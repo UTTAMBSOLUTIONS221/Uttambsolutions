@@ -1,0 +1,26 @@
+﻿@model IEnumerable<DBL.Entities.Systemmodule>
+@{
+    ViewData["Title"] = "Moudules";
+    Layout = "~/Views/Shared/_PreAuthLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            @foreach (var data in Model)
+            {
+                <div class="col-md-4">
+                    <a asp-action="Dashboard" asp-controller="Home" asp-route-slug="@data.Slug" class="card-link">
+                        <div class="card">
+                            <img src="@Url.Content(data.Moduleimagepath)" class="card-img-top" />
+                            <div class="card-body">
+                                <h4>@data.Modulename</h4>
+                                <p>@data.Moduledescription</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

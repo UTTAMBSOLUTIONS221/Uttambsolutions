@@ -1,0 +1,83 @@
+﻿@using System.Security.Claims
+@using DBL.Models
+@using Microsoft.Extensions.Configuration
+@{
+    bool authenticated = false;
+    UsermodelResponce currentUserData = null;
+    if (User.Identities.Any(u => u.IsAuthenticated))
+    {
+        authenticated = true;
+        currentUserData = Util.GetCurrentUserData(User.Identities);
+        IConfiguration config = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WEB</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WEB.styles.css" asp-append-version="true" />
+</head>
+<body class="hold-transition layout-top-nav">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
+            <div class="container">
+                <a asp-controller="Home" asp-action="Modules" class="navbar-brand">
+                    <img src="~/images/uttambsolutionlogo.png" alt="Uttambsolutions Logo" class="brand-image elevation-3" style="opacity: .8">
+                    <span class="brand-text font-weight-light text-white fw-bold text-uppercase">UTTAMB SOLUTIONS</span>
+                </a>
+
+                <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+              
+
+                <!-- Right navbar links -->
+                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                    <li class="nav-link dropdown">
+                        <a class="font-weight-bold text-uppercase text-xs text-white dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-user-circle text-white font-weight-bold fa-1x img-circle rounded-circle"></i>&nbsp; @currentUserData.Usermodel.Fullname</a>
+                        <div class="dropdown-menu bg-custom">
+                            <div class="row" hidden>
+                                <div class="col-sm-12">
+                                    <input id="systemLoggedinedUtcnameid" value="@currentUserData.Usermodel.Utcname">
+                                    <input id="systemLoggedinedTenantid" value="@currentUserData.Usermodel.Tenantid">
+                                    <input id="systemLoggedinedUserid" value="@currentUserData.Usermodel.Userid">
+                                    <input id="systemLoggedinedUserNameId" value="@currentUserData.Usermodel.Fullname">
+                                </div>
+                            </div>
+                            @*  <a asp-area="" asp-controller="Account" asp-action="Myprofile" class="dropdown-item text-dark text-sm font-weight-bold">My Profile</a> *@
+                            <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item text-white text-sm font-weight-bold"> Log out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<DBL.Entities.Systemmodule>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h6 class="font-weight-bold text-sm card-title">Modules</h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <a asp-action="AddModule" asp-controller="Module" asp-route-code="@Guid.NewGuid()" asp-route-Moduleid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Module</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive table-responsive-sm">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Descrition</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><img src="@Url.Content(item.Moduleimagepath)" height="40" width="40"/></td>
+                                <td>@item.Modulename</td>
+                                <td>@item.Moduledescription</td>
+                                <td><a asp-action="AddModule" asp-controller="Module" asp-route-code="@Guid.NewGuid()" asp-route-Moduleid="@item.Moduleid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        ﻿function savesystemtmoduledata() {
+    document.getElementById("savesystemtmoduleid").disabled = true;
+    document.getElementById("processingSpinner").style.display = "inline-block";
+    document.getElementById("buttonText").innerText = "Processing...";
+    if ($('#Modulenameid').val() == '') {
+        Swal.fire("Module Not Created", 'Module Name is Required', "warning");
+        document.getElementById("savesystemtmoduleid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    if ($('#Moduledescriptionid').val() == '') {
+        Swal.fire("Module Not Created", 'Module Description is Required', "warning");
+        document.getElementById("savesystemtmoduleid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    var uil1 = {
+        Moduleid: $('#Moduleid').val(), Modulename: $('#Modulenameid').val(), Moduledescription: $('#Moduledescriptionid').val()
+    };
+    $.post("/Module/Addsystemmoduledata", uil1, function (response) {
+        if (response.RespStatus == 0) {
+            Swal.fire('Saved!', response.RespMessage, 'success')
+            $('#Uttambsolutionsmodal').hide();
+            setTimeout(function () { location.reload(); }, 1000);
+        } else if (response.RespStatus == 1) {
+            Swal.fire("Module details not saved", response.RespMessage, "warning");
+        }
+        else {
+            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+        }
+          document.getElementById("savesystemtmoduleid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+    });
+}
+        </script>
+}

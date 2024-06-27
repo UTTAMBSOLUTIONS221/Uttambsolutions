@@ -1,0 +1,47 @@
+﻿@model DBL.Entities.Systemmodule
+
+<div class="modal-header">
+    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Modules</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <input asp-for="@Model.Moduleid" id="Moduleid" hidden />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="font-weight-light">Module Name</label>
+                <input class="form-control form-control-sm" type="number" asp-for="@Model.Modulename" id="Modulenameid" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="font-weight-light">Module Description</label>
+                <textarea class="form-control form-control-sm" asp-for="@Model.Moduledescription" id="Moduledescriptionid"></textarea>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="font-weight-light">Module Image</label>
+                <input type="file" class="form-control form-control-sm" />
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemtmoduleid" onclick="savesystemtmoduledata();">
+        <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+    </button>
+</div>
