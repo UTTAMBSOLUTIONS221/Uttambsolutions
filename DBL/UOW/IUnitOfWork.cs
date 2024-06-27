@@ -11,5 +11,6 @@ namespace DBL.UOW
     {
         IAccountRepository AccountRepository { get; }
         IModulesRepository ModulesRepository { get; }
+        IBlogsRepository BlogsRepository { get; }
     }
 }

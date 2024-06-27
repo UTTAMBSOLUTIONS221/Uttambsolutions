@@ -2,6 +2,7 @@
 using DBL.Helpers;
 using DBL.Models;
 using DBL.UOW;
+using Newtonsoft.Json;
 
 namespace DBL
 {
@@ -105,6 +106,17 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.ModulesRepository.Getsystemmoduledatabyid(Moduleid);
+                return Resp;
+            });
+        }
+        #endregion
+
+        #region Retrieve and save blogs
+        public Task<Genericmodel> RetrieveandSaveBlogs(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Registersystemblogdata(Obj);
                 return Resp;
             });
         }

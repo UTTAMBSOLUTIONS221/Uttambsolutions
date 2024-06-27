@@ -14,8 +14,9 @@ namespace DBL.UOW
 
         private IAccountRepository accountRepository;
         private IModulesRepository modulesRepository;
-      
-        
+        private IBlogsRepository blogsRepository;
+
+
         public UnitOfWork(string connectionString) => connString = connectionString;
         public IAccountRepository AccountRepository
         {
@@ -25,11 +26,16 @@ namespace DBL.UOW
         {
             get { return modulesRepository ?? (modulesRepository = new ModulesRepository(connString)); }
         }
+        public IBlogsRepository BlogsRepository
+        {
+            get { return blogsRepository ?? (blogsRepository = new BlogsRepository(connString)); }
+        }
 
         public void Reset()
         {
             accountRepository = null;
             modulesRepository = null;
+            blogsRepository = null;
         }
 
         public void Dispose()

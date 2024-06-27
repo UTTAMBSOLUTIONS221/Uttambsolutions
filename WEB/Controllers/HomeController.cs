@@ -6,7 +6,6 @@ using NewsAPI.Constants;
 using NewsAPI.Models;
 using System.Diagnostics;
 using WEB.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WEB.Controllers
 {
@@ -48,7 +47,7 @@ namespace WEB.Controllers
                 Q = "Apple",
                 SortBy = SortBys.Popularity,
                 Language = Languages.EN,
-                From = new DateTime(yesterday.Year , yesterday.Month ,yesterday.Day ),
+                From = new DateTime(yesterday.Year, yesterday.Month, yesterday.Day),
             });
             if (articlesResponse.Status == Statuses.Ok)
             {
