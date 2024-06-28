@@ -172,9 +172,8 @@ async function uploadImage(files) {
                     .trim()
                     .replace(/[^\w\s-]/g, '') 
                     .replace(/[\s_-]+/g, '-')  
-                    .replace(/^-+|-+$/g, ''), Moduledescription: $('#Moduledescriptionid').val(), Moduleimagepath: $('#UttambsolutionsimagesurlId').val()
+                    .replace(/^-+|-+$/g, ''), Moduledescription: $('#Moduledescriptionid').val(), Moduleimagepath: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
     };
-         alert(JSON.stringify(uil1));
     $.post("/Module/Addsystemmoduledata", uil1, function (response) {
         if (response.RespStatus == 0) {
             Swal.fire('Saved!', response.RespMessage, 'success')
