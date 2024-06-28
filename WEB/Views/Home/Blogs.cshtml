@@ -1,8 +1,22 @@
-﻿
+﻿@model IEnumerable<DBL.Models.Newsapiarticles>
 @{
     ViewData["Title"] = "Blogs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Blogs</h1>
-
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card">
+                <img src="@Url.Content(item.UrlToImage)" class="card-img-top" />
+                <div class="card-body">
+                    <h4>@item.Title</h4>
+                    <p>@item.Description</p>
+                    <p>@item.Content</p>
+                </div>
+            </div>
+        </div>
+    }
+   
+</div>
