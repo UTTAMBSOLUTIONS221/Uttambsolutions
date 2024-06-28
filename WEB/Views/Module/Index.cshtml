@@ -153,14 +153,14 @@ async function uploadImage(files) {
     document.getElementById("savesystemtmoduleid").disabled = true;
     document.getElementById("processingSpinner").style.display = "inline-block";
     document.getElementById("buttonText").innerText = "Processing...";
-    if ($('#Modulenameid').val() == '') {
+    if ($('#Modulenameid').val() === '') {
         Swal.fire("Module Not Created", 'Module Name is Required', "warning");
         document.getElementById("savesystemtmoduleid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
         document.getElementById("buttonText").innerText = "SAVE";
         return;
     }
-    if ($('#Moduledescriptionid').val() == '') {
+    if ($('#Moduledescriptionid').val() === '') {
         Swal.fire("Module Not Created", 'Module Description is Required', "warning");
         document.getElementById("savesystemtmoduleid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
