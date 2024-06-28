@@ -22,7 +22,7 @@ namespace WEB.Schedulers
             bl = new BL(Util.ShareConnectionString(config));
         }
 
-        public Task Execute(IJobExecutionContext context)
+        public async Task Execute(IJobExecutionContext context)
         {
             Logs($"{DateTime.Now} [Reminders Service called]" + Environment.NewLine);
 
@@ -31,42 +31,57 @@ namespace WEB.Schedulers
             string formattedDate = yesterday.ToString("yyyy-MM-dd");
 
             var newsApiClient = new NewsApiClient("ba5196a31b684d1194b4d161ad7dd5c6");
-            var articlesResponse = newsApiClient.GetEverything(new EverythingRequest
-            {
-                Q = "Apple",
-                SortBy = SortBys.Popularity,
-                Language = Languages.EN,
-                From = new DateTime(yesterday.Year, yesterday.Month, yesterday.Day),
-            });
+            var allArticles = new List<Article>();
 
-            if (articlesResponse.Status == Statuses.Ok && articlesResponse.Articles != null)
+            for (int page = 1; page <= 10; page++)
             {
-                var newsResponse = new DBL.Models.NewsResponse
+                var articlesResponse = newsApiClient.GetEverything(new EverythingRequest
                 {
-                    Status = articlesResponse.Status.ToString(),
-                    TotalResults = articlesResponse.TotalResults,
-                    Articles = articlesResponse.Articles.Select(article => new DBL.Models.Article
-                    {
-                        Source = new DBL.Models.Source
-                        {
-                            Id = article.Source.Id,
-                            Name = article.Source.Name
-                        },
-                        Author = article.Author,
-                        Title = article.Title,
-                        Description = article.Description,
-                        Url = article.Url,
-                        UrlToImage = article.UrlToImage,
-                        PublishedAt = article.PublishedAt ?? DateTime.MinValue,
-                        Content = article.Content
-                    }).ToList()
-                };
+                    Q = "Apple",
+                    SortBy = SortBys.Popularity,
+                    Language = Languages.EN,
+                    From = new DateTime(yesterday.Year, yesterday.Month, yesterday.Day),
+                    Page = page,
+                    PageSize = 10,
+                });
 
-                bl.RetrieveandSaveBlogs(JsonConvert.SerializeObject(newsResponse));
+                if (articlesResponse.Status == Statuses.Ok && articlesResponse.Articles != null)
+                {
+                    allArticles.AddRange(articlesResponse.Articles);
+                }
+                else
+                {
+                    Logs($"{DateTime.Now} [Error retrieving articles from API]" + Environment.NewLine);
+                    break;
+                }
             }
 
-            return Task.CompletedTask;
+            var newsResponse = new DBL.Models.NewsResponse
+            {
+                Status = "ok",
+                TotalResults = allArticles.Count,
+                Articles = allArticles.Select(article => new DBL.Models.Article
+                {
+                    Source = new DBL.Models.Source
+                    {
+                        Id = article.Source.Id,
+                        Name = article.Source.Name
+                    },
+                    Author = article.Author,
+                    Title = article.Title,
+                    Description = article.Description,
+                    Url = article.Url,
+                    UrlToImage = article.UrlToImage,
+                    PublishedAt = article.PublishedAt ?? DateTime.MinValue,
+                    Content = article.Content
+                }).ToList()
+            };
+
+            bl.RetrieveandSaveBlogs(JsonConvert.SerializeObject(newsResponse));
+
+            await Task.CompletedTask;
         }
+
 
         public void Logs(string message)
         {

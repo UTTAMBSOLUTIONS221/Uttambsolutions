@@ -18,7 +18,7 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@JsonObjectdata", JsonData);
-                return connection.Query<Genericmodel>("Usp_InsertArticlesAndSourcesdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                return connection.Query<Genericmodel>("Usp_Registerarticlesandsourcesdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
     }
