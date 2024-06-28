@@ -24,3 +24,21 @@
 
 28/06/2024 06:26:02 [Reminders Service called]
 
+28/06/2024 07:37:00 [Reminders Service called]
+
+28/06/2024 08:14:12 [Reminders Service called]
+
+28/06/2024 08:15:00 [Reminders Service called]
+
+28/06/2024 08:39:00 [Reminders Service called]
+
+28/06/2024 08:40:03 [Reminders Service called]
+
+28/06/2024 08:41:00 [Reminders Service called]
+
+28/06/2024 08:56:03 [Reminders Service called]
+
+28/06/2024 09:01:00 [Reminders Service called]
+
+28/06/2024 09:21:00 [Reminders Service called]
+

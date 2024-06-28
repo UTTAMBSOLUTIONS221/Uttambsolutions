@@ -31,7 +31,6 @@ namespace WEB.Schedulers
             string formattedDate = yesterday.ToString("yyyy-MM-dd");
 
             var newsApiClient = new NewsApiClient("ba5196a31b684d1194b4d161ad7dd5c6");
-            var allArticles = new List<Article>();
 
             for (int page = 1; page <= 10; page++)
             {
@@ -45,39 +44,39 @@ namespace WEB.Schedulers
                     PageSize = 10,
                 });
 
-                if (articlesResponse.Status == Statuses.Ok && articlesResponse.Articles != null)
+                if (articlesResponse.Status == Statuses.Ok && articlesResponse.Articles != null && articlesResponse.Articles.Any())
                 {
-                    allArticles.AddRange(articlesResponse.Articles);
+                    var allArticles = articlesResponse.Articles;
+
+                    var newsResponse = new DBL.Models.NewsResponse
+                    {
+                        Status = "ok",
+                        TotalResults = allArticles.Count,
+                        Articles = allArticles.Select(article => new DBL.Models.Article
+                        {
+                            Source = new DBL.Models.Source
+                            {
+                                Id = article.Source.Id,
+                                Name = article.Source.Name
+                            },
+                            Author = article.Author,
+                            Title = article.Title,
+                            Description = article.Description,
+                            Url = article.Url,
+                            UrlToImage = article.UrlToImage,
+                            PublishedAt = article.PublishedAt ?? DateTime.MinValue,
+                            Content = article.Content
+                        }).ToList()
+                    };
+
+                    bl.RetrieveandSaveBlogs(JsonConvert.SerializeObject(newsResponse));
                 }
                 else
                 {
                     Logs($"{DateTime.Now} [Error retrieving articles from API]" + Environment.NewLine);
-                    break;
+                    break; // Exit loop if there's an error or no articles
                 }
             }
-
-            var newsResponse = new DBL.Models.NewsResponse
-            {
-                Status = "ok",
-                TotalResults = allArticles.Count,
-                Articles = allArticles.Select(article => new DBL.Models.Article
-                {
-                    Source = new DBL.Models.Source
-                    {
-                        Id = article.Source.Id,
-                        Name = article.Source.Name
-                    },
-                    Author = article.Author,
-                    Title = article.Title,
-                    Description = article.Description,
-                    Url = article.Url,
-                    UrlToImage = article.UrlToImage,
-                    PublishedAt = article.PublishedAt ?? DateTime.MinValue,
-                    Content = article.Content
-                }).ToList()
-            };
-
-            bl.RetrieveandSaveBlogs(JsonConvert.SerializeObject(newsResponse));
 
             await Task.CompletedTask;
         }
