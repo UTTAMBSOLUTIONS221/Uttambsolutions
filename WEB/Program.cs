@@ -25,7 +25,7 @@ builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
 builder.Services.AddSingleton<RetrieveBlogsJob>();
 builder.Services.AddSingleton(new JobSchedule(
     jobType: typeof(RetrieveBlogsJob),
-    cronExpression: "0 0/1 * 1/1 * ? *"));
+    cronExpression: "0 0 3 * * ?"));
 
 builder.Services.AddSession(options =>
 {
