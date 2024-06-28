@@ -132,6 +132,34 @@ namespace DBL
         #endregion
 
 
+        #region System Category
+        public Task<Genericmodel> Registersystemcategorydata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.CategoryRepository.Registersystemcategorydata(Obj);
+                return Resp;
+            });
+        }
+        public Task<IEnumerable<Productcategories>> Getsystemcategorydata(int Page, int PageSize)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.CategoryRepository.Getsystemcategorydata(Page, PageSize);
+                return Resp;
+            });
+        }
+        public Task<Productcategories> Getsystemcategorydatabyid(long Categoryid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.CategoryRepository.Getsystemcategorydatabyid(Categoryid);
+                return Resp;
+            });
+        }
+        #endregion
+
+
         #region System Dropdowns
         public Task<IEnumerable<ListModel>> GetListModel(ListModelType listType)
         {

@@ -7,5 +7,6 @@ namespace DBL.Repositories
     {
         Genericmodel Registersystemcategorydata(string JsonData);
         IEnumerable<Productcategories> Getsystemcategorydata(int Page, int PageSize);
+        Productcategories Getsystemcategorydatabyid(long Categoryid);
     }
 }

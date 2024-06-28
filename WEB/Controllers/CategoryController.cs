@@ -4,6 +4,7 @@ using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace WEB.Controllers
 {
@@ -29,6 +30,11 @@ namespace WEB.Controllers
             {
             }
             return PartialView(productcategories);
+        }
+        public async Task<JsonResult> Addsystemcategorydata(Productcategories model)
+        {
+            var resp = await bl.Registersystemcategorydata(JsonConvert.SerializeObject(model));
+            return Json(resp);
         }
     }
 }

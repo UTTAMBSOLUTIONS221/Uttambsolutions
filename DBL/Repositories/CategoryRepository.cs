@@ -39,5 +39,15 @@ namespace DBL.Repositories
                 return connection.Query<Productcategories>("Usp_Getsystemcategorydata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+        public Productcategories Getsystemcategorydatabyid(long Categoryid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Categoryid", Categoryid);
+                return connection.Query<Productcategories>("Usp_Getsystemcategorydatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
     }
 }
