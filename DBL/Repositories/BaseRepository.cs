@@ -96,6 +96,7 @@ namespace DBL.Repositories
             {
                 return string.Format("Select * From {0} Where {1} = @Id and {2} = @Idone and {3}=@Idtwo", tableName, idColumn, idColumnone, idColumntwo);
             }
+
         }
     }
 }

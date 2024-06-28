@@ -1,6 +1,9 @@
 ﻿using DBL;
+using DBL.Entities;
+using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WEB.Controllers
 {
@@ -18,9 +21,14 @@ namespace WEB.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Addcategory()
+        public IActionResult Addcategory(int Categoryid)
         {
-            return PartialView();
+            ViewData["Systemcategorylists"] = bl.GetListModel(ListModelType.SystemCategory).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            Productcategories productcategories = new Productcategories();
+            if (Categoryid > 0)
+            {
+            }
+            return PartialView(productcategories);
         }
     }
 }

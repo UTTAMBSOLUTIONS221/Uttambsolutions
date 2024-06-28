@@ -1,4 +1,64 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model DBL.Entities.Productcategories
+@{
+    var Systemcategory = ViewData["Systemcategorylists"] as List<SelectListItem>;
+}
+<div class="modal-header">
+    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Category</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <input asp-for="@Model.Categoryid" id="Categoryid" hidden />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="font-weight-light">Category Name</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Categoryname" id="Categorynameid" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label class="font-weight-light">Parent Category</label>
+                <select class="form-control form-control-sm" asp-items="@Systemcategory" asp-for="@Model.Parentid" id="Parentid">
+                    <option value="0">---Select---</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Vate Rate</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Vatrate" id="Vatrateid" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="font-weight-light">Category Image</label>
+                <input class="form-control form-control-sm font-weight-light" type="file" onchange="categoryFileChanged(event)" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12" hidden>
+            <div class="form-group">
+                <label class="font-weight-light">Images Url</label>
+                <input class="form-control form-control-sm" id="UttambsolutionsimagesurlId" readonly />
+            </div>
+        </div>
+        <div id="Uttambsolutionsimagespreviewcontainer"></div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemtcategoryid" onclick="savesystemtcategorydata();">
+        <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+    </button>
+</div>

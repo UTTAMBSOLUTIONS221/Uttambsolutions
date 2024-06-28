@@ -1,4 +1,5 @@
 ﻿using DBL.Entities;
+using DBL.Enum;
 using DBL.Helpers;
 using DBL.Models;
 using DBL.UOW;
@@ -130,5 +131,15 @@ namespace DBL
         }
         #endregion
 
+
+        #region System Dropdowns
+        public Task<IEnumerable<ListModel>> GetListModel(ListModelType listType)
+        {
+            return Task.Run(() =>
+            {
+                return db.GeneralRepository.GetListModel(listType);
+            });
+        }
+        #endregion
     }
 }

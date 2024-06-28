@@ -12,12 +12,18 @@ namespace DBL.UOW
         private string connString;
         private bool _disposed;
 
+        private IGeneralRepository generalRepository;
         private IAccountRepository accountRepository;
         private IModulesRepository modulesRepository;
         private IBlogsRepository blogsRepository;
+        private ICategoryRepository categoryRepository;
 
 
         public UnitOfWork(string connectionString) => connString = connectionString;
+        public IGeneralRepository GeneralRepository
+        {
+            get { return generalRepository ?? (generalRepository = new GeneralRepository(connString)); }
+        }
         public IAccountRepository AccountRepository
         {
             get { return accountRepository ?? (accountRepository = new AccountRepository(connString)); }
@@ -30,9 +36,14 @@ namespace DBL.UOW
         {
             get { return blogsRepository ?? (blogsRepository = new BlogsRepository(connString)); }
         }
+        public ICategoryRepository CategoryRepository
+        {
+            get { return categoryRepository ?? (categoryRepository = new CategoryRepository(connString)); }
+        }
 
         public void Reset()
         {
+            generalRepository = null;
             accountRepository = null;
             modulesRepository = null;
             blogsRepository = null;

@@ -59,7 +59,7 @@
 firebase.initializeApp(firebaseConfig);
 var storage = firebase.storage();
 
-function moduleFileChanged(event) {
+function categoryFileChanged(event) {
     var files = event.target.files;
     uploadImage(files);
     console.log(document.getElementById('UttambsolutionsimagesurlId').files);
@@ -76,7 +76,7 @@ async function uploadImage(files) {
         // Get the file extension
         var fileExtension = file.name.split('.').pop();
         // Construct the new file name
-        var newFileName = 'Module/ModuleLogo/' + uniqueId + '.' + fileExtension;
+        var newFileName = 'Productcategory/Categoryimage/' + uniqueId + '.' + fileExtension;
         return newFileName;
     }
 
@@ -149,43 +149,39 @@ async function uploadImage(files) {
     inputField.value = JSON.stringify(downloadURLs);
 }
 
-    ﻿function savesystemtmoduledata() {
-    document.getElementById("savesystemtmoduleid").disabled = true;
+    ﻿function savesystemtcategorydata() {
+    document.getElementById("savesystemtcategoryid").disabled = true;
     document.getElementById("processingSpinner").style.display = "inline-block";
     document.getElementById("buttonText").innerText = "Processing...";
-    if ($('#Modulenameid').val() === '') {
-        Swal.fire("Module Not Created", 'Module Name is Required', "warning");
-        document.getElementById("savesystemtmoduleid").disabled = false;
+    if ($('#Categorynameid').val() === '') {
+        Swal.fire("Category Not Created", 'Category Name is Required', "warning");
+        document.getElementById("savesystemtcategoryid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
         document.getElementById("buttonText").innerText = "SAVE";
         return;
     }
-    if ($('#Moduledescriptionid').val() === '') {
-        Swal.fire("Module Not Created", 'Module Description is Required', "warning");
-        document.getElementById("savesystemtmoduleid").disabled = false;
+    if ($('#Vatrateid').val() === '') {
+        Swal.fire("Category Not Created", 'Vat Rate is Required', "warning");
+        document.getElementById("savesystemtcategoryid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
         document.getElementById("buttonText").innerText = "SAVE";
         return;
     }
     var uil1 = {
-        Moduleid: $('#Moduleid').val(), Modulename: $('#Modulenameid').val(),Slug: $('#Modulenameid').val().toLowerCase()
-                    .trim()
-                    .replace(/[^\w\s-]/g, '') 
-                    .replace(/[\s_-]+/g, '-')  
-                    .replace(/^-+|-+$/g, ''), Moduledescription: $('#Moduledescriptionid').val(), Moduleimagepath: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
+        Categoryid: $('#Categoryid').val(), Categoryname: $('#Categorynameid').val(),Parentid: $('#Parentid').val(),Vatrate: $('#Vatrateid').val(), Moduleimagepath: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
     };
-    $.post("/Module/Addsystemmoduledata", uil1, function (response) {
+    $.post("/Category/Addsystemcategorydata", uil1, function (response) {
         if (response.RespStatus == 0) {
             Swal.fire('Saved!', response.RespMessage, 'success')
             $('#Uttambsolutionsmodal').hide();
             setTimeout(function () { location.reload(); }, 1000);
         } else if (response.RespStatus == 1) {
-            Swal.fire("Module details not saved", response.RespMessage, "warning");
+            Swal.fire("Category details not saved", response.RespMessage, "warning");
         }
         else {
             Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
         }
-        document.getElementById("savesystemtmoduleid").disabled = false;
+        document.getElementById("savesystemtcategoryid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
         document.getElementById("buttonText").innerText = "SAVE";
         });
