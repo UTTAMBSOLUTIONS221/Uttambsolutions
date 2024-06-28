@@ -3,6 +3,197 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
 }
+@model IEnumerable<DBL.Entities.Systemmodule>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h6 class="font-weight-bold text-sm card-title">Modules</h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <a asp-action="AddModule" asp-controller="Module" asp-route-code="@Guid.NewGuid()" asp-route-Moduleid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Module</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive table-responsive-sm">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Descrition</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><img src="@Url.Content(item.Moduleimagepath)" height="40" width="40"/></td>
+                                <td>@item.Modulename</td>
+                                <td>@item.Moduledescription</td>
+                                <td class="text-right"><a asp-action="AddModule" asp-controller="Module" asp-route-code="@Guid.NewGuid()" asp-route-Moduleid="@item.Moduleid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                            </tr>
+                        }
 
-<h1>Index</h1>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
+    <script type="text/javascript">
+        const firebaseConfig = {
+    apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
+    authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
+    projectId: "uttambsolutions-4ec2a",
+    storageBucket: "uttambsolutions-4ec2a.appspot.com",
+    messagingSenderId: "336739823411",
+    appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
+    measurementId: "G-Z24LLL0113"
+};
+firebase.initializeApp(firebaseConfig);
+var storage = firebase.storage();
 
+function moduleFileChanged(event) {
+    var files = event.target.files;
+    uploadImage(files);
+    console.log(document.getElementById('UttambsolutionsimagesurlId').files);
+}
+
+async function uploadImage(files) {
+    // Array to store the download URLs
+    var downloadURLs = [];
+
+    // Function to generate a unique file name
+    function generateFileName(file) {
+        // Generate a unique identifier
+        var uniqueId = Date.now();
+        // Get the file extension
+        var fileExtension = file.name.split('.').pop();
+        // Construct the new file name
+        var newFileName = 'Module/ModuleLogo/' + uniqueId + '.' + fileExtension;
+        return newFileName;
+    }
+
+    // Function to upload a single file
+    async function uploadFile(file) {
+        return new Promise((resolve, reject) => {
+            var newFileName = generateFileName(file); // Generate a new file name
+
+            var storageRef = storage.ref().child(newFileName);
+            var uploadTask = storageRef.put(file);
+
+            uploadTask.on('state_changed',
+                function (snapshot) {
+                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                },
+                function (error) {
+                    reject('Error uploading file: ' + error);
+                },
+                function () {
+                    // Upload complete
+                    uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                        console.log('File available at', downloadURL);
+                        downloadURLs.push(downloadURL);
+                        resolve(downloadURL);
+                    });
+                }
+            );
+        });
+    }
+
+    // Function to display image preview
+    function displayImagePreview(file) {
+        return new Promise((resolve, reject) => {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // Create a new image element
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.width = 140;
+                img.height = 140;
+
+                // Append the image to a container element
+                var previewContainer = document.getElementById('Uttambsolutionsimagespreviewcontainer');
+                previewContainer.appendChild(img);
+
+                resolve();
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // Iterate over each file
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+
+        try {
+            // Upload the file and get the download URL
+            var downloadURL = await uploadFile(file);
+
+            // Display image preview
+            await displayImagePreview(file);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    // Set the input field value with JSON stringified URLs
+    var inputField = document.getElementById('UttambsolutionsimagesurlId');
+    inputField.value = JSON.stringify(downloadURLs);
+}
+
+    ﻿function savesystemtmoduledata() {
+    document.getElementById("savesystemtmoduleid").disabled = true;
+    document.getElementById("processingSpinner").style.display = "inline-block";
+    document.getElementById("buttonText").innerText = "Processing...";
+    if ($('#Modulenameid').val() === '') {
+        Swal.fire("Module Not Created", 'Module Name is Required', "warning");
+        document.getElementById("savesystemtmoduleid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    if ($('#Moduledescriptionid').val() === '') {
+        Swal.fire("Module Not Created", 'Module Description is Required', "warning");
+        document.getElementById("savesystemtmoduleid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    var uil1 = {
+        Moduleid: $('#Moduleid').val(), Modulename: $('#Modulenameid').val(),Slug: $('#Modulenameid').val().toLowerCase()
+                    .trim()
+                    .replace(/[^\w\s-]/g, '') 
+                    .replace(/[\s_-]+/g, '-')  
+                    .replace(/^-+|-+$/g, ''), Moduledescription: $('#Moduledescriptionid').val(), Moduleimagepath: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
+    };
+    $.post("/Module/Addsystemmoduledata", uil1, function (response) {
+        if (response.RespStatus == 0) {
+            Swal.fire('Saved!', response.RespMessage, 'success')
+            $('#Uttambsolutionsmodal').hide();
+            setTimeout(function () { location.reload(); }, 1000);
+        } else if (response.RespStatus == 1) {
+            Swal.fire("Module details not saved", response.RespMessage, "warning");
+        }
+        else {
+            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+        }
+        document.getElementById("savesystemtmoduleid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        });
+    }
+   </script>
+}

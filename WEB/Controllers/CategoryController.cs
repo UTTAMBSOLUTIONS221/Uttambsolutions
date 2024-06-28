@@ -17,5 +17,10 @@ namespace WEB.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult Addcategory()
+        {
+            return PartialView();
+        }
     }
 }
