@@ -148,7 +148,7 @@
 
                         <li class="nav-item has-treeview main">
                             <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-modules"></i><p>Modules<i class="fa fa-angle-left right"></i></p>
+                                <i class="nav-icon fa fa-list"></i><p>Modules<i class="fa fa-angle-left right"></i></p>
                             </a>
                             <ul class="nav nav-treeview ml-2">
                                 <li class="nav-item main">
@@ -164,8 +164,13 @@
                             </a>
                             <ul class="nav nav-treeview ml-2">
                                 <li class="nav-item main">
-                                    <a asp-controller="Module" asp-action="Index" class="nav-link">
+                                    <a asp-controller="Category" asp-action="Index" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Category</p>
+                                    </a>
+                                </li>
+                                 <li class="nav-item main">
+                                    <a asp-controller="Product" asp-action="Index" class="nav-link">
+                                        <i class="nav-icon fas fa-list"></i><p>Product</p>
                                     </a>
                                 </li>
                             </ul>
