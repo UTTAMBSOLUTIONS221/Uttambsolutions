@@ -120,6 +120,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<IEnumerable<Newsapiarticles>> Getsystemblogsdata(int Page, int PageSize)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Getsystemblogsdata(Page, PageSize);
+                return Resp;
+            });
+        }
         #endregion
 
     }

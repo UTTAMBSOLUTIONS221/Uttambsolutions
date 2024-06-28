@@ -3,6 +3,7 @@ using DBL.Models;
 using DBL.Repositories.DBL.Repositories;
 using System.Data.SqlClient;
 using System.Data;
+using DBL.Entities;
 
 namespace DBL.Repositories
 {
@@ -19,6 +20,18 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@JsonObjectdata", JsonData);
                 return connection.Query<Genericmodel>("Usp_Registerarticlesandsourcesdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
+        public IEnumerable<Newsapiarticles> Getsystemblogsdata(int Page, int PageSize)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Page", Page);
+                parameters.Add("@PageSize", PageSize);
+                return connection.Query<Newsapiarticles>("Usp_Getsystemblogsdata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
     }
