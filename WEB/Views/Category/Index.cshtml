@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<DBL.Entities.Productcategories>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
@@ -22,20 +22,20 @@
                         <tr>
                             <th>Image</th>
                             <th>Name</th>
-                            <th>Descrition</th>
+                            <th>Vat Rate</th>
                             <th class="text-right">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                       @*  @foreach (var item in Model)
+                        @foreach (var item in Model)
                         {
                             <tr>
-                                <td><img src="@Url.Content(item.Moduleimagepath)" height="40" width="40"/></td>
-                                <td>@item.Modulename</td>
-                                <td>@item.Moduledescription</td>
-                                <td class="text-right"><a asp-action="AddModule" asp-controller="Module" asp-route-code="@Guid.NewGuid()" asp-route-Moduleid="@item.Moduleid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                <td><img src="@Url.Content(item.Imageurl)" height="40" width="40"/></td>
+                                <td>@item.Categoryname</td>
+                                <td>@item.Vatrate</td>
+                                <td class="text-right"><a asp-action="Addcategory" asp-controller="Category" asp-route-code="@Guid.NewGuid()" asp-route-Categoryid="@item.Categoryid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                             </tr>
-                        } *@
+                        }
 
                     </tbody>
                 </table>
@@ -168,7 +168,7 @@ async function uploadImage(files) {
         return;
     }
     var uil1 = {
-        Categoryid: $('#Categoryid').val(), Categoryname: $('#Categorynameid').val(),Parentid: $('#Parentid').val(),Vatrate: $('#Vatrateid').val(), Moduleimagepath: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
+        Categoryid: $('#Categoryid').val(), Categoryname: $('#Categorynameid').val(),Parentid: $('#Parentid').val(),Vatrate: $('#Vatrateid').val(), Imageurl: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
     };
     $.post("/Category/Addsystemcategorydata", uil1, function (response) {
         if (response.RespStatus == 0) {

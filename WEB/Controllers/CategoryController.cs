@@ -17,17 +17,19 @@ namespace WEB.Controllers
             bl = new BL(Util.ShareConnectionString(config));
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var data = await bl.Getsystemcategorydata(0, 1000);
+            return View(data);
         }
         [HttpGet]
-        public IActionResult Addcategory(int Categoryid)
+        public async Task<IActionResult> Addcategory(int Categoryid)
         {
             ViewData["Systemcategorylists"] = bl.GetListModel(ListModelType.SystemCategory).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Productcategories productcategories = new Productcategories();
             if (Categoryid > 0)
             {
+                productcategories = await bl.Getsystemcategorydatabyid(Categoryid);
             }
             return PartialView(productcategories);
         }
