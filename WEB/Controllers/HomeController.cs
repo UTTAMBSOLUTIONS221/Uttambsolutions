@@ -24,6 +24,19 @@ namespace WEB.Controllers
             return View();
         }
         [HttpGet]
+        [AllowAnonymous]
+        public IActionResult About()
+        {
+            return View();
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Moudules()
         {
             var modules = await bl.Getsystemmoduledata();

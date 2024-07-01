@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UTTAMB SOLUTIONS | SIGNIN</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
 </head>
 <body class="hold-transition login-page">
@@ -69,18 +69,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-6">
                             <button type="submit" class="btn btn-sm btn-info font-weight-bolder btn-block text-uppercase">Sign in</button>
                         </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-12">
-                            <a asp-action="Forgotpassword" asp-controller="Customer" class="text-uppercase font-weight-bold text-info text-xs"> Forgot Password?</a>
+                        <div class="col-6">
+                            <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder btn-block text-uppercase">cancel</a>
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-12">
-                            Don't have account yet? <a asp-action="Registersystemcustomers" asp-controller="Customer" class="text-uppercase font-weight-bold text-info text-xs">Register</a>
+                        <div class="col-5">
+                            <a asp-action="Forgotpassword" asp-controller="Customer" class="text-uppercase text-info text-xs"> Forgot Password?</a>
+                        </div>
+                        <div class="col-7">
+                            <p class="text-xs">Don't have account yet? <a asp-action="Registersystemcustomers" asp-controller="Customer" class="text-uppercase text-info text-xs">Register</a></p>
                         </div>
                     </div>
                 </form>

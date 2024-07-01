@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 my-auto">
+                <h6 class="custom-text-color">Contact Us</h6>
+            </div>
+            <div class="col-md-8 my-auto">
+                <h6 class="custom-text-color float-end">
+                    Home/Contact Us
+                </h6>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6>Contact Form</h6>
+                        <hr />
+                        <form method="post" action="@(Url.Action("SendContactMessage", "Home"))">
+                            <div class="form-group">
+                                <label class="mb-1">Full Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Full Name" name="FullName" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1">Phone Number</label>
+                                <input type="text" class="form-control" placeholder="Enter Phone Number" name="PhoneNumber" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1">Email Address</label>
+                                <input type="email" class="form-control" placeholder="Enter Email Address" name="EmailAddress" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1">Message</label>
+                                <textarea rows="3" class="form-control" placeholder="Type your message...." name="Message" required></textarea>
+                            </div>
+                            <div class="form-group py-3">
+                                <button type="submit" class="btn btn-primary shadow w-100">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-6 border-start">
+                        <h5 class="main-heading">Address Information</h5>
+                        <div class="underline"></div>
+                        <p>Call us at: +254728316050 / +254792714257</p>
+                        <p>Email us at: info@uttambsolutions.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -2,7 +2,115 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="section mb-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="main-heading">Our Company</h3>
+                <div class="underline mx-auto"></div>
+                <p>
+                    Uttamb Solutions is a premier provider of innovative technology solutions specifically tailored for the oil and gas industry. <!-- Your content here -->
+                </p>
+                <a asp-controller="Home" asp-action="About" class="btn btn-warning shadow">Read More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Include other sections like Vision, Mission, and Values using Razor partial views -->
+@await Html.PartialAsync("~/Views/Shared/Vmc.cshtml")
+
+<!-- Section 3: Our Services -->
+<section class="section border-top">
+    <div class="container">
+        <div class="row">
+            <!-- Repeat structure for each service -->
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <img src="~/images/web-development1.png" class="w-100 border-bottom" alt="BESPOKE WEB DESIGN AND DEVELOPMENT" />
+                    <div class="card-body">
+                        <h6>BESPOKE WEB DESIGN AND DEVELOPMENT</h6>
+                        <div class="underline"></div>
+                        <p>
+                            <strong>Key Features:</strong>
+                            <br />
+                            <strong>Customized Design:</strong> Tailored to reflect the client's brand identity and specific aesthetic preferences.
+                            <br />
+                            <strong>Unique Functionality:</strong> Development of bespoke features and interactive elements tailored to client requirements.
+                            <br />
+                            <strong>Responsive Design:</strong> Ensures optimal viewing experience across all devices (desktop, tablet, mobile).
+                            <br />
+                            <strong>SEO Optimization:</strong> Implementation of best practices to enhance search engine visibility and rankings.
+                            <br />
+                            <strong>Integration Capabilities:</strong> Seamless integration with third-party platforms and systems as needed.
+                            <br />
+                            <strong>Scalability:</strong> Designed to grow and evolve with the client's business needs.
+                            <br />
+                            <strong>Security:</strong> Implementation of robust security measures to protect user data and website integrity.
+                            <br />
+                            <strong>Collaborative Process:</strong> Close collaboration with clients throughout design and development phases.
+                            <br />
+                            </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <img src="~/images/onlinepaymentintegrations.png" class="w-100 border-bottom" height="256" alt="ONLINE PAYMENT INTEGRATIONS" />
+                    <div class="card-body">
+                        <h6>ONLINE PAYMENT INTEGRATIONS</h6>
+                        <div class="underline"></div>
+                        <p>
+                            <strong>Key Features:</strong>
+                            <br />
+                            <strong>Customized Integration:</strong> Tailored online payment solutions to match specific business needs and user expectations.
+                            <br />
+                            <strong>Multiple Payment Gateways:</strong> Integration with diverse payment gateways such as Mpesa, Visa, MasterCard, PayPal, etc.
+                            <br />
+                            <strong>Secure Transactions:</strong> Implementation of robust security protocols to ensure safe handling of sensitive payment information.
+                            <br />
+                            <strong>Mobile Compatibility:</strong> Seamless payment experience across mobile devices, enhancing user convenience.
+                            <br />
+                            <strong>Compliance:</strong> Adherence to industry standards and regulations to guarantee trust and reliability.
+                            <br />
+                            <strong>Scalability:</strong> Designed to support growth and expansion, accommodating increased transaction volumes.
+                            <br />
+                            <strong>Analytics and Reporting:</strong> Tools for monitoring transactions, analyzing payment trends, and optimizing financial strategies.
+                            <br />
+                            <strong>Support and Maintenance:</strong> Continuous monitoring ensuring uninterrupted services.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <img src="~/images/payment-5695697_1280.png" class="w-100 border-bottom" height="256" alt="BESPOKE APP DESIGN AND DEVELOPMENT" />
+                    <div class="card-body">
+                        <h6>BESPOKE APP DESIGN AND DEVELOPMENT</h6>
+                        <div class="underline"></div>
+                        <p>
+                            <strong>Key Features:</strong>
+                            <br />
+                            <strong>Customized Design:</strong> Tailored to reflect the unique branding and user experience requirements of the client.
+                            <br />
+                            <strong>Platform Compatibility:</strong> Development across iOS, Android, and web platforms for broad accessibility.
+                            <br />
+                            <strong>Interactive UI/UX:</strong> User-centric design with intuitive navigation and engaging interfaces.
+                            <br />
+                            <strong>Backend Development:</strong> Robust server-side development to support app functionalities and data management.
+                            <br />
+                            <strong>API Integration:</strong> Seamless integration with third-party services for enhanced features and capabilities.
+                            <br />
+                            <strong>Scalability:</strong> Designed to grow and adapt with increasing user base and evolving business needs.
+                            <br />
+                            <strong>Security:</strong> Implementation of stringent security measures to protect user data and ensure privacy.
+                            <br />
+                            <strong>Testing and QA:</strong> Rigorous testing across devices and scenarios to ensure optimal performance and reliability.
+                            <br />
+                           </p>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+</section>
