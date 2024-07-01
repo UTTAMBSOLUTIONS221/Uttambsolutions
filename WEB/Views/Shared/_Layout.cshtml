@@ -41,11 +41,17 @@
                         <li class="nav-item">
                             <a asp-action="Contact" asp-controller="Home" asp-area="" class="nav-link text-white fw-bold text-uppercase">Contact</a>
                         </li>
+                        <li class="nav-item">
+                            <a asp-action="Blogs" asp-controller="Home" asp-area="" class="nav-link text-white fw-bold text-uppercase">BLOGS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Signin" asp-controller="Account" asp-area="" class="nav-link text-white fw-bold text-uppercase">SIGNIN</a>
+                        </li>
                     </ul>
                 </div>
 
-                <!-- Right navbar links -->
-                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                <!-- Right navbar links for large screens -->
+                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto d-none d-md-flex">
                     <li class="nav-item">
                         <a asp-action="Blogs" asp-controller="Home" asp-area="" class="nav-link text-white fw-bold text-uppercase">BLOGS</a>
                     </li>
@@ -63,6 +69,7 @@
                 @RenderBody()
             </div>
         </section>
+        <!-- /.content -->
     </div>
 
     <footer class="border-top footer text-muted">
