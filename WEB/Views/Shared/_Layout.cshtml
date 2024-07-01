@@ -16,7 +16,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
             crossorigin="anonymous"></script>
 </head>
-<body class="hold-transition layout-top-nav">
+<body class="hold-transition layout-top-nav layout-navbar-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
             <div class="container">
@@ -57,10 +57,12 @@
         </nav>
     </div>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="content-wrapper" style="padding-top: 58px;">
+        <section class="content">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </section>
     </div>
 
     <footer class="border-top footer text-muted">
