@@ -159,6 +159,33 @@ namespace DBL
         }
         #endregion
 
+        #region System Products
+        public Task<Genericmodel> Registersystemproductdata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ProductRepository.Registersystemproductdata(Obj);
+                return Resp;
+            });
+        }
+        public Task<IEnumerable<Systemproducts>> Getsystemproductdata(int Page, int PageSize)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ProductRepository.Getsystemproductdata(Page, PageSize);
+                return Resp;
+            });
+        }
+        public Task<Systemproducts> Getsystemproductdatabyid(long Productid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ProductRepository.Getsystemproductdatabyid(Productid);
+                return Resp;
+            });
+        }
+        #endregion
+
 
         #region System Dropdowns
         public Task<IEnumerable<ListModel>> GetListModel(ListModelType listType)

@@ -14,7 +14,7 @@ namespace DBL.Enum
         SystemOutlets = 2,
         SystemBlogModule = 3,
         SystemCategory = 4,
-        SystemProductCategory = 5,
+        SystemSubCategory = 5,
         Systemproductbrand = 6,
         SystemProductSubCategory = 7,
         Systempermission = 8,

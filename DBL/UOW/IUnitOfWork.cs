@@ -9,5 +9,6 @@ namespace DBL.UOW
         IModulesRepository ModulesRepository { get; }
         IBlogsRepository BlogsRepository { get; }
         ICategoryRepository CategoryRepository { get; }
+        IProductRepository ProductRepository { get; }
     }
 }

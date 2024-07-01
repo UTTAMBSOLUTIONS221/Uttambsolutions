@@ -1,9 +1,4 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_MasterLayout.cshtml";
-}
-@model IEnumerable<DBL.Entities.Systemmodule>
+﻿@model IEnumerable<DBL.Entities.Systemproducts>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
@@ -14,10 +9,10 @@
             <div class="card-header py-1">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h6 class="font-weight-bold text-sm card-title">Modules</h6>
+                        <h6 class="font-weight-bold text-sm card-title">Products</h6>
                     </div>
                     <div class="col-sm-4">
-                        <a asp-action="AddModule" asp-controller="Module" asp-route-code="@Guid.NewGuid()" asp-route-Moduleid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Module</a>
+                        <a asp-action="Addproduct" asp-controller="Product" asp-route-code="@Guid.NewGuid()" asp-route-Productid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Product</a>
                     </div>
                 </div>
             </div>
@@ -32,7 +27,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @* @foreach (var item in Model)
                         {
                             <tr>
                                 <td><img src="@Url.Content(item.Moduleimagepath)" height="40" width="40"/></td>
@@ -41,7 +36,7 @@
                                 <td class="text-right"><a asp-action="AddModule" asp-controller="Module" asp-route-code="@Guid.NewGuid()" asp-route-Moduleid="@item.Moduleid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                             </tr>
                         }
-
+ *@
                     </tbody>
                 </table>
             </div>
