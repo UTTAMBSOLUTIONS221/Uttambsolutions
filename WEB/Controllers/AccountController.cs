@@ -29,7 +29,7 @@ namespace WEB.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Signup(SystemStaff model)
+        public async Task<IActionResult> Register(SystemStaff model)
         {
             if (ModelState.IsValid)
             {

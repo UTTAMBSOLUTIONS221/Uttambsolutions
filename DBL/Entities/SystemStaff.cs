@@ -24,7 +24,7 @@ namespace DBL.Entities
         public string? Passwords { get; set; }
         [Required(ErrorMessage = "Confirm Password is required.")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Passwords", ErrorMessage = "The password and confirmation password do not match.")]
         public string? Confirmpasswords { get; set; }
         public bool Isactive { get; set; }
         public bool Isdeleted { get; set; }
