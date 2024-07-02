@@ -26,6 +26,7 @@ namespace WEB.Controllers
         public async Task<IActionResult> Addproduct(int Productid)
         {
             ViewData["Systemsubcategorylists"] = bl.GetListModel(ListModelType.SystemSubCategory).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["Systembrandlists"] = bl.GetListModel(ListModelType.Systemproductbrand).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Systemproducts products = new Systemproducts();
             if (Productid > 0)
             {

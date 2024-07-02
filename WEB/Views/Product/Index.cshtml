@@ -203,7 +203,7 @@ async function uploadImage(files) {
         return;
     }
     var uil1 = {
-        Productid: $('#Productid').val(), Productname: $('#Productnameid').val(),Productbarcode: $('#Productbarcodeid').val(), Productdescription: $('#Productdescriptionid').val(), 
+        Productid: $('#Productid').val(), Productname: $('#Productnameid').val(),Productbarcode: $('#Productbarcodeid').val(), Productdescription: $('#Productdescriptionid').val(), Sku: $('#Productskuid').val(), 
         Categoryid: $('#Categoryid').val(),Brandid: $('#Brandid').val(),Wholsaleprice: $('#Wholsalepriceid').val(),Retailprice: $('#Retailpriceid').val(),Primaryimageurl: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
     };
     $.post("/Product/Addsystemproductdata", uil1, function (response) {

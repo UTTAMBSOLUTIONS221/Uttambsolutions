@@ -1,6 +1,7 @@
 ﻿@model DBL.Entities.Systemproducts
 @{
     var Systemcategory = ViewData["Systemsubcategorylists"] as List<SelectListItem>;
+    var Systembrand = ViewData["Systembrandlists"] as List<SelectListItem>;
 }
 <div class="modal-header">
     <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Product</h5>
@@ -29,10 +30,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-8">
             <div class="form-group">
                 <label class="font-weight-light">Product Description</label>
                 <textarea class="form-control form-control-sm" asp-for="@Model.Productdescription" id="Productdescriptionid"></textarea>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Product Sku</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Sku" id="Productskuid" />
             </div>
         </div>
     </div>
@@ -48,7 +55,7 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <label class="font-weight-light">Brand</label>
-                <select class="form-control form-control-sm" asp-items="@Systemcategory" asp-for="@Model.Brandid" id="Brandid">
+                <select class="form-control form-control-sm" asp-items="@Systembrand" asp-for="@Model.Brandid" id="Brandid">
                     <option value="0">---Select---</option>
                 </select>
             </div>
