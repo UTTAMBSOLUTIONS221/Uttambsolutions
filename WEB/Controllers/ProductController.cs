@@ -4,6 +4,7 @@ using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace WEB.Controllers
 {
@@ -31,6 +32,11 @@ namespace WEB.Controllers
                 products = await bl.Getsystemproductdatabyid(Productid);
             }
             return PartialView(products);
+        }
+        public async Task<JsonResult> Addsystemproductdata(Systemproducts model)
+        {
+            var resp = await bl.Registersystemproductdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
         }
     }
 }
