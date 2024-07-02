@@ -30,6 +30,10 @@ namespace DBL
                 string Password = str.RandomString(8).ToString();
                 obj.Passwords = sec.Encrypt(Password, Passwordhash);
                 obj.Passharsh = Passwordhash;
+                obj.Username = obj.Emailaddress;
+                obj.Datecreated = DateTime.Now;
+                obj.Datemodified = DateTime.Now;
+                obj.Passwordresetdate = DateTime.Now.AddDays(90);
                 var Resp = db.AccountRepository.Registersystemstaffdata(JsonConvert.SerializeObject(obj));
                 return Resp;
             });
