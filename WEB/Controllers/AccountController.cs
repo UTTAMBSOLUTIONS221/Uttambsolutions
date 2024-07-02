@@ -31,19 +31,29 @@ namespace WEB.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Signup(SystemStaff model)
         {
-            var resp = await bl.Registersystemstaffdata(model);
-            if (resp.RespStatus == 0)
+            if (ModelState.IsValid)
             {
-                Success(resp.RespMessage, true);
-                return RedirectToAction("Signin", "Account");
-            }
-            else if (resp.RespStatus == 401)
-            {
-                Warning(resp.RespMessage, true);
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, resp.RespMessage);
+                try
+                {
+                    var resp = await bl.Registersystemstaffdata(model);
+                    if (resp.RespStatus == 0)
+                    {
+                        Success(resp.RespMessage, true);
+                        return RedirectToAction("Signin", "Account");
+                    }
+                    else if (resp.RespStatus == 401)
+                    {
+                        Warning(resp.RespMessage, true);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, resp.RespMessage);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Util.LogError("Register Staff", ex, true);
+                }
             }
             return View();
         }

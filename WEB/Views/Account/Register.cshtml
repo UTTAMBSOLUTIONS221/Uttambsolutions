@@ -30,6 +30,7 @@
                             <label class="text-sm fontweight-light">First Name</label>
                             <div class="input-group mb-3">
                                 <input asp-for="Firstname" type="email" class="form-control form-control-sm" placeholder="First Name">
+                                <span asp-validation-for="Firstname" class="text-danger"></span>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fa fa-user"></span>
