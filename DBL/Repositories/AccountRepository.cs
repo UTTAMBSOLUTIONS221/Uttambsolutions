@@ -13,6 +13,19 @@ namespace DBL.Repositories
         public AccountRepository(string connectionString) : base(connectionString)
         {
         }
+        #region Register Staffs
+        public Genericmodel Registersystemstaffdata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registersystemstaffdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        #endregion
+
         #region Verify System Staff
         public UsermodelResponce VerifySystemStaff(string Username)
         {

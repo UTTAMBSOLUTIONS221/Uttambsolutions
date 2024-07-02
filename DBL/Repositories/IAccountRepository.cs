@@ -9,6 +9,7 @@ namespace DBL.Repositories
 {
     public interface IAccountRepository
     {
+        Genericmodel Registersystemstaffdata(string JsonData);
         UsermodelResponce VerifySystemStaff(string Username);
     }
 }

@@ -20,6 +20,23 @@ namespace DBL
             this._connString = connString;
             db = new UnitOfWork(connString);
         }
+
+        #region System Staffs
+        public Task<Genericmodel> Registersystemstaffdata(SystemStaff obj)
+        {
+            return Task.Run(() =>
+            {
+                string Passwordhash = str.RandomString(12);
+                string Password = str.RandomString(8).ToString();
+                obj.Passwords = sec.Encrypt(Password, Passwordhash);
+                obj.Passharsh = Passwordhash;
+                var Resp = db.AccountRepository.Registersystemstaffdata(JsonConvert.SerializeObject(obj));
+                return Resp;
+            });
+        }
+        #endregion
+
+
         #region Verify and Validate System Staff
         public Task<UsermodelResponce> ValidateSystemStaff(string userName, string password)
         {

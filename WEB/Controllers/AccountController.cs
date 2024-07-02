@@ -1,4 +1,5 @@
 ﻿using DBL;
+using DBL.Entities;
 using DBL.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -24,6 +25,26 @@ namespace WEB.Controllers
         public async Task<IActionResult> Register()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Signup(SystemStaff model)
+        {
+            var resp = await bl.Registersystemstaffdata(model);
+            if (resp.RespStatus == 0)
+            {
+                Success(resp.RespMessage, true);
+                return RedirectToAction("Signin", "Account");
+            }
+            else if (resp.RespStatus == 401)
+            {
+                Warning(resp.RespMessage, true);
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, resp.RespMessage);
+            }
             return View();
         }
 
