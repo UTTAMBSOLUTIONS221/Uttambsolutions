@@ -1,8 +1,10 @@
+using Faithlink.Services;
+
 namespace Faithlink.Components.Views;
 
 public partial class LoginPage : ContentPage
 {
-        private AuthenticationService _authService;
+    private AuthenticationService _authService;
 
     public LoginPage()
     {

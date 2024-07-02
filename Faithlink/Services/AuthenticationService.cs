@@ -15,7 +15,7 @@ namespace Faithlink.Services
         {
             _httpClient = new HttpClient();
             // Replace with your API base URL
-            _httpClient.BaseAddress = new Uri("https://your-api-base-url.com/");
+            _httpClient.BaseAddress = new Uri("http://mainapi.uttambsolutions.com/");
         }
 
         public async Task<bool> LoginAsync(string username, string password)
@@ -30,7 +30,7 @@ namespace Faithlink.Services
 
             try
             {
-                var response = await _httpClient.PostAsync("api/auth/login", content);
+                var response = await _httpClient.PostAsync("/api/Account/Authenticate", content);
 
                 if (response.IsSuccessStatusCode)
                 {
