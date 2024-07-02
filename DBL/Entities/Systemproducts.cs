@@ -7,7 +7,9 @@
         public string? Productname { get; set; }
         public string? Productdescription { get; set; }
         public int Categoryid { get; set; }
+        public string? Categoryname { get; set; }
         public int Brandid { get; set; }
+        public string? Brandname { get; set; }
         public string? Sku { get; set; }
         public decimal Wholsaleprice { get; set; }
         public decimal Retailprice { get; set; }
