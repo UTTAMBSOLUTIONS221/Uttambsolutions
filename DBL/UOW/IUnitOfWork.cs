@@ -8,6 +8,7 @@ namespace DBL.UOW
         IAccountRepository AccountRepository { get; }
         IModulesRepository ModulesRepository { get; }
         IBlogsRepository BlogsRepository { get; }
+        IBrandRepository BrandRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
     }

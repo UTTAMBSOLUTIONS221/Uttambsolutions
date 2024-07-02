@@ -131,6 +131,32 @@ namespace DBL
         }
         #endregion
 
+        #region System Product Brands
+        public Task<Genericmodel> Registersystemproductbranddata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BrandRepository.Registersystemproductbranddata(Obj);
+                return Resp;
+            });
+        }
+        public Task<IEnumerable<Productbrand>> Getsystemproductbranddata(int Page, int PageSize)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BrandRepository.Getsystemproductbranddata(Page, PageSize);
+                return Resp;
+            });
+        }
+        public Task<Productbrand> Getsystemproductbranddatabyid(long Brandid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BrandRepository.Getsystemproductbranddatabyid(Brandid);
+                return Resp;
+            });
+        }
+        #endregion
 
         #region System Category
         public Task<Genericmodel> Registersystemcategorydata(string Obj)
