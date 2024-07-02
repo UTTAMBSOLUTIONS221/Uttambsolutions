@@ -1,4 +1,6 @@
-﻿namespace Faithlink
+﻿using Faithlink.Components.Views;
+
+namespace Faithlink
 {
     public partial class App : Application
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new LoginPage();
         }
     }
 }
