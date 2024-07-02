@@ -1,0 +1,55 @@
+﻿@page "/chat"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<h3>Chat</h3>
+
+<div>
+    <input @bind="messageText" placeholder="Enter message" />
+    <button @onclick="SendMessage">Send</button>
+</div>
+
+<ul>
+    @foreach (var message in messages)
+    {
+        <li>@message.UserName: @message.Text</li>
+    }
+</ul>
+
+@code {
+    private List<Message> messages = new List<Message>();
+    private string messageText;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMessages();
+    }
+
+    private async Task LoadMessages()
+    {
+        messages = await Http.GetFromJsonAsync<List<Message>>("api/messages/1");
+    }
+
+    private async Task SendMessage()
+    {
+        var message = new Message
+            {
+                Text = messageText,
+                UserName = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity.Name,
+                GroupId = 1
+            };
+
+        var response = await Http.PostAsJsonAsync("api/messages", message);
+
+        if (response.IsSuccessStatusCode)
+        {
+            messageText = string.Empty;
+            await LoadMessages();
+        }
+        else
+        {
+            // Handle error
+        }
+    }
+}
