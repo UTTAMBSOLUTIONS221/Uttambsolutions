@@ -68,20 +68,20 @@
 
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="submit" class="btn btn-sm btn-info font-weight-bolder btn-block text-uppercase">Sign in</button>
-                        </div>
+                    <div class="row">                      
                         <div class="col-6">
                             <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder btn-block text-uppercase">cancel</a>
+                        </div>
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-sm btn-info font-weight-bolder btn-block text-uppercase">Sign in</button>
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-5">
-                            <a asp-action="Forgotpassword" asp-controller="Customer" class="text-uppercase text-info text-xs"> Forgot Password?</a>
+                            <a asp-action="Forgotpassword" asp-controller="Account" class="text-uppercase text-info text-xs"> Forgot Password?</a>
                         </div>
                         <div class="col-7">
-                            <p class="text-xs">Don't have account yet? <a asp-action="Registersystemcustomers" asp-controller="Customer" class="text-uppercase text-info text-xs">Register</a></p>
+                            <p class="text-xs">Don't have account yet? <a asp-action="Register" asp-controller="Account" class="text-uppercase text-info text-xs">Register</a></p>
                         </div>
                     </div>
                 </form>

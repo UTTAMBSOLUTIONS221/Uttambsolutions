@@ -18,6 +18,15 @@ namespace WEB.Controllers
         {
             bl = new BL(Util.ShareConnectionString(config));
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return View();
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Signin(string returnUrl = null)
@@ -40,7 +49,7 @@ namespace WEB.Controllers
                 //{
                 //    return RedirectToAction("VerifyAccount", "Account", new { Usercode = resp.Userid, Phonenumber = resp.Phone });
                 //}
-                return RedirectToLocal(returnUrl,resp.Usermodel.Rolename);
+                return RedirectToLocal(returnUrl, resp.Usermodel.Rolename);
             }
             else if (resp.RespStatus == 401)
             {
@@ -84,7 +93,7 @@ namespace WEB.Controllers
                 ExpiresUtc = new DateTimeOffset?(DateTime.UtcNow.AddMinutes(30))
             });
         }
-        private IActionResult RedirectToLocal(string returnUrl,string rolename)
+        private IActionResult RedirectToLocal(string returnUrl, string rolename)
         {
             if (Url.IsLocalUrl(returnUrl))
             {
@@ -99,7 +108,7 @@ namespace WEB.Controllers
                 else
                 {
                     return RedirectToAction(nameof(HomeController.Moudules), "Home", new { area = "" });
-                }   
+                }
             }
         }
         #endregion
