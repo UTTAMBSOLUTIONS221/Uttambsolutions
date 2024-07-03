@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Faithlink.Views.OpenForums.OpenForumsPage"
+             Title="Faith Link Open Forums">
+    <VerticalStackLayout>
+        <!-- List of open forums -->
+        <CollectionView ItemsSource="{Binding OpenForums}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding ForumName}" FontAttributes="Bold" FontSize="18" />
+                        <Label Text="{Binding OpenTime}" FontSize="14" />
+
+                        <!-- Join Forum button -->
+                        <Button Text="Join Forum"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.JoinCommand}"
+                                CommandParameter="{Binding ForumId}"
+                                IsVisible="{Binding IsOpen}" 
+                            Margin="10" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

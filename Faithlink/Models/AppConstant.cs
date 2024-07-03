@@ -1,5 +1,6 @@
 ﻿using Faithlink.Controls;
 using Faithlink.Views.Dashboard;
+using Faithlink.Views.OpenForums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,13 +38,25 @@ namespace Faithlink.Models
                                 new ShellContent
                                 {
                                     Icon = Icons.Dashboard,
-                                    Title = "Student Dashboard",
+                                    Title = "Dashboard",
+                                    ContentTemplate = new DataTemplate(typeof(StudentDashboardPage)),
+                                },
+                                new ShellContent
+                                {
+                                    Icon = Icons.People,
+                                    Title = "Open Forum",
+                                    ContentTemplate = new DataTemplate(typeof(OpenForumsPage)),
+                                },
+                                new ShellContent
+                                {
+                                    Icon = Icons.People,
+                                    Title = "Groups",
                                     ContentTemplate = new DataTemplate(typeof(StudentDashboardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.AboutUs,
-                                    Title = "Student Profile",
+                                    Title = "Profile",
                                     ContentTemplate = new DataTemplate(typeof(StudentDashboardPage)),
                                 },
                             }

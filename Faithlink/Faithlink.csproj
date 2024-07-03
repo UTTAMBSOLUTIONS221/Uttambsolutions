@@ -79,12 +79,25 @@
 	  <MauiXaml Update="Views\Dashboard\TeacherDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\OpenForums\OpenForumsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Startup\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Startup\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Views\NewFolder\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\OpenForums\OpenForumsPage.xaml.cs">
+	    <DependentUpon>OpenForumsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionFaithlinkHideInfoBar="True" /></VisualStudio></ProjectExtensions>
