@@ -1,4 +1,5 @@
 ﻿using Faithlink.Controls;
+using Faithlink.Views.Bible;
 using Faithlink.Views.Dashboard;
 using Faithlink.Views.OpenForums;
 using System;
@@ -40,6 +41,12 @@ namespace Faithlink.Models
                                     Icon = Icons.Dashboard,
                                     Title = "Dashboard",
                                     ContentTemplate = new DataTemplate(typeof(StudentDashboardPage)),
+                                },
+                                new ShellContent
+                                {
+                                    Icon = Icons.People,
+                                    Title = "Bible",
+                                    ContentTemplate = new DataTemplate(typeof(BibleVersesPage)),
                                 },
                                 new ShellContent
                                 {

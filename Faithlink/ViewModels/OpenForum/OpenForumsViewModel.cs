@@ -1,73 +1,41 @@
-﻿using Microsoft.Maui.Controls;
-using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Faithlink.Models;
+using Faithlink.Services;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace Faithlink.ViewModels
 {
-    public class OpenForumsViewModel : BindableObject
+    public partial class OpenForumsViewModel : ObservableObject
     {
-        private ObservableCollection<OpenForum> _openForums;
-        public ObservableCollection<OpenForum> OpenForums
+        private readonly IOpenForumsApiService _openForumsApiService;
+
+        public ObservableCollection<OpenForum> OpenForums { get; } = new ObservableCollection<OpenForum>();
+
+        public OpenForumsViewModel(IOpenForumsApiService openForumsApiService)
         {
-            get => _openForums;
-            set
-            {
-                _openForums = value;
-                OnPropertyChanged();
-            }
+            _openForumsApiService = openForumsApiService;
+            LoadOpenForumsCommand = new AsyncRelayCommand(LoadOpenForumsAsync);
+            JoinCommand = new AsyncRelayCommand<int>(JoinForumAsync);
         }
 
-        public OpenForumsViewModel()
-        {
-            // Initialize OpenForums collection (populate from database)
-            LoadOpenForums();
-        }
+        public IAsyncRelayCommand LoadOpenForumsCommand { get; }
+        public IAsyncRelayCommand<int> JoinCommand { get; }
 
-        private void LoadOpenForums()
+        private async Task LoadOpenForumsAsync()
         {
-            // Simulated data for demonstration
-            var forums = new ObservableCollection<OpenForum>
-            {
-                new OpenForum { ForumId = 1, ForumName = "Forum A", OpenTime = "09:00 AM" },
-                new OpenForum { ForumId = 2, ForumName = "Forum B", OpenTime = "10:30 AM" },
-                new OpenForum { ForumId = 3, ForumName = "Forum C", OpenTime = "12:00 PM" }
-                // Fetch actual data from database here
-            };
-
-            // Determine if each forum is open based on current time
+            var forums = await _openForumsApiService.GetOpenForumsAsync();
+            OpenForums.Clear();
             foreach (var forum in forums)
             {
-                if (IsForumOpen(forum.OpenTime))
-                {
-                    forum.IsOpen = true;
-                }
-                else
-                {
-                    forum.IsOpen = false;
-                }
+                OpenForums.Add(forum);
             }
-
-            OpenForums = forums;
         }
 
-        private bool IsForumOpen(string openTime)
+        private async Task JoinForumAsync(int forumId)
         {
-            // Compare current time with the openTime of the forum
-            var currentTime = DateTime.Now.TimeOfDay;
-            var forumOpenTime = TimeSpan.Parse(openTime);
-
-            // Forum is considered open if current time is after or equal to openTime
-            return currentTime >= forumOpenTime;
+            await _openForumsApiService.JoinForumAsync(forumId);
+            // Optionally reload forums or update UI to reflect joined forum
         }
-    }
-
-    public class OpenForum
-    {
-        public int ForumId { get; set; }
-        public string ForumName { get; set; }
-        public string OpenTime { get; set; }
-        public bool IsOpen { get; set; }
-        // Add more properties as needed
     }
 }
