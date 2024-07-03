@@ -1,4 +1,4 @@
-﻿
+﻿using Faithlink.Entities;
 using Faithlink.Models;
 using Newtonsoft.Json;
 
@@ -17,11 +17,15 @@ namespace Faithlink.Services
         {
             // Example URL and request body for login endpoint
             string apiUrl = "http://mainapi.uttambsolutions.com/api/Account/Authenticate";
-            var requestBody = new { Email = email, Password = password };
+            Userloginmodel userloginmodel = new Userloginmodel
+            {
+                username = email,
+                password = password
+            };
 
             try
             {
-                HttpResponseMessage response = await _httpClient.PostAsync(apiUrl, new StringContent(JsonConvert.SerializeObject(requestBody)));
+                HttpResponseMessage response = await _httpClient.PostAsync(apiUrl, new StringContent(JsonConvert.SerializeObject(userloginmodel)));
                 response.EnsureSuccessStatusCode(); // Ensure success status code
 
                 string jsonResponse = await response.Content.ReadAsStringAsync();
