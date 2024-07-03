@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Faithlink.Components.Views;
+using Faithlink.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Faithlink
 {
@@ -7,6 +10,7 @@ namespace Faithlink
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
@@ -17,9 +21,13 @@ namespace Faithlink
             builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
+
+            // Register services
+            builder.Services.AddSingleton<AuthenticationService>();
+            builder.Services.AddTransient<LoginPage>();
 
             return builder.Build();
         }

@@ -66,6 +66,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\DBL\DBL.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<MauiXaml Update="Components\Views\LoginPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

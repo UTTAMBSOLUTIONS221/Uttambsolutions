@@ -1,33 +1,47 @@
 using Faithlink.Services;
+using Microsoft.Maui.Controls;
 
-namespace Faithlink.Components.Views;
-
-public partial class LoginPage : ContentPage
+namespace Faithlink.Components.Views
 {
-    private AuthenticationService _authService;
-
-    public LoginPage()
+    public partial class LoginPage : ContentPage
     {
-        InitializeComponent();
-        _authService = new AuthenticationService();
-    }
+        private readonly AuthenticationService _authService;
 
-    private async void OnLoginClicked(object sender, EventArgs e)
-    {
-        var username = UsernameEntry.Text;
-        var password = PasswordEntry.Text;
-
-        if (await _authService.LoginAsync(username, password))
+        public LoginPage(AuthenticationService authService)
         {
-            // Navigate to next page or perform actions upon successful login
-            await DisplayAlert("Success", "Login Successful", "OK");
-            // Example of navigating to another page:
-            // await Navigation.PushAsync(new MainPage());
+            InitializeComponent();
+            _authService = authService;
         }
-        else
+
+        private async void OnLoginClicked(object sender, EventArgs e)
         {
-            // Handle unsuccessful login
-            await DisplayAlert("Error", "Invalid username or password", "OK");
+            var username = UsernameEntry?.Text;
+            var password = PasswordEntry?.Text;
+
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                await DisplayAlert("Error", "Please enter both username and password", "OK");
+                return;
+            }
+
+            try
+            {
+                var resp = await _authService.Validateuser(username, password);
+                if (resp.RespStatus == 200 || resp.RespStatus == 0)
+                {
+                    await DisplayAlert("Success", "Login Successful", "OK");
+                    // Example of navigating to another page:
+                    await Navigation.PushAsync(new MainPage());
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Invalid username or password", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
+            }
         }
     }
 }

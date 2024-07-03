@@ -1,4 +1,6 @@
 ﻿using Faithlink.Components.Views;
+using Faithlink.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Faithlink
 {
@@ -7,8 +9,7 @@ namespace Faithlink
         public App()
         {
             InitializeComponent();
-
-            MainPage = new LoginPage();
+            MainPage = new NavigationPage(new LoginPage(new AuthenticationService()));
         }
     }
 }

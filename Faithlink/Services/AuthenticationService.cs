@@ -1,57 +1,60 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DBL.Models;
+using Faithlink.Models;
+using Newtonsoft.Json;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Faithlink.Services
 {
     public class AuthenticationService
     {
-        private readonly HttpClient _httpClient;
+        private readonly string BaseUrl;
 
         public AuthenticationService()
         {
-            _httpClient = new HttpClient();
-            // Replace with your API base URL
-            _httpClient.BaseAddress = new Uri("http://mainapi.uttambsolutions.com/");
+            BaseUrl = Constants.BaseUrl;
         }
 
-        public async Task<bool> LoginAsync(string username, string password)
+        public async Task<UsermodelResponce> Validateuser(string username, string password)
         {
-            var loginModel = new
+            Userloginmodel obj = new Userloginmodel
             {
-                Username = username,
-                Password = password
+                username = username,
+                password = password
             };
-
-            var content = new StringContent(JsonConvert.SerializeObject(loginModel), Encoding.UTF8, "application/json");
-
-            try
+            UsermodelResponce userModel = new UsermodelResponce();
+            var resp = await POSTTOAPILOGIN("/api/Account/Authenticate", obj);
+            if (resp.RespStatus == 200)
             {
-                var response = await _httpClient.PostAsync("/api/Account/Authenticate", content);
+                userModel = new UsermodelResponce
+                {
+                    Token = resp.Token,
+                    Usermodel = resp.Usermodel,
+                    RespStatus = resp.RespStatus,
+                    RespMessage = resp.RespMessage,
+                };
+            }
+            else
+            {
+                userModel.RespStatus = 401;
+                userModel.RespMessage = "Incorrect Password!";
+            }
 
-                if (response.IsSuccessStatusCode)
+            return userModel;
+        }
+
+        public async Task<UsermodelResponce> POSTTOAPILOGIN(string endpoint, dynamic obj)
+        {
+            UsermodelResponce resp = new UsermodelResponce();
+            using (var httpClient = new HttpClient())
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
+                using (var response = await httpClient.PostAsync(BaseUrl + endpoint, content))
                 {
-                    // Process successful login (e.g., store token)
-                    var token = await response.Content.ReadAsStringAsync();
-                    // Store token securely (e.g., in secure storage or token cache)
-                    // Implement your token storage logic here
-                    return true;
-                }
-                else
-                {
-                    // Handle unsuccessful login
-                    return false;
+                    string outPut = response.Content.ReadAsStringAsync().Result;
+                    resp = JsonConvert.DeserializeObject<UsermodelResponce>(outPut);
                 }
             }
-            catch (Exception ex)
-            {
-                // Handle exceptions
-                Console.WriteLine($"Exception: {ex.Message}");
-                return false;
-            }
+            return resp;
         }
     }
 }
