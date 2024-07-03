@@ -1,5 +1,4 @@
-﻿using Android.Net;
-using Faithlink.Services;
+﻿using Faithlink.Services;
 using Faithlink.ViewModels.Dashboard;
 using Faithlink.ViewModels.Startup;
 using Faithlink.Views.Dashboard;
