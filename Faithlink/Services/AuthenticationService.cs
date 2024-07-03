@@ -26,15 +26,36 @@ public class AuthenticationService : IAuthenticationService
                 password = password
             };
             UsermodelResponce resp = new UsermodelResponce();
-            using (var httpClient = new HttpClient())
+
+            // Create HttpClient with custom HttpClientHandler
+            using (var handler = new HttpClientHandler())
             {
-                var content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
-                using (var response = await httpClient.PostAsync("https://mainapi.uttambsolutions.com/api/Account/Authenticate", content))
+                // Ignore SSL certificate errors (use with caution)
+                handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+
+                using (var httpClient = new HttpClient(handler))
                 {
-                    string outPut = response.Content.ReadAsStringAsync().Result;
-                    resp = JsonConvert.DeserializeObject<UsermodelResponce>(outPut);
+                    var json = JsonConvert.SerializeObject(obj);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    using (var response = await httpClient.PostAsync("https://mainapi.uttambsolutions.com/api/Account/Authenticate", content))
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string outPut = await response.Content.ReadAsStringAsync();
+                            resp = JsonConvert.DeserializeObject<UsermodelResponce>(outPut);
+                        }
+                        else
+                        {
+                            // Handle HTTP error response
+                            Console.WriteLine($"HTTP error: {response.StatusCode}");
+                            // Optionally handle error response body
+                            // string errorResponse = await response.Content.ReadAsStringAsync();
+                        }
+                    }
                 }
             }
+
             return resp;
         }
         catch (HttpRequestException ex)
@@ -50,4 +71,5 @@ public class AuthenticationService : IAuthenticationService
             throw;
         }
     }
+
 }
