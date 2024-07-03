@@ -1,4 +1,6 @@
-﻿using Faithlink.ViewModels.Dashboard;
+﻿using Android.Net;
+using Faithlink.Services;
+using Faithlink.ViewModels.Dashboard;
 using Faithlink.ViewModels.Startup;
 using Faithlink.Views.Dashboard;
 using Faithlink.Views.Startup;
@@ -27,6 +29,10 @@ namespace Faithlink
             builder.Services.AddSingleton<LoginPageViewModel>();
             builder.Services.AddSingleton<DashboardPageViewModel>();
             builder.Services.AddSingleton<LoadingPageViewModel>();
+
+            // Services
+            builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
+
 
             return builder.Build();
         }

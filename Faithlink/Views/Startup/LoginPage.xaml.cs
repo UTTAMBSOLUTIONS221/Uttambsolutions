@@ -1,9 +1,12 @@
+using Faithlink.ViewModels.Startup;
+
 namespace Faithlink.Views.Startup;
 
 public partial class LoginPage : ContentPage
 {
-	public LoginPage()
-	{
-		InitializeComponent();
-	}
+    public LoginPage(LoginPageViewModel viewModel)
+    {
+        InitializeComponent();
+        this.BindingContext = viewModel;
+    }
 }

@@ -8,11 +8,11 @@ namespace Faithlink.ViewModels.Startup
 {
     public partial class LoginPageViewModel : BaseViewModel
     {
-        private readonly IAuthenticationService authService;
+        private readonly IAuthenticationService bl;
 
         public LoginPageViewModel(IAuthenticationService authService)
         {
-            authService = authService;
+            bl = authService;
         }
         [ObservableProperty]
         private string _email;
@@ -29,7 +29,7 @@ namespace Faithlink.ViewModels.Startup
             {
                 try
                 {
-                    var userDetails = await authService.Validateuser(Email, Password);
+                    var userDetails = await bl.Validateuser(Email, Password);
 
                     // Process user details as needed
                     userDetails.Usermodel.Fullname = "Test User Name"; // Example modification
