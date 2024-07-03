@@ -1,6 +1,7 @@
 ﻿using Faithlink.Entities;
 using Faithlink.Models;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace Faithlink.Services
 {
@@ -13,29 +14,25 @@ namespace Faithlink.Services
             _httpClient = new HttpClient();
             // Configure HttpClient, base address, headers, etc.
         }
+
         public async Task<UsermodelResponce> Validateuser(string email, string password)
         {
-            // Example URL and request body for login endpoint
-            string apiUrl = "http://mainapi.uttambsolutions.com/api/Account/Authenticate";
-            Userloginmodel userloginmodel = new Userloginmodel
+            Userloginmodel obj = new Userloginmodel
             {
                 username = email,
                 password = password
             };
-
-            try
+            UsermodelResponce resp = new UsermodelResponce();
+            using (var httpClient = new HttpClient())
             {
-                HttpResponseMessage response = await _httpClient.PostAsync(apiUrl, new StringContent(JsonConvert.SerializeObject(userloginmodel)));
-                response.EnsureSuccessStatusCode(); // Ensure success status code
-
-                string jsonResponse = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<UsermodelResponce>(jsonResponse);
+                var content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
+                using (var response = await httpClient.PostAsync("http://mainapi.uttambsolutions.com/api/Account/Authenticate", content))
+                {
+                    string outPut = response.Content.ReadAsStringAsync().Result;
+                    resp = JsonConvert.DeserializeObject<UsermodelResponce>(outPut);
+                }
             }
-            catch (Exception ex)
-            {
-                // Handle exception (e.g., logging, error handling)
-                throw new ApplicationException("Error occurred while logging in", ex);
-            }
+            return resp;
         }
     }
 }
