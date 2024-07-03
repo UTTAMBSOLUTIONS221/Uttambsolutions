@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Faithlink.ViewModels.Dashboard;
+using Faithlink.ViewModels.Startup;
+using Faithlink.Views.Dashboard;
+using Faithlink.Views.Startup;
 
 namespace Faithlink
 {
@@ -15,9 +18,15 @@ namespace Faithlink
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+            // Views
+            builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<DashboardPage>();
+            builder.Services.AddSingleton<LoadingPage>();
+
+            // View Models
+            builder.Services.AddSingleton<LoginPageViewModel>();
+            builder.Services.AddSingleton<DashboardPageViewModel>();
+            builder.Services.AddSingleton<LoadingPageViewModel>();
 
             return builder.Build();
         }
