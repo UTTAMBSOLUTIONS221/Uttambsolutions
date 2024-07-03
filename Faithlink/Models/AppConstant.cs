@@ -25,7 +25,7 @@ namespace Faithlink.Models
             if (adminDashboardInfo != null) AppShell.Current.Items.Remove(adminDashboardInfo);
 
 
-            if (App.UserDetails.RoleID == (int)RoleDetails.Student)
+            if (App.UserDetails.Roleid == (int)RoleDetails.Student)
             {
                 var flyoutItem = new FlyoutItem()
                 {
@@ -66,7 +66,7 @@ namespace Faithlink.Models
 
             }
 
-            if (App.UserDetails.RoleID == (int)RoleDetails.Teacher)
+            if (App.UserDetails.Roleid == (int)RoleDetails.Teacher)
             {
                 var flyoutItem = new FlyoutItem()
                 {
@@ -107,7 +107,7 @@ namespace Faithlink.Models
                 }
             }
 
-            if (App.UserDetails.RoleID == (int)RoleDetails.Admin)
+            if (App.UserDetails.Roleid == (int)RoleDetails.Admin)
             {
                 var flyoutItem = new FlyoutItem()
                 {

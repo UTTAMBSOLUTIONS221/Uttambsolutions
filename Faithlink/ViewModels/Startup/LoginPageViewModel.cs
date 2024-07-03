@@ -1,61 +1,53 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Faithlink.Models;
+using Faithlink.Services;
 using Newtonsoft.Json;
 
 namespace Faithlink.ViewModels.Startup
 {
     public partial class LoginPageViewModel : BaseViewModel
     {
+        private readonly IAuthenticationService authService;
+
+        public LoginPageViewModel(IAuthenticationService authService)
+        {
+            authService = authService;
+        }
         [ObservableProperty]
         private string _email;
 
         [ObservableProperty]
         private string _password;
 
+
         #region Commands
         [RelayCommand]
-        async void Login()
+        public async void Login()
         {
             if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password))
             {
-                var userDetails = new UserBasicInfo();
-                userDetails.Email = Email;
-                userDetails.FullName = "Test User Name";
-
-                // Student Role, Teacher Role, Admin Role,
-                if (Email.ToLower().Contains("student"))
+                try
                 {
-                    userDetails.RoleID = (int)RoleDetails.Student;
-                    userDetails.RoleText = "Student Role";
+                    var userDetails = await authService.Validateuser(Email, Password);
+
+                    // Process user details as needed
+                    userDetails.Usermodel.Fullname = "Test User Name"; // Example modification
+
+                    // Store user details locally (e.g., using Preferences)
+                    string userDetailStr = JsonConvert.SerializeObject(userDetails);
+                    Preferences.Set(nameof(App.UserDetails), userDetailStr);
+                    App.UserDetails = userDetails.Usermodel;
+
+                    // Example additional logic after successful login
+                    await AppConstant.AddFlyoutMenusDetails();
                 }
-                else if (Email.ToLower().Contains("teacher"))
+                catch (Exception ex)
                 {
-                    userDetails.RoleID = (int)RoleDetails.Teacher;
-                    userDetails.RoleText = "Teacher Role";
+                    // Handle API error (e.g., show error message)
+                    Console.WriteLine($"Login failed: {ex.Message}");
                 }
-                else
-                {
-                    userDetails.RoleID = (int)RoleDetails.Admin;
-                    userDetails.RoleText = "Admin Role";
-                }
-
-
-                // calling api 
-
-
-                if (Preferences.ContainsKey(nameof(App.UserDetails)))
-                {
-                    Preferences.Remove(nameof(App.UserDetails));
-                }
-
-                string userDetailStr = JsonConvert.SerializeObject(userDetails);
-                Preferences.Set(nameof(App.UserDetails), userDetailStr);
-                App.UserDetails = userDetails;
-                await AppConstant.AddFlyoutMenusDetails();
             }
-
-
         }
         #endregion
     }

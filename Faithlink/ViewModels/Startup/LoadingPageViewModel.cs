@@ -31,7 +31,7 @@ namespace Faithlink.ViewModels.Startup
             }
             else
             {
-                var userInfo = JsonConvert.DeserializeObject<UserBasicInfo>(userDetailsStr);
+                var userInfo = JsonConvert.DeserializeObject<UsermodeldataResponce>(userDetailsStr);
                 App.UserDetails = userInfo;
                 await AppConstant.AddFlyoutMenusDetails();
             }

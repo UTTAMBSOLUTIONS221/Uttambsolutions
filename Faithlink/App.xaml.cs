@@ -7,7 +7,7 @@ namespace Faithlink
 
     public partial class App : Application
     {
-        public static UserBasicInfo UserDetails;
+        public static UsermodeldataResponce UserDetails;
         public App()
         {
             InitializeComponent();
@@ -17,7 +17,7 @@ namespace Faithlink
                 if (view is BorderlessEntry)
                 {
 #if __ANDROID__
-                handler.PlatformView.SetBackgroundColor(Colors.Transparent.ToPlatform());
+                    handler.PlatformView.SetBackgroundColor(Colors.Transparent.ToPlatform());
 #elif __IOS__
                     handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
 #endif
