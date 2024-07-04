@@ -37,7 +37,8 @@
 
         <!-- Chapters ListView -->
         <ListView ItemsSource="{Binding Chapters}"
-                  SelectedItem="{Binding SelectedChapter}">
+                  SelectedItem="{Binding SelectedChapter}"
+                  IsVisible="{Binding Books.Count, Converter={StaticResource HasItemsToVisibilityConverter}}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Reference}" />
@@ -47,7 +48,8 @@
 
         <!-- Verses ListView -->
         <ListView ItemsSource="{Binding Verses}"
-                  SelectedItem="{Binding SelectedVerse}">
+                  SelectedItem="{Binding SelectedVerse}"
+                  IsVisible="{Binding Chapters.Count, Converter={StaticResource HasItemsToVisibilityConverter}}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Reference}" />
@@ -60,5 +62,11 @@
                FontSize="Medium" 
                TextColor="Black" 
                Padding="10"/>
+
+        <!-- Loading Overlay -->
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="CenterAndExpand" />
     </StackLayout>
 </ContentPage>
