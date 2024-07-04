@@ -45,7 +45,8 @@
         </ListView>
 
         <!-- Verses ListView -->
-        <ListView ItemsSource="{Binding Verses}">
+        <ListView ItemsSource="{Binding Verses}"
+                  SelectedItem="{Binding SelectedVerse}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Text}" />
@@ -53,14 +54,9 @@
             </ListView.ItemTemplate>
         </ListView>
 
-
-        <ListView ItemsSource="{Binding SelectedVerse}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Reference}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
+        <!-- Selected Verse Detail -->
+        <Label Text="{Binding SelectedVerse?.Content}"
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="CenterAndExpand" />
     </StackLayout>
 </ContentPage>

@@ -176,9 +176,9 @@ namespace Faithlink.ViewModels.Bibles
                 var verses = await _bibleApiService.GetVersesAsync(SelectedChapter.BibleId, SelectedChapter.Id);
 
                 Verses.Clear();
-                foreach (var bibleverse in verses.Data)
+                foreach (var verse in verses.Data)
                 {
-                    Verses.Add(bibleverse);
+                    Verses.Add(verse);
                 }
             }
         }
