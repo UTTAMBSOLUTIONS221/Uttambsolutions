@@ -27,6 +27,7 @@ namespace Faithlink.ViewModels.Bibles
                 if (SetProperty(ref _selectedBible, value))
                 {
                     LoadBooksAsync();
+                    ClearVerseDetail();
                 }
             }
         }
@@ -40,6 +41,7 @@ namespace Faithlink.ViewModels.Bibles
                 if (SetProperty(ref _selectedBook, value))
                 {
                     LoadChaptersAsync();
+                    ClearVerseDetail();
                 }
             }
         }
@@ -53,6 +55,7 @@ namespace Faithlink.ViewModels.Bibles
                 if (SetProperty(ref _selectedChapter, value))
                 {
                     LoadVersesAsync();
+                    ClearVerseDetail();
                 }
             }
         }
@@ -66,6 +69,7 @@ namespace Faithlink.ViewModels.Bibles
                 if (SetProperty(ref _selectedLanguage, value))
                 {
                     LoadBiblesAsync();
+                    ClearVerseDetail();
                 }
             }
         }
@@ -229,11 +233,15 @@ namespace Faithlink.ViewModels.Bibles
 
             if (SelectedVerse != null)
             {
+                ClearVerseDetail();
                 var verseData = await _bibleApiService.GetVerseAsync(SelectedVerse.BibleId, SelectedVerse.Id);
                 VerseContent = verseData.Data.Content;
             }
-
             IsLoading = false;
+        }
+        private void ClearVerseDetail()
+        {
+            VerseContent = string.Empty;
         }
     }
 }
