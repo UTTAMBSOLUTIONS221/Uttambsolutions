@@ -3,10 +3,11 @@ using CommunityToolkit.Mvvm.Input;
 using Faithlink.Models;
 using Faithlink.Services;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Faithlink.ViewModels.Bibles
 {
-    public class BibleViewModel : ObservableObject
+    public partial class BibleViewModel : ObservableObject
     {
         private readonly IBibleApiService _bibleApiService;
         private bool _isLoading;
@@ -69,18 +70,24 @@ namespace Faithlink.ViewModels.Bibles
             }
         }
 
-        private BibleVerse _selectedVerse;
-        public BibleVerse SelectedVerse
+        private BibleVerses _selectedVerse;
+        public BibleVerses SelectedVerse
         {
             get => _selectedVerse;
-            set => SetProperty(ref _selectedVerse, value);
+            set
+            {
+                if (SetProperty(ref _selectedVerse, value))
+                {
+                    LoadVerseAsync();
+                }
+            }
         }
 
-        private bool _isVerseSelected;
-        public bool IsVerseSelected
+        private string _verseContent;
+        public string VerseContent
         {
-            get => _isVerseSelected;
-            set => SetProperty(ref _isVerseSelected, value);
+            get => _verseContent;
+            set => SetProperty(ref _verseContent, value);
         }
 
         public bool IsLoading
@@ -223,8 +230,7 @@ namespace Faithlink.ViewModels.Bibles
             if (SelectedVerse != null)
             {
                 var verseData = await _bibleApiService.GetVerseAsync(SelectedVerse.BibleId, SelectedVerse.Id);
-
-                SelectedVerse = verseData.Data; // Update the selected verse with detailed data
+                VerseContent = verseData.Data.Content;
             }
 
             IsLoading = false;

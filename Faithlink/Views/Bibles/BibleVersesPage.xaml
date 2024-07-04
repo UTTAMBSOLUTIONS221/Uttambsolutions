@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Faithlink.ViewModels.Bibles"
@@ -39,7 +40,7 @@
                   SelectedItem="{Binding SelectedChapter}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Number}" />
+                    <TextCell Text="{Binding Reference}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -49,14 +50,15 @@
                   SelectedItem="{Binding SelectedVerse}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Text}" />
+                    <TextCell Text="{Binding Reference}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Selected Verse Detail -->
-        <Label Text="{Binding SelectedVerse?.Content}"
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="CenterAndExpand" />
+        <!-- Verse Content Label -->
+        <Label Text="{Binding VerseContent}" 
+               FontSize="Medium" 
+               TextColor="Black" 
+               Padding="10"/>
     </StackLayout>
 </ContentPage>
