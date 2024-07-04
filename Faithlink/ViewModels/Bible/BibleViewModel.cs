@@ -3,32 +3,49 @@ using CommunityToolkit.Mvvm.Input;
 using Faithlink.Models;
 using Faithlink.Services;
 using System.Collections.ObjectModel;
-using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Faithlink.ViewModels.Bible
 {
-    public partial class BibleViewModel : ObservableObject
+    public class BibleViewModel : ObservableObject
     {
         private readonly IBibleApiService _bibleApiService;
 
         public ObservableCollection<BibleBook> Books { get; } = new();
         public ObservableCollection<BibleLanguage> Languages { get; } = new();
 
-        [ObservableProperty]
         private BibleBook _selectedBook;
-
-        [ObservableProperty]
-        private BibleChapter _selectedChapter;
-
-        [ObservableProperty]
-        private BibleLanguage _selectedLanguage;
-
-        public BibleViewModel(IBibleApiService bibleApiService)
+        public BibleBook SelectedBook
         {
-            _bibleApiService = bibleApiService;
+            get => _selectedBook;
+            set => SetProperty(ref _selectedBook, value);
+        }
+
+        private BibleChapter _selectedChapter;
+        public BibleChapter SelectedChapter
+        {
+            get => _selectedChapter;
+            set => SetProperty(ref _selectedChapter, value);
+        }
+
+        private BibleLanguage _selectedLanguage;
+        public BibleLanguage SelectedLanguage
+        {
+            get => _selectedLanguage;
+            set => SetProperty(ref _selectedLanguage, value);
+        }
+
+        public BibleViewModel()
+        {
+            _bibleApiService = new BibleApiService(); // Initialize with default constructor
+
+            // Initialize commands
             LoadLanguagesCommand = new AsyncRelayCommand(LoadLanguagesAsync);
             LoadBooksCommand = new AsyncRelayCommand(LoadBooksAsync);
             LoadChapterCommand = new AsyncRelayCommand(LoadChapterAsync);
+
+            // Load initial data
+            LoadLanguagesAsync();
         }
 
         public IAsyncRelayCommand LoadLanguagesCommand { get; }
@@ -38,6 +55,7 @@ namespace Faithlink.ViewModels.Bible
         private async Task LoadLanguagesAsync()
         {
             var languages = await _bibleApiService.GetLanguagesAsync();
+
             Languages.Clear();
             foreach (var language in languages)
             {

@@ -1,20 +1,56 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Faithlink.ViewModels.Bible"
              x:Class="Faithlink.Views.Bible.BibleVersesPage">
 
+    <ContentPage.BindingContext>
+        <vm:BibleViewModel />
+    </ContentPage.BindingContext>
+
     <StackLayout>
+        <!-- Language Picker -->
         <Picker ItemsSource="{Binding Languages}"
                 ItemDisplayBinding="{Binding Name}"
                 SelectedItem="{Binding SelectedLanguage}"
                 Title="Select Language" />
 
+        <!-- Load Books Button -->
         <Button Text="Load Books"
                 Command="{Binding LoadBooksCommand}" />
 
+        <!-- Books ListView -->
         <ListView ItemsSource="{Binding Books}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Name}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Load Chapters Button -->
+        <Button Text="Load Chapters"
+                Command="{Binding LoadChaptersCommand}"
+                IsEnabled="{Binding IsBooksLoaded}" />
+
+        <!-- Chapters ListView -->
+        <ListView ItemsSource="{Binding Chapters}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Number}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Load Verses Button -->
+        <Button Text="Load Verses"
+                Command="{Binding LoadVersesCommand}"
+                IsEnabled="{Binding IsChaptersLoaded}" />
+
+        <!-- Verses ListView -->
+        <ListView ItemsSource="{Binding Verses}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Text}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

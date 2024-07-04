@@ -1,9 +1,10 @@
 ﻿using Faithlink.Models;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace Faithlink.Services
-{ //private const string ApiKey = "387c5d1adb54e0afd3fd11e605d16f97"; // Replace with your API key
-  //private const string BaseUrl = "https://api.scripture.api.bible/v1/";
+{
     public class BibleApiService : IBibleApiService
     {
         private readonly HttpClient _httpClient;
@@ -11,15 +12,10 @@ namespace Faithlink.Services
         public BibleApiService()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://mainapi.uttambsolutions.com/");
-            // Optionally configure timeout, headers, etc. for HttpClient
+            _httpClient.BaseAddress = new Uri("https://api.scripture.api.bible/v1/");
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.DefaultRequestHeaders.Add("api-key", "387c5d1adb54e0afd3fd11e605d16f97");
         }
-
-        public async Task<List<BibleBook>> GetBooksAsync(string languageCode)
-        {
-            return await _httpClient.GetFromJsonAsync<List<BibleBook>>($"https://api.bible.com/v1/books?language={languageCode}");
-        }
-
         public async Task<List<BibleLanguage>> GetLanguagesAsync()
         {
             var languages = new List<BibleLanguage>
@@ -31,6 +27,29 @@ namespace Faithlink.Services
 
             return languages;
         }
+        public async Task<BibleData> GetBooksAsync(string languageCode)
+        {
+            var response = await _httpClient.GetAsync($"bibles?language={languageCode}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                };
+
+                return JsonSerializer.Deserialize<BibleData>(content, options);
+            }
+            else
+            {
+                // Handle unsuccessful response
+                // For example, throw exception or return empty list
+                return new List<BibleBook>();
+            }
+        }
+
+
 
         public async Task<BibleChapter> GetChapterAsync(string bookId, int chapterNumber)
         {

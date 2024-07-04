@@ -9,8 +9,8 @@ namespace Faithlink.Services
 {
     public interface IBibleApiService
     {
-        Task<List<BibleBook>> GetBooksAsync(string languageCode);
         Task<List<BibleLanguage>> GetLanguagesAsync();
+        Task<BibleData> GetBooksAsync(string languageCode);
         Task<BibleChapter> GetChapterAsync(string bookId, int chapterNumber);
     }
 }
