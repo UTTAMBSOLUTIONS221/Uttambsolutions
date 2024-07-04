@@ -1,6 +1,6 @@
 using Faithlink.ViewModels.Bibles;
 
-namespace Faithlink.Views.Bible;
+namespace Faithlink.Views.Bibles;
 
 public partial class BibleVersesPage : ContentPage
 {

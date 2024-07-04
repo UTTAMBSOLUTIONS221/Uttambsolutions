@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using Faithlink.Models;
 using Faithlink.Services;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 
 namespace Faithlink.ViewModels.Bibles
 {
@@ -225,7 +224,7 @@ namespace Faithlink.ViewModels.Bibles
             {
                 var verseData = await _bibleApiService.GetVerseAsync(SelectedVerse.BibleId, SelectedVerse.Id);
 
-                SelectedVerse = verseData.Data; 
+                SelectedVerse = verseData.Data; // Update the selected verse with detailed data
             }
 
             IsLoading = false;

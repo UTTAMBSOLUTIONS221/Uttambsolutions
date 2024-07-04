@@ -1,5 +1,5 @@
 ﻿using Faithlink.Controls;
-using Faithlink.Views.Bible;
+using Faithlink.Views.Bibles;
 using Faithlink.Views.Dashboard;
 using Faithlink.Views.OpenForums;
 using System;

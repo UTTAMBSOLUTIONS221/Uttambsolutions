@@ -3,7 +3,7 @@ using Faithlink.ViewModels;
 using Faithlink.ViewModels.Bibles;
 using Faithlink.ViewModels.Dashboard;
 using Faithlink.ViewModels.Startup;
-using Faithlink.Views.Bible;
+using Faithlink.Views.Bibles;
 using Faithlink.Views.Dashboard;
 using Faithlink.Views.OpenForums;
 using Faithlink.Views.Startup;
