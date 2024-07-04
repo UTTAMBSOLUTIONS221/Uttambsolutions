@@ -7,64 +7,107 @@
         <vm:BibleViewModel />
     </ContentPage.BindingContext>
 
-    <StackLayout>
-        <!-- Language Picker -->
-        <Picker ItemsSource="{Binding Languages}"
-                ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedLanguage}"
-                Title="Select Language" />
+    <Grid>
+        <!-- Main Content -->
+        <StackLayout>
+            <!-- Language Picker -->
+            <Picker ItemsSource="{Binding Languages}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedLanguage}"
+                    Title="Select Language" />
 
-        <!-- Bibles ListView -->
-        <ListView ItemsSource="{Binding Bibles}"
-                  SelectedItem="{Binding SelectedBible}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Name}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <!-- Bibles Expander -->
+            <Expander VerticalOptions="FillAndExpand"
+                      IsExpanded="True">
+                <Expander.Header>
+                    <Label Text="Bibles"
+                           FontAttributes="Bold" />
+                </Expander.Header>
+                <ListView ItemsSource="{Binding Bibles}"
+                          SelectedItem="{Binding SelectedBible}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Expander>
 
-        <!-- Books ListView -->
-        <ListView ItemsSource="{Binding Books}"
-                  SelectedItem="{Binding SelectedBook}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Name}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <!-- Books Expander -->
+            <Expander VerticalOptions="FillAndExpand"
+                      IsExpanded="{Binding SelectedBible, Converter={StaticResource IsNotNullConverter}}">
+                <Expander.Header>
+                    <Label Text="Books"
+                           FontAttributes="Bold"
+                           IsVisible="{Binding SelectedBible, Converter={StaticResource IsNotNullConverter}}" />
+                </Expander.Header>
+                <ListView ItemsSource="{Binding Books}"
+                          SelectedItem="{Binding SelectedBook}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Expander>
 
-        <!-- Chapters ListView -->
-        <ListView ItemsSource="{Binding Chapters}"
-                  SelectedItem="{Binding SelectedChapter}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Number}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <!-- Chapters Expander -->
+            <Expander VerticalOptions="FillAndExpand"
+                      IsExpanded="{Binding SelectedBook, Converter={StaticResource IsNotNullConverter}}">
+                <Expander.Header>
+                    <Label Text="Chapters"
+                           FontAttributes="Bold"
+                           IsVisible="{Binding SelectedBook, Converter={StaticResource IsNotNullConverter}}" />
+                </Expander.Header>
+                <ListView ItemsSource="{Binding Chapters}"
+                          SelectedItem="{Binding SelectedChapter}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Number}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Expander>
 
-        <!-- Verses ListView -->
-        <ListView ItemsSource="{Binding Verses}"
-                  SelectedItem="{Binding SelectedVerse}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Text}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <!-- Verses Expander -->
+            <Expander VerticalOptions="FillAndExpand"
+                      IsExpanded="{Binding SelectedChapter, Converter={StaticResource IsNotNullConverter}}">
+                <Expander.Header>
+                    <Label Text="Verses"
+                           FontAttributes="Bold"
+                           IsVisible="{Binding SelectedChapter, Converter={StaticResource IsNotNullConverter}}" />
+                </Expander.Header>
+                <ListView ItemsSource="{Binding Verses}"
+                          SelectedItem="{Binding SelectedVerse}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Text}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Expander>
 
-        <!-- Loading Indicator -->
-        <ActivityIndicator IsVisible="{Binding IsLoading}"
-                           IsRunning="{Binding IsLoading}"
-                           VerticalOptions="CenterAndExpand"
-                           HorizontalOptions="Center" />
+            <!-- Selected Verse Detail -->
+            <Label Text="{Binding SelectedVerse?.Content}"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"
+                   IsVisible="{Binding IsVerseSelected}"
+                   IsEnabled="{Binding IsVerseSelected}" />
+        </StackLayout>
 
-        <!-- Selected Verse Detail -->
-        <Label Text="{Binding SelectedVerse?.Content}"
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="CenterAndExpand"
-               IsVisible="{Binding IsVerseSelected}"
-               IsEnabled="{Binding IsVerseSelected}" />
-    </StackLayout>
+        <!-- Overlay Loading Indicator -->
+        <Grid IsVisible="{Binding IsLoading}"
+              VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand">
+            <Grid BackgroundColor="#80000000"
+                  VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand">
+                <!-- Semi-transparent background -->
+                <ActivityIndicator IsRunning="True"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Color="White" />
+            </Grid>
+        </Grid>
+    </Grid>
 </ContentPage>

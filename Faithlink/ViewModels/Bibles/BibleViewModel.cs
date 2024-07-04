@@ -225,7 +225,7 @@ namespace Faithlink.ViewModels.Bibles
             {
                 var verseData = await _bibleApiService.GetVerseAsync(SelectedVerse.BibleId, SelectedVerse.Id);
 
-                SelectedVerse = verseData.Data; // Update the selected verse with detailed data
+                SelectedVerse = verseData.Data; 
             }
 
             IsLoading = false;
