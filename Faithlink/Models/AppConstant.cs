@@ -51,7 +51,7 @@ namespace Faithlink.Models
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
-                                    Title = "Open Forums",
+                                    Title = "Forums",
                                     ContentTemplate = new DataTemplate(typeof(OpenForumsPage)),
                                 },
                                 new ShellContent

@@ -1,77 +1,70 @@
-﻿using Faithlink.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Faithlink.Models;
 using Faithlink.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace Faithlink.ViewModels.Bible
 {
-    public class BibleViewModel : INotifyPropertyChanged
+    public partial class BibleViewModel : ObservableObject
     {
         private readonly IBibleApiService _bibleApiService;
-        private List<string> _languages;
-        private string _verseOfTheDay;
-        private ObservableCollection<BibleVerse> _verses;
 
-        public List<string> Languages
-        {
-            get => _languages;
-            set
-            {
-                _languages = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<BibleBook> Books { get; } = new();
+        public ObservableCollection<BibleLanguage> Languages { get; } = new();
 
-        public string VerseOfTheDay
-        {
-            get => _verseOfTheDay;
-            set
-            {
-                _verseOfTheDay = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        private BibleBook _selectedBook;
 
-        public ObservableCollection<BibleVerse> Verses
-        {
-            get => _verses;
-            set
-            {
-                _verses = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        private BibleChapter _selectedChapter;
+
+        [ObservableProperty]
+        private BibleLanguage _selectedLanguage;
 
         public BibleViewModel(IBibleApiService bibleApiService)
         {
             _bibleApiService = bibleApiService;
-            LoadData();
+            LoadLanguagesCommand = new AsyncRelayCommand(LoadLanguagesAsync);
+            LoadBooksCommand = new AsyncRelayCommand(LoadBooksAsync);
+            LoadChapterCommand = new AsyncRelayCommand(LoadChapterAsync);
         }
 
-        private async void LoadData()
+        public IAsyncRelayCommand LoadLanguagesCommand { get; }
+        public IAsyncRelayCommand LoadBooksCommand { get; }
+        public IAsyncRelayCommand LoadChapterCommand { get; }
+
+        private async Task LoadLanguagesAsync()
         {
-            Languages = await _bibleApiService.GetAllLanguagesAsync();
-            VerseOfTheDay = await _bibleApiService.GetVerseOfTheDayAsync();
-            Verses = new ObservableCollection<BibleVerse>(); // Initialize or load verses as needed
+            var languages = await _bibleApiService.GetLanguagesAsync();
+            Languages.Clear();
+            foreach (var language in languages)
+            {
+                Languages.Add(language);
+            }
         }
 
-        public async Task LoadVersesByReference(string bibleId, string reference)
+        private async Task LoadBooksAsync()
         {
-            var verses = await _bibleApiService.GetVersesByReferenceAsync(bibleId, reference);
-            Verses = new ObservableCollection<BibleVerse>(verses);
+            if (SelectedLanguage != null)
+            {
+                var books = await _bibleApiService.GetBooksAsync(SelectedLanguage.Id);
+                Books.Clear();
+                foreach (var book in books)
+                {
+                    Books.Add(book);
+                }
+            }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private async Task LoadChapterAsync()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (SelectedBook != null)
+            {
+                var chapter = await _bibleApiService.GetChapterAsync(SelectedBook.Id, 1); // Assuming chapter 1 for now
+                SelectedChapter = chapter;
+            }
         }
     }
 }

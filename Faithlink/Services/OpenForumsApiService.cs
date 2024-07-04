@@ -6,11 +6,12 @@ namespace Faithlink.Services
     {
         private readonly HttpClient _httpClient;
 
-        public OpenForumsApiService(HttpClient httpClient)
+        public OpenForumsApiService()
         {
-            _httpClient = httpClient;
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("https://mainapi.uttambsolutions.com/");
+            // Optionally configure timeout, headers, etc. for HttpClient
         }
-
         public async Task<IEnumerable<OpenForum>> GetOpenForumsAsync()
         {
             var response = await _httpClient.GetAsync("api/openforums");
