@@ -133,6 +133,34 @@ namespace DBL
         }
         #endregion
 
+        #region System Roles
+        public Task<Genericmodel> Registersystemroledata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.RoleRepository.Registersystemroledata(Obj);
+                return Resp;
+            });
+        }
+        public Task<IEnumerable<SystemRole>> Getsystemroledata(int Page, int PageSize)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.RoleRepository.Getsystemroledata(Page, PageSize);
+                return Resp;
+            });
+        }
+        public Task<SystemRole> Getsystemroledatabyid(long Roleid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.RoleRepository.Getsystemroledatabyid(Roleid);
+                return Resp;
+            });
+        }
+        #endregion
+
+
         #region Retrieve and save blogs
         public Task<Genericmodel> RetrieveandSaveBlogs(string Obj)
         {

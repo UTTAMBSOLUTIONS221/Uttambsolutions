@@ -13,6 +13,7 @@ namespace DBL.UOW
         private bool _disposed;
 
         private IGeneralRepository generalRepository;
+        private IRoleRepository roleRepository;
         private IAccountRepository accountRepository;
         private IModulesRepository modulesRepository;
         private IBlogsRepository blogsRepository;
@@ -21,10 +22,15 @@ namespace DBL.UOW
         private IProductRepository productRepository;
 
 
+
         public UnitOfWork(string connectionString) => connString = connectionString;
         public IGeneralRepository GeneralRepository
         {
             get { return generalRepository ?? (generalRepository = new GeneralRepository(connString)); }
+        }
+        public IRoleRepository RoleRepository
+        {
+            get { return roleRepository ?? (roleRepository = new RoleRepository(connString)); }
         }
         public IAccountRepository AccountRepository
         {
@@ -54,6 +60,7 @@ namespace DBL.UOW
         public void Reset()
         {
             generalRepository = null;
+            roleRepository = null;
             accountRepository = null;
             modulesRepository = null;
             blogsRepository = null;
