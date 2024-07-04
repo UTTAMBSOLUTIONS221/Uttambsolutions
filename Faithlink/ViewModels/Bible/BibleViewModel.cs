@@ -11,6 +11,7 @@ namespace Faithlink.ViewModels.Bible
     {
         private readonly IBibleApiService _bibleApiService;
 
+        public ObservableCollection<Bible> Bibles { get; } = new();
         public ObservableCollection<BibleBook> Books { get; } = new();
         public ObservableCollection<BibleLanguage> Languages { get; } = new();
 
@@ -60,6 +61,18 @@ namespace Faithlink.ViewModels.Bible
             foreach (var language in languages)
             {
                 Languages.Add(language);
+            }
+        }
+        private async Task LoadBiblesAsync()
+        {
+            if (SelectedLanguage != null)
+            {
+                var bibleData = await _bibleApiService.GetBiblesAsync(SelectedLanguage.Id);
+                Bibles.Clear();
+                foreach (var bible in bibleData.Data)
+                {
+                    Bibles.Add(bible);
+                }
             }
         }
 

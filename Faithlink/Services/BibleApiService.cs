@@ -27,26 +27,16 @@ namespace Faithlink.Services
 
             return languages;
         }
-        public async Task<BibleData> GetBooksAsync(string languageCode)
+        public async Task<BibleData> GetBiblesAsync(string languageCode)
         {
             var response = await _httpClient.GetAsync($"bibles?language={languageCode}");
-
-            if (response.IsSuccessStatusCode)
+            var content = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                };
+                PropertyNameCaseInsensitive = true,
+            };
 
-                return JsonSerializer.Deserialize<BibleData>(content, options);
-            }
-            else
-            {
-                // Handle unsuccessful response
-                // For example, throw exception or return empty list
-                return new List<BibleBook>();
-            }
+            return JsonSerializer.Deserialize<BibleData>(content, options);
         }
 
 
