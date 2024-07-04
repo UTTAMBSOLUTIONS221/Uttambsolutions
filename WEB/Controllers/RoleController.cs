@@ -21,7 +21,7 @@ namespace WEB.Controllers
             return View(data);
         }
         [HttpGet]
-        public async Task<IActionResult> Addsystemrole(int Roleid)
+        public async Task<IActionResult> Addrole(int Roleid)
         {
             SystemRole role = new SystemRole();
             if (Roleid > 0)
@@ -30,9 +30,9 @@ namespace WEB.Controllers
             }
             return PartialView(role);
         }
-        public async Task<JsonResult> Registersystemroledata(Productbrand model)
+        public async Task<JsonResult> Addsystemroledata(SystemRole model)
         {
-            var resp = await bl.Registersystemroledata(JsonConvert.SerializeObject(model));
+            var resp = await bl.Registersystemroledata(model);
             return Json(resp);
         }
     }

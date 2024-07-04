@@ -1,8 +1,86 @@
-﻿
+﻿@model IEnumerable<DBL.Entities.SystemRole>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
 }
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h6 class="font-weight-bold text-sm card-title">Roles</h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <a asp-action="Addrole" asp-controller="Role" asp-route-code="@Guid.NewGuid()" asp-route-Roleid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Role</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive table-responsive-sm">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.RoleName</td>
+                                <td>@item.RoleDescription</td>
+                                <td class="text-right"><a asp-action="Addrole" asp-controller="Role" asp-route-code="@Guid.NewGuid()" asp-route-Roleid="@item.RoleId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                            </tr>
+                        }
 
-<h1>Index</h1>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+    ﻿function savesystemtroledata() {
+    document.getElementById("savesystemtroleid").disabled = true;
+    document.getElementById("processingSpinner").style.display = "inline-block";
+    document.getElementById("buttonText").innerText = "Processing...";
+    if ($('#Rolenameid').val() === '') {
+        Swal.fire("Role Not Created", 'Role Name is Required', "warning");
+        document.getElementById("savesystemtroleid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    if ($('#Roledescriptionid').val() === '') {
+        Swal.fire("Role Not Created", 'Role Description is Required', "warning");
+        document.getElementById("savesystemtroleid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    
+    var uil1 = {
+        RoleId: $('#RoleId').val(), RoleName: $('#Rolenameid').val(),RoleDescription: $('#Roledescriptionid').val()
+    };
+    $.post("/Role/Addsystemroledata", uil1, function (response) {
+        if (response.RespStatus == 0) {
+            Swal.fire('Saved!', response.RespMessage, 'success')
+            $('#Uttambsolutionsmodal').hide();
+            setTimeout(function () { location.reload(); }, 1000);
+        } else if (response.RespStatus == 1) {
+            Swal.fire("Role details not saved", response.RespMessage, "warning");
+        }
+        else {
+            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+        }
+        document.getElementById("savesystemtroleid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        });
+    }
+   </script>
+}
 

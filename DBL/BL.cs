@@ -4,6 +4,7 @@ using DBL.Helpers;
 using DBL.Models;
 using DBL.UOW;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace DBL
 {
@@ -134,11 +135,17 @@ namespace DBL
         #endregion
 
         #region System Roles
-        public Task<Genericmodel> Registersystemroledata(string Obj)
+        public Task<Genericmodel> Registersystemroledata(SystemRole Obj)
         {
             return Task.Run(() =>
             {
-                var Resp = db.RoleRepository.Registersystemroledata(Obj);
+                Obj.TenantId = 1;
+                Obj.IsDefault = false;
+                Obj.IsActive = true;
+                Obj.IsDeleted = false;
+                Obj.DateCreated = DateTime.Now;
+                Obj.DateModified = DateTime.Now;
+                var Resp = db.RoleRepository.Registersystemroledata(JsonConvert.SerializeObject(Obj));
                 return Resp;
             });
         }
