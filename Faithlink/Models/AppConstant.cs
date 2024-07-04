@@ -1,5 +1,6 @@
 ﻿using Faithlink.Controls;
 using Faithlink.Views.Bibles;
+using Faithlink.Views.Chats.GroupsChat;
 using Faithlink.Views.Dashboard;
 using Faithlink.Views.OpenForums;
 using System;
@@ -58,7 +59,7 @@ namespace Faithlink.Models
                                 {
                                     Icon = Icons.People,
                                     Title = "Groups",
-                                    ContentTemplate = new DataTemplate(typeof(StudentDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(GroupsListPage)),
                                 },
                                 new ShellContent
                                 {

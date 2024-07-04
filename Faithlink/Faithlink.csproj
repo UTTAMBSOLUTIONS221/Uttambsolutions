@@ -70,6 +70,9 @@
 	  <MauiXaml Update="Views\Bibles\BibleVersesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Chats\GroupsChat\GroupsListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Dashboard\AdminDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -94,10 +97,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Views\NewFolder\" />
-	</ItemGroup>
-
-	<ItemGroup>
+	  <Compile Update="Views\Chats\GroupsChat\GroupsListPage.xaml.cs">
+	    <DependentUpon>GroupsListPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\OpenForums\OpenForumsPage.xaml.cs">
 	    <DependentUpon>OpenForumsPage.xaml</DependentUpon>
 	  </Compile>

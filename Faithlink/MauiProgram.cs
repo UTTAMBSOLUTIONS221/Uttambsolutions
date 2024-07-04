@@ -1,9 +1,11 @@
 ﻿using Faithlink.Services;
 using Faithlink.ViewModels;
 using Faithlink.ViewModels.Bibles;
+using Faithlink.ViewModels.Chat.GroupsChat;
 using Faithlink.ViewModels.Dashboard;
 using Faithlink.ViewModels.Startup;
 using Faithlink.Views.Bibles;
+using Faithlink.Views.Chats.GroupsChat;
 using Faithlink.Views.Dashboard;
 using Faithlink.Views.OpenForums;
 using Faithlink.Views.Startup;
@@ -29,6 +31,7 @@ namespace Faithlink
             builder.Services.AddSingleton<LoadingPage>();
             builder.Services.AddSingleton<BibleVersesPage>();
             builder.Services.AddTransient<OpenForumsPage>();
+            builder.Services.AddTransient<GroupsListPage>();
 
             // View Models
             builder.Services.AddSingleton<LoginPageViewModel>();
@@ -36,6 +39,7 @@ namespace Faithlink
             builder.Services.AddSingleton<LoadingPageViewModel>();
             builder.Services.AddSingleton<BibleViewModel>();
             builder.Services.AddSingleton<OpenForumsViewModel>();
+            builder.Services.AddSingleton<GroupsListViewModel>();
 
             // Services
             builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
