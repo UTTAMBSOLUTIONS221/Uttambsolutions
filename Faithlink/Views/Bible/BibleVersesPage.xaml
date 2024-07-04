@@ -54,9 +54,17 @@
             </ListView.ItemTemplate>
         </ListView>
 
+        <!-- Loading Indicator -->
+        <ActivityIndicator IsVisible="{Binding IsLoading}"
+                           IsRunning="{Binding IsLoading}"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="Center" />
+
         <!-- Selected Verse Detail -->
         <Label Text="{Binding SelectedVerse?.Content}"
                VerticalOptions="CenterAndExpand"
-               HorizontalOptions="CenterAndExpand" />
+               HorizontalOptions="CenterAndExpand"
+               IsVisible="{Binding IsVerseSelected}"
+               IsEnabled="{Binding IsVerseSelected}" />
     </StackLayout>
 </ContentPage>

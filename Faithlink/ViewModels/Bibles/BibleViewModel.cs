@@ -10,6 +10,7 @@ namespace Faithlink.ViewModels.Bibles
     public class BibleViewModel : ObservableObject
     {
         private readonly IBibleApiService _bibleApiService;
+        private bool _isLoading;
 
         public ObservableCollection<Bible> Bibles { get; } = new();
         public ObservableCollection<BibleBook> Books { get; } = new();
@@ -76,6 +77,19 @@ namespace Faithlink.ViewModels.Bibles
             set => SetProperty(ref _selectedVerse, value);
         }
 
+        private bool _isVerseSelected;
+        public bool IsVerseSelected
+        {
+            get => _isVerseSelected;
+            set => SetProperty(ref _isVerseSelected, value);
+        }
+
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set => SetProperty(ref _isLoading, value);
+        }
+
         public BibleViewModel()
         {
             _bibleApiService = new BibleApiService(); // Initialize with default constructor
@@ -101,6 +115,8 @@ namespace Faithlink.ViewModels.Bibles
 
         private async Task LoadLanguagesAsync()
         {
+            IsLoading = true;
+
             var languages = await _bibleApiService.GetLanguagesAsync();
 
             Languages.Clear();
@@ -113,10 +129,14 @@ namespace Faithlink.ViewModels.Bibles
             {
                 SelectedLanguage = Languages[0]; // Select the first language by default
             }
+
+            IsLoading = false;
         }
 
         private async Task LoadBiblesAsync()
         {
+            IsLoading = true;
+
             if (SelectedLanguage != null)
             {
                 var bibleData = await _bibleApiService.GetBiblesAsync(SelectedLanguage.Id);
@@ -132,10 +152,14 @@ namespace Faithlink.ViewModels.Bibles
                 Chapters.Clear();
                 Verses.Clear();
             }
+
+            IsLoading = false;
         }
 
         private async Task LoadBooksAsync()
         {
+            IsLoading = true;
+
             if (SelectedBible != null)
             {
                 var books = await _bibleApiService.GetBooksAsync(SelectedBible.Id);
@@ -150,10 +174,14 @@ namespace Faithlink.ViewModels.Bibles
                 Chapters.Clear();
                 Verses.Clear();
             }
+
+            IsLoading = false;
         }
 
         private async Task LoadChaptersAsync()
         {
+            IsLoading = true;
+
             if (SelectedBook != null)
             {
                 var chapters = await _bibleApiService.GetChaptersAsync(SelectedBook.BibleId, SelectedBook.Id);
@@ -167,10 +195,14 @@ namespace Faithlink.ViewModels.Bibles
                 // Clear verses collection
                 Verses.Clear();
             }
+
+            IsLoading = false;
         }
 
         private async Task LoadVersesAsync()
         {
+            IsLoading = true;
+
             if (SelectedChapter != null)
             {
                 var verses = await _bibleApiService.GetVersesAsync(SelectedChapter.BibleId, SelectedChapter.Id);
@@ -181,16 +213,22 @@ namespace Faithlink.ViewModels.Bibles
                     Verses.Add(verse);
                 }
             }
+
+            IsLoading = false;
         }
 
         private async Task LoadVerseAsync()
         {
+            IsLoading = true;
+
             if (SelectedVerse != null)
             {
                 var verseData = await _bibleApiService.GetVerseAsync(SelectedVerse.BibleId, SelectedVerse.Id);
 
                 SelectedVerse = verseData.Data; // Update the selected verse with detailed data
             }
+
+            IsLoading = false;
         }
     }
 }
