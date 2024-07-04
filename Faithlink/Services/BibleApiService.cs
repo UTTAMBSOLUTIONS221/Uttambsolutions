@@ -81,7 +81,7 @@ namespace Faithlink.Services
         }
         public async Task<BibleVerseResponse> GetVerseAsync(string bibleId, string verseId)
         {
-            var response = await _httpClient.GetAsync($"/bibles/{bibleId}/verses/{verseId}?content-type=text");
+            var response = await _httpClient.GetAsync($"bibles/{bibleId}/verses/{verseId}?content-type=text");
             var content = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
