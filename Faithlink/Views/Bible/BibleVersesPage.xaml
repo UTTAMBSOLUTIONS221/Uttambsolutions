@@ -1,6 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:Faithlink.ViewModels.Bible"
+             xmlns:vm="clr-namespace:Faithlink.ViewModels.Bibles"
              x:Class="Faithlink.Views.Bible.BibleVersesPage">
 
     <ContentPage.BindingContext>
@@ -14,12 +14,9 @@
                 SelectedItem="{Binding SelectedLanguage}"
                 Title="Select Language" />
 
-        <!-- Load Books Button -->
-        <Button Text="Load Books"
-                Command="{Binding LoadBooksCommand}" />
-
-        <!-- Books ListView -->
-        <ListView ItemsSource="{Binding Books}">
+        <!-- Bibles ListView -->
+        <ListView ItemsSource="{Binding Bibles}"
+                  SelectedItem="{Binding SelectedBible}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Name}" />
@@ -27,24 +24,25 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Load Chapters Button -->
-        <Button Text="Load Chapters"
-                Command="{Binding LoadChaptersCommand}"
-                IsEnabled="{Binding IsBooksLoaded}" />
+        <!-- Books ListView -->
+        <ListView ItemsSource="{Binding Books}"
+                  SelectedItem="{Binding SelectedBook}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <!-- Chapters ListView -->
-        <ListView ItemsSource="{Binding Chapters}">
+        <ListView ItemsSource="{Binding Chapters}"
+                  SelectedItem="{Binding SelectedChapter}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Number}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-        <!-- Load Verses Button -->
-        <Button Text="Load Verses"
-                Command="{Binding LoadVersesCommand}"
-                IsEnabled="{Binding IsChaptersLoaded}" />
 
         <!-- Verses ListView -->
         <ListView ItemsSource="{Binding Verses}">
@@ -54,5 +52,15 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+
+        <ListView ItemsSource="{Binding SelectedVerse}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Reference}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </StackLayout>
 </ContentPage>

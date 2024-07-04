@@ -1,7 +1,10 @@
 ﻿using Faithlink.Models;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Faithlink.Services
 {
@@ -16,6 +19,7 @@ namespace Faithlink.Services
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _httpClient.DefaultRequestHeaders.Add("api-key", "387c5d1adb54e0afd3fd11e605d16f97");
         }
+
         public async Task<List<BibleLanguage>> GetLanguagesAsync()
         {
             var languages = new List<BibleLanguage>
@@ -27,7 +31,8 @@ namespace Faithlink.Services
 
             return languages;
         }
-        public async Task<BibleData> GetBiblesAsync(string languageCode)
+
+        public async Task<BibleDataResponse> GetBiblesAsync(string languageCode)
         {
             var response = await _httpClient.GetAsync($"bibles?language={languageCode}");
             var content = await response.Content.ReadAsStringAsync();
@@ -36,19 +41,54 @@ namespace Faithlink.Services
                 PropertyNameCaseInsensitive = true,
             };
 
-            return JsonSerializer.Deserialize<BibleData>(content, options);
+            return JsonSerializer.Deserialize<BibleDataResponse>(content, options);
         }
 
-
-
-        public async Task<BibleChapter> GetChapterAsync(string bookId, int chapterNumber)
+        public async Task<BibleBookDataResponse> GetBooksAsync(string bibleId)
         {
-            var verses = await _httpClient.GetFromJsonAsync<List<BibleVerse>>($"https://api.bible.com/v1/books/{bookId}/chapters/{chapterNumber}");
-            return new BibleChapter
+            var response = await _httpClient.GetAsync($"bibles/{bibleId}/books");
+            var content = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
             {
-                Number = chapterNumber,
-                Verses = verses
+                PropertyNameCaseInsensitive = true,
             };
+
+            return JsonSerializer.Deserialize<BibleBookDataResponse>(content, options);
+        }
+
+        public async Task<BibleChapterDataResponse> GetChaptersAsync(string bibleId, string bookId)
+        {
+            var response = await _httpClient.GetAsync($"bibles/{bibleId}/books/{bookId}/chapters");
+            var content = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+
+            return JsonSerializer.Deserialize<BibleChapterDataResponse>(content, options);
+        }
+
+        public async Task<BibleVersesResponse> GetVersesAsync(string bibleId, string chapterId)
+        {
+            var response = await _httpClient.GetAsync($"bibles/{bibleId}/chapters/{chapterId}/verses");
+            var content = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+
+            return JsonSerializer.Deserialize<BibleVersesResponse>(content, options);
+        }
+        public async Task<BibleVerseResponse> GetVerseAsync(string bibleId, string verseId)
+        {
+            var response = await _httpClient.GetAsync($"/bibles/{bibleId}/verses/{verseId}?content-type=text");
+            var content = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+
+            return JsonSerializer.Deserialize<BibleVerseResponse>(content, options);
         }
     }
 }

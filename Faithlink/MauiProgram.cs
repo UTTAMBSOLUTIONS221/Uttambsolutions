@@ -1,6 +1,6 @@
 ﻿using Faithlink.Services;
 using Faithlink.ViewModels;
-using Faithlink.ViewModels.Bible;
+using Faithlink.ViewModels.Bibles;
 using Faithlink.ViewModels.Dashboard;
 using Faithlink.ViewModels.Startup;
 using Faithlink.Views.Bible;

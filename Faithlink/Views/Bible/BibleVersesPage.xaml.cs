@@ -1,4 +1,4 @@
-using Faithlink.ViewModels.Bible;
+using Faithlink.ViewModels.Bibles;
 
 namespace Faithlink.Views.Bible;
 
