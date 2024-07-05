@@ -103,6 +103,15 @@ namespace DBL
                 return Resp;
             });
         }
+
+        public Task<SystemUserProfileData> Getsystemuserprofiledata(long Userid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Getsystemuserprofiledata(Userid);
+                return Resp;
+            });
+        }
         #endregion
 
 

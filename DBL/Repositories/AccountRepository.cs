@@ -46,6 +46,29 @@ namespace DBL.Repositories
                 return connection.Query<SystemStaff>("Usp_Getsystemstaffdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+        public SystemUserProfileData Getsystemuserprofiledata(long Userid)
+        {
+
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                SystemUserProfileData resp = new SystemUserProfileData();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Userid", Userid);
+                parameters.Add("@UserProfileData", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_verifysystemuser", parameters, commandType: CommandType.StoredProcedure);
+                string userProfileDataJson = parameters.Get<string>("@UserProfileData");
+                if (userProfileDataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<SystemUserProfileData>(userProfileDataJson);
+                }
+                else
+                {
+                    return new SystemUserProfileData();
+                }
+
+            }
+        }
         #endregion
 
         #region Verify System Staff

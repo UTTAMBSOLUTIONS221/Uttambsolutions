@@ -99,6 +99,14 @@ namespace WEB.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> Myprofile()
+        {
+            var data = await bl.Getsystemuserprofiledata(SessionUserData.Usermodel.Userid);
+            return View();
+        }
+
         #region Other Methods
 
         private async void SetUserLoggedIn(UsermodelResponce user, bool rememberMe)

@@ -8,6 +8,7 @@ namespace DBL.Repositories
         IEnumerable<SystemStaff> Getsystemstaffdata(int Page, int PageSize);
         Genericmodel Registersystemstaffdata(string JsonData);
         SystemStaff Getsystemstaffdatabyid(long Staffid);
+        SystemUserProfileData Getsystemuserprofiledata(long Userid);
         UsermodelResponce VerifySystemStaff(string Username);
     }
 }
