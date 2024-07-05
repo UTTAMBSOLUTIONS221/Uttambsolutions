@@ -17,6 +17,7 @@ namespace DBL.Entities
         [DataType(DataType.EmailAddress)]
         public string? Emailaddress { get; set; }
         public int Roleid { get; set; }
+        public string? Rolename { get; set; }
 
         public string? Passharsh { get; set; }
 
@@ -29,7 +30,7 @@ namespace DBL.Entities
         public bool Isactive { get; set; }
         public bool Isdeleted { get; set; }
         public bool Isdefault { get; set; }
-        public string? Loginstatus { get; set; }
+        public int Loginstatus { get; set; }
         public DateTime? Passwordresetdate { get; set; }
         public int? Parentid { get; set; }
         public string? Extra { get; set; }
