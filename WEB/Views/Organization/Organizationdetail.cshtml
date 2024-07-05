@@ -296,7 +296,7 @@ const firebaseConfig = {
         Shopproductwhatsinboxsdata.push(Shopproductwhatsinboxdata);
     });
      ShopProductImagesdata = {
-            ProductWhatsInBoxItem:$('#UttambsolutionsimagesurlId').val().replaceAll('\\"', '"').split(','),
+            ProductWhatsInBoxItem:$('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '').split(','),
             DateCreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
         };
     
