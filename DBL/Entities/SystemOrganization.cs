@@ -8,6 +8,8 @@
         public string? OrganizationDescription { get; set; }
         public int OrganizationTypeId { get; set; }
         public int OrganizationStatus { get; set; }
+        public string? OrganizationPhone { get; set; }
+        public string? OrganizationEmail { get; set; }
         public DateTime DateCreated { get; set; }
     }
 }
