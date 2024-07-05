@@ -15,6 +15,7 @@ namespace DBL.UOW
         private IGeneralRepository generalRepository;
         private IRoleRepository roleRepository;
         private IAccountRepository accountRepository;
+        private IOrganizationRepository organizationRepository;
         private IModulesRepository modulesRepository;
         private IBlogsRepository blogsRepository;
         private IBrandRepository brandRepository;
@@ -35,6 +36,10 @@ namespace DBL.UOW
         public IAccountRepository AccountRepository
         {
             get { return accountRepository ?? (accountRepository = new AccountRepository(connString)); }
+        }
+        public IOrganizationRepository OrganizationRepository
+        {
+            get { return organizationRepository ?? (organizationRepository = new OrganizationRepository(connString)); }
         }
         public IModulesRepository ModulesRepository
         {

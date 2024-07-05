@@ -207,6 +207,28 @@ namespace DBL
         }
         #endregion
 
+        #region System Orgnizations
+        public Task<Genericmodel> Addsystemorganizationdata(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OrganizationRepository.Registersystemorganizationdata(obj);
+                return Resp;
+            });
+        }
+        public Task<SystemOrganization> Getsystemorganizationdatabyid(long Organizationid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OrganizationRepository.Getsystemorganizationdatabyid(Organizationid);
+                return Resp;
+            });
+        }
+        #endregion
+
+
+
+
         #region Retrieve and save blogs
         public Task<Genericmodel> RetrieveandSaveBlogs(string Obj)
         {
