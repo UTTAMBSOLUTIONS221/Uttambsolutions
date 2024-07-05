@@ -21,7 +21,7 @@ namespace WEB.Controllers
             {
                 organization = await bl.Getsystemorganizationdatabyid(Organizationid);
             }
-            return PartialView(Organizationid);
+            return PartialView(organization);
         }
     }
 }
