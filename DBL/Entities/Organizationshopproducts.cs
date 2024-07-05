@@ -5,6 +5,7 @@
         public long Shopproductid { get; set; }
         public long Productid { get; set; }
         public string? Productname { get; set; }
+        public string? Primaryimageurl { get; set; }
         public long Organizationid { get; set; }
         public decimal Retailprice { get; set; }
         public decimal Wholesaleprice { get; set; }

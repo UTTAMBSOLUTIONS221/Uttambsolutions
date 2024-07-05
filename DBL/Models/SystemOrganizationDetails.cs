@@ -12,5 +12,6 @@ namespace DBL.Models
         public int OrganizationStatus { get; set; }
         public DateTime DateCreated { get; set; }
         public List<Systemproducts>? Systemproducts { get; set; }
+        public List<Organizationshopproducts>? Organizationshopproducts { get; set; }
     }
 }

@@ -43,7 +43,7 @@
                                 <td>@item.Sku</td>
                                 <td>@item.Brandname</td>
                                 <td>@item.Categoryname</td>
-                                <td>@item.Wholsaleprice.ToString("F2")</td>
+                                <td>@item.Wholesaleprice.ToString("F2")</td>
                                 <td>@item.Retailprice.ToString("F2")</td>
                                 <td class="text-right"><a asp-action="Addproduct" asp-controller="Product" asp-route-code="@Guid.NewGuid()" asp-route-Productid="@item.Productid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                             </tr>
@@ -200,7 +200,7 @@ async function uploadImage(files) {
         document.getElementById("buttonText").innerText = "SAVE";
         return;
     }
-     if ($('#Wholsalepriceid').val() === '') {
+     if ($('#Wholesalepriceid').val() === '') {
         Swal.fire("Product Not Created", 'Wholesale price is Required', "warning");
         document.getElementById("savesystemtproductid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
@@ -216,7 +216,7 @@ async function uploadImage(files) {
     }
     var uil1 = {
         Productid: $('#Productid').val(), Productname: $('#Productnameid').val(),Productbarcode: $('#Productbarcodeid').val(), Productdescription: $('#Productdescriptionid').val(), Sku: $('#Productskuid').val(), 
-        Categoryid: $('#Categoryid').val(),Brandid: $('#Brandid').val(),Wholsaleprice: $('#Wholsalepriceid').val(),Retailprice: $('#Retailpriceid').val(),Primaryimageurl: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
+        Categoryid: $('#Categoryid').val(),Brandid: $('#Brandid').val(),Wholesaleprice: $('#Wholesalepriceid').val(),Retailprice: $('#Retailpriceid').val(),Primaryimageurl: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
     };
     $.post("/Product/Addsystemproductdata", uil1, function (response) {
         if (response.RespStatus == 0) {
