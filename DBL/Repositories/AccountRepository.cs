@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DBL.Entities;
 using DBL.Models;
 using DBL.Repositories.DBL.Repositories;
 using Newtonsoft.Json;
@@ -14,6 +15,17 @@ namespace DBL.Repositories
         {
         }
         #region Register Staffs
+        public IEnumerable<SystemStaff> Getsystemstaffdata(int Page, int PageSize)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Page", Page);
+                parameters.Add("@PageSize", PageSize);
+                return connection.Query<SystemStaff>("Usp_Getsystemstaffdata", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
         public Genericmodel Registersystemstaffdata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))
@@ -22,6 +34,16 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@JsonObjectdata", JsonData);
                 return connection.Query<Genericmodel>("Usp_Registersystemstaffdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        public SystemStaff Getsystemstaffdatabyid(long Staffid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Staffid", Staffid);
+                return connection.Query<SystemStaff>("Usp_Getsystemstaffdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
         #endregion

@@ -21,8 +21,48 @@ namespace DBL
             this._connString = connString;
             db = new UnitOfWork(connString);
         }
+        #region System Roles
+        public Task<Genericmodel> Registersystemroledata(SystemRole Obj)
+        {
+            return Task.Run(() =>
+            {
+                Obj.TenantId = 1;
+                Obj.IsDefault = false;
+                Obj.IsActive = true;
+                Obj.IsDeleted = false;
+                Obj.DateCreated = DateTime.Now;
+                Obj.DateModified = DateTime.Now;
+                var Resp = db.RoleRepository.Registersystemroledata(JsonConvert.SerializeObject(Obj));
+                return Resp;
+            });
+        }
+        public Task<IEnumerable<SystemRole>> Getsystemroledata(int Page, int PageSize)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.RoleRepository.Getsystemroledata(Page, PageSize);
+                return Resp;
+            });
+        }
+        public Task<SystemRole> Getsystemroledatabyid(long Roleid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.RoleRepository.Getsystemroledatabyid(Roleid);
+                return Resp;
+            });
+        }
+        #endregion
 
         #region System Staffs
+        public Task<IEnumerable<SystemStaff>> Getsystemstaffdata(int Page, int PageSize)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Getsystemstaffdata(Page, PageSize);
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Registersystemstaffdata(SystemStaff obj)
         {
             return Task.Run(() =>
@@ -36,6 +76,14 @@ namespace DBL
                 obj.Datemodified = DateTime.Now;
                 obj.Passwordresetdate = DateTime.Now.AddDays(90);
                 var Resp = db.AccountRepository.Registersystemstaffdata(JsonConvert.SerializeObject(obj));
+                return Resp;
+            });
+        }
+        public Task<SystemStaff> Getsystemstaffdatabyid(long Staffid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Getsystemstaffdatabyid(Staffid);
                 return Resp;
             });
         }
@@ -133,40 +181,6 @@ namespace DBL
             });
         }
         #endregion
-
-        #region System Roles
-        public Task<Genericmodel> Registersystemroledata(SystemRole Obj)
-        {
-            return Task.Run(() =>
-            {
-                Obj.TenantId = 1;
-                Obj.IsDefault = false;
-                Obj.IsActive = true;
-                Obj.IsDeleted = false;
-                Obj.DateCreated = DateTime.Now;
-                Obj.DateModified = DateTime.Now;
-                var Resp = db.RoleRepository.Registersystemroledata(JsonConvert.SerializeObject(Obj));
-                return Resp;
-            });
-        }
-        public Task<IEnumerable<SystemRole>> Getsystemroledata(int Page, int PageSize)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.RoleRepository.Getsystemroledata(Page, PageSize);
-                return Resp;
-            });
-        }
-        public Task<SystemRole> Getsystemroledatabyid(long Roleid)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.RoleRepository.Getsystemroledatabyid(Roleid);
-                return Resp;
-            });
-        }
-        #endregion
-
 
         #region Retrieve and save blogs
         public Task<Genericmodel> RetrieveandSaveBlogs(string Obj)

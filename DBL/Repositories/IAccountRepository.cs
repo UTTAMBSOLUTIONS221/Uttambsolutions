@@ -1,15 +1,13 @@
-﻿using DBL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DBL.Entities;
+using DBL.Models;
 
 namespace DBL.Repositories
 {
     public interface IAccountRepository
     {
+        IEnumerable<SystemStaff> Getsystemstaffdata(int Page, int PageSize);
         Genericmodel Registersystemstaffdata(string JsonData);
+        SystemStaff Getsystemstaffdatabyid(long Staffid);
         UsermodelResponce VerifySystemStaff(string Username);
     }
 }
