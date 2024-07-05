@@ -275,10 +275,38 @@ const firebaseConfig = {
         document.getElementById("buttonText").innerText = "SAVE";
         return;
     }
+    var Shopproductfeaturesdata = [];
+    var Shopproductwhatsinboxsdata = [];
+    var ShopProductImagesdata = [];
+
+    $("#ShopProductFeatureTable tbody tr").each(function () {
+        var row = $(this);
+        var Shopproductfeaturedata = {
+            ProductFeature: row.find('td:eq(0)').text(),
+            DateCreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+        };
+        Shopproductfeaturesdata.push(Shopproductfeaturedata);
+    });
+    $("#ShopProductFeatureTable tbody tr").each(function () {
+        var row = $(this);
+        var Shopproductwhatsinboxdata = {
+            ProductWhatsInBoxItem: row.find('td:eq(0)').text(),
+            DateCreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+        };
+        Shopproductwhatsinboxsdata.push(Shopproductwhatsinboxdata);
+    });
+    var ShopProductImagedata = {
+            ProductWhatsInBoxItem:$('#UttambsolutionsimagesurlId').val().replaceAll('\\"', '"').split(','),
+            DateCreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+        };
+        ShopProductImagesdata.push(ShopProductImagedata);
     
     var uil1 = {
-        Shopproductid:$('#Shopproductid').val(),Productid:$('#Productid').val(),Productname:$('#Productnameid').val(),Organizationid:$('#Organizationid').val(),Marketprice:$('#Marketpriceid').val(),Productdescription:$('#Productdescriptionid').val(),ProductSize:$('#ProductSizeid').val(),ProductColor:$('#ProductColorid').val(),ProductModel:$('#ProductModelid').val(),ProductStock:$('#ProductStockid').val(),DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+        Shopproductid:$('#Shopproductid').val(),Productid:$('#Productid').val(),Productname:$('#Productnameid').val(),Organizationid:$('#Organizationid').val(),Marketprice:$('#Marketpriceid').val(),Productdescription:$('#Productdescriptionid').val(),ProductSize:$('#ProductSizeid').val(),ProductColor:$('#ProductColorid').val(),ProductModel:$('#ProductModelid').val(),ProductStock:$('#ProductStockid').val(),
+        DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Shopproductfeature:Shopproductfeaturedata,Shopproductwhatsinbox:Shopproductwhatsinboxdata,ShopProductImage:ShopProductImagedata
     };
+         alert(JSON.stringify(uil1));
+
     $.post("/Organization/Addorganizationshopproductsdata", uil1, function (response) {
         if (response.RespStatus == 0) {
             Swal.fire('Saved!', response.RespMessage, 'success')
