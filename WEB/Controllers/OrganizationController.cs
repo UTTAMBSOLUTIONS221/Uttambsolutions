@@ -15,7 +15,7 @@ namespace WEB.Controllers
             bl = new BL(Util.ShareConnectionString(config));
         }
         [HttpGet]
-        public async Task<IActionResult> Addorganization(int Organizationid)
+        public async Task<IActionResult> Addorganization(long Organizationid)
         {
             SystemOrganization organization = new SystemOrganization();
             if (Organizationid > 0)
@@ -28,6 +28,12 @@ namespace WEB.Controllers
         {
             var resp = await bl.Registersystemorganizationdata(JsonConvert.SerializeObject(model));
             return Json(resp);
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> Organizationdetail(long Organizationid)
+        {
+            return View();
         }
     }
 }

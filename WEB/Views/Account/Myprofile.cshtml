@@ -330,7 +330,7 @@
                                                         <tr>
                                                             <td>@item.OrganizationName</td>
                                                             <td>@item.OrganizationDescription</td>
-                                                            <td class="text-right"><a asp-action="Addorganization" asp-controller="Organization" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="@item.OrganizationId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                                            <td class="text-right"><a asp-action="Addorganization" asp-controller="Organization" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="@item.OrganizationId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase mr-1" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a><a asp-action="Organizationdetail" asp-controller="Organization" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="@item.OrganizationId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase mr-1">View</a></td>
                                                         </tr>
                                                     }
                                                 }
