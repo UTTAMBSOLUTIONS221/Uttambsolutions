@@ -56,7 +56,7 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Userid", Userid);
                 parameters.Add("@UserProfileData", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_verifysystemuser", parameters, commandType: CommandType.StoredProcedure);
+                var queryResult = connection.Query("Usp_Getsystemuserprofiledata", parameters, commandType: CommandType.StoredProcedure);
                 string userProfileDataJson = parameters.Get<string>("@UserProfileData");
                 if (userProfileDataJson != null)
                 {
