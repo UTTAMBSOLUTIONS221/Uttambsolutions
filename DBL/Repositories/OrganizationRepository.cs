@@ -71,7 +71,17 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Shopproductid", Shopproductid);
-                return connection.Query<Organizationshopproducts>("Usp_Getorganizationshopproductdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                parameters.Add("@ShopproductDetailData", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getorganizationshopproductdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string shopproductDetailDataJson = parameters.Get<string>("@ShopproductDetailData");
+                if (shopproductDetailDataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Organizationshopproducts>(shopproductDetailDataJson);
+                }
+                else
+                {
+                    return new Organizationshopproducts();
+                }
             }
         }
     }

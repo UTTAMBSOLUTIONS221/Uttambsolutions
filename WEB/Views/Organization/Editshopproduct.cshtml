@@ -102,19 +102,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model != null)
+                        @if (Model.Shopproductfeature != null)
                         {
-                            if (Model.Shopproductfeature.Count() > 0)
+                            foreach (var data in Model.Shopproductfeature)
                             {
-                                foreach (var data in Model.Shopproductfeature)
-                                {
-                                    <tr>
-                                        <td hidden>@data.ProductFeatureId</td>
-                                        <td hidden>@data.ShopProductId</td>
-                                        <td>@data.ProductFeature</td>
-                                        <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editshopproductfeaturedata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateshopproductfeaturedata(this.parentNode.parentNode)">Update</button></td>
-                                    </tr>
-                                }
+                                <tr>
+                                    <td hidden>@data.ProductFeatureId</td>
+                                    <td hidden>@data.ShopProductId</td>
+                                    <td>@data.ProductFeature</td>
+                                    <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editshopproductfeaturedata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateshopproductfeaturedata(this.parentNode.parentNode)">Update</button></td>
+                                </tr>
                             }
                         }
                     </tbody>
@@ -155,19 +152,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model != null)
+                        @if (Model.Shopproductwhatsinbox != null)
                         {
-                            if (Model.Shopproductwhatsinbox.Count() > 0)
+                            foreach (var data in Model.Shopproductwhatsinbox)
                             {
-                                foreach (var data in Model.Shopproductwhatsinbox)
-                                {
-                                    <tr>
-                                        <td hidden>@data.ProductWhatsInBoxId</td>
-                                        <td hidden>@data.ShopProductId</td>
-                                        <td>@data.ProductWhatsInBoxItem</td>
-                                        <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editshopproductboxitemdata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateshopproductboxitemdata(this.parentNode.parentNode)">Update</button></td>
-                                    </tr>
-                                }
+                                <tr>
+                                    <td hidden>@data.ProductWhatsInBoxId</td>
+                                    <td hidden>@data.ShopProductId</td>
+                                    <td>@data.ProductWhatsInBoxItem</td>
+                                    <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editshopproductboxitemdata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateshopproductboxitemdata(this.parentNode.parentNode)">Update</button></td>
+                                </tr>
                             }
                         }
                     </tbody>
