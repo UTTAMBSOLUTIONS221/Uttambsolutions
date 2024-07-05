@@ -43,20 +43,20 @@
 </div>
 @section Scripts {
     <script type="text/javascript">
-    ﻿function savesystemtroledata() {
-    document.getElementById("savesystemtroleid").disabled = true;
+    ﻿function savesystemroledata() {
+    document.getElementById("savesystemroleid").disabled = true;
     document.getElementById("processingSpinner").style.display = "inline-block";
     document.getElementById("buttonText").innerText = "Processing...";
     if ($('#Rolenameid').val() === '') {
         Swal.fire("Role Not Created", 'Role Name is Required', "warning");
-        document.getElementById("savesystemtroleid").disabled = false;
+        document.getElementById("savesystemroleid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
         document.getElementById("buttonText").innerText = "SAVE";
         return;
     }
     if ($('#Roledescriptionid').val() === '') {
         Swal.fire("Role Not Created", 'Role Description is Required', "warning");
-        document.getElementById("savesystemtroleid").disabled = false;
+        document.getElementById("savesystemroleid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
         document.getElementById("buttonText").innerText = "SAVE";
         return;
@@ -76,7 +76,7 @@
         else {
             Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
         }
-        document.getElementById("savesystemtroleid").disabled = false;
+        document.getElementById("savesystemroleid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
         document.getElementById("buttonText").innerText = "SAVE";
         });
