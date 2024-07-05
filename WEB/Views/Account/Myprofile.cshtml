@@ -319,6 +319,8 @@
                                                 <tr>
                                                     <th>Name</th>
                                                     <th>Description</th>
+                                                    <th>Phone</th>
+                                                    <th>Email</th>
                                                     <th class="text-right">Action</th>
                                                 </tr>
                                             </thead>
@@ -330,6 +332,8 @@
                                                         <tr>
                                                             <td>@item.OrganizationName</td>
                                                             <td>@item.OrganizationDescription</td>
+                                                            <td>@item.OrganizationPhone</td>
+                                                            <td>@item.OrganizationEmail</td>
                                                             <td class="text-right"><a asp-action="Addorganization" asp-controller="Organization" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="@item.OrganizationId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase mr-1" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a><a asp-action="Organizationdetail" asp-controller="Organization" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="@item.OrganizationId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase mr-1">View</a></td>
                                                         </tr>
                                                     }
