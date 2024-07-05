@@ -295,10 +295,13 @@ const firebaseConfig = {
         };
         Shopproductwhatsinboxsdata.push(Shopproductwhatsinboxdata);
     });
-     ShopProductImagesdata = {
-            ProductWhatsInBoxItem:$('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '').split(','),
+    var imageUrls = $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '').split(',');
+    imageUrls.forEach(function (url) {
+        ShopProductImagesdata.push({
+            Productimageurl: url,
             DateCreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
-        };
+        });
+    });
     
     var uil1 = {
         Shopproductid:$('#Shopproductid').val(),Productid:$('#Productid').val(),Productname:$('#Productnameid').val(),Organizationid:$('#Organizationid').val(),Marketprice:$('#Marketpriceid').val(),Productdescription:$('#Productdescriptionid').val(),ProductSize:$('#ProductSizeid').val(),ProductColor:$('#ProductColorid').val(),ProductModel:$('#ProductModelid').val(),ProductStock:$('#ProductStockid').val(),

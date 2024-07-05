@@ -95,29 +95,28 @@
                 <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap font-weight-light w-100" id="ShopProductFeatureTable">
                     <thead>
                         <tr>
+                            <th hidden></th>
+                            <th hidden></th>
                             <th>FEATURE/SPECIFICATION</th>
                             <th class="text-right">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @* @if (Model != null)
+                        @if (Model != null)
                         {
-                            if (Model.SystemSuplierPrice.Count() > 0)
+                            if (Model.Shopproductfeature.Count() > 0)
                             {
-                                foreach (var data in Model.SystemSuplierPrice)
+                                foreach (var data in Model.Shopproductfeature)
                                 {
                                     <tr>
-                                        <td hidden>@data.SupplierPriceId</td>
-                                        <td hidden>@data.SupplierId</td>
-                                        <td hidden>@data.ProductVariationId</td>
-                                        <td>@data.ProductVariationName</td>
-                                        <td class="text-right">@data.ProductPrice.ToString("#,##0.00")</td>
-                                        <td class="text-right">@data.ProductVat.ToString("#,##0.00")</td>
-                                        <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editSupplierProduct(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateSupplierProduct(this.parentNode.parentNode)">Update</button></td>
+                                        <td hidden>@data.ProductFeatureId</td>
+                                        <td hidden>@data.ShopProductId</td>
+                                        <td>@data.ProductFeature</td>
+                                        <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editshopproductfeaturedata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateshopproductfeaturedata(this.parentNode.parentNode)">Update</button></td>
                                     </tr>
                                 }
                             }
-                        } *@
+                        }
                     </tbody>
                 </table>
             </div>
@@ -149,29 +148,28 @@
                 <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap font-weight-light w-100" id="ShopProductBoxItemTable">
                     <thead>
                         <tr>
+                            <th hidden></th>
+                            <th hidden></th>
                             <th>ITEM IN BOX</th>
                             <th class="text-right">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @* @if (Model != null)
+                        @if (Model != null)
                         {
-                        if (Model.SystemSuplierPrice.Count() > 0)
-                        {
-                        foreach (var data in Model.SystemSuplierPrice)
-                        {
-                        <tr>
-                        <td hidden>@data.SupplierPriceId</td>
-                        <td hidden>@data.SupplierId</td>
-                        <td hidden>@data.ProductVariationId</td>
-                        <td>@data.ProductVariationName</td>
-                        <td class="text-right">@data.ProductPrice.ToString("#,##0.00")</td>
-                        <td class="text-right">@data.ProductVat.ToString("#,##0.00")</td>
-                        <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editSupplierProduct(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateSupplierProduct(this.parentNode.parentNode)">Update</button></td>
-                        </tr>
+                            if (Model.Shopproductwhatsinbox.Count() > 0)
+                            {
+                                foreach (var data in Model.Shopproductwhatsinbox)
+                                {
+                                    <tr>
+                                        <td hidden>@data.ProductWhatsInBoxId</td>
+                                        <td hidden>@data.ShopProductId</td>
+                                        <td>@data.ProductWhatsInBoxItem</td>
+                                        <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editshopproductboxitemdata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateshopproductboxitemdata(this.parentNode.parentNode)">Update</button></td>
+                                    </tr>
+                                }
+                            }
                         }
-                        }
-                        } *@
                     </tbody>
                 </table>
             </div>
