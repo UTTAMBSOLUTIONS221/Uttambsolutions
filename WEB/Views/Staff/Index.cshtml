@@ -107,3 +107,65 @@
         </div>
     </div>
 </div>
+
+                                            @section Scripts {
+    <script type="text/javascript">
+    ﻿function savesystemstaffdetails() {
+    document.getElementById("savesystemstaffid").disabled = true;
+    document.getElementById("processingSpinner").style.display = "inline-block";
+    document.getElementById("buttonText").innerText = "Processing...";
+
+    if ($('#FirstnameId').val() == '') {
+        Swal.fire("Staff Detail Not Created", 'Firstname is Required', "warning");
+        document.getElementById("savesystemstaffid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    if ($('#LastnameId').val() == '') {
+        Swal.fire("Staff Detail Not Created", 'Lastname is Required', "warning");
+        document.getElementById("savesystemstaffid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    if ($('#EmailAddressId').val() == '') {
+        Swal.fire("Staff Detail Not Created", 'Emailaddress is Required', "warning");
+        document.getElementById("savesystemstaffid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    if ($('#PhonenumberId').val() == '') {
+        Swal.fire("Staff Detail Not Created", 'Phonenumber is Required', "warning");
+        document.getElementById("savesystemstaffid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    if ($('#StaffRoleId').val() == '' || $('#StaffRoleId').val() == 0) {
+        Swal.fire("Staff Detail Not Created", 'Role is Required', "warning");
+        document.getElementById("savesystemstaffid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    var uil = {
+        Userid: $('#UserId').val(), Firstname: $('#FirstnameId').val(), Lastname: $('#LastnameId').val(), Emailaddress: $('#EmailAddressId').val(), Phonenumber: $('#PhonenumberId').val(),
+        Roleid: $('#StaffRoleId').val(), Createdby: $('#systemLoggedinedUserid').val(), Modifiedby: $('#systemLoggedinedUserid').val(),
+        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+    };
+    $.post("/Staff/Addsystemstaffdata", uil, function (response) {
+        if (response.RespStatus == 0) {
+            Swal.fire("Staff Detail", "Staff has been added and email sent.", "success");
+            setTimeout(function () { location.reload(); }, 500);
+        } else {
+            Swal.fire("Staff Detail Not Created", response.RespMessage, "error");
+        }
+        document.getElementById("savesystemstaffid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+    });
+}
+   </script>
+}
