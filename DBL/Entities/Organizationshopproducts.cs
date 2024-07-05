@@ -16,5 +16,7 @@
         public string? ProductModel { get; set; }
         public decimal ProductStock { get; set; }
         public DateTime DateCreated { get; set; }
+        public List<ShopProductFeature>? Shopproductfeature { get; set; }
+        public List<ShopProductWhatsInBox>? Shopproductwhatsinbox { get; set; }
     }
 }
