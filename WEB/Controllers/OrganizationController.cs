@@ -19,7 +19,7 @@ namespace WEB.Controllers
             SystemOrganization organization = new SystemOrganization();
             if (Organizationid > 0)
             {
-                organization = await bl.Getsystemproductbranddatabyid(Organizationid);
+                organization = await bl.Getsystemorganizationdatabyid(Organizationid);
             }
             return PartialView(Organizationid);
         }
