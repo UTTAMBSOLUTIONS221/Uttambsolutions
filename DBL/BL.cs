@@ -240,6 +240,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Organizationshopproducts> Getorganizationshopproductdatabyid(long Shopproductid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OrganizationRepository.Getorganizationshopproductdatabyid(Shopproductid);
+                return Resp;
+            });
+        }
         #endregion
 
 

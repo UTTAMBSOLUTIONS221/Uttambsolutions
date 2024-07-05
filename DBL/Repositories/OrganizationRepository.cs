@@ -64,5 +64,15 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registerorganizationshopproductdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+        public Organizationshopproducts Getorganizationshopproductdatabyid(long Shopproductid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Shopproductid", Shopproductid);
+                return connection.Query<Organizationshopproducts>("Usp_Getorganizationshopproductdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace DBL.Repositories
         SystemOrganization Getsystemorganizationdatabyid(long Organizationid);
         SystemOrganizationDetails Getsystemorganizationdetaildatabyid(long Organizationid);
         Genericmodel Registerorganizationshopproductdata(string JsonData);
+        Organizationshopproducts Getorganizationshopproductdatabyid(long Shopproductid);
     }
 }

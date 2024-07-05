@@ -3,6 +3,7 @@ using DBL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace WEB.Controllers
 {
@@ -37,7 +38,7 @@ namespace WEB.Controllers
             return View(data);
         }
         [HttpGet]
-        public IActionResult Addproducttoshop(long Organizationid, long Productid,decimal Wholesaleprice, decimal Retailprice, string Productname)
+        public IActionResult Addproducttoshop(long Organizationid, long Productid, decimal Wholesaleprice, decimal Retailprice, string Productname)
         {
             Organizationshopproducts model = new Organizationshopproducts();
             model.Productid = Productid;
@@ -46,6 +47,12 @@ namespace WEB.Controllers
             model.Retailprice = Retailprice;
             model.Productname = Productname;
             return PartialView(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Editshopproduct(long Shopproductid)
+        {
+            var data = await bl.Getorganizationshopproductdatabyid(Shopproductid);
+            return PartialView(data);
         }
         public async Task<JsonResult> Addorganizationshopproductsdata(Organizationshopproducts model)
         {

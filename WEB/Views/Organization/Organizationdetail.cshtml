@@ -81,7 +81,7 @@
                                     <td>@item.ProductModel</td>
                                     <td>@item.ProductStock</td>
                                     <td>@item.Marketprice.ToString("F2")</td>
-                                    <td class="text-right"><a asp-action="Editproducttoshop" asp-controller="Organization" asp-route-code="@Guid.NewGuid()" asp-route-Shopproductid="@item.Shopproductid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                    <td class="text-right"><a asp-action="Editshopproduct" asp-controller="Organization" asp-route-code="@Guid.NewGuid()" asp-route-Shopproductid="@item.Shopproductid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                                 </tr>
                             }
                         }
