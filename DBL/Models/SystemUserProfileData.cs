@@ -1,4 +1,6 @@
-﻿namespace DBL.Models
+﻿using DBL.Entities;
+
+namespace DBL.Models
 {
     public class SystemUserProfileData
     {
@@ -18,5 +20,6 @@
         public DateTime Lastlogin { get; set; }
         public DateTime Datemodified { get; set; }
         public DateTime Datecreated { get; set; }
+        public List<SystemOrganization>? Systemorganizations { get; set; }
     }
 }
