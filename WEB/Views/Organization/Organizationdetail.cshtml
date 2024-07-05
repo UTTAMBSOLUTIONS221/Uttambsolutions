@@ -295,5 +295,62 @@ const firebaseConfig = {
         document.getElementById("buttonText").innerText = "SAVE";
         });
     }
+
+
+     var tableBody = $('#ShopProductFeatureTable tbody');
+        var noDataRows = tableBody.find('tr');
+        if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+            // Remove the "No data available in table" row
+            tableBody.empty();
+        }
+        function addshopproductfeaturedata() {
+            if ($('#SystemshopproductfeaturenameId').val() == "") {
+                Swal.fire("Product Feature Not Created", 'Product feature is Required', "warning");
+                return;
+            }
+            var Productfeaturename = $('#SystemshopproductfeaturenameId').val();
+           
+            // Check if the table body contains any rows
+            var tableBody = $('#ShopProductFeatureTable tbody');
+            var noDataRows = tableBody.find('tr');
+            if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                // Remove the "No data available in table" row
+                tableBody.empty();
+            }
+            // Append row to table
+            var newRow = '<tr>' +
+                '<td>' + Productfeaturename + '</td>' +
+                '<td class="text-right">' +
+                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editshopproductfeaturedata(this.parentNode.parentNode)">Edit</button>' +
+                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateshopproductfeaturedata(this.parentNode.parentNode)">Update</button>' +
+                '</td>' +
+                '</tr>';
+
+            $('#ShopProductFeatureTable tbody').append(newRow);
+            // Clear the form after adding a new row
+            clearShopProductFeatureForm();
+        }
+
+        // Function to populate input fields with values from the selected row for editing
+        function editshopproductfeaturedata(row) {
+            var cells = $(row).children();
+            $('#SystemshopproductfeaturenameId').val($(cells[0]).text());
+        }
+        // Function to update the selected row with edited values
+        function updateshopproductfeaturedata(row) {
+            if ($('#SystemshopproductfeaturenameId').val() == "") {
+                Swal.fire("Product Feature Not Created", 'Product feature is Required', "warning");
+                return;
+            }
+            var cells = $(row).children(); // Get the cells of the selected row
+
+            // Update the cells with edited values from input fields
+            $(cells[0]).text($('#SystemshopproductfeaturenameId').val());
+            clearShopProductFeatureForm();
+        }
+        // Function to clear the form after adding a new row or updating
+        function clearShopProductFeatureForm() {
+            $('#SystemshopproductfeaturenameId').val('');
+        }
    </script>
 }

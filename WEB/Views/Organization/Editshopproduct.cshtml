@@ -77,36 +77,25 @@
     <div id="section2" style="display: none;">
         <h6>Step 2: Product Features</h6>
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-10">
                 <div class="form-group">
-                    <label class="font-weight-light">Price</label>
-                    <input class="form-control form-control-sm font-weight-light" type="number" id="SystemSupplierPriceId" />
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label class="font-weight-light">Vat</label>
-                    <input class="form-control form-control-sm font-weight-light" type="number" id="SystemSuppliervatId" />
+                    <label class="font-weight-light">Feature</label>
+                    <input class="form-control form-control-sm font-weight-light id="SystemshopproductfeaturenameId" />
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light"></label>
-                    <button class="btn btn-sm btn-info btn-block text-white font-weight-bold text-uppercase mt-2" onclick="addSupplierandProductPrice()">ADD</button>
+                    <button class="btn btn-sm btn-info btn-block text-white font-weight-bold text-uppercase mt-2" onclick="addshopproductfeaturedata()">ADD</button>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12 table-responsive">
-                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap font-weight-light w-100" id="SuplierProductsTable">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap font-weight-light w-100" id="ShopProductFeatureTable">
                     <thead>
                         <tr>
-                            <th hidden></th>
-                            <th hidden></th>
-                            <th hidden></th>
-                            <th>PRODUCT</th>
-                            <th class="text-right">PRICE</th>
-                            <th class="text-right">VAT</th>
+                            <th>FEATURE</th>
                             <th class="text-right">ACTION</th>
                         </tr>
                     </thead>
@@ -132,6 +121,7 @@
                     </tbody>
                 </table>
             </div>
+        </div>
         <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection(1)">Previous</button>
         <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection(3)">Next</button>
     </div>
@@ -141,7 +131,50 @@
     <div id="section3" style="display: none;">
         <h6>Step 3: Whats in the Box</h6>
         <div class="row">
-            <!-- Add content for section 2 here -->
+            <div class="col-sm-10">
+                <div class="form-group">
+                    <label class="font-weight-light">Item in Box</label>
+                    <input class="form-control form-control-sm font-weight-light id="SystemSupplierPriceId" />
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light"></label>
+                    <button class="btn btn-sm btn-info btn-block text-white font-weight-bold text-uppercase mt-2" onclick="addSupplierandProductPrice()">ADD</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap font-weight-light w-100" id="SuplierProductsTable">
+                    <thead>
+                        <tr>
+                            <th>ITEM IN BOX</th>
+                            <th class="text-right">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @* @if (Model != null)
+                        {
+                        if (Model.SystemSuplierPrice.Count() > 0)
+                        {
+                        foreach (var data in Model.SystemSuplierPrice)
+                        {
+                        <tr>
+                        <td hidden>@data.SupplierPriceId</td>
+                        <td hidden>@data.SupplierId</td>
+                        <td hidden>@data.ProductVariationId</td>
+                        <td>@data.ProductVariationName</td>
+                        <td class="text-right">@data.ProductPrice.ToString("#,##0.00")</td>
+                        <td class="text-right">@data.ProductVat.ToString("#,##0.00")</td>
+                        <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editSupplierProduct(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateSupplierProduct(this.parentNode.parentNode)">Update</button></td>
+                        </tr>
+                        }
+                        }
+                        } *@
+                    </tbody>
+                </table>
+            </div>
         </div>
         <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection(2)">Previous</button>
         <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection(4)">Next</button>
