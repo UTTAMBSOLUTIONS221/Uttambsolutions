@@ -95,7 +95,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
     <script type="text/javascript">
- const firebaseConfig = {
+const firebaseConfig = {
             apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
             authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
             projectId: "uttambsolutions-4ec2a",
@@ -181,9 +181,11 @@
                         img.src = e.target.result;
                         img.width = 140;
                         img.height = 140;
+                        img.style.display = 'none'; // Hide the image initially
                         img.onload = function () {
-                            // Remove the spinner and show the image
+                            // Show the image and remove the spinner
                             spinner.remove();
+                            img.style.display = 'block';
                             previewContainer.appendChild(img);
                         };
 
@@ -192,6 +194,10 @@
                     reader.readAsDataURL(file);
                 });
             }
+
+            // Show the overlay with the spinner
+             document.getElementById('loadingOverlay').style.zIndex = 1100; 
+            document.getElementById('loadingOverlay').style.display = 'flex';
 
             // Iterate over each file
             for (var i = 0; i < files.length; i++) {
@@ -207,6 +213,9 @@
                     console.error(error);
                 }
             }
+
+            // Hide the overlay after all uploads are complete
+            document.getElementById('loadingOverlay').style.display = 'none';
 
             // Set the input field value with JSON stringified URLs
             var inputField = document.getElementById('UttambsolutionsimagesurlId');

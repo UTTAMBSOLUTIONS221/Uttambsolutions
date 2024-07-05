@@ -64,13 +64,13 @@ body {
 }
 
 .overlay {
-    position: fixed; /* Fixed position */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: none; /* Initially hidden */
-    justify-content: center; /* Center the spinner horizontally */
-    align-items: center; /* Center the spinner vertically */
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
 }
