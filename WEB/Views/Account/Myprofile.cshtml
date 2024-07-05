@@ -1,4 +1,4 @@
-﻿
+﻿@model DBL.Models.SystemUserProfileData
 @{
     ViewData["Title"] = "Myprofile";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
@@ -16,7 +16,7 @@
                          alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">Nina Mcintire</h3>
+                <h3 class="profile-username text-center">@Model.Fullname</h3>
 
                 <p class="text-muted text-center">Software Engineer</p>
 
@@ -85,7 +85,7 @@
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
                     <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#systempages" data-toggle="tab">Pages</a></li>
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -299,7 +299,7 @@
                     </div>
                     <!-- /.tab-pane -->
 
-                    <div class="tab-pane" id="settings">
+                    <div class="tab-pane" id="systempages">
                         <form class="form-horizontal">
                             <div class="form-group row">
                                 <label for="inputName" class="col-sm-2 col-form-label">Name</label>

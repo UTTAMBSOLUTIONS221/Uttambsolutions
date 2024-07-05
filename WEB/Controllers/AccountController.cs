@@ -104,7 +104,7 @@ namespace WEB.Controllers
         public async Task<IActionResult> Myprofile()
         {
             var data = await bl.Getsystemuserprofiledata(SessionUserData.Usermodel.Userid);
-            return View();
+            return View(data);
         }
 
         #region Other Methods
