@@ -295,11 +295,10 @@ const firebaseConfig = {
         };
         Shopproductwhatsinboxsdata.push(Shopproductwhatsinboxdata);
     });
-    var ShopProductImagedata = {
+     ShopProductImagesdata = {
             ProductWhatsInBoxItem:$('#UttambsolutionsimagesurlId').val().replaceAll('\\"', '"').split(','),
             DateCreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
         };
-        ShopProductImagesdata.push(ShopProductImagedata);
     
     var uil1 = {
         Shopproductid:$('#Shopproductid').val(),Productid:$('#Productid').val(),Productname:$('#Productnameid').val(),Organizationid:$('#Organizationid').val(),Marketprice:$('#Marketpriceid').val(),Productdescription:$('#Productdescriptionid').val(),ProductSize:$('#ProductSizeid').val(),ProductColor:$('#ProductColorid').val(),ProductModel:$('#ProductModelid').val(),ProductStock:$('#ProductStockid').val(),
