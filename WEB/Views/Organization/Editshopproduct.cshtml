@@ -8,6 +8,7 @@
 <div class="modal-body">
     <!-- Section 1: Product Information -->
     <div id="section1">
+        <h6>Step 1: Product Information</h6>
         <div class="row">
             <div class="col-sm-12">
                 <input asp-for="@Model.Shopproductid" id="Shopproductid" hidden />
@@ -69,19 +70,36 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-sm btn-custom float-right" onclick="nextSection(2)">Next</button>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection(2)">Next</button>
     </div>
 
-    <!-- Section 2: Product Details -->
+    <!-- Section 2: Product Features -->
     <div id="section2" style="display: none;">
-       
+        <h6>Step 2: Product Features</h6>
+        <div class="row">
+            <!-- Add content for section 2 here -->
+        </div>
         <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection(1)">Previous</button>
         <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection(3)">Next</button>
     </div>
 
-    <!-- Section 3: Product Description and Images -->
+
+    <!-- Section 3: Product Details -->
     <div id="section3" style="display: none;">
-        
+        <h6>Step 3: Whats in the Box</h6>
+        <div class="row">
+            <!-- Add content for section 2 here -->
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection(2)">Previous</button>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection(4)">Next</button>
+    </div>
+
+    <!-- Section 3: Product Description and Images -->
+    <div id="section4" style="display: none;">
+        <h6>Step 4: Upload Images</h6>
+        <div class="row">
+            <!-- Add content for section 3 here -->
+        </div>
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
@@ -99,35 +117,10 @@
             </div>
             <div id="Uttambsolutionsimagespreviewcontainer"></div>
         </div>
-        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection(2)">Previous</button>
-        <button class="btn btn-sm btn-info font-weight-bold" type="button" id="saveorgshopproductid" onclick="saveorgshopproductdata();">
+        <button type="button" class="btn btn-sm btn-secondary float-left mr-1" onclick="prevSection(3)">Previous</button>
+        <button class="btn btn-sm btn-info font-weight-bold ml-1" type="button" id="saveorgshopproductid" onclick="saveorgshopproductdata();">
             <span id="buttonText">SAVE</span>
             <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
         </button>
     </div>
 </div>
-
-<script>
-    function nextSection(next) {
-        document.getElementById('section1').style.display = 'none';
-        document.getElementById('section2').style.display = 'none';
-        document.getElementById('section3').style.display = 'none';
-        document.getElementById('section' + next).style.display = 'block';
-    }
-
-    function prevSection(prev) {
-        document.getElementById('section1').style.display = 'none';
-        document.getElementById('section2').style.display = 'none';
-        document.getElementById('section3').style.display = 'none';
-        document.getElementById('section' + prev).style.display = 'block';
-    }
-
-    function shopproductFileChanged(event) {
-        // Handle file selection logic here
-    }
-
-    function saveorgshopproductdata() {
-        // Handle save logic here
-    }
-</script>
-

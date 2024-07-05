@@ -359,6 +359,21 @@
     <script src="~/lib/plugins/pdfmake/vfs_fonts.js"></script>
 
     <script type="text/javascript">
+        function nextSection(next) {
+            document.getElementById('section1').style.display = 'none';
+            document.getElementById('section2').style.display = 'none';
+            document.getElementById('section3').style.display = 'none';
+            document.getElementById('section4').style.display = 'none';
+            document.getElementById('section' + next).style.display = 'block';
+        }
+
+        function prevSection(prev) {
+            document.getElementById('section1').style.display = 'none';
+            document.getElementById('section2').style.display = 'none';
+            document.getElementById('section3').style.display = 'none';
+            document.getElementById('section4').style.display = 'none';
+            document.getElementById('section' + prev).style.display = 'block';
+        }
         $('#Uttambsolutionsmodalextralarge').on('show.bs.modal', function (event) {
             $(".blockoverlay").show();
             var button = $(event.relatedTarget);
