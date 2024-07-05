@@ -224,6 +224,22 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<SystemOrganizationDetails> Getsystemorganizationdetaildatabyid(long Organizationid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OrganizationRepository.Getsystemorganizationdetaildatabyid(Organizationid);
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registerorganizationshopproductdata(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OrganizationRepository.Registerorganizationshopproductdata(obj);
+                return Resp;
+            });
+        }
         #endregion
 
 

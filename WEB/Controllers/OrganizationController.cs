@@ -29,11 +29,28 @@ namespace WEB.Controllers
             var resp = await bl.Registersystemorganizationdata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> Organizationdetail(long Organizationid)
         {
-            return View();
+            var data = await bl.Getsystemorganizationdetaildatabyid(Organizationid);
+            return View(data);
+        }
+        [HttpGet]
+        public IActionResult Addproducttoshop(long Organizationid, long Productid,decimal Wholesaleprice, decimal Retailprice, string Productname)
+        {
+            Organizationshopproducts model = new Organizationshopproducts();
+            model.Productid = Productid;
+            model.Organizationid = Organizationid;
+            model.Wholesaleprice = Wholesaleprice;
+            model.Retailprice = Retailprice;
+            model.Productname = Productname;
+            return PartialView(model);
+        }
+        public async Task<JsonResult> Addorganizationshopproductsdata(Organizationshopproducts model)
+        {
+            var resp = await bl.Registerorganizationshopproductdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
         }
     }
 }
