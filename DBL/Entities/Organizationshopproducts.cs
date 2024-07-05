@@ -18,5 +18,6 @@
         public DateTime DateCreated { get; set; }
         public List<ShopProductFeature>? Shopproductfeature { get; set; }
         public List<ShopProductWhatsInBox>? Shopproductwhatsinbox { get; set; }
+        public List<ShopProductImage>? ShopProductImage { get; set; }
     }
 }
