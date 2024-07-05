@@ -2,6 +2,7 @@
 using DBL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace WEB.Controllers
 {
@@ -22,6 +23,11 @@ namespace WEB.Controllers
                 organization = await bl.Getsystemorganizationdatabyid(Organizationid);
             }
             return PartialView(organization);
+        }
+        public async Task<JsonResult> Addsystemorganizationdata(SystemOrganization model)
+        {
+            var resp = await bl.Registersystemorganizationdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
         }
     }
 }

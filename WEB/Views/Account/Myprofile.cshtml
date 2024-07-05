@@ -380,7 +380,7 @@
     var uil1 = {
         OrganizationId: $('#OrganizationId').val(), OrganizationName: $('#OrganizationNameid').val(), OrganizationTypeId: $('#OrganizationTypeId').val(), OrganizationDescription: $('#OrganizationDescriptionid').val(),OrganizationStatus:0,DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
     };
-    $.post("/Brand/Addsystemproductbranddata", uil1, function (response) {
+    $.post("/Organization/Addsystemorganizationdata", uil1, function (response) {
         if (response.RespStatus == 0) {
             Swal.fire('Saved!', response.RespMessage, 'success')
             $('#Uttambsolutionsmodal').hide();

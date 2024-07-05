@@ -208,7 +208,7 @@ namespace DBL
         #endregion
 
         #region System Orgnizations
-        public Task<Genericmodel> Addsystemorganizationdata(string obj)
+        public Task<Genericmodel> Registersystemorganizationdata(string obj)
         {
             return Task.Run(() =>
             {
