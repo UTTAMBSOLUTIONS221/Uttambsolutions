@@ -41,13 +41,13 @@
 </div>
 @section Scripts {
     <script type="text/javascript">
-    ﻿function savesystemtproductbranddata() {
-    document.getElementById("savesystemtproductbrandid").disabled = true;
+    ﻿function savesystemproductbranddata() {
+    document.getElementById("savesystemproductbrandid").disabled = true;
     document.getElementById("processingSpinner").style.display = "inline-block";
     document.getElementById("buttonText").innerText = "Processing...";
     if ($('#Brandnameid').val() === '') {
         Swal.fire("Brand Not Created", 'Brand Name is Required', "warning");
-        document.getElementById("savesystemtproductbrandid").disabled = false;
+        document.getElementById("savesystemproductbrandid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
         document.getElementById("buttonText").innerText = "SAVE";
         return;
@@ -67,7 +67,7 @@
         else {
             Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
         }
-        document.getElementById("savesystemtproductbrandid").disabled = false;
+        document.getElementById("savesystemproductbrandid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
         document.getElementById("buttonText").innerText = "SAVE";
         });

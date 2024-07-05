@@ -348,3 +348,53 @@
     </div>
     <!-- /.col -->
 </div>
+
+                                            @section Scripts {
+    <script type="text/javascript">
+    ﻿function savesystemorganizationdata() {
+    document.getElementById("savesystemorganizationid").disabled = true;
+    document.getElementById("processingSpinner").style.display = "inline-block";
+    document.getElementById("buttonText").innerText = "Processing...";
+    if ($('#OrganizationNameid').val() === '') {
+        Swal.fire("Organization Not Created", 'Organization Name is Required', "warning");
+        document.getElementById("savesystemorganizationid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    if ($('#OrganizationTypeId').val() === ''|| $('#OrganizationTypeId').val() === 0) {
+        Swal.fire("Organization Not Created", 'Organization Type is Required', "warning");
+        document.getElementById("savesystemorganizationid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+     if ($('#OrganizationDescriptionid').val() === '') {
+        Swal.fire("Organization Not Created", 'Organization Description is Required', "warning");
+        document.getElementById("savesystemorganizationid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    
+    var uil1 = {
+        OrganizationId: $('#OrganizationId').val(), OrganizationName: $('#OrganizationNameid').val(), OrganizationTypeId: $('#OrganizationTypeId').val(), OrganizationDescription: $('#OrganizationDescriptionid').val(),OrganizationStatus:0,DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+    };
+    $.post("/Brand/Addsystemproductbranddata", uil1, function (response) {
+        if (response.RespStatus == 0) {
+            Swal.fire('Saved!', response.RespMessage, 'success')
+            $('#Uttambsolutionsmodal').hide();
+            setTimeout(function () { location.reload(); }, 1000);
+        } else if (response.RespStatus == 1) {
+            Swal.fire("Organization details not saved", response.RespMessage, "warning");
+        }
+        else {
+            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+        }
+        document.getElementById("savesystemorganizationid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        });
+    }
+   </script>
+}
