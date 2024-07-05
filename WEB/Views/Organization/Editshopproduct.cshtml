@@ -1,93 +1,133 @@
 ﻿@model DBL.Entities.Organizationshopproducts
 <div class="modal-header">
-    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Product to sell</h5>
+    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">My Shop Product Details</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <div class="row">
-        <div class="col-sm-12">
-            <input asp-for="@Model.Shopproductid" id="Shopproductid" hidden />
-            <input asp-for="@Model.Organizationid" id="Organizationid" hidden />
-            <input asp-for="@Model.Productid" id="Productid" hidden />
+    <!-- Section 1: Product Information -->
+    <div id="section1">
+        <div class="row">
+            <div class="col-sm-12">
+                <input asp-for="@Model.Shopproductid" id="Shopproductid" hidden />
+                <input asp-for="@Model.Organizationid" id="Organizationid" hidden />
+                <input asp-for="@Model.Productid" id="Productid" hidden />
+            </div>
         </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Product Name</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Productname" id="Productnameid" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Wholesale Price</label>
+                    <input class="form-control form-control-sm" type="number" asp-for="@Model.Wholesaleprice" readonly />
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label class="font-weight-light">My Selling Price</label>
+                    <input class="form-control form-control-sm" type="number" asp-for="@Model.Marketprice" id="Marketpriceid" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Product Size</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.ProductSize" id="ProductSizeid" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Product Color</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.ProductColor" id="ProductColorid" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Product Model</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.ProductModel" id="ProductModelid" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Product Units</label>
+                    <input class="form-control form-control-sm" type="number" asp-for="@Model.ProductStock" id="ProductStockid" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="font-weight-light">Product Description</label>
+                    <textarea class="form-control form-control-sm" asp-for="@Model.Productdescription" id="Productdescriptionid"></textarea>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-sm btn-custom float-right" onclick="nextSection(2)">Next</button>
     </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="font-weight-light">Product Name</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Productname" id="Productnameid" />
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label class="font-weight-light">Wholesale Price</label>
-                <input class="form-control form-control-sm" type="number" asp-for="@Model.Wholesaleprice" readonly />
-            </div>
-        </div>
-        <div class="col-sm-5">
-            <div class="form-group">
-                <label class="font-weight-light">My Selling Price</label>
-                <input class="form-control form-control-sm" type="number" asp-for="@Model.Marketprice" id="Marketpriceid" />
-            </div>
-        </div>
+
+    <!-- Section 2: Product Details -->
+    <div id="section2" style="display: none;">
+       
+        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection(1)">Previous</button>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection(3)">Next</button>
     </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label class="font-weight-light">Product Size</label>
-                <input class="form-control form-control-sm" asp-for="@Model.ProductSize" id="ProductSizeid" />
+
+    <!-- Section 3: Product Description and Images -->
+    <div id="section3" style="display: none;">
+        
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="font-weight-light">Product Image(s)</label>
+                    <input class="form-control form-control-sm font-weight-light" multiple type="file" onchange="shopproductFileChanged(event)" />
+                </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label class="font-weight-light">Product Color</label>
-                <input class="form-control form-control-sm" asp-for="@Model.ProductColor" id="ProductColorid" />
+        <div class="row">
+            <div class="col-sm-12" hidden>
+                <div class="form-group">
+                    <label class="font-weight-light">Images Url</label>
+                    <input class="form-control form-control-sm" id="UttambsolutionsimagesurlId" readonly />
+                </div>
             </div>
+            <div id="Uttambsolutionsimagespreviewcontainer"></div>
         </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label class="font-weight-light">Product Model</label>
-                <input class="form-control form-control-sm" asp-for="@Model.ProductModel" id="ProductModelid" />
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label class="font-weight-light">Product Units</label>
-                <input class="form-control form-control-sm" type="number" asp-for="@Model.ProductStock" id="ProductStockid" />
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label class="font-weight-light">Product description</label>
-                <textarea class="form-control form-control-sm" asp-for="@Model.Productdescription" id="Productdescriptionid"></textarea>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label class="font-weight-light">Product Image(s)</label>
-                <input class="form-control form-control-sm font-weight-light" multiple type="file" onchange="shopproductFileChanged(event)" />
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12" hidden>
-            <div class="form-group">
-                <label class="font-weight-light">Images Url</label>
-                <input class="form-control form-control-sm" id="UttambsolutionsimagesurlId" readonly />
-            </div>
-        </div>
-        <div id="Uttambsolutionsimagespreviewcontainer"></div>
+        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection(2)">Previous</button>
+        <button class="btn btn-sm btn-info font-weight-bold" type="button" id="saveorgshopproductid" onclick="saveorgshopproductdata();">
+            <span id="buttonText">SAVE</span>
+            <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+        </button>
     </div>
 </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="saveorgshopproductid" onclick="saveorgshopproductdata();">
-        <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
-    </button>
-</div>
+
+<script>
+    function nextSection(next) {
+        document.getElementById('section1').style.display = 'none';
+        document.getElementById('section2').style.display = 'none';
+        document.getElementById('section3').style.display = 'none';
+        document.getElementById('section' + next).style.display = 'block';
+    }
+
+    function prevSection(prev) {
+        document.getElementById('section1').style.display = 'none';
+        document.getElementById('section2').style.display = 'none';
+        document.getElementById('section3').style.display = 'none';
+        document.getElementById('section' + prev).style.display = 'block';
+    }
+
+    function shopproductFileChanged(event) {
+        // Handle file selection logic here
+    }
+
+    function saveorgshopproductdata() {
+        // Handle save logic here
+    }
+</script>
+

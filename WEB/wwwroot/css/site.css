@@ -1,7 +1,10 @@
 .bg-custom {
     background-color: #0a506c !important;
 }
-
+.btn-custom {
+    background-color: #0a506c !important;
+    color:#ffffff;
+}
 html {
     font-size: 14px;
 }
