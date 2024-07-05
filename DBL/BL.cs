@@ -79,6 +79,22 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Registersystemportalstaffdata(SystemStaff obj)
+        {
+            return Task.Run(() =>
+            {
+                string Passwordhash = str.RandomString(12);
+                string Password = str.RandomString(8).ToString();
+                obj.Passwords = sec.Encrypt(Password, Passwordhash);
+                obj.Passharsh = Passwordhash;
+                obj.Username = obj.Emailaddress;
+                obj.Datecreated = DateTime.Now;
+                obj.Datemodified = DateTime.Now;
+                obj.Passwordresetdate = DateTime.Now.AddDays(90);
+                var Resp = db.AccountRepository.Registersystemstaffdata(JsonConvert.SerializeObject(obj));
+                return Resp;
+            });
+        }
         public Task<SystemStaff> Getsystemstaffdatabyid(long Staffid)
         {
             return Task.Run(() =>

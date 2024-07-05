@@ -34,7 +34,7 @@ namespace WEB.Controllers
         }
         public async Task<JsonResult> Addsystemstaffdata(SystemStaff model)
         {
-            var resp = await bl.Registersystemstaffdata(model);
+            var resp = await bl.Registersystemportalstaffdata(model);
             return Json(resp);
         }
     }
