@@ -282,7 +282,9 @@ const firebaseConfig = {
     $("#ShopProductFeatureTable tbody tr").each(function () {
         var row = $(this);
         var Shopproductfeaturedata = {
-            ProductFeature: row.find('td:eq(0)').text(),
+            ProductFeatureId: row.find('td:eq(0)').text(),
+            ShopProductId: $('#Shopproductid').val(),
+            ProductFeature: row.find('td:eq(2)').text(),
             DateCreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
         };
         Shopproductfeaturesdata.push(Shopproductfeaturedata);
@@ -290,7 +292,9 @@ const firebaseConfig = {
     $("#ShopProductFeatureTable tbody tr").each(function () {
         var row = $(this);
         var Shopproductwhatsinboxdata = {
-            ProductWhatsInBoxItem: row.find('td:eq(0)').text(),
+            ProductWhatsInBoxId: row.find('td:eq(0)').text(),
+            ShopProductId: $('#Shopproductid').val(),
+            ProductWhatsInBoxItem: row.find('td:eq(2)').text(),
             DateCreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
         };
         Shopproductwhatsinboxsdata.push(Shopproductwhatsinboxdata);
@@ -298,6 +302,8 @@ const firebaseConfig = {
     var imageUrls = $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '').split(',');
     imageUrls.forEach(function (url) {
         ShopProductImagesdata.push({
+            ProductImagesId: 0,
+            ShopProductId: $('#Shopproductid').val(),
             Productimageurl: url,
             DateCreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
         });
@@ -338,6 +344,8 @@ const firebaseConfig = {
                 Swal.fire("Product Feature Not Created", 'Product feature is Required', "warning");
                 return;
             }
+             var ProductFeatureId = 0;
+            var Shopproductid = $('#Shopproductid').val();
             var Productfeaturename = $('#SystemshopproductfeaturenameId').val();
            
 
@@ -350,6 +358,8 @@ const firebaseConfig = {
             }
             // Append row to table
             var newRow = '<tr>' +
+                '<td hidden>' + ProductFeatureId + '</td>' +
+                '<td hidden>' + Shopproductid + '</td>' +
                 '<td>' + Productfeaturename + '</td>' +
                 '<td class="text-right">' +
                 '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editshopproductfeaturedata(this.parentNode.parentNode)">Edit</button>' +
@@ -365,7 +375,8 @@ const firebaseConfig = {
         // Function to populate input fields with values from the selected row for editing
         function editshopproductfeaturedata(row) {
             var cells = $(row).children();
-            $('#SystemshopproductfeaturenameId').val($(cells[0]).text());
+            $('#ProductFeatureId').val($(cells[0]).text());
+            $('#SystemshopproductfeaturenameId').val($(cells[2]).text());
         }
         // Function to update the selected row with edited values
         function updateshopproductfeaturedata(row) {
@@ -376,11 +387,14 @@ const firebaseConfig = {
             var cells = $(row).children(); // Get the cells of the selected row
 
             // Update the cells with edited values from input fields
-            $(cells[0]).text($('#SystemshopproductfeaturenameId').val());
+            $(cells[0]).text($('#ProductFeatureId').val());
+            $(cells[1]).text($('#Shopproductid').val());
+            $(cells[2]).text($('#SystemshopproductfeaturenameId').val());
             clearShopProductFeatureForm();
         }
         // Function to clear the form after adding a new row or updating
         function clearShopProductFeatureForm() {
+            $('#ProductFeatureId').val('');
             $('#SystemshopproductfeaturenameId').val('');
         }
 
@@ -395,6 +409,8 @@ const firebaseConfig = {
                 Swal.fire("Product Box Item Not Created", 'Product Box Item is Required', "warning");
                 return;
             }
+            var ProductWhatsInBoxId = 0;
+            var Shopproductid = $('#Shopproductid').val();
             var Productboxitemname = $('#SystemshopproductboxitemnameId').val();
            
 
@@ -407,6 +423,8 @@ const firebaseConfig = {
             }
             // Append row to table
             var newRow = '<tr>' +
+                '<td hidden>' + ProductWhatsInBoxId + '</td>' +
+                '<td hidden>' + Shopproductid + '</td>' +
                 '<td>' + Productboxitemname + '</td>' +
                 '<td class="text-right">' +
                 '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editshopproductboxitemdata(this.parentNode.parentNode)">Edit</button>' +
@@ -422,7 +440,8 @@ const firebaseConfig = {
         // Function to populate input fields with values from the selected row for editing
         function editshopproductboxitemdata(row) {
             var cells = $(row).children();
-            $('#SystemshopproductboxitemnameId').val($(cells[0]).text());
+            $('#ProductWhatsInBoxId').val($(cells[0]).text());
+            $('#SystemshopproductboxitemnameId').val($(cells[2]).text());
         }
         // Function to update the selected row with edited values
         function updateshopproductboxitemdata(row) {
@@ -433,11 +452,14 @@ const firebaseConfig = {
             var cells = $(row).children(); // Get the cells of the selected row
 
             // Update the cells with edited values from input fields
-            $(cells[0]).text($('#SystemshopproductboxitemnameId').val());
+            $(cells[0]).text($('#ProductWhatsInBoxId').val());
+            $(cells[1]).text($('#Shopproductid').val());
+            $(cells[2]).text($('#SystemshopproductboxitemnameId').val());
             clearShopProductBoxItemForm();
         }
         // Function to clear the form after adding a new row or updating
         function clearShopProductBoxItemForm() {
+            $('#ProductWhatsInBoxId').val('');
             $('#SystemshopproductboxitemnameId').val('');
         }
    </script>
