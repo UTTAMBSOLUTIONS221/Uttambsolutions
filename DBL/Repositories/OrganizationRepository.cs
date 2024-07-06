@@ -84,5 +84,15 @@ namespace DBL.Repositories
                 }
             }
         }
+
+        public IEnumerable<Systemorganizationshopproducts> Getsystemorganizationshopproductsdata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                return connection.Query<Systemorganizationshopproducts>("Usp_Getsystemorganizationshopproductsdata", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
     }
 }

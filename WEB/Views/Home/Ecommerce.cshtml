@@ -1,0 +1,23 @@
+﻿@model IEnumerable<DBL.Models.Systemorganizationshopproducts>
+@{
+    ViewData["Title"] = "Ecommerce";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @if (Model!= null)
+    {
+        foreach (var product in Model)
+        {
+            <div class="col-sm-3">
+                <div class="card">
+                    <img src="@Url.Content(product.Primaryimageurl)" alt="@product.Productname" class="card-img-top" />
+                    <div class="card-body">
+                        <h4>@product.Productname</h4>
+                        <p>@product.Mainproductdescription</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

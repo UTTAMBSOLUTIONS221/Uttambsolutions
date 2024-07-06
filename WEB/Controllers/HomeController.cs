@@ -54,6 +54,13 @@ namespace WEB.Controllers
             var blogs = await bl.Getsystemblogsdata(0, 10);
             return View(blogs);
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Ecommerce()
+        {
+            var ecommerce = await bl.Getsystemblogsdata(0, 10);
+            return View(ecommerce);
+        }
         public IActionResult Privacy()
         {
             return View();

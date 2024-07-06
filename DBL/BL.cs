@@ -248,6 +248,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<IEnumerable<Systemorganizationshopproducts>> Getsystemorganizationshopproductsdata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OrganizationRepository.Getsystemorganizationshopproductsdata();
+                return Resp;
+            });
+        }
         #endregion
 
 
