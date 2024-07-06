@@ -9,17 +9,58 @@
     {
         foreach (var product in Model.Organizationshopproductsdata)
         {
-            <div class="col-sm-2">
-                <div class="card">
-                    <img src="@Url.Content(product.Primaryimageurl)" alt="@product.Productname" height="140" class="card-img-top" />
-                    <div class="card-body">
-                        <h4 class="card-title nowrap text-nowrap">@product.Productname</h4>
-@*                         <p class="card-text">@product.Mainproductdescription</p> *@
-                        <p class="card-text nowrap text-nowrap">Kes. @product.Marketprice</p>
-                        <p class="card-text nowrap text-nowrap">Shop: @product.Organizationname</p>
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
+                <a asp-action="Shopproductdetail" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Shopproductid="@product.Shopproductid" asp-area="" class="text-decoration-none">
+                    <div class="card h-100 shadow-sm card-info card-outline">
+                        <img src="@Url.Content(product.Primaryimageurl)" alt="@product.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" />
+                        <div class="card-body pt-2 pr-2 pl-2 d-flex flex-column">
+                            <p class="card-text text-center text-muted text-truncate mb-1" title="@product.Productname">@product.Productname</p>
+                            <p class="card-text text-center text-muted text-truncate mb-1" title="Kes. @product.Marketprice">Kes. @product.Marketprice</p>
+                            <p class="card-text text-center text-muted text-truncate" title="Shop: @product.Organizationname">Shop: @product.Organizationname</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         }
     }
+    else
+    {
+        <p class="text-center">No products available at the moment.</p>
+    }
 </div>
+
+<!-- Styles -->
+<style>
+    .card {
+        transition: transform 0.2s;
+        margin-bottom: 0;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    .card-title {
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 0.8rem;
+        color: #555;
+    }
+
+    .text-truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .text-decoration-none {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+</style>
