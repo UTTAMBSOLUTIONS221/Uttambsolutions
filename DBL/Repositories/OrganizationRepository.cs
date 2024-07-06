@@ -85,13 +85,23 @@ namespace DBL.Repositories
             }
         }
 
-        public IEnumerable<Systemorganizationshopproducts> Getsystemorganizationshopproductsdata()
+        public Systemorganizationshopproducts Getsystemorganizationshopproductsdata()
         {
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
-                return connection.Query<Systemorganizationshopproducts>("Usp_Getsystemorganizationshopproductsdata", parameters, commandType: CommandType.StoredProcedure).ToList();
+                parameters.Add("@Organizationshopproductsdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystemorganizationshopproductsdata", parameters, commandType: CommandType.StoredProcedure);
+                string organizationshopproductsdataJson = parameters.Get<string>("@Organizationshopproductsdata");
+                if (organizationshopproductsdataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Systemorganizationshopproducts>(organizationshopproductsdataJson);
+                }
+                else
+                {
+                    return new Systemorganizationshopproducts();
+                }
             }
         }
     }

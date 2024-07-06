@@ -248,7 +248,7 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<IEnumerable<Systemorganizationshopproducts>> Getsystemorganizationshopproductsdata()
+        public Task<Systemorganizationshopproducts> Getsystemorganizationshopproductsdata()
         {
             return Task.Run(() =>
             {

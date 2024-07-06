@@ -4,6 +4,10 @@ namespace DBL.Models
 {
     public class Systemorganizationshopproducts
     {
+        public List<Organizationshopproductsdata>? Organizationshopproductsdata{ get; set; }
+    }
+    public class Organizationshopproductsdata
+    {
         public long Shopproductid { get; set; }
         public long Productid { get; set; }
         public long Organizationid { get; set; }
