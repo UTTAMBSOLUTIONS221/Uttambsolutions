@@ -58,7 +58,7 @@ namespace WEB.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Ecommerce()
         {
-            var ecommerce = await bl.Getsystemblogsdata(0, 10);
+            var ecommerce = await bl.Getsystemorganizationshopproductsdata();
             return View(ecommerce);
         }
         public IActionResult Privacy()
