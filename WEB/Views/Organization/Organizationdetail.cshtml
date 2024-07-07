@@ -222,6 +222,14 @@ const firebaseConfig = {
             inputField.value = JSON.stringify(downloadURLs);
         }
 
+            function showorhidelipalater() {
+            if ($('#Islipalaterid').is(':checked')) {
+                $('#lipamdogomdogolaterrowid').show();
+            } else {
+                $('#lipamdogomdogolaterrowid').hide();
+            }
+        }
+
     ﻿function saveorgshopproductdata() {
     document.getElementById("saveorgshopproductid").disabled = true;
     document.getElementById("processingSpinner").style.display = "inline-block";
@@ -261,6 +269,13 @@ const firebaseConfig = {
         document.getElementById("buttonText").innerText = "SAVE";
         return;
     }
+    if ($('#ProductStatusid').val() === '') {
+        Swal.fire("Shop product Not Created", 'Status is Required', "warning");
+        document.getElementById("saveorgshopproductid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
     if ($('#ProductStockid').val() === '' || $('#ProductStockid').val() === 0) {
         Swal.fire("Shop product Not Created", 'Units Available is Required', "warning");
         document.getElementById("saveorgshopproductid").disabled = false;
@@ -268,6 +283,30 @@ const firebaseConfig = {
         document.getElementById("buttonText").innerText = "SAVE";
         return;
     }
+    if ($('#Islipalaterid').is(':checked')) {
+        if ($('#Productdepositamountid').val() === '' || $('#Productdepositamountid').val() === 0) {
+        Swal.fire("Shop product Not Created", 'Deposit Amount is Required', "warning");
+        document.getElementById("saveorgshopproductid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+       }
+      if ($('#Productinterestrateid').val() === '') {
+        Swal.fire("Shop product Not Created", 'Interest Rate is Required', "warning");
+        document.getElementById("saveorgshopproductid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+      }
+      if ($('#Periodicamountid').val() === '' || $('#Periodicamountid').val() === 0) {
+        Swal.fire("Shop product Not Created", 'Amount to be Paid is Required', "warning");
+        document.getElementById("saveorgshopproductid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+       }
+    }
+
     if ($('#Productdescriptionid').val() === '') {
         Swal.fire("Shop product Not Created", 'Descriptive Narration is Required', "warning");
         document.getElementById("saveorgshopproductid").disabled = false;

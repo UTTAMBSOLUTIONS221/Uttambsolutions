@@ -77,11 +77,11 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Is lipa mdogo/later?</label>
-                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Islipalater" id="Islipalaterid" />
+                    <input class="form-control form-control-sm" type="checkbox" onchange="showorhidelipalater()" asp-for="@Model.Islipalater" id="Islipalaterid" />
                 </div>
             </div>
         </div>
-        <div class="row" style="display:none">
+        <div class="row" id="lipamdogomdogolaterrowid" style="display:none">
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Deposit Amount</label>
