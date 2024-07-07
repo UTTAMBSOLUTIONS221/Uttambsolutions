@@ -4,7 +4,7 @@ namespace DBL.Models
 {
     public class Systemorganizationshopproducts
     {
-        public List<Organizationshopproductsdata>? Organizationshopproductsdata{ get; set; }
+        public List<Organizationshopproductsdata>? Organizationshopproductsdata { get; set; }
     }
     public class Organizationshopproductsdata
     {
@@ -34,7 +34,13 @@ namespace DBL.Models
         public string? ProductColor { get; set; }
         public string? ProductModel { get; set; }
         public decimal Marketprice { get; set; }
+        public string? ProductStatus { get; set; }
         public decimal ProductStock { get; set; }
+        public bool Islipalater { get; set; }
+        public decimal Productdepositamount { get; set; }
+        public decimal Productinterestrate { get; set; }
+        public decimal Periodicamount { get; set; }
+        public int PaymentTerm { get; set; }
         public int Organizationstatus { get; set; }
         public List<ShopProductFeature>? Productfeatures { get; set; }
         public List<ShopProductWhatsInBox>? Productwhatsinbox { get; set; }

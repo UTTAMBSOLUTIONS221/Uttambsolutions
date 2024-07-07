@@ -241,6 +241,13 @@ const firebaseConfig = {
         document.getElementById("buttonText").innerText = "SAVE";
         return;
     }
+    if ($('#Wholesalepriceid').val() === ''|| $('#Wholesalepriceid').val() === 0) {
+        Swal.fire("Shop product Not Created", 'Wholesale Price is Required', "warning");
+        document.getElementById("saveorgshopproductid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
     if ($('#Marketpriceid').val() === ''|| $('#Marketpriceid').val() === 0) {
         Swal.fire("Shop product Not Created", 'Selling Price is Required', "warning");
         document.getElementById("saveorgshopproductid").disabled = false;
@@ -384,6 +391,13 @@ const firebaseConfig = {
     document.getElementById("buttonText").innerText = "Processing...";
     if ($('#Productnameid').val() === '') {
         Swal.fire("Shop product Not Created", 'Product Name is Required', "warning");
+        document.getElementById("saveorgshopproductid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    if ($('#Wholesalepriceid').val() === ''|| $('#Wholesalepriceid').val() === 0) {
+        Swal.fire("Shop product Not Created", 'Wholesale Price is Required', "warning");
         document.getElementById("saveorgshopproductid").disabled = false;
         document.getElementById("processingSpinner").style.display = "none";
         document.getElementById("buttonText").innerText = "SAVE";
