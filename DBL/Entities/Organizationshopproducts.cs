@@ -20,6 +20,7 @@
         public decimal Productdepositamount { get; set; }
         public decimal Productinterestrate { get; set; }
         public decimal Periodicamount { get; set; }
+        public int PaymentTerm { get; set; }
         public DateTime DateCreated { get; set; }
         public List<ShopProductFeature>? Shopproductfeature { get; set; }
         public List<ShopProductWhatsInBox>? Shopproductwhatsinbox { get; set; }
