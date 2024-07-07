@@ -17,6 +17,16 @@
                             <p class="card-text text-center text-muted text-truncate mb-1" title="@product.Productname">@product.Productname</p>
                             <p class="card-text text-center text-muted text-truncate mb-1" title="Kes. @product.Marketprice">Kes. @product.Marketprice</p>
                             <p class="card-text text-center text-muted text-truncate" title="Shop: @product.Organizationname">Shop: @product.Organizationname</p>
+                            <p class="card-text text-center text-muted text-truncate" title="Status: @product.ProductStatus">
+                                Status: @if (product.ProductStatus == "New")
+                                {
+                                    <span class="badge badge-info badge-info-xs font-weight-bold text-uppercase">New</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-warning badge-warning-xs font-weight-bold text-uppercase">Used</span>
+                                } 
+                            </p>
                         </div>
                     </div>
                 </a>
