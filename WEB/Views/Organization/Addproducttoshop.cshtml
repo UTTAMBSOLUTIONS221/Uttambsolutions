@@ -37,28 +37,67 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Product Size</label>
                     <input class="form-control form-control-sm" asp-for="@Model.ProductSize" id="ProductSizeid" />
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Product Color</label>
                     <input class="form-control form-control-sm" asp-for="@Model.ProductColor" id="ProductColorid" />
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Product Model</label>
                     <input class="form-control form-control-sm" asp-for="@Model.ProductModel" id="ProductModelid" />
                 </div>
             </div>
-            <div class="col-sm-3">
+            
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Product Units</label>
                     <input class="form-control form-control-sm" type="number" asp-for="@Model.ProductStock" id="ProductStockid" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Product Status</label>
+                    <select class="form-control form-control-sm" type="number" asp-for="@Model.ProductStatus" id="ProductStatusid">
+                        <option value="">---Select Status---</option>
+                        <option value="New">New</option>
+                        <option value="Used">Used</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Is lipa mdogo/later?</label>
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Islipalater" id="Islipalaterid" />
+                </div>
+            </div>
+        </div>
+        <div class="row" style="display:none">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Deposit Amount</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Productdepositamount" id="Productdepositamountid" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Interest Rate</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Productinterestrate" id="Productinterestrateid" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Periodic Amount</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Periodicamount" id="Periodicamountid" />
                 </div>
             </div>
         </div>

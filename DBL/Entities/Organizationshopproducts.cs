@@ -14,7 +14,12 @@
         public string? ProductSize { get; set; }
         public string? ProductColor { get; set; }
         public string? ProductModel { get; set; }
+        public string? ProductStatus { get; set; }
         public decimal ProductStock { get; set; }
+        public bool Islipalater { get; set; }
+        public decimal Productdepositamount { get; set; }
+        public decimal Productinterestrate { get; set; }
+        public decimal Periodicamount { get; set; }
         public DateTime DateCreated { get; set; }
         public List<ShopProductFeature>? Shopproductfeature { get; set; }
         public List<ShopProductWhatsInBox>? Shopproductwhatsinbox { get; set; }
