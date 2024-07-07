@@ -353,7 +353,6 @@ const firebaseConfig = {
         ProductStatus:$('#ProductStatusid').val(),ProductStock:$('#ProductStockid').val(),Islipalater: $('#Islipalaterid').is(':checked'),Productdepositamount:$('#Productdepositamountid').val(),Productinterestrate:$('#Productinterestrateid').val(),Periodicamount:$('#Periodicamountid').val(),
         DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Shopproductfeature:Shopproductfeaturesdata,Shopproductwhatsinbox:Shopproductwhatsinboxsdata,ShopProductImage:ShopProductImagesdata
     };
-         alert(JSON.stringify(uil1));
 
     $.post("/Organization/Addorganizationshopproductsdata", uil1, function (response) {
         if (response.RespStatus == 0) {
@@ -438,7 +437,7 @@ const firebaseConfig = {
         };
         Shopproductfeaturesdata.push(Shopproductfeaturedata);
     });
-    $("#ShopProductFeatureTable tbody tr").each(function () {
+    $("#ShopProductBoxItemTable tbody tr").each(function () {
         var row = $(this);
         var Shopproductwhatsinboxdata = {
             ProductWhatsInBoxId: row.find('td:eq(0)').text(),
@@ -450,11 +449,11 @@ const firebaseConfig = {
     });
     
     
-    var uil1 = {
-        Shopproductid:$('#Shopproductid').val(),Productid:$('#Productid').val(),Productname:$('#Productnameid').val(),Organizationid:$('#Organizationid').val(),Marketprice:$('#Marketpriceid').val(),Productdescription:$('#Productdescriptionid').val(),ProductSize:$('#ProductSizeid').val(),ProductColor:$('#ProductColorid').val(),ProductModel:$('#ProductModelid').val(),ProductStock:$('#ProductStockid').val(),
+ var uil1 = {
+        Shopproductid:$('#Shopproductid').val(),Productid:$('#Productid').val(),Productname:$('#Productnameid').val(),Organizationid:$('#Organizationid').val(),Marketprice:$('#Marketpriceid').val(),Productdescription:$('#Productdescriptionid').val(),ProductSize:$('#ProductSizeid').val(),ProductColor:$('#ProductColorid').val(),ProductModel:$('#ProductModelid').val(),
+        ProductStatus:$('#ProductStatusid').val(),ProductStock:$('#ProductStockid').val(),Islipalater: $('#Islipalaterid').is(':checked'),Productdepositamount:$('#Productdepositamountid').val(),Productinterestrate:$('#Productinterestrateid').val(),Periodicamount:$('#Periodicamountid').val(),
         DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Shopproductfeature:Shopproductfeaturesdata,Shopproductwhatsinbox:Shopproductwhatsinboxsdata
     };
-         alert(JSON.stringify(uil1));
 
     $.post("/Organization/Addorganizationshopproductsdata", uil1, function (response) {
         if (response.RespStatus == 0) {

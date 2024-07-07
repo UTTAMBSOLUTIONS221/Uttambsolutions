@@ -72,7 +72,7 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Shopproductid", Shopproductid);
                 parameters.Add("@ShopproductDetailData", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_Getorganizationshopproductdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                var queryResult = connection.Query("Usp_Getsystemorganizationshopproductdatabyid", parameters, commandType: CommandType.StoredProcedure);
                 string shopproductDetailDataJson = parameters.Get<string>("@ShopproductDetailData");
                 if (shopproductDetailDataJson != null)
                 {
