@@ -328,7 +328,7 @@ const firebaseConfig = {
         };
         Shopproductfeaturesdata.push(Shopproductfeaturedata);
     });
-    $("#ShopProductFeatureTable tbody tr").each(function () {
+    $("#ShopProductBoxItemTable tbody tr").each(function () {
         var row = $(this);
         var Shopproductwhatsinboxdata = {
             ProductWhatsInBoxId: row.find('td:eq(0)').text(),
