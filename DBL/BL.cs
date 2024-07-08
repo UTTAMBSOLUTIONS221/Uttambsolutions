@@ -280,6 +280,33 @@ namespace DBL
         }
         #endregion
 
+        #region Communication Templates
+        public Task<IEnumerable<Communicationtemplate>> Getsystemcommunicationtemplatedata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystemcommunicationtemplatedata();
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registersystemcommunicationtemplatedata(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Registersystemcommunicationtemplatedata(obj);
+                return Resp;
+            });
+        }
+        public Task<Communicationtemplate> Getsystemcommunicationtemplatedatabyid(long TemplateId)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystemcommunicationtemplatedatabyid(TemplateId);
+                return Resp;
+            });
+        }
+        #endregion
+
         #region System Orgnizations
         public Task<Genericmodel> Registersystemorganizationdata(string obj)
         {

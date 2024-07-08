@@ -1,10 +1,8 @@
-﻿using DBL.Entities;
-using DBL.Enum;
-using DBL;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json;
+﻿using DBL;
+using DBL.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace WEB.Controllers
 {
