@@ -106,10 +106,10 @@
                 Templateid: $('#SystemcommTemplateId').val(), Templatename: $('#SystemcommtemplatenameId').val(), Templatesubject: $('#SystemcommtemplatesubjectId').val(),
                 Isemailsms: $('#SystemcommtemplateisemailsmsId').is(':checked'), Templatebody: $('#SystemcommtemplatebodyId').val()
             };
-            $.post("/CommunicationTemplate/Addcommunicationtemplatedata", uil1, function (response) {
+            $.post("/Settings/Addcommunicationtemplatedata", uil1, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire('Saved!', response.RespMessage, 'success')
-                    $('#FuelcardsystemModal').hide();
+                    $('#Uttambsolutionsmodalpdate').hide();
                     setTimeout(function () { location.reload(); }, 1000);
                 } else if (response.RespStatus == 1) {
                     Swal.fire("Communication templates details not saved", response.RespMessage, "warning");
