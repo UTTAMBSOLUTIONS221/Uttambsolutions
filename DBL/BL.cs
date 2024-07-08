@@ -125,7 +125,7 @@ namespace DBL
                 {
                     //send email for reseting password
 
-                    var commtempdata = db.SettingsRepository.Getsystemcommunicationtemplatedatabyname(true, "Forgotpasswords");
+                    var commtempdata = db.SettingsRepository.Getsystemcommunicationtemplatedatabyname(true, "Staffforgotpasswordtemplate");
                     if (commtempdata != null)
                     {
                         StringBuilder StrBodyEmail = new StringBuilder(commtempdata.Templatebody);
