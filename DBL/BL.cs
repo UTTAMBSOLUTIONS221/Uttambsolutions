@@ -129,9 +129,6 @@ namespace DBL
                     if (commtempdata != null)
                     {
                         StringBuilder StrBodyEmail = new StringBuilder(commtempdata.Templatebody);
-                        StrBodyEmail.Replace("@CompanyLogo", commtempdata.Modulelogo);
-                        StrBodyEmail.Replace("@CompanyName", commtempdata.Module);
-                        StrBodyEmail.Replace("@CompanyEmail", commtempdata.Moduleemail);
                         StrBodyEmail.Replace("@Fullname", resp.Usermodel.Fullname);
                         StrBodyEmail.Replace("@Username", resp.Usermodel.Username);
                         StrBodyEmail.Replace("@CurrentYear", DateTime.Now.Year.ToString());
@@ -140,8 +137,8 @@ namespace DBL
                         EmailLogs Logs = new EmailLogs
                         {
                             EmailLogId = 0,
-                            TenantId = Obj.TenantId,
-                            EmailAddress = Obj.Emailaddress,
+                            ModuleId = 1,
+                            EmailAddress = userName,
                             EmailSubject = commtempdata.Templatesubject,
                             EmailMessage = message,
                             IsEmailSent = false,
@@ -157,9 +154,9 @@ namespace DBL
                             //Update Email is sent 
                             EmailLogs Logs1 = new EmailLogs
                             {
-                                EmailLogId = Convert.ToInt64(resp.Data1),
-                                TenantId = Obj.TenantId,
-                                EmailAddress = Obj.Emailaddress,
+                                EmailLogId = Convert.ToInt64(respdata.Data1),
+                                ModuleId = 1,
+                                EmailAddress = userName,
                                 EmailSubject = commtempdata.Templatesubject,
                                 EmailMessage = message,
                                 IsEmailSent = true,
