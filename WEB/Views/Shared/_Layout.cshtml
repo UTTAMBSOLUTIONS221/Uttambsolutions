@@ -87,7 +87,14 @@
     <div class="content-wrapper" style="padding-top: 58px;">
         <section class="content">
             <div class="container">
-                @RenderBody()
+                <div id="AlertsContainer">
+                    @{
+                        await Html.RenderPartialAsync("_Alerts");
+                    }
+                </div>
+                <main role="main" class="pb-3 mt-2 pt-2">
+                    @RenderBody()
+                </main>
             </div>
         </section>
         <!-- /.content -->
