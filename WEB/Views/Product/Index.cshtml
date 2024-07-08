@@ -59,107 +59,132 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
     <script type="text/javascript">
-        const firebaseConfig = {
-    apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
-    authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
-    projectId: "uttambsolutions-4ec2a",
-    storageBucket: "uttambsolutions-4ec2a.appspot.com",
-    messagingSenderId: "336739823411",
-    appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
-    measurementId: "G-Z24LLL0113"
-};
-firebase.initializeApp(firebaseConfig);
-var storage = firebase.storage();
+const firebaseConfig = {
+            apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
+            authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
+            projectId: "uttambsolutions-4ec2a",
+            storageBucket: "uttambsolutions-4ec2a.appspot.com",
+            messagingSenderId: "336739823411",
+            appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
+            measurementId: "G-Z24LLL0113"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var storage = firebase.storage();
 
-function productFileChanged(event) {
-    var files = event.target.files;
-    uploadImage(files);
-    console.log(document.getElementById('UttambsolutionsimagesurlId').files);
-}
-
-async function uploadImage(files) {
-    // Array to store the download URLs
-    var downloadURLs = [];
-
-    // Function to generate a unique file name
-    function generateFileName(file) {
-        // Generate a unique identifier
-        var uniqueId = Date.now();
-        // Get the file extension
-        var fileExtension = file.name.split('.').pop();
-        // Construct the new file name
-        var newFileName = 'Product/Productimage/' + uniqueId + '.' + fileExtension;
-        return newFileName;
-    }
-
-    // Function to upload a single file
-    async function uploadFile(file) {
-        return new Promise((resolve, reject) => {
-            var newFileName = generateFileName(file); // Generate a new file name
-
-            var storageRef = storage.ref().child(newFileName);
-            var uploadTask = storageRef.put(file);
-
-            uploadTask.on('state_changed',
-                function (snapshot) {
-                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done');
-                },
-                function (error) {
-                    reject('Error uploading file: ' + error);
-                },
-                function () {
-                    // Upload complete
-                    uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                        console.log('File available at', downloadURL);
-                        downloadURLs.push(downloadURL);
-                        resolve(downloadURL);
-                    });
-                }
-            );
-        });
-    }
-
-    // Function to display image preview
-    function displayImagePreview(file) {
-        return new Promise((resolve, reject) => {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                // Create a new image element
-                var img = document.createElement('img');
-                img.src = e.target.result;
-                img.width = 140;
-                img.height = 140;
-
-                // Append the image to a container element
-                var previewContainer = document.getElementById('Uttambsolutionsimagespreviewcontainer');
-                previewContainer.appendChild(img);
-
-                resolve();
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-
-    // Iterate over each file
-    for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-
-        try {
-            // Upload the file and get the download URL
-            var downloadURL = await uploadFile(file);
-
-            // Display image preview
-            await displayImagePreview(file);
-        } catch (error) {
-            console.error(error);
+        function productFileChanged(event) {
+            var files = event.target.files;
+            uploadImage(files);
+            console.log(document.getElementById('UttambsolutionsimagesurlId').files);
         }
-    }
 
-    // Set the input field value with JSON stringified URLs
-    var inputField = document.getElementById('UttambsolutionsimagesurlId');
-    inputField.value = JSON.stringify(downloadURLs);
-}
+        async function uploadImage(files) {
+            // Array to store the download URLs
+            var downloadURLs = [];
+
+            // Function to generate a unique file name
+            function generateFileName(file) {
+                // Generate a unique identifier
+                var uniqueId = Date.now();
+                // Get the file extension
+                var fileExtension = file.name.split('.').pop();
+                // Construct the new file name
+                var newFileName = 'Product/Productimage/' + uniqueId + '.' + fileExtension;
+                return newFileName;
+            }
+
+            // Function to upload a single file
+            async function uploadFile(file) {
+                return new Promise((resolve, reject) => {
+                    var newFileName = generateFileName(file); // Generate a new file name
+
+                    var storageRef = storage.ref().child(newFileName);
+                    var uploadTask = storageRef.put(file);
+
+                    uploadTask.on('state_changed',
+                        function (snapshot) {
+                            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            console.log('Upload is ' + progress + '% done');
+                        },
+                        function (error) {
+                            reject('Error uploading file: ' + error);
+                        },
+                        function () {
+                            // Upload complete
+                            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                                console.log('File available at', downloadURL);
+                                downloadURLs.push(downloadURL);
+                                resolve(downloadURL);
+                            });
+                        }
+                    );
+                });
+            }
+
+            // Function to display image preview
+            function displayImagePreview(file) {
+                return new Promise((resolve, reject) => {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        // Create a container element
+                        var previewContainer = document.createElement('div');
+                        previewContainer.classList.add('image-preview');
+
+                        // Create a spinner element
+                        var spinner = document.createElement('div');
+                        spinner.classList.add('spinner');
+
+                        // Append the spinner to the container
+                        previewContainer.appendChild(spinner);
+
+                        // Append the container to the preview container element
+                        var previewContainerElement = document.getElementById('Uttambsolutionsimagespreviewcontainer');
+                        previewContainerElement.appendChild(previewContainer);
+
+                        // Create a new image element
+                        var img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.width = 140;
+                        img.height = 140;
+                        img.style.display = 'none'; // Hide the image initially
+                        img.onload = function () {
+                            // Show the image and remove the spinner
+                            spinner.remove();
+                            img.style.display = 'block';
+                            previewContainer.appendChild(img);
+                        };
+
+                        resolve();
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // Show the overlay with the spinner
+             document.getElementById('loadingOverlay').style.zIndex = 1100; 
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            // Iterate over each file
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                try {
+                    // Display the image preview first with a loading indicator
+                    await displayImagePreview(file);
+
+                    // Upload the file and get the download URL
+                    var downloadURL = await uploadFile(file);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+
+            // Hide the overlay after all uploads are complete
+            document.getElementById('loadingOverlay').style.display = 'none';
+
+            // Set the input field value with JSON stringified URLs
+            var inputField = document.getElementById('UttambsolutionsimagesurlId');
+            inputField.value = JSON.stringify(downloadURLs);
+        }
 
     ﻿function savesystemtproductdata() {
     document.getElementById("savesystemtproductid").disabled = true;

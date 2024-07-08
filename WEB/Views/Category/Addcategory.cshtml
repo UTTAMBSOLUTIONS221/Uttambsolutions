@@ -38,14 +38,17 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label class="font-weight-light">Category Image</label>
-                <input class="form-control form-control-sm font-weight-light" type="file" onchange="categoryFileChanged(event)" />
+    @if (Model.Categoryid ==0)
+    {
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="font-weight-light">Category Image</label>
+                    <input class="form-control form-control-sm font-weight-light" type="file" onchange="categoryFileChanged(event)" />
+                </div>
             </div>
         </div>
-    </div>
+    }
     <div class="row">
         <div class="col-sm-12" hidden>
             <div class="form-group">
