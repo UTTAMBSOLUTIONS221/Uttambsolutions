@@ -1,9 +1,4 @@
 ﻿using DBL.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DBL.UOW
 {
@@ -15,6 +10,7 @@ namespace DBL.UOW
         private IGeneralRepository generalRepository;
         private IRoleRepository roleRepository;
         private IAccountRepository accountRepository;
+        private ISettingsRepository settingsRepository;
         private IOrganizationRepository organizationRepository;
         private IModulesRepository modulesRepository;
         private IBlogsRepository blogsRepository;
@@ -36,6 +32,10 @@ namespace DBL.UOW
         public IAccountRepository AccountRepository
         {
             get { return accountRepository ?? (accountRepository = new AccountRepository(connString)); }
+        }
+        public ISettingsRepository SettingsRepository
+        {
+            get { return settingsRepository ?? (settingsRepository = new SettingsRepository(connString)); }
         }
         public IOrganizationRepository OrganizationRepository
         {

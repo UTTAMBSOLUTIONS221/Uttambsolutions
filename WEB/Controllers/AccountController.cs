@@ -107,6 +107,34 @@ namespace WEB.Controllers
             return View(data);
         }
 
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Forgotpassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Forgotpassword(Forgotpassword model)
+        {
+            var resp = await bl.ValidateSystemForgotpasswordStaff(model.Emailaddress);
+            if (resp.RespStatus == 0)
+            {
+                Success(resp.RespMessage, true);
+                return RedirectToAction("Index", "Home");
+            }
+            else if (resp.RespStatus == 401)
+            {
+                Warning(resp.RespMessage, true);
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, resp.RespMessage);
+            }
+            return View();
+        }
+
         #region Other Methods
 
         private async void SetUserLoggedIn(UsermodelResponce user, bool rememberMe)

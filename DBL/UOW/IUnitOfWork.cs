@@ -7,6 +7,7 @@ namespace DBL.UOW
         IGeneralRepository GeneralRepository { get; }
         IRoleRepository RoleRepository { get; }
         IAccountRepository AccountRepository { get; }
+        ISettingsRepository SettingsRepository { get; }
         IOrganizationRepository OrganizationRepository { get; }
         IModulesRepository ModulesRepository { get; }
         IBlogsRepository BlogsRepository { get; }

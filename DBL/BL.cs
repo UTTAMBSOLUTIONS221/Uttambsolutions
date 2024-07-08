@@ -4,7 +4,7 @@ using DBL.Helpers;
 using DBL.Models;
 using DBL.UOW;
 using Newtonsoft.Json;
-using System.Reflection;
+using System.Text;
 
 namespace DBL
 {
@@ -114,6 +114,82 @@ namespace DBL
         }
         #endregion
 
+        #region Verify System Staff Forgot Password
+        public Task<Genericmodel> ValidateSystemForgotpasswordStaff(string userName)
+        {
+            return Task.Run(() =>
+            {
+                Genericmodel model = new Genericmodel();
+                var resp = db.AccountRepository.VerifySystemStaff(userName);
+                if (resp.RespStatus == 0)
+                {
+                    //send email for reseting password
+
+                    var commtempdata = db.SettingsRepository.Getsystemcommunicationtemplatedatabyname(true, "Forgotpasswords");
+                    if (commtempdata != null)
+                    {
+                        StringBuilder StrBodyEmail = new StringBuilder(commtempdata.Templatebody);
+                        StrBodyEmail.Replace("@CompanyLogo", commtempdata.Modulelogo);
+                        StrBodyEmail.Replace("@CompanyName", commtempdata.Module);
+                        StrBodyEmail.Replace("@CompanyEmail", commtempdata.Moduleemail);
+                        StrBodyEmail.Replace("@Fullname", resp.Usermodel.Fullname);
+                        StrBodyEmail.Replace("@Username", resp.Usermodel.Username);
+                        StrBodyEmail.Replace("@CurrentYear", DateTime.Now.Year.ToString());
+                        string message = StrBodyEmail.ToString();
+                        //log Email Messages
+                        EmailLogs Logs = new EmailLogs
+                        {
+                            EmailLogId = 0,
+                            TenantId = Obj.TenantId,
+                            EmailAddress = Obj.Emailaddress,
+                            EmailSubject = commtempdata.Templatesubject,
+                            EmailMessage = message,
+                            IsEmailSent = false,
+                            DateTimeSent = DateTime.Now,
+                            Datecreated = DateTime.Now,
+                        };
+                        var respdata = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs));
+                        bool data = emlsnd.UttambsolutionssendemailAsync(resp.Usermodel.Emailaddress, commtempdata.Templatesubject, message, true, "", "", "");
+                        if (data)
+                        {
+                            model.RespStatus = 0;
+                            model.RespMessage = "Email Sent";
+                            //Update Email is sent 
+                            EmailLogs Logs1 = new EmailLogs
+                            {
+                                EmailLogId = Convert.ToInt64(resp.Data1),
+                                TenantId = Obj.TenantId,
+                                EmailAddress = Obj.Emailaddress,
+                                EmailSubject = commtempdata.Templatesubject,
+                                EmailMessage = message,
+                                IsEmailSent = true,
+                                DateTimeSent = DateTime.Now,
+                                Datecreated = DateTime.Now,
+                            };
+                            var resp1 = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs1));
+                        }
+                        else
+                        {
+                            model.RespStatus = 1;
+                            model.RespMessage = "Email not Sent";
+                        }
+                    }
+                    else
+                    {
+                        model.RespStatus = 1;
+                        model.RespMessage = "Template not found!";
+                    }
+
+                }
+                else
+                {
+                    model.RespStatus = 1;
+                    model.RespMessage = resp.RespMessage;
+                }
+                return model;
+            });
+        }
+        #endregion
 
         #region Verify and Validate System Staff
         public Task<UsermodelResponce> ValidateSystemStaff(string userName, string password)
