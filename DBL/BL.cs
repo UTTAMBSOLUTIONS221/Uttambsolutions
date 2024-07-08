@@ -129,6 +129,7 @@ namespace DBL
                     if (commtempdata != null)
                     {
                         StringBuilder StrBodyEmail = new StringBuilder(commtempdata.Templatebody);
+                        StrBodyEmail.Replace("@CompanyName", "Uttamb Solutions");
                         StrBodyEmail.Replace("@Fullname", resp.Usermodel.Fullname);
                         StrBodyEmail.Replace("@Username", resp.Usermodel.Username);
                         StrBodyEmail.Replace("@CurrentYear", DateTime.Now.Year.ToString());
