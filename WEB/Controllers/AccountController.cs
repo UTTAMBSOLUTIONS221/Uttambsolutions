@@ -124,7 +124,7 @@ namespace WEB.Controllers
                 Success(resp.RespMessage, true);
                 return RedirectToAction("Index", "Home");
             }
-            else if (resp.RespStatus == 401)
+            else if (resp.RespStatus == 1)
             {
                 Warning(resp.RespMessage, true);
             }
