@@ -344,7 +344,8 @@ namespace DBL
                 respData = db.OrganizationRepository.Registerorganizationshopproductdata(obj);
 
                 googleSheetsHelper.UpdateOrAppendRow(respData);
-                Resp.RespStatus
+                Resp.RespStatus = respData.RespStatus;
+                Resp.RespMessage = respData.RespMessage;
                 return Resp;
             });
         }
