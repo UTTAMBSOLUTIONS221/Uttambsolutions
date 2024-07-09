@@ -64,7 +64,8 @@ namespace WEB.Controllers
             var data = await bl.Getorganizationshopproductdatabyid(Shopproductid);
             return PartialView(data);
         }
-        public async Task<JsonResult> Addorganizationshopproductsdata(Organizationshopproducts model)
+
+        public async Task<JsonResult> AddOrganizationShopProductsData(Organizationshopproducts model)
         {
             Genericmodel resp = new Genericmodel();
             Organizationshopproductsdata productData = new Organizationshopproductsdata();
@@ -73,107 +74,162 @@ namespace WEB.Controllers
             {
                 try
                 {
+                    // Ensure initialization
+                    EnsureGoogleSheetServiceIsInitialized();
+                    EnsureSpreadsheetIdAndSheetNameAreInitialized();
+
                     var rangeToCheck = $"{SHEET_NAME}!A1:A";
                     var request = _googleSheetValues.Get(SPREADSHEET_ID, rangeToCheck);
                     var response = request.Execute();
                     var values = response.Values;
 
-                    int rowIndex = -1;
-                    if (values != null)
-                    {
-                        for (int i = 0; i < values.Count; i++)
-                        {
-                            if (values[i].Count > 0 && values[i][0].ToString() == productData.Productid.ToString())
-                            {
-                                rowIndex = i + 1; // Adjust for 1-based indexing
-                                break;
-                            }
-                        }
-                    }
-
-                    var valueRange = new ValueRange
-                    {
-                        Values = ItemsMapper.MapToRangeData(new FaceBookItems
-                        {
-                            Id = productData.Organizationid.ToString(),
-                            Title = productData.Productname,
-                            Description = productData.Productdescription,
-                            Availability = productData.Productavailability,
-                            Condition = productData.ProductStatus,
-                            Price = productData.Marketprice.ToString("#,##0.00") + " KSH",
-                            Link = productData.Producturl,
-                            Image_link = productData.Primaryimageurl,
-                            Brand = productData.Brandname,
-                            Google_product_category = productData.Categoryname,
-                            Fb_product_category = productData.Categoryname,
-                            Quantity_to_sell_on_facebook = productData.ProductStock.ToString("F2"),
-                            Sale_price = productData.Marketprice.ToString("#,##0.00") + " KSH",
-                            Sale_price_effective_date = productData.DateCreated.ToString("dd-MM-yyyy"),
-                            Item_group_id = productData.Parentcategoryname,
-                            Gender = "",
-                            Color = productData.ProductColor,
-                            Size = productData.ProductSize,
-                            Age_group = "",
-                            Material = "",
-                            Pattern = "",
-                            Shipping = "",
-                            Shipping_weight = "",
-                        })
-                    };
-                    if (_googleSheetValues == null)
-                    {
-                        throw new InvalidOperationException("Google Sheets service client (_googleSheetValues) is not initialized.");
-                    }
-
-                    if (valueRange == null)
-                    {
-                        throw new InvalidOperationException("ValueRange object (valueRange) is not initialized.");
-                    }
-
-                    if (string.IsNullOrEmpty(SPREADSHEET_ID))
-                    {
-                        throw new InvalidOperationException("Spreadsheet ID (SPREADSHEET_ID) is not initialized or is empty.");
-                    }
-
-                    if (string.IsNullOrEmpty(SHEET_NAME))
-                    {
-                        throw new InvalidOperationException("Sheet name (SHEET_NAME) is not initialized or is empty.");
-                    }
-
                     if (values == null || !values.Any())
                     {
-                        throw new InvalidOperationException("Values collection (values) is not initialized or empty.");
+                        // Add headers if the sheet is empty
+                        AddSheetHeaders();
+                        // Reload the values after adding headers
+                        response = request.Execute();
+                        values = response.Values;
                     }
+
+                    int rowIndex = FindRowIndex(values, productData.Shopproductid);
+                    var valueRange = CreateValueRange(productData);
 
                     if (rowIndex != -1)
                     {
-                        // If the row exists, update the existing row
-                        var updateRequest = _googleSheetValues.Update(valueRange, SPREADSHEET_ID, $"{SHEET_NAME}!A{rowIndex}:I{rowIndex}");
-                        updateRequest.ValueInputOption = UpdateRequest.ValueInputOptionEnum.RAW;
-                        var updateResponse = updateRequest.Execute();
+                        // Update existing row
+                        UpdateExistingRow(valueRange, rowIndex);
                     }
                     else
                     {
-                        // If the row doesn't exist, append a new row
-                        var appendRequest = _googleSheetValues.Append(valueRange, SPREADSHEET_ID, $"{SHEET_NAME}!A{values.Count + 1}:I{values.Count + 1}");
-                        appendRequest.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
-                        appendRequest.Execute();
+                        // Append new row
+                        AppendNewRow(valueRange, values.Count + 1);
                     }
 
+                    resp.RespStatus = productData.RespStatus;
+                    resp.RespMessage = productData.RespMessage;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error occurred while reading data from Google Sheet: {ex}");
+                    Console.WriteLine($"Error occurred while interacting with Google Sheets: {ex}");
+                    resp.RespStatus = 2;
+                    resp.RespMessage = "An error occurred while updating the Google Sheet. Please try again later.";
                 }
-                resp.RespStatus = productData.RespStatus;
-                resp.RespMessage = productData.RespMessage;
             }
             else
             {
                 resp.RespStatus = 2;
-                resp.RespMessage = "Database error occured. Kindly contact system administrator";
+                resp.RespMessage = "Database error occurred. Kindly contact the system administrator.";
             }
+
             return Json(resp);
         }
+
+        private int FindRowIndex(IList<IList<object>> values, long shopProductId)
+        {
+            if (values != null)
+            {
+                for (int i = 0; i < values.Count; i++)
+                {
+                    if (values[i].Count > 0 && values[i][0].ToString() == shopProductId.ToString())
+                    {
+                        return i + 1; // Adjust for 1-based indexing
+                    }
+                }
+            }
+
+            return -1;
+        }
+
+        private ValueRange CreateValueRange(Organizationshopproductsdata productData)
+        {
+            return new ValueRange
+            {
+                Values = ItemsMapper.MapToRangeData(new FaceBookItems
+                {
+                    Id = productData.Organizationid.ToString(),
+                    Title = productData.Productname,
+                    Description = productData.Productdescription,
+                    Availability = productData.Productavailability,
+                    Condition = productData.ProductStatus,
+                    Price = productData.Marketprice.ToString("#,##0.00"),
+                    Link = productData.Producturl,
+                    Image_link = productData.Primaryimageurl,
+                    Brand = productData.Brandname,
+                    Google_product_category = productData.Categoryname,
+                    Fb_product_category = productData.Categoryname,
+                    Quantity_to_sell_on_facebook = productData.ProductStock.ToString("F2"),
+                    Sale_price = productData.Marketprice.ToString("#,##0.00"),
+                    Sale_price_effective_date = productData.DateCreated.ToString("dd-MM-yyyy"),
+                    Item_group_id = productData.Parentcategoryname,
+                    Gender = "",
+                    Color = productData.ProductColor,
+                    Size = productData.ProductSize,
+                    Age_group = "",
+                    Material = "",
+                    Pattern = "",
+                    Shipping = "",
+                    Shipping_weight = "",
+                })
+            };
+        }
+
+        private void EnsureGoogleSheetServiceIsInitialized()
+        {
+            if (_googleSheetValues == null)
+            {
+                throw new InvalidOperationException("Google Sheets service client (_googleSheetValues) is not initialized.");
+            }
+        }
+
+        private void EnsureSpreadsheetIdAndSheetNameAreInitialized()
+        {
+            if (string.IsNullOrEmpty(SPREADSHEET_ID))
+            {
+                throw new InvalidOperationException("Spreadsheet ID (SPREADSHEET_ID) is not initialized or is empty.");
+            }
+
+            if (string.IsNullOrEmpty(SHEET_NAME))
+            {
+                throw new InvalidOperationException("Sheet name (SHEET_NAME) is not initialized or is empty.");
+            }
+        }
+
+        private void AddSheetHeaders()
+        {
+            var headers = new ValueRange
+            {
+                Values = new List<IList<object>>
+        {
+            new List<object>
+            {
+                "id", "title", "description", "availability", "condition", "price", "link", "image_link", "brand",
+                "google_product_category", "fb_product_category", "quantity_to_sell_on_facebook", "sale_price",
+                "sale_price_effective_date", "item_group_id", "gender", "color", "size", "age_group", "material",
+                "pattern", "shipping", "shipping_weight", "video[0].url", "video[0].tag[0]", "style[0]"
+            }
+        }
+            };
+
+            var headerRequest = _googleSheetValues.Update(headers, SPREADSHEET_ID, $"{SHEET_NAME}!A1:Z1");
+            headerRequest.ValueInputOption = UpdateRequest.ValueInputOptionEnum.USERENTERED;
+            headerRequest.Execute();
+        }
+
+        private void UpdateExistingRow(ValueRange valueRange, int rowIndex)
+        {
+            var updateRequest = _googleSheetValues.Update(valueRange, SPREADSHEET_ID, $"{SHEET_NAME}!A{rowIndex}:Z{rowIndex}");
+            updateRequest.ValueInputOption = UpdateRequest.ValueInputOptionEnum.RAW;
+            updateRequest.Execute();
+        }
+
+        private void AppendNewRow(ValueRange valueRange, int rowIndex)
+        {
+            var appendRequest = _googleSheetValues.Append(valueRange, SPREADSHEET_ID, $"{SHEET_NAME}!A{rowIndex}:Z{rowIndex}");
+            appendRequest.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
+            appendRequest.Execute();
+        }
+
+
     }
 }

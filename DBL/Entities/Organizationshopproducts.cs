@@ -14,6 +14,9 @@
         public string? ProductSize { get; set; }
         public string? ProductColor { get; set; }
         public string? ProductModel { get; set; }
+        public string? ProductGender { get; set; }
+        public string? ProductAgeGroup { get; set; }
+        public string? ProductMaterial { get; set; }
         public string? ProductStatus { get; set; }
         public decimal ProductStock { get; set; }
         public bool Islipalater { get; set; }

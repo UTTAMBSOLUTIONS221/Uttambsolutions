@@ -55,7 +55,35 @@
                     <input class="form-control form-control-sm" asp-for="@Model.ProductModel" id="ProductModelid" />
                 </div>
             </div>
-
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Gender</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.ProductGender" id="ProductGenderid">
+                        <option value="">---Select---</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Unisex">Unisex</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Age Group</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.ProductAgeGroup" id="ProductAgeGroupid">
+                        <option value="">---Select---</option>
+                        <option value="0-5">0-5</option>
+                        <option value="5-7">5-7</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Product Material</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.ProductMaterial" id="ProductMaterialid" />
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
