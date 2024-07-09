@@ -2,12 +2,12 @@
 using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
 
-namespace DBL.Helpers
+namespace WEB.Helpers
 {
     public class GoogleSheetsHelper
     {
         public SheetsService Service { get; set; }
-        const string APPLICATION_NAME = "Uttambsolutions";
+        const string APPLICATION_NAME = "Dukawaremall";
         static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
 
         public GoogleSheetsHelper()

@@ -1,12 +1,12 @@
 ﻿using DBL;
 using DBL.Entities;
-using DBL.Helpers;
 using DBL.Models;
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using WEB.Helpers;
 using static Google.Apis.Sheets.v4.SpreadsheetsResource.ValuesResource;
 
 namespace WEB.Controllers
@@ -15,7 +15,7 @@ namespace WEB.Controllers
     public class OrganizationController : BaseController
     {
         const string SPREADSHEET_ID = "1ahr99NXiAMIgbDxBsnY07Lb2SfRIo81ry4-pSD1tO3U";
-        const string SHEET_NAME = "Sokojijicatalog";
+        const string SHEET_NAME = "Dukawaremallcatalog";
         SpreadsheetsResource.ValuesResource _googleSheetValues;
         private readonly BL bl;
         IConfiguration _config;
@@ -120,7 +120,6 @@ namespace WEB.Controllers
                             Shipping_weight = "",
                         })
                     };
-
                     if (rowIndex != -1)
                     {
                         // If the row exists, update the existing row

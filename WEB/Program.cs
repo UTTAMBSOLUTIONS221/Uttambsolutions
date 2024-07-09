@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
-using Quartz;
+using WEB.Helpers;
 using WEB.Schedulers;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddSingleton(typeof(GoogleSheetsHelper));
 // Add services to the container.
 builder.Services.AddRazorPages().AddJsonOptions(options =>
 {
