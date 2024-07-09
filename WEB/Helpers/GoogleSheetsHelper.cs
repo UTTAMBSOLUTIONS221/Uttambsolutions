@@ -7,7 +7,7 @@ namespace WEB.Helpers
     public class GoogleSheetsHelper
     {
         public SheetsService Service { get; set; }
-        const string APPLICATION_NAME = "Dukawaremall";
+        const string APPLICATION_NAME = "Uttambsolutions";
         static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
 
         public GoogleSheetsHelper()

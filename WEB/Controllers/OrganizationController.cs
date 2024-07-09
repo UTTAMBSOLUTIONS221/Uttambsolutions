@@ -14,8 +14,8 @@ namespace WEB.Controllers
     [Authorize]
     public class OrganizationController : BaseController
     {
-        const string SPREADSHEET_ID = "1ahr99NXiAMIgbDxBsnY07Lb2SfRIo81ry4-pSD1tO3U";
-        const string SHEET_NAME = "Dukawaremallcatalog";
+        const string SPREADSHEET_ID = "13lWdMa6sfGVnKSCN5Ssj3UCJLXAiWUVwKrJ6ma6GCPE";
+        const string SHEET_NAME = "Sokojijicatalog";
         SpreadsheetsResource.ValuesResource _googleSheetValues;
         private readonly BL bl;
         IConfiguration _config;
@@ -120,6 +120,31 @@ namespace WEB.Controllers
                             Shipping_weight = "",
                         })
                     };
+                    if (_googleSheetValues == null)
+                    {
+                        throw new InvalidOperationException("Google Sheets service client (_googleSheetValues) is not initialized.");
+                    }
+
+                    if (valueRange == null)
+                    {
+                        throw new InvalidOperationException("ValueRange object (valueRange) is not initialized.");
+                    }
+
+                    if (string.IsNullOrEmpty(SPREADSHEET_ID))
+                    {
+                        throw new InvalidOperationException("Spreadsheet ID (SPREADSHEET_ID) is not initialized or is empty.");
+                    }
+
+                    if (string.IsNullOrEmpty(SHEET_NAME))
+                    {
+                        throw new InvalidOperationException("Sheet name (SHEET_NAME) is not initialized or is empty.");
+                    }
+
+                    if (values == null || !values.Any())
+                    {
+                        throw new InvalidOperationException("Values collection (values) is not initialized or empty.");
+                    }
+
                     if (rowIndex != -1)
                     {
                         // If the row exists, update the existing row
@@ -134,6 +159,7 @@ namespace WEB.Controllers
                         appendRequest.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
                         appendRequest.Execute();
                     }
+
                 }
                 catch (Exception ex)
                 {
