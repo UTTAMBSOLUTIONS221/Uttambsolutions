@@ -40,6 +40,9 @@ namespace DBL.Models
         public string? ProductModel { get; set; }
         public decimal Marketprice { get; set; }
         public string? ProductStatus { get; set; }
+        public string? ProductGender { get; set; }
+        public string? ProductAgeGroup { get; set; }
+        public string? ProductMaterial { get; set; }
         public decimal ProductStock { get; set; }
         public bool Islipalater { get; set; }
         public decimal Productdepositamount { get; set; }
@@ -47,6 +50,7 @@ namespace DBL.Models
         public decimal Periodicamount { get; set; }
         public int PaymentTerm { get; set; }
         public int Organizationstatus { get; set; }
+        public string? Productlink { get; set; }
         public DateTime DateCreated { get; set; }
         public List<ShopProductFeature>? Productfeatures { get; set; }
         public List<ShopProductWhatsInBox>? Productwhatsinbox { get; set; }
