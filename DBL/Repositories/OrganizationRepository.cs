@@ -2,9 +2,9 @@
 using DBL.Entities;
 using DBL.Models;
 using DBL.Repositories.DBL.Repositories;
-using System.Data.SqlClient;
-using System.Data;
 using Newtonsoft.Json;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DBL.Repositories
 {
@@ -54,14 +54,24 @@ namespace DBL.Repositories
                 }
             }
         }
-        public Genericmodel Registerorganizationshopproductdata(string JsonData)
+        public Organizationshopproductsdata Registerorganizationshopproductdata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@JsonObjectdata", JsonData);
-                return connection.Query<Genericmodel>("Usp_Registerorganizationshopproductdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                parameters.Add("@Organizationshopproductsdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Registerorganizationshopproductdata", parameters, commandType: CommandType.StoredProcedure);
+                string shopproductDetailDataJson = parameters.Get<string>("@Organizationshopproductsdata");
+                if (shopproductDetailDataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Organizationshopproductsdata>(shopproductDetailDataJson);
+                }
+                else
+                {
+                    return new Organizationshopproductsdata();
+                }
             }
         }
         public Organizationshopproducts Getorganizationshopproductdatabyid(long Shopproductid)

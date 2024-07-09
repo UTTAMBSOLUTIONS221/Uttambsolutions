@@ -13,6 +13,7 @@ namespace DBL
         private UnitOfWork db;
         private string _connString;
         static bool mailSent = false;
+        GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper();
         Encryptdecrypt sec = new Encryptdecrypt();
         Stringgenerator str = new Stringgenerator();
         EmailSenderHelper emlsnd = new EmailSenderHelper();
@@ -338,7 +339,12 @@ namespace DBL
         {
             return Task.Run(() =>
             {
-                var Resp = db.OrganizationRepository.Registerorganizationshopproductdata(obj);
+                Genericmodel Resp = new Genericmodel();
+                Organizationshopproductsdata respData = new Organizationshopproductsdata();
+                respData = db.OrganizationRepository.Registerorganizationshopproductdata(obj);
+
+                googleSheetsHelper.UpdateOrAppendRow(respData);
+                Resp.RespStatus
                 return Resp;
             });
         }
@@ -358,6 +364,7 @@ namespace DBL
                 return Resp;
             });
         }
+
         #endregion
 
 

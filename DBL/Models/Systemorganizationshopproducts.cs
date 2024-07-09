@@ -8,6 +8,8 @@ namespace DBL.Models
     }
     public class Organizationshopproductsdata
     {
+        public int RespStatus { get; set; }
+        public string? RespMessage { get; set; }
         public long Shopproductid { get; set; }
         public long Productid { get; set; }
         public long Organizationid { get; set; }
@@ -19,9 +21,12 @@ namespace DBL.Models
         public string? Productname { get; set; }
         public string? Productdescription { get; set; }
         public string? Primaryimageurl { get; set; }
+        public string? Productavailability { get; set; }
+        public string? Producturl { get; set; }
         public string? Mainproductdescription { get; set; }
         public string? Productbarcode { get; set; }
         public string? Categoryname { get; set; }
+        public string? Parentcategoryname { get; set; }
         public string? Brandname { get; set; }
         public string? Sku { get; set; }
         public int Brandid { get; set; }
@@ -42,6 +47,7 @@ namespace DBL.Models
         public decimal Periodicamount { get; set; }
         public int PaymentTerm { get; set; }
         public int Organizationstatus { get; set; }
+        public DateTime DateCreated { get; set; }
         public List<ShopProductFeature>? Productfeatures { get; set; }
         public List<ShopProductWhatsInBox>? Productwhatsinbox { get; set; }
         public List<ShopProductImage>? Productotherimages { get; set; }
