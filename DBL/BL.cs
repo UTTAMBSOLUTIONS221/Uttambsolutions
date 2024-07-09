@@ -13,7 +13,6 @@ namespace DBL
         private UnitOfWork db;
         private string _connString;
         static bool mailSent = false;
-        GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper();
         Encryptdecrypt sec = new Encryptdecrypt();
         Stringgenerator str = new Stringgenerator();
         EmailSenderHelper emlsnd = new EmailSenderHelper();
@@ -335,18 +334,12 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<Genericmodel> Registerorganizationshopproductdata(string obj)
+        public Task<Organizationshopproductsdata> Registerorganizationshopproductdata(string obj)
         {
             return Task.Run(() =>
             {
-                Genericmodel Resp = new Genericmodel();
-                Organizationshopproductsdata respData = new Organizationshopproductsdata();
-                respData = db.OrganizationRepository.Registerorganizationshopproductdata(obj);
-
-                googleSheetsHelper.UpdateOrAppendRow(respData);
-                Resp.RespStatus = respData.RespStatus;
-                Resp.RespMessage = respData.RespMessage;
-                return Resp;
+                var respData = db.OrganizationRepository.Registerorganizationshopproductdata(obj);
+                return respData;
             });
         }
         public Task<Organizationshopproducts> Getorganizationshopproductdatabyid(long Shopproductid)
