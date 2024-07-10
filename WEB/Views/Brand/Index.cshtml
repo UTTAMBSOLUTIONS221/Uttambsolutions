@@ -188,7 +188,7 @@
     var uil1 = {
         Brandid: $('#Brandid').val(), Brandname: $('#Brandnameid').val(),Brandpathurl: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
     };
-             alert(JSON.stringify(uil1));
+ 
     $.post("/Brand/Addsystemproductbranddata", uil1, function (response) {
         if (response.RespStatus == 0) {
             Swal.fire('Saved!', response.RespMessage, 'success')
