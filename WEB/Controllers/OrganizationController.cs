@@ -143,24 +143,30 @@ namespace WEB.Controllers
 
         private ValueRange CreateValueRange(Organizationshopproductsdata productData)
         {
+            string category = !string.IsNullOrEmpty(productData.Parentcategoryname) ?
+                      $"{productData.Categoryname}>{productData.Parentcategoryname}" :
+                      productData.Categoryname;
+            string startDate = productData.DateCreated.ToString("yyyy-MM-ddTHH:mm:sszzz");
+            string endDate = productData.DateCreated.AddMonths(1).ToString("yyyy-MM-ddTHH:mm:sszzz");
+            string salePriceEffectiveDate = $"{startDate}/{endDate}";
             return new ValueRange
             {
                 Values = ItemsMapper.MapToRangeData(new FaceBookItems
                 {
-                    Id = productData.Organizationid.ToString(),
+                    Id = productData.Shopproductid.ToString(),
                     Title = productData.Productname,
                     Description = productData.Productdescription,
                     Availability = productData.Productavailability,
                     Condition = productData.ProductStatus,
                     Price = productData.Marketprice.ToString("#,##0.00"),
-                    Link = productData.Producturl,
+                    Link = "https://uttambsolutions.com/Home/Shopproductdetail?code=" + Guid.NewGuid().ToString() + "&Shopproductid=" + productData.Shopproductid,
                     Image_link = productData.Primaryimageurl,
                     Brand = productData.Brandname,
-                    Google_product_category = productData.Categoryname.Replace(" ", "_"),
-                    Fb_product_category = productData.Categoryname.Replace(" ", "_"),
+                    Google_product_category = category,
+                    Fb_product_category = category,
                     Quantity_to_sell_on_facebook = productData.ProductStock.ToString("F2"),
                     Sale_price = productData.Marketprice.ToString("#,##0.00"),
-                    Sale_price_effective_date = productData.DateCreated.ToString("dd-MM-yyyy"),
+                    Sale_price_effective_date = salePriceEffectiveDate,
                     Item_group_id = productData.Parentcategoryname,
                     Gender = productData.ProductGender,
                     Color = productData.ProductColor,
