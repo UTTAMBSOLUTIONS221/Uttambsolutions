@@ -42,6 +42,8 @@
     </div>
 </div>
 @section Scripts {
+      <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
     <script type="text/javascript">
           const firebaseConfig = {
             apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
@@ -169,7 +171,9 @@
             var inputField = document.getElementById('UttambsolutionsimagesurlId');
             inputField.value = JSON.stringify(downloadURLs);
         }
-    ﻿function savesystemproductbranddata() {
+    
+        
+        ﻿function savesystemproductbranddata() {
     document.getElementById("savesystemproductbrandid").disabled = true;
     document.getElementById("processingSpinner").style.display = "inline-block";
     document.getElementById("buttonText").innerText = "Processing...";
@@ -182,8 +186,9 @@
     }
     
     var uil1 = {
-        Brandid: $('#Brandid').val(), Brandname: $('#Brandnameid').val(),Brandpathurl: $('#UttambsolutionsimagesurlId').val()
+        Brandid: $('#Brandid').val(), Brandname: $('#Brandnameid').val(),Brandpathurl: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
     };
+             alert(JSON.stringify(uil1));
     $.post("/Brand/Addsystemproductbranddata", uil1, function (response) {
         if (response.RespStatus == 0) {
             Swal.fire('Saved!', response.RespMessage, 'success')
