@@ -20,6 +20,7 @@
                 <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
                     <thead>
                         <tr>
+                            <th>Image</th>
                             <th>Name</th>
                             <th class="text-right">Action</th>
                         </tr>
@@ -28,6 +29,7 @@
                         @foreach (var item in Model)
                         {
                             <tr>
+                                <td><img src="@Url.Content(item.Brandpathurl)" height="40" width="40"/></td>
                                 <td>@item.Brandname</td>
                                 <td class="text-right"><a asp-action="Addproductbrand" asp-controller="Brand" asp-route-code="@Guid.NewGuid()" asp-route-Brandid="@item.Brandid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                             </tr>
