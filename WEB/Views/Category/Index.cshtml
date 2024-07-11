@@ -22,7 +22,6 @@
                         <tr>
                             <th>Image</th>
                             <th>Name</th>
-                            <th>Parent Name</th>
                             <th>Vat Rate</th>
                             <th class="text-right">Action</th>
                         </tr>
@@ -32,7 +31,6 @@
                         {
                             <tr>
                                 <td><img src="@Url.Content(item.Imageurl)" height="40" width="40"/></td>
-                                <td>@item.Categoryname</td>
                                 <td>@item.Categoryname</td>
                                 <td>@item.Vatrate</td>
                                 <td class="text-right"><a asp-action="Addcategory" asp-controller="Category" asp-route-code="@Guid.NewGuid()" asp-route-Categoryid="@item.Categoryid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
