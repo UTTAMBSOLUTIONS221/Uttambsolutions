@@ -161,7 +161,7 @@ namespace WEB.Controllers
                     Brand = productData.Brandname,
                     Google_product_category = productData.Categoryname.Replace(' ', '_'),
                     Fb_product_category = productData.Categoryname.Replace(' ', '_'),
-                    Quantity_to_sell_on_facebook = productData.ProductStock.ToString("F2"),
+                    Quantity_to_sell_on_facebook = productData.ProductStock.ToString("#,##0"),
                     Sale_price = productData.Marketprice.ToString("#,##0.00"),
                     Sale_price_effective_date = salePriceEffectiveDate,
                     Item_group_id = productData.Parentcategoryname,
