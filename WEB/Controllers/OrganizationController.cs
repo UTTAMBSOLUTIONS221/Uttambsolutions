@@ -143,9 +143,6 @@ namespace WEB.Controllers
 
         private ValueRange CreateValueRange(Organizationshopproductsdata productData)
         {
-            string category = !string.IsNullOrEmpty(productData.Parentcategoryname) ?
-                      $"{productData.Categoryname}>{productData.Parentcategoryname}" :
-                      productData.Categoryname;
             string startDate = productData.DateCreated.ToString("yyyy-MM-ddTHH:mm:sszzz");
             string endDate = productData.DateCreated.AddMonths(1).ToString("yyyy-MM-ddTHH:mm:sszzz");
             string salePriceEffectiveDate = $"{startDate}/{endDate}";
@@ -162,8 +159,8 @@ namespace WEB.Controllers
                     Link = "https://uttambsolutions.com/Home/Shopproductdetail?code=" + Guid.NewGuid().ToString() + "&Shopproductid=" + productData.Shopproductid,
                     Image_link = productData.Primaryimageurl,
                     Brand = productData.Brandname,
-                    Google_product_category = category,
-                    Fb_product_category = category,
+                    Google_product_category = productData.Categoryname.Replace(' ', '_'),
+                    Fb_product_category = productData.Categoryname.Replace(' ', '_'),
                     Quantity_to_sell_on_facebook = productData.ProductStock.ToString("F2"),
                     Sale_price = productData.Marketprice.ToString("#,##0.00"),
                     Sale_price_effective_date = salePriceEffectiveDate,
