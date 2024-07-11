@@ -193,7 +193,7 @@
         return;
     }
     var uil1 = {
-        Categoryid: $('#Categoryid').val(), Categoryname: $('#Categorynameid').val(),Parentid: $('#Parentid').val(),Vatrate: $('#Vatrateid').val(), Imageurl: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
+        Categoryid: $('#Categoryid').val(), Categoryname: $('#Categorynameid').val(),Parentcategoryname: $('#Parentcategorynameid').val(),Vatrate: $('#Vatrateid').val(), Imageurl: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
     };
     $.post("/Category/Addsystemcategorydata", uil1, function (response) {
         if (response.RespStatus == 0) {

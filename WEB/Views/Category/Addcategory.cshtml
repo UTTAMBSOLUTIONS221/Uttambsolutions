@@ -24,17 +24,15 @@
           <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Vate Rate</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Vatrate" id="Vatrateid" />
+                <input class="form-control form-control-sm" type="number" asp-for="@Model.Vatrate" id="Vatrateid" />
             </div>
         </div>
     </div>
-    <div class="row" hidden>
-        <div class="col-sm-8">
+    <div class="row">
+        <div class="col-sm-12">
             <div class="form-group">
                 <label class="font-weight-light">Parent Category</label>
-                <select class="form-control form-control-sm" asp-items="@Systemcategory" asp-for="@Model.Parentid" id="Parentid">
-                    <option value="0">---Select---</option>
-                </select>
+                <input class="form-control form-control-sm" asp-for="@Model.Parentcategoryname" id="Parentcategorynameid" />
             </div>
         </div>
     </div>
