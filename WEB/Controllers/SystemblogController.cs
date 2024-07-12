@@ -19,7 +19,8 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View();
+            var blogData = await bl.Getsystemallblogdata(0, 1000);
+            return View(blogData);
         }
         [HttpGet]
         public async Task<IActionResult> Addsystemblog(int Blogid)

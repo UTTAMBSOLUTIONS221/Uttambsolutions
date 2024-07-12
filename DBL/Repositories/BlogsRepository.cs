@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DBL.Models;
 using DBL.Repositories.DBL.Repositories;
+using Newtonsoft.Json;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -11,7 +12,25 @@ namespace DBL.Repositories
         public BlogsRepository(string connectionString) : base(connectionString)
         {
         }
-
+        public Systemblogdata Getsystemallblogdata(int Page, int PageSize)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Systemblogdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystemblogdata", parameters, commandType: CommandType.StoredProcedure);
+                string systemblogdataJson = parameters.Get<string>("@Systemblogdata");
+                if (systemblogdataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Systemblogdata>(systemblogdataJson);
+                }
+                else
+                {
+                    return new Systemblogdata();
+                }
+            }
+        }
         public Genericmodel Registersystemblogdata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))

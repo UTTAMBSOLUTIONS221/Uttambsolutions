@@ -414,6 +414,14 @@ namespace DBL
         #endregion
 
         #region System Blogs
+        public Task<Systemblogdata> Getsystemallblogdata(int Page, int PageSize)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Getsystemallblogdata(Page, PageSize);
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Registersystemblogdata(string Obj)
         {
             return Task.Run(() =>
