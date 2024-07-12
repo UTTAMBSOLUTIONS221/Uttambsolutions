@@ -42,7 +42,7 @@
                     </ul>
                     <hr />
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-12">
                             <h4 class="fw-bold">Product Features/Specifications</h4>
                             <ul class="list-unstyled">
                                 @if (Model.Productfeatures != null && Model.Productfeatures.Any())
@@ -54,7 +54,10 @@
                                 }
                             </ul>
                         </div>
-                        <div class="col-md-5">
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12">
                             <h4 class="fw-bold">What's in the Box</h4>
                             <ul class="list-unstyled">
                                 @if (Model.Productwhatsinbox != null && Model.Productwhatsinbox.Any())
