@@ -334,30 +334,29 @@
             $('#UttambsolutionsparagraphimageurlId').val('');
             $('#Uttambsolutionsparagraphimagespreviewcontainer').empty();
         }
-          var Shopblogparagraphsdata = [];
-          $("#SystemBlogParagraphListTable tbody tr").each(function () {
-        var row = $(this);
-        var Shopblogparagraphdata = {
-             Blogparagraphid:row.find('td:eq(0)').text(),
-             Blogid:('#Blogid').val(),
-             Blogparagraphcontent:row.find('td:eq(3)').text(),
-             Blogparagraphimageurl:row.find('td:eq(4)').text(),
-             Createdby:$('#systemLoggedinedUserid').val(),
-             Modifiedby:$('#systemLoggedinedUserid').val(),
-            Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-            Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
-        };
+             var Shopblogparagraphsdata = [];
+           $("#SystemBlogParagraphListTable tbody tr").each(function () {
+           var row = $(this);
+            var Shopblogparagraphdata = {
+                 Blogparagraphid:row.find('td:eq(0)').text(),
+                 Blogid:$('#Blogid').val(),
+                 Blogparagraphcontent:row.find('td:eq(3)').text(),
+                 Blogparagraphimageurl:row.find('td:eq(4)').text(),
+                 Createdby:$('#systemLoggedinedUserid').val(),
+                 Modifiedby:$('#systemLoggedinedUserid').val(),
+                Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+            };
         Shopblogparagraphsdata.push(Shopblogparagraphdata);
-    });
+         });
 
         alert(JSON.stringify(Shopblogparagraphsdata));
-         
+
     ﻿function savesystemblogdata() {
     document.getElementById("savesystemblogid").disabled = true;
     document.getElementById("processingSpinner").style.display = "inline-block";
     document.getElementById("buttonText").innerText = "Processing...";
- 
-    
+
     var uil1 = {
         Blogid: $('#Blogid').val(), Blogcategoryid: $('#Blogcategoryid').val(),Blogname: $('#Blognameid').val(),Blogcontent: $('#Blogcontentid').val(),Summary: $('#Summaryid').val(),Blogprimaryimageurl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, ''),Blogtags: $('#Blogtagsid').val(),Blogowner:$('#systemLoggedinedUserid').val(),IsPublished:false,Blogstatus:3,Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Systemblogparagraph:Shopblogparagraphsdata
     };
