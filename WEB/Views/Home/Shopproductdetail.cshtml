@@ -4,33 +4,60 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    /* Custom CSS for selected image preview */
+    .preview-image {
+        object-fit: contain; /* Maintain aspect ratio and contain within container */
+        border: 1px solid #ddd; /* Optional border for preview */
+        margin-bottom: 10px; /* Space between preview and thumbnails */
+    }
+</style>
+
 <div class="container py-4">
     <div class="row">
         <div class="col-md-5">
-            <div class="card h-100 shadow-sm">
-                <img src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top" style="object-fit: cover;" />
-                <div class="card-body">
-                    @if (Model.Productotherimages != null && Model.Productotherimages.Any())
-                    {
-                        <div class="row row-cols-2 g-2">
-                            @foreach (var Productimage in Model.Productotherimages)
+            <div class="row">
+                <div class="card h-100 shadow-sm">
+                    <img id="selectedImage" src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top preview-image" />
+                    <div class="card-body">
+                        <h2 class="fw-bold">@Model.Productname</h2>
+                        <p>@Model.Mainproductdescription</p>
+                    </div>
+                </div>
+            </div>
+            @* Preview Images Card *@
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4 class="fw-bold">Preview Images</h4>
+                            @if (Model.Productotherimages != null && Model.Productotherimages.Any())
                             {
-                                <div class="col">
-                                    <div class="card">
-                                        <img src="@Url.Content(Productimage.ProductImageUrl)" alt="@Model.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" />
+                                <div class="row row-cols-3 g-2">
+                                    <div class="col">
+                                        <div class="card">
+                                            <img id="selectedImage" src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" onclick="previewImage('@Url.Content(Model.Primaryimageurl)')" />
+                                        </div>
                                     </div>
+                                    @foreach (var Productimage in Model.Productotherimages)
+                                    {
+                                        <div class="col">
+                                            <div class="card">
+                                                <img src="@Url.Content(Productimage.ProductImageUrl)" alt="@Model.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" onclick="previewImage('@Url.Content(Productimage.ProductImageUrl)')" />
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             }
                         </div>
-                    }
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-7">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                    <h2 class="fw-bold">@Model.Productname</h2>
-                    <p>@Model.Mainproductdescription</p>
+                    <h4 class="fw-bold">Product Description</h4>
                     <p>@Model.Productdescription</p>
                     <hr />
                     <h4 class="fw-bold">Product Details</h4>
@@ -49,13 +76,12 @@
                                 {
                                     @foreach (var Feature in Model.Productfeatures)
                                     {
-                                        <li class="text-nowrap nowrap">@Feature.ProductFeature</li>
+                                        <li class="text-nowrap">@Feature.ProductFeature</li>
                                     }
                                 }
                             </ul>
                         </div>
                     </div>
-                    <hr />
                     <div class="row">
                         <div class="col-md-12">
                             <h4 class="fw-bold">What's in the Box</h4>
@@ -64,7 +90,7 @@
                                 {
                                     @foreach (var Item in Model.Productwhatsinbox)
                                     {
-                                        <li class="text-nowrap nowrap">@Item.ProductWhatsInBoxItem</li>
+                                        <li class="text-nowrap">@Item.ProductWhatsInBoxItem</li>
                                     }
                                 }
                             </ul>
@@ -75,3 +101,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    // JavaScript function to update selected image preview
+    function previewImage(imageUrl) {
+        var selectedImage = document.getElementById('selectedImage');
+        selectedImage.src = imageUrl;
+    }
+</script>
