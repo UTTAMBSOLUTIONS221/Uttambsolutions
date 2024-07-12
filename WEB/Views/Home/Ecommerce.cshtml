@@ -15,7 +15,7 @@
                         <img src="@Url.Content(product.Primaryimageurl)" alt="@product.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" />
                         <div class="card-body pt-2 pr-2 pl-2 d-flex flex-column">
                             <p class="card-text text-center text-muted text-truncate mb-1" title="@product.Productname">@product.Productname</p>
-                            <p class="card-text text-center text-muted text-truncate mb-1" title="Kes. @product.Marketprice">Kes. @product.Marketprice</p>
+                            <p class="card-text text-center text-muted text-truncate mb-1" title="Kes. @product.Marketprice">Kes. @product.Marketprice.ToString("#,##0.00")</p>
                             <p class="card-text text-center text-muted text-truncate" title="Shop: @product.Organizationname">Shop: @product.Organizationname</p>
                             <p class="card-text text-center text-muted text-truncate" title="Status: @product.ProductStatus">
                                 Status: @if (product.ProductStatus == "New")
