@@ -29,7 +29,7 @@ namespace WEB.Controllers
             Systemblog blogData = new Systemblog();
             if (Blogid > 0)
             {
-                //blogData = await bl.Getsystemblogcategorydatabyid(Blogid);
+                blogData = await bl.Getsystemblogdatabyid(Blogid);
             }
             return PartialView(blogData);
         }

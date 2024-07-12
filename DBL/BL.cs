@@ -430,6 +430,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Systemblog> Getsystemblogdatabyid(long Blogid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Getsystemblogdatabyid(Blogid);
+                return Resp;
+            });
+        }
         #endregion
 
         #region System Product Brands
