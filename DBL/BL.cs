@@ -369,10 +369,17 @@ namespace DBL
 
         #endregion
 
-
-
-
         #region Retrieve and save blogs
+
+        public Task<IEnumerable<Systemblogcategories>> Getsystemblogcategorydata(int offset, int size)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogcategoryRepository.Getsystemblogcategorydata(offset, size);
+                return Resp;
+            });
+        }
+
         public Task<Genericmodel> RetrieveandSaveBlogs(string Obj)
         {
             return Task.Run(() =>

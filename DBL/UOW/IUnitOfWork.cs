@@ -10,6 +10,9 @@ namespace DBL.UOW
         ISettingsRepository SettingsRepository { get; }
         IOrganizationRepository OrganizationRepository { get; }
         IModulesRepository ModulesRepository { get; }
+
+        IBlogcategoryRepository BlogcategoryRepository { get; }
+
         IBlogsRepository BlogsRepository { get; }
         IBrandRepository BrandRepository { get; }
         ICategoryRepository CategoryRepository { get; }

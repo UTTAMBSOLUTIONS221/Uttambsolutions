@@ -13,6 +13,7 @@ namespace DBL.UOW
         private ISettingsRepository settingsRepository;
         private IOrganizationRepository organizationRepository;
         private IModulesRepository modulesRepository;
+        private IBlogcategoryRepository blogcategoryRepository;
         private IBlogsRepository blogsRepository;
         private IBrandRepository brandRepository;
         private ICategoryRepository categoryRepository;
@@ -45,6 +46,10 @@ namespace DBL.UOW
         {
             get { return modulesRepository ?? (modulesRepository = new ModulesRepository(connString)); }
         }
+        public IBlogcategoryRepository BlogcategoryRepository
+        {
+            get { return blogcategoryRepository ?? (blogcategoryRepository = new BlogcategoryRepository(connString)); }
+        }
         public IBlogsRepository BlogsRepository
         {
             get { return blogsRepository ?? (blogsRepository = new BlogsRepository(connString)); }
@@ -68,6 +73,7 @@ namespace DBL.UOW
             roleRepository = null;
             accountRepository = null;
             modulesRepository = null;
+            blogcategoryRepository = null;
             blogsRepository = null;
             brandRepository = null;
             categoryRepository = null;
