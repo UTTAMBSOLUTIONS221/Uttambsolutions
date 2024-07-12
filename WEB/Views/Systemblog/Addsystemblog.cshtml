@@ -18,18 +18,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Title</label>
-                    <textarea class="form-control form-control-sm" asp-for="@Model.Blogname" id="Blognameid" required></textarea>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="font-weight-light">Category</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Blogcategoryid" asp-items="Systemblogcategory" id="Blogcategoryidid" required>
-                        <option value="">---Select---</option>
-                    </select>
+                    <input class="form-control form-control-sm" asp-for="@Model.Blogname" id="Blognameid" required />
                 </div>
             </div>
         </div>
@@ -48,13 +40,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Tags</label>
                     <input class="form-control form-control-sm" asp-for="@Model.Blogtags" id="Blogtagsid" required />
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Category</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.Blogcategoryid" asp-items="Systemblogcategory" id="Blogcategoryidid" required>
+                        <option value="">---Select---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Primary Image</label>
                     <input class="form-control form-control-sm font-weight-light" type="file" onchange="systemBlogFileChanged(event)" />
