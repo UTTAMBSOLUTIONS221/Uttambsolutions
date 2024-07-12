@@ -49,7 +49,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Primary Image</label>
-                    <input class="form-control form-control-sm font-weight-light" type="file" onchange="systemBlogFileChanged(event)" required />
+                    <input class="form-control form-control-sm font-weight-light" type="file" onchange="systemBlogFileChanged(event)" />
                 </div>
             </div>
         </div>
@@ -67,14 +67,81 @@
 
     <!-- Section 2: Product Features -->
     <div id="section2" class="section" style="display: none;">
-        <h6>Step 2: Product Features</h6>
-        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
-        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
-    </div>
-
-    <!-- Section 3: Product Description and Images -->
-    <div id="section3" class="section" style="display: none;">
-        <h6>Step 3: Product Description and Images</h6>
+        <h6>Step 2: Blog Paragraphs</h6>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12" hidden>
+                                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="font-weight-light">Paragraph</label>
+                                    <textarea class="form-control form-control-sm font-weight-light" id="SystemshopproductfeaturenameId"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="font-weight-light">Paragraph Primary Image</label>
+                                    <input class="form-control form-control-sm font-weight-light" type="file" onchange="systemBlogParagraphFileChanged(event)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12" hidden>
+                                <div class="form-group">
+                                    <label class="font-weight-light">Images Url</label>
+                                    <input class="form-control form-control-sm" id="UttambsolutionsimagesurlId" readonly />
+                                </div>
+                            </div>
+                            <div id="Uttambsolutionsimagespreviewcontainer"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="font-weight-light"></label>
+                                    <button class="btn btn-sm btn-info btn-block text-white font-weight-bold text-uppercase" onclick="addshopproductfeaturedata()">ADD</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap font-weight-light w-100" id="ShopProductFeatureTable">
+                    <thead>
+                        <tr>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th>FEATURE/SPECIFICATION</th>
+                            <th class="text-right">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*  @if (Model.Shopproductfeature != null)
+                        {
+                        foreach (var data in Model.Shopproductfeature)
+                        {
+                        <tr>
+                        <td hidden>@data.ProductFeatureId</td>
+                        <td hidden>@data.ShopProductId</td>
+                        <td>@data.ProductFeature</td>
+                        <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editshopproductfeaturedata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateshopproductfeaturedata(this.parentNode.parentNode)">Update</button></td>
+                        </tr>
+                        }
+                        } *@
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
         <button class="btn btn-sm btn-info font-weight-bold float-right" type="button" id="saveBlogData" onclick="saveBlogData();">
             <span id="buttonText">SAVE</span>
