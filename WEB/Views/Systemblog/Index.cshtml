@@ -282,7 +282,7 @@
             var Blogparagraphimageurl = $('#UttambsolutionsparagraphimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '');
 
             // Check if the table body contains any rows
-            var tableBody = $('#SystemBlogListTable tbody');
+            var tableBody = $('#SystemBlogParagraphListTable tbody');
             var noDataRows = tableBody.find('tr');
             if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
                 // Remove the "No data available in table" row
@@ -295,14 +295,14 @@
                 '<td hidden>' + Blogid + '</td>' +
                 '<td><img src="' + Blogparagraphimageurl + '" alt="Blog Paragraph Image" style="max-width: 100px; max-height: 100px;"></td>' +
                 '<td>' + Blogparagraphcontent + '</td>' +
-                 '<td>' + Blogparagraphimageurl + '</td>' +
+                 '<td hidden>' + Blogparagraphimageurl + '</td>' +
                 '<td class="text-right">' +
                 '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editblogparagraphdata(this.parentNode.parentNode)">Edit</button>' +
                 '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateblogparagraphdata(this.parentNode.parentNode)">Update</button>' +
                 '</td>' +
                 '</tr>';
 
-            $('#SystemBlogListTable tbody').append(newRow);
+            $('#SystemBlogParagraphListTable tbody').append(newRow);
             // Clear the form after adding a new row
             clearBlogParagraphForm();
         }
@@ -332,7 +332,7 @@
             $('#SystemblogparagraphId').val('');
         }
           var Shopblogparagraphsdata = [];
-          $("#SystemBlogListTable tbody tr").each(function () {
+          $("#SystemBlogParagraphListTable tbody tr").each(function () {
         var row = $(this);
         var Shopblogparagraphdata = {
              Blogparagraphid:row.find('td:eq(0)').text(),
@@ -347,7 +347,7 @@
         Shopblogparagraphsdata.push(Shopblogparagraphdata);
     });
 
-
+        alert(JSON.stringify(Shopblogparagraphsdata));
          
     ﻿function savesystemblogdata() {
     document.getElementById("savesystemblogid").disabled = true;
