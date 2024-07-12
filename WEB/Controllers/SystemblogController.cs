@@ -34,7 +34,7 @@ namespace WEB.Controllers
         }
         public async Task<JsonResult> Addsystemblogdata(Systemblog model)
         {
-            var resp = await bl.Registersystemblogcategorydata(JsonConvert.SerializeObject(model));
+            var resp = await bl.Registersystemblogdata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
     }

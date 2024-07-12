@@ -9,6 +9,7 @@ namespace DBL.Entities
 
         [Required]
         public long Blogcategoryid { get; set; }
+        public string? Blogcategoryname { get; set; }
 
         [Required]
         [StringLength(400)]
@@ -32,6 +33,7 @@ namespace DBL.Entities
 
         [Required]
         public long Blogowner { get; set; }
+        public string? Blogownername { get; set; }
 
         [Required]
         public bool IsPublished { get; set; }
@@ -41,9 +43,11 @@ namespace DBL.Entities
 
         [Required]
         public long Createdby { get; set; }
+        public string? Createdbyname { get; set; }
 
         [Required]
         public long Modifiedby { get; set; }
+        public string? Modifiedbyname { get; set; }
 
         [Required]
         public DateTime Datecreated { get; set; }

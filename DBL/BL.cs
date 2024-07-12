@@ -369,8 +369,7 @@ namespace DBL
 
         #endregion
 
-        #region Retrieve and save blogs
-
+        #region System Blog Category
         public Task<IEnumerable<Systemblogcategories>> Getsystemblogcategorydata(int Page, int PageSize)
         {
             return Task.Run(() =>
@@ -400,7 +399,7 @@ namespace DBL
         {
             return Task.Run(() =>
             {
-                var Resp = db.BlogsRepository.Registersystemblogdata(Obj);
+                var Resp = db.BlogsRepository.Registersystemserverblogdata(Obj);
                 return Resp;
             });
         }
@@ -409,6 +408,17 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.BlogsRepository.Getsystemblogsdata(Page, PageSize);
+                return Resp;
+            });
+        }
+        #endregion
+
+        #region System Blogs
+        public Task<Genericmodel> Registersystemblogdata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Registersystemblogdata(Obj);
                 return Resp;
             });
         }
