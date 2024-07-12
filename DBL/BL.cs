@@ -371,11 +371,27 @@ namespace DBL
 
         #region Retrieve and save blogs
 
-        public Task<IEnumerable<Systemblogcategories>> Getsystemblogcategorydata(int offset, int size)
+        public Task<IEnumerable<Systemblogcategories>> Getsystemblogcategorydata(int Page, int PageSize)
         {
             return Task.Run(() =>
             {
-                var Resp = db.BlogcategoryRepository.Getsystemblogcategorydata(offset, size);
+                var Resp = db.BlogcategoryRepository.Getsystemblogcategorydata(Page, PageSize);
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registersystemblogcategorydata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogcategoryRepository.Registersystemblogcategorydata(Obj);
+                return Resp;
+            });
+        }
+        public Task<Systemblogcategories> Getsystemblogcategorydatabyid(long Blogcategoryid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogcategoryRepository.Getsystemblogcategorydatabyid(Blogcategoryid);
                 return Resp;
             });
         }
