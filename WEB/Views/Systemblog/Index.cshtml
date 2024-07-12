@@ -295,6 +295,7 @@
                 '<td hidden>' + Blogid + '</td>' +
                 '<td><img src="' + Blogparagraphimageurl + '" alt="Blog Paragraph Image" style="max-width: 100px; max-height: 100px;"></td>' +
                 '<td>' + Blogparagraphcontent + '</td>' +
+                 '<td>' + Blogparagraphimageurl + '</td>' +
                 '<td class="text-right">' +
                 '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editblogparagraphdata(this.parentNode.parentNode)">Edit</button>' +
                 '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateblogparagraphdata(this.parentNode.parentNode)">Update</button>' +
@@ -330,6 +331,22 @@
             $('#Blogparagraphid').val('');
             $('#SystemblogparagraphId').val('');
         }
+          var Shopblogparagraphsdata = [];
+          $("#SystemBlogListTable tbody tr").each(function () {
+        var row = $(this);
+        var Shopblogparagraphdata = {
+             Blogparagraphid:row.find('td:eq(0)').text(),
+             Blogid:('#Blogid').val(),
+             Blogparagraphcontent:row.find('td:eq(3)').text(),,
+             Blogparagraphimageurl:row.find('td:eq(4)').text(),,
+             Createdby:$('#systemLoggedinedUserid').val(),
+             Modifiedby:$('#systemLoggedinedUserid').val(),
+            Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+            Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+        };
+        Shopblogparagraphsdata.push(Shopblogparagraphdata);
+    });
+
 
          
     ﻿function savesystemblogdata() {
@@ -339,7 +356,7 @@
  
     
     var uil1 = {
-        Blogid: $('#Blogid').val(), Blogcategoryid: $('#Blogcategoryid').val(),Blogname: $('#Blognameid').val(),Blogcontent: $('#Blogcontentid').val(),Summary: $('#Summaryid').val(),Blogprimaryimageurl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, ''),Blogtags: $('#Blogtagsid').val(),Blogowner:$('#systemLoggedinedUserid').val(),IsPublished:false,Blogstatus:3,Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+        Blogid: $('#Blogid').val(), Blogcategoryid: $('#Blogcategoryid').val(),Blogname: $('#Blognameid').val(),Blogcontent: $('#Blogcontentid').val(),Summary: $('#Summaryid').val(),Blogprimaryimageurl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, ''),Blogtags: $('#Blogtagsid').val(),Blogowner:$('#systemLoggedinedUserid').val(),IsPublished:false,Blogstatus:3,Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Systemblogparagraph:
     };
  
     $.post("/Systemblog/Addsystemblogdata", uil1, function (response) {
