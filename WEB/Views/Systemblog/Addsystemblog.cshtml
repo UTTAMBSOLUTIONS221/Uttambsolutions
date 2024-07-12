@@ -34,15 +34,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Summary</label>
                     <textarea class="form-control form-control-sm" asp-for="@Model.Summary" id="Summaryid" required></textarea>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Content</label>
                     <textarea class="form-control form-control-sm" asp-for="@Model.Blogcontent" id="Blogcontentid" required></textarea>
@@ -50,15 +48,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Tags</label>
                     <input class="form-control form-control-sm" asp-for="@Model.Blogtags" id="Blogtagsid" required />
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Primary Image</label>
                     <input class="form-control form-control-sm font-weight-light" type="file" onchange="systemBlogFileChanged(event)" />
