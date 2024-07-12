@@ -270,7 +270,7 @@
             // Remove the "No data available in table" row
             tableBody.empty();
         }
-        function addshopproductfeaturedata() {
+        function addsystemblogparagraphdata() {
             if ($('#SystemblogparagraphId').val() == "") {
                 Swal.fire("Blog Paragraphs Not Created", 'Paragraph name is Required', "warning");
                 return;
@@ -330,6 +330,9 @@
         function clearBlogParagraphForm() {
             $('#Blogparagraphid').val('');
             $('#SystemblogparagraphId').val('');
+            $('#Paragraphimageurlid').val('');
+            $('#UttambsolutionsparagraphimageurlId').val('');
+            $('#Uttambsolutionsparagraphimagespreviewcontainer').val('');
         }
           var Shopblogparagraphsdata = [];
           $("#SystemBlogParagraphListTable tbody tr").each(function () {
