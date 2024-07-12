@@ -362,7 +362,7 @@
  
     
     var uil1 = {
-        Blogcategoryid: $('#Blogcategoryid').val(), Blogcategoryname: $('#Blogcategorynameid').val(),DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+        Blogid: $('#Blogid').val(), Blogcategoryid: $('#Blogcategoryid').val(),Blogname: $('#Blognameid').val(),Blogcontent: $('#Blogcontentid').val(),Summary: $('#Summaryid').val(),Blogprimaryimageurl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, ''),Blogtags: $('#Blogtagsid').val(),Blogowner:$('#systemLoggedinedUserid').val(),IsPublished:false,Blogstatus:3,Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
     };
  
     $.post("/Systemblog/Addsystemblogdata", uil1, function (response) {

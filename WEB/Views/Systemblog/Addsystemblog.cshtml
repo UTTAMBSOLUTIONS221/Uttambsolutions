@@ -52,6 +52,14 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
+                    <label class="font-weight-light">Blog Tags</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Blogtags" id="Blogtagsid" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
                     <label class="font-weight-light">Blog Primary Image</label>
                     <input class="form-control form-control-sm font-weight-light" type="file" onchange="systemBlogFileChanged(event)" />
                 </div>
@@ -61,7 +69,7 @@
             <div class="col-sm-12" hidden>
                 <div class="form-group">
                     <label class="font-weight-light">Images Url</label>
-                    <input class="form-control form-control-sm" id="UttambsolutionsimagesurlId" readonly />
+                    <input class="form-control form-control-sm" id="UttambsolutionsimageurlId" readonly />
                 </div>
             </div>
             <div id="Uttambsolutionsimagespreviewcontainer"></div>
