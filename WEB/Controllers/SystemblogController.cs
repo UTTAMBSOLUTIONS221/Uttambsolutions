@@ -4,6 +4,7 @@ using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace WEB.Controllers
 {
@@ -30,6 +31,11 @@ namespace WEB.Controllers
                 //blogData = await bl.Getsystemblogcategorydatabyid(Blogid);
             }
             return PartialView(blogData);
+        }
+        public async Task<JsonResult> Addsystemblogdata(Systemblog model)
+        {
+            var resp = await bl.Registersystemblogcategorydata(JsonConvert.SerializeObject(model));
+            return Json(resp);
         }
     }
 }
