@@ -358,7 +358,6 @@
     <script src="~/lib/plugins/pdfmake/vfs_fonts.js"></script>
 
     <script type="text/javascript">
-
         let currentSection = 1;
 
         function showSection(sectionNumber) {
@@ -369,13 +368,41 @@
                     section.style.display = 'block';
                 }
             });
+
+            // Show/hide the save button and navigation buttons
+            const navigationButtons = document.getElementById('navigationButtons');
+            const saveButton = document.querySelector('#section' + sectionNumber + ' .btn-info');
+            if (sectionNumber === sections.length) {
+                if (saveButton) saveButton.style.display = 'block';
+                if (navigationButtons) navigationButtons.classList.add('d-none');
+            } else {
+                if (saveButton) saveButton.style.display = 'none';
+                if (navigationButtons) navigationButtons.classList.remove('d-none');
+            }
+        }
+
+        function validateSection(sectionNumber) {
+            const section = document.querySelector('#section' + sectionNumber);
+            const inputs = section.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            });
+            return isValid;
         }
 
         function nextSection() {
-            const sections = document.querySelectorAll('.section');
-            if (currentSection < sections.length) {
-                currentSection++;
-                showSection(currentSection);
+            if (validateSection(currentSection)) {
+                const sections = document.querySelectorAll('.section');
+                if (currentSection < sections.length) {
+                    currentSection++;
+                    showSection(currentSection);
+                }
             }
         }
 

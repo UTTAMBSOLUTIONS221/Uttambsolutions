@@ -10,18 +10,17 @@
     <!-- Section 1: Blog Details -->
     <div id="section1" class="section">
         <h6>Step 1: Blog Details</h6>
-        <!-- Blog details content -->
         <div class="row">
             <div class="col-sm-9">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Title</label>
-                    <input class="form-control form-control-sm" required asp-for="@Model.Blogname" id="Blognameid" />
+                    <input class="form-control form-control-sm" asp-for="@Model.Blogname" id="Blognameid" required />
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">Category</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Blogcategoryid" id="Blogcategoryidid">
+                    <select class="form-control form-control-sm" asp-for="@Model.Blogcategoryid" id="Blogcategoryidid" required>
                         <option value="">---Select---</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -34,7 +33,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Summary</label>
-                    <textarea class="form-control form-control-sm" required asp-for="@Model.Summary" id="Summaryid"></textarea>
+                    <textarea class="form-control form-control-sm" asp-for="@Model.Summary" id="Summaryid" required></textarea>
                 </div>
             </div>
         </div>
@@ -42,7 +41,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Content</label>
-                    <textarea class="form-control form-control-sm" required asp-for="@Model.Blogcontent" id="Blogcontentid"></textarea>
+                    <textarea class="form-control form-control-sm" asp-for="@Model.Blogcontent" id="Blogcontentid" required></textarea>
                 </div>
             </div>
         </div>
@@ -50,7 +49,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Primary Image</label>
-                    <input class="form-control form-control-sm font-weight-light" multiple type="file" onchange="systemBlogFileChanged(event)" />
+                    <input class="form-control form-control-sm font-weight-light" type="file" onchange="systemBlogFileChanged(event)" required />
                 </div>
             </div>
         </div>
@@ -63,22 +62,23 @@
             </div>
             <div id="Uttambsolutionsimagespreviewcontainer"></div>
         </div>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
     </div>
 
     <!-- Section 2: Product Features -->
     <div id="section2" class="section" style="display: none;">
         <h6>Step 2: Product Features</h6>
-        <!-- Product features content -->
+        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
     </div>
 
     <!-- Section 3: Product Description and Images -->
     <div id="section3" class="section" style="display: none;">
         <h6>Step 3: Product Description and Images</h6>
-        <!-- Product description and images content -->
+        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
+        <button class="btn btn-sm btn-info font-weight-bold float-right" type="button" id="saveBlogData" onclick="saveBlogData();">
+            <span id="buttonText">SAVE</span>
+            <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+        </button>
     </div>
-
-    <!-- Add more sections as needed -->
-
-    <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
-    <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
 </div>
