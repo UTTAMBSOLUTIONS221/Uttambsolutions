@@ -358,7 +358,7 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<Systemorganizationshopproducts> Getsystemorganizationshopproductsdatabyid(long Shopproductid)
+        public Task<Organizationshopproductsdata> Getsystemorganizationshopproductsdatabyid(long Shopproductid)
         {
             return Task.Run(() =>
             {

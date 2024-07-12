@@ -114,7 +114,7 @@ namespace DBL.Repositories
                 }
             }
         }
-        public Systemorganizationshopproducts Getsystemorganizationshopproductsdatabyid(long Shopproductid)
+        public Organizationshopproductsdata Getsystemorganizationshopproductsdatabyid(long Shopproductid)
         {
             using (var connection = new SqlConnection(_connString))
             {
@@ -126,11 +126,11 @@ namespace DBL.Repositories
                 string organizationshopproductsdataJson = parameters.Get<string>("@Organizationshopproductsdata");
                 if (organizationshopproductsdataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<Systemorganizationshopproducts>(organizationshopproductsdataJson);
+                    return JsonConvert.DeserializeObject<Organizationshopproductsdata>(organizationshopproductsdataJson);
                 }
                 else
                 {
-                    return new Systemorganizationshopproducts();
+                    return new Organizationshopproductsdata();
                 }
             }
         }
