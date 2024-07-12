@@ -358,21 +358,38 @@
     <script src="~/lib/plugins/pdfmake/vfs_fonts.js"></script>
 
     <script type="text/javascript">
-        function nextSection(next) {
-            document.getElementById('section1').style.display = 'none';
-            document.getElementById('section2').style.display = 'none';
-            document.getElementById('section3').style.display = 'none';
-            document.getElementById('section4').style.display = 'none';
-            document.getElementById('section' + next).style.display = 'block';
+
+        let currentSection = 1;
+
+        function showSection(sectionNumber) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.display = 'none';
+                if (index === sectionNumber - 1) {
+                    section.style.display = 'block';
+                }
+            });
         }
 
-        function prevSection(prev) {
-            document.getElementById('section1').style.display = 'none';
-            document.getElementById('section2').style.display = 'none';
-            document.getElementById('section3').style.display = 'none';
-            document.getElementById('section4').style.display = 'none';
-            document.getElementById('section' + prev).style.display = 'block';
+        function nextSection() {
+            const sections = document.querySelectorAll('.section');
+            if (currentSection < sections.length) {
+                currentSection++;
+                showSection(currentSection);
+            }
         }
+
+        function prevSection() {
+            if (currentSection > 1) {
+                currentSection--;
+                showSection(currentSection);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection(currentSection);
+        });
+
         $('#Uttambsolutionsmodalextralarge').on('show.bs.modal', function (event) {
             $(".blockoverlay").show();
             var button = $(event.relatedTarget);

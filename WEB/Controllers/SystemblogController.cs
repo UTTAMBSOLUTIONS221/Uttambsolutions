@@ -1,4 +1,5 @@
 ﻿using DBL;
+using DBL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,16 @@ namespace WEB.Controllers
         public async Task<IActionResult> Index()
         {
             return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> Addsystemblog(int Blogid)
+        {
+            Systemblog blogData = new Systemblog();
+            if (Blogid > 0)
+            {
+                //blogData = await bl.Getsystemblogcategorydatabyid(Blogid);
+            }
+            return PartialView(blogData);
         }
     }
 }
