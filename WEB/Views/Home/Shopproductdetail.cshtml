@@ -32,10 +32,10 @@
                 <h4>@Model.Productname</h4>
                 <p>@Model.Mainproductdescription</p>
                 <p>@Model.Productdescription</p>
-                <p>@Model.Brandname</p>
-                <p>@Model.Categoryname</p>
-                <p>@("Ksh. " + Model.Marketprice.ToString("#,##0.00"))</p>
-                <p>@Model.Organizationname</p>
+                <p>Brand: @Model.Brandname</p>
+                <p>Category: @Model.Categoryname</p>
+                <p>Price: <span class="fw-bold">@("Ksh. " + Model.Marketprice.ToString("#,##0.00"))</span></p>
+                <p>Shop: @Model.Organizationname</p>
             </div>
         </div>
         <div class="row">
