@@ -46,7 +46,7 @@
                     <input class="form-control form-control-sm" asp-for="@Model.Blogtags" id="Blogtagsid" required />
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">Category</label>
                     <select class="form-control form-control-sm" asp-for="@Model.Blogcategoryid" asp-items="Systemblogcategory" id="Blogcategoryidid" required>
@@ -54,7 +54,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Primary Image</label>
                     <input class="form-control form-control-sm font-weight-light" type="file" onchange="systemBlogFileChanged(event)" />
