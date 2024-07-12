@@ -1,9 +1,6 @@
 using DBL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NewsAPI;
-using NewsAPI.Constants;
-using NewsAPI.Models;
 using System.Diagnostics;
 using WEB.Models;
 
@@ -65,7 +62,8 @@ namespace WEB.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Shopproductdetail(long Shopproductid)
         {
-            return View();
+            var commerceProducts = await bl.Getsystemorganizationshopproductsdatabyid(Shopproductid);
+            return View(commerceProducts);
         }
         public IActionResult Privacy()
         {

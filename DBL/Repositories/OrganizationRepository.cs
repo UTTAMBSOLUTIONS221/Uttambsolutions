@@ -114,5 +114,25 @@ namespace DBL.Repositories
                 }
             }
         }
+        public Systemorganizationshopproducts Getsystemorganizationshopproductsdatabyid(long Shopproductid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Shopproductid", Shopproductid);
+                parameters.Add("@Organizationshopproductsdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystemorganizationshopproductsdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string organizationshopproductsdataJson = parameters.Get<string>("@Organizationshopproductsdata");
+                if (organizationshopproductsdataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Systemorganizationshopproducts>(organizationshopproductsdataJson);
+                }
+                else
+                {
+                    return new Systemorganizationshopproducts();
+                }
+            }
+        }
     }
 }

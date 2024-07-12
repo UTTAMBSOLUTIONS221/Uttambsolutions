@@ -11,5 +11,6 @@ namespace DBL.Repositories
         Organizationshopproductsdata Registerorganizationshopproductdata(string JsonData);
         Organizationshopproducts Getorganizationshopproductdatabyid(long Shopproductid);
         Systemorganizationshopproducts Getsystemorganizationshopproductsdata();
+        Systemorganizationshopproducts Getsystemorganizationshopproductsdatabyid(long Shopproductid);
     }
 }
