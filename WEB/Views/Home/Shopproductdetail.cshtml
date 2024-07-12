@@ -4,79 +4,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="card h-100 shadow-sm card-info card-outline">
-                        <img src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top" style="object-fit: cover;" />
-                        <div class="card-body">
-                            <div class="row">
-                                @if (Model.Productotherimages != null)
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card h-100 shadow-sm">
+                <img src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top" style="object-fit: cover; height: 300px;" />
+                <div class="card-body">
+                    @if (Model.Productotherimages != null && Model.Productotherimages.Any())
+                    {
+                        <div class="row row-cols-2 g-2">
+                            @foreach (var Productimage in Model.Productotherimages)
+                            {
+                                <div class="col">
+                                    <div class="card">
+                                        <img src="@Url.Content(Productimage.ProductImageUrl)" alt="@Model.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="fw-bold">@Model.Productname</h2>
+                    <p>@Model.Mainproductdescription</p>
+                    <p>@Model.Productdescription</p>
+                    <hr />
+                    <h4 class="fw-bold">Product Details</h4>
+                    <ul class="list-unstyled">
+                        <li><strong>Brand:</strong> @Model.Brandname</li>
+                        <li><strong>Category:</strong> @Model.Categoryname</li>
+                        <li><strong>Price:</strong> Ksh. @Model.Marketprice.ToString("#,##0.00")</li>
+                        <li><strong>Shop:</strong> @Model.Organizationname</li>
+                    </ul>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h4 class="fw-bold">Product Features/Specifications</h4>
+                            <ul class="list-unstyled">
+                                @if (Model.Productfeatures != null && Model.Productfeatures.Any())
                                 {
-                                    foreach (var Productimae in Model.Productotherimages)
+                                    @foreach (var Feature in Model.Productfeatures)
                                     {
-                                        <div class="col-sm-4">
-                                            <div class="card">
-                                                <img src="@Url.Content(Productimae.ProductImageUrl)" alt="@Model.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" />
-                                            </div>
-                                        </div>
+                                        <li class="text-nowrap nowrap">@Feature.ProductFeature</li>
                                     }
                                 }
-                            </div>
+                            </ul>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="fw-bold text-uppercase">Product Details</h4>
-                                    <h4>@Model.Productname</h4>
-                                    <p>@Model.Mainproductdescription</p>
-                                    <p>@Model.Productdescription</p>
-                                    <p>Brand: @Model.Brandname</p>
-                                    <p>Category: @Model.Categoryname</p>
-                                    <p>Price: <span class="fw-bold">@("Ksh. " + Model.Marketprice.ToString("#,##0.00"))</span></p>
-                                    <p>Shop: @Model.Organizationname</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <div class="row">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="fw-bold text-uppercase text-sm">Product Feature/Specifications</h4>
-                                        @if (Model.Productfeatures != null)
-                                        {
-                                            foreach (var Feature in Model.Productfeatures)
-                                            {
-                                                <p>@Feature.ProductFeature</p>
-                                            }
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-5">
-                            <div class="row">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="fw-bold text-uppercase text-sm">Product What's in Box</h4>
-                                        @if (Model.Productwhatsinbox != null)
-                                        {
-                                            foreach (var Item in Model.Productwhatsinbox)
-                                            {
-                                                <p>@Item.ProductWhatsInBoxItem</p>
-                                            }
-                                        }
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-5">
+                            <h4 class="fw-bold">What's in the Box</h4>
+                            <ul class="list-unstyled">
+                                @if (Model.Productwhatsinbox != null && Model.Productwhatsinbox.Any())
+                                {
+                                    @foreach (var Item in Model.Productwhatsinbox)
+                                    {
+                                        <li class="text-nowrap nowrap">@Item.ProductWhatsInBoxItem</li>
+                                    }
+                                }
+                            </ul>
                         </div>
                     </div>
                 </div>
