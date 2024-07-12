@@ -13,6 +13,11 @@
     <div id="section1" class="section">
         <h6>Step 1: Blog Details</h6>
         <div class="row">
+            <div class="col-sm-12">
+                <input asp-for="@Model.Blogid" id="Blogid" hidden />
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-8">
                 <div class="form-group">
                     <label class="font-weight-light">Blog Title</label>
@@ -80,7 +85,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="font-weight-light">Paragraph</label>
-                                    <textarea class="form-control form-control-sm font-weight-light" id="SystemshopproductfeaturenameId"></textarea>
+                                    <textarea class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -108,12 +113,13 @@
         </div>
         <div class="row">
             <div class="col-sm-12 table-responsive">
-                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap font-weight-light w-100" id="ShopProductFeatureTable">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap font-weight-light w-100" id="SystemBlogListTable">
                     <thead>
                         <tr>
                             <th hidden></th>
                             <th hidden></th>
-                            <th>FEATURE/SPECIFICATION</th>
+                            <th>IMAGE</th>
+                            <th>PARAGRAPH</th>
                             <th class="text-right">ACTION</th>
                         </tr>
                     </thead>

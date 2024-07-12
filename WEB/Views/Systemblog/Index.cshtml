@@ -170,6 +170,73 @@
             inputField.value = JSON.stringify(downloadURLs);
         }
 
+          var tableBody = $('#SystemBlogListTable tbody');
+        var noDataRows = tableBody.find('tr');
+        if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+            // Remove the "No data available in table" row
+            tableBody.empty();
+        }
+        function addshopproductfeaturedata() {
+            if ($('#SystemblogparagraphId').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Paragraph name is Required', "warning");
+                return;
+            }
+    
+            var Blogparagraphid = 0;
+            var Blogid = $('#Blogid').val();
+            var Blogparagraphcontent = $('#SystemblogparagraphId').val();
+            var Blogparagraphimageurl = $('#UttambsolutionsparagraphimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '');
+
+            // Check if the table body contains any rows
+            var tableBody = $('#SystemBlogListTable tbody');
+            var noDataRows = tableBody.find('tr');
+            if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                // Remove the "No data available in table" row
+                tableBody.empty();
+            }
+
+            // Append row to table with image
+            var newRow = '<tr>' +
+                '<td hidden>' + Blogparagraphid + '</td>' +
+                '<td hidden>' + Blogid + '</td>' +
+                '<td><img src="' + Blogparagraphimageurl + '" alt="Blog Paragraph Image" style="max-width: 100px; max-height: 100px;"></td>' +
+                '<td>' + Blogparagraphcontent + '</td>' +
+                '<td class="text-right">' +
+                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editblogparagraphdata(this.parentNode.parentNode)">Edit</button>' +
+                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateblogparagraphdata(this.parentNode.parentNode)">Update</button>' +
+                '</td>' +
+                '</tr>';
+
+            $('#SystemBlogListTable tbody').append(newRow);
+            // Clear the form after adding a new row
+            clearBlogParagraphForm();
+        }
+        // Function to populate input fields with values from the selected row for editing
+        function editblogparagraphdata(row) {
+            var cells = $(row).children();
+            $('#Blogparagraphid').val($(cells[0]).text());
+            $('#SystemblogparagraphId').val($(cells[3]).text());
+        }
+        // Function to update the selected row with edited values
+        function updateblogparagraphdata(row) {
+           if ($('#SystemblogparagraphId').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Paragraph name is Required', "warning");
+                return;
+            }
+            var cells = $(row).children(); // Get the cells of the selected row
+
+            // Update the cells with edited values from input fields
+            $(cells[0]).text($('#Blogparagraphid').val());
+            $(cells[1]).text($('#Blogid').val());
+            $(cells[3]).text($('#SystemblogparagraphId').val());
+            clearBlogParagraphForm();
+        }
+        // Function to clear the form after adding a new row or updating
+        function clearBlogParagraphForm() {
+            $('#Blogparagraphid').val('');
+            $('#SystemblogparagraphId').val('');
+        }
+
          
     ﻿function savesystemblogdata() {
     document.getElementById("savesystemblogid").disabled = true;
