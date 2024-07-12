@@ -370,7 +370,6 @@
     var uil1 = {
         Blogid: $('#Blogid').val(), Blogcategoryid: $('#Blogcategoryid').val(),Blogname: $('#Blognameid').val(),Blogcontent: $('#Blogcontentid').val(),Summary: $('#Summaryid').val(),Blogprimaryimageurl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, ''),Blogtags: $('#Blogtagsid').val(),Blogowner:$('#systemLoggedinedUserid').val(),IsPublished:false,Blogstatus:3,Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Systemblogparagraph:Shopblogparagraphsdata
     };
-         alert(JSON.stringify(uil1));
     $.post("/Systemblog/Addsystemblogdata", uil1, function (response) {
         if (response.RespStatus == 0) {
             Swal.fire('Saved!', response.RespMessage, 'success')

@@ -127,17 +127,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                         @if (Model.Systemblogparagraph != null)
+                        @if (Model.Systemblogparagraph != null)
                         {
                             foreach (var data in Model.Systemblogparagraph)
-                        {
-                        <tr>
-                        <td hidden>@data.Blogparagraphid</td>
-                        <td hidden>@data.Blogid</td>
-                        <td>@data.Blogparagraphcontent</td>
+                            {
+                                <tr>
+                                    <td hidden>@data.Blogparagraphid</td>
+                                    <td hidden>@data.Blogid</td>
+                                    <td><img src="@data.Blogparagraphimageurl" alt="Blog Paragraph Image" style="max-width: 70px; max-height: 70px;" /></td>
+                                    <td>@data.Blogparagraphcontent</td>
+                                    <td hidden>@data.Blogparagraphimageurl</td>
                                     <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editblogparagraphdata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateblogparagraphdata(this.parentNode.parentNode)">Update</button></td>
-                        </tr>
-                        }
+                                </tr>
+                            }
                         }
                     </tbody>
                 </table>
