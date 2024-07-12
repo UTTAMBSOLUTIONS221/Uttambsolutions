@@ -11,6 +11,58 @@
     <div id="section1" class="section">
         <h6>Step 1: Blog Details</h6>
         <!-- Blog details content -->
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <label class="font-weight-light">Blog Title</label>
+                    <input class="form-control form-control-sm" required asp-for="@Model.Blogname" id="Blognameid" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Category</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.Blogcategoryid" id="Blogcategoryidid">
+                        <option value="">---Select---</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Unisex">Unisex</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="font-weight-light">Blog Summary</label>
+                    <textarea class="form-control form-control-sm" required asp-for="@Model.Summary" id="Summaryid"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="font-weight-light">Blog Content</label>
+                    <textarea class="form-control form-control-sm" required asp-for="@Model.Blogcontent" id="Blogcontentid"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="font-weight-light">Blog Primary Image</label>
+                    <input class="form-control form-control-sm font-weight-light" multiple type="file" onchange="systemBlogFileChanged(event)" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" hidden>
+                <div class="form-group">
+                    <label class="font-weight-light">Images Url</label>
+                    <input class="form-control form-control-sm" id="UttambsolutionsimagesurlId" readonly />
+                </div>
+            </div>
+            <div id="Uttambsolutionsimagespreviewcontainer"></div>
+        </div>
     </div>
 
     <!-- Section 2: Product Features -->
