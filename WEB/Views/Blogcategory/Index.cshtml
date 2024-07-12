@@ -1,6 +1,80 @@
-﻿
+﻿@model IEnumerable<DBL.Entities.Systemblogcategories>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
 }
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h6 class="font-weight-bold text-sm card-title">Blog Categories</h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <a asp-action="Addsystemblogcategory" asp-controller="Blogcategory" asp-route-code="@Guid.NewGuid()" asp-route-Blogcategoryid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Category</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive table-responsive-sm">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Blogcategoryname</td>
+                                <td class="text-right"><a asp-action="Addsystemblogcategory" asp-controller="Blogcategory" asp-route-code="@Guid.NewGuid()" asp-route-Blogcategoryid="@item.Blogcategoryid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                            </tr>
+                        }
 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+      <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
+    <script type="text/javascript">
+         
+        ﻿function savesystemblogcategorydata() {
+    document.getElementById("savesystemblogcategorydid").disabled = true;
+    document.getElementById("processingSpinner").style.display = "inline-block";
+    document.getElementById("buttonText").innerText = "Processing...";
+    if ($('#Blogcategorynameid').val() === '') {
+        Swal.fire("Category Not Created", 'Category Name is Required', "warning");
+        document.getElementById("savesystemblogcategorydid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    
+    var uil1 = {
+        Blogcategoryid: $('#Blogcategoryid').val(), Blogcategoryname: $('#Blogcategorynameid').val(),DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+    };
+ 
+    $.post("/Blogcategory/Addsystemblogcategorydata", uil1, function (response) {
+        if (response.RespStatus == 0) {
+            Swal.fire('Saved!', response.RespMessage, 'success')
+            $('#Uttambsolutionsmodal').hide();
+            setTimeout(function () { location.reload(); }, 1000);
+        } else if (response.RespStatus == 1) {
+            Swal.fire("Category details not saved", response.RespMessage, "warning");
+        }
+        else {
+            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+        }
+        document.getElementById("savesystemblogcategorydid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        });
+    }
+   </script>
+}
