@@ -1,7 +1,9 @@
 ﻿using DBL;
 using DBL.Entities;
+using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WEB.Controllers
 {
@@ -21,6 +23,7 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Addsystemblog(int Blogid)
         {
+            ViewData["Systemblogcategorylists"] = bl.GetListModel(ListModelType.SystemBlogCategory).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Systemblog blogData = new Systemblog();
             if (Blogid > 0)
             {
