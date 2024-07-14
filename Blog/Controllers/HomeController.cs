@@ -29,7 +29,11 @@ namespace Blog.Controllers
             var blogpost = await bl.Getsystemblogdatabyid(Blogid);
             return View(blogpost);
         }
-
+        [HttpGet]
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

@@ -1,0 +1,131 @@
+﻿@model DBL.Entities.SystemStaff
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UTTAMB SOLUTIONS | SIGNUP</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
+            crossorigin="anonymous"></script>
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-info card-outline">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg font-weight-light text-dark text-uppercase font-weight-bold">Sign up to start interaction</p>
+                <div class="row mt-1">
+                    <div class="col-sm-12" id="AlertsContainer">
+                        @{
+                            await Html.RenderPartialAsync("_Alerts");
+                        }
+                    </div>
+                </div>
+                <form asp-action="Register" asp-controller="Account" method="post">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="text-sm fontweight-light">First Name</label>
+                            <div class="input-group mb-3">
+                                <input asp-for="Firstname" type="text" class="form-control form-control-sm" placeholder="First Name">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Firstname" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Last Name</label>
+                            <div class="input-group mb-3">
+                                <input asp-for="Lastname" type="text" class="form-control form-control-sm" placeholder="Last Name">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Lastname" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Email Address</label>
+                            <div class="input-group mb-3">
+                                <input asp-for="Emailaddress" type="email" class="form-control form-control-sm" placeholder="Email Address">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-envelope"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Emailaddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Phone Number</label>
+                            <div class="input-group mb-3">
+                                <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Phonenumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Password</label>
+                            <div class="input-group mb-3">
+                                <input asp-for="Passwords" type="password" class="form-control form-control-sm" placeholder="Password">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Passwords" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Confirm Password</label>
+                            <div class="input-group mb-3">
+                                <input asp-for="Confirmpasswords" type="password" class="form-control form-control-sm" placeholder="Confirm Password">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Confirmpasswords" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder btn-block text-uppercase">cancel</a>
+                        </div>
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-sm btn-info font-weight-bolder btn-block text-uppercase">Sign Up</button>
+                        </div>
+                    </div>
+                    <div class="row mt-2 text-center">
+                        <div class="col-12">
+                            <p class="text-xs">Already have account? <a asp-action="Signin" asp-controller="Account" class="text-uppercase text-info text-xs">Sign In</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/dist/adminlte.js"></script>
+</body>
+</html>
