@@ -22,6 +22,14 @@ namespace Blog.Controllers
             return View(blogposts);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Blogdetails(long Blogid)
+        {
+            var blogpost = await bl.Getsystemblogdatabyid(Blogid);
+            return View(blogpost);
+        }
+
         public IActionResult Privacy()
         {
             return View();

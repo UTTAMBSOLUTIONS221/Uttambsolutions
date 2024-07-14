@@ -1,32 +1,23 @@
-﻿@model IEnumerable<DBL.Entities.Systemblog>
+﻿@model DBL.Models.Systemblogdata
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="row">
-    @if (Model != null && Model != null)
+    @if (Model != null && Model.Systemblogs != null)
     {
-        foreach (var product in Model.Organizationshopproductsdata)
+        foreach (var blogPost in Model.Systemblogs)
         {
             <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
-                <a asp-action="Shopproductdetail" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Shopproductid="@product.Shopproductid" asp-area="" class="text-decoration-none">
+                <a asp-action="Blogdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@blogPost.Blogid" asp-area="" class="text-decoration-none">
                     <div class="card h-100 shadow-sm card-info card-outline">
-                        <img src="@Url.Content(product.Primaryimageurl)" alt="@product.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" />
+                        <img src="@Url.Content(blogPost.Blogprimaryimageurl)" alt="@blogPost.Blogcategoryname" class="card-img-top" style="height: 140px; object-fit: cover;" />
                         <div class="card-body pt-2 pr-2 pl-2 d-flex flex-column">
-                            <p class="card-text text-center text-muted text-truncate mb-1" title="@product.Productname">@product.Productname</p>
-                            <p class="card-text text-center text-muted text-truncate mb-1" title="Kes. @product.Marketprice">Kes. @product.Marketprice.ToString("#,##0.00")</p>
-                            <p class="card-text text-center text-muted text-truncate" title="Shop: @product.Organizationname">Shop: @product.Organizationname</p>
-                            <p class="card-text text-center text-muted text-truncate" title="Status: @product.ProductStatus">
-                                Status: @if (product.ProductStatus == "New")
-                                {
-                                    <span class="badge badge-info badge-info-xs font-weight-bold text-uppercase">New</span>
-                                }
-                                else
-                                {
-                                    <span class="badge badge-warning badge-warning-xs font-weight-bold text-uppercase">Used</span>
-                                }
-                            </p>
+                            <p class="card-text text-center text-muted text-truncate mb-1" title="@blogPost.Blogname">@blogPost.Blogname</p>
+                            <p class="card-text text-center text-muted text-truncate mb-1" title="@blogPost.Summary">@blogPost.Summary</p>
+                            <p class="card-text text-center text-muted text-truncate" title="Author: @blogPost.Blogownername">Author: @blogPost.Blogownername</p>
+                            <p class="card-text text-center text-muted text-truncate" title="Published On: @blogPost.Datecreated">Published On: @blogPost.Datecreated</p>
                         </div>
                     </div>
                 </a>
@@ -35,6 +26,6 @@
     }
     else
     {
-        <p class="text-center">No products available at the moment.</p>
+        <p class="text-center">No blogs available at the moment.</p>
     }
 </div>
