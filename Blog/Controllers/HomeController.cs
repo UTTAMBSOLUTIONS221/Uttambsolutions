@@ -1,21 +1,25 @@
 using Blog.Models;
+using DBL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Blog.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly BL bl;
+        public HomeController(IConfiguration config)
         {
-            _logger = logger;
+            bl = new BL(Util.ShareConnectionString(config));
         }
-
-        public IActionResult Index()
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var blogposts = await bl.Getsystemallblogdata(0, 10000);
+            return View(blogposts);
         }
 
         public IActionResult Privacy()
