@@ -521,7 +521,6 @@ namespace DBL
         }
         #endregion
 
-
         #region System Dropdowns
         public Task<IEnumerable<ListModel>> GetListModel(ListModelType listType)
         {
