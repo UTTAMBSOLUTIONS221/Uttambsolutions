@@ -9,16 +9,22 @@
     {
         foreach (var blogPost in Model.Systemblogs)
         {
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
+            <div class="col-lg-3 col-md-3 col-sm-4 col-12 mb-3">
                 <a asp-action="Blogdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@blogPost.Blogid" asp-area="" class="text-decoration-none">
                     <div class="card h-100 shadow-sm card-info card-outline">
                         <img src="@Url.Content(blogPost.Blogprimaryimageurl)" alt="@blogPost.Blogcategoryname" class="card-img-top" style="height: 140px; object-fit: cover;" />
                         <div class="card-body pt-2 pr-2 pl-2 d-flex flex-column">
-                            <p class="card-text text-center text-muted text-truncate mb-1" title="@blogPost.Blogname">@blogPost.Blogname</p>
-                            <p class="card-text text-center text-muted text-truncate mb-1" title="@blogPost.Summary">@blogPost.Summary</p>
-                            <p class="card-text text-center text-muted text-truncate" title="Author: @blogPost.Blogownername">Author: @blogPost.Blogownername</p>
-                            <p class="card-text text-center text-muted text-truncate" title="Published On: @blogPost.Datecreated">Published On: @blogPost.Datecreated</p>
-                        </div>
+                            <h6 class="card-text text-custom text-uppercase text-sm" title="@blogPost.Blogname">@blogPost.Truncatedblogname</h6>
+                            <p class="card-text text-muted text-truncate text-wrap text-sm" title="@blogPost.Summary">@blogPost.Truncatedblogsummary</p>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <p class="card-text text-muted text-xs" title="Author: @blogPost.Blogownername">Author: @blogPost.Blogownername</p>
+                                </div>
+                                <div class="col-sm-7">
+                                    <p class="card-text text-muted text-xs" title="Published On: @blogPost.Datecreated">Published On: @blogPost.Datecreated</p>
+                                </div>
+                            </div>
+                          </div>
                     </div>
                 </a>
             </div>

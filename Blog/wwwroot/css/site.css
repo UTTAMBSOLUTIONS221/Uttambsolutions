@@ -5,6 +5,9 @@
     background-color: #0a506c !important;
     color:#ffffff;
 }
+.text-custom {
+    color: #0a506c !important;
+}
 html {
     font-size: 14px;
 }

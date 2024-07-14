@@ -55,5 +55,42 @@ namespace DBL.Entities
         [Required]
         public DateTime Datemodified { get; set; }
         public List<Systemblogparagraph>? Systemblogparagraph { get; set; }
+
+        public string Truncatedblogname
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Blogname))
+                {
+                    return Blogname;
+                }
+
+                var words = Blogname.Split(' ');
+                if (words.Length <= 10)
+                {
+                    return Blogname;
+                }
+
+                return string.Join(' ', words.Take(10)) + "...";
+            }
+        }
+        public string Truncatedblogsummary
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Summary))
+                {
+                    return Summary;
+                }
+
+                var words = Summary.Split(' ');
+                if (words.Length <= 40)
+                {
+                    return Summary;
+                }
+
+                return string.Join(' ', words.Take(40)) + "...";
+            }
+        }
     }
 }
