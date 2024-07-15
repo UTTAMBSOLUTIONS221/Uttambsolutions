@@ -5,8 +5,9 @@ namespace DBL.Repositories
 {
     public interface ISocialmediaRepository
     {
-        IEnumerable<SocialMediaSettings> Getsysteusersocialmediadata(long Userid);
+        IEnumerable<SocialMediaSettings> Getsystemsocialmediadata(long Userid);
         Genericmodel Registersystemsocialmediapagedata(string JsonData);
-        SocialMediaSettings Getsysteusersocialmediadatabyid(long Socialsettingid);
+        SocialMediaSettings Getsystemsocialmediadatabyid(long Socialsettingid);
+        IEnumerable<SocialMediaSettings> Getsystemallsocialmediadata();
     }
 }

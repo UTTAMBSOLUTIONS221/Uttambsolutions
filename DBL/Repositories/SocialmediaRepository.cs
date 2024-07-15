@@ -13,7 +13,7 @@ namespace DBL.Repositories
         {
         }
 
-        public IEnumerable<SocialMediaSettings> Getsysteusersocialmediadata(long Userid)
+        public IEnumerable<SocialMediaSettings> Getsystemsocialmediadata(long Userid)
         {
             using (var connection = new SqlConnection(_connString))
             {
@@ -33,7 +33,7 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registersystemsocialmediapagedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
-        public SocialMediaSettings Getsysteusersocialmediadatabyid(long Socialsettingid)
+        public SocialMediaSettings Getsystemsocialmediadatabyid(long Socialsettingid)
         {
             using (var connection = new SqlConnection(_connString))
             {
@@ -41,6 +41,14 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Socialsettingid", Socialsettingid);
                 return connection.Query<SocialMediaSettings>("Usp_Getsystemsocialmediadatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        public IEnumerable<SocialMediaSettings> Getsystemallsocialmediadata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                return connection.Query<SocialMediaSettings>("Usp_Getsystemallsocialmediadata", null, commandType: CommandType.StoredProcedure).ToList();
             }
         }
     }

@@ -16,7 +16,7 @@ namespace Blog.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var socialmedia = await bl.Getsysteusersocialmediadata(SessionUserData.Usermodel.Userid);
+            var socialmedia = await bl.Getsystemsocialmediadata(SessionUserData.Usermodel.Userid);
             return View(socialmedia);
         }
 
@@ -26,7 +26,7 @@ namespace Blog.Controllers
             SocialMediaSettings socialMediaSettings = new SocialMediaSettings();
             if (Socialsettingid > 0)
             {
-                socialMediaSettings = await bl.Getsysteusersocialmediadatabyid(Socialsettingid);
+                socialMediaSettings = await bl.Getsystemsocialmediadatabyid(Socialsettingid);
             }
             return PartialView(socialMediaSettings);
         }

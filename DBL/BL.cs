@@ -311,11 +311,11 @@ namespace DBL
         #endregion
 
         #region System Social Medias
-        public Task<IEnumerable<SocialMediaSettings>> Getsysteusersocialmediadata(long UserId)
+        public Task<IEnumerable<SocialMediaSettings>> Getsystemsocialmediadata(long UserId)
         {
             return Task.Run(() =>
             {
-                var Resp = db.SocialmediaRepository.Getsysteusersocialmediadata(UserId);
+                var Resp = db.SocialmediaRepository.Getsystemsocialmediadata(UserId);
                 return Resp;
             });
         }
@@ -362,11 +362,19 @@ namespace DBL
             return Resp;
         }
 
-        public Task<SocialMediaSettings> Getsysteusersocialmediadatabyid(long Socialsettingid)
+        public Task<SocialMediaSettings> Getsystemsocialmediadatabyid(long Socialsettingid)
         {
             return Task.Run(() =>
             {
-                var Resp = db.SocialmediaRepository.Getsysteusersocialmediadatabyid(Socialsettingid);
+                var Resp = db.SocialmediaRepository.Getsystemsocialmediadatabyid(Socialsettingid);
+                return Resp;
+            });
+        }
+        public Task<IEnumerable<SocialMediaSettings>> Getsystemallsocialmediadata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SocialmediaRepository.Getsystemallsocialmediadata();
                 return Resp;
             });
         }
@@ -498,6 +506,14 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.BlogsRepository.Getsystemblogdatabyid(Blogid);
+                return Resp;
+            });
+        }
+        public Task<Systemblogdata> Getsystemallunpublishedblogdata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Getsystemallunpublishedblogdata();
                 return Resp;
             });
         }

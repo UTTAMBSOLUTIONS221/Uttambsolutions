@@ -1,7 +1,11 @@
+using Blog.Schedulers;
 using DBL.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Quartz;
+using Quartz.Impl;
+using Quartz.Spi;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -16,6 +20,16 @@ builder.Services.AddScoped<FacebookService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddHostedService<QuartzHostedService>();
+builder.Services.AddSingleton<IJobFactory, SingletonJobFactory>();
+builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+// Add our job
+builder.Services.AddSingleton<PublishBlogstoFacebookJob>();
+builder.Services.AddSingleton(new JobSchedule(
+    jobType: typeof(PublishBlogstoFacebookJob),
+    cronExpression: "0 0 3 * * ?"));
+
+
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
