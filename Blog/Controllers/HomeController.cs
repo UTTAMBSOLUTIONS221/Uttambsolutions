@@ -27,14 +27,16 @@ namespace Blog.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Blogdetails(long Blogid)
+        public async Task<IActionResult> Blogdetails(long Blogid, string Pageid)
         {
             var blogPost = await bl.Getsystemblogdatabyid(Blogid); // Fetch your blog post
-            ViewBag.Title = blogPost.Blogname;
-            ViewBag.OgTitle = blogPost.Blogname;
-            ViewBag.OgDescription = blogPost.Summary;
-            ViewBag.OgImage = blogPost.Blogprimaryimageurl;
-            ViewBag.OgUrl = $"https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={Blogid}";
+            @ViewData["app_id"] = Pageid;
+            @ViewData["type"] = "website";
+            @ViewData["Title"] = blogPost.Blogname;
+            @ViewData["description"] = blogPost.Summary;
+            @ViewData["image"] = blogPost.Blogprimaryimageurl;
+            @ViewData["url"] = $"https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={Blogid}&Pageid={Pageid}";
+
 
             return View(blogPost);
         }
