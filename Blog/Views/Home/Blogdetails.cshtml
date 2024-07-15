@@ -1,4 +1,4 @@
-﻿
+﻿@model DBL.Entities.Systemblog
 @{
     Layout = null;
 }
@@ -79,14 +79,7 @@
     <div class="content-wrapper" style="padding-top: 58px;">
         <section class="content">
             <div class="container">
-                <div id="AlertsContainer">
-                    @{
-                        await Html.RenderPartialAsync("_Alerts");
-                    }
-                </div>
-                <main role="main" class="pb-3 mt-2 pt-2">
-                    @RenderBody()
-                </main>
+                
             </div>
         </section>
         <!-- /.content -->
