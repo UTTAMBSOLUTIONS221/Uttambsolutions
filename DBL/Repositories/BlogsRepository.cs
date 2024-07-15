@@ -70,5 +70,16 @@ namespace DBL.Repositories
                 return connection.Query<Systemblog>("Usp_Getsystemallunpublishedblogdata", null, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+
+        public Genericmodel Updatepublishedblogdata(long Blogid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Blogid", Blogid);
+                return connection.Query<Genericmodel>("Usp_Updatepublishedblogdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
     }
 }

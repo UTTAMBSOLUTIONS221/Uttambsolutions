@@ -500,6 +500,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Updatepublishedblogdata(long Blogid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Updatepublishedblogdata(Blogid);
+                return Resp;
+            });
+        }
         #endregion
 
         #region System Product Brands

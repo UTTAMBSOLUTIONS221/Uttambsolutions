@@ -9,5 +9,6 @@ namespace DBL.Repositories
         Genericmodel Registersystemblogdata(string JsonData);
         Systemblog Getsystemblogdatabyid(long Blogid);
         IEnumerable<Systemblog> Getsystemallunpublishedblogdata();
+        Genericmodel Updatepublishedblogdata(long Blogid);
     }
 }
