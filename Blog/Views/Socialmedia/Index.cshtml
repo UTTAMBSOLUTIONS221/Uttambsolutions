@@ -76,8 +76,16 @@
         return;
     }
     
+    if ($('#Pagetypeid').val() === '') {
+        Swal.fire("Social Page Not Created", 'Page Type is Required', "warning");
+        document.getElementById("savesystemsocialmediaid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    
    var uil1 = {
-        SocialSettingId: $('#SocialSettingId').val(), Socialpagename: $('#Socialpagenameid').val(),UserAccessToken: $('#UserAccessTokenid').val(),Appid: $('#Appid').val(),Appsecret: $('#Appsecretid').val(),Socialowner:$('#systemLoggedinedUserid').val(),Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+        SocialSettingId: $('#SocialSettingId').val(), Socialpagename: $('#Socialpagenameid').val(),UserAccessToken: $('#UserAccessTokenid').val(),Appid: $('#Appid').val(),Appsecret: $('#Appsecretid').val(),Pagetype: $('#Pagetypeid').val(),Socialowner:$('#systemLoggedinedUserid').val(),Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
     };
     $.post("/Socialmedia/Addsocialmediapagedata", uil1, function (response) {
         if (response.RespStatus == 0) {

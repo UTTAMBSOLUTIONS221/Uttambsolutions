@@ -10,6 +10,7 @@
         public string UserAccessToken { get; set; }
         public string PageAccessToken { get; set; }
         public string PageId { get; set; }
+        public string Pagetype { get; set; }
         public string Extra { get; set; }
         public string Extra1 { get; set; }
         public string Extra2 { get; set; }

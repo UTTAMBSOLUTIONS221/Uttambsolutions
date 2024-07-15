@@ -12,13 +12,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Page Name</label>
                 <input class="form-control form-control-sm" asp-for="@Model.Socialpagename" id="Socialpagenameid" />
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <div class="form-group">
                 <label class="font-weight-light">Access Token</label>
                 <input class="form-control form-control-sm" asp-for="@Model.UserAccessToken" id="UserAccessTokenid" />
@@ -26,16 +26,25 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">App Id</label>
                 <input class="form-control form-control-sm" asp-for="@Model.Appid" id="Appid" />
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">App Secret</label>
                 <input class="form-control form-control-sm" asp-for="@Model.Appsecret" id="Appsecretid" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Page Type</label>
+                <select class="form-control form-control-sm" asp-for="@Model.Pagetype" id="Pagetypeid">
+                    <option value="">---Select---</option>
+                    <option value="Facebook">Facebook</option>
+                </select>
             </div>
         </div>
     </div>
