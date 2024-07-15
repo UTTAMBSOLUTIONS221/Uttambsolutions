@@ -361,6 +361,15 @@ namespace DBL
 
             return Resp;
         }
+
+        public Task<SocialMediaSettings> Getsysteusersocialmediadatabyid(long Socialsettingid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SocialmediaRepository.Getsysteusersocialmediadatabyid(Socialsettingid);
+                return Resp;
+            });
+        }
         #endregion
 
         #region System Orgnizations

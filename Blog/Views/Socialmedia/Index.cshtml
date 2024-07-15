@@ -85,7 +85,7 @@
     }
     
    var uil1 = {
-        SocialSettingId: $('#SocialSettingId').val(), Socialpagename: $('#Socialpagenameid').val(),UserAccessToken: $('#UserAccessTokenid').val(),Appid: $('#Appid').val(),Appsecret: $('#Appsecretid').val(),Pagetype: $('#Pagetypeid').val(),Socialowner:$('#systemLoggedinedUserid').val(),Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+        SocialSettingId: $('#SocialSettingId').val(), Socialpagename: $('#Socialpagenameid').val(),UserAccessToken: $('#UserAccessTokenid').val(),Appid: $('#Appid').val(),Appsecret: $('#Appsecretid').val(),PageType: $('#Pagetypeid').val(),Socialowner:$('#systemLoggedinedUserid').val(),Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
     };
     $.post("/Socialmedia/Addsocialmediapagedata", uil1, function (response) {
         if (response.RespStatus == 0) {

@@ -21,9 +21,14 @@ namespace Blog.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Addsocialmediapage()
+        public async Task<IActionResult> Addsocialmediapage(long Socialsettingid)
         {
-            return PartialView();
+            SocialMediaSettings socialMediaSettings = new SocialMediaSettings();
+            if (Socialsettingid > 0)
+            {
+                socialMediaSettings = await bl.Getsysteusersocialmediadatabyid(Socialsettingid);
+            }
+            return PartialView(socialMediaSettings);
         }
 
         public async Task<JsonResult> Addsocialmediapagedata(SocialMediaSettings model)

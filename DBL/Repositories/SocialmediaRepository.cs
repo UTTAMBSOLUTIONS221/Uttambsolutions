@@ -33,5 +33,15 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registersystemsocialmediapagedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+        public SocialMediaSettings Getsysteusersocialmediadatabyid(long Socialsettingid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Socialsettingid", Socialsettingid);
+                return connection.Query<SocialMediaSettings>("Usp_Getsysteusersocialmediadatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
     }
 }

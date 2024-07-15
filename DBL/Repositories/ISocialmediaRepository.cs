@@ -7,5 +7,6 @@ namespace DBL.Repositories
     {
         IEnumerable<SocialMediaSettings> Getsysteusersocialmediadata(long Userid);
         Genericmodel Registersystemsocialmediapagedata(string JsonData);
+        SocialMediaSettings Getsysteusersocialmediadatabyid(long Socialsettingid);
     }
 }
