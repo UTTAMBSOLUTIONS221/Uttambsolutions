@@ -12,15 +12,15 @@ namespace DBL.Helpers
         /// <param name="appSecret">The Facebook App Secret.</param>
         /// <param name="shortLivedAccessToken">The short-lived access token.</param>
         /// <returns>The exchange token response.</returns>
-        public FacebookExchangeTokenResponse ExchangeAccessToken(string appId, string appSecret, string shortLivedAccessToken)
+        public async Task<FacebookExchangeTokenResponse> ExchangeAccessTokenAsync(string appId, string appSecret, string shortLivedAccessToken)
         {
             string requestUri = $"https://graph.facebook.com/oauth/access_token?client_id={appId}&client_secret={appSecret}&grant_type=fb_exchange_token&fb_exchange_token={shortLivedAccessToken}";
 
             using (var httpClient = new HttpClient())
             {
-                var response = httpClient.GetAsync(requestUri).Result;
+                var response = await httpClient.GetAsync(requestUri);
                 response.EnsureSuccessStatusCode();
-                var responseBody = response.Content.ReadAsStringAsync().Result;
+                var responseBody = await response.Content.ReadAsStringAsync();
 
                 return JsonSerializer.Deserialize<FacebookExchangeTokenResponse>(responseBody);
             }
@@ -31,15 +31,15 @@ namespace DBL.Helpers
         /// </summary>
         /// <param name="extendedAccessToken">The extended access token.</param>
         /// <returns>The never expires token response.</returns>
-        public FacebookNeverExpiresResponse GenerateNeverExpiresAccessToken(string extendedAccessToken)
+        public async Task<FacebookNeverExpiresResponse> GenerateNeverExpiresAccessTokenAsync(string extendedAccessToken)
         {
             string requestUri = $"https://graph.facebook.com/me/accounts?access_token={extendedAccessToken}";
 
             using (var httpClient = new HttpClient())
             {
-                var response = httpClient.GetAsync(requestUri).Result;
+                var response = await httpClient.GetAsync(requestUri);
                 response.EnsureSuccessStatusCode();
-                var responseBody = response.Content.ReadAsStringAsync().Result;
+                var responseBody = await response.Content.ReadAsStringAsync();
 
                 return JsonSerializer.Deserialize<FacebookNeverExpiresResponse>(responseBody);
             }
