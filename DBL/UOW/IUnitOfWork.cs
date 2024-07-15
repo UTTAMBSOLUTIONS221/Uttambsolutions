@@ -8,6 +8,7 @@ namespace DBL.UOW
         IRoleRepository RoleRepository { get; }
         IAccountRepository AccountRepository { get; }
         ISettingsRepository SettingsRepository { get; }
+        ISocialmediaRepository SocialmediaRepository { get; }
         IOrganizationRepository OrganizationRepository { get; }
         IModulesRepository ModulesRepository { get; }
 

@@ -11,6 +11,7 @@ namespace DBL.UOW
         private IRoleRepository roleRepository;
         private IAccountRepository accountRepository;
         private ISettingsRepository settingsRepository;
+        private ISocialmediaRepository socialmediaRepository;
         private IOrganizationRepository organizationRepository;
         private IModulesRepository modulesRepository;
         private IBlogcategoryRepository blogcategoryRepository;
@@ -37,6 +38,10 @@ namespace DBL.UOW
         public ISettingsRepository SettingsRepository
         {
             get { return settingsRepository ?? (settingsRepository = new SettingsRepository(connString)); }
+        }
+        public ISocialmediaRepository SocialmediaRepository
+        {
+            get { return socialmediaRepository ?? (socialmediaRepository = new SocialmediaRepository(connString)); }
         }
         public IOrganizationRepository OrganizationRepository
         {
@@ -72,6 +77,7 @@ namespace DBL.UOW
             generalRepository = null;
             roleRepository = null;
             accountRepository = null;
+            socialmediaRepository = null;
             modulesRepository = null;
             blogcategoryRepository = null;
             blogsRepository = null;

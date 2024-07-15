@@ -82,13 +82,9 @@
                     <div class="dropdown-menu bg-white">
                         <div class="row" hidden>
                             <div class="col-sm-12">
-                                <input id="systemLoggedinedUtcnameid" value="@currentUserData.Usermodel.Utcname">
-                                <input id="systemLoggedinedTenantid" value="@currentUserData.Usermodel.Tenantid">
                                 <input id="systemLoggedinedUserid" value="@currentUserData.Usermodel.Userid">
-                                <input id="systemLoggedinedUserNameId" value="@currentUserData.Usermodel.Fullname">
                             </div>
                         </div>
-                        <a asp-area="" asp-controller="Account" asp-action="Myprofile" class="dropdown-item text-dark text-sm font-weight-bold">My Profile</a>
                         <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item text-dark text-sm font-weight-bold"> Log out</a>
                     </div>
                 </li>
@@ -102,202 +98,62 @@
         <aside class="main-sidebar sidebar-white bg-white position-fixed">
             <a asp-controller="Home" asp-action="Dashboard" class="brand-link">
                 <img src="~/images/uttambsolutionlogo.png" alt="Uttambsolutions Logo" class="brand-image">
-                <span class="brand-text font-weight-bold">UTTAMB SOLUTIONS</span>
+                <span class="brand-text font-weight-bold">47 NEWS</span>
             </a>
             <div class="sidebar" style="height: calc(100vh - 56px); overflow-y: auto;">
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item">
-                            <a asp-controller="Home" asp-action="Dashboard" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i><p>Dashboard</p>
-                            </a>
-                        </li>
 
-                        <li class="nav-item has-treeview main">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-cogs"></i><p>Settings<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item main">
-                                    <a asp-controller="Settings" asp-action="Index" asp-area="" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Templates</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                <!-- Profile Image -->
+                <div class="card card-info card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="../../dist/img/user4-128x128.jpg"
+                                 alt="User profile picture">
+                        </div>
 
-                        <li class="nav-item has-treeview main">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-list"></i><p>Modules<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main">
-                                    <a asp-controller="Module" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Modules</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <h3 class="profile-username text-center">@currentUserData.Usermodel.Fullname</h3>
 
-                        <li class="nav-item has-treeview main">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-list"></i><p>Blogs<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main">
-                                    <a asp-controller="Blogcategory" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Categories</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item main">
-                                    <a asp-controller="Systemblog" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Blogs</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <p class="text-muted text-center">Software Engineer</p>
 
-                        <li class="nav-item has-treeview main">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-list"></i><p>Products<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main">
-                                    <a asp-controller="Brand" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Brands</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item main">
-                                    <a asp-controller="Category" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Category</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item main">
-                                    <a asp-controller="Product" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Product</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>Followers</b> <a class="float-right">1,322</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Following</b> <a class="float-right">543</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Friends</b> <a class="float-right">13,287</a>
+                            </li>
+                        </ul>
 
-                        <li id="CAN_MANAGE_PRODUCTS" class="nav-item has-treeview main" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-store"></i><p>Products<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item  ml-2 main" id="CAN_VIEW_PRODUCTS" style="display:none;">
-                                    <a asp-controller="ProductManagement" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Products List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ml-2 main" id="CAN_VIEW_STORE_PRODUCTS" style="display:none;">
-                                    <a asp-controller="ProductManagement" asp-action="Mainstore" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Mainstore List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_SUPPLIERS" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-truck"></i><p>Suppliers<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_SUPPLIERS" style="display:none;">
-                                    <a asp-controller="SettingsManagement" asp-action="Systemsupplierslist" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Suppliers</p>
+                        <a href="#" class="btn btn-info btn-block"><b>Follow</b></a>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+
+                <!-- /.card -->
+                <!-- About Me Box -->
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">About Me</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <nav>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item">
+                                    <a asp-controller="Socialmedia" asp-action="Index" asp-area="" class="nav-link">
+                                        <i class="nav-icon fas fa-social"></i><p>Social Media</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_PRICES" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-object-group"></i><p>Price<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_PRICELISTS" style="display:none;">
-                                    <a asp-controller="PriceManagement" asp-action="Pricelists" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Price List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item main" id="CAN_VIEW_DISCOUNTS" style="display:none;">
-                                    <a asp-controller="PriceManagement" asp-action="Discountlists" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Discount List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_HARDWARES" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-university "></i><p>Hardware<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_CARDS" style="display:none;">
-                                    <a asp-controller="HardwareManagement" asp-action="Cardlists" class="nav-link">
-                                        <i class="nav-icon fa fa-solid fa-credit-card"></i><p>Cards List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_LOYALTY" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-gift"></i><p>Loyalty<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_FORMULA_LISTINGS" style="display:none;">
-                                    <a asp-controller="LoyaltyManagement" asp-action="Formulalist" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Formula List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item main" id="CAN_VIEW_SCHEME_LISTINGS" style="display:none;">
-                                    <a asp-controller="LoyaltyManagement" asp-action="Schemelist" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Schemes List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_CUSTOMERS" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-users"></i><p>Customers<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_CUSTOMERS" style="display:none;">
-                                    <a asp-controller="Customermanagement" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Customers</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_SALES" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-receipt"></i><p>Sales<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_SALES" style="display:none;">
-                                    <a asp-controller="SaleManagement" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Sales List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-users"></i><p>Staff<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main">
-                                    <a asp-controller="Role" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Role List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item main">
-                                    <a asp-controller="Staff" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Staffs List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
+                        </nav>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
             </div>
         </aside>
 

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<DBL.Entities.SocialMediaSettings>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Adminlayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h6 class="font-weight-bold text-sm card-title">Social Pages</h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive table-responsive-sm">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>DateCreated</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Socialpagename</td>
+                                <td>@item.DateCreated</td>
+                                <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+    ﻿function savesystemsocialmediadata() {
+    document.getElementById("savesystemsocialmediaid").disabled = true;
+    document.getElementById("processingSpinner").style.display = "inline-block";
+    document.getElementById("buttonText").innerText = "Processing...";
+    if ($('#Socialpagenameid').val() === '') {
+        Swal.fire("Social Page Not Created", 'Page Name is Required', "warning");
+        document.getElementById("savesystemsocialmediaid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    if ($('#UserAccessTokenid').val() === '') {
+        Swal.fire("Social Page Not Created", 'Access Token is Required', "warning");
+        document.getElementById("savesystemsocialmediaid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    if ($('#Appid').val() === '') {
+        Swal.fire("Social Page Not Created", 'App Id is Required', "warning");
+        document.getElementById("savesystemsocialmediaid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    } 
+    if ($('#Appsecretid').val() === '') {
+        Swal.fire("Social Page Not Created", 'App Secret is Required', "warning");
+        document.getElementById("savesystemsocialmediaid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        return;
+    }
+    
+   var uil1 = {
+        SocialSettingId: $('#SocialSettingId').val(), Socialpagename: $('#Socialpagenameid').val(),UserAccessToken: $('#UserAccessTokenid').val(),Appid: $('#Appid').val(),Appsecret: $('#Appsecretid').val(),Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+    };
+    $.post("/Socialmedia/Addsocialmediapagedata", uil1, function (response) {
+        if (response.RespStatus == 0) {
+            Swal.fire('Saved!', response.RespMessage, 'success')
+            $('#Uttambsolutionsmodallarge').hide();
+            setTimeout(function () { location.reload(); }, 1000);
+        } else if (response.RespStatus == 1) {
+            Swal.fire("Module details not saved", response.RespMessage, "warning");
+        }
+        else {
+            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+        }
+        document.getElementById("savesystemtmoduleid").disabled = false;
+        document.getElementById("processingSpinner").style.display = "none";
+        document.getElementById("buttonText").innerText = "SAVE";
+        });
+    }
+   </script>
+}

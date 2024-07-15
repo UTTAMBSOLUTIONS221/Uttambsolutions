@@ -16,6 +16,7 @@ namespace DBL
         Encryptdecrypt sec = new Encryptdecrypt();
         Stringgenerator str = new Stringgenerator();
         EmailSenderHelper emlsnd = new EmailSenderHelper();
+        FacebookHelper facebook = new FacebookHelper();
         public BL(string connString)
         {
             this._connString = connString;
@@ -304,6 +305,45 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.SettingsRepository.Getsystemcommunicationtemplatedatabyid(TemplateId);
+                return Resp;
+            });
+        }
+        #endregion
+
+        #region System Social Medias
+        public Task<IEnumerable<SocialMediaSettings>> Getsysteusersocialmediadata(long UserId)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SocialmediaRepository.Getsysteusersocialmediadata(UserId);
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registersystemsocialmediapagedata(SocialMediaSettings obj)
+        {
+            Genericmodel Resp = new Genericmodel();
+            return Task.Run(() =>
+            {
+                FacebookExchangeTokenResponse longlivedaccessToken = facebook.ExchangeAccessToken(obj.Appid, obj.Appsecret, obj.UserAccessToken);
+                if (longlivedaccessToken.access_token != null)
+                {
+                    FacebookNeverExpiresResponse neverexpiresaccessToken = facebook.GenerateNeverExpiresAccessToken(longlivedaccessToken.access_token);
+                    if (neverexpiresaccessToken.Data.Count() != null)
+                    {
+                        obj.PageAccessToken = neverexpiresaccessToken.Data.FirstOrDefault().AccessToken;
+                        Resp = db.SocialmediaRepository.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(obj));
+                    }
+                    else
+                    {
+                        Resp.RespStatus = 1;
+                        Resp.RespMessage = "Failed to generate Facebook long lived access token.";
+                    }
+                }
+                else
+                {
+                    Resp.RespStatus = 1;
+                    Resp.RespMessage = "Failed to retrieve Facebook access token.";
+                }
                 return Resp;
             });
         }
