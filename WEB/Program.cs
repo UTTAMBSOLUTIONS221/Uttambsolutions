@@ -1,11 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Quartz;
-using Quartz.Impl;
-using Quartz.Spi;
 using WEB.Helpers;
-using WEB.Schedulers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton(typeof(GoogleSheetsHelper));
@@ -19,15 +15,6 @@ builder.Services.AddDataProtection();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddHostedService<QuartzHostedService>();
-builder.Services.AddSingleton<IJobFactory, SingletonJobFactory>();
-builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
-// Add our job
-builder.Services.AddSingleton<RetrieveBlogsJob>();
-builder.Services.AddSingleton(new JobSchedule(
-    jobType: typeof(RetrieveBlogsJob),
-    cronExpression: "0 0 3 * * ?"));
-
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);

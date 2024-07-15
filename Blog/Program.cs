@@ -8,6 +8,7 @@ using Quartz.Impl;
 using Quartz.Spi;
 
 var builder = WebApplication.CreateBuilder(args);
+
 // Add services to the container.
 builder.Services.AddRazorPages().AddJsonOptions(options =>
 {
@@ -20,15 +21,17 @@ builder.Services.AddScoped<FacebookService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddDistributedMemoryCache();
+
+// Add Quartz services
 builder.Services.AddHostedService<QuartzHostedService>();
 builder.Services.AddSingleton<IJobFactory, SingletonJobFactory>();
 builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+
 // Add our job
 builder.Services.AddSingleton<PublishBlogstoFacebookJob>();
 builder.Services.AddSingleton(new JobSchedule(
     jobType: typeof(PublishBlogstoFacebookJob),
-    cronExpression: "0 0 3 * * ?"));
-
+    cronExpression: "0 * * * * ?")); // Cron expression for running every minute
 
 builder.Services.AddSession(options =>
 {
@@ -51,7 +54,6 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>()
     .AddScoped(x => x.GetRequiredService<IUrlHelperFactory>().GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext));
-
 
 var app = builder.Build();
 
@@ -82,7 +84,6 @@ app.MapControllerRoute(
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

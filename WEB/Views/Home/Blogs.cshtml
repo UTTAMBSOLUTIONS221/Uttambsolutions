@@ -1,22 +1,24 @@
-﻿@model IEnumerable<DBL.Models.Newsapiarticles>
+﻿@model DBL.Models.Systemblogdata
 @{
     ViewData["Title"] = "Blogs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row">
-    @foreach (var item in Model)
+    @if (Model.Systemblogs.Any())
     {
-        <div class="col-md-4">
-            <div class="card">
-                <img src="@Url.Content(item.UrlToImage)" class="card-img-top" />
-                <div class="card-body">
-                    <h4>@item.Title</h4>
-                    <p>@item.Description</p>
-                    <p>@item.Content</p>
+        foreach (var item in Model.Systemblogs)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="@Url.Content(item.Blogprimaryimageurl)" class="card-img-top" />
+                    <div class="card-body">
+                        <h4>@item.Blogname</h4>
+                        <p>@item.Summary</p>
+                        <p>@item.Blogcontent</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     }
-   
 </div>

@@ -48,7 +48,7 @@ namespace WEB.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Blogs()
         {
-            var blogs = await bl.Getsystemblogsdata(0, 10);
+            var blogs = await bl.Getsystemallblogdata(0, 10000);
             return View(blogs);
         }
         [HttpGet]
