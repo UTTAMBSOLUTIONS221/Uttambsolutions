@@ -1,4 +1,5 @@
 ﻿using DBL;
+using DBL.Helpers;
 using Quartz;
 
 namespace Blog.Schedulers
@@ -7,7 +8,7 @@ namespace Blog.Schedulers
     {
         private readonly IServiceProvider _provider;
         private readonly BL bl;
-
+        FacebookHelper facebook = new FacebookHelper();
         public PublishBlogstoFacebookJob(IServiceProvider provider, IConfiguration config)
         {
             _provider = provider;
@@ -21,16 +22,23 @@ namespace Blog.Schedulers
             DateTime now = DateTime.Now;
             DateTime yesterday = now.AddDays(-1);
             string formattedDate = yesterday.ToString("yyyy-MM-dd");
-            //get all unpublished blogs
+            //get all unpublished blogs and not published
             var unpublishedBlogs = await bl.Getsystemallunpublishedblogdata();
             if (unpublishedBlogs != null && unpublishedBlogs.Any())
             {
-                foreach (var data in unpublishedBlogs)
+                foreach (var blogData in unpublishedBlogs)
                 {
                     //Get all Registered Social Pages
-                    var Socialpages = await bl.Getsystemallunpublishedblogdata();
-
-
+                    var Socialpages = await bl.Getsystemallsocialmediadata();
+                    foreach (var page in Socialpages)
+                    {
+                        var imageUrls = new List<string>
+                        {
+                            blogData.Blogprimaryimageurl
+                        };
+                        string blogUrl = $"https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={blogData.Blogid}";
+                        var resp = facebook.PublishBlogPostAsync(page.PageAccessToken, page.PageId, blogData.Summary, imageUrls, blogUrl);
+                    }
                 }
             }
 

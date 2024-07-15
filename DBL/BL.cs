@@ -465,23 +465,6 @@ namespace DBL
                 return Resp;
             });
         }
-
-        public Task<Genericmodel> RetrieveandSaveBlogs(string Obj)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.BlogsRepository.Registersystemserverblogdata(Obj);
-                return Resp;
-            });
-        }
-        public Task<IEnumerable<Newsapiarticles>> Getsystemblogsdata(int Page, int PageSize)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.BlogsRepository.Getsystemblogsdata(Page, PageSize);
-                return Resp;
-            });
-        }
         #endregion
 
         #region System Blogs
@@ -509,7 +492,7 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<IEnumerable<Newsapiarticles>> Getsystemallunpublishedblogdata()
+        public Task<IEnumerable<Systemblog>> Getsystemallunpublishedblogdata()
         {
             return Task.Run(() =>
             {

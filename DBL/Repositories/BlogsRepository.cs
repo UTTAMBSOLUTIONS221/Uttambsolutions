@@ -62,35 +62,12 @@ namespace DBL.Repositories
                 }
             }
         }
-        public Genericmodel Registersystemserverblogdata(string JsonData)
+        public IEnumerable<Systemblog> Getsystemallunpublishedblogdata()
         {
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
-                DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@JsonObjectdata", JsonData);
-                return connection.Query<Genericmodel>("Usp_Registerarticlesandsourcesdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
-            }
-        }
-
-        public IEnumerable<Newsapiarticles> Getsystemblogsdata(int Page, int PageSize)
-        {
-            using (var connection = new SqlConnection(_connString))
-            {
-                connection.Open();
-                DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@Page", Page);
-                parameters.Add("@PageSize", PageSize);
-                return connection.Query<Newsapiarticles>("Usp_Getsystemblogsdata", parameters, commandType: CommandType.StoredProcedure).ToList();
-            }
-        }
-
-        public IEnumerable<Newsapiarticles> Getsystemallunpublishedblogdata()
-        {
-            using (var connection = new SqlConnection(_connString))
-            {
-                connection.Open();
-                return connection.Query<Newsapiarticles>("Usp_Getsystemallunpublishedblogdata", null, commandType: CommandType.StoredProcedure).ToList();
+                return connection.Query<Systemblog>("Usp_Getsystemallunpublishedblogdata", null, commandType: CommandType.StoredProcedure).ToList();
             }
         }
     }
