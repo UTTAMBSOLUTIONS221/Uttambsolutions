@@ -23,9 +23,9 @@ namespace Blog.Schedulers
             string formattedDate = yesterday.ToString("yyyy-MM-dd");
             //get all unpublished blogs
             var unpublishedBlogs = await bl.Getsystemallunpublishedblogdata();
-            if (unpublishedBlogs != null && unpublishedBlogs.Systemblogs.Any())
+            if (unpublishedBlogs != null && unpublishedBlogs.Any())
             {
-                foreach (var data in unpublishedBlogs.Systemblogs)
+                foreach (var data in unpublishedBlogs)
                 {
                     //Get all Registered Social Pages
                     var Socialpages = await bl.Getsystemallunpublishedblogdata();

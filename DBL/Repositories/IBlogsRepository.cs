@@ -10,5 +10,6 @@ namespace DBL.Repositories
         Systemblog Getsystemblogdatabyid(long Blogid);
         Genericmodel Registersystemserverblogdata(string JsonData);
         IEnumerable<Newsapiarticles> Getsystemblogsdata(int Page, int PageSize);
+        IEnumerable<Newsapiarticles> Getsystemallunpublishedblogdata();
     }
 }

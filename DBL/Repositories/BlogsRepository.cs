@@ -84,5 +84,14 @@ namespace DBL.Repositories
                 return connection.Query<Newsapiarticles>("Usp_Getsystemblogsdata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+
+        public IEnumerable<Newsapiarticles> Getsystemallunpublishedblogdata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                return connection.Query<Newsapiarticles>("Usp_Getsystemallunpublishedblogdata", null, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
     }
 }

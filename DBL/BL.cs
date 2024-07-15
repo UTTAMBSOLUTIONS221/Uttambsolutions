@@ -509,7 +509,7 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<Systemblogdata> Getsystemallunpublishedblogdata()
+        public Task<IEnumerable<Newsapiarticles>> Getsystemallunpublishedblogdata()
         {
             return Task.Run(() =>
             {
