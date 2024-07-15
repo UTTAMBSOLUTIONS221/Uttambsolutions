@@ -32,6 +32,7 @@ builder.Services.AddSingleton<PublishBlogstoFacebookJob>();
 builder.Services.AddSingleton(new JobSchedule(
     jobType: typeof(PublishBlogstoFacebookJob),
     cronExpression: "0 * * * * ?")); // Cron expression for running every minute
+                                     //cronExpression: "0 0 */3 * * ?")); // Cron expression for running every Three Hours
 
 builder.Services.AddSession(options =>
 {
