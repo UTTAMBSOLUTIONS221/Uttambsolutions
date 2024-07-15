@@ -1,16 +1,32 @@
 .bg-custom {
     background-color: #0a506c !important;
 }
+
 .btn-custom {
     background-color: #0a506c !important;
-    color:#ffffff;
+    color: #ffffff;
 }
+
 .text-custom {
     color: #0a506c !important;
 }
+
 html {
     font-size: 14px;
 }
+
+.footer {
+    background-color: black;
+}
+
+    .footer a {
+        color: white;
+    }
+
+    .footer h5 {
+        color: white;
+    }
+
 
 @media (min-width: 768px) {
     html {
