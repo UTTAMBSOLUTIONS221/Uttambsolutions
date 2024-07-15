@@ -54,14 +54,17 @@ namespace DBL.Helpers
         /// <param name="imageUrls">List of image URLs to include</param>
         /// <param name="blogLink">Link to the blog post</param>
         /// <returns>Status message</returns>
-        public async Task<string> PublishBlogPostAsync(string pageAccessToken, string postToPageURL, string summary, List<string> imageUrls, string blogLink)
+        public async Task<string> PublishBlogPostAsync(string pageAccessToken, string pageID, string summary, List<string> imageUrls, string blogLink)
         {
             try
             {
+                string postToPageURL = $"https://graph.facebook.com/{pageID}/feed";
+                string postToProfileURL = $"https://graph.facebook.com/me/feed";
+                string postToPagePhotosURL = $"https://graph.facebook.com/{pageID}/photos";
                 var imageIds = new List<string>();
                 foreach (var imageUrl in imageUrls)
                 {
-                    var uploadResult = await UploadPhotoAsync(pageAccessToken, postToPageURL, imageUrl);
+                    var uploadResult = await UploadPhotoAsync(pageAccessToken, postToPagePhotosURL, imageUrl);
                     if (uploadResult.Item1 != 200)
                     {
                         var error = ParseError(uploadResult.Item2);
@@ -79,7 +82,7 @@ namespace DBL.Helpers
                     return $"Error posting to Facebook page: {error}";
                 }
 
-                var profilePostResult = await PublishPostAsync(pageAccessToken, postToPageURL, summary, imageIds, blogLink);
+                var profilePostResult = await PublishPostAsync(pageAccessToken, postToProfileURL, summary, imageIds, blogLink);
                 if (profilePostResult.Item1 != 200)
                 {
                     var error = ParseError(profilePostResult.Item2);
