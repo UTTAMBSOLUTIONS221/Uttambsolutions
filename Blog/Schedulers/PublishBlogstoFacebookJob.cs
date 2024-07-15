@@ -36,7 +36,7 @@ namespace Blog.Schedulers
                         {
                             blogData.Blogprimaryimageurl
                         };
-                        string blogUrl = $"http://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={blogData.Blogid}";
+                        string blogUrl = $"https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={blogData.Blogid}";
                         string resp = await facebook.PublishBlogPostAsync(page.PageAccessToken, page.PageId, blogData.Summary, blogUrl);
                         if (resp == "Post published successfully!")
                         {

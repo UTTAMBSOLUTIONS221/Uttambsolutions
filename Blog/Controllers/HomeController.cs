@@ -34,7 +34,7 @@ namespace Blog.Controllers
             ViewBag.OgTitle = blogPost.Blogname;
             ViewBag.OgDescription = blogPost.Summary;
             ViewBag.OgImage = blogPost.Blogprimaryimageurl;
-            ViewBag.OgUrl = $"http://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={Blogid}";
+            ViewBag.OgUrl = $"https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={Blogid}";
 
             return View(blogPost);
         }
