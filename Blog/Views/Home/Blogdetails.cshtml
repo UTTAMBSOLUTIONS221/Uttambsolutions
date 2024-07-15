@@ -17,29 +17,20 @@
     <meta property="og:url" content="@ViewBag.OgUrl" />
     <meta property="og:type" content="article" />
 
-
-    <meta name="description" content="Uttamb Solutions offers top-notch web development, e-commerce,fuel card system,forecought management system,fcs,fms,fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
-    <meta name="keywords" content="Uttamb Solutions,fuel card system,forecought management system,fcs,fms,fuel management system, web development, e-commerce, digital marketing, blogs" />
+    <meta name="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card system, forecought management system, fcs, fms, fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
+    <meta name="keywords" content="Uttamb Solutions, fuel card system, forecought management system, fcs, fms, fuel management system, web development, e-commerce, digital marketing, blogs" />
     <meta name="author" content="Uttamb Solutions" />
-    <meta name="google-adsense-account" content="ca-pub-2850934153859537">
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="@ViewData["Title"] - Uttamb Solutions" />
-    <meta property="og:description" content="Uttamb Solutions offers top-notch web development, e-commerce,fuel card system,forecought management system,fcs,fms,fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
-    <meta property="og:image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
-    <meta property="og:url" content="https://uttambsolutions.com" />
-    <meta property="og:type" content="website" />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="@ViewData["Title"] - Uttamb Solutions" />
-    <meta name="twitter:description" content="Uttamb Solutions offers top-notch web development, e-commerce,fuel card system,forecought management system,fcs,fms,fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
+    <meta name="twitter:description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card system, forecought management system, fcs, fms, fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
     <meta name="twitter:image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
 
     <!-- Schema.org Markup for Google+ -->
     <meta itemprop="name" content="@ViewData["Title"] - Uttamb Solutions" />
-    <meta itemprop="description" content="Uttamb Solutions offers top-notch web development, e-commerce,fuel card system,forecought management system,fcs,fms,fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
+    <meta itemprop="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card system, forecought management system, fcs, fms, fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
     <meta itemprop="image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
-
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -80,46 +71,69 @@
         <section class="content">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-header">
-
-                            </div>
+                    <div class="col-sm-8">
+                        <div class="card mb-4">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <img src="@Url.Content(Model.Blogprimaryimageurl)" alt="@Model.Blogcategoryname" class="card-img-top" style="object-fit: cover;" />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                               <p>@Model.Blogname</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <p>@Model.Summary</p>
-                                                <p>@Model.Blogcontent</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        @foreach(var paraGraph in Model.Pa){
+                                <h2 class="card-title ">@Model.Blogname</h2>
+                                <p class="card-text">@Model.Summary</p>
+                                <img src="@Url.Content(Model.Blogprimaryimageurl)" alt="@Model.Blogcategoryname" class="card-img-top mb-3" style="object-fit: cover;" />
+                                <p class="card-text">@Model.Blogcontent</p>
 
+                                @if (Model.Systemblogparagraph.Any())
+                                {
+                                    bool alternate = false;
+                                    foreach (var paraGraph in Model.Systemblogparagraph)
+                                    {
+                                        if (alternate)
+                                        {
+                                            <div class="media mb-3">
+                                                <div class="media-body">
+                                                    <p>@paraGraph.Blogparagraphcontent</p>
+                                                </div>
+                                                <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="ml-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
+                                            </div>
                                         }
+                                        else
+                                        {
+                                            <div class="media mb-3">
+                                                <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="mr-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
+                                                <div class="media-body">
+                                                    <p>@paraGraph.Blogparagraphcontent</p>
+                                                </div>
+                                            </div>
+                                        }
+                                        alternate = !alternate;
+                                    }
+                                }
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p class="card-text">@Model.Blogcategoryname</p>
+                                        <p class="card-text">@Model.Blogowner</p>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-6">
+                                        <p class="card-text">@Model.Datecreated</p>
+                                        <p class="card-text">@Model.Datecreated</p>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Related Articles</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Related articles logic here -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /.content -->
     </div>
 
     <footer class="border-top footer text-muted">
