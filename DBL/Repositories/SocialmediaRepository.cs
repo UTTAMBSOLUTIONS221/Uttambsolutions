@@ -20,7 +20,7 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Userid", Userid);
-                return connection.Query<SocialMediaSettings>("Usp_Getsysteusersocialmediadata", parameters, commandType: CommandType.StoredProcedure).ToList();
+                return connection.Query<SocialMediaSettings>("Usp_Getsystemsocialmediadata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
         public Genericmodel Registersystemsocialmediapagedata(string JsonData)
@@ -40,7 +40,7 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Socialsettingid", Socialsettingid);
-                return connection.Query<SocialMediaSettings>("Usp_Getsysteusersocialmediadatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                return connection.Query<SocialMediaSettings>("Usp_Getsystemsocialmediadatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
     }
