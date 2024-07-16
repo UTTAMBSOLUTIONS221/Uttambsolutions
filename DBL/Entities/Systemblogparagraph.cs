@@ -15,7 +15,12 @@ namespace DBL.Entities
 
         [StringLength(200)]
         public string? Blogparagraphimageurl { get; set; }
-
+        [Required]
+        [StringLength(100)]
+        public string? Blogparagraphimagename { get; set; }
+        [Required]
+        [StringLength(70)]
+        public string? Blogparagraphimagesource { get; set; }
         [Required]
         public long Createdby { get; set; }
 

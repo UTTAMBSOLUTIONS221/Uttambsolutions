@@ -77,7 +77,7 @@
             function generateBlogFileName(file) {
                 var uniqueId = Date.now();
                 var fileExtension = file.name.split('.').pop();
-                var newFileName = 'Blog/Blogimage/' + uniqueId + '.' + fileExtension;
+                var newFileName = 'Blogs/Blogimage/' + uniqueId + '.' + fileExtension;
                 return newFileName;
             }
 
@@ -177,7 +177,7 @@
                 // Get the file extension
                 var fileExtension = file.name.split('.').pop();
                 // Construct the new file name
-                var newFileName = 'Blog/Blogparagraphimage/' + uniqueId + '.' + fileExtension;
+                var newFileName = 'Blogs/Blogparagraphimage/' + uniqueId + '.' + fileExtension;
                 return newFileName;
             }
 
@@ -282,16 +282,26 @@
             tableBody.empty();
         }
         function addsystemblogparagraphdata() {
-            if ($('#SystemblogparagraphId').val() == "") {
-                Swal.fire("Blog Paragraphs Not Created", 'Paragraph name is Required', "warning");
+             if ($('#SystemblogparagraphId').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Paragraph is Required', "warning");
+                return;
+            }
+            if ($('#Blogparagraphimagenameid').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Image name is Required', "warning");
+                return;
+            }
+            if ($('#Blogparagraphimagesourceid').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Image source is Required', "warning");
                 return;
             }
     
             var Blogparagraphid = 0;
             var Blogid = $('#Blogid').val();
             var Blogparagraphcontent = $('#SystemblogparagraphId').val();
-            var Blogparagraphimageurl = $('#UttambsolutionsparagraphimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '');
-
+            var Blogparagraphimageurl = $('#UttambsolutionsparagraphimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '');   
+            var Blogparagraphimagename = $('#Blogparagraphimagenameid').val();
+            var Blogparagraphimagesource = $('#Blogparagraphimagesourceid').val();
+          
             // Check if the table body contains any rows
             var tableBody = $('#SystemBlogParagraphListTable tbody');
             var noDataRows = tableBody.find('tr');
@@ -307,6 +317,8 @@
                 '<td><img src="' + Blogparagraphimageurl + '" alt="Blog Paragraph Image" style="max-width: 70px; max-height: 70px;"></td>' +
                 '<td>' + Blogparagraphcontent + '</td>' +
                  '<td hidden>' + Blogparagraphimageurl + '</td>' +
+                 '<td>' + Blogparagraphimagename + '</td>' +
+                 '<td>' + Blogparagraphimagesource + '</td>' +
                 '<td class="text-right">' +
                 '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editblogparagraphdata(this.parentNode.parentNode)">Edit</button>' +
                 '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateblogparagraphdata(this.parentNode.parentNode)">Update</button>' +
@@ -322,11 +334,21 @@
             var cells = $(row).children();
             $('#Blogparagraphid').val($(cells[0]).text());
             $('#SystemblogparagraphId').val($(cells[3]).text());
+            $('#Blogparagraphimagenameid').val($(cells[5]).text());
+            $('#Blogparagraphimagesourceid').val($(cells[6]).text());
         }
         // Function to update the selected row with edited values
         function updateblogparagraphdata(row) {
            if ($('#SystemblogparagraphId').val() == "") {
-                Swal.fire("Blog Paragraphs Not Created", 'Paragraph name is Required', "warning");
+                Swal.fire("Blog Paragraphs Not Created", 'Paragraph is Required', "warning");
+                return;
+            }
+            if ($('#Blogparagraphimagenameid').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Image name is Required', "warning");
+                return;
+            }
+            if ($('#Blogparagraphimagesourceid').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Image source is Required', "warning");
                 return;
             }
             var cells = $(row).children(); // Get the cells of the selected row
@@ -335,6 +357,8 @@
             $(cells[0]).text($('#Blogparagraphid').val());
             $(cells[1]).text($('#Blogid').val());
             $(cells[3]).text($('#SystemblogparagraphId').val());
+            $(cells[5]).text($('#Blogparagraphimagenameid').val());
+            $(cells[6]).text($('#Blogparagraphimagesourceid').val());
             clearBlogParagraphForm();
         }
         // Function to clear the form after adding a new row or updating
@@ -343,6 +367,8 @@
             $('#SystemblogparagraphId').val('');
             $('#Paragraphimageurlid').val('');
             $('#UttambsolutionsparagraphimageurlId').val('');
+            $('#Blogparagraphimagenameid').val('');
+            $('#Blogparagraphimagesourceid').val('');
             $('#Uttambsolutionsparagraphimagespreviewcontainer').empty();
         }
         
@@ -351,6 +377,8 @@
     document.getElementById("savesystemblogid").disabled = true;
     document.getElementById("processingSpinner").style.display = "inline-block";
     document.getElementById("buttonText").innerText = "Processing...";
+
+
          var Shopblogparagraphsdata = [];
            $("#SystemBlogParagraphListTable tbody tr").each(function () {
            var row = $(this);
@@ -359,6 +387,8 @@
                  Blogid:$('#Blogid').val(),
                  Blogparagraphcontent:row.find('td:eq(3)').text(),
                  Blogparagraphimageurl:row.find('td:eq(4)').text(),
+                 Blogparagraphimagename:row.find('td:eq(5)').text(),
+                 Blogparagraphimagesource:row.find('td:eq(6)').text(),
                  Createdby:$('#systemLoggedinedUserid').val(),
                  Modifiedby:$('#systemLoggedinedUserid').val(),
                 Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
@@ -368,7 +398,7 @@
          });
 
     var uil1 = {
-        Blogid: $('#Blogid').val(), Blogcategoryid: $('#Blogcategoryid').val(),Blogname: $('#Blognameid').val(),Blogcontent: $('#Blogcontentid').val(),Summary: $('#Summaryid').val(),Blogprimaryimageurl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, ''),Blogtags: $('#Blogtagsid').val(),Blogowner:$('#systemLoggedinedUserid').val(),IsPublished:false,Blogstatus:3,Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Systemblogparagraph:Shopblogparagraphsdata
+        Blogid: $('#Blogid').val(), Blogcategoryid: $('#Blogcategoryid').val(),Blogname: $('#Blognameid').val(),Blogcontent: $('#Blogcontentid').val(),Summary: $('#Summaryid').val(),Blogprimaryimageurl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, ''),Blogimagename: $('#Blogimagenameid').val(),Blogimagesource: $('#Blogimagesourceid').val(),Blogtags: $('#Blogtagsid').val(),Blogowner:$('#systemLoggedinedUserid').val(),IsPublished:false,Blogstatus:3,Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Systemblogparagraph:Shopblogparagraphsdata
     };
     $.post("/Systemblog/Addsystemblogdata", uil1, function (response) {
         if (response.RespStatus == 0) {

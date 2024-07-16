@@ -26,7 +26,12 @@ namespace DBL.Entities
         [Required]
         [StringLength(200)]
         public string? Blogprimaryimageurl { get; set; }
-
+        [Required]
+        [StringLength(100)]
+        public string? Blogimagename { get; set; }
+        [Required]
+        [StringLength(70)]
+        public string? Blogimagesource { get; set; }
         [Required]
         [StringLength(400)]
         public string? Blogtags { get; set; }
