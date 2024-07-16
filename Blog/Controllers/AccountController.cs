@@ -172,7 +172,7 @@ namespace Blog.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Dashboard), "Home", new { area = "" });
+                return RedirectToAction(nameof(AccountController.Myprofile), "Account", new { area = "" });
             }
         }
         #endregion
