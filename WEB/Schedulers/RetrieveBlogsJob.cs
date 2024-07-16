@@ -1,12 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using DBL;
-using Microsoft.Extensions.Configuration;
+﻿using DBL;
 using NewsAPI;
 using NewsAPI.Constants;
 using NewsAPI.Models;
-using Newtonsoft.Json;
 using Quartz;
 
 namespace WEB.Schedulers
@@ -69,7 +64,7 @@ namespace WEB.Schedulers
                         }).ToList()
                     };
 
-                    bl.RetrieveandSaveBlogs(JsonConvert.SerializeObject(newsResponse));
+                    ///bl.RetrieveandSaveBlogs(JsonConvert.SerializeObject(newsResponse));
                 }
                 else
                 {
