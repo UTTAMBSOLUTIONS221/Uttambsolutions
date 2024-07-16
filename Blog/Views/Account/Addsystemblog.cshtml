@@ -1,0 +1,186 @@
+﻿@model DBL.Entities.Systemblog
+@{
+    var Systemblogcategory = ViewData["Systemblogcategorylists"] as List<SelectListItem>;
+}
+<div class="modal-header">
+    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Blog Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <!-- Section 1: Blog Details -->
+    <div id="section1" class="section">
+        <h6>Step 1: Blog Details</h6>
+        <div class="row">
+            <div class="col-sm-12">
+                <input asp-for="@Model.Blogid" id="Blogid" hidden />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="font-weight-light">Blog Title</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Blogname" id="Blognameid" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="font-weight-light">Blog Summary</label>
+                    <textarea class="form-control form-control-sm" asp-for="@Model.Summary" id="Summaryid" required></textarea>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="font-weight-light">Blog Content</label>
+                    <textarea class="form-control form-control-sm" asp-for="@Model.Blogcontent" id="Blogcontentid" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label class="font-weight-light">Blog Tags</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Blogtags" id="Blogtagsid" required />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Category</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.Blogcategoryid" asp-items="Systemblogcategory" id="Blogcategoryid" required>
+                        <option value="">---Select---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Blog Primary Image</label>
+                    <input class="form-control form-control-sm font-weight-light" type="file" onchange="systemBlogFileChanged(event)" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group">
+                    <label class="font-weight-light">Blog Image Name</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Blogimagename" id="Blogimagenameid" required />
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label class="font-weight-light">Image Source</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Blogimagesource" id="Blogimagesourceid" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" hidden>
+                <div class="form-group">
+                    <label class="font-weight-light">Images Url</label>
+                    <input class="form-control form-control-sm" id="UttambsolutionsimageurlId" readonly />
+                </div>
+            </div>
+            <div id="Uttambsolutionsimagespreviewcontainer"></div>
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
+    </div>
+
+    <!-- Section 2: Product Features -->
+    <div id="section2" class="section" style="display: none;">
+        <h6>Step 2: Blog Paragraphs</h6>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12" hidden>
+                                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label class="font-weight-light">Paragraph</label>
+                                    <textarea class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="font-weight-light">Paragraph Primary Image</label>
+                                    <input class="form-control form-control-sm font-weight-light" type="file" id="Paragraphimageurlid" onchange="systemBlogParagraphFileChanged(event)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <label class="font-weight-light">Paragraph Image Name</label>
+                                    <input class="form-control form-control-sm" id="Blogparagraphimagenameid" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label class="font-weight-light">Paragraph Image Source</label>
+                                    <input class="form-control form-control-sm" id="Blogparagraphimagesourceid" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12" hidden>
+                                <div class="form-group">
+                                    <label class="font-weight-light">Images Url</label>
+                                    <input class="form-control form-control-sm" id="UttambsolutionsparagraphimageurlId" readonly />
+                                </div>
+                            </div>
+                            <div id="Uttambsolutionsparagraphimagespreviewcontainer"></div>
+                        </div>
+                        <button class="btn btn-sm btn-info font-weight-bold float-right" onclick="addsystemblogparagraphdata()">ADD</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap font-weight-light w-100" id="SystemBlogParagraphListTable">
+                    <thead>
+                        <tr>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th>IMAGE</th>
+                            <th>PARAGRAPH</th>
+                            <th hidden></th>
+                            <th>NAME</th>
+                            <th>SOURCE</th>
+                            <th class="text-right">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Systemblogparagraph != null)
+                        {
+                            foreach (var data in Model.Systemblogparagraph)
+                            {
+                                <tr>
+                                    <td hidden>@data.Blogparagraphid</td>
+                                    <td hidden>@data.Blogid</td>
+                                    <td><img src="@data.Blogparagraphimageurl" alt="Blog Paragraph Image" style="max-width: 70px; max-height: 70px;" /></td>
+                                    <td>@data.Blogparagraphcontent</td>
+                                    <td hidden>@data.Blogparagraphimageurl</td>
+                                    <td>@data.Blogparagraphimagename</td>
+                                    <td>@data.Blogparagraphimagesource</td>
+                                    <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editblogparagraphdata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateblogparagraphdata(this.parentNode.parentNode)">Update</button></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
+        <button class="btn btn-sm btn-info font-weight-bold float-right" type="button" id="savesystemblogid" onclick="savesystemblogdata();">
+            <span id="buttonText">SAVE</span>
+            <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+        </button>
+    </div>
+</div>

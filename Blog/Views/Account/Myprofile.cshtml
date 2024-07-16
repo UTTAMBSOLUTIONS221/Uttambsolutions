@@ -84,109 +84,85 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-12 col-12">
-                            <div class="card">
-                                <div class="card-header p-2">
-                                    <ul class="nav nav-pills">
-                                        <li class="nav-item"><a class="nav-link active" href="#userprofile" data-toggle="tab">Profile</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
-                                    </ul>
-                                </div>
-                                <div class="card-body">
-                                    <div class="tab-content">
-                                        <div class="active tab-pane" id="userprofile">
-                                            <!-- User profile content -->
+                        <div class="col-sm-7">
+                            <div class="card card-outline card-info">
+                                <div class="card-header py-1">
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <h6 class="font-weight-bold text-sm card-title">Blogs</h6>
                                         </div>
-                                        <div class="tab-pane" id="timeline">
-                                            <div class="timeline timeline-inverse">
-                                                <div class="row">
-                                                    <div class="col-sm-7">
-                                                        <div class="card card-outline card-info">
-                                                            <div class="card-header py-1">
-                                                                <div class="row">
-                                                                    <div class="col-sm-8">
-                                                                        <h6 class="font-weight-bold text-sm card-title">Blogs</h6>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <a asp-action="Addsystemblog" asp-controller="Systemblog" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Blog</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body table-responsive table-responsive-sm">
-                                                                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Image</th>
-                                                                            <th>Title</th>
-                                                                            <th>Summary</th>
-                                                                            <th>Content</th>
-                                                                            <th>Category</th>
-                                                                            <th>Tags</th>
-                                                                            <th class="text-right">Action</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        @* @if (Model.Systemblogs != null)
-                                                                        {
-                                                                            foreach (var item in Model.Systemblogs)
-                                                                            {
-                                                                                <tr>
-                                                                                    <td><img src="@Url.Content(item.Blogprimaryimageurl)" height="40" width="40" alt="@item.Blogcategoryname" /></td>
-                                                                                    <td>@item.Blogname</td>
-                                                                                    <td>@item.Summary</td>
-                                                                                    <td>@item.Blogcontent</td>
-                                                                                    <td>@item.Blogcategoryname</td>
-                                                                                    <td>@item.Blogtags</td>
-                                                                                    <td class="text-right"><a asp-action="Addsystemblog" asp-controller="Systemblog" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@item.Blogid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
-                                                                                </tr>
-                                                                            }
-                                                                        } *@
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-5">
-                                                        <div class="card card-outline card-info">
-                                                            <div class="card-header py-1">
-                                                                <div class="row">
-                                                                    <div class="col-sm-8">
-                                                                        <h6 class="font-weight-bold text-sm card-title">Social Pages</h6>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body table-responsive table-responsive-sm">
-                                                                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables1">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Name</th>
-                                                                            <th>DateCreated</th>
-                                                                            <th class="text-right">Action</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        @*  @foreach (var item in Model)
-                                                                        {
-                                                                        <tr>
-                                                                        <td>@item.Socialpagename</td>
-                                                                        <td>@item.DateCreated</td>
-                                                                        <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
-                                                                        </tr>
-                                                                        } *@
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
+                                        <div class="col-sm-4">
+                                            <a asp-action="Addsystemblog" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Blog</a>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="card-body table-responsive table-responsive-sm">
+                                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                                        <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Title</th>
+                                                <th>Summary</th>
+                                                <th>Content</th>
+                                                <th>Category</th>
+                                                <th>Tags</th>
+                                                <th class="text-right">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @* @if (Model.Systemblogs != null)
+                                            {
+                                            foreach (var item in Model.Systemblogs)
+                                            {
+                                            <tr>
+                                            <td><img src="@Url.Content(item.Blogprimaryimageurl)" height="40" width="40" alt="@item.Blogcategoryname" /></td>
+                                            <td>@item.Blogname</td>
+                                            <td>@item.Summary</td>
+                                            <td>@item.Blogcontent</td>
+                                            <td>@item.Blogcategoryname</td>
+                                            <td>@item.Blogtags</td>
+                                            <td class="text-right"><a asp-action="Addsystemblog" asp-controller="Systemblog" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@item.Blogid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                            </tr>
+                                            }
+                                            } *@
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="card card-outline card-info">
+                                <div class="card-header py-1">
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <h6 class="font-weight-bold text-sm card-title">Social Pages</h6>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive table-responsive-sm">
+                                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables1">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>DateCreated</th>
+                                                <th class="text-right">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @*  @foreach (var item in Model)
+                                            {
+                                            <tr>
+                                            <td>@item.Socialpagename</td>
+                                            <td>@item.DateCreated</td>
+                                            <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                            </tr>
+                                            } *@
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -234,6 +210,30 @@
                 </div>
             </div>
         </footer>
+
+        <div class="modal modal- fade" id="Uttambsolutionsmodalextralarge" tabindex="-1">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
+        <div class="modal modal- fade" id="Uttambsolutionsmodallarge" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="Uttambsolutionsmodal" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
+        <!-- Overlay for loading spinner -->
+        <div id="loadingOverlay" class="overlay">
+            <div class="spinner"></div>
+        </div>
+
     </div>
     <script src="~/lib/plugins/jquery/jquery.min.js"></script>
     <script src="~/lib/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -247,9 +247,10 @@
     <script src="~/lib/plugins/pdfmake/pdfmake.min.js"></script>
     <script src="~/lib/plugins/pdfmake/vfs_fonts.js"></script>
     <script src="~/dist/js/adminlte.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
             let currentSection = 1;
 
             function showSection(sectionNumber) {
@@ -421,7 +422,373 @@
             $("#AllsystemDataTables16").DataTable();
             $("#ShopProductFeatureTable").DataTable();
             $("#ShopProductBoxItemTable").DataTable();
-        });
+
     </script>
+  @*Scripts for saving the blogs and blogs details*@
+    <script type="text/javascript">
+        const firebaseConfig = {
+            apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
+            authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
+            projectId: "uttambsolutions-4ec2a",
+            storageBucket: "uttambsolutions-4ec2a.appspot.com",
+            messagingSenderId: "336739823411",
+            appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
+            measurementId: "G-Z24LLL0113"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var storage = firebase.storage();
+
+          function systemBlogFileChanged(event) {
+            var files = event.target.files;
+            uploadBlogImage(files);
+        }
+
+        async function uploadBlogImage(files) {
+            var downloadURLs = [];
+
+            function generateBlogFileName(file) {
+                var uniqueId = Date.now();
+                var fileExtension = file.name.split('.').pop();
+                var newFileName = 'Blogs/Blogimage/' + uniqueId + '.' + fileExtension;
+                return newFileName;
+            }
+
+            async function uploadBlogFile(file) {
+                return new Promise((resolve, reject) => {
+                    var newFileName = generateBlogFileName(file);
+
+                    var storageRef = storage.ref().child(newFileName);
+                    var uploadTask = storageRef.put(file);
+
+                    uploadTask.on('state_changed',
+                        function (snapshot) {
+                            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            console.log('Upload is ' + progress + '% done');
+                        },
+                        function (error) {
+                            reject('Error uploading file: ' + error);
+                        },
+                        function () {
+                            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                                console.log('File available at', downloadURL);
+                                downloadURLs.push(downloadURL);
+                                resolve(downloadURL);
+                            });
+                        }
+                    );
+                });
+            }
+
+            function displayBlogImagePreview(file) {
+                return new Promise((resolve, reject) => {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var previewContainer = document.createElement('div');
+                        previewContainer.classList.add('image-preview');
+
+                        var spinner = document.createElement('div');
+                        spinner.classList.add('spinner');
+                        previewContainer.appendChild(spinner);
+
+                        var previewContainerElement = document.getElementById('Uttambsolutionsimagespreviewcontainer');
+                        previewContainerElement.appendChild(previewContainer);
+
+                        var img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.width = 140;
+                        img.height = 140;
+                        img.style.display = 'none';
+                        img.onload = function () {
+                            spinner.remove();
+                            img.style.display = 'block';
+                            previewContainer.appendChild(img);
+                        };
+
+                        resolve();
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            document.getElementById('loadingOverlay').style.zIndex = 1100; 
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                try {
+                    await displayBlogImagePreview(file);
+                    var downloadURL = await uploadBlogFile(file);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+
+            document.getElementById('loadingOverlay').style.display = 'none';
+
+            var inputField = document.getElementById('UttambsolutionsimageurlId');
+            inputField.value = JSON.stringify(downloadURLs);
+        }
+
+
+
+        function systemBlogParagraphFileChanged(event) {
+            var files = event.target.files;
+            uploadImage(files);
+            console.log(document.getElementById('UttambsolutionsparagraphimageurlId').files);
+        }
+
+        async function uploadImage(files) {
+            // Array to store the download URLs
+            var downloadURLs = [];
+
+            // Function to generate a unique file name
+            function generateFileName(file) {
+                // Generate a unique identifier
+                var uniqueId = Date.now();
+                // Get the file extension
+                var fileExtension = file.name.split('.').pop();
+                // Construct the new file name
+                var newFileName = 'Blogs/Blogparagraphimage/' + uniqueId + '.' + fileExtension;
+                return newFileName;
+            }
+
+            // Function to upload a single file
+            async function uploadFile(file) {
+                return new Promise((resolve, reject) => {
+                    var newFileName = generateFileName(file); // Generate a new file name
+
+                    var storageRef = storage.ref().child(newFileName);
+                    var uploadTask = storageRef.put(file);
+
+                    uploadTask.on('state_changed',
+                        function (snapshot) {
+                            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            console.log('Upload is ' + progress + '% done');
+                        },
+                        function (error) {
+                            reject('Error uploading file: ' + error);
+                        },
+                        function () {
+                            // Upload complete
+                            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                                console.log('File available at', downloadURL);
+                                downloadURLs.push(downloadURL);
+                                resolve(downloadURL);
+                            });
+                        }
+                    );
+                });
+            }
+
+            // Function to display image preview
+            function displayImagePreview(file) {
+                return new Promise((resolve, reject) => {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        // Create a container element
+                        var previewContainer = document.createElement('div');
+                        previewContainer.classList.add('image-preview');
+
+                        // Create a spinner element
+                        var spinner = document.createElement('div');
+                        spinner.classList.add('spinner');
+
+                        // Append the spinner to the container
+                        previewContainer.appendChild(spinner);
+
+                        // Append the container to the preview container element
+                        var previewContainerElement = document.getElementById('Uttambsolutionsparagraphimagespreviewcontainer');
+                        previewContainerElement.appendChild(previewContainer);
+
+                        // Create a new image element
+                        var img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.width = 140;
+                        img.height = 140;
+                        img.style.display = 'none'; // Hide the image initially
+                        img.onload = function () {
+                            // Show the image and remove the spinner
+                            spinner.remove();
+                            img.style.display = 'block';
+                            previewContainer.appendChild(img);
+                        };
+
+                        resolve();
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // Show the overlay with the spinner
+             document.getElementById('loadingOverlay').style.zIndex = 1100; 
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            // Iterate over each file
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                try {
+                    // Display the image preview first with a loading indicator
+                    await displayImagePreview(file);
+
+                    // Upload the file and get the download URL
+                    var downloadURL = await uploadFile(file);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+
+            // Hide the overlay after all uploads are complete
+            document.getElementById('loadingOverlay').style.display = 'none';
+
+            // Set the input field value with JSON stringified URLs
+            var inputField = document.getElementById('UttambsolutionsparagraphimageurlId');
+            inputField.value = JSON.stringify(downloadURLs);
+        }
+
+        var tableBody = $('#SystemBlogParagraphListTable tbody');
+        var noDataRows = tableBody.find('tr');
+        if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+            // Remove the "No data available in table" row
+            tableBody.empty();
+        }
+        function addsystemblogparagraphdata() {
+             if ($('#SystemblogparagraphId').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Paragraph is Required', "warning");
+                return;
+            }
+            if ($('#Blogparagraphimagenameid').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Image name is Required', "warning");
+                return;
+            }
+            if ($('#Blogparagraphimagesourceid').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Image source is Required', "warning");
+                return;
+            }
+    
+            var Blogparagraphid = 0;
+            var Blogid = $('#Blogid').val();
+            var Blogparagraphcontent = $('#SystemblogparagraphId').val();
+            var Blogparagraphimageurl = $('#UttambsolutionsparagraphimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '');   
+            var Blogparagraphimagename = $('#Blogparagraphimagenameid').val();
+            var Blogparagraphimagesource = $('#Blogparagraphimagesourceid').val();
+          
+            // Check if the table body contains any rows
+            var tableBody = $('#SystemBlogParagraphListTable tbody');
+            var noDataRows = tableBody.find('tr');
+            if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                // Remove the "No data available in table" row
+                tableBody.empty();
+            }
+
+            // Append row to table with image
+            var newRow = '<tr>' +
+                '<td hidden>' + Blogparagraphid + '</td>' +
+                '<td hidden>' + Blogid + '</td>' +
+                '<td><img src="' + Blogparagraphimageurl + '" alt="Blog Paragraph Image" style="max-width: 70px; max-height: 70px;"></td>' +
+                '<td>' + Blogparagraphcontent + '</td>' +
+                 '<td hidden>' + Blogparagraphimageurl + '</td>' +
+                 '<td>' + Blogparagraphimagename + '</td>' +
+                 '<td>' + Blogparagraphimagesource + '</td>' +
+                '<td class="text-right">' +
+                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editblogparagraphdata(this.parentNode.parentNode)">Edit</button>' +
+                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateblogparagraphdata(this.parentNode.parentNode)">Update</button>' +
+                '</td>' +
+                '</tr>';
+
+            $('#SystemBlogParagraphListTable tbody').append(newRow);
+            // Clear the form after adding a new row
+            clearBlogParagraphForm();
+        }
+        // Function to populate input fields with values from the selected row for editing
+        function editblogparagraphdata(row) {
+            var cells = $(row).children();
+            $('#Blogparagraphid').val($(cells[0]).text());
+            $('#SystemblogparagraphId').val($(cells[3]).text());
+            $('#Blogparagraphimagenameid').val($(cells[5]).text());
+            $('#Blogparagraphimagesourceid').val($(cells[6]).text());
+        }
+        // Function to update the selected row with edited values
+        function updateblogparagraphdata(row) {
+           if ($('#SystemblogparagraphId').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Paragraph is Required', "warning");
+                return;
+            }
+            if ($('#Blogparagraphimagenameid').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Image name is Required', "warning");
+                return;
+            }
+            if ($('#Blogparagraphimagesourceid').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Image source is Required', "warning");
+                return;
+            }
+            var cells = $(row).children(); // Get the cells of the selected row
+
+            // Update the cells with edited values from input fields
+            $(cells[0]).text($('#Blogparagraphid').val());
+            $(cells[1]).text($('#Blogid').val());
+            $(cells[3]).text($('#SystemblogparagraphId').val());
+            $(cells[5]).text($('#Blogparagraphimagenameid').val());
+            $(cells[6]).text($('#Blogparagraphimagesourceid').val());
+            clearBlogParagraphForm();
+        }
+        // Function to clear the form after adding a new row or updating
+        function clearBlogParagraphForm() {
+            $('#Blogparagraphid').val('');
+            $('#SystemblogparagraphId').val('');
+            $('#Paragraphimageurlid').val('');
+            $('#UttambsolutionsparagraphimageurlId').val('');
+            $('#Blogparagraphimagenameid').val('');
+            $('#Blogparagraphimagesourceid').val('');
+            $('#Uttambsolutionsparagraphimagespreviewcontainer').empty();
+        }
+        
+
+        ﻿function savesystemblogdata() {
+            document.getElementById("savesystemblogid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+             var Shopblogparagraphsdata = [];
+               $("#SystemBlogParagraphListTable tbody tr").each(function () {
+               var row = $(this);
+                var Shopblogparagraphdata = {
+                     Blogparagraphid:row.find('td:eq(0)').text(),
+                     Blogid:$('#Blogid').val(),
+                     Blogparagraphcontent:row.find('td:eq(3)').text(),
+                     Blogparagraphimageurl:row.find('td:eq(4)').text(),
+                     Blogparagraphimagename:row.find('td:eq(5)').text(),
+                     Blogparagraphimagesource:row.find('td:eq(6)').text(),
+                     Createdby:$('#systemLoggedinedUserid').val(),
+                     Modifiedby:$('#systemLoggedinedUserid').val(),
+                    Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                    Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                };
+                Shopblogparagraphsdata.push(Shopblogparagraphdata);
+               });
+
+            var uil1 = {
+                Blogid: $('#Blogid').val(), Blogcategoryid: $('#Blogcategoryid').val(),Blogname: $('#Blognameid').val(),Blogcontent: $('#Blogcontentid').val(),Summary: $('#Summaryid').val(),Blogprimaryimageurl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, ''),Blogimagename: $('#Blogimagenameid').val(),Blogimagesource: $('#Blogimagesourceid').val(),Blogtags: $('#Blogtagsid').val(),Blogowner:$('#systemLoggedinedUserid').val(),IsPublished:false,Blogstatus:3,Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Systemblogparagraph:Shopblogparagraphsdata
+            };
+            $.post("/Account/Addsystemblogdata", uil1, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#Uttambsolutionsmodal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Blog details not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystemblogid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+   </script>
+ @*End of saving Blogs *@
+
+
 </body>
 </html>
