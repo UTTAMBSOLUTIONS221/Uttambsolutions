@@ -20,6 +20,8 @@
     <meta property="og:image" content="@ViewData["image"]" />
     <meta property="og:url" content=" @ViewData["url"]" />
 
+
+
     <meta name="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card system, forecought management system, fcs, fms, fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
     <meta name="keywords" content="Uttamb Solutions, fuel card system, forecought management system, fcs, fms, fuel management system, web development, e-commerce, digital marketing, blogs" />
     <meta name="author" content="Uttamb Solutions" />
@@ -43,12 +45,11 @@
     <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WEB.styles.css" asp-append-version="true" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
             crossorigin="anonymous"></script>
 </head>
-<body class="hold-transition layout-top-nav layout-navbar-fixed d-flex flex-column min-vh-100">
-    <div class="wrapper flex-grow-1">
+<body class="hold-transition layout-top-nav layout-navbar-fixed">
+    <div class="wrapper">
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
             <div class="container">
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">
@@ -68,113 +69,124 @@
                 </ul>
             </div>
         </nav>
-    </div>
 
-    <div class="content-wrapper" style="padding-top: 58px;">
-        <section class="content">
+        <div class="content-wrapper">
+            <section class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h2 class="card-title text-custom fw-bold">@Model.Blogname</h2>
+                                    <p class="card-text">@Model.Summary</p>
+                                    <img src="@Url.Content(Model.Blogprimaryimageurl)" alt="@Model.Blogcategoryname" class="card-img-top mb-3" style="object-fit: cover;" />
+                                    <p class="card-text">@Model.Blogcontent</p>
+
+                                    @if (Model.Systemblogparagraph.Any())
+                                    {
+                                        bool alternate = false;
+                                        foreach (var paraGraph in Model.Systemblogparagraph)
+                                        {
+                                            if (alternate)
+                                            {
+                                                <div class="media mb-3">
+                                                    <div class="media-body">
+                                                        <p>@paraGraph.Blogparagraphcontent</p>
+                                                    </div>
+                                                    <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="ml-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="media mb-3">
+                                                    <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="mr-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
+                                                    <div class="media-body">
+                                                        <p>@paraGraph.Blogparagraphcontent</p>
+                                                    </div>
+                                                </div>
+                                            }
+                                            alternate = !alternate;
+                                        }
+                                    }
+                                </div>
+                                <div class="card-footer bg-white">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <p class="card-text">Author: @Model.Blogownername</p>
+                                            <p class="card-text">Category: @Model.Blogcategoryname</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="card-text">Published On: @Model.Datecreated</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Related Articles</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Related articles logic here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="main-footer bg-dark">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-8">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h2 class="card-title text-custom fw-bold">@Model.Blogname</h2>
-                                <p class="card-text">@Model.Summary</p>
-                                <img src="@Url.Content(Model.Blogprimaryimageurl)" alt="@Model.Blogcategoryname" class="card-img-top mb-3" style="object-fit: cover;" />
-                                <p class="card-text">@Model.Blogcontent</p>
-
-                                @if (Model.Systemblogparagraph.Any())
-                                {
-                                    bool alternate = false;
-                                    foreach (var paraGraph in Model.Systemblogparagraph)
-                                    {
-                                        if (alternate)
-                                        {
-                                            <div class="media mb-3">
-                                                <div class="media-body">
-                                                    <p>@paraGraph.Content</p>
-                                                </div>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <p>@paraGraph.Content</p>
-                                        }
-                                        alternate = !alternate;
-                                    }
-                                }
-                                else
-                                {
-                                    <p>No paragraphs available for this blog post.</p>
-                                }
-                            </div>
-                        </div>
+                    <div class="col-sm-6">
+                        <h5 class="text-white">About Uttamb Solutions</h5>
+                        <p class="text-white">
+                            Uttamb Solutions is a premier web development and digital marketing company specializing in e-commerce solutions, fuel management systems, and innovative software solutions. Our team is dedicated to delivering high-quality services to help your business thrive in the digital age.
+                        </p>
                     </div>
-
-                    <div class="col-sm-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title text-custom fw-bold">Recent Blogs</h5>
-                                <ul class="list-group list-group-flush">
-                                    @foreach (var recentBlog in ViewData["RecentBlogs"] as List<DBL.Entities.Systemblog>)
-                                    {
-                                        <li class="list-group-item">
-                                            <a href="@Url.Action("Detail", "Blog", new { id = recentBlog.Id })" class="text-reset text-decoration-none">@recentBlog.Blogname</a>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="text-white">Contact Us</h5>
+                        <p class="text-white">
+                            <strong>Address:</strong> 123 Tech Street, Nairobi, Kenya<br />
+                            <strong>Phone:</strong> +254 728 316050<br />
+                            <strong>Email:</strong> info@uttambsolutions.com
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 class="text-white">Follow Us</h5>
+                        <p class="text-white">
+                            <a href="https://www.facebook.com/uttambsolutions" target="_blank" class="text-reset">
+                                <i class="fab fa-facebook-f text-white"></i> Facebook
+                            </a><br />
+                            <a href="https://www.twitter.com/uttambsolutions" target="_blank" class="text-reset">
+                                <i class="fab fa-twitter text-white"></i> Twitter
+                            </a><br />
+                            <a href="https://www.linkedin.com/company/uttambsolutions" target="_blank" class="text-reset">
+                                <i class="fab fa-linkedin-in text-white"></i> LinkedIn
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-12 text-center text-white">
+                        &copy; 2024 Uttamb Solutions. All rights reserved. | <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">Privacy Policy</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted bg-dark footer-no-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h5 class="text-white">About Uttamb Solutions</h5>
-                    <p class="text-white">
-                        Uttamb Solutions is a premier web development and digital marketing company specializing in e-commerce solutions, fuel management systems, and innovative software solutions. Our team is dedicated to delivering high-quality services to help your business thrive in the digital age.
-                    </p>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="text-white">Contact Us</h5>
-                    <p class="text-white">
-                        <strong>Address:</strong> 123 Tech Street, Nairobi, Kenya<br />
-                        <strong>Phone:</strong> +254 717 850720<br />
-                        <strong>Email:</strong> info@uttambsolutions.com
-                    </p>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="text-white">Follow Us</h5>
-                    <p class="text-white">
-                        <a href="https://www.facebook.com/uttambsolutions" target="_blank" class="text-reset">
-                            <i class="fab fa-facebook-f text-white"></i> Facebook
-                        </a><br />
-                        <a href="https://www.twitter.com/uttambsolutions" target="_blank" class="text-reset">
-                            <i class="fab fa-twitter text-white"></i> Twitter
-                        </a><br />
-                        <a href="https://www.linkedin.com/company/uttambsolutions" target="_blank" class="text-reset">
-                            <i class="fab fa-linkedin-in text-white"></i> LinkedIn
-                        </a>
-                    </p>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-sm-12 text-center text-white">
-                    &copy; 2024 Uttamb Solutions. All rights reserved. | <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">Privacy Policy</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/plugins/fontawesome-free/js/all.min.js"></script>
-    <script src="~/dist/js/adminlte.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>
