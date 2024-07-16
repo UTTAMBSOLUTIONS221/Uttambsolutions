@@ -35,7 +35,7 @@ namespace Blog.Controllers
             @ViewData["Title"] = blogPost.Blogname;
             @ViewData["description"] = blogPost.Summary;
             @ViewData["image"] = blogPost.Blogprimaryimageurl;
-            @ViewData["url"] = $"https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={Blogid}&Pageid={Pageid}";
+            @ViewData["url"] = $"https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={Blogid}";
 
 
             return View(blogPost);

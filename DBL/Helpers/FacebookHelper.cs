@@ -54,7 +54,7 @@ namespace DBL.Helpers
         /// <param name="imageUrls">List of image URLs to include</param>
         /// <param name="blogLink">Link to the blog post</param>
         /// <returns>Status message</returns>
-        public async Task<string> PublishBlogPostAsync(string pageAccessToken, string pageID, string summary, string blogLink)
+        public async Task<string> PublishBlogPostAsync(string pageAccessToken, string userAccessToken, string pageID, string summary, string blogLink)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace DBL.Helpers
                 }
 
                 // Publish post to the Facebook profile
-                var profilePostResult = await PublishPostAsync(pageAccessToken, postToProfileURL, summary, blogLink);
+                var profilePostResult = await PublishPostAsync(userAccessToken, postToProfileURL, summary, blogLink);
                 if (profilePostResult.Item1 != 200)
                 {
                     var error = ParseError(profilePostResult.Item2);
