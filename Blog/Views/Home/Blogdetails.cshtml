@@ -20,8 +20,6 @@
     <meta property="og:image" content="@ViewData["image"]" />
     <meta property="og:url" content=" @ViewData["url"]" />
 
-
-
     <meta name="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card system, forecought management system, fcs, fms, fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
     <meta name="keywords" content="Uttamb Solutions, fuel card system, forecought management system, fcs, fms, fuel management system, web development, e-commerce, digital marketing, blogs" />
     <meta name="author" content="Uttamb Solutions" />
@@ -49,8 +47,8 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
             crossorigin="anonymous"></script>
 </head>
-<body class="hold-transition layout-top-nav layout-navbar-fixed">
-    <div class="wrapper">
+<body class="hold-transition layout-top-nav layout-navbar-fixed d-flex flex-column min-vh-100">
+    <div class="wrapper flex-grow-1">
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
             <div class="container">
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">
@@ -93,45 +91,37 @@
                                         {
                                             <div class="media mb-3">
                                                 <div class="media-body">
-                                                    <p>@paraGraph.Blogparagraphcontent</p>
+                                                    <p>@paraGraph.Content</p>
                                                 </div>
-                                                <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="ml-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
                                             </div>
                                         }
                                         else
                                         {
-                                            <div class="media mb-3">
-                                                <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="mr-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
-                                                <div class="media-body">
-                                                    <p>@paraGraph.Blogparagraphcontent</p>
-                                                </div>
-                                            </div>
+                                            <p>@paraGraph.Content</p>
                                         }
                                         alternate = !alternate;
                                     }
                                 }
-                            </div>
-                            <div class="card-footer bg-white">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <p class="card-text">Author: @Model.Blogownername</p>
-                                        <p class="card-text">Category: @Model.Blogcategoryname</p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <p class="card-text">Published On: @Model.Datecreated</p>
-                                    </div>
-                                </div>
+                                else
+                                {
+                                    <p>No paragraphs available for this blog post.</p>
+                                }
                             </div>
                         </div>
                     </div>
 
                     <div class="col-sm-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">Related Articles</h5>
-                            </div>
+                        <div class="card mb-4">
                             <div class="card-body">
-                                <!-- Related articles logic here -->
+                                <h5 class="card-title text-custom fw-bold">Recent Blogs</h5>
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var recentBlog in ViewData["RecentBlogs"] as List<DBL.Entities.Systemblog>)
+                                    {
+                                        <li class="list-group-item">
+                                            <a href="@Url.Action("Detail", "Blog", new { id = recentBlog.Id })" class="text-reset text-decoration-none">@recentBlog.Blogname</a>
+                                        </li>
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -140,7 +130,7 @@
         </section>
     </div>
 
-    <footer class="border-top footer text-muted bg-dark mb-0 pb-0">
+    <footer class="border-top footer text-muted bg-dark footer-no-padding">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -180,15 +170,11 @@
         </div>
     </footer>
 
-
-    <!-- jQuery -->
-    <script src="~/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/dist/js/adminlte.min.js"></script>
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/fontawesome-free/js/all.min.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>
