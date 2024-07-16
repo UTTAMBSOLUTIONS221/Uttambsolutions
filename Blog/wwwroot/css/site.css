@@ -16,6 +16,21 @@ html {
 }
 
 
+.nav-pills .nav-link {
+    background-color: #d4e6ed; /* Inactive tab color (lightened base color) */
+    color: #0a506c; /* Inactive tab text color */
+}
+
+    .nav-pills .nav-link:hover {
+        background-color: #82b9cd; /* Hover tab color (tinted base color) */
+        color: #5D8AA8; /* Hover tab text color (darkened base color) */
+    }
+
+    .nav-pills .nav-link.active {
+        background-color: #0a506c; /* Active tab color (base color) */
+        color: #ffffff; /* Active tab text color */
+    }
+
 
 @media (min-width: 768px) {
     html {
