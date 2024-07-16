@@ -1,11 +1,13 @@
 ﻿using Blog.Entities;
 using DBL;
 using DBL.Entities;
+using DBL.Enum;
 using DBL.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -175,6 +177,29 @@ namespace Blog.Controllers
                 return RedirectToAction(nameof(AccountController.Myprofile), "Account", new { area = "" });
             }
         }
+        #endregion
+
+        #region Other Methods
+
+        #region Add Personal Blogs
+        [HttpGet]
+        public async Task<IActionResult> Addsystemblog(int Blogid)
+        {
+            ViewData["Systemblogcategorylists"] = bl.GetListModel(ListModelType.SystemBlogCategory).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            Systemblog blogData = new Systemblog();
+            if (Blogid > 0)
+            {
+                blogData = await bl.Getsystemblogdatabyid(Blogid);
+            }
+            return PartialView(blogData);
+        }
+        public async Task<JsonResult> Addsystemblogdata(Systemblog model)
+        {
+            var resp = await bl.Registersystemblogdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
+        #endregion
+
         #endregion
     }
 }

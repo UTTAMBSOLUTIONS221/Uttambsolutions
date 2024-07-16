@@ -41,7 +41,6 @@
     <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap-toggle/css/bootstrap2-toggle.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
@@ -50,8 +49,6 @@
     <link rel="stylesheet" href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
-            crossorigin="anonymous"></script>
 </head>
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
     <div class="wrapper">
@@ -103,43 +100,89 @@
                                         <div class="tab-pane" id="timeline">
                                             <div class="timeline timeline-inverse">
                                                 <div class="row">
-    <div class="col-sm-12">
-        <div class="card card-outline card-info">
-            <div class="card-header py-1">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <h6 class="font-weight-bold text-sm card-title">Social Pages</h6>
-                    </div>
-                    <div class="col-sm-4">
-                        <a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body table-responsive table-responsive-sm">
-                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>DateCreated</th>
-                            <th class="text-right">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.Socialpagename</td>
-                                <td>@item.DateCreated</td>
-                                <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
-                            </tr>
-                        }
+                                                    <div class="col-sm-7">
+                                                        <div class="card card-outline card-info">
+                                                            <div class="card-header py-1">
+                                                                <div class="row">
+                                                                    <div class="col-sm-8">
+                                                                        <h6 class="font-weight-bold text-sm card-title">Blogs</h6>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <a asp-action="Addsystemblog" asp-controller="Systemblog" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Blog</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body table-responsive table-responsive-sm">
+                                                                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Image</th>
+                                                                            <th>Title</th>
+                                                                            <th>Summary</th>
+                                                                            <th>Content</th>
+                                                                            <th>Category</th>
+                                                                            <th>Tags</th>
+                                                                            <th class="text-right">Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @* @if (Model.Systemblogs != null)
+                                                                        {
+                                                                            foreach (var item in Model.Systemblogs)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td><img src="@Url.Content(item.Blogprimaryimageurl)" height="40" width="40" alt="@item.Blogcategoryname" /></td>
+                                                                                    <td>@item.Blogname</td>
+                                                                                    <td>@item.Summary</td>
+                                                                                    <td>@item.Blogcontent</td>
+                                                                                    <td>@item.Blogcategoryname</td>
+                                                                                    <td>@item.Blogtags</td>
+                                                                                    <td class="text-right"><a asp-action="Addsystemblog" asp-controller="Systemblog" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@item.Blogid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                                                                </tr>
+                                                                            }
+                                                                        } *@
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <div class="card card-outline card-info">
+                                                            <div class="card-header py-1">
+                                                                <div class="row">
+                                                                    <div class="col-sm-8">
+                                                                        <h6 class="font-weight-bold text-sm card-title">Social Pages</h6>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body table-responsive table-responsive-sm">
+                                                                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables1">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Name</th>
+                                                                            <th>DateCreated</th>
+                                                                            <th class="text-right">Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @*  @foreach (var item in Model)
+                                                                        {
+                                                                        <tr>
+                                                                        <td>@item.Socialpagename</td>
+                                                                        <td>@item.DateCreated</td>
+                                                                        <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                                                        </tr>
+                                                                        } *@
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -200,931 +243,185 @@
     <script src="~/lib/plugins/datatables-buttons/js/datatables.buttons.min.js"></script>
     <script src="~/lib/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="~/lib/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="~/lib/bootstrap-toggle/js/bootstrap2-toggle.min.js"></script>
     <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="~/lib/plugins/pdfmake/pdfmake.min.js"></script>
     <script src="~/lib/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
 
     <script type="text/javascript">
-        let currentSection = 1;
+        $(document).ready(function () {
+            let currentSection = 1;
 
-        function showSection(sectionNumber) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach((section, index) => {
-                section.style.display = 'none';
-                if (index === sectionNumber - 1) {
-                    section.style.display = 'block';
-                }
-            });
-
-            // Show/hide the save button and navigation buttons
-            const navigationButtons = document.getElementById('navigationButtons');
-            const saveButton = document.querySelector('#section' + sectionNumber + ' .btn-info');
-            if (sectionNumber === sections.length) {
-                if (saveButton) saveButton.style.display = 'block';
-                if (navigationButtons) navigationButtons.classList.add('d-none');
-            } else {
-                if (saveButton) saveButton.style.display = 'none';
-                if (navigationButtons) navigationButtons.classList.remove('d-none');
-            }
-        }
-
-        function validateSection(sectionNumber) {
-            const section = document.querySelector('#section' + sectionNumber);
-            const inputs = section.querySelectorAll('input[required], select[required], textarea[required]');
-            let isValid = true;
-            inputs.forEach(input => {
-                if (!input.value.trim()) {
-                    input.classList.add('is-invalid');
-                    isValid = false;
-                } else {
-                    input.classList.remove('is-invalid');
-                }
-            });
-            return isValid;
-        }
-
-        function nextSection() {
-            if (validateSection(currentSection)) {
+            function showSection(sectionNumber) {
                 const sections = document.querySelectorAll('.section');
-                if (currentSection < sections.length) {
-                    currentSection++;
+                sections.forEach((section, index) => {
+                    section.style.display = 'none';
+                    if (index === sectionNumber - 1) {
+                        section.style.display = 'block';
+                    }
+                });
+
+                // Show/hide the save button and navigation buttons
+                const navigationButtons = document.getElementById('navigationButtons');
+                const saveButton = document.querySelector('#section' + sectionNumber + ' .btn-info');
+                if (sectionNumber === sections.length) {
+                    if (saveButton) saveButton.style.display = 'block';
+                    if (navigationButtons) navigationButtons.classList.add('d-none');
+                } else {
+                    if (saveButton) saveButton.style.display = 'none';
+                    if (navigationButtons) navigationButtons.classList.remove('d-none');
+                }
+            }
+
+            function validateSection(sectionNumber) {
+                const section = document.querySelector('#section' + sectionNumber);
+                const inputs = section.querySelectorAll('input[required], select[required], textarea[required]');
+                let isValid = true;
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
+                });
+                return isValid;
+            }
+
+            function nextSection() {
+                if (validateSection(currentSection)) {
+                    const sections = document.querySelectorAll('.section');
+                    if (currentSection < sections.length) {
+                        currentSection++;
+                        showSection(currentSection);
+                    }
+                }
+            }
+
+            function prevSection() {
+                if (currentSection > 1) {
+                    currentSection--;
                     showSection(currentSection);
                 }
             }
-        }
 
-        function prevSection() {
-            if (currentSection > 1) {
-                currentSection--;
+            document.addEventListener('DOMContentLoaded', () => {
                 showSection(currentSection);
-            }
-        }
+            });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            showSection(currentSection);
-        });
-
-        $('#Uttambsolutionsmodalextralarge').on('show.bs.modal', function (event) {
-            $(".blockoverlay").show();
-            var button = $(event.relatedTarget);
-            var url = button.attr("href");
-            var modal = $(this);
-            modal.find('.modal-content').load(url, function () {
-                // After the content is loaded, find the dropdowns and apply Select2
-                modal.find('.modal-content select.select2').each(function () {
-                    $(this).select2({
-                        placeholder: "--Select--",
-                        allowClear: true,
-                        dropdownAutoWidth: true,
-                        minimumResultsForSearch: 1 // Show search box when there is 1 or more items
-                        // Add any other options you need
-                    }); // Initialize Select2
+            $('#Uttambsolutionsmodalextralarge').on('show.bs.modal', function (event) {
+                $(".blockoverlay").show();
+                var button = $(event.relatedTarget);
+                var url = button.attr("href");
+                var modal = $(this);
+                modal.find('.modal-content').load(url, function () {
+                    // After the content is loaded, find the dropdowns and apply Select2
+                    modal.find('.modal-content select.select2').each(function () {
+                        $(this).select2({
+                            placeholder: "--Select--",
+                            allowClear: true,
+                            dropdownAutoWidth: true,
+                            minimumResultsForSearch: 1 // Show search box when there is 1 or more items
+                            // Add any other options you need
+                        }); // Initialize Select2
+                    });
+                    $("#AllsystemDataTables").DataTable();
+                    $("#AllsystemDataTables1").DataTable();
+                    $("#AllsystemDataTables2").DataTable();
+                    $("#AllsystemDataTables3").DataTable();
+                    $("#AllsystemDataTables4").DataTable();
+                    $(".blockoverlay").hide();
                 });
-                $("#AllsystemDataTables").DataTable();
-                $("#AllsystemDataTables1").DataTable();
-                $("#AllsystemDataTables2").DataTable();
-                $("#AllsystemDataTables3").DataTable();
-                $("#AllsystemDataTables4").DataTable();
-                $(".blockoverlay").hide();
             });
-        });
-        $('#Uttambsolutionsmodalextralarge').on('hidden.bs.modal', function () {
-            $(this).removeData('bs.modal');
-            $('.modal-backdrop').remove();
-            $('#Uttambsolutionsmodalextralarge .modal-content').empty();
-        });
+            $('#Uttambsolutionsmodalextralarge').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+                $('.modal-backdrop').remove();
+                $('#Uttambsolutionsmodalextralarge .modal-content').empty();
+            });
 
-        $('#Uttambsolutionsmodallarge').on('show.bs.modal', function (event) {
-            $(".blockoverlay").show();
-            var button = $(event.relatedTarget);
-            var url = button.attr("href");
-            var modal = $(this);
-            modal.find('.modal-content').load(url, function () {
-                // After the content is loaded, find the dropdowns and apply Select2
-                modal.find('.modal-content select.select2').each(function () {
-                    $(this).select2({
-                        placeholder: "--Select--",
-                        allowClear: true,
-                        dropdownAutoWidth: true,
-                        minimumResultsForSearch: 1 // Show search box when there is 1 or more items
-                        // Add any other options you need
-                    }); // Initialize Select2
+            $('#Uttambsolutionsmodallarge').on('show.bs.modal', function (event) {
+                $(".blockoverlay").show();
+                var button = $(event.relatedTarget);
+                var url = button.attr("href");
+                var modal = $(this);
+                modal.find('.modal-content').load(url, function () {
+                    // After the content is loaded, find the dropdowns and apply Select2
+                    modal.find('.modal-content select.select2').each(function () {
+                        $(this).select2({
+                            placeholder: "--Select--",
+                            allowClear: true,
+                            dropdownAutoWidth: true,
+                            minimumResultsForSearch: 1 // Show search box when there is 1 or more items
+                            // Add any other options you need
+                        }); // Initialize Select2
+                    });
+                    $("#AllsystemDataTables").DataTable();
+                    $("#AllsystemDataTables1").DataTable();
+                    $("#AllsystemDataTables2").DataTable();
+                    $("#AllsystemDataTables3").DataTable();
+                    $("#AllsystemDataTables4").DataTable();
+                    $(".blockoverlay").hide();
                 });
-                $("#AllsystemDataTables").DataTable();
-                $("#AllsystemDataTables1").DataTable();
-                $("#AllsystemDataTables2").DataTable();
-                $("#AllsystemDataTables3").DataTable();
-                $("#AllsystemDataTables4").DataTable();
-                $(".blockoverlay").hide();
             });
-        });
-        $('#Uttambsolutionsmodallarge').on('hidden.bs.modal', function () {
-            $(this).removeData('bs.modal');
-            $('.modal-backdrop').remove();
-            $('#Uttambsolutionsmodallarge .modal-content').empty();
-        });
+            $('#Uttambsolutionsmodallarge').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+                $('.modal-backdrop').remove();
+                $('#Uttambsolutionsmodallarge .modal-content').empty();
+            });
 
-        $('#Uttambsolutionsmodal').on('show.bs.modal', function (event) {
-            $(".blockoverlay").show();
-            var button = $(event.relatedTarget);
-            var url = button.attr("href");
-            var modal = $(this);
-            modal.find('.modal-content').load(url, function () {
-                // After the content is loaded, find the dropdowns and apply Select2
-                modal.find('.modal-content select.select2').each(function () {
-                    $(this).select2({
-                        placeholder: "--Select--",
-                        allowClear: true,
-                        dropdownAutoWidth: true,
-                        minimumResultsForSearch: 1 // Show search box when there is 1 or more items
-                        // Add any other options you need
-                    }); // Initialize Select2
+            $('#Uttambsolutionsmodal').on('show.bs.modal', function (event) {
+                $(".blockoverlay").show();
+                var button = $(event.relatedTarget);
+                var url = button.attr("href");
+                var modal = $(this);
+                modal.find('.modal-content').load(url, function () {
+                    // After the content is loaded, find the dropdowns and apply Select2
+                    modal.find('.modal-content select.select2').each(function () {
+                        $(this).select2({
+                            placeholder: "--Select--",
+                            allowClear: true,
+                            dropdownAutoWidth: true,
+                            minimumResultsForSearch: 1 // Show search box when there is 1 or more items
+                            // Add any other options you need
+                        }); // Initialize Select2
+                    });
+                    $("#AllsystemDataTables").DataTable();
+                    $("#AllsystemDataTables1").DataTable();
+                    $("#AllsystemDataTables2").DataTable();
+                    $("#AllsystemDataTables3").DataTable();
+                    $("#AllsystemDataTables4").DataTable();
+                    $("#SuplierProductsTable").DataTable();
+                    $("#ShopProductFeatureTable").DataTable();
+                    $("#ShopProductBoxItemTable").DataTable();
+                    $(".blockoverlay").hide();
                 });
-                $("#AllsystemDataTables").DataTable();
-                $("#AllsystemDataTables1").DataTable();
-                $("#AllsystemDataTables2").DataTable();
-                $("#AllsystemDataTables3").DataTable();
-                $("#AllsystemDataTables4").DataTable();
-                $("#SuplierProductsTable").DataTable();
-                $("#ShopProductFeatureTable").DataTable();
-                $("#ShopProductBoxItemTable").DataTable();
-                $(".blockoverlay").hide();
             });
+            $('#Uttambsolutionsmodal').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+                $('.modal-backdrop').remove();
+                $('#Uttambsolutionsmodal .modal-content').empty();
+            });
+
+            $("#AllsystemDataTables").DataTable();
+            $("#AllsystemDataTables1").DataTable();
+            $("#AllsystemDataTables2").DataTable();
+            $("#AllsystemDataTables3").DataTable();
+            $("#AllsystemDataTables4").DataTable();
+            $("#AllsystemDataTables5").DataTable();
+            $("#AllsystemDataTables6").DataTable();
+            $("#AllsystemDataTables7").DataTable();
+            $("#AllsystemDataTables8").DataTable();
+            $("#AllsystemDataTables9").DataTable();
+            $("#AllsystemDataTables10").DataTable();
+            $("#AllsystemDataTables11").DataTable();
+            $("#AllsystemDataTables12").DataTable();
+            $("#AllsystemDataTables13").DataTable();
+            $("#AllsystemDataTables14").DataTable();
+            $("#AllsystemDataTables15").DataTable();
+            $("#AllsystemDataTables16").DataTable();
+            $("#ShopProductFeatureTable").DataTable();
+            $("#ShopProductBoxItemTable").DataTable();
         });
-        $('#Uttambsolutionsmodal').on('hidden.bs.modal', function () {
-            $(this).removeData('bs.modal');
-            $('.modal-backdrop').remove();
-            $('#Uttambsolutionsmodal .modal-content').empty();
-        });
-
-        function deactivatethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to deactivate this?",
-                text: "Once deactivated, it will transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, deactivate it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var deactivateBtn = event.target;
-                    var tableName = deactivateBtn.getAttribute('data-tablename');
-                    var columnName = deactivateBtn.getAttribute('data-Columname');
-                    var status = deactivateBtn.getAttribute('data-Status');
-                    var columnIdName = deactivateBtn.getAttribute('data-Columnidname');
-                    var entryId = deactivateBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: tableName, Columname: columnName, Status: status, Columnidname: columnIdName, Entryid: entryId,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/CustomerManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Deactivated!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Deactivate once you are sure", "info");
-                }
-            });
-        };
-
-        function activatethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to activate this?",
-                text: "Once activated, it will transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, activate it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var activateBtn = event.target;
-                    var Tablename = activateBtn.getAttribute('data-Tablename');
-                    var Columname = activateBtn.getAttribute('data-Columname');
-                    var Status = activateBtn.getAttribute('data-Status');
-                    var Columnidname = activateBtn.getAttribute('data-Columnidname');
-                    var Entryid = activateBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columname: Columname, Status: Status, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/CustomerManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Activated!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Activate once you are sure", "info");
-                }
-            });
-        };
-
-        function restorethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to restore this?",
-                text: "Once retored, it will transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, restore it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var restoreBtn = event.target;
-                    var Tablename = restoreBtn.getAttribute('data-Tablename');
-                    var Columname = restoreBtn.getAttribute('data-Columname');
-                    var Status = restoreBtn.getAttribute('data-Status');
-                    var Columnidname = restoreBtn.getAttribute('data-Columnidname');
-                    var Entryid = restoreBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columname: Columname, Status: Status, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-
-                    $.post("/CustomerManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Restored!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Restore once you are sure", "info");
-                }
-            });
-        };
-
-        function deletethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to delete this?",
-                text: "Once deleted, it will not transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var deleteBtn = event.target;
-                    var Tablename = deleteBtn.getAttribute('data-Tablename');
-                    var Columname = deleteBtn.getAttribute('data-Columname');
-                    var Status = deleteBtn.getAttribute('data-Status');
-                    var Columnidname = deleteBtn.getAttribute('data-Columnidname');
-                    var Entryid = deleteBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columname: Columname, Status: Status, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/CustomerManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Deleted!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Delete once you are sure", "info");
-                }
-            });
-        };
-        function closethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to close this?",
-                text: "Once closed, no other modification!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, close it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var deleteBtn = event.target;
-                    var Tablename = deleteBtn.getAttribute('data-Tablename');
-                    var Columname = deleteBtn.getAttribute('data-Columname');
-                    var Status = deleteBtn.getAttribute('data-Status');
-                    var Columnidname = deleteBtn.getAttribute('data-Columnidname');
-                    var Entryid = deleteBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columname: Columname, Status: Status, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/CustomerManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Shift Closed!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Delete once you are sure", "info");
-                }
-            });
-        };
-        function rejectthis(event) {
-            Swal.fire({
-                title: "Are you sure you want to reject this?",
-                text: "Once rejected, it will not transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Reject it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var rejectBtn = event.target;
-                    var tableName = rejectBtn.getAttribute('data-tablename');
-                    var columnName = rejectBtn.getAttribute('data-Columname');
-                    var status = rejectBtn.getAttribute('data-Status');
-                    var columnIdName = rejectBtn.getAttribute('data-Columnidname');
-                    var entryId = rejectBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: tableName, Columname: columnName, Status: status, Columnidname: columnIdName, Entryid: entryId,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/CustomerManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Rejected!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Reject once you are sure", "info");
-                }
-            });
-        };
-
-        function approvethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to Approve this?",
-                text: "Approving this, it will transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Approve it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var approveBtn = event.target;
-                    var Tablename = approveBtn.getAttribute('data-Tablename');
-                    var Columname = approveBtn.getAttribute('data-Columname');
-                    var Status = approveBtn.getAttribute('data-Status');
-                    var Columnidname = approveBtn.getAttribute('data-Columnidname');
-                    var Entryid = approveBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columname: Columname, Status: Status, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/CustomerManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Approved!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Approve once you are sure", "info");
-                }
-            });
-        };
-
-        function permanentdeletethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to Remove this?",
-                text: "Once Removed, Cannot be Recovered!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Remove it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var removeBtn = event.target;
-                    var Tablename = removeBtn.getAttribute('data-Tablename');
-                    var Columnidname = removeBtn.getAttribute('data-Columnidname');
-                    var Entryid = removeBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/CustomerManagement/AllRemoveDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Removed!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Remove once you are sure", "info");
-                }
-            });
-        };
-
-        function singledefaultthis(event) {
-            Swal.fire({
-                title: "Are you sure you want to default this?",
-                text: "Once defaulted, it will be the primary item!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, default it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var activateBtn = event.target;
-                    var Tablename = activateBtn.getAttribute('data-Tablename');
-                    var Columname = activateBtn.getAttribute('data-Columname');
-                    var Status = activateBtn.getAttribute('data-Status');
-                    var Columnidname = activateBtn.getAttribute('data-Columnidname');
-                    var Entryid = activateBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        TenantId: $('#systemLoggedinedTenantid').val(), Tablename: Tablename, Columname: Columname, Status: Status, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/CustomerManagement/AllSingleDefaultActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Defaulted!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Default once you are sure", "info");
-                }
-            });
-        };
-
-        function tenantdeactivatethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to deactivate this?",
-                text: "Once deactivated, it will transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, deactivate it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var deactivateBtn = event.target;
-                    var tableName = deactivateBtn.getAttribute('data-tablename');
-                    var columnName = deactivateBtn.getAttribute('data-Columname');
-                    var status = deactivateBtn.getAttribute('data-Status');
-                    var columnIdName = deactivateBtn.getAttribute('data-Columnidname');
-                    var entryId = deactivateBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: tableName, Columname: columnName, Status: status, Columnidname: columnIdName, Entryid: entryId,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/StaffManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Deactivated!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Deactivate once you are sure", "info");
-                }
-            });
-        };
-
-        function tenantactivatethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to activate this?",
-                text: "Once activated, it will transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, activate it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var activateBtn = event.target;
-                    var Tablename = activateBtn.getAttribute('data-Tablename');
-                    var Columname = activateBtn.getAttribute('data-Columname');
-                    var Status = activateBtn.getAttribute('data-Status');
-                    var Columnidname = activateBtn.getAttribute('data-Columnidname');
-                    var Entryid = activateBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columname: Columname, Status: Status, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/StaffManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Activated!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Activate once you are sure", "info");
-                }
-            });
-        };
-
-        function tenantrestorethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to restore this?",
-                text: "Once retored, it will transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, restore it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var restoreBtn = event.target;
-                    var Tablename = restoreBtn.getAttribute('data-Tablename');
-                    var Columname = restoreBtn.getAttribute('data-Columname');
-                    var Status = restoreBtn.getAttribute('data-Status');
-                    var Columnidname = restoreBtn.getAttribute('data-Columnidname');
-                    var Entryid = restoreBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columname: Columname, Status: Status, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-
-                    $.post("/StaffManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Restored!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Restore once you are sure", "info");
-                }
-            });
-        };
-
-        function tenantdeletethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to delete this?",
-                text: "Once deleted, it will not transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var deleteBtn = event.target;
-                    var Tablename = deleteBtn.getAttribute('data-Tablename');
-                    var Columname = deleteBtn.getAttribute('data-Columname');
-                    var Status = deleteBtn.getAttribute('data-Status');
-                    var Columnidname = deleteBtn.getAttribute('data-Columnidname');
-                    var Entryid = deleteBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columname: Columname, Status: Status, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/StaffManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Deleted!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Delete once you are sure", "info");
-                }
-            });
-        };
-
-        function tenantrejectthis(event) {
-            Swal.fire({
-                title: "Are you sure you want to reject this?",
-                text: "Once rejected, it will not transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Reject it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var rejectBtn = event.target;
-                    var tableName = rejectBtn.getAttribute('data-tablename');
-                    var columnName = rejectBtn.getAttribute('data-Columname');
-                    var status = rejectBtn.getAttribute('data-Status');
-                    var columnIdName = rejectBtn.getAttribute('data-Columnidname');
-                    var entryId = rejectBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: tableName, Columname: columnName, Status: status, Columnidname: columnIdName, Entryid: entryId,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/StaffManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Rejected!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Reject once you are sure", "info");
-                }
-            });
-        };
-
-        function tenantapprovethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to Approve this?",
-                text: "Approving this, it will transact!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Approve it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var approveBtn = event.target;
-                    var Tablename = approveBtn.getAttribute('data-Tablename');
-                    var Columname = approveBtn.getAttribute('data-Columname');
-                    var Status = approveBtn.getAttribute('data-Status');
-                    var Columnidname = approveBtn.getAttribute('data-Columnidname');
-                    var Entryid = approveBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columname: Columname, Status: Status, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/StaffManagement/AllDeleteDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Approved!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Approve once you are sure", "info");
-                }
-            });
-        };
-
-        function tenantpermanentdeletethis(event) {
-            Swal.fire({
-                title: "Are you sure you want to Remove this?",
-                text: "Once Removed, Cannot be Recovered!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Remove it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var removeBtn = event.target;
-                    var Tablename = removeBtn.getAttribute('data-Tablename');
-                    var Columnidname = removeBtn.getAttribute('data-Columnidname');
-                    var Entryid = removeBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/StaffManagement/AllRemoveDeativateActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Removed!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Remove once you are sure", "info");
-                }
-            });
-        };
-
-        function tenantsingledefaultthis(event) {
-            Swal.fire({
-                title: "Are you sure you want to default this?",
-                text: "Once defaulted, it will be the primary item!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, default it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var activateBtn = event.target;
-                    var Tablename = activateBtn.getAttribute('data-Tablename');
-                    var Columname = activateBtn.getAttribute('data-Columname');
-                    var Status = activateBtn.getAttribute('data-Status');
-                    var Columnidname = activateBtn.getAttribute('data-Columnidname');
-                    var Entryid = activateBtn.getAttribute('data-Entryid');
-                    var uil =
-                    {
-                        Tablename: Tablename, Columname: Columname, Status: Status, Columnidname: Columnidname, Entryid: Entryid,
-                        CreatedbyId: $('#systemLoggedinedUserId').val(), Createdby: $('#systemLoggedinedUserNameId').val(), ModifiedId: $('#systemLoggedinedUserId').val(), Modifiedby: $('#systemLoggedinedUserNameId').val(),
-                        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
-                    };
-                    $.post("/StaffManagement/AllSingleDefaultActions", uil, function (response) {
-                        if (response.RespStatus == 0) {
-                            Swal.fire('Item Defaulted!', 'Good.', 'success')
-                            setTimeout(function () { location.reload(); }, 1000);
-                        } else if (response.RespStatus == 1) {
-                            Swal.fire("Oops!", response.RespMessage, "warning");
-                        }
-                        else {
-                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                        }
-                    });
-                } else {
-                    Swal.fire("Thank you!", "Default once you are sure", "info");
-                }
-            });
-        };
-
-
-        // Attach event listener to parent modal's "show.bs.modal" event
-        $('#parentModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var url = button.attr("href");
-            var modal = $(this);
-
-            // Load the content of the parent modal via AJAX
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function (result) {
-                    modal.find('#parentModalContent').html(result);
-                    // Attach event listener to child modal's button to open the child modal
-                    modal.find('#childModalButton').on('click', function () {
-                        var accountId = $('#customeraccountId').val();
-                        var childUrl = '@Url.Action("AddCustomerAccountPolicy", "CustomerManagement")?AccountId=' + accountId;
-                        var childModal = $('#childModal');
-
-                        // Load the content of the child modal via AJAX
-                        $.ajax({
-                            url: childUrl,
-                            type: 'GET',
-                            success: function (result) {
-                                childModal.find('.modal-content').html(result);
-
-                                // Show the child modal on top of the parent modal
-                                childModal.modal('show');
-                            },
-                            error: function () {
-                                childModal.find('.modal-content').html('Error loading content.');
-
-                                // Show the child modal on top of the parent modal
-                                childModal.modal('show');
-                            }
-                        });
-                    });
-                },
-                error: function () {
-                    modal.find('#parentModalContent').html('Error loading content.');
-                }
-            });
-        });
-        function dataObject() {
-            var t = $('#form_id').serializeArray();
-            var paramObj = {};
-            $.each(t, function (_, kv) {
-                if (paramObj.hasOwnProperty(kv.name)) {
-                    paramObj[kv.name] = $.makeArray(paramObj[kv.name]);
-                    paramObj[kv.name].push(kv.value);
-                }
-                else {
-                    paramObj[kv.name] = kv.value;
-                }
-            });
-
-            return paramObj;
-        }
-        function initViewer(s, e) {
-
-            s.previewModel.reportPreview.showMultipagePreview(true);
-        }
-
-        $("#AllsystemDataTables").DataTable();
-        $("#AllsystemDataTables1").DataTable();
-        $("#AllsystemDataTables2").DataTable();
-        $("#AllsystemDataTables3").DataTable();
-        $("#AllsystemDataTables4").DataTable();
-        $("#AllsystemDataTables5").DataTable();
-        $("#AllsystemDataTables6").DataTable();
-        $("#AllsystemDataTables7").DataTable();
-        $("#AllsystemDataTables8").DataTable();
-        $("#AllsystemDataTables9").DataTable();
-        $("#AllsystemDataTables10").DataTable();
-        $("#AllsystemDataTables11").DataTable();
-        $("#AllsystemDataTables12").DataTable();
-        $("#AllsystemDataTables13").DataTable();
-        $("#AllsystemDataTables14").DataTable();
-        $("#AllsystemDataTables15").DataTable();
-        $("#AllsystemDataTables16").DataTable();
-
-        $("#ShopProductFeatureTable").DataTable();
-        $("#ShopProductBoxItemTable").DataTable();
     </script>
-    <script src="~/dist/js/adminlte.min.js"></script>
 </body>
 </html>
