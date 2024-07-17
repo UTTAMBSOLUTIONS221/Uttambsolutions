@@ -4,12 +4,12 @@ using Quartz;
 
 namespace Jobs.Schedulers
 {
-    public class PublishBlogstoFacebookJob : IJob
+    public class PublishJobandBlogtoLinkedinJob : IJob
     {
         private readonly IServiceProvider _provider;
         private readonly BL bl;
         FacebookHelper facebook = new FacebookHelper();
-        public PublishBlogstoFacebookJob(IServiceProvider provider, IConfiguration config)
+        public PublishJobandBlogtoLinkedinJob(IServiceProvider provider, IConfiguration config)
         {
             _provider = provider;
             bl = new BL(Util.ShareConnectionString(config));
