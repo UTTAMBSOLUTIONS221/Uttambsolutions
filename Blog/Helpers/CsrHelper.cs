@@ -2,7 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 namespace Blog.Helpers
 {
-    public class CsrHelper
+    public static class CsrHelper
     {
         public static byte[] GenerateCsr(string subjectName, out string base64Csr)
         {

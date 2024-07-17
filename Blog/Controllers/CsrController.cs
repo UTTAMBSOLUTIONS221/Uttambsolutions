@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
+    [Route("api/csr")]
     public class CsrController : Controller
     {
-        [HttpGet]
+        [HttpGet("GenerateCsr/{commonName?}")]
         public IActionResult GenerateCsr(string commonName)
         {
             if (string.IsNullOrWhiteSpace(commonName))

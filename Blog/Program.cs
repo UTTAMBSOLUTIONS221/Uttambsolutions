@@ -1,6 +1,8 @@
+using Blog.Controllers;
 using Blog.Schedulers;
 using DBL.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Quartz;
@@ -32,7 +34,6 @@ builder.Services.AddSingleton<PublishBlogstoFacebookJob>();
 builder.Services.AddSingleton(new JobSchedule(
     jobType: typeof(PublishBlogstoFacebookJob),
     cronExpression: "0 * * * * ?")); // Cron expression for running every minute
-                                     //cronExpression: "0 0 */3 * * ?")); // Cron expression for running every Three Hours
 
 builder.Services.AddSession(options =>
 {
@@ -55,6 +56,9 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>()
     .AddScoped(x => x.GetRequiredService<IUrlHelperFactory>().GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext));
+
+// Register the CsrController explicitly
+builder.Services.AddTransient<CsrController>();
 
 var app = builder.Build();
 
@@ -93,4 +97,16 @@ app.MapControllerRoute(
     pattern: "api/csr/{action=GenerateCsr}/{commonName?}",
     defaults: new { controller = "Csr", action = "GenerateCsr" });
 
-app.Run();
+// Execute the CSR generation logic on application start
+using (var scope = app.Services.CreateScope())
+{
+    var csrController = scope.ServiceProvider.GetRequiredService<CsrController>();
+    var result = csrController.GenerateCsr("uttambsolutions.com");
+    if (result is ObjectResult objectResult && objectResult.StatusCode == 200)
+    {
+        var csr = ((dynamic)objectResult.Value).csr;
+        Console.WriteLine($"CSR generated on startup: {csr}");
+    }
+
+    app.Run();
+}
