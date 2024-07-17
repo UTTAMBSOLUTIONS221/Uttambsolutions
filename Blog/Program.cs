@@ -2,7 +2,6 @@ using Blog.Controllers;
 using Blog.Schedulers;
 using DBL.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Quartz;
@@ -92,21 +91,4 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "csr",
-    pattern: "api/csr/{action=GenerateCsr}/{commonName?}",
-    defaults: new { controller = "Csr", action = "GenerateCsr" });
-
-// Execute the CSR generation logic on application start
-using (var scope = app.Services.CreateScope())
-{
-    var csrController = scope.ServiceProvider.GetRequiredService<CsrController>();
-    var result = csrController.GenerateCsr("uttambsolutions.com");
-    if (result is ObjectResult objectResult && objectResult.StatusCode == 200)
-    {
-        var csr = ((dynamic)objectResult.Value).csr;
-        Console.WriteLine($"CSR generated on startup: {csr}");
-    }
-
-    app.Run();
-}
+app.Run();
