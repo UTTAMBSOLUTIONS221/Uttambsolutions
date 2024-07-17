@@ -6,9 +6,15 @@ namespace DBL.Helpers
 {
     public class LinkedinHelpers
     {
+        private readonly HttpClient _client;
+
+        public LinkedinHelpers()
+        {
+            _client = new HttpClient();
+        }
+
         public async Task<string> GetAccessTokenAsync(string clientId, string clientSecret, string redirectUri, string authCode)
         {
-            var client = new HttpClient();
             var requestBody = new Dictionary<string, string>
             {
                 { "grant_type", "authorization_code" },
@@ -19,25 +25,32 @@ namespace DBL.Helpers
             };
 
             var requestContent = new FormUrlEncodedContent(requestBody);
-            var response = await client.PostAsync("https://www.linkedin.com/oauth/v2/accessToken", requestContent);
+            var response = await _client.PostAsync("https://www.linkedin.com/oauth/v2/accessToken", requestContent);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                // Log error or throw exception
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new HttpRequestException($"Error fetching access token: {errorContent}");
+            }
 
             var responseContent = await response.Content.ReadAsStringAsync();
             var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(responseContent);
 
             return tokenResponse.AccessToken;
         }
-        public async Task PostJobToLinkedInAsync(string accessToken, JobPost jobPost)
+
+        public async Task PostJobToLinkedInAsync(string accessToken, JobPost jobPost, string companyPageId)
         {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
             var postContent = new
             {
-                author = "urn:li:organization:<YOUR_COMPANY_PAGE_ID>",
+                author = $"urn:li:organization:{companyPageId}",
                 lifecycleState = "PUBLISHED",
                 specificContent = new
                 {
-                    "com.linkedin.ugc.ShareContent" = new
+                    comLinkedinUgcShareContent = new
                     {
                         shareCommentary = new
                         {
@@ -48,18 +61,20 @@ namespace DBL.Helpers
                 },
                 visibility = new
                 {
-                    "com.linkedin.ugc.MemberNetworkVisibility" = "PUBLIC"
+                    comLinkedinUgcMemberNetworkVisibility = "PUBLIC"
                 }
             };
 
             var jsonContent = JsonConvert.SerializeObject(postContent);
             var requestContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("https://api.linkedin.com/v2/ugcPosts", requestContent);
+            var response = await _client.PostAsync("https://api.linkedin.com/v2/ugcPosts", requestContent);
 
             if (!response.IsSuccessStatusCode)
             {
-                // Handle error
+                // Log error or throw exception
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new HttpRequestException($"Error posting job to LinkedIn: {errorContent}");
             }
         }
 
@@ -69,5 +84,11 @@ namespace DBL.Helpers
             public string AccessToken { get; set; }
         }
 
+        public class JobPost
+        {
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public string Url { get; set; }
+        }
     }
 }
