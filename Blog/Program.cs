@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
-using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,8 +31,8 @@ builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
 builder.Services.AddSingleton<PublishBlogstoFacebookJob>();
 builder.Services.AddSingleton(new JobSchedule(
     jobType: typeof(PublishBlogstoFacebookJob),
-cronExpression: "0 * * * * ?")); // Cron expression for running every minute
-//cronExpression: "0 0 */3 * * ?")); // Cron expression for running every Three Hours
+    cronExpression: "0 * * * * ?")); // Cron expression for running every minute
+                                     //cronExpression: "0 0 */3 * * ?")); // Cron expression for running every Three Hours
 
 builder.Services.AddSession(options =>
 {
@@ -71,6 +70,12 @@ app.Use(async (context, next) =>
     await next();
 });
 
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -83,18 +88,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
+app.MapControllerRoute(
+    name: "csr",
+    pattern: "api/csr/{action=GenerateCsr}/{commonName?}",
+    defaults: new { controller = "Csr", action = "GenerateCsr" });
 
 app.Run();
-// Configure Kestrel for HTTPS
-builder.WebHost.UseKestrel(options =>
-{
-    options.ConfigureHttpsDefaults(httpsOptions =>
-    {
-        httpsOptions.ServerCertificate = new X509Certificate2(@"h:\root\home\uttambadmin-003\www\certificateuttambsolutions.com.pfx", "123456");
-    });
-});

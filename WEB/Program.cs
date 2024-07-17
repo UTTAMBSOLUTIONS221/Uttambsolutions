@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
-using System.Security.Cryptography.X509Certificates;
 using WEB.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container
 builder.Services.AddSingleton(typeof(GoogleSheetsHelper));
-// Add services to the container.
 builder.Services.AddRazorPages().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = null;
@@ -38,7 +38,6 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>()
     .AddScoped(x => x.GetRequiredService<IUrlHelperFactory>().GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext));
 
-
 var app = builder.Build();
 
 // Middleware to enforce HTTPS and limit request body size
@@ -53,6 +52,12 @@ app.Use(async (context, next) =>
     await next();
 });
 
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -65,23 +70,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    if (!app.Environment.IsDevelopment())
-    {
-        app.UseExceptionHandler("/Home/Error");
-        app.UseHsts();
-    }
-}
+app.MapControllerRoute(
+    name: "csr",
+    pattern: "api/csr/{action=GenerateCsr}/uttambsolutions.com",
+    defaults: new { controller = "Csr" });
 
 app.Run();
-
-builder.WebHost.UseKestrel(options =>
-{
-    options.ConfigureHttpsDefaults(httpsOptions =>
-    {
-        httpsOptions.ServerCertificate = new X509Certificate2(@"h:\root\home\uttambadmin-003\www\certificateuttambsolutions.com.pfx", "123456");
-    });
-});
