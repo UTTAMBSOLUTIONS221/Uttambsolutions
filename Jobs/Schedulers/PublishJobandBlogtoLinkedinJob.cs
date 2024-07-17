@@ -26,19 +26,19 @@ namespace Jobs.Schedulers
             var unpublishedBlogs = await bl.Getsystemallunpublishedblogdata();
             if (unpublishedBlogs != null && unpublishedBlogs.Any())
             {
-                foreach (var blogData in unpublishedBlogs)
-                {
-                    //Get all Registered Social Pages
-                    var Socialpages = await bl.Getsystemallsocialmediadata();
-                    var accessToken = await linkedinHelper.GetAccessTokenAsync(clientId, clientSecret, redirectUri, authCode);
+                //foreach (var blogData in unpublishedBlogs)
+                //{
+                //    //Get all Registered Social Pages
+                //    var Socialpages = await bl.Getsystemallsocialmediadata();
+                //    var accessToken = await linkedinHelper.GetAccessTokenAsync(clientId, clientSecret, redirectUri, authCode);
 
-                    var jobPosts = ExtractJobPostsFromBlog(blogUrl); // Implement this method to extract job posts from your blog
+                //    var jobPosts = ExtractJobPostsFromBlog(blogUrl); // Implement this method to extract job posts from your blog
 
-                    foreach (var jobPost in jobPosts)
-                    {
-                        await linkedinHelper.PostJobToLinkedInAsync(accessToken, jobPost, companyPageId);
-                    }
-                }
+                //    foreach (var jobPost in jobPosts)
+                //    {
+                //        await linkedinHelper.PostJobToLinkedInAsync(accessToken, jobPost, companyPageId);
+                //    }
+                //}
                 await Task.CompletedTask;
             }
         }
