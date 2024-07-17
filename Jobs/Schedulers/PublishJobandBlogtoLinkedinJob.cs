@@ -8,7 +8,7 @@ namespace Jobs.Schedulers
     {
         private readonly IServiceProvider _provider;
         private readonly BL bl;
-        FacebookHelper facebook = new FacebookHelper();
+        LinkedinHelpers linkedinHelper = new LinkedinHelpers();
         public PublishJobandBlogtoLinkedinJob(IServiceProvider provider, IConfiguration config)
         {
             _provider = provider;
@@ -30,18 +30,13 @@ namespace Jobs.Schedulers
                 {
                     //Get all Registered Social Pages
                     var Socialpages = await bl.Getsystemallsocialmediadata();
-                    foreach (var page in Socialpages)
+                    var accessToken = await linkedinHelper.GetAccessTokenAsync(clientId, clientSecret, redirectUri, authCode);
+
+                    var jobPosts = ExtractJobPostsFromBlog(blogUrl); // Implement this method to extract job posts from your blog
+
+                    foreach (var jobPost in jobPosts)
                     {
-                        var imageUrls = new List<string>
-                        {
-                            blogData.Blogprimaryimageurl
-                        };
-                        string blogUrl = $"https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={blogData.Blogid}";
-                        string resp = await facebook.PublishBlogPostAsync(page.PageAccessToken, page.UserAccessToken, page.PageId, blogData.Summary, blogUrl);
-                        if (resp == "Post published successfully!")
-                        {
-                            await bl.Updatepublishedblogdata(blogData.Blogid);
-                        }
+                        await linkedinHelper.PostJobToLinkedInAsync(accessToken, jobPost, companyPageId);
                     }
                 }
                 await Task.CompletedTask;
