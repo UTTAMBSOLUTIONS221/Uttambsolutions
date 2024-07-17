@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,3 +90,11 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.Run();
+// Configure Kestrel for HTTPS
+builder.WebHost.UseKestrel(options =>
+{
+    options.ConfigureHttpsDefaults(httpsOptions =>
+    {
+        httpsOptions.ServerCertificate = new X509Certificate2(@"h:\root\home\uttambadmin-003\www\certificateuttambsolutions.com.pfx", "123456");
+    });
+});
