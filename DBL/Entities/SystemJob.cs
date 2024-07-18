@@ -5,8 +5,9 @@
         public int JobId { get; set; }
         public int EmployerId { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
-        public int? JobFunctionParentId { get; set; }
+        public string JobDescription { get; set; }
+        public int? JobFunctionId { get; set; }
+        public int? JobIndustryId { get; set; }
         public int? JobLocationId { get; set; }
         public string JobTypeName { get; set; }
         public int? JobExperienceId { get; set; }

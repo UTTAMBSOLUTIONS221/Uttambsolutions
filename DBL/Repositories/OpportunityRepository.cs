@@ -13,14 +13,14 @@ namespace DBL.Repositories
         public OpportunityRepository(string connectionString) : base(connectionString)
         {
         }
-        public Systemjobdata Getsystemallopportuntydata(int Page, int PageSize)
+        public Systemjobdata Getsystemallopportunitydata(int Page, int PageSize)
         {
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Systemjobdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_Getsystemallopportuntydata", parameters, commandType: CommandType.StoredProcedure);
+                var queryResult = connection.Query("Usp_Getsystemallopportunitydata", parameters, commandType: CommandType.StoredProcedure);
                 string systemjobdatadataJson = parameters.Get<string>("@Systemjobdata");
                 if (systemjobdatadataJson != null)
                 {
@@ -32,17 +32,17 @@ namespace DBL.Repositories
                 }
             }
         }
-        public Genericmodel Registersystemopportuntydata(string JsonData)
+        public Genericmodel Registersystemopportunitydata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@JsonObjectdata", JsonData);
-                return connection.Query<Genericmodel>("Usp_Registersystemopportuntydata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                return connection.Query<Genericmodel>("Usp_Registersystemopportunitydata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
-        public SystemJob Getsystemopportuntydatabyid(long Opportunityid)
+        public SystemJob Getsystemopportunitydatabyid(long Opportunityid)
         {
             using (var connection = new SqlConnection(_connString))
             {
@@ -50,7 +50,7 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Opportunityid", Opportunityid);
                 parameters.Add("@Systemjobdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_Getsystemopportuntydatabyid", parameters, commandType: CommandType.StoredProcedure);
+                var queryResult = connection.Query("Usp_Getsystemopportunitydatabyid", parameters, commandType: CommandType.StoredProcedure);
                 string systemjobdataJson = parameters.Get<string>("@Systemjobdata");
                 if (systemjobdataJson != null)
                 {

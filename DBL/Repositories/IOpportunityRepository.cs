@@ -5,9 +5,9 @@ namespace DBL.Repositories
 {
     public interface IOpportunityRepository
     {
-        Systemjobdata Getsystemallopportuntydata(int Page, int PageSize);
-        Genericmodel Registersystemopportuntydata(string JsonData);
-        SystemJob Getsystemopportuntydatabyid(long Opportunityid);
+        Systemjobdata Getsystemallopportunitydata(int Page, int PageSize);
+        Genericmodel Registersystemopportunitydata(string JsonData);
+        SystemJob Getsystemopportunitydatabyid(long Opportunityid);
         IEnumerable<SystemJob> Getsystemallunpublishedopportunitydata();
         Genericmodel Updatepublishedopportunitydata(long Opportunityid);
     }

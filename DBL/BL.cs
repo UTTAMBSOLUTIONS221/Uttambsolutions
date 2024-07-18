@@ -592,27 +592,27 @@ namespace DBL
         #endregion
 
         #region System Job Opportunities
-        public Task<Systemjobdata> Getsystemallopportuntydata(int Page, int PageSize)
+        public Task<Systemjobdata> Getsystemallopportunitydata(int Page, int PageSize)
         {
             return Task.Run(() =>
             {
-                var Resp = db.OpportunityRepository.Getsystemallopportuntydata(Page, PageSize);
+                var Resp = db.OpportunityRepository.Getsystemallopportunitydata(Page, PageSize);
                 return Resp;
             });
         }
-        public Task<Genericmodel> Registersystemopportuntydata(string Obj)
+        public Task<Genericmodel> Registersystemopportunitydata(string Obj)
         {
             return Task.Run(() =>
             {
-                var Resp = db.OpportunityRepository.Registersystemopportuntydata(Obj);
+                var Resp = db.OpportunityRepository.Registersystemopportunitydata(Obj);
                 return Resp;
             });
         }
-        public Task<SystemJob> Getsystemopportuntydatabyid(long Opportunityid)
+        public Task<SystemJob> Getsystemopportunitydatabyid(long Opportunityid)
         {
             return Task.Run(() =>
             {
-                var Resp = db.OpportunityRepository.Getsystemopportuntydatabyid(Opportunityid);
+                var Resp = db.OpportunityRepository.Getsystemopportunitydatabyid(Opportunityid);
                 return Resp;
             });
         }

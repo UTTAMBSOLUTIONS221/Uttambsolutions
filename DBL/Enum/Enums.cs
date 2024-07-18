@@ -16,5 +16,10 @@
         SystemSubCounty = 10,
         SystemChurch = 11,
         SystemChurchBranch = 12,
+        Systemjobfunction = 13,
+        Systemjobindustry = 14,
+        Systemjoblocation = 15,
+        Systemjobexperience = 16,
+        Systemjobtypeid = 17,
     }
 }
