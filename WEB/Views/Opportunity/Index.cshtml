@@ -23,6 +23,13 @@
                             <th>Image</th>
                             <th>Title</th>
                             <th>Employer</th>
+                            <th>Function</th>
+                            <th>Industry</th>
+                            <th>Location</th>
+                            <th>Jobtype</th>
+                            <th>Experience</th>
+                            <th>Salary Range</th>
+                            <th>Status</th>
                             <th class="text-right">Action</th>
                         </tr>
                     </thead>
@@ -34,6 +41,13 @@
                                     <td><img src="@Url.Content(item.Employerlogo)" height="30" width="30"/></td>
                                     <td>@item.Title</td>
                                     <td>@item.Employername</td>
+                                    <td>@item.Functionname</td>
+                                    <td>@item.Jobindustryname</td>
+                                    <td>@item.Locationname</td>
+                                    <td>@item.Jobtypename</td>
+                                    <td>@item.Experiencename</td>
+                                    <td>@item.JobSalaryRange</td>
+                                    <td>@item.JobStatus</td>
                                     <td class="text-right">   <a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                                 </tr>
                             }
