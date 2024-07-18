@@ -440,76 +440,6 @@ namespace DBL
 
         #endregion
 
-        #region System Blog Category
-        public Task<IEnumerable<Systemblogcategories>> Getsystemblogcategorydata(int Page, int PageSize)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.BlogcategoryRepository.Getsystemblogcategorydata(Page, PageSize);
-                return Resp;
-            });
-        }
-        public Task<Genericmodel> Registersystemblogcategorydata(string Obj)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.BlogcategoryRepository.Registersystemblogcategorydata(Obj);
-                return Resp;
-            });
-        }
-        public Task<Systemblogcategories> Getsystemblogcategorydatabyid(long Blogcategoryid)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.BlogcategoryRepository.Getsystemblogcategorydatabyid(Blogcategoryid);
-                return Resp;
-            });
-        }
-        #endregion
-
-        #region System Blogs
-        public Task<Systemblogdata> Getsystemallblogdata(int Page, int PageSize)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.BlogsRepository.Getsystemallblogdata(Page, PageSize);
-                return Resp;
-            });
-        }
-        public Task<Genericmodel> Registersystemblogdata(string Obj)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.BlogsRepository.Registersystemblogdata(Obj);
-                return Resp;
-            });
-        }
-        public Task<Systemblog> Getsystemblogdatabyid(long Blogid)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.BlogsRepository.Getsystemblogdatabyid(Blogid);
-                return Resp;
-            });
-        }
-        public Task<IEnumerable<Systemblog>> Getsystemallunpublishedblogdata()
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.BlogsRepository.Getsystemallunpublishedblogdata();
-                return Resp;
-            });
-        }
-        public Task<Genericmodel> Updatepublishedblogdata(long Blogid)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.BlogsRepository.Updatepublishedblogdata(Blogid);
-                return Resp;
-            });
-        }
-        #endregion
-
         #region System Product Brands
         public Task<Genericmodel> Registersystemproductbranddata(string Obj)
         {
@@ -586,6 +516,119 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.ProductRepository.Getsystemproductdatabyid(Productid);
+                return Resp;
+            });
+        }
+        #endregion
+
+        #region System Blog Category
+        public Task<IEnumerable<Systemblogcategories>> Getsystemblogcategorydata(int Page, int PageSize)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogcategoryRepository.Getsystemblogcategorydata(Page, PageSize);
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registersystemblogcategorydata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogcategoryRepository.Registersystemblogcategorydata(Obj);
+                return Resp;
+            });
+        }
+        public Task<Systemblogcategories> Getsystemblogcategorydatabyid(long Blogcategoryid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogcategoryRepository.Getsystemblogcategorydatabyid(Blogcategoryid);
+                return Resp;
+            });
+        }
+        #endregion
+
+        #region System Blogs
+        public Task<Systemblogdata> Getsystemallblogdata(int Page, int PageSize)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Getsystemallblogdata(Page, PageSize);
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registersystemblogdata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Registersystemblogdata(Obj);
+                return Resp;
+            });
+        }
+        public Task<Systemblog> Getsystemblogdatabyid(long Blogid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Getsystemblogdatabyid(Blogid);
+                return Resp;
+            });
+        }
+        public Task<IEnumerable<Systemblog>> Getsystemallunpublishedblogdata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Getsystemallunpublishedblogdata();
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Updatepublishedblogdata(long Blogid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.BlogsRepository.Updatepublishedblogdata(Blogid);
+                return Resp;
+            });
+        }
+        #endregion
+
+        #region System Job Opportunities
+        public Task<Systemjobdata> Getsystemallopportuntydata(int Page, int PageSize)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OpportunityRepository.Getsystemallopportuntydata(Page, PageSize);
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registersystemopportuntydata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OpportunityRepository.Registersystemopportuntydata(Obj);
+                return Resp;
+            });
+        }
+        public Task<SystemJob> Getsystemopportuntydatabyid(long Opportunityid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OpportunityRepository.Getsystemopportuntydatabyid(Opportunityid);
+                return Resp;
+            });
+        }
+        public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OpportunityRepository.Getsystemallunpublishedopportunitydata();
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Updatepublishedopportunitydata(long Opportunityid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OpportunityRepository.Updatepublishedopportunitydata(Opportunityid);
                 return Resp;
             });
         }

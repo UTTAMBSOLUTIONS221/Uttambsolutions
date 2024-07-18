@@ -15,6 +15,7 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var data = await bl.Getsystemallopportuntydata(0, 1000);
             return View();
         }
     }

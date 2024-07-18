@@ -15,6 +15,7 @@ namespace DBL.UOW
         IBlogcategoryRepository BlogcategoryRepository { get; }
 
         IBlogsRepository BlogsRepository { get; }
+        IOpportunityRepository OpportunityRepository { get; }
         IBrandRepository BrandRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
