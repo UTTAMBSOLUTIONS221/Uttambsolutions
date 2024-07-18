@@ -9,6 +9,7 @@
         public int? JobFunctionId { get; set; }
         public int? JobIndustryId { get; set; }
         public int? JobLocationId { get; set; }
+        public int? JobTypeId { get; set; }
         public string JobTypeName { get; set; }
         public int? JobExperienceId { get; set; }
         public string JobSalaryRange { get; set; }

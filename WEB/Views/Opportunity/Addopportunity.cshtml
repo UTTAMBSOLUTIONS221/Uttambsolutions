@@ -67,15 +67,45 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Job Type</label>
-                    <input class="form-control form-control-sm" asp-for="@Model.JobTypeName" id="JobTypeNameid" required />
+                    <select class="form-control form-control-sm" asp-for="@Model.JobTypeId" asp-items="Systemjobtype" id="JobTypeId" required>
+                        <option value="">---Select---</option>
+                    </select>
                 </div>
             </div>
-            <div class="col-sm-4">
-            <div class="form-group">
-                <label class="font-weight-light">Has Test?</label>
+            <div class="col-sm-4 d-flex justify-content-center">
+                <div class="form-group text-center">
+                    <label class="font-weight-light">Has Test?</label>
                     <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.HasTest" id="JobHasTestid" />
+                </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="font-weight-light">Salary Range</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.JobSalaryRange" id="JobSalaryRangeid" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label class="font-weight-light">Job Url</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.JobUrl" id="JobUrlid" required />
+                </div>
+            </div> 
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Deadline</label>
+                    <input class="form-control form-control-sm" type="date" asp-for ="@Model.Deadline" required id="Deadlineid" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Easy Apply?</label>
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.EasyApply" id="EasyApplyid" />
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
