@@ -23,22 +23,22 @@ namespace Jobs.Schedulers
             DateTime yesterday = now.AddDays(-1);
             string formattedDate = yesterday.ToString("yyyy-MM-dd");
             //get all unpublished blogs and not published
-            var unpublishedBlogs = await bl.Getsystemallunpublishedblogdata();
-            if (unpublishedBlogs != null && unpublishedBlogs.Any())
+            var unpublishedopportunities = await bl.Getsystemallunpublishedopportunitydata();
+            if (unpublishedopportunities != null && unpublishedopportunities.Any())
             {
-                //foreach (var blogData in unpublishedBlogs)
-                //{
-                //    //Get all Registered Social Pages
-                //    var Socialpages = await bl.Getsystemallsocialmediadata();
-                //    var accessToken = await linkedinHelper.GetAccessTokenAsync(clientId, clientSecret, redirectUri, authCode);
-
-                //    var jobPosts = ExtractJobPostsFromBlog(blogUrl); // Implement this method to extract job posts from your blog
-
-                //    foreach (var jobPost in jobPosts)
-                //    {
-                //        await linkedinHelper.PostJobToLinkedInAsync(accessToken, jobPost, companyPageId);
-                //    }
-                //}
+                foreach (var opportunityData in unpublishedopportunities)
+                {
+                    string JobPostUrl = "";
+                    opportunityData.JobPostUrl = JobPostUrl;
+                    //Get all Registered Social Pages
+                    var Socialpages = await bl.Getsystemalllinkedinsocialmediadata();
+                    foreach (var social in Socialpages.Where(x => x.PageType == "Linkedin"))
+                    {
+                        var accessToken = "";
+                        // var accessToken = await linkedinHelper.GetAccessTokenAsync(social.clientId, clientSecret, redirectUri, authCode);
+                        await linkedinHelper.PostJobToLinkedInAsync(accessToken, opportunityData, social.PageId);
+                    }
+                }
                 await Task.CompletedTask;
             }
         }

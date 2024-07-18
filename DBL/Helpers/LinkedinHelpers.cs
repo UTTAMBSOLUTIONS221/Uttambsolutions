@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DBL.Entities;
+using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -40,7 +41,7 @@ namespace DBL.Helpers
             return tokenResponse.AccessToken;
         }
 
-        public async Task PostJobToLinkedInAsync(string accessToken, JobPost jobPost, string companyPageId)
+        public async Task PostJobToLinkedInAsync(string accessToken, SystemJob jobPost, string companyPageId)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
@@ -54,7 +55,7 @@ namespace DBL.Helpers
                     {
                         shareCommentary = new
                         {
-                            text = $"{jobPost.Title}\n\n{jobPost.Description}\n\nApply here: {jobPost.Url}"
+                            text = $"{jobPost.Title}\n\n{jobPost.JobDescription}\n\nApply here: {jobPost.JobPostUrl}"
                         },
                         shareMediaCategory = "ARTICLE"
                     }

@@ -9,5 +9,6 @@ namespace DBL.Repositories
         Genericmodel Registersystemsocialmediapagedata(string JsonData);
         SocialMediaSettings Getsystemsocialmediadatabyid(long Socialsettingid);
         IEnumerable<SocialMediaSettings> Getsystemallsocialmediadata();
+        IEnumerable<SocialMediaSettings> Getsystemalllinkedinsocialmediadata();
     }
 }

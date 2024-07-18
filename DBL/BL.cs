@@ -378,6 +378,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<IEnumerable<SocialMediaSettings>> Getsystemalllinkedinsocialmediadata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SocialmediaRepository.Getsystemalllinkedinsocialmediadata();
+                return Resp;
+            });
+        }
         #endregion
 
         #region System Orgnizations

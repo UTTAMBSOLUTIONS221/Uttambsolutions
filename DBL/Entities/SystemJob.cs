@@ -23,6 +23,7 @@
         public string? JobStatus { get; set; } = "Open";
         public DateTime DatePosted { get; set; } = DateTime.Now;
         public string? JobUrl { get; set; }
+        public string? JobPostUrl { get; set; }
         public bool EasyApply { get; set; } = false;
         public bool HasTest { get; set; } = false;
         public bool Approved { get; set; } = false;

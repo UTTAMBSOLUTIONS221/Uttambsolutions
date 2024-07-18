@@ -51,5 +51,13 @@ namespace DBL.Repositories
                 return connection.Query<SocialMediaSettings>("Usp_Getsystemallsocialmediadata", null, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+        public IEnumerable<SocialMediaSettings> Getsystemalllinkedinsocialmediadata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                return connection.Query<SocialMediaSettings>("Usp_Getsystemalllinkedinsocialmediadata", null, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
     }
 }
