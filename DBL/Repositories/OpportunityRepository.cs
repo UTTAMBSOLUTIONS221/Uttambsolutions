@@ -19,16 +19,16 @@ namespace DBL.Repositories
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@Systemblogdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_Getsystemblogdata", parameters, commandType: CommandType.StoredProcedure);
-                string systemblogdataJson = parameters.Get<string>("@Systemblogdata");
-                if (systemblogdataJson != null)
+                parameters.Add("@Systemjobdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystemallopportuntydata", parameters, commandType: CommandType.StoredProcedure);
+                string systemjobdatadataJson = parameters.Get<string>("@Systemjobdata");
+                if (systemjobdatadataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<Systemblogdata>(systemblogdataJson);
+                    return JsonConvert.DeserializeObject<Systemjobdata>(systemjobdatadataJson);
                 }
                 else
                 {
-                    return new Systemblogdata();
+                    return new Systemjobdata();
                 }
             }
         }
@@ -48,17 +48,17 @@ namespace DBL.Repositories
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@Blogid", Blogid);
-                parameters.Add("@Systemblogdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_Getsystemblogdatabyid", parameters, commandType: CommandType.StoredProcedure);
-                string systemblogdataJson = parameters.Get<string>("@Systemblogdata");
-                if (systemblogdataJson != null)
+                parameters.Add("@Opportunityid", Opportunityid);
+                parameters.Add("@Systemjobdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystemopportuntydatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string systemjobdataJson = parameters.Get<string>("@Systemjobdata");
+                if (systemjobdataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<Systemblog>(systemblogdataJson);
+                    return JsonConvert.DeserializeObject<SystemJob>(systemjobdataJson);
                 }
                 else
                 {
-                    return new Systemblog();
+                    return new SystemJob();
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace DBL.Repositories
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@Blogid", Opportunityid);
+                parameters.Add("@Opportunityid", Opportunityid);
                 return connection.Query<Genericmodel>("Usp_Updatepublishedopportunitydata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
