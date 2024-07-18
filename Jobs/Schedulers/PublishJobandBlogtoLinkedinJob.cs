@@ -19,31 +19,41 @@ namespace Jobs.Schedulers
         {
             Logs($"{DateTime.Now} [Reminders Service called]" + Environment.NewLine);
 
-            DateTime now = DateTime.Now;
-            DateTime yesterday = now.AddDays(-1);
-            string formattedDate = yesterday.ToString("yyyy-MM-dd");
-            //get all unpublished blogs and not published
-            var unpublishedopportunities = await bl.Getsystemallunpublishedopportunitydata();
-            if (unpublishedopportunities != null && unpublishedopportunities.Any())
+            await InitiateLinkedInAuthorizationAsync();
+            await Task.CompletedTask;
+        }
+
+        private async Task InitiateLinkedInAuthorizationAsync()
+        {
+            string redirectUri = "https://academicresearchwriters.uttambsolutions.com/linkedin/redirect";
+
+            try
             {
-                foreach (var opportunityData in unpublishedopportunities)
+                // Construct the URL for LinkedIn authorization redirect
+                string authorizationUrl = $"{redirectUri}";
+
+                // Make a request to the authorization URL
+                using (var client = new HttpClient())
                 {
-                    string JobPostUrl = "https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code=b6248b28-cea5-456d-b705-aa0ddf82548a&Blogid=1";
-                    opportunityData.JobPostUrl = JobPostUrl;
-                    //Get all Registered Social Pages
-                    var Socialpages = await bl.Getsystemalllinkedinsocialmediadata();
-                    foreach (var social in Socialpages.Where(x => x.PageType == "Linkedin"))
+                    var response = await client.GetAsync(authorizationUrl);
+
+                    if (!response.IsSuccessStatusCode)
                     {
-                        string redirectUri = "https://fortysevennews.uttambsolutions.com/";
-                        string state = "randomState";
-                        string authCode = GetAuthorizationUrl(social.Appid, redirectUri, state);
-                        var accessToken = await linkedinHelper.GetAccessTokenAsync(social.Appid, social.Appsecret, redirectUri, authCode);
-                        await linkedinHelper.PostJobToLinkedInAsync(accessToken, opportunityData, social.PageId);
+                        // Handle unsuccessful request
+                        var errorContent = await response.Content.ReadAsStringAsync();
+                        throw new Exception($"Failed to initiate LinkedIn authorization: {errorContent}");
                     }
                 }
-                await Task.CompletedTask;
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                Console.WriteLine($"Error initiating LinkedIn authorization: {ex.Message}");
+                throw;
             }
         }
+
+
         public string GetAuthorizationUrl(string clientId, string redirectUri, string state)
         {
             return $"https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={clientId}&redirect_uri={Uri.EscapeDataString(redirectUri)}&state={state}&scope=w_member_social";

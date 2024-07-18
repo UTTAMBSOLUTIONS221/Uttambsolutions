@@ -1,4 +1,5 @@
 ﻿using DBL;
+using DBL.Helpers;
 using Jobs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -9,10 +10,12 @@ public class LinkedInController : Controller
     private readonly IConfiguration _configuration;
     private readonly HttpClient _httpClient = new HttpClient();
     private readonly BL bl;
+    private readonly LinkedinHelpers linkedinHelper;
     private readonly string redirectUri = "https://academicresearchwriters.uttambsolutions.com/linkedin/callback";
     public LinkedInController(IConfiguration config)
     {
         bl = new BL(Util.ShareConnectionString(config));
+        linkedinHelper = new LinkedinHelpers();
     }
 
 
@@ -54,7 +57,27 @@ public class LinkedInController : Controller
             var tokenResponse = await ExchangeCodeForTokenAsync(app.Appid, app.Appsecret, redirectUri, code);
 
             // Save the access token and refresh token in the database with the associated LinkedIn app
-            await bl.Updatelinkedinpagetoken(app.SocialSettingId, app.Appid, tokenResponse.AccessToken, tokenResponse.RefreshToken, tokenResponse.ExpiresIn);
+            var resp = await bl.Updatelinkedinpagetoken(app.SocialSettingId, app.Appid, tokenResponse.AccessToken, tokenResponse.RefreshToken, tokenResponse.ExpiresIn);
+            if (resp.RespStatus == 0)
+            {
+                var unpublishedopportunities = await bl.Getsystemallunpublishedopportunitydata();
+                if (unpublishedopportunities != null && unpublishedopportunities.Any())
+                {
+                    foreach (var opportunityData in unpublishedopportunities)
+                    {
+                        string JobPostUrl = "https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code=b6248b28-cea5-456d-b705-aa0ddf82548a&Blogid=1";
+                        opportunityData.JobPostUrl = JobPostUrl;
+                        // Get all Registered Social Pages
+                        var Socialpages = await bl.Getsystemalllinkedinsocialmediadata();
+                        foreach (var social in Socialpages.Where(x => x.PageType == "Linkedin"))
+                        {
+                            // Post job to LinkedIn using the helper
+                            await linkedinHelper.PostJobToLinkedInAsync(social.UserAccessToken, opportunityData, social.PageId);
+                        }
+                    }
+                }
+            }
+
 
             return Ok("Job posted successfully on LinkedIn.");
         }
