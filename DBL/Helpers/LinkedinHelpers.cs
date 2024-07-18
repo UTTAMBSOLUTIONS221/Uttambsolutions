@@ -13,7 +13,10 @@ namespace DBL.Helpers
         {
             _client = new HttpClient();
         }
-
+        public async Task<string> GetAuthorizationUrl(string clientId, string redirectUri, string state)
+        {
+            return $"https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={clientId}&redirect_uri={Uri.EscapeDataString(redirectUri)}&state={state}&scope=w_member_social";
+        }
         public async Task<string> GetAccessTokenAsync(string clientId, string clientSecret, string redirectUri, string authCode)
         {
             var requestBody = new Dictionary<string, string>

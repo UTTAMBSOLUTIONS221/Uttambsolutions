@@ -28,14 +28,16 @@ namespace Jobs.Schedulers
             {
                 foreach (var opportunityData in unpublishedopportunities)
                 {
-                    string JobPostUrl = "";
+                    string JobPostUrl = "https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code=b6248b28-cea5-456d-b705-aa0ddf82548a&Blogid=1";
                     opportunityData.JobPostUrl = JobPostUrl;
                     //Get all Registered Social Pages
                     var Socialpages = await bl.Getsystemalllinkedinsocialmediadata();
                     foreach (var social in Socialpages.Where(x => x.PageType == "Linkedin"))
                     {
-                        var accessToken = "";
-                        // var accessToken = await linkedinHelper.GetAccessTokenAsync(social.clientId, clientSecret, redirectUri, authCode);
+                        string redirectUri = "https://fortysevennews.uttambsolutions.com/";
+                        string state = "randomState";
+                        string authCode = await linkedinHelper.GetAuthorizationUrl(social.Appid, redirectUri, state);
+                        var accessToken = await linkedinHelper.GetAccessTokenAsync(social.Appid, social.Appsecret, redirectUri, authCode);
                         await linkedinHelper.PostJobToLinkedInAsync(accessToken, opportunityData, social.PageId);
                     }
                 }

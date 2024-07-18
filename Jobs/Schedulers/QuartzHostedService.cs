@@ -1,4 +1,7 @@
-﻿namespace Jobs.Schedulers
+﻿using Quartz;
+using Quartz.Spi;
+
+namespace Jobs.Schedulers
 {
     public class QuartzHostedService : IHostedService
     {

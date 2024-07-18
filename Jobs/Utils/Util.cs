@@ -1,4 +1,8 @@
-﻿namespace Jobs
+﻿using DBL.Models;
+using Newtonsoft.Json;
+using System.Security.Claims;
+
+namespace Jobs
 {
     public class Util
     {
