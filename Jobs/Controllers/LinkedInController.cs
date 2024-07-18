@@ -14,33 +14,31 @@ namespace Jobs.Controllers
         }
 
         // Endpoint to generate and redirect to LinkedIn's authorization URL
-        [HttpGet("redirect/{clientId}")]
-        public IActionResult RedirectToLinkedIn(string clientId)
+        [HttpGet("redirect")]
+        public IActionResult RedirectToLinkedIn()
         {
+            string clientId = "7797zie5ixisk8";
             string redirectUri = "https://academicresearchwriters.uttambsolutions.com/linkedin/callback";
-            string state = "randomState"; // Use a random or securely generated state string
+            string state = "randomState"; // Generate a random or securely generated state string for each request
 
             var authorizationUrl = GetAuthorizationUrl(clientId, redirectUri, state);
             return Redirect(authorizationUrl);
         }
 
-        // Method to generate the authorization URL
         private string GetAuthorizationUrl(string clientId, string redirectUri, string state)
         {
             return $"https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={clientId}&redirect_uri={Uri.EscapeDataString(redirectUri)}&state={state}&scope=w_member_social";
         }
 
-        // Callback endpoint to handle LinkedIn's redirect
         [HttpGet("callback")]
         public async Task<IActionResult> LinkedInCallback(string code, string state)
         {
-            string clientId = "<YourClientId>";
-            string clientSecret = "<YourClientSecret>";
-            string redirectUri = "<YourRedirectUri>";
+            string clientId = "7797zie5ixisk8";
+            string clientSecret = "OjkMPRqTXU78vbw7";
+            string redirectUri = "https://academicresearchwriters.uttambsolutions.com/linkedin/callback";
 
             if (string.IsNullOrEmpty(code))
             {
-                // Handle error
                 return BadRequest("Authorization code is missing.");
             }
 
@@ -52,7 +50,6 @@ namespace Jobs.Controllers
             }
             catch (Exception ex)
             {
-                // Handle error
                 return BadRequest($"Error exchanging authorization code: {ex.Message}");
             }
         }
