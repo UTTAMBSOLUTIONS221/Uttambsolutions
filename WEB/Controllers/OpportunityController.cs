@@ -19,8 +19,8 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //var data = await bl.Getsystemallopportuntydata(0, 1000);
-            return View();
+            var data = await bl.Getsystemallopportunitydata(0, 1000);
+            return View(data);
         }
         [HttpGet]
         public async Task<IActionResult> Addopportunity(int Opportunityid)
