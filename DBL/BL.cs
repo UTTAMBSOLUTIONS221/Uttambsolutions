@@ -364,8 +364,8 @@ namespace DBL
             else if (obj.PageType == "Linkedin")
             {
                 // Set the page access token and page ID
-                obj.PageAccessToken = "not set";
-                obj.PageId = "not set";
+                obj.PageAccessToken = Guid.NewGuid();
+                obj.PageId = Guid.NewGuid();
 
                 // Save the data
                 Resp = db.SocialmediaRepository.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(obj));
@@ -396,6 +396,14 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.SocialmediaRepository.Getsystemalllinkedinsocialmediadata();
+                return Resp;
+            });
+        }
+        public Task<SocialMediaSettings> Getsystemlinkedinsocialmediadata(string Appid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SocialmediaRepository.Getsystemlinkedinsocialmediadata(Appid);
                 return Resp;
             });
         }
