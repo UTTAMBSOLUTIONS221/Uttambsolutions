@@ -399,11 +399,35 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<SocialMediaSettings> Getsystemlinkedinsocialmediadata(string Appid)
+        public Task<SocialMediaSettings> Getsystemlinkedinsocialmediadata(string Pageid)
         {
             return Task.Run(() =>
             {
-                var Resp = db.SocialmediaRepository.Getsystemlinkedinsocialmediadata(Appid);
+                var Resp = db.SocialmediaRepository.Getsystemlinkedinsocialmediadata(Pageid);
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Updatelinkedinpagetoken(long Socialsettingid, string Appid, string AccessToken, string RefreshToken, int ExpiresIn)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SocialmediaRepository.Updatelinkedinpagetoken(Socialsettingid, Appid, AccessToken, RefreshToken, ExpiresIn);
+                return Resp;
+            });
+        }
+        public Task<SocialMediaSettings> Getsystemlinkedinsocialmediadatabyappid(string Appid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SocialmediaRepository.Getsystemlinkedinsocialmediadatabyappid(Appid);
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Updateaccesstokenonlinkedinpagetoken(long Socialsettingid, string Appid, string AccessToken)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SocialmediaRepository.Updateaccesstokenonlinkedinpagetoken(Socialsettingid, Appid, AccessToken);
                 return Resp;
             });
         }

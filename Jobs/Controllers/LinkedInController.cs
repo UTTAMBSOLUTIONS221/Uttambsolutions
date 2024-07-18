@@ -9,6 +9,7 @@ public class LinkedInController : Controller
     private readonly IConfiguration _configuration;
     private readonly HttpClient _httpClient = new HttpClient();
     private readonly BL bl;
+    private readonly string redirectUri = "https://academicresearchwriters.uttambsolutions.com/linkedin/callback";
     public LinkedInController(IConfiguration config)
     {
         bl = new BL(Util.ShareConnectionString(config));
@@ -20,7 +21,6 @@ public class LinkedInController : Controller
     {
 
         var authorizationUrl = "";
-        string redirectUri = "https://academicresearchwriters.uttambsolutions.com/linkedin/callback";
         //get social media apps to update the access tokens
         var linkedinapps = await bl.Getsystemalllinkedinsocialmediadata();
         if (linkedinapps != null)
@@ -44,46 +44,17 @@ public class LinkedInController : Controller
 
         try
         {
-            var app = await bl.GetLinkedinSocialMediaDataById(state);
+            var app = await bl.Getsystemlinkedinsocialmediadata(state);
             if (app == null)
             {
                 return BadRequest("LinkedIn app not found.");
             }
 
             // Exchange authorization code for access token
-            var tokenResponse = await ExchangeCodeForTokenAsync(app, clientSecret, redirectUri, code);
+            var tokenResponse = await ExchangeCodeForTokenAsync(app.Appid, app.Appsecret, redirectUri, code);
 
             // Save the access token and refresh token in the database with the associated LinkedIn app
-            await SaveTokensToDatabaseAsync(app.Appid, tokenResponse.AccessToken, tokenResponse.RefreshToken, tokenResponse.ExpiresIn);
-
-            return Ok("Job posted successfully on LinkedIn.");
-        }
-        catch (Exception ex)
-        {
-            return BadRequest($"Error exchanging authorization code: {ex.Message}");
-        }
-    }
-
-
-    [HttpGet("callback")]
-    public async Task<IActionResult> LinkedInCallback(string code, string state)
-    {
-        if (string.IsNullOrEmpty(code))
-        {
-            return BadRequest("Authorization code is missing.");
-        }
-
-        string clientId = _configuration["LinkedIn:ClientId"];
-        string clientSecret = _configuration["LinkedIn:ClientSecret"];
-        string redirectUri = _configuration["LinkedIn:RedirectUri"];
-
-        try
-        {
-            // Exchange authorization code for access token
-            var tokenResponse = await ExchangeCodeForTokenAsync(clientId, clientSecret, redirectUri, code);
-
-            // Save the access token and refresh token in the database with an associated LinkedIn page
-            await SaveTokensToDatabaseAsync(clientId, tokenResponse.AccessToken, tokenResponse.RefreshToken, tokenResponse.ExpiresIn);
+            await bl.Updatelinkedinpagetoken(app.SocialSettingId, app.Appid, tokenResponse.AccessToken, tokenResponse.RefreshToken, tokenResponse.ExpiresIn);
 
             return Ok("Job posted successfully on LinkedIn.");
         }
@@ -96,23 +67,22 @@ public class LinkedInController : Controller
     [HttpGet("refresh")]
     public async Task<IActionResult> RefreshAccessToken(string clientId)
     {
-        var clientSecret = _configuration["LinkedIn:ClientSecret"];
-
         try
         {
             // Retrieve refresh token from database based on clientId
-            var refreshToken = await GetRefreshTokenFromDatabaseAsync(clientId);
+            var refreshToken = await bl.Getsystemlinkedinsocialmediadatabyappid(clientId);
 
-            if (string.IsNullOrEmpty(refreshToken))
+            if (string.IsNullOrEmpty(refreshToken.Extra))
             {
                 return BadRequest("Refresh token not found or expired. Reauthorize.");
             }
 
             // Exchange refresh token for a new access token
-            var accessToken = await RefreshAccessTokenAsync(clientId, clientSecret, refreshToken);
+            var accessToken = await RefreshAccessTokenAsync(refreshToken.Appid, refreshToken.Appsecret, refreshToken.Extra);
 
             // Update access token in database
-            await UpdateAccessTokenInDatabaseAsync(clientId, accessToken);
+            await bl.Updateaccesstokenonlinkedinpagetoken(refreshToken.SocialSettingId, refreshToken.Appid, accessToken);
+
 
             return Ok("Access token refreshed successfully.");
         }
@@ -172,48 +142,23 @@ public class LinkedInController : Controller
 
         return tokenResponse.AccessToken;
     }
+    //private async Task<string> GetRefreshTokenFromDatabaseAsync(string clientId)
+    //{
+    //    var token = await _dbContext.LinkedInTokens.FindAsync(clientId);
+    //    return token?.RefreshToken;
+    //}
 
-    private async Task SaveTokensToDatabaseAsync(string clientId, string accessToken, string refreshToken, int expiresIn)
-    {
-        var existingToken = await _dbContext.LinkedInTokens.FindAsync(clientId);
+    //private async Task UpdateAccessTokenInDatabaseAsync(string clientId, string accessToken)
+    //{
+    //    var token = await _dbContext.LinkedInTokens.FindAsync(clientId);
 
-        if (existingToken != null)
-        {
-            existingToken.AccessToken = accessToken;
-            existingToken.RefreshToken = refreshToken;
-            existingToken.ExpiryDate = DateTime.UtcNow.AddSeconds(expiresIn); // Set token expiration
-        }
-        else
-        {
-            _dbContext.LinkedInTokens.Add(new LinkedInToken
-            {
-                ClientId = clientId,
-                AccessToken = accessToken,
-                RefreshToken = refreshToken,
-                ExpiryDate = DateTime.UtcNow.AddSeconds(expiresIn) // Set token expiration
-            });
-        }
-
-        await _dbContext.SaveChangesAsync();
-    }
-
-    private async Task<string> GetRefreshTokenFromDatabaseAsync(string clientId)
-    {
-        var token = await _dbContext.LinkedInTokens.FindAsync(clientId);
-        return token?.RefreshToken;
-    }
-
-    private async Task UpdateAccessTokenInDatabaseAsync(string clientId, string accessToken)
-    {
-        var token = await _dbContext.LinkedInTokens.FindAsync(clientId);
-
-        if (token != null)
-        {
-            token.AccessToken = accessToken;
-            token.ExpiryDate = DateTime.UtcNow.AddHours(24); // Example: Extend token validity
-            await _dbContext.SaveChangesAsync();
-        }
-    }
+    //    if (token != null)
+    //    {
+    //        token.AccessToken = accessToken;
+    //        token.ExpiryDate = DateTime.UtcNow.AddHours(24); // Example: Extend token validity
+    //        await _dbContext.SaveChangesAsync();
+    //    }
+    //}
 
     public class TokenResponse
     {

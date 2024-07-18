@@ -59,5 +59,54 @@ namespace DBL.Repositories
                 return connection.Query<SocialMediaSettings>("Usp_Getsystemalllinkedinsocialmediadata", null, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+        public SocialMediaSettings Getsystemlinkedinsocialmediadata(string PageId)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@PageId", PageId);
+                return connection.Query<SocialMediaSettings>("Usp_Getsystemlinkedinsocialmediadata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
+        public Genericmodel Updatelinkedinpagetoken(long SoicialId, string Appid, string AccessToken, string RefreshToken, int ExpiresIn)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@SoicialId", SoicialId);
+                parameters.Add("@Appid", Appid);
+                parameters.Add("@AccessToken", AccessToken);
+                parameters.Add("@RefreshToken", RefreshToken);
+                parameters.Add("@ExpiresIn", ExpiresIn);
+                return connection.Query<Genericmodel>("Usp_Updatelinkedinpagetokendata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
+        public SocialMediaSettings Getsystemlinkedinsocialmediadatabyappid(string Appid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Appid", Appid);
+                return connection.Query<SocialMediaSettings>("Usp_Getsystemlinkedinsocialmediadatabyappid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
+        public Genericmodel Updateaccesstokenonlinkedinpagetoken(long SoicialId, string Appid, string AccessToken)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@SoicialId", SoicialId);
+                parameters.Add("@Appid", Appid);
+                parameters.Add("@AccessToken", AccessToken);
+                return connection.Query<Genericmodel>("Usp_Updateaccesstokenonlinkedinpagetokendata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
     }
 }

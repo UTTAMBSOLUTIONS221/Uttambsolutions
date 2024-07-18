@@ -10,5 +10,9 @@ namespace DBL.Repositories
         SocialMediaSettings Getsystemsocialmediadatabyid(long Socialsettingid);
         IEnumerable<SocialMediaSettings> Getsystemallsocialmediadata();
         IEnumerable<SocialMediaSettings> Getsystemalllinkedinsocialmediadata();
+        SocialMediaSettings Getsystemlinkedinsocialmediadata(string PageId);
+        Genericmodel Updatelinkedinpagetoken(long SoicialId, string Appid, string AccessToken, string RefreshToken, int ExpiresIn);
+        SocialMediaSettings Getsystemlinkedinsocialmediadatabyappid(string Appid);
+        Genericmodel Updateaccesstokenonlinkedinpagetoken(long SoicialId, string Appid, string AccessToken);
     }
 }
