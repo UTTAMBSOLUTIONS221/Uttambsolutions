@@ -364,8 +364,8 @@ namespace DBL
             else if (obj.PageType == "Linkedin")
             {
                 // Set the page access token and page ID
-                obj.PageAccessToken = Guid.NewGuid();
-                obj.PageId = Guid.NewGuid();
+                obj.PageAccessToken = Guid.NewGuid().ToString();
+                obj.PageId = Guid.NewGuid().ToString();
 
                 // Save the data
                 Resp = db.SocialmediaRepository.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(obj));

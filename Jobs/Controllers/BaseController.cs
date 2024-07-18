@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DBL.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace Jobs.Controllers
 {
