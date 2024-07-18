@@ -38,7 +38,12 @@ namespace WEB.Controllers
             }
             return PartialView(systemJob);
         }
-        public async Task<JsonResult> Addsystemopportunitydata(SystemJob model)
+        public async void Addsystemopportunitydata(int Opportunityid)
+        {
+            var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
+        }
+
+        public async Task<JsonResult> Publishopportunity(SystemJob model)
         {
             var resp = await bl.Registersystemopportunitydata(JsonConvert.SerializeObject(model));
             return Json(resp);

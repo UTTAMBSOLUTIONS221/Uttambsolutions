@@ -67,7 +67,7 @@ namespace DBL.Repositories
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
-                return connection.Query<SystemJob>("Usp_Getsystemallunpublishedblogdata", null, commandType: CommandType.StoredProcedure).ToList();
+                return connection.Query<SystemJob>("Usp_Getsystemallunpublishedopportunitydata", null, commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
