@@ -4,6 +4,7 @@ using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace WEB.Controllers
 {
@@ -36,6 +37,11 @@ namespace WEB.Controllers
                 systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
             }
             return PartialView(systemJob);
+        }
+        public async Task<JsonResult> Addsystemopportunitydata(SystemJob model)
+        {
+            var resp = await bl.Registersystemopportunitydata(JsonConvert.SerializeObject(model));
+            return Json(resp);
         }
     }
 }
