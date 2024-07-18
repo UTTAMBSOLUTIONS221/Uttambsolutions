@@ -66,7 +66,7 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@PageId", PageId);
-                return connection.Query<SocialMediaSettings>("Usp_Getsystemlinkedinsocialmediadata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                return connection.Query<SocialMediaSettings>("Usp_Getsystemlinkedinsocialmediadatabypageid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
 

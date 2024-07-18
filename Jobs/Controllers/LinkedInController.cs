@@ -12,26 +12,24 @@ public class LinkedInController : Controller
     private readonly BL bl;
     private readonly LinkedinHelpers linkedinHelper;
     private readonly string redirectUri = "https://academicresearchwriters.uttambsolutions.com/linkedin/callback";
+
     public LinkedInController(IConfiguration config)
     {
+        _configuration = config;
         bl = new BL(Util.ShareConnectionString(config));
         linkedinHelper = new LinkedinHelpers();
     }
 
-
     [HttpGet("redirect")]
     public async Task<IActionResult> RedirectToLinkedIn()
     {
-
         var authorizationUrl = "";
-        //get social media apps to update the access tokens
         var linkedinapps = await bl.Getsystemalllinkedinsocialmediadata();
         if (linkedinapps != null)
         {
             foreach (var app in linkedinapps)
             {
-                string state = app.PageId;
-                authorizationUrl = $"https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={app.Appid}&redirect_uri={Uri.EscapeDataString(redirectUri)}&state={state}&scope=w_member_social";
+                authorizationUrl = $"https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={app.Appid}&redirect_uri={Uri.EscapeDataString(redirectUri)}&state={app.PageId}&scope=w_member_social";
             }
         }
         return Redirect(authorizationUrl);
@@ -47,17 +45,17 @@ public class LinkedInController : Controller
 
         try
         {
-            var app = await bl.Getsystemlinkedinsocialmediadata(state);
-            if (app == null)
+            var socialApp = await bl.Getsystemlinkedinsocialmediadata(state);
+            if (socialApp == null)
             {
                 return BadRequest("LinkedIn app not found.");
             }
 
             // Exchange authorization code for access token
-            var tokenResponse = await ExchangeCodeForTokenAsync(app.Appid, app.Appsecret, redirectUri, code);
+            var tokenResponse = await ExchangeCodeForTokenAsync(socialApp.Appid, socialApp.Appsecret, redirectUri, code);
 
             // Save the access token and refresh token in the database with the associated LinkedIn app
-            var resp = await bl.Updatelinkedinpagetoken(app.SocialSettingId, app.Appid, tokenResponse.AccessToken, tokenResponse.RefreshToken, tokenResponse.ExpiresIn);
+            var resp = await bl.Updatelinkedinpagetoken(socialApp.SocialSettingId, socialApp.Appid, tokenResponse.AccessToken, tokenResponse.RefreshToken, tokenResponse.ExpiresIn);
             if (resp.RespStatus == 0)
             {
                 var unpublishedopportunities = await bl.Getsystemallunpublishedopportunitydata();
@@ -67,18 +65,14 @@ public class LinkedInController : Controller
                     {
                         string JobPostUrl = "https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code=b6248b28-cea5-456d-b705-aa0ddf82548a&Blogid=1";
                         opportunityData.JobPostUrl = JobPostUrl;
-                        // Get all Registered Social Pages
                         var Socialpages = await bl.Getsystemalllinkedinsocialmediadata();
                         foreach (var social in Socialpages.Where(x => x.PageType == "Linkedin"))
                         {
-                            // Post job to LinkedIn using the helper
                             await linkedinHelper.PostJobToLinkedInAsync(social.UserAccessToken, opportunityData, social.PageId);
                         }
                     }
                 }
             }
-
-
             return Ok("Job posted successfully on LinkedIn.");
         }
         catch (Exception ex)
@@ -92,7 +86,6 @@ public class LinkedInController : Controller
     {
         try
         {
-            // Retrieve refresh token from database based on clientId
             var refreshToken = await bl.Getsystemlinkedinsocialmediadatabyappid(clientId);
 
             if (string.IsNullOrEmpty(refreshToken.Extra))
@@ -100,12 +93,9 @@ public class LinkedInController : Controller
                 return BadRequest("Refresh token not found or expired. Reauthorize.");
             }
 
-            // Exchange refresh token for a new access token
             var accessToken = await RefreshAccessTokenAsync(refreshToken.Appid, refreshToken.Appsecret, refreshToken.Extra);
 
-            // Update access token in database
             await bl.Updateaccesstokenonlinkedinpagetoken(refreshToken.SocialSettingId, refreshToken.Appid, accessToken);
-
 
             return Ok("Access token refreshed successfully.");
         }
@@ -165,7 +155,6 @@ public class LinkedInController : Controller
 
         return tokenResponse.AccessToken;
     }
-
 
     public class TokenResponse
     {
