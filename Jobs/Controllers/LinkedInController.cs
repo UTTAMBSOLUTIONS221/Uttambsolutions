@@ -142,23 +142,7 @@ public class LinkedInController : Controller
 
         return tokenResponse.AccessToken;
     }
-    //private async Task<string> GetRefreshTokenFromDatabaseAsync(string clientId)
-    //{
-    //    var token = await _dbContext.LinkedInTokens.FindAsync(clientId);
-    //    return token?.RefreshToken;
-    //}
 
-    //private async Task UpdateAccessTokenInDatabaseAsync(string clientId, string accessToken)
-    //{
-    //    var token = await _dbContext.LinkedInTokens.FindAsync(clientId);
-
-    //    if (token != null)
-    //    {
-    //        token.AccessToken = accessToken;
-    //        token.ExpiryDate = DateTime.UtcNow.AddHours(24); // Example: Extend token validity
-    //        await _dbContext.SaveChangesAsync();
-    //    }
-    //}
 
     public class TokenResponse
     {
