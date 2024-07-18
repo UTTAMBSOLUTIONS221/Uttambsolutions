@@ -19,7 +19,7 @@
         public int? JobExperienceId { get; set; }
         public string? Experiencename { get; set; }
         public string? JobSalaryRange { get; set; }
-        public DateTime? Deadline { get; set; }
+        public DateTime Deadline { get; set; }
         public string? JobStatus { get; set; } = "Open";
         public DateTime DatePosted { get; set; } = DateTime.Now;
         public string? JobUrl { get; set; }

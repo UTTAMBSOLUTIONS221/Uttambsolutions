@@ -51,7 +51,7 @@
                                     <td>@item.Experiencename</td>
                                     <td>@item.JobSalaryRange</td>
                                     <td>@item.JobStatus</td>
-                                    <td>@item.Deadline</td>
+                                    <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
                                     <td>@item.DateCreated</td>
                                     <td>@item.DatePosted</td>
                                     <td class="text-right">   <a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
