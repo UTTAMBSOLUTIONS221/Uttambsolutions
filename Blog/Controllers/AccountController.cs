@@ -200,6 +200,25 @@ namespace Blog.Controllers
         }
         #endregion
 
+        #region Add Social Pages
+        [HttpGet]
+        public async Task<IActionResult> Addsocialmediapage(long Socialsettingid)
+        {
+            SocialMediaSettings socialMediaSettings = new SocialMediaSettings();
+            if (Socialsettingid > 0)
+            {
+                socialMediaSettings = await bl.Getsystemsocialmediadatabyid(Socialsettingid);
+            }
+            return PartialView(socialMediaSettings);
+        }
+
+        public async Task<JsonResult> Addsocialmediapagedata(SocialMediaSettings model)
+        {
+            var resp = await bl.Registersystemsocialmediapagedata(model);
+            return Json(resp);
+        }
+        #endregion
+
         #endregion
     }
 }
