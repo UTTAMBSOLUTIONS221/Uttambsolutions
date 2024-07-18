@@ -56,20 +56,17 @@ public class LinkedInController : Controller
 
             // Save the access token and refresh token in the database with the associated LinkedIn app
             var resp = await bl.Updatelinkedinpagetoken(socialApp.SocialSettingId, socialApp.Appid, tokenResponse.AccessToken, tokenResponse.RefreshToken, tokenResponse.ExpiresIn);
-            if (resp.RespStatus == 0)
+            var unpublishedopportunities = await bl.Getsystemallunpublishedopportunitydata();
+            if (unpublishedopportunities != null)
             {
-                var unpublishedopportunities = await bl.Getsystemallunpublishedopportunitydata();
-                if (unpublishedopportunities != null && unpublishedopportunities.Any())
+                foreach (var opportunityData in unpublishedopportunities)
                 {
-                    foreach (var opportunityData in unpublishedopportunities)
+                    string JobPostUrl = "https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code=b6248b28-cea5-456d-b705-aa0ddf82548a&Blogid=1";
+                    opportunityData.JobPostUrl = JobPostUrl;
+                    var Socialpages = await bl.Getsystemalllinkedinsocialmediadata();
+                    foreach (var social in Socialpages.Where(x => x.PageType == "Linkedin"))
                     {
-                        string JobPostUrl = "https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code=b6248b28-cea5-456d-b705-aa0ddf82548a&Blogid=1";
-                        opportunityData.JobPostUrl = JobPostUrl;
-                        var Socialpages = await bl.Getsystemalllinkedinsocialmediadata();
-                        foreach (var social in Socialpages.Where(x => x.PageType == "Linkedin"))
-                        {
-                            await linkedinHelper.PostJobToLinkedInAsync(social.UserAccessToken, opportunityData, social.PageId);
-                        }
+                        await linkedinHelper.PostJobToLinkedInAsync(social.UserAccessToken, opportunityData, social.PageId);
                     }
                 }
             }

@@ -32,8 +32,13 @@ namespace Jobs.Schedulers
                 // Construct the URL for LinkedIn authorization redirect
                 string authorizationUrl = $"{redirectUri}";
 
-                // Make a request to the authorization URL
-                using (var client = new HttpClient())
+                // Bypass SSL validation (for development purposes only)
+                HttpClientHandler handler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+                };
+
+                using (var client = new HttpClient(handler))
                 {
                     var response = await client.GetAsync(authorizationUrl);
 
@@ -45,9 +50,16 @@ namespace Jobs.Schedulers
                     }
                 }
             }
+            catch (HttpRequestException ex) when (ex.InnerException != null)
+            {
+                // Handle any exceptions and log inner exception details
+                Console.WriteLine($"Error initiating LinkedIn authorization: {ex.Message}");
+                Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                throw;
+            }
             catch (Exception ex)
             {
-                // Handle any exceptions
+                // Handle other exceptions
                 Console.WriteLine($"Error initiating LinkedIn authorization: {ex.Message}");
                 throw;
             }
