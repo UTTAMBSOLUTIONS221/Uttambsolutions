@@ -7,27 +7,19 @@
     var Systemjobtype = ViewData["Systemjobtypelists"] as List<SelectListItem>;
 }
 <div class="modal-header">
-    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Job Details</h5>
+    <h5 class="modal-title" id="Uttambsolutionsmodallabel">Job Details</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <!-- Section 1: Blog Details -->
+    <!-- Section 1: Job Details -->
     <div id="section1" class="section">
-        <h6>Step 1: Job Details</h6>
-        <div class="row">
-            <div class="col-sm-12">
-                <input asp-for="@Model.JobId" id="JobId" hidden />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="font-weight-light">Job Title</label>
-                    <input class="form-control form-control-sm" asp-for="@Model.Title" id="Titleid" required />
-                </div>
-            </div>
+        <h6 class="mb-3">Step 1: Job Details</h6>
+        <input asp-for="@Model.JobId" id="JobId" hidden />
+        <div class="form-group">
+            <label class="font-weight-light">Job Title</label>
+            <input class="form-control form-control-sm" asp-for="@Model.Title" id="Titleid" required />
         </div>
         <div class="row">
             <div class="col-sm-4">
@@ -64,7 +56,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">Job Type</label>
                     <select class="form-control form-control-sm" asp-for="@Model.JobTypeId" asp-items="Systemjobtype" id="JobTypeId" required>
@@ -72,130 +64,94 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-4 d-flex justify-content-center">
-                <div class="form-group text-center">
-                    <label class="font-weight-light">Has Test?</label>
-                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.HasTest" id="JobHasTestid" />
+            <div class="col-sm-3 d-flex align-items-center mt-2">
+                <div class="custom-control custom-checkbox small-checkbox">
+                    <input class="custom-control-input" type="checkbox" asp-for="@Model.EasyApply" id="EasyApplyid" />
+                    <label class="custom-control-label text-sm font-weight-light text-nowrap nowrap" for="EasyApplyid">Easy apply?</label>
+                </div>
+            </div>
+            <div class="col-sm-2 d-flex align-items-center mt-2">
+                <div class="custom-control custom-checkbox small-checkbox">
+                    <input class="custom-control-input" type="checkbox" asp-for="@Model.HasTest" id="JobHasTestid" />
+                    <label class="custom-control-label text-sm font-weight-light text-nowrap nowrap" for="JobHasTestid">Test ?</label>
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-5">
                 <div class="form-group">
+                    <label class="font-weight-light">Job URL</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.JobUrl" id="JobUrlid" required />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Deadline</label>
+                    <input class="form-control form-control-sm" type="date" asp-for="@Model.Deadline" id="Deadlineid" required />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group mb-0">
                     <label class="font-weight-light">Salary Range</label>
                     <input class="form-control form-control-sm" asp-for="@Model.JobSalaryRange" id="JobSalaryRangeid" required />
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-5">
-                <div class="form-group">
-                    <label class="font-weight-light">Job Url</label>
-                    <input class="form-control form-control-sm" asp-for="@Model.JobUrl" id="JobUrlid" required />
-                </div>
-            </div> 
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="font-weight-light">Deadline</label>
-                    <input class="form-control form-control-sm" type="date" asp-for ="@Model.Deadline" required id="Deadlineid" />
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label class="font-weight-light">Easy Apply?</label>
-                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.EasyApply" id="EasyApplyid" />
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="font-weight-light">Job Description</label>
-                    <textarea class="form-control form-control-sm" asp-for="@Model.JobDescription" id="JobDescriptionid" required></textarea>
-                </div>
-            </div>
+        <div class="form-group">
+            <label class="font-weight-light">Job Description</label>
+            <textarea class="form-control form-control-sm" asp-for="@Model.JobDescription" id="JobDescriptionid" required></textarea>
         </div>
         <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
     </div>
 
-    <!-- Section 2: Product Features -->
+    <!-- Section 2: Blog Paragraphs -->
     <div id="section2" class="section" style="display: none;">
-        <h6>Step 2: Blog Paragraphs</h6>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12" hidden>
-                                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <div class="form-group">
-                                    <label class="font-weight-light">Paragraph</label>
-                                    <textarea class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="font-weight-light">Paragraph Primary Image</label>
-                                    <input class="form-control form-control-sm font-weight-light" type="file" id="Paragraphimageurlid" onchange="systemBlogParagraphFileChanged(event)" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-7">
-                                <div class="form-group">
-                                    <label class="font-weight-light">Paragraph Image Name</label>
-                                    <input class="form-control form-control-sm" id="Blogparagraphimagenameid" required />
-                                </div>
-                            </div>
-                            <div class="col-sm-5">
-                                <div class="form-group">
-                                    <label class="font-weight-light">Paragraph Image Source</label>
-                                    <input class="form-control form-control-sm" id="Blogparagraphimagesourceid" required />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12" hidden>
-                                <div class="form-group">
-                                    <label class="font-weight-light">Images Url</label>
-                                    <input class="form-control form-control-sm" id="UttambsolutionsparagraphimageurlId" readonly />
-                                </div>
-                            </div>
-                            <div id="Uttambsolutionsparagraphimagespreviewcontainer"></div>
-                        </div>
-                        <button class="btn btn-sm btn-info font-weight-bold float-right" onclick="addsystemblogparagraphdata()">ADD</button>
-                    </div>
+        <h6 class="mb-3">Step 2: Blog Paragraphs</h6>
+        <div class="card">
+            <div class="card-body">
+                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" hidden />
+                <div class="form-group">
+                    <label class="font-weight-light">Paragraph</label>
+                    <textarea class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId"></textarea>
                 </div>
+                <div class="form-group">
+                    <label class="font-weight-light">Paragraph Primary Image</label>
+                    <input class="form-control form-control-sm font-weight-light" type="file" id="Paragraphimageurlid" onchange="systemBlogParagraphFileChanged(event)" />
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-light">Paragraph Image Name</label>
+                    <input class="form-control form-control-sm" id="Blogparagraphimagenameid" required />
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-light">Paragraph Image Source</label>
+                    <input class="form-control form-control-sm" id="Blogparagraphimagesourceid" required />
+                </div>
+                <input class="form-control form-control-sm" id="UttambsolutionsparagraphimageurlId" hidden readonly />
+                <div id="Uttambsolutionsparagraphimagespreviewcontainer"></div>
+                <button class="btn btn-sm btn-info font-weight-bold float-right" onclick="addsystemblogparagraphdata()">Add</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12 table-responsive">
-                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap font-weight-light w-100" id="SystemBlogParagraphListTable">
-                    <thead>
-                        <tr>
-                            <th hidden></th>
-                            <th hidden></th>
-                            <th>IMAGE</th>
-                            <th>PARAGRAPH</th>
-                            <th hidden></th>
-                            <th>NAME</th>
-                            <th>SOURCE</th>
-                            <th class="text-right">ACTION</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
-            </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="SystemBlogParagraphListTable">
+                <thead>
+                    <tr>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th>Image</th>
+                        <th>Paragraph</th>
+                        <th hidden></th>
+                        <th>Name</th>
+                        <th>Source</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
         <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
         <button class="btn btn-sm btn-info font-weight-bold float-right" type="button" id="savesystemblogid" onclick="savesystemblogdata();">
-            <span id="buttonText">SAVE</span>
+            <span id="buttonText">Save</span>
             <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
         </button>
     </div>
