@@ -1,4 +1,4 @@
-﻿
+﻿@model DBL.Models.Systemjobdata
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
@@ -12,7 +12,7 @@
                         <h6 class="font-weight-bold text-sm card-title">Opportunities</h6>
                     </div>
                     <div class="col-sm-4">
-                        <a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Brandid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Opportunity</a>
+                        <a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Opportunity</a>
                     </div>
                 </div>
             </div>
@@ -21,20 +21,23 @@
                     <thead>
                         <tr>
                             <th>Image</th>
-                            <th>Name</th>
+                            <th>Title</th>
+                            <th>Employer</th>
                             <th class="text-right">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                     @*    @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td><img src="@Url.Content(item.Brandpathurl)" height="40" width="40"/></td>
-                                <td>@item.Brandname</td>
-                                <td class="text-right"><a asp-action="Addproductbrand" asp-controller="Brand" asp-route-code="@Guid.NewGuid()" asp-route-Brandid="@item.Brandid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
-                            </tr>
-                        } *@
-
+                        @if(Model!= null && Model.Systemjobs!=null){
+                            foreach (var item in Model.Systemjobs)
+                            {
+                                <tr>
+                                    <td><img src="@Url.Content(item.Employerlogo)" height="30" width="30"/></td>
+                                    <td>@item.Title</td>
+                                    <td>@item.Employername</td>
+                                    <td class="text-right">   <a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table>
             </div>
