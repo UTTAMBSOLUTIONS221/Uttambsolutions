@@ -323,41 +323,54 @@ namespace DBL
         {
             Genericmodel Resp = new Genericmodel();
             // Retrieve the long-lived access token
-            FacebookExchangeTokenResponse longLivedAccessToken = await facebook.ExchangeAccessTokenAsync(obj.Appid, obj.Appsecret, obj.UserAccessToken);
-            if (longLivedAccessToken.access_token != null)
+            if (obj.PageType == "Facebook")
             {
-                // Retrieve the never-expiring access token
-                FacebookNeverExpiresResponse neverExpiresAccessToken = await facebook.GenerateNeverExpiresAccessTokenAsync(longLivedAccessToken.access_token);
-                if (neverExpiresAccessToken.Data.Any())
+                FacebookExchangeTokenResponse longLivedAccessToken = await facebook.ExchangeAccessTokenAsync(obj.Appid, obj.Appsecret, obj.UserAccessToken);
+                if (longLivedAccessToken.access_token != null)
                 {
-                    var matchingPage = neverExpiresAccessToken.Data.FirstOrDefault(x => x.Name.Contains(obj.Socialpagename, StringComparison.OrdinalIgnoreCase));
-                    if (matchingPage != null)
+                    // Retrieve the never-expiring access token
+                    FacebookNeverExpiresResponse neverExpiresAccessToken = await facebook.GenerateNeverExpiresAccessTokenAsync(longLivedAccessToken.access_token);
+                    if (neverExpiresAccessToken.Data.Any())
                     {
-                        // Set the page access token and page ID
-                        obj.PageAccessToken = matchingPage.AccessToken;
-                        obj.PageId = matchingPage.Id;
+                        var matchingPage = neverExpiresAccessToken.Data.FirstOrDefault(x => x.Name.Contains(obj.Socialpagename, StringComparison.OrdinalIgnoreCase));
+                        if (matchingPage != null)
+                        {
+                            // Set the page access token and page ID
+                            obj.PageAccessToken = matchingPage.AccessToken;
+                            obj.PageId = matchingPage.Id;
 
-                        // Save the data
-                        Resp = db.SocialmediaRepository.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(obj));
+                            // Save the data
+                            Resp = db.SocialmediaRepository.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(obj));
+                        }
+                        else
+                        {
+                            // If the page name doesn't exist, return with an error message
+                            Resp.RespStatus = 1;
+                            Resp.RespMessage = "Failed to find the page with the specified name. Use correct facebook Page name";
+                        }
                     }
                     else
                     {
-                        // If the page name doesn't exist, return with an error message
                         Resp.RespStatus = 1;
-                        Resp.RespMessage = "Failed to find the page with the specified name. Use correct facebook Page name";
+                        Resp.RespMessage = "Failed to generate Facebook long-lived access token.";
                     }
                 }
                 else
                 {
                     Resp.RespStatus = 1;
-                    Resp.RespMessage = "Failed to generate Facebook long-lived access token.";
+                    Resp.RespMessage = "Failed to retrieve Facebook long-lived access token.";
                 }
             }
-            else
+            else if (obj.PageType == "Linkedin")
             {
-                Resp.RespStatus = 1;
-                Resp.RespMessage = "Failed to retrieve Facebook long-lived access token.";
+                // Set the page access token and page ID
+                obj.PageAccessToken = "not set";
+                obj.PageId = "not set";
+
+                // Save the data
+                Resp = db.SocialmediaRepository.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(obj));
             }
+
 
             return Resp;
         }
