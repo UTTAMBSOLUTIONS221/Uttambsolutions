@@ -36,13 +36,17 @@ namespace Jobs.Schedulers
                     {
                         string redirectUri = "https://fortysevennews.uttambsolutions.com/";
                         string state = "randomState";
-                        string authCode = await linkedinHelper.GetAuthorizationUrl(social.Appid, redirectUri, state);
+                        string authCode = GetAuthorizationUrl(social.Appid, redirectUri, state);
                         var accessToken = await linkedinHelper.GetAccessTokenAsync(social.Appid, social.Appsecret, redirectUri, authCode);
                         await linkedinHelper.PostJobToLinkedInAsync(accessToken, opportunityData, social.PageId);
                     }
                 }
                 await Task.CompletedTask;
             }
+        }
+        public string GetAuthorizationUrl(string clientId, string redirectUri, string state)
+        {
+            return $"https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={clientId}&redirect_uri={Uri.EscapeDataString(redirectUri)}&state={state}&scope=w_member_social";
         }
         public void Logs(string message)
         {
