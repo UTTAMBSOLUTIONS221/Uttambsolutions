@@ -1,5 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-
+﻿using App.Pages.Users;
+using App.ViewModels.User;
+using Microsoft.Extensions.Logging;
 namespace App
 {
     public static class MauiProgram
