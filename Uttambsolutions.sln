@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Faithlink", "Faithlink\Fait
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog", "Blog\Blog.csproj", "{3B94BA79-962C-4CD5-A4D2-E866DD5E809F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs", "Jobs\Jobs.csproj", "{18E8E3FA-5DB1-439C-BB34-D1D899FB45F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobs", "Jobs\Jobs.csproj", "{18E8E3FA-5DB1-439C-BB34-D1D899FB45F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{0F851BCC-F064-493D-BDE5-F972C8B382A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,12 @@ Global
 		{18E8E3FA-5DB1-439C-BB34-D1D899FB45F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18E8E3FA-5DB1-439C-BB34-D1D899FB45F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18E8E3FA-5DB1-439C-BB34-D1D899FB45F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F851BCC-F064-493D-BDE5-F972C8B382A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F851BCC-F064-493D-BDE5-F972C8B382A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F851BCC-F064-493D-BDE5-F972C8B382A2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0F851BCC-F064-493D-BDE5-F972C8B382A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F851BCC-F064-493D-BDE5-F972C8B382A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F851BCC-F064-493D-BDE5-F972C8B382A2}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

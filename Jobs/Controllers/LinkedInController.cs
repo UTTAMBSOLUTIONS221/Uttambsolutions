@@ -34,7 +34,6 @@ public class LinkedInController : Controller
         }
         return Redirect(authorizationUrl);
     }
-
     [HttpGet("callback")]
     public async Task<IActionResult> LinkedInCallback(string code, string state)
     {
@@ -56,20 +55,26 @@ public class LinkedInController : Controller
 
             // Save the access token and refresh token in the database with the associated LinkedIn app
             var resp = await bl.Updatelinkedinpagetoken(socialApp.SocialSettingId, socialApp.Appid, tokenResponse.AccessToken, tokenResponse.RefreshToken, tokenResponse.ExpiresIn);
-            var unpublishedopportunities = await bl.Getsystemallunpublishedopportunitydata();
-            if (unpublishedopportunities != null)
+            if (resp.RespStatus == 0)
             {
-                foreach (var opportunityData in unpublishedopportunities)
+                var unpublishedopportunities = await bl.Getsystemallunpublishedopportunitydata();
+                if (unpublishedopportunities != null && unpublishedopportunities.Any())
                 {
-                    string JobPostUrl = "https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code=b6248b28-cea5-456d-b705-aa0ddf82548a&Blogid=1";
-                    opportunityData.JobPostUrl = JobPostUrl;
-                    var Socialpages = await bl.Getsystemalllinkedinsocialmediadata();
-                    foreach (var social in Socialpages.Where(x => x.PageType == "Linkedin"))
+                    foreach (var opportunityData in unpublishedopportunities)
                     {
-                        await linkedinHelper.PostJobToLinkedInAsync(social.UserAccessToken, opportunityData, social.PageId);
+                        string JobPostUrl = "https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code=b6248b28-cea5-456d-b705-aa0ddf82548a&Blogid=1";
+                        opportunityData.JobPostUrl = JobPostUrl;
+                        // Get all Registered Social Pages
+                        var Socialpages = await bl.Getsystemalllinkedinsocialmediadata();
+                        foreach (var social in Socialpages.Where(x => x.PageType == "Linkedin"))
+                        {
+                            // Post job to LinkedIn using the helper
+                            await linkedinHelper.PostJobToLinkedInAsync(social.UserAccessToken, opportunityData, social.PageId);
+                        }
                     }
                 }
             }
+
             return Ok("Job posted successfully on LinkedIn.");
         }
         catch (Exception ex)
