@@ -1,6 +1,5 @@
 using Blog.Models;
 using DBL;
-using DBL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -11,11 +10,10 @@ namespace Blog.Controllers
     public class HomeController : BaseController
     {
         private readonly BL bl;
-        private readonly FacebookService _facebookService;
-        public HomeController(IConfiguration config, FacebookService facebookService)
+
+        public HomeController(IConfiguration config)
         {
             bl = new BL(Util.ShareConnectionString(config));
-            _facebookService = facebookService;
         }
         [HttpGet]
         [AllowAnonymous]

@@ -13,7 +13,7 @@ namespace Blog.Controllers
     {
         private readonly FacebookHelper _facebookHelper;
         private readonly BL bl;
-        IConfiguration _config;
+        private readonly IConfiguration _config;
 
         public FacebookController(FacebookHelper facebookHelper, IConfiguration config)
         {
@@ -34,20 +34,18 @@ namespace Blog.Controllers
             [FromQuery] string code,
             [FromQuery] string appId,
             [FromQuery] string appSecret,
-            [FromQuery] string pageName,
-            [FromQuery] long socialOwner,  // You can pass the social owner ID if needed
-            [FromQuery] long createdBy,     // You can pass the creator ID if needed
-            [FromQuery] string pageType)   // Optional: Page type if applicable
+            [FromQuery] string redirectUri)
         {
             if (string.IsNullOrEmpty(code))
             {
                 return BadRequest("Authorization code is missing.");
             }
 
-            if (string.IsNullOrEmpty(appId) || string.IsNullOrEmpty(appSecret))
-            {
-                return BadRequest("App ID and App Secret are required.");
-            }
+            // Ideally, retrieve stored data from a secure session or database
+            var socialMediaData = HttpContext.Session.GetString("SocialMediaData");
+            var socialMediaDataObject = string.IsNullOrEmpty(socialMediaData)
+                ? null
+                : JsonConvert.DeserializeObject<SocialMediaSettings>(socialMediaData);
 
             // Step 1: Get the short-lived access token
             var shortLivedToken = await GetShortLivedAccessTokenAsync(code, appId, appSecret);
@@ -57,20 +55,21 @@ namespace Blog.Controllers
 
             // Step 3: Generate page access tokens (if applicable)
             var pageAccessTokenResponse = await _facebookHelper.GenerateNeverExpiresAccessTokenAsync(longLivedToken.AccessToken);
-            var matchingPage = pageAccessTokenResponse.Data.FirstOrDefault(x => x.Name.Contains(pageName, StringComparison.OrdinalIgnoreCase));
+            var matchingPage = pageAccessTokenResponse.Data.FirstOrDefault(x => x.Name.Contains(socialMediaDataObject?.Socialpagename, StringComparison.OrdinalIgnoreCase));
+
             // Prepare SocialMediaSettings data to save
             var settings = new SocialMediaSettings
             {
-                SocialOwner = socialOwner,
-                Socialpagename = pageName,
+                SocialOwner = socialMediaDataObject?.SocialOwner ?? 0,
+                Socialpagename = socialMediaDataObject?.Socialpagename,
                 Appid = appId,
                 Appsecret = appSecret,
                 UserAccessToken = longLivedToken.AccessToken,
                 PageAccessToken = pageAccessTokenResponse.Data.FirstOrDefault()?.AccessToken,
-                PageId = matchingPage.Id,
-                PageType = pageType,
-                CreatedBy = createdBy,
-                ModifiedBy = createdBy, // Assuming the same user who created it is modifying
+                PageId = matchingPage?.Id,
+                PageType = socialMediaDataObject?.PageType,
+                CreatedBy = socialMediaDataObject?.CreatedBy ?? 0,
+                ModifiedBy = socialMediaDataObject?.ModifiedBy ?? 0,
                 DateCreated = DateTime.UtcNow,
                 DateModified = DateTime.UtcNow
             };
@@ -88,16 +87,24 @@ namespace Blog.Controllers
 
         private async Task<string> GetShortLivedAccessTokenAsync(string code, string appId, string appSecret)
         {
-            var requestUri = $"https://graph.facebook.com/v11.0/oauth/access_token?client_id={appId}&redirect_uri=https://yourapp.com/api/facebook/callback&client_secret={appSecret}&code={code}";
+            var requestUri = $"https://graph.facebook.com/v11.0/oauth/access_token?client_id={appId}&redirect_uri=https://fortysevennews.uttambsolutions.com/api/facebook/callback&client_secret={appSecret}&code={code}";
 
             using (var httpClient = new HttpClient())
             {
-                var response = await httpClient.GetAsync(requestUri);
-                response.EnsureSuccessStatusCode();
-                var responseBody = await response.Content.ReadAsStringAsync();
+                try
+                {
+                    var response = await httpClient.GetAsync(requestUri);
+                    response.EnsureSuccessStatusCode();
+                    var responseBody = await response.Content.ReadAsStringAsync();
 
-                var tokenResponse = JsonConvert.DeserializeObject<FacebookTokenResponse>(responseBody);
-                return tokenResponse.AccessToken;
+                    var tokenResponse = JsonConvert.DeserializeObject<FacebookTokenResponse>(responseBody);
+                    return tokenResponse?.AccessToken ?? throw new Exception("Access token not found.");
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception
+                    throw new Exception("Failed to get short-lived access token.", ex);
+                }
             }
         }
     }
