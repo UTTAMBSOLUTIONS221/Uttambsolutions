@@ -320,62 +320,70 @@ namespace DBL
                 return Resp;
             });
         }
-        public async Task<Genericmodel> Registersystemsocialmediapagedata(SocialMediaSettings obj)
+        //public async Task<Genericmodel> Registersystemsocialmediapagedata(SocialMediaSettings obj)
+        //{
+        //    Genericmodel Resp = new Genericmodel();
+        //    // Retrieve the long-lived access token
+        //    if (obj.PageType == "Facebook")
+        //    {
+        //        FacebookExchangeTokenResponse longLivedAccessToken = await facebook.ExchangeAccessTokenAsync(obj.Appid, obj.Appsecret, obj.UserAccessToken);
+        //        if (longLivedAccessToken.access_token != null)
+        //        {
+        //            // Retrieve the never-expiring access token
+        //            FacebookNeverExpiresResponse neverExpiresAccessToken = await facebook.GenerateNeverExpiresAccessTokenAsync(longLivedAccessToken.access_token);
+        //            if (neverExpiresAccessToken.Data.Any())
+        //            {
+        //                var matchingPage = neverExpiresAccessToken.Data.FirstOrDefault(x => x.Name.Contains(obj.Socialpagename, StringComparison.OrdinalIgnoreCase));
+        //                if (matchingPage != null)
+        //                {
+        //                    // Set the page access token and page ID
+        //                    obj.PageAccessToken = matchingPage.AccessToken;
+        //                    obj.PageId = matchingPage.Id;
+
+        //                    // Save the data
+        //                    Resp = db.SocialmediaRepository.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(obj));
+        //                }
+        //                else
+        //                {
+        //                    // If the page name doesn't exist, return with an error message
+        //                    Resp.RespStatus = 1;
+        //                    Resp.RespMessage = "Failed to find the page with the specified name. Use correct facebook Page name";
+        //                }
+        //            }
+        //            else
+        //            {
+        //                Resp.RespStatus = 1;
+        //                Resp.RespMessage = "Failed to generate Facebook long-lived access token.";
+        //            }
+        //        }
+        //        else
+        //        {
+        //            Resp.RespStatus = 1;
+        //            Resp.RespMessage = "Failed to retrieve Facebook long-lived access token.";
+        //        }
+        //    }
+        //    else if (obj.PageType == "Linkedin")
+        //    {
+        //        // Set the page access token and page ID
+        //        obj.PageAccessToken = Guid.NewGuid().ToString();
+        //        obj.PageId = Guid.NewGuid().ToString();
+
+        //        // Save the data
+        //        Resp = db.SocialmediaRepository.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(obj));
+        //    }
+
+
+        //    return Resp;
+        //}
+
+        public Task<Genericmodel> Registersystemsocialmediapagedata(string Obj)
         {
-            Genericmodel Resp = new Genericmodel();
-            // Retrieve the long-lived access token
-            if (obj.PageType == "Facebook")
+            return Task.Run(() =>
             {
-                FacebookExchangeTokenResponse longLivedAccessToken = await facebook.ExchangeAccessTokenAsync(obj.Appid, obj.Appsecret, obj.UserAccessToken);
-                if (longLivedAccessToken.access_token != null)
-                {
-                    // Retrieve the never-expiring access token
-                    FacebookNeverExpiresResponse neverExpiresAccessToken = await facebook.GenerateNeverExpiresAccessTokenAsync(longLivedAccessToken.access_token);
-                    if (neverExpiresAccessToken.Data.Any())
-                    {
-                        var matchingPage = neverExpiresAccessToken.Data.FirstOrDefault(x => x.Name.Contains(obj.Socialpagename, StringComparison.OrdinalIgnoreCase));
-                        if (matchingPage != null)
-                        {
-                            // Set the page access token and page ID
-                            obj.PageAccessToken = matchingPage.AccessToken;
-                            obj.PageId = matchingPage.Id;
-
-                            // Save the data
-                            Resp = db.SocialmediaRepository.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(obj));
-                        }
-                        else
-                        {
-                            // If the page name doesn't exist, return with an error message
-                            Resp.RespStatus = 1;
-                            Resp.RespMessage = "Failed to find the page with the specified name. Use correct facebook Page name";
-                        }
-                    }
-                    else
-                    {
-                        Resp.RespStatus = 1;
-                        Resp.RespMessage = "Failed to generate Facebook long-lived access token.";
-                    }
-                }
-                else
-                {
-                    Resp.RespStatus = 1;
-                    Resp.RespMessage = "Failed to retrieve Facebook long-lived access token.";
-                }
-            }
-            else if (obj.PageType == "Linkedin")
-            {
-                // Set the page access token and page ID
-                obj.PageAccessToken = Guid.NewGuid().ToString();
-                obj.PageId = Guid.NewGuid().ToString();
-
-                // Save the data
-                Resp = db.SocialmediaRepository.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(obj));
-            }
-
-
-            return Resp;
+                var Resp = db.SocialmediaRepository.Registersystemsocialmediapagedata(Obj);
+                return Resp;
+            });
         }
-
         public Task<SocialMediaSettings> Getsystemsocialmediadatabyid(long Socialsettingid)
         {
             return Task.Run(() =>
