@@ -31,11 +31,11 @@ namespace Blog.Controllers
             return PartialView(socialMediaSettings);
         }
 
-        public async Task<JsonResult> Addsocialmediapagedata(SocialMediaSettings model)
-        {
-            var resp = await bl.Registersystemsocialmediapagedata(model);
-            return Json(resp);
-        }
+        //public async Task<JsonResult> Addsocialmediapagedata(SocialMediaSettings model)
+        //{
+        //    var resp = await bl.Registersystemsocialmediapagedata(model);
+        //    return Json(resp);
+        //}
     }
 }
 

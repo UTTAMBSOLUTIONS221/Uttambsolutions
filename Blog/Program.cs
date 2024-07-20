@@ -1,5 +1,6 @@
 using Blog.Controllers;
 using Blog.Schedulers;
+using DBL.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -18,6 +19,7 @@ builder.Services.AddRazorPages().AddJsonOptions(options =>
 builder.Services.AddDataProtection();
 builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<FacebookHelper>();
 builder.Services.AddSignalR();
 builder.Services.AddDistributedMemoryCache();
 

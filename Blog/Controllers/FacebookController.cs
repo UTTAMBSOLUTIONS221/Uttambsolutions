@@ -25,9 +25,10 @@ namespace Blog.Controllers
         [HttpGet("login")]
         public IActionResult Login([FromQuery] string appId, [FromQuery] string appSecret, [FromQuery] string redirectUri)
         {
-            var authorizationUrl = $"https://www.facebook.com/v11.0/dialog/oauth?client_id={appId}&redirect_uri={redirectUri}&scope=public_profile,email,pages_show_list,publish_pages,publish_to_groups";
+            var authorizationUrl = $"https://www.facebook.com/v11.0/dialog/oauth?client_id={appId}&redirect_uri={redirectUri}&scope=pages_manage_posts,pages_read_engagement,pages_manage_engagement";
             return Redirect(authorizationUrl);
         }
+
 
         [HttpGet("callback")]
         public async Task<IActionResult> Callback(
