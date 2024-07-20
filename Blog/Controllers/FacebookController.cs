@@ -31,11 +31,7 @@ namespace Blog.Controllers
 
 
         [HttpGet("callback")]
-        public async Task<IActionResult> Callback(
-            [FromQuery] string code,
-            [FromQuery] string appId,
-            [FromQuery] string appSecret,
-            [FromQuery] string redirectUri)
+        public async Task<IActionResult> Callback([FromQuery] string code)
         {
             if (string.IsNullOrEmpty(code))
             {
@@ -47,6 +43,11 @@ namespace Blog.Controllers
             var socialMediaDataObject = string.IsNullOrEmpty(socialMediaData)
                 ? null
                 : JsonConvert.DeserializeObject<SocialMediaSettings>(socialMediaData);
+
+
+            // Retrieve appId and appSecret from configuration
+            var appId = socialMediaDataObject?.Appid;
+            var appSecret = socialMediaDataObject?.Appsecret;
 
             // Step 1: Get the short-lived access token
             var shortLivedToken = await GetShortLivedAccessTokenAsync(code, appId, appSecret);

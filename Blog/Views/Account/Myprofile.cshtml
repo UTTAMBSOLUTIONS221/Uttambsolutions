@@ -798,11 +798,7 @@
                     resetForm();
                     return;
                 }
-                if ($('#UserAccessTokenid').val() === '') {
-                    Swal.fire("Social Page Not Created", 'Access Token is Required', "warning");
-                    resetForm();
-                    return;
-                }
+  
                 if ($('#Appid').val() === '') {
                     Swal.fire("Social Page Not Created", 'App Id is Required', "warning");
                     resetForm();

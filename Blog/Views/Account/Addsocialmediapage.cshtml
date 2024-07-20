@@ -12,33 +12,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="font-weight-light">Page Name</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Socialpagename" id="Socialpagenameid" />
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="form-group">
-                <label class="font-weight-light">Access Token</label>
-                <input class="form-control form-control-sm" asp-for="@Model.UserAccessToken" id="UserAccessTokenid" />
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="font-weight-light">App Id</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Appid" id="Appid" />
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="font-weight-light">App Secret</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Appsecret" id="Appsecretid" />
-            </div>
-        </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label class="font-weight-light">Page Type</label>
                 <select class="form-control form-control-sm" asp-for="@Model.PageType" id="Pagetypeid">
@@ -46,8 +20,28 @@
                     <option value="Facebook">Facebook</option>
                     <option value="Linkedin">Linkedin</option>
                     <option value="Twitter">X</option>
-                    <option value="Instagram">Instagram</option>                   
+                    <option value="Instagram">Instagram</option>
                 </select>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="font-weight-light">Page Name</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Socialpagename" id="Socialpagenameid" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="font-weight-light">App Id</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Appid" id="Appid" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="font-weight-light">App Secret</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Appsecret" id="Appsecretid" />
             </div>
         </div>
     </div>
