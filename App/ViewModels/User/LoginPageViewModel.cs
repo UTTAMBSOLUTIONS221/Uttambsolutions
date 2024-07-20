@@ -51,12 +51,12 @@ namespace App.ViewModels.User
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("ChatApp", response.StatusMessage, "OK");
+                    await Shell.Current.DisplayAlert("Uttamb Solutions", response.StatusMessage, "OK");
                 }
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("ChatApp", ex.Message, "OK");
+                await Shell.Current.DisplayAlert("Uttamb Solutions", ex.Message, "OK");
             }
         }
 

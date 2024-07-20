@@ -1,4 +1,5 @@
 ﻿using App.Helpers;
+using App.Pages;
 using App.Pages.Users;
 using App.ViewModels.User;
 using Microsoft.Extensions.Logging;
@@ -31,6 +32,7 @@ namespace App
 
             // Register pages
             builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<DashBoardPage>();
 
             // Register view models
             builder.Services.AddSingleton<LoginPageViewModel>();

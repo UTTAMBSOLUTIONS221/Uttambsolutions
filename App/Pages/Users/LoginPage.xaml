@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Login"
-    BackgroundColor="#13232f">
+    BackgroundColor="#ffffff">
 
     <Grid Padding="30">
         <!-- Main Content Layer -->
@@ -14,7 +14,7 @@
                     FontSize="36"
                     HorizontalOptions="Center"
                     Text="ChatApp"
-                    TextColor="White" />
+                    TextColor="#0a506c" />
 
                 <Label
                     FontSize="18"
@@ -60,7 +60,7 @@
                 </Label>
 
                 <Button
-                    BackgroundColor="#f0932b"
+                    BackgroundColor="#0a506c"
                     Command="{Binding LoginCommand}"
                     CornerRadius="10"
                     Text="Login"

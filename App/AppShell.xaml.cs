@@ -1,4 +1,5 @@
-﻿using App.Pages.Users;
+﻿using App.Pages;
+using App.Pages.Users;
 
 namespace App
 {
@@ -7,6 +8,7 @@ namespace App
         public AppShell(LoginPage loginPage)
         {
             InitializeComponent();
+            Routing.RegisterRoute("DashBoardPage", typeof(DashBoardPage));
             this.CurrentItem = loginPage;
         }
 
