@@ -218,31 +218,28 @@ namespace Blog.Controllers
 
         public async Task<JsonResult> Addsocialmediapagedata(SocialMediaSettings model)
         {
+            Genericmodel Resp = new Genericmodel();
             var longLivedToken = await _facebookHelper.ExchangeAccessTokenAsync(model.Appid, model.Appsecret, model.UserAccessToken);
             var pageAccessTokenResponse = await _facebookHelper.GenerateNeverExpiresAccessTokenAsync(longLivedToken.AccessToken);
 
             var matchingPage = pageAccessTokenResponse.Data.FirstOrDefault(x => x.Name.Contains(model.Socialpagename, StringComparison.OrdinalIgnoreCase));
-
-            // Prepare SocialMediaSettings data to save
-            var settings = new SocialMediaSettings
+            if (matchingPage != null)
             {
-                SocialOwner = model.SocialOwner,
-                Socialpagename = model.Socialpagename,
-                Appid = model.Appid,
-                Appsecret = model.Appsecret,
-                UserAccessToken = longLivedToken.AccessToken,
-                PageAccessToken = pageAccessTokenResponse.Data.FirstOrDefault()?.AccessToken,
-                PageId = matchingPage.Id,
-                PageType = model.PageType,
-                CreatedBy = model.CreatedBy,
-                ModifiedBy = model.ModifiedBy,
-                DateCreated = DateTime.UtcNow,
-                DateModified = DateTime.UtcNow
-            };
+                // Set the page access token and page ID
+                model.PageAccessToken = matchingPage.AccessToken;
+                model.PageId = matchingPage.Id;
 
-            // Save to database
-            var resp = await bl.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(settings));
-            return Json(resp);
+                // Save the data
+                Resp = await bl.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(model));
+            }
+            else
+            {
+                // If the page name doesn't exist, return with an error message
+                Resp.RespStatus = 1;
+                Resp.RespMessage = "Failed to find the page with the specified name. Use correct facebook Page name";
+            }
+
+            return Json(Resp);
         }
         #endregion
 
