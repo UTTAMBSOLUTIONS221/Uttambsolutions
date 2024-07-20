@@ -18,13 +18,19 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image" content="@ViewData["image"]" />
-    <meta property="og:url" content=" @ViewData["url"]" />
+    <meta property="og:url" content="@ViewData["url"]" />
+    <meta property="og:image:alt" content="@ViewData["imagealt"]" />
 
+
+    <meta property="ia:markup_url" content="URL for instant articles markup" />
+    <meta property="ia:markup_url_dev" content="URL for instant articles markup (development)" />
+    <meta property="ia:rules_url" content="URL for instant articles rules" />
+    <meta property="ia:rules_url_dev" content="URL for instant articles rules (development)" />
 
 
     <meta name="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card system, forecought management system, fcs, fms, fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
-    <meta name="keywords" content="Uttamb Solutions, fuel card system, forecought management system, fcs, fms, fuel management system, web development, e-commerce, digital marketing, blogs" />
-    <meta name="author" content="Uttamb Solutions" />
+    <meta name="keywords" content="@ViewData["Blogtags"]" />
+    <meta name="author" content="@ViewData["Blogownername"]" />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -51,20 +57,16 @@
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
-            <div class="container">
+            <div class="container-fluid">
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">
                     <img src="~/images/uttambsolutionlogo.png" alt="Uttambsolutions Logo" class="brand-image elevation-3">
-                    <span class="brand-text font-weight-light text-white fw-bold text-uppercase">47 News</span>
+                    <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">47 News</span>
                 </a>
 
-                <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
                 <!-- Right navbar links for large screens -->
-                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto d-none d-md-flex">
+                <ul class="nav-item order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                     <li class="nav-item">
-                        <a asp-action="Signin" asp-controller="Account" asp-area="" class="nav-link text-white fw-bold text-uppercase">SIGNIN</a>
+                        <a asp-action="Signin" asp-controller="Account" asp-area="" class="nav-link text-white fw-bold font-weight-bold text-uppercase">SIGNIN</a>
                     </li>
                 </ul>
             </div>
