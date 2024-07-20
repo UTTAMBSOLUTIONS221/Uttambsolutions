@@ -4,10 +4,11 @@ namespace App.Pages;
 
 public partial class DashBoardPage : ContentPage
 {
-    public DashBoardPage(DashBoardViewModel viewModel)
+    public DashBoardPage()
     {
         InitializeComponent();
 
-        this.BindingContext = viewModel;
+        // Pass INavigation to the ViewModel
+        BindingContext = new DashBoardViewModel(Navigation);
     }
 }
