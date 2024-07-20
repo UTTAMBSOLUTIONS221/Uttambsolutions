@@ -38,16 +38,24 @@ namespace Blog.Controllers
                 return BadRequest("Authorization code is missing.");
             }
 
-            // Ideally, retrieve stored data from a secure session or database
+            // Retrieve SocialMediaData from database or secure storage
             var socialMediaData = HttpContext.Session.GetString("SocialMediaData");
             var socialMediaDataObject = string.IsNullOrEmpty(socialMediaData)
                 ? null
                 : JsonConvert.DeserializeObject<SocialMediaSettings>(socialMediaData);
 
+            if (socialMediaDataObject == null)
+            {
+                return BadRequest("Social media data is missing.");
+            }
 
-            // Retrieve appId and appSecret from configuration
-            var appId = socialMediaDataObject?.Appid;
-            var appSecret = socialMediaDataObject?.Appsecret;
+            var appId = socialMediaDataObject.Appid;
+            var appSecret = socialMediaDataObject.Appsecret;
+
+            if (string.IsNullOrEmpty(appId) || string.IsNullOrEmpty(appSecret))
+            {
+                return BadRequest("AppId or AppSecret is missing.");
+            }
 
             // Step 1: Get the short-lived access token
             var shortLivedToken = await GetShortLivedAccessTokenAsync(code, appId, appSecret);
