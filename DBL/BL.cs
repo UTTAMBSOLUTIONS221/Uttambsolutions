@@ -134,6 +134,7 @@ namespace DBL
                         StrBodyEmail.Replace("@CompanyEmail", "contact@uttambsolutions.com");
                         StrBodyEmail.Replace("@Fullname", resp.Usermodel.Fullname);
                         StrBodyEmail.Replace("@Username", resp.Usermodel.Username);
+                        StrBodyEmail.Replace("@Password", sec.Decrypt(resp.Usermodel.Passwords, resp.Usermodel.Passharsh));
                         StrBodyEmail.Replace("@CurrentYear", DateTime.Now.Year.ToString());
                         string message = StrBodyEmail.ToString();
                         //log Email Messages

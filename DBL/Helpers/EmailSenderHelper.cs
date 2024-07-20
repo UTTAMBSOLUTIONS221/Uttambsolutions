@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using System.Net.Mail;
 
 namespace DBL.Helpers
@@ -34,7 +32,7 @@ namespace DBL.Helpers
             //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             using (MailMessage mail = new MailMessage())
             {
-                mail.From = new MailAddress(appEmail, "EVEREST");
+                mail.From = new MailAddress(appEmail, "UTTAMB SOLUTIONS");
                 mail.IsBodyHtml = IsBodyHtml;
                 mail.Subject = subject;
                 mail.Body = body;
