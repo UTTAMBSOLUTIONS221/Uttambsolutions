@@ -134,7 +134,7 @@
                                             <h6 class="font-weight-bold text-sm card-title">Social Pages</h6>
                                         </div>
                                         <div class="col-sm-4">
-                                            <a asp-action="Addsocialmediapage" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
+                                            <a asp-action="Addsocialmediapage" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
                                         </div>
                                     </div>
                                 </div>
@@ -787,63 +787,67 @@
 
       @*Scripts for saving the social medial pages details*@
        <script type="text/javascript">
-            function savesystemsocialmediadata() {
-                document.getElementById("savesystemsocialmediaid").disabled = true;
-                document.getElementById("processingSpinner").style.display = "inline-block";
-                document.getElementById("buttonText").innerText = "Processing...";
-
-                // Validate inputs
-                if ($('#Socialpagenameid').val() === '') {
-                    Swal.fire("Social Page Not Created", 'Page Name is Required', "warning");
-                    resetForm();
-                    return;
-                }
-  
-                if ($('#Appid').val() === '') {
-                    Swal.fire("Social Page Not Created", 'App Id is Required', "warning");
-                    resetForm();
-                    return;
-                }
-                if ($('#Appsecretid').val() === '') {
-                    Swal.fire("Social Page Not Created", 'App Secret is Required', "warning");
-                    resetForm();
-                    return;
-                }
-                if ($('#Pagetypeid').val() === '') {
-                    Swal.fire("Social Page Not Created", 'Page Type is Required', "warning");
-                    resetForm();
-                    return;
-                }
-
-                // Prepare the redirect URL
-                var redirectUri = encodeURIComponent("https://fortysevennews.uttambsolutions.com/api/facebook/callback"); // Update with your actual callback URL
-                var loginUrl = `/api/facebook/login?appId=${$('#Appid').val()}&appSecret=${$('#Appsecretid').val()}&redirectUri=${redirectUri}`;
-
-                // Store data in sessionStorage to pass it to the callback
-                sessionStorage.setItem('socialMediaData', JSON.stringify({
-                    SocialSettingId: $('#SocialSettingId').val(),
-                    Socialpagename: $('#Socialpagenameid').val(),
-                    UserAccessToken: $('#UserAccessTokenid').val(),
-                    Appid: $('#Appid').val(),
-                    Appsecret: $('#Appsecretid').val(),
-                    PageType: $('#Pagetypeid').val(),
-                    Socialowner: $('#systemLoggedinedUserid').val(),
-                    Createdby: $('#systemLoggedinedUserid').val(),
-                    Modifiedby: $('#systemLoggedinedUserid').val(),
-                    Datecreated: new Date().toISOString(),
-                    Datemodified: new Date().toISOString()
-                }));
-
-                // Redirect to Facebook login URL
-                window.location.href = loginUrl;
-
-                function resetForm() {
-                    document.getElementById("savesystemsocialmediaid").disabled = false;
-                    document.getElementById("processingSpinner").style.display = "none";
-                    document.getElementById("buttonText").innerText = "SAVE";
-                }
+            ﻿function savesystemsocialmediadata() {
+            document.getElementById("savesystemsocialmediaid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            if ($('#Socialpagenameid').val() === '') {
+                Swal.fire("Social Page Not Created", 'Page Name is Required', "warning");
+                document.getElementById("savesystemsocialmediaid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
             }
-        </script>
+            if ($('#UserAccessTokenid').val() === '') {
+                Swal.fire("Social Page Not Created", 'Access Token is Required', "warning");
+                document.getElementById("savesystemsocialmediaid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#Appid').val() === '') {
+                Swal.fire("Social Page Not Created", 'App Id is Required', "warning");
+                document.getElementById("savesystemsocialmediaid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } 
+            if ($('#Appsecretid').val() === '') {
+                Swal.fire("Social Page Not Created", 'App Secret is Required', "warning");
+                document.getElementById("savesystemsocialmediaid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+    
+            if ($('#Pagetypeid').val() === '') {
+                Swal.fire("Social Page Not Created", 'Page Type is Required', "warning");
+                document.getElementById("savesystemsocialmediaid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+    
+           var uil1 = {
+                SocialSettingId: $('#SocialSettingId').val(), Socialpagename: $('#Socialpagenameid').val(),UserAccessToken: $('#UserAccessTokenid').val(),Appid: $('#Appid').val(),Appsecret: $('#Appsecretid').val(),PageType: $('#Pagetypeid').val(),Socialowner:$('#systemLoggedinedUserid').val(),Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+            };
+            $.post("/Account/Addsocialmediapagedata", uil1, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#Uttambsolutionsmodallarge').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Module details not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystemsocialmediaid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                });
+            }
+           </script>
        @*End of saving Blogs *@
 
 </body>

@@ -2,6 +2,7 @@
 using DBL;
 using DBL.Entities;
 using DBL.Enum;
+using DBL.Helpers;
 using DBL.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -16,11 +17,14 @@ namespace Blog.Controllers
     [Authorize]
     public class AccountController : BaseController
     {
+        private readonly FacebookHelper _facebookHelper;
         private readonly BL bl;
-        public AccountController(IConfiguration config)
+        public AccountController(FacebookHelper facebookHelper, IConfiguration config)
         {
+            _facebookHelper = facebookHelper;
             bl = new BL(Util.ShareConnectionString(config));
         }
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -212,11 +216,34 @@ namespace Blog.Controllers
             return PartialView(socialMediaSettings);
         }
 
-        //public async Task<JsonResult> Addsocialmediapagedata(SocialMediaSettings model)
-        //{
-        //    var resp = await bl.Registersystemsocialmediapagedata(model);
-        //    return Json(resp);
-        //}
+        public async Task<JsonResult> Addsocialmediapagedata(SocialMediaSettings model)
+        {
+            var longLivedToken = await _facebookHelper.ExchangeAccessTokenAsync(model.Appid, model.Appsecret, model.UserAccessToken);
+            var pageAccessTokenResponse = await _facebookHelper.GenerateNeverExpiresAccessTokenAsync(longLivedToken.AccessToken);
+
+            var matchingPage = pageAccessTokenResponse.Data.FirstOrDefault(x => x.Name.Contains(model.Socialpagename, StringComparison.OrdinalIgnoreCase));
+
+            // Prepare SocialMediaSettings data to save
+            var settings = new SocialMediaSettings
+            {
+                SocialOwner = model.SocialOwner,
+                Socialpagename = model.Socialpagename,
+                Appid = model.Appid,
+                Appsecret = model.Appsecret,
+                UserAccessToken = longLivedToken.AccessToken,
+                PageAccessToken = pageAccessTokenResponse.Data.FirstOrDefault()?.AccessToken,
+                PageId = matchingPage.Id,
+                PageType = model.PageType,
+                CreatedBy = model.CreatedBy,
+                ModifiedBy = model.ModifiedBy,
+                DateCreated = DateTime.UtcNow,
+                DateModified = DateTime.UtcNow
+            };
+
+            // Save to database
+            var resp = await bl.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(settings));
+            return Json(resp);
+        }
         #endregion
 
         #endregion

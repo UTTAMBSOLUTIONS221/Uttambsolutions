@@ -1,6 +1,6 @@
 ﻿using DBL.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Text.Json;
 
 namespace DBL.Helpers
 {
@@ -15,8 +15,7 @@ namespace DBL.Helpers
                 var response = await httpClient.GetAsync(requestUri);
                 response.EnsureSuccessStatusCode();
                 var responseBody = await response.Content.ReadAsStringAsync();
-
-                return JsonSerializer.Deserialize<FacebookExchangeTokenResponse>(responseBody);
+                return JsonConvert.DeserializeObject<FacebookExchangeTokenResponse>(responseBody);
             }
         }
 
@@ -30,7 +29,7 @@ namespace DBL.Helpers
                 response.EnsureSuccessStatusCode();
                 var responseBody = await response.Content.ReadAsStringAsync();
 
-                return JsonSerializer.Deserialize<FacebookNeverExpiresResponse>(responseBody);
+                return JsonConvert.DeserializeObject<FacebookNeverExpiresResponse>(responseBody);
             }
         }
 
