@@ -47,7 +47,7 @@ namespace App.ViewModels.User
                 var response = await _serviceProvider.Authenticate(request);
                 if (response.StatusCode == 200)
                 {
-                    await Shell.Current.GoToAsync($"ListChatPage?userId={response.Usermodel.Userid}");
+                    await Shell.Current.GoToAsync($"DashBoardPage?userId={response.Usermodel.Userid}");
                 }
                 else
                 {
