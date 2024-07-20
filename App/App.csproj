@@ -64,10 +64,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Miniapps\JCM\" />
+		<Folder Include="Miniapps\Church\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Miniapps\Education\Pages\EducationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Miniapps\Finance\Pages\FinancePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Miniapps\Health\Pages\HealthPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Miniapps\News\Pages\NewsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Miniapps\Sports\Pages\SportsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Miniapps\Weather\Pages\WeatherPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\DashBoardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
