@@ -38,10 +38,7 @@ namespace Blog.Schedulers
                         };
                         string blogUrl = $"https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={blogData.Blogid}";
                         string resp = await facebook.PublishBlogPostAsync(page.PageAccessToken, page.UserAccessToken, page.PageId, blogData.Summary, blogUrl);
-                        if (resp == "Post published successfully!")
-                        {
-                            await bl.Updatepublishedblogdata(blogData.Blogid);
-                        }
+                        await bl.Updatepublishedblogdata(blogData.Blogid);
                     }
                 }
                 await Task.CompletedTask;
