@@ -1,4 +1,3 @@
-using Blog.Controllers;
 using Blog.Schedulers;
 using DBL.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -56,8 +55,6 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>()
     .AddScoped(x => x.GetRequiredService<IUrlHelperFactory>().GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext));
 
-// Register the CsrController explicitly
-builder.Services.AddTransient<CsrController>();
 
 var app = builder.Build();
 
