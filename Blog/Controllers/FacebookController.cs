@@ -4,7 +4,6 @@ using DBL.Helpers;
 using DBL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text.Json;
 
 namespace Blog.Controllers
 {
@@ -64,11 +63,11 @@ namespace Blog.Controllers
             {
                 SocialOwner = socialOwner,
                 Socialpagename = pageName,
-                Appid = matchingPage.Id,
+                Appid = appId,
                 Appsecret = appSecret,
                 UserAccessToken = longLivedToken.AccessToken,
                 PageAccessToken = pageAccessTokenResponse.Data.FirstOrDefault()?.AccessToken,
-                PageId = pageAccessTokenResponse.Data.FirstOrDefault()?.Id,
+                PageId = matchingPage.Id,
                 PageType = pageType,
                 CreatedBy = createdBy,
                 ModifiedBy = createdBy, // Assuming the same user who created it is modifying
@@ -97,7 +96,7 @@ namespace Blog.Controllers
                 response.EnsureSuccessStatusCode();
                 var responseBody = await response.Content.ReadAsStringAsync();
 
-                var tokenResponse = JsonSerializer.Deserialize<FacebookTokenResponse>(responseBody);
+                var tokenResponse = JsonConvert.DeserializeObject<FacebookTokenResponse>(responseBody);
                 return tokenResponse.AccessToken;
             }
         }
