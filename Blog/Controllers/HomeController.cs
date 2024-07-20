@@ -49,6 +49,8 @@ namespace Blog.Controllers
         {
             return View();
         }
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
