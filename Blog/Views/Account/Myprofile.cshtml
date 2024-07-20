@@ -79,6 +79,44 @@
         <div class="content-wrapper">
             <section class="content">
                 <div class="container-fluid">
+                     <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card card-outline card-info">
+                                <div class="card-header py-1">
+                                    <h6 class="font-weight-bold text-sm card-title">User Profile</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <img src="@Url.Content(Model.UserProfileImageUrl)" class="img-fluid rounded-circle" alt="@Model.Fullname" />
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <table class="table table-borderless table-sm">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="font-weight-bold">Name:</td>
+                                                        <td>@Model.Fullname</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="font-weight-bold">Email:</td>
+                                                        <td>@Model.Emailaddress</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="font-weight-bold">Joined:</td>
+                                                        <td>@Model.Datecreated</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="font-weight-bold">Role:</td>
+                                                        <td>@Model.Rolename</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-7">
                             <div class="card card-outline card-info">
@@ -106,21 +144,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @* @if (Model.Systemblogs != null)
+                                            @if (Model.Systemuserblogs != null)
                                             {
-                                            foreach (var item in Model.Systemblogs)
-                                            {
-                                            <tr>
-                                            <td><img src="@Url.Content(item.Blogprimaryimageurl)" height="40" width="40" alt="@item.Blogcategoryname" /></td>
-                                            <td>@item.Blogname</td>
-                                            <td>@item.Summary</td>
-                                            <td>@item.Blogcontent</td>
-                                            <td>@item.Blogcategoryname</td>
-                                            <td>@item.Blogtags</td>
-                                            <td class="text-right"><a asp-action="Addsystemblog" asp-controller="Systemblog" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@item.Blogid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
-                                            </tr>
+                                                foreach (var item in Model.Systemuserblogs)
+                                                {
+                                                    <tr>
+                                                        <td><img src="@Url.Content(item.Blogprimaryimageurl)" height="40" width="40" alt="@item.Blogcategoryname" /></td>
+                                                        <td>@item.Blogname</td>
+                                                        <td>@item.Summary</td>
+                                                        <td>@item.Blogcontent</td>
+                                                        <td>@item.Blogcategoryname</td>
+                                                        <td>@item.Blogtags</td>
+                                                        <td class="text-right"><a asp-action="Addsystemblog" asp-controller="Systemblog" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@item.Blogid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                                    </tr>
+                                                }
                                             }
-                                            } *@
                                         </tbody>
                                     </table>
                                 </div>
@@ -148,15 +186,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @*  @foreach (var item in Model)
-                                            {
-                                            <tr>
-                                            <td>@item.Socialpagename</td>
-                                            <td>@item.DateCreated</td>
-                                            <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
-                                            </tr>
-                                            } *@
-
+                                            @if(Model.Systemusersocials!= null ){
+                                                foreach (var item in Model.Systemusersocials)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Socialpagename</td>
+                                                        <td>@item.DateCreated</td>
+                                                        <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                                    </tr>
+                                                }
+                                            }
                                         </tbody>
                                     </table>
                                 </div>

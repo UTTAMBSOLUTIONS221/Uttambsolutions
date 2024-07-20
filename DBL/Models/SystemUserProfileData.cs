@@ -7,6 +7,7 @@ namespace DBL.Models
         public long Userid { get; set; }
         public string? Firstname { get; set; }
         public string? Lastname { get; set; }
+        public string? UserProfileImageUrl { get; set; }
         public string? Fullname { get; set; }
         public string? Phonenumber { get; set; }
         public string? Username { get; set; }
@@ -21,5 +22,7 @@ namespace DBL.Models
         public DateTime Datemodified { get; set; }
         public DateTime Datecreated { get; set; }
         public List<SystemOrganization>? Systemorganizations { get; set; }
+        public List<SocialMediaSettings>? Systemusersocials { get; set; }
+        public List<Systemblog>? Systemuserblogs { get; set; }
     }
 }
