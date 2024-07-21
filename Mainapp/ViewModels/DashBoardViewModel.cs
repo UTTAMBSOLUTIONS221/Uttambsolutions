@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Mainapp.Miniapps.Apps.Church;
 
 namespace Mainapp.ViewModels
 {
@@ -18,6 +19,12 @@ namespace Mainapp.ViewModels
         }
 
         // Commands for opening mini-apps
+        [RelayCommand]
+        private async Task OpenChurchAppCommand()
+        {
+            await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
+        }
+
         [RelayCommand]
         private void OpenWeatherApp()
         {
