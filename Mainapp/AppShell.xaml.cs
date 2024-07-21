@@ -1,4 +1,4 @@
-﻿using Mainapp.Pages;
+﻿using Mainapp.Miniapps.Apps.Church;
 using Mainapp.Pages.Users;
 namespace Mainapp
 {
@@ -7,9 +7,7 @@ namespace Mainapp
         public AppShell(LoginPage loginPage)
         {
             InitializeComponent();
-
-            Routing.RegisterRoute("DashBoardPage", typeof(DashBoardPage));
-
+            Routing.RegisterRoute(nameof(ChurchDashBoardPage), typeof(ChurchDashBoardPage));
             this.CurrentItem = loginPage;
         }
     }

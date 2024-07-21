@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mainapp.Miniapps.Apps.Church;
+using System.Windows.Input;
 
 namespace Mainapp.ViewModels
 {
@@ -12,8 +13,9 @@ namespace Mainapp.ViewModels
         [ObservableProperty]
         private string memberNumber;
 
-        [RelayCommand]
-        private async Task OpenChurchAppCommand()
+        public ICommand OpenChurchAppCommand => new Command(async () => await OpenChurchAppCommandAsync());
+
+        private async Task OpenChurchAppCommandAsync()
         {
             await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
         }
