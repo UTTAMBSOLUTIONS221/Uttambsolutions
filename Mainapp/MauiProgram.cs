@@ -1,8 +1,9 @@
 ﻿using Mainapp.Helpers;
+using Mainapp.Pages;
+using Mainapp.Pages.Users;
 using Mainapp.ViewModels;
 using Mainapp.ViewModels.User;
 using Microsoft.Extensions.Logging;
-
 namespace Mainapp
 {
     public static class MauiProgram
