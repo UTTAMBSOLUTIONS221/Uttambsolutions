@@ -1,4 +1,4 @@
-﻿namespace Mainapp.Costants
+﻿namespace Mainapp.Constants
 {
     public static class Icons
     {

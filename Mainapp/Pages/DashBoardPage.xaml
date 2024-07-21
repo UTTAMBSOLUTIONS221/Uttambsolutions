@@ -100,8 +100,5 @@
                 <Label Text="Technology App" HorizontalOptions="Center" TextColor="#0a506c" />
             </StackLayout>
         </Grid>
-
-        <!-- Logout Button at the bottom -->
-        <Button Text="Logout" Command="{Binding LogoutCommand}" BackgroundColor="#0a506c" TextColor="White" HorizontalOptions="Center" VerticalOptions="EndAndExpand" />
     </VerticalStackLayout>
 </ContentPage>

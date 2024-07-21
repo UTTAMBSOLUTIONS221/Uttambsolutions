@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mainapp.Controls;
-using Mainapp.Costants;
+using Mainapp.Constants;
 using Mainapp.Miniapps.News.Pages;
 using Mainapp.Miniapps.Weather;
+using Mainapp.Pages.Users;
 using System.Windows.Input;
+
 
 namespace Mainapp.ViewModels
 {
@@ -13,6 +14,7 @@ namespace Mainapp.ViewModels
 
         public ICommand OpenWeatherAppCommand => new Command(async () => await OpenWeatherAppAsync());
         public ICommand OpenNewsAppCommand => new Command(async () => await OpenNewsAppAsync());
+        public ICommand LogoutCommand => new Command(async () => await LogoutAsync());
 
         public DashBoardViewModel(INavigation navigation)
         {
@@ -21,40 +23,31 @@ namespace Mainapp.ViewModels
 
         private async Task OpenWeatherAppAsync()
         {
-            // Ensure AppShell.Current is not null
-            if (AppShell.Current == null)
+            await AppConstant.AddFlyoutMenusDetails();
+
+            // Ensure the navigation is to a different route or page if necessary
+            if (Shell.Current.CurrentState.Location.OriginalString != $"//{nameof(WeatherDashBoardPage)}")
             {
-                throw new InvalidOperationException("AppShell.Current is not initialized.");
+                await Shell.Current.GoToAsync($"//{nameof(WeatherDashBoardPage)}");
             }
-
-            // Set Flyout Header
-            AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
-
-            // Update Flyout Menu Items
-            await UpdateFlyoutMenuForWeatherAsync();
-
-            // Navigate to WeatherDashBoardPage
-            await _navigation.PushAsync(new WeatherDashBoardPage());
         }
+
 
         private async Task OpenNewsAppAsync()
         {
-            // Ensure AppShell.Current is not null
-            if (AppShell.Current == null)
-            {
-                throw new InvalidOperationException("AppShell.Current is not initialized.");
-            }
-
-            // Set Flyout Header
-            AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
-
-            // Update Flyout Menu Items
-            await UpdateFlyoutMenuForNewsAsync();
-
+            await AppConstant.AddFlyoutMenusDetails();
             // Navigate to NewsPage
             await _navigation.PushAsync(new NewsPage());
         }
 
+        private async Task LogoutAsync()
+        {
+            if (Preferences.ContainsKey(nameof(App.UserDetails)))
+            {
+                Preferences.Remove(nameof(App.UserDetails));
+            }
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+        }
 
         private async Task UpdateFlyoutMenuForWeatherAsync()
         {

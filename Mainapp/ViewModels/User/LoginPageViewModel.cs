@@ -1,9 +1,9 @@
-﻿using Mainapp.Constants;
-using Mainapp.Services.Authenticate;
+﻿using Mainapp.Services.Authenticate;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+
 
 namespace Mainapp.ViewModels.User
 {
@@ -52,9 +52,7 @@ namespace Mainapp.ViewModels.User
                     string userDetailStr = JsonConvert.SerializeObject(response);
                     Preferences.Set(nameof(App.UserDetails), userDetailStr);
                     App.UserDetails = response.Usermodel;
-
-                    // Example additional logic after successful login
-                    await AppConstant.AddFlyoutMenusDetails();
+                    await Shell.Current.GoToAsync($"DashBoardPage");
                 }
                 else
                 {

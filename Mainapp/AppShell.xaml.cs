@@ -1,5 +1,5 @@
-﻿using Mainapp.Pages.Users;
-using Mainapp.ViewModels;
+﻿using Mainapp.Pages;
+using Mainapp.Pages.Users;
 namespace Mainapp
 {
     public partial class AppShell : Shell
@@ -7,7 +7,10 @@ namespace Mainapp
         public AppShell(LoginPage loginPage)
         {
             InitializeComponent();
-            this.BindingContext = new AppShellViewModel();
+
+            Routing.RegisterRoute("DashBoardPage", typeof(DashBoardPage));
+
+            this.CurrentItem = loginPage;
         }
     }
 }

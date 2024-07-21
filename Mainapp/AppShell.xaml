@@ -3,16 +3,26 @@
     x:Class="Mainapp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Mainapp"
-    xmlns:pages="clr-namespace:Mainapp.Pages.Users"
+    xmlns:local="clr-namespace:Mainapp.Controls"
+    xmlns:users="clr-namespace:Mainapp.Pages.Users"
+    xmlns:miniapps="clr-namespace:Mainapp.Miniapps.Weather"
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False"
     Shell.TabBarIsVisible="False">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate pages:LoginPage}"
+        ContentTemplate="{DataTemplate users:LoginPage}"
         Route="MainPage" />
+
+    <ShellContent
+        Title="Weather Dashboard"
+        ContentTemplate="{DataTemplate miniapps:WeatherDashBoardPage}"
+        Route="WeatherDashBoardPage" />
+
+    <Shell.FlyoutHeader>
+        <local:FlyoutHeaderControl />
+    </Shell.FlyoutHeader>
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">
