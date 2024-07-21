@@ -1,9 +1,5 @@
 ﻿using Mainapp.Controls;
 using Mainapp.Costants;
-using Mainapp.Miniapps.Church;
-using Mainapp.Miniapps.Church.Pages;
-using Mainapp.Miniapps.News;
-using Mainapp.Miniapps.Weather;
 using Mainapp.Pages;
 
 namespace Mainapp.Constants
@@ -12,22 +8,24 @@ namespace Mainapp.Constants
     {
         public async static Task AddFlyoutMenusDetails()
         {
+            // Set the FlyoutHeader
             AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
             var currentRoute = Shell.Current.CurrentState.Location.OriginalString;
 
-            // Remove existing dashboard info
-            var pagesToRemove = new[] { nameof(ChurchDashBoardPage), nameof(NewsDashBoardPage), nameof(WeatherDashBoardPage) };
-            foreach (var page in pagesToRemove)
+            // Remove general dashboard item if it exists
+            var generalDashboardItem = AppShell.Current.Items
+                .OfType<FlyoutItem>()
+                .FirstOrDefault(item => item.Route == nameof(DashBoardPage));
+            if (generalDashboardItem != null)
             {
-                var pageInfo = AppShell.Current.Items.Where(f => f.Route == page).FirstOrDefault();
-                if (pageInfo != null) AppShell.Current.Items.Remove(pageInfo);
+                AppShell.Current.Items.Remove(generalDashboardItem);
             }
 
-            // Add the general DashboardPage accessible to all logins
-            var generalDashboardItem = new FlyoutItem()
+            // Create and add FlyoutItem for DashBoardPage
+            var flyoutItem = new FlyoutItem()
             {
-                Title = "General Dashboard",
+                Title = "Dashboard",
                 Route = nameof(DashBoardPage),
                 FlyoutDisplayOptions = FlyoutDisplayOptions.AsSingleItem,
                 Items =
@@ -41,12 +39,14 @@ namespace Mainapp.Constants
                 }
             };
 
-            if (!AppShell.Current.Items.Contains(generalDashboardItem))
+            // Add FlyoutItem if it is not already present
+            if (!AppShell.Current.Items.Contains(flyoutItem))
             {
-                AppShell.Current.Items.Insert(0, generalDashboardItem);
+                AppShell.Current.Items.Insert(0, flyoutItem);
+
                 if (DeviceInfo.Platform == DevicePlatform.WinUI)
                 {
-                    AppShell.Current.Dispatcher.Dispatch(async () =>
+                    await AppShell.Current.Dispatcher.DispatchAsync(async () =>
                     {
                         await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
                     });
@@ -54,115 +54,6 @@ namespace Mainapp.Constants
                 else
                 {
                     await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
-                }
-            }
-
-            FlyoutItem flyoutItem = null;
-
-            if (currentRoute.Contains(nameof(ChurchDashBoardPage)))
-            {
-                flyoutItem = new FlyoutItem()
-                {
-                    Title = "Church Dashboard Page",
-                    Route = nameof(ChurchDashBoardPage),
-                    FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
-                    Items =
-                    {
-                        new ShellContent
-                        {
-                            Icon = Icons.Dashboard,
-                            Title = "Dashboard",
-                            ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.People,
-                            Title = "Bible",
-                            ContentTemplate = new DataTemplate(typeof(ChurchDetailPage)),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.People,
-                            Title = "Forums",
-                            ContentTemplate = new DataTemplate(typeof(ChurchDetailPage)),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.People,
-                            Title = "Groups",
-                            ContentTemplate = new DataTemplate(typeof(ChurchDetailPage)),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.AboutUs,
-                            Title = "Profile",
-                            ContentTemplate = new DataTemplate(typeof(ChurchDetailPage)),
-                        },
-                    }
-                };
-            }
-            else if (currentRoute.Contains(nameof(NewsDashBoardPage)))
-            {
-                flyoutItem = new FlyoutItem()
-                {
-                    Title = "News Dashboard Page",
-                    Route = nameof(NewsDashBoardPage),
-                    FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
-                    Items =
-                    {
-                        new ShellContent
-                        {
-                            Icon = Icons.Dashboard,
-                            Title = "News Dashboard",
-                            ContentTemplate = new DataTemplate(typeof(NewsDashBoardPage)),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.AboutUs,
-                            Title = "News Profile",
-                            ContentTemplate = new DataTemplate(typeof(NewsDashBoardPage)),
-                        },
-                    }
-                };
-            }
-            else if (currentRoute.Contains(nameof(WeatherDashBoardPage)))
-            {
-                flyoutItem = new FlyoutItem()
-                {
-                    Title = "Weather Dashboard Page",
-                    Route = nameof(WeatherDashBoardPage),
-                    FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
-                    Items =
-                    {
-                        new ShellContent
-                        {
-                            Icon = Icons.Dashboard,
-                            Title = "Weather Dashboard",
-                            ContentTemplate = new DataTemplate(typeof(WeatherDashBoardPage)),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.AboutUs,
-                            Title = "Weather Profile",
-                            ContentTemplate = new DataTemplate(typeof(WeatherDashBoardPage)),
-                        },
-                    }
-                };
-            }
-
-            if (flyoutItem != null && !AppShell.Current.Items.Contains(flyoutItem))
-            {
-                AppShell.Current.Items.Add(flyoutItem);
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                {
-                    AppShell.Current.Dispatcher.Dispatch(async () =>
-                    {
-                        await Shell.Current.GoToAsync($"//{flyoutItem.Route}");
-                    });
-                }
-                else
-                {
-                    await Shell.Current.GoToAsync($"//{flyoutItem.Route}");
                 }
             }
         }

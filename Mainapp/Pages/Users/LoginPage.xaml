@@ -85,7 +85,7 @@
                 IsRunning="{Binding IsProcessing}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
-                Color="White"
+                Color="#0a506c"
                 HeightRequest="60"
                 WidthRequest="60" />
         </Grid>
