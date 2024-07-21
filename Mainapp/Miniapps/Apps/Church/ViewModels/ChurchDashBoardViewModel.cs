@@ -1,4 +1,6 @@
-﻿namespace Mainapp.Miniapps.Apps.Church.ViewModels
+﻿using Mainapp.Miniapps.Controls;
+using Mainapp.Miniapps.ViewModels;
+namespace Mainapp.Miniapps.Apps.Church.ViewModels
 {
     public partial class ChurchDashBoardViewModel : BaseViewModel
     {

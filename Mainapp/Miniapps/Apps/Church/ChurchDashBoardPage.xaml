@@ -3,28 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mainapp.Miniapps.Apps.Church.ChurchDashBoardPage"
              Title="ChurchDashBoardPage">
-    <StackLayout>
-        <!-- Profile Section -->
-        <Label Text="Profile" FontSize="24" HorizontalOptions="Center"/>
-        <Image Source="{Binding ProfileImageUrl}" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center"/>
-        <Label Text="{Binding UserName}" FontSize="18" HorizontalOptions="Center"/>
-
-        <!-- Collapsible Menu Section -->
-        <Frame BorderColor="Gray" CornerRadius="5">
-            <StackLayout>
-                <Label Text="Menu" FontSize="20" HorizontalOptions="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnMenuHeaderTapped"/>
-                    </Label.GestureRecognizers>
-                </Label>
-                <StackLayout x:Name="MenuStackLayout" IsVisible="False">
-                    <Button Text="Bible" Command="{Binding OpenBibleCommand}"/>
-                    <Button Text="Forums" Command="{Binding OpenForumsCommand}"/>
-                    <Button Text="Groups" Command="{Binding OpenGroupsCommand}"/>
-                    <Button Text="Profile" Command="{Binding OpenProfileCommand}"/>
-                </StackLayout>
-            </StackLayout>
-        </Frame>
-
+    <StackLayout Padding="10">
+        <Label FontSize="18" Text="Welcome to Student Dashboard Page" />
     </StackLayout>
 </ContentPage>

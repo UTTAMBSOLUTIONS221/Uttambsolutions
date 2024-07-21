@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:Faithlink.ViewModels.Chat.GroupsChat"
+             xmlns:viewModels="clr-namespace:Faithlink.Models"
              x:Class="Faithlink.Views.Chats.GroupsChat.GroupsListPage"
-             x:DataType="viewModels:GroupsListViewModel">
+             x:DataType="viewModels:GroupModel">
     <ContentPage.Content>
         <StackLayout>
-            <!-- Group list -->
-            <CollectionView ItemsSource="{Binding Groups}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Label Text="{Binding Name}" />
-                            <Button Text="Join"
-                                    IsEnabled="{Binding IsJoined, Converter={StaticResource InverseBooleanConverter}}"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:GroupsViewModel}}, Path=JoinGroupCommand}"
-                                    CommandParameter="{Binding }" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
