@@ -1,121 +1,83 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mainapp.Common;
-using Mainapp.Miniapps.News.Pages;
-using Mainapp.Miniapps.Weather;
-using Mainapp.Pages.Users;
-using System.Windows.Input;
-
+using CommunityToolkit.Mvvm.Input;
 
 namespace Mainapp.ViewModels
 {
-    public class DashBoardViewModel : ObservableObject
+    public partial class DashBoardViewModel : BaseViewModel
     {
-        private readonly INavigation _navigation;
+        [ObservableProperty]
+        private string userName;
 
-        public ICommand OpenWeatherAppCommand => new Command(async () => await OpenWeatherAppAsync());
-        public ICommand OpenNewsAppCommand => new Command(async () => await OpenNewsAppAsync());
-        public ICommand LogoutCommand => new Command(async () => await LogoutAsync());
+        [ObservableProperty]
+        private string memberNumber;
 
-        public DashBoardViewModel(INavigation navigation)
+        [RelayCommand]
+        private void EditProfile()
         {
-            _navigation = navigation;
+            // Implement the edit profile logic
         }
 
-        private async Task OpenWeatherAppAsync()
-        { // Navigate to NewsPage
-            await _navigation.PushAsync(new WeatherDashBoardPage());
-        }
-        private async Task OpenNewsAppAsync()
+        // Commands for opening mini-apps
+        [RelayCommand]
+        private void OpenWeatherApp()
         {
-            // Navigate to NewsPage
-            await _navigation.PushAsync(new NewsPage());
+            // Implement navigation to Weather App
         }
 
-        private async Task LogoutAsync()
+        [RelayCommand]
+        private void OpenNewsApp()
         {
-            if (Preferences.ContainsKey(nameof(App.UserDetails)))
-            {
-                Preferences.Remove(nameof(App.UserDetails));
-            }
-            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            // Implement navigation to News App
         }
 
-        private async Task UpdateFlyoutMenuForWeatherAsync()
+        [RelayCommand]
+        private void OpenFinanceApp()
         {
-            // Ensure AppShell.Current and its Items are not null
-            if (AppShell.Current == null || AppShell.Current.Items == null)
-            {
-                throw new InvalidOperationException("AppShell.Current or its Items are not initialized.");
-            }
-
-            // Clear previous items if needed
-            var existingItems = AppShell.Current.Items.OfType<FlyoutItem>().ToList();
-            foreach (var item in existingItems)
-            {
-                AppShell.Current.Items.Remove(item);
-            }
-
-            // Add specific Flyout items for Weather Dashboard
-            var weatherFlyoutItem = new FlyoutItem()
-            {
-                Title = "Weather Dashboard",
-                Route = nameof(WeatherDashBoardPage),
-                FlyoutDisplayOptions = FlyoutDisplayOptions.AsSingleItem,
-                Items =
-                {
-                    new ShellContent
-                    {
-                        Icon = Icons.Dashboard,
-                        Title = "Weather Dashboard",
-                        ContentTemplate = new DataTemplate(typeof(WeatherDashBoardPage)),
-                    }
-                }
-            };
-
-            if (!AppShell.Current.Items.Contains(weatherFlyoutItem))
-            {
-                AppShell.Current.Items.Add(weatherFlyoutItem);
-                await Shell.Current.GoToAsync($"//{nameof(WeatherDashBoardPage)}");
-            }
+            // Implement navigation to Finance App
         }
 
-        private async Task UpdateFlyoutMenuForNewsAsync()
+        [RelayCommand]
+        private void OpenSportsApp()
         {
-            // Ensure AppShell.Current and its Items are not null
-            if (AppShell.Current == null || AppShell.Current.Items == null)
-            {
-                throw new InvalidOperationException("AppShell.Current or its Items are not initialized.");
-            }
+            // Implement navigation to Sports App
+        }
 
-            // Clear previous items if needed
-            var existingItems = AppShell.Current.Items.OfType<FlyoutItem>().ToList();
-            foreach (var item in existingItems)
-            {
-                AppShell.Current.Items.Remove(item);
-            }
+        [RelayCommand]
+        private void OpenHealthApp()
+        {
+            // Implement navigation to Health App
+        }
 
-            // Add specific Flyout items for News Dashboard
-            var newsFlyoutItem = new FlyoutItem()
-            {
-                Title = "News Dashboard",
-                Route = nameof(NewsPage),
-                FlyoutDisplayOptions = FlyoutDisplayOptions.AsSingleItem,
-                Items =
-                {
-                    new ShellContent
-                    {
-                        Icon = Icons.Dashboard,
-                        Title = "News Dashboard",
-                        ContentTemplate = new DataTemplate(typeof(NewsPage)),
-                    }
-                }
-            };
+        [RelayCommand]
+        private void OpenEducationApp()
+        {
+            // Implement navigation to Education App
+        }
 
-            if (!AppShell.Current.Items.Contains(newsFlyoutItem))
-            {
-                AppShell.Current.Items.Add(newsFlyoutItem);
-                await Shell.Current.GoToAsync($"//{nameof(NewsPage)}");
-            }
+        [RelayCommand]
+        private void OpenEntertainmentApp()
+        {
+            // Implement navigation to Entertainment App
+        }
+
+        [RelayCommand]
+        private void OpenTravelApp()
+        {
+            // Implement navigation to Travel App
+        }
+
+        [RelayCommand]
+        private void OpenShoppingApp()
+        {
+            // Implement navigation to Shopping App
+        }
+
+        // Constructor
+        public DashBoardViewModel()
+        {
+            // Initialize properties, e.g.,
+            UserName = App.UserDetails.Fullname;
+            MemberNumber = "23456";
         }
     }
 }

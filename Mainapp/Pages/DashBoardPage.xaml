@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Mainapp.ViewModels"
              x:Class="Mainapp.Pages.DashBoardPage"
              Title="Dashboard">
+    <ContentPage.BindingContext>
+        <vm:DashBoardViewModel />
+    </ContentPage.BindingContext>
     <VerticalStackLayout Padding="10" Spacing="10">
         <!-- Reduced Padding and Spacing -->
 
@@ -13,10 +17,10 @@
                     <ImageButton Source="user.png" Aspect="AspectFill" Command="{Binding EditProfileCommand}" BackgroundColor="Transparent" BorderColor="#0a506c"/>
                 </Frame>
             </Frame>
-            <Label x:Name="lblUserName" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#0a506c"/>
+            <Label x:Name="lblUserName" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#0a506c" Text="{Binding UserName}"/>
             <StackLayout Orientation="Horizontal" Spacing="10">
-                <Label x:Name="lblMemberNumber" FontSize="17" FontAttributes="Bold" TextColor="#0a506c"/>
-                <Label x:Name="lblMemberNo" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="16" TextColor="#0a506c"/>
+                <Label x:Name="lblMemberNumber" FontSize="17" FontAttributes="Bold" TextColor="#0a506c" Text="Member No: "/>
+                <Label x:Name="lblMemberNo" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Text="{Binding MemberNumber}"/>
             </StackLayout>
         </VerticalStackLayout>
 
@@ -105,9 +109,9 @@
             <StackLayout Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5">
                 <!-- Reduced Margin -->
                 <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center">
-                    <ImageButton Source="technology_icon.png" Command="{Binding OpenTechnologyAppCommand}" BackgroundColor="Transparent"/>
+                    <ImageButton Source="shopping_icon.png" Command="{Binding OpenShoppingAppCommand}" BackgroundColor="Transparent"/>
                 </Frame>
-                <Label Text="Technology App" HorizontalOptions="Center" TextColor="#0a506c" />
+                <Label Text="Shopping App" HorizontalOptions="Center" TextColor="#0a506c" />
             </StackLayout>
         </Grid>
     </VerticalStackLayout>
