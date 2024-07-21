@@ -13,76 +13,68 @@ namespace Mainapp.ViewModels
         private string memberNumber;
 
         [RelayCommand]
-        private void EditProfile()
-        {
-            // Implement the edit profile logic
-        }
-
-        // Commands for opening mini-apps
-        [RelayCommand]
         private async Task OpenChurchAppCommand()
         {
             await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
         }
 
         [RelayCommand]
-        private void OpenWeatherApp()
+        private async Task OpenWeatherAppCommand()
         {
-            // Implement navigation to Weather App
+            await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
         }
 
         [RelayCommand]
-        private void OpenNewsApp()
+        private async Task OpenNewsAppCommand()
         {
-            // Implement navigation to News App
+            await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
         }
 
         [RelayCommand]
-        private void OpenFinanceApp()
+        private async Task OpenFinanceAppCommand()
         {
-            // Implement navigation to Finance App
+            await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
         }
 
         [RelayCommand]
-        private void OpenSportsApp()
+        private async Task OpenSportsAppCommand()
         {
-            // Implement navigation to Sports App
+            await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
         }
 
         [RelayCommand]
-        private void OpenHealthApp()
+        private async Task OpenHealthAppCommand()
         {
-            // Implement navigation to Health App
+            await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
         }
 
         [RelayCommand]
-        private void OpenEducationApp()
+        private async Task OpenEducationAppCommand()
         {
-            // Implement navigation to Education App
+            await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
         }
 
         [RelayCommand]
-        private void OpenEntertainmentApp()
+        private async Task OpenEntertainmentAppCommand()
         {
-            // Implement navigation to Entertainment App
+            await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
         }
 
         [RelayCommand]
-        private void OpenTravelApp()
+        private async Task OpenTravelAppCommand()
         {
-            // Implement navigation to Travel App
+            await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
         }
 
         [RelayCommand]
-        private void OpenShoppingApp()
+        private async Task OpenShoppingAppCommand()
         {
-            // Implement navigation to Shopping App
+            await Shell.Current.GoToAsync(nameof(ChurchDashBoardPage));
         }
 
         // Constructor
         public DashBoardViewModel()
         {
-            // Initialize properties, e.g.,
             UserName = App.UserDetails.Fullname;
             MemberNumber = "23456";
         }
