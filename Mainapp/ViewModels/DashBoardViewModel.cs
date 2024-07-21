@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Mainapp.Miniapps.News.Pages;
 using Mainapp.Miniapps.Weather.Pages;
 using Mainapp.Pages.Users;
@@ -9,28 +8,27 @@ namespace Mainapp.ViewModels
 {
     public class DashBoardViewModel : ObservableObject
     {
-        public ICommand OpenWeatherAppCommand { get; }
-        public ICommand OpenNewsAppCommand { get; }
-        public ICommand SignOutCommand { get; }
+        private readonly INavigation _navigation;
 
-        public DashBoardViewModel()
+        public ICommand OpenWeatherAppCommand => new Command(async () => await OpenWeatherAppAsync());
+        public ICommand OpenNewsAppCommand => new Command(async () => await OpenNewsAppAsync());
+        public ICommand LogoutCommand => new Command(async () => await LogoutAsync());
+
+        public DashBoardViewModel(INavigation navigation)
         {
-            OpenWeatherAppCommand = new AsyncRelayCommand(OpenWeatherAppAsync);
-            OpenNewsAppCommand = new AsyncRelayCommand(OpenNewsAppAsync);
-            SignOutCommand = new AsyncRelayCommand(SignOutAsync);
+            _navigation = navigation;
         }
 
         private async Task OpenWeatherAppAsync()
         {
-            await Shell.Current.GoToAsync($"//{nameof(WeatherPage)}");
+            await _navigation.PushAsync(new WeatherPage());
         }
 
         private async Task OpenNewsAppAsync()
         {
-            await Shell.Current.GoToAsync($"//{nameof(NewsPage)}");
+            await _navigation.PushAsync(new NewsPage());
         }
-
-        private async Task SignOutAsync()
+        private async Task LogoutAsync()
         {
             if (Preferences.ContainsKey(nameof(App.UserDetails)))
             {
