@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout Padding="20" xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mainapp.Controls.FlyoutHeaderControl">
+    <VerticalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+        <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" IsClippedToBounds="True" BorderColor="#0a506c" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center" Padding="5">
+            <Frame WidthRequest="90" HeightRequest="90" CornerRadius="45" IsClippedToBounds="True" BorderColor="Transparent" HasShadow="False">
+                <Image Source="user.png" Aspect="AspectFill"/>
+            </Frame>
+        </Frame>
+        <Label x:Name="lblUserName" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Label x:Name="lblMemberNumber"  FontSize="17" FontAttributes="Bold" />
+            <Label VerticalTextAlignment="Center" FontAttributes="Bold" x:Name="lblMemberNo" FontSize="16" />
+        </StackLayout>
+    </VerticalStackLayout>
+</StackLayout>
