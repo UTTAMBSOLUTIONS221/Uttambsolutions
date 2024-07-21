@@ -1,4 +1,6 @@
-﻿namespace Mainapp.Costants
+﻿using Mainapp.Controls;
+using Mainapp.Pages;
+namespace Mainapp.Costants
 {
     public class AppConstant
     {
@@ -7,13 +9,13 @@
         {
             AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
-            var studentDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(StudentDashboardPage)).FirstOrDefault();
+            var studentDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(DashBoardPage)).FirstOrDefault();
             if (studentDashboardInfo != null) AppShell.Current.Items.Remove(studentDashboardInfo);
 
-            var teacherDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(TeacherDashboardPage)).FirstOrDefault();
+            var teacherDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(DashBoardPage)).FirstOrDefault();
             if (teacherDashboardInfo != null) AppShell.Current.Items.Remove(teacherDashboardInfo);
 
-            var adminDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(AdminDashboardPage)).FirstOrDefault();
+            var adminDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(DashBoardPage)).FirstOrDefault();
             if (adminDashboardInfo != null) AppShell.Current.Items.Remove(adminDashboardInfo);
 
 
@@ -22,7 +24,7 @@
                 var flyoutItem = new FlyoutItem()
                 {
                     Title = "Dashboard Page",
-                    Route = nameof(StudentDashboardPage),
+                    Route = nameof(DashBoardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
                             {
@@ -30,31 +32,31 @@
                                 {
                                     Icon = Icons.Dashboard,
                                     Title = "Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(StudentDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(DashBoardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
                                     Title = "Bible",
-                                    ContentTemplate = new DataTemplate(typeof(BibleVersesPage)),
+                                    ContentTemplate = new DataTemplate(typeof(DashBoardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
                                     Title = "Forums",
-                                    ContentTemplate = new DataTemplate(typeof(OpenForumsPage)),
+                                    ContentTemplate = new DataTemplate(typeof(DashBoardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
                                     Title = "Groups",
-                                    ContentTemplate = new DataTemplate(typeof(GroupsListPage)),
+                                    ContentTemplate = new DataTemplate(typeof(DashBoardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.AboutUs,
                                     Title = "Profile",
-                                    ContentTemplate = new DataTemplate(typeof(StudentDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(DashBoardPage)),
                                 },
                             }
                 };
@@ -65,12 +67,12 @@
                     {
                         AppShell.Current.Dispatcher.Dispatch(async () =>
                         {
-                            await Shell.Current.GoToAsync($"//{nameof(StudentDashboardPage)}");
+                            await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
                         });
                     }
                     else
                     {
-                        await Shell.Current.GoToAsync($"//{nameof(StudentDashboardPage)}");
+                        await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
                     }
                 }
 
@@ -81,7 +83,7 @@
                 var flyoutItem = new FlyoutItem()
                 {
                     Title = "Dashboard Page",
-                    Route = nameof(TeacherDashboardPage),
+                    Route = nameof(DashBoardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
                     {
@@ -89,13 +91,13 @@
                                 {
                                     Icon = Icons.Dashboard,
                                     Title = "Teacher Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(TeacherDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(DashBoardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.AboutUs,
                                     Title = "Teacher Profile",
-                                    ContentTemplate = new DataTemplate(typeof(TeacherDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(DashBoardPage)),
                                 },
                    }
                 };
@@ -107,12 +109,12 @@
                     {
                         AppShell.Current.Dispatcher.Dispatch(async () =>
                         {
-                            await Shell.Current.GoToAsync($"//{nameof(TeacherDashboardPage)}");
+                            await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
                         });
                     }
                     else
                     {
-                        await Shell.Current.GoToAsync($"//{nameof(TeacherDashboardPage)}");
+                        await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
                     }
                 }
             }
@@ -122,7 +124,7 @@
                 var flyoutItem = new FlyoutItem()
                 {
                     Title = "Dashboard Page",
-                    Route = nameof(AdminDashboardPage),
+                    Route = nameof(DashBoardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
                     {
@@ -130,13 +132,13 @@
                                 {
                                     Icon = Icons.Dashboard,
                                     Title = "Admin Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(AdminDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(DashBoardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.AboutUs,
                                     Title = "Admin Profile",
-                                    ContentTemplate = new DataTemplate(typeof(AdminDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(DashBoardPage)),
                                 },
                    }
                 };
@@ -148,12 +150,12 @@
                     {
                         AppShell.Current.Dispatcher.Dispatch(async () =>
                         {
-                            await Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
+                            await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
                         });
                     }
                     else
                     {
-                        await Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
+                        await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
                     }
                 }
             }

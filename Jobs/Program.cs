@@ -1,4 +1,3 @@
-using DBL.Services;
 using Jobs.Schedulers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -17,7 +16,6 @@ builder.Services.AddRazorPages().AddJsonOptions(options =>
 
 builder.Services.AddDataProtection();
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<FacebookService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddDistributedMemoryCache();

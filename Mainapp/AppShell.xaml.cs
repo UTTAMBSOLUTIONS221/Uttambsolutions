@@ -1,4 +1,6 @@
-﻿namespace Mainapp
+﻿using Mainapp.Pages;
+using Mainapp.Pages.Users;
+namespace Mainapp
 {
     public partial class AppShell : Shell
     {

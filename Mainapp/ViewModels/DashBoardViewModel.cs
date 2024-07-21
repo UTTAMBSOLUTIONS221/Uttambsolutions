@@ -1,4 +1,7 @@
-﻿using System.Windows.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Mainapp.Miniapps.News.Pages;
+using Mainapp.Miniapps.Weather.Pages;
+using System.Windows.Input;
 
 namespace Mainapp.ViewModels
 {
