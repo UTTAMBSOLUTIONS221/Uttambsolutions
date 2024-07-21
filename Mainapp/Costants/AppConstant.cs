@@ -4,6 +4,7 @@ using Mainapp.Miniapps.Church;
 using Mainapp.Miniapps.Church.Pages;
 using Mainapp.Miniapps.News;
 using Mainapp.Miniapps.Weather;
+using Mainapp.Pages;
 
 namespace Mainapp.Constants
 {
@@ -23,13 +24,46 @@ namespace Mainapp.Constants
                 if (pageInfo != null) AppShell.Current.Items.Remove(pageInfo);
             }
 
+            // Add the general DashboardPage accessible to all logins
+            var generalDashboardItem = new FlyoutItem()
+            {
+                Title = "General Dashboard",
+                Route = nameof(DashBoardPage),
+                FlyoutDisplayOptions = FlyoutDisplayOptions.AsSingleItem,
+                Items =
+                {
+                    new ShellContent
+                    {
+                        Icon = Icons.Dashboard,
+                        Title = "Dashboard",
+                        ContentTemplate = new DataTemplate(typeof(DashBoardPage)),
+                    }
+                }
+            };
+
+            if (!AppShell.Current.Items.Contains(generalDashboardItem))
+            {
+                AppShell.Current.Items.Insert(0, generalDashboardItem);
+                if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                {
+                    AppShell.Current.Dispatcher.Dispatch(async () =>
+                    {
+                        await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
+                    });
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
+                }
+            }
+
             FlyoutItem flyoutItem = null;
 
             if (currentRoute.Contains(nameof(ChurchDashBoardPage)))
             {
                 flyoutItem = new FlyoutItem()
                 {
-                    Title = "Dashboard Page",
+                    Title = "Church Dashboard Page",
                     Route = nameof(ChurchDashBoardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
@@ -71,7 +105,7 @@ namespace Mainapp.Constants
             {
                 flyoutItem = new FlyoutItem()
                 {
-                    Title = "Dashboard Page",
+                    Title = "News Dashboard Page",
                     Route = nameof(NewsDashBoardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
@@ -79,13 +113,13 @@ namespace Mainapp.Constants
                         new ShellContent
                         {
                             Icon = Icons.Dashboard,
-                            Title = "Teacher Dashboard",
+                            Title = "News Dashboard",
                             ContentTemplate = new DataTemplate(typeof(NewsDashBoardPage)),
                         },
                         new ShellContent
                         {
                             Icon = Icons.AboutUs,
-                            Title = "Teacher Profile",
+                            Title = "News Profile",
                             ContentTemplate = new DataTemplate(typeof(NewsDashBoardPage)),
                         },
                     }
@@ -95,7 +129,7 @@ namespace Mainapp.Constants
             {
                 flyoutItem = new FlyoutItem()
                 {
-                    Title = "Dashboard Page",
+                    Title = "Weather Dashboard Page",
                     Route = nameof(WeatherDashBoardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
@@ -103,13 +137,13 @@ namespace Mainapp.Constants
                         new ShellContent
                         {
                             Icon = Icons.Dashboard,
-                            Title = "Admin Dashboard",
+                            Title = "Weather Dashboard",
                             ContentTemplate = new DataTemplate(typeof(WeatherDashBoardPage)),
                         },
                         new ShellContent
                         {
                             Icon = Icons.AboutUs,
-                            Title = "Admin Profile",
+                            Title = "Weather Profile",
                             ContentTemplate = new DataTemplate(typeof(WeatherDashBoardPage)),
                         },
                     }
