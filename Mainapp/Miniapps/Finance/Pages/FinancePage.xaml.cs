@@ -1,9 +1,9 @@
-namespace App.Miniapps.Finance.Pages;
+namespace Mainapp.Miniapps.Finance.Pages;
 
 public partial class FinancePage : ContentPage
 {
-	public FinancePage()
-	{
-		InitializeComponent();
-	}
+    public FinancePage()
+    {
+        InitializeComponent();
+    }
 }

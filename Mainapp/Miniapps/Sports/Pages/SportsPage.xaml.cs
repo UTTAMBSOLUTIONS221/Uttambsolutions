@@ -1,9 +1,9 @@
-namespace App.Miniapps.Sports.Pages;
+namespace Mainapp.Miniapps.Sports.Pages;
 
 public partial class SportsPage : ContentPage
 {
-	public SportsPage()
-	{
-		InitializeComponent();
-	}
+    public SportsPage()
+    {
+        InitializeComponent();
+    }
 }

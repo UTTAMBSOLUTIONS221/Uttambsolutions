@@ -1,4 +1,4 @@
-﻿namespace App.Services
+﻿namespace Mainapp.Services
 {
     public class BaseResponse
     {

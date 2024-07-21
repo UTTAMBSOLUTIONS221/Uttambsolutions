@@ -1,4 +1,4 @@
-﻿namespace App.Helpers
+﻿namespace Mainapp.Helpers
 {
     public class DevHttpConnectionHelper
     {

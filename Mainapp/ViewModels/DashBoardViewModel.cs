@@ -1,9 +1,6 @@
-﻿using App.Miniapps.News.Pages;
-using App.Miniapps.Weather.Pages;
-using CommunityToolkit.Mvvm.ComponentModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-namespace App.ViewModels
+namespace Mainapp.ViewModels
 {
     public class DashBoardViewModel : ObservableObject
     {

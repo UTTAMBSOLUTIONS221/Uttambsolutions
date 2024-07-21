@@ -1,9 +1,9 @@
-﻿using App.Services.Authenticate;
+﻿using Mainapp.Services.Authenticate;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace App.ViewModels.User
+namespace Mainapp.ViewModels.User
 {
     public class LoginPageViewModel : INotifyPropertyChanged
     {

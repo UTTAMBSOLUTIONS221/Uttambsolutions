@@ -1,11 +1,9 @@
-﻿using App.Helpers;
-using App.Pages;
-using App.Pages.Users;
-using App.ViewModels;
-using App.ViewModels.User;
+﻿using Mainapp.Helpers;
+using Mainapp.ViewModels;
+using Mainapp.ViewModels.User;
 using Microsoft.Extensions.Logging;
 
-namespace App
+namespace Mainapp
 {
     public static class MauiProgram
     {

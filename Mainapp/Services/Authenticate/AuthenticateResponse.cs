@@ -1,4 +1,4 @@
-﻿namespace App.Services.Authenticate
+﻿namespace Mainapp.Services.Authenticate
 {
     public class AuthenticateResponse : BaseResponse
     {

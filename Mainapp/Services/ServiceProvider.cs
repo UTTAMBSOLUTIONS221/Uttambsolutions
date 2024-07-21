@@ -1,9 +1,9 @@
-﻿using App.Helpers;
-using App.Services.Authenticate;
-using Newtonsoft.Json;
+﻿using Mainapp.Helpers;
+using Mainapp.Services.Authenticate;
 using System.Text;
 
-namespace App.Services
+
+namespace Mainapp.Services
 {
     public class ServiceProvider
     {

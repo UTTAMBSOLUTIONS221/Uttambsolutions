@@ -1,9 +1,9 @@
-namespace App.Miniapps.News.Pages;
+namespace Mainapp.Miniapps.News.Pages;
 
 public partial class NewsPage : ContentPage
 {
-	public NewsPage()
-	{
-		InitializeComponent();
-	}
+    public NewsPage()
+    {
+        InitializeComponent();
+    }
 }

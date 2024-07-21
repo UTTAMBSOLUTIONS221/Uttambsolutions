@@ -1,9 +1,9 @@
-namespace App.Miniapps.Education.Pages;
+namespace Mainapp.Miniapps.Education.Pages;
 
 public partial class EducationPage : ContentPage
 {
-	public EducationPage()
-	{
-		InitializeComponent();
-	}
+    public EducationPage()
+    {
+        InitializeComponent();
+    }
 }
