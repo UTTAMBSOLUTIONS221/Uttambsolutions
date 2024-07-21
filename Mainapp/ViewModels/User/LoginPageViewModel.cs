@@ -1,4 +1,6 @@
-﻿using Mainapp.Services.Authenticate;
+﻿using Mainapp.Constants;
+using Mainapp.Services.Authenticate;
+using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -47,7 +49,12 @@ namespace Mainapp.ViewModels.User
                 var response = await _serviceProvider.Authenticate(request);
                 if (response.StatusCode == 200)
                 {
-                    await Shell.Current.GoToAsync($"DashBoardPage?userId={response.Usermodel.Userid}");
+                    string userDetailStr = JsonConvert.SerializeObject(response);
+                    Preferences.Set(nameof(App.UserDetails), userDetailStr);
+                    App.UserDetails = response.Usermodel;
+
+                    // Example additional logic after successful login
+                    await AppConstant.AddFlyoutMenusDetails();
                 }
                 else
                 {
