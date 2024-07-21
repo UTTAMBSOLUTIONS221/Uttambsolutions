@@ -1,4 +1,5 @@
-﻿namespace Mainapp.Miniapps.ViewModels.CommonDashBoard
+﻿using Mainapp.Miniapps.Controls;
+namespace Mainapp.Miniapps.ViewModels.CommonDashBoard
 {
     public partial class DashboardPageViewModel : BaseViewModel
     {
