@@ -1,31 +1,42 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Mainapp.Miniapps.News.Pages;
 using Mainapp.Miniapps.Weather.Pages;
+using Mainapp.Pages.Users;
 using System.Windows.Input;
 
 namespace Mainapp.ViewModels
 {
     public class DashBoardViewModel : ObservableObject
     {
-        private readonly INavigation _navigation;
+        public ICommand OpenWeatherAppCommand { get; }
+        public ICommand OpenNewsAppCommand { get; }
+        public ICommand SignOutCommand { get; }
 
-        public ICommand OpenWeatherAppCommand => new Command(async () => await OpenWeatherAppAsync());
-        public ICommand OpenNewsAppCommand => new Command(async () => await OpenNewsAppAsync());
-
-        public DashBoardViewModel(INavigation navigation)
+        public DashBoardViewModel()
         {
-            _navigation = navigation;
+            OpenWeatherAppCommand = new AsyncRelayCommand(OpenWeatherAppAsync);
+            OpenNewsAppCommand = new AsyncRelayCommand(OpenNewsAppAsync);
+            SignOutCommand = new AsyncRelayCommand(SignOutAsync);
         }
 
         private async Task OpenWeatherAppAsync()
         {
-            await _navigation.PushAsync(new WeatherPage());
+            await Shell.Current.GoToAsync($"//{nameof(WeatherPage)}");
         }
 
         private async Task OpenNewsAppAsync()
         {
-            await _navigation.PushAsync(new NewsPage());
+            await Shell.Current.GoToAsync($"//{nameof(NewsPage)}");
+        }
+
+        private async Task SignOutAsync()
+        {
+            if (Preferences.ContainsKey(nameof(App.UserDetails)))
+            {
+                Preferences.Remove(nameof(App.UserDetails));
+            }
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
     }
-
 }

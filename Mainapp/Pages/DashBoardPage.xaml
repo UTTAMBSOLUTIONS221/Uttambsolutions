@@ -102,6 +102,6 @@
         </Grid>
 
         <!-- Logout Button at the bottom -->
-        <Button Text="Logout" Command="{Binding LogoutCommand}" BackgroundColor="#0a506c" TextColor="White" HorizontalOptions="Center" VerticalOptions="EndAndExpand" />
+        <Button Text="Logout" Command="{Binding SignOut}" BackgroundColor="#0a506c" TextColor="White" HorizontalOptions="Center" VerticalOptions="EndAndExpand" />
     </VerticalStackLayout>
 </ContentPage>
