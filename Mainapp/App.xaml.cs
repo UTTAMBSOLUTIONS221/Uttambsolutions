@@ -1,7 +1,9 @@
-﻿namespace Mainapp
+﻿using Mainapp.Models;
+namespace Mainapp
 {
     public partial class App : Application
     {
+        public static UsermodeldataResponce UserDetails;
         public App(AppShell appShell)
         {
             InitializeComponent();
