@@ -1,13 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mainapp.Constants;
-using Mainapp.Miniapps.News.Pages;
+﻿using Mainapp.Miniapps.News.Pages;
 using Mainapp.Miniapps.Weather;
 using Mainapp.Pages.Users;
 using System.Windows.Input;
 
 namespace Mainapp.ViewModels
 {
-    public class DashBoardViewModel : ObservableObject
+    public class DashBoardViewModel : BaseViewModel
     {
         private readonly INavigation _navigation;
 
@@ -22,10 +20,6 @@ namespace Mainapp.ViewModels
 
         private async Task OpenWeatherAppAsync()
         {
-            // Update Flyout Menu Details
-            await AppConstant.AddFlyoutMenusDetails();
-
-            // Navigate to WeatherDashBoardPage
             await _navigation.PushAsync(new WeatherDashBoardPage());
         }
 
