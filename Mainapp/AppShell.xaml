@@ -14,4 +14,10 @@
         ContentTemplate="{DataTemplate pages:LoginPage}"
         Route="MainPage" />
 
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Text="Sign Out" FontAttributes="Bold" Command="{Binding SignOutCommand}" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
+
 </Shell>
