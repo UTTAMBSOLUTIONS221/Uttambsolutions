@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mainapp.Constants;
+using Mainapp.Common;
 using Mainapp.Miniapps.News.Pages;
 using Mainapp.Miniapps.Weather;
 using Mainapp.Pages.Users;
@@ -22,20 +22,11 @@ namespace Mainapp.ViewModels
         }
 
         private async Task OpenWeatherAppAsync()
-        {
-            await AppConstant.AddFlyoutMenusDetails();
-
-            // Ensure the navigation is to a different route or page if necessary
-            if (Shell.Current.CurrentState.Location.OriginalString != $"//{nameof(WeatherDashBoardPage)}")
-            {
-                await Shell.Current.GoToAsync($"//{nameof(WeatherDashBoardPage)}");
-            }
+        { // Navigate to NewsPage
+            await _navigation.PushAsync(new WeatherDashBoardPage());
         }
-
-
         private async Task OpenNewsAppAsync()
         {
-            await AppConstant.AddFlyoutMenusDetails();
             // Navigate to NewsPage
             await _navigation.PushAsync(new NewsPage());
         }
