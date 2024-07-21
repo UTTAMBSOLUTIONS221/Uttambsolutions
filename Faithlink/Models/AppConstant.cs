@@ -8,7 +8,6 @@ namespace Faithlink.Models
 {
     public class AppConstant
     {
-
         public async static Task AddFlyoutMenusDetails()
         {
             AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();

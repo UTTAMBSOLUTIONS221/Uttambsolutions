@@ -7,16 +7,28 @@ namespace Mainapp.Miniapps.Constants
     {
         public async static Task AddFlyoutMenusDetails()
         {
+            // Ensure AppShell.Current is not null
+            if (AppShell.Current == null)
+            {
+                throw new InvalidOperationException("AppShell.Current is not initialized.");
+            }
+
             // Set the custom flyout header
             AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+
+            // Ensure App.UserDetails is not null
+            if (App.UserDetails == null)
+            {
+                throw new InvalidOperationException("User details are not available.");
+            }
 
             // Remove existing menu items for different dashboards
             var dashboardRoutes = new[]
             {
-                nameof(ChurchDashBoardPage),
-                nameof(ChurchDashBoardPage),
-                nameof(ChurchDashBoardPage)
-            };
+            nameof(ChurchDashBoardPage),
+            nameof(ChurchDashBoardPage),
+            nameof(ChurchDashBoardPage)
+        };
 
             foreach (var route in dashboardRoutes)
             {
@@ -40,38 +52,38 @@ namespace Mainapp.Miniapps.Constants
                         Route = nameof(ChurchDashBoardPage),
                         FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                         Items =
-                {
-                    new ShellContent
                     {
-                        Icon = Icons.Dashboard,
-                        Title = "Dashboard",
-                        ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
-                    },
-                    new ShellContent
-                    {
-                        Icon = Icons.People,
-                        Title = "Bible",
-                        ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
-                    },
-                    new ShellContent
-                    {
-                        Icon = Icons.People,
-                        Title = "Forums",
-                        ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
-                    },
-                    new ShellContent
-                    {
-                        Icon = Icons.People,
-                        Title = "Groups",
-                        ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
-                    },
-                    new ShellContent
-                    {
-                        Icon = Icons.AboutUs,
-                        Title = "Profile",
-                        ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        new ShellContent
+                        {
+                            Icon = Icons.Dashboard,
+                            Title = "Dashboard",
+                            ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.People,
+                            Title = "Bible",
+                            ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.People,
+                            Title = "Forums",
+                            ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.People,
+                            Title = "Groups",
+                            ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.AboutUs,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        }
                     }
-                }
                     };
                     break;
 
@@ -82,20 +94,20 @@ namespace Mainapp.Miniapps.Constants
                         Route = nameof(ChurchDashBoardPage),
                         FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                         Items =
-                {
-                    new ShellContent
                     {
-                        Icon = Icons.Dashboard,
-                        Title = "Teacher Dashboard",
-                        ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
-                    },
-                    new ShellContent
-                    {
-                        Icon = Icons.AboutUs,
-                        Title = "Teacher Profile",
-                        ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        new ShellContent
+                        {
+                            Icon = Icons.Dashboard,
+                            Title = "Teacher Dashboard",
+                            ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.AboutUs,
+                            Title = "Teacher Profile",
+                            ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        }
                     }
-                }
                     };
                     break;
 
@@ -106,20 +118,20 @@ namespace Mainapp.Miniapps.Constants
                         Route = nameof(ChurchDashBoardPage),
                         FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                         Items =
-                {
-                    new ShellContent
                     {
-                        Icon = Icons.Dashboard,
-                        Title = "Admin Dashboard",
-                        ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
-                    },
-                    new ShellContent
-                    {
-                        Icon = Icons.AboutUs,
-                        Title = "Admin Profile",
-                        ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        new ShellContent
+                        {
+                            Icon = Icons.Dashboard,
+                            Title = "Admin Dashboard",
+                            ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.AboutUs,
+                            Title = "Admin Profile",
+                            ContentTemplate = new DataTemplate(typeof(ChurchDashBoardPage)),
+                        }
                     }
-                }
                     };
                     break;
             }
@@ -129,19 +141,15 @@ namespace Mainapp.Miniapps.Constants
             {
                 AppShell.Current.Items.Add(flyoutItem);
 
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                // Ensure Shell.Current is not null
+                if (Shell.Current == null)
                 {
-                    await AppShell.Current.Dispatcher.DispatchAsync(async () =>
-                    {
-                        await Shell.Current.GoToAsync($"//{flyoutItem.Route}");
-                    });
+                    throw new InvalidOperationException("Shell.Current is not initialized.");
                 }
-                else
-                {
-                    await Shell.Current.GoToAsync($"//{flyoutItem.Route}");
-                }
+
+                await Shell.Current.GoToAsync($"//{flyoutItem.Route}");
             }
         }
-
     }
+
 }
