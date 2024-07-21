@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Mainapp.Controls"
              x:Class="Mainapp.Pages.DashBoardPage"
              Title="Dashboard">
-    <VerticalStackLayout Padding="30" Spacing="0">
+    <VerticalStackLayout Padding="30" Spacing="20">
+
+        <!-- FlyoutHeaderControl at the top of the page -->
+        <controls:FlyoutHeaderControl />
+
         <Label 
             Text="Welcome to the Dashboard!"
             VerticalOptions="Center" 
@@ -25,67 +30,66 @@
             </Grid.RowDefinitions>
 
             <!-- Row 1 -->
-            <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
-                <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="LightGray" HorizontalOptions="Center">
+            <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10">
+                <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center">
                     <ImageButton Source="weather_icon.png" Command="{Binding OpenWeatherAppCommand}" BackgroundColor="Transparent"/>
                 </Frame>
                 <Label Text="Weather App" HorizontalOptions="Center" />
             </StackLayout>
 
-            <StackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
-                <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="LightGray" HorizontalOptions="Center">
+            <StackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10">
+                <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center">
                     <ImageButton Source="news_icon.png" Command="{Binding OpenNewsAppCommand}" BackgroundColor="Transparent"/>
                 </Frame>
                 <Label Text="News App" HorizontalOptions="Center" />
             </StackLayout>
 
-            <!-- Additional mini-apps -->
-            <StackLayout Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
-                <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="LightGray" HorizontalOptions="Center">
+            <StackLayout Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10">
+                <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center">
                     <ImageButton Source="finance_icon.png" Command="{Binding OpenFinanceAppCommand}" BackgroundColor="Transparent"/>
                 </Frame>
                 <Label Text="Finance App" HorizontalOptions="Center" />
             </StackLayout>
 
             <!-- Row 2 -->
-            <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
-                <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="LightGray" HorizontalOptions="Center">
+            <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10">
+                <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center">
                     <ImageButton Source="sports_icon.png" Command="{Binding OpenSportsAppCommand}" BackgroundColor="Transparent"/>
                 </Frame>
                 <Label Text="Sports App" HorizontalOptions="Center" />
             </StackLayout>
 
-            <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
-                <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="LightGray" HorizontalOptions="Center">
+            <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10">
+                <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center">
                     <ImageButton Source="health_icon.png" Command="{Binding OpenHealthAppCommand}" BackgroundColor="Transparent"/>
                 </Frame>
                 <Label Text="Health App" HorizontalOptions="Center" />
             </StackLayout>
 
-            <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
-                <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="LightGray" HorizontalOptions="Center">
+            <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10">
+                <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center">
                     <ImageButton Source="education_icon.png" Command="{Binding OpenEducationAppCommand}" BackgroundColor="Transparent"/>
                 </Frame>
                 <Label Text="Education App" HorizontalOptions="Center" />
             </StackLayout>
 
             <!-- Row 3 -->
-            <StackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
-                <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="LightGray" HorizontalOptions="Center">
+            <StackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10">
+                <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center">
                     <ImageButton Source="entertainment_icon.png" Command="{Binding OpenEntertainmentAppCommand}" BackgroundColor="Transparent"/>
                 </Frame>
                 <Label Text="Entertainment App" HorizontalOptions="Center" />
             </StackLayout>
 
-            <StackLayout Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
-                <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="LightGray" HorizontalOptions="Center">
+            <StackLayout Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10">
+                <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center">
                     <ImageButton Source="travel_icon.png" Command="{Binding OpenTravelAppCommand}" BackgroundColor="Transparent"/>
                 </Frame>
                 <Label Text="Travel App" HorizontalOptions="Center" />
             </StackLayout>
 
-            <StackLayout Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
-                <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="LightGray" HorizontalOptions="Center">
+            <StackLayout Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10">
+                <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center">
                     <ImageButton Source="technology_icon.png" Command="{Binding OpenTechnologyAppCommand}" BackgroundColor="Transparent"/>
                 </Frame>
                 <Label Text="Technology App" HorizontalOptions="Center" />
