@@ -1,5 +1,4 @@
-namespace Mainapp.Controls;
-
+namespace Mainapp.Miniapps.Controls;
 public partial class FlyoutHeaderControl : StackLayout
 {
     public FlyoutHeaderControl()

@@ -90,30 +90,26 @@
 	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Controls\FlyoutHeaderControl.xaml.cs">
-	    <SubType>Code</SubType>
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
 	  <Compile Update="MainPage.xaml.cs">
 	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Miniapps\Education\Pages\EducationPage.xaml.cs">
+	  <Compile Update="Miniapps\Apps\Education\Pages\EducationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Miniapps\Finance\Pages\FinancePage.xaml.cs">
+	  <Compile Update="Miniapps\Apps\Finance\Pages\FinancePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Miniapps\Health\Pages\HealthPage.xaml.cs">
+	  <Compile Update="Miniapps\Apps\Health\Pages\HealthPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Miniapps\News\Pages\NewsPage.xaml.cs">
+	  <Compile Update="Miniapps\Apps\News\Pages\NewsPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Miniapps\Sports\Pages\SportsPage.xaml.cs">
+	  <Compile Update="Miniapps\Apps\Sports\Pages\SportsPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Miniapps\Weather\Pages\WeatherPage.xaml.cs">
+	  <Compile Update="Miniapps\Apps\Weather\Pages\WeatherPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\DashBoardPage.xaml.cs">
@@ -140,38 +136,37 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Controls\FlyoutHeaderControl.xaml">
-	    <SubType>Designer</SubType>
+	  <MauiXaml Update="Miniapps\Apps\Church\ChurchDashBoardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Miniapps\Church\ChurchDashBoardPage.xaml">
+	  <MauiXaml Update="Miniapps\Apps\Church\Pages\ChurchDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Miniapps\Church\Pages\ChurchDetailPage.xaml">
+	  <MauiXaml Update="Miniapps\Apps\Education\Pages\EducationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Miniapps\Education\Pages\EducationPage.xaml">
+	  <MauiXaml Update="Miniapps\Apps\Finance\Pages\FinancePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Miniapps\Finance\Pages\FinancePage.xaml">
+	  <MauiXaml Update="Miniapps\Apps\Health\Pages\HealthPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Miniapps\Health\Pages\HealthPage.xaml">
+	  <MauiXaml Update="Miniapps\Apps\News\NewsDashBoardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Miniapps\News\NewsDashBoardPage.xaml">
+	  <MauiXaml Update="Miniapps\Apps\News\Pages\NewsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Miniapps\News\Pages\NewsPage.xaml">
+	  <MauiXaml Update="Miniapps\Apps\Sports\Pages\SportsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Miniapps\Sports\Pages\SportsPage.xaml">
+	  <MauiXaml Update="Miniapps\Apps\Weather\Pages\WeatherPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Miniapps\Weather\Pages\WeatherPage.xaml">
+	  <MauiXaml Update="Miniapps\Apps\Weather\WeatherDashBoardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Miniapps\Weather\WeatherDashBoardPage.xaml">
+	  <MauiXaml Update="Miniapps\Controls\FlyoutHeaderControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\DashBoardPage.xaml">
@@ -182,10 +177,6 @@
 	    <SubType>Designer</SubType>
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Miniapps\NewFolder\" />
 	</ItemGroup>
 
 </Project>
