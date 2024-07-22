@@ -3,59 +3,130 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Jobs</title>
+    <title>@ViewData["Title"] - JobCenter</title>
+    <meta name="description" content="JobCenter offers the latest job listings, freelancing job biddings, and career opportunities. Stay informed and find your next job with our comprehensive job board." />
+    <meta name="keywords" content="JobCenter, job listings, freelancing, job biddings, career opportunities, job board" />
+    <meta name="author" content="JobCenter" />
+    <meta name="google-adsense-account" content="ca-pub-2850934153859537">
 
-    <meta property="fb:app_id" content="@ViewData["app_id"]" />
-    <meta property="og:type" content="@ViewData["type"]" />
-    <meta property="og:title" content="@ViewData["Title"]" />
-    <meta property="og:description" content="@ViewData["description"]" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image" content="@ViewData["image"]" />
-    <meta property="og:url" content=" @ViewData["url"]" />
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@ViewData["Title"] - JobCenter" />
+    <meta property="og:description" content="JobCenter provides the latest job listings, freelancing job biddings, and career opportunities. Explore our platform to find your next job." />
+    <meta property="og:image" content="https://jobcenter.uttambsolutions.com/images/jobcenterlogo.png" />
+    <meta property="og:url" content="https://jobcenter.uttambsolutions.com" />
+    <meta property="og:type" content="website" />
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Jobs.styles.css" asp-append-version="true" />
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@ViewData["Title"] - JobCenter" />
+    <meta name="twitter:description" content="JobCenter offers job listings, freelancing job biddings, and career opportunities. Stay connected and find your next job with our platform." />
+    <meta name="twitter:image" content="https://jobcenter.uttambsolutions.com/images/jobcenterlogo.png" />
+
+    <!-- Schema.org Markup -->
+    <meta itemprop="name" content="@ViewData["Title"] - JobCenter" />
+    <meta itemprop="description" content="JobCenter provides the latest job listings, freelancing job biddings, and career opportunities." />
+    <meta itemprop="image" content="https://jobcenter.uttambsolutions.com/images/jobcenterlogo.png" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link href="~/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
             crossorigin="anonymous"></script>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Jobs</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+<body class="hold-transition layout-top-nav layout-navbar-fixed">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
+            <div class="container">
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                    <img src="~/images/uttambsolutionsjoblogo.png" alt="JobCenter Logo" class="brand-image elevation-3">
+                    <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">JobCenter</span>
+                </a>
+
+                <!-- Right navbar links for large screens -->
+                <ul class="nav-item order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                    <li class="nav-item">
+                        <a asp-action="Signin" asp-controller="Account" asp-area="" class="nav-link text-white fw-bold font-weight-bold text-uppercase">SIGNIN</a>
+                    </li>
+                </ul>
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Jobs - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="content-wrapper">
+            <section class="content">
+                <div class="container">
+                    <div id="AlertsContainer">
+                        @{
+                            await Html.RenderPartialAsync("_Alerts");
+                        }
+                    </div>
+                    <main role="main" class="pb-3 mt-2 pt-2">
+                        @RenderBody()
+                    </main>
+                </div>
+            </section>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+        <footer class="main-footer bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5 class="text-white">About JobCenter</h5>
+                        <p class="text-white">
+                            JobCenter is a premier job listing and freelancing platform that connects job seekers with potential employers. Our services include job listings, freelancing job biddings, and other career opportunities. We are dedicated to helping you find your next job in the digital age.
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 class="text-white">Contact Us</h5>
+                        <p class="text-white">
+                            <strong>Address:</strong> 123 Tech Street, Nairobi, Kenya<br />
+                            <strong>Phone:</strong> +254 728 316050<br />
+                            <strong>Email:</strong> info@jobcenter.com
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 class="text-white">Follow Us</h5>
+                        <p class="text-white">
+                            <a href="https://www.facebook.com/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-facebook-f text-white"></i> Facebook
+                            </a><br />
+                            <a href="https://www.twitter.com/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-twitter text-white"></i> Twitter
+                            </a><br />
+                            <a href="https://www.linkedin.com/company/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-linkedin-in text-white"></i> LinkedIn
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-12 text-center text-white">
+                        &copy; 2024 Uttamb Solutions. All rights reserved. | <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="~/lib/plugins/jquery/jquery.min.js"></script>
+    <script src="~/lib/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/datatables-buttons/js/datatables.buttons.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/lib/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/lib/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
