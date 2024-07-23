@@ -46,28 +46,28 @@
         public int Jobfunctionid { get; set; }
         public int JobId { get; set; }
         public string? Jobfunction { get; set; }
-        public DateTime DateCreated { get; set; }
+        public DateTime DateCreated { get; set; } = DateTime.Now;
     }
     public class Systemjobqualification
     {
         public int Jobqualificationid { get; set; }
         public int Jobid { get; set; }
         public string? Jobqualification { get; set; }
-        public DateTime Datecreated { get; set; } = DateTime.Now;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
     }
     public class Systemjobskill
     {
         public int Jobskillid { get; set; }
         public int Jobid { get; set; }
         public string? Jobskill { get; set; }
-        public DateTime Datecreated { get; set; } = DateTime.Now;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
     }
     public class Systemjobbenefit
     {
         public int Jobbenefitid { get; set; }
         public int Jobid { get; set; }
         public string? Jobbenefit { get; set; }
-        public DateTime Datecreated { get; set; } = DateTime.Now;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
     }
 
 }
