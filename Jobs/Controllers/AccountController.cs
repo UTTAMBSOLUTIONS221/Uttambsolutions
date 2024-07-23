@@ -199,9 +199,10 @@ namespace Jobs.Controllers
             }
             return PartialView(systemJob);
         }
-        public async void Addsystemopportunitydata(int Opportunityid)
+        public async Task<JsonResult> Addsystemopportunitydata(SystemJob model)
         {
-            var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
+            var resp = await bl.Registersystemopportunitydata(JsonConvert.SerializeObject(model));
+            return Json(resp);
         }
 
         [HttpGet]

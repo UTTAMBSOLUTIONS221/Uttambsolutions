@@ -257,7 +257,7 @@
                                                 foreach (var item in Model.Systemjobs)
                                                 {
                                                     <tr>
-                                                        <td><img src="@Url.Content(item.Employerlogo)" height="30" width="30"/></td>
+                                                        <td><img src="@Url.Content(item.Employerlogo ?? "~/Images/uttambsolutionsjoblogo.png")" height="30" width="30"/></td>
                                                         <td>@item.Title</td>
                                                         <td>@item.Employername</td>
                                                         <td>@item.Functionname</td>
@@ -270,7 +270,7 @@
                                                         <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
                                                         <td>@item.DateCreated</td>
                                                         <td>@item.DatePosted</td>
-                                                        <td class="text-right"><a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a><a asp-action="Publishopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right">Publish</a></td>
+                                                        <td class="text-right"><a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                                                     </tr>
                                                 }
                                             }
