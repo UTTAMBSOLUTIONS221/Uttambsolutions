@@ -135,9 +135,14 @@
                 </div>
                 <div class="form-group mb-3">
                     <label class="font-weight-medium" for="FunctionInput">Function</label>
-                    <input class="form-control form-control-sm" id="FunctionInput" placeholder="Enter function here"/>
-                    <button class="btn btn-sm btn-secondary mt-2" onclick="addFunction()">Add Function</button>
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-sm" id="FunctionInput" placeholder="Enter function here" aria-label="Function" />
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-secondary" onclick="addFunction()">Add Function</button>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="form-group mb-3">
                     <label class="font-weight-medium">Functions</label>
                     <ul id="FunctionList" class="list-group mb-3">
@@ -167,20 +172,18 @@
         </div>
     </div>
 
-    <!-- Section 3: Preferred Skills -->
+    <!-- Section 3: Qualification -->
     <div id="section3" class="section" style="display: none;">
-        <div class="card">
-            <div class="card-body">
-                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" hidden />
-                <div class="form-group">
-                    <label class="font-weight-light">Qualification</label>
-                    <input class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId" />
-                </div>
-                <button class="btn btn-sm btn-info font-weight-bold float-right" onclick="addsystemblogparagraphdata()">Add</button>
+        <h6 class="mb-3">Step 3:  Qualifications</h6>
+        <input class="form-control form-control-sm" id="Jobqualificationid" hidden />
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" id="SystemjobqualificationId" placeholder="Enter qualification" aria-label="Qualification" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="addsystemjobqualificationdata()">Add</button>
             </div>
         </div>
         <div class="table-responsive mt-3">
-            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables11">
                 <thead>
                     <tr>
                         <th hidden></th>
@@ -188,28 +191,30 @@
                         <th class="text-right">Action</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <!-- Table rows will be dynamically added here -->
+                </tbody>
             </table>
         </div>
-        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
-        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
+
+        <div class="d-flex justify-content-between mt-3">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="nextSection()">Next</button>
+        </div>
     </div>
 
-    <!-- Section 4: Benefits -->
+    <!-- Section 4: Skills -->
     <div id="section4" class="section" style="display: none;">
         <h6 class="mb-3">Step 3: Preferred Skills</h6>
-        <div class="card">
-            <div class="card-body">
-                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" hidden />
-                <div class="form-group">
-                    <label class="font-weight-light">Skill</label>
-                    <input class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId" />
-                </div>
-                <button class="btn btn-sm btn-info font-weight-bold float-right" onclick="addsystemblogparagraphdata()">Add</button>
+        <input class="form-control form-control-sm" id="Jobskillid" hidden />
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" id="SystemjobskillnameId" placeholder="Enter skill" aria-label="Skill" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="addsystemjobskilldata()">Add</button>
             </div>
         </div>
         <div class="table-responsive mt-3">
-            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables12">
                 <thead>
                     <tr>
                         <th hidden></th>
@@ -228,18 +233,15 @@
     <!-- Section 5: Qualifications -->
     <div id="section5" class="section" style="display: none;">
         <h6 class="mb-3">Step 4: Benefits</h6>
-        <div class="card">
-            <div class="card-body">
-                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" hidden />
-                <div class="form-group">
-                    <label class="font-weight-light">Benefit</label>
-                    <input class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId" />
-                </div>
-                <button class="btn btn-sm btn-info font-weight-bold float-right" onclick="addsystemblogparagraphdata()">Add</button>
+        <input class="form-control form-control-sm" id="JobbenefitId" hidden />
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" id="SystemjobbenefitnameId" placeholder="Enter Benefit" aria-label="Benefit" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="addsystemjobbenfitdata()">Add</button>
             </div>
         </div>
         <div class="table-responsive mt-3">
-            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables13">
                 <thead>
                     <tr>
                         <th hidden></th>
@@ -257,23 +259,36 @@
     <!-- Section 6: Conclusion -->
     <div id="section6" class="section" style="display: none;">
         <h6 class="mb-3">Step 6: Job Conclusion</h6>
-        <div class="card">
-            <div class="card-body">
-                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" hidden />
+        <div class="row">
+            <!-- Column for "Reports to" -->
+            <div class="col-sm-6">
                 <div class="form-group">
-                    <label class="font-weight-light">Reports to</label>
-                    <input class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId" />
+                    <label class="font-weight-light" for="SystemjobreportstoId">Reports to</label>
+                    <input class="form-control form-control-sm font-weight-light" id="SystemjobreportstoId" />
                 </div>
+            </div>
+            <!-- Column for "Support Document" -->
+            <div class="col-sm-6">
                 <div class="form-group">
-                    <label class="font-weight-light">How to Apply</label>
-                    <textarea class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId"></textarea>
+                    <label class="font-weight-light" for="SupportDocumentId">Support Document</label>
+                    <input type="file" class="form-control form-control-sm font-weight-light" id="SupportDocumentId" />
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
-        <button class="btn btn-sm btn-info font-weight-bold ml-1" type="button" id="saveopportunityid" onclick="saveopportunitydata();">
-            <span id="buttonText">Save</span>
-            <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
-        </button>
+        <div class="form-group">
+            <label class="font-weight-light">How to Apply</label>
+            <textarea class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId"></textarea>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <!-- Previous Button -->
+            <button type="button" class="btn btn-sm btn-secondary" onclick="prevSection()">Previous</button>
+
+            <!-- Save Button -->
+            <button type="button" class="btn btn-sm btn-info font-weight-bold" id="saveopportunityid" onclick="saveopportunitydata();">
+                <span id="buttonText">Save</span>
+                <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+            </button>
+        </div>
+
     </div>
 </div>

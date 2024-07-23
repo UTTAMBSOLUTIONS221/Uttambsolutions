@@ -688,6 +688,173 @@
                     row.parentNode.removeChild(row);
                 }
 
+            
+            function addsystemjobqualificationdata() {
+                 if ($('#SystemjobqualificationId').val() == "") {
+                    Swal.fire("Job Qualification Not Created", 'Qualification is Required', "warning");
+                    return;
+                }
+                var Jobqualificationid = 0;
+                var Jobqualification = $('#SystemjobqualificationId').val();
+             
+          
+                // Check if the table body contains any rows
+                var tableQualificationBody = $('#AllsystemDataTables11 tbody');
+                var noDataRows = tableQualificationBody.find('tr');
+                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                    // Remove the "No data available in table" row
+                    tableQualificationBody.empty();
+                }
+                // Append row to table with image
+                var newRow = '<tr>' +
+                    '<td hidden>' + Jobqualificationid + '</td>' +
+                     '<td>' + Jobqualification + '</td>' +
+                    '<td class="text-right">' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobqualificationdata(this.parentNode.parentNode)">Edit</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobqualificationdata(this.parentNode.parentNode)">Update</button>' +
+                    '</td>' +
+                    '</tr>';
+
+                $('#AllsystemDataTables11 tbody').append(newRow);
+                // Clear the form after adding a new row
+                clearJobQualificationForm();
+            }
+            // Function to populate input fields with values from the selected row for editing
+            function editjobqualificationdata(row) {
+                var cells = $(row).children();
+                $('#Jobqualificationid').val($(cells[0]).text());
+                $('#SystemjobqualificationId').val($(cells[1]).text());
+            }
+            // Function to update the selected row with edited values
+            function updatejobqualificationdata(row) {
+               if ($('#SystemjobqualificationId').val() == "") {
+                    Swal.fire("Job Qualification Not Created", 'Qualification is Required', "warning");
+                    return;
+                }
+                var cells = $(row).children(); // Get the cells of the selected row
+
+                // Update the cells with edited values from input fields
+                $(cells[0]).text($('#Jobqualificationid').val());
+                $(cells[1]).text($('#SystemjobqualificationId').val());
+                clearJobQualificationForm();
+            }
+            // Function to clear the form after adding a new row or updating
+            function clearJobQualificationForm() {
+                $('#Jobqualificationid').val('');
+                $('#SystemjobqualificationId').val('');
+            }
+
+
+               function addsystemjobskilldata() {
+                 if ($('#SystemjobskillnameId').val() == "") {
+                    Swal.fire("Job Skill Not Created", 'Skill is Required', "warning");
+                    return;
+                }
+                var JobskillId = 0;
+                var JobskillnameId = $('#SystemjobskillnameId').val();
+             
+          
+                // Check if the table body contains any rows
+                var tableSkillBody = $('#AllsystemDataTables12 tbody');
+                var noDataRows = tableSkillBody.find('tr');
+                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                    // Remove the "No data available in table" row
+                    tableSkillBody.empty();
+                }
+                // Append row to table with image
+                var newRow = '<tr>' +
+                    '<td hidden>' + JobskillId + '</td>' +
+                     '<td>' + JobskillnameId + '</td>' +
+                    '<td class="text-right">' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobskilldata(this.parentNode.parentNode)">Edit</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobskilldata(this.parentNode.parentNode)">Update</button>' +
+                    '</td>' +
+                    '</tr>';
+
+                $('#AllsystemDataTables12 tbody').append(newRow);
+                // Clear the form after adding a new row
+                clearJobSkillsForm();
+            }
+            // Function to populate input fields with values from the selected row for editing
+            function editjobskilldata(row) {
+                var cells = $(row).children();
+                $('#Jobskillid').val($(cells[0]).text());
+                $('#SystemjobskillnameId').val($(cells[1]).text());
+            }
+            // Function to update the selected row with edited values
+            function updatejobskilldata(row) {
+                if ($('#SystemjobskillnameId').val() == "") {
+                    Swal.fire("Job Skill Not Created", 'Skill is Required', "warning");
+                    return;
+                }
+                var cells = $(row).children(); // Get the cells of the selected row
+
+                // Update the cells with edited values from input fields
+                $(cells[0]).text($('#Jobskillid').val());
+                $(cells[1]).text($('#SystemjobskillnameId').val());
+                clearJobSkillsForm();
+            }
+            // Function to clear the form after adding a new row or updating
+            function clearJobSkillsForm() {
+                $('#Jobskillid').val('');
+                $('#SystemjobskillnameId').val('');
+            }
+
+             function addsystemjobbenfitdata() {
+                 if ($('#SystemjobbenefitId').val() == "") {
+                    Swal.fire("Job Benefit Not Created", 'Benefit is Required', "warning");
+                    return;
+                }
+                var JobbenefitId = 0;
+                var JobbenefitnameId = $('#SystemjobbenefitnameId').val();
+             
+          
+                // Check if the table body contains any rows
+                var tableBenefitBody = $('#AllsystemDataTables13 tbody');
+                var noDataRows = tableBenefitBody.find('tr');
+                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                    // Remove the "No data available in table" row
+                    tableBenefitBody.empty();
+                }
+                // Append row to table with image
+                var newRow = '<tr>' +
+                    '<td hidden>' + JobbenefitId + '</td>' +
+                     '<td>' + JobbenefitnameId + '</td>' +
+                    '<td class="text-right">' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobbenefitdata(this.parentNode.parentNode)">Edit</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobbenefitdata(this.parentNode.parentNode)">Update</button>' +
+                    '</td>' +
+                    '</tr>';
+
+                $('#AllsystemDataTables13 tbody').append(newRow);
+                // Clear the form after adding a new row
+                clearJobBenefitForm();
+            }
+            // Function to populate input fields with values from the selected row for editing
+            function editjobbenefitdata(row) {
+                var cells = $(row).children();
+                $('#JobbenefitId').val($(cells[0]).text());
+                $('#SystemjobbenefitnameId').val($(cells[1]).text());
+            }
+            // Function to update the selected row with edited values
+            function updatejobbenefitdata(row) {
+                if ($('#SystemjobbenefitId').val() == "") {
+                    Swal.fire("Job Benefit Not Created", 'Benefit is Required', "warning");
+                    return;
+                }
+                var cells = $(row).children(); // Get the cells of the selected row
+
+                // Update the cells with edited values from input fields
+                $(cells[0]).text($('#JobbenefitId').val());
+                $(cells[1]).text($('#SystemjobbenefitnameId').val());
+                clearJobBenefitForm();
+            }
+            // Function to clear the form after adding a new row or updating
+            function clearJobBenefitForm() {
+                $('#JobbenefitId').val('');
+                $('#SystemjobbenefitnameId').val('');
+            }
+
 
 
             ﻿function saveopportunitydata() {
