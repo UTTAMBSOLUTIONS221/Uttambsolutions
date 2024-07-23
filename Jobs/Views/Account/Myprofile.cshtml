@@ -131,7 +131,9 @@
                                         <div class="col-sm-2">
                                             <img src="@imageUrl" class="img-fluid rounded-circle" alt="@Model.Fullname" />
                                         </div>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-10">
+                                            <!-- User Details Table -->
+                                            <h6 class="font-weight-bold">User Details</h6>
                                             <table class="table table-borderless table-sm">
                                                 <tbody>
                                                     <tr>
@@ -145,12 +147,13 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                        </div>
-                                       <div class="col-sm-5">
-                                            @if(Model.Systemorganizations!=null)
+
+                                            <!-- Organization or Company Details Table -->
+                                            @if(Model.Systemorganizations != null && Model.Systemorganizations.Any())
                                             {
+                                                <h6 class="font-weight-bold">Organization Details</h6>
                                                 <table class="table table-borderless table-sm">
-                                                   <tbody>
+                                                    <tbody>
                                                         <tr>
                                                             <td><span class="font-weight-bold">Name: </span>@Model.Systemorganizations.FirstOrDefault().OrganizationName</td>
                                                         </tr>
@@ -170,6 +173,7 @@
                                                         <a asp-action="Addorganization" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Organization</a>
                                                     </div>
                                                 </div>
+                                                <h6 class="font-weight-bold">Organization Details</h6>
                                                 <table class="table table-borderless table-sm">
                                                     <tbody>
                                                         <tr>
@@ -189,12 +193,13 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-5 col-md-12">
                             <div class="card card-outline card-info">
                                 <div class="card-header">
                                     <h5 class="font-weight-bold">Summary</h5>
                                 </div>
-                               @*  <div class="card-body">
+                                <div class="card-body">
                                     <table class="table table-borderless table-sm">
                                         <tbody>
                                             <tr>
@@ -215,10 +220,11 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div> *@
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-sm-7">
                             <div class="card card-outline card-info">
@@ -270,7 +276,7 @@
                                                         <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
                                                         <td>@item.DateCreated</td>
                                                         <td>@item.DatePosted</td>
-                                                        <td class="text-right"><a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                                        <td class="text-right"><a asp-action="Addopportunity" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                                                     </tr>
                                                 }
                                             }
