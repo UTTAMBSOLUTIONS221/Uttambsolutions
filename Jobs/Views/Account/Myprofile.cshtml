@@ -238,26 +238,39 @@
                                             <tr>
                                                 <th>Image</th>
                                                 <th>Title</th>
-                                                <th>Summary</th>
-                                                <th>Content</th>
-                                                <th>Category</th>
-                                                <th>Tags</th>
+                                                <th>Employer</th>
+                                                <th>Function</th>
+                                                <th>Industry</th>
+                                                <th>Location</th>
+                                                <th>Jobtype</th>
+                                                <th>Experience</th>
+                                                <th>Salary Range</th>
+                                                <th>Status</th>
+                                                <th>Deadline</th>
+                                                <th>Datecreated</th>
+                                                <th>Dateposted</th>
                                                 <th class="text-right">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if (Model.Systemuserblogs != null)
-                                            {
-                                                foreach (var item in Model.Systemuserblogs)
+                                            @if(Model!= null && Model.Systemjobs!=null){
+                                                foreach (var item in Model.Systemjobs)
                                                 {
                                                     <tr>
-                                                        <td><img src="@Url.Content(item.Blogprimaryimageurl)" height="40" width="40" alt="@item.Blogcategoryname" /></td>
-                                                        <td>@item.Blogname</td>
-                                                        <td>@item.Summary</td>
-                                                        <td>@item.Blogcontent</td>
-                                                        <td>@item.Blogcategoryname</td>
-                                                        <td>@item.Blogtags</td>
-                                                        <td class="text-right"><a asp-action="Addsystemblog" asp-controller="Systemblog" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@item.Blogid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                                        <td><img src="@Url.Content(item.Employerlogo)" height="30" width="30"/></td>
+                                                        <td>@item.Title</td>
+                                                        <td>@item.Employername</td>
+                                                        <td>@item.Functionname</td>
+                                                        <td>@item.Jobindustryname</td>
+                                                        <td>@item.Locationname</td>
+                                                        <td>@item.Jobtypename</td>
+                                                        <td>@item.Experiencename</td>
+                                                        <td>@item.JobSalaryRange</td>
+                                                        <td>@item.JobStatus</td>
+                                                        <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
+                                                        <td>@item.DateCreated</td>
+                                                        <td>@item.DatePosted</td>
+                                                        <td class="text-right"><a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a><a asp-action="Publishopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right">Publish</a></td>
                                                     </tr>
                                                 }
                                             }
@@ -571,7 +584,7 @@
                 JobTypeId: $('#JobTypeId').val(),EasyApply: $('#EasyApplyid').prop('checked'), HasTest: $('#JobHasTestid').prop('checked'),IsFeatured: $('#IsJobFeaturedid').prop('checked'),JobUrl: $('#JobUrlid').val(),Deadline: $('#Deadlineid').val(),JobSalaryRange: $('#JobSalaryRangeid').val(),JobDescription: $('#JobDescriptionid').val(),CreatedBy: $('#systemLoggedinedUserid').val()
             };
  
-            $.post("/Opportunity/Addsystemopportunitydata", uil1, function (response) {
+            $.post("/Account/Addsystemopportunitydata", uil1, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire('Saved!', response.RespMessage, 'success')
                     $('#Uttambsolutionsmodal').hide();
@@ -636,7 +649,7 @@
         var uil1 = {
             OrganizationId: $('#OrganizationId').val(),OrganizationOwner: $('#systemLoggedinedUserid').val(), OrganizationName: $('#OrganizationNameid').val(), OrganizationTypeId: $('#OrganizationTypeId').val(),OrganizationPhone:$('#OrganizationPhoneid').val(),OrganizationEmail:$('#OrganizationEmailid').val(), OrganizationDescription: $('#OrganizationDescriptionid').val(),OrganizationStatus:0,DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
         };
-        $.post("/Organization/Addsystemorganizationdata", uil1, function (response) {
+        $.post("/Account/Addsystemorganizationdata", uil1, function (response) {
             if (response.RespStatus == 0) {
                 Swal.fire('Saved!', response.RespMessage, 'success')
                 $('#Uttambsolutionsmodal').hide();
