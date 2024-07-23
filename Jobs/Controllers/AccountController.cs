@@ -1,10 +1,12 @@
 ﻿using DBL;
 using DBL.Entities;
+using DBL.Enum;
 using DBL.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -174,6 +176,31 @@ namespace Jobs.Controllers
             {
                 return RedirectToAction(nameof(AccountController.Myprofile), "Account", new { area = "" });
             }
+        }
+        #endregion
+
+
+
+        #region Other Methods for other Posts
+        [HttpGet]
+        public async Task<IActionResult> Addopportunity(int Opportunityid)
+        {
+            ViewData["Systemjobfunctionlists"] = bl.GetListModel(ListModelType.Systemjobfunction).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["Systemjobindustrylists"] = bl.GetListModel(ListModelType.Systemjobindustry).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["Systemjoblocationlists"] = bl.GetListModel(ListModelType.Systemjoblocation).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["Systemjobexperiencelists"] = bl.GetListModel(ListModelType.Systemjobexperience).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["Systemjobtypelists"] = bl.GetListModel(ListModelType.Systemjobtypeid).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+
+            SystemJob systemJob = new SystemJob();
+            if (Opportunityid > 0)
+            {
+                systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
+            }
+            return PartialView(systemJob);
+        }
+        public async void Addsystemopportunitydata(int Opportunityid)
+        {
+            var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
         }
         #endregion
     }
