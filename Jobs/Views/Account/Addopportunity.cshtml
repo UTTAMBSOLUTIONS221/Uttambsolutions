@@ -126,30 +126,11 @@
     <!-- Section 2: Key Responsibilities -->
     <div id="section2" class="section" style="display: none;">
         <h6 class="mb-4 font-weight-bold">Step 2: Key Responsibilities</h6>
-        <div class="card">
-            <div class="card-body">
-                <input class="form-control form-control-sm d-none" id="ResponsibilityId" />
-                <div class="form-group mb-3">
-                    <label class="font-weight-medium" for="ResponsibilityInput">Responsibility</label>
-                    <input class="form-control form-control-sm" id="ResponsibilityInput" placeholder="Enter responsibility here" />
-                </div>
-                <div class="form-group mb-3">
-                    <label class="font-weight-medium" for="FunctionInput">Function</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control form-control-sm" id="FunctionInput" placeholder="Enter function here" aria-label="Function" />
-                        <div class="input-group-append">
-                            <button class="btn btn-sm btn-secondary" onclick="addFunction()">Add Function</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label class="font-weight-medium">Functions</label>
-                    <ul id="FunctionList" class="list-group mb-3">
-                        <!-- Function items will be added here -->
-                    </ul>
-                </div>
-                <button class="btn btn-sm btn-custom float-right" onclick="addResponsibility()">Add Responsibility</button>
+        <input class="form-control form-control-sm" id="Jobfunctionid" hidden />
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" id="SystemjobfunctionId" placeholder="Enter Responsibility" aria-label="Qualification" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="addsystemjobfunctiondata()">Add</button>
             </div>
         </div>
         <div class="table-responsive mt-4">

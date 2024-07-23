@@ -35,29 +35,19 @@
         public string? Jobimageburl { get; set; }
         public string? jobhowtoapply { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
-        public List<SystemJobKeyResponsibility>? SystemJobKeyResponsibility { get; set; }
+        public List<Systemjobfunction>? Systemjobfunction { get; set; }
         public List<Systemjobqualification>? Systemjobqualification { get; set; }
         public List<Systemjobskill>? Systemjobskill { get; set; }
         public List<Systemjobbenefit>? Systemjobbenefit { get; set; }
     }
 
-    public class SystemJobKeyResponsibility
+    public class Systemjobfunction
     {
-        public int JobKeyResponsibilityId { get; set; }
+        public int Jobfunctionid { get; set; }
         public int JobId { get; set; }
-        public string? Responsibility { get; set; }
-        public DateTime DateCreated { get; set; }
-        public List<SystemJobKeyResponsibilityFunction> SystemJobKeyResponsibilityFunction { get; set; }
-    }
-
-    public class SystemJobKeyResponsibilityFunction
-    {
-        public int JobKeyResponsibilityFunctionId { get; set; }
-        public int JobKeyResponsibilityId { get; set; }
-        public string? ResponsibilityFunction { get; set; }
+        public string? Jobfunction { get; set; }
         public DateTime DateCreated { get; set; }
     }
-
     public class Systemjobqualification
     {
         public int Jobqualificationid { get; set; }

@@ -689,112 +689,60 @@
     
     @*Scripts for saving the job opportunity*@
         <script type="text/javascript">
-                function addFunction() {
-                    var func = document.getElementById('FunctionInput').value;
-                    if (func) {
-                        var functionList = document.getElementById('FunctionList');
-                        var listItem = document.createElement('li');
-                        listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-                        listItem.innerHTML = `
-                            ${func}
-                            <button class="btn btn-sm btn-danger" onclick="removeFunction(this)">Remove</button>
-                        `;
-                        functionList.appendChild(listItem);
-
-                        // Clear input field
-                        document.getElementById('FunctionInput').value = '';
-                    } else {
-                        alert('Please enter a function.');
-                    }
+             function addsystemjobfunctiondata() {
+                 if ($('#SystemjobfunctionId').val() == "") {
+                    Swal.fire("Job Function Not Created", 'Function is Required', "warning");
+                    return;
                 }
-
-                function removeFunction(button) {
-                    var listItem = button.parentNode;
-                    listItem.parentNode.removeChild(listItem);
+                var Jobfunctionid = 0;
+                var Jobfunction = $('#SystemjobfunctionId').val();
+             
+          
+                // Check if the table body contains any rows
+                var tableFunctionBody = $('#AllsystemDataTables10 tbody');
+                var noDataRows = tableFunctionBody.find('tr');
+                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                    // Remove the "No data available in table" row
+                    tableFunctionBody.empty();
                 }
+                // Append row to table with image
+                var newRow = '<tr>' +
+                    '<td hidden>' + Jobfunctionid + '</td>' +
+                     '<td>' + Jobfunction + '</td>' +
+                    '<td class="text-right">' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobfunctiondata(this.parentNode.parentNode)">Edit</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobfunctiondata(this.parentNode.parentNode)">Update</button>' +
+                    '</td>' +
+                    '</tr>';
 
-                function addResponsibility() {
-                    var responsibility = document.getElementById('ResponsibilityInput').value;
-                    var functionList = document.getElementById('FunctionList');
-                    var functions = Array.from(functionList.children).map(item => item.firstChild.textContent.trim());
-
-                    if (responsibility && functions.length > 0) {
-                        var table = document.getElementById('AllsystemDataTables10').getElementsByTagName('tbody')[0];
-                        var newRow = table.insertRow();
-                        newRow.insertCell(0).innerText = responsibility;
-                        newRow.insertCell(1).innerHTML = functions.join('<br>'); // Display functions in a new line
-                        newRow.insertCell(2).innerHTML = `
-                            <button class="btn btn-sm btn-warning mr-1" onclick="editRow(this)">Edit</button>
-                            <button class="btn btn-sm btn-danger" onclick="removeRow(this)">Remove</button>
-                        `;
-
-                        // Clear input fields and function list
-                        document.getElementById('ResponsibilityInput').value = '';
-                        document.getElementById('FunctionInput').value = '';
-                        functionList.innerHTML = ''; // Clear all functions
-
-                    } else {
-                        alert('Please enter a responsibility and at least one function.');
-                    }
+                $('#AllsystemDataTables10 tbody').append(newRow);
+                // Clear the form after adding a new row
+                clearJobFunctionForm();
+            }
+            // Function to populate input fields with values from the selected row for editing
+            function editjobfunctiondata(row) {
+                var cells = $(row).children();
+                $('#Jobfunctionid').val($(cells[0]).text());
+                $('#SystemjobfunctionId').val($(cells[1]).text());
+            }
+            // Function to update the selected row with edited values
+            function updatejobfunctiondata(row) {
+                if ($('#SystemjobfunctionId').val() == "") {
+                    Swal.fire("Job Function Not Created", 'Function is Required', "warning");
+                    return;
                 }
+                var cells = $(row).children(); // Get the cells of the selected row
 
-                var rowToUpdate = null;
-
-                function editRow(button) {
-                    var row = button.parentNode.parentNode;
-                    var responsibilityCell = row.cells[0];
-                    var functionsCell = row.cells[1];
-
-                    // Set input fields to current values
-                    document.getElementById('ResponsibilityInput').value = responsibilityCell.innerText;
-                    var functions = functionsCell.innerHTML.split('<br>').map(func => func.trim()).filter(func => func !== '');
-                    var functionList = document.getElementById('FunctionList');
-                    functionList.innerHTML = '';
-                    functions.forEach(func => {
-                        var listItem = document.createElement('li');
-                        listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-                        listItem.innerHTML = `
-                            ${func}
-                            <button class="btn btn-sm btn-danger" onclick="removeFunction(this)">Remove</button>
-                        `;
-                        functionList.appendChild(listItem);
-                    });
-
-                    // Change the "Add" button to "Update"
-                    var addButton = document.querySelector('#section2 .btn-primary');
-                    addButton.innerText = 'Update';
-                    addButton.setAttribute('onclick', 'updateRow(this)');
-    
-                    // Store the row to update
-                    rowToUpdate = row;
-                }
-
-                function updateRow(button) {
-                    var responsibility = document.getElementById('ResponsibilityInput').value;
-                    var functionList = document.getElementById('FunctionList');
-                    var functions = Array.from(functionList.children).map(item => item.firstChild.textContent.trim());
-
-                    if (responsibility && functions.length > 0 && rowToUpdate) {
-                        rowToUpdate.cells[0].innerText = responsibility;
-                        rowToUpdate.cells[1].innerHTML = functions.join('<br>');
-
-                        // Clear input fields and function list
-                        document.getElementById('ResponsibilityInput').value = '';
-                        document.getElementById('FunctionInput').value = '';
-                        functionList.innerHTML = ''; // Clear all functions
-                        button.innerText = 'Add Responsibility';
-                        button.setAttribute('onclick', 'addResponsibility()');
-
-                        rowToUpdate = null; // Clear the reference to the row
-                    } else {
-                        alert('Please enter a responsibility and at least one function.');
-                    }
-                }
-
-                function removeRow(button) {
-                    var row = button.parentNode.parentNode;
-                    row.parentNode.removeChild(row);
-                }
+                // Update the cells with edited values from input fields
+                $(cells[0]).text($('#Jobfunctionid').val());
+                $(cells[1]).text($('#SystemjobfunctionId').val());
+                clearJobFunctionForm();
+            }
+            // Function to clear the form after adding a new row or updating
+            function clearJobFunctionForm() {
+                $('#Jobfunctionid').val('');
+                $('#SystemjobfunctionId').val('');
+            }
 
             
             function addsystemjobqualificationdata() {
@@ -979,12 +927,9 @@
 
                         var responsibilityModel = {
                             JobId: $('#JobId').val(),
-                            Responsibility: responsibility,
+                            JobId: $('#JobId').val(),
+                            Systemjobfunction: responsibility,
                             DateCreated: new Date().toISOString(),
-                            SystemJobKeyResponsibilityFunction: functions.map(func => ({
-                                ResponsibilityFunction: func,
-                                DateCreated: new Date().toISOString()
-                            }))
                         };
 
                         responsibilities.push(responsibilityModel);
