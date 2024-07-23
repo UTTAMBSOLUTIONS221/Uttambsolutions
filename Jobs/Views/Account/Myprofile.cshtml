@@ -882,6 +882,44 @@
                         responsibilities.push(responsibilityModel);
                     }
 
+                    //Job Qualification data
+                   var Systemjobquaificationsdata = [];
+                   $("#AllsystemDataTables11 tbody tr").each(function () {
+                   var row = $(this);
+                        var Systemjobquaificationdata = {
+                             Jobqualificationid:row.find('td:eq(0)').text(),
+                             Jobid:$('#JobId').val(),
+                             Jobqualification:row.find('td:eq(1)').text(),
+                             Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                        };
+                        Systemjobquaificationsdata.push(Systemjobquaificationdata);
+                   });
+
+                   //Job Qualification data
+                   var Systemjobskillsdata = [];
+                   $("#AllsystemDataTables12 tbody tr").each(function () {
+                   var row = $(this);
+                        var Systemjobskilldata = {
+                             Jobskillid:row.find('td:eq(0)').text(),
+                             Jobid:$('#JobId').val(),
+                             Jobskill:row.find('td:eq(1)').text(),
+                             Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                        };
+                        Systemjobskillsdata.push(Systemjobskilldata);
+                   });
+
+                   //Job Benefits data
+                   var Systemjobbenefitsdata = [];
+                   $("#AllsystemDataTables13 tbody tr").each(function () {
+                   var row = $(this);
+                        var Systemjobbenefitdata = {
+                             Jobbenefitid:row.find('td:eq(0)').text(),
+                             Jobid:$('#JobId').val(),
+                             Jobbenefit:row.find('td:eq(1)').text(),
+                             Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                        };
+                        Systemjobbenefitsdata.push(Systemjobbenefitdata);
+                   });
 
 
                 var uil1 = {
