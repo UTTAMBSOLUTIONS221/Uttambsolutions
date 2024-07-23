@@ -70,8 +70,8 @@
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
             <div class="container-fluid">
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">
-                    <img src="~/images/uttambsolutionlogo.png" alt="Uttambsolutions Logo" class="brand-image elevation-3">
-                    <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">47 News</span>
+                    <img src="~/images/uttambsolutionsjoblogo.png" alt="Uttambsolutions Logo" class="brand-image elevation-3">
+                    <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">JOB CENTER</span>
                 </a>
 
                 <!-- Right navbar links for large screens -->
@@ -94,18 +94,18 @@
         <div class="content-wrapper">
             <section class="content">
                 <div class="container-fluid">
-                     <div class="row">
-                        <div class="col-sm-12">
+                    <div class="row mb-4">
+                        <div class="col-lg-8 col-md-12">
                             <div class="card card-outline card-info">
-                                <div class="card-header py-1">
-                                    <h6 class="font-weight-bold text-sm card-title">User Profile</h6>
+                                <div class="card-header">
+                                    <h5 class="font-weight-bold">User Profile</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                             <img src="@imageUrl" class="img-fluid rounded-circle" alt="@Model.Fullname" />
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <img src="@imageUrl" class="img-fluid rounded-circle" alt="@Model.Fullname" />
                                         </div>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-9">
                                             <table class="table table-borderless table-sm">
                                                 <tbody>
                                                     <tr>
@@ -118,7 +118,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="font-weight-bold">Joined:</td>
-                                                        <td>@Model.Datecreated</td>
+                                                        <td>@Model.Datecreated.ToString("MMMM dd, yyyy")</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="font-weight-bold">Role:</td>
@@ -129,6 +129,35 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="card card-outline card-info">
+                                <div class="card-header">
+                                    <h5 class="font-weight-bold">Summary</h5>
+                                </div>
+                               @*  <div class="card-body">
+                                    <table class="table table-borderless table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-weight-bold">Total Posts:</td>
+                                                <td>@Model.TotalPosts</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight-bold">Total Comments:</td>
+                                                <td>@Model.TotalComments</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight-bold">Last Login:</td>
+                                                <td>@Model.LastLogin.ToString("MMMM dd, yyyy")</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight-bold">Status:</td>
+                                                <td>@Model.Status</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> *@
                             </div>
                         </div>
                     </div>
@@ -221,13 +250,13 @@
             </section>
         </div>
 
-        <footer class="main-footer bg-dark">
+     <footer class="main-footer bg-dark">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h5 class="text-white">About Uttamb Solutions</h5>
+                        <h5 class="text-white">About JobCenter</h5>
                         <p class="text-white">
-                            Uttamb Solutions is a premier web development and digital marketing company specializing in e-commerce solutions, fuel management systems, and innovative software solutions. Our team is dedicated to delivering high-quality services to help your business thrive in the digital age.
+                            JobCenter is a premier job listing and freelancing platform that connects job seekers with potential employers. Our services include job listings, freelancing job biddings, and other career opportunities. We are dedicated to helping you find your next job in the digital age.
                         </p>
                     </div>
                     <div class="col-sm-3">
@@ -235,19 +264,19 @@
                         <p class="text-white">
                             <strong>Address:</strong> 123 Tech Street, Nairobi, Kenya<br />
                             <strong>Phone:</strong> +254 728 316050<br />
-                            <strong>Email:</strong> info@uttambsolutions.com
+                            <strong>Email:</strong> info@jobcenter.com
                         </p>
                     </div>
                     <div class="col-sm-3">
                         <h5 class="text-white">Follow Us</h5>
                         <p class="text-white">
-                            <a href="https://www.facebook.com/uttambsolutions" target="_blank" class="text-reset">
+                            <a href="https://www.facebook.com/jobcenter" target="_blank" class="text-reset">
                                 <i class="fab fa-facebook-f text-white"></i> Facebook
                             </a><br />
-                            <a href="https://www.twitter.com/uttambsolutions" target="_blank" class="text-reset">
+                            <a href="https://www.twitter.com/jobcenter" target="_blank" class="text-reset">
                                 <i class="fab fa-twitter text-white"></i> Twitter
                             </a><br />
-                            <a href="https://www.linkedin.com/company/uttambsolutions" target="_blank" class="text-reset">
+                            <a href="https://www.linkedin.com/company/jobcenter" target="_blank" class="text-reset">
                                 <i class="fab fa-linkedin-in text-white"></i> LinkedIn
                             </a>
                         </p>
@@ -260,7 +289,6 @@
                 </div>
             </div>
         </footer>
-
         <div class="modal modal- fade" id="Uttambsolutionsmodalextralarge" tabindex="-1">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
