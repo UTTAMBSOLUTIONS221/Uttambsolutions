@@ -703,7 +703,7 @@
                         var functions = rows[i].cells[1].innerHTML.split('<br>').map(func => func.trim()).filter(func => func !== '');
 
                         var responsibilityModel = {
-                            JobId: /* Insert JobId here */,
+                            JobId: $('#JobId').val(),
                             Responsibility: responsibility,
                             DateCreated: new Date().toISOString(),
                             SystemJobKeyResponsibilityFunction: functions.map(func => ({

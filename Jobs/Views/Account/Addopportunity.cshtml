@@ -169,6 +169,34 @@
 
     <!-- Section 3: Preferred Skills -->
     <div id="section3" class="section" style="display: none;">
+        <div class="card">
+            <div class="card-body">
+                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" hidden />
+                <div class="form-group">
+                    <label class="font-weight-light">Qualification</label>
+                    <input class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId" />
+                </div>
+                <button class="btn btn-sm btn-info font-weight-bold float-right" onclick="addsystemblogparagraphdata()">Add</button>
+            </div>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables">
+                <thead>
+                    <tr>
+                        <th hidden></th>
+                        <th>Qualification</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
+    </div>
+
+    <!-- Section 4: Benefits -->
+    <div id="section4" class="section" style="display: none;">
         <h6 class="mb-3">Step 3: Preferred Skills</h6>
         <div class="card">
             <div class="card-body">
@@ -196,8 +224,9 @@
         <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
     </div>
 
-    <!-- Section 4: Benefits -->
-    <div id="section4" class="section" style="display: none;">
+
+    <!-- Section 5: Qualifications -->
+    <div id="section5" class="section" style="display: none;">
         <h6 class="mb-3">Step 4: Benefits</h6>
         <div class="card">
             <div class="card-body">
@@ -225,39 +254,9 @@
         <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
     </div>
 
-
-    <!-- Section 4: Qualifications -->
-    <div id="section4" class="section" style="display: none;">
-        <h6 class="mb-3">Step 4: Qualifications</h6>
-        <div class="card">
-            <div class="card-body">
-                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" hidden />
-                <div class="form-group">
-                    <label class="font-weight-light">Qualification</label>
-                    <input class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId" />
-                </div>
-                <button class="btn btn-sm btn-info font-weight-bold float-right" onclick="addsystemblogparagraphdata()">Add</button>
-            </div>
-        </div>
-        <div class="table-responsive mt-3">
-            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables">
-                <thead>
-                    <tr>
-                        <th hidden></th>
-                        <th>Qualification</th>
-                        <th class="text-right">Action</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
-        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
-    </div>
-
-    <!-- Section 5: Conclusion -->
-    <div id="section5" class="section" style="display: none;">
-        <h6 class="mb-3">Step 5: Job Conclusion</h6>
+    <!-- Section 6: Conclusion -->
+    <div id="section6" class="section" style="display: none;">
+        <h6 class="mb-3">Step 6: Job Conclusion</h6>
         <div class="card">
             <div class="card-body">
                 <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" hidden />
