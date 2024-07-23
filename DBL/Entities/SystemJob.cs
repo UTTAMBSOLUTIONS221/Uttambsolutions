@@ -3,7 +3,7 @@
     public class SystemJob
     {
         public int JobId { get; set; }
-        public int EmployerId { get; set; }
+        public long EmployerId { get; set; }
         public string? Employername { get; set; }
         public string? Employerlogo { get; set; }
         public string? Title { get; set; }
@@ -19,7 +19,7 @@
         public int? JobExperienceId { get; set; }
         public string? Experiencename { get; set; }
         public string? JobSalaryRange { get; set; }
-        public DateTime Deadline { get; set; }
+        public DateTime Deadline { get; set; } = DateTime.Now;
         public string? JobStatus { get; set; } = "Open";
         public DateTime DatePosted { get; set; } = DateTime.Now;
         public string? JobUrl { get; set; }
@@ -29,6 +29,7 @@
         public bool IsFeatured { get; set; } = false;
         public bool Approved { get; set; } = false;
         public bool IsPublished { get; set; } = false;
+        public long CreatedBy { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
     }
 }

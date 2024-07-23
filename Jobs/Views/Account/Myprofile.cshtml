@@ -568,7 +568,7 @@
             document.getElementById("buttonText").innerText = "Processing...";
             var uil1 = {
                 JobId: $('#JobId').val(),EmployerId: $('#JobEmployerId').val(),Title: $('#Titleid').val(), JobFunctionId: $('#JobFunctionId').val(),JobIndustryId: $('#JobIndustryId').val(), JobLocationId: $('#JobLocationId').val(), JobExperienceId: $('#JobExperienceId').val(),
-                JobTypeId: $('#JobTypeId').val(),EasyApply: $('#EasyApplyid').prop('checked'), HasTest: $('#JobHasTestid').prop('checked'),IsFeatured: $('#IsJobFeaturedid').prop('checked'),JobUrl: $('#JobUrlid').val(),Deadline: $('#Deadlineid').val(),JobSalaryRange: $('#JobSalaryRangeid').val(),JobDescription: $('#JobDescriptionid').val()
+                JobTypeId: $('#JobTypeId').val(),EasyApply: $('#EasyApplyid').prop('checked'), HasTest: $('#JobHasTestid').prop('checked'),IsFeatured: $('#IsJobFeaturedid').prop('checked'),JobUrl: $('#JobUrlid').val(),Deadline: $('#Deadlineid').val(),JobSalaryRange: $('#JobSalaryRangeid').val(),JobDescription: $('#JobDescriptionid').val(),CreatedBy: $('#systemLoggedinedUserid').val()
             };
  
             $.post("/Opportunity/Addsystemopportunitydata", uil1, function (response) {
