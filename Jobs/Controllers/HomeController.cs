@@ -1,21 +1,26 @@
+using DBL;
 using Jobs.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Jobs.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly BL bl;
+
+        public HomeController(IConfiguration config)
         {
-            _logger = logger;
+            bl = new BL(Util.ShareConnectionString(config));
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var jobsData = await bl.Getsystemallopportunitydata(0, 1000);
+            return View(jobsData);
         }
 
         public IActionResult Privacy()
