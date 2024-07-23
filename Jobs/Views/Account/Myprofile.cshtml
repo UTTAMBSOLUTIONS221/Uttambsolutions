@@ -974,9 +974,6 @@
                     JobTypeId: $('#JobTypeId').val(),EasyApply: $('#EasyApplyid').prop('checked'), HasTest: $('#JobHasTestid').prop('checked'),IsFeatured: $('#IsJobFeaturedid').prop('checked'),JobUrl: $('#JobUrlid').val(),Deadline: $('#Deadlineid').val(),JobSalaryRange: $('#JobSalaryRangeid').val(),JobDescription: $('#JobDescriptionid').val(),CreatedBy: $('#systemLoggedinedUserid').val(),
                     Systemjobfunction:Systemjobfunctionsdata,Systemjobqualification:Systemjobquaificationsdata,Systemjobskill:Systemjobskillsdata,Systemjobbenefit:Systemjobbenefitsdata,Jobreportto:$('#SystemjobreportstoId').val(),Jobhowtoapply:$('#SystemjobhowtoapplyId').val(),Jobimageburl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
                 };
-
-                 alert(JSON.stringify(uil1));
- 
                 $.post("/Account/Addsystemopportunitydata", uil1, function (response) {
                     if (response.RespStatus == 0) {
                         Swal.fire('Saved!', response.RespMessage, 'success')
