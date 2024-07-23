@@ -1,43 +1,122 @@
-﻿@model  DBL.Models.Systemjobdata
+﻿@model DBL.Models.Systemjobdata
 @{
     ViewData["Title"] = "Home Page";
+    // Method to calculate relative time
+    string GetRelativeDate(DateTime date)
+    {
+        var now = DateTime.Now;
+        var timeSpan = now - date;
+
+        if (timeSpan.TotalDays < 1)
+        {
+            return "Today";
+        }
+        else if (timeSpan.TotalDays < 2)
+        {
+            return "Yesterday";
+        }
+        else
+        {
+            var days = (int)timeSpan.TotalDays;
+            return $"{days} day{(days > 1 ? "s" : "")} ago";
+        }
+    }
 }
 
+@if (Model != null && Model.Systemjobs != null)
+{
+    foreach (var job in Model.Systemjobs)
+    {
+        <div class="row mb-4">
+            <div class="col-lg-8 col-md-12">
+                <div class="card bg-light border-0 shadow-sm">
+                    <div class="card-header bg-white">
+                        <h4 class="fw-bold font-weight-bold text-custom text-uppercase">@job.Title</h4>
+                        <h6 class="text-secondary  text-uppercase">@job.Employername</h6>
+                        <div class="d-flex flex-wrap">
+                            <span class="badge badge-secondary mr-2 mb-2"><strong>Location:</strong> @job.Locationname</span>
+                            <span class="badge badge-secondary mr-2 mb-2"><strong>Type:</strong> @job.Jobtypename</span>
+                            <span class="badge badge-secondary mr-2 mb-2"><strong>Salary Range:</strong> @job.JobSalaryRange</span>
+                            <span class="badge badge-secondary mb-2"><strong>Job Function:</strong> @job.Functionname</span>
+                        </div>
+                        <hr class="full-width-hr" />
+                        <div class="d-flex justify-content-between mt-1">
+                            <span class="badge bg-success">@job.JobStatus</span>
+                            <span class="text-muted">@GetRelativeDate(job.DateCreated)</span>
+                        </div>
+                    </div>
+                    <div class="card-body bg-white">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-3 col-4">
+                                <div class="card card-border-custom">
+                                    <img src="~/Images/uttambsolutionsjoblogo.png" class="img-fluid rounded" alt="Company Logo" />
+                                </div>
+                            </div>
+                            <div class="col-md-10 col-sm-9 col-8">
+                                <p>@job.JobDescription</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white text-start">
+                        @if (job.EasyApply)
+                        {
+                            <a href="#" class="btn btn-primary">Easy Apply</a>
+                        }
+                        else
+                        {
+                            <a href="@job.JobUrl" class="btn btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Apply on Company Site</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
 
+<div class="mt-4">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2850934153859537"
+         data-ad-slot="1149686671"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
 
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2850934153859537"
-     data-ad-slot="1149686671"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script> 
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-2850934153859537"
-     data-ad-slot="8445437350"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-2850934153859537"
-     data-ad-slot="8445437350"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-6b+by+d-1s+li"
-     data-ad-client="ca-pub-2850934153859537"
-     data-ad-slot="1596995960"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+<div class="mt-4">
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-2850934153859537"
+         data-ad-slot="8445437350"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || {}).push({});
+    </script>
+</div>
+
+<div class="mt-4">
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-2850934153859537"
+         data-ad-slot="8445437350"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || {}).push({});
+    </script>
+</div>
+
+<div class="mt-4">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-format="fluid"
+         data-ad-layout-key="-6b+by+d-1s+li"
+         data-ad-client="ca-pub-2850934153859537"
+         data-ad-slot="1596995960"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || {}).push({});
+    </script>
+</div>

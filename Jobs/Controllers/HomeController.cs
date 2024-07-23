@@ -16,7 +16,7 @@ namespace Jobs.Controllers
         {
             bl = new BL(Util.ShareConnectionString(config));
         }
-
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var jobsData = await bl.Getsystemallopportunitydata(0, 1000);

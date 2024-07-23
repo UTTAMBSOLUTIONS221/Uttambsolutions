@@ -28,6 +28,7 @@
     <meta itemprop="image" content="https://jobcenter.uttambsolutions.com/images/jobcenterlogo.png" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
@@ -45,7 +46,7 @@
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
-            <div class="container">
+            <div class="container-fluid">
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">
                     <img src="~/images/uttambsolutionsjoblogo.png" alt="JobCenter Logo" class="brand-image elevation-3">
                     <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">JobCenter</span>
@@ -62,7 +63,7 @@
 
         <div class="content-wrapper">
             <section class="content">
-                <div class="container">
+                <div class="container-fluid">
                     <div id="AlertsContainer">
                         @{
                             await Html.RenderPartialAsync("_Alerts");
