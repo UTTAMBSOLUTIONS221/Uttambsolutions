@@ -19,6 +19,31 @@
 .btn-apply-site {
     color: white !important;
 }
+
+textarea {
+    resize: none;
+}
+/* Hide spinner arrows for number inputs */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.no-wrap-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px; /* Adjust the gap as needed */
+}
+
+    .no-wrap-buttons a {
+        white-space: nowrap;
+    }
+
 html {
     font-size: 14px;
 }

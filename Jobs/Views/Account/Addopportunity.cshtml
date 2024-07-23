@@ -21,7 +21,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Job Employer</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.JobFunctionId" asp-items="Systemjobfunction" id="JobFunctionId" required>
+                    <select class="form-control form-control-sm" asp-for="@Model.EmployerId" asp-items="Systemjobfunction" id="JobEmployerId" required>
                         <option value="">---Select---</option>
                     </select>
                 </div>
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">Job Experience</label>
                     <select class="form-control form-control-sm" asp-for="@Model.JobExperienceId" asp-items="Systemjobexperience" id="JobExperienceId" required>
@@ -76,7 +76,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-3 d-flex align-items-center mt-2">
+            <div class="col-sm-2 d-flex align-items-center mt-2">
                 <div class="custom-control custom-checkbox small-checkbox">
                     <input class="custom-control-input" type="checkbox" asp-for="@Model.EasyApply" id="EasyApplyid" />
                     <label class="custom-control-label text-sm font-weight-light text-nowrap nowrap" for="EasyApplyid">Easy apply?</label>
@@ -85,7 +85,13 @@
             <div class="col-sm-2 d-flex align-items-center mt-2">
                 <div class="custom-control custom-checkbox small-checkbox">
                     <input class="custom-control-input" type="checkbox" asp-for="@Model.HasTest" id="JobHasTestid" />
-                    <label class="custom-control-label text-sm font-weight-light text-nowrap nowrap" for="JobHasTestid">Test ?</label>
+                    <label class="custom-control-label text-sm font-weight-light text-nowrap nowrap" for="JobHasTestid">Has Test?</label>
+                </div>
+            </div>
+            <div class="col-sm-2 d-flex align-items-center mt-2">
+                <div class="custom-control custom-checkbox small-checkbox">
+                    <input class="custom-control-input" type="checkbox" asp-for="@Model.IsFeatured" id="IsJobFeaturedid" />
+                    <label class="custom-control-label text-sm font-weight-light text-nowrap nowrap" for="IsJobFeaturedid">Is Featured?</label>
                 </div>
             </div>
         </div>

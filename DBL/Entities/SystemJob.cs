@@ -26,6 +26,7 @@
         public string? JobPostUrl { get; set; }
         public bool EasyApply { get; set; } = false;
         public bool HasTest { get; set; } = false;
+        public bool IsFeatured { get; set; } = false;
         public bool Approved { get; set; } = false;
         public bool IsPublished { get; set; } = false;
         public DateTime DateCreated { get; set; } = DateTime.Now;
