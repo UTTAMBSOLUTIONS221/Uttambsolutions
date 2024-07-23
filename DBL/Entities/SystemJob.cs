@@ -31,5 +31,23 @@
         public bool IsPublished { get; set; } = false;
         public long CreatedBy { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
+        public List<SystemJobKeyResponsibility> SystemJobKeyResponsibility { get; set; }
+    }
+
+    public class SystemJobKeyResponsibility
+    {
+        public int JobKeyResponsibilityId { get; set; }
+        public int JobId { get; set; }
+        public string? Responsibility { get; set; }
+        public DateTime DateCreated { get; set; }
+        public List<SystemJobKeyResponsibilityFunction> SystemJobKeyResponsibilityFunction { get; set; }
+    }
+
+    public class SystemJobKeyResponsibilityFunction
+    {
+        public int JobKeyResponsibilityFunctionId { get; set; }
+        public int JobKeyResponsibilityId { get; set; }
+        public string? ResponsibilityFunction { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }
