@@ -21,6 +21,10 @@ namespace DBL.Models
         public DateTime Lastlogin { get; set; }
         public DateTime Datemodified { get; set; }
         public DateTime Datecreated { get; set; }
+        public int TotalPosts { get; set; }
+        public int TotalComments { get; set; }
+        public DateTime? LastLogin { get; set; }
+        public string? Status { get; set; }
         public List<SystemOrganization>? Systemorganizations { get; set; }
         public List<SocialMediaSettings>? Systemusersocials { get; set; }
         public List<Systemblog>? Systemuserblogs { get; set; }
