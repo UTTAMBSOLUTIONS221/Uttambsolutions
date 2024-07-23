@@ -21,5 +21,6 @@
         Systemjoblocation = 15,
         Systemjobexperience = 16,
         Systemjobtypeid = 17,
+        SystemOrganization = 18,
     }
 }

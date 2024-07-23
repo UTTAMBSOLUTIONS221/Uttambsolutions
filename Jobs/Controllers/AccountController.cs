@@ -185,6 +185,7 @@ namespace Jobs.Controllers
         [HttpGet]
         public async Task<IActionResult> Addopportunity(int Opportunityid)
         {
+            ViewData["Systemorganizationlists"] = bl.GetListModel(ListModelType.SystemOrganization).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             ViewData["Systemjobfunctionlists"] = bl.GetListModel(ListModelType.Systemjobfunction).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             ViewData["Systemjobindustrylists"] = bl.GetListModel(ListModelType.Systemjobindustry).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             ViewData["Systemjoblocationlists"] = bl.GetListModel(ListModelType.Systemjoblocation).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
@@ -201,6 +202,22 @@ namespace Jobs.Controllers
         public async void Addsystemopportunitydata(int Opportunityid)
         {
             var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Addorganization(long Organizationid)
+        {
+            SystemOrganization organization = new SystemOrganization();
+            if (Organizationid > 0)
+            {
+                organization = await bl.Getsystemorganizationdatabyid(Organizationid);
+            }
+            return PartialView(organization);
+        }
+        public async Task<JsonResult> Addsystemorganizationdata(SystemOrganization model)
+        {
+            var resp = await bl.Registersystemorganizationdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
         }
         #endregion
     }

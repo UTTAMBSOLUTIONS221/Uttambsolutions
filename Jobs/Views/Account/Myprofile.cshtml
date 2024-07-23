@@ -121,17 +121,17 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row mb-4">
-                        <div class="col-lg-8 col-md-12">
+                        <div class="col-lg-7 col-md-12">
                             <div class="card card-outline card-info">
                                 <div class="card-header">
                                     <h5 class="font-weight-bold">User Profile</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row mb-3">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-2">
                                             <img src="@imageUrl" class="img-fluid rounded-circle" alt="@Model.Fullname" />
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-5">
                                             <table class="table table-borderless table-sm">
                                                 <tbody>
                                                     <tr>
@@ -147,27 +147,49 @@
                                             </table>
                                         </div>
                                        <div class="col-sm-5">
-                                            <table class="table table-borderless table-sm">
-                                                <tbody>
-                                                    <tr>
-                                                        <td><span class="font-weight-bold">Name: </span>@Model.Fullname</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span class="font-weight-bold">Email: </span>@Model.Emailaddress</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span class="font-weight-bold">Joined: </span>@Model.Datecreated.ToString("MMMM dd, yyyy")</td>
-                                                    </tr>
-                                                    <tr><td><span class="font-weight-bold">Role: </span>@Model.Rolename</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            @if(Model.Systemorganizations!=null)
+                                            {
+                                                <table class="table table-borderless table-sm">
+                                                   <tbody>
+                                                        <tr>
+                                                            <td><span class="font-weight-bold">Name: </span>@Model.Systemorganizations.FirstOrDefault().OrganizationName</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="font-weight-bold">Email: </span>@Model.Systemorganizations.FirstOrDefault().OrganizationEmail</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="font-weight-bold">Joined: </span>@Model.Systemorganizations.FirstOrDefault().DateCreated.ToString("MMMM dd, yyyy")</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            }
+                                            else
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <a asp-action="Addorganization" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Organization</a>
+                                                    </div>
+                                                </div>
+                                                <table class="table table-borderless table-sm">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><span class="font-weight-bold">Name: </span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="font-weight-bold">Email: </span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="font-weight-bold">Joined: </span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-12">
+                        <div class="col-lg-5 col-md-12">
                             <div class="card card-outline card-info">
                                 <div class="card-header">
                                     <h5 class="font-weight-bold">Summary</h5>
@@ -538,7 +560,7 @@
             $("#ShopProductBoxItemTable").DataTable();
 
     </script>
-      @*Scripts for saving the blogs and blogs details*@
+      @*Scripts for saving the job opportunity*@
         <script type="text/javascript">
             ﻿function saveopportunitydata() {
             document.getElementById("saveopportunityid").disabled = true;
@@ -566,71 +588,71 @@
             });
         }
        </script>
-      @*End of saving Blogs *@
+      @*End of saving job opportunity *@
 
-      @*Scripts for saving the social medial pages details*@
-       <script type="text/javascript">
-            ﻿function savesystemsocialmediadata() {
-            document.getElementById("savesystemsocialmediaid").disabled = true;
-            document.getElementById("processingSpinner").style.display = "inline-block";
-            document.getElementById("buttonText").innerText = "Processing...";
-            if ($('#Socialpagenameid').val() === '') {
-                Swal.fire("Social Page Not Created", 'Page Name is Required', "warning");
-                document.getElementById("savesystemsocialmediaid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
-                return;
-            }
-            if ($('#UserAccessTokenid').val() === '') {
-                Swal.fire("Social Page Not Created", 'Access Token is Required', "warning");
-                document.getElementById("savesystemsocialmediaid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
-                return;
-            }
-            if ($('#Appid').val() === '') {
-                Swal.fire("Social Page Not Created", 'App Id is Required', "warning");
-                document.getElementById("savesystemsocialmediaid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
-                return;
-            } 
-            if ($('#Appsecretid').val() === '') {
-                Swal.fire("Social Page Not Created", 'App Secret is Required', "warning");
-                document.getElementById("savesystemsocialmediaid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
-                return;
-            }
+      @*Scripts for saving the organization details*@
+      <script type="text/javascript">
+        ﻿function savesystemorganizationdata() {
+        document.getElementById("savesystemorganizationid").disabled = true;
+        document.getElementById("processingSpinner").style.display = "inline-block";
+        document.getElementById("buttonText").innerText = "Processing...";
+        if ($('#OrganizationNameid').val() === '') {
+            Swal.fire("Organization Not Created", 'Organization Name is Required', "warning");
+            document.getElementById("savesystemorganizationid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+            return;
+        }
+        if ($('#OrganizationTypeId').val() === ''|| $('#OrganizationTypeId').val() === 0) {
+            Swal.fire("Organization Not Created", 'Organization Type is Required', "warning");
+            document.getElementById("savesystemorganizationid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+            return;
+        }
+        if ($('#OrganizationPhoneid').val() === '') {
+            Swal.fire("Organization Not Created", 'Organization Phone is Required', "warning");
+            document.getElementById("savesystemorganizationid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+            return;
+        }
+        if ($('#OrganizationEmailid').val() === '') {
+            Swal.fire("Organization Not Created", 'Organization Email is Required', "warning");
+            document.getElementById("savesystemorganizationid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+            return;
+        }
+
+         if ($('#OrganizationDescriptionid').val() === '') {
+            Swal.fire("Organization Not Created", 'Organization Description is Required', "warning");
+            document.getElementById("savesystemorganizationid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+            return;
+        }
     
-            if ($('#Pagetypeid').val() === '') {
-                Swal.fire("Social Page Not Created", 'Page Type is Required', "warning");
-                document.getElementById("savesystemsocialmediaid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
-                return;
+        var uil1 = {
+            OrganizationId: $('#OrganizationId').val(),OrganizationOwner: $('#systemLoggedinedUserid').val(), OrganizationName: $('#OrganizationNameid').val(), OrganizationTypeId: $('#OrganizationTypeId').val(),OrganizationPhone:$('#OrganizationPhoneid').val(),OrganizationEmail:$('#OrganizationEmailid').val(), OrganizationDescription: $('#OrganizationDescriptionid').val(),OrganizationStatus:0,DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+        };
+        $.post("/Organization/Addsystemorganizationdata", uil1, function (response) {
+            if (response.RespStatus == 0) {
+                Swal.fire('Saved!', response.RespMessage, 'success')
+                $('#Uttambsolutionsmodal').hide();
+                setTimeout(function () { location.reload(); }, 1000);
+            } else if (response.RespStatus == 1) {
+                Swal.fire("Organization details not saved", response.RespMessage, "warning");
             }
-    
-           var uil1 = {
-                SocialSettingId: $('#SocialSettingId').val(), Socialpagename: $('#Socialpagenameid').val(),UserAccessToken: $('#UserAccessTokenid').val(),Appid: $('#Appid').val(),Appsecret: $('#Appsecretid').val(),PageType: $('#Pagetypeid').val(),Socialowner:$('#systemLoggedinedUserid').val(),Createdby:$('#systemLoggedinedUserid').val(),Modifiedby:$('#systemLoggedinedUserid').val(),Datecreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),Datemodified:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
-            };
-            $.post("/Account/Addsocialmediapagedata", uil1, function (response) {
-                if (response.RespStatus == 0) {
-                    Swal.fire('Saved!', response.RespMessage, 'success')
-                    $('#Uttambsolutionsmodallarge').hide();
-                    setTimeout(function () { location.reload(); }, 1000);
-                } else if (response.RespStatus == 1) {
-                    Swal.fire("Module details not saved", response.RespMessage, "warning");
-                }
-                else {
-                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                }
-                document.getElementById("savesystemsocialmediaid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
-                });
+            else {
+                Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
             }
-           </script>
+            document.getElementById("savesystemorganizationid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+      </script>
        @*End of saving Blogs *@
 
 

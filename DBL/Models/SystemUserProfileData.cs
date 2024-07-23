@@ -24,5 +24,6 @@ namespace DBL.Models
         public List<SystemOrganization>? Systemorganizations { get; set; }
         public List<SocialMediaSettings>? Systemusersocials { get; set; }
         public List<Systemblog>? Systemuserblogs { get; set; }
+        public List<SystemJob> Systemjobs { get; set; }
     }
 }

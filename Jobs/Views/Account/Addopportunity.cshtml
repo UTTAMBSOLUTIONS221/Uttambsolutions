@@ -1,5 +1,6 @@
 ﻿@model DBL.Entities.SystemJob
 @{
+    var Systemorganization = ViewData["Systemorganizationlists"] as List<SelectListItem>;
     var Systemjobfunction = ViewData["Systemjobfunctionlists"] as List<SelectListItem>;
     var Systemjobindustry = ViewData["Systemjobindustrylists"] as List<SelectListItem>;
     var Systemjoblocation = ViewData["Systemjoblocationlists"] as List<SelectListItem>;
@@ -21,7 +22,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Job Employer</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.EmployerId" asp-items="Systemjobfunction" id="JobEmployerId" required>
+                    <select class="form-control form-control-sm" asp-for="@Model.EmployerId" asp-items="Systemorganization" id="JobEmployerId" required>
                         <option value="">---Select---</option>
                     </select>
                 </div>
