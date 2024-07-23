@@ -26,8 +26,8 @@ namespace Jobs.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Jobdetails(long JobId)
         {
-            var jobsData = await bl.Getsystemallopportunitydata(0, 1000);
-            return View(jobsData);
+            var jobData = await bl.Getsystemopportunitydatabyid(JobId);
+            return View(jobData);
         }
 
         public IActionResult Privacy()
