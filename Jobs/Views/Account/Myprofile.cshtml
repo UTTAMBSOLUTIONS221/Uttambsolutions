@@ -131,7 +131,7 @@
                                         <div class="col-sm-2">
                                             <img src="@imageUrl" class="img-fluid rounded-circle" alt="@Model.Fullname" />
                                         </div>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-5">
                                             <!-- User Details Table -->
                                             <h6 class="font-weight-bold">User Details</h6>
                                             <table class="table table-borderless table-sm">
@@ -147,7 +147,8 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-
+                                        </div>
+                                        <div class="col-sm-5">
                                             <!-- Organization or Company Details Table -->
                                             @if(Model.Systemorganizations != null && Model.Systemorganizations.Any())
                                             {
@@ -205,16 +206,13 @@
                                     <table class="table table-borderless table-sm">
                                         <tbody>
                                             <tr>
-                                                <td class="font-weight-bold">Total Posts:</td>
-                                                <td>@Model.TotalPosts</td>
+                                                <td><span class="font-weight-bold">Total Posts: </span>@Model.TotalPosts</td>
                                             </tr>
                                             <tr>
-                                                <td class="font-weight-bold">Total Comments:</td>
-                                                <td>@Model.TotalComments</td>
+                                                <td><span class="font-weight-bold">Total Comments: </span>@Model.TotalComments</td>
                                             </tr>
                                             <tr>
-                                                <td class="font-weight-bold">Last Login:</td>
-                                                <td>@Model.LastLogin.ToString("MMMM dd, yyyy")</td>
+                                                <td><span class="font-weight-bold">Last Login: </span>@Model.LastLogin.ToString("MMMM dd, yyyy")</td>
                                             </tr>
                                             <tr>
                                                 <td class="font-weight-bold">Status:</td>
