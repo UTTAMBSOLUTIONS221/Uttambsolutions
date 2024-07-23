@@ -163,11 +163,11 @@
                                         <div class="card-footer bg-white text-start">
                                             @if (Model.EasyApply)
                                             {
-                                                <a href="#" class="btn btn-primary">Easy Apply</a>
+                                                <a asp-action="Easyapplythisjob" asp-controller="Home" asp-route-jobcode="@Guid.NewGuid()" asp-route-code="@Guid.NewGuid()" asp-route-jobid="@Model.JobId" class="btn btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Easy Apply</a>
                                             }
                                             else
                                             {
-                                                <a href="@Model.JobUrl" target="_blank" class="btn btn-secondary text-uppercase fw-bold btn-apply-site">Apply Now</a>
+                                                <a href="@Model.JobUrl" target="_blank" class="btn btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Apply Now</a>
                                             }
                                         </div>
                                     </div>

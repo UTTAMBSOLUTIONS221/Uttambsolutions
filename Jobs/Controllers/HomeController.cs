@@ -16,17 +16,24 @@ namespace Jobs.Controllers
         {
             bl = new BL(Util.ShareConnectionString(config));
         }
+        [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var jobsData = await bl.Getsystemallopportunitydata(0, 1000);
             return View(jobsData);
         }
-
+        [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Jobdetails(long JobId)
         {
             var jobData = await bl.Getsystemopportunitydatabyid(JobId);
+            return View(jobData);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Easyapplythisjob(long jobid)
+        {
+            var jobData = await bl.Getsystemopportunitydatabyid(jobid);
             return View(jobData);
         }
 
