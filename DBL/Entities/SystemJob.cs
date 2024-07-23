@@ -33,7 +33,7 @@
 
         public string? Jobreportto { get; set; }
         public string? Jobimageburl { get; set; }
-        public string? jobhowtoapply { get; set; }
+        public string? Jobhowtoapply { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
         public List<Systemjobfunction>? Systemjobfunction { get; set; }
         public List<Systemjobqualification>? Systemjobqualification { get; set; }

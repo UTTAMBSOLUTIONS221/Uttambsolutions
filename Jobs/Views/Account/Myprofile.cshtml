@@ -917,23 +917,17 @@
                 document.getElementById("saveopportunityid").disabled = true;
                 document.getElementById("processingSpinner").style.display = "inline-block";
                 document.getElementById("buttonText").innerText = "Processing...";
-                var table = document.getElementById('AllsystemDataTables10').getElementsByTagName('tbody')[0];
-                var rows = table.getElementsByTagName('tr');
-                var responsibilities = [];
-
-                    for (var i = 0; i < rows.length; i++) {
-                        var responsibility = rows[i].cells[0].innerText.trim();
-                        var functions = rows[i].cells[1].innerHTML.split('<br>').map(func => func.trim()).filter(func => func !== '');
-
-                        var responsibilityModel = {
-                            JobId: $('#JobId').val(),
-                            JobId: $('#JobId').val(),
-                            Systemjobfunction: responsibility,
-                            DateCreated: new Date().toISOString(),
+                   var Systemjobfunctionsdata = [];
+                   $("#AllsystemDataTables11 tbody tr").each(function () {
+                   var row = $(this);
+                        var Systemjobfunctiondata = {
+                             Jobfunctionid:row.find('td:eq(0)').text(),
+                             Jobid:$('#JobId').val(),
+                             Jobfunction:row.find('td:eq(1)').text(),
+                             Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
                         };
-
-                        responsibilities.push(responsibilityModel);
-                    }
+                        Systemjobfunctionsdata.push(Systemjobfunctiondata);
+                   });
 
                     //Job Qualification data
                    var Systemjobquaificationsdata = [];
@@ -978,7 +972,7 @@
                 var uil1 = {
                     JobId: $('#JobId').val(),EmployerId: $('#JobEmployerId').val(),Title: $('#Titleid').val(), JobFunctionId: $('#JobFunctionId').val(),JobIndustryId: $('#JobIndustryId').val(), JobLocationId: $('#JobLocationId').val(), JobExperienceId: $('#JobExperienceId').val(),
                     JobTypeId: $('#JobTypeId').val(),EasyApply: $('#EasyApplyid').prop('checked'), HasTest: $('#JobHasTestid').prop('checked'),IsFeatured: $('#IsJobFeaturedid').prop('checked'),JobUrl: $('#JobUrlid').val(),Deadline: $('#Deadlineid').val(),JobSalaryRange: $('#JobSalaryRangeid').val(),JobDescription: $('#JobDescriptionid').val(),CreatedBy: $('#systemLoggedinedUserid').val(),
-                    SystemJobKeyResponsibility:responsibilities,Systemjobqualification:Systemjobquaificationsdata,Systemjobskill:Systemjobskillsdata,Systemjobbenefit:Systemjobbenefitsdata,Jobreportto:('#SystemjobreportstoId').val(),jobhowtoapply:('#SystemjobhowtoapplyId').val(),Jobimageburl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
+                    Systemjobfunction:Systemjobfunctionsdata,Systemjobqualification:Systemjobquaificationsdata,Systemjobskill:Systemjobskillsdata,Systemjobbenefit:Systemjobbenefitsdata,Jobreportto:('#SystemjobreportstoId').val(),Jobhowtoapply:('#SystemjobhowtoapplyId').val(),Jobimageburl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
                 };
 
                  alert(JSON.stringify(uil1));
