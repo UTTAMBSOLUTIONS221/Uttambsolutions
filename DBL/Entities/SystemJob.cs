@@ -35,7 +35,10 @@
         public string? Jobimageburl { get; set; }
         public string? jobhowtoapply { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
-        public List<SystemJobKeyResponsibility> SystemJobKeyResponsibility { get; set; }
+        public List<SystemJobKeyResponsibility>? SystemJobKeyResponsibility { get; set; }
+        public List<Systemjobqualification>? Systemjobqualification { get; set; }
+        public List<Systemjobskill>? Systemjobskill { get; set; }
+        public List<Systemjobbenefit>? Systemjobbenefit { get; set; }
     }
 
     public class SystemJobKeyResponsibility
@@ -54,4 +57,27 @@
         public string? ResponsibilityFunction { get; set; }
         public DateTime DateCreated { get; set; }
     }
+
+    public class Systemjobqualification
+    {
+        public int Jobqualificationid { get; set; }
+        public int Jobid { get; set; }
+        public string? Jobqualification { get; set; }
+        public DateTime Datecreated { get; set; } = DateTime.Now;
+    }
+    public class Systemjobskill
+    {
+        public int Jobskillid { get; set; }
+        public int Jobid { get; set; }
+        public string? Jobskill { get; set; }
+        public DateTime Datecreated { get; set; } = DateTime.Now;
+    }
+    public class Systemjobbenefit
+    {
+        public int Jobbenefitid { get; set; }
+        public int Jobid { get; set; }
+        public string? Jobbenefit { get; set; }
+        public DateTime Datecreated { get; set; } = DateTime.Now;
+    }
+
 }
