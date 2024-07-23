@@ -125,36 +125,46 @@
     </div>
     <!-- Section 2: Key Responsibilities -->
     <div id="section2" class="section" style="display: none;">
-        <h6 class="mb-3">Step 2: Key Responsibilities</h6>
+        <h6 class="mb-4 font-weight-bold">Step 2: Key Responsibilities</h6>
         <div class="card">
             <div class="card-body">
-                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" hidden />
-                <div class="form-group">
-                    <label class="font-weight-light">Responsibility</label>
-                    <input class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId" />
+                <input class="form-control form-control-sm d-none" id="ResponsibilityId" />
+                <div class="form-group mb-3">
+                    <label class="font-weight-medium" for="ResponsibilityInput">Responsibility</label>
+                    <input class="form-control form-control-sm" id="ResponsibilityInput" placeholder="Enter responsibility here" />
                 </div>
-                <button class="btn btn-sm btn-info font-weight-bold float-right" onclick="addsystemblogparagraphdata()">Add</button>
+                <div class="form-group mb-3">
+                    <label class="font-weight-medium" for="FunctionInput">Function</label>
+                    <input class="form-control form-control-sm" id="FunctionInput" placeholder="Enter function here" />
+                    <button class="btn btn-sm btn-secondary mt-2" onclick="addFunction()">Add Function</button>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="font-weight-medium">Functions</label>
+                    <ul id="FunctionList" class="list-group mb-3">
+                        <!-- Function items will be added here -->
+                    </ul>
+                </div>
+                <button class="btn btn-sm btn-primary float-right" onclick="addResponsibility()">Add Responsibility</button>
             </div>
         </div>
-        <div class="table-responsive mt-3">
-            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables">
-                <thead>
+        <div class="table-responsive mt-4">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="ResponsibilitiesTable">
+                <thead class="thead-dark">
                     <tr>
-                        <th hidden></th>
-                        <th hidden></th>
-                        <th>Image</th>
-                        <th>Paragraph</th>
-                        <th hidden></th>
-                        <th>Name</th>
-                        <th>Source</th>
+                        <th>Responsibility</th>
+                        <th>Functions</th>
                         <th class="text-right">Action</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <!-- Table rows will be inserted here dynamically -->
+                </tbody>
             </table>
         </div>
-        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
-        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-sm btn-secondary" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-sm btn-secondary" onclick="nextSection()">Next</button>
+        </div>
     </div>
 
     <!-- Section 3: Preferred Skills -->
@@ -217,8 +227,8 @@
 
 
     <!-- Section 4: Qualifications -->
-    <div id="section3" class="section" style="display: none;">
-        <h6 class="mb-3">Step 3: Qualifications</h6>
+    <div id="section4" class="section" style="display: none;">
+        <h6 class="mb-3">Step 4: Qualifications</h6>
         <div class="card">
             <div class="card-body">
                 <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" hidden />
