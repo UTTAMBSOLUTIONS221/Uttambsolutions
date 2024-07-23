@@ -205,7 +205,7 @@
 
     <!-- Section 4: Skills -->
     <div id="section4" class="section" style="display: none;">
-        <h6 class="mb-3">Step 3: Preferred Skills</h6>
+        <h6 class="mb-3">Step 4: Preferred Skills</h6>
         <input class="form-control form-control-sm" id="Jobskillid" hidden />
         <div class="input-group">
             <input type="text" class="form-control form-control-sm" id="SystemjobskillnameId" placeholder="Enter skill" aria-label="Skill" />
@@ -271,13 +271,22 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light" for="SupportDocumentId">Support Document</label>
-                    <input type="file" class="form-control form-control-sm font-weight-light" id="SupportDocumentId" />
+                    <input type="file" class="form-control form-control-sm font-weight-light" id="SupportDocumentId" type="file" onchange="systemJobSupportDocChanged(event)" />
                 </div>
             </div>
         </div>
         <div class="form-group">
             <label class="font-weight-light">How to Apply</label>
-            <textarea class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId"></textarea>
+            <textarea class="form-control form-control-sm font-weight-light" id="SystemjobhowtoapplyId"></textarea>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" hidden>
+                <div class="form-group">
+                    <label class="font-weight-light">Images Url</label>
+                    <input class="form-control form-control-sm" id="UttambsolutionsimageurlId" readonly />
+                </div>
+            </div>
+            <div id="Uttambsolutionsimagespreviewcontainer"></div>
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <!-- Previous Button -->
