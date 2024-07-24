@@ -240,7 +240,11 @@
                                             <h6 class="font-weight-bold text-sm card-title">My Job Posts</h6>
                                         </div>
                                         <div class="col-sm-4">
-                                            <a asp-action="Addopportunity" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Opportunity</a>
+                                            @if(Model.usermodel.loginstatus==0){
+                                                <a asp-action="Addopportunity" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Opportunity</a>
+                                            }else{
+                                                <a href=""  class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right">Verify Account</a>
+                                            }
                                         </div>
                                     </div>
                                 </div>
