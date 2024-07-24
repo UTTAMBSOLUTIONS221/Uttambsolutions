@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using UAParser;
 
 namespace Jobs.Controllers
 {
@@ -93,6 +94,16 @@ namespace Jobs.Controllers
             }
 
             return errors.ToArray();
+        }
+        public string GetUserBrowser()
+        {
+            var userAgent = Request.Headers["User-Agent"];
+            //UserAgent.UserAgent ua = new UserAgent.UserAgent(userAgent);
+            string uaString = Convert.ToString(userAgent[0]);
+            var uaParser = Parser.GetDefault();
+            ClientInfo c = uaParser.Parse(uaString);
+            string browserdata = c.ToString();
+            return browserdata;
         }
     }
 }

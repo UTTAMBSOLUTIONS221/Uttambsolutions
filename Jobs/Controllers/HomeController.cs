@@ -1,8 +1,10 @@
 using DBL;
+using DBL.Entities;
 using DBL.Models;
 using Jobs.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace Jobs.Controllers
@@ -72,7 +74,18 @@ namespace Jobs.Controllers
                 Job = jobData,
                 User = SessionUserData.Usermodel
             };
-
+            var model = new SystemUserLog
+            {
+                Userid = SessionUserData.Usermodel.Userid,
+                Logaction = "Viewing the easy apply page for job application",
+                Browser = GetUserBrowser(),
+                Ipaddress = Audit.GetIPAddress(),
+                Loyaltyreward = 0,
+                Loyaltystatus = 1,
+                Logactionexittime = 0,
+                Datecreated = DateTime.Now,
+            };
+            bl.Logsystemuseractivitydata(JsonConvert.SerializeObject(model));
             return View(viewModel);
         }
 
