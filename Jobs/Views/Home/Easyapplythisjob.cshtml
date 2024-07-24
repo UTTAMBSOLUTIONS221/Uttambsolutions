@@ -192,29 +192,31 @@
                             <div class="col-lg-4 col-md-12">
                                 <div class="card border-0 shadow-sm mb-4">
                                     <div class="card-header bg-white text-custom">
-                                        <h5 class="card-title mb-0">Similar Jobs</h5>
+                                        <h5 class="card-title mb-0">Apply Here</h5>
                                     </div>
                                     <div class="card-body">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="#" class="d-flex align-items-center mb-3">
-                                                    <img src="~/Images/uttambsolutionsjoblogo.png" class="img-fluid rounded-circle mr-3" alt="Job Logo" width="50" />
-                                                    <div>
-                                                        <h6 class="text-custom mb-1">Similar Job Title</h6>
-                                                        <small class="text-muted">Similar Job Employer</small>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="d-flex align-items-center mb-3">
-                                                    <img src="~/Images/uttambsolutionsjoblogo.png" class="img-fluid rounded-circle mr-3" alt="Job Logo" width="50" />
-                                                    <div>
-                                                        <h6 class="text-custom mb-1">Another Similar Job Title</h6>
-                                                        <small class="text-muted">Another Similar Job Employer</small>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold">Curriculum Vitae</label>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="cvOption" id="existingCV" value="existing" checked>
+                                                <label class="form-check-label" for="existingCV">
+                                                    Use Existing Curriculum Vitae
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="cvOption" id="newCV" value="new">
+                                                <label class="form-check-label" for="newCV">
+                                                    Upload a New Curriculum Vitae
+                                                </label>
+                                            </div>
+                                            <div id="uploadCV" class="mt-3" style="display: none;">
+                                                <label for="cvFile" class="form-label fw-bold">Upload CV</label>
+                                                <input type="file" class="form-control" id="cvFile">
+                                                <p>Note: Uploading this will replace the existing CV</p>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-block btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Apply</button>
+
                                     </div>
                                 </div>
                             </div>
@@ -265,5 +267,26 @@
     <script src="~/lib/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script src="~/dist/js/adminlte.min.js"></script>
     <script src="~/js/site.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var existingCV = document.getElementById('existingCV');
+            var newCV = document.getElementById('newCV');
+            var uploadCV = document.getElementById('uploadCV');
+
+            function toggleCVUpload() {
+                if (newCV.checked) {
+                    uploadCV.style.display = 'block';
+                } else {
+                    uploadCV.style.display = 'none';
+                }
+            }
+
+            existingCV.addEventListener('change', toggleCVUpload);
+            newCV.addEventListener('change', toggleCVUpload);
+
+            // Initialize the display based on the default selected radio button
+            toggleCVUpload();
+        });
+    </script>
 </body>
 </html>
