@@ -25,6 +25,7 @@
                     <option value="0">---Select Type---</option>
                     <option value="1">Page</option>
                     <option value="2">Group</option>
+                    <option value="3">Company</option>
                 </select>
             </div>
         </div>
@@ -50,6 +51,23 @@
                 <textarea class="form-control form-control-sm" asp-for="@Model.OrganizationDescription" id="OrganizationDescriptionid"></textarea>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="font-weight-light">Organization Logo</label>
+                <input type="file" class="form-control form-control-sm font-weight-light" onchange="systemorganizationcompanychanged(event)" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12" hidden>
+            <div class="form-group">
+                <label class="font-weight-light">Images Url</label>
+                <input class="form-control form-control-sm" id="UttambsolutionsimageurlId" readonly />
+            </div>
+        </div>
+        <div id="Uttambsolutionsimagespreviewcontainer"></div>
     </div>
 </div>
 <div class="modal-footer">

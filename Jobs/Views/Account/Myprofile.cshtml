@@ -705,7 +705,101 @@
                 var inputField = document.getElementById('UttambsolutionsimageurlId');
                 inputField.value = JSON.stringify(downloadURLs);
             }
-    </script>
+   
+                        
+          function systemorganizationcompanychanged(event) {
+                var files = event.target.files;
+                uploadorganizationcompanyimage(files);
+            }
+
+            async function uploadorganizationcompanyimage(files) {
+                var downloadURLs = [];
+
+                function generateorganizationcompanyfilename(file) {
+                    var uniqueId = Date.now();
+                    var fileExtension = file.name.split('.').pop();
+                    var newFileName = 'Orgcompany/Orgcompanyimage/' + uniqueId + '.' + fileExtension;
+                    return newFileName;
+                }
+
+                async function uploadBlogFile(file) {
+                    return new Promise((resolve, reject) => {
+                        var newFileName = generateorganizationcompanyfilename(file);
+
+                        var storageRef = storage.ref().child(newFileName);
+                        var uploadTask = storageRef.put(file);
+
+                        uploadTask.on('state_changed',
+                            function (snapshot) {
+                                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                console.log('Upload is ' + progress + '% done');
+                            },
+                            function (error) {
+                                reject('Error uploading file: ' + error);
+                            },
+                            function () {
+                                uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                                    console.log('File available at', downloadURL);
+                                    downloadURLs.push(downloadURL);
+                                    resolve(downloadURL);
+                                });
+                            }
+                        );
+                    });
+                }
+
+                function displayorganisationcompanyimagepreview(file) {
+                    return new Promise((resolve, reject) => {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var previewContainer = document.createElement('div');
+                            previewContainer.classList.add('image-preview');
+
+                            var spinner = document.createElement('div');
+                            spinner.classList.add('spinner');
+                            previewContainer.appendChild(spinner);
+
+                            var previewContainerElement = document.getElementById('Uttambsolutionsimagespreviewcontainer');
+                            previewContainerElement.appendChild(previewContainer);
+
+                            var img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.width = 140;
+                            img.height = 140;
+                            img.style.display = 'none';
+                            img.onload = function () {
+                                spinner.remove();
+                                img.style.display = 'block';
+                                previewContainer.appendChild(img);
+                            };
+
+                            resolve();
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+
+                document.getElementById('loadingOverlay').style.zIndex = 1100; 
+                document.getElementById('loadingOverlay').style.display = 'flex';
+
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+
+                    try {
+                        await displayorganisationcompanyimagepreview(file);
+                        var downloadURL = await uploadBlogFile(file);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+
+                document.getElementById('loadingOverlay').style.display = 'none';
+
+                var inputField = document.getElementById('UttambsolutionsimageurlId');
+                inputField.value = JSON.stringify(downloadURLs);
+            }          
+                        
+      </script>
     
     
     @*Scripts for saving the job opportunity*@
