@@ -6,9 +6,11 @@
     background-color: #0a506c !important;
     color: #ffffff;
 }
+
 .full-width-hr {
     margin: 0 -15px; /* Adjust based on card padding */
 }
+
 .card-border-custom {
     border: 1px solid #0a506c;
 }
@@ -16,6 +18,7 @@
 .text-custom {
     color: #0a506c !important;
 }
+
 .btn-apply-site {
     color: white !important;
 }
