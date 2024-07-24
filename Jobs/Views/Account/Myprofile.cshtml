@@ -128,9 +128,10 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row mb-3">
-                                       <div class="col-sm-2 position-relative">
+                                        <div class="col-sm-2 position-relative">
                                             <img src="@imageUrl" class="img-fluid rounded-circle" alt="@Model.Fullname" />
-                                            <button class="position-absolute top-0 end-0 p-1" style="margin: 10px; border: none; background: transparent; cursor: pointer; transform: translate(50%, -50%);" onclick="systemuserprofileeditimagechanged()">
+                                            <input type="file" id="imageUpload" style="display: none;" accept="image/*" onchange="systemuserprofileeditimagechanged(event)" />
+                                            <button class="position-absolute top-0 end-0 p-1" style="margin: 10px; border: none; background: transparent; cursor: pointer; transform: translate(50%, -50%);" onclick="triggerFileInput()">
                                                 <i class="fas fa-camera"></i>
                                             </button>
                                         </div>
@@ -809,8 +810,12 @@
                 inputField.value = JSON.stringify(downloadURLs);
             }   
             
+            function triggerFileInput() {
+                // Trigger the file input click event
+                document.getElementById('imageUpload').click();
+            }
 
-             function systemuserprofileeditimagechanged(event) {
+            function systemuserprofileeditimagechanged(event) {
                 var files = event.target.files;
                 uploaduserprofileeditimage(files);
             }
@@ -853,7 +858,7 @@
 
                 async function saveprofileimageurltodatabase(url) {
                     var uil1 = {Profileimagelogo: url };
-                    $.post("/Product/Addsystemproductdata", uil1, function (response) {
+                    $.post("/Account/Updatestaffprofilepicturedata", uil1, function (response) {
                         setTimeout(function () { location.reload(); }, 1000);
                     });
                  }
