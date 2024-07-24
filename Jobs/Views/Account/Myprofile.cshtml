@@ -404,34 +404,26 @@
     <script src="~/dist/js/adminlte.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
-        <script>
+    <script>
         $(document).ready(function() {
             $('#AllsystemDataTables tbody').on('click', 'tr', function() {
                 var jobId = $(this).data('jobid');
-            
-                // Check if jobId is correctly fetched
-                if (jobId) {
-                    var url = '@Url.Action("Opportunitydetail", "Account", new { code = Guid.NewGuid(), Opportunityid = "__JOBID__" })';
-                    url = url.replace("__JOBID__", jobId);
-                    // Create a temporary anchor element to hold the URL
-                    var $tempAnchor = $('<a></a>')
-                        .attr('href', url)
-                        .attr('data-target', '#Uttambsolutionsmodallarge')
-                        .attr('data-toggle', 'modal')
-                        .attr('data-backdrop', 'static')
-                        .attr('data-keyboard', 'false');
+                var guid = '@Guid.NewGuid()';
+                var url = '@Url.Action("Opportunitydetail", "Account", new { code = "__GUID__", Opportunityid = "__JOBID__" })';
+                url = url.replace("__JOBID__", jobId).replace("__GUID__", guid);
 
-                    // Append the anchor to the body, click it to trigger the modal, then remove it
-                    $('body').append($tempAnchor);
-                    $tempAnchor.trigger('click');
-                    $tempAnchor.remove();
-                } else {
-                    console.error('JobId is not defined');
-                }
+                // Create a temporary anchor element to hold the URL
+                var $tempAnchor = $('<a>')
+                    .attr({
+                        'href': url,
+                        'data-target': '#Uttambsolutionsmodallarge',
+                        'data-toggle': 'modal',
+                        'data-backdrop': 'static',
+                        'data-keyboard': 'false'
+                    });
             });
         });
-     </script>
-
+    </script>
 
     <script type="text/javascript">
             let currentSection = 1;
