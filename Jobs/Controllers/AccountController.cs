@@ -206,6 +206,13 @@ namespace Jobs.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Opportunitydetail(long Opportunityid)
+        {
+            var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
+            return PartialView(systemJob);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Addorganization(long Organizationid)
         {
             SystemOrganization organization = new SystemOrganization();
