@@ -69,6 +69,16 @@ namespace DBL.Repositories
 
             }
         }
+        public Genericmodel Updatestaffprofilepicturedata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Updatestaffprofilepicturedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         #endregion
 
         #region Verify System Staff

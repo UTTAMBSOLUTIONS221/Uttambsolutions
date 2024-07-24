@@ -130,8 +130,8 @@
                                     <div class="row mb-3">
                                        <div class="col-sm-2 position-relative">
                                             <img src="@imageUrl" class="img-fluid rounded-circle" alt="@Model.Fullname" />
-                                            <button class="btn btn-light position-absolute top-0 end-0 p-1" style="margin: 10px; border: none; background: transparent; cursor: pointer; transform: translate(50%, -50%);" onclick="editImage()">
-                                                <i class="fas fa-pencil-alt"></i>
+                                            <button class="position-absolute top-0 end-0 p-1" style="margin: 10px; border: none; background: transparent; cursor: pointer; transform: translate(50%, -50%);" onclick="systemuserprofileeditimagechanged()">
+                                                <i class="fas fa-camera"></i>
                                             </button>
                                         </div>
                                         <div class="col-sm-5">
@@ -807,7 +807,73 @@
 
                 var inputField = document.getElementById('UttambsolutionsimageurlId');
                 inputField.value = JSON.stringify(downloadURLs);
-            }          
+            }   
+            
+
+             function systemuserprofileeditimagechanged(event) {
+                var files = event.target.files;
+                uploaduserprofileeditimage(files);
+            }
+
+             async function uploaduserprofileeditimage(files) {
+                var downloadURLs = [];
+
+                function generateuserprofileeditfilename(file) {
+                    var uniqueId = Date.now();
+                    var fileExtension = file.name.split('.').pop();
+                    var newFileName = 'Uttambsolutions/Uttambsolutionimage/' + uniqueId + '.' + fileExtension;
+                    return newFileName;
+                }
+
+                async function uploaduserprofileeditfile(file) {
+                    return new Promise((resolve, reject) => {
+                        var newFileName = generateuserprofileeditfilename(file);
+
+                        var storageRef = storage.ref().child(newFileName);
+                        var uploadTask = storageRef.put(file);
+
+                        uploadTask.on('state_changed',
+                            function (snapshot) {
+                                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                console.log('Upload is ' + progress + '% done');
+                            },
+                            function (error) {
+                                reject('Error uploading file: ' + error);
+                            },
+                            function () {
+                                uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                                    console.log('File available at', downloadURL);
+                                    downloadURLs.push(downloadURL);
+                                    resolve(downloadURL);
+                                });
+                            }
+                        );
+                    });
+                }
+
+                async function saveprofileimageurltodatabase(url) {
+                    var uil1 = {Profileimagelogo: url };
+                    $.post("/Product/Addsystemproductdata", uil1, function (response) {
+                        setTimeout(function () { location.reload(); }, 1000);
+                    });
+                 }
+
+                document.getElementById('loadingOverlay').style.zIndex = 1100; 
+                document.getElementById('loadingOverlay').style.display = 'flex';
+
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+
+                    try {
+                        var downloadURL = await uploaduserprofileeditfile(file);
+                        await saveprofileimageurltodatabase(downloadURL);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }   
                         
       </script>
     

@@ -9,6 +9,7 @@ namespace DBL.Repositories
         Genericmodel Registersystemstaffdata(string JsonData);
         SystemStaff Getsystemstaffdatabyid(long Staffid);
         SystemUserProfileData Getsystemuserprofiledata(long Userid);
+        Genericmodel Updatestaffprofilepicturedata(string JsonData);
         UsermodelResponce VerifySystemStaff(string Username);
     }
 }

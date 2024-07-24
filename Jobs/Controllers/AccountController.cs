@@ -121,6 +121,12 @@ namespace Jobs.Controllers
             return View(data);
         }
 
+        public async Task<JsonResult> Updatestaffprofilepicturedata(Staffprofile model)
+        {
+            var resp = await bl.Updatestaffprofilepicturedata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
+
 
         [HttpGet]
         [AllowAnonymous]

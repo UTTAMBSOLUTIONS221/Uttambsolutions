@@ -113,6 +113,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Updatestaffprofilepicturedata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Updatestaffprofilepicturedata(Obj);
+                return Resp;
+            });
+        }
         #endregion
 
         #region Verify System Staff Forgot Password
