@@ -246,14 +246,9 @@
                                                 <th>Title</th>
                                                 <th>Employer</th>
                                                 <th>Function</th>
-                                                <th>Industry</th>
-                                                <th>Location</th>
-                                                <th>Jobtype</th>
-                                                <th>Experience</th>
                                                 <th>Salary Range</th>
                                                 <th>Status</th>
                                                 <th>Deadline</th>
-                                                <th>Datecreated</th>
                                                 <th>Dateposted</th>
                                                 <th class="text-right">Action</th>
                                             </tr>
@@ -267,15 +262,10 @@
                                                         <td>@item.Title</td>
                                                         <td>@item.Employername</td>
                                                         <td>@item.Functionname</td>
-                                                        <td>@item.Jobindustryname</td>
-                                                        <td>@item.Locationname</td>
-                                                        <td>@item.Jobtypename</td>
-                                                        <td>@item.Experiencename</td>
                                                         <td>@item.JobSalaryRange</td>
                                                         <td>@item.JobStatus</td>
                                                         <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
-                                                        <td>@item.DateCreated</td>
-                                                        <td>@item.DatePosted</td>
+                                                        <td>@item.DatePosted.ToString("dd/MM/yyyy")</td>
                                                         <td class="text-right"><a asp-action="Addopportunity" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                                                     </tr>
                                                 }
@@ -409,8 +399,7 @@
             $('#AllsystemDataTables tbody').on('click', 'tr', function() {
                 var jobId = $(this).data('jobid');
                 var guid = '@Guid.NewGuid()';
-                var url = '@Url.Action("Opportunitydetail", "Account", new { code = "__GUID__", Opportunityid = "__JOBID__" })';
-                url = url.replace("__JOBID__", jobId).replace("__GUID__", guid);
+                var url = '/Account/Opportunitydetail?code=' + guid + '&Opportunityid=' + jobId;
 
                 // Create a temporary anchor element to hold the URL
                 var $tempAnchor = $('<a>')
@@ -421,9 +410,15 @@
                         'data-backdrop': 'static',
                         'data-keyboard': 'false'
                     });
+
+                // Append the anchor to the body, click it to trigger the modal, then remove it
+                $('body').append($tempAnchor);
+                $tempAnchor.trigger('click');
+                $tempAnchor.remove();
             });
         });
     </script>
+
 
     <script type="text/javascript">
             let currentSection = 1;
