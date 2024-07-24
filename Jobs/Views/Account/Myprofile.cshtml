@@ -202,22 +202,28 @@
                                 <div class="card-header">
                                     <h5 class="font-weight-bold">Summary</h5>
                                 </div>
-                                <div class="card-body">
-                                    <table class="table table-borderless table-sm">
+                                <div class="card-body table-responsive table-responsive-sm">
+                                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                                        <thead>
+                                            <tr>
+                                                <th>Action</th>
+                                                <th>Time</th>
+                                                <th>Reward</th>
+                                                <th>Datecreated</th>
+                                            </tr>
+                                        </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><span class="font-weight-bold">Total Posts: </span>@Model.TotalPosts</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font-weight-bold">Total Comments: </span>@Model.TotalComments</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font-weight-bold">Last Login: </span>@Model.LastLogin.ToString("MMMM dd, yyyy")</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-weight-bold">Status:</td>
-                                                <td>@Model.Status</td>
-                                            </tr>
+                                            @if(Model!= null && Model.Systemuserlogs!=null){
+                                                foreach (var item in Model.Systemuserlogs)
+                                                {
+                                                  <tr>
+                                                    <td>@item.Logaction</td>
+                                                    <td>@item.Logactionexittime</td>
+                                                    <td>@item.Loyaltyreward</td>
+                                                    <td>@item.Datecreated.ToString("dd/MM/yyyy")</td>
+                                                </tr>
+                                                }
+                                            }
                                         </tbody>
                                     </table>
                                 </div>

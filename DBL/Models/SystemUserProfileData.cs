@@ -29,5 +29,6 @@ namespace DBL.Models
         public List<SocialMediaSettings>? Systemusersocials { get; set; }
         public List<Systemblog>? Systemuserblogs { get; set; }
         public List<SystemJob> Systemjobs { get; set; }
+        public List<SystemUserLog> Systemuserlogs { get; set; }
     }
 }
