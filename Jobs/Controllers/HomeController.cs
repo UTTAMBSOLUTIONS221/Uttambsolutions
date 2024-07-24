@@ -28,13 +28,45 @@ namespace Jobs.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Jobdetails(long JobId)
         {
+
+            // Retrieve job data based on the provided JobId
             var jobData = await bl.Getsystemopportunitydatabyid(JobId);
+            // Set the image URL, using a default image if Employerlogo is null
+            var imageUrl = string.IsNullOrEmpty(jobData.Employerlogo)
+                           ? "https://jobcenter.uttambsolutions.com/Images/uttambsolutionsjoblogo.png"
+                           : jobData.Employerlogo;
+
+            // Populate ViewData with relevant information
+            ViewData["image"] = imageUrl;
+            ViewData["type"] = "website";
+            ViewData["Title"] = jobData.Title;
+            ViewData["description"] = jobData.JobDescription;
+            ViewData["Blogownername"] = jobData.Employername;
+            ViewData["imagealt"] = jobData.Functionname;
+            ViewData["Blogtags"] = "JobCenter, job listings, freelancing, job biddings, career opportunities, .NET jobs, Python jobs, article writing, SQL Server, MSSQL, technical writing, recruitment agency, hiring, job search, employment, job board, job portal, IT jobs, software development, engineering jobs, healthcare jobs, finance jobs, marketing jobs, remote jobs, freelance jobs, contract jobs, part-time jobs, full-time jobs, internship, entry-level jobs, executive jobs, job applications, resume writing, career advice, interview tips, job fairs, talent acquisition, staffing solutions, headhunting, workforce solutions, career development, job training, job placement, skill development, professional networking, job alerts, recruitment services, job consultancy, employment agency, recruitment solutions, job opportunities, career hub, job finder, work opportunities, job postings, job openings, hiring now, employment opportunities, job vacancies, find a job, job seekers, talent pool, career growth, job support, online jobs, local jobs, international jobs, job market, job recommendations, industry-specific jobs, job matching, job board software, HR solutions, job outreach, talent management, employee recruitment, workforce management";
+            ViewData["url"] = $"https://jobcenter.uttambsolutions.com/Home/Jobdetails?code={Guid.NewGuid()}&jobcode={Guid.NewGuid()}&JobId={JobId}";
+
             return View(jobData);
         }
         [HttpGet]
         public async Task<IActionResult> Easyapplythisjob(long jobid)
         {
             var jobData = await bl.Getsystemopportunitydatabyid(jobid);
+            // Set the image URL, using a default image if Employerlogo is null
+            var imageUrl = string.IsNullOrEmpty(jobData.Employerlogo)
+                           ? "https://jobcenter.uttambsolutions.com/Images/uttambsolutionsjoblogo.png"
+                           : jobData.Employerlogo;
+
+            // Populate ViewData with relevant information
+            ViewData["image"] = imageUrl;
+            ViewData["type"] = "website";
+            ViewData["Title"] = jobData.Title;
+            ViewData["description"] = jobData.JobDescription;
+            ViewData["Blogownername"] = jobData.Employername;
+            ViewData["imagealt"] = jobData.Functionname;
+            ViewData["Blogtags"] = "JobCenter, job listings, freelancing, job biddings, career opportunities, .NET jobs, Python jobs, article writing, SQL Server, MSSQL, technical writing, recruitment agency, hiring, job search, employment, job board, job portal, IT jobs, software development, engineering jobs, healthcare jobs, finance jobs, marketing jobs, remote jobs, freelance jobs, contract jobs, part-time jobs, full-time jobs, internship, entry-level jobs, executive jobs, job applications, resume writing, career advice, interview tips, job fairs, talent acquisition, staffing solutions, headhunting, workforce solutions, career development, job training, job placement, skill development, professional networking, job alerts, recruitment services, job consultancy, employment agency, recruitment solutions, job opportunities, career hub, job finder, work opportunities, job postings, job openings, hiring now, employment opportunities, job vacancies, find a job, job seekers, talent pool, career growth, job support, online jobs, local jobs, international jobs, job market, job recommendations, industry-specific jobs, job matching, job board software, HR solutions, job outreach, talent management, employee recruitment, workforce management";
+            ViewData["url"] = $"https://jobcenter.uttambsolutions.com/Home/Jobdetails?code={Guid.NewGuid()}&jobcode={Guid.NewGuid()}&JobId={jobid}";
+
             var viewModel = new JobApplicationViewModel
             {
                 Job = jobData,

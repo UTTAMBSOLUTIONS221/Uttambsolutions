@@ -1,6 +1,7 @@
 ﻿@model DBL.Entities.SystemJob
 @{
     Layout = null;
+
     // Method to calculate relative time
     string GetRelativeDate(DateTime date)
     {
@@ -29,29 +30,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - JobCenter</title>
-    <meta name="description" content="JobCenter offers the latest job listings, freelancing job biddings, and career opportunities. Stay informed and find your next job with our comprehensive job board." />
-    <meta name="keywords" content="JobCenter, job listings, freelancing, job biddings, career opportunities, job board" />
-    <meta name="author" content="JobCenter" />
-    <meta name="google-adsense-account" content="ca-pub-2850934153859537">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="@ViewData["Title"] - JobCenter" />
-    <meta property="og:description" content="JobCenter provides the latest job listings, freelancing job biddings, and career opportunities. Explore our platform to find your next job." />
-    <meta property="og:image" content="https://jobcenter.uttambsolutions.com/images/jobcenterlogo.png" />
-    <meta property="og:url" content="https://jobcenter.uttambsolutions.com" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="@ViewData["type"]" />
+    <meta property="og:title" content="@ViewData["Title"]" />
+    <meta property="og:description" content="@ViewData["description"]" />
+    <meta property="og:image" content="@ViewData["image"]" />
+    <meta property="og:url" content="@ViewData["url"]" />
+    <meta property="og:image:alt" content="@ViewData["imagealt"]" />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="@ViewData["Title"] - JobCenter" />
     <meta name="twitter:description" content="JobCenter offers job listings, freelancing job biddings, and career opportunities. Stay connected and find your next job with our platform." />
-    <meta name="twitter:image" content="https://jobcenter.uttambsolutions.com/images/jobcenterlogo.png" />
+    <meta name="twitter:image" content="@ViewData["image"]" />
 
     <!-- Schema.org Markup -->
     <meta itemprop="name" content="@ViewData["Title"] - JobCenter" />
-    <meta itemprop="description" content="JobCenter provides the latest job listings, freelancing job biddings, and career opportunities." />
-    <meta itemprop="image" content="https://jobcenter.uttambsolutions.com/images/jobcenterlogo.png" />
+    <meta itemprop="description" content="@ViewData["description"]" />
+    <meta itemprop="image" content="@ViewData["image"]" />
 
+    <!-- CSS Links -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
@@ -60,13 +59,13 @@
     <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link href="~/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
     <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
-            crossorigin="anonymous"></script>
+
+    <!-- Google Adsense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537" crossorigin="anonymous"></script>
 </head>
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
     <div class="wrapper">
@@ -76,11 +75,9 @@
                     <img src="~/images/uttambsolutionsjoblogo.png" alt="JobCenter Logo" class="brand-image elevation-3">
                     <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">JobCenter</span>
                 </a>
-
-                <!-- Right navbar links for large screens -->
                 <ul class="nav-item order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                     <li class="nav-item">
-                        <a asp-action="Signin" asp-controller="Account" asp-area="" class="nav-link text-white fw-bold font-weight-bold text-uppercase">SIGNIN</a>
+                        <a asp-action="Signin" asp-controller="Account" class="nav-link text-white fw-bold font-weight-bold text-uppercase">SIGNIN</a>
                     </li>
                 </ul>
             </div>
@@ -255,6 +252,7 @@
         </footer>
     </div>
 
+    <!-- JavaScript Files -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
