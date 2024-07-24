@@ -128,7 +128,7 @@
         <h6 class="mb-4 font-weight-bold">Step 2: Key Responsibilities</h6>
         <input class="form-control form-control-sm" id="Jobfunctionid" hidden />
         <div class="input-group">
-            <input type="text" class="form-control form-control-sm" id="SystemjobfunctionId" placeholder="Enter Responsibility" aria-label="Qualification" />
+            <input type="text" class="form-control form-control-sm" id="SystemjobfunctionId" placeholder="Enter Responsibility" aria-label="Responsibility" />
             <div class="input-group-append">
                 <button class="btn btn-sm btn-secondary" onclick="addsystemjobfunctiondata()">Add</button>
             </div>
@@ -138,12 +138,20 @@
                 <thead>
                     <tr>
                         <th>Responsibility</th>
-                        <th>Functions</th>
                         <th class="text-right">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Table rows will be inserted here dynamically -->
+                    @if (Model.Systemjobfunction != null)
+                    {
+                        foreach (var item in Model.Systemjobfunction)
+                        {
+                            <tr>
+                                <td>@item.Jobfunction</td>
+                                <td class="text-right"></td>
+                            </tr>
+                        }
+                    }
                 </tbody>
             </table>
         </div>
@@ -173,7 +181,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Table rows will be dynamically added here -->
+                    @if (Model.Systemjobqualification != null)
+                    {
+                        foreach (var item in Model.Systemjobqualification)
+                        {
+                            <tr>
+                                <td>@item.Jobqualification</td>
+                                <td class="text-right"></td>
+                            </tr>
+                        }
+                    }
                 </tbody>
             </table>
         </div>
@@ -203,7 +220,18 @@
                         <th class="text-right">Action</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    @if (Model.Systemjobskill != null)
+                    {
+                        foreach (var item in Model.Systemjobskill)
+                        {
+                            <tr>
+                                <td>@item.Jobskill</td>
+                                <td class="text-right"></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
             </table>
         </div>
         <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
@@ -230,7 +258,18 @@
                         <th class="text-right">Action</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    @if (Model.Systemjobbenefit != null)
+                    {
+                        foreach (var item in Model.Systemjobbenefit)
+                        {
+                            <tr>
+                                <td>@item.Jobbenefit</td>
+                                <td class="text-right"></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
             </table>
         </div>
         <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
