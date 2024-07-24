@@ -69,8 +69,8 @@ namespace DBL
             return Task.Run(() =>
             {
                 string Passwordhash = str.RandomString(12);
-                string Password = str.RandomString(8).ToString();
-                obj.Passwords = sec.Encrypt(Password, Passwordhash);
+                //string Password = str.RandomString(8).ToString();
+                obj.Passwords = sec.Encrypt(obj.Passwords, Passwordhash);
                 obj.Passharsh = Passwordhash;
                 obj.Username = obj.Emailaddress;
                 obj.Datecreated = DateTime.Now;
