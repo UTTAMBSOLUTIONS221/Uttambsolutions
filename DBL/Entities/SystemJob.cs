@@ -30,7 +30,6 @@
         public bool Approved { get; set; } = false;
         public bool IsPublished { get; set; } = false;
         public long CreatedBy { get; set; }
-
         public string? Jobreportto { get; set; }
         public string? Jobimageburl { get; set; }
         public string? Jobhowtoapply { get; set; }
