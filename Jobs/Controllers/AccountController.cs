@@ -123,6 +123,7 @@ namespace Jobs.Controllers
 
         public async Task<JsonResult> Updatestaffprofilepicturedata(Staffprofile model)
         {
+            model.Userid = SessionUserData.Usermodel.Userid;
             var resp = await bl.Updatestaffprofilepicturedata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
