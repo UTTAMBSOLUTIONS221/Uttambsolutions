@@ -277,7 +277,7 @@
                                                         <td>@item.JobStatus</td>
                                                         <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
                                                         <td>@item.DatePosted.ToString("dd/MM/yyyy")</td>
-                                                        <td class="text-right"><a asp-action="Addopportunity" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                                        <td class="text-right"><a asp-action="Addopportunity" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                                                     </tr>
                                                 }
                                             }
@@ -405,40 +405,6 @@
     <script src="~/dist/js/adminlte.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Handle row click
-            $('#AllsystemDataTables tbody').on('click', 'tr', function(event) {
-                // Check if the click originated from the Edit button
-                if ($(event.target).closest('a').length === 0) {
-                    var jobId = $(this).data('jobid');
-                    var guid = '@Guid.NewGuid()';
-                    var url = '/Account/Opportunitydetail?code=' + guid + '&Opportunityid=' + jobId;
-
-                    // Create a temporary anchor element to hold the URL
-                    var $tempAnchor = $('<a>')
-                        .attr({
-                            'href': url,
-                            'data-target': '#Uttambsolutionsmodallarge',
-                            'data-toggle': 'modal',
-                            'data-backdrop': 'static',
-                            'data-keyboard': 'false'
-                        });
-
-                    // Append the anchor to the body, click it to trigger the modal, then remove it
-                    $('body').append($tempAnchor);
-                    $tempAnchor.trigger('click');
-                    $tempAnchor.remove();
-                }
-            });
-
-            // Prevent row click when clicking on the Edit button
-            $('#AllsystemDataTables tbody').on('click', 'a', function(event) {
-                event.stopPropagation();
-            });
-        });
-    </script>
-
     <script type="text/javascript">
             let currentSection = 1;
 
@@ -614,6 +580,34 @@
 
     </script>
       
+    <script type="text/javascript">
+       // Handle row click
+        $('#AllsystemDataTables tbody').on('click', 'tr', function(event) {
+            // Check if the click originated from the Edit button
+            if ($(event.target).closest('a').length === 0) {
+                var jobId = $(this).data('jobid');
+                var guid = '@Guid.NewGuid()';
+                var url = '/Account/Opportunitydetail?code=' + guid + '&Opportunityid=' + jobId;
+
+                // Create a temporary anchor element to hold the URL
+                var $tempAnchor = $('<a>')
+                    .attr({
+                        'href': url,
+                        'data-target': '#Uttambsolutionsmodallarge',
+                        'data-toggle': 'modal',
+                        'data-backdrop': 'static',
+                        'data-keyboard': 'false'
+                    });
+
+                // Append the anchor to the body, click it to trigger the modal, then remove it
+                $('body').append($tempAnchor);
+                $tempAnchor.trigger('click');
+                $tempAnchor.remove();
+            }
+        });
+    </script>
+
+ 
      <script type="text/javascript">
          const firebaseConfig = {
                 apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
