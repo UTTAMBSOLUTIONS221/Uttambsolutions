@@ -284,7 +284,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light">Reports to</label>
-                    <input class="form-control form-control-sm font-weight-light" id="SystemjobreportstoId" />
+                    <input class="form-control form-control-sm font-weight-light" asp-for="@Model.Jobreportto" id="SystemjobreportstoId" />
                 </div>
             </div>
             <!-- Column for "Support Document" -->
@@ -297,7 +297,7 @@
         </div>
         <div class="form-group">
             <label class="font-weight-light">How to Apply</label>
-            <textarea class="form-control form-control-sm font-weight-light" id="SystemjobhowtoapplyId"></textarea>
+            <textarea class="form-control form-control-sm font-weight-light" asp-for="@Model.Jobhowtoapply" id=" SystemjobhowtoapplyId"></textarea>
         </div>
         <div class="row">
             <div class="col-sm-12" hidden>
