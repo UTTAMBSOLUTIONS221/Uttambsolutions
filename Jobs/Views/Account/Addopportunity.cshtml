@@ -137,6 +137,7 @@
             <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables10">
                 <thead>
                     <tr>
+                        <th>Responsibilityid</th>
                         <th>Responsibility</th>
                         <th class="text-right">Action</th>
                     </tr>
@@ -147,6 +148,7 @@
                         foreach (var item in Model.Systemjobfunction)
                         {
                             <tr>
+                                <td hidden>@item.Jobfunctionid</td>
                                 <td>@item.Jobfunction</td>
                                 <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobfunctiondata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobfunctiondata(this.parentNode.parentNode)">Update</button></td>
                             </tr>
@@ -186,6 +188,7 @@
                         foreach (var item in Model.Systemjobqualification)
                         {
                             <tr>
+                                <td>@item.Jobqualificationid</td>
                                 <td>@item.Jobqualification</td>
                                 <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobqualificationdata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobqualificationdata(this.parentNode.parentNode)">Update</button></td>
                             </tr>
@@ -226,6 +229,7 @@
                         foreach (var item in Model.Systemjobskill)
                         {
                             <tr>
+                                <td>@item.Jobskillid</td>
                                 <td>@item.Jobskill</td>
                                 <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobskilldata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobskilldata(this.parentNode.parentNode)">Update</button></td>
                             </tr>
@@ -264,6 +268,7 @@
                         foreach (var item in Model.Systemjobbenefit)
                         {
                             <tr>
+                                <td>@item.Jobbenefitid</td>
                                 <td>@item.Jobbenefit</td>
                                 <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobbenefitdata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobbenefitdata(this.parentNode.parentNode)">Update</button></td>
                             </tr>
