@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DBL.Models
+﻿namespace DBL.Models
 {
     public class UsermodeldataResponce
     {
@@ -12,7 +6,7 @@ namespace DBL.Models
         public long Tenantid { get; set; }
         public string? Tenantname { get; set; }
         public string? Tenantsubdomain { get; set; }
-        public string? TenantLogo { get; set; }
+        public string? UserProfileImageUrl { get; set; }
         public string? Currencyname { get; set; }
         public string? Utcname { get; set; }
         public string? Firstname { get; set; }

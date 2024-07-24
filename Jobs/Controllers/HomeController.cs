@@ -1,4 +1,5 @@
 using DBL;
+using DBL.Models;
 using Jobs.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +35,13 @@ namespace Jobs.Controllers
         public async Task<IActionResult> Easyapplythisjob(long jobid)
         {
             var jobData = await bl.Getsystemopportunitydatabyid(jobid);
-            return View(jobData);
+            var viewModel = new JobApplicationViewModel
+            {
+                Job = jobData,
+                User = SessionUserData.Usermodel
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

@@ -216,7 +216,6 @@ namespace DBL
                                 Tenantid = resp.Usermodel.Tenantid,
                                 Tenantname = resp.Usermodel.Tenantname,
                                 Tenantsubdomain = resp.Usermodel.Tenantsubdomain,
-                                TenantLogo = resp.Usermodel.TenantLogo,
                                 Currencyname = resp.Usermodel.Currencyname,
                                 Utcname = resp.Usermodel.Utcname,
                                 Firstname = resp.Usermodel.Firstname,

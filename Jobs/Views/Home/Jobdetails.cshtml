@@ -160,7 +160,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-footer bg-white text-start">
+                                        <div class="card-footer bg-white text-end">
                                             @if (Model.EasyApply)
                                             {
                                                 <a asp-action="Easyapplythisjob" asp-controller="Home" asp-route-jobcode="@Guid.NewGuid()" asp-route-code="@Guid.NewGuid()" asp-route-jobid="@Model.JobId" class="btn btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Easy Apply</a>
@@ -221,7 +221,7 @@
                                                 <label for="message" class="form-label">Message</label>
                                                 <textarea class="form-control" id="message" rows="3" placeholder="Your Message"></textarea>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Send Message</button>
+                                            <button type="submit" class="btn btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Send Message</button>
                                         </form>
                                     </div>
                                 </div>
