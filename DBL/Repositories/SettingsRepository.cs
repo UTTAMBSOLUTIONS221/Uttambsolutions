@@ -68,5 +68,18 @@ namespace DBL.Repositories
             }
         }
         #endregion
+
+        #region Log User Activities
+        public Genericmodel Registersystemuseractivitydata(string jsonObjectdata)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", jsonObjectdata);
+                return connection.Query<Genericmodel>("Usp_Registersystemuseractivitydata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        #endregion
     }
 }

@@ -704,5 +704,16 @@ namespace DBL
             });
         }
         #endregion
+
+        #region System Other Methods
+        public Task<Genericmodel> Logsystemuseractivitydata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Registersystemuseractivitydata(Obj);
+                return Resp;
+            });
+        }
+        #endregion
     }
 }

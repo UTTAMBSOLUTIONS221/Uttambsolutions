@@ -15,5 +15,9 @@ namespace DBL.Repositories
         #region Log Email Messages
         Genericmodel LogEmailMessage(string JsonEntity);
         #endregion
+
+        #region Log User Activities
+        Genericmodel Registersystemuseractivitydata(string jsonObjectdata);
+        #endregion
     }
 }
