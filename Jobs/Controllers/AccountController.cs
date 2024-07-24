@@ -105,6 +105,18 @@ namespace Jobs.Controllers
         [HttpGet]
         public async Task<IActionResult> Myprofile()
         {
+            var model = new SystemUserLog
+            {
+                Userid = SessionUserData.Usermodel.Userid,
+                Logaction = "Viewing my profile",
+                Browser = GetUserBrowser(),
+                Ipaddress = Audit.GetIPAddress(),
+                Loyaltyreward = 0,
+                Loyaltystatus = 1,
+                Logactionexittime = 0,
+                Datecreated = DateTime.Now,
+            };
+            bl.Logsystemuseractivitydata(JsonConvert.SerializeObject(model));
             var data = await bl.Getsystemuserprofiledata(SessionUserData.Usermodel.Userid);
             return View(data);
         }
@@ -208,6 +220,18 @@ namespace Jobs.Controllers
         [HttpGet]
         public async Task<IActionResult> Opportunitydetail(long Opportunityid)
         {
+            var model = new SystemUserLog
+            {
+                Userid = SessionUserData.Usermodel.Userid,
+                Logaction = "Viewing the opportunity details whike in the my profile",
+                Browser = GetUserBrowser(),
+                Ipaddress = Audit.GetIPAddress(),
+                Loyaltyreward = 0,
+                Loyaltystatus = 1,
+                Logactionexittime = 0,
+                Datecreated = DateTime.Now,
+            };
+            bl.Logsystemuseractivitydata(JsonConvert.SerializeObject(model));
             var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
             return PartialView(systemJob);
         }
