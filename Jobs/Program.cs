@@ -19,6 +19,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddHttpContextAccessor();
 
 // Add Quartz services
 builder.Services.AddHostedService<QuartzHostedService>();

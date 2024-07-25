@@ -149,31 +149,33 @@
                                                     <img src="~/Images/uttambsolutionsjoblogo.png" class="img-fluid rounded" alt="Company Logo" />
                                                 </div>
                                             </div>
-                                            <div class="col-md-10 col-sm-9 col-8">
+                                             <div class="col-md-10 col-sm-9 col-8">
                                                 <p>@Model.Job.JobDescription</p>
-                                                <h4>Key Responsibilities:</h4>
-                                                @if (Model.Job.Systemjobfunction != null)
-                                                {
-                                                    foreach (var joFunctions in Model.Job.Systemjobfunction)
-                                                    {
-                                                        <p>@joFunctions.Jobfunction</p>
-                                                    }
-                                                }
-                                                <h4>Qualifications:</h4>
-                                                @if (Model.Job.Systemjobqualification != null)
-                                                {
-                                                    foreach (var joQualifications in Model.Job.Systemjobqualification)
-                                                    {
-                                                        <p>@joQualifications.Jobqualification</p>
-                                                    }
-                                                }
-                                                <h4>How to Apply:</h4>
-                                                <p>@Model.Job.Jobhowtoapply</p>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12">
+                                                    <h4>Key Responsibilities:</h4>
+                                                    @if (Model.Job.Systemjobfunction != null)
+                                                    {
+                                                        foreach (var joFunctions in Model.Job.Systemjobfunction)
+                                                        {
+                                                            <p>@joFunctions.Jobfunction</p>
+                                                        }
+                                                    }
+                                                    <h4>Qualifications:</h4>
+                                                    @if (Model.Job.Systemjobqualification != null)
+                                                    {
+                                                        foreach (var joQualifications in Model.Job.Systemjobqualification)
+                                                        {
+                                                            <p>@joQualifications.Jobqualification</p>
+                                                        }
+                                                    }
+                                                    <h4>How to Apply:</h4>
+                                                    <p>@Model.Job.Jobhowtoapply</p>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
-                                    </div>
-                                    <div class="card-footer bg-white">
-                                        <a href="javascript:void(0);" class="btn btn-custom font-weight-bold text-uppercase" id="applyBtn" onclick="scrollToApplicationForm()">Apply Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -204,15 +206,6 @@
                                                 </div>
                                                 <div class="card card-border-custom mb-4">
                                                     <div class="card-header bg-white">
-                                                        <h5 class="fw-bold font-weight-bold text-custom">Contact Information:</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <p><strong>Email:</strong> @Model.User.Emailaddress</p>
-                                                        <p><strong>Phone:</strong> @Model.User.Phonenumber</p>
-                                                    </div>
-                                                </div>
-                                                <div class="card card-border-custom mb-4">
-                                                    <div class="card-header bg-white">
                                                         <h5 class="fw-bold font-weight-bold text-custom">Share this Job:</h5>
                                                     </div>
                                                     <div class="card-body">
@@ -221,6 +214,50 @@
                                                             <a href="https://www.facebook.com/sharer/sharer.php?u=@(Url.Action("Details", "Job", new { id = Model.Job.JobId }, HttpContextAccessor.HttpContext.Request.Scheme))" class="btn btn-custom mr-2" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
                                                             <a href="https://www.linkedin.com/sharing/share-offsite/?url=@(Url.Action("Details", "Job", new { id = Model.Job.JobId }, HttpContextAccessor.HttpContext.Request.Scheme))" class="btn btn-custom" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card card-border-custom shadow-sm bg-light border-0">
+                                                    <div class="card-header bg-white">
+                                                        <h4 class="fw-bold font-weight-bold text-custom text-uppercase">Application Form</h4>
+                                                    </div>
+                                                    <div class="card-body bg-white">
+                                                        @using (Html.BeginForm("Apply", "Job", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                        {
+                                                            @Html.AntiForgeryToken()
+                                                            @Html.HiddenFor(model => model.Job.JobId)
+                                                            @Html.HiddenFor(model => model.User.Userid)
+
+                                                            <div class="form-group">
+                                                                <label class="control-label">Curriculum Vitae (CV)</label>
+                                                                <div class="form-check">
+                                                                    <input type="radio" name="CVOption" id="useExistingCV" value="existing" class="form-check-input" @(Model.User.Usercurriculumvitae != null ? "checked" : "") />
+                                                                    <label for="useExistingCV" class="form-check-label">Use existing CV</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input type="radio" name="CVOption" id="uploadNewCV" value="new" class="form-check-input" @(Model.User.Usercurriculumvitae == null ? "checked" : "") />
+                                                                    <label for="uploadNewCV" class="form-check-label">Upload a new CV</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group" id="existingCV" style="display: @(Model.User.Usercurriculumvitae != null ? "block" : "none")">
+                                                                @if (Model.User.Usercurriculumvitae != null)
+                                                                {
+                                                                    <a href="@Url.Content(Model.User.Usercurriculumvitae)" target="_blank">View Current CV</a>
+                                                                }
+                                                            </div>
+                                                            <div class="form-group" id="newCV" style="display: @(Model.User.Usercurriculumvitae == null ? "block" : "none")">
+                                                                <label for="newCVFile" class="control-label">Upload CV</label>
+                                                                <input type="file" name="CVFile" id="newCVFile" class="form-control" />
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="coverLetter" class="control-label">Cover Letter</label>
+                                                                <textarea name="coverLetter" id="coverLetter" class="form-control" rows="5"></textarea>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <input type="submit" value="Submit Application" class="btn btn-custom text-uppercase font-weight-bold" />
+                                                            </div>
+                                                        }
                                                     </div>
                                                 </div>
                                                 <div class="card card-border-custom mb-4">
@@ -251,9 +288,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-footer bg-white">
-                                        <a href="javascript:void(0);" class="btn btn-custom font-weight-bold text-uppercase" id="applyBtn2" onclick="scrollToApplicationForm()">Apply Now</a>
                                     </div>
                                 </div>
                             </div>
