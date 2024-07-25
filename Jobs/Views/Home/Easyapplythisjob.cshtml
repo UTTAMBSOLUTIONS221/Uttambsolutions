@@ -165,16 +165,31 @@
                                                     <h4>Qualifications:</h4>
                                                     @if (Model.Job.Systemjobqualification != null)
                                                     {
-                                                        foreach (var joQualifications in Model.Job.Systemjobqualification)
+                                                        foreach (var jobQualifications in Model.Job.Systemjobqualification)
                                                         {
-                                                            <p>@joQualifications.Jobqualification</p>
+                                                            <p>@jobQualifications.Jobqualification</p>
+                                                        }
+                                                    }
+                                                    <h4>Preferred Skills:</h4>
+                                                    @if (Model.Job.Systemjobskill != null)
+                                                    {
+                                                        foreach (var jobSkill in Model.Job.Systemjobskill)
+                                                        {
+                                                            <p>@jobSkill.Jobskill</p>
+                                                        }
+                                                    }
+                                                    <h4>Benefits:</h4>
+                                                    @if (Model.Job.Systemjobbenefit != null)
+                                                    {
+                                                        foreach (var jobBenefit in Model.Job.Systemjobbenefit)
+                                                        {
+                                                            <p>@jobBenefit.Jobbenefit</p>
                                                         }
                                                     }
                                                     <h4>How to Apply:</h4>
                                                     <p>@Model.Job.Jobhowtoapply</p>
                                                 </div>
                                             </div>
-                                            
                                         </div>
                                     </div>
                                 </div>
@@ -221,43 +236,36 @@
                                                         <h4 class="fw-bold font-weight-bold text-custom text-uppercase">Application Form</h4>
                                                     </div>
                                                     <div class="card-body bg-white">
-                                                        @using (Html.BeginForm("Apply", "Job", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                        {
-                                                            @Html.AntiForgeryToken()
-                                                            @Html.HiddenFor(model => model.Job.JobId)
-                                                            @Html.HiddenFor(model => model.User.Userid)
+                                                        <div class="form-group">
+                                                            <label class="control-label">Curriculum Vitae (CV)</label>
+                                                            <div class="form-check">
+                                                                <input type="radio" name="CVOption" id="useExistingCV" value="existing" class="form-check-input" @(Model.User.Usercurriculumvitae != null ? "checked" : "") />
+                                                                <label for="useExistingCV" class="form-check-label">Use existing CV</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input type="radio" name="CVOption" id="uploadNewCV" value="new" class="form-check-input" @(Model.User.Usercurriculumvitae == null ? "checked" : "") />
+                                                                <label for="uploadNewCV" class="form-check-label">Upload a new CV</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group" id="existingCV" style="display: @(Model.User.Usercurriculumvitae != null ? "block" : "none")">
+                                                            @if (Model.User.Usercurriculumvitae != null)
+                                                            {
+                                                                <a href="@Url.Content(Model.User.Usercurriculumvitae)" target="_blank">View Current CV</a>
+                                                            }
+                                                        </div>
+                                                        <div class="form-group" id="newCV" style="display: @(Model.User.Usercurriculumvitae == null ? "block" : "none")">
+                                                            <label for="newCVFile" class="control-label">Upload CV</label>
+                                                            <input type="file" id="newCVFile" accept=".pdf" class="form-control" onchange="systemusercurriculumvitaechanged(event)" />
+                                                        </div>
 
-                                                            <div class="form-group">
-                                                                <label class="control-label">Curriculum Vitae (CV)</label>
-                                                                <div class="form-check">
-                                                                    <input type="radio" name="CVOption" id="useExistingCV" value="existing" class="form-check-input" @(Model.User.Usercurriculumvitae != null ? "checked" : "") />
-                                                                    <label for="useExistingCV" class="form-check-label">Use existing CV</label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input type="radio" name="CVOption" id="uploadNewCV" value="new" class="form-check-input" @(Model.User.Usercurriculumvitae == null ? "checked" : "") />
-                                                                    <label for="uploadNewCV" class="form-check-label">Upload a new CV</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group" id="existingCV" style="display: @(Model.User.Usercurriculumvitae != null ? "block" : "none")">
-                                                                @if (Model.User.Usercurriculumvitae != null)
-                                                                {
-                                                                    <a href="@Url.Content(Model.User.Usercurriculumvitae)" target="_blank">View Current CV</a>
-                                                                }
-                                                            </div>
-                                                            <div class="form-group" id="newCV" style="display: @(Model.User.Usercurriculumvitae == null ? "block" : "none")">
-                                                                <label for="newCVFile" class="control-label">Upload CV</label>
-                                                                <input type="file" name="CVFile" id="newCVFile" class="form-control" />
-                                                            </div>
+                                                        <div class="form-group">
+                                                            <label for="coverLetter" class="control-label">Cover Letter</label>
+                                                            <textarea name="coverLetter" id="coverLetter" class="form-control" rows="5"></textarea>
+                                                        </div>
 
-                                                            <div class="form-group">
-                                                                <label for="coverLetter" class="control-label">Cover Letter</label>
-                                                                <textarea name="coverLetter" id="coverLetter" class="form-control" rows="5"></textarea>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <input type="submit" value="Submit Application" class="btn btn-custom text-uppercase font-weight-bold" />
-                                                            </div>
-                                                        }
+                                                        <div class="form-group">
+                                                            <input type="submit" value="Submit Application" class="btn btn-custom text-uppercase font-weight-bold" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="card card-border-custom mb-4">
@@ -288,55 +296,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-md-8 offset-md-2">
-                                <div class="card card-border-custom shadow-sm bg-light border-0">
-                                    <div class="card-header bg-white">
-                                        <h4 class="fw-bold font-weight-bold text-custom text-uppercase">Application Form</h4>
-                                    </div>
-                                    <div class="card-body bg-white">
-                                        @using (Html.BeginForm("Apply", "Job", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                        {
-                                            @Html.AntiForgeryToken()
-                                            @Html.HiddenFor(model => model.Job.JobId)
-                                            @Html.HiddenFor(model => model.User.Userid)
-
-                                            <div class="form-group">
-                                                <label class="control-label">Curriculum Vitae (CV)</label>
-                                                <div class="form-check">
-                                                    <input type="radio" name="CVOption" id="useExistingCV" value="existing" class="form-check-input" @(Model.User.Usercurriculumvitae != null ? "checked" : "") />
-                                                    <label for="useExistingCV" class="form-check-label">Use existing CV</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="radio" name="CVOption" id="uploadNewCV" value="new" class="form-check-input" @(Model.User.Usercurriculumvitae == null ? "checked" : "") />
-                                                    <label for="uploadNewCV" class="form-check-label">Upload a new CV</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" id="existingCV" style="display: @(Model.User.Usercurriculumvitae != null ? "block" : "none")">
-                                                @if (Model.User.Usercurriculumvitae != null)
-                                                {
-                                                    <a href="@Url.Content(Model.User.Usercurriculumvitae)" target="_blank">View Current CV</a>
-                                                }
-                                            </div>
-                                            <div class="form-group" id="newCV" style="display: @(Model.User.Usercurriculumvitae == null ? "block" : "none")">
-                                                <label for="newCVFile" class="control-label">Upload CV</label>
-                                                <input type="file" name="CVFile" id="newCVFile" class="form-control" />
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="coverLetter" class="control-label">Cover Letter</label>
-                                                <textarea name="coverLetter" id="coverLetter" class="form-control" rows="5"></textarea>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input type="submit" value="Submit Application" class="btn btn-custom text-uppercase font-weight-bold" />
-                                            </div>
-                                        }
                                     </div>
                                 </div>
                             </div>
@@ -393,6 +352,86 @@
             $('html, body').animate({
                 scrollTop: $("#applicationForm").offset().top
             }, 1000);
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        const firebaseConfig = {
+            apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
+            authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
+            projectId: "uttambsolutions-4ec2a",
+            storageBucket: "uttambsolutions-4ec2a.appspot.com",
+            messagingSenderId: "336739823411",
+            appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
+            measurementId: "G-Z24LLL0113"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var storage = firebase.storage();
+
+        function systemusercurriculumvitaechanged(event) {
+            var files = event.target.files;
+            uploadandsaveusercurriculumvitaefile(files);
+        }
+
+        async function uploadandsaveusercurriculumvitaefile(files) {
+            var downloadURLs = [];
+
+            function generateusercurriculumfilename(file) {
+                var uniqueId = Date.now();
+                var fileExtension = file.name.split('.').pop();
+                var newFileName = 'Usercurriculums/Usercurriculumfile/' + uniqueId + '.' + fileExtension;
+                return newFileName;
+            }
+
+            async function uploadusercurriculumvitaefile(file) {
+                return new Promise((resolve, reject) => {
+                    var newFileName = generateusercurriculumfilename(file);
+
+                    var storageRef = storage.ref().child(newFileName);
+                    var uploadTask = storageRef.put(file);
+
+                    uploadTask.on('state_changed',
+                        function (snapshot) {
+                            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            console.log('Upload is ' + progress + '% done');
+                        },
+                        function (error) {
+                            reject('Error uploading file: ' + error);
+                        },
+                        function () {
+                            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                                console.log('File available at', downloadURL);
+                                downloadURLs.push(downloadURL);
+                                resolve(downloadURL);
+                            });
+                        }
+                    );
+                });
+            }
+
+            async function saveusercurriculumvitaefiletodatabase(url) {
+                var uil1 = { Curriculumfile: url };
+                $.post("/Account/Updatestaffcurriculumdata", uil1, function (response) {
+                    setTimeout(function () { location.reload(); }, 1000);
+                });
+            }
+
+            document.getElementById('loadingOverlay').style.zIndex = 1100;
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                try {
+                    var downloadURL = await uploadusercurriculumvitaefile(file);
+                    await saveusercurriculumvitaefiletodatabase(downloadURL);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+
+            document.getElementById('loadingOverlay').style.display = 'none';
         }
     </script>
 </body>

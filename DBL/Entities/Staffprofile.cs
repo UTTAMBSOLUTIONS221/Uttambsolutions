@@ -4,5 +4,6 @@
     {
         public long Userid { get; set; }
         public string? Profileimagelogo { get; set; }
+        public string? Curriculumfile { get; set; }
     }
 }

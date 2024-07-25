@@ -10,6 +10,7 @@ namespace DBL.Repositories
         SystemStaff Getsystemstaffdatabyid(long Staffid);
         SystemUserProfileData Getsystemuserprofiledata(long Userid);
         Genericmodel Updatestaffprofilepicturedata(string JsonData);
+        Genericmodel Updatestaffcurriculumdata(string JsonData);
         UsermodelResponce VerifySystemStaff(string Username);
     }
 }

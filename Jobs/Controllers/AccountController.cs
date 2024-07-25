@@ -128,6 +128,13 @@ namespace Jobs.Controllers
             return Json(resp);
         }
 
+        public async Task<JsonResult> Updatestaffcurriculumdata(Staffprofile model)
+        {
+            model.Userid = SessionUserData.Usermodel.Userid;
+            var resp = await bl.Updatestaffcurriculumdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
+
 
         [HttpGet]
         [AllowAnonymous]
