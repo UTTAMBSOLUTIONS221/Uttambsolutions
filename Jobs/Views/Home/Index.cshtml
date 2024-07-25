@@ -33,8 +33,8 @@
     {
         <div class="row mb-4">
             <div class="col-lg-8 col-md-12">
-                <a asp-action="Jobdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-jobcode="@Guid.NewGuid()" asp-route-JobId="@job.JobId" asp-area="" class="text-decoration-none">
-                    <div class="card bg-light border-0 shadow-sm">
+                 <div class="card bg-light border-0 shadow-sm">
+                    <a asp-action="Jobdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-jobcode="@Guid.NewGuid()" asp-route-JobId="@job.JobId" asp-area="" class="text-decoration-none">
                         <div class="card-header bg-white">
                             <h4 class="fw-bold font-weight-bold text-custom text-uppercase">@job.Title</h4>
                             <h6 class="text-secondary text-uppercase">@job.Employername</h6>
@@ -62,20 +62,15 @@
                                 </div>
                             </div>
                         </div>
+                    </a>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-start">
+                            <a href="https://twitter.com/share?url=@(Url.Action("Details", "Job", new { id = job.JobId }, HttpContextAccessor.HttpContext.Request.Scheme))" class="btn btn-custom mr-2" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=@(Url.Action("Details", "Job", new { id = job.JobId }, HttpContextAccessor.HttpContext.Request.Scheme))" class="btn btn-custom mr-2" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=@(Url.Action("Details", "Job", new { id = job.JobId }, HttpContextAccessor.HttpContext.Request.Scheme))" class="btn btn-custom" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                        </div>
                     </div>
-                </a>
-            </div>
-            <div class="card card-border-custom mb-4">
-                <div class="card-header bg-white">
-                    <h5 class="fw-bold font-weight-bold text-custom">Share this Job:</h5>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-start">
-                        <a href="https://twitter.com/share?url=@(Url.Action("Details", "Job", new { id = job.JobId }, HttpContextAccessor.HttpContext.Request.Scheme))" class="btn btn-custom mr-2" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=@(Url.Action("Details", "Job", new { id = job.JobId }, HttpContextAccessor.HttpContext.Request.Scheme))" class="btn btn-custom mr-2" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=@(Url.Action("Details", "Job", new { id = job.JobId }, HttpContextAccessor.HttpContext.Request.Scheme))" class="btn btn-custom" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
-                    </div>
-                </div>
+                 </div>
             </div>
         </div>
 
