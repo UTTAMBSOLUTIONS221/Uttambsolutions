@@ -312,6 +312,11 @@
                 <strong>&copy; 2023 <a href="#">JobCenter</a>.</strong> All rights reserved.
             </div>
         </footer>
+
+        <!-- Overlay for loading spinner -->
+        <div id="loadingOverlay" class="overlay">
+            <div class="spinner"></div>
+        </div>
     </div>
 
     <!-- Scripts -->
@@ -324,6 +329,8 @@
     <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/dist/js/adminlte.min.js"></script>
     <script src="~/js/site.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -370,11 +377,13 @@
         var storage = firebase.storage();
 
         function systemusercurriculumvitaechanged(event) {
+            alert('am here');
             var files = event.target.files;
             uploadandsaveusercurriculumvitaefile(files);
         }
 
         async function uploadandsaveusercurriculumvitaefile(files) {
+            alert('am here1');
             var downloadURLs = [];
 
             function generateusercurriculumfilename(file) {
@@ -421,6 +430,7 @@
             document.getElementById('loadingOverlay').style.display = 'flex';
 
             for (var i = 0; i < files.length; i++) {
+                alert('am here2');
                 var file = files[i];
 
                 try {
@@ -433,6 +443,7 @@
 
             document.getElementById('loadingOverlay').style.display = 'none';
         }
+
     </script>
 </body>
 
