@@ -138,6 +138,7 @@ namespace Jobs.Controllers
         public async Task<JsonResult> Addsystemjobapplicationdata(Systemjobapplications model)
         {
             model.Userid = SessionUserData.Usermodel.Userid;
+            model.Datecreated = DateTime.UtcNow;
             var resp = await bl.Registersystemjobapplicationdata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
