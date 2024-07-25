@@ -247,6 +247,8 @@ namespace DBL
                                 Phonenumber = resp.Usermodel.Phonenumber,
                                 Username = resp.Usermodel.Username,
                                 Emailaddress = resp.Usermodel.Emailaddress,
+                                UserProfileImageUrl = resp.Usermodel.UserProfileImageUrl,
+                                Usercurriculumvitae = resp.Usermodel.Usercurriculumvitae,
                                 Roleid = resp.Usermodel.Roleid,
                                 Rolename = resp.Usermodel.Rolename,
                                 Passharsh = resp.Usermodel.Passharsh,
