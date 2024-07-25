@@ -6,6 +6,7 @@
         public long EmployerId { get; set; }
         public string? Employername { get; set; }
         public string? Employerlogo { get; set; }
+        public string? Organizationlogo { get; set; }
         public string? Title { get; set; }
         public string? JobDescription { get; set; }
         public int? JobFunctionId { get; set; }
