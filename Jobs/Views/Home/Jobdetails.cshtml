@@ -197,26 +197,23 @@
                                         <h5 class="card-title mb-0">Similar Jobs</h5>
                                     </div>
                                     <div class="card-body">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="#" class="d-flex align-items-center mb-3">
-                                                    <img src="~/Images/uttambsolutionsjoblogo.png" class="img-fluid rounded-circle mr-3" alt="Job Logo" width="50" />
-                                                    <div>
-                                                        <h6 class="text-custom mb-1">Similar Job Title</h6>
-                                                        <small class="text-muted">Similar Job Employer</small>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="d-flex align-items-center mb-3">
-                                                    <img src="~/Images/uttambsolutionsjoblogo.png" class="img-fluid rounded-circle mr-3" alt="Job Logo" width="50" />
-                                                    <div>
-                                                        <h6 class="text-custom mb-1">Another Similar Job Title</h6>
-                                                        <small class="text-muted">Another Similar Job Employer</small>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        @if (Model.RelatedJobs != null)
+                                        {
+                                            foreach (var relatedJob in Model.RelatedJobs)
+                                            {
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <a href="#" class="d-flex align-items-center mb-3">
+                                                            <img src="@Url.Content(relatedJob.Organizationlogo)" class="img-fluid rounded-circle mr-3" alt="@relatedJob.Employername" width="50" />
+                                                            <div>
+                                                                <h6 class="text-custom mb-1">@relatedJob.Title</h6>
+                                                                <small class="text-muted">@relatedJob.Employername</small>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            }
+                                        }
                                     </div>
                                 </div>
                                 <div class="row mb-4">
