@@ -467,7 +467,7 @@
             $.post("/Account/Addsystemjobapplicationdata", uil1, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire('Saved!', response.RespMessage, 'success')
-                    setTimeout(function () { location.reload(); }, 1000);
+                    window.location.href = '/Account/Myprofile';
                 } else if (response.RespStatus == 1) {
                     Swal.fire("Job application not saved", response.RespMessage, "warning");
                 }
