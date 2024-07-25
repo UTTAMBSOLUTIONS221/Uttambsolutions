@@ -129,6 +129,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Registersystemjobapplicationdata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Registersystemjobapplicationdata(Obj);
+                return Resp;
+            });
+        }
         #endregion
 
         #region Verify System Staff Forgot Password

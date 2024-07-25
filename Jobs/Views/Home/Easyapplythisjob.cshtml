@@ -126,8 +126,10 @@
                     <main role="main" class="pb-3 mt-2 pt-2">
                         <div class="row mb-4">
                             <div class="col-lg-8 col-md-12">
+                                <input  asp-for="@Model.Job.JobId" id="Systemapplicationjobid" />
                                 <div class="card bg-light border-0 shadow-sm">
                                     <div class="card-header bg-white">
+                                       
                                         <h4 class="fw-bold font-weight-bold text-custom text-uppercase">@Model.Job.Title</h4>
                                         <h6 class="text-secondary text-uppercase">@Model.Job.Employername</h6>
                                         <div class="d-flex flex-wrap">
@@ -259,12 +261,15 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="coverLetter" class="control-label">Cover Letter</label>
-                                                            <textarea name="coverLetter" id="coverLetter" class="form-control" rows="5"></textarea>
+                                                            <label for="Systemapplicationcoverletterid" class="control-label">Cover Letter</label>
+                                                            <textarea name="coverLetter" id="Systemapplicationcoverletterid" class="form-control" rows="5"></textarea>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <input type="submit" value="Submit Application" class="btn btn-custom text-uppercase font-weight-bold" />
+                                                            <button type="button" class="btn btn-custom text-uppercase font-weight-bold" id="submituserjobapplicationid" onclick="submituserjobapplicationdata();">
+                                                                <span id="buttonText">Submit Application</span>
+                                                                <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -332,7 +337,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
             // Handle the display of CV options based on the initial state
             $('input[name="CVOption"]').on('change', function () {
@@ -362,7 +367,6 @@
         }
     </script>
 
-
     <script type="text/javascript">
         const firebaseConfig = {
             apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
@@ -377,13 +381,11 @@
         var storage = firebase.storage();
 
         function systemusercurriculumvitaechanged(event) {
-            alert('am here');
             var files = event.target.files;
             uploadandsaveusercurriculumvitaefile(files);
         }
 
         async function uploadandsaveusercurriculumvitaefile(files) {
-            alert('am here1');
             var downloadURLs = [];
 
             function generateusercurriculumfilename(file) {
@@ -430,7 +432,6 @@
             document.getElementById('loadingOverlay').style.display = 'flex';
 
             for (var i = 0; i < files.length; i++) {
-                alert('am here2');
                 var file = files[i];
 
                 try {
@@ -445,6 +446,40 @@
         }
 
     </script>
-</body>
 
+    <script type="text/javascript">
+        function submituserjobapplicationdata() {
+            document.getElementById("submituserjobapplicationid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            if ($('#Systemapplicationcoverletterid').val() === '') {
+                Swal.fire("Job application not saved", 'Cover letter is Required', "warning");
+                document.getElementById("submituserjobapplicationid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "Submit Application";
+                return;
+            }
+
+            var uil1 = {
+                Jobid: $('#Systemapplicationjobid').val(), Coverletter: $('#Systemapplicationcoverletterid').val()
+
+            };
+            $.post("/Account/Addsystemjobapplicationdata", uil1, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Job application not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("submituserjobapplicationid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "Submit Application";
+            });
+        }
+    </script>
+
+</body>
 </html>

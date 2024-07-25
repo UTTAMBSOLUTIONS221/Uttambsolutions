@@ -11,6 +11,7 @@ namespace DBL.Repositories
         SystemUserProfileData Getsystemuserprofiledata(long Userid);
         Genericmodel Updatestaffprofilepicturedata(string JsonData);
         Genericmodel Updatestaffcurriculumdata(string JsonData);
+        Genericmodel Registersystemjobapplicationdata(string JsonData);
         UsermodelResponce VerifySystemStaff(string Username);
     }
 }

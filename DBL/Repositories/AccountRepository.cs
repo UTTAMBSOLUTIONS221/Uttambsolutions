@@ -89,6 +89,16 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Updatestaffcurriculumdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+        public Genericmodel Registersystemjobapplicationdata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registersystemjobapplicationdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         #endregion
 
         #region Verify System Staff
