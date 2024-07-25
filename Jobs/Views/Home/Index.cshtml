@@ -1,8 +1,9 @@
 ﻿@model DBL.Models.Systemjobdata
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
 @{
     ViewData["Title"] = "Home Page";
-    // Method to calculate relative time
+
     string GetRelativeDate(DateTime date)
     {
         var now = DateTime.Now;
@@ -23,20 +24,19 @@
         }
     }
 
-    // Counter for ads
     int adCounter = 0;
 }
 
-@if (Model != null && Model.Systemjobs != null)
-{
-    foreach (var job in Model.Systemjobs)
-    {
-        <div class="row mb-4">
-            <div class="col-lg-8 col-md-12">
-                <div class="card bg-light border-0 shadow-sm">
+<div class="row mb-4">
+    <div class="col-lg-8 col-md-12">
+        @if (Model != null && Model.Systemjobs != null)
+        {
+            foreach (var job in Model.Systemjobs)
+            {
+                <div class="card mb-4 bg-light border-0 shadow-sm">
                     <a asp-action="Jobdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-jobcode="@Guid.NewGuid()" asp-route-JobId="@job.JobId" asp-area="" class="text-decoration-none">
                         <div class="card-header bg-white">
-                            <h4 class="fw-bold font-weight-bold text-custom text-uppercase">@job.Title</h4>
+                            <h4 class="fw-bold text-custom text-uppercase">@job.Title</h4>
                             <h6 class="text-secondary text-uppercase">@job.Employername</h6>
                             <div class="d-flex flex-wrap">
                                 <span class="badge badge-secondary mr-2 mb-2"><strong>Location:</strong> @job.Locationname</span>
@@ -44,7 +44,7 @@
                                 <span class="badge badge-secondary mr-2 mb-2"><strong>Salary Range:</strong> @job.JobSalaryRange</span>
                                 <span class="badge badge-secondary mb-2"><strong>Job Function:</strong> @job.Functionname</span>
                             </div>
-                            <hr class="full-width-hr" />
+                            <hr />
                             <div class="d-flex justify-content-between mt-1">
                                 <span class="badge bg-success">@job.JobStatus</span>
                                 <span class="text-muted">@GetRelativeDate(job.DateCreated)</span>
@@ -71,28 +71,30 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        // Insert ad after every 2 job posts
-        if (++adCounter % 2 == 0)
-        {
-            <div class="row mb-4">
-                <div class="col-lg-8 col-md-12">
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-2850934153859537"
-                         data-ad-slot="1149686671"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
+                @if (++adCounter % 2 == 0)
+                {
+                    <div class="row mb-4">
+                        <div class="col-lg-8 col-md-12">
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-2850934153859537"
+                                 data-ad-slot="1149686671"
+                                 data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                }
+            }
         }
-    }
-}
+    </div>
+    <div class="col-lg-4 col-md-12">
+        <!-- Add additional content for the right column if needed -->
+    </div>
+</div>
 
 <div class="row mb-4">
     <div class="col-lg-8 col-md-12">
@@ -104,7 +106,7 @@
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
-            (adsbygoogle = window.adsbygoogle || {}).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
 </div>
@@ -119,7 +121,7 @@
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
-            (adsbygoogle = window.adsbygoogle || {}).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
 </div>
@@ -134,7 +136,7 @@
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
-            (adsbygoogle = window.adsbygoogle || {}).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
 </div>
