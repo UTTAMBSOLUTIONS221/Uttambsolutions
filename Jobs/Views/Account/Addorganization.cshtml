@@ -67,7 +67,14 @@
                 <input class="form-control form-control-sm" id="UttambsolutionsimageurlId" readonly />
             </div>
         </div>
-        <div id="Uttambsolutionsimagespreviewcontainer"></div>
+        <div class="col-sm-6">
+            <h6>Current Document</h6>
+            <img src="@Url.Content(Model.OrganizationLogo)" height="140" width="140" />
+        </div>
+        <div class="col-sm-6">
+            <h6>Document to Replace</h6>
+            <div id="Uttambsolutionsimagespreviewcontainer"></div>
+        </div>
     </div>
 </div>
 <div class="modal-footer">
