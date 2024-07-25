@@ -123,33 +123,29 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12">
-                                                    <h4>Key Responsibilities:</h4>
                                                     @if (Model.Systemjobfunction != null)
-                                                    {
+                                                    {  <h4>Key Responsibilities:</h4>
                                                         foreach (var joFunctions in Model.Systemjobfunction)
                                                         {
                                                             <p>@joFunctions.Jobfunction</p>
                                                         }
                                                     }
-                                                    <h4>Qualifications:</h4>
                                                     @if (Model.Systemjobqualification != null)
-                                                    {
+                                                    { <h4>Qualifications:</h4>
                                                         foreach (var jobQualifications in Model.Systemjobqualification)
                                                         {
                                                             <p>@jobQualifications.Jobqualification</p>
                                                         }
                                                     }
-                                                    <h4>Preferred Skills:</h4>
                                                     @if (Model.Systemjobskill != null)
-                                                    {
+                                                    {  <h4>Preferred Skills:</h4>
                                                         foreach (var jobSkill in Model.Systemjobskill)
                                                         {
                                                             <p>@jobSkill.Jobskill</p>
                                                         }
                                                     }
-                                                    <h4>Benefits:</h4>
                                                     @if (Model.Systemjobbenefit != null)
-                                                    {
+                                                    {    <h4>Benefits:</h4>
                                                         foreach (var jobBenefit in Model.Systemjobbenefit)
                                                         {
                                                             <p>@jobBenefit.Jobbenefit</p>
