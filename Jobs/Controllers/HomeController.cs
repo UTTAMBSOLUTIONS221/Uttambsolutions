@@ -34,9 +34,9 @@ namespace Jobs.Controllers
             // Retrieve job data based on the provided JobId
             var jobData = await bl.Getsystemopportunitydatabyid(JobId);
             // Set the image URL, using a default image if Employerlogo is null
-            var imageUrl = string.IsNullOrEmpty(jobData.Employerlogo)
+            var imageUrl = string.IsNullOrEmpty(jobData.Organizationlogo)
                            ? "https://jobcenter.uttambsolutions.com/Images/uttambsolutionsjoblogo.png"
-                           : jobData.Employerlogo;
+                           : jobData.Organizationlogo;
 
             // Populate ViewData with relevant information
             ViewData["image"] = imageUrl;
