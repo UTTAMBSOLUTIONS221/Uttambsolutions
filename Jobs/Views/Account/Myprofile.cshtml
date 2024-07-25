@@ -153,7 +153,7 @@
                                                 <i class="fas fa-camera"></i>
                                             </button>
                                         </div>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-10">
                                             <!-- User Details Table -->
                                             <h6 class="font-weight-bold">User Details</h6>
                                             <table class="table table-borderless table-sm">
@@ -170,49 +170,52 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="col-sm-5">
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-12">
                                             <!-- Organization or Company Details Table -->
-                                            @if(Model.Systemorganizations != null && Model.Systemorganizations.Any())
-                                            {
-                                                <h6 class="font-weight-bold">Organization Details</h6>
-                                                <table class="table table-borderless table-sm">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><span class="font-weight-bold">Name: </span>@Model.Systemorganizations.FirstOrDefault().OrganizationName</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span class="font-weight-bold">Email: </span>@Model.Systemorganizations.FirstOrDefault().OrganizationEmail</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span class="font-weight-bold">Joined: </span>@Model.Systemorganizations.FirstOrDefault().DateCreated.ToString("MMMM dd, yyyy")</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            }
-                                            else
-                                            {
-                                                <div class="row">
-                                                    <div class="col-sm-7">
-                                                         <h6 class="font-weight-bold">Organization Details</h6>
-                                                     </div>
-                                                    <div class="col-sm-5">
-                                                        <a asp-action="Addorganization" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase nowrap text-nowrap" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Organization</a>
+                                              <div class="card card-outline card-info">
+                                                    <div class="card-header py-1">
+                                                        <div class="row">
+                                                            <div class="col-sm-8">
+                                                                <h6 class="font-weight-bold text-sm card-title">Organizations</h6>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                 <a asp-action="Addorganization" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase nowrap text-nowrap" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Organization</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body table-responsive table-responsive-sm">
+                                                        <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Image</th>
+                                                                    <th>Name</th>
+                                                                    <th>Description</th>
+                                                                    <th>Phone</th>
+                                                                    <th>Email</th>
+                                                                    <th class="text-right">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>  
+                                                                @if (Model.Systemorganizations != null)
+                                                                {
+                                                                    foreach (var item in Model.Systemorganizations)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>@item.OrganizationName</td>
+                                                                            <td>@item.OrganizationName</td>
+                                                                            <td>@item.OrganizationDescription</td>
+                                                                            <td>@item.OrganizationPhone</td>
+                                                                            <td>@item.OrganizationEmail</td>
+                                                                            <td class="text-right"><a asp-action="Addorganization" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="@item.OrganizationId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase mr-1" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a><a asp-action="Organizationdetail" asp-controller="Organization" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="@item.OrganizationId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase mr-1">View</a></td>
+                                                                        </tr>
+                                                                    }
+                                                                }
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
-                                                <table class="table table-borderless table-sm">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><span class="font-weight-bold">Name: </span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span class="font-weight-bold">Email: </span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span class="font-weight-bold">Joined: </span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            }
                                         </div>
                                     </div>
                                 </div>
