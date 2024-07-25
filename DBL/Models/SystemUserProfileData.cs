@@ -31,5 +31,6 @@ namespace DBL.Models
         public List<Systemblog>? Systemuserblogs { get; set; }
         public List<SystemJob> Systemjobs { get; set; }
         public List<SystemUserLog> Systemuserlogs { get; set; }
+        public List<Systemjobapplications> Systemjobapplications { get; set; }
     }
 }

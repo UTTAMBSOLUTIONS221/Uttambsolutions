@@ -14,12 +14,12 @@ namespace DBL.Entities
 
         [Required]
         public int Jobid { get; set; }
+        public string? Title { get; set; }
 
         [Required]
         [StringLength(1000)]
         public string Coverletter { get; set; }
 
-        [Required]
         public int Applicationstatus { get; set; } = 3;
 
         [Required]

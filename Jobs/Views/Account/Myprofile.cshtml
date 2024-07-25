@@ -1,4 +1,22 @@
 ﻿@model DBL.Models.SystemUserProfileData
+@functions {
+    private string GetApplicationStatus(int status)
+    {
+        switch (status)
+        {
+            case 3:
+                return "Received";
+            case 2:
+                return "Viewed";
+            case 1:
+                return "Rejected";
+            case 0:
+                return "Approved";
+            default:
+                return "Unknown";
+        }
+    }
+}
 @{
     Layout = null;
     var profileImageUrl = Model.UserProfileImageUrl;
@@ -294,11 +312,8 @@
                             <div class="card card-outline card-info">
                                 <div class="card-header py-1">
                                     <div class="row">
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-12">
                                             <h6 class="font-weight-bold text-sm card-title">My Job Applications</h6>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <a asp-action="Addsocialmediapage" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
                                         </div>
                                     </div>
                                 </div>
@@ -306,19 +321,19 @@
                                     <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables1">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>DateCreated</th>
-                                                <th class="text-right">Action</th>
+                                                <th>Job</th>
+                                                <th>Status</th>
+                                                <th>DateApplied</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if(Model.Systemusersocials!= null ){
-                                                foreach (var item in Model.Systemusersocials)
+                                            @if(Model.Systemjobapplications!= null ){
+                                                foreach (var item in Model.Systemjobapplications)
                                                 {
                                                     <tr>
-                                                        <td>@item.Socialpagename</td>
-                                                        <td>@item.DateCreated</td>
-                                                        <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                                        <td>@item.Title</td>
+                                                        <td>@Html.Raw(GetApplicationStatus(item.Applicationstatus))</td>
+                                                        <td>@item.Datecreated</td>
                                                     </tr>
                                                 }
                                             }
