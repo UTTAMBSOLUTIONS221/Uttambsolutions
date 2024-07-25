@@ -38,6 +38,7 @@
         public List<Systemjobqualification>? Systemjobqualification { get; set; }
         public List<Systemjobskill>? Systemjobskill { get; set; }
         public List<Systemjobbenefit>? Systemjobbenefit { get; set; }
+        public List<SystemJob>? RelatedJobs { get; set; }
     }
 
     public class Systemjobfunction

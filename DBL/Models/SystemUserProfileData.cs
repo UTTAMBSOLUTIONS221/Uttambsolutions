@@ -8,6 +8,7 @@ namespace DBL.Models
         public string? Firstname { get; set; }
         public string? Lastname { get; set; }
         public string? UserProfileImageUrl { get; set; }
+        public string? Usercurriculumvitae { get; set; }
         public string? Fullname { get; set; }
         public string? Phonenumber { get; set; }
         public string? Username { get; set; }

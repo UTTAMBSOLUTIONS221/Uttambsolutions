@@ -7,6 +7,7 @@
         public string? Tenantname { get; set; }
         public string? Tenantsubdomain { get; set; }
         public string? UserProfileImageUrl { get; set; }
+        public string? Usercurriculumvitae { get; set; }
         public string? Currencyname { get; set; }
         public string? Utcname { get; set; }
         public string? Firstname { get; set; }
