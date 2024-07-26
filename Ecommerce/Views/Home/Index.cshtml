@@ -1,8 +1,85 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model DBL.Models.Systemorganizationshopproducts
+@{
+    ViewData["Title"] = "Ecommerce";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    @if (Model != null && Model.Organizationshopproductsdata != null)
+    {
+        foreach (var product in Model.Organizationshopproductsdata)
+        {
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
+                <a asp-action="Shopproductdetail" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Shopproductid="@product.Shopproductid" asp-area="" class="text-decoration-none">
+                    <div class="card h-100 shadow-sm card-info card-outline">
+                        <img src="@Url.Content(product.Primaryimageurl)" alt="@product.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" />
+                        <div class="card-body pt-2 pr-2 pl-2 d-flex flex-column">
+                            <p class="card-text text-center text-muted text-truncate mb-1" title="@product.Productname">@product.Productname</p>
+                            <p class="card-text text-center text-muted text-truncate mb-1" title="Kes. @product.Marketprice">Kes. @product.Marketprice.ToString("#,##0.00")</p>
+                            <p class="card-text text-center text-muted text-truncate" title="Shop: @product.Organizationname">Shop: @product.Organizationname</p>
+                            <p class="card-text text-center text-muted text-truncate" title="Status: @product.ProductStatus">
+                                Status: @if (product.ProductStatus == "New")
+                                {
+                                    <span class="badge badge-info badge-info-xs font-weight-bold text-uppercase">New</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-warning badge-warning-xs font-weight-bold text-uppercase">Used</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-center">No products available at the moment.</p>
+    }
 </div>
+<!-- Uttambsolutionsdisplayad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2850934153859537"
+     data-ad-slot="1149686671"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- Styles -->
+<style>
+    .card {
+        transition: transform 0.2s;
+        margin-bottom: 0;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    .card-title {
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 0.8rem;
+        color: #555;
+    }
+
+    .text-truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .text-decoration-none {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+</style>

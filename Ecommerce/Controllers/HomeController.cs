@@ -1,21 +1,27 @@
+using DBL;
 using Ecommerce.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
+
 namespace Ecommerce.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly BL bl;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IConfiguration config)
         {
-            _logger = logger;
+            bl = new BL(Util.ShareConnectionString(config));
         }
-
-        public IActionResult Index()
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var ecommerce = await bl.Getsystemorganizationshopproductsdata();
+            return View(ecommerce);
         }
 
         public IActionResult Privacy()
