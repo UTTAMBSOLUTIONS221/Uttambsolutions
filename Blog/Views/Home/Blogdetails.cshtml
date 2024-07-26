@@ -157,7 +157,6 @@
                                 <div class="card-body">
                                     @if (Model.Relatedarticles != null && Model.Relatedarticles.Any())
                                     {
-                                        bool alternate = false;
                                         int itemCount = 0;
 
                                         <ul class="list-unstyled">
@@ -179,28 +178,15 @@
                                                     </li>
                                                 }
 
-                                                <li class="mb-3">
-                                                    <a asp-action="Blogdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@relatedarticle.Blogid" asp-area="" class="d-flex align-items-center text-decoration-none">
-                                                        @if (alternate)
-                                                        {
-                                                            <img src="@Url.Content(relatedarticle.Blogprimaryimageurl)" class="img-fluid rounded-circle mr-3" alt="@relatedarticle.Blogname" width="50" />
-                                                            <div>
-                                                                <h6 class="text-custom mb-1">@relatedarticle.Blogname</h6>
-                                                                <small class="text-muted">@relatedarticle.Blogcategoryname</small>
-                                                            </div>
-                                                        }
-                                                        else
-                                                        {
-                                                            <div>
-                                                                <h6 class="text-custom mb-1">@relatedarticle.Blogname</h6>
-                                                                <small class="text-muted">@relatedarticle.Blogcategoryname</small>
-                                                            </div>
-                                                            <img src="@Url.Content(relatedarticle.Blogprimaryimageurl)" class="img-fluid rounded-circle ml-3" alt="@relatedarticle.Blogname" width="50" />
-                                                        }
+                                                <li>
+                                                    <a asp-action="Blogdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@relatedarticle.Blogid" asp-area="" class="d-flex align-items-center mb-3 text-decoration-none">
+                                                        <img src="@Url.Content(relatedarticle.Blogprimaryimageurl)" class="img-fluid rounded-circle mr-3" alt="@relatedarticle.Blogname" width="50" />
+                                                        <div>
+                                                            <h6 class="text-custom mb-1">@relatedarticle.Blogname</h6>
+                                                            <small class="text-muted">@relatedarticle.Blogcategoryname</small>
+                                                        </div>
                                                     </a>
                                                 </li>
-
-                                                alternate = !alternate;
                                                 itemCount++;
                                             }
                                         </ul>
