@@ -2,27 +2,6 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @{
     Layout = null;
-
-    // Method to calculate relative time
-    string GetRelativeDate(DateTime date)
-    {
-        var now = DateTime.Now;
-        var timeSpan = now - date;
-
-        if (timeSpan.TotalDays < 1)
-        {
-            return "Today";
-        }
-        else if (timeSpan.TotalDays < 2)
-        {
-            return "Yesterday";
-        }
-        else
-        {
-            var days = (int)timeSpan.TotalDays;
-            return $"{days} day{(days > 1 ? "s" : "")} ago";
-        }
-    }
 }
 
 <!DOCTYPE html>
@@ -30,11 +9,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - JobCenter</title>
+    <title>@ViewData["Title"] - JobCenter | Premier Job Listing & Freelancing Platform</title>
+
+    <!-- Meta Description for SEO -->
+    <meta name="description" content="JobCenter connects job seekers with employers through our comprehensive job listings, freelancing opportunities, and career resources. Discover your next career move with JobCenter." />
+    <meta name="keywords" content="JobCenter, job listings, freelancing jobs, career opportunities, job search, online jobs, career resources" />
+    <meta name="author" content="JobCenter" />
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:type" content="@ViewData["type"]" />
-    <meta property="og:title" content="@ViewData["Title"]" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@ViewData["Title"] - JobCenter" />
     <meta property="og:description" content="@ViewData["description"]" />
     <meta property="og:image" content="@ViewData["image"]" />
     <meta property="og:url" content="@ViewData["url"]" />
@@ -79,7 +63,7 @@
                 </a>
                 <ul class="nav-item order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                     <li class="nav-item">
-                        <a asp-action="Signin" asp-controller="Account" class="nav-link text-white fw-bold font-weight-bold text-uppercase">SIGNIN</a>
+                        <a asp-action="Signin" asp-controller="Account" class="nav-link text-white fw-bold font-weight-bold text-uppercase">SIGN IN</a>
                     </li>
                 </ul>
             </div>
@@ -94,189 +78,89 @@
                         }
                     </div>
                     <main role="main" class="pb-3 mt-2 pt-2">
-                        <div class="row mb-4">
-                            <div class="col-lg-8 col-md-12">
-                                <div class="card bg-light border-0 shadow-sm">
-                                    <div class="card-header bg-white">
-                                        <h4 class="fw-bold font-weight-bold text-custom text-uppercase">@Model.Title</h4>
-                                        <h6 class="text-secondary text-uppercase">@Model.Employername</h6>
-                                        <div class="d-flex flex-wrap">
-                                            <span class="badge badge-secondary mr-2 mb-2"><strong>Location:</strong> @Model.Locationname</span>
-                                            <span class="badge badge-secondary mr-2 mb-2"><strong>Type:</strong> @Model.Jobtypename</span>
-                                            <span class="badge badge-secondary mr-2 mb-2"><strong>Salary Range:</strong> @Model.JobSalaryRange</span>
-                                            <span class="badge badge-secondary mb-2"><strong>Job Function:</strong> @Model.Functionname</span>
-                                        </div>
-                                        <hr class="full-width-hr" />
-                                        <div class="d-flex justify-content-between mt-1">
-                                            <span class="badge bg-success">@Model.JobStatus</span>
-                                            <span class="text-muted">@GetRelativeDate(Model.DateCreated)</span>
+                        <div class="container py-4">
+                            <div class="row mb-4">
+                                <div class="col-md-5">
+                                    <div class="card h-100 shadow-sm">
+                                        <img id="selectedImage" src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top preview-image" style="height: 300px; object-fit: contain;" />
+                                        <div class="card-body">
+                                            <h2 class="fw-bold">@Model.Productname</h2>
+                                            <p>@Model.Mainproductdescription</p>
                                         </div>
                                     </div>
-                                    <div class="card-body bg-white">
-                                        <div class="row">
-                                            <div class="col-md-2 col-sm-3 col-4">
-                                                <div class="card card-border-custom">
-                                                    <img src="@Url.Content(Model.Organizationlogo)" class="img-fluid rounded" alt="@Model.Employername" />
+                                    @* Preview Images Card *@
+                                    <div class="row mt-4">
+                                        <div class="col-md-12">
+                                            <div class="card shadow-sm">
+                                                <div class="card-body">
+                                                    <h4 class="fw-bold">Preview Images</h4>
+                                                    @if (Model.Productotherimages != null && Model.Productotherimages.Any())
+                                                    {
+                                                        <div class="row row-cols-3 g-2">
+                                                            <div class="col">
+                                                                <div class="card">
+                                                                    <img src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" onclick="previewImage('@Url.Content(Model.Primaryimageurl)')" />
+                                                                </div>
+                                                            </div>
+                                                            @foreach (var Productimage in Model.Productotherimages)
+                                                            {
+                                                                <div class="col">
+                                                                    <div class="card">
+                                                                        <img src="@Url.Content(Productimage.ProductImageUrl)" alt="@Model.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" onclick="previewImage('@Url.Content(Productimage.ProductImageUrl)')" />
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    }
                                                 </div>
                                             </div>
-                                            <div class="col-md-10 col-sm-9 col-8">
-                                                <p>@Model.JobDescription</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="card h-100 shadow-sm">
+                                        <div class="card-body">
+                                            <h4 class="fw-bold">Product Description</h4>
+                                            <p>@Model.Productdescription</p>
+                                            <hr />
+                                            <h4 class="fw-bold">Product Details</h4>
+                                            <ul class="list-unstyled">
+                                                <li><strong>Brand:</strong> @Model.Brandname</li>
+                                                <li><strong>Category:</strong> @Model.Categoryname</li>
+                                                <li><strong>Price:</strong> <span class="fw-bold">Ksh. @Model.Marketprice.ToString("#,##0.00")</span></li>
+                                                <li><strong>Shop:</strong> @Model.Organizationname</li>
+                                            </ul>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4 class="fw-bold">Product Features/Specifications</h4>
+                                                    <ul class="list-unstyled">
+                                                        @if (Model.Productfeatures != null && Model.Productfeatures.Any())
+                                                        {
+                                                            @foreach (var Feature in Model.Productfeatures)
+                                                            {
+                                                                <li>@Feature.ProductFeature</li>
+                                                            }
+                                                        }
+                                                    </ul>
+                                                </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-12">
-                                                    @if (Model.Systemjobfunction != null)
-                                                    {
-                                                          <h4>Key Responsibilities:</h4>
-                                                        foreach (var joFunctions in Model.Systemjobfunction)
+                                                <div class="col-md-12">
+                                                    <h4 class="fw-bold">What's in the Box</h4>
+                                                    <ul class="list-unstyled">
+                                                        @if (Model.Productwhatsinbox != null && Model.Productwhatsinbox.Any())
                                                         {
-                                                            <p>@joFunctions.Jobfunction</p>
+                                                            @foreach (var Item in Model.Productwhatsinbox)
+                                                            {
+                                                                <li>@Item.ProductWhatsInBoxItem</li>
+                                                            }
                                                         }
-                                                    }
-                                                    <div class="row mb-4">
-                                                        <ins class="adsbygoogle"
-                                                             style="display:block"
-                                                             data-ad-client="ca-pub-2850934153859537"
-                                                             data-ad-slot="1149686671"
-                                                             data-ad-format="auto"
-                                                             data-full-width-responsive="true"></ins>
-                                                        <script>
-                                                            (adsbygoogle = window.adsbygoogle || []).push({});
-                                                        </script>
-                                                    </div>
-                                                    @if (Model.Systemjobqualification != null)
-                                                    {
-                                                        <h4>Qualifications:</h4>
-                                                        foreach (var jobQualifications in Model.Systemjobqualification)
-                                                        {
-                                                            <p>@jobQualifications.Jobqualification</p>
-                                                        }
-                                                    }
-                                                    @if (Model.Systemjobskill != null)
-                                                    {
-                                                          <h4>Preferred Skills:</h4>
-                                                        foreach (var jobSkill in Model.Systemjobskill)
-                                                        {
-                                                            <p>@jobSkill.Jobskill</p>
-                                                        }
-                                                    }
-                                                    @if (Model.Systemjobbenefit != null)
-                                                    {
-                                                            <h4>Benefits:</h4>
-                                                        foreach (var jobBenefit in Model.Systemjobbenefit)
-                                                        {
-                                                            <p>@jobBenefit.Jobbenefit</p>
-                                                        }
-                                                    }
-                                                    <h4>How to Apply:</h4>
-                                                    <p>@Model.Jobhowtoapply</p>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer bg-white text-end">
-                                        @if (Model.Jopapplicationstatus != "Applied")
-                                        {
-                                            if (Model.EasyApply)
-                                            {
-                                                <a asp-action="Easyapplythisjob" asp-controller="Home" asp-route-jobcode="@Guid.NewGuid()" asp-route-code="@Guid.NewGuid()" asp-route-jobid="@Model.JobId" class="btn btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Easy Apply</a>
-                                            }
-                                            else
-                                            {
-                                                <a href="@Model.JobUrl" target="_blank" class="btn btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Apply Now</a>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <div class="form-group">
-                                                <button type="button" class="btn btn-custom text-uppercase font-weight-bold">
-                                                    <span id="buttonText">Applied</span>
-                                                </button>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-12">
-                                <div class="card border-0 shadow-sm mb-4">
-                                    <div class="card-header bg-white text-custom">
-                                        <h5 class="card-title mb-0">Similar Jobs</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        @if (Model.RelatedJobs != null)
-                                        {
-                                            foreach (var relatedJob in Model.RelatedJobs)
-                                            {
-                                                <ul class="list-unstyled">
-                                                    <li>
-                                                        <a href="#" class="d-flex align-items-center mb-3">
-                                                            <img src="@Url.Content(relatedJob.Organizationlogo)" class="img-fluid rounded-circle mr-3" alt="@relatedJob.Employername" width="50" />
-                                                            <div>
-                                                                <h6 class="text-custom mb-1">@relatedJob.Title</h6>
-                                                                <small class="text-muted">@relatedJob.Employername</small>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            }
-                                        }
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <ins class="adsbygoogle"
-                                         style="display:block"
-                                         data-ad-client="ca-pub-2850934153859537"
-                                         data-ad-slot="1149686671"
-                                         data-ad-format="auto"
-                                         data-full-width-responsive="true"></ins>
-                                    <script>
-                                        (adsbygoogle = window.adsbygoogle || []).push({});
-                                    </script>
-                                </div>
-                                <div class="card card-border-custom mb-4">
-                                    <div class="card-header bg-white">
-                                        <h5 class="fw-bold font-weight-bold text-custom">Share this Job:</h5>
-                                    </div>
-                                    <div class="card-footer bg-white text-end">
-                                        <div class="d-flex justify-content-end">
-                                            <a href="https://twitter.com/intent/tweet?url=https://jobcenter.uttambsolutions.com/Home/Jobdetails?JobId=@(Model.JobId)" class="btn btn-xs btn-custom mr-2" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> Twitter</a>
-                                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://jobcenter.uttambsolutions.com/Home/Jobdetails?JobId=@(Model.JobId)" class="btn btn-xs btn-custom mr-2" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i> Facebook</a>
-                                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://jobcenter.uttambsolutions.com/Home/Jobdetails?JobId=@(Model.JobId)" class="btn btn-xs btn-custom" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card border-0 shadow-sm mb-4">
-                                    <div class="card-header bg-white text-custom">
-                                        <h5 class="card-title mb-0">Contact Us</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <form>
-                                            <div class="mb-3">
-                                                <label for="name" class="form-label">Name</label>
-                                                <input type="text" class="form-control" id="name" placeholder="Your Name" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="email" placeholder="Your Email" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="message" class="form-label">Message</label>
-                                                <textarea class="form-control" id="message" rows="3" placeholder="Your Message"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Send Message</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <ins class="adsbygoogle"
-                                         style="display:block"
-                                         data-ad-client="ca-pub-2850934153859537"
-                                         data-ad-slot="1149686671"
-                                         data-ad-format="auto"
-                                         data-full-width-responsive="true"></ins>
-                                    <script>
-                                        (adsbygoogle = window.adsbygoogle || []).push({});
-                                    </script>
                                 </div>
                             </div>
                         </div>
