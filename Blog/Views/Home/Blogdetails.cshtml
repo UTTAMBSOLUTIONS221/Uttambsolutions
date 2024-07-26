@@ -21,12 +21,10 @@
     <meta property="og:url" content="@ViewData["url"]" />
     <meta property="og:image:alt" content="@ViewData["imagealt"]" />
 
-
     <meta property="ia:markup_url" content="URL for instant articles markup" />
     <meta property="ia:markup_url_dev" content="URL for instant articles markup (development)" />
     <meta property="ia:rules_url" content="URL for instant articles rules" />
     <meta property="ia:rules_url_dev" content="URL for instant articles rules (development)" />
-
 
     <meta name="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card system, forecought management system, fcs, fms, fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
     <meta name="keywords" content="@ViewData["Blogtags"]" />
@@ -84,32 +82,59 @@
                                     <img src="@Url.Content(Model.Blogprimaryimageurl)" alt="@Model.Blogcategoryname" class="card-img-top mb-3" style="object-fit: cover;" />
                                     <p class="card-text">@Model.Blogcontent</p>
 
+                                    <ins class="adsbygoogle"
+                                         style="display:block; text-align:center;"
+                                         data-ad-layout="in-article"
+                                         data-ad-format="fluid"
+                                         data-ad-client="ca-pub-2850934153859537"
+                                         data-ad-slot="8445437350"></ins>
+                                    <script>
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                    </script>
+
                                     @if (Model.Systemblogparagraph.Any())
                                     {
                                         bool alternate = false;
                                         foreach (var paraGraph in Model.Systemblogparagraph)
                                         {
-                                            if (alternate)
+                                            if (!string.IsNullOrEmpty(paraGraph.Blogparagraphimageurl))
                                             {
-                                                <div class="media mb-3">
-                                                    <div class="media-body">
-                                                        <p>@paraGraph.Blogparagraphcontent</p>
+                                                if (alternate)
+                                                {
+                                                    <div class="media mb-3">
+                                                        <div class="media-body">
+                                                            <p>@paraGraph.Blogparagraphcontent</p>
+                                                        </div>
+                                                        <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="ml-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
                                                     </div>
-                                                    <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="ml-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
-                                                </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="media mb-3">
+                                                        <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="mr-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
+                                                        <div class="media-body">
+                                                            <p>@paraGraph.Blogparagraphcontent</p>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                alternate = !alternate;
                                             }
                                             else
                                             {
-                                                <div class="media mb-3">
-                                                    <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="mr-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
-                                                    <div class="media-body">
-                                                        <p>@paraGraph.Blogparagraphcontent</p>
-                                                    </div>
-                                                </div>
+                                                <p class="mb-3">@paraGraph.Blogparagraphcontent</p>
                                             }
-                                            alternate = !alternate;
                                         }
                                     }
+
+                                    <ins class="adsbygoogle"
+                                         style="display:block; text-align:center;"
+                                         data-ad-layout="in-article"
+                                         data-ad-format="fluid"
+                                         data-ad-client="ca-pub-2850934153859537"
+                                         data-ad-slot="8445437350"></ins>
+                                    <script>
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                    </script>
                                 </div>
                                 <div class="card-footer bg-white">
                                     <div class="row">
@@ -192,40 +217,40 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <!-- Uttambsolutionsdisplayad -->
     <ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2850934153859537"
-     data-ad-slot="1149686671"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script> 
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-2850934153859537"
-     data-ad-slot="8445437350"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-2850934153859537"
-     data-ad-slot="8445437350"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-6b+by+d-1s+li"
-     data-ad-client="ca-pub-2850934153859537"
-     data-ad-slot="1596995960"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+         style="display:block"
+         data-ad-client="ca-pub-2850934153859537"
+         data-ad-slot="1149686671"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-2850934153859537"
+         data-ad-slot="8445437350"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-2850934153859537"
+         data-ad-slot="8445437350"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-format="fluid"
+         data-ad-layout-key="-6b+by+d-1s+li"
+         data-ad-client="ca-pub-2850934153859537"
+         data-ad-slot="1596995960"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 </body>
 </html>
