@@ -4,6 +4,7 @@
     {
         public int Logid { get; set; }
         public long Userid { get; set; }
+        public string? Modulename { get; set; }
         public string? Logaction { get; set; }
         public string? Browser { get; set; }
         public string? Ipaddress { get; set; }

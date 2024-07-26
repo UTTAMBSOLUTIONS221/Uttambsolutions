@@ -108,6 +108,7 @@ namespace Jobs.Controllers
             var model = new SystemUserLog
             {
                 Userid = SessionUserData.Usermodel.Userid,
+                Modulename = "Job center",
                 Logaction = "Viewing my profile",
                 Browser = GetUserBrowser(),
                 Ipaddress = Audit.GetIPAddress(),
@@ -245,7 +246,8 @@ namespace Jobs.Controllers
             var model = new SystemUserLog
             {
                 Userid = SessionUserData.Usermodel.Userid,
-                Logaction = "Viewing the opportunity details whike in the my profile",
+                Modulename = "Job center",
+                Logaction = "Viewing the opportunity details while in the my profile",
                 Browser = GetUserBrowser(),
                 Ipaddress = Audit.GetIPAddress(),
                 Loyaltyreward = 0,
