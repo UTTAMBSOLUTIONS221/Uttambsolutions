@@ -36,8 +36,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WEB.styles.css" asp-append-version="true" />
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
+            crossorigin="anonymous"></script>
 </head>
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
     <div class="wrapper">
@@ -89,26 +89,60 @@
 
 
         <div class="content-wrapper" style="padding-top: 58px;">
-        <section class="content">
-            <div class="container">
-                <div id="AlertsContainer">
-                    @{
-                        await Html.RenderPartialAsync("_Alerts");
-                    }
+            <section class="content">
+                <div class="container">
+                    <div id="AlertsContainer">
+                        @{
+                            await Html.RenderPartialAsync("_Alerts");
+                        }
+                    </div>
+                    <main role="main" class="pb-3 mt-2 pt-2">
+                        @RenderBody()
+                    </main>
                 </div>
-                <main role="main" class="pb-3 mt-2 pt-2">
-                    @RenderBody()
-                </main>
-            </div>
-        </section>
-        <!-- /.content -->
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - WEB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </section>
+            <!-- /.content -->
         </div>
-    </footer>
+
+        <footer class="main-footer bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5 class="text-white">About JobCenter</h5>
+                        <p class="text-white">
+                            JobCenter is a premier job listing and freelancing platform that connects job seekers with potential employers. Our services include job listings, freelancing job biddings, and other career opportunities. We are dedicated to helping you find your next job in the digital age.
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 class="text-white">Contact Us</h5>
+                        <p class="text-white">
+                            <strong>Address:</strong> 123 Tech Street, Nairobi, Kenya<br />
+                            <strong>Phone:</strong> +254 728 316050<br />
+                            <strong>Email:</strong> info@jobcenter.com
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 class="text-white">Follow Us</h5>
+                        <p class="text-white">
+                            <a href="https://www.facebook.com/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-facebook-f text-white"></i> Facebook
+                            </a><br />
+                            <a href="https://www.twitter.com/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-twitter text-white"></i> Twitter
+                            </a><br />
+                            <a href="https://www.linkedin.com/company/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-linkedin-in text-white"></i> LinkedIn
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-12 text-center text-white">
+                        &copy; 2024 Uttamb Solutions. All rights reserved. | <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
     <!-- jQuery -->
     <script src="~/plugins/jquery/jquery.min.js"></script>
