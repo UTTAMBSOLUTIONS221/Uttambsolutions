@@ -27,98 +27,138 @@
     <meta itemprop="image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
 
 
-    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
-    <!-- Theme style -->
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link href="~/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WEB.styles.css" asp-append-version="true" />
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
-     crossorigin="anonymous"></script>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
+            crossorigin="anonymous"></script>
 </head>
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
     <div class="wrapper">
-        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
+        <nav class="main-header navbar navbar-expand-md navbar-light bg-custom">
             <div class="container">
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">
                     <img src="~/images/uttambsolutionlogo.png" alt="Uttambsolutions Logo" class="brand-image elevation-3">
-                    <span class="brand-text font-weight-light text-white fw-bold text-uppercase">UTTAMB SOLUTIONS</span>
+                    <span class="brand-text font-weight-light text-white fw-bold font-weight-bold text-uppercase">UTTAMB SOLUTIONS</span>
                 </a>
 
                 <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-
                 <div class="collapse navbar-collapse order-3" id="navbarCollapse">
                     <!-- Left navbar links -->
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a asp-action="Index" asp-controller="Home" asp-area="" class="nav-link text-white fw-bold text-uppercase">Home</a>
-                        </li>
                         <li class="nav-item">
                             <a asp-action="About" asp-controller="Home" asp-area="" class="nav-link text-white fw-bold text-uppercase">About</a>
                         </li>
                         <li class="nav-item">
                             <a asp-action="Contact" asp-controller="Home" asp-area="" class="nav-link text-white fw-bold text-uppercase">Contact</a>
                         </li>
-
                         <li class="nav-item">
-                            <a asp-action="Blogs" asp-controller="Home" asp-area="" class="nav-link text-white fw-bold text-uppercase">BLOGS</a>
+                            <a href="https://everest.uttambsolutions.com" target="_blank" class="nav-link text-white fw-bold text-uppercase">FMS</a>
                         </li>
                         <li class="nav-item">
-                            <a asp-action="Ecommerce" asp-controller="Home" asp-area="" class="nav-link text-white fw-bold text-uppercase">ECOMMERCE</a>
+                            <a href="https://jobcenter.uttambsolutions.com" target="_blank" class="nav-link text-white fw-bold text-uppercase">JOBS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://fortysevennews.uttambsolutions.com" target="_blank" class="nav-link text-white fw-bold text-uppercase">BLOGS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://sokojiji.uttambsolutions.com" target="_blank" class="nav-link text-white fw-bold text-uppercase">ECOMMERCE</a>
                         </li>
                     </ul>
                 </div>
-
-                <!-- Right navbar links for large screens -->
-                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto d-none d-md-flex">
-                    <li class="nav-item">
-                        <a asp-action="Signin" asp-controller="Account" asp-area="" class="nav-link text-white fw-bold text-uppercase">SIGNIN</a>
-                    </li>
-                </ul>
             </div>
         </nav>
-
-
-
-
+        <!-- /.navbar -->
 
         <div class="content-wrapper" style="padding-top: 58px;">
-        <section class="content">
-            <div class="container">
-                <div id="AlertsContainer">
-                    @{
-                        await Html.RenderPartialAsync("_Alerts");
-                    }
+            <section class="content">
+                <div class="container">
+                    <div id="AlertsContainer">
+                        @{
+                            await Html.RenderPartialAsync("_Alerts");
+                        }
+                    </div>
+                    <main role="main" class="pb-3 mt-2 pt-2">
+                        @RenderBody()
+                    </main>
                 </div>
-                <main role="main" class="pb-3 mt-2 pt-2">
-                    @RenderBody()
-                </main>
-            </div>
-        </section>
-        <!-- /.content -->
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - WEB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </section>
+            <!-- /.content -->
         </div>
-    </footer>
+
+        <footer class="main-footer bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5 class="text-white">About JobCenter</h5>
+                        <p class="text-white">
+                            JobCenter is a premier job listing and freelancing platform that connects job seekers with potential employers. Our services include job listings, freelancing job biddings, and other career opportunities. We are dedicated to helping you find your next job in the digital age.
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 class="text-white">Contact Us</h5>
+                        <p class="text-white">
+                            <strong>Address:</strong> 123 Tech Street, Nairobi, Kenya<br />
+                            <strong>Phone:</strong> +254 728 316050<br />
+                            <strong>Email:</strong> info@jobcenter.com
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 class="text-white">Follow Us</h5>
+                        <p class="text-white">
+                            <a href="https://www.facebook.com/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-facebook-f text-white"></i> Facebook
+                            </a><br />
+                            <a href="https://www.twitter.com/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-twitter text-white"></i> Twitter
+                            </a><br />
+                            <a href="https://www.linkedin.com/company/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-linkedin-in text-white"></i> LinkedIn
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-12 text-center text-white">
+                        &copy; 2024 Uttamb Solutions. All rights reserved. | <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
-    <!-- jQuery -->
-    <script src="~/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
+    <script src="~/lib/plugins/jquery/jquery.min.js"></script>
+    <script src="~/lib/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/datatables-buttons/js/datatables.buttons.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/lib/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/lib/plugins/pdfmake/vfs_fonts.js"></script>
     <script src="~/dist/js/adminlte.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z24LLL0113"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-Z24LLL0113');
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
