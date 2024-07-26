@@ -9,16 +9,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - JobCenter | Premier Job Listing & Freelancing Platform</title>
-
-    <!-- Meta Description for SEO -->
-    <meta name="description" content="JobCenter connects job seekers with employers through our comprehensive job listings, freelancing opportunities, and career resources. Discover your next career move with JobCenter." />
-    <meta name="keywords" content="JobCenter, job listings, freelancing jobs, career opportunities, job search, online jobs, career resources" />
-    <meta name="author" content="JobCenter" />
+    <title>@ViewData["Title"] - SokoJiji | Your Premier E-commerce Platform</title>
+    <meta name="description" content="@ViewData["description"]" />
+    <meta name="keywords" content="SokoJiji, e-commerce, online shopping, product details, buy online, best prices, product reviews" />
+    <meta name="author" content="SokoJiji" />
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="@ViewData["Title"] - JobCenter" />
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="@ViewData["Title"] - SokoJiji" />
     <meta property="og:description" content="@ViewData["description"]" />
     <meta property="og:image" content="@ViewData["image"]" />
     <meta property="og:url" content="@ViewData["url"]" />
@@ -26,14 +24,18 @@
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="@ViewData["Title"] - JobCenter" />
-    <meta name="twitter:description" content="JobCenter offers job listings, freelancing job biddings, and career opportunities. Stay connected and find your next job with our platform." />
+    <meta name="twitter:title" content="@ViewData["Title"] - SokoJiji" />
+    <meta name="twitter:description" content="@ViewData["description"]" />
     <meta name="twitter:image" content="@ViewData["image"]" />
 
     <!-- Schema.org Markup -->
-    <meta itemprop="name" content="@ViewData["Title"] - JobCenter" />
+    <meta itemprop="name" content="@ViewData["Title"] - SokoJiji" />
     <meta itemprop="description" content="@ViewData["description"]" />
     <meta itemprop="image" content="@ViewData["image"]" />
+    <meta itemprop="productID" content="@Model.Shopproductid" />
+    <meta itemprop="brand" content="@Model.Brandname" />
+    <meta itemprop="price" content="@Model.Marketprice.ToString("#,##0.00")" />
+    <meta itemprop="offers" content="In Stock" />
 
     <!-- CSS Links -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -58,8 +60,8 @@
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
             <div class="container-fluid">
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">
-                    <img src="~/images/uttambsolutionsjoblogo.png" alt="JobCenter Logo" class="brand-image elevation-3">
-                    <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">JobCenter</span>
+                    <img src="~/images/sokojiji-logo.png" alt="SokoJiji Logo" class="brand-image elevation-3">
+                    <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">SokoJiji</span>
                 </a>
                 <ul class="nav-item order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                     <li class="nav-item">
@@ -81,11 +83,13 @@
                         <div class="container py-4">
                             <div class="row mb-4">
                                 <div class="col-md-5">
-                                    <div class="card h-100 shadow-sm">
-                                        <img id="selectedImage" src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top preview-image" style="height: 300px; object-fit: contain;" />
-                                        <div class="card-body">
-                                            <h2 class="fw-bold">@Model.Productname</h2>
-                                            <p>@Model.Mainproductdescription</p>
+                                    <div class="row">
+                                        <div class="card h-100 shadow-sm">
+                                            <img id="selectedImage" src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top preview-image" style="height: 300px; object-fit: contain;" />
+                                            <div class="card-body">
+                                                <h2 class="fw-bold">@Model.Productname</h2>
+                                                <p>@Model.Mainproductdescription</p>
+                                            </div>
                                         </div>
                                     </div>
                                     @* Preview Images Card *@
@@ -173,37 +177,37 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h5 class="text-white">About JobCenter</h5>
+                        <h5 class="text-white">About SokoJiji</h5>
                         <p class="text-white">
-                            JobCenter is a premier job listing and freelancing platform that connects job seekers with potential employers. Our services include job listings, freelancing job biddings, and other career opportunities. We are dedicated to helping you find your next job in the digital age.
+                            SokoJiji is your premier e-commerce platform offering a wide range of products at competitive prices. From the latest tech gadgets to fashion essentials, we bring the best products right to your doorstep. Shop with confidence and discover unbeatable deals at SokoJiji.
                         </p>
                     </div>
                     <div class="col-sm-3">
                         <h5 class="text-white">Contact Us</h5>
                         <p class="text-white">
-                            <strong>Address:</strong> 123 Tech Street, Nairobi, Kenya<br />
-                            <strong>Phone:</strong> +254 728 316050<br />
-                            <strong>Email:</strong> info@jobcenter.com
+                            <strong>Address:</strong> 123 Commerce Avenue, Nairobi, Kenya<br />
+                            <strong>Phone:</strong> +254 700 123456<br />
+                            <strong>Email:</strong> support@sokojiji.com
                         </p>
                     </div>
                     <div class="col-sm-3">
                         <h5 class="text-white">Follow Us</h5>
                         <p class="text-white">
-                            <a href="https://www.facebook.com/jobcenter" target="_blank" class="text-reset">
+                            <a href="https://www.facebook.com/sokojiji" target="_blank" class="text-reset">
                                 <i class="fab fa-facebook-f text-white"></i> Facebook
                             </a><br />
-                            <a href="https://www.twitter.com/jobcenter" target="_blank" class="text-reset">
+                            <a href="https://www.twitter.com/sokojiji" target="_blank" class="text-reset">
                                 <i class="fab fa-twitter text-white"></i> Twitter
                             </a><br />
-                            <a href="https://www.linkedin.com/company/jobcenter" target="_blank" class="text-reset">
-                                <i class="fab fa-linkedin-in text-white"></i> LinkedIn
+                            <a href="https://www.instagram.com/sokojiji" target="_blank" class="text-reset">
+                                <i class="fab fa-instagram text-white"></i> Instagram
                             </a>
                         </p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-sm-12 text-center text-white">
-                        &copy; 2024 Uttamb Solutions. All rights reserved. | <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">Privacy Policy</a>
+                        &copy; 2024 SokoJiji. All rights reserved. | <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">Privacy Policy</a>
                     </div>
                 </div>
             </div>
