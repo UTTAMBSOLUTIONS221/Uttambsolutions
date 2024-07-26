@@ -80,143 +80,141 @@
                         }
                     </div>
                     <main role="main" class="pb-3 mt-2 pt-2">
-                        <div class="container-fluid py-4">
-                            <div class="row mb-4">
-                                <div class="col-md-5">
-                                    <div class="row">
-                                        <div class="card h-100 shadow-sm">
-                                            <img id="selectedImage" src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top preview-image" style="height: 300px; object-fit: contain;" />
-                                            <div class="card-body">
-                                                <h2 class="fw-bold">@Model.Productname</h2>
-                                                <p>@Model.Mainproductdescription</p>
-                                            </div>
+                        <div class="row mb-4">
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="card h-100 shadow-sm">
+                                        <img id="selectedImage" src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top preview-image" style="height: 300px; object-fit: contain;" />
+                                        <div class="card-body">
+                                            <h2 class="fw-bold">@Model.Productname</h2>
+                                            <p>@Model.Mainproductdescription</p>
                                         </div>
                                     </div>
-                                    @* Preview Images Card *@
-                                    <div class="row mt-4">
-                                        <div class="col-md-12">
-                                            <div class="card shadow-sm">
-                                                <div class="card-body">
-                                                    <h4 class="fw-bold">Preview Images</h4>
-                                                    @if (Model.Productotherimages != null && Model.Productotherimages.Any())
-                                                    {
-                                                        <div class="row row-cols-3 g-2">
+                                </div>
+                                @* Preview Images Card *@
+                                <div class="row mt-4">
+                                    <div class="col-md-12">
+                                        <div class="card shadow-sm">
+                                            <div class="card-body">
+                                                <h4 class="fw-bold">Preview Images</h4>
+                                                @if (Model.Productotherimages != null && Model.Productotherimages.Any())
+                                                {
+                                                    <div class="row row-cols-3 g-2">
+                                                        <div class="col">
+                                                            <div class="card">
+                                                                <img src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" onclick="previewImage('@Url.Content(Model.Primaryimageurl)')" />
+                                                            </div>
+                                                        </div>
+                                                        @foreach (var Productimage in Model.Productotherimages)
+                                                        {
                                                             <div class="col">
                                                                 <div class="card">
-                                                                    <img src="@Url.Content(Model.Primaryimageurl)" alt="@Model.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" onclick="previewImage('@Url.Content(Model.Primaryimageurl)')" />
+                                                                    <img src="@Url.Content(Productimage.ProductImageUrl)" alt="@Model.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" onclick="previewImage('@Url.Content(Productimage.ProductImageUrl)')" />
                                                                 </div>
                                                             </div>
-                                                            @foreach (var Productimage in Model.Productotherimages)
-                                                            {
-                                                                <div class="col">
-                                                                    <div class="card">
-                                                                        <img src="@Url.Content(Productimage.ProductImageUrl)" alt="@Model.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" onclick="previewImage('@Url.Content(Productimage.ProductImageUrl)')" />
-                                                                    </div>
-                                                                </div>
-                                                            }
-                                                        </div>
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 mb-4">
-                                        <div class="ad-container text-center">
-                                            <ins class="adsbygoogle"
-                                                 style="display:block"
-                                                 data-ad-client="ca-pub-2850934153859537"
-                                                 data-ad-slot="1234567890"
-                                                 data-ad-format="auto"></ins>
-                                            <script>
-                                                (adsbygoogle = window.adsbygoogle || []).push({});
-                                            </script>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card h-100 shadow-sm">
-                                        <div class="card-body">
-                                            <h4 class="fw-bold">Product Description</h4>
-                                            <p>@Model.Productdescription</p>
-                                            <hr />
-                                            <h4 class="fw-bold">Product Details</h4>
-                                            <ul class="list-unstyled">
-                                                <li><strong>Brand:</strong> @Model.Brandname</li>
-                                                <li><strong>Category:</strong> @Model.Categoryname</li>
-                                                <li><strong>Price:</strong> <span class="fw-bold">Ksh. @Model.Marketprice.ToString("#,##0.00")</span></li>
-                                                <li><strong>Shop:</strong> @Model.Organizationname</li>
-                                            </ul>
-                                            <hr />
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h4 class="fw-bold">Product Features/Specifications</h4>
-                                                    <ul class="list-unstyled">
-                                                        @if (Model.Productfeatures != null && Model.Productfeatures.Any())
-                                                        {
-                                                            @foreach (var Feature in Model.Productfeatures)
-                                                            {
-                                                                <li>@Feature.ProductFeature</li>
-                                                            }
                                                         }
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-4">
-                                                <div class="ad-container text-center">
-                                                    <ins class="adsbygoogle"
-                                                         style="display:block"
-                                                         data-ad-client="ca-pub-2850934153859537"
-                                                         data-ad-slot="1234567890"
-                                                         data-ad-format="auto"></ins>
-                                                    <script>
-                                                        (adsbygoogle = window.adsbygoogle || []).push({});
-                                                    </script>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h4 class="fw-bold">What's in the Box</h4>
-                                                    <ul class="list-unstyled">
-                                                        @if (Model.Productwhatsinbox != null && Model.Productwhatsinbox.Any())
-                                                        {
-                                                            @foreach (var Item in Model.Productwhatsinbox)
-                                                            {
-                                                                <li>@Item.ProductWhatsInBoxItem</li>
-                                                            }
-                                                        }
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-4">
-                                                <div class="ad-container text-center">
-                                                    <ins class="adsbygoogle"
-                                                         style="display:block"
-                                                         data-ad-client="ca-pub-2850934153859537"
-                                                         data-ad-slot="1234567890"
-                                                         data-ad-format="auto"></ins>
-                                                    <script>
-                                                        (adsbygoogle = window.adsbygoogle || []).push({});
-                                                    </script>
-                                                </div>
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Another Ad Banner -->
-                            <div class="row mb-4">
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-4">
                                     <div class="ad-container text-center">
                                         <ins class="adsbygoogle"
                                              style="display:block"
                                              data-ad-client="ca-pub-2850934153859537"
-                                             data-ad-slot="0987654321"
+                                             data-ad-slot="1234567890"
                                              data-ad-format="auto"></ins>
                                         <script>
                                             (adsbygoogle = window.adsbygoogle || []).push({});
                                         </script>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h4 class="fw-bold">Product Description</h4>
+                                        <p>@Model.Productdescription</p>
+                                        <hr />
+                                        <h4 class="fw-bold">Product Details</h4>
+                                        <ul class="list-unstyled">
+                                            <li><strong>Brand:</strong> @Model.Brandname</li>
+                                            <li><strong>Category:</strong> @Model.Categoryname</li>
+                                            <li><strong>Price:</strong> <span class="fw-bold">Ksh. @Model.Marketprice.ToString("#,##0.00")</span></li>
+                                            <li><strong>Shop:</strong> @Model.Organizationname</li>
+                                        </ul>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4 class="fw-bold">Product Features/Specifications</h4>
+                                                <ul class="list-unstyled">
+                                                    @if (Model.Productfeatures != null && Model.Productfeatures.Any())
+                                                    {
+                                                        @foreach (var Feature in Model.Productfeatures)
+                                                        {
+                                                            <li>@Feature.ProductFeature</li>
+                                                        }
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <div class="ad-container text-center">
+                                                <ins class="adsbygoogle"
+                                                     style="display:block"
+                                                     data-ad-client="ca-pub-2850934153859537"
+                                                     data-ad-slot="1234567890"
+                                                     data-ad-format="auto"></ins>
+                                                <script>
+                                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                                </script>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4 class="fw-bold">What's in the Box</h4>
+                                                <ul class="list-unstyled">
+                                                    @if (Model.Productwhatsinbox != null && Model.Productwhatsinbox.Any())
+                                                    {
+                                                        @foreach (var Item in Model.Productwhatsinbox)
+                                                        {
+                                                            <li>@Item.ProductWhatsInBoxItem</li>
+                                                        }
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <div class="ad-container text-center">
+                                                <ins class="adsbygoogle"
+                                                     style="display:block"
+                                                     data-ad-client="ca-pub-2850934153859537"
+                                                     data-ad-slot="1234567890"
+                                                     data-ad-format="auto"></ins>
+                                                <script>
+                                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Another Ad Banner -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="ad-container text-center">
+                                    <ins class="adsbygoogle"
+                                         style="display:block"
+                                         data-ad-client="ca-pub-2850934153859537"
+                                         data-ad-slot="0987654321"
+                                         data-ad-format="auto"></ins>
+                                    <script>
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                    </script>
                                 </div>
                             </div>
                         </div>
