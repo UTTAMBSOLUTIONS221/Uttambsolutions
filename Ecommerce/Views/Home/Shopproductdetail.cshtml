@@ -1,0 +1,347 @@
+﻿@model DBL.Models.Organizationshopproductsdata
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    Layout = null;
+
+    // Method to calculate relative time
+    string GetRelativeDate(DateTime date)
+    {
+        var now = DateTime.Now;
+        var timeSpan = now - date;
+
+        if (timeSpan.TotalDays < 1)
+        {
+            return "Today";
+        }
+        else if (timeSpan.TotalDays < 2)
+        {
+            return "Yesterday";
+        }
+        else
+        {
+            var days = (int)timeSpan.TotalDays;
+            return $"{days} day{(days > 1 ? "s" : "")} ago";
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - JobCenter</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="@ViewData["type"]" />
+    <meta property="og:title" content="@ViewData["Title"]" />
+    <meta property="og:description" content="@ViewData["description"]" />
+    <meta property="og:image" content="@ViewData["image"]" />
+    <meta property="og:url" content="@ViewData["url"]" />
+    <meta property="og:image:alt" content="@ViewData["imagealt"]" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@ViewData["Title"] - JobCenter" />
+    <meta name="twitter:description" content="JobCenter offers job listings, freelancing job biddings, and career opportunities. Stay connected and find your next job with our platform." />
+    <meta name="twitter:image" content="@ViewData["image"]" />
+
+    <!-- Schema.org Markup -->
+    <meta itemprop="name" content="@ViewData["Title"] - JobCenter" />
+    <meta itemprop="description" content="@ViewData["description"]" />
+    <meta itemprop="image" content="@ViewData["image"]" />
+
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <!-- Google Adsense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
+            crossorigin="anonymous"></script>
+</head>
+<body class="hold-transition layout-top-nav layout-navbar-fixed">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
+            <div class="container-fluid">
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                    <img src="~/images/uttambsolutionsjoblogo.png" alt="JobCenter Logo" class="brand-image elevation-3">
+                    <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">JobCenter</span>
+                </a>
+                <ul class="nav-item order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                    <li class="nav-item">
+                        <a asp-action="Signin" asp-controller="Account" class="nav-link text-white fw-bold font-weight-bold text-uppercase">SIGNIN</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="content-wrapper">
+            <section class="content">
+                <div class="container-fluid">
+                    <div id="AlertsContainer">
+                        @{
+                            await Html.RenderPartialAsync("_Alerts");
+                        }
+                    </div>
+                    <main role="main" class="pb-3 mt-2 pt-2">
+                        <div class="row mb-4">
+                            <div class="col-lg-8 col-md-12">
+                                <div class="card bg-light border-0 shadow-sm">
+                                    <div class="card-header bg-white">
+                                        <h4 class="fw-bold font-weight-bold text-custom text-uppercase">@Model.Title</h4>
+                                        <h6 class="text-secondary text-uppercase">@Model.Employername</h6>
+                                        <div class="d-flex flex-wrap">
+                                            <span class="badge badge-secondary mr-2 mb-2"><strong>Location:</strong> @Model.Locationname</span>
+                                            <span class="badge badge-secondary mr-2 mb-2"><strong>Type:</strong> @Model.Jobtypename</span>
+                                            <span class="badge badge-secondary mr-2 mb-2"><strong>Salary Range:</strong> @Model.JobSalaryRange</span>
+                                            <span class="badge badge-secondary mb-2"><strong>Job Function:</strong> @Model.Functionname</span>
+                                        </div>
+                                        <hr class="full-width-hr" />
+                                        <div class="d-flex justify-content-between mt-1">
+                                            <span class="badge bg-success">@Model.JobStatus</span>
+                                            <span class="text-muted">@GetRelativeDate(Model.DateCreated)</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body bg-white">
+                                        <div class="row">
+                                            <div class="col-md-2 col-sm-3 col-4">
+                                                <div class="card card-border-custom">
+                                                    <img src="@Url.Content(Model.Organizationlogo)" class="img-fluid rounded" alt="@Model.Employername" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 col-sm-9 col-8">
+                                                <p>@Model.JobDescription</p>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12">
+                                                    @if (Model.Systemjobfunction != null)
+                                                    {
+                                                          <h4>Key Responsibilities:</h4>
+                                                        foreach (var joFunctions in Model.Systemjobfunction)
+                                                        {
+                                                            <p>@joFunctions.Jobfunction</p>
+                                                        }
+                                                    }
+                                                    <div class="row mb-4">
+                                                        <ins class="adsbygoogle"
+                                                             style="display:block"
+                                                             data-ad-client="ca-pub-2850934153859537"
+                                                             data-ad-slot="1149686671"
+                                                             data-ad-format="auto"
+                                                             data-full-width-responsive="true"></ins>
+                                                        <script>
+                                                            (adsbygoogle = window.adsbygoogle || []).push({});
+                                                        </script>
+                                                    </div>
+                                                    @if (Model.Systemjobqualification != null)
+                                                    {
+                                                        <h4>Qualifications:</h4>
+                                                        foreach (var jobQualifications in Model.Systemjobqualification)
+                                                        {
+                                                            <p>@jobQualifications.Jobqualification</p>
+                                                        }
+                                                    }
+                                                    @if (Model.Systemjobskill != null)
+                                                    {
+                                                          <h4>Preferred Skills:</h4>
+                                                        foreach (var jobSkill in Model.Systemjobskill)
+                                                        {
+                                                            <p>@jobSkill.Jobskill</p>
+                                                        }
+                                                    }
+                                                    @if (Model.Systemjobbenefit != null)
+                                                    {
+                                                            <h4>Benefits:</h4>
+                                                        foreach (var jobBenefit in Model.Systemjobbenefit)
+                                                        {
+                                                            <p>@jobBenefit.Jobbenefit</p>
+                                                        }
+                                                    }
+                                                    <h4>How to Apply:</h4>
+                                                    <p>@Model.Jobhowtoapply</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-white text-end">
+                                        @if (Model.Jopapplicationstatus != "Applied")
+                                        {
+                                            if (Model.EasyApply)
+                                            {
+                                                <a asp-action="Easyapplythisjob" asp-controller="Home" asp-route-jobcode="@Guid.NewGuid()" asp-route-code="@Guid.NewGuid()" asp-route-jobid="@Model.JobId" class="btn btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Easy Apply</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Model.JobUrl" target="_blank" class="btn btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Apply Now</a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-custom text-uppercase font-weight-bold">
+                                                    <span id="buttonText">Applied</span>
+                                                </button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-12">
+                                <div class="card border-0 shadow-sm mb-4">
+                                    <div class="card-header bg-white text-custom">
+                                        <h5 class="card-title mb-0">Similar Jobs</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        @if (Model.RelatedJobs != null)
+                                        {
+                                            foreach (var relatedJob in Model.RelatedJobs)
+                                            {
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <a href="#" class="d-flex align-items-center mb-3">
+                                                            <img src="@Url.Content(relatedJob.Organizationlogo)" class="img-fluid rounded-circle mr-3" alt="@relatedJob.Employername" width="50" />
+                                                            <div>
+                                                                <h6 class="text-custom mb-1">@relatedJob.Title</h6>
+                                                                <small class="text-muted">@relatedJob.Employername</small>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <ins class="adsbygoogle"
+                                         style="display:block"
+                                         data-ad-client="ca-pub-2850934153859537"
+                                         data-ad-slot="1149686671"
+                                         data-ad-format="auto"
+                                         data-full-width-responsive="true"></ins>
+                                    <script>
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                    </script>
+                                </div>
+                                <div class="card card-border-custom mb-4">
+                                    <div class="card-header bg-white">
+                                        <h5 class="fw-bold font-weight-bold text-custom">Share this Job:</h5>
+                                    </div>
+                                    <div class="card-footer bg-white text-end">
+                                        <div class="d-flex justify-content-end">
+                                            <a href="https://twitter.com/intent/tweet?url=https://jobcenter.uttambsolutions.com/Home/Jobdetails?JobId=@(Model.JobId)" class="btn btn-xs btn-custom mr-2" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> Twitter</a>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://jobcenter.uttambsolutions.com/Home/Jobdetails?JobId=@(Model.JobId)" class="btn btn-xs btn-custom mr-2" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i> Facebook</a>
+                                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://jobcenter.uttambsolutions.com/Home/Jobdetails?JobId=@(Model.JobId)" class="btn btn-xs btn-custom" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-0 shadow-sm mb-4">
+                                    <div class="card-header bg-white text-custom">
+                                        <h5 class="card-title mb-0">Contact Us</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Name</label>
+                                                <input type="text" class="form-control" id="name" placeholder="Your Name" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="email" placeholder="Your Email" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message" class="form-label">Message</label>
+                                                <textarea class="form-control" id="message" rows="3" placeholder="Your Message"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-secondary text-uppercase fw-bold btn-apply-site" style="color:#ffffff !important">Send Message</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <ins class="adsbygoogle"
+                                         style="display:block"
+                                         data-ad-client="ca-pub-2850934153859537"
+                                         data-ad-slot="1149686671"
+                                         data-ad-format="auto"
+                                         data-full-width-responsive="true"></ins>
+                                    <script>
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </section>
+        </div>
+
+        <footer class="main-footer bg-dark text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5 class="text-white">About JobCenter</h5>
+                        <p class="text-white">
+                            JobCenter is a premier job listing and freelancing platform that connects job seekers with potential employers. Our services include job listings, freelancing job biddings, and other career opportunities. We are dedicated to helping you find your next job in the digital age.
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 class="text-white">Contact Us</h5>
+                        <p class="text-white">
+                            <strong>Address:</strong> 123 Tech Street, Nairobi, Kenya<br />
+                            <strong>Phone:</strong> +254 728 316050<br />
+                            <strong>Email:</strong> info@jobcenter.com
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 class="text-white">Follow Us</h5>
+                        <p class="text-white">
+                            <a href="https://www.facebook.com/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-facebook-f text-white"></i> Facebook
+                            </a><br />
+                            <a href="https://www.twitter.com/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-twitter text-white"></i> Twitter
+                            </a><br />
+                            <a href="https://www.linkedin.com/company/jobcenter" target="_blank" class="text-reset">
+                                <i class="fab fa-linkedin-in text-white"></i> LinkedIn
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-12 text-center text-white">
+                        &copy; 2024 Uttamb Solutions. All rights reserved. | <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/lib/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/lib/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/lib/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/lib/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>

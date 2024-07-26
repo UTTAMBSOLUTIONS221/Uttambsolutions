@@ -23,7 +23,13 @@ namespace Ecommerce.Controllers
             var ecommerce = await bl.Getsystemorganizationshopproductsdata();
             return View(ecommerce);
         }
-
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Shopproductdetail(long Shopproductid)
+        {
+            var commerceProducts = await bl.Getsystemorganizationshopproductsdatabyid(Shopproductid);
+            return View(commerceProducts);
+        }
         public IActionResult Privacy()
         {
             return View();
