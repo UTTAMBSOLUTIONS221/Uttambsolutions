@@ -10,28 +10,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@Model.Productname - SokoJiji | Your Premier E-commerce Platform</title>
-    <meta name="description" content="@ViewData["description"]" />
+    <meta name="description" content="@Model.Productdescription" />
     <meta name="keywords" content="SokoJiji, e-commerce, online shopping, product details, buy online, best prices, product reviews" />
     <meta name="author" content="SokoJiji" />
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:type" content="product" />
-    <meta property="og:title" content="@ViewData["Title"] - SokoJiji" />
-    <meta property="og:description" content="@ViewData["description"]" />
-    <meta property="og:image" content="@ViewData["image"]" />
-    <meta property="og:url" content="@ViewData["url"]" />
-    <meta property="og:image:alt" content="@ViewData["imagealt"]" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@Model.Productname - SokoJiji" />
+    <meta property="og:description" content="@Model.Productdescription" />
+    <meta property="og:image" content="@Model.Primaryimageurl" />
+    <meta property="og:url" content=$"https://sokojiji.uttambsolutions.com/Home/Shopproductdetail?Shopproductid ={Model.Shopproductid}" />
+    <meta property="og:image:alt" content="@Model.Productname" />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="@ViewData["Title"] - SokoJiji" />
-    <meta name="twitter:description" content="@ViewData["description"]" />
-    <meta name="twitter:image" content="@ViewData["image"]" />
+    <meta name="twitter:title" content="@Model.Productname - SokoJiji" />
+    <meta name="twitter:description" content="@Model.Productdescription" />
+    <meta name="twitter:image" content="@Model.Primaryimageurl" />
 
     <!-- Schema.org Markup -->
-    <meta itemprop="name" content="@ViewData["Title"] - SokoJiji" />
-    <meta itemprop="description" content="@ViewData["description"]" />
-    <meta itemprop="image" content="@ViewData["image"]" />
+    <meta itemprop="name" content="@Model.Productname - SokoJiji" />
+    <meta itemprop="description" content="@Model.Productdescription" />
+    <meta itemprop="image" content="@Model.Primaryimageurl" />
     <meta itemprop="productID" content="@Model.Shopproductid" />
     <meta itemprop="brand" content="@Model.Brandname" />
     <meta itemprop="price" content="@Model.Marketprice.ToString("#,##0.00")" />
@@ -82,6 +82,20 @@
                     <main role="main" class="pb-3 mt-2 pt-2">
                         <div class="container-fluid py-4">
                             <div class="row mb-4">
+                                <!-- Ad Banner -->
+                                <div class="col-md-12 mb-4">
+                                    <div class="ad-container text-center">
+                                        <ins class="adsbygoogle"
+                                             style="display:block"
+                                             data-ad-client="ca-pub-2850934153859537"
+                                             data-ad-slot="1234567890"
+                                             data-ad-format="auto"></ins>
+                                        <script>
+                                            (adsbygoogle = window.adsbygoogle || []).push({});
+                                        </script>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-5">
                                     <div class="row">
                                         <div class="card h-100 shadow-sm">
@@ -164,6 +178,22 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Another Ad Banner -->
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <div class="ad-container text-center">
+                                        <ins class="adsbygoogle"
+                                             style="display:block"
+                                             data-ad-client="ca-pub-2850934153859537"
+                                             data-ad-slot="0987654321"
+                                             data-ad-format="auto"></ins>
+                                        <script>
+                                            (adsbygoogle = window.adsbygoogle || []).push({});
+                                        </script>
                                     </div>
                                 </div>
                             </div>
