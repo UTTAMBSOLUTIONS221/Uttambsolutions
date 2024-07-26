@@ -97,5 +97,6 @@ namespace DBL.Entities
                 return string.Join(' ', words.Take(40)) + "...";
             }
         }
+        public List<Systemblog>? Relatedarticles { get; set; }
     }
 }
