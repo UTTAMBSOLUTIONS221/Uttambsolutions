@@ -7,8 +7,10 @@
 <div class="row">
     @if (Model != null && Model.Systemblogs != null)
     {
+        int blogCount = 0; // Counter to track the number of blog posts
         foreach (var blogPost in Model.Systemblogs)
         {
+            // Blog post card
             <div class="col-lg-3 col-md-3 col-sm-4 col-12 mb-3">
                 <a asp-action="Blogdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@blogPost.Blogid" asp-area="" class="text-decoration-none">
                     <div class="card h-100 shadow-sm card-info card-outline">
@@ -24,7 +26,7 @@
                                     <p class="card-text text-muted text-xs" title="Published On: @blogPost.Datecreated">Published On: @blogPost.Datecreated</p>
                                 </div>
                             </div>
-                          </div>
+                        </div>
                         <div class="card-footer bg-white">
                             <div class="d-flex justify-content-center">
                                 <a href="https://twitter.com/intent/tweet?url=https://fortysevennews.uttambsolutions.com/Home/Blogdetails?Blogid=@(blogPost.Blogid)" class="btn btn-xs btn-custom mr-2" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> Twitter</a>
@@ -35,6 +37,22 @@
                     </div>
                 </a>
             </div>
+
+            // Increment the counter
+            blogCount++;
+
+            // Insert advertisement after every 3 blog posts
+            if (blogCount % 3 == 0 && blogCount < Model.Systemblogs.Count)
+            {
+                <div class="col-12 mb-3">
+                    <!-- Advertisement HTML here -->
+                    <div class="ad-placeholder">
+                        <p class="text-center">Advertisement</p>
+                        <!-- Example Ad content -->
+                        <img src="path-to-ad-image.jpg" alt="Ad" class="img-fluid">
+                    </div>
+                </div>
+            }
         }
     }
     else
@@ -42,6 +60,7 @@
         <p class="text-center">No blogs available at the moment.</p>
     }
 </div>
+
 <!-- Uttambsolutionsdisplayad -->
 <ins class="adsbygoogle"
      style="display:block"
