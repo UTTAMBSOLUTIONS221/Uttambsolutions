@@ -180,7 +180,7 @@
 
                                                 <li>
                                                     <a asp-action="Blogdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@relatedarticle.Blogid" asp-area="" class="d-flex align-items-center mb-3 text-decoration-none">
-                                                        <img src="@Url.Content(relatedarticle.Blogprimaryimageurl)" class="img-fluid rounded-circle mr-3" alt="@relatedarticle.Blogname" width="100" />
+                                                        <img src="@Url.Content(relatedarticle.Blogprimaryimageurl)" class="img-fluid mr-3" alt="@relatedarticle.Blogname" width="70"  height="70"/>
                                                         <div>
                                                             <h6 class="text-custom mb-1">@relatedarticle.Blogname</h6>
                                                             <small class="text-muted">@relatedarticle.Blogcategoryname</small>
