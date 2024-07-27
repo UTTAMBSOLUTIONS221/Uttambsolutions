@@ -1,4 +1,5 @@
-﻿using Mainapp.Entities.Startup;
+﻿using Mainapp.Constants;
+using Mainapp.Entities.Startup;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -48,10 +49,13 @@ namespace Mainapp.ViewModels.Startup
                 var response = await _serviceProvider.Authenticate(request);
                 if (response.StatusCode == 200)
                 {
+                    // Store user details locally (e.g., using Preferences)
                     string userDetailStr = JsonConvert.SerializeObject(response);
                     Preferences.Set(nameof(App.UserDetails), userDetailStr);
                     App.UserDetails = response.Usermodel;
-                    await Shell.Current.GoToAsync($"DashBoardPage");
+
+                    // Example additional logic after successful login
+                    await AppConstant.AddFlyoutMenusDetails();
                 }
                 else
                 {

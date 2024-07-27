@@ -5,41 +5,88 @@
              Shell.NavBarIsVisible="False"
              xmlns:handlers="clr-namespace:Mainapp.Handlers"
              Title="LoginPage">
-    <VerticalStackLayout 
-            Spacing="25" 
-            Padding="30,0" 
-            VerticalOptions="Center">
+    <Grid Padding="30">
+        <!-- Main Content Layer -->
+        <Grid>
+            <VerticalStackLayout Spacing="20" VerticalOptions="CenterAndExpand">
+                <Label
+                    FontSize="36"
+                    HorizontalOptions="Center"
+                    Text="ChatApp"
+                    TextColor="#0a506c" />
 
-        <Image Source="company_logo.jpg" HeightRequest="150" WidthRequest="150" />
+                <Label
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    Text="Powered by SignalR"
+                    TextColor="White" />
 
-        <VerticalStackLayout Spacing="5">
-            <Label Text="Welcome!" FontSize="28" TextColor="Gray" HorizontalTextAlignment="Center" />
-            <Label Text="Login to your account" FontSize="18" TextColor="Gray" HorizontalTextAlignment="Center" />
-        </VerticalStackLayout>
+                <Frame
+                    BackgroundColor="White"
+                    BorderColor="Transparent"
+                    CornerRadius="10"
+                    HasShadow="False"
+                    Padding="10,0">
+                    <Entry
+                        Placeholder="Username"
+                        ReturnType="Next"
+                        Text="{Binding UserName}"
+                        TextColor="Black" />
+                </Frame>
 
-        <StackLayout Orientation="Horizontal">
-            <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" CornerRadius="28">
-                <Image Source="user.png" HeightRequest="20" WidthRequest="20" />
-            </Frame>
-            <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White"  HorizontalOptions="FillAndExpand">
-                <handlers:BorderlessEntry Text="{Binding Email}" Margin="20,0,0,0" VerticalOptions="Center" Placeholder="User Name" Keyboard="Email" />
-            </Frame>
-        </StackLayout>
+                <Frame
+                    BackgroundColor="White"
+                    BorderColor="Transparent"
+                    CornerRadius="10"
+                    HasShadow="False"
+                    Padding="10,0">
+                    <Entry
+                        IsPassword="True"
+                        Placeholder="Password"
+                        ReturnType="Done"
+                        Text="{Binding Password}"
+                        TextColor="Black" />
+                </Frame>
 
-        <StackLayout Orientation="Horizontal">
-            <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" CornerRadius="28">
-                <Image Source="lock.png" HeightRequest="20" WidthRequest="20" />
-            </Frame>
-            <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White"  HorizontalOptions="FillAndExpand">
-                <handlers:BorderlessEntry Text="{Binding Password}" Margin="20,0,0,0" VerticalOptions="Center" Placeholder="Password" IsPassword="True" />
-            </Frame>
-        </StackLayout>
+                <Label
+                    HorizontalOptions="End"
+                    Margin="0,10,0,0"
+                    Text="Forgot password?"
+                    TextColor="#1e90ff">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
 
-        <Button Text="Sign In" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" Command="{Binding LoginCommand}" />
+                <Button
+                    BackgroundColor="#0a506c"
+                    Command="{Binding LoginCommand}"
+                    CornerRadius="10"
+                    Text="Login"
+                    TextColor="White" />
 
-        <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="Center">
-            <Label Text="Don't have account?" TextColor="Gray" />
-            <Label Text="Sign Up here" TextColor="#50b3f2" />
-        </StackLayout>
-    </VerticalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Label Text="Not a member?" TextColor="White" />
+                    <Label
+                        Text="Register now"
+                        TextColor="#1e90ff">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RegisterCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Overlay Layer for ActivityIndicator -->
+        <Grid IsVisible="{Binding IsProcessing}" BackgroundColor="#00000066">
+            <ActivityIndicator
+                IsRunning="{Binding IsProcessing}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Color="#0a506c"
+                HeightRequest="60"
+                WidthRequest="60" />
+        </Grid>
+    </Grid>
 </ContentPage>

@@ -1,5 +1,4 @@
 ﻿using Mainapp.Helpers;
-using Mainapp.Services.Startup;
 using Mainapp.ViewModels;
 using Mainapp.ViewModels.Startup;
 using Mainapp.Views;
@@ -21,6 +20,8 @@ namespace Mainapp
 
             string apiUrl = "https://mainapi.uttambsolutions.com";
             builder.Services.AddSingleton(new DevHttpConnectionHelper(apiUrl));
+            // Services
+            builder.Services.AddSingleton<Services.ServiceProvider>();
 
             // Register services
             builder.Services.AddSingleton<AppShell>();
@@ -33,10 +34,10 @@ namespace Mainapp
             builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddSingleton<LoadingPageViewModel>();
             builder.Services.AddSingleton<LoginPageViewModel>();
+            builder.Services.AddSingleton<DashboardPageViewModel>();
 
 
-            // Services
-            builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
+
 
             return builder.Build();
         }
