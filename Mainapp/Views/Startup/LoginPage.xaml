@@ -6,12 +6,7 @@
 
     <Grid Padding="20" BackgroundColor="#F4F4F4">
         <!-- Top Image -->
-        <Image Source="uttambsolutionlogo.png" 
-               HorizontalOptions="FillAndExpand" 
-               VerticalOptions="Start" 
-               HeightRequest="200" 
-               Aspect="AspectFill"
-               Margin="0,0,0,20"/>
+
 
         <!-- Main Content Layer -->
         <VerticalStackLayout Spacing="25" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="350">
