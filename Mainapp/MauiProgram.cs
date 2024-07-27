@@ -1,4 +1,6 @@
-﻿using Mainapp.Services.Startup;
+﻿using Mainapp.Helpers;
+using Mainapp.Services.Startup;
+using Mainapp.ViewModels;
 using Mainapp.ViewModels.Startup;
 using Mainapp.Views;
 using Mainapp.Views.Startup;
@@ -17,12 +19,18 @@ namespace Mainapp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            string apiUrl = "https://mainapi.uttambsolutions.com";
+            builder.Services.AddSingleton(new DevHttpConnectionHelper(apiUrl));
+
+            // Register services
+            builder.Services.AddSingleton<AppShell>();
             // Views
             builder.Services.AddSingleton<LoadingPage>();
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<CommonDashboardPage>();
 
             // View Models
+            builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddSingleton<LoadingPageViewModel>();
             builder.Services.AddSingleton<LoginPageViewModel>();
 

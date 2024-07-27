@@ -4,12 +4,10 @@ namespace Mainapp
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        public AppShell(AppShellViewModel viewModel)
         {
             InitializeComponent();
-            this.BindingContext = new AppShellViewModel();
-
-
+            this.BindingContext = viewModel;
         }
     }
 }
