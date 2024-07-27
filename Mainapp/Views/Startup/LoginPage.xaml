@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mainapp.Views.Startup.LoginPage"
              Shell.NavBarIsVisible="False"
              Title="Login Page">
 
-    <!-- Main Layout Container -->
     <Grid Padding="20" BackgroundColor="#F4F4F4">
         <!-- Top Image -->
         <Image Source="uttambsolutionlogo.png" 
@@ -17,7 +15,6 @@
 
         <!-- Main Content Layer -->
         <VerticalStackLayout Spacing="25" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="350">
-
             <!-- App Logo/Title -->
             <Label
                 FontSize="32"
