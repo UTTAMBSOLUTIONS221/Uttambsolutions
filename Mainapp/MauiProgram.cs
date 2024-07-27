@@ -1,9 +1,5 @@
-﻿using Mainapp.Helpers;
-using Mainapp.Pages;
-using Mainapp.Pages.Users;
-using Mainapp.ViewModels;
-using Mainapp.ViewModels.User;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+
 namespace Mainapp
 {
     public static class MauiProgram
@@ -20,23 +16,8 @@ namespace Mainapp
                 });
 
 #if DEBUG
-            builder.Logging.AddDebug();
+    		builder.Logging.AddDebug();
 #endif
-
-            string apiUrl = "https://mainapi.uttambsolutions.com";
-            builder.Services.AddSingleton(new DevHttpConnectionHelper(apiUrl));
-
-            // Register services
-            builder.Services.AddSingleton<Services.ServiceProvider>();
-            builder.Services.AddSingleton<AppShell>();
-
-            // Register pages
-            builder.Services.AddSingleton<LoginPage>();
-            builder.Services.AddSingleton<DashBoardPage>();
-
-            // Register view models
-            builder.Services.AddSingleton<LoginPageViewModel>();
-            builder.Services.AddSingleton<DashBoardViewModel>();
 
             return builder.Build();
         }

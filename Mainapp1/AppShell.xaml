@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Mainapp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:users="clr-namespace:Mainapp.Pages.Users"
+    xmlns:dashboard="clr-namespace:Mainapp.Pages"
+    xmlns:churchDashBoard="clr-namespace:Mainapp.Miniapps.Apps.Church"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate users:LoginPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="Dashboard"
+        ContentTemplate="{DataTemplate dashboard:DashBoardPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="Church Dashboard"
+        ContentTemplate="{DataTemplate churchDashBoard:ChurchDashBoardPage}"
+        Route="ChurchDashBoardPage" />
+
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Text="Sign Out" FontAttributes="Bold" Command="{Binding SignOutCommand}" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
+
+</Shell>
