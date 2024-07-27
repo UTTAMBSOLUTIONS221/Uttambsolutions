@@ -19,7 +19,7 @@
             <Label
                 FontSize="32"
                 HorizontalOptions="Center"
-                Text="ChatApp"
+                Text="Uttamb Solutions"
                 TextColor="#0a506c"
                 FontAttributes="Bold" />
 
@@ -67,7 +67,7 @@
                 HorizontalOptions="End"
                 Margin="0,10,0,0"
                 Text="Forgot password?"
-                TextColor="#1e90ff">
+                TextColor="#0a506c">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
                 </Label.GestureRecognizers>
@@ -88,7 +88,7 @@
                 <Label Text="Not a member?" TextColor="#888888" />
                 <Label
                     Text="Register now"
-                    TextColor="#1e90ff">
+                    TextColor="#0a506c">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding RegisterCommand}" />
                     </Label.GestureRecognizers>
@@ -102,7 +102,7 @@
                 IsRunning="{Binding IsProcessing}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
-                Color="White"
+                Color="#0a506c"
                 HeightRequest="60"
                 WidthRequest="60" />
         </Grid>
