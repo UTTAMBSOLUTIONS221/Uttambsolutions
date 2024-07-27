@@ -1,4 +1,4 @@
-﻿namespace Faithlink.Models
+﻿namespace Mainapp.Models.Startup
 {
     public class UsermodeldataResponce
     {

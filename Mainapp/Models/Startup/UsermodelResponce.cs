@@ -1,4 +1,4 @@
-﻿namespace DBL.Models
+﻿namespace Mainapp.Models.Startup
 {
     public class UsermodelResponce
     {
