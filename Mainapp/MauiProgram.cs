@@ -1,5 +1,6 @@
 ﻿using Mainapp.Services.Startup;
 using Mainapp.ViewModels.Startup;
+using Mainapp.Views;
 using Mainapp.Views.Startup;
 namespace Mainapp
 {
@@ -19,6 +20,7 @@ namespace Mainapp
             // Views
             builder.Services.AddSingleton<LoadingPage>();
             builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<CommonDashboardPage>();
 
             // View Models
             builder.Services.AddSingleton<LoadingPageViewModel>();
