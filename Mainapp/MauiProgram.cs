@@ -1,8 +1,10 @@
 ﻿using Mainapp.Helpers;
+using Mainapp.Miniapps.Ecommerce.Views;
 using Mainapp.ViewModels;
 using Mainapp.ViewModels.Startup;
 using Mainapp.Views;
 using Mainapp.Views.Startup;
+
 namespace Mainapp
 {
     public static class MauiProgram
@@ -29,6 +31,7 @@ namespace Mainapp
             builder.Services.AddSingleton<LoadingPage>();
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<CommonDashboardPage>();
+            builder.Services.AddSingleton<SokojijiDashboardPage>();
 
             // View Models
             builder.Services.AddSingleton<AppShellViewModel>();
