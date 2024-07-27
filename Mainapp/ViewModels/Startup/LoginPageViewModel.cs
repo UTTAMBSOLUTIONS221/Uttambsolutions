@@ -1,51 +1,91 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Mainapp.Constants;
-using Mainapp.Services.Startup;
+﻿using Mainapp.Entities.Startup;
 using Newtonsoft.Json;
-
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace Mainapp.ViewModels.Startup
 {
-    public partial class LoginPageViewModel : BaseViewModel
+    public class LoginPageViewModel : INotifyPropertyChanged
     {
-        private readonly IAuthenticationService bl;
-
-        public LoginPageViewModel(IAuthenticationService authService)
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            bl = authService;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        [ObservableProperty]
-        private string _email;
 
-        [ObservableProperty]
-        private string _password;
+        private readonly Services.ServiceProvider _serviceProvider;
 
-
-        #region Commands
-        [RelayCommand]
-        public async void Login()
+        public LoginPageViewModel(Services.ServiceProvider serviceProvider)
         {
-            if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password))
-            {
-                try
-                {
-                    var userDetails = await bl.Validateuser(Email, Password);
-                    // Store user details locally (e.g., using Preferences)
-                    string userDetailStr = JsonConvert.SerializeObject(userDetails);
-                    Preferences.Set(nameof(App.UserDetails), userDetailStr);
-                    App.UserDetails = userDetails.Usermodel;
+            UserName = "info@uttambsolutions.com";
+            Password = "Password123!";
+            IsProcessing = false;
 
-                    // Example additional logic after successful login
-                    await AppConstant.AddFlyoutMenusDetails();
-                }
-                catch (Exception ex)
+            LoginCommand = new Command(async () =>
+            {
+                if (IsProcessing) return;
+
+                if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password)) return;
+
+                IsProcessing = true;
+                await Login();
+                IsProcessing = false;
+            });
+
+            _serviceProvider = serviceProvider;
+        }
+
+        async Task Login()
+        {
+            try
+            {
+                var request = new Userloginmodel
                 {
-                    // Handle API error (e.g., show error message)
-                    Console.WriteLine($"Login failed: {ex.Message}");
+                    username = UserName,
+                    password = Password,
+                };
+                var response = await _serviceProvider.Authenticate(request);
+                if (response.StatusCode == 200)
+                {
+                    string userDetailStr = JsonConvert.SerializeObject(response);
+                    Preferences.Set(nameof(App.UserDetails), userDetailStr);
+                    App.UserDetails = response.Usermodel;
+                    await Shell.Current.GoToAsync($"DashBoardPage");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Uttamb Solutions", response.StatusMessage, "OK");
                 }
             }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Uttamb Solutions", ex.Message, "OK");
+            }
         }
-        #endregion
+
+        private string userName;
+        private string password;
+        private bool isProcessing;
+
+        public string UserName
+        {
+            get { return userName; }
+            set { userName = value; OnPropertyChanged(); }
+        }
+
+        public string Password
+        {
+            get { return password; }
+            set { password = value; OnPropertyChanged(); }
+        }
+
+        public bool IsProcessing
+        {
+            get { return isProcessing; }
+            set { isProcessing = value; OnPropertyChanged(); }
+        }
+
+        public ICommand LoginCommand { get; set; }
     }
 }
