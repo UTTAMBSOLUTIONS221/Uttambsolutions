@@ -80,9 +80,9 @@
 
                 <StackLayout Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5">
                     <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center" Padding="0" HasShadow="False">
-                        <ImageButton Source="shopping_icon.png" Command="{Binding OpenShoppingAppCommand}" BackgroundColor="Transparent" Aspect="AspectFill" Padding="0"/>
+                        <ImageButton Source="sokojijilogo.png" Command="{Binding OpenShoppingAppCommand}" BackgroundColor="Transparent" Aspect="AspectFill" Padding="0"/>
                     </Frame>
-                    <Label Text="Shopping App" HorizontalOptions="Center" FontSize="Header" TextColor="#0a506c" FontAttributes="Bold"/>
+                    <Label Text="Soko Jiji" HorizontalOptions="Center" FontSize="Header" TextColor="#0a506c" FontAttributes="Bold"/>
                 </StackLayout>
             </Grid>
         </VerticalStackLayout>
