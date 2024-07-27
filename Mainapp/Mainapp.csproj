@@ -65,6 +65,7 @@
 	  <None Remove="Resources\Fonts\OpenSans-Regular.ttf" />
 	  <None Remove="Resources\Fonts\OpenSans-Semibold.ttf" />
 	  <None Remove="Resources\Images\about_us.png" />
+	  <None Remove="Resources\Images\churchblaze.png" />
 	  <None Remove="Resources\Images\company_logo.jpg" />
 	  <None Remove="Resources\Images\contact_us.png" />
 	  <None Remove="Resources\Images\dashboard.png" />

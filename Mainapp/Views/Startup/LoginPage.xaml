@@ -9,37 +9,31 @@
 
 
         <!-- Main Content Layer -->
-        <VerticalStackLayout Spacing="25" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="350">
+        <VerticalStackLayout Spacing="20" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="350">
             <!-- App Logo/Title -->
             <Label
                 FontSize="32"
                 HorizontalOptions="Center"
-                Text="Uttamb Solutions"
+                Text="UTTAMB SOLUTIONS"
                 TextColor="#0a506c"
                 FontAttributes="Bold" />
-
-            <!-- Subheading -->
-            <Label
-                FontSize="16"
-                HorizontalOptions="Center"
-                Text="Powered by SignalR"
-                TextColor="#888888" />
 
             <!-- Username Entry -->
             <Frame
                 BackgroundColor="White"
-                BorderColor="#e0e0e0"
+                BorderColor="Transparent"
                 CornerRadius="8"
-                HasShadow="True"
-                Padding="10,0"
+                HasShadow="False"
+                Padding="5,0" 
                 Margin="0,10">
                 <Entry
                     Placeholder="Username"
                     ReturnType="Next"
                     Text="{Binding UserName}"
                     TextColor="Black"
-                    FontSize="16" />
+                    FontSize="16" />        
             </Frame>
+
 
             <!-- Password Entry -->
             <Frame

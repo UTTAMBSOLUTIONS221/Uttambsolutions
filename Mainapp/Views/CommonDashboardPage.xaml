@@ -3,9 +3,88 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mainapp.Views.CommonDashboardPage"
              Title="DASH BOARD">
-    <StackLayout>
-        <Label Text="{Binding Title}"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-    </StackLayout>
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <!-- Grid for mini apps -->
+            <Grid VerticalOptions="FillAndExpand" RowSpacing="10" ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Row 1 -->
+                <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5">
+                    <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center" Padding="0" HasShadow="False">
+                        <ImageButton Source="churchblaze.png" Command="{Binding OpenChurchAppCommand}" BackgroundColor="Transparent" Aspect="AspectFill" Padding="0"/>
+                    </Frame>
+                    <Label Text="Church Blaze" HorizontalOptions="Center" FontSize="Header" TextColor="#0a506c" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5">
+                    <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center" Padding="0" HasShadow="False">
+                        <ImageButton Source="weather_icon.png" Command="{Binding OpenWeatherAppCommand}" BackgroundColor="Transparent" Aspect="AspectFill" Padding="0"/>
+                    </Frame>
+                    <Label Text="Weather App" HorizontalOptions="Center" FontSize="Header" TextColor="#0a506c" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5">
+                    <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center" Padding="0" HasShadow="False">
+                        <ImageButton Source="news_icon.png" Command="{Binding OpenNewsAppCommand}" BackgroundColor="Transparent" Aspect="AspectFill" Padding="0"/>
+                    </Frame>
+                    <Label Text="News App" HorizontalOptions="Center" FontSize="Header" TextColor="#0a506c" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <!-- Row 2 -->
+                <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5">
+                    <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center" Padding="0" HasShadow="False">
+                        <ImageButton Source="sports_icon.png" Command="{Binding OpenSportsAppCommand}" BackgroundColor="Transparent" Aspect="AspectFill" Padding="0"/>
+                    </Frame>
+                    <Label Text="Sports App" HorizontalOptions="Center" FontSize="Header" TextColor="#0a506c" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5">
+                    <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center" Padding="0" HasShadow="False">
+                        <ImageButton Source="health_icon.png" Command="{Binding OpenHealthAppCommand}" BackgroundColor="Transparent" Aspect="AspectFill" Padding="0"/>
+                    </Frame>
+                    <Label Text="Health App" HorizontalOptions="Center" FontSize="Header" TextColor="#0a506c" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5">
+                    <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center" Padding="0" HasShadow="False">
+                        <ImageButton Source="education_icon.png" Command="{Binding OpenEducationAppCommand}" BackgroundColor="Transparent" Aspect="AspectFill" Padding="0"/>
+                    </Frame>
+                    <Label Text="Education App" HorizontalOptions="Center" FontSize="Header" TextColor="#0a506c" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <!-- Row 3 -->
+                <StackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5">
+                    <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center" Padding="0" HasShadow="False">
+                        <ImageButton Source="entertainment_icon.png" Command="{Binding OpenEntertainmentAppCommand}" BackgroundColor="Transparent" Aspect="AspectFill" Padding="0"/>
+                    </Frame>
+                    <Label Text="Entertainment App" HorizontalOptions="Center" FontSize="Header" TextColor="#0a506c" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5">
+                    <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center" Padding="0" HasShadow="False">
+                        <ImageButton Source="travel_icon.png" Command="{Binding OpenTravelAppCommand}" BackgroundColor="Transparent" Aspect="AspectFill" Padding="0"/>
+                    </Frame>
+                    <Label Text="Travel App" HorizontalOptions="Center" FontSize="Header" TextColor="#0a506c" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5">
+                    <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" BackgroundColor="LightGray" HorizontalOptions="Center" Padding="0" HasShadow="False">
+                        <ImageButton Source="shopping_icon.png" Command="{Binding OpenShoppingAppCommand}" BackgroundColor="Transparent" Aspect="AspectFill" Padding="0"/>
+                    </Frame>
+                    <Label Text="Shopping App" HorizontalOptions="Center" FontSize="Header" TextColor="#0a506c" FontAttributes="Bold"/>
+                </StackLayout>
+            </Grid>
+        </VerticalStackLayout>
+    </ContentPage.Content>
 </ContentPage>
