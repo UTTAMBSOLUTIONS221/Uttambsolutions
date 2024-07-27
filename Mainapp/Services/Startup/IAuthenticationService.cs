@@ -1,4 +1,6 @@
-﻿namespace Mainapp.Services.Startup
+﻿using Mainapp.Models.Startup;
+
+namespace Mainapp.Services.Startup
 {
     public interface IAuthenticationService
     {
