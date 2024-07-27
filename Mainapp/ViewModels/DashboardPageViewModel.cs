@@ -1,6 +1,5 @@
 ﻿using Mainapp.Constants;
 using Mainapp.Controls;
-using Mainapp.Miniapps.Ecommerce.Views;
 using System.Windows.Input;
 
 namespace Mainapp.ViewModels
@@ -83,7 +82,7 @@ namespace Mainapp.ViewModels
         private async Task OpenShoppingAppAsync()
         {
             await AppConstant.AddFlyoutMenusDetails();
-            await Shell.Current.GoToAsync(nameof(SokojijiDashboardPage));
+            //await Shell.Current.GoToAsync(nameof(SokojijiDashboardPage));
         }
     }
 }

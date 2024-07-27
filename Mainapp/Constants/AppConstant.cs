@@ -1,4 +1,5 @@
 ﻿using Mainapp.Controls;
+using Mainapp.Miniapps.Ecommerce.Views;
 using Mainapp.Models.Startup;
 using Mainapp.Views;
 
@@ -16,8 +17,8 @@ namespace Mainapp.Constants
             var teacherDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(CommonDashboardPage)).FirstOrDefault();
             if (teacherDashboardInfo != null) AppShell.Current.Items.Remove(teacherDashboardInfo);
 
-            var adminDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(CommonDashboardPage)).FirstOrDefault();
-            if (adminDashboardInfo != null) AppShell.Current.Items.Remove(adminDashboardInfo);
+            var sokoJijiDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(SokojijiDashboardPage)).FirstOrDefault();
+            if (sokoJijiDashboardInfo != null) AppShell.Current.Items.Remove(sokoJijiDashboardInfo);
 
 
             if (App.UserDetails.Roleid == (int)RoleDetails.Student)
@@ -25,7 +26,7 @@ namespace Mainapp.Constants
                 var flyoutItem = new FlyoutItem()
                 {
                     Title = "Dashboard Page",
-                    Route = nameof(CommonDashboardPage),
+                    Route = nameof(SokojijiDashboardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
                             {
@@ -33,31 +34,31 @@ namespace Mainapp.Constants
                                 {
                                     Icon = Icons.Dashboard,
                                     Title = "Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(CommonDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
                                     Title = "Bible",
-                                    ContentTemplate = new DataTemplate(typeof(CommonDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
                                     Title = "Forums",
-                                    ContentTemplate = new DataTemplate(typeof(CommonDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
                                     Title = "Groups",
-                                    ContentTemplate = new DataTemplate(typeof(CommonDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.AboutUs,
                                     Title = "Profile",
-                                    ContentTemplate = new DataTemplate(typeof(CommonDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
                                 },
                             }
                 };
