@@ -8,97 +8,90 @@ namespace Mainapp.Constants
     {
         public static async Task AddFlyoutMenusDetails(string pageName)
         {
-            // Navigate to the requested page first
-            await Shell.Current.GoToAsync($"///{pageName}");
+            AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
-            // Update Flyout items in the background
-            await Task.Run(() =>
+            var itemsToRemove = AppShell.Current.Items.Where(f => f.Route == nameof(CommonDashboardPage) || f.Route == nameof(SokojijiDashboardPage)).ToList();
+            foreach (var item in itemsToRemove)
             {
-                AppShell.Current.Dispatcher.Dispatch(() =>
+                AppShell.Current.Items.Remove(item);
+            }
+
+            FlyoutItem flyoutItem = null;
+
+            if (pageName == nameof(SokojijiDashboardPage))
+            {
+                flyoutItem = new FlyoutItem()
                 {
-                    AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
-
-                    var itemsToRemove = AppShell.Current.Items.Where(f => f.Route == nameof(CommonDashboardPage) || f.Route == nameof(SokojijiDashboardPage)).ToList();
-                    foreach (var item in itemsToRemove)
+                    Title = "Sokojiji Dashboard",
+                    Route = pageName,
+                    FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
+                    Items =
                     {
-                        AppShell.Current.Items.Remove(item);
-                    }
-
-                    FlyoutItem flyoutItem = null;
-
-                    if (pageName == nameof(SokojijiDashboardPage))
-                    {
-                        flyoutItem = new FlyoutItem()
+                        new ShellContent
                         {
-                            Title = "Sokojiji Dashboard",
-                            Route = pageName,
-                            FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
-                            Items =
-                            {
-                                new ShellContent
-                                {
-                                    Icon = Icons.Dashboard,
-                                    Title = "Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.People,
-                                    Title = "Bible",
-                                    ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.People,
-                                    Title = "Forums",
-                                    ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.People,
-                                    Title = "Groups",
-                                    ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.AboutUs,
-                                    Title = "Profile",
-                                    ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
-                                },
-                            }
-                        };
-                    }
-                    else if (pageName == nameof(CommonDashboardPage))
-                    {
-                        flyoutItem = new FlyoutItem()
+                            Icon = Icons.Dashboard,
+                            Title = "Dashboard",
+                            ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
+                        },
+                        new ShellContent
                         {
-                            Title = "Common Dashboard",
-                            Route = pageName,
-                            FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
-                            Items =
-                            {
-                                new ShellContent
-                                {
-                                    Icon = Icons.Dashboard,
-                                    Title = "Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(CommonDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.People,
-                                    Title = "Profile",
-                                    ContentTemplate = new DataTemplate(typeof(CommonDashboardPage)),
-                                },
-                            }
-                        };
+                            Icon = Icons.People,
+                            Title = "Bible",
+                            ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.People,
+                            Title = "Forums",
+                            ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.People,
+                            Title = "Groups",
+                            ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.AboutUs,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(typeof(SokojijiDashboardPage)),
+                        },
                     }
-
-                    if (flyoutItem != null && !AppShell.Current.Items.Contains(flyoutItem))
+                };
+            }
+            else if (pageName == nameof(CommonDashboardPage))
+            {
+                flyoutItem = new FlyoutItem()
+                {
+                    Title = "Common Dashboard",
+                    Route = pageName,
+                    FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
+                    Items =
                     {
-                        AppShell.Current.Items.Add(flyoutItem);
+                        new ShellContent
+                        {
+                            Icon = Icons.Dashboard,
+                            Title = "Dashboard",
+                            ContentTemplate = new DataTemplate(typeof(CommonDashboardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.People,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(typeof(CommonDashboardPage)),
+                        },
                     }
-                });
-            });
+                };
+            }
+
+            if (flyoutItem != null && !AppShell.Current.Items.Contains(flyoutItem))
+            {
+                AppShell.Current.Items.Add(flyoutItem);
+            }
+
+            // Navigate to the requested page
+            await Shell.Current.GoToAsync($"///{pageName}");
         }
     }
 }
