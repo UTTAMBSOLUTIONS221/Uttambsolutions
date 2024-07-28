@@ -45,10 +45,15 @@ namespace Mainapp.ViewModels
         private async Task OpenShoppingAppAsync()
         {
             var route = nameof(SokojijiDashboardPage);
-            await AppConstant.AddFlyoutMenusDetails(route);
 
-            // Use absolute navigation to ensure smooth transition
-            await Shell.Current.GoToAsync($"///{route}");
+            // Task for adding Flyout Menu Details
+            var addFlyoutMenusTask = AppConstant.AddFlyoutMenusDetails(route);
+
+            // Navigation Task
+            var navigationTask = Shell.Current.GoToAsync($"///{route}");
+
+            // Await both tasks to complete in parallel
+            await Task.WhenAll(addFlyoutMenusTask, navigationTask);
         }
     }
 }
