@@ -26,7 +26,7 @@ namespace Mainapp.Miniapps.Ecommerce.ViewModels
 
             try
             {
-                var response = await _serviceProvider.CallUnAuthWebApi<object, BaseResponse<List<Systemorganizationshopproducts>>>("/api/sokojiji/items", HttpMethod.Get, null);
+                var response = await _serviceProvider.CallUnAuthWebApi<object, BaseResponse<List<Systemorganizationshopproducts>>>("/api/Ecommerce/Getsystemorganizationshopproductsdata", HttpMethod.Get, null);
                 if (response != null && response.Data != null)
                 {
                     foreach (var item in response.Data.Data)
