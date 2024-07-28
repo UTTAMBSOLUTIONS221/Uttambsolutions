@@ -27,9 +27,9 @@
                                 <Image Source="{Binding Primaryimageurl}" Aspect="AspectFill" HeightRequest="150" />
                                 <Label Text="{Binding Productname}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" />
                                 <Label Text="{Binding Productdescription}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" />
-                                <Label Text="{Binding Marketprice, StringFormat='{0:C}'}" FontSize="Small" TextColor="Green" />
+                                <Label Text="{Binding Marketprice, Converter={StaticResource CurrencyConverter}}" FontSize="Small" TextColor="#0a506c" />
                                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
-                                    <Button Text="Add to Cart" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SokojijiViewModel}}, Path=AddToCartCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" FontAttributes="Bold" />
+                                    <Button Text="Add to Cart" FontAttributes="Bold" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SokojijiViewModel}}, Path=AddToCartCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" />
                                 </StackLayout>
                             </StackLayout>
                         </Frame>
