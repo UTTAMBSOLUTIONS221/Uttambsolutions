@@ -10,15 +10,17 @@ namespace Mainapp.Constants
         {
             AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
+            // Remove previous flyout items
             var itemsToRemove = AppShell.Current.Items.Where(f => f.Route == nameof(CommonDashboardPage) || f.Route == nameof(SokojijiDashboardPage)).ToList();
             foreach (var item in itemsToRemove)
             {
                 AppShell.Current.Items.Remove(item);
             }
 
+            // Add new flyout items based on the current page
             var flyoutItem = new FlyoutItem()
             {
-                Title = "Dashboard Page",
+                Title = $"{pageName} Menu",
                 Route = pageName,
                 FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                 Items =
@@ -61,7 +63,8 @@ namespace Mainapp.Constants
                 AppShell.Current.Items.Add(flyoutItem);
             }
 
-            await Shell.Current.GoToAsync($"//{pageName}");
+            // Navigate to the new page using absolute routing
+            await Shell.Current.GoToAsync($"///{pageName}");
         }
     }
 }

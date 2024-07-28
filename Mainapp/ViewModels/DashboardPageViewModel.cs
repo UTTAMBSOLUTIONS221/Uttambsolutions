@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace Mainapp.ViewModels
 {
-    public partial class DashboardPageViewModel : BaseViewModel
+    public class DashboardPageViewModel : BaseViewModel
     {
         public ICommand OpenChurchAppCommand { get; }
         public ICommand OpenWeatherAppCommand { get; }
@@ -46,6 +46,9 @@ namespace Mainapp.ViewModels
         {
             var route = nameof(SokojijiDashboardPage);
             await AppConstant.AddFlyoutMenusDetails(route);
+
+            // Use absolute navigation to ensure smooth transition
+            await Shell.Current.GoToAsync($"///{route}");
         }
     }
 }
