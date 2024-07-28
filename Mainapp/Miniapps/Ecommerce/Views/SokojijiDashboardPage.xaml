@@ -13,7 +13,7 @@
         <StackLayout Padding="10">
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
 
-            <CollectionView ItemsSource="{Binding Items}" Margin="0,4">
+            <CollectionView ItemsSource="{Binding Items}" Margin="0,10">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="2" />
                 </CollectionView.ItemsLayout>
