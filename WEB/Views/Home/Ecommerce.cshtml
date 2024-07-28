@@ -5,9 +5,9 @@
 }
 
 <div class="row">
-    @if (Model != null && Model.Organizationshopproductsdata != null)
+    @if (Model != null && Model.Data != null)
     {
-        foreach (var product in Model.Organizationshopproductsdata)
+        foreach (var product in Model.Data)
         {
             <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
                 <a asp-action="Shopproductdetail" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Shopproductid="@product.Shopproductid" asp-area="" class="text-decoration-none">
