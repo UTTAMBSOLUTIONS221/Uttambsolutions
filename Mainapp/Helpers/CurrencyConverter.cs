@@ -8,6 +8,7 @@ namespace Mainapp.Helpers
         {
             if (value is decimal decimalValue)
             {
+                // Ensure the currency value is formatted with thousand separator and two decimal places
                 return $"KES {decimalValue:N2}";
             }
             return value;
