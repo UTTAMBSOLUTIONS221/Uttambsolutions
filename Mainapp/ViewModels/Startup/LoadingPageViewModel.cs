@@ -1,5 +1,6 @@
 ﻿using Mainapp.Constants;
 using Mainapp.Models.Startup;
+using Mainapp.Views;
 using Mainapp.Views.Startup;
 using Newtonsoft.Json;
 namespace Mainapp.ViewModels.Startup
@@ -33,7 +34,19 @@ namespace Mainapp.ViewModels.Startup
             {
                 var userInfo = JsonConvert.DeserializeObject<UsermodelResponce>(userDetailsStr);
                 App.UserDetails = userInfo.Usermodel;
-                await AppConstant.AddFlyoutMenusDetails();
+                await AppConstant.AddFlyoutMenusDetails(nameof(CommonDashboardPage));
+
+                if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                {
+                    AppShell.Current.Dispatcher.Dispatch(async () =>
+                    {
+                        await Shell.Current.GoToAsync($"//{nameof(CommonDashboardPage)}");
+                    });
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync($"//{nameof(CommonDashboardPage)}");
+                }
             }
         }
     }

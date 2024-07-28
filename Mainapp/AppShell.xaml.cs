@@ -1,4 +1,6 @@
-﻿using Mainapp.ViewModels;
+﻿using Mainapp.Miniapps.Ecommerce.Views;
+using Mainapp.ViewModels;
+using Mainapp.Views;
 
 namespace Mainapp
 {
@@ -8,6 +10,10 @@ namespace Mainapp
         {
             InitializeComponent();
             this.BindingContext = viewModel;
+
+            Routing.RegisterRoute(nameof(CommonDashboardPage), typeof(CommonDashboardPage));
+            Routing.RegisterRoute(nameof(SokojijiDashboardPage), typeof(SokojijiDashboardPage));
         }
     }
 }
+

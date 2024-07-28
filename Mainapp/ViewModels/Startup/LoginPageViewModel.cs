@@ -1,5 +1,6 @@
 ﻿using Mainapp.Constants;
 using Mainapp.Entities.Startup;
+using Mainapp.Views;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -55,7 +56,19 @@ namespace Mainapp.ViewModels.Startup
                     App.UserDetails = response.Usermodel;
 
                     // Example additional logic after successful login
-                    await AppConstant.AddFlyoutMenusDetails();
+                    await AppConstant.AddFlyoutMenusDetails(nameof(CommonDashboardPage));
+
+                    if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                    {
+                        AppShell.Current.Dispatcher.Dispatch(async () =>
+                        {
+                            await Shell.Current.GoToAsync($"//{nameof(CommonDashboardPage)}");
+                        });
+                    }
+                    else
+                    {
+                        await Shell.Current.GoToAsync($"//{nameof(CommonDashboardPage)}");
+                    }
                 }
                 else
                 {

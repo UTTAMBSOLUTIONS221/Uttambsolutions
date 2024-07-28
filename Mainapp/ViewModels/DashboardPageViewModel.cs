@@ -1,5 +1,6 @@
 ﻿using Mainapp.Constants;
 using Mainapp.Controls;
+using Mainapp.Miniapps.Ecommerce.Views;
 using System.Windows.Input;
 
 namespace Mainapp.ViewModels
@@ -28,61 +29,23 @@ namespace Mainapp.ViewModels
             OpenTravelAppCommand = new Command(async () => await OpenTravelAppAsync());
             OpenShoppingAppCommand = new Command(async () => await OpenShoppingAppAsync());
 
+            // Set Flyout Header
             AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
         }
 
-        private async Task OpenChurchAppAsync()
-        {
-            // Implement navigation or logic to open the Church App
-            await Task.CompletedTask;
-        }
-
-        private async Task OpenWeatherAppAsync()
-        {
-            // Implement navigation or logic to open the Weather App
-            await Task.CompletedTask;
-        }
-
-        private async Task OpenNewsAppAsync()
-        {
-            // Implement navigation or logic to open the News App
-            await Task.CompletedTask;
-        }
-
-        private async Task OpenSportsAppAsync()
-        {
-            // Implement navigation or logic to open the Sports App
-            await Task.CompletedTask;
-        }
-
-        private async Task OpenHealthAppAsync()
-        {
-            // Implement navigation or logic to open the Health App
-            await Task.CompletedTask;
-        }
-
-        private async Task OpenEducationAppAsync()
-        {
-            // Implement navigation or logic to open the Education App
-            await Task.CompletedTask;
-        }
-
-        private async Task OpenEntertainmentAppAsync()
-        {
-            // Implement navigation or logic to open the Entertainment App
-            await Task.CompletedTask;
-        }
-
-        private async Task OpenTravelAppAsync()
-        {
-            // Implement navigation or logic to open the Travel App
-            await Task.CompletedTask;
-        }
+        private async Task OpenChurchAppAsync() => await Task.CompletedTask;
+        private async Task OpenWeatherAppAsync() => await Task.CompletedTask;
+        private async Task OpenNewsAppAsync() => await Task.CompletedTask;
+        private async Task OpenSportsAppAsync() => await Task.CompletedTask;
+        private async Task OpenHealthAppAsync() => await Task.CompletedTask;
+        private async Task OpenEducationAppAsync() => await Task.CompletedTask;
+        private async Task OpenEntertainmentAppAsync() => await Task.CompletedTask;
+        private async Task OpenTravelAppAsync() => await Task.CompletedTask;
 
         private async Task OpenShoppingAppAsync()
         {
-            await AppConstant.AddFlyoutMenusDetails();
-            //await Shell.Current.GoToAsync(nameof(SokojijiDashboardPage));
+            var route = nameof(SokojijiDashboardPage);
+            await AppConstant.AddFlyoutMenusDetails(route);
         }
     }
 }
