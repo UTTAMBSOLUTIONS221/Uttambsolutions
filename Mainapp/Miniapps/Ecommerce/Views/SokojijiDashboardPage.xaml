@@ -4,21 +4,38 @@
              xmlns:viewmodels="clr-namespace:Mainapp.Miniapps.Ecommerce.ViewModels"
              x:Class="Mainapp.Miniapps.Ecommerce.Views.SokojijiDashboardPage"
              Title="Dashboard">
-    <StackLayout Padding="10">
-        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
 
-        <CollectionView ItemsSource="{Binding Items}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" Margin="5" HasShadow="True">
-                        <StackLayout>
-                            <Label Text="{Binding Productname}" FontSize="Medium" FontAttributes="Bold" />
-                            <Label Text="{Binding Productdescription}" FontSize="Small" />
-                            <Label Text="{Binding Marketprice, StringFormat='{0:C}'}" FontSize="Small" TextColor="Green" />
-                        </StackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+    <ContentPage.BindingContext>
+        <viewmodels:SokojijiViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="10">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+
+            <CollectionView ItemsSource="{Binding Items}" Margin="0,4">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="10" HasShadow="True" BorderColor="LightGray" CornerRadius="10">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SokojijiViewModel}}, Path=ViewDetailsCommand}" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <StackLayout>
+                                <Image Source="{Binding Primaryimageurl}" Aspect="AspectFill" HeightRequest="150" />
+                                <Label Text="{Binding Productname}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" />
+                                <Label Text="{Binding Productdescription}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" />
+                                <Label Text="{Binding Marketprice, StringFormat='{0:C}'}" FontSize="Small" TextColor="Green" />
+                                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                                    <Button Text="Add to Cart" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SokojijiViewModel}}, Path=AddToCartCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" FontAttributes="Bold" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
