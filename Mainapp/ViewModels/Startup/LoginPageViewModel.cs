@@ -48,7 +48,7 @@ namespace Mainapp.ViewModels.Startup
                     password = Password,
                 };
                 var response = await _serviceProvider.Authenticate(request);
-                if (response.StatusCode == 200)
+                if (response.RespStatus == 200)
                 {
                     // Store user details locally (e.g., using Preferences)
                     string userDetailStr = JsonConvert.SerializeObject(response);
@@ -72,7 +72,7 @@ namespace Mainapp.ViewModels.Startup
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Uttamb Solutions", response.StatusMessage, "OK");
+                    await Shell.Current.DisplayAlert("Uttamb Solutions", response.RespMessage, "OK");
                 }
             }
             catch (Exception ex)

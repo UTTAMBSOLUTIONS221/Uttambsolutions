@@ -1,4 +1,5 @@
 ﻿using Mainapp.Helpers;
+using Mainapp.Miniapps.Ecommerce.ViewModels;
 using Mainapp.Miniapps.Ecommerce.Views;
 using Mainapp.ViewModels;
 using Mainapp.ViewModels.Startup;
@@ -38,6 +39,7 @@ namespace Mainapp
             builder.Services.AddSingleton<LoadingPageViewModel>();
             builder.Services.AddSingleton<LoginPageViewModel>();
             builder.Services.AddSingleton<DashboardPageViewModel>();
+            builder.Services.AddSingleton<SokojijiViewModel>();
 
 
 

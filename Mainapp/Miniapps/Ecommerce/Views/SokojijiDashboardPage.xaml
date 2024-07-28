@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Mainapp.Miniapps.Ecommerce.ViewModels"
              x:Class="Mainapp.Miniapps.Ecommerce.Views.SokojijiDashboardPage"
-             Title="DASH BOARD">
+             Title="Dashboard">
+    <StackLayout Padding="10">
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
 
-
+        <CollectionView ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" HasShadow="True">
+                        <StackLayout>
+                            <Label Text="{Binding Productname}" FontSize="Medium" FontAttributes="Bold" />
+                            <Label Text="{Binding Productdescription}" FontSize="Small" />
+                            <Label Text="{Binding Marketprice, StringFormat='{0:C}'}" FontSize="Small" TextColor="Green" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
 </ContentPage>
