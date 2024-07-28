@@ -17,12 +17,6 @@
         ContentTemplate="{DataTemplate startupPages:LoginPage}"
         Route="LoginPage" />
 
-    <ShellContent
-    Title="Dashboard Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
-    ContentTemplate="{DataTemplate sokojijiDashboardPages:SokojijiDashboardPage}"
-    Route="SokojijiDashboardPage" />
-
-
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">
             <Button Text="Sign Out" FontAttributes="Bold" Command="{Binding SignOutCommand}" />
