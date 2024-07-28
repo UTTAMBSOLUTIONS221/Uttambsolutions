@@ -1,21 +1,21 @@
-﻿using DBL.Models;
-using Mainapp.ViewModels;
+﻿using Mainapp.ViewModels;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+
 
 namespace Mainapp.Miniapps.Ecommerce.ViewModels
 {
     public class SokojijiViewModel : BaseViewModel
     {
         private readonly Services.ServiceProvider _serviceProvider;
-        public ObservableCollection<Systemorganizationshopproducts> Items { get; }
+        public ObservableCollection<dynamic> Items { get; }
 
         public ICommand LoadItemsCommand { get; }
 
         public SokojijiViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            Items = new ObservableCollection<Systemorganizationshopproducts>();
+            Items = new ObservableCollection<dynamic>();
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadItemsCommand.Execute(null);
         }
@@ -26,14 +26,14 @@ namespace Mainapp.Miniapps.Ecommerce.ViewModels
 
             try
             {
-                var response = await _serviceProvider.CallUnAuthWebApi<object, BaseResponse<Systemorganizationshopproducts>>("/api/Ecommerce/Getsystemorganizationshopproductsdata", HttpMethod.Get, null);
-                //if (response != null && response.Data != null)
-                //{
-                //    foreach (var item in response.Data.Data)
-                //    {
-                //        Items.Add(item);
-                //    }
-                //}
+                var response = await _serviceProvider.CallUnAuthWebApi<object>("/api/Ecommerce/Getsystemorganizationshopproductsdata", HttpMethod.Get, null);
+                if (response != null && response.Data is List<dynamic> items)
+                {
+                    foreach (var item in items)
+                    {
+                        Items.Add(item);
+                    }
+                }
             }
             catch (Exception ex)
             {

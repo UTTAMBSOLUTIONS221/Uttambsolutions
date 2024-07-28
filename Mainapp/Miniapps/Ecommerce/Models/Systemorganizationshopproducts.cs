@@ -1,8 +1,7 @@
 ﻿using DBL.Entities;
-using Mainapp.Services;
 namespace Mainapp.Miniapps.Ecommerce.Models
 {
-    public class Systemorganizationshopproducts : BaseResponse
+    public class Systemorganizationshopproducts
     {
         public List<Organizationshopproductsdata>? Organizationshopproductsdata { get; set; }
     }

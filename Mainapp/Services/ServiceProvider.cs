@@ -2,6 +2,7 @@
 using Mainapp.Entities.Startup;
 using Mainapp.Helpers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text;
 
 namespace Mainapp.Services
@@ -55,8 +56,7 @@ namespace Mainapp.Services
             }
         }
 
-        public async Task<BaseResponse<TResponse>> CallUnAuthWebApi<TRequest, TResponse>(
-            string apiUrl, HttpMethod httpMethod, TRequest request)
+        public async Task<BaseResponse> CallUnAuthWebApi<TRequest>(string apiUrl, HttpMethod httpMethod, TRequest request)
         {
             var httpRequestMessage = new HttpRequestMessage
             {
@@ -75,15 +75,27 @@ namespace Mainapp.Services
             {
                 var response = await _devHttpHelper.HttpClient.SendAsync(httpRequestMessage);
                 var responseContent = await response.Content.ReadAsStringAsync();
-
-                var result = JsonConvert.DeserializeObject<BaseResponse<TResponse>>(responseContent);
-                result.StatusCode = (int)response.StatusCode;
+                var result = new BaseResponse
+                {
+                    StatusCode = (int)response.StatusCode,
+                    StatusMessage = "OK"
+                };
+                //var result = JsonConvert.DeserializeObject<BaseResponse>(responseContent);
+                var json = JObject.Parse(responseContent);
+                if (json["data"] is JArray dataArray)
+                {
+                    result.Data = dataArray.ToObject<List<dynamic>>();
+                }
+                else
+                {
+                    result.Data = json["data"];
+                }
 
                 return result;
             }
             catch (Exception ex)
             {
-                return new BaseResponse<TResponse>
+                return new BaseResponse
                 {
                     StatusCode = 500,
                     StatusMessage = ex.Message
@@ -91,8 +103,7 @@ namespace Mainapp.Services
             }
         }
 
-        public async Task<BaseResponse<TResponse>> CallAuthWebApi<TRequest, TResponse>(
-            string apiUrl, HttpMethod httpMethod, TRequest request)
+        public async Task<BaseResponse> CallAuthWebApi<TRequest>(string apiUrl, HttpMethod httpMethod, TRequest request)
         {
             var httpRequestMessage = new HttpRequestMessage
             {
@@ -113,14 +124,14 @@ namespace Mainapp.Services
                 var response = await _devHttpHelper.HttpClient.SendAsync(httpRequestMessage);
                 var responseContent = await response.Content.ReadAsStringAsync();
 
-                var result = JsonConvert.DeserializeObject<BaseResponse<TResponse>>(responseContent);
+                var result = JsonConvert.DeserializeObject<BaseResponse>(responseContent);
                 result.StatusCode = (int)response.StatusCode;
 
                 return result;
             }
             catch (Exception ex)
             {
-                return new BaseResponse<TResponse>
+                return new BaseResponse
                 {
                     StatusCode = 500,
                     StatusMessage = ex.Message
