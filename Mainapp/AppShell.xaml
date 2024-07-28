@@ -9,6 +9,11 @@
     xmlns:sokojijiDashboardPages="clr-namespace:Mainapp.Miniapps.Ecommerce.Views">
 
     <ShellContent
+     Title="Loading Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
+     ContentTemplate="{DataTemplate startupPages:LoadingPage}"
+     Route="LoadingPage" />
+
+    <ShellContent
         Title="Login Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
         ContentTemplate="{DataTemplate startupPages:LoginPage}"
         Route="LoginPage" />
