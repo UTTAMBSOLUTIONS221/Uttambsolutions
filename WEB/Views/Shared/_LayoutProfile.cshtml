@@ -1,50 +1,4 @@
-﻿@functions {
-    private string GetApplicationStatus(int status)
-    {
-        switch (status)
-        {
-            case 3:
-                return "Received";
-            case 2:
-                return "Viewed";
-            case 1:
-                return "Rejected";
-            case 0:
-                return "Approved";
-            default:
-                return "Unknown";
-        }
-    }
-}
-@{
-    Layout = null;
-    var profileImageUrl = Model.UserProfileImageUrl;
-    var defaultImageUrl = Url.Content("~/images/user.png");
-    var imageUrl = !string.IsNullOrEmpty(profileImageUrl) ? Url.Content(profileImageUrl) : defaultImageUrl;
-      string GetRelativeDate(DateTime date)
-    {
-        var now = DateTime.Now;
-        var timeSpan = now - date;
-
-        if (timeSpan.TotalDays < 1)
-        {
-            return "Today";
-        }
-        else if (timeSpan.TotalDays < 2)
-        {
-            return "Yesterday";
-        }
-        else
-        {
-            var days = (int)timeSpan.TotalDays;
-            return $"{days} day{(days > 1 ? "s" : "")} ago";
-        }
-    }
-
-    int adCounter = 0;
-}
-
-@using System.Security.Claims
+﻿@using System.Security.Claims
 @using DBL.Models
 @using Microsoft.Extensions.Configuration
 @{
@@ -56,6 +10,9 @@
         currentUserData = Util.GetCurrentUserData(User.Identities);
         IConfiguration config = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
     }
+    var profileImageUrl = currentUserData.Usermodel.UserProfileImageUrl;
+    var defaultImageUrl = Url.Content("~/images/user.png");
+    var imageUrl = !string.IsNullOrEmpty(profileImageUrl) ? Url.Content(profileImageUrl) : defaultImageUrl;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -159,13 +116,13 @@
              <div class="sidebar bg-white" style="height: calc(100vh - 56px); overflow-y: auto;">
                  <div class="box-profile">
                     <div class="text-center position-relative">
-                        <img src="@imageUrl" class="profile-user-img img-fluid img-circle" alt="@Model.Fullname" />
+                        <img src="@imageUrl" class="profile-user-img img-fluid img-circle" alt="@currentUserData.Usermodel.Fullname" />
                         <input type="file" id="imageUpload" style="display: none;" accept="image/*" onchange="systemuserprofileeditimagechanged(event)" />
                         <button class="position-absolute top-0 end-0 p-1" style="margin: 10px; border: none; background: transparent; cursor: pointer; transform: translate(50%, -50%);" onclick="triggerFileInput()">
                             <i class="fas fa-camera"></i>
                         </button>
                     </div>
-                    <h3 class="profile-username text-center">@Model.Fullname</h3>
+                    <h3 class="profile-username text-center">@currentUserData.Usermodel.Fullname</h3>
                  </div>
                  <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

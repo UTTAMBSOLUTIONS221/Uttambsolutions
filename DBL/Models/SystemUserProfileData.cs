@@ -4,6 +4,7 @@ namespace DBL.Models
 {
     public class SystemUserProfileData
     {
+        public string Systemmodulename { get; set; }
         public Systemjobdata Systemjobsdata { get; set; }
         public Systemblogdata Systemblogdata { get; set; }
         public Systemorganizationshopproducts Shopproductsdata { get; set; }

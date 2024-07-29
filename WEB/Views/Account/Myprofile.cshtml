@@ -3,3 +3,201 @@
     ViewData["Title"] = "Myprofile";
     Layout = "~/Views/Shared/_LayoutProfile.cshtml";
 }
+@functions {
+    private string GetApplicationStatus(int status)
+    {
+        switch (status)
+        {
+            case 3:
+                return "Received";
+            case 2:
+                return "Viewed";
+            case 1:
+                return "Rejected";
+            case 0:
+                return "Approved";
+            default:
+                return "Unknown";
+        }
+    }
+}
+@{
+    string GetRelativeDate(DateTime date)
+    {
+        var now = DateTime.Now;
+        var timeSpan = now - date;
+
+        if (timeSpan.TotalDays < 1)
+        {
+            return "Today";
+        }
+        else if (timeSpan.TotalDays < 2)
+        {
+            return "Yesterday";
+        }
+        else
+        {
+            var days = (int)timeSpan.TotalDays;
+            return $"{days} day{(days > 1 ? "s" : "")} ago";
+        }
+    }
+
+    int adCounter = 0;
+}
+
+@if (Model.Systemmodulename == "job-listing-and-cv-revamping")
+{
+
+    <div class="row">
+        <div class="row mb-4">
+            <div class="col-lg-8 col-md-12">
+                @if (Model != null && Model.Systemjobsdata != null)
+                {
+                    foreach (var job in Model.Systemjobsdata.Systemjobs)
+                    {
+                        <div class="card mb-4 bg-light border-0 shadow-sm">
+                            <a asp-action="Jobdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-jobcode="@Guid.NewGuid()" asp-route-JobId="@job.JobId" asp-area="" class="text-decoration-none">
+                                <div class="card-header bg-white">
+                                    <h4 class="fw-bold text-custom text-uppercase">@job.Title</h4>
+                                    <h6 class="text-secondary text-uppercase">@job.Employername</h6>
+                                    <div class="d-flex flex-wrap">
+                                        <span class="badge badge-secondary mr-2 mb-2"><strong>Location:</strong> @job.Locationname</span>
+                                        <span class="badge badge-secondary mr-2 mb-2"><strong>Type:</strong> @job.Jobtypename</span>
+                                        <span class="badge badge-secondary mr-2 mb-2"><strong>Salary Range:</strong> @job.JobSalaryRange</span>
+                                        <span class="badge badge-secondary mb-2"><strong>Job Function:</strong> @job.Functionname</span>
+                                    </div>
+                                    <hr />
+                                    <div class="d-flex justify-content-between mt-1">
+                                        <span class="badge bg-success">@job.JobStatus</span>
+                                        <span class="text-muted">@GetRelativeDate(job.DateCreated)</span>
+                                    </div>
+                                </div>
+                                <div class="card-body bg-white">
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-3 col-4">
+                                            <div class="card card-border-custom">
+                                                <img src="@Url.Content(job.Organizationlogo)" class="img-fluid rounded" alt="@job.Employername" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10 col-sm-9 col-8">
+                                            <p>@job.JobDescription</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="card-footer bg-white text-end">
+                                <div class="d-flex justify-content-end">
+                                    <a href="https://twitter.com/intent/tweet?url=https://jobcenter.uttambsolutions.com/Home/Jobdetails?JobId=@(job.JobId)" class="btn btn-xs btn-custom mr-2" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> Twitter</a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://jobcenter.uttambsolutions.com/Home/Jobdetails?JobId=@(job.JobId)" class="btn btn-xs btn-custom mr-2" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i> Facebook</a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://jobcenter.uttambsolutions.com/Home/Jobdetails?JobId=@(job.JobId)" class="btn btn-xs btn-custom" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (++adCounter % 2 == 0)
+                        {
+                            <div class="row mb-4">
+                                <div class="col-lg-8 col-md-12">
+                                    <ins class="adsbygoogle"
+                                         style="display:block"
+                                         data-ad-client="ca-pub-2850934153859537"
+                                         data-ad-slot="1149686671"
+                                         data-ad-format="auto"
+                                         data-full-width-responsive="true"></ins>
+                                    <script>
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                    </script>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+            <div class="col-sm-4">
+                <div class="card card-outline card-info">
+                    <div class="card-header py-1">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h6 class="font-weight-bold text-sm card-title">My Job Applications</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive table-responsive-sm">
+                        <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables3">
+                            <thead>
+                                <tr>
+                                    <th>Job</th>
+                                    <th>Status</th>
+                                    <th>DateApplied</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Systemjobapplications != null)
+                                {
+                                    foreach (var item in Model.Systemjobapplications)
+                                    {
+                                        <tr>
+                                            <td>@item.Title</td>
+                                            <td>@Html.Raw(GetApplicationStatus(item.Applicationstatus))</td>
+                                            <td>@item.Datecreated</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+else if (Model.Systemmodulename == "latest-news-emerging-trends-and-politics")
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-outline card-info">
+                <div class="card-header py-1">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h6 class="font-weight-bold text-sm card-title">Blogs</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body table-responsive table-responsive-sm">
+                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables2">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Summary</th>
+                                <th>Content</th>
+                                <th>Category</th>
+                                <th>Tags</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Systemuserblogs != null)
+                            {
+                                foreach (var item in Model.Systemuserblogs)
+                                {
+                                    <tr>
+                                        <td><img src="@Url.Content(item.Blogprimaryimageurl)" height="40" width="40" alt="@item.Blogcategoryname" /></td>
+                                        <td>@item.Blogname</td>
+                                        <td>@item.Summary</td>
+                                        <td>@item.Blogcontent</td>
+                                        <td>@item.Blogcategoryname</td>
+                                        <td>@item.Blogtags</td>
+                                        <td class="text-right"><a asp-action="Addsystemblog" asp-controller="Systemblog" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@item.Blogid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

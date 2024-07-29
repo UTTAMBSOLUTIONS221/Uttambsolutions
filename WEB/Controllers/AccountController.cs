@@ -100,8 +100,8 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Myprofile(string? Modulename = "job-listing-and-cv-revamping", int page = 0, int pageSize = 10)
         {
-            ViewData["Modulename"] = Modulename;
             SystemUserProfileData profileModel = new SystemUserProfileData();
+            profileModel.Systemmodulename = Modulename;
             if (Modulename == "job-listing-and-cv-revamping")
             {
                 profileModel.Systemjobsdata = await bl.Getsystemallopportunitydata(page, pageSize);
