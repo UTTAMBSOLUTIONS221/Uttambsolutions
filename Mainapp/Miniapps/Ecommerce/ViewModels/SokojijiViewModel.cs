@@ -59,14 +59,24 @@ namespace Mainapp.Miniapps.Ecommerce.ViewModels
 
         private async Task ViewDetails(Organizationshopproductsdata item)
         {
-            // Navigate to a details page or show a modal with item details
-            await Application.Current.MainPage.DisplayAlert("Product Details", item.Productdescription, "OK");
+            var navigationParameter = new Dictionary<string, object>
+    {
+        { "Product", item }
+    };
+
+            await Shell.Current.GoToAsync("SokojijiProductDetailsPage", navigationParameter);
         }
 
         private async Task AddToCart(Organizationshopproductsdata item)
         {
-            // Logic to add the item to the cart
+            //_cartService.AddToCart(item);
             await Application.Current.MainPage.DisplayAlert("Added to Cart", $"{item.Productname} has been added to your cart.", "OK");
+        }
+
+        private async Task NavigateToCart()
+        {
+            // Navigate to the Cart page
+            await Shell.Current.GoToAsync("CartPage");
         }
     }
 }

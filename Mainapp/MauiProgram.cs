@@ -33,6 +33,7 @@ namespace Mainapp
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<CommonDashboardPage>();
             builder.Services.AddSingleton<SokojijiDashboardPage>();
+            builder.Services.AddSingleton<SokojijiProductDetailsPage>();
 
             // View Models
             builder.Services.AddSingleton<AppShellViewModel>();
@@ -40,6 +41,7 @@ namespace Mainapp
             builder.Services.AddSingleton<LoginPageViewModel>();
             builder.Services.AddSingleton<DashboardPageViewModel>();
             builder.Services.AddSingleton<SokojijiViewModel>();
+            builder.Services.AddSingleton<SokojijiProductDetailsViewModel>();
 
 
 

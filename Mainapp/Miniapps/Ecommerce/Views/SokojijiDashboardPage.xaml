@@ -12,6 +12,14 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="cart.png" 
+                     Command="{Binding NavigateToCartCommand}" 
+                     Text="Cart" 
+                     Order="Primary" 
+                     Priority="0" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.BindingContext>
         <viewmodels:SokojijiViewModel />
     </ContentPage.BindingContext>

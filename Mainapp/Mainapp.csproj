@@ -19,6 +19,7 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+        <AndroidSplashScreen>@drawable/splash_screen</AndroidSplashScreen>
     </PropertyGroup>
 
     <ItemGroup>
@@ -32,6 +33,10 @@
         <AndroidResource Remove="Platforms\Android\Resources\drawable\splash_image.png" />
         <AndroidResource Remove="Platforms\Android\Resources\drawable\splash_screen.xml" />
         <AndroidResource Remove="Platforms\Android\Resources\values\styles.xml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\Images\cart.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -50,8 +55,14 @@
         <MauiXaml Update="Controls\FlyoutHeaderControl.xaml">
             <Generator>MSBuild:Compile</Generator>
         </MauiXaml>
+        <MauiXaml Update="Miniapps\Ecommerce\Views\SokojijiCartPage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </MauiXaml>
         <MauiXaml Update="Miniapps\Ecommerce\Views\SokojijiDashboardPage.xaml">
             <Generator>MSBuild:Compile</Generator>
+        </MauiXaml>
+        <MauiXaml Update="Miniapps\Ecommerce\Views\SokojijiProductDetailsPage.xaml">
+          <Generator>MSBuild:Compile</Generator>
         </MauiXaml>
         <MauiXaml Update="Views\CommonDashboardPage.xaml">
             <Generator>MSBuild:Compile</Generator>
