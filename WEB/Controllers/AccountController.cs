@@ -98,11 +98,24 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Myprofile(long Moduleid, string Modulename)
+        public async Task<IActionResult> Myprofile(string? Modulename = "job-listing-and-cv-revamping", int page = 0, int pageSize = 10)
         {
             ViewData["Modulename"] = Modulename;
-            // var data = await bl.Getsystemuserprofiledata(SessionUserData.Usermodel.Userid);
-            return View(SessionUserData.Usermodel);
+            SystemUserProfileData profileModel = new SystemUserProfileData();
+            if (Modulename == "job-listing-and-cv-revamping")
+            {
+                profileModel.Systemjobsdata = await bl.Getsystemallopportunitydata(page, pageSize);
+            }
+            else if (Modulename == "latest-news-emerging-trends-and-politics")
+            {
+                profileModel.Systemblogdata = await bl.Getsystemallblogdata(page, pageSize);
+            }
+            else if (Modulename == "ecommerce-and-market-place")
+            {
+                profileModel.Shopproductsdata = await bl.Getsystemorganizationshopproductsdata();
+            }
+            //var data = await bl.Getsystemuserprofiledata(SessionUserData.Usermodel.Userid);
+            return View(profileModel);
         }
 
         [HttpGet]
