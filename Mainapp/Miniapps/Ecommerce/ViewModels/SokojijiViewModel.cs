@@ -79,8 +79,6 @@ namespace Mainapp.Miniapps.Ecommerce.ViewModels
         {
             await _serviceProvider.AddToCartAsync(item);
             CartItemCount++;
-            //_cartService.AddToCart(item);
-            await Application.Current.MainPage.DisplayAlert("Added to Cart", $"{item.Productname} has been added to your cart.", "OK");
         }
 
         private async Task NavigateToCart()
