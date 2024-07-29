@@ -155,49 +155,134 @@
 else if (Model.Systemmodulename == "latest-news-emerging-trends-and-politics")
 {
     <div class="row">
-        <div class="col-sm-12">
-            <div class="card card-outline card-info">
-                <div class="card-header py-1">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h6 class="font-weight-bold text-sm card-title">Blogs</h6>
+        @if (Model != null && Model.Systemblogdata != null && Model.Systemblogdata.Systemblogs != null)
+        {
+            int blogCount = 0; // Counter to track the number of blog posts
+            foreach (var blogPost in Model.Systemblogdata.Systemblogs)
+            {
+                // Blog post card
+                <div class="col-lg-3 col-md-3 col-sm-4 col-12 mb-3">
+                    <a asp-action="Blogdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@blogPost.Blogid" asp-area="" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm card-info card-outline">
+                            <img src="@Url.Content(blogPost.Blogprimaryimageurl)" alt="@blogPost.Blogcategoryname" class="card-img-top" style="height: 140px; object-fit: cover;" />
+                            <div class="card-body pt-2 pr-2 pl-2 d-flex flex-column">
+                                <h6 class="card-text text-custom text-uppercase text-sm" title="@blogPost.Blogname">@blogPost.Truncatedblogname</h6>
+                                <p class="card-text text-muted text-truncate text-wrap text-sm" title="@blogPost.Summary">@blogPost.Truncatedblogsummary</p>
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <p class="card-text text-muted text-xs" title="Author: @blogPost.Blogownername">Author: @blogPost.Blogownername</p>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <p class="card-text text-muted text-xs" title="Published On: @blogPost.Datecreated">Published On: @blogPost.Datecreated</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <div class="d-flex justify-content-center">
+                                    <a href="https://twitter.com/intent/tweet?url=https://fortysevennews.uttambsolutions.com/Home/Blogdetails?Blogid=@(blogPost.Blogid)" class="btn btn-xs btn-custom mr-2" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> Twitter</a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://fortysevennews.uttambsolutions.com/Home/Blogdetails?Blogid=@(blogPost.Blogid)" class="btn btn-xs btn-custom mr-2" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i> Facebook</a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://fortysevennews.uttambsolutions.com/Home/Blogdetails?Blogid=@(blogPost.Blogid)" class="btn btn-xs btn-custom" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                                </div>
+                            </div>
                         </div>
+                    </a>
+                </div>
+
+                // Increment the counter
+                blogCount++;
+
+                // Insert advertisement after every 3 blog posts
+                if (blogCount % 4 == 0 && blogCount < Model.Systemblogdata.Systemblogs.Count)
+                {
+                    <div class="col-12 mb-3">
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-2850934153859537"
+                             data-ad-slot="1149686671"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     </div>
+                }
+            }
+        }
+        else
+        {
+            <p class="text-center">No blogs available at the moment.</p>
+        }
+    </div>
+}
+else if (Model.Systemmodulename == "ecommerce-and-market-place")
+{
+    <div class="row">
+        @if (Model != null && Model.Shopproductsdata!= null && Model.Shopproductsdata.Data != null)
+        {
+            foreach (var product in Model.Shopproductsdata.Data)
+            {
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
+                    <a asp-action="Shopproductdetail" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Shopproductid="@product.Shopproductid" asp-area="" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm card-info card-outline">
+                            <img src="@Url.Content(product.Primaryimageurl)" alt="@product.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" />
+                            <div class="card-body pt-2 pr-2 pl-2 d-flex flex-column">
+                                <p class="card-text text-center text-muted text-truncate mb-1" title="@product.Productname">@product.Productname</p>
+                                <p class="card-text text-center text-muted text-truncate mb-1" title="Kes. @product.Marketprice">Kes. @product.Marketprice.ToString("#,##0.00")</p>
+                                <p class="card-text text-center text-muted text-truncate" title="Shop: @product.Organizationname">Shop: @product.Organizationname</p>
+                                <p class="card-text text-center text-muted text-truncate" title="Status: @product.ProductStatus">
+                                    Status: @if (product.ProductStatus == "New")
+                                    {
+                                        <span class="badge badge-info badge-info-xs font-weight-bold text-uppercase">New</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning badge-warning-xs font-weight-bold text-uppercase">Used</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="card-body table-responsive table-responsive-sm">
-                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables2">
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>Summary</th>
-                                <th>Content</th>
-                                <th>Category</th>
-                                <th>Tags</th>
-                                <th class="text-right">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model.Systemuserblogs != null)
-                            {
-                                foreach (var item in Model.Systemuserblogs)
-                                {
-                                    <tr>
-                                        <td><img src="@Url.Content(item.Blogprimaryimageurl)" height="40" width="40" alt="@item.Blogcategoryname" /></td>
-                                        <td>@item.Blogname</td>
-                                        <td>@item.Summary</td>
-                                        <td>@item.Blogcontent</td>
-                                        <td>@item.Blogcategoryname</td>
-                                        <td>@item.Blogtags</td>
-                                        <td class="text-right"><a asp-action="Addsystemblog" asp-controller="Systemblog" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@item.Blogid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+            }
+        }
+        else
+        {
+            <p class="text-center">No products available at the moment.</p>
+        }
     </div>
 }
 
+<style>
+    .card {
+        transition: transform 0.2s;
+        margin-bottom: 0;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    .card-title {
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 0.8rem;
+        color: #555;
+    }
+
+    .text-truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .text-decoration-none {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+</style>
