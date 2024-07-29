@@ -138,5 +138,73 @@ namespace Mainapp.Services
                 };
             }
         }
+
+
+
+        #region Cart Management
+
+        private const string CartKey = "CartItems";
+
+        // Add item to the cart
+        public async Task AddToCartAsync(Organizationshopproductsdata item)
+        {
+            // Retrieve cart items from preferences
+            var cartItems = GetCartItems().ToList();
+            if (!cartItems.Any(x => x.Shopproductid == item.Shopproductid)) // Prevent duplicates
+            {
+                cartItems.Add(item);
+                // Save updated cart items to preferences
+                SaveCartItems(cartItems);
+                await Task.CompletedTask; // Simulate async operation
+            }
+        }
+        // Remove item from the cart
+        public void RemoveFromCart(Organizationshopproductsdata item)
+        {
+            var cartItems = GetCartItems().ToList();
+            cartItems.RemoveAll(x => x.Shopproductid == item.Shopproductid);
+            SaveCartItems(cartItems);
+        }
+
+        // Get all items from the cart
+        public IEnumerable<Organizationshopproductsdata> GetCartItems()
+        {
+            var cartJson = Preferences.Get(CartKey, "[]"); // Default to empty array if not found
+            return JsonConvert.DeserializeObject<List<Organizationshopproductsdata>>(cartJson) ?? new List<Organizationshopproductsdata>();
+        }
+
+        // Clear the cart
+        public void ClearCart()
+        {
+            Preferences.Set(CartKey, "[]"); // Set to empty array
+        }
+
+        // Save cart items to preferences
+        private void SaveCartItems(List<Organizationshopproductsdata> cartItems)
+        {
+            var cartJson = JsonConvert.SerializeObject(cartItems);
+            Preferences.Set(CartKey, cartJson);
+        }
+
+        // Checkout the cart items
+        public async Task<BaseResponse> CheckoutAsync()
+        {
+            var cartItems = GetCartItems();
+            if (!cartItems.Any())
+            {
+                return new BaseResponse
+                {
+                    StatusCode = 400,
+                    StatusMessage = "Cart is empty."
+                };
+            }
+
+            var apiUrl = "/api/Cart/Checkout"; // Replace with your actual API endpoint
+            var response = await CallAuthWebApi("/api/Cart/Checkout", HttpMethod.Post, new { Items = cartItems });
+            ClearCart(); // Clear cart after successful checkout
+            return response;
+        }
+
+        #endregion
     }
 }

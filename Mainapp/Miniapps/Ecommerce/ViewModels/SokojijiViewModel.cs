@@ -14,6 +14,14 @@ namespace Mainapp.Miniapps.Ecommerce.ViewModels
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand AddToCartCommand { get; }
+        private int _cartItemCount;
+        public int CartItemCount
+        {
+            get => _cartItemCount;
+            set => SetProperty(ref _cartItemCount, value);
+        }
+
+
 
         // Parameterless constructor for XAML support
         public SokojijiViewModel()
@@ -69,6 +77,8 @@ namespace Mainapp.Miniapps.Ecommerce.ViewModels
 
         private async Task AddToCart(Organizationshopproductsdata item)
         {
+            await _serviceProvider.AddToCartAsync(item);
+            CartItemCount++;
             //_cartService.AddToCart(item);
             await Application.Current.MainPage.DisplayAlert("Added to Cart", $"{item.Productname} has been added to your cart.", "OK");
         }
