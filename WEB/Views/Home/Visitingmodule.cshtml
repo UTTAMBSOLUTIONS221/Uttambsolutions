@@ -105,6 +105,20 @@
                     <img src="~/images/uttambsolutionlogo.png" alt="Uttambsolutions Logo" class="brand-image elevation-3">
                     <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">Uttamb Solutions</span>
                 </a>
+                <!-- Right navbar links for large screens -->
+                <ul class="nav-item order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                    <li class="nav-link dropdown">
+                        <a class="font-weight-bold text-uppercase text-xs text-white dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-user-circle text-white font-weight-bold fa-1x img-circle rounded-circle"></i>&nbsp; @currentUserData.Usermodel.Fullname</a>
+                        <div class="dropdown-menu bg-custom">
+                            <div class="row" hidden>
+                                <div class="col-sm-12">
+                                    <input id="systemLoggedinedUserid" value="@currentUserData.Usermodel.Userid">
+                                </div>
+                            </div>
+                            <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item text-white text-sm font-weight-bold"> Log out</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </nav>
 
