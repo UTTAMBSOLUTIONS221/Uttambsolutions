@@ -1,4 +1,5 @@
 ﻿using DBL.Models;
+using Mainapp.Miniapps.Ecommerce.Views;
 using Mainapp.ViewModels;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -56,15 +57,14 @@ namespace Mainapp.Miniapps.Ecommerce.ViewModels
                 IsBusy = false;
             }
         }
-
         private async Task ViewDetails(Organizationshopproductsdata item)
         {
             var navigationParameter = new Dictionary<string, object>
-    {
-        { "Product", item }
-    };
+            {
+                { "Product", item }
+            };
 
-            await Shell.Current.GoToAsync("SokojijiProductDetailsPage", navigationParameter);
+            await Shell.Current.GoToAsync(nameof(SokojijiProductDetailsPage), navigationParameter);
         }
 
         private async Task AddToCart(Organizationshopproductsdata item)

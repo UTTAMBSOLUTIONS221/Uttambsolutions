@@ -13,6 +13,8 @@ namespace Mainapp
 
             Routing.RegisterRoute(nameof(CommonDashboardPage), typeof(CommonDashboardPage));
             Routing.RegisterRoute(nameof(SokojijiDashboardPage), typeof(SokojijiDashboardPage));
+            Routing.RegisterRoute(nameof(SokojijiProductDetailsPage), typeof(SokojijiProductDetailsPage));
+
         }
     }
 }

@@ -1,22 +1,28 @@
-using DBL.Models;
 using Mainapp.Miniapps.Ecommerce.ViewModels;
-namespace Mainapp.Miniapps.Ecommerce.Views;
 
-public partial class SokojijiProductDetailsPage : ContentPage
+namespace Mainapp.Miniapps.Ecommerce.Views
 {
-    public SokojijiProductDetailsPage()
+    public partial class SokojijiProductDetailsPage : ContentPage
     {
-        InitializeComponent();
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        if (BindingContext is SokojijiProductDetailsViewModel viewModel)
+        public SokojijiProductDetailsPage()
         {
-            if (Shell.Current.CurrentState.Parameters.TryGetValue("Product", out var product))
+            InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext is SokojijiProductDetailsViewModel viewModel)
             {
-                viewModel.Product = product as Organizationshopproductsdata;
+                if (Shell.Current.CurrentPage?.BindingContext is SokojijiProductDetailsViewModel currentPageViewModel)
+                {
+                    var productParameter = currentPageViewModel.Product;
+                    if (productParameter != null)
+                    {
+                        viewModel.Product = productParameter;
+                    }
+                }
             }
         }
     }

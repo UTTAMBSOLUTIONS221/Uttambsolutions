@@ -2,8 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Mainapp.Miniapps.Ecommerce.ViewModels"
+             xmlns:helpers="clr-namespace:Mainapp.Helpers"
              x:Class="Mainapp.Miniapps.Ecommerce.Views.SokojijiProductDetailsPage"
              Title="Product Details">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <helpers:CurrencyConverter x:Key="CurrencyConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.BindingContext>
         <viewmodels:SokojijiProductDetailsViewModel />
