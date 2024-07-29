@@ -16,6 +16,8 @@ builder.Services.AddDataProtection();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
