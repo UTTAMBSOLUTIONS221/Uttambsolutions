@@ -1,5 +1,6 @@
 ﻿@model DBL.Entities.SystemJob
 @{
+    var Systemorganization = ViewData["Systemorganizationlists"] as List<SelectListItem>;
     var Systemjobfunction = ViewData["Systemjobfunctionlists"] as List<SelectListItem>;
     var Systemjobindustry = ViewData["Systemjobindustrylists"] as List<SelectListItem>;
     var Systemjoblocation = ViewData["Systemjoblocationlists"] as List<SelectListItem>;
@@ -17,9 +18,21 @@
     <div id="section1" class="section">
         <h6 class="mb-3">Step 1: Job Details</h6>
         <input asp-for="@Model.JobId" id="JobId" hidden />
-        <div class="form-group">
-            <label class="font-weight-light">Job Title</label>
-            <input class="form-control form-control-sm" asp-for="@Model.Title" id="Titleid" required />
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Job Employer</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.EmployerId" asp-items="Systemorganization" id="JobEmployerId" required>
+                        <option value="">---Select---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label class="font-weight-light">Job Title</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Title" id="Titleid" required />
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
@@ -48,7 +61,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">Job Experience</label>
                     <select class="form-control form-control-sm" asp-for="@Model.JobExperienceId" asp-items="Systemjobexperience" id="JobExperienceId" required>
@@ -64,7 +77,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-3 d-flex align-items-center mt-2">
+            <div class="col-sm-2 d-flex align-items-center mt-2">
                 <div class="custom-control custom-checkbox small-checkbox">
                     <input class="custom-control-input" type="checkbox" asp-for="@Model.EasyApply" id="EasyApplyid" />
                     <label class="custom-control-label text-sm font-weight-light text-nowrap nowrap" for="EasyApplyid">Easy apply?</label>
@@ -73,7 +86,13 @@
             <div class="col-sm-2 d-flex align-items-center mt-2">
                 <div class="custom-control custom-checkbox small-checkbox">
                     <input class="custom-control-input" type="checkbox" asp-for="@Model.HasTest" id="JobHasTestid" />
-                    <label class="custom-control-label text-sm font-weight-light text-nowrap nowrap" for="JobHasTestid">Test ?</label>
+                    <label class="custom-control-label text-sm font-weight-light text-nowrap nowrap" for="JobHasTestid">Has Test?</label>
+                </div>
+            </div>
+            <div class="col-sm-2 d-flex align-items-center mt-2">
+                <div class="custom-control custom-checkbox small-checkbox">
+                    <input class="custom-control-input" type="checkbox" asp-for="@Model.IsFeatured" id="IsJobFeaturedid" />
+                    <label class="custom-control-label text-sm font-weight-light text-nowrap nowrap" for="IsJobFeaturedid">Is Featured?</label>
                 </div>
             </div>
         </div>
@@ -82,7 +101,7 @@
             <div class="col-sm-5">
                 <div class="form-group">
                     <label class="font-weight-light">Job URL</label>
-                    <input class="form-control form-control-sm" asp-for="@Model.JobUrl" id="JobUrlid" required />
+                    <input class="form-control form-control-sm" asp-for="@Model.JobUrl" id="JobUrlid" />
                 </div>
             </div>
             <div class="col-sm-4">
@@ -104,55 +123,217 @@
         </div>
         <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
     </div>
-
-    <!-- Section 2: Blog Paragraphs -->
+    <!-- Section 2: Key Responsibilities -->
     <div id="section2" class="section" style="display: none;">
-        <h6 class="mb-3">Step 2: Blog Paragraphs</h6>
-        <div class="card">
-            <div class="card-body">
-                <input class="form-control form-control-sm font-weight-light" id="ProductFeatureId" hidden />
-                <div class="form-group">
-                    <label class="font-weight-light">Paragraph</label>
-                    <textarea class="form-control form-control-sm font-weight-light" id="SystemblogparagraphId"></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="font-weight-light">Paragraph Primary Image</label>
-                    <input class="form-control form-control-sm font-weight-light" type="file" id="Paragraphimageurlid" onchange="systemBlogParagraphFileChanged(event)" />
-                </div>
-                <div class="form-group">
-                    <label class="font-weight-light">Paragraph Image Name</label>
-                    <input class="form-control form-control-sm" id="Blogparagraphimagenameid" required />
-                </div>
-                <div class="form-group">
-                    <label class="font-weight-light">Paragraph Image Source</label>
-                    <input class="form-control form-control-sm" id="Blogparagraphimagesourceid" required />
-                </div>
-                <input class="form-control form-control-sm" id="UttambsolutionsparagraphimageurlId" hidden readonly />
-                <div id="Uttambsolutionsparagraphimagespreviewcontainer"></div>
-                <button class="btn btn-sm btn-info font-weight-bold float-right" onclick="addsystemblogparagraphdata()">Add</button>
+        <h6 class="mb-4 font-weight-bold">Step 2: Key Responsibilities</h6>
+        <input class="form-control form-control-sm" id="Jobfunctionid" hidden />
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" id="SystemjobfunctionId" placeholder="Enter Responsibility" aria-label="Responsibility" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="addsystemjobfunctiondata()">Add</button>
             </div>
         </div>
-        <div class="table-responsive mt-3">
-            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables1">
+        <div class="table-responsive mt-4">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables10">
                 <thead>
                     <tr>
-                        <th hidden></th>
-                        <th hidden></th>
-                        <th>Image</th>
-                        <th>Paragraph</th>
-                        <th hidden></th>
-                        <th>Name</th>
-                        <th>Source</th>
+                        <th hidden>Responsibilityid</th>
+                        <th>Responsibility</th>
                         <th class="text-right">Action</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    @if (Model.Systemjobfunction != null)
+                    {
+                        foreach (var item in Model.Systemjobfunction)
+                        {
+                            <tr>
+                                <td hidden>@item.Jobfunctionid</td>
+                                <td>@item.Jobfunction</td>
+                                <td class="text-right">
+                                    <button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase m-1" onclick="editjobfunctiondata(this.parentNode.parentNode)">Edit</button>
+                                    <button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase m-1" onclick="updatejobfunctiondata(this.parentNode.parentNode)">Update</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-sm btn-secondary" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-sm btn-secondary" onclick="nextSection()">Next</button>
+        </div>
+    </div>
+
+    <!-- Section 3: Qualification -->
+    <div id="section3" class="section" style="display: none;">
+        <h6 class="mb-3">Step 3:  Qualifications</h6>
+        <input class="form-control form-control-sm" id="Jobqualificationid" hidden />
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" id="SystemjobqualificationId" placeholder="Enter qualification" aria-label="Qualification" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="addsystemjobqualificationdata()">Add</button>
+            </div>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables11">
+                <thead>
+                    <tr>
+                        <th hidden></th>
+                        <th>Qualification</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Systemjobqualification != null)
+                    {
+                        foreach (var item in Model.Systemjobqualification)
+                        {
+                            <tr>
+                                <td hidden>@item.Jobqualificationid</td>
+                                <td>@item.Jobqualification</td>
+                                <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobqualificationdata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobqualificationdata(this.parentNode.parentNode)">Update</button></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="nextSection()">Next</button>
+        </div>
+    </div>
+
+    <!-- Section 4: Skills -->
+    <div id="section4" class="section" style="display: none;">
+        <h6 class="mb-3">Step 4: Preferred Skills</h6>
+        <input class="form-control form-control-sm" id="Jobskillid" hidden />
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" id="SystemjobskillnameId" placeholder="Enter skill" aria-label="Skill" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="addsystemjobskilldata()">Add</button>
+            </div>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables12">
+                <thead>
+                    <tr>
+                        <th hidden></th>
+                        <th>Skill</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Systemjobskill != null)
+                    {
+                        foreach (var item in Model.Systemjobskill)
+                        {
+                            <tr>
+                                <td hidden>@item.Jobskillid</td>
+                                <td>@item.Jobskill</td>
+                                <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobskilldata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobskilldata(this.parentNode.parentNode)">Update</button></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
             </table>
         </div>
         <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
-        <button class="btn btn-sm btn-info font-weight-bold ml-1" type="button" id="saveopportunityid" onclick="saveopportunitydata();">
-            <span id="buttonText">Save</span>
-            <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
-        </button>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
+    </div>
+
+
+    <!-- Section 5: Qualifications -->
+    <div id="section5" class="section" style="display: none;">
+        <h6 class="mb-3">Step 4: Benefits</h6>
+        <input class="form-control form-control-sm" id="JobbenefitId" hidden />
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" id="SystemjobbenefitnameId" placeholder="Enter Benefit" aria-label="Benefit" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="addsystemjobbenfitdata()">Add</button>
+            </div>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables13">
+                <thead>
+                    <tr>
+                        <th hidden></th>
+                        <th>Benefit</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Systemjobbenefit != null)
+                    {
+                        foreach (var item in Model.Systemjobbenefit)
+                        {
+                            <tr>
+                                <td hidden>@item.Jobbenefitid</td>
+                                <td>@item.Jobbenefit</td>
+                                <td class="text-right"><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobbenefitdata(this.parentNode.parentNode)">Edit</button><button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobbenefitdata(this.parentNode.parentNode)">Update</button></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
+    </div>
+
+    <!-- Section 6: Conclusion -->
+    <div id="section6" class="section" style="display: none;">
+        <h6 class="mb-3">Step 6: Job Conclusion</h6>
+        <div class="row">
+            <!-- Column for "Reports to" -->
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="font-weight-light">Reports to</label>
+                    <input class="form-control form-control-sm font-weight-light" asp-for="@Model.Jobreportto" id="SystemjobreportstoId" />
+                </div>
+            </div>
+            <!-- Column for "Support Document" -->
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="font-weight-light" for="SupportDocumentId">Support Document</label>
+                    <input type="file" class="form-control form-control-sm font-weight-light" id="SupportDocumentId" onchange="systemJobSupportDocChanged(event)" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-light">How to Apply</label>
+            <textarea class="form-control form-control-sm font-weight-light" asp-for="@Model.Jobhowtoapply" id="SystemjobhowtoapplyId"></textarea>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" hidden>
+                <div class="form-group">
+                    <label class="font-weight-light">Images Url</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Jobimageburl" id="UttambsolutionsimageurlId" readonly />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h6>Current Document</h6>
+                <img src="@Url.Content(Model.Jobimageburl)" height="140" width="140" />
+            </div>
+            <div class="col-sm-6">
+                <h6>Document to Replace</h6>
+                <div id="Uttambsolutionsimagespreviewcontainer"></div>
+            </div>
+
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <!-- Previous Button -->
+            <button type="button" class="btn btn-sm btn-secondary" onclick="prevSection()">Previous</button>
+
+            <!-- Save Button -->
+            <button type="button" class="btn btn-sm btn-info font-weight-bold" id="saveopportunityid" onclick="saveopportunitydata();">
+                <span id="buttonText">Save</span>
+                <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+            </button>
+        </div>
+
     </div>
 </div>

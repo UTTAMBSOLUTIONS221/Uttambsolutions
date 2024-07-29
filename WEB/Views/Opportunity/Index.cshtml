@@ -17,21 +17,16 @@
                 </div>
             </div>
             <div class="card-body table-responsive table-responsive-sm">
-                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                 <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables2">
                     <thead>
                         <tr>
                             <th>Image</th>
                             <th>Title</th>
                             <th>Employer</th>
                             <th>Function</th>
-                            <th>Industry</th>
-                            <th>Location</th>
-                            <th>Jobtype</th>
-                            <th>Experience</th>
                             <th>Salary Range</th>
                             <th>Status</th>
                             <th>Deadline</th>
-                            <th>Datecreated</th>
                             <th>Dateposted</th>
                             <th class="text-right">Action</th>
                         </tr>
@@ -40,58 +35,468 @@
                         @if(Model!= null && Model.Systemjobs!=null){
                             foreach (var item in Model.Systemjobs)
                             {
-                                <tr>
-                                    <td><img src="@Url.Content(item.Employerlogo)" height="30" width="30"/></td>
+                                <tr data-jobid="@item.JobId">
+                                    <td><img src="@Url.Content(item.Organizationlogo)" height="30" width="30"/></td>
                                     <td>@item.Title</td>
                                     <td>@item.Employername</td>
                                     <td>@item.Functionname</td>
-                                    <td>@item.Jobindustryname</td>
-                                    <td>@item.Locationname</td>
-                                    <td>@item.Jobtypename</td>
-                                    <td>@item.Experiencename</td>
                                     <td>@item.JobSalaryRange</td>
                                     <td>@item.JobStatus</td>
                                     <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
-                                    <td>@item.DateCreated</td>
-                                    <td>@item.DatePosted</td>
-                                    <td class="text-right"><a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a><a asp-action="Publishopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right">Publish</a></td>
+                                    <td>@item.DatePosted.ToString("dd/MM/yyyy")</td>
+                                    <td class="text-right"><a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" class="btn btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                                 </tr>
                             }
                         }
                     </tbody>
                 </table>
-            </div>
+             </div>
         </div>
     </div>
 </div>
 @section Scripts {
       <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
-    <script type="text/javascript">
-        ﻿function saveopportunitydata() {
-            document.getElementById("saveopportunityid").disabled = true;
-            document.getElementById("processingSpinner").style.display = "inline-block";
-            document.getElementById("buttonText").innerText = "Processing...";
-            var uil1 = {
-                JobId: $('#JobId').val(),EmployerId: $('#systemLoggedinedUserid').val(),Title: $('#Titleid').val(), JobFunctionId: $('#JobFunctionId').val(),JobIndustryId: $('#JobIndustryId').val(), JobLocationId: $('#JobLocationId').val(), JobExperienceId: $('#JobExperienceId').val(),
-                JobTypeId: $('#JobTypeId').val(),EasyApply: $('#EasyApplyid').prop('checked'), HasTest: $('#JobHasTestid').prop('checked'),JobUrl: $('#JobUrlid').val(),Deadline: $('#Deadlineid').val(),JobSalaryRange: $('#JobSalaryRangeid').val(),JobDescription: $('#JobDescriptionid').val()
+     <script type="text/javascript">
+         const firebaseConfig = {
+                apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
+                authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
+                projectId: "uttambsolutions-4ec2a",
+                storageBucket: "uttambsolutions-4ec2a.appspot.com",
+                messagingSenderId: "336739823411",
+                appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
+                measurementId: "G-Z24LLL0113"
             };
- 
-            $.post("/Opportunity/Addsystemopportunitydata", uil1, function (response) {
-                if (response.RespStatus == 0) {
-                    Swal.fire('Saved!', response.RespMessage, 'success')
-                    $('#Uttambsolutionsmodal').hide();
-                    setTimeout(function () { location.reload(); }, 1000);
-                } else if (response.RespStatus == 1) {
-                    Swal.fire("Job details not saved", response.RespMessage, "warning");
+            firebase.initializeApp(firebaseConfig);
+            var storage = firebase.storage();
+
+            function systemJobSupportDocChanged(event) {
+                var files = event.target.files;
+                uploadJobSupportDocImage(files);
+            }
+
+            async function uploadJobSupportDocImage(files) {
+                var downloadURLs = [];
+
+                function generateBlogFileName(file) {
+                    var uniqueId = Date.now();
+                    var fileExtension = file.name.split('.').pop();
+                    var newFileName = 'Opportunity/Opportunityimage/' + uniqueId + '.' + fileExtension;
+                    return newFileName;
                 }
-                else {
-                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+
+                async function uploadBlogFile(file) {
+                    return new Promise((resolve, reject) => {
+                        var newFileName = generateBlogFileName(file);
+
+                        var storageRef = storage.ref().child(newFileName);
+                        var uploadTask = storageRef.put(file);
+
+                        uploadTask.on('state_changed',
+                            function (snapshot) {
+                                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                console.log('Upload is ' + progress + '% done');
+                            },
+                            function (error) {
+                                reject('Error uploading file: ' + error);
+                            },
+                            function () {
+                                uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                                    console.log('File available at', downloadURL);
+                                    downloadURLs.push(downloadURL);
+                                    resolve(downloadURL);
+                                });
+                            }
+                        );
+                    });
                 }
-                document.getElementById("saveopportunityid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
-            });
-        }
-   </script>
+
+                function displayBlogImagePreview(file) {
+                    return new Promise((resolve, reject) => {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var previewContainer = document.createElement('div');
+                            previewContainer.classList.add('image-preview');
+
+                            var spinner = document.createElement('div');
+                            spinner.classList.add('spinner');
+                            previewContainer.appendChild(spinner);
+
+                            var previewContainerElement = document.getElementById('Uttambsolutionsimagespreviewcontainer');
+                            previewContainerElement.appendChild(previewContainer);
+
+                            var img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.width = 140;
+                            img.height = 140;
+                            img.style.display = 'none';
+                            img.onload = function () {
+                                spinner.remove();
+                                img.style.display = 'block';
+                                previewContainer.appendChild(img);
+                            };
+
+                            resolve();
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+
+                document.getElementById('loadingOverlay').style.zIndex = 1100; 
+                document.getElementById('loadingOverlay').style.display = 'flex';
+
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+
+                    try {
+                        await displayBlogImagePreview(file);
+                        var downloadURL = await uploadBlogFile(file);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+
+                document.getElementById('loadingOverlay').style.display = 'none';
+
+                var inputField = document.getElementById('UttambsolutionsimageurlId');
+                inputField.value = JSON.stringify(downloadURLs);
+            }              
+      </script>
+    
+    
+    @*Scripts for saving the job opportunity*@
+        <script type="text/javascript">
+             function addsystemjobfunctiondata() {
+                 if ($('#SystemjobfunctionId').val() == "") {
+                    Swal.fire("Job Function Not Created", 'Function is Required', "warning");
+                    return;
+                }
+                var Jobfunctionid = 0;
+                var Jobfunction = $('#SystemjobfunctionId').val();
+             
+          
+                // Check if the table body contains any rows
+                var tableFunctionBody = $('#AllsystemDataTables10 tbody');
+                var noDataRows = tableFunctionBody.find('tr');
+                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                    // Remove the "No data available in table" row
+                    tableFunctionBody.empty();
+                }
+                // Append row to table with image
+                var newRow = '<tr>' +
+                    '<td hidden>' + Jobfunctionid + '</td>' +
+                     '<td>' + Jobfunction + '</td>' +
+                    '<td class="text-right">' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobfunctiondata(this.parentNode.parentNode)">Edit</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobfunctiondata(this.parentNode.parentNode)">Update</button>' +
+                    '</td>' +
+                    '</tr>';
+
+                $('#AllsystemDataTables10 tbody').append(newRow);
+                // Clear the form after adding a new row
+                clearJobFunctionForm();
+            }
+            // Function to populate input fields with values from the selected row for editing
+            function editjobfunctiondata(row) {
+                var cells = $(row).children();
+                $('#Jobfunctionid').val($(cells[0]).text());
+                $('#SystemjobfunctionId').val($(cells[1]).text());
+            }
+            // Function to update the selected row with edited values
+            function updatejobfunctiondata(row) {
+                if ($('#SystemjobfunctionId').val() == "") {
+                    Swal.fire("Job Function Not Created", 'Function is Required', "warning");
+                    return;
+                }
+                var cells = $(row).children(); // Get the cells of the selected row
+
+                // Update the cells with edited values from input fields
+                $(cells[0]).text($('#Jobfunctionid').val());
+                $(cells[1]).text($('#SystemjobfunctionId').val());
+                clearJobFunctionForm();
+            }
+            // Function to clear the form after adding a new row or updating
+            function clearJobFunctionForm() {
+                $('#Jobfunctionid').val('');
+                $('#SystemjobfunctionId').val('');
+            }
+
+            
+            function addsystemjobqualificationdata() {
+                 if ($('#SystemjobqualificationId').val() == "") {
+                    Swal.fire("Job Qualification Not Created", 'Qualification is Required', "warning");
+                    return;
+                }
+                var Jobqualificationid = 0;
+                var Jobqualification = $('#SystemjobqualificationId').val();
+             
+          
+                // Check if the table body contains any rows
+                var tableQualificationBody = $('#AllsystemDataTables11 tbody');
+                var noDataRows = tableQualificationBody.find('tr');
+                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                    // Remove the "No data available in table" row
+                    tableQualificationBody.empty();
+                }
+                // Append row to table with image
+                var newRow = '<tr>' +
+                    '<td hidden>' + Jobqualificationid + '</td>' +
+                     '<td>' + Jobqualification + '</td>' +
+                    '<td class="text-right">' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobqualificationdata(this.parentNode.parentNode)">Edit</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobqualificationdata(this.parentNode.parentNode)">Update</button>' +
+                    '</td>' +
+                    '</tr>';
+
+                $('#AllsystemDataTables11 tbody').append(newRow);
+                // Clear the form after adding a new row
+                clearJobQualificationForm();
+            }
+            // Function to populate input fields with values from the selected row for editing
+            function editjobqualificationdata(row) {
+                var cells = $(row).children();
+                $('#Jobqualificationid').val($(cells[0]).text());
+                $('#SystemjobqualificationId').val($(cells[1]).text());
+            }
+            // Function to update the selected row with edited values
+            function updatejobqualificationdata(row) {
+               if ($('#SystemjobqualificationId').val() == "") {
+                    Swal.fire("Job Qualification Not Created", 'Qualification is Required', "warning");
+                    return;
+                }
+                var cells = $(row).children(); // Get the cells of the selected row
+
+                // Update the cells with edited values from input fields
+                $(cells[0]).text($('#Jobqualificationid').val());
+                $(cells[1]).text($('#SystemjobqualificationId').val());
+                clearJobQualificationForm();
+            }
+            // Function to clear the form after adding a new row or updating
+            function clearJobQualificationForm() {
+                $('#Jobqualificationid').val('');
+                $('#SystemjobqualificationId').val('');
+            }
+
+
+               function addsystemjobskilldata() {
+                 if ($('#SystemjobskillnameId').val() == "") {
+                    Swal.fire("Job Skill Not Created", 'Skill is Required', "warning");
+                    return;
+                }
+                var JobskillId = 0;
+                var JobskillnameId = $('#SystemjobskillnameId').val();
+             
+          
+                // Check if the table body contains any rows
+                var tableSkillBody = $('#AllsystemDataTables12 tbody');
+                var noDataRows = tableSkillBody.find('tr');
+                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                    // Remove the "No data available in table" row
+                    tableSkillBody.empty();
+                }
+                // Append row to table with image
+                var newRow = '<tr>' +
+                    '<td hidden>' + JobskillId + '</td>' +
+                     '<td>' + JobskillnameId + '</td>' +
+                    '<td class="text-right">' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobskilldata(this.parentNode.parentNode)">Edit</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobskilldata(this.parentNode.parentNode)">Update</button>' +
+                    '</td>' +
+                    '</tr>';
+
+                $('#AllsystemDataTables12 tbody').append(newRow);
+                // Clear the form after adding a new row
+                clearJobSkillsForm();
+            }
+            // Function to populate input fields with values from the selected row for editing
+            function editjobskilldata(row) {
+                var cells = $(row).children();
+                $('#Jobskillid').val($(cells[0]).text());
+                $('#SystemjobskillnameId').val($(cells[1]).text());
+            }
+            // Function to update the selected row with edited values
+            function updatejobskilldata(row) {
+                if ($('#SystemjobskillnameId').val() == "") {
+                    Swal.fire("Job Skill Not Created", 'Skill is Required', "warning");
+                    return;
+                }
+                var cells = $(row).children(); // Get the cells of the selected row
+
+                // Update the cells with edited values from input fields
+                $(cells[0]).text($('#Jobskillid').val());
+                $(cells[1]).text($('#SystemjobskillnameId').val());
+                clearJobSkillsForm();
+            }
+            // Function to clear the form after adding a new row or updating
+            function clearJobSkillsForm() {
+                $('#Jobskillid').val('');
+                $('#SystemjobskillnameId').val('');
+            }
+
+             function addsystemjobbenfitdata() {
+                 if ($('#SystemjobbenefitId').val() == "") {
+                    Swal.fire("Job Benefit Not Created", 'Benefit is Required', "warning");
+                    return;
+                }
+                var JobbenefitId = 0;
+                var JobbenefitnameId = $('#SystemjobbenefitnameId').val();
+             
+          
+                // Check if the table body contains any rows
+                var tableBenefitBody = $('#AllsystemDataTables13 tbody');
+                var noDataRows = tableBenefitBody.find('tr');
+                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                    // Remove the "No data available in table" row
+                    tableBenefitBody.empty();
+                }
+                // Append row to table with image
+                var newRow = '<tr>' +
+                    '<td hidden>' + JobbenefitId + '</td>' +
+                     '<td>' + JobbenefitnameId + '</td>' +
+                    '<td class="text-right">' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editjobbenefitdata(this.parentNode.parentNode)">Edit</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatejobbenefitdata(this.parentNode.parentNode)">Update</button>' +
+                    '</td>' +
+                    '</tr>';
+
+                $('#AllsystemDataTables13 tbody').append(newRow);
+                // Clear the form after adding a new row
+                clearJobBenefitForm();
+            }
+            // Function to populate input fields with values from the selected row for editing
+            function editjobbenefitdata(row) {
+                var cells = $(row).children();
+                $('#JobbenefitId').val($(cells[0]).text());
+                $('#SystemjobbenefitnameId').val($(cells[1]).text());
+            }
+            // Function to update the selected row with edited values
+            function updatejobbenefitdata(row) {
+                if ($('#SystemjobbenefitId').val() == "") {
+                    Swal.fire("Job Benefit Not Created", 'Benefit is Required', "warning");
+                    return;
+                }
+                var cells = $(row).children(); // Get the cells of the selected row
+
+                // Update the cells with edited values from input fields
+                $(cells[0]).text($('#JobbenefitId').val());
+                $(cells[1]).text($('#SystemjobbenefitnameId').val());
+                clearJobBenefitForm();
+            }
+            // Function to clear the form after adding a new row or updating
+            function clearJobBenefitForm() {
+                $('#JobbenefitId').val('');
+                $('#SystemjobbenefitnameId').val('');
+            }
+
+
+
+            ﻿function saveopportunitydata() {
+                document.getElementById("saveopportunityid").disabled = true;
+                document.getElementById("processingSpinner").style.display = "inline-block";
+                document.getElementById("buttonText").innerText = "Processing...";
+                   var Systemjobfunctionsdata = [];
+                   $("#AllsystemDataTables10 tbody tr").each(function () {
+                   var row = $(this);
+                        var Systemjobfunctiondata = {
+                             Jobfunctionid:row.find('td:eq(0)').text(),
+                             Jobid:$('#JobId').val(),
+                             Jobfunction:row.find('td:eq(1)').text(),
+                             Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                        };
+                        Systemjobfunctionsdata.push(Systemjobfunctiondata);
+                   });
+
+                    //Job Qualification data
+                   var Systemjobquaificationsdata = [];
+                   $("#AllsystemDataTables11 tbody tr").each(function () {
+                   var row = $(this);
+                        var Systemjobquaificationdata = {
+                             Jobqualificationid:row.find('td:eq(0)').text(),
+                             Jobid:$('#JobId').val(),
+                             Jobqualification:row.find('td:eq(1)').text(),
+                             Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                        };
+                        Systemjobquaificationsdata.push(Systemjobquaificationdata);
+                   });
+
+                   //Job Qualification data
+                   var Systemjobskillsdata = [];
+                   $("#AllsystemDataTables12 tbody tr").each(function () {
+                   var row = $(this);
+                        var Systemjobskilldata = {
+                             Jobskillid:row.find('td:eq(0)').text(),
+                             Jobid:$('#JobId').val(),
+                             Jobskill:row.find('td:eq(1)').text(),
+                             Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                        };
+                        Systemjobskillsdata.push(Systemjobskilldata);
+                   });
+
+                   //Job Benefits data
+                   var Systemjobbenefitsdata = [];
+                   $("#AllsystemDataTables13 tbody tr").each(function () {
+                   var row = $(this);
+                        var Systemjobbenefitdata = {
+                             Jobbenefitid:row.find('td:eq(0)').text(),
+                             Jobid:$('#JobId').val(),
+                             Jobbenefit:row.find('td:eq(1)').text(),
+                             Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                        };
+                        Systemjobbenefitsdata.push(Systemjobbenefitdata);
+                   });
+
+
+                var uil1 = {
+                    JobId: $('#JobId').val(),EmployerId: $('#JobEmployerId').val(),Title: $('#Titleid').val(), JobFunctionId: $('#JobFunctionId').val(),JobIndustryId: $('#JobIndustryId').val(), JobLocationId: $('#JobLocationId').val(), JobExperienceId: $('#JobExperienceId').val(),
+                    JobTypeId: $('#JobTypeId').val(),EasyApply: $('#EasyApplyid').prop('checked'), HasTest: $('#JobHasTestid').prop('checked'),IsFeatured: $('#IsJobFeaturedid').prop('checked'),JobUrl: $('#JobUrlid').val(),Deadline: $('#Deadlineid').val(),JobSalaryRange: $('#JobSalaryRangeid').val(),JobDescription: $('#JobDescriptionid').val(),CreatedBy: $('#systemLoggedinedUserid').val(),
+                    Systemjobfunction:Systemjobfunctionsdata,Systemjobqualification:Systemjobquaificationsdata,Systemjobskill:Systemjobskillsdata,Systemjobbenefit:Systemjobbenefitsdata,Jobreportto:$('#SystemjobreportstoId').val(),Jobhowtoapply:$('#SystemjobhowtoapplyId').val(),Jobimageburl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
+                };
+                $.post("/Opportunity/Addsystemopportunitydata", uil1, function (response) {
+                    if (response.RespStatus == 0) {
+                        Swal.fire('Saved!', response.RespMessage, 'success')
+                        $('#Uttambsolutionsmodal').hide();
+                        setTimeout(function () { location.reload(); }, 1000);
+                    } else if (response.RespStatus == 1) {
+                        Swal.fire("Job details not saved", response.RespMessage, "warning");
+                    }
+                    else {
+                        Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                    }
+                    document.getElementById("saveopportunityid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                });
+            }
+       </script>
+      @*End of saving job opportunity *@
+
+
+        
+    <script type="text/javascript">
+       // Handle row click
+        $('#AllsystemDataTables2 tbody').on('click', 'tr', function(event) {
+            // Check if the click originated from the Edit button
+            if ($(event.target).closest('a').length === 0) {
+                var jobId = $(this).data('jobid');
+                var guid = '@Guid.NewGuid()';
+                var url = '/Opportunity/Opportunitydetail?code=' + guid + '&Opportunityid=' + jobId;
+
+                // Create a temporary anchor element to hold the URL
+                var $tempAnchor = $('<a>')
+                    .attr({
+                        'href': url,
+                        'data-target': '#Uttambsolutionsmodallarge',
+                        'data-toggle': 'modal',
+                        'data-backdrop': 'static',
+                        'data-keyboard': 'false'
+                    });
+
+                // Append the anchor to the body, click it to trigger the modal, then remove it
+                $('body').append($tempAnchor);
+                $tempAnchor.trigger('click');
+                $tempAnchor.remove();
+            }
+        });
+    </script>
+
 }

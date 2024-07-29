@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace WEB.Controllers
 {
     [Authorize]
-    public class OpportunityController : Controller
+    public class OpportunityController : BaseController
     {
         private readonly BL bl;
         public OpportunityController(IConfiguration config)
@@ -25,6 +25,7 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Addopportunity(int Opportunityid)
         {
+            ViewData["Systemorganizationlists"] = bl.GetListModel(ListModelType.SystemOrganization).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             ViewData["Systemjobfunctionlists"] = bl.GetListModel(ListModelType.Systemjobfunction).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             ViewData["Systemjobindustrylists"] = bl.GetListModel(ListModelType.Systemjobindustry).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             ViewData["Systemjoblocationlists"] = bl.GetListModel(ListModelType.Systemjoblocation).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
@@ -48,5 +49,26 @@ namespace WEB.Controllers
             var resp = await bl.Registersystemopportunitydata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Opportunitydetail(long Opportunityid)
+        {
+            var model = new SystemUserLog
+            {
+                Userid = SessionUserData.Usermodel.Userid,
+                Modulename = "Job center",
+                Logaction = "Viewing the opportunity details while in the my profile",
+                Browser = GetUserBrowser(),
+                Ipaddress = Audit.GetIPAddress(),
+                Loyaltyreward = 1,
+                Loyaltystatus = 1,
+                Logactionexittime = 0,
+                Datecreated = DateTime.Now,
+            };
+            bl.Logsystemuseractivitydata(JsonConvert.SerializeObject(model));
+            var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
+            return PartialView(systemJob);
+        }
+
     }
 }

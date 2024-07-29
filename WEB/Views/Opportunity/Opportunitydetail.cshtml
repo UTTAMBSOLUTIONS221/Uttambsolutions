@@ -1,0 +1,238 @@
+﻿@model DBL.Entities.SystemJob
+@{
+    // Method to calculate relative time
+    string GetRelativeDate(DateTime date)
+    {
+        var now = DateTime.Now;
+        var timeSpan = now - date;
+
+        if (timeSpan.TotalDays < 1)
+        {
+            return "Today";
+        }
+        else if (timeSpan.TotalDays < 2)
+        {
+            return "Yesterday";
+        }
+        else
+        {
+            var days = (int)timeSpan.TotalDays;
+            return $"{days} day{(days > 1 ? "s" : "")} ago";
+        }
+    }
+}
+<div class="modal-header">
+    <h5 class="modal-title" id="Uttambsolutionsmodallabel">Job Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <!-- Section 1: Job Details -->
+    <div id="section1" class="section">
+        <h6 class="mb-4">Step 1: Job Details</h6>
+        <div class="mb-3">
+            <h4 class="font-weight-bold text-custom">@Model.Title</h4>
+            <p class="text-muted"><strong>Employer:</strong> @Model.Employername</p>
+            <div class="d-flex flex-wrap mb-2">
+                <span class="badge badge-secondary mr-2 mb-2"><strong>Location:</strong> @Model.Locationname</span>
+                <span class="badge badge-secondary mr-2 mb-2"><strong>Type:</strong> @Model.Jobtypename</span>
+                <span class="badge badge-secondary mr-2 mb-2"><strong>Salary Range:</strong> @Model.JobSalaryRange</span>
+                <span class="badge badge-secondary mb-2"><strong>Function:</strong> @Model.Functionname</span>
+            </div>
+            <hr />
+            <div class="d-flex justify-content-between mb-3">
+                <span class="badge badge-success">@Model.JobStatus</span>
+                <span class="text-muted">@GetRelativeDate(Model.DateCreated)</span>
+            </div>
+            <p>@Model.JobDescription</p>
+        </div>
+        <!-- Ad Section -->
+        <div class="mt-4">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2850934153859537"
+                 data-ad-slot="1149686671"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary" onclick="nextSection()">Next</button>
+        </div>
+    </div>
+
+    <!-- Section 2: Key Responsibilities -->
+    <div id="section2" class="section" style="display: none;">
+        <h6 class="mb-4">Step 2: Key Responsibilities</h6>
+        @if (Model.Systemjobfunction != null)
+        {
+            <ul class="list-group">
+                @foreach (var jobFunction in Model.Systemjobfunction)
+                {
+                    <li class="list-group-item">@jobFunction.Jobfunction</li>
+                }
+                <!-- Ad Section -->
+                <div class="mt-4">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-2850934153859537"
+                         data-ad-slot="1149686671"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </ul>
+        }
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-secondary" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-secondary" onclick="nextSection()">Next</button>
+        </div>
+    </div>
+
+
+
+    <!-- Section 3: Qualifications -->
+    <div id="section3" class="section" style="display: none;">
+        <h6 class="mb-4">Step 3: Qualifications</h6>
+        @if (Model.Systemjobqualification != null)
+        {
+            <ul class="list-group">
+                @foreach (var jobQualification in Model.Systemjobqualification)
+                {
+                    <li class="list-group-item">@jobQualification.Jobqualification</li>
+                }
+                <!-- Ad Section -->
+                <div class="mt-4">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-2850934153859537"
+                         data-ad-slot="1149686671"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </ul>
+        }
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-secondary" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-secondary" onclick="nextSection()">Next</button>
+        </div>
+    </div>
+
+    <!-- Section 4: Skills -->
+    <div id="section4" class="section" style="display: none;">
+        <h6 class="mb-4">Step 4: Preferred Skills</h6>
+        @if (Model.Systemjobskill != null)
+        {
+            <ul class="list-group">
+                @foreach (var jobSkill in Model.Systemjobskill)
+                {
+                    <li class="list-group-item">@jobSkill.Jobskill</li>
+                }
+                <!-- Ad Section -->
+                <div class="mt-4">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-2850934153859537"
+                         data-ad-slot="1149686671"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </ul>
+        }
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-secondary" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-secondary" onclick="nextSection()">Next</button>
+        </div>
+    </div>
+
+    <!-- Section 5: Benefits -->
+    <div id="section5" class="section" style="display: none;">
+        <h6 class="mb-4">Step 5: Benefits</h6>
+        @if (Model.Systemjobbenefit != null)
+        {
+            <ul class="list-group">
+                @foreach (var jobBenefit in Model.Systemjobbenefit)
+                {
+                    <li class="list-group-item">@jobBenefit.Jobbenefit</li>
+                }
+                <!-- Ad Section -->
+                <div class="mt-4">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-2850934153859537"
+                         data-ad-slot="1149686671"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </ul>
+        }
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-secondary" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-secondary" onclick="nextSection()">Next</button>
+        </div>
+    </div>
+
+    <!-- Section 6: Job Conclusion -->
+    <div id="section6" class="section" style="display: none;">
+        <h6 class="mb-4">Step 6: Job Conclusion</h6>
+        <p><strong>Reports to:</strong> @Model.Jobreportto</p>
+        <p><strong>How to Apply:</strong> @Model.Jobhowtoapply</p>
+        <!-- Ad Section -->
+        <div class="mt-4">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2850934153859537"
+                 data-ad-slot="1149686671"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        <p><strong>Support Document:</strong></p>
+        @if (!string.IsNullOrEmpty(Model.Jobimageburl))
+        {
+            <div class="image-container mb-3">
+                <img src="@Model.Jobimageburl" alt="Support Document" class="img-fluid" />
+            </div>
+        }
+        else
+        {
+            <p>No support document available.</p>
+        }
+        <div class="d-flex justify-content-between align-items-center">
+            <button type="button" class="btn btn-secondary" onclick="prevSection()">Previous</button>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .image-container {
+        max-width: 100%;
+        max-height: 200px; /* Adjust the height as needed */
+        overflow: hidden;
+        border: 1px solid #ddd; /* Optional: for a border around the image */
+        border-radius: 4px; /* Optional: for rounded corners */
+    }
+
+        .image-container img {
+            width: auto;
+            height: 100%;
+            object-fit: cover; /* Adjusts image to cover the container while preserving aspect ratio */
+        }
+</style>
