@@ -1,6 +1,6 @@
 ﻿using DBL.Models;
-using Mainapp.Miniapps.Ecommerce.Views;
 using Mainapp.ViewModels;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -67,13 +67,18 @@ namespace Mainapp.Miniapps.Ecommerce.ViewModels
         }
         private async Task ViewDetails(Organizationshopproductsdata item)
         {
-            var navigationParameter = new Dictionary<string, object>
+            try
             {
-                { "Product", item }
-            };
-
-            await Shell.Current.GoToAsync(nameof(SokojijiProductDetailsPage), navigationParameter);
+                var jsonProduct = JsonConvert.SerializeObject(item);
+                var encodedProduct = Uri.EscapeDataString(jsonProduct);
+                await Shell.Current.GoToAsync($"SokojijiProductDetailsPage?Product={encodedProduct}");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Navigation Error", ex.Message, "OK");
+            }
         }
+
 
         private async Task AddToCart(Organizationshopproductsdata item)
         {

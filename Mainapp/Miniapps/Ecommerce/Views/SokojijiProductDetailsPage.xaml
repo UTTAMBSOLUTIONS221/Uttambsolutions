@@ -1,27 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:Mainapp.Miniapps.Ecommerce.ViewModels"
-             xmlns:helpers="clr-namespace:Mainapp.Helpers"
-             x:Class="Mainapp.Miniapps.Ecommerce.Views.SokojijiProductDetailsPage"
-             Title="Product Details">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <helpers:CurrencyConverter x:Key="CurrencyConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
-    <ContentPage.BindingContext>
-        <viewmodels:SokojijiProductDetailsViewModel />
-    </ContentPage.BindingContext>
-
-    <ScrollView>
-        <StackLayout Padding="10">
-            <Image Source="{Binding Product.Primaryimageurl}" Aspect="AspectFill" HeightRequest="200" />
-            <Label Text="{Binding Product.Productname}" FontSize="24" FontAttributes="Bold" TextColor="#0a506c" />
-            <Label Text="{Binding Product.Productdescription}" FontSize="16" TextColor="DarkGray" Margin="0,10" />
-            <Label Text="{Binding Product.Marketprice, Converter={StaticResource CurrencyConverter}}" FontSize="20" TextColor="#0a506c" />
-        </StackLayout>
-    </ScrollView>
+             x:Class="Mainapp.Miniapps.Ecommerce.Views.SokojijiProductDetailsPage">
+    <StackLayout>
+        <Label x:Name="ProductName" Text="Product Name" />
+        <Label x:Name="ProductPrice" Text="Product Price" />
+    </StackLayout>
 </ContentPage>
