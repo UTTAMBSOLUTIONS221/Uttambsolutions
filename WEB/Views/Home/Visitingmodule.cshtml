@@ -134,12 +134,12 @@
                                 @foreach (var item in Model.modules)
                                 {
                                     <div class="col-sm-3 mb-4 no-decoration">
-                                        <a asp-action="Myprofile" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-modulecode="@Guid.NewGuid()" asp-route-Moduleid="@item.Moduleid" asp-route-Modulename="@item.Slug">
+                                        <a asp-action="Myprofile" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-modulecode="@Guid.NewGuid()" asp-route-Modulename="@item.Slug" class="text-decoration-none">
                                             <div class="card shadow-sm border-light">
                                                 <img class="card-img-top" src="@item.Moduleimagepath" alt="@item.Modulename">
                                                 <div class="card-body">
-                                                    <h5 class="card-title text-uppercase">@item.Modulename</h5>
-                                                    <p class="card-text">@item.Moduledescription</p>
+                                                    <h5 class="card-title text-uppercase text-custom">@item.Modulename</h5>
+                                                    <p class="card-text text-muted">@item.Moduledescription</p>
                                                 </div>
                                             </div>
                                         </a>
