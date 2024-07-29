@@ -98,7 +98,7 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Myprofile(long Moduleid)
+        public async Task<IActionResult> Myprofile(long Moduleid, string Modulename)
         {
             var data = await bl.Getsystemuserprofiledata(SessionUserData.Usermodel.Userid);
             return View(data);

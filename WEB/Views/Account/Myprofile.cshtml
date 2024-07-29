@@ -142,7 +142,7 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row mb-4">
-                        <div class="col-lg-7 col-md-12">
+                        <div class="col-lg-5 col-md-12">
                             <div class="card card-outline card-info">
                                 <div class="card-header">
                                     <h5 class="font-weight-bold">User Profile</h5>
@@ -212,26 +212,14 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-5 col-md-12">
-                          
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-7">
+                        <div class="col-lg-7 col-md-12">
+                           <div class="row">
+                        <div class="col-sm-12">
                             <div class="card card-outline card-info">
                                 <div class="card-header py-1">
                                     <div class="row">
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-12">
                                             <h6 class="font-weight-bold text-sm card-title">My Job Posts</h6>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            @if(Model.Loginstatus==0){
-                                                <a asp-action="Addopportunity" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Opportunity</a>
-                                            }else{
-                                                @* <a href=""  class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right">Verify Account</a> *@
-                                                <a asp-action="Addopportunity" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Opportunity</a>
-                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -272,7 +260,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-5">
+                        </div>
+                        <div class="row">
+                        <div class="col-sm-12">
                             <div class="card card-outline card-info">
                                 <div class="card-header py-1">
                                     <div class="row">
@@ -305,6 +295,8 @@
                                     </table>
                                 </div>
                             </div>
+                        </div>
+                    </div>
                         </div>
                     </div>
                 </div>
