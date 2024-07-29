@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mainapp.Controls.SokojijiCartBadge">
+    <Grid>
+        <!-- Cart Icon -->
+        <Image Source="cart.png"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+
+        <!-- Badge with rounded corners -->
+        <Frame BackgroundColor="Red"
+               CornerRadius="10"
+               Padding="0"
+               HasShadow="False"
+               IsVisible="{Binding CartItemCount, Converter={StaticResource IsNotZeroConverter}}"
+               VerticalOptions="Start"
+               HorizontalOptions="End">
+            <Label Text="{Binding CartItemCount}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   TextColor="White"
+                   FontSize="12"
+                   Padding="2,1" />
+        </Frame>
+    </Grid>
+</ContentView>

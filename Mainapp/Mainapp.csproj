@@ -56,6 +56,9 @@
         <MauiXaml Update="Controls\FlyoutHeaderControl.xaml">
             <Generator>MSBuild:Compile</Generator>
         </MauiXaml>
+        <MauiXaml Update="Controls\SokojijiCartBadge.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </MauiXaml>
         <MauiXaml Update="Miniapps\Ecommerce\Views\SokojijiCartPage.xaml">
           <Generator>MSBuild:Compile</Generator>
         </MauiXaml>
