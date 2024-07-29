@@ -56,7 +56,7 @@
                     foreach (var job in Model.Systemjobsdata.Systemjobs)
                     {
                         <div class="card mb-4 bg-light border-0 shadow-sm">
-                            <a asp-action="Jobdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-jobcode="@Guid.NewGuid()" asp-route-JobId="@job.JobId" asp-area="" class="text-decoration-none">
+                            <a asp-action="Jobdetails" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-jobcode="@Guid.NewGuid()" asp-route-JobId="@job.JobId" asp-area="" class="text-decoration-none">
                                 <div class="card-header bg-white">
                                     <h4 class="fw-bold text-custom text-uppercase">@job.Title</h4>
                                     <h6 class="text-secondary text-uppercase">@job.Employername</h6>
@@ -162,7 +162,7 @@ else if (Model.Systemmodulename == "latest-news-emerging-trends-and-politics")
             {
                 // Blog post card
                 <div class="col-lg-3 col-md-3 col-sm-4 col-12 mb-3">
-                    <a asp-action="Blogdetails" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@blogPost.Blogid" asp-area="" class="text-decoration-none">
+                    <a asp-action="Blogdetails" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@blogPost.Blogid" asp-area="" class="text-decoration-none">
                         <div class="card h-100 shadow-sm card-info card-outline">
                             <img src="@Url.Content(blogPost.Blogprimaryimageurl)" alt="@blogPost.Blogcategoryname" class="card-img-top" style="height: 140px; object-fit: cover;" />
                             <div class="card-body pt-2 pr-2 pl-2 d-flex flex-column">
@@ -222,7 +222,7 @@ else if (Model.Systemmodulename == "ecommerce-and-market-place")
             foreach (var product in Model.Shopproductsdata.Data)
             {
                 <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
-                    <a asp-action="Shopproductdetail" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Shopproductid="@product.Shopproductid" asp-area="" class="text-decoration-none">
+                    <a asp-action="Shopproductdetail" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Shopproductid="@product.Shopproductid" asp-area="" class="text-decoration-none">
                         <div class="card h-100 shadow-sm card-info card-outline">
                             <img src="@Url.Content(product.Primaryimageurl)" alt="@product.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" />
                             <div class="card-body pt-2 pr-2 pl-2 d-flex flex-column">

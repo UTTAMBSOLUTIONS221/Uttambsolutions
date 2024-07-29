@@ -209,5 +209,54 @@ namespace WEB.Controllers
 
 
         #endregion
+
+
+        [HttpGet]
+        public async Task<IActionResult> Blogdetails(long Blogid, string Pageid)
+        {
+            var blogPost = await bl.Getsystemblogdatabyid(Blogid);
+            return View(blogPost);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Shopproductdetail(long Shopproductid)
+        {
+            var commerceProducts = await bl.Getsystemorganizationshopproductsdatabyid(Shopproductid);
+            return View(commerceProducts);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Jobdetails(long JobId)
+        {
+
+            // Retrieve job data based on the provided JobId
+            var jobData = await bl.Getsystemopportunitydatabyid(JobId);
+            return View(jobData);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Easyapplythisjob(long jobid)
+        {
+            var jobData = await bl.Getsystemopportunitydatabyid(jobid);
+            var viewModel = new JobApplicationViewModel
+            {
+                Job = jobData,
+                User = SessionUserData.Usermodel
+            };
+            var model = new SystemUserLog
+            {
+                Userid = SessionUserData.Usermodel.Userid,
+                Logaction = "Viewing the easy apply page for job application",
+                Browser = GetUserBrowser(),
+                Ipaddress = Audit.GetIPAddress(),
+                Loyaltyreward = 0,
+                Loyaltystatus = 1,
+                Logactionexittime = 0,
+                Datecreated = DateTime.Now,
+            };
+            bl.Logsystemuseractivitydata(JsonConvert.SerializeObject(model));
+            return View(viewModel);
+        }
+
     }
 }

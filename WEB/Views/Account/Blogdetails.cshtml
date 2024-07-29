@@ -1,0 +1,129 @@
+﻿@model DBL.Entities.Systemblog
+@{
+    ViewData["Title"] = "Blogdetails";
+    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-8">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title text-custom fw-bold">@Model.Blogname</h2>
+                <p class="card-text">@Model.Summary</p>
+                <img src="@Url.Content(Model.Blogprimaryimageurl)" alt="@Model.Blogcategoryname" class="card-img-top mb-3" style="object-fit: cover;" />
+                <p class="card-text">@Model.Blogcontent</p>
+
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-layout="in-article"
+                     data-ad-format="fluid"
+                     data-ad-client="ca-pub-2850934153859537"
+                     data-ad-slot="8445437350"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
+                @if (Model.Systemblogparagraph.Any())
+                {
+                    bool alternate = false;
+                    foreach (var paraGraph in Model.Systemblogparagraph)
+                    {
+                        if (!string.IsNullOrEmpty(paraGraph.Blogparagraphimageurl))
+                        {
+                            if (alternate)
+                            {
+                                <div class="media mb-3">
+                                    <div class="media-body">
+                                        <p>@paraGraph.Blogparagraphcontent</p>
+                                    </div>
+                                    <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="ml-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="media mb-3">
+                                    <img src="@Url.Content(paraGraph.Blogparagraphimageurl)" class="mr-3" alt="@Model.Blogcategoryname" style="width: 200px; object-fit: cover;">
+                                    <div class="media-body">
+                                        <p>@paraGraph.Blogparagraphcontent</p>
+                                    </div>
+                                </div>
+                            }
+                            alternate = !alternate;
+                        }
+                        else
+                        {
+                            <p class="mb-3">@paraGraph.Blogparagraphcontent</p>
+                        }
+                    }
+                }
+
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-layout="in-article"
+                     data-ad-format="fluid"
+                     data-ad-client="ca-pub-2850934153859537"
+                     data-ad-slot="8445437350"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <div class="card-footer bg-white">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="card-text">Author: @Model.Blogownername</p>
+                        <p class="card-text">Category: @Model.Blogcategoryname</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="card-text">Published On: @Model.Datecreated</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white text-custom">
+                <h5 class="card-title mb-0">Related  Articles</h5>
+            </div>
+            <div class="card-body">
+                @if (Model.Relatedarticles != null && Model.Relatedarticles.Any())
+                {
+                    int itemCount = 0;
+
+                    <ul class="list-unstyled">
+                        @foreach (var relatedarticle in Model.Relatedarticles)
+                        {
+                            if (itemCount > 0 && itemCount % 2 == 0)
+                            {
+                                <!-- Ad display here -->
+                                <li class="mb-3">
+                                    <ins class="adsbygoogle"
+                                         style="display:block; text-align:center;"
+                                         data-ad-layout="in-article"
+                                         data-ad-format="fluid"
+                                         data-ad-client="ca-pub-2850934153859537"
+                                         data-ad-slot="8445437350"></ins>
+                                    <script>
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                    </script>
+                                </li>
+                            }
+
+                            <li>
+                                <a asp-action="Blogdetails" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@relatedarticle.Blogid" asp-area="" class="d-flex align-items-center mb-3 text-decoration-none">
+                                    <img src="@Url.Content(relatedarticle.Blogprimaryimageurl)" class="img-fluid mr-3" alt="@relatedarticle.Blogname" width="70" height="70" />
+                                    <div>
+                                        <h6 class="text-custom mb-1">@relatedarticle.Blogname</h6>
+                                        <small class="text-muted">@relatedarticle.Blogcategoryname</small>
+                                    </div>
+                                </a>
+                            </li>
+                            itemCount++;
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
