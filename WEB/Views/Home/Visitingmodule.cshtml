@@ -91,6 +91,10 @@
             .no-wrap-buttons a {
                 white-space: nowrap;
             }
+
+        .no-decoration a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
@@ -110,13 +114,13 @@
                     <div class="row">
                         @foreach (var item in Model.modules)
                         {
-                            <div class="col-sm-3 mb-4">
-                                <a asp-action="Myprofile" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-modulecode="@Guid.NewGuid()" asp-route-Moduleid="@item.Moduleid" asp-asp-area="" asp-route-Modulename="@item.Slug" asp-asp-area="">
+                            <div class="col-sm-3 mb-4 no-decoration">
+                                <a asp-action="Myprofile" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-modulecode="@Guid.NewGuid()" asp-route-Moduleid="@item.Moduleid" asp-route-Modulename="@item.Slug">
                                     <div class="card shadow-sm border-light">
                                         <img class="card-img-top" src="@item.Moduleimagepath" alt="@item.Modulename">
                                         <div class="card-body">
-                                            <h5 class="card-title text-uppercase text-decoration-none">@item.Modulename</h5>
-                                            <p class="card-text text-decoration-none">@item.Moduledescription</p>
+                                            <h5 class="card-title text-uppercase">@item.Modulename</h5>
+                                            <p class="card-text">@item.Moduledescription</p>
                                         </div>
                                     </div>
                                 </a>
