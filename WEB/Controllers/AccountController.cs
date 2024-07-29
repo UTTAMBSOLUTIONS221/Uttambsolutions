@@ -100,6 +100,7 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Myprofile(long Moduleid, string Modulename)
         {
+            ViewData["Modulename"] = Modulename;
             var data = await bl.Getsystemuserprofiledata(SessionUserData.Usermodel.Userid);
             return View(data);
         }
