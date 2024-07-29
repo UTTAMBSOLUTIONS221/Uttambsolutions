@@ -176,5 +176,25 @@ namespace WEB.Controllers
             }
         }
         #endregion
+
+
+        #region Profile Data via Ajax
+        public async Task<JsonResult> GetJobs(int page, int pageSize)
+        {
+            var jobs = await bl.Getsystemallopportunitydata(page, pageSize);
+            var totalPages = 1;
+
+            var result = new
+            {
+                items = jobs.Systemjobs,
+                pageIndex = page,
+                totalPages = totalPages
+            };
+
+            return Json(result);
+        }
+
+
+        #endregion
     }
 }
