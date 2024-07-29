@@ -1,4 +1,5 @@
 using DBL;
+using DBL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -31,6 +32,17 @@ namespace WEB.Controllers
         public IActionResult Contact()
         {
             return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> Visitingmodule()
+        {
+            var modules = await bl.Getsystemmoduledata();
+            Visitingmodulemodel visitingmodule = new Visitingmodulemodel()
+            {
+                user = SessionUserData.Usermodel,
+                modules = modules.ToList()
+            };
+            return View(visitingmodule);
         }
 
         [HttpGet]

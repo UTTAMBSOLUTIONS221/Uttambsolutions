@@ -1,0 +1,159 @@
+﻿@model DBL.Models.Visitingmodulemodel
+@{
+    Layout = null;
+    var profileImageUrl = Model.user.UserProfileImageUrl;
+    var defaultImageUrl = Url.Content("~/images/user.png");
+    var imageUrl = !string.IsNullOrEmpty(profileImageUrl) ? Url.Content(profileImageUrl) : defaultImageUrl;
+}
+
+@using System.Security.Claims
+@using DBL.Models
+@using Microsoft.Extensions.Configuration
+@{
+    bool authenticated = false;
+    UsermodelResponce currentUserData = null;
+    if (User.Identities.Any(u => u.IsAuthenticated))
+    {
+        authenticated = true;
+        currentUserData = Util.GetCurrentUserData(User.Identities);
+        IConfiguration config = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <meta name="description" content="JobCenter offers the latest job listings, freelancing job biddings, and career opportunities. Stay informed and find your next job with our comprehensive job board." />
+    <meta name="keywords" content="JobCenter, job listings, freelancing, job biddings, career opportunities, job board" />
+    <meta name="author" content="JobCenter" />
+    <meta name="google-adsense-account" content="ca-pub-2850934153859537">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@ViewData["Title"] - JobCenter" />
+    <meta property="og:description" content="JobCenter provides the latest job listings, freelancing job biddings, and career opportunities. Explore our platform to find your next job." />
+    <meta property="og:image" content="https://jobcenter.uttambsolutions.com/images/jobcenterlogo.png" />
+    <meta property="og:url" content="https://jobcenter.uttambsolutions.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@ViewData["Title"] - JobCenter" />
+    <meta name="twitter:description" content="JobCenter offers job listings, freelancing job biddings, and career opportunities. Stay connected and find your next job with our platform." />
+    <meta name="twitter:image" content="https://jobcenter.uttambsolutions.com/images/jobcenterlogo.png" />
+
+    <!-- Schema.org Markup -->
+    <meta itemprop="name" content="@ViewData["Title"] - JobCenter" />
+    <meta itemprop="description" content="JobCenter provides the latest job listings, freelancing job biddings, and career opportunities." />
+    <meta itemprop="image" content="https://jobcenter.uttambsolutions.com/images/jobcenterlogo.png" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link href="~/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
+            crossorigin="anonymous"></script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-2850934153859537?ers=1" nonce="dDYKvq_VdPZaU6r2X5lJmw"></script>
+    <script nonce="dDYKvq_VdPZaU6r2X5lJmw">(function () { function signalGooglefcPresent() { if (!window.frames['googlefcPresent']) { if (document.body) { const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe); } else { setTimeout(signalGooglefcPresent, 0); } } } signalGooglefcPresent(); })();</script>
+
+    <style type="text/css">
+        textarea {
+            resize: none;
+        }
+        /* Hide spinner arrows for number inputs */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield; /* Firefox */
+        }
+
+        .no-wrap-buttons {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 5px; /* Adjust the gap as needed */
+        }
+
+            .no-wrap-buttons a {
+                white-space: nowrap;
+            }
+    </style>
+</head>
+<body class="hold-transition layout-top-nav layout-navbar-fixed">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
+            <div class="container-fluid">
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                    <img src="~/images/uttambsolutionlogo.png" alt="Uttambsolutions Logo" class="brand-image elevation-3">
+                    <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">Uttamb Solutions</span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="content-wrapper">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        @foreach (var item in Model.modules)
+                        {
+                            <div class="col-sm-3 mb-4">
+                                <a asp-action="Myprofile" asp-controller="Account" asp-route-Moduleid="@item.Moduleid" asp-asp-area="" asp-route-Modulename="@item.Modulename" asp-asp-area="">
+                                    <div class="card shadow-sm border-light">
+                                        <img class="card-img-top" src="@item.Moduleimagepath" alt="@item.Modulename">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-uppercase">@item.Modulename</h5>
+                                             <p class="card-text">@item.Moduledescription</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="main-footer bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5 class="text-white">About JobCenter</h5>
+                        <p class="text-white">
+                            JobCenter is a premier job listing and freelancing platform that connects job seekers with potential employers. Our services include job listings, freelancing job biddings, and career development opportunities.
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5 class="text-white">Contact Us</h5>
+                        <p class="text-white">Email: info@jobcenter.com</p>
+                        <p class="text-white">Phone: +1 (123) 456-7890</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/axios/dist/axios.min.js"></script>
+    <script src="~/lib/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="~/lib/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>

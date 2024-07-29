@@ -73,12 +73,11 @@ namespace WEB.Controllers
             var resp = await bl.ValidateSystemStaff(model.username, model.password);
             if (resp.RespStatus == 0)
             {
-                SetUserLoggedIn(resp, false);
-
                 //if (resp.LoginStatus == (int)UserLoginStatus.VerifyAccount)
                 //{
                 //    return RedirectToAction("VerifyAccount", "Account", new { Usercode = resp.Userid, Phonenumber = resp.Phone });
                 //}
+                SetUserLoggedIn(resp, false);
                 return RedirectToLocal(returnUrl, resp.Usermodel.Rolename);
             }
             else if (resp.RespStatus == 401)
@@ -98,14 +97,12 @@ namespace WEB.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-
         [HttpGet]
-        public async Task<IActionResult> Myprofile()
+        public async Task<IActionResult> Myprofile(long Moduleid)
         {
             var data = await bl.Getsystemuserprofiledata(SessionUserData.Usermodel.Userid);
             return View(data);
         }
-
 
         [HttpGet]
         [AllowAnonymous]
@@ -167,13 +164,13 @@ namespace WEB.Controllers
             }
             else
             {
-                if (rolename == "Super Admin")
+                if (rolename == "Default User")
                 {
-                    return RedirectToAction(nameof(HomeController.Dashboard), "Home", new { area = "" });
+                    return RedirectToAction(nameof(HomeController.Visitingmodule), "Home", new { area = "" });
                 }
                 else
                 {
-                    return RedirectToAction(nameof(HomeController.Moudules), "Home", new { area = "" });
+                    return RedirectToAction(nameof(HomeController.Dashboard), "Home", new { area = "" });
                 }
             }
         }
