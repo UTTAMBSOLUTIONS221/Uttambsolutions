@@ -108,46 +108,57 @@ async function uploadImage(files) {
         });
     }
 
-    // Function to display image preview
-    function displayImagePreview(file) {
-        return new Promise((resolve, reject) => {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                // Create a new image element
-                var img = document.createElement('img');
-                img.src = e.target.result;
-                img.width = 140;
-                img.height = 140;
+    
+        function displaySystemModuleImagePreview(file) {
+            return new Promise((resolve, reject) => {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var previewContainer = document.createElement('div');
+                    previewContainer.classList.add('image-preview');
 
-                // Append the image to a container element
-                var previewContainer = document.getElementById('Uttambsolutionsimagespreviewcontainer');
-                previewContainer.appendChild(img);
+                    var spinner = document.createElement('div');
+                    spinner.classList.add('spinner');
+                    previewContainer.appendChild(spinner);
 
-                resolve();
-            };
-            reader.readAsDataURL(file);
-        });
-    }
+                    var previewContainerElement = document.getElementById('Uttambsolutionsimagespreviewcontainer');
+                    previewContainerElement.appendChild(previewContainer);
 
-    // Iterate over each file
-    for (var i = 0; i < files.length; i++) {
-        var file = files[i];
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.width = 140;
+                    img.height = 140;
+                    img.style.display = 'none';
+                    img.onload = function () {
+                        spinner.remove();
+                        img.style.display = 'block';
+                        previewContainer.appendChild(img);
+                    };
 
-        try {
-            // Upload the file and get the download URL
-            var downloadURL = await uploadFile(file);
-
-            // Display image preview
-            await displayImagePreview(file);
-        } catch (error) {
-            console.error(error);
+                    resolve();
+                };
+                reader.readAsDataURL(file);
+            });
         }
-    }
 
-    // Set the input field value with JSON stringified URLs
-    var inputField = document.getElementById('UttambsolutionsimagesurlId');
-    inputField.value = JSON.stringify(downloadURLs);
-}
+        document.getElementById('loadingOverlay').style.zIndex = 1100; 
+        document.getElementById('loadingOverlay').style.display = 'flex';
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+
+            try {
+                await displaySystemModuleImagePreview(file);
+                var downloadURL = await uploadBlogFile(file);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        document.getElementById('loadingOverlay').style.display = 'none';
+
+        var inputField = document.getElementById('UttambsolutionsimageurlId');
+        inputField.value = JSON.stringify(downloadURLs);
+    }
 
     ﻿function savesystemtmoduledata() {
     document.getElementById("savesystemtmoduleid").disabled = true;
