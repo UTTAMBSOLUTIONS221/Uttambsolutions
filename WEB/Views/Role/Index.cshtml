@@ -31,7 +31,15 @@
                             <tr>
                                 <td>@item.RoleName</td>
                                 <td>@item.RoleDescription</td>
-                                <td class="text-right"><a asp-action="Addrole" asp-controller="Role" asp-route-code="@Guid.NewGuid()" asp-route-Roleid="@item.RoleId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                <td class="text-right">
+                                    @if (item.RoleName!="Default User" && item.RoleName!="Super Admin") 
+                                    {
+                                        <a asp-action="Addrole" asp-controller="Role" asp-route-code="@Guid.NewGuid()" asp-route-Roleid="@item.RoleId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                    }else
+                                    {
+                                        <a  href="#" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right">Disaabled</a>
+                                    }
+                                </td>
                             </tr>
                         }
 
