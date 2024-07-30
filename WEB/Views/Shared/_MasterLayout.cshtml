@@ -118,8 +118,9 @@
                                 <i class="nav-icon fa fa-cogs"></i><p>Settings<i class="fa fa-angle-left right"></i></p>
                             </a>
                             <ul class="nav nav-treeview">
-                                 <li class="nav-item main" id="CAN_VIEW_PERMISSION" style="display:none;">
-                                    <a asp-controller="SettingsManagement" asp-action="Systempermissionlist" asp-area="" class="nav-link">
+                                 @* <li class="nav-item main" id="CAN_VIEW_PERMISSION" style="display:none;"> *@
+                                 <li class="nav-item main" id="CAN_VIEW_PERMISSION">
+                                    <a asp-controller="Settings" asp-action="Systempermissionlist" asp-area="" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Permissions</p>
                                     </a>
                                 </li>

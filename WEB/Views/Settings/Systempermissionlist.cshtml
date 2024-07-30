@@ -13,7 +13,7 @@
                         <h6 class="font-weight-bold text-sm card-title">Permissions</h6>
                     </div>
                     <div class="col-sm-4">
-                        <a asp-action="Addsystempermissions" asp-controller="SettingsManagement" asp-route-Permissionid="0" asp-area="" id="CAN_ADD_PERMISSION" class="btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#FuelcardsystemModal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Permission</a>
+                        <a asp-action="Addsystempermissions" asp-controller="Settings" asp-route-Permissionid="0" asp-area="" id="CAN_ADD_PERMISSION" class="btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#FuelcardsystemModal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Permission</a>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                                         }
                                     </td>
                                     <td class="text-right">
-                                        <a asp-action="Addsystempermissions" asp-controller="SettingsManagement" asp-route-Permissionid="@item.PermissionId" asp-area="" id="CAN_EDIT_PERMISSION" class="btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#FuelcardsystemModal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                        <a asp-action="Addsystempermissions" asp-controller="Settings" asp-route-Permissionid="@item.PermissionId" asp-area="" id="CAN_EDIT_PERMISSION" class="btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#FuelcardsystemModal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
                                     </td>
                                 </tr>
                             }
@@ -56,3 +56,37 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script type="text/javascript">
+        function Savesystempermissiondetails() {
+            document.getElementById("saveUpdateSystemPermissions").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            if ($('#Systempermissionnameid').val() == '') {
+                Swal.fire("Permission Not Created", 'Permission Name is Required', "warning");
+                document.getElementById("saveUpdateSystemPermissions").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            var uil1 = {
+                PermissionId: $('#Systempermissionid').val(), Permissionname: $('#Systempermissionnameid').val(), Isadmin: $('#Systempermissionisadminid').is(':checked')
+            };
+            $.post("/Settings/Addsystempermissiondata", uil1, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#FuelcardsystemModal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Permission details not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("saveUpdateSystemPermissions").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+    </script>
+}
