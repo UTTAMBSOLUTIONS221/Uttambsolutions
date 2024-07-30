@@ -78,33 +78,6 @@ namespace WEB
             // Perform any additional processing if needed
             return userData;
         }
-
-        //public static UsermodelResponce GetCurrentUserData(IEnumerable<ClaimsIdentity> claims)
-        //{
-        //    string userData = claims.First(u => u.IsAuthenticated && u.HasClaim(c => c.Type == "userData")).FindFirst("userData").Value;
-        //    if (string.IsNullOrEmpty(userData))
-        //        return null;
-
-        //    return JsonConvert.DeserializeObject<UsermodelResponce>(userData);
-        //}
-        //public static async Task<List<SystemPermissions>> GetCurrentUserPermissionsData(IEnumerable<ClaimsIdentity> claims, IConfiguration config)
-        //{
-        //    var Tokenbearer = claims.FirstOrDefault(u => u.IsAuthenticated && u.HasClaim(c => c.Type == "Token"))?.FindFirst("Token")?.Value;
-        //    var Userid = claims.FirstOrDefault(u => u.IsAuthenticated && u.HasClaim(c => c.Type == "Userid"))?.FindFirst("Userid")?.Value;
-        //    List<SystemPermissions> Permissions = new List<SystemPermissions>();
-        //    using (var httpClient = new HttpClient())
-        //    {
-        //        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tokenbearer);
-        //        using (var response = await httpClient.GetAsync(Currenttenantbaseurlstring(config) + "/api/StaffManagemet/GetSystemUserPermissions/" + Userid + "/" + true))
-        //        {
-        //            string apiResponse = await response.Content.ReadAsStringAsync();
-        //            Permissions = JsonConvert.DeserializeObject<List<SystemPermissions>>(apiResponse);
-        //        }
-        //    }
-        //    return Permissions;
-        //}
-
-
     }
 
     public class Alert

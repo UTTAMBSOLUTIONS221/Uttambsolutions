@@ -5,13 +5,10 @@
 @{
     bool authenticated = false;
     UsermodelResponce currentUserData = null;
-    List<Systempermissions>? permissionData = null;
     if (User.Identities.Any(u => u.IsAuthenticated))
     {
         authenticated = true;
         currentUserData = Util.GetCurrentUserData(User.Identities);
-        IConfiguration config = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
-        permissionData = await Util.GetCurrentUserPermissionsData(User.Identities, config);
     }
 }
 <!DOCTYPE html>
