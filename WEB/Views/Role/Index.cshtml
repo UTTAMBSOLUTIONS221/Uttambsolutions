@@ -50,45 +50,70 @@
     </div>
 </div>
 @section Scripts {
-    <script type="text/javascript">
-    ﻿function savesystemroledata() {
-    document.getElementById("savesystemroleid").disabled = true;
-    document.getElementById("processingSpinner").style.display = "inline-block";
-    document.getElementById("buttonText").innerText = "Processing...";
-    if ($('#Rolenameid').val() === '') {
-        Swal.fire("Role Not Created", 'Role Name is Required', "warning");
-        document.getElementById("savesystemroleid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-    if ($('#Roledescriptionid').val() === '') {
-        Swal.fire("Role Not Created", 'Role Description is Required', "warning");
-        document.getElementById("savesystemroleid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
+   <script type="text/javascript">
+      function checkAllOtherPermissions() {
+        var checkBox = document.getElementById("staffRolesCheckAll");
+        if (checkBox.checked == true) {
+            $('.permission-checkbox').prop('checked', true);
+        } else {
+            $('.permission-checkbox').prop('checked', false);
+        }
+      }
+    ﻿  function savesystemroledata() {
+            document.getElementById("savesystemroleid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked:not(#staffRolesCheckAll)');
+            var Perms = new Array();
+            checkboxes.forEach((checkbox) => {
+                var Permission = {};
+                Permission.PermissionId = checkbox.value;
+                Perms.push(Permission);
+            });
+            if ($('#Rolenameid').val() === '') {
+                Swal.fire("Role Not Created", 'Role Name is Required', "warning");
+                document.getElementById("savesystemroleid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#Roledescriptionid').val() === '') {
+                Swal.fire("Role Not Created", 'Role Description is Required', "warning");
+                document.getElementById("savesystemroleid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
     
-    var uil1 = {
-        RoleId: $('#RoleId').val(), RoleName: $('#Rolenameid').val(),RoleDescription: $('#Roledescriptionid').val()
-    };
-    $.post("/Role/Addsystemroledata", uil1, function (response) {
-        if (response.RespStatus == 0) {
-            Swal.fire('Saved!', response.RespMessage, 'success')
-            $('#Uttambsolutionsmodal').hide();
-            setTimeout(function () { location.reload(); }, 1000);
-        } else if (response.RespStatus == 1) {
-            Swal.fire("Role details not saved", response.RespMessage, "warning");
-        }
-        else {
-            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-        }
-        document.getElementById("savesystemroleid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        });
-    }
-   </script>
-}
+            if (Perms.length < 1) {
+                Swal.fire("Staff Role Not Created", 'Atleast one Permission is Required', "warning");
+                document.getElementById("savesystemroleid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+
+            var uil = {
+                 RoleId: $('#RoleId').val(), RoleName: $('#Rolenameid').val(),RoleDescription: $('#Roledescriptionid').val(), Permissions: Perms,
+                Createdby: $('#systemLoggedinedUserid').val(), Modifiedby: $('#systemLoggedinedUserid').val(), Tenantid: $('#systemLoggedinedTenantid').val(),
+                Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+            };
+            $.post("/Role/Addsystemroledata", uil, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#FuelcardsystemModal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Role Not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystemroleid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+       }
+      </script>
+   }
 

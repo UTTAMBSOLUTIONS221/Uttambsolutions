@@ -1,31 +1,60 @@
 ﻿@model DBL.Entities.SystemRole
+@{
+    var Systempermission = ViewData["Systempermissionlists"] as List<SelectListItem>;
+    var rolePermissions = Model.Permissions; 
+    bool isChecked = false;
+}
 <div class="modal-header">
-    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Roles</h5>
+    <h5 class="text-sm modal-title" id="SocialPesaModalLabel">Staff Role</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
     <div class="row">
-        <div class="col-sm-12">
-            <input asp-for="@Model.RoleId" id="RoleId" hidden />
-        </div>
+           <input class="form-control form-control-sm" asp-for="RoleId" id="RoleId" hidden />
     </div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label class="font-weight-light">Role Name</label>
-                <input class="form-control form-control-sm" asp-for="@Model.RoleName" id="Rolenameid" />
+                <input class="form-control form-control-sm" asp-for="RoleName" id="Rolenameid" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="font-weight-light">Description</label>
+                <input class="form-control form-control-sm" asp-for="RoleDescription" id="Roledescriptionid" />
             </div>
         </div>
     </div>
+    <h6 class="card-title">Permissions</h6>
+        <br />
     <div class="row">
         <div class="col-sm-12">
-            <div class="form-group">
-                <label class="font-weight-light">Role Description</label>
-                <input class="form-control form-control-sm" asp-for="@Model.RoleDescription" id="Roledescriptionid" />
-            </div>
+            <label class="font-weight-normal text-dark">
+                <input type="checkbox" id="staffRolesCheckAll" onclick="checkAllOtherPermissions()"/> Check All
+            </label>
         </div>
+    </div>
+    <div class="row">
+        @for (int i = 0; i < Systempermission.Count; i++)
+        {
+            if (rolePermissions != null)
+            {
+                isChecked = rolePermissions.Any(p => p.PermissionId == long.Parse(Systempermission[i].Value));
+            }
+            if (i > 0 && i % 4 == 0)
+            {
+                @:</div><div class="row">
+            }
+            <div class="col-sm-3">
+                <label class="font-weight-normal nowrap text-nowrap">
+                    <input type="checkbox" class="permission-checkbox" id="permissioncheckbox" value="@Systempermission[i].Value" @(isChecked ? "checked" : "") />
+                    <span class="font-weight-normal text-xs">@Systempermission[i].Text</span>
+                </label>
+            </div>
+        }
     </div>
 </div>
 <div class="modal-footer">
