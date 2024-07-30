@@ -145,6 +145,13 @@ namespace WEB.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<JsonResult> GetPermissions(long UserId)
+        {
+            var permissions = await bl.Getcurrentuserpermissionsdata(UserId);
+            return Json(permissions);
+        }
+
         #region Other Methods
 
         private async void SetUserLoggedIn(UsermodelResponce user, bool rememberMe)

@@ -83,7 +83,6 @@
                         <div class="row" hidden>
                             <div class="col-sm-12">
                                 <input id="systemLoggedinedUtcnameid" value="@currentUserData.Usermodel.Utcname">
-                                <input id="systemLoggedinedTenantid" value="@currentUserData.Usermodel.Tenantid">
                                 <input id="systemLoggedinedUserid" value="@currentUserData.Usermodel.Userid">
                                 <input id="systemLoggedinedUserNameId" value="@currentUserData.Usermodel.Fullname">
                             </div>
@@ -286,21 +285,26 @@
     <script src="~/lib/plugins/pdfmake/vfs_fonts.js"></script>
 
     <script type="text/javascript">
-         $(document).ready(function () {
-            var _perms = document.getElementById("permissionList");
-            if (!_perms) {
-                window.location.href = '/Account/Signin';
-            } else {
-                     var permissionValues = Array.from(_perms.options).map(option => option.value);
-                     document.querySelectorAll('.main').forEach(function (node) {
-                      if (permissionValues.includes(node.id)) {
-                        console.log("Displaying element with ID:", node.id);
-                        //node.style.display = "inline-block";
-                        node.style.display = "";
-                     }
-                  });
-              }
-         });
+       $(document).ready(function () {
+            var userId = $("#systemLoggedinedUserid").val();
+            $.ajax({
+                url: '/Account/GetPermissions',
+                type: 'GET',
+                data: { userId: userId },
+                success: function (permissionValues) {
+                    document.querySelectorAll('.main').forEach(function (node) {
+                        if (permissionValues.includes(node.id)) {
+                            console.log("Displaying element with ID:", node.id);
+                            node.style.display = "";
+                        }
+                    });
+                },
+                error: function () {
+                    window.location.href = '/Account/Signin';
+                }
+            });
+        });
+
 
         let currentSection = 1;
 
