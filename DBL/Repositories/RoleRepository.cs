@@ -42,6 +42,7 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Roleid", Roleid);
+                parameters.Add("@Systemroledata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystemroledatabyid", parameters, commandType: CommandType.StoredProcedure);
                 string systemroledataJson = parameters.Get<string>("@Systemroledata");
                 if (systemroledataJson != null)
