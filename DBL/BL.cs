@@ -280,6 +280,15 @@ namespace DBL
                 return userModel;
             });
         }
+
+        public Task<List<string>> Getsystempermissiondatabyroleid(long Roleid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Getsystempermissiondatabyroleid(Roleid);
+                return Resp;
+            });
+        }
         #endregion
 
         #region System Permissions
@@ -307,14 +316,7 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<List<string>> Getsystempermissiondatabyroleid(long Roleid)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.SettingsRepository.Getsystempermissiondatabyroleid(Roleid);
-                return Resp;
-            });
-        }
+
         #endregion
 
         #region System Modules
