@@ -56,7 +56,7 @@ namespace WEB.Controllers
         }
         public async Task<JsonResult> Addsystempermissiondata(Systempermissions model)
         {
-            var Resp = await bl.Registersystempermissiondata(model);
+            var Resp = await bl.Registersystempermissiondata(JsonConvert.SerializeObject(model));
             return Json(Resp);
         }
         #endregion
