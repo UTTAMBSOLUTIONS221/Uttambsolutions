@@ -2,13 +2,9 @@
 using DBL.Entities;
 using DBL.Models;
 using DBL.Repositories.DBL.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+using Newtonsoft.Json;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace DBL.Repositories
 {
@@ -46,7 +42,16 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Roleid", Roleid);
-                return connection.Query<SystemRole>("Usp_Getsystemroledatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                var queryResult = connection.Query("Usp_Getsystemroledatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string systemroledataJson = parameters.Get<string>("@Systemroledata");
+                if (systemroledataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<SystemRole>(systemroledataJson);
+                }
+                else
+                {
+                    return new SystemRole();
+                }
             }
         }
     }

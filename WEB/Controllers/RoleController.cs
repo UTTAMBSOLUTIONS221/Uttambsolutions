@@ -1,8 +1,9 @@
 ﻿using DBL;
 using DBL.Entities;
+using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WEB.Controllers
 {
@@ -23,6 +24,8 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Addrole(int Roleid)
         {
+            ViewData["Systempermissionlists"] = bl.GetListModel(ListModelType.Systempermission).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+
             SystemRole role = new SystemRole();
             if (Roleid > 0)
             {
