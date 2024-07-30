@@ -84,6 +84,7 @@
                             <div class="col-sm-12">
                                 <input id="systemLoggedinedUtcnameid" value="@currentUserData.Usermodel.Utcname">
                                 <input id="systemLoggedinedUserid" value="@currentUserData.Usermodel.Userid">
+                                <input id="systemLoggedinedUserRoleid" value="@currentUserData.Usermodel.Roleid">
                                 <input id="systemLoggedinedUserNameId" value="@currentUserData.Usermodel.Fullname">
                             </div>
                         </div>
@@ -286,11 +287,11 @@
 
     <script type="text/javascript">
        $(document).ready(function () {
-            var userId = $("#systemLoggedinedUserid").val();
+            var RoleId = $("#systemLoggedinedUserRoleid").val();
             $.ajax({
                 url: '/Account/GetPermissions',
                 type: 'GET',
-                data: { userId: userId },
+                data: { roleId: RoleId },
                 success: function (permissionValues) {
                     document.querySelectorAll('.main').forEach(function (node) {
                         if (permissionValues.includes(node.id)) {

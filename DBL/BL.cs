@@ -307,6 +307,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<List<string>> Getsystempermissiondatabyroleid(long Roleid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystempermissiondatabyroleid(Roleid);
+                return Resp;
+            });
+        }
         #endregion
 
         #region System Modules

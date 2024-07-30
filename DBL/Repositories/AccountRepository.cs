@@ -134,5 +134,19 @@ namespace DBL.Repositories
             }
         }
         #endregion
+
+
+        #region System Permission by Roles
+        public List<string> Getsystempermissiondatabyroleid(long Roleid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Roleid", Roleid);
+                return connection.Query<string>("Usp_Getsystempermissiondatabyroleid", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+        #endregion
     }
 }

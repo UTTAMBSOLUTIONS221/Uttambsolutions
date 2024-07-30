@@ -13,5 +13,6 @@ namespace DBL.Repositories
         Genericmodel Updatestaffcurriculumdata(string JsonData);
         Genericmodel Registersystemjobapplicationdata(string JsonData);
         UsermodelResponce VerifySystemStaff(string Username);
+        List<string> Getsystempermissiondatabyroleid(long Roleid);
     }
 }

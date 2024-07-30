@@ -146,9 +146,9 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetPermissions(long UserId)
+        public async Task<JsonResult> GetPermissions(long RoleId)
         {
-            var permissions = await bl.Getcurrentuserpermissionsdata(UserId);
+            var permissions = await bl.Getsystempermissiondatabyroleid(RoleId);
             return Json(permissions);
         }
 
