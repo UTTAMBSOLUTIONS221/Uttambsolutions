@@ -61,5 +61,28 @@ namespace WEB.Controllers
         }
         #endregion
 
+        #region System Company
+        [HttpGet]
+        public async Task<IActionResult> Companylist()
+        {
+            var data = await bl.Getsystemcommunicationtemplatedata();
+            return View(data);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Addorganization(long Organizationid)
+        {
+            SystemOrganization organization = new SystemOrganization();
+            if (Organizationid > 0)
+            {
+                organization = await bl.Getsystemorganizationdatabyid(Organizationid);
+            }
+            return PartialView(organization);
+        }
+        public async Task<JsonResult> Addsystemorganizationdata(SystemOrganization model)
+        {
+            var resp = await bl.Registersystemorganizationdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
+        #endregion
     }
 }

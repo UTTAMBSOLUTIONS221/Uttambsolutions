@@ -1,0 +1,222 @@
+﻿
+@{
+    ViewData["Title"] = "Companylist";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<div class="row mb-3">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h6 class="font-weight-bold text-sm card-title">Organizations</h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <a asp-action="Addorganization" asp-controller="Settings" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase nowrap text-nowrap float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Organization</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive table-responsive-sm">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Systemorganizations != null)
+                        {
+                            foreach (var item in Model.Systemorganizations)
+                            {
+                                <tr>
+                                    <td><img src="@Url.Content(item.OrganizationLogo)" height="30" width="30" /></td>
+                                    <td>@item.OrganizationName</td>
+                                    <td>@item.OrganizationPhone</td>
+                                    <td>@item.OrganizationEmail</td>
+                                    <td class="text-right"><a asp-action="Addorganization" asp-controller="Settings" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="@item.OrganizationId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase mr-1" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+      <script type="text/javascript">
+         const firebaseConfig = {
+                apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
+                authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
+                projectId: "uttambsolutions-4ec2a",
+                storageBucket: "uttambsolutions-4ec2a.appspot.com",
+                messagingSenderId: "336739823411",
+                appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
+                measurementId: "G-Z24LLL0113"
+            };
+            firebase.initializeApp(firebaseConfig);
+            var storage = firebase.storage();
+
+          function systemorganizationcompanychanged(event) {
+                var files = event.target.files;
+                uploadorganizationcompanyimage(files);
+            }
+
+            async function uploadorganizationcompanyimage(files) {
+                var downloadURLs = [];
+
+                function generateorganizationcompanyfilename(file) {
+                    var uniqueId = Date.now();
+                    var fileExtension = file.name.split('.').pop();
+                    var newFileName = 'Orgcompany/Orgcompanyimage/' + uniqueId + '.' + fileExtension;
+                    return newFileName;
+                }
+
+                async function uploadBlogFile(file) {
+                    return new Promise((resolve, reject) => {
+                        var newFileName = generateorganizationcompanyfilename(file);
+
+                        var storageRef = storage.ref().child(newFileName);
+                        var uploadTask = storageRef.put(file);
+
+                        uploadTask.on('state_changed',
+                            function (snapshot) {
+                                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                console.log('Upload is ' + progress + '% done');
+                            },
+                            function (error) {
+                                reject('Error uploading file: ' + error);
+                            },
+                            function () {
+                                uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                                    console.log('File available at', downloadURL);
+                                    downloadURLs.push(downloadURL);
+                                    resolve(downloadURL);
+                                });
+                            }
+                        );
+                    });
+                }
+
+                function displayorganisationcompanyimagepreview(file) {
+                    return new Promise((resolve, reject) => {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var previewContainer = document.createElement('div');
+                            previewContainer.classList.add('image-preview');
+
+                            var spinner = document.createElement('div');
+                            spinner.classList.add('spinner');
+                            previewContainer.appendChild(spinner);
+
+                            var previewContainerElement = document.getElementById('Uttambsolutionsimagespreviewcontainer');
+                            previewContainerElement.appendChild(previewContainer);
+
+                            var img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.width = 140;
+                            img.height = 140;
+                            img.style.display = 'none';
+                            img.onload = function () {
+                                spinner.remove();
+                                img.style.display = 'block';
+                                previewContainer.appendChild(img);
+                            };
+
+                            resolve();
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+
+                document.getElementById('loadingOverlay').style.zIndex = 1100; 
+                document.getElementById('loadingOverlay').style.display = 'flex';
+
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+
+                    try {
+                        await displayorganisationcompanyimagepreview(file);
+                        var downloadURL = await uploadBlogFile(file);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+
+                document.getElementById('loadingOverlay').style.display = 'none';
+
+                var inputField = document.getElementById('UttambsolutionsimageurlId');
+                inputField.value = JSON.stringify(downloadURLs);
+            }        
+      </script>
+
+       @*Scripts for saving the organization details*@
+      <script type="text/javascript">
+        ﻿function savesystemorganizationdata() {
+            document.getElementById("savesystemorganizationid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            if ($('#OrganizationNameid').val() === '') {
+                Swal.fire("Organization Not Created", 'Organization Name is Required', "warning");
+                document.getElementById("savesystemorganizationid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#OrganizationTypeId').val() === ''|| $('#OrganizationTypeId').val() === 0) {
+                Swal.fire("Organization Not Created", 'Organization Type is Required', "warning");
+                document.getElementById("savesystemorganizationid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#OrganizationPhoneid').val() === '') {
+                Swal.fire("Organization Not Created", 'Organization Phone is Required', "warning");
+                document.getElementById("savesystemorganizationid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#OrganizationEmailid').val() === '') {
+                Swal.fire("Organization Not Created", 'Organization Email is Required', "warning");
+                document.getElementById("savesystemorganizationid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+
+             if ($('#OrganizationDescriptionid').val() === '') {
+                Swal.fire("Organization Not Created", 'Organization Description is Required', "warning");
+                document.getElementById("savesystemorganizationid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+    
+            var uil1 = {
+                OrganizationId: $('#OrganizationId').val(),OrganizationOwner: $('#systemLoggedinedUserid').val(), OrganizationName: $('#OrganizationNameid').val(), OrganizationTypeId: $('#OrganizationTypeId').val(),OrganizationPhone:$('#OrganizationPhoneid').val(),OrganizationEmail:$('#OrganizationEmailid').val(), OrganizationDescription: $('#OrganizationDescriptionid').val(),OrganizationStatus:0,DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),OrganizationLogo: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
+            };
+            $.post("/Account/Addsystemorganizationdata", uil1, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#Uttambsolutionsmodal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Organization details not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystemorganizationid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                });
+        }
+      </script>
+       @*End of saving Blogs *@
+}
