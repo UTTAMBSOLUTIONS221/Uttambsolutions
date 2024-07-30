@@ -44,11 +44,11 @@
             {
                 isChecked = rolePermissions.Any(p => p.PermissionId == long.Parse(Systempermission[i].Value));
             }
-            if (i > 0 && i % 4 == 0)
+            if (i > 0 && i % 3 == 0)
             {
                 @:</div><div class="row">
             }
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <label class="font-weight-normal nowrap text-nowrap">
                     <input type="checkbox" class="permission-checkbox" id="permissioncheckbox" value="@Systempermission[i].Value" @(isChecked ? "checked" : "") />
                     <span class="font-weight-normal text-xs">@Systempermission[i].Text</span>
