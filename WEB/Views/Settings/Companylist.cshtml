@@ -13,7 +13,7 @@
                         <h6 class="font-weight-bold text-sm card-title">Organizations</h6>
                     </div>
                     <div class="col-sm-4">
-                        <a asp-action="Addorganization" asp-controller="Settings" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase nowrap text-nowrap float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Organization</a>
+                        <a asp-action="Addorganization" asp-controller="Settings" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="0" asp-area="" id="CAN_ADD_COMPANY" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase nowrap text-nowrap float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Organization</a>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                                     <td>@item.OrganizationName</td>
                                     <td>@item.OrganizationPhone</td>
                                     <td>@item.OrganizationEmail</td>
-                                    <td class="text-right"><a asp-action="Addorganization" asp-controller="Settings" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="@item.OrganizationId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase mr-1" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                    <td class="text-right"><a asp-action="Addorganization" asp-controller="Settings" asp-route-code="@Guid.NewGuid()" asp-route-Organizationid="@item.OrganizationId" asp-area="" id="CAN_EDIT_COMPANY" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase mr-1" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                                 </tr>
                             }
                         }

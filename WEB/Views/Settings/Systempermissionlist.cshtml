@@ -13,7 +13,7 @@
                         <h6 class="font-weight-bold text-sm card-title">Permissions</h6>
                     </div>
                     <div class="col-sm-4">
-                        <a asp-action="Addsystempermissions" asp-controller="Settings" asp-route-Permissionid="0" asp-area="" id="CAN_ADD_PERMISSION" class="btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Permission</a>
+                        <a asp-action="Addsystempermissions" asp-controller="Settings" asp-route-Permissionid="0" asp-area="" id="CAN_ADD_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Permission</a>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                                         }
                                     </td>
                                     <td class="text-right">
-                                        <a asp-action="Addsystempermissions" asp-controller="Settings" asp-route-Permissionid="@item.PermissionId" asp-area="" id="CAN_EDIT_PERMISSION" class="btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                        <a asp-action="Addsystempermissions" asp-controller="Settings" asp-route-Permissionid="@item.PermissionId" asp-area="" id="CAN_EDIT_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
                                     </td>
                                 </tr>
                             }

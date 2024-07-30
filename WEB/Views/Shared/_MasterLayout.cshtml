@@ -123,17 +123,17 @@
                                         <i class="nav-icon fas fa-list"></i><p>Permissions</p>
                                     </a>
                                 </li>
-                                <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_TEMPLATE" style="display:none;">
                                     <a asp-controller="Settings" asp-action="Index" asp-area="" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Templates</p>
                                     </a>
                                 </li>
-                                <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_COMPANY" style="display:none;">
                                     <a asp-controller="Settings" asp-action="Companylist" asp-area="" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Company</p>
                                     </a>
                                 </li>
-                                <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_SOCIAL_PAGES" style="display:none;">
                                     <a asp-controller="Socialmedia" asp-action="Index" asp-area="" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Social Media</p>
                                     </a>
@@ -146,7 +146,7 @@
                                 <i class="nav-icon fa fa-list"></i><p>Modules<i class="fa fa-angle-left right"></i></p>
                             </a>
                             <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_MODULES" style="display:none;">
                                     <a asp-controller="Module" asp-action="Index" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Modules</p>
                                     </a>
@@ -159,7 +159,7 @@
                                 <i class="nav-icon fa fa-list"></i><p>Jobs<i class="fa fa-angle-left right"></i></p>
                             </a>
                             <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_JOBS" style="display:none;">
                                     <a asp-controller="Opportunity" asp-action="Index" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Jobs</p>
                                     </a>
@@ -172,12 +172,12 @@
                                 <i class="nav-icon fa fa-list"></i><p>Blogs<i class="fa fa-angle-left right"></i></p>
                             </a>
                             <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_BLOG_CATEGORY" style="display:none;">
                                     <a asp-controller="Blogcategory" asp-action="Index" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Categories</p>
                                     </a>
                                 </li>
-                                <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_BLOGS" style="display:none;">
                                     <a asp-controller="Systemblog" asp-action="Index" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Blogs</p>
                                     </a>
@@ -190,17 +190,17 @@
                                 <i class="nav-icon fa fa-list"></i><p>Products<i class="fa fa-angle-left right"></i></p>
                             </a>
                             <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_BRANDS" style="display:none;">
                                     <a asp-controller="Brand" asp-action="Index" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Brands</p>
                                     </a>
                                 </li>
-                                <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_PRODUCT_CATEGORIES" style="display:none;">
                                     <a asp-controller="Category" asp-action="Index" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Category</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_PRODUCTS" style="display:none;">
                                     <a asp-controller="Product" asp-action="Index" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Product</p>
                                     </a>
