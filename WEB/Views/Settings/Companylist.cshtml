@@ -204,7 +204,6 @@
             var uil1 = {
                 OrganizationId: $('#OrganizationId').val(),OrganizationOwner: $('#systemLoggedinedUserid').val(), OrganizationName: $('#OrganizationNameid').val(), OrganizationTypeId: $('#OrganizationTypeId').val(),OrganizationPhone:$('#OrganizationPhoneid').val(),OrganizationEmail:$('#OrganizationEmailid').val(), OrganizationDescription: $('#OrganizationDescriptionid').val(),OrganizationStatus:0,DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),OrganizationLogo: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
             };
-             alert(JSON.stringify(uil1));
             $.post("/Settings/Addsystemorganizationdata", uil1, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire('Saved!', response.RespMessage, 'success')
