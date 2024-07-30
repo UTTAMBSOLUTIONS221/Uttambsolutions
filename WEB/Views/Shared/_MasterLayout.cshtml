@@ -113,13 +113,12 @@
                             </a>
                         </li>
 
-                        <li class="nav-item has-treeview main">
+                        <li class="nav-item has-treeview main" id="CAN_MANAGE_SETTINGS" style="display:none;">
                             <a href="javascript: void(0);" class="nav-link">
                                 <i class="nav-icon fa fa-cogs"></i><p>Settings<i class="fa fa-angle-left right"></i></p>
                             </a>
                             <ul class="nav nav-treeview">
-                                 @* <li class="nav-item main" id="CAN_VIEW_PERMISSION" style="display:none;"> *@
-                                 <li class="nav-item main" id="CAN_VIEW_PERMISSION">
+                                <li class="nav-item main" id="CAN_VIEW_PERMISSIONS" style="display:none;">
                                     <a asp-controller="Settings" asp-action="Systempermissionlist" asp-area="" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Permissions</p>
                                     </a>
@@ -142,7 +141,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item has-treeview main">
+                        <li class="nav-item has-treeview main" id="CAN_MANAGE_MODULES" style="display:none;">
                             <a href="javascript: void(0);" class="nav-link">
                                 <i class="nav-icon fa fa-list"></i><p>Modules<i class="fa fa-angle-left right"></i></p>
                             </a>
@@ -154,7 +153,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview main">
+                       
+                        <li class="nav-item has-treeview main" id="CAN_MANAGE_JOBS" style="display:none;">
                             <a href="javascript: void(0);" class="nav-link">
                                 <i class="nav-icon fa fa-list"></i><p>Jobs<i class="fa fa-angle-left right"></i></p>
                             </a>
@@ -167,8 +167,7 @@
                             </ul>
                         </li>
 
-
-                        <li class="nav-item has-treeview main">
+                        <li class="nav-item has-treeview main" id="CAN_MANAGE_BLOGS" style="display:none;">
                             <a href="javascript: void(0);" class="nav-link">
                                 <i class="nav-icon fa fa-list"></i><p>Blogs<i class="fa fa-angle-left right"></i></p>
                             </a>
@@ -186,8 +185,7 @@
                             </ul>
                         </li>
                         
-
-                        <li class="nav-item has-treeview main">
+                        <li class="nav-item has-treeview main" id="CAN_MANAGE_PRODUCTS" style="display:none;">
                             <a href="javascript: void(0);" class="nav-link">
                                 <i class="nav-icon fa fa-list"></i><p>Products<i class="fa fa-angle-left right"></i></p>
                             </a>
@@ -210,119 +208,17 @@
                             </ul>
                         </li>
 
-                       
-
-
-                        <li id="CAN_MANAGE_PRODUCTS" class="nav-item has-treeview main" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-store"></i><p>Products<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item  ml-2 main" id="CAN_VIEW_PRODUCTS" style="display:none;">
-                                    <a asp-controller="ProductManagement" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Products List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ml-2 main" id="CAN_VIEW_STORE_PRODUCTS" style="display:none;">
-                                    <a asp-controller="ProductManagement" asp-action="Mainstore" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Mainstore List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_SUPPLIERS" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-truck"></i><p>Suppliers<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_SUPPLIERS" style="display:none;">
-                                    <a asp-controller="SettingsManagement" asp-action="Systemsupplierslist" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Suppliers</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_PRICES" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-object-group"></i><p>Price<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_PRICELISTS" style="display:none;">
-                                    <a asp-controller="PriceManagement" asp-action="Pricelists" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Price List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item main" id="CAN_VIEW_DISCOUNTS" style="display:none;">
-                                    <a asp-controller="PriceManagement" asp-action="Discountlists" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Discount List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_HARDWARES" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-university "></i><p>Hardware<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_CARDS" style="display:none;">
-                                    <a asp-controller="HardwareManagement" asp-action="Cardlists" class="nav-link">
-                                        <i class="nav-icon fa fa-solid fa-credit-card"></i><p>Cards List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_LOYALTY" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-gift"></i><p>Loyalty<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_FORMULA_LISTINGS" style="display:none;">
-                                    <a asp-controller="LoyaltyManagement" asp-action="Formulalist" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Formula List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item main" id="CAN_VIEW_SCHEME_LISTINGS" style="display:none;">
-                                    <a asp-controller="LoyaltyManagement" asp-action="Schemelist" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Schemes List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_CUSTOMERS" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-users"></i><p>Customers<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_CUSTOMERS" style="display:none;">
-                                    <a asp-controller="Customermanagement" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Customers</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main" id="CAN_MANAGE_SALES" style="display:none;">
-                            <a href="javascript: void(0);" class="nav-link">
-                                <i class="nav-icon fa fa-receipt"></i><p>Sales<i class="fa fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main" id="CAN_VIEW_SALES" style="display:none;">
-                                    <a asp-controller="SaleManagement" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fas fa-list"></i><p>Sales List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview main">
+                        <li class="nav-item has-treeview main" id="CAN_MANAGE_STAFFS" style="display:none;">
                             <a href="javascript: void(0);" class="nav-link">
                                 <i class="nav-icon fa fa-users"></i><p>Staff<i class="fa fa-angle-left right"></i></p>
                             </a>
                             <ul class="nav nav-treeview ml-2">
-                                <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_ROLES" style="display:none;">
                                     <a asp-controller="Role" asp-action="Index" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Role List</p>
                                     </a>
                                 </li>
-                                <li class="nav-item main">
+                                <li class="nav-item main" id="CAN_VIEW_STAFFS" style="display:none;">
                                     <a asp-controller="Staff" asp-action="Index" class="nav-link">
                                         <i class="nav-icon fas fa-list"></i><p>Staffs List</p>
                                     </a>
