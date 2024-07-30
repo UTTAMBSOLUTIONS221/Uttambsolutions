@@ -19,13 +19,14 @@
         IConfiguration config = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
     }
 }
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-
     <meta name="description" content="JobCenter offers the latest job listings, freelancing job biddings, and career opportunities. Stay informed and find your next job with our comprehensive job board." />
     <meta name="keywords" content="JobCenter, job listings, freelancing, job biddings, career opportunities, job board" />
     <meta name="author" content="JobCenter" />
@@ -49,7 +50,8 @@
     <meta itemprop="description" content="JobCenter provides the latest job listings, freelancing job biddings, and career opportunities." />
     <meta itemprop="image" content="https://jobcenter.uttambsolutions.com/images/jobcenterlogo.png" />
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" rel="stylesheet">
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
@@ -57,20 +59,38 @@
     <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
     <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link href="~/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
     <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
-            crossorigin="anonymous"></script>
+
+    <!-- Scripts -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537" crossorigin="anonymous"></script>
     <script async src="https://fundingchoicesmessages.google.com/i/pub-2850934153859537?ers=1" nonce="dDYKvq_VdPZaU6r2X5lJmw"></script>
-    <script nonce="dDYKvq_VdPZaU6r2X5lJmw">(function () { function signalGooglefcPresent() { if (!window.frames['googlefcPresent']) { if (document.body) { const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe); } else { setTimeout(signalGooglefcPresent, 0); } } } signalGooglefcPresent(); })();</script>
+    <script nonce="dDYKvq_VdPZaU6r2X5lJmw">
+        (function () {
+            function signalGooglefcPresent() {
+                if (!window.frames['googlefcPresent']) {
+                    if (document.body) {
+                        const iframe = document.createElement('iframe');
+                        iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+                        iframe.style.display = 'none';
+                        iframe.name = 'googlefcPresent';
+                        document.body.appendChild(iframe);
+                    } else {
+                        setTimeout(signalGooglefcPresent, 0);
+                    }
+                }
+            }
+            signalGooglefcPresent();
+        })();
+    </script>
 
     <style type="text/css">
         textarea {
             resize: none;
         }
+
         /* Hide spinner arrows for number inputs */
         input[type=number]::-webkit-inner-spin-button,
         input[type=number]::-webkit-outer-spin-button {
@@ -97,6 +117,7 @@
         }
     </style>
 </head>
+
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
@@ -138,7 +159,7 @@
                                             <div class="card shadow-sm border-light">
                                                 <img class="card-img-top" src="@item.Moduleimagepath" alt="@item.Modulename">
                                                 <div class="card-body">
-                                                    <h5 class="card-title text-uppercase text-muted">@item.Modulename</h5>
+                                                    <h5 class="card-title text-uppercase text-custom">@item.Modulename</h5>
                                                     <p class="card-text text-muted">@item.Moduledescription</p>
                                                 </div>
                                             </div>
@@ -181,4 +202,5 @@
     <script src="~/dist/js/adminlte.min.js"></script>
     <script src="~/js/site.js"></script>
 </body>
+
 </html>

@@ -1,13 +1,72 @@
 .bg-custom {
     background-color: #0a506c !important;
 }
+
 .btn-custom {
     background-color: #0a506c !important;
-    color:#ffffff;
+    color: #ffffff;
 }
+
+.full-width-hr {
+    margin: 0 -15px; /* Adjust based on card padding */
+}
+
+.card-border-custom {
+    border: 1px solid #0a506c;
+}
+
+.text-custom {
+    color: #0a506c !important;
+}
+
+.btn-apply-site {
+    color: white !important;
+}
+
+textarea {
+    resize: none;
+}
+/* Hide spinner arrows for number inputs */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.no-wrap-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px; /* Adjust the gap as needed */
+}
+
+    .no-wrap-buttons a {
+        white-space: nowrap;
+    }
+
 html {
     font-size: 14px;
 }
+
+
+.nav-pills .nav-link {
+    background-color: #d4e6ed; /* Inactive tab color (lightened base color) */
+    color: #0a506c; /* Inactive tab text color */
+}
+
+    .nav-pills .nav-link:hover {
+        background-color: #82b9cd; /* Hover tab color (tinted base color) */
+        color: #5D8AA8; /* Hover tab text color (darkened base color) */
+    }
+
+    .nav-pills .nav-link.active {
+        background-color: #0a506c; /* Active tab color (base color) */
+        color: #ffffff; /* Active tab text color */
+    }
+
 
 @media (min-width: 768px) {
     html {
@@ -25,7 +84,7 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
+    margin-bottom: -30px;
 }
 
 .spinner {
@@ -49,9 +108,6 @@ body {
     100% {
         transform: rotate(360deg);
     }
-}
-.navbar-toggler-custom .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 .image-preview {
