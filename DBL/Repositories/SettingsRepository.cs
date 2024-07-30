@@ -12,6 +12,38 @@ namespace DBL.Repositories
         public SettingsRepository(string connectionString) : base(connectionString)
         {
         }
+        #region System Permissions
+        public IEnumerable<Systempermissions> Getsystempermissiondata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                return connection.Query<Systempermissions>("Usp_Getsystempermissiondata", null, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+        public Genericmodel Registersystempermissiondata(string jsonObjectdata)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", jsonObjectdata);
+                return connection.Query<Genericmodel>("Usp_Registersystempermissiondata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        public Systempermissions Getsystempermissiondatabyid(long Permissionid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Permissionid", Permissionid);
+                return connection.Query<Systempermissions>("Usp_Getsystempermissiondatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        #endregion
+
         #region Communication Templates
         public IEnumerable<Communicationtemplate> Getsystemcommunicationtemplatedata()
         {

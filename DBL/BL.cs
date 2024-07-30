@@ -282,6 +282,33 @@ namespace DBL
         }
         #endregion
 
+        #region System Permissions
+        public Task<IEnumerable<Systempermissions>> Getsystempermissiondata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystempermissiondata();
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registersystempermissiondata(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Registersystempermissiondata(obj);
+                return Resp;
+            });
+        }
+        public Task<Systempermissions> Getsystempermissiondatabyid(long Permissionid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystempermissiondatabyid(Permissionid);
+                return Resp;
+            });
+        }
+        #endregion
+
         #region System Modules
         public Task<IEnumerable<Systemmodule>> Getsystemmoduledata()
         {

@@ -14,6 +14,7 @@ namespace WEB.Controllers
         {
             bl = new BL(Util.ShareConnectionString(config));
         }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -35,5 +36,30 @@ namespace WEB.Controllers
             var resp = await bl.Registersystemcommunicationtemplatedata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
+
+        #region System Permissions
+        [HttpGet]
+        public async Task<IActionResult> Systempermissionlist()
+        {
+            var data = await bl.Getsystempermissiondata();
+            return View(data);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Addsystempermissions(long Permissionid)
+        {
+            Systempermissions model = new Systempermissions();
+            if (Permissionid > 0)
+            {
+                model = await bl.Getsystempermissiondatabyid(Permissionid);
+            }
+            return PartialView(model);
+        }
+        public async Task<JsonResult> Addsystempermissiondata(Systempermissions model)
+        {
+            var Resp = await bl.Registersystempermissiondata(model);
+            return Json(Resp);
+        }
+        #endregion
+
     }
 }
