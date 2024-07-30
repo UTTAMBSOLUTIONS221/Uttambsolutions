@@ -1,14 +1,17 @@
 ﻿@using System.Security.Claims
 @using DBL.Models
+@using DBL.Entities
 @using Microsoft.Extensions.Configuration
 @{
     bool authenticated = false;
     UsermodelResponce currentUserData = null;
+    List<Systempermissions>? permissionData = null;
     if (User.Identities.Any(u => u.IsAuthenticated))
     {
         authenticated = true;
         currentUserData = Util.GetCurrentUserData(User.Identities);
         IConfiguration config = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
+        permissionData = await Util.GetCurrentUserPermissionsData(User.Identities, config);
     }
 }
 <!DOCTYPE html>
@@ -286,6 +289,22 @@
     <script src="~/lib/plugins/pdfmake/vfs_fonts.js"></script>
 
     <script type="text/javascript">
+         $(document).ready(function () {
+            var _perms = document.getElementById("permissionList");
+            if (!_perms) {
+                window.location.href = '/Account/Signin';
+            } else {
+                     var permissionValues = Array.from(_perms.options).map(option => option.value);
+                     document.querySelectorAll('.main').forEach(function (node) {
+                      if (permissionValues.includes(node.id)) {
+                        console.log("Displaying element with ID:", node.id);
+                        //node.style.display = "inline-block";
+                        node.style.display = "";
+                     }
+                  });
+              }
+         });
+
         let currentSection = 1;
 
         function showSection(sectionNumber) {
