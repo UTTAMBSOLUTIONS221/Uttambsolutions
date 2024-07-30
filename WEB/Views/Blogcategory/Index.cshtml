@@ -12,7 +12,7 @@
                         <h6 class="font-weight-bold text-sm card-title">Blog Categories</h6>
                     </div>
                     <div class="col-sm-4">
-                        <a asp-action="Addsystemblogcategory" asp-controller="Blogcategory" asp-route-code="@Guid.NewGuid()" asp-route-Blogcategoryid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Category</a>
+                        <a asp-action="Addsystemblogcategory" asp-controller="Blogcategory" asp-route-code="@Guid.NewGuid()" asp-route-Blogcategoryid="0" asp-area="" id="CAN_ADD_BLOG_CATEGORY" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Category</a>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                         {
                             <tr>
                                 <td>@item.Blogcategoryname</td>
-                                <td class="text-right"><a asp-action="Addsystemblogcategory" asp-controller="Blogcategory" asp-route-code="@Guid.NewGuid()" asp-route-Blogcategoryid="@item.Blogcategoryid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                <td class="text-right"><a asp-action="Addsystemblogcategory" asp-controller="Blogcategory" asp-route-code="@Guid.NewGuid()" asp-route-Blogcategoryid="@item.Blogcategoryid" asp-area="" id="CAN_EDIT_BLOG_CATEGORY" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                             </tr>
                         }
 

@@ -12,7 +12,7 @@
                         <h6 class="font-weight-bold text-sm card-title">Products</h6>
                     </div>
                     <div class="col-sm-4">
-                        <a asp-action="Addproduct" asp-controller="Product" asp-route-code="@Guid.NewGuid()" asp-route-Productid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Product</a>
+                        <a asp-action="Addproduct" asp-controller="Product" asp-route-code="@Guid.NewGuid()" asp-route-Productid="0" asp-area="" id="CAN_ADD_PRODUCT" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Product</a>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                                 <td>@item.Categoryname</td>
                                 <td>@item.Wholesaleprice.ToString("F2")</td>
                                 <td>@item.Retailprice.ToString("F2")</td>
-                                <td class="text-right"><a asp-action="Addproduct" asp-controller="Product" asp-route-code="@Guid.NewGuid()" asp-route-Productid="@item.Productid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                <td class="text-right"><a asp-action="Addproduct" asp-controller="Product" asp-route-code="@Guid.NewGuid()" asp-route-Productid="@item.Productid" asp-area="" id="CAN_EDIT_PRODUCT" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                             </tr>
                         }
 

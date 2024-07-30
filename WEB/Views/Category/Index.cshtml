@@ -12,7 +12,7 @@
                         <h6 class="font-weight-bold text-sm card-title">Categories</h6>
                     </div>
                     <div class="col-sm-4">
-                        <a asp-action="Addcategory" asp-controller="Category" asp-route-code="@Guid.NewGuid()" asp-route-Categoryid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Category</a>
+                        <a asp-action="Addcategory" asp-controller="Category" asp-route-code="@Guid.NewGuid()" asp-route-Categoryid="0" asp-area="" id="CAN_ADD_PRODUCT_CATEGORY" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Category</a>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                                 <td>@item.Categoryname</td>
                                 <td>@item.Parentcategoryname</td>
                                 <td>@item.Vatrate</td>
-                                <td class="text-right"><a asp-action="Addcategory" asp-controller="Category" asp-route-code="@Guid.NewGuid()" asp-route-Categoryid="@item.Categoryid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                <td class="text-right"><a asp-action="Addcategory" asp-controller="Category" asp-route-code="@Guid.NewGuid()" asp-route-Categoryid="@item.Categoryid" asp-area="" id="CAN_EDIT_PRODUCT_CATEGORY" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                             </tr>
                         }
 
