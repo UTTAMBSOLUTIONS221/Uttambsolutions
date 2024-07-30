@@ -5,6 +5,7 @@ namespace DBL.Repositories
 {
     public interface IOrganizationRepository
     {
+        IEnumerable<SystemOrganization> Getsystemorganizationdata();
         Genericmodel Registersystemorganizationdata(string JsonData);
         SystemOrganization Getsystemorganizationdatabyid(long Organizationid);
         SystemOrganizationDetails Getsystemorganizationdetaildatabyid(long Organizationid);

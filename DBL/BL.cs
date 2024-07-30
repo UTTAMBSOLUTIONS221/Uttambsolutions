@@ -495,6 +495,14 @@ namespace DBL
         #endregion
 
         #region System Orgnizations
+        public Task<IEnumerable<SystemOrganization>> Getsystemorganizationdata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.OrganizationRepository.Getsystemorganizationdata();
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Registersystemorganizationdata(string obj)
         {
             return Task.Run(() =>

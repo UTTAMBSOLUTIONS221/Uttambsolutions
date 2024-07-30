@@ -65,7 +65,7 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Companylist()
         {
-            var data = await bl.Getsystemcommunicationtemplatedata();
+            var data = await bl.Getsystemorganizationdata();
             return View(data);
         }
         [HttpGet]

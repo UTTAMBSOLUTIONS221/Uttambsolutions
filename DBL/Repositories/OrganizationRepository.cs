@@ -13,6 +13,16 @@ namespace DBL.Repositories
         public OrganizationRepository(string connectionString) : base(connectionString)
         {
         }
+
+        public IEnumerable<SystemOrganization> Getsystemorganizationdata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                return connection.Query<SystemOrganization>("Usp_Getsystemorganizationdata", null, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
         public Genericmodel Registersystemorganizationdata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))

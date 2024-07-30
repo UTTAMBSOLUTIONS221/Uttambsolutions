@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<DBL.Entities.SystemOrganization>
 @{
     ViewData["Title"] = "Companylist";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
@@ -29,9 +29,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.Systemorganizations != null)
+                        @if (Model != null)
                         {
-                            foreach (var item in Model.Systemorganizations)
+                            foreach (var item in Model)
                             {
                                 <tr>
                                     <td><img src="@Url.Content(item.OrganizationLogo)" height="30" width="30" /></td>
@@ -201,7 +201,7 @@
             var uil1 = {
                 OrganizationId: $('#OrganizationId').val(),OrganizationOwner: $('#systemLoggedinedUserid').val(), OrganizationName: $('#OrganizationNameid').val(), OrganizationTypeId: $('#OrganizationTypeId').val(),OrganizationPhone:$('#OrganizationPhoneid').val(),OrganizationEmail:$('#OrganizationEmailid').val(), OrganizationDescription: $('#OrganizationDescriptionid').val(),OrganizationStatus:0,DateCreated:new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),OrganizationLogo: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
             };
-            $.post("/Account/Addsystemorganizationdata", uil1, function (response) {
+            $.post("/Settings/Addsystemorganizationdata", uil1, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire('Saved!', response.RespMessage, 'success')
                     $('#Uttambsolutionsmodal').hide();
