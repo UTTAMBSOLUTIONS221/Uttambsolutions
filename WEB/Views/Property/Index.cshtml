@@ -187,28 +187,35 @@ const firebaseConfig = {
 
 
         function addsystempropertyroomsdata() {
-                var Propertyroomid = 0;
-                var Roomsize = $('#Roomsizeid').val();
-                var Numberofrooms = $('#Numberofroomsizeid').val();
+               var Propertyroomid = 0;
+                // Get the selected value and text for Roomsize
+                var Roomsizeid = $('#Roomsizeid').val(); // Selected value
+                var Roomsize = $('#Roomsizeid option:selected').text(); // Selected text
+    
+                // Get the selected value and text for Numberofrooms
+                var Numberofroomsid = $('#Numberofroomsizeid').val(); // Selected value
+                var Numberofrooms = $('#Numberofroomsizeid option:selected').text(); // Selected text
+    
+                // Get Roomrentamount value
                 var Roomrentamount = $('#Roomsizerentamountid').val();
-
+       
                 // Validation
                 var isValid = true;
-                if (!Roomsize) {
+                if (Roomsizeid === "") {
                     $('#Roomsizeid').css('border', '2px solid red');
                     isValid = false;
                 } else {
                     $('#Roomsizeid').css('border', '');
                 }
 
-                if (!Numberofrooms) {
+                if (Numberofroomsid === "") {
                     $('#Numberofroomsizeid').css('border', '2px solid red');
                     isValid = false;
                 } else {
                     $('#Numberofroomsizeid').css('border', '');
                 }
 
-                if (!Roomrentamount) {
+                if (Roomrentamount === "") {
                     $('#Roomsizerentamountid').css('border', '2px solid red');
                     isValid = false;
                 } else {
@@ -218,6 +225,7 @@ const firebaseConfig = {
                 if (!isValid) {
                     return; // If validation fails, exit the function
                 }
+
              
           
                 // Check if the table body contains any rows
@@ -230,7 +238,9 @@ const firebaseConfig = {
                 // Append row to table with image
                 var newRow = '<tr>' +
                     '<td hidden>' + Propertyroomid + '</td>' +
+                     '<td hidden>' + Roomsizeid + '</td>' +
                      '<td>' + Roomsize + '</td>' +
+                     '<td hidden>' + Numberofroomsid + '</td>' +
                      '<td>' + Numberofrooms + '</td>' +
                      '<td>' + Roomrentamount + '</td>' +
                     '<td class="text-right">' +
@@ -248,8 +258,8 @@ const firebaseConfig = {
                 var cells = $(row).children();
                 $('Propertyroomid').val($(cells[0]).text());
                 $('#Roomsizeid').val($(cells[1]).text());
-                $('#Numberofroomsizeid').val($(cells[2]).text());
-                $('#Roomsizerentamountid').val($(cells[3]).text());
+                $('#Numberofroomsizeid').val($(cells[3]).text());
+                $('#Roomsizerentamountid').val($(cells[5]).text());
             }
             // Function to update the selected row with edited values
             function updatesystempropertyroomsdata(row) {
@@ -258,14 +268,14 @@ const firebaseConfig = {
                 // Update the cells with edited values from input fields
                 $(cells[0]).text($('#Propertyroomid').val());
                 $(cells[1]).text($('#Roomsizeid').val());
-                $(cells[2]).text($('#Numberofroomsizeid').val());
-                $(cells[3]).text($('#Roomsizerentamountid').val());
+                $(cells[3]).text($('#Numberofroomsizeid').val());
+                $(cells[5]).text($('#Roomsizerentamountid').val());
                 clearPropertyRoomsForm();
             }
             // Function to clear the form after adding a new row or updating
-            function clearPropertyRoomsForm() {
-                $('#Roomsizeid').val('');
-                $('#Numberofroomsizeid').val('');
+           function clearPropertyRoomsForm() {
+                $('#Roomsizeid').val('').change(); // Reset the dropdown and trigger change event
+                $('#Numberofroomsizeid').val('').change(); // Reset the dropdown and trigger change event
                 $('#Roomsizerentamountid').val('');
                 // Remove red border when clearing the form
                 $('#Roomsizeid').css('border', '');
