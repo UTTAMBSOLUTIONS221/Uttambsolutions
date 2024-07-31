@@ -2,6 +2,7 @@
 @{
     var Systemcounty = ViewData["Systemcountylists"] as List<SelectListItem>;
     var Systemhousebenefit = ViewData["Systemhousebenefitslists"] as List<SelectListItem>;
+    var Systemhousedepositfee = ViewData["Systemhousedepositfeeslists"] as List<SelectListItem>;
     bool isChecked = false;
 }
 <div class="modal-header">
@@ -14,15 +15,28 @@
     <!-- Section 1: Job Details -->
     <div id="section1" class="section">
         <h6 class="mb-3">Step 1: House Details</h6>
-        <div class="row">
-                 <input class="form-control form-control-sm" asp-for="Propertyid" id="Propertyid" hidden />
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label class="font-weight-light">House Name</label>
-                    <input class="form-control form-control-sm" asp-for="Propertyname" id="Rolenameid" required />
-                </div>
+          <input class="form-control form-control-sm" asp-for="Propertyhouseid" id="Propertyhouseid" hidden />
+     <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="font-weight-light">Agency?</label>
+                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isagency" id="Ispropertyhouseagencyid" onchange="toggleOwnerName()" />
             </div>
         </div>
+        <div class="col-sm-3" id="OwnerNameContainer" style="display: none;">
+            <div class="form-group">
+                <label class="font-weight-light">Owner Name</label>
+                <input class="form-control form-control-sm" asp-for="Propertyhousename" id="Propertyhousenameid" />
+            </div>
+        </div>
+        <div class="col-sm-10" id="HouseNameContainer">
+            <div class="form-group">
+                <label class="font-weight-light">House Name</label>
+                <input class="form-control form-control-sm" asp-for="Propertyhousename" id="Propertyhousenameid" required />
+            </div>
+        </div>
+    </div>
+
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
@@ -42,7 +56,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label class="font-weight-light">Town</label>
+                    <label class="font-weight-light">Town/Ward</label>
                     <select class="form-control form-control-sm" id="Systemsubcountywardid" asp-for="@Model.Subcountywardid" required>
                         <option value="">---Select---</option>
                     </select>
@@ -53,13 +67,13 @@
             <div class="col-sm-9">
                 <div class="form-group">
                     <label class="font-weight-light">Street/Landmark</label>
-                    <input class="form-control form-control-sm" asp-for="@Model.Streetorlandmark" placeholder="start with near land mark and next to a landmark" id="JobDescriptionid" required />
+                    <input class="form-control form-control-sm" asp-for="@Model.Streetorlandmark" placeholder="start with near land mark and next to a landmark" id="Streetorlandmarkid" required />
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">House Deposit?</label>
-                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hasdeposit" id="JobDescriptionid" required />
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousedeposit" id="Hashousedepositid" required />
                 </div>
             </div>
         </div>
@@ -161,39 +175,31 @@
     <!-- Section 3: House Deposits and Fees -->
     <div id="section3" class="section" style="display: none;">
         <h6 class="mb-4">Step 3: House Deposits and Fees</h6>
-        <input class="form-control form-control-sm" id="Housedepositfeeid" hidden />
         <div class="container">
-            <div class="row align-items-end">
-                <div class="col-sm-6 mb-2">
-                    <div class="form-group">
-                        <label class="text-sm font-weight-light fw-light">Deposit/Fee Name </label>
-                        <input type="text" class="form-control form-control-sm" id="Housedepositnameid" placeholder="Deposit" aria-label="Housedepositname" />
-                    </div>
-                </div>
-                <div class="col-sm-4 mb-2">
-                    <div class="form-group">
-                        <label class="text-sm font-weight-light fw-light">Deposit/Fee Amount</label>
-                        <input type="number" class="form-control form-control-sm" id="Housedepositamountid" placeholder="Deposit Amount" aria-label="Depositamount" />
-                    </div>
-                </div>
-                <div class="col-sm-2 mb-4">
-                    <button class="btn btn-sm btn-secondary w-100" onclick="addsystempropertydepositsdata()">Add</button>
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap" id="AllsystemDataTables3">
+                        <thead>
+                            <tr>
+                                <th hidden></th>
+                                <th>DEPOSIT NAME</th>
+                                <th>DEPOSIT AMOUNT </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td hidden></td>
+                            <td>
+                                <select class="form-control form-control-sm font-weight-light select2 pump-cashier-attendant" id="pump-cashier-attendant" asp-items="@Systemhousedepositfee">
+                                    <option value="">--select--</option>
+                                </select>
+                            </td>
+                            <td><input type="number" class="form-control form-control-sm font-weight-light pump-closing-electronic" /></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
-        <div class="table-responsive mt-4">
-            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables3">
-                <thead>
-                    <tr>
-                        <th hidden>Housedepositfeeid</th>
-                        <th>Deposit/Fee Name</th>
-                        <th>Deposit/Fee Amount</th>
-                        <th class="text-right">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
         </div>
         <div class="d-flex justify-content-between mt-3">
             <button type="button" class="btn btn-secondary btn-sm" onclick="prevSection()">Previous</button>
@@ -206,6 +212,8 @@
         <h6 class="mb-4">Step 4: House Benefits and Services to Enjoy</h6>
         <input class="form-control form-control-sm" id="Jobfunctionid" hidden />
         <div class="container">
+            
+
            <div class="row">
                 @for (int i = 0; i < Systemhousebenefit.Count; i++)
                 {

@@ -20,6 +20,7 @@ namespace DBL.UOW
         private IBrandRepository brandRepository;
         private ICategoryRepository categoryRepository;
         private IProductRepository productRepository;
+        private IPropertyRepository propertyRepository;
 
 
 
@@ -76,6 +77,10 @@ namespace DBL.UOW
         {
             get { return productRepository ?? (productRepository = new ProductRepository(connString)); }
         }
+        public IPropertyRepository PropertyRepository
+        {
+            get { return propertyRepository ?? (propertyRepository = new PropertyRepository(connString)); }
+        }
 
         public void Reset()
         {
@@ -90,6 +95,7 @@ namespace DBL.UOW
             brandRepository = null;
             categoryRepository = null;
             productRepository = null;
+            propertyRepository = null;
         }
 
         public void Dispose()

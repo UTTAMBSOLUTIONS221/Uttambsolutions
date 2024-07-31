@@ -19,6 +19,7 @@ namespace DBL.UOW
         IBrandRepository BrandRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
+        IPropertyRepository PropertyRepository { get; }
 
     }
 }

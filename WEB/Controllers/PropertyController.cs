@@ -21,11 +21,14 @@ namespace WEB.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Addproperty()
+        public async Task<IActionResult> Addproperty(long Propertyid)
         {
-            ViewData["Systemcountylists"] = bl.GetListModel(ListModelType.SystemCounty).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
-            ViewData["Systemhousebenefitslists"] = bl.GetListModel(ListModelType.SystemHouseBenefits).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
-
+            ViewData["Systemcountylists"] = bl.GetListModel(ListModelType.SystemCounty).Result.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
+            var data = await bl.Getpropertyhousedatabyid(Propertyid);
             return PartialView();
         }
 

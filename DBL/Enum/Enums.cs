@@ -25,5 +25,7 @@
         SystemOrganization = 18,
         SystemHouseBenefits = 19,
         SystemHouseItems = 20,
+        SystemHouseDepositfees = 21,
+        Systempropertyhousesizes = 22,
     }
 }

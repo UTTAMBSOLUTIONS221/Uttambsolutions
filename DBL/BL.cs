@@ -766,6 +766,49 @@ namespace DBL
         }
         #endregion
 
+        #region System Properties Houses
+        //public Task<Systemjobdata> Getsystemallopportunitydata(int Page, int PageSize)
+        //{
+        //    return Task.Run(() =>
+        //    {
+        //        var Resp = db.OpportunityRepository.Getsystemallopportunitydata(Page, PageSize);
+        //        return Resp;
+        //    });
+        //}
+        //public Task<Genericmodel> Registersystemopportunitydata(string Obj)
+        //{
+        //    return Task.Run(() =>
+        //    {
+        //        var Resp = db.OpportunityRepository.Registersystemopportunitydata(Obj);
+        //        return Resp;
+        //    });
+        //}
+        public Task<Systemproperty> Getpropertyhousedatabyid(long Propertyid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Getsystemopportunitydatabyid(Propertyid);
+                return Resp;
+            });
+        }
+        //public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
+        //{
+        //    return Task.Run(() =>
+        //    {
+        //        var Resp = db.OpportunityRepository.Getsystemallunpublishedopportunitydata();
+        //        return Resp;
+        //    });
+        //}
+        //public Task<Genericmodel> Updatepublishedopportunitydata(long Opportunityid)
+        //{
+        //    return Task.Run(() =>
+        //    {
+        //        var Resp = db.OpportunityRepository.Updatepublishedopportunitydata(Opportunityid);
+        //        return Resp;
+        //    });
+        //}
+        #endregion
+
         #region System Dropdowns
         public Task<IEnumerable<ListModel>> GetListModel(ListModelType listType)
         {

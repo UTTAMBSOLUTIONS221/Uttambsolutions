@@ -58,7 +58,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
     <script type="text/javascript">
-const firebaseConfig = {
+       const firebaseConfig = {
             apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
             authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
             projectId: "uttambsolutions-4ec2a",
@@ -426,4 +426,28 @@ const firebaseConfig = {
         });
     }
    </script>
+
+    <script type="text/javascript">
+        function toggleOwnerName() {
+        var isChecked = document.getElementById('Ispropertyhouseagencyid').checked;
+        var ownerNameContainer = document.getElementById('OwnerNameContainer');
+        var houseNameContainer = document.getElementById('HouseNameContainer');
+        
+        if (isChecked) {
+            ownerNameContainer.style.display = 'block';
+            houseNameContainer.classList.remove('col-sm-10');
+            houseNameContainer.classList.add('col-sm-7');
+        } else {
+            ownerNameContainer.style.display = 'none';
+            houseNameContainer.classList.remove('col-sm-7');
+            houseNameContainer.classList.add('col-sm-10');
+        }
+    }
+
+    // Call toggleOwnerName on page load to set the initial state based on the checkbox value
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleOwnerName();
+    });
+    </script>
+
 }
