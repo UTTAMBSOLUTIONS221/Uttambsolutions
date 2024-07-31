@@ -15,5 +15,13 @@
         public long Modifiedby { get; set; }
         public DateTime Datecreated { get; set; }
         public DateTime Datemodified { get; set; }
+        public List<Systemhousebenefits> Housebenefits { get; set; }
+    }
+
+
+    public class Systemhousebenefits
+    {
+        public long Housebenefitid { get; set; }
+        public string? Housebenefitname { get; set; }
     }
 }
