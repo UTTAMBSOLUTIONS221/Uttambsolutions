@@ -29,28 +29,37 @@
         public DateTime Datecreated { get; set; }
         public DateTime Datemodified { get; set; }
         public List<Systempropertyhousesize>? Propertyhousesize { get; set; }
-        public List<Systemhousedepositfees>? Housedepositfees { get; set; }
+        public List<Systempropertyhousedepositfees>? Propertyhousedepositfee { get; set; }
+        public List<Systempropertyhousebenefits>? Propertyhousebenefit { get; set; }
     }
     public class Systempropertyhousesize
     {
         public long Systempropertyhousesizeid { get; set; }
         public long Propertyhouseid { get; set; }
         public int Systempropertyhousesizeunits { get; set; }
+        public long? Systemhousesizeid { get; set; }
         public string? Systemhousesizename { get; set; }
         public decimal Systempropertyhousesizerent { get; set; }
         public bool Systempropertyhousesizedeposit { get; set; }
+        public bool Systempropertyhousesizewehave { get; set; }
     }
 
-    public class Systemhousebenefits
+    public class Systempropertyhousedepositfees
     {
+        public long Systempropertyhousedepositfeeid { get; set; }
+        public long Propertyhouseid { get; set; }
+        public long Housedepositfeeid { get; set; }
+        public string? Housedepositfeename { get; set; }
+        public decimal Systempropertyhousedepositfeeamount { get; set; }
+        public bool Systempropertyhousesizedepositfeewehave { get; set; }
+    }
+
+    public class Systempropertyhousebenefits
+    {
+        public long Systempropertyhousebenefitid { get; set; }
+        public long Propertyhouseid { get; set; }
         public long Housebenefitid { get; set; }
         public string? Housebenefitname { get; set; }
-    }
-
-    public class Systemhousedepositfees
-    {
-        public long Propertyid { get; set; }
-        public long Housedepositfeeid { get; set; }
-        public decimal Housedepositamount { get; set; }
+        public bool Systempropertyhousebenefitwehave { get; set; }
     }
 }
