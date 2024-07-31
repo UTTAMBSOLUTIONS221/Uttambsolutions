@@ -1,5 +1,4 @@
-﻿@model DBL.Models.SystemUserProfileData
-@functions {
+﻿@functions {
     private string GetApplicationStatus(int status)
     {
         switch (status)
@@ -19,14 +18,12 @@
 }
 @{
     Layout = null;
-    var profileImageUrl = Model.UserProfileImageUrl;
-    var defaultImageUrl = Url.Content("~/images/user.png");
-    var imageUrl = !string.IsNullOrEmpty(profileImageUrl) ? Url.Content(profileImageUrl) : defaultImageUrl;
+  
 }
 @using System.Security.Claims
 @using DBL.Models
 @using Microsoft.Extensions.Configuration
-@{
+@{ var imageUrl ="";
     bool authenticated = false;
     UsermodelResponce currentUserData = null;
     if (User.Identities.Any(u => u.IsAuthenticated))
@@ -34,6 +31,9 @@
         authenticated = true;
         currentUserData = Util.GetCurrentUserData(User.Identities);
         IConfiguration config = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
+        var profileImageUrl = currentUserData.Usermodel.UserProfileImageUrl;
+        var defaultImageUrl = Url.Content("~/images/user.png");
+         imageUrl = !string.IsNullOrEmpty(profileImageUrl) ? Url.Content(profileImageUrl) : defaultImageUrl;
     }
 }
 <!DOCTYPE html>
