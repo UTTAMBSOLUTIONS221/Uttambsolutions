@@ -27,5 +27,19 @@ namespace WEB.Controllers
 
             return PartialView();
         }
+
+
+        [HttpGet]
+        public JsonResult Getsystemsubcountydatabyid(long Id)
+        {
+            var Resp = bl.GetListModelById(ListModelType.SystemSubCounty, Id).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            return Json(Resp);
+        }
+        [HttpGet]
+        public JsonResult Getsystemsubcountywarddatabyid(long Id)
+        {
+            var Resp = bl.GetListModelById(ListModelType.SystemSubCountyWard, Id).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            return Json(Resp);
+        }
     }
 }

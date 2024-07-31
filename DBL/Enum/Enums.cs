@@ -14,6 +14,7 @@
         Systempermission = 8,
         SystemCounty = 9,
         SystemSubCounty = 10,
+        SystemSubCountyWard = 110,
         SystemChurch = 11,
         SystemChurchBranch = 12,
         Systemjobfunction = 13,

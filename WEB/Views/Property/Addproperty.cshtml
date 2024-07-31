@@ -25,7 +25,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">County</label>
-                    <select class="form-control form-control-sm" id="Systemcountyid" asp-for="@Model.Countyid" asp-items=" @Systemcounty" required>
+                    <select class="form-control form-control-sm" id="Systemcountyid" asp-for="@Model.Countyid" asp-items="@Systemcounty" onclick="getsystemcountysubcounty(this.value)" required>
                         <option value="">---Select---</option>
                     </select>
                 </div>
@@ -33,7 +33,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Sub County</label>
-                    <select class="form-control form-control-sm" id="Systemsubcountyid" asp-for="@Model.Subcountyid" required>
+                    <select class="form-control form-control-sm" id="Systemsubcountyid" asp-for="@Model.Subcountyid" onclick="getsystemsubcountysubcounty(this.value)" required>
                         <option value="">---Select---</option>
                     </select>
                 </div>

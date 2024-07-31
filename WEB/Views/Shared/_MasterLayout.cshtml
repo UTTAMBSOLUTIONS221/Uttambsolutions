@@ -473,6 +473,25 @@
             $('#Uttambsolutionsmodal .modal-content').empty();
         });
 
+         function getsystemcountysubcounty(countyid) {
+            var onj = "<option value=''>Select Subcounty</option>";
+            if (countyid == "" || countyid == 0) { $('#Systemsubcountyid').html(onj); return; }
+            $.get("/Property/Getsystemsubcountydatabyid/" + countyid, null, function (data) {
+                $.each(data, function (a, x) { onj = onj + "<option value='" + x.Value + "'>" + x.Text + "</option>"; })
+                $('#Systemsubcountyid').html(onj);
+            });
+         }
+
+          function getsystemsubcountysubcounty(subcountyid) {
+            var onj = "<option value=''>Select Ward</option>";
+            if (subcountyid == "" || subcountyid == 0) { $('#Systemsubcountywardid').html(onj); return; }
+            $.get("/Property/Getsystemsubcountywarddatabyid/" + subcountyid, null, function (data) {
+                $.each(data, function (a, x) { onj = onj + "<option value='" + x.Value + "'>" + x.Text + "</option>"; })
+                $('#Systemsubcountywardid').html(onj);
+            });
+         }
+
+
         function deactivatethis(event) {
             Swal.fire({
                 title: "Are you sure you want to deactivate this?",

@@ -774,6 +774,13 @@ namespace DBL
                 return db.GeneralRepository.GetListModel(listType);
             });
         }
+        public Task<IEnumerable<ListModel>> GetListModelById(ListModelType listType, long Id)
+        {
+            return Task.Run(() =>
+            {
+                return db.GeneralRepository.GetListModelbycode(listType, Id);
+            });
+        }
         #endregion
 
         #region System Other Methods
