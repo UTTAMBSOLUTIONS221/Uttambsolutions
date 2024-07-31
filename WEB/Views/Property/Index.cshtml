@@ -11,7 +11,7 @@
                         <h6 class="font-weight-bold text-sm card-title">Properties</h6>
                     </div>
                     <div class="col-sm-4">
-                        <a asp-action="Addproperty" asp-controller="Property" asp-route-code="@Guid.NewGuid()" asp-route-Propertyid="0" asp-area="" id="CAN_ADD_PROPERTY" style="display:none;"  class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Property</a>
+                        <a asp-action="Addproperty" asp-controller="Property" asp-route-code="@Guid.NewGuid()" asp-route-Propertyid="0" asp-area="" id="CAN_ADD_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Property</a>
                     </div>
                 </div>
             </div>
@@ -34,20 +34,20 @@
                     <tbody>
                         @* @foreach (var item in Model)
                         {
-                            <tr>
-                                <td><img src="@Url.Content(item.Primaryimageurl)" height="40" width="40"/></td>
-                                <td>@item.Productname</td>
-                                <td class="text-wrap">@item.Productdescription</td>
-                                <td>@item.Productbarcode</td>
-                                <td>@item.Sku</td>
-                                <td>@item.Brandname</td>
-                                <td>@item.Categoryname</td>
-                                <td>@item.Wholesaleprice.ToString("F2")</td>
-                                <td>@item.Retailprice.ToString("F2")</td>
-                                <td class="text-right"><a asp-action="Addproduct" asp-controller="Product" asp-route-code="@Guid.NewGuid()" asp-route-Productid="@item.Productid" asp-area="" id="CAN_EDIT_PRODUCT" style="display:none;"  class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
-                            </tr>
+                        <tr>
+                        <td><img src="@Url.Content(item.Primaryimageurl)" height="40" width="40"/></td>
+                        <td>@item.Productname</td>
+                        <td class="text-wrap">@item.Productdescription</td>
+                        <td>@item.Productbarcode</td>
+                        <td>@item.Sku</td>
+                        <td>@item.Brandname</td>
+                        <td>@item.Categoryname</td>
+                        <td>@item.Wholesaleprice.ToString("F2")</td>
+                        <td>@item.Retailprice.ToString("F2")</td>
+                        <td class="text-right"><a asp-action="Addproduct" asp-controller="Product" asp-route-code="@Guid.NewGuid()" asp-route-Productid="@item.Productid" asp-area="" id="CAN_EDIT_PRODUCT" style="display:none;"  class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                        </tr>
                         }
- *@
+                        *@
                     </tbody>
                 </table>
             </div>
@@ -55,399 +55,109 @@
     </div>
 </div>
 @section Scripts {
-    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
-    <script type="text/javascript">
-       const firebaseConfig = {
-            apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
-            authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
-            projectId: "uttambsolutions-4ec2a",
-            storageBucket: "uttambsolutions-4ec2a.appspot.com",
-            messagingSenderId: "336739823411",
-            appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
-            measurementId: "G-Z24LLL0113"
-        };
-        firebase.initializeApp(firebaseConfig);
-        var storage = firebase.storage();
-
-        function productFileChanged(event) {
-            var files = event.target.files;
-            uploadImage(files);
-            console.log(document.getElementById('UttambsolutionsimagesurlId').files);
-        }
-
-        async function uploadImage(files) {
-            // Array to store the download URLs
-            var downloadURLs = [];
-
-            // Function to generate a unique file name
-            function generateFileName(file) {
-                // Generate a unique identifier
-                var uniqueId = Date.now();
-                // Get the file extension
-                var fileExtension = file.name.split('.').pop();
-                // Construct the new file name
-                var newFileName = 'Product/Productimage/' + uniqueId + '.' + fileExtension;
-                return newFileName;
-            }
-
-            // Function to upload a single file
-            async function uploadFile(file) {
-                return new Promise((resolve, reject) => {
-                    var newFileName = generateFileName(file); // Generate a new file name
-
-                    var storageRef = storage.ref().child(newFileName);
-                    var uploadTask = storageRef.put(file);
-
-                    uploadTask.on('state_changed',
-                        function (snapshot) {
-                            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                            console.log('Upload is ' + progress + '% done');
-                        },
-                        function (error) {
-                            reject('Error uploading file: ' + error);
-                        },
-                        function () {
-                            // Upload complete
-                            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                                console.log('File available at', downloadURL);
-                                downloadURLs.push(downloadURL);
-                                resolve(downloadURL);
-                            });
-                        }
-                    );
-                });
-            }
-
-            // Function to display image preview
-            function displayImagePreview(file) {
-                return new Promise((resolve, reject) => {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        // Create a container element
-                        var previewContainer = document.createElement('div');
-                        previewContainer.classList.add('image-preview');
-
-                        // Create a spinner element
-                        var spinner = document.createElement('div');
-                        spinner.classList.add('spinner');
-
-                        // Append the spinner to the container
-                        previewContainer.appendChild(spinner);
-
-                        // Append the container to the preview container element
-                        var previewContainerElement = document.getElementById('Uttambsolutionsimagespreviewcontainer');
-                        previewContainerElement.appendChild(previewContainer);
-
-                        // Create a new image element
-                        var img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.width = 140;
-                        img.height = 140;
-                        img.style.display = 'none'; // Hide the image initially
-                        img.onload = function () {
-                            // Show the image and remove the spinner
-                            spinner.remove();
-                            img.style.display = 'block';
-                            previewContainer.appendChild(img);
-                        };
-
-                        resolve();
-                    };
-                    reader.readAsDataURL(file);
-                });
-            }
-
-            // Show the overlay with the spinner
-             document.getElementById('loadingOverlay').style.zIndex = 1100; 
-            document.getElementById('loadingOverlay').style.display = 'flex';
-
-            // Iterate over each file
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-
-                try {
-                    // Display the image preview first with a loading indicator
-                    await displayImagePreview(file);
-
-                    // Upload the file and get the download URL
-                    var downloadURL = await uploadFile(file);
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-
-            // Hide the overlay after all uploads are complete
-            document.getElementById('loadingOverlay').style.display = 'none';
-
-            // Set the input field value with JSON stringified URLs
-            var inputField = document.getElementById('UttambsolutionsimagesurlId');
-            inputField.value = JSON.stringify(downloadURLs);
-        }
-
-
-        function addsystempropertyroomsdata() {
-               var Propertyroomid = 0;
-                // Get the selected value and text for Roomsize
-                var Roomsizeid = $('#Roomsizeid').val(); // Selected value
-                var Roomsize = $('#Roomsizeid option:selected').text(); // Selected text
-    
-                // Get the selected value and text for Numberofrooms
-                var Numberofroomsid = $('#Numberofroomsizeid').val(); // Selected value
-                var Numberofrooms = $('#Numberofroomsizeid option:selected').text(); // Selected text
-    
-                // Get Roomrentamount value
-                var Roomrentamount = $('#Roomsizerentamountid').val();
-       
-                // Validation
-                var isValid = true;
-                if (Roomsizeid === "") {
-                    $('#Roomsizeid').css('border', '2px solid red');
-                    isValid = false;
-                } else {
-                    $('#Roomsizeid').css('border', '');
-                }
-
-                if (Numberofroomsid === "") {
-                    $('#Numberofroomsizeid').css('border', '2px solid red');
-                    isValid = false;
-                } else {
-                    $('#Numberofroomsizeid').css('border', '');
-                }
-
-                if (Roomrentamount === "") {
-                    $('#Roomsizerentamountid').css('border', '2px solid red');
-                    isValid = false;
-                } else {
-                    $('#Roomsizerentamountid').css('border', '');
-                }
-
-                if (!isValid) {
-                    return; // If validation fails, exit the function
-                }
-
-             
-          
-                // Check if the table body contains any rows
-                var tableFunctionBody = $('#AllsystemDataTables2 tbody');
-                var noDataRows = tableFunctionBody.find('tr');
-                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
-                    // Remove the "No data available in table" row
-                    tableFunctionBody.empty();
-                }
-                // Append row to table with image
-                var newRow = '<tr>' +
-                    '<td hidden>' + Propertyroomid + '</td>' +
-                     '<td hidden>' + Roomsizeid + '</td>' +
-                     '<td>' + Roomsize + '</td>' +
-                     '<td hidden>' + Numberofroomsid + '</td>' +
-                     '<td>' + Numberofrooms + '</td>' +
-                     '<td>' + Roomrentamount + '</td>' +
-                    '<td class="text-right">' +
-                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editsystempropertyroomsdata(this.parentNode.parentNode)">Edit</button>' +
-                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatesystempropertyroomsdata(this.parentNode.parentNode)">Update</button>' +
-                    '</td>' +
-                    '</tr>';
-
-                $('#AllsystemDataTables2 tbody').append(newRow);
-                // Clear the form after adding a new row
-                clearPropertyRoomsForm();
-        }
-        // Function to populate input fields with values from the selected row for editing
-        function editsystempropertyroomsdata(row) {
-            var cells = $(row).children();
-            $('Propertyroomid').val($(cells[0]).text());
-            $('#Roomsizeid').val($(cells[1]).text());
-            $('#Numberofroomsizeid').val($(cells[3]).text());
-            $('#Roomsizerentamountid').val($(cells[5]).text());
-        }
-        // Function to update the selected row with edited values
-        function updatesystempropertyroomsdata(row) {
-            var cells = $(row).children(); // Get the cells of the selected row
-
-            // Update the cells with edited values from input fields
-            $(cells[0]).text($('#Propertyroomid').val());
-            $(cells[1]).text($('#Roomsizeid').val());
-            $(cells[3]).text($('#Numberofroomsizeid').val());
-            $(cells[5]).text($('#Roomsizerentamountid').val());
-            clearPropertyRoomsForm();
-        }
-        // Function to clear the form after adding a new row or updating
-        function clearPropertyRoomsForm() {
-            $('#Roomsizeid').val('').change(); // Reset the dropdown and trigger change event
-            $('#Numberofroomsizeid').val('').change(); // Reset the dropdown and trigger change event
-            $('#Roomsizerentamountid').val('');
-            // Remove red border when clearing the form
-            $('#Roomsizeid').css('border', '');
-            $('#Numberofroomsizeid').css('border', '');
-            $('#Roomsizerentamountid').css('border', '');
-        }
-
-        function addsystempropertydepositsdata() {
-               var Housedepositfeeid = 0;
-                // Get the selected value and text for Roomsize
-                var Housedepositname = $('#Housedepositnameid').val(); // Selected value
-                var Housedepositamount = $('#Housedepositamountid').val(); // Selected value
-    
-                // Validation
-                var isValid = true;
-                if (Housedepositname === "") {
-                    $('#Housedepositnameid').css('border', '2px solid red');
-                    isValid = false;
-                } else {
-                    $('#Housedepositnameid').css('border', '');
-                }
-
-                if (Housedepositamount === ""|| Housedepositamount === 0) {
-                    $('#Housedepositamountid').css('border', '2px solid red');
-                    isValid = false;
-                } else {
-                    $('#Housedepositamountid').css('border', '');
-                }
-                if (!isValid) {
-                    return; // If validation fails, exit the function
-                }
-          
-                // Check if the table body contains any rows
-                var tableFunctionBody = $('#AllsystemDataTables3 tbody');
-                var noDataRows = tableFunctionBody.find('tr');
-                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
-                    // Remove the "No data available in table" row
-                    tableFunctionBody.empty();
-                }
-                // Append row to table with image
-                var newRow = '<tr>' +
-                    '<td hidden>' + Housedepositfeeid + '</td>' +
-                     '<td>' + Housedepositname + '</td>' +
-                     '<td>' + Housedepositamount + '</td>' +
-                    '<td class="text-right">' +
-                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editsystempropertydepositfeesdata(this.parentNode.parentNode)">Edit</button>' +
-                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatesystempropertydepositfeesdata(this.parentNode.parentNode)">Update</button>' +
-                    '</td>' +
-                    '</tr>';
-
-                $('#AllsystemDataTables3 tbody').append(newRow);
-                // Clear the form after adding a new row
-                clearPropertyHouseDepositFeesForm();
-        }
-        // Function to populate input fields with values from the selected row for editing
-        function editsystempropertydepositfeesdata(row) {
-            var cells = $(row).children();
-            $('Housedepositnameid').val($(cells[1]).text());
-            $('#Housedepositamountid').val($(cells[2]).text());
-        }
-        // Function to update the selected row with edited values
-        function updatesystempropertydepositfeesdata(row) {
-            var cells = $(row).children(); // Get the cells of the selected row
-
-            // Update the cells with edited values from input fields
-            $(cells[1]).text($('#Housedepositnameid').val());
-            $(cells[2]).text($('#Housedepositamountid').val());
-            clearPropertyHouseDepositFeesForm();
-        }
-        // Function to clear the form after adding a new row or updating
-        function clearPropertyHouseDepositFeesForm() {
-            $('#Housedepositnameid').val(''); 
-            $('#Housedepositamountid').val('');
-        }
-
-
-    ﻿function savesystemtproductdata() {
-    document.getElementById("savesystemtproductid").disabled = true;
-    document.getElementById("processingSpinner").style.display = "inline-block";
-    document.getElementById("buttonText").innerText = "Processing...";
-    if ($('#Productnameid').val() === '') {
-        Swal.fire("Product Not Created", 'Product Name is Required', "warning");
-        document.getElementById("savesystemtproductid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-    if ($('#Productbarcodeid').val() === '') {
-        Swal.fire("Product Not Created", 'Product barcode is Required', "warning");
-        document.getElementById("savesystemtproductid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-    if ($('#Productdescriptionid').val() === '') {
-        Swal.fire("Product Not Created", 'Product description is Required', "warning");
-        document.getElementById("savesystemtproductid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-     if ($('#Categoryid').val() === '') {
-        Swal.fire("Product Not Created", 'Product category is Required', "warning");
-        document.getElementById("savesystemtproductid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-      if ($('#Brandid').val() === '') {
-        Swal.fire("Product Not Created", 'Product brand is Required', "warning");
-        document.getElementById("savesystemtproductid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-     if ($('#Wholesalepriceid').val() === '') {
-        Swal.fire("Product Not Created", 'Wholesale price is Required', "warning");
-        document.getElementById("savesystemtproductid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-    if ($('#Retailpriceid').val() === '') {
-        Swal.fire("Product Not Created", 'Retail price is Required', "warning");
-        document.getElementById("savesystemtproductid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-    var uil1 = {
-        Productid: $('#Productid').val(), Productname: $('#Productnameid').val(),Productbarcode: $('#Productbarcodeid').val(), Productdescription: $('#Productdescriptionid').val(), Sku: $('#Productskuid').val(), 
-        Categoryid: $('#Categoryid').val(),Brandid: $('#Brandid').val(),Wholesaleprice: $('#Wholesalepriceid').val(),Retailprice: $('#Retailpriceid').val(),Primaryimageurl: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
-    };
-    $.post("/Product/Addsystemproductdata", uil1, function (response) {
-        if (response.RespStatus == 0) {
-            Swal.fire('Saved!', response.RespMessage, 'success')
-            $('#Uttambsolutionsmodal').hide();
-            setTimeout(function () { location.reload(); }, 1000);
-        } else if (response.RespStatus == 1) {
-            Swal.fire("Product details not saved", response.RespMessage, "warning");
-        }
-        else {
-            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-        }
-        document.getElementById("savesystemtproductid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        });
-    }
-   </script>
-
     <script type="text/javascript">
         function toggleOwnerName() {
-        var isChecked = document.getElementById('Ispropertyhouseagencyid').checked;
-        var ownerNameContainer = document.getElementById('OwnerNameContainer');
-        var houseNameContainer = document.getElementById('HouseNameContainer');
-        
-        if (isChecked) {
-            ownerNameContainer.style.display = 'block';
-            houseNameContainer.classList.remove('col-sm-10');
-            houseNameContainer.classList.add('col-sm-7');
-        } else {
-            ownerNameContainer.style.display = 'none';
-            houseNameContainer.classList.remove('col-sm-7');
-            houseNameContainer.classList.add('col-sm-10');
+            var isChecked = document.getElementById('Ispropertyhouseagencyid').checked;
+            var ownerNameContainer = document.getElementById('OwnerNameContainer');
+            var houseNameContainer = document.getElementById('HouseNameContainer');
+            if (isChecked) {
+                ownerNameContainer.style.display = 'block';
+                houseNameContainer.classList.remove('col-sm-10');
+                houseNameContainer.classList.add('col-sm-7');
+            } else {
+                ownerNameContainer.style.display = 'none';
+                houseNameContainer.classList.remove('col-sm-7');
+                houseNameContainer.classList.add('col-sm-10');
+            }
         }
-    }
-
-    // Call toggleOwnerName on page load to set the initial state based on the checkbox value
-    document.addEventListener('DOMContentLoaded', function() {
-        toggleOwnerName();
-    });
+        // Call toggleOwnerName on page load to set the initial state based on the checkbox value
+        document.addEventListener('DOMContentLoaded', function () {
+            toggleOwnerName();
+        });
     </script>
 
+    <script type="text/javascript">
+        function savepropertyhousedata() {
+            document.getElementById("savepropertyhouseid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            if (document.getElementById('Ispropertyhouseagencyid').checked) {
+                if ($("#Propertyhouseownerid").val() === "") {
+                    document.getElementById("Propertyhouseownerid").addClass('is-invalid');
+                } else {
+                    document.getElementById("Propertyhouseownerid").addClass('is-valid');
+                }
+            }
+            var isPumpValid = true;
+            var Propertyhouseowner = 0;
+            var Propertyhouseposter = 0;
+
+            var Systsempropertyhousesizedata = [];
+            var Systempropertyhousedepositfeedata = [];
+            var Systempropertyhousebenefitata = [];
+
+            $('#AllsystemDataTables2').DataTable().$('tr', { "filter": "applied" }).each(function () {
+                Systsempropertyhousesizedata.push({
+                    Systempropertyhousesizeid: $(this).find('td').eq(0).text(),
+                    Systemhousesizeid: $(this).find('td').eq(1).text(),
+                    Systemhousesizename: $(this).find('.system-house-size-name').val(),
+                    Systempropertyhousesizeunits: $(this).find('.system-property-house-size-unit').val(),
+                    Systempropertyhousesizerent: $(this).find('.system-property-house-size-rent').val(),
+                    Systempropertyhousesizewehave: $(this).find('.system-property-house-size-wehave').prop('checked')
+                });
+            });
+            $('#AllsystemDataTables3').DataTable().$('tr', { "filter": "applied" }).each(function () {
+                Systempropertyhousedepositfeedata.push({
+                    Systempropertyhousedepositfeeid: $(this).find('td').eq(0).text(),
+                    Housedepositfeeid: $(this).find('td').eq(1).text(),
+                    Housedepositfeename: $(this).find('.house-deposit-fee-name').val(),
+                    Systempropertyhousedepositfeeamount: $(this).find('.system-property-house-deposit-fee-amount').val(),
+                    Systempropertyhousesizedepositfeewehave: $(this).find('.system-property-house-size-deposit-fee-wehave').prop('checked')
+                });
+            });
+
+            $('#AllsystemDataTables4').DataTable().$('tr', { "filter": "applied" }).each(function () {
+                Systempropertyhousebenefitata.push({
+                    Systempropertyhousebenefitid: $(this).find('td').eq(0).text(),
+                    Housebenefitid: $(this).find('td').eq(1).text(),
+                    Housebenefitname: $(this).find('.house-benefit-name').val(),
+                    Systempropertyhousebenefitwehave: $(this).find('.system-property-house-benefit-wehave').prop('checked')
+                });
+            });
+
+            if (document.getElementById('Ispropertyhouseagencyid').checked) 
+            {
+                Propertyhouseowner = $('#Propertyhouseownerid').val(),;
+                Propertyhouseposter = $('#systemLoggedinedUserid').val();
+            }else{
+                Propertyhouseowner = $('#systemLoggedinedUserid').val();
+                Propertyhouseposter = $('#systemLoggedinedUserid').val();
+            }
+
+            var uil1 = {
+                Propertyhouseid: $('#Propertyhouseid').val(), Isagency: $('#Ispropertyhouseagencyid').prop('checked'), Propertyhouseowner: Propertyhouseowner, Propertyhouseposter: Propertyhouseposter, Propertyhousename: $('#Propertyhousenameid').val(),
+                Countyid: $('#Systemcountyid').val(),Subcountyid: $('#Systemsubcountyid').val(),Subcountywardid: $('#Systemsubcountywardid').val(),Streetorlandmark: $('#Streetorlandmarkid').val(),Hashousedeposit: $('#Hashousedepositid').prop('checked'),
+                Propertyhousesize: Systsempropertyhousesizedata, Propertyhousedepositfee: Systempropertyhousedepositfeedata, Propertyhousebenefit: Systempropertyhousebenefitata
+            };
+
+            alert(JSON.stringfy(uil1));
+
+
+            $.post("/Product/Addsystemproductdata", uil1, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#Uttambsolutionsmodal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Product details not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savepropertyhouseid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+    </script>
 }
