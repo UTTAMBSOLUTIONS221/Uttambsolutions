@@ -321,32 +321,32 @@ const firebaseConfig = {
                      '<td>' + Housedepositname + '</td>' +
                      '<td>' + Housedepositamount + '</td>' +
                     '<td class="text-right">' +
-                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editsystempropertydepositsdata(this.parentNode.parentNode)">Edit</button>' +
-                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatesystempropertydepositsdata(this.parentNode.parentNode)">Update</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editsystempropertydepositfeesdata(this.parentNode.parentNode)">Edit</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatesystempropertydepositfeesdata(this.parentNode.parentNode)">Update</button>' +
                     '</td>' +
                     '</tr>';
 
                 $('#AllsystemDataTables3 tbody').append(newRow);
                 // Clear the form after adding a new row
-                clearPropertyHouseDepositsForm();
+                clearPropertyHouseDepositFeesForm();
         }
         // Function to populate input fields with values from the selected row for editing
-        function editsystempropertydepositsdata(row) {
+        function editsystempropertydepositfeesdata(row) {
             var cells = $(row).children();
-            $('Housedepositnameid').val($(cells[0]).text());
-            $('#Housedepositamountid').val($(cells[1]).text());
+            $('Housedepositnameid').val($(cells[1]).text());
+            $('#Housedepositamountid').val($(cells[2]).text());
         }
         // Function to update the selected row with edited values
-        function updatesystempropertydepositsdata(row) {
+        function updatesystempropertydepositfeesdata(row) {
             var cells = $(row).children(); // Get the cells of the selected row
 
             // Update the cells with edited values from input fields
-            $(cells[0]).text($('#Housedepositnameid').val());
-            $(cells[1]).text($('#Housedepositamountid').val());
-            clearPropertyHouseDepositsForm();
+            $(cells[1]).text($('#Housedepositnameid').val());
+            $(cells[2]).text($('#Housedepositamountid').val());
+            clearPropertyHouseDepositFeesForm();
         }
         // Function to clear the form after adding a new row or updating
-        function clearPropertyHouseDepositsForm() {
+        function clearPropertyHouseDepositFeesForm() {
             $('#Housedepositnameid').val(''); 
             $('#Housedepositamountid').val('');
         }
