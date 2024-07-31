@@ -50,7 +50,7 @@
             <div class="col-sm-4 mb-2">
                 <div class="form-group">
                     <label class="text-sm font-weight-light fw-light">Room Size</label>
-                    <select class="form-control form-control-sm select2" id="JobEmployerId" required>
+                    <select class="form-control form-control-sm select2" id="Roomsizeid" required>
                         <option value="">---Select---</option>
                         <option value="Single">Single</option>
                         <option value="Double">Double</option>
@@ -63,7 +63,7 @@
             <div class="col-sm-3 mb-2">
                 <div class="form-group">
                     <label class="text-sm font-weight-light fw-light">How Many</label>
-                    <select class="form-control form-control-sm select2" id="numberSelect">
+                    <select class="form-control form-control-sm select2" id="Numberofroomsizeid">
                         <option value="">---Select---</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -91,20 +91,22 @@
             <div class="col-sm-3 mb-2">
                 <div class="form-group">
                     <label class="text-sm font-weight-light fw-light">Rent Amount</label>
-                    <input type="text" class="form-control form-control-sm" id="SystemjobfunctionId2" placeholder="Rent Amount" aria-label="Rentamount" />
+                    <input type="text" class="form-control form-control-sm" id="Roomsizerentamountid" placeholder="Rent Amount" aria-label="Rentamount" />
                 </div>
             </div>
             <div class="col-sm-2 mb-4">
-                <button class="btn btn-sm btn-secondary w-100" onclick="addsystemjobfunctiondata()">Add</button>
+                <button class="btn btn-sm btn-secondary w-100" onclick="addsystempropertyroomsdata()">Add</button>
             </div>
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables">
+        <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables4">
             <thead>
                 <tr>
                     <th hidden>Responsibilityid</th>
-                    <th class="font-weight-light fw-light">Responsibility</th>
+                    <th class="font-weight-light fw-light">Room Size</th>
+                    <th class="font-weight-light fw-light">Units</th>
+                    <th class="font-weight-light fw-light">Rent Amount</th>
                     <th class="font-weight-light fw-light text-right">Action</th>
                 </tr>
             </thead>

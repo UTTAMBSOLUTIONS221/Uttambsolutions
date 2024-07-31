@@ -185,6 +185,94 @@ const firebaseConfig = {
             inputField.value = JSON.stringify(downloadURLs);
         }
 
+
+        function addsystempropertyroomsdata() {
+                var Propertyroomid = 0;
+                var Roomsize = $('#Roomsizeid').val();
+                var Numberofrooms = $('#Numberofroomsizeid').val();
+                var Roomrentamount = $('#Roomsizerentamountid').val();
+
+                // Validation
+                var isValid = true;
+                if (!Roomsize) {
+                    $('#Roomsizeid').css('border', '2px solid red');
+                    isValid = false;
+                } else {
+                    $('#Roomsizeid').css('border', '');
+                }
+
+                if (!Numberofrooms) {
+                    $('#Numberofroomsizeid').css('border', '2px solid red');
+                    isValid = false;
+                } else {
+                    $('#Numberofroomsizeid').css('border', '');
+                }
+
+                if (!Roomrentamount) {
+                    $('#Roomsizerentamountid').css('border', '2px solid red');
+                    isValid = false;
+                } else {
+                    $('#Roomsizerentamountid').css('border', '');
+                }
+
+                if (!isValid) {
+                    return; // If validation fails, exit the function
+                }
+             
+          
+                // Check if the table body contains any rows
+                var tableFunctionBody = $('#AllsystemDataTables4 tbody');
+                var noDataRows = tableFunctionBody.find('tr');
+                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                    // Remove the "No data available in table" row
+                    tableFunctionBody.empty();
+                }
+                // Append row to table with image
+                var newRow = '<tr>' +
+                    '<td hidden>' + Propertyroomid + '</td>' +
+                     '<td>' + Roomsize + '</td>' +
+                     '<td>' + Numberofrooms + '</td>' +
+                     '<td>' + Roomrentamount + '</td>' +
+                    '<td class="text-right">' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editsystempropertyroomsdata(this.parentNode.parentNode)">Edit</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatesystempropertyroomsdata(this.parentNode.parentNode)">Update</button>' +
+                    '</td>' +
+                    '</tr>';
+
+                $('#AllsystemDataTables4 tbody').append(newRow);
+                // Clear the form after adding a new row
+                clearPropertyRoomsForm();
+            }
+            // Function to populate input fields with values from the selected row for editing
+            function editsystempropertyroomsdata(row) {
+                var cells = $(row).children();
+                $('Propertyroomid').val($(cells[0]).text());
+                $('#Roomsizeid').val($(cells[1]).text());
+                $('#Numberofroomsizeid').val($(cells[2]).text());
+                $('#Roomsizerentamountid').val($(cells[3]).text());
+            }
+            // Function to update the selected row with edited values
+            function updatesystempropertyroomsdata(row) {
+                var cells = $(row).children(); // Get the cells of the selected row
+
+                // Update the cells with edited values from input fields
+                $(cells[0]).text($('#Propertyroomid').val());
+                $(cells[1]).text($('#Roomsizeid').val());
+                $(cells[2]).text($('#Numberofroomsizeid').val());
+                $(cells[3]).text($('#Roomsizerentamountid').val());
+                clearPropertyRoomsForm();
+            }
+            // Function to clear the form after adding a new row or updating
+            function clearPropertyRoomsForm() {
+                $('#Roomsizeid').val('');
+                $('#Numberofroomsizeid').val('');
+                $('#Roomsizerentamountid').val('');
+                // Remove red border when clearing the form
+                $('#Roomsizeid').css('border', '');
+                $('#Numberofroomsizeid').css('border', '');
+                $('#Roomsizerentamountid').css('border', '');
+            }
+
     ﻿function savesystemtproductdata() {
     document.getElementById("savesystemtproductid").disabled = true;
     document.getElementById("processingSpinner").style.display = "inline-block";
