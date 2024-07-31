@@ -229,7 +229,7 @@ const firebaseConfig = {
              
           
                 // Check if the table body contains any rows
-                var tableFunctionBody = $('#AllsystemDataTables4 tbody');
+                var tableFunctionBody = $('#AllsystemDataTables2 tbody');
                 var noDataRows = tableFunctionBody.find('tr');
                 if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
                     // Remove the "No data available in table" row
@@ -249,39 +249,108 @@ const firebaseConfig = {
                     '</td>' +
                     '</tr>';
 
-                $('#AllsystemDataTables4 tbody').append(newRow);
+                $('#AllsystemDataTables2 tbody').append(newRow);
                 // Clear the form after adding a new row
                 clearPropertyRoomsForm();
-            }
-            // Function to populate input fields with values from the selected row for editing
-            function editsystempropertyroomsdata(row) {
-                var cells = $(row).children();
-                $('Propertyroomid').val($(cells[0]).text());
-                $('#Roomsizeid').val($(cells[1]).text());
-                $('#Numberofroomsizeid').val($(cells[3]).text());
-                $('#Roomsizerentamountid').val($(cells[5]).text());
-            }
-            // Function to update the selected row with edited values
-            function updatesystempropertyroomsdata(row) {
-                var cells = $(row).children(); // Get the cells of the selected row
+        }
+        // Function to populate input fields with values from the selected row for editing
+        function editsystempropertyroomsdata(row) {
+            var cells = $(row).children();
+            $('Propertyroomid').val($(cells[0]).text());
+            $('#Roomsizeid').val($(cells[1]).text());
+            $('#Numberofroomsizeid').val($(cells[3]).text());
+            $('#Roomsizerentamountid').val($(cells[5]).text());
+        }
+        // Function to update the selected row with edited values
+        function updatesystempropertyroomsdata(row) {
+            var cells = $(row).children(); // Get the cells of the selected row
 
-                // Update the cells with edited values from input fields
-                $(cells[0]).text($('#Propertyroomid').val());
-                $(cells[1]).text($('#Roomsizeid').val());
-                $(cells[3]).text($('#Numberofroomsizeid').val());
-                $(cells[5]).text($('#Roomsizerentamountid').val());
-                clearPropertyRoomsForm();
-            }
-            // Function to clear the form after adding a new row or updating
-           function clearPropertyRoomsForm() {
-                $('#Roomsizeid').val('').change(); // Reset the dropdown and trigger change event
-                $('#Numberofroomsizeid').val('').change(); // Reset the dropdown and trigger change event
-                $('#Roomsizerentamountid').val('');
-                // Remove red border when clearing the form
-                $('#Roomsizeid').css('border', '');
-                $('#Numberofroomsizeid').css('border', '');
-                $('#Roomsizerentamountid').css('border', '');
-            }
+            // Update the cells with edited values from input fields
+            $(cells[0]).text($('#Propertyroomid').val());
+            $(cells[1]).text($('#Roomsizeid').val());
+            $(cells[3]).text($('#Numberofroomsizeid').val());
+            $(cells[5]).text($('#Roomsizerentamountid').val());
+            clearPropertyRoomsForm();
+        }
+        // Function to clear the form after adding a new row or updating
+        function clearPropertyRoomsForm() {
+            $('#Roomsizeid').val('').change(); // Reset the dropdown and trigger change event
+            $('#Numberofroomsizeid').val('').change(); // Reset the dropdown and trigger change event
+            $('#Roomsizerentamountid').val('');
+            // Remove red border when clearing the form
+            $('#Roomsizeid').css('border', '');
+            $('#Numberofroomsizeid').css('border', '');
+            $('#Roomsizerentamountid').css('border', '');
+        }
+
+        function addsystempropertydepositsdata() {
+               var Propertdepositfeeid = 0;
+                // Get the selected value and text for Roomsize
+                var Housedepositname = $('#Housedepositnameid').val(); // Selected value
+                var Housedepositamount = $('#Housedepositamountid').val(); // Selected value
+    
+                // Validation
+                var isValid = true;
+                if (Housedepositname === "") {
+                    $('#Housedepositnameid').css('border', '2px solid red');
+                    isValid = false;
+                } else {
+                    $('#Housedepositnameid').css('border', '');
+                }
+
+                if (Housedepositamount === ""|| Housedepositamount === 0) {
+                    $('#Housedepositamountid').css('border', '2px solid red');
+                    isValid = false;
+                } else {
+                    $('#Housedepositamountid').css('border', '');
+                }
+                if (!isValid) {
+                    return; // If validation fails, exit the function
+                }
+          
+                // Check if the table body contains any rows
+                var tableFunctionBody = $('#AllsystemDataTables3 tbody');
+                var noDataRows = tableFunctionBody.find('tr');
+                if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                    // Remove the "No data available in table" row
+                    tableFunctionBody.empty();
+                }
+                // Append row to table with image
+                var newRow = '<tr>' +
+                    '<td hidden>' + Propertdepositfeeid + '</td>' +
+                     '<td>' + Housedepositname + '</td>' +
+                     '<td>' + Housedepositamount + '</td>' +
+                    '<td class="text-right">' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editsystempropertydepositsdata(this.parentNode.parentNode)">Edit</button>' +
+                    '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updatesystempropertydepositsdata(this.parentNode.parentNode)">Update</button>' +
+                    '</td>' +
+                    '</tr>';
+
+                $('#AllsystemDataTables3 tbody').append(newRow);
+                // Clear the form after adding a new row
+                clearPropertyHouseDepositsForm();
+        }
+        // Function to populate input fields with values from the selected row for editing
+        function editsystempropertydepositsdata(row) {
+            var cells = $(row).children();
+            $('Housedepositnameid').val($(cells[0]).text());
+            $('#Housedepositamountid').val($(cells[1]).text());
+        }
+        // Function to update the selected row with edited values
+        function updatesystempropertydepositsdata(row) {
+            var cells = $(row).children(); // Get the cells of the selected row
+
+            // Update the cells with edited values from input fields
+            $(cells[0]).text($('#Housedepositnameid').val());
+            $(cells[1]).text($('#Housedepositamountid').val());
+            clearPropertyHouseDepositsForm();
+        }
+        // Function to clear the form after adding a new row or updating
+        function clearPropertyHouseDepositsForm() {
+            $('#Housedepositnameid').val(''); 
+            $('#Housedepositamountid').val('');
+        }
+
 
     ﻿function savesystemtproductdata() {
     document.getElementById("savesystemtproductid").disabled = true;

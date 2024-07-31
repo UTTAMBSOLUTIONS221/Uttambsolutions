@@ -112,7 +112,7 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables4">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables2">
                 <thead>
                     <tr>
                         <th hidden>Responsibilityid</th>
@@ -150,14 +150,27 @@
     <div id="section3" class="section" style="display: none;">
         <h6 class="mb-4">Step 3: House Deposits and Fees</h6>
         <input class="form-control form-control-sm" id="Jobfunctionid" hidden />
-        <div class="input-group">
-            <input type="text" class="form-control form-control-sm" id="SystemjobfunctionId" placeholder="Enter Responsibility" aria-label="Responsibility" />
-            <div class="input-group-append">
-                <button class="btn btn-sm btn-secondary" onclick="addsystemjobfunctiondata()">Add</button>
+        <div class="container">
+            <div class="row align-items-end">
+                <div class="col-sm-7 mb-2">
+                    <div class="form-group">
+                        <label class="text-sm font-weight-light fw-light">Deposit Name </label>
+                        <input type="text" class="form-control form-control-sm" id="Housedepositnameid" placeholder="Deposit" aria-label="Housedepositname" />
+                    </div>
+                </div>
+                <div class="col-sm-5 mb-2">
+                    <div class="form-group">
+                        <label class="text-sm font-weight-light fw-light">Deposit Amount</label>
+                        <input type="number" class="form-control form-control-sm" id="Housedepositamountid" placeholder="Deposit Amount" aria-label="Depositamount" />
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-4">
+                    <button class="btn btn-sm btn-secondary w-100" onclick="addsystempropertydepositsdata()">Add</button>
+                </div>
             </div>
         </div>
         <div class="table-responsive mt-4">
-            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables10">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables3">
                 <thead>
                     <tr>
                         <th hidden>Responsibilityid</th>
