@@ -81,21 +81,21 @@
             document.getElementById("savepropertyhouseid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
+
+            // Validate owner if agency is checked
             if (document.getElementById('Ispropertyhouseagencyid').checked) {
                 if ($("#Propertyhouseownerid").val() === "") {
-                    document.getElementById("Propertyhouseownerid").addClass('is-invalid');
+                    $("#Propertyhouseownerid").addClass('is-invalid');
                 } else {
-                    document.getElementById("Propertyhouseownerid").addClass('is-valid');
+                    $("#Propertyhouseownerid").removeClass('is-invalid').addClass('is-valid');
                 }
             }
-            var isPumpValid = true;
-            var Propertyhouseowner = 0;
-            var Propertyhouseposter = 0;
 
             var Systsempropertyhousesizedata = [];
             var Systempropertyhousedepositfeedata = [];
             var Systempropertyhousebenefitata = [];
 
+            // Collect table data
             $('#AllsystemDataTables2').DataTable().$('tr', { "filter": "applied" }).each(function () {
                 Systsempropertyhousesizedata.push({
                     Systempropertyhousesizeid: $(this).find('td').eq(0).text(),
@@ -106,6 +106,7 @@
                     Systempropertyhousesizewehave: $(this).find('.system-property-house-size-wehave').prop('checked')
                 });
             });
+
             $('#AllsystemDataTables3').DataTable().$('tr', { "filter": "applied" }).each(function () {
                 Systempropertyhousedepositfeedata.push({
                     Systempropertyhousedepositfeeid: $(this).find('td').eq(0).text(),
@@ -125,34 +126,42 @@
                 });
             });
 
-            if (document.getElementById('Ispropertyhouseagencyid').checked) 
-            {
-                Propertyhouseowner = $('#Propertyhouseownerid').val(),;
+            var Propertyhouseowner, Propertyhouseposter;
+            if (document.getElementById('Ispropertyhouseagencyid').checked) {
+                Propertyhouseowner = $('#Propertyhouseownerid').val();
                 Propertyhouseposter = $('#systemLoggedinedUserid').val();
-            }else{
+            } else {
                 Propertyhouseowner = $('#systemLoggedinedUserid').val();
                 Propertyhouseposter = $('#systemLoggedinedUserid').val();
             }
 
             var uil1 = {
-                Propertyhouseid: $('#Propertyhouseid').val(), Isagency: $('#Ispropertyhouseagencyid').prop('checked'), Propertyhouseowner: Propertyhouseowner, Propertyhouseposter: Propertyhouseposter, Propertyhousename: $('#Propertyhousenameid').val(),
-                Countyid: $('#Systemcountyid').val(),Subcountyid: $('#Systemsubcountyid').val(),Subcountywardid: $('#Systemsubcountywardid').val(),Streetorlandmark: $('#Streetorlandmarkid').val(),Hashousedeposit: $('#Hashousedepositid').prop('checked'),
-                Propertyhousesize: Systsempropertyhousesizedata, Propertyhousedepositfee: Systempropertyhousedepositfeedata, Propertyhousebenefit: Systempropertyhousebenefitata
+                Propertyhouseid: $('#Propertyhouseid').val(),
+                Isagency: $('#Ispropertyhouseagencyid').prop('checked'),
+                Propertyhouseowner: Propertyhouseowner,
+                Propertyhouseposter: Propertyhouseposter,
+                Propertyhousename: $('#Propertyhousenameid').val(),
+                Countyid: $('#Systemcountyid').val(),
+                Subcountyid: $('#Systemsubcountyid').val(),
+                Subcountywardid: $('#Systemsubcountywardid').val(),
+                Streetorlandmark: $('#Streetorlandmarkid').val(),
+                Hashousedeposit: $('#Hashousedepositid').prop('checked'),
+                Propertyhousesize: Systsempropertyhousesizedata,
+                Propertyhousedepositfee: Systempropertyhousedepositfeedata,
+                Propertyhousebenefit: Systempropertyhousebenefitata
             };
-
-            alert(JSON.stringfy(uil1));
-
+            alert(JSON.stringify(uil1));
+            console.log(JSON.stringify(uil1));
 
             $.post("/Product/Addsystemproductdata", uil1, function (response) {
                 if (response.RespStatus == 0) {
-                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    Swal.fire('Saved!', response.RespMessage, 'success');
                     $('#Uttambsolutionsmodal').hide();
                     setTimeout(function () { location.reload(); }, 1000);
                 } else if (response.RespStatus == 1) {
                     Swal.fire("Product details not saved", response.RespMessage, "warning");
-                }
-                else {
-                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                } else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occurred. Kindly Contact our support team.", "error");
                 }
                 document.getElementById("savepropertyhouseid").disabled = false;
                 document.getElementById("processingSpinner").style.display = "none";
@@ -160,4 +169,5 @@
             });
         }
     </script>
+
 }
