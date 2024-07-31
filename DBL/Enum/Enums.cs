@@ -23,5 +23,7 @@
         Systemjobexperience = 16,
         Systemjobtypeid = 17,
         SystemOrganization = 18,
+        SystemHouseBenefits = 19,
+        SystemHouseItems = 20,
     }
 }
