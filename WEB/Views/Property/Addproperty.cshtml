@@ -189,38 +189,52 @@
         </div>
     </div>
 
-    <!-- Section 4: Skills -->
+    <!-- Section 4: Qualification -->
     <div id="section4" class="section" style="display: none;">
-        <h6 class="mb-3">Step 4: Preferred Skills</h6>
-        <input class="form-control form-control-sm" id="Jobskillid" hidden />
-        <div class="input-group">
-            <input type="text" class="form-control form-control-sm" id="SystemjobskillnameId" placeholder="Enter skill" aria-label="Skill" />
-            <div class="input-group-append">
-                <button class="btn btn-sm btn-secondary" onclick="addsystemjobskilldata()">Add</button>
+        <h6 class="mb-4">Step 4: House Deposits and Fees</h6>
+        <input class="form-control form-control-sm" id="Jobfunctionid" hidden />
+        <div class="container">
+            <div class="row align-items-end">
+                <div class="col-sm-7 mb-2">
+                    <div class="form-group">
+                        <label class="text-sm font-weight-light fw-light">Deposit/Fee Name </label>
+                        <input type="text" class="form-control form-control-sm" id="Housedepositnameid" placeholder="Deposit" aria-label="Housedepositname" />
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-2">
+                    <div class="form-group">
+                        <label class="text-sm font-weight-light fw-light">Deposit/Fee Amount</label>
+                        <input type="number" class="form-control form-control-sm" id="Housedepositamountid" placeholder="Deposit Amount" aria-label="Depositamount" />
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-4">
+                    <button class="btn btn-sm btn-secondary w-100" onclick="addsystempropertydepositsdata()">Add</button>
+                </div>
             </div>
         </div>
-        <div class="table-responsive mt-3">
-            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables12">
+        <div class="table-responsive mt-4">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables3">
                 <thead>
                     <tr>
-                        <th hidden></th>
-                        <th>Skill</th>
+                        <th hidden>Responsibilityid</th>
+                        <th>Deposit/Fee Name</th>
+                        <th>Deposit/Fee Amount</th>
                         <th class="text-right">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                 
                 </tbody>
             </table>
         </div>
-        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
-        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
+        <div class="d-flex justify-content-between mt-3">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="nextSection()">Next</button>
+        </div>
     </div>
-
 
     <!-- Section 5: Qualifications -->
     <div id="section5" class="section" style="display: none;">
-        <h6 class="mb-3">Step 4: Benefits</h6>
+        <h6 class="mb-3">Step 5: Services to Enjoy</h6>
         <input class="form-control form-control-sm" id="JobbenefitId" hidden />
         <div class="input-group">
             <input type="text" class="form-control form-control-sm" id="SystemjobbenefitnameId" placeholder="Enter Benefit" aria-label="Benefit" />
