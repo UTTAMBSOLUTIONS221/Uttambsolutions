@@ -783,11 +783,11 @@ namespace DBL
         //        return Resp;
         //    });
         //}
-        public Task<Systemproperty> Getpropertyhousedatabyid(long Propertyid)
+        public Task<Systemproperty> Getsystempropertyhousedatabyid(long Propertyid)
         {
             return Task.Run(() =>
             {
-                var Resp = db.PropertyRepository.Getsystemopportunitydatabyid(Propertyid);
+                var Resp = db.PropertyRepository.Getsystempropertyhousedatabyid(Propertyid);
                 return Resp;
             });
         }

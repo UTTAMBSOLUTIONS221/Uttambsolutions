@@ -13,7 +13,7 @@ namespace DBL.Repositories
         {
         }
 
-        public Systemproperty Getsystemopportunitydatabyid(long Propertyid)
+        public Systemproperty Getsystempropertyhousedatabyid(long Propertyid)
         {
             using (var connection = new SqlConnection(_connString))
             {
@@ -21,7 +21,7 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Propertyid", Propertyid);
                 parameters.Add("@Systempropertydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_Getsystemopportunitydatabyid", parameters, commandType: CommandType.StoredProcedure);
+                var queryResult = connection.Query("Usp_Getsystempropertyhousedatabyid", parameters, commandType: CommandType.StoredProcedure);
                 string systempropertydataJson = parameters.Get<string>("@Systempropertydata");
                 if (systempropertydataJson != null)
                 {

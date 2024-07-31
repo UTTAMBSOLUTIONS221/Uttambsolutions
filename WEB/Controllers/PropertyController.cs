@@ -28,8 +28,8 @@ namespace WEB.Controllers
                 Text = x.Text,
                 Value = x.Value
             }).ToList();
-            var data = await bl.Getpropertyhousedatabyid(Propertyid);
-            return PartialView();
+            var data = await bl.Getsystempropertyhousedatabyid(Propertyid);
+            return PartialView(data);
         }
 
 

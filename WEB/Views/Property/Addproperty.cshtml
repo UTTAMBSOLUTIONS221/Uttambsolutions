@@ -137,32 +137,29 @@
                 </div>
             </div>
         </div>
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables2">
+        <div class="col-sm-12 table-responsive">
+            <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap" id="AllsystemDataTables2">
                 <thead>
                     <tr>
-                        <th hidden>Responsibilityid</th>
+                        <th hidden>Room sizeid</th>
                         <th class="font-weight-light fw-light">Room Size</th>
                         <th class="font-weight-light fw-light">Units</th>
                         <th class="font-weight-light fw-light">Rent Amount</th>
-                        <th class="font-weight-light fw-light text-right">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @*  @if (Model.Systemjobfunction != null)
+                    @if (Model != null && Model.Propertyhousesize != null)
                     {
-                    foreach (var item in Model.Systemjobfunction)
-                    {
-                    <tr>
-                    <td hidden>@item.Jobfunctionid</td>
-                    <td>@item.Jobfunction</td>
-                    <td class="text-right">
-                    <button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase m-1" onclick="editjobfunctiondata(this.parentNode.parentNode)">Edit</button>
-                    <button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase m-1" onclick="updatejobfunctiondata(this.parentNode.parentNode)">Update</button>
-                    </td>
-                    </tr>
+                        foreach (var data in Model.Propertyhousesize)
+                        {
+                            <tr>
+                                <td hidden>@data.Systempropertyhousesizeid</td>
+                                <td><input type="text" class="form-control form-control-sm font-weight-light system-house-size-name" value="@data.Systemhousesizename" readonly /></td>
+                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-size-unit" value="@data.Systempropertyhousesizeunits" /></td>
+                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-size-rent" value="@data.Systempropertyhousesizerent" /></td>
+                            </tr>
+                        }
                     }
-                    } *@
                 </tbody>
             </table>
         </div>
@@ -215,26 +212,7 @@
             
 
            <div class="row">
-                @for (int i = 0; i < Systemhousebenefit.Count; i++)
-                {
-                    if (Model != null)
-                    {
-                        if (Model.Housebenefits != null)
-                        {
-                            isChecked = Model.Housebenefits.Any(p => p.Housebenefitid == long.Parse(Systemhousebenefit[i].Value));
-                        } 
-                    }
-                    if (i > 0 && i % 2 == 0)
-                    {
-                        @:</div><div class="row">
-                    }
-                    <div class="col-sm-6">
-                        <label class="font-weight-normal nowrap text-nowrap">
-                            <input type="checkbox" class="housebenefit-checkbox" id="phousebenefitcheckbox" value="@Systemhousebenefit[i].Value" @(isChecked ? "checked" : "") />
-                            <span class="font-weight-normal text-xs">@Systemhousebenefit[i].Text</span>
-                        </label>
-                    </div>
-                }
+             
            </div>
         </div>
         <div class="d-flex justify-content-between mt-3">
