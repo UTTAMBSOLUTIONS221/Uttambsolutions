@@ -209,15 +209,18 @@
            <div class="row">
                 @for (int i = 0; i < Systemhousebenefit.Count; i++)
                 {
-                    if (Model.Housebenefits != null)
+                    if (Model != null)
                     {
-                        isChecked = Model.Housebenefits.Any(p => p.Housebenefitid == long.Parse(Systemhousebenefit[i].Value));
-                    } 
-                    if (i > 0 && i % 3 == 0)
+                        if (Model.Housebenefits != null)
+                        {
+                            isChecked = Model.Housebenefits.Any(p => p.Housebenefitid == long.Parse(Systemhousebenefit[i].Value));
+                        } 
+                    }
+                    if (i > 0 && i % 2 == 0)
                     {
                         @:</div><div class="row">
                     }
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <label class="font-weight-normal nowrap text-nowrap">
                             <input type="checkbox" class="housebenefit-checkbox" id="phousebenefitcheckbox" value="@Systemhousebenefit[i].Value" @(isChecked ? "checked" : "") />
                             <span class="font-weight-normal text-xs">@Systemhousebenefit[i].Text</span>
