@@ -1,6 +1,8 @@
 ﻿using DBL;
+using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WEB.Controllers
 {
@@ -21,6 +23,8 @@ namespace WEB.Controllers
         [HttpGet]
         public IActionResult Addproperty()
         {
+            ViewData["Systemcountylists"] = bl.GetListModel(ListModelType.SystemCounty).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+
             return PartialView();
         }
     }

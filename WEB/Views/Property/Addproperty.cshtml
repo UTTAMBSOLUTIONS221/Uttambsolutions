@@ -1,137 +1,158 @@
 ﻿@model DBL.Entities.Systemproperty
+@{
+    var Systemcounty = ViewData["Systemcountylists"] as List<SelectListItem>;
+}
 <div class="modal-header">
-    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Property Details</h5>
+    <h5 class="modal-title" id="Uttambsolutionsmodallabel">Properties Details</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <div class="row">
-        <input class="form-control form-control-sm" asp-for="Propertyid" id="Propertyid" hidden />
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label class="font-weight-light">House Name</label>
-                <input class="form-control form-control-sm" asp-for="Propertyname" id="Rolenameid" />
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="font-weight-light">Town</label>
-                <select class="form-control form-control-sm select2" id="JobEmployerId" required>
-                    <option value="">---Select---</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="font-weight-light">Town</label>
-                <select class="form-control form-control-sm select2" id="JobEmployerId" required>
-                    <option value="">---Select---</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="font-weight-light">Town</label>
-                <select class="form-control form-control-sm select2" id="JobEmployerId" required>
-                    <option value="">---Select---</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <h6 class="card-title text-sm">Rooms Available</h6>
-    <br />
-    <div class="container">
-        <div class="row align-items-end">
-            <div class="col-sm-4 mb-2">
+    <!-- Section 1: Job Details -->
+    <div id="section1" class="section">
+        <h6 class="mb-3">Step 1: House Details</h6>
+        <div class="row">
+                 <input class="form-control form-control-sm" asp-for="Propertyid" id="Propertyid" hidden />
+            <div class="col-sm-12">
                 <div class="form-group">
-                    <label class="text-sm font-weight-light fw-light">Room Size</label>
-                    <select class="form-control form-control-sm select2" id="Roomsizeid" required>
+                    <label class="font-weight-light">House Name</label>
+                    <input class="form-control form-control-sm" asp-for="Propertyname" id="Rolenameid" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">County</label>
+                    <select class="form-control form-control-sm" id="Systemcountyid" asp-for="@Model.Countyid" asp-items=" @Systemcounty" required>
                         <option value="">---Select---</option>
-                        <option value="Single">Single</option>
-                        <option value="Double">Double</option>
-                        <option value="Bed Sitter">Bed Sitter</option>
-                        <option value="One Bedroom">One Bedroom</option>
-                        <option value="Two Bedroom">Two Bedroom</option>
                     </select>
                 </div>
             </div>
-            <div class="col-sm-3 mb-2">
+            <div class="col-sm-4">
                 <div class="form-group">
-                    <label class="text-sm font-weight-light fw-light">How Many</label>
-                    <select class="form-control form-control-sm select2" id="Numberofroomsizeid">
+                    <label class="font-weight-light">Sub County</label>
+                    <select class="form-control form-control-sm" id="Systemsubcountyid" asp-for="@Model.Subcountyid" required>
                         <option value="">---Select---</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
                     </select>
                 </div>
             </div>
-            <div class="col-sm-3 mb-2">
+            <div class="col-sm-4">
                 <div class="form-group">
-                    <label class="text-sm font-weight-light fw-light">Rent Amount</label>
-                    <input type="text" class="form-control form-control-sm" id="Roomsizerentamountid" placeholder="Rent Amount" aria-label="Rentamount" />
+                    <label class="font-weight-light">Town</label>
+                    <select class="form-control form-control-sm" id="Systemsubcountywardid" asp-for="@Model.Subcountywardid" required>
+                        <option value="">---Select---</option>
+                    </select>
                 </div>
             </div>
-            <div class="col-sm-2 mb-4">
-                <button class="btn btn-sm btn-secondary w-100" onclick="addsystempropertyroomsdata()">Add</button>
-            </div>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-light">Street/Landmark</label>
+            <input class="form-control form-control-sm" asp-for="@Model.Streetorlandmark" id="JobDescriptionid" required />
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
+    </div>
+    <!-- Section 2: Key Responsibilities -->
+    <div id="section2" class="section" style="display: none;">
+        <h6 class="mb-4 font-weight-bold">Step 2: Key Responsibilities</h6>
+
+
+
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-sm btn-secondary" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-sm btn-secondary" onclick="nextSection()">Next</button>
         </div>
     </div>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables4">
-            <thead>
-                <tr>
-                    <th hidden>Responsibilityid</th>
-                    <th class="font-weight-light fw-light">Room Size</th>
-                    <th class="font-weight-light fw-light">Units</th>
-                    <th class="font-weight-light fw-light">Rent Amount</th>
-                    <th class="font-weight-light fw-light text-right">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-               @*  @if (Model.Systemjobfunction != null)
-                {
-                    foreach (var item in Model.Systemjobfunction)
-                    {
-                        <tr>
-                            <td hidden>@item.Jobfunctionid</td>
-                            <td>@item.Jobfunction</td>
-                            <td class="text-right">
-                                <button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase m-1" onclick="editjobfunctiondata(this.parentNode.parentNode)">Edit</button>
-                                <button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase m-1" onclick="updatejobfunctiondata(this.parentNode.parentNode)">Update</button>
-                            </td>
-                        </tr>
-                    }
-                } *@
-            </tbody>
-        </table>
+
+    <!-- Section 3: Qualification -->
+    <div id="section3" class="section" style="display: none;">
+        <h6 class="mb-3">Step 3:  Qualifications</h6>
+        <input class="form-control form-control-sm" id="Jobqualificationid" hidden />
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" id="SystemjobqualificationId" placeholder="Enter qualification" aria-label="Qualification" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="addsystemjobqualificationdata()">Add</button>
+            </div>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables11">
+                <thead>
+                    <tr>
+                        <th hidden></th>
+                        <th>Qualification</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="nextSection()">Next</button>
+        </div>
     </div>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemroleid" onclick="savesystemroledata();">
-        <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
-    </button>
+
+    <!-- Section 4: Skills -->
+    <div id="section4" class="section" style="display: none;">
+        <h6 class="mb-3">Step 4: Preferred Skills</h6>
+        <input class="form-control form-control-sm" id="Jobskillid" hidden />
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" id="SystemjobskillnameId" placeholder="Enter skill" aria-label="Skill" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="addsystemjobskilldata()">Add</button>
+            </div>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables12">
+                <thead>
+                    <tr>
+                        <th hidden></th>
+                        <th>Skill</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody>
+            </table>
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
+    </div>
+
+
+    <!-- Section 5: Qualifications -->
+    <div id="section5" class="section" style="display: none;">
+        <h6 class="mb-3">Step 4: Benefits</h6>
+        <input class="form-control form-control-sm" id="JobbenefitId" hidden />
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" id="SystemjobbenefitnameId" placeholder="Enter Benefit" aria-label="Benefit" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="addsystemjobbenfitdata()">Add</button>
+            </div>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-striped table-sm text-nowrap w-100" id="AllsystemDataTables13">
+                <thead>
+                    <tr>
+                        <th hidden></th>
+                        <th>Benefit</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                </tbody>
+            </table>
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary float-left" onclick="prevSection()">Previous</button>
+        <button type="button" class="btn btn-sm btn-info font-weight-bold" id="saveopportunityid" onclick="saveopportunitydata();">
+            <span id="buttonText">Save</span>
+            <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+        </button>
+    </div>
 </div>
