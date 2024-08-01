@@ -1,0 +1,25 @@
+﻿@model DBL.Models.Systemblogdata
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    @if (Model.Systemblogs.Any())
+    {
+        foreach (var item in Model.Systemblogs)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="@Url.Content(item.Blogprimaryimageurl)" class="card-img-top" />
+                    <div class="card-body">
+                        <h4>@item.Blogname</h4>
+                        <p>@item.Summary</p>
+                        <p>@item.Blogcontent</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
