@@ -55,21 +55,18 @@
 @section Scripts {
     <script type="text/javascript">
         function toggleOwnerName() {
-            var isChecked = document.getElementById('Ispropertyhouseagencyid').checked;
-            var ownerNameContainer = document.getElementById('OwnerNameContainer');
-            var houseNameContainer = document.getElementById('HouseNameContainer');
+            var isChecked = $('#Ispropertyhouseagencyid').prop('checked');
             if (isChecked) {
-                ownerNameContainer.style.display = 'block';
-                houseNameContainer.classList.remove('col-sm-10');
-                houseNameContainer.classList.add('col-sm-7');
+                $('#OwnerNameContainer').css('display', 'block');
+                $('#HouseNameContainer').removeClass('col-sm-10').addClass('col-sm-7');
             } else {
-                ownerNameContainer.style.display = 'none';
-                houseNameContainer.classList.remove('col-sm-7');
-                houseNameContainer.classList.add('col-sm-10');
+                $('#OwnerNameContainer').css('display', 'none');
+                $('#HouseNameContainer').removeClass('col-sm-7').addClass('col-sm-10');
             }
         }
+
         // Call toggleOwnerName on page load to set the initial state based on the checkbox value
-        document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function () {
             toggleOwnerName();
         });
     </script>
