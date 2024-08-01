@@ -18,6 +18,7 @@
         public string? Streetorlandmark { get; set; }
         public bool Hashousedeposit { get; set; }
         public int Propertyhousestatus { get; set; }
+        public string? Propertyhousestatusdata { get; set; }
         public string? Extra { get; set; }
         public string? Extra1 { get; set; }
         public string? Extra2 { get; set; }
