@@ -1,8 +1,10 @@
 ﻿using DBL;
+using DBL.Entities;
 using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace WEB.Controllers
 {
@@ -31,7 +33,11 @@ namespace WEB.Controllers
             var data = await bl.Getsystempropertyhousedatabyid(Propertyid);
             return PartialView(data);
         }
-
+        public async Task<JsonResult> Addsystempropertyhousedata(Systemproperty model)
+        {
+            var resp = await bl.Registersystempropertyhousedata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
 
         [HttpGet]
         public JsonResult Getsystemsubcountydatabyid(long Id)
@@ -45,5 +51,6 @@ namespace WEB.Controllers
             var Resp = bl.GetListModelById(ListModelType.SystemSubCountyWard, Id).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             return Json(Resp);
         }
+
     }
 }

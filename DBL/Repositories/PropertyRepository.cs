@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DBL.Entities;
+using DBL.Models;
 using DBL.Repositories.DBL.Repositories;
 using Newtonsoft.Json;
 using System.Data;
@@ -13,6 +14,16 @@ namespace DBL.Repositories
         {
         }
 
+        public Genericmodel Registersystempropertyhousedata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registersystempropertyhousedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         public Systemproperty Getsystempropertyhousedatabyid(long Propertyid)
         {
             using (var connection = new SqlConnection(_connString))

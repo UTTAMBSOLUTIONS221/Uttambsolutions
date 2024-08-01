@@ -775,14 +775,14 @@ namespace DBL
         //        return Resp;
         //    });
         //}
-        //public Task<Genericmodel> Registersystemopportunitydata(string Obj)
-        //{
-        //    return Task.Run(() =>
-        //    {
-        //        var Resp = db.OpportunityRepository.Registersystemopportunitydata(Obj);
-        //        return Resp;
-        //    });
-        //}
+        public Task<Genericmodel> Registersystempropertyhousedata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Registersystempropertyhousedata(Obj);
+                return Resp;
+            });
+        }
         public Task<Systemproperty> Getsystempropertyhousedatabyid(long Propertyid)
         {
             return Task.Run(() =>
