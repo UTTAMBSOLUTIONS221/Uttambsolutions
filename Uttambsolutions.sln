@@ -23,8 +23,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mainapp", "Mainapp\Mainapp.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maqaoplus", "Maqaoplus\Maqaoplus.csproj", "{9E6A574C-C333-47F8-ACC4-1428FB3578BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commonapp", "Commonapp\Commonapp.csproj", "{9CDBA44F-BAF7-41BD-896F-D1452D300565}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
