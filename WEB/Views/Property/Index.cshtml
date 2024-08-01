@@ -146,6 +146,10 @@
                 Subcountywardid: $('#Systemsubcountywardid').val(),
                 Streetorlandmark: $('#Streetorlandmarkid').val(),
                 Hashousedeposit: $('#Hashousedepositid').prop('checked'),
+                Createdby:$('#systemLoggedinedUserid').val(),
+                Modifiedby: $('#systemLoggedinedUserid').val(),
+                Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
                 Propertyhousesize: Systsempropertyhousesizedata,
                 Propertyhousedepositfee: Systempropertyhousedepositfeedata,
                 Propertyhousebenefit: Systempropertyhousebenefitata
