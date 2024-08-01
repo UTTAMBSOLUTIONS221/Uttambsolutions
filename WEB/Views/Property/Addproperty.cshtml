@@ -66,13 +66,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-9">
+            <div class="col-sm-7">
                 <div class="form-group">
                     <label class="font-weight-light">Street/Landmark</label>
                     <input class="form-control form-control-sm" asp-for="@Model.Streetorlandmark" placeholder="start with near land mark and next to a landmark" id="Streetorlandmarkid" required />
                 </div>
             </div>
             <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">House Status</label>
+                    <select class="form-control form-control-sm" id="Propertyhousestatusid" required>
+                        <option value="">---Select---</option>
+                        <option value="0">First Tenants</option>
+                        <option value="1">Second Tenants</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">House Deposit?</label>
                     <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousedeposit" id="Hashousedepositid" required />
