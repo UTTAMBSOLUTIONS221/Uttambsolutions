@@ -775,6 +775,14 @@ namespace DBL
         //        return Resp;
         //    });
         //}
+        public Task<IEnumerable<Systemproperty>> Getsystempropertyhousedata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Getsystempropertyhousedata();
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Registersystempropertyhousedata(string Obj)
         {
             return Task.Run(() =>

@@ -18,9 +18,10 @@ namespace WEB.Controllers
             bl = new BL(Util.ShareConnectionString(config));
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var data = await bl.Getsystempropertyhousedata();
+            return View(data);
         }
         [HttpGet]
         public async Task<IActionResult> Addproperty(long Propertyid)

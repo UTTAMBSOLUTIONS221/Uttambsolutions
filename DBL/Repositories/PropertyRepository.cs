@@ -13,6 +13,14 @@ namespace DBL.Repositories
         public PropertyRepository(string connectionString) : base(connectionString)
         {
         }
+        public IEnumerable<Systemproperty> Getsystempropertyhousedata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                return connection.Query<Systemproperty>("Usp_Getsystempropertyhousedata", null, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
 
         public Genericmodel Registersystempropertyhousedata(string JsonData)
         {
