@@ -12,6 +12,7 @@ namespace WEB.Controllers
         {
             bl = new BL(Util.ShareConnectionString(config));
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var blogs = await bl.Getsystemallblogdata(0, 10000);
