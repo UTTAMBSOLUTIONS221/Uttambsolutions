@@ -56,12 +56,15 @@
     <script type="text/javascript">
         function toggleOwnerName() {
             var isChecked = $('#Ispropertyhouseagencyid').prop('checked');
+            var ownerNameSelect = $('#Propertyhouseownerid');
             if (isChecked) {
                 $('#OwnerNameContainer').css('display', 'block');
                 $('#HouseNameContainer').removeClass('col-sm-10').addClass('col-sm-7');
+                ownerNameSelect.prop('required', true);
             } else {
                 $('#OwnerNameContainer').css('display', 'none');
                 $('#HouseNameContainer').removeClass('col-sm-7').addClass('col-sm-10');
+                ownerNameSelect.prop('required', false);
             }
         }
 
