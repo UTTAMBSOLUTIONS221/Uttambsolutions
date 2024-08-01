@@ -31,6 +31,16 @@ namespace WEB.Controllers
                 Text = x.Text,
                 Value = x.Value
             }).ToList();
+            ViewData["Systemsubcountylists"] = bl.GetListModel(ListModelType.SystemSubCounty).Result.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
+            ViewData["Systemsubcountywardlists"] = bl.GetListModel(ListModelType.SystemSubCountyWard).Result.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
             var data = await bl.Getsystempropertyhousedatabyid(Propertyid);
             return PartialView(data);
         }

@@ -1,6 +1,8 @@
 ﻿@model DBL.Entities.Systemproperty
 @{
     var Systemcounty = ViewData["Systemcountylists"] as List<SelectListItem>;
+    var Systemsubcounty = ViewData["Systemsubcountylists"] as List<SelectListItem>;
+    var Systemsubcountyward = ViewData["Systemsubcountywardlists"] as List<SelectListItem>;
     var Systemhousebenefit = ViewData["Systemhousebenefitslists"] as List<SelectListItem>;
     var Systemhousedepositfee = ViewData["Systemhousedepositfeeslists"] as List<SelectListItem>;
     bool isChecked = false;
@@ -51,7 +53,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Sub County</label>
-                    <select class="form-control form-control-sm" id="Systemsubcountyid" asp-for="@Model.Subcountyid" onclick="getsystemsubcountysubcounty(this.value)" required>
+                    <select class="form-control form-control-sm" id="Systemsubcountyid" asp-for="@Model.Subcountyid" asp-items="@Systemsubcounty" onclick="getsystemsubcountysubcounty(this.value)" required>
                         <option value="">---Select---</option>
                     </select>
                 </div>
@@ -59,7 +61,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="font-weight-light">Town/Ward</label>
-                    <select class="form-control form-control-sm" id="Systemsubcountywardid" asp-for="@Model.Subcountywardid" required>
+                    <select class="form-control form-control-sm" id="Systemsubcountywardid" asp-for="@Model.Subcountywardid" asp-items="@Systemsubcountyward" required>
                         <option value="">---Select---</option>
                     </select>
                 </div>
@@ -75,7 +77,7 @@
             <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">House Status</label>
-                    <select class="form-control form-control-sm" id="Propertyhousestatusid" required>
+                    <select class="form-control form-control-sm" id="Propertyhousestatusid" asp-for="@Model.Propertyhousestatus" required>
                         <option value="">---Select---</option>
                         <option value="0">First Tenants</option>
                         <option value="1">Second Tenants</option>
