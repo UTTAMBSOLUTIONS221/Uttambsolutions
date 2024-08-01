@@ -4,12 +4,17 @@
     {
         public long Propertyhouseid { get; set; }
         public bool Isagency { get; set; }
+        public int Roomscount { get; set; }
         public long Propertyhouseowner { get; set; }
+        public string? Propertyhouseownername { get; set; }
         public long Propertyhouseposter { get; set; }
         public string? Propertyhousename { get; set; }
         public int Countyid { get; set; }
+        public string? Countyname { get; set; }
         public int Subcountyid { get; set; }
+        public string? Subcountyname { get; set; }
         public int Subcountywardid { get; set; }
+        public string? Subcountywardname { get; set; }
         public string? Streetorlandmark { get; set; }
         public bool Hashousedeposit { get; set; }
         public int Propertyhousestatus { get; set; }
