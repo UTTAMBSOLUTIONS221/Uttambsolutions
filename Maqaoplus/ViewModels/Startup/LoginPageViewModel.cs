@@ -108,7 +108,6 @@ namespace Maqaoplus.ViewModels.Startup
         }
         private async void OnRegister()
         {
-            // Navigate to the registration page using the registered route
             await Shell.Current.GoToAsync(nameof(RegisterPage));
         }
     }

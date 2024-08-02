@@ -1,6 +1,9 @@
-﻿using System.ComponentModel;
+﻿using DBL.Entities;
+using Maqaoplus.Views.Startup;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+
 
 namespace Maqaoplus.ViewModels.Startup
 {
@@ -12,9 +15,15 @@ namespace Maqaoplus.ViewModels.Startup
         private string _phoneNumber;
         private string _password;
         private string _confirmPassword;
+        private bool _isProcessing;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        private readonly Services.ServiceProvider _serviceProvider;
 
+        public RegisterPageViewModel(Services.ServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -27,6 +36,7 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _firstName = value;
                 OnPropertyChanged();
+                ((Command)SignUpCommand).ChangeCanExecute();
             }
         }
 
@@ -37,6 +47,7 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _lastName = value;
                 OnPropertyChanged();
+                ((Command)SignUpCommand).ChangeCanExecute();
             }
         }
 
@@ -47,6 +58,7 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _emailAddress = value;
                 OnPropertyChanged();
+                ((Command)SignUpCommand).ChangeCanExecute();
             }
         }
 
@@ -57,6 +69,7 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _phoneNumber = value;
                 OnPropertyChanged();
+                ((Command)SignUpCommand).ChangeCanExecute();
             }
         }
 
@@ -67,6 +80,7 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _password = value;
                 OnPropertyChanged();
+                ((Command)SignUpCommand).ChangeCanExecute();
             }
         }
 
@@ -77,27 +91,84 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _confirmPassword = value;
                 OnPropertyChanged();
+                ((Command)SignUpCommand).ChangeCanExecute();
             }
         }
 
-        public ICommand SignUpCommand => new Command(OnSignUp);
-        public ICommand CancelCommand => new Command(OnCancel);
-        public ICommand SignInCommand => new Command(OnSignIn);
-
-        private async void OnSignUp()
+        public bool IsProcessing
         {
-            // Sign up logic here
+            get => _isProcessing;
+            set
+            {
+                _isProcessing = value;
+                OnPropertyChanged();
+                ((Command)SignUpCommand).ChangeCanExecute();
+            }
         }
 
-        private async void OnCancel()
+        public ICommand SignUpCommand => new Command(async () => await OnSignUp(), () => !IsProcessing);
+        public ICommand CancelCommand => new Command(async () => await OnCancel());
+        public ICommand SignInCommand => new Command(async () => await OnSignIn());
+
+        private async Task OnSignUp()
         {
-            // Cancel logic here
+            if (IsProcessing || !IsValidInput())
+                return;
+
+            try
+            {
+                IsProcessing = true;
+
+                var request = new SystemStaff
+                {
+                    Firstname = FirstName,
+                    Lastname = LastName,
+                    Emailaddress = EmailAddress,
+                    Phonenumber = PhoneNumber,
+                    Passwords = Password
+                };
+
+                // Call your registration service here
+                var response = await _serviceProvider.CallWebApi(request);
+
+                if (response.Success)
+                {
+                    await Shell.Current.GoToAsync(nameof(LoginPage));
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", response.ErrorMessage, "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
         }
 
-        private async void OnSignIn()
+        private bool IsValidInput()
         {
-            // Navigate to Sign In page
+            // Implement your input validation logic here
+            return !string.IsNullOrWhiteSpace(FirstName) &&
+                   !string.IsNullOrWhiteSpace(LastName) &&
+                   !string.IsNullOrWhiteSpace(EmailAddress) &&
+                   !string.IsNullOrWhiteSpace(PhoneNumber) &&
+                   !string.IsNullOrWhiteSpace(Password) &&
+                   Password == ConfirmPassword;
+        }
+
+        private async Task OnCancel()
+        {
+            await Shell.Current.GoToAsync(nameof(LoginPage));
+        }
+
+        private async Task OnSignIn()
+        {
+            await Shell.Current.GoToAsync(nameof(LoginPage));
         }
     }
-
 }
