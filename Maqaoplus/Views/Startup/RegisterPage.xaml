@@ -2,92 +2,69 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.Startup.RegisterPage"
-             Title="Signup">
+             Title="Register">
 
     <ContentPage.Content>
-        <ScrollView>
-            <VerticalStackLayout Padding="20" Spacing="15">
+        <ScrollView Padding="20">
+            <VerticalStackLayout Spacing="15">
                 <Label Text="Sign up to start interaction"
                        FontSize="24"
                        HorizontalOptions="Center"
                        TextColor="#0a506c"
                        FontAttributes="Bold" />
 
-                <Entry Placeholder="First Name"
-                       Text="{Binding FirstName}"
-                       FontSize="16"
-                       TextColor="Black" />
-                <Label Text="{Binding [FirstName], Mode=OneWayToSource, TargetNullValue=''}" 
-                       FontSize="14" 
-                       TextColor="Red" />
+                <Frame BackgroundColor="White"
+                       BorderColor="Transparent"
+                       CornerRadius="8"
+                       HasShadow="True"
+                       Padding="10"
+                       Margin="0,10">
+                    <VerticalStackLayout Spacing="10">
+                        <Entry Placeholder="First Name"
+                               ReturnType="Next"
+                               Text="{Binding FirstName}"
+                               TextColor="Black"
+                               FontSize="16" />
+                        <Entry Placeholder="Last Name"
+                               ReturnType="Next"
+                               Text="{Binding LastName}"
+                               TextColor="Black"
+                               FontSize="16" />
+                        <Entry Placeholder="Email Address"
+                               Text="{Binding EmailAddress}"
+                               Keyboard="Email"
+                               FontSize="16"
+                               TextColor="Black" />
+                        <Entry Placeholder="Phone Number"
+                               Text="{Binding PhoneNumber}"
+                               Keyboard="Telephone"
+                               FontSize="16"
+                               TextColor="Black" />
+                        <Entry Placeholder="Password"
+                               Text="{Binding Password}"
+                               IsPassword="True"
+                               FontSize="16"
+                               TextColor="Black" />
+                        <Entry Placeholder="Confirm Password"
+                               Text="{Binding ConfirmPassword}"
+                               IsPassword="True"
+                               FontSize="16"
+                               TextColor="Black" />
+                    </VerticalStackLayout>
+                </Frame>
 
-                <Entry Placeholder="Last Name"
-                       Text="{Binding LastName}"
-                       FontSize="16"
-                       TextColor="Black" />
-                <Label Text="{Binding [LastName], Mode=OneWayToSource, TargetNullValue=''}"
-                       FontSize="14"
-                       TextColor="Red" />
+                <Button BackgroundColor="#0a506c"
+                        Command="{Binding SignUpCommand}"
+                        CornerRadius="8"
+                        Text="Register"
+                        TextColor="White"
+                        FontSize="18"
+                        HeightRequest="50" />
 
-                <Entry Placeholder="Email Address"
-                       Text="{Binding EmailAddress}"
-                       Keyboard="Email"
-                       FontSize="16"
-                       TextColor="Black" />
-                <Label Text="{Binding [EmailAddress], Mode=OneWayToSource, TargetNullValue=''}"
-                       FontSize="14"
-                       TextColor="Red" />
-
-                <Entry Placeholder="Phone Number"
-                       Text="{Binding PhoneNumber}"
-                       Keyboard="Telephone"
-                       FontSize="16"
-                       TextColor="Black" />
-                <Label Text="{Binding [PhoneNumber], Mode=OneWayToSource, TargetNullValue=''}"
-                       FontSize="14"
-                       TextColor="Red" />
-
-                <Entry Placeholder="Password"
-                       Text="{Binding Password}"
-                       IsPassword="True"
-                       FontSize="16"
-                       TextColor="Black" />
-                <Label Text="{Binding [Password], Mode=OneWayToSource, TargetNullValue=''}"
-                       FontSize="14"
-                       TextColor="Red" />
-
-                <Entry Placeholder="Confirm Password"
-                       Text="{Binding ConfirmPassword}"
-                       IsPassword="True"
-                       FontSize="16"
-                       TextColor="Black" />
-                <Label Text="{Binding [ConfirmPassword], Mode=OneWayToSource, TargetNullValue=''}"
-                       FontSize="14"
-                       TextColor="Red" />
-
-                <HorizontalStackLayout Spacing="10">
-                    <Button Text="Cancel"
-                            BackgroundColor="Red"
-                            TextColor="White"
-                            Command="{Binding CancelCommand}" />
-                    <Button Text="Sign Up"
-                            BackgroundColor="#0a506c"
-                            TextColor="White"
-                            Command="{Binding SignUpCommand}" />
-                </HorizontalStackLayout>
-
-                <Label HorizontalOptions="Center"
-                       Text="Already have an account?"
-                       FontSize="14"
-                       TextColor="#888888" />
-                <Label Text="Sign In"
+                <Label Text="* Required fields"
+                       FontSize="12"
                        HorizontalOptions="Center"
-                       TextColor="#0a506c"
-                       FontSize="14">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SignInCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
+                       TextColor="Gray" />
             </VerticalStackLayout>
         </ScrollView>
     </ContentPage.Content>

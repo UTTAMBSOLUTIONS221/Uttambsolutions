@@ -1,9 +1,11 @@
+using Maqaoplus.ViewModels.Startup;
 namespace Maqaoplus.Views.Startup;
 
 public partial class RegisterPage : ContentPage
 {
-	public RegisterPage()
-	{
-		InitializeComponent();
-	}
+    public RegisterPage(RegisterPageViewModel viewModel)
+    {
+        InitializeComponent();
+        this.BindingContext = viewModel;
+    }
 }
