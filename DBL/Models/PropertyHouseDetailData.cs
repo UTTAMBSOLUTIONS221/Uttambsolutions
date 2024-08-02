@@ -16,6 +16,7 @@
         public string? Streetorlandmark { get; set; }
         public string? Propertyhousestatusdata { get; set; }
         public string? Systempropertyhousesizename { get; set; }
+        public string? Systemhousesizename { get; set; }
         public decimal Systempropertyhousesizerent { get; set; }
         public bool Systempropertyhousesizedeposit { get; set; }
         public string? Propertyhousevacant { get; set; }
