@@ -2,11 +2,93 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.Startup.RegisterPage"
-             Title="RegisterPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Signup">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Label Text="Sign up to start interaction"
+                       FontSize="24"
+                       HorizontalOptions="Center"
+                       TextColor="#0a506c"
+                       FontAttributes="Bold" />
+
+                <Entry Placeholder="First Name"
+                       Text="{Binding FirstName}"
+                       FontSize="16"
+                       TextColor="Black" />
+                <Label Text="{Binding [FirstName], Mode=OneWayToSource, TargetNullValue=''}" 
+                       FontSize="14" 
+                       TextColor="Red" />
+
+                <Entry Placeholder="Last Name"
+                       Text="{Binding LastName}"
+                       FontSize="16"
+                       TextColor="Black" />
+                <Label Text="{Binding [LastName], Mode=OneWayToSource, TargetNullValue=''}"
+                       FontSize="14"
+                       TextColor="Red" />
+
+                <Entry Placeholder="Email Address"
+                       Text="{Binding EmailAddress}"
+                       Keyboard="Email"
+                       FontSize="16"
+                       TextColor="Black" />
+                <Label Text="{Binding [EmailAddress], Mode=OneWayToSource, TargetNullValue=''}"
+                       FontSize="14"
+                       TextColor="Red" />
+
+                <Entry Placeholder="Phone Number"
+                       Text="{Binding PhoneNumber}"
+                       Keyboard="Telephone"
+                       FontSize="16"
+                       TextColor="Black" />
+                <Label Text="{Binding [PhoneNumber], Mode=OneWayToSource, TargetNullValue=''}"
+                       FontSize="14"
+                       TextColor="Red" />
+
+                <Entry Placeholder="Password"
+                       Text="{Binding Password}"
+                       IsPassword="True"
+                       FontSize="16"
+                       TextColor="Black" />
+                <Label Text="{Binding [Password], Mode=OneWayToSource, TargetNullValue=''}"
+                       FontSize="14"
+                       TextColor="Red" />
+
+                <Entry Placeholder="Confirm Password"
+                       Text="{Binding ConfirmPassword}"
+                       IsPassword="True"
+                       FontSize="16"
+                       TextColor="Black" />
+                <Label Text="{Binding [ConfirmPassword], Mode=OneWayToSource, TargetNullValue=''}"
+                       FontSize="14"
+                       TextColor="Red" />
+
+                <HorizontalStackLayout Spacing="10">
+                    <Button Text="Cancel"
+                            BackgroundColor="Red"
+                            TextColor="White"
+                            Command="{Binding CancelCommand}" />
+                    <Button Text="Sign Up"
+                            BackgroundColor="#0a506c"
+                            TextColor="White"
+                            Command="{Binding SignUpCommand}" />
+                </HorizontalStackLayout>
+
+                <Label HorizontalOptions="Center"
+                       Text="Already have an account?"
+                       FontSize="14"
+                       TextColor="#888888" />
+                <Label Text="Sign In"
+                       HorizontalOptions="Center"
+                       TextColor="#0a506c"
+                       FontSize="14">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SignInCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>
