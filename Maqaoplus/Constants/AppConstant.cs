@@ -105,12 +105,12 @@ namespace Maqaoplus.Constants
                     {
                         AppShell.Current.Dispatcher.Dispatch(async () =>
                         {
-                            await Shell.Current.GoToAsync($"//{nameof(customerDashboardInfo)}");
+                            await Shell.Current.GoToAsync($"//{nameof(CustomerDashboardPage)}");
                         });
                     }
                     else
                     {
-                        await Shell.Current.GoToAsync($"//{nameof(customerDashboardInfo)}");
+                        await Shell.Current.GoToAsync($"//{nameof(CustomerDashboardPage)}");
                     }
                 }
             }
@@ -127,31 +127,31 @@ namespace Maqaoplus.Constants
                                 {
                                     Icon = Icons.Dashboard,
                                     Title = "Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
                                     Title = "Bible",
-                                    ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
                                     Title = "Forums",
-                                    ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
                                     Title = "Groups",
-                                    ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.AboutUs,
                                     Title = "Profile",
-                                    ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
                                 },
                             }
                 };
@@ -162,12 +162,12 @@ namespace Maqaoplus.Constants
                     {
                         AppShell.Current.Dispatcher.Dispatch(async () =>
                         {
-                            await Shell.Current.GoToAsync($"//{nameof(userDashboardInfo)}");
+                            await Shell.Current.GoToAsync($"//{nameof(UserDashboardPage)}");
                         });
                     }
                     else
                     {
-                        await Shell.Current.GoToAsync($"//{nameof(userDashboardInfo)}");
+                        await Shell.Current.GoToAsync($"//{nameof(UserDashboardPage)}");
                     }
                 }
             }
