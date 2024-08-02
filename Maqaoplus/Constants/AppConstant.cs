@@ -18,7 +18,9 @@ namespace Maqaoplus.Constants
             var userDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(UserDashboardPage)).FirstOrDefault();
             if (userDashboardInfo != null) AppShell.Current.Items.Remove(userDashboardInfo);
 
-            if (App.UserDetails.Rolename == "Super Admin")
+            var serviceProvider = App.Current.Handler.MauiContext.Services.GetService<Services.ServiceProvider>();
+
+            if (App.UserDetails.Usermodel.Rolename == "Super Admin")
             {
                 var flyoutItem = new FlyoutItem()
                 {
@@ -58,7 +60,7 @@ namespace Maqaoplus.Constants
                     }
                 }
             }
-            else if (App.UserDetails.Rolename == "Maqaoplus Property House Owner")
+            else if (App.UserDetails.Usermodel.Rolename == "Maqaoplus Property House Owner")
             {
                 var flyoutItem = new FlyoutItem()
                 {
@@ -77,7 +79,7 @@ namespace Maqaoplus.Constants
                                 {
                                     Icon = Icons.People,
                                     Title = "Houses",
-                                    ContentTemplate = new DataTemplate(typeof(PropertyHousesPage)),
+                                    ContentTemplate = new DataTemplate(() => new PropertyHousesPage(serviceProvider)),
                                 },
                                 new ShellContent
                                 {

@@ -32,7 +32,7 @@ namespace Maqaoplus.ViewModels.Startup
             else
             {
                 var userInfo = JsonConvert.DeserializeObject<UsermodelResponce>(userDetailsStr);
-                App.UserDetails = userInfo.Usermodel;
+                App.UserDetails = userInfo;
                 await AppConstant.AddFlyoutMenusDetails();
             }
         }

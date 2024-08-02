@@ -87,7 +87,7 @@ namespace Maqaoplus.ViewModels.Startup
                     // Store user details locally (e.g., using Preferences)
                     string userDetailStr = JsonConvert.SerializeObject(response);
                     Preferences.Set(nameof(App.UserDetails), userDetailStr);
-                    App.UserDetails = response.Usermodel;
+                    App.UserDetails = response;
 
                     // Example additional logic after successful login
                     await AppConstant.AddFlyoutMenusDetails();

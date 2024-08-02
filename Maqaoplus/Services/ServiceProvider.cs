@@ -109,7 +109,7 @@ namespace Maqaoplus.Services
             {
                 Method = httpMethod,
                 RequestUri = new Uri(_devHttpHelper.ApiUrl + apiUrl),
-                Headers = { Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken) }
+                Headers = { Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", App.UserDetails.Token) }
             };
 
             if (request != null)

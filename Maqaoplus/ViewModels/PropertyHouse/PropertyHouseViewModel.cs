@@ -25,7 +25,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public PropertyHouseViewModel(Services.ServiceProvider serviceProvider) : this()
         {
             _serviceProvider = serviceProvider;
-            LoadItemsCommand.Execute(null);
         }
 
         private async Task LoadItems()
@@ -54,6 +53,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsBusy = false;
             }
         }
+
         private async Task ViewDetails(Systemproperty item)
         {
             try
