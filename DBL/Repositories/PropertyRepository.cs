@@ -52,5 +52,25 @@ namespace DBL.Repositories
                 }
             }
         }
+        public Systempropertyhousedata Getsystempropertyhousedatabyowner(long Ownerid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Ownerid", Ownerid);
+                parameters.Add("@Systempropertydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystempropertyhousedatabyownerid", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Systempropertydata");
+                if (systempropertydataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Systempropertyhousedata>(systempropertydataJson);
+                }
+                else
+                {
+                    return new Systempropertyhousedata();
+                }
+            }
+        }
     }
 }

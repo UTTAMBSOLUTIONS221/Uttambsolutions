@@ -8,5 +8,6 @@ namespace DBL.Repositories
         IEnumerable<Systemproperty> Getsystempropertyhousedata();
         Genericmodel Registersystempropertyhousedata(string JsonData);
         Systemproperty Getsystempropertyhousedatabyid(long Propertyid);
+        Systempropertyhousedata Getsystempropertyhousedatabyowner(long Ownerid);
     }
 }

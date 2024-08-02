@@ -1,5 +1,5 @@
 ﻿using DBL;
-using DBL.Entities;
+using DBL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,10 +17,10 @@ namespace API.Controllers
             bl = new BL(Util.ShareConnectionString(config));
             _config = config;
         }
-        [HttpGet("Getsystempropertyhousedata")]
-        public async Task<IEnumerable<Systemproperty>> Getsystempropertyhousedata()
+        [HttpGet("Getsystempropertyhousedatabyowner/{OwnerId}")]
+        public async Task<Systempropertyhousedata> Getsystempropertyhousedatabyowner(long OwnerId)
         {
-            return await bl.Getsystempropertyhousedata();
+            return await bl.Getsystempropertyhousedatabyowner(OwnerId);
         }
     }
 }
