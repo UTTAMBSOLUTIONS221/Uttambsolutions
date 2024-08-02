@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using DBL.Entities;
+using DBL.Models;
+using Maqaoplus.Helpers;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace Maqaoplus.Services
 {
@@ -12,7 +16,7 @@ namespace Maqaoplus.Services
             _devHttpHelper = devHttpHelper;
         }
 
-        public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
+        public async Task<UsermodelResponce> Authenticate(Userloginmodel request)
         {
             var httpRequestMessage = new HttpRequestMessage
             {
@@ -32,10 +36,10 @@ namespace Maqaoplus.Services
                 var response = await _devHttpHelper.HttpClient.SendAsync(httpRequestMessage);
                 var responseContent = await response.Content.ReadAsStringAsync();
 
-                var result = JsonConvert.DeserializeObject<AuthenticateResponse>(responseContent);
-                result.StatusCode = (int)response.StatusCode;
+                var result = JsonConvert.DeserializeObject<UsermodelResponce>(responseContent);
+                result.RespStatus = (int)response.StatusCode;
 
-                if (result.StatusCode == 200)
+                if (result.RespStatus == 200)
                 {
                     _accessToken = result.Token;
                 }
@@ -43,10 +47,10 @@ namespace Maqaoplus.Services
             }
             catch (Exception ex)
             {
-                return new AuthenticateResponse
+                return new UsermodelResponce
                 {
-                    StatusCode = 500,
-                    StatusMessage = ex.Message
+                    RespStatus = 500,
+                    RespMessage = ex.Message
                 };
             }
         }

@@ -1,4 +1,5 @@
 ﻿using DBL.Models;
+using Maqaoplus.Constants;
 using Maqaoplus.Views.Startup;
 using Newtonsoft.Json;
 namespace Maqaoplus.ViewModels.Startup
@@ -32,19 +33,7 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 var userInfo = JsonConvert.DeserializeObject<UsermodelResponce>(userDetailsStr);
                 App.UserDetails = userInfo.Usermodel;
-                await AppConstant.AddFlyoutMenusDetails(nameof(CommonDashboardPage));
-
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                {
-                    AppShell.Current.Dispatcher.Dispatch(async () =>
-                    {
-                        await Shell.Current.GoToAsync($"//{nameof(CommonDashboardPage)}");
-                    });
-                }
-                else
-                {
-                    await Shell.Current.GoToAsync($"//{nameof(CommonDashboardPage)}");
-                }
+                await AppConstant.AddFlyoutMenusDetails();
             }
         }
     }

@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using DBL.Entities;
+using Maqaoplus.Constants;
+using Maqaoplus.Views.Dashboards;
+using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -52,18 +55,18 @@ namespace Maqaoplus.ViewModels.Startup
                     App.UserDetails = response.Usermodel;
 
                     // Example additional logic after successful login
-                    await AppConstant.AddFlyoutMenusDetails(nameof(CommonDashboardPage));
+                    await AppConstant.AddFlyoutMenusDetails();
 
                     if (DeviceInfo.Platform == DevicePlatform.WinUI)
                     {
                         AppShell.Current.Dispatcher.Dispatch(async () =>
                         {
-                            await Shell.Current.GoToAsync($"//{nameof(CommonDashboardPage)}");
+                            await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
                         });
                     }
                     else
                     {
-                        await Shell.Current.GoToAsync($"//{nameof(CommonDashboardPage)}");
+                        await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
                     }
                 }
                 else
