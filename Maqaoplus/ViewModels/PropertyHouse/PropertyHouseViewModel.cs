@@ -1,5 +1,4 @@
 ﻿using DBL.Entities;
-using DBL.Models;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -19,7 +18,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             Items = new ObservableCollection<Systemproperty>();
             LoadItemsCommand = new Command(async () => await LoadItems());
-            ViewDetailsCommand = new Command<Organizationshopproductsdata>(async (item) => await ViewDetails(item));
+            ViewDetailsCommand = new Command<Systemproperty>(async (item) => await ViewDetails(item));
         }
 
         // Constructor with ServiceProvider parameter
@@ -55,7 +54,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsBusy = false;
             }
         }
-        private async Task ViewDetails(Organizationshopproductsdata item)
+        private async Task ViewDetails(Systemproperty item)
         {
             try
             {
