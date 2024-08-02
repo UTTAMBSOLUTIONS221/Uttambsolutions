@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Maqaoplus.ViewModels.PropertyHouse"
              x:Class="Maqaoplus.Views.PropertyHouse.PropertyHousesPage"
-             Title="Houses">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Dashboard">
+
+
+    <ContentPage.BindingContext>
+        <viewmodels:PropertyHouseViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="10">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+
+            <CollectionView ItemsSource="{Binding Items}" Margin="0,10">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="10" HasShadow="True" BorderColor="LightGray" CornerRadius="10">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PropertyHouseViewModel}}, Path=ViewDetailsCommand}" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding Primaryimageurl}" Aspect="AspectFill" HeightRequest="150" Grid.Row="0" />
+                                <Label Text="{Binding Productname}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" MaxLines="3" LineBreakMode="WordWrap" Grid.Row="1" />
+                                <Label Text="{Binding Productdescription}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" Grid.Row="2" />
+                                <Label Text="{Binding Marketprice}" FontSize="Small" TextColor="#0a506c" Grid.Row="3" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

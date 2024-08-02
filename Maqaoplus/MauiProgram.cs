@@ -1,6 +1,7 @@
 ﻿using Maqaoplus.Helpers;
 using Maqaoplus.ViewModels;
 using Maqaoplus.ViewModels.Dashboards;
+using Maqaoplus.ViewModels.PropertyHouse;
 using Maqaoplus.ViewModels.Startup;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.Startup;
@@ -43,6 +44,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<LoginPageViewModel>();
             builder.Services.AddSingleton<RegisterPageViewModel>();
             builder.Services.AddSingleton<DashboardPageViewModel>();
+            builder.Services.AddSingleton<PropertyHouseViewModel>();
             return builder.Build();
         }
     }

@@ -1,4 +1,5 @@
-﻿using DBL.Models;
+﻿using DBL.Entities;
+using DBL.Models;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -8,7 +9,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
     public class PropertyHouseViewModel : BaseViewModel
     {
         private readonly Services.ServiceProvider _serviceProvider;
-        public ObservableCollection<Organizationshopproductsdata> Items { get; }
+        public ObservableCollection<Systemproperty> Items { get; }
 
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
@@ -16,7 +17,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         // Parameterless constructor for XAML support
         public PropertyHouseViewModel()
         {
-            Items = new ObservableCollection<Organizationshopproductsdata>();
+            Items = new ObservableCollection<Systemproperty>();
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Organizationshopproductsdata>(async (item) => await ViewDetails(item));
         }
@@ -34,13 +35,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallUnAuthWebApi<object>("/api/Ecommerce/Getsystemorganizationshopproductsdata", HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedata", HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
                     Items.Clear();
                     foreach (var item in items)
                     {
-                        var product = item.ToObject<Organizationshopproductsdata>(); // Assuming item is of type JObject
+                        var product = item.ToObject<Systemproperty>(); // Assuming item is of type JObject
                         Items.Add(product);
                     }
                 }
