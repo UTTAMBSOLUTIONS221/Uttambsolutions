@@ -13,12 +13,23 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
 
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged();
+            }
+        }
+
         // Parameterless constructor for XAML support
         public PropertyHouseViewModel()
         {
             Items = new ObservableCollection<Systemproperty>();
             LoadItemsCommand = new Command(async () => await LoadItems());
-            ViewDetailsCommand = new Command<Systemproperty>(async (item) => await ViewDetails(item));
+            ViewDetailsCommand = new Command<int>(async (propertyId) => await ViewDetails(propertyId));
         }
 
         // Constructor with ServiceProvider parameter
@@ -29,7 +40,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async Task LoadItems()
         {
-            IsBusy = true;
+            IsLoading = true;
 
             try
             {
@@ -50,16 +61,27 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             finally
             {
-                IsBusy = false;
+                IsLoading = false;
             }
         }
-        private async Task ViewDetails(Systemproperty item)
+
+        private async Task ViewDetails(int propertyId)
         {
             try
             {
-                var jsonProperty = JsonConvert.SerializeObject(item);
-                var encodedProperty = Uri.EscapeDataString(jsonProperty);
-                await Shell.Current.GoToAsync($"PropertyHousesDetailPage?Property={encodedProperty}");
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/GetPropertyDetails/{propertyId}", HttpMethod.Get, null);
+                var propertyDetails = response?.Data; // Replace with actual deserialization
+
+                if (propertyDetails != null)
+                {
+                    var jsonProperty = JsonConvert.SerializeObject(propertyDetails);
+                    var encodedProperty = Uri.EscapeDataString(jsonProperty);
+                    await Shell.Current.GoToAsync($"PropertyHousesDetailPage?Property={encodedProperty}");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Property details not found.", "OK");
+                }
             }
             catch (Exception ex)
             {

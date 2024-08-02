@@ -9,31 +9,55 @@
         <viewmodels:PropertyHouseViewModel />
     </ContentPage.BindingContext>
 
-    <ScrollView>
-        <CollectionView x:Name="PropertyHousesCollectionView"
-                        ItemsSource="{Binding Items}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" Margin="10" HasShadow="True" BorderColor="LightGray" CornerRadius="10">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PropertyHouseViewModel}}, Path=ViewDetailsCommand}" CommandParameter="{Binding .}" />
-                        </Frame.GestureRecognizers>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Image Source="{Binding Primaryimageurl}" Aspect="AspectFill" HeightRequest="150" Grid.Row="0" />
-                            <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" MaxLines="3" LineBreakMode="WordWrap" Grid.Row="1" />
-                            <Label Text="{Binding Streetorlandmark}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" Grid.Row="2" />
-                            <Label Text="{Binding Roomscount}" FontSize="Small" TextColor="#0a506c" Grid.Row="3" />
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </ScrollView>
+    <Grid>
+        <!-- ActivityIndicator -->
+        <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                           IsVisible="{Binding IsLoading}" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center" 
+                           Color="#0a506c" />
+
+        <ScrollView IsVisible="{Binding IsDataLoaded}">
+            <CollectionView x:Name="PropertyHousesCollectionView"
+                            ItemsSource="{Binding Items}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="200">
+                            <!-- Adjust HeightRequest here -->
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PropertyHouseViewModel}}, Path=ViewDetailsCommand}"
+                                                      CommandParameter="{Binding Propertyhouseid}" />
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <!-- Image -->
+                                <Image Source="{Binding Primaryimageurl}" Aspect="AspectFill" HeightRequest="100" Grid.Row="0" />
+
+                                <!-- Property Name and Room Count in the same row -->
+                                <Grid Grid.Row="1" ColumnSpacing="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" LineBreakMode="TailTruncation" Grid.Column="0" />
+                                    <Label Text="{Binding Roomscount}" FontSize="Small" TextColor="#0a506c" HorizontalOptions="End" Grid.Column="1" />
+                                </Grid>
+
+                                <!-- Street or Landmark -->
+                                <Label Text="{Binding Streetorlandmark}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" Grid.Row="2" />
+                                <Label Text="{Binding Countyname}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" Grid.Row="3" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
 </ContentPage>
