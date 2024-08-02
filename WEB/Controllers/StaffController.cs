@@ -37,5 +37,11 @@ namespace WEB.Controllers
             var resp = await bl.Registersystemportalstaffdata(model);
             return Json(resp);
         }
+
+        public async Task<JsonResult> Getsystemstaffdatabyidnumber(int Idnumber)
+        {
+            var resp = await bl.Getsystemstaffdatabyidnumber(Idnumber);
+            return Json(resp);
+        }
     }
 }

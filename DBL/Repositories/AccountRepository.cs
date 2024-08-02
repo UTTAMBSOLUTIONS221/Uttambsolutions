@@ -99,6 +99,17 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registersystemjobapplicationdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+
+        public SystemStaff Getsystemstaffdatabyidnumber(int Idnumber)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Idnumber", Idnumber);
+                return connection.Query<SystemStaff>("Usp_Getsystemstaffdatabyidnumber", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         #endregion
 
         #region Verify System Staff

@@ -137,6 +137,15 @@ namespace DBL
                 return Resp;
             });
         }
+
+        public Task<SystemStaff> Getsystemstaffdatabyidnumber(int Idnumber)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Getsystemstaffdatabyidnumber(Idnumber);
+                return Resp;
+            });
+        }
         #endregion
 
         #region Verify System Staff Forgot Password

@@ -55,3 +55,42 @@
         </div>
     }
 </div>
+@section Scripts {
+    <script type="text/javascript">
+        function searchsystemstaffdata() {
+            var idNumber = $('#Systemstaffidnumberid').val();
+
+            // Validate if Propertyhouseownerid is empty
+            if ($("#Systemstaffidnumberid").val() === "") {
+                $("#Systemstaffidnumberid").addClass('is-invalid');
+                return;
+            } else {
+                $("#Systemstaffidnumberid").removeClass('is-invalid').addClass('is-valid');
+            }
+
+            $.get("/Staff/Getsystemstaffdatabyidnumber/" + idNumber, null, function (response) {
+                var resultsBody = $('#resultsBody');
+                resultsBody.empty(); // Clear previous results
+
+                if (response.length === 0) {
+                    resultsBody.append('<tr><td colspan="4" class="text-center">No results found.</td></tr>');
+                } else {
+                    $.each(response, function (index, item) {
+                        resultsBody.append(
+                            '<tr>' +
+                            '<td>' + item.Name + '</td>' +
+                            '<td>' + item.IdNumber + '</td>' +
+                            '<td>' + item.Email + '</td>' +
+                            '<td>' + item.Phone + '</td>' +
+                            '</tr>'
+                        );
+                    });
+                }
+
+                $('#searchResults').removeClass('d-none');
+            }).fail(function () {
+                alert('An error occurred while searching. Please try again.');
+            });
+        }
+    </script>
+}
