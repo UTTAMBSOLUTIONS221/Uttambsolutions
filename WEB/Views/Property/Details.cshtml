@@ -33,14 +33,14 @@
                             <div class="d-flex flex-wrap justify-content-center mb-2">
                                 <span class="badge badge-secondary mr-1"><strong>Landmark:</strong> @property.Streetorlandmark</span>
                             </div>
-                            <div class="d-flex flex-wrap justify-content-center">
+                            <div class="d-flex flex-wrap justify-content-center mb-2">
                                 <span class="badge badge-success mr-1"><strong>Shop:</strong> @property.Propertyhouseshop</span>
                                 <span class="badge badge-danger mr-1"><strong>Vacant:</strong> @property.Propertyhousevacant</span>
                                 <span class="badge badge-warning"><strong>Renovation:</strong> @property.Propertyhouseunderrenovation</span>
                             </div>
                             @if (!property.Isvacant)
                             {
-                                <a asp-action="Addpropertyhousetenant" asp-controller="Property" asp-route-Houseroomid="@property.Systempropertyhouseroomid" asp-area="" class="btn btn-sm btn-custom">Add Tenant</a>
+                                <a asp-action="Addpropertyhousetenant" asp-controller="Property" asp-route-Houseroomid="@property.Systempropertyhouseroomid" asp-area="" id="CAN_ADD_PROPERTY_HOUSE_TENANT" style="display:none;" class="btn-info btn-xs btn-custom text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Tenant</a>
                             }
                         </div>
                     </div>

@@ -59,7 +59,9 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Addpropertyhousetenant(long Houseroomid)
         {
-            return PartialView();
+            Propertyhouseroomtenant model = new Propertyhouseroomtenant();
+            model.Houseroomid = Houseroomid;
+            return PartialView(model);
         }
         [HttpGet]
         public JsonResult Getsystemsubcountydatabyid(long Id)
