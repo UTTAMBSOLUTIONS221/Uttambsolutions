@@ -33,7 +33,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedata", HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedatabyowner/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
                     Items.Clear();
