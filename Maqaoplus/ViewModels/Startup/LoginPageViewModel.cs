@@ -1,51 +1,87 @@
 ﻿using DBL.Entities;
 using Maqaoplus.Constants;
+using Maqaoplus.Views.Startup;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+
 namespace Maqaoplus.ViewModels.Startup
 {
     public class LoginPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private readonly Services.ServiceProvider _serviceProvider;
+
+        public LoginPageViewModel(Services.ServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+            LoginCommand = new Command(async () => await LoginAsync(), () => !IsProcessing);
+            RegisterCommand = new Command(OnRegister);
+        }
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private readonly Services.ServiceProvider _serviceProvider;
+        private string _userName;
+        private string _password;
+        private bool _isProcessing;
 
-        public LoginPageViewModel(Services.ServiceProvider serviceProvider)
+        public string UserName
         {
-            UserName = "info@uttambsolutions.com";
-            Password = "Password123!";
-            IsProcessing = false;
-
-            LoginCommand = new Command(async () =>
+            get => _userName;
+            set
             {
-                if (IsProcessing) return;
-
-                if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password)) return;
-
-                IsProcessing = true;
-                await Login();
-                IsProcessing = false;
-            });
-
-            _serviceProvider = serviceProvider;
+                _userName = value;
+                OnPropertyChanged();
+                ((Command)LoginCommand).ChangeCanExecute();
+            }
         }
 
-        async Task Login()
+        public string Password
         {
+            get => _password;
+            set
+            {
+                _password = value;
+                OnPropertyChanged();
+                ((Command)LoginCommand).ChangeCanExecute();
+            }
+        }
+
+        public bool IsProcessing
+        {
+            get => _isProcessing;
+            set
+            {
+                _isProcessing = value;
+                OnPropertyChanged();
+                ((Command)LoginCommand).ChangeCanExecute();
+            }
+        }
+
+        public ICommand LoginCommand { get; }
+        public ICommand RegisterCommand { get; }
+
+        private async Task LoginAsync()
+        {
+            if (IsProcessing || string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
+                return;
+
             try
             {
+                IsProcessing = true;
+
                 var request = new Userloginmodel
                 {
                     username = UserName,
-                    password = Password,
+                    password = Password
                 };
+
                 var response = await _serviceProvider.Authenticate(request);
+
                 if (response.RespStatus == 200)
                 {
                     // Store user details locally (e.g., using Preferences)
@@ -65,30 +101,15 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 await Shell.Current.DisplayAlert("Uttamb Solutions", ex.Message, "OK");
             }
+            finally
+            {
+                IsProcessing = false;
+            }
         }
-
-        private string userName;
-        private string password;
-        private bool isProcessing;
-
-        public string UserName
+        private async void OnRegister()
         {
-            get { return userName; }
-            set { userName = value; OnPropertyChanged(); }
+            // Navigate to the registration page using the registered route
+            await Shell.Current.GoToAsync(nameof(RegisterPage));
         }
-
-        public string Password
-        {
-            get { return password; }
-            set { password = value; OnPropertyChanged(); }
-        }
-
-        public bool IsProcessing
-        {
-            get { return isProcessing; }
-            set { isProcessing = value; OnPropertyChanged(); }
-        }
-
-        public ICommand LoginCommand { get; set; }
     }
 }
