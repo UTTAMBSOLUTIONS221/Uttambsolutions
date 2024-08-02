@@ -51,6 +51,15 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Details(long Propertyid, long Ownerid)
+        {
+            var data = await bl.Getsystempropertyhousedetaildatabypropertyidandownerid(Propertyid, Ownerid);
+            return View(data);
+        }
+
+
+
+        [HttpGet]
         public JsonResult Getsystemsubcountydatabyid(long Id)
         {
             var Resp = bl.GetListModelById(ListModelType.SystemSubCounty, Id).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();

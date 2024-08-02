@@ -9,5 +9,6 @@ namespace DBL.Repositories
         Genericmodel Registersystempropertyhousedata(string JsonData);
         Systemproperty Getsystempropertyhousedatabyid(long Propertyid);
         Systempropertyhousedata Getsystempropertyhousedatabyowner(long Ownerid);
+        PropertyHouseDetailData Getsystempropertyhousedetaildatabypropertyidandownerid(long Propertyid, long Ownerid);
     }
 }

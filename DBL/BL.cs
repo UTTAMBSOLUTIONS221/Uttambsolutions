@@ -807,6 +807,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<PropertyHouseDetailData> Getsystempropertyhousedetaildatabypropertyidandownerid(long Propertyid, long Ownerid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Getsystempropertyhousedetaildatabypropertyidandownerid(Propertyid, Ownerid);
+                return Resp;
+            });
+        }
         //public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
         //{
         //    return Task.Run(() =>

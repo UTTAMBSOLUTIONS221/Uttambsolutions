@@ -42,7 +42,10 @@
                                 <td>@item.Subcountyname</td>
                                 <td>@item.Subcountywardname</td>
                                 <td class="text-wrap">@item.Streetorlandmark</td>
-                                <td class="text-right"><a asp-action="Addproperty" asp-controller="Property" asp-route-code="@Guid.NewGuid()" asp-route-Propertyid="@item.Propertyhouseid" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                <td class="text-right">
+                                    <a asp-action="Addproperty" asp-controller="Property" asp-route-code="@Guid.NewGuid()" asp-route-Propertyid="@item.Propertyhouseid" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                    <a asp-action="Details" asp-controller="Property" asp-route-code="@Guid.NewGuid()" asp-route-Propertyid="@item.Propertyhouseid" asp-area="" id="CAN_VIEW_PROPERTY_HOUSE_DETAILS" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right">Details</a>
+                                </td>
                             </tr>
                         }
 
