@@ -66,6 +66,11 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Addpropertyhouseroom(long Houseroomid)
         {
+            ViewData["Systempropertyhousesizelists"] = bl.GetListModel(ListModelType.Systempropertyhousesizes).Result.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
             Systempropertyhouserooms model = new Systempropertyhouserooms();
             if (Houseroomid > 0)
             {

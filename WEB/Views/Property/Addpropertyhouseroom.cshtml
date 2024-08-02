@@ -1,0 +1,63 @@
+﻿@model DBL.Entities.Systempropertyhouserooms
+@{
+    var Systempermission = ViewData["Systempropertyhousesizelists"] as List<SelectListItem>;
+}
+<div class="modal-header">
+    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">House Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <input class="form-control form-control-sm" asp-for="Systempropertyhouseroomid" id="RoleId" hidden />
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="font-weight-light">Size Name</label>
+                <select class="form-control form-control-sm" asp-for="Systempropertyhousesizeid" asp-items="@Systempermission" id="Systempropertyhousesizeid">
+                    <option value="">---Select---</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="font-weight-light">Description</label>
+                <input class="form-control form-control-sm" asp-for="Systempropertyhousesizename" id="Roledescriptionid" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="font-weight-light">Is Vacant?</label>
+                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isvacant" id="Isvacantid" required />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="font-weight-light">Is Under Renovation?</label>
+                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isunderrenovation" id="Isunderrenovationid" required />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="font-weight-light">Is Ground Floor?</label>
+                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isgroundfloor" id="Isgroundfloorid" required />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="font-weight-light">Is Shop?</label>
+                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isshop" id="Isshopid" required />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemroleid" onclick="savesystemroledata();">
+        <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+    </button>
+</div>
