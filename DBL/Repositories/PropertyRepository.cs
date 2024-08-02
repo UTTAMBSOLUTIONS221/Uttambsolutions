@@ -104,5 +104,27 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registersystempropertyhouseroomtenantdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+
+        public Genericmodel Registerpropertyhouseroomdata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registerpropertyhouseroomdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        public Systempropertyhouserooms Getsystempropertyhouseroomdatabyid(long Houseroomid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Houseroomid", Houseroomid);
+                return connection.Query<Systempropertyhouserooms>("Usp_Getsystempropertyhouseroomdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
     }
 }

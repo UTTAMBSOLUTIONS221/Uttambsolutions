@@ -64,6 +64,21 @@ namespace WEB.Controllers
             return PartialView(model);
         }
         [HttpGet]
+        public async Task<IActionResult> Addpropertyhouseroom(long Houseroomid)
+        {
+            Systempropertyhouserooms model = new Systempropertyhouserooms();
+            if (Houseroomid > 0)
+            {
+                model = await bl.Getsystempropertyhouseroomdatabyid(Houseroomid);
+            }
+            return PartialView(model);
+        }
+        public async Task<JsonResult> Addpropertyhouseroomdata(Systempropertyhouserooms model)
+        {
+            var resp = await bl.Registerpropertyhouseroomdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
+        [HttpGet]
         public JsonResult Getsystemsubcountydatabyid(long Id)
         {
             var Resp = bl.GetListModelById(ListModelType.SystemSubCounty, Id).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();

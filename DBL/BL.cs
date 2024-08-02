@@ -833,6 +833,24 @@ namespace DBL
             });
         }
 
+        public Task<Systempropertyhouserooms> Getsystempropertyhouseroomdatabyid(long Houseroomid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Getsystempropertyhouseroomdatabyid(Houseroomid);
+                return Resp;
+            });
+        }
+
+        public Task<Genericmodel> Registerpropertyhouseroomdata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Registerpropertyhouseroomdata(Obj);
+                return Resp;
+            });
+        }
+
         //public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
         //{
         //    return Task.Run(() =>
