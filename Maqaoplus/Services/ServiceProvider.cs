@@ -123,9 +123,21 @@ namespace Maqaoplus.Services
             {
                 var response = await _devHttpHelper.HttpClient.SendAsync(httpRequestMessage);
                 var responseContent = await response.Content.ReadAsStringAsync();
-
-                var result = JsonConvert.DeserializeObject<BaseResponse>(responseContent);
-                result.StatusCode = (int)response.StatusCode;
+                var result = new BaseResponse
+                {
+                    StatusCode = (int)response.StatusCode,
+                    StatusMessage = "OK"
+                };
+                //var result = JsonConvert.DeserializeObject<BaseResponse>(responseContent);
+                var json = JObject.Parse(responseContent);
+                if (json["data"] is JArray dataArray)
+                {
+                    result.Data = dataArray.ToObject<List<dynamic>>();
+                }
+                else
+                {
+                    result.Data = json["data"];
+                }
 
                 return result;
             }

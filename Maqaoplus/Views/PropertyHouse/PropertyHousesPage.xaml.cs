@@ -18,8 +18,6 @@ public partial class PropertyHousesPage : ContentPage
         if (_viewModel.LoadItemsCommand.CanExecute(null))
         {
             _viewModel.LoadItemsCommand.Execute(null);
-            // You can directly call the method if needed
-            // await _viewModel.LoadItems();
         }
     }
 }

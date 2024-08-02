@@ -58,9 +58,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             try
             {
-                var jsonProduct = JsonConvert.SerializeObject(item);
-                var encodedProduct = Uri.EscapeDataString(jsonProduct);
-                await Shell.Current.GoToAsync($"SokojijiProductDetailsPage?Product={encodedProduct}");
+                var jsonProperty = JsonConvert.SerializeObject(item);
+                var encodedProperty = Uri.EscapeDataString(jsonProperty);
+                await Shell.Current.GoToAsync($"PropertyHousesDetailPage?Property={encodedProperty}");
             }
             catch (Exception ex)
             {

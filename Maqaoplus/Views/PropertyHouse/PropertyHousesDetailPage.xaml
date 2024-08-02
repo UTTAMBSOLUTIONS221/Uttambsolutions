@@ -1,0 +1,54 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maqaoplus.Views.PropertyHouse.PropertyHousesDetailPage">
+    <ScrollView>
+        <StackLayout Padding="10">
+            <!-- Main Property Details -->
+            <Label Text="Property Details" FontSize="Large" FontAttributes="Bold"/>
+            <Label Text="{Binding Propertyhousename}" FontSize="Medium"/>
+            <Label Text="{Binding Propertyhouseownername}" FontSize="Medium"/>
+            <Label Text="{Binding Countyname}" FontSize="Medium"/>
+            <Label Text="{Binding Subcountyname}" FontSize="Medium"/>
+            <Label Text="{Binding Subcountywardname}" FontSize="Medium"/>
+            <Label Text="{Binding Streetorlandmark}" FontSize="Medium"/>
+
+            <!-- Property Sizes -->
+            <Label Text="Property Sizes" FontSize="Large" FontAttributes="Bold" Margin="0,20,0,0"/>
+            <CollectionView ItemsSource="{Binding Propertyhousesize}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Systemhousesizename}" FontSize="Medium"/>
+                            <Label Text="{Binding Systempropertyhousesizerent, StringFormat='Rent: {0:C}'}" FontSize="Medium"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Property Deposit Fees -->
+            <Label Text="Property Deposit Fees" FontSize="Large" FontAttributes="Bold" Margin="0,20,0,0"/>
+            <CollectionView ItemsSource="{Binding Propertyhousedepositfee}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Housedepositfeename}" FontSize="Medium"/>
+                            <Label Text="{Binding Systempropertyhousedepositfeeamount, StringFormat='Fee: {0:C}'}" FontSize="Medium"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Property Benefits -->
+            <Label Text="Property Benefits" FontSize="Large" FontAttributes="Bold" Margin="0,20,0,0"/>
+            <CollectionView ItemsSource="{Binding Propertyhousebenefit}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Housebenefitname}" FontSize="Medium"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

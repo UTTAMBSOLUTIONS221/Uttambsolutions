@@ -4,6 +4,7 @@ using Maqaoplus.ViewModels.Dashboards;
 using Maqaoplus.ViewModels.PropertyHouse;
 using Maqaoplus.ViewModels.Startup;
 using Maqaoplus.Views.Dashboards;
+using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.Startup;
 namespace Maqaoplus
 {
@@ -36,6 +37,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddSingleton<DashboardPage>();
+            builder.Services.AddSingleton<PropertyHousesDetailPage>();
 
 
             // View Models
@@ -45,6 +47,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<RegisterPageViewModel>();
             builder.Services.AddSingleton<DashboardPageViewModel>();
             builder.Services.AddSingleton<PropertyHouseViewModel>();
+            builder.Services.AddSingleton<PropertyHouseDetailViewModel>();
             return builder.Build();
         }
     }
