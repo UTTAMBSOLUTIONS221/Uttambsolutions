@@ -16,21 +16,21 @@
                             <h5 class="card-title text-center text-dark">@property.Propertyhousename</h5>
                             <p class="card-text text-center text-muted">@property.Systemhousesizename</p>
                             <p class="card-text text-center text-muted">@property.Systempropertyhousesizename</p>
-                            <div class="d-flex flex-wrap justify-content-center">
+                            <div class="d-flex flex-wrap justify-content-center  mb-1">
                                 <span class="badge badge-primary mr-2"><strong>Rent:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
                                 @if (property.Systempropertyhousesizedeposit)
                                 {
                                     <span class="badge badge-warning mr-2"><strong>Deposit:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
                                 }
                             </div>
-                            <div class="d-flex flex-wrap justify-content-center">
+                            <div class="d-flex flex-wrap justify-content-center mb-1">
                                 <span class="badge badge-info mr-2"><strong>County:</strong> @property.Countyname</span>
                                 <span class="badge badge-info mr-2"><strong>Sub County:</strong> @property.Subcountyname</span>
                             </div>
-                            <div class="d-flex flex-wrap justify-content-center">
+                            <div class="d-flex flex-wrap justify-content-center mb-1">
                                 <span class="badge badge-info mr-2"><strong>Ward:</strong> @property.Subcountywardname</span>
                             </div>
-                            <div class="d-flex flex-wrap justify-content-center mb-3">
+                            <div class="d-flex flex-wrap justify-content-center mb-1">
                                 <span class="badge badge-secondary mr-2"><strong>Landmark:</strong> @property.Streetorlandmark</span>
                             </div>
                             <div class="d-flex flex-wrap justify-content-center">
