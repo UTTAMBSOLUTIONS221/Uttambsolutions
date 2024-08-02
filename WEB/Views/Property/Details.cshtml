@@ -76,15 +76,11 @@
                     resultsContainer.empty();
                     if (response) {
                         var cardHtml =
-                            '<div class="card mb-3">' +
-                            '    <div class="card-body">' +
-                            '        <input type="text" name="name" value="' + response.Userid + '" class="form-control mb-2" />' +
-                            '        <h5 class="card-title">Name: ' + response.Firstname + ' ' + response.Lastname + '</h5>' +
-                            '        <p class="card-text">ID Number: ' + response.Idnumber + '</p>' +
-                            '        <p class="card-text">Email Address: ' + response.Emailaddress + '</p>' +
-                            '        <p class="card-text">Phone Number: ' + response.Phonenumber + '</p>' +
-                            '    </div>' +
-                            '</div>';
+                            '<input type="text" id="systemstaffid" value="' + response.Userid + '" class="form-control mb-2" hidden />' +
+                            '<h5 class="card-title">Name: ' + response.Firstname + ' ' + response.Lastname + '</h5>' +
+                            '<p class="card-text">ID Number: ' + response.Idnumber + '</p>' +
+                            '<p class="card-text">Email Address: ' + response.Emailaddress + '</p>' +
+                            '<p class="card-text">Phone Number: ' + response.Phonenumber + '</p>';
 
                         resultsContainer.append(cardHtml);
                     } else {
@@ -92,6 +88,7 @@
                     }
 
                     resultsContainer.removeClass('d-none');
+                    $("#searchresultbuttons").removeClass('d-none');
                 },
                 error: function () {
                     alert('An error occurred while searching. Please try again.');
