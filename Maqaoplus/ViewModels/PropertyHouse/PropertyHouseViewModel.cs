@@ -24,6 +24,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        private bool _isDataLoaded;
+        public bool IsDataLoaded
+        {
+            get => _isDataLoaded;
+            set
+            {
+                _isDataLoaded = value;
+                OnPropertyChanged();
+            }
+        }
+
         // Parameterless constructor for XAML support
         public PropertyHouseViewModel()
         {
@@ -41,6 +52,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task LoadItems()
         {
             IsLoading = true;
+            IsDataLoaded = false;
 
             try
             {
@@ -54,6 +66,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         Items.Add(product);
                     }
                 }
+                IsDataLoaded = true;
             }
             catch (Exception ex)
             {
@@ -71,6 +84,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 var jsonProperty = JsonConvert.SerializeObject(propertyId);
                 var encodedProperty = Uri.EscapeDataString(jsonProperty);
+                System.Diagnostics.Debug.WriteLine($"Navigating to PropertyHousesDetailPage with PropertyId={encodedProperty}");
                 await Shell.Current.GoToAsync($"PropertyHousesDetailPage?PropertyId={encodedProperty}");
             }
             catch (Exception ex)
