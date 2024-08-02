@@ -24,6 +24,9 @@ namespace Maqaoplus
             // Services
             builder.Services.AddSingleton<Services.ServiceProvider>();
 
+            // Register services
+            builder.Services.AddSingleton<AppShell>();
+
             // Views
             builder.Services.AddSingleton<LoadingPage>();
             builder.Services.AddSingleton<LoginPage>();
