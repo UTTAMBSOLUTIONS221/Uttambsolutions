@@ -2,6 +2,7 @@
 using DBL.Models;
 using Maqaoplus.Helpers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text;
 
 namespace Maqaoplus.Services
@@ -55,8 +56,54 @@ namespace Maqaoplus.Services
             }
         }
 
-        public async Task<TResponse> CallWebApi<TRequest, TResponse>(
-            string apiUrl, HttpMethod httpMethod, TRequest request) where TResponse : BaseResponse
+        public async Task<BaseResponse> CallUnAuthWebApi<TRequest>(string apiUrl, HttpMethod httpMethod, TRequest request)
+        {
+            var httpRequestMessage = new HttpRequestMessage
+            {
+                Method = httpMethod,
+                RequestUri = new Uri(_devHttpHelper.ApiUrl + apiUrl)
+            };
+
+            if (request != null)
+            {
+                string jsonContent = JsonConvert.SerializeObject(request);
+                var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                httpRequestMessage.Content = httpContent;
+            }
+
+            try
+            {
+                var response = await _devHttpHelper.HttpClient.SendAsync(httpRequestMessage);
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var result = new BaseResponse
+                {
+                    StatusCode = (int)response.StatusCode,
+                    StatusMessage = "OK"
+                };
+                //var result = JsonConvert.DeserializeObject<BaseResponse>(responseContent);
+                var json = JObject.Parse(responseContent);
+                if (json["data"] is JArray dataArray)
+                {
+                    result.Data = dataArray.ToObject<List<dynamic>>();
+                }
+                else
+                {
+                    result.Data = json["data"];
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse
+                {
+                    StatusCode = 500,
+                    StatusMessage = ex.Message
+                };
+            }
+        }
+
+        public async Task<BaseResponse> CallAuthWebApi<TRequest>(string apiUrl, HttpMethod httpMethod, TRequest request)
         {
             var httpRequestMessage = new HttpRequestMessage
             {
@@ -77,17 +124,18 @@ namespace Maqaoplus.Services
                 var response = await _devHttpHelper.HttpClient.SendAsync(httpRequestMessage);
                 var responseContent = await response.Content.ReadAsStringAsync();
 
-                var result = JsonConvert.DeserializeObject<TResponse>(responseContent);
+                var result = JsonConvert.DeserializeObject<BaseResponse>(responseContent);
                 result.StatusCode = (int)response.StatusCode;
 
                 return result;
             }
             catch (Exception ex)
             {
-                var result = Activator.CreateInstance<TResponse>();
-                result.StatusCode = 500;
-                result.StatusMessage = ex.Message;
-                return result;
+                return new BaseResponse
+                {
+                    StatusCode = 500,
+                    StatusMessage = ex.Message
+                };
             }
         }
     }

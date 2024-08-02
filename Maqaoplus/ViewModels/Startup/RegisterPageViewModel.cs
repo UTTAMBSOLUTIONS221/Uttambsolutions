@@ -129,15 +129,18 @@ namespace Maqaoplus.ViewModels.Startup
                 };
 
                 // Call your registration service here
-                var response = await _serviceProvider.CallWebApi(request);
-
-                if (response.Success)
+                var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Register", HttpMethod.Post, request);
+                if (response.StatusCode == 0)
                 {
                     await Shell.Current.GoToAsync(nameof(LoginPage));
                 }
+                else if (response.StatusCode == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.StatusMessage, "OK");
+                }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Error", response.ErrorMessage, "OK");
+                    await Shell.Current.DisplayAlert("Error", "Database error occured kindly Contact Admin", "OK");
                 }
             }
             catch (Exception ex)
