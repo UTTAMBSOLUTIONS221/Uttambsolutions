@@ -74,20 +74,17 @@
                 success: function (response) {
                     var resultsBody = $('#resultsBody');
                     resultsBody.empty(); 
-
-                    if (response.length === 0) {
-                        resultsBody.append('<tr><td colspan="4" class="text-center">No results found.</td></tr>');
+                    if (response) {
+                        resultsBody.append(
+                            '<tr>' +
+                            '<td>' + response.Firstname + ' ' + response.Lastname + '</td>' +
+                            '<td>' + response.Idnumber + '</td>' +
+                            '<td>' + response.Emailaddress + '</td>' +
+                            '<td>' + response.Phonenumber + '</td>' +
+                            '</tr>'
+                        );
                     } else {
-                        $.each(response, function (index, item) {
-                            resultsBody.append(
-                                '<tr>' +
-                                '<td>' + item.Firstname + ' ' + item.Lastname + '</td>' +
-                                '<td>' + item.Idnumber + '</td>' +
-                                '<td>' + item.Emailaddress + '</td>' +
-                                '<td>' + item.Phonenumber + '</td>' +
-                                '</tr>'
-                            );
-                        });
+                        resultsBody.append('<tr><td colspan="4" class="text-center">No results found.</td></tr>');
                     }
 
                     $('#searchResults').removeClass('d-none');
