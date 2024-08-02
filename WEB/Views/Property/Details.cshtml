@@ -60,6 +60,8 @@
         function searchsystemstaffdata() {
             var idNumber = $('#Systemstaffidnumberid').val();
 
+            alert(JSON.stringify(idNumber));
+
             // Validate if ID number input is empty
             if (idNumber.trim() === "") {
                 $("#Systemstaffidnumberid").addClass('is-invalid');
@@ -69,8 +71,9 @@
             }
 
             $.ajax({
-                url: '/Staff/Getsystemstaffdatabyidnumber/' + idNumber, 
+                url: '/Staff/Getsystemstaffdatabyidnumber',
                 type: 'GET',
+                data: { Idnumber: idNumber },
                 success: function (response) {
                     var resultsBody = $('#resultsBody');
                     resultsBody.empty(); 
