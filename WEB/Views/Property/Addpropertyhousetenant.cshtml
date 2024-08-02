@@ -13,8 +13,23 @@
         <div class="input-group">
             <input type="text" class="form-control form-control-sm" id="SystemjobfunctionId" placeholder="Enter id number to search" aria-label="Idnumbersearch" />
             <div class="input-group-append">
-                <button class="btn btn-sm btn-secondary" onclick="addsystemjobfunctiondata()">Search</button>
+                <button class="btn btn-sm btn-secondary" onclick="searchsystemstaffdata()">Search</button>
             </div>
+        </div>
+        <div id="searchResults" class="d-none">
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>ID Number</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                    <!-- Rows will be populated here -->
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
