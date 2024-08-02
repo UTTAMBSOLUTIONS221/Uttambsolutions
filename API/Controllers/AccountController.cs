@@ -1,8 +1,7 @@
-﻿using API.Models;
-using DBL;
+﻿using DBL;
+using DBL.Entities;
 using DBL.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -60,6 +59,12 @@ namespace API.Controllers
                 Token = tokenString,
                 Usermodel = _userData.Usermodel
             });
+        }
+        [AllowAnonymous]
+        [Route("Registerstaff"), HttpPost]
+        public async Task<Genericmodel> Registersystemstaffdata(SystemStaff Model)
+        {
+            return await bl.Registersystemstaffdata(Model);
         }
     }
 }
