@@ -1,5 +1,50 @@
-﻿
+﻿@model DBL.Models.PropertyHouseDetailData
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
 }
+<div class="container">
+    @if (Model != null && Model.Data != null)
+    {
+        <div class="row">
+            @foreach (var property in Model.Data)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card h-100 shadow-lg border-light">
+                        <img src="@Url.Content(property.Primaryimageurl ?? "~/images/house.png")" alt="@property.Propertyhousename" class="card-img-top" style="height: 200px; object-fit: cover;" />
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-center text-dark">@property.Propertyhousename</h5>
+                            <p class="card-text text-center text-muted mb-3">@property.Systempropertyhousesizename</p>
+                            <div class="d-flex flex-wrap justify-content-center mb-3">
+                                <span class="badge badge-primary mr-2"><strong>Rent:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
+                                @if (property.Systempropertyhousesizedeposit)
+                                {
+                                    <span class="badge badge-warning mr-2"><strong>Deposit:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
+                                }
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-center mb-3">
+                                <span class="badge badge-info mr-2"><strong>County:</strong> @property.Countyname</span>
+                                <span class="badge badge-info mr-2"><strong>Sub County:</strong> @property.Subcountyname</span>
+                                <span class="badge badge-info mr-2"><strong>Ward:</strong> @property.Subcountywardname</span>
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-center mb-3">
+                                <span class="badge badge-secondary mr-2"><strong>Landmark:</strong> @property.Streetorlandmark</span>
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-center">
+                                <span class="badge badge-success mr-2"><strong>Shop:</strong> @property.Propertyhouseshop</span>
+                                <span class="badge badge-danger mr-2"><strong>Vacant:</strong> @property.Propertyhousevacant</span>
+                                <span class="badge badge-warning"><strong>Renovation:</strong> @property.Propertyhouseunderrenovation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center my-5">
+            <p class="text-muted">No property available at the moment.</p>
+        </div>
+    }
+</div>

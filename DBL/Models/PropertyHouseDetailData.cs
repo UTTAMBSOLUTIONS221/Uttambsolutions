@@ -7,6 +7,7 @@
     public class PropertyHouseDetails
     {
         public int Systempropertyhouseroomid { get; set; }
+        public string? Primaryimageurl { get; set; }
         public string? Propertyhouseownername { get; set; }
         public string? Propertyhousename { get; set; }
         public string? Countyname { get; set; }
@@ -16,7 +17,7 @@
         public string? Propertyhousestatusdata { get; set; }
         public string? Systempropertyhousesizename { get; set; }
         public decimal Systempropertyhousesizerent { get; set; }
-        public decimal Systempropertyhousesizedeposit { get; set; }
+        public bool Systempropertyhousesizedeposit { get; set; }
         public string? Propertyhousevacant { get; set; }
         public string? Propertyhouseunderrenovation { get; set; }
         public string? Propertyhouseshop { get; set; }
