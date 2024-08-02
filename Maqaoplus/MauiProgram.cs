@@ -33,13 +33,15 @@ namespace Maqaoplus
             // Views
             builder.Services.AddSingleton<LoadingPage>();
             builder.Services.AddSingleton<LoginPage>();
-            builder.Services.AddSingleton<DashboardPage>();
             builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddSingleton<DashboardPage>();
+
 
             // View Models
             builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddSingleton<LoadingPageViewModel>();
             builder.Services.AddSingleton<LoginPageViewModel>();
+            builder.Services.AddSingleton<RegisterPageViewModel>();
             builder.Services.AddSingleton<DashboardPageViewModel>();
             return builder.Build();
         }

@@ -125,19 +125,20 @@ namespace Maqaoplus.ViewModels.Startup
                     Lastname = LastName,
                     Emailaddress = EmailAddress,
                     Phonenumber = PhoneNumber,
-                    Passwords = Password
+                    Passwords = Password,
+                    Confirmpasswords = ConfirmPassword
                 };
 
                 // Call your registration service here
-                var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Register", HttpMethod.Post, request);
-                if (response.StatusCode == 0)
+                var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Registerstaff", HttpMethod.Post, request);
+                if (response.StatusCode == 200)
                 {
                     await Shell.Current.GoToAsync(nameof(LoginPage));
                 }
-                else if (response.StatusCode == 1)
-                {
-                    await Shell.Current.DisplayAlert("Warning", response.StatusMessage, "OK");
-                }
+                //else if (response.StatusCode == 1)
+                //{
+                //    await Shell.Current.DisplayAlert("Warning", response.StatusMessage, "OK");
+                //}
                 else
                 {
                     await Shell.Current.DisplayAlert("Error", "Database error occured kindly Contact Admin", "OK");
