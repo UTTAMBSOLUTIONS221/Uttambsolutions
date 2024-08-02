@@ -76,5 +76,11 @@ namespace WEB.Controllers
             return Json(Resp);
         }
 
+        public async Task<JsonResult> Addsystempropertyhouseroomtenantdata(Propertyhouseroomtenant model)
+        {
+            var resp = await bl.Registersystempropertyhouseroomtenantdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
+
     }
 }
