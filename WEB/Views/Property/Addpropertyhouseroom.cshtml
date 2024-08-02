@@ -10,7 +10,7 @@
 </div>
 <div class="modal-body">
     <div class="row">
-        <input class="form-control form-control-sm" asp-for="Systempropertyhouseroomid" id="RoleId" hidden />
+        <input class="form-control form-control-sm" asp-for="Systempropertyhouseroomid" id="Systempropertyhouseroomid" hidden />
     </div>
     <div class="row">
         <div class="col-sm-6">
@@ -23,8 +23,8 @@
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label class="font-weight-light">Description</label>
-                <input class="form-control form-control-sm" asp-for="Systempropertyhousesizename" id="Roledescriptionid" />
+                <label class="font-weight-light">House Name</label>
+                <input class="form-control form-control-sm" asp-for="Systempropertyhousesizename" id="Systempropertyhousesizenameid" />
             </div>
         </div>
     </div>
@@ -32,32 +32,32 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Is Vacant?</label>
-                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isvacant" id="Isvacantid" required />
+                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isvacant" id="Isvacantid" />
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Is Under Renovation?</label>
-                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isunderrenovation" id="Isunderrenovationid" required />
+                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isunderrenovation" id="Isunderrenovationid" />
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Is Ground Floor?</label>
-                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isgroundfloor" id="Isgroundfloorid" required />
+                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isgroundfloor" id="Isgroundfloorid" />
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Is Shop?</label>
-                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isshop" id="Isshopid" required />
+                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isshop" id="Isshopid" />
             </div>
         </div>
     </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemroleid" onclick="savesystemroledata();">
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystempropertyroomid" onclick="savesystempropertyroomdata();">
         <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
     </button>
 </div>
