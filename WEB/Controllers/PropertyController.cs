@@ -56,9 +56,11 @@ namespace WEB.Controllers
             var data = await bl.Getsystempropertyhousedetaildatabypropertyidandownerid(Propertyid, Ownerid);
             return View(data);
         }
-
-
-
+        [HttpGet]
+        public async Task<IActionResult> Addpropertyhousetenant(long Houseroomid)
+        {
+            return PartialView();
+        }
         [HttpGet]
         public JsonResult Getsystemsubcountydatabyid(long Id)
         {
