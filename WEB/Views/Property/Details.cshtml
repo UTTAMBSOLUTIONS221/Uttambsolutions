@@ -78,10 +78,11 @@
                         var cardHtml =
                             '<div class="card mb-3">' +
                             '    <div class="card-body">' +
-                            '        <h5 class="card-title">' + response.Firstname + ' ' + response.Lastname + '</h5>' +
-                            '        <p class="card-text"><strong>ID Number:</strong> ' + response.Idnumber + '</p>' +
-                            '        <p class="card-text"><strong>Email Address:</strong> ' + response.Emailaddress + '</p>' +
-                            '        <p class="card-text"><strong>Phone Number:</strong> ' + response.Phonenumber + '</p>' +
+                            '        <input type="text" name="name" value="' + response.Userid + '" class="form-control mb-2" />' +
+                            '        <h5 class="card-title">Name: ' + response.Firstname + ' ' + response.Lastname + '</h5>' +
+                            '        <p class="card-text">ID Number: ' + response.Idnumber + '</p>' +
+                            '        <p class="card-text">Email Address: ' + response.Emailaddress + '</p>' +
+                            '        <p class="card-text">Phone Number: ' + response.Phonenumber + '</p>' +
                             '    </div>' +
                             '</div>';
 
