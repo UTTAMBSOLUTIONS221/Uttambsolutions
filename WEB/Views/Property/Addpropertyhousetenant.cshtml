@@ -17,23 +17,10 @@
             </div>
         </div>
         <div id="searchResults" class="d-none">
-            <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="AllsystemDataTables2">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>ID Number</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                    </tr>
-                </thead>
-                <tbody id="resultsBody">
-                    <!-- Rows will be populated here -->
-                </tbody>
-            </table>
         </div>
     </div>
 </div>
-<div class="modal-footer">
+<div class="modal-footer d-none" id="searchResults">
     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
     <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemroleid" onclick="savesystemroledata();">
         <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>

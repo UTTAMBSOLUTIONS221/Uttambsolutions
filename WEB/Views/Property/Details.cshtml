@@ -72,22 +72,25 @@
                 type: 'GET',
                 data: { Idnumber: idNumber },
                 success: function (response) {
-                    var resultsBody = $('#resultsBody');
-                    resultsBody.empty(); 
+                    var resultsContainer = $('#searchResults');
+                    resultsContainer.empty();
                     if (response) {
-                        resultsBody.append(
-                            '<tr>' +
-                            '<td>' + response.Firstname + ' ' + response.Lastname + '</td>' +
-                            '<td>' + response.Idnumber + '</td>' +
-                            '<td>' + response.Emailaddress + '</td>' +
-                            '<td>' + response.Phonenumber + '</td>' +
-                            '</tr>'
-                        );
+                        var cardHtml =
+                            '<div class="card mb-3">' +
+                            '    <div class="card-body">' +
+                            '        <h5 class="card-title">' + response.Firstname + ' ' + response.Lastname + '</h5>' +
+                            '        <p class="card-text"><strong>ID Number:</strong> ' + response.Idnumber + '</p>' +
+                            '        <p class="card-text"><strong>Email Address:</strong> ' + response.Emailaddress + '</p>' +
+                            '        <p class="card-text"><strong>Phone Number:</strong> ' + response.Phonenumber + '</p>' +
+                            '    </div>' +
+                            '</div>';
+
+                        resultsContainer.append(cardHtml);
                     } else {
-                        resultsBody.append('<tr><td colspan="4" class="text-center">No results found.</td></tr>');
+                        resultsContainer.append('<tr><td colspan="4" class="text-center">No results found.</td></tr>');
                     }
 
-                    $('#searchResults').removeClass('d-none');
+                    resultsContainer.removeClass('d-none');
                 },
                 error: function () {
                     alert('An error occurred while searching. Please try again.');
