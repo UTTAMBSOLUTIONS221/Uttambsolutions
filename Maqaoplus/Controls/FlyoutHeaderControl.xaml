@@ -9,9 +9,5 @@
             </Frame>
         </Frame>
         <Label x:Name="lblUserName" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
-        <StackLayout Orientation="Horizontal" Spacing="10">
-            <Label x:Name="lblMemberNumber"  FontSize="17" FontAttributes="Bold" />
-            <Label VerticalTextAlignment="Center" FontAttributes="Bold" x:Name="lblMemberNo" FontSize="16" />
-        </StackLayout>
     </VerticalStackLayout>
 </StackLayout>

@@ -4,7 +4,7 @@
              x:Class="Maqaoplus.Views.Dashboards.CustomerDashboardPage"
              Title="CustomerDashboardPage">
     <StackLayout Padding="10">
-        <Label FontSize="18" Text="Welcome to Admin Dashboard Page" />
+        <Label FontSize="18" Text="Welcome to Customer Dashboard Page" />
 
     </StackLayout>
 </ContentPage>

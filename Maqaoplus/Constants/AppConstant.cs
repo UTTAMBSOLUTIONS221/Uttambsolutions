@@ -1,5 +1,6 @@
 ﻿using Maqaoplus.Controls;
 using Maqaoplus.Views.Dashboards;
+using Maqaoplus.Views.PropertyHouse;
 
 namespace Maqaoplus.Constants
 {
@@ -75,25 +76,19 @@ namespace Maqaoplus.Constants
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
-                                    Title = "Bible",
-                                    ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
+                                    Title = "Houses",
+                                    ContentTemplate = new DataTemplate(typeof(PropertyHousesPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
-                                    Title = "Forums",
-                                    ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.People,
-                                    Title = "Groups",
+                                    Title = "Statement",
                                     ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
                                 },
                                 new ShellContent
                                 {
                                     Icon = Icons.AboutUs,
-                                    Title = "Profile",
+                                    Title = "Feedback",
                                     ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
                                 },
                             }
