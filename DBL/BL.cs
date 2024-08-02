@@ -824,50 +824,57 @@ namespace DBL
                 return Resp;
             });
         }
-        //public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
-        //{
-        //    return Task.Run(() =>
-        //    {
-        //        var Resp = db.OpportunityRepository.Getsystemallunpublishedopportunitydata();
-        //        return Resp;
-        //    });
-        //}
-        //public Task<Genericmodel> Updatepublishedopportunitydata(long Opportunityid)
-        //{
-        //    return Task.Run(() =>
-        //    {
-        //        var Resp = db.OpportunityRepository.Updatepublishedopportunitydata(Opportunityid);
-        //        return Resp;
-        //    });
-        //}
-        #endregion
-
-        #region System Dropdowns
-        public Task<IEnumerable<ListModel>> GetListModel(ListModelType listType)
+        public Task<Genericmodel> Registersystempropertyhouseroomtenantdata(string Obj)
         {
             return Task.Run(() =>
             {
-                return db.GeneralRepository.GetListModel(listType);
-            });
-        }
-        public Task<IEnumerable<ListModel>> GetListModelById(ListModelType listType, long Id)
-        {
-            return Task.Run(() =>
-            {
-                return db.GeneralRepository.GetListModelbycode(listType, Id);
-            });
-        }
-        #endregion
-
-        #region System Other Methods
-        public Task<Genericmodel> Logsystemuseractivitydata(string Obj)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.SettingsRepository.Registersystemuseractivitydata(Obj);
+                var Resp = db.PropertyRepository.Registersystempropertyhouseroomtenantdata(Obj);
                 return Resp;
-            });
-        }
-        #endregion
-    }
+
+                //public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
+                //{
+                //    return Task.Run(() =>
+                //    {
+                //        var Resp = db.OpportunityRepository.Getsystemallunpublishedopportunitydata();
+                //        return Resp;
+                //    });
+                //}
+                //public Task<Genericmodel> Updatepublishedopportunitydata(long Opportunityid)
+                //{
+                //    return Task.Run(() =>
+                //    {
+                //        var Resp = db.OpportunityRepository.Updatepublishedopportunitydata(Opportunityid);
+                //        return Resp;
+                //    });
+                //}
+                #endregion
+
+                #region System Dropdowns
+                public Task<IEnumerable<ListModel>> GetListModel(ListModelType listType)
+                {
+                    return Task.Run(() =>
+                    {
+                        return db.GeneralRepository.GetListModel(listType);
+                    });
+                }
+                public Task<IEnumerable<ListModel>> GetListModelById(ListModelType listType, long Id)
+                {
+                    return Task.Run(() =>
+                    {
+                        return db.GeneralRepository.GetListModelbycode(listType, Id);
+                    });
+                }
+                #endregion
+
+                #region System Other Methods
+                public Task<Genericmodel> Logsystemuseractivitydata(string Obj)
+                {
+                    return Task.Run(() =>
+                    {
+                        var Resp = db.SettingsRepository.Registersystemuseractivitydata(Obj);
+                        return Resp;
+                    });
+                }
+                #endregion
+            }
 }
