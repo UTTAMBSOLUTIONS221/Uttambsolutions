@@ -69,18 +69,16 @@ namespace WEB.Controllers
             var Resp = bl.GetListModelById(ListModelType.SystemSubCounty, Id).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             return Json(Resp);
         }
+        public async Task<JsonResult> Addsystempropertyhouseroomtenantdata(Propertyhouseroomtenant model)
+        {
+            var resp = await bl.Registersystempropertyhouseroomtenantdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
         [HttpGet]
         public JsonResult Getsystemsubcountywarddatabyid(long Id)
         {
             var Resp = bl.GetListModelById(ListModelType.SystemSubCountyWard, Id).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             return Json(Resp);
         }
-
-        public async Task<JsonResult> Addsystempropertyhouseroomtenantdata(Propertyhouseroomtenant model)
-        {
-            var resp = await bl.Registersystempropertyhouseroomtenantdata(JsonConvert.SerializeObject(model));
-            return Json(resp);
-        }
-
     }
 }
