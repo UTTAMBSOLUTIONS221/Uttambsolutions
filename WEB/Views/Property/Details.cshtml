@@ -59,9 +59,6 @@
     <script type="text/javascript">
         function searchsystemstaffdata() {
             var idNumber = $('#Systemstaffidnumberid').val();
-
-            alert(JSON.stringify(idNumber));
-
             // Validate if ID number input is empty
             if (idNumber.trim() === "") {
                 $("#Systemstaffidnumberid").addClass('is-invalid');
@@ -84,10 +81,10 @@
                         $.each(response, function (index, item) {
                             resultsBody.append(
                                 '<tr>' +
-                                '<td>' + item.Name + '</td>' +
-                                '<td>' + item.IdNumber + '</td>' +
-                                '<td>' + item.Email + '</td>' +
-                                '<td>' + item.Phone + '</td>' +
+                                '<td>' + item.Firstname item.Lastname + '</td>' +
+                                '<td>' + item.Idnumber + '</td>' +
+                                '<td>' + item.Emailaddress + '</td>' +
+                                '<td>' + item.Phonenumber + '</td>' +
                                 '</tr>'
                             );
                         });
