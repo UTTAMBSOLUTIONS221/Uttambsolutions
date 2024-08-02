@@ -1,5 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
-
+﻿using Maqaoplus.Helpers;
+using Maqaoplus.ViewModels;
+using Maqaoplus.ViewModels.Dashboards;
+using Maqaoplus.ViewModels.Startup;
+using Maqaoplus.Views.Dashboards;
+using Maqaoplus.Views.Startup;
 namespace Maqaoplus
 {
     public static class MauiProgram
@@ -15,10 +19,21 @@ namespace Maqaoplus
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+            string apiUrl = "https://mainapi.uttambsolutions.com";
+            builder.Services.AddSingleton(new DevHttpConnectionHelper(apiUrl));
+            // Services
+            builder.Services.AddSingleton<Services.ServiceProvider>();
 
+            // Views
+            builder.Services.AddSingleton<LoadingPage>();
+            builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<DashboardPage>();
+
+            // View Models
+            builder.Services.AddSingleton<AppShellViewModel>();
+            builder.Services.AddSingleton<LoadingPageViewModel>();
+            builder.Services.AddSingleton<LoginPageViewModel>();
+            builder.Services.AddSingleton<DashboardPageViewModel>();
             return builder.Build();
         }
     }
