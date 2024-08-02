@@ -1,12 +1,14 @@
 ﻿using Maqaoplus.ViewModels;
+using Maqaoplus.Views.PropertyHouse;
 namespace Maqaoplus
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        public AppShell(AppShellViewModel viewModel)
         {
             InitializeComponent();
-            this.BindingContext = new AppShellViewModel();
+            this.BindingContext = viewModel;
+            Routing.RegisterRoute(nameof(PropertyHousesDetailPage), typeof(PropertyHousesDetailPage));
         }
     }
 }

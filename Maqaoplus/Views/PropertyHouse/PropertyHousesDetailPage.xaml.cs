@@ -1,39 +1,43 @@
 using DBL.Entities;
 using Newtonsoft.Json;
-namespace Maqaoplus.Views.PropertyHouse;
 
-public partial class PropertyHousesDetailPage : ContentPage
+namespace Maqaoplus.Views.PropertyHouse
 {
-    public Systemproperty Property { get; set; }
-
-    public PropertyHousesDetailPage()
+    public partial class PropertyHousesDetailPage : ContentPage
     {
-        InitializeComponent();
-        BindingContext = this;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        HandleQueryParameters();
-    }
-
-    private void HandleQueryParameters()
-    {
-        var query = Shell.Current.CurrentState.Location.OriginalString;
-        var parameters = new Uri(query, UriKind.RelativeOrAbsolute).Query;
-
-        if (parameters.Contains("Property"))
+        public PropertyHousesDetailPage()
         {
-            var queryParams = System.Web.HttpUtility.ParseQueryString(parameters);
-            var encodedProperty = queryParams["Property"];
-            var jsonProperty = Uri.UnescapeDataString(encodedProperty);
-            Property = JsonConvert.DeserializeObject<Systemproperty>(jsonProperty);
+            InitializeComponent();
+        }
 
-            if (Property != null)
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            HandleQueryParameters();
+        }
+
+        private void HandleQueryParameters()
+        {
+            // Retrieve the query parameters from the Shell's current navigation state
+            var query = Shell.Current.CurrentState.Location.OriginalString;
+            var parameters = new Uri(query, UriKind.RelativeOrAbsolute).Query;
+
+            if (parameters.Contains("Property"))
             {
-                // Setting the BindingContext to the deserialized object to bind all properties and lists
-                BindingContext = Property;
+                var queryParams = System.Web.HttpUtility.ParseQueryString(parameters);
+                var encodedProperty = queryParams["Property"];
+                var jsonProperty = Uri.UnescapeDataString(encodedProperty);
+                var property = JsonConvert.DeserializeObject<Systemproperty>(jsonProperty);
+
+                if (property != null)
+                {
+                    PropertyNameLabel.Text = property.Propertyhousename;
+                    PropertyOwnerLabel.Text = property.Propertyhouseownername;
+                    PropertyCountyLabel.Text = property.Countyname;
+                    PropertySubCountyLabel.Text = property.Subcountyname;
+                    PropertyStreetLabel.Text = property.Streetorlandmark;
+                    PropertyStatusLabel.Text = property.Propertyhousestatusdata;
+                }
             }
         }
     }

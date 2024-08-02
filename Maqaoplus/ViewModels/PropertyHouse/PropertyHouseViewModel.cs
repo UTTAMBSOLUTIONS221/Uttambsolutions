@@ -53,7 +53,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsBusy = false;
             }
         }
-
         private async Task ViewDetails(Systemproperty item)
         {
             try
