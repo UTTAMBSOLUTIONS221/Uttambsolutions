@@ -1,8 +1,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Maqaoplus.ViewModels.PropertyHouse"
+             xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.PropertyHouse.PropertyHousesPage"
-             Title="Property Houses">
+             Title="My Houses">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:NullToImageConverter x:Key="NullToImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.BindingContext>
         <viewmodels:PropertyHouseViewModel />
@@ -22,7 +29,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="200">
-                            <!-- Adjust HeightRequest here -->
+                            <!-- Tap Gesture Recognizer -->
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PropertyHouseViewModel}}, Path=ViewDetailsCommand}"
                                                       CommandParameter="{Binding Propertyhouseid}" />
@@ -33,10 +40,11 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <!-- Image -->
-                                <Image Source="{Binding Primaryimageurl}" Aspect="AspectFill" HeightRequest="100" Grid.Row="0" />
+                                <!-- Image with Null Handling -->
+                                <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" HeightRequest="100" Grid.Row="0" />
 
                                 <!-- Property Name and Room Count in the same row -->
                                 <Grid Grid.Row="1" ColumnSpacing="5">

@@ -69,19 +69,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/GetPropertyDetails/{propertyId}", HttpMethod.Get, null);
-                var propertyDetails = response?.Data; // Replace with actual deserialization
-
-                if (propertyDetails != null)
-                {
-                    var jsonProperty = JsonConvert.SerializeObject(propertyDetails);
-                    var encodedProperty = Uri.EscapeDataString(jsonProperty);
-                    await Shell.Current.GoToAsync($"PropertyHousesDetailPage?Property={encodedProperty}");
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Property details not found.", "OK");
-                }
+                var jsonProperty = JsonConvert.SerializeObject(propertyId);
+                var encodedProperty = Uri.EscapeDataString(jsonProperty);
+                await Shell.Current.GoToAsync($"PropertyHousesDetailPage?PropertyId={encodedProperty}");
             }
             catch (Exception ex)
             {

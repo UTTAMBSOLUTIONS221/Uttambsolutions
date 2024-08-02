@@ -6,6 +6,7 @@
         public bool Isagency { get; set; }
         public int Roomscount { get; set; }
         public long Propertyhouseowner { get; set; }
+        public string? Primaryimageurl { get; set; }
         public string? Propertyhouseownername { get; set; }
         public long Propertyhouseposter { get; set; }
         public string? Propertyhousename { get; set; }
