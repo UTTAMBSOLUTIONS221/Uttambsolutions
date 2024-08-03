@@ -41,6 +41,7 @@
                         <th class="font-weight-light fw-light text-sm">Opening Meter</th>
                         <th class="font-weight-light fw-light text-sm">Closing Meter</th>
                         <th class="font-weight-light fw-light text-sm">Units</th>
+                        <th class="font-weight-light fw-light text-sm">Bill</th>
                         <th class="font-weight-light fw-light text-sm">Date Created</th>
                     </tr>
                 </thead>
@@ -50,11 +51,12 @@
                         foreach (var item in Model.Data)
                         {
                             <tr>
-                                <td>@item.Systempropertyhouseroommeternumber</td>
-                                <td>@item.Openingmeter</td>
-                                <td>@item.Closingmeter</td>
-                                <td>@item.Movedmeter</td>
-                                <td>@item.Datecreated</td>
+                                <td class="font-weight-light fw-light text-sm">@item.Systempropertyhouseroommeternumber</td>
+                                <td class="font-weight-light fw-light text-sm">@item.Openingmeter</td>
+                                <td class="font-weight-light fw-light text-sm">@item.Closingmeter</td>
+                                <td class="font-weight-light fw-light text-sm">@item.Movedmeter</td>
+                                <td class="font-weight-light fw-light text-sm">@item.Consumedamount</td>
+                                <td class="font-weight-light fw-light text-sm">@item.Datecreated</td>
                             </tr>
                         }
                     }

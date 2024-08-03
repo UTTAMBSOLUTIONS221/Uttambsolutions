@@ -22,6 +22,7 @@
         public decimal Openingmeter { get; set; }
         public decimal Movedmeter { get; set; }
         public decimal Closingmeter { get; set; }
+        public decimal Consumedamount { get; set; }
         public int Createdby { get; set; }
         public DateTime Datecreated { get; set; }
     }
