@@ -2,6 +2,7 @@
 {
     public class Systempropertyhouseroommeters
     {
+        public bool Hasprevious { get; set; }
         public int Systempropertyhousemeterid { get; set; }
         public int Systempropertyhouseroomid { get; set; }
         public string? Systempropertyhouseroommeternumber { get; set; }

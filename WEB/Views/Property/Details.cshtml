@@ -157,5 +157,32 @@
                 document.getElementById("buttonText").innerText = "SAVE";
             });
         }
+
+        document.addEventListener('input', function (event) {
+            var target = event.target;
+            if (target.closest('#roommeterreadingtable')) {
+                var detailRows = document.querySelectorAll('#roommeterreadingtable tbody tr');
+                detailRows.forEach(function (row) {
+                    var roomopeningmeter = parseFloat(row.querySelector('.system-property-house-room-opening-meter').value) || 0;
+                    var roomclosingmeter = parseFloat(row.querySelector('.system-property-house-room-closing-meter').value) || 0;
+                    var movedmeterunits = parseFloat(row.querySelector('.system-property-house-room-moved-meter').value) || 0;
+                    var rowIsValid = true;
+
+                    // Ensure inputs exist before accessing their values
+                    if (roomclosingmeter && (parseFloat(roomclosingmeter.value) === 0 || parseFloat(roomclosingmeter.value) < parseFloat(roomclosingmeter.value))) {
+                        row.querySelector('.system-property-house-room-closing-meter').classList.add('is-invalid');
+                        rowIsValid = false;
+                    }
+
+                    var movedmeterunits = roomclosingmeter - roomopeningmeter;
+                    movedmeterunits = Math.max(movedmeterunits, 0);
+                    row.querySelector('.system-property-house-room-moved-meter').value = movedmeterunits.toFixed(2);
+            
+                });
+            }
+
+        });
+
+
     </script>
 }
