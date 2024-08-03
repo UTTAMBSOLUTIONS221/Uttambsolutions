@@ -209,7 +209,7 @@
                 alert("Please ensure all meter readings are valid and the closing meter is greater than or equal to the opening meter.");
                 return;
             }
-            $.post("/Property/Addpropertyhouseroomdata", uil, function (response) {
+            $.post("/Property/Addpropertyhouseroommeterdata", uil, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire('Saved!', response.RespMessage, 'success')
                     $('#Uttambsolutionsmodal').hide();
