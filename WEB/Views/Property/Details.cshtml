@@ -193,8 +193,8 @@
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
             var meterData = {
-                Systempropertyhousemeterid: $(this).find('td').eq(0).text(),
-                Systempropertyhouseroomid: $(this).find('td').eq(1).text(),
+                Systempropertyhousemeterid: $('.system-property-house-meterid').val(),
+                Systempropertyhouseroomid: $('.system-property-house-roomid').val(),
                 Systempropertyhouseroommeternumber: $('.system-property-house-room-meter-number').val(),
                 Openingmeter: parseFloat($('.system-property-house-room-opening-meter').val()),
                 Closingmeter: parseFloat($('.system-property-house-room-closing-meter').val()),

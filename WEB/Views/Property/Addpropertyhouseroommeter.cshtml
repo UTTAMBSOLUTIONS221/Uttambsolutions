@@ -21,8 +21,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td hidden>@Model.Systempropertyhousemeterid</td>
-                    <td hidden>@Model.Systempropertyhouseroomid</td>
+                    <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-meterid" value="@Model.Systempropertyhousemeterid" hidden /></td>
+                    <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-roomid" value="@Model.Systempropertyhouseroomid" hidden /></td>
                     <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-room-meter-number" value="@Model.Systempropertyhouseroommeternumber" /></td>
                     <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-room-opening-meter" value="@Model.Openingmeter" @((Model.Hasprevious && Model.Openingmeter != 0) ? "readonly" : "") /></td>
                     <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-closing-meter" value="@Model.Closingmeter" required /></td>
