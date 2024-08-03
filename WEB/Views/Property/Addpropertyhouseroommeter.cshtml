@@ -35,10 +35,10 @@
             <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="AllsystemDataTables1">
                 <thead>
                     <tr>
-                        <th>Opening Meter</th>
-                        <th>Units</th>
-                        <th>Closing Meter</th>
-                        <th>Date Read</th>
+                        <th class="font-weight-light fw-light">Meter Number</th>
+                        <th class="font-weight-light fw-light">Opening Meter</th>
+                        <th class="font-weight-light fw-light">Units</th>
+                        <th class="font-weight-light fw-light">Closing Meter</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,6 +47,7 @@
                         foreach (var item in Model.Data)
                         {
                             <tr>
+                                <td>@item.Systempropertyhouseroommeternumber</td>
                                 <td>@item.Openingmeter</td>
                                 <td>@item.Movedmeter</td>
                                 <td>@item.Closingmeter</td>
