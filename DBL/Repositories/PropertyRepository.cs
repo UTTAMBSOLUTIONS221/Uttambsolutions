@@ -132,7 +132,17 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Houseroomid", Houseroomid);
-                return connection.Query<Systempropertyhouseroommeters>("Usp_Getsystempropertyhouseroommeterdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                parameters.Add("@Systempropertyhousemetedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystempropertyhouseroommeterdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Systempropertyhousemetedata");
+                if (systempropertydataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Systempropertyhouseroommeters>(systempropertydataJson);
+                }
+                else
+                {
+                    return new Systempropertyhouseroommeters();
+                }
             }
         }
 
