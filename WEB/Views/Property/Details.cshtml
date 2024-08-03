@@ -177,6 +177,11 @@
                     var movedmeterunits = roomclosingmeter - roomopeningmeter;
                     movedmeterunits = Math.max(movedmeterunits, 0);
                     row.querySelector('.system-property-house-room-moved-meter').value = movedmeterunits.toFixed(2);
+
+                    var meterconsumedamount = movedmeterunits * 200;
+                    meterconsumedamount = Math.max(meterconsumedamount, 0); // Ensure amount is non-negative
+                    row.querySelector('.system-property-house-room-meter-cost').value = meterconsumedamount.toFixed(2);
+
             
                 });
             }
