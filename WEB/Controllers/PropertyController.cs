@@ -90,7 +90,11 @@ namespace WEB.Controllers
             var model = await bl.Getsystempropertyhouseroommeterdatabyid(Houseroomid);
             return PartialView(model);
         }
-
+        public async Task<JsonResult> Addpropertyhouseroommeterdata(Systempropertyhouseroommeters model)
+        {
+            var resp = await bl.Registerpropertyhouseroommeterdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
 
 
 

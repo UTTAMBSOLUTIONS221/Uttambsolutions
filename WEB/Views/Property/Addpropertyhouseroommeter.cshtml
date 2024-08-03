@@ -16,6 +16,7 @@
                     <th class="font-weight-light fw-light">Opening Meter</th>
                     <th class="font-weight-light fw-light">Closing Meter</th>
                     <th class="font-weight-light fw-light">Units</th>
+                    <th class="font-weight-light fw-light">Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,7 @@
                     <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-room-opening-meter" value="@Model.Openingmeter" @((Model.Hasprevious && Model.Openingmeter != 0) ? "readonly" : "") /></td>
                     <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-closing-meter" value="@Model.Closingmeter" required /></td>
                     <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-moved-meter" value="@Model.Movedmeter" readonly /></td>
+                    <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-meter-cost" value="@Model.Consumedamount" readonly /></td>
                 </tr>
             </tbody>
         </table>
@@ -62,7 +64,7 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystempropertyroomid" onclick="savesystempropertyroomdata();">
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystempropertyroommeterid" onclick="savesystempropertyroommeterdata();">
         <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
     </button>
 </div>
