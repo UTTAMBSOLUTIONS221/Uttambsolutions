@@ -13,5 +13,6 @@ namespace DBL.Repositories
         Genericmodel Registersystempropertyhouseroomtenantdata(string JsonData);
         Genericmodel Registerpropertyhouseroomdata(string JsonData);
         Systempropertyhouserooms Getsystempropertyhouseroomdatabyid(long Houseroomid);
+        Systempropertyhouseroommeters Getsystempropertyhouseroommeterdatabyid(long Houseroomid);
     }
 }

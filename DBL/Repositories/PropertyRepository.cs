@@ -125,6 +125,16 @@ namespace DBL.Repositories
                 return connection.Query<Systempropertyhouserooms>("Usp_Getsystempropertyhouseroomdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+        public Systempropertyhouseroommeters Getsystempropertyhouseroommeterdatabyid(long Houseroomid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Houseroomid", Houseroomid);
+                return connection.Query<Systempropertyhouseroommeters>("Usp_Getsystempropertyhouseroommeterdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
 
     }
 }
