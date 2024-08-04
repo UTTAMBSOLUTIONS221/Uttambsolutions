@@ -12,5 +12,6 @@
         public bool Hasbalcony { get; set; }
         public bool Forcaretaker { get; set; }
         public bool Kitchentypeid { get; set; }
+        public List<Systempropertyhouseroommeters>? Meterdata { get; set; }
     }
 }
