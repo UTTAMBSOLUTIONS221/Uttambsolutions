@@ -23,6 +23,8 @@
         public string? Propertyhousevacant { get; set; }
         public string? Propertyhouseunderrenovation { get; set; }
         public string? Propertyhouseshop { get; set; }
+        public bool Iscaretaker { get; set; }
+        public string Propertyhousecaretaker { get; set; }
         public string? Propertyhousegroundfloor { get; set; }
     }
 
