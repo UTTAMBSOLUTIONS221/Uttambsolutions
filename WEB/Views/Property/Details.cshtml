@@ -21,18 +21,18 @@
                             <div class="d-flex flex-row mb-3">
                                 <img src="@Url.Content(property.Primaryimageurl ?? "~/images/house.png")" alt="@property.Propertyhousename" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover; margin-right: 15px;" />
                                 <div class="d-flex flex-column justify-content-center">
-                                    <p>
+                                    <p class="mb-0">
                                         <span class="badge badge-primary mr-1"><strong>Rent:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
                                         @if (property.Systempropertyhousesizedeposit)
                                         {
                                             <span class="badge badge-warning mr-1"><strong>Deposit:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
                                         }
                                     </p>
-                                    <p><span class="badge badge-success"><strong>Is Shop:</strong> @property.Propertyhouseshop</span></p>
-                                    <p> <span class="badge badge-danger"><strong>Is Vacant:</strong> @property.Propertyhousevacant</span></p>
-                                    <p><span class="badge badge-warning"><strong>Under Renovation:</strong> @property.Propertyhouseunderrenovation</span></p>
-                                    <p><span class="badge badge-success"><strong>Is Ground Floor:</strong> @property.Propertyhousegroundfloor</span></p>
-                                    <p><span class="badge badge-success"><strong>Has Balcony:</strong> @property.Propertyhousebalcony</span></p>
+                                    <p class="mb-0"><span class="badge badge-success"><strong>Is Shop:</strong> @property.Propertyhouseshop</span></p>
+                                    <p class="mb-0"><span class="badge badge-danger"><strong>Is Vacant:</strong> @property.Propertyhousevacant</span></p>
+                                    <p class="mb-0"><span class="badge badge-warning"><strong>Under Renovation:</strong> @property.Propertyhouseunderrenovation</span></p>
+                                    <p class="mb-0"><span class="badge badge-success"><strong>Is Ground Floor:</strong> @property.Propertyhousegroundfloor</span></p>
+                                    <p class="mb-0"><span class="badge badge-success"><strong>Has Balcony:</strong> @property.Propertyhousebalcony</span></p>
                                 </div>
                             </div>
                             <div>
