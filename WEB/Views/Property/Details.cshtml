@@ -12,7 +12,7 @@
     @if (Model != null && Model.Data != null)
     {
         <div class="row">
-            @foreach (var property in Model.Data)
+            @foreach (var property in Model.Data.Where(x => x.Forcaretaker ==false))
             {
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="card shadow-sm border-light" style="height: 100%; max-width: 350px;">
@@ -39,7 +39,8 @@
                                 <span class="badge badge-danger mr-1"><strong>Vacant:</strong> @property.Propertyhousevacant</span>
                                 <span class="badge badge-warning"><strong>Renovation:</strong> @property.Propertyhouseunderrenovation</span>
                                 <span class="badge badge-warning"><strong>Groun floor:</strong> @property.Propertyhousegroundfloor</span>
-                                <span class="badge badge-warning"><strong>Care Taker:</strong> @property.Propertyhousecaretaker</span>
+                                <span class="badge badge-warning"><strong>Balcony:</strong> @property.Propertyhousebalcony</span>
+                                <span class="badge badge-warning"><strong>Kitchen:</strong> @property.Propertyhousekithcentype</span>
                             </div>
                             <div class="d-flex flex-wrap justify-content-center mb-2">
                                 @if (property.Isvacant)
