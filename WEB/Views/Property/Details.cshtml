@@ -6,51 +6,53 @@
 <div class="container">
     <div class="row m-3">
         <div class="col-sm-4">
-            <a asp-action="Addpropertyhouseroom" asp-controller="Property" asp-route-Houseroomid="0" asp-area="" id="CAN_ADD_PROPERTY_HOUSE_ROOM" style="display:none;" class="btn-info btn-sm btn-custom text-white font-weight-bold text-uppercase text-center main mr-2" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add House Room</a>
+            <a asp-action="Addpropertyhouseroom" asp-controller="Property" asp-route-Houseroomid="0" asp-area="" id="CAN_ADD_PROPERTY_HOUSE_ROOM" style="display:none;" class="btn btn-info btn-sm text-white font-weight-bold text-uppercase main mr-2" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add House Room</a>
         </div>
     </div>
     @if (Model != null && Model.Data != null)
     {
         <div class="row">
-            @foreach (var property in Model.Data.Where(x => x.Forcaretaker ==false))
+            @foreach (var property in Model.Data.Where(x => x.Forcaretaker == false))
             {
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
-                    <div class="card shadow-sm border-light" style="height: 100%; max-width: 350px;">
-                        <img src="@Url.Content(property.Primaryimageurl ?? "~/images/house.png")" alt="@property.Propertyhousename" class="card-img-top" style="height: 170px; object-fit: cover;" />
-                        <div class="card-body d-flex flex-column p-2">
-                            <h6 class="card-title text-center text-dark" style="font-size: 1rem;">@property.Propertyhousename</h6>
-                            <p class="card-text text-center text-muted mb-1" style="font-size: 0.9rem;">@property.Systemhousesizename</p>
-                            <p class="card-text text-center text-muted mb-2" style="font-size: 0.9rem;">@property.Systempropertyhousesizename</p>
-                            <div class="d-flex flex-wrap justify-content-center mb-2">
-                                <span class="badge badge-primary mr-1"><strong>Rent:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
-                                @if (property.Systempropertyhousesizedeposit)
-                                {
-                                    <span class="badge badge-warning mr-1"><strong>Deposit:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
-                                }
+                    <div class="card shadow-sm border-light h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title text-dark text-sm">@property.Propertyhousename - @property.Systemhousesizename - @property.Systempropertyhousesizename</h6>
+                            <div class="d-flex flex-row mb-3">
+                                <img src="@Url.Content(property.Primaryimageurl ?? "~/images/house.png")" alt="@property.Propertyhousename" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover; margin-right: 15px;" />
+                                <div class="d-flex flex-column justify-content-center">
+                                    <p>
+                                        <span class="badge badge-primary mr-1"><strong>Rent:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
+                                        @if (property.Systempropertyhousesizedeposit)
+                                        {
+                                            <span class="badge badge-warning mr-1"><strong>Deposit:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
+                                        }
+                                    </p>
+                                    <p><span class="badge badge-success"><strong>Is Shop:</strong> @property.Propertyhouseshop</span></p>
+                                    <p> <span class="badge badge-danger"><strong>Is Vacant:</strong> @property.Propertyhousevacant</span></p>
+                                    <p><span class="badge badge-warning"><strong>Under Renovation:</strong> @property.Propertyhouseunderrenovation</span></p>
+                                    <p><span class="badge badge-success"><strong>Is Ground Floor:</strong> @property.Propertyhousegroundfloor</span></p>
+                                    <p><span class="badge badge-success"><strong>Has Balcony:</strong> @property.Propertyhousebalcony</span></p>
+                                </div>
                             </div>
-                            <div class="d-flex flex-wrap justify-content-center mb-2">
+                            <div>
+                                <span class="badge badge-success"><strong>Kitchen Type:</strong> @property.Propertyhousekitchentype</span>
+                            </div>
+                            <div>
                                 <span class="badge badge-info mr-1"><strong>Location: </strong> @property.Countyname <strong> >> </strong>@property.Subcountyname <strong> >> </strong>@property.Subcountywardname</span>
                             </div>
-                            <div class="d-flex flex-wrap justify-content-center mb-2">
+                            <div>
                                 <span class="badge badge-secondary mr-1"><strong>Landmark:</strong> @property.Streetorlandmark</span>
                             </div>
-                            <div class="d-flex flex-wrap justify-content-center mb-2">
-                                <span class="badge badge-success mr-1"><strong>Shop:</strong> @property.Propertyhouseshop</span>
-                                <span class="badge badge-danger mr-1"><strong>Vacant:</strong> @property.Propertyhousevacant</span>
-                                <span class="badge badge-warning"><strong>Renovation:</strong> @property.Propertyhouseunderrenovation</span>
-                                <span class="badge badge-warning"><strong>Groun floor:</strong> @property.Propertyhousegroundfloor</span>
-                                <span class="badge badge-warning"><strong>Balcony:</strong> @property.Propertyhousebalcony</span>
-                                <span class="badge badge-warning"><strong>Kitchen:</strong> @property.Propertyhousekitchentype</span>
-                            </div>
-                            <div class="d-flex flex-wrap justify-content-center mb-2">
+                            <div class="mt-auto d-flex justify-content-center">
                                 @if (property.Isvacant)
                                 {
-                                    <a asp-action="Addpropertyhousetenant" asp-controller="Property" asp-route-Houseroomid="@property.Systempropertyhouseroomid" asp-area="" id="CAN_ADD_PROPERTY_HOUSE_TENANT" style="display:none;" class="btn-info btn-sm btn-custom text-white font-weight-bold text-uppercase text-center main mr-2" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Tenant</a>
+                                    <a asp-action="Addpropertyhousetenant" asp-controller="Property" asp-route-Houseroomid="@property.Systempropertyhouseroomid" asp-area="" id="CAN_ADD_PROPERTY_HOUSE_TENANT" style="display:none;" class="btn btn-info btn-sm text-white font-weight-bold text-uppercase main mr-2" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Tenant</a>
                                 }
-                                <a asp-action="Addpropertyhouseroom" asp-controller="Property" asp-route-Houseroomid="@property.Systempropertyhouseroomid" asp-area="" id="CAN_EDIT_PROPERTY_HOUSE_ROOM" style="display:none;" class="btn-info btn-sm btn-custom text-white font-weight-bold text-uppercase text-center main mr-2" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
-                                <a asp-action="Addpropertyhouseroommeter" asp-controller="Property" asp-route-Houseroomid="@property.Systempropertyhouseroomid" asp-area="" id="CAN_EDIT_PROPERTY_HOUSE_ROOM" style="display:none;" class="btn-info btn-sm btn-custom text-white font-weight-bold text-uppercase text-center main mr-2" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Meter Readng</a>
+                                <a asp-action="Addpropertyhouseroom" asp-controller="Property" asp-route-Houseroomid="@property.Systempropertyhouseroomid" asp-area="" id="CAN_EDIT_PROPERTY_HOUSE_ROOM" style="display:none;" class="btn btn-info btn-sm text-white font-weight-bold text-uppercase main mr-2" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                <a asp-action="Addpropertyhouseroommeter" asp-controller="Property" asp-route-Houseroomid="@property.Systempropertyhouseroomid" asp-area="" id="CAN_EDIT_PROPERTY_HOUSE_ROOM" style="display:none;" class="btn btn-info btn-sm text-white font-weight-bold text-uppercase main mr-2" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Meter Reading</a>
+                                <a asp-action="Addpropertyhouseroommeter" asp-controller="Property" asp-route-Houseroomid="@property.Systempropertyhouseroomid" asp-area="" id="CAN_EDIT_PROPERTY_HOUSE_ROOM" style="display:none;" class="btn btn-info btn-sm text-white font-weight-bold text-uppercase main mr-2" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Manage House Room</a>
                             </div>
-                           
                         </div>
                     </div>
                 </div>
@@ -68,7 +70,6 @@
     <script type="text/javascript">
         function searchsystemstaffdata() {
             var idNumber = $('#Systemstaffidnumberid').val();
-            // Validate if ID number input is empty
             if (idNumber.trim() === "") {
                 $("#Systemstaffidnumberid").addClass('is-invalid');
                 return;
@@ -127,103 +128,13 @@
                 }
                 document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = false;
                 document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
-            });
-        }
-
-        function savesystempropertyroomdata() {
-            document.getElementById("savesystempropertyroomid").disabled = true;
-            document.getElementById("processingSpinner").style.display = "inline-block";
-            document.getElementById("buttonText").innerText = "Processing...";
-            var uil = {
-                Systempropertyhouseroomid: $('#Systempropertyhouseroomid').val(), Systempropertyhousesizeid: $('#Systempropertyhousesizeid').val(),
-                Systempropertyhousesizename: $('#Systempropertyhousesizenameid').val(), Isvacant: $('#Isvacantid').prop('checked'), Isunderrenovation: $('#Isunderrenovationid').prop('checked'),
-                Isgroundfloor: $('#Isgroundfloorid').prop('checked'), Isshop: $('#Isshopid').prop('checked')
-            };
-            $.post("/Property/Addpropertyhouseroomdata", uil, function (response) {
-                if (response.RespStatus == 0) {
-                    Swal.fire('Saved!', response.RespMessage, 'success')
-                    $('#Uttambsolutionsmodal').hide();
-                    setTimeout(function () { location.reload(); }, 1000);
-                } else if (response.RespStatus == 1) {
-                    Swal.fire("House Room Not saved", response.RespMessage, "warning");
-                }
-                else {
-                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                }
-                document.getElementById("savesystempropertyroomid").disabled = false;
+                document.getElementById("buttonText").innerText = "Save changes";
+            }).fail(function () {
+                Swal.fire("Oops! Something Went Wrong", "A critical error has occurred. Kindly Contact our support team.", "error");
+                document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = false;
                 document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
+                document.getElementById("buttonText").innerText = "Save changes";
             });
         }
-
-        document.addEventListener('input', function (event) {
-            var target = event.target;
-            if (target.closest('#roommeterreadingtable')) {
-                var detailRows = document.querySelectorAll('#roommeterreadingtable tbody tr');
-                detailRows.forEach(function (row) {
-                    var roomopeningmeter = parseFloat(row.querySelector('.system-property-house-room-opening-meter').value) || 0;
-                    var roomclosingmeter = parseFloat(row.querySelector('.system-property-house-room-closing-meter').value) || 0;
-                    var movedmeterunits = parseFloat(row.querySelector('.system-property-house-room-moved-meter').value) || 0;
-                    var rowIsValid = true;
-
-                    // Ensure inputs exist before accessing their values
-                    if (roomclosingmeter && (parseFloat(roomclosingmeter.value) === 0 || parseFloat(roomclosingmeter.value) < parseFloat(roomclosingmeter.value))) {
-                        row.querySelector('.system-property-house-room-closing-meter').classList.add('is-invalid');
-                        rowIsValid = false;
-                    }
-
-                    var movedmeterunits = roomclosingmeter - roomopeningmeter;
-                    movedmeterunits = Math.max(movedmeterunits, 0);
-                    row.querySelector('.system-property-house-room-moved-meter').value = movedmeterunits.toFixed(2);
-
-                    var meterconsumedamount = movedmeterunits * 200;
-                    meterconsumedamount = Math.max(meterconsumedamount, 0); // Ensure amount is non-negative
-                    row.querySelector('.system-property-house-room-meter-cost').value = meterconsumedamount.toFixed(2);
-
-            
-                });
-            }
-
-        });
-
-        function savesystempropertyroommeterdata() {
-            document.getElementById("savesystempropertyroommeterid").disabled = true;
-            document.getElementById("processingSpinner").style.display = "inline-block";
-            document.getElementById("buttonText").innerText = "Processing...";
-            var meterData = {
-                Systempropertyhousemeterid: $('.system-property-house-meterid').val(),
-                Systempropertyhouseroomid: $('.system-property-house-roomid').val(),
-                Systempropertyhouseroommeternumber: $('.system-property-house-room-meter-number').val(),
-                Openingmeter: parseFloat($('.system-property-house-room-opening-meter').val()),
-                Closingmeter: parseFloat($('.system-property-house-room-closing-meter').val()),
-                Movedmeter: parseFloat($('.system-property-house-room-moved-meter').val()),
-                Consumedamount: parseFloat($('.system-property-house-room-meter-cost').val()),
-                Createdby: $('#systemLoggedinedUserid').val(),
-                Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
-            };
-
-            // Client-side validation
-            if (isNaN(meterData.Openingmeter) || isNaN(meterData.Closingmeter) || meterData.Openingmeter > meterData.Closingmeter) {
-                alert("Please ensure all meter readings are valid and the closing meter is greater than or equal to the opening meter.");
-                return;
-            }
-            $.post("/Property/Addpropertyhouseroommeterdata", meterData, function (response) {
-                if (response.RespStatus == 0) {
-                    Swal.fire('Saved!', response.RespMessage, 'success')
-                    $('#Uttambsolutionsmodal').hide();
-                    setTimeout(function () { location.reload(); }, 1000);
-                } else if (response.RespStatus == 1) {
-                    Swal.fire("House Room Meter Not saved", response.RespMessage, "warning");
-                }
-                else {
-                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                }
-                document.getElementById("savesystempropertyroommeterid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
-            });
-        }
-
     </script>
 }
