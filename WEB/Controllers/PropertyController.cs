@@ -76,6 +76,11 @@ namespace WEB.Controllers
                 Text = x.Text,
                 Value = x.Value
             }).ToList();
+            ViewData["Systemkitchentypelists"] = bl.GetListModel(ListModelType.Systempropertyhousesizes).Result.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
             Systempropertyhouserooms model = new Systempropertyhouserooms();
             if (Houseroomid > 0)
             {
