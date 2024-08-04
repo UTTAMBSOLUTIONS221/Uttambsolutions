@@ -26,6 +26,25 @@
 textarea {
     resize: none;
 }
+
+.custom-badge {
+    margin: 2px 0;
+}
+
+    .custom-badge.unique-color-1 {
+        background-color: #FF5733;
+        color: white;
+    }
+
+    .custom-badge.unique-color-2 {
+        background-color: #33FF57;
+        color: white;
+    }
+
+    .custom-badge.unique-color-3 {
+        background-color: #3357FF;
+        color: white;
+    }
 /* Hide spinner arrows for number inputs */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {

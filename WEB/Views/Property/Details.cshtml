@@ -19,30 +19,30 @@
                         <div class="card-body d-flex flex-column">
                             <h6 class="card-title text-dark text-sm">@property.Propertyhousename - @property.Systemhousesizename - @property.Systempropertyhousesizename</h6>
                             <div class="d-flex flex-row mb-0">
-                                <img src="@Url.Content(property.Primaryimageurl ?? "~/images/house.png")" alt="@property.Propertyhousename" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover; margin-right: 10px;" />
+                                <img src="@Url.Content(property.Primaryimageurl ?? "~/images/house.png")" alt="@property.Propertyhousename" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover; margin-right: 7px;" />
                                 <div class="d-flex flex-column justify-content-center">
                                     <p class="mb-0">
-                                        <span class="badge badge-primary"><strong>Rent:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
+                                        <span class="badge badge-primary custom-badge"><strong>Rent:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
                                         @if (!property.Systempropertyhousesizedeposit)
                                         {
-                                            <span class="badge badge-warning"><strong>Deposit:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
+                                            <span class="badge badge-warning custom-badge"><strong>Deposit:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
                                         }
                                     </p>
-                                    <p class="mb-0"><span class="badge badge-success"><strong>Is Shop:</strong> @property.Propertyhouseshop</span></p>
-                                    <p class="mb-0"><span class="badge badge-danger"><strong>Is Vacant:</strong> @property.Propertyhousevacant</span></p>
-                                    <p class="mb-0"><span class="badge badge-warning"><strong>Under Renovation:</strong> @property.Propertyhouseunderrenovation</span></p>
-                                    <p class="mb-0"><span class="badge badge-success"><strong>Is Ground Floor:</strong> @property.Propertyhousegroundfloor</span></p>
-                                    <p class="mb-0"><span class="badge badge-success"><strong>Has Balcony:</strong> @property.Propertyhousebalcony</span></p>
+                                    <p class="mb-0"><span class="badge badge-success custom-badge"><strong>Is Shop:</strong> @property.Propertyhouseshop</span></p>
+                                    <p class="mb-0"><span class="badge badge-danger custom-badge"><strong>Is Vacant:</strong> @property.Propertyhousevacant</span></p>
+                                    <p class="mb-0"><span class="badge badge-warning custom-badge"><strong>Under Renovation:</strong> @property.Propertyhouseunderrenovation</span></p>
+                                    <p class="mb-0"><span class="badge badge-success custom-badge"><strong>Is Ground Floor:</strong> @property.Propertyhousegroundfloor</span></p>
+                                    <p class="mb-0"><span class="badge badge-success custom-badge"><strong>Has Balcony:</strong> @property.Propertyhousebalcony</span></p>
                                 </div>
                             </div>
                             <div>
-                                <span class="badge badge-success"><strong>Kitchen Type:</strong> @property.Propertyhousekitchentype</span>
+                                <span class="badge badge-success custom-badge"><strong>Kitchen Type:</strong> @property.Propertyhousekitchentype</span>
                             </div>
                             <div>
-                                <span class="badge badge-info mr-1"><strong>Location: </strong> @property.Countyname <strong> >> </strong>@property.Subcountyname <strong> >> </strong>@property.Subcountywardname</span>
+                                <span class="badge badge-info custom-badge mr-1"><strong>Location: </strong> @property.Countyname <strong> >> </strong>@property.Subcountyname <strong> >> </strong>@property.Subcountywardname</span>
                             </div>
                             <div>
-                                <span class="badge badge-secondary mr-1"><strong>Landmark:</strong> @property.Streetorlandmark</span>
+                                <span class="badge badge-secondary custom-badge mr-1"><strong>Landmark:</strong> @property.Streetorlandmark</span>
                             </div>
                             <div class="mt-auto d-flex justify-content-center">
                                 @if (property.Isvacant)
