@@ -141,23 +141,27 @@
                     var movedmeterunits = parseFloat(row.querySelector('.system-property-house-room-moved-meter').value) || 0;
                     var rowIsValid = true;
 
-                    // Ensure inputs exist before accessing their values
-                    if (roomclosingmeter && (parseFloat(roomclosingmeter.value) === 0 || parseFloat(roomclosingmeter.value) < parseFloat(roomclosingmeter.value))) {
+                    // Validate roomclosingmeter to ensure it's greater than or equal to roomopeningmeter
+                    if (roomclosingmeter < roomopeningmeter) {
                         row.querySelector('.system-property-house-room-closing-meter').classList.add('is-invalid');
                         rowIsValid = false;
+                    } else {
+                        row.querySelector('.system-property-house-room-closing-meter').classList.remove('is-invalid');
                     }
 
-                    var movedmeterunits = roomclosingmeter - roomopeningmeter;
+                    // Calculate moved meter units
+                    movedmeterunits = roomclosingmeter - roomopeningmeter;
                     movedmeterunits = Math.max(movedmeterunits, 0);
                     row.querySelector('.system-property-house-room-moved-meter').value = movedmeterunits.toFixed(2);
 
+                    // Calculate meter consumed amount
                     var meterconsumedamount = movedmeterunits * 200;
                     meterconsumedamount = Math.max(meterconsumedamount, 0); // Ensure amount is non-negative
                     row.querySelector('.system-property-house-room-meter-cost').value = meterconsumedamount.toFixed(2);
                 });
             }
-
         });
+
 
 
         function savesystempropertyroomdata() {
@@ -175,7 +179,35 @@
                 Movedmeter: parseFloat($('.system-property-house-room-moved-meter').val()), Consumedamount: parseFloat($('.system-property-house-room-meter-cost').val()),Tenantid: $('#systemstaffid').val(),
                 Createdby: $('#systemLoggedinedUserid').val(),Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
             };
-            alert(JSON.stringify(uil));
+
+            // Validate form data
+            var errors = [];
+
+            // Ensure required fields are not empty
+            if (!uil.Systempropertyhouseroomid) errors.push("Room ID is required.");
+            if (!uil.Systempropertyhousesizeid) errors.push("House size ID is required.");
+            if (!uil.Systempropertyhouseroommeternumber) errors.push("Meter number is required.");
+            if (!uil.Tenantid) errors.push("Tenant ID is required.");
+            if (!uil.Createdby) errors.push("Creator ID is required.");
+
+            // Validate numeric fields
+            if (isNaN(uil.Openingmeter) || uil.Openingmeter < 0) errors.push("Opening meter must be a non-negative number.");
+            if (isNaN(uil.Closingmeter) || uil.Closingmeter < 0) errors.push("Closing meter must be a non-negative number.");
+            if (isNaN(uil.Movedmeter) || uil.Movedmeter < 0) errors.push("Moved meter must be a non-negative number.");
+            if (isNaN(uil.Consumedamount) || uil.Consumedamount < 0) errors.push("Consumed amount must be a non-negative number.");
+
+            // Logical validation
+            if (uil.Closingmeter < uil.Openingmeter) errors.push("Closing meter cannot be less than the opening meter.");
+
+            // If there are validation errors, show them and exit
+            if (errors.length > 0) {
+                Swal.fire("Validation Error", errors.join('<br>'), "error");
+                document.getElementById("savesystempropertyroomid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+
             $.post("/Property/Addpropertyhouseroomdata", uil, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire('Saved!', response.RespMessage, 'success')
