@@ -9,5 +9,8 @@
         public bool Isunderrenovation { get; set; }
         public bool Isshop { get; set; }
         public bool Isgroundfloor { get; set; }
+        public bool Hasbalcony { get; set; }
+        public bool Forcaretaker { get; set; }
+        public bool Kitchentypeid { get; set; }
     }
 }

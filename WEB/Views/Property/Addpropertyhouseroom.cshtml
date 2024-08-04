@@ -13,7 +13,15 @@
         <input class="form-control form-control-sm" asp-for="Systempropertyhouseroomid" id="Systempropertyhouseroomid" hidden />
     </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="font-weight-light">Kitchen Type</label>
+                <select class="form-control form-control-sm" asp-for="Systempropertyhousesizeid" asp-items="@Systempermission" id="Systempropertyhousesizeid">
+                    <option value="">---Select---</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Size Name</label>
                 <select class="form-control form-control-sm" asp-for="Systempropertyhousesizeid" asp-items="@Systempermission" id="Systempropertyhousesizeid">
@@ -21,37 +29,59 @@
                 </select>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <div class="form-group">
-                <label class="font-weight-light">House Room Number</label>
+                <label class="font-weight-light">House Room #</label>
                 <input class="form-control form-control-sm" asp-for="Systempropertyhousesizename" id="Systempropertyhousesizenameid" />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group form-check">
+                <input class="form-check-input" type="checkbox" asp-for="@Model.Forcaretaker" id="Forcaretakerid" />
+                <label class="form-check-label" for="Forcaretakerid">Assign Tenant?</label>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-2">
-            <div class="form-group">
-                <label class="font-weight-light">Vacant?</label>
-                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isvacant" id="Isvacantid" />
+            <div class="form-group form-check">
+                <input class="form-check-input" type="checkbox" asp-for="@Model.Forcaretaker" id="Forcaretakerid" />
+                <label class="form-check-label text-sm" for="Forcaretakerid">For Caretaker?</label>
             </div>
         </div>
         <div class="col-sm-2">
-            <div class="form-group">
-                <label class="font-weight-light">Shop?</label>
-                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isshop" id="Isshopid" />
+            <div class="form-group form-check">
+                <input class="form-check-input" type="checkbox" asp-for="@Model.Isshop" id="Isshopid" />
+                <label class="form-check-label text-sm" for="Isshopid">Is Shop?</label>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group form-check">
+                <input class="form-check-input" type="checkbox" asp-for="@Model.Isgroundfloor" id="Isgroundfloorid" />
+                <label class="form-check-label text-sm" for="Isgroundfloorid">Ground Floor?</label>
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="form-group">
-                <label class="font-weight-light"> Ground Floor?</label>
-                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isgroundfloor" id="Isgroundfloorid" />
+            <div class="form-group form-check">
+                <input class="form-check-input" type="checkbox" asp-for="@Model.Hasbalcony" id="Hasbalconyid" />
+                <label class="form-check-label text-sm" for="Hasbalconyid">Has Balcony?</label>
             </div>
         </div>
-        <div class="col-sm-5">
-            <div class="form-group">
-                <label class="font-weight-light">Under Renovation?</label>
-                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isunderrenovation" id="Isunderrenovationid" />
+        <div class="col-sm-3">
+            <div class="form-group form-check">
+                <input class="form-check-input" type="checkbox" asp-for="@Model.Isunderrenovation" id="Isunderrenovationid" />
+                <label class="form-check-label" for="Isunderrenovationid">Under Renovation?</label>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-group">
+            <input type="number" class="form-control form-control-sm" id="Systemstaffidnumberid" placeholder="Enter id number to search" aria-label="Idnumbersearch" />
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" onclick="searchsystemstaffdata()">Search</button>
+            </div>
+        </div>
+        <div id="searchResults" class="col-sm-12 d-none">
         </div>
     </div>
 </div>
