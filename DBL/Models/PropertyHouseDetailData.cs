@@ -25,7 +25,7 @@
         public string? Propertyhouseshop { get; set; }
         public bool Forcaretaker { get; set; }
         public string? Propertyhousebalcony { get; set; }
-        public string? Propertyhousekithcentype { get; set; }
+        public string? Propertyhousekitchentype { get; set; }
         public string? Propertyhousegroundfloor { get; set; }
     }
 
