@@ -27,5 +27,6 @@
         SystemHouseItems = 20,
         SystemHouseDepositfees = 21,
         Systempropertyhousesizes = 22,
+        Systemhousewatertype = 23,
     }
 }

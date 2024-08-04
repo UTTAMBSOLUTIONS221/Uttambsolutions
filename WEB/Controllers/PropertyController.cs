@@ -41,6 +41,11 @@ namespace WEB.Controllers
                 Text = x.Text,
                 Value = x.Value
             }).ToList();
+            ViewData["Systemhousewatertypelists"] = bl.GetListModel(ListModelType.Systemhousewatertype).Result.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
             var data = await bl.Getsystempropertyhousedatabyid(Propertyid);
             return PartialView(data);
         }

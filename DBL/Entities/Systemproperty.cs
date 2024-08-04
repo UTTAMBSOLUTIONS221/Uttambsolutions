@@ -17,8 +17,11 @@
         public int Subcountywardid { get; set; }
         public string? Subcountywardname { get; set; }
         public string? Streetorlandmark { get; set; }
+        public string? Contactdetails { get; set; }
         public bool Hashousedeposit { get; set; }
+        public bool Hasagent { get; set; }
         public int Propertyhousestatus { get; set; }
+        public int Watertypeid { get; set; }
         public string? Propertyhousestatusdata { get; set; }
         public string? Extra { get; set; }
         public string? Extra1 { get; set; }

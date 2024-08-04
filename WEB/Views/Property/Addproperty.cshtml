@@ -5,6 +5,7 @@
     var Systemsubcountyward = ViewData["Systemsubcountywardlists"] as List<SelectListItem>;
     var Systemhousebenefit = ViewData["Systemhousebenefitslists"] as List<SelectListItem>;
     var Systemhousedepositfee = ViewData["Systemhousedepositfeeslists"] as List<SelectListItem>;
+    var Systemhousewatertype = ViewData["Systemhousewatertypelists"] as List<SelectListItem>;
     bool isChecked = false;
 }
 <div class="modal-header">
@@ -42,36 +43,6 @@
     </div>
 
         <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="font-weight-light">County</label>
-                    <select class="form-control form-control-sm" id="Systemcountyid" asp-for="@Model.Countyid" asp-items="@Systemcounty" onclick="getsystemcountysubcounty(this.value)" required>
-                        <option value="">---Select---</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="font-weight-light">Sub County</label>
-                    <select class="form-control form-control-sm" id="Systemsubcountyid" asp-for="@Model.Subcountyid" asp-items="@Systemsubcounty" onclick="getsystemsubcountysubcounty(this.value)" required>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="font-weight-light">Town/Ward</label>
-                    <select class="form-control form-control-sm" id="Systemsubcountywardid" asp-for="@Model.Subcountywardid" asp-items="@Systemsubcountyward" required>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-7">
-                <div class="form-group">
-                    <label class="font-weight-light">Street/Landmark</label>
-                    <input class="form-control form-control-sm" asp-for="@Model.Streetorlandmark" placeholder="start with near land mark and next to a landmark" id="Streetorlandmarkid" required />
-                </div>
-            </div>
             <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">House Status</label>
@@ -82,11 +53,60 @@
                     </select>
                 </div>
             </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">County</label>
+                    <select class="form-control form-control-sm" id="Systemcountyid" asp-for="@Model.Countyid" asp-items="@Systemcounty" onclick="getsystemcountysubcounty(this.value)" required>
+                        <option value="">---Select---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Sub County</label>
+                    <select class="form-control form-control-sm" id="Systemsubcountyid" asp-for="@Model.Subcountyid" asp-items="@Systemsubcounty" onclick="getsystemsubcountysubcounty(this.value)" required>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Town/Ward</label>
+                    <select class="form-control form-control-sm" id="Systemsubcountywardid" asp-for="@Model.Subcountywardid" asp-items="@Systemsubcountyward" required>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="font-weight-light">Street/Landmark</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Streetorlandmark" placeholder="start with near land mark and next to a landmark" id="Streetorlandmarkid" required />
+                </div>
+            </div>
             <div class="col-sm-2">
                 <div class="form-group">
-                    <label class="font-weight-light">House Deposit?</label>
+                    <label class="font-weight-light">Water Type</label>
+                    <select class="form-control form-control-sm" id="Systemhousewatertypeid" asp-items="@Systemhousewatertype" asp-for="@Model.Watertypeid" required>
+                        <option value="">---Select---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Has Agent?</label>
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hasagent" id="Hashousehasagentid" required />
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Has Deposit?</label>
                     <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousedeposit" id="Hashousedepositid" required />
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input class="form-control form-control-sm" asp-for="@Model.Contactdetails" id="Contactdetailsid" required />
             </div>
         </div>
         <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
