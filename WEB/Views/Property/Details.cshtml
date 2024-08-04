@@ -136,32 +136,6 @@
             });
         }
 
-        function savesystempropertyroomdata() {
-            document.getElementById("savesystempropertyroomid").disabled = true;
-            document.getElementById("processingSpinner").style.display = "inline-block";
-            document.getElementById("buttonText").innerText = "Processing...";
-            var uil = {
-                Systempropertyhouseroomid: $('#Systempropertyhouseroomid').val(), Systempropertyhousesizeid: $('#Systempropertyhousesizeid').val(),
-                Systempropertyhousesizename: $('#Systempropertyhousesizenameid').val(), Isvacant: $('#Isvacantid').prop('checked'), Isunderrenovation: $('#Isunderrenovationid').prop('checked'),
-                Isgroundfloor: $('#Isgroundfloorid').prop('checked'), Isshop: $('#Isshopid').prop('checked')
-            };
-            $.post("/Property/Addpropertyhouseroomdata", uil, function (response) {
-                if (response.RespStatus == 0) {
-                    Swal.fire('Saved!', response.RespMessage, 'success')
-                    $('#Uttambsolutionsmodal').hide();
-                    setTimeout(function () { location.reload(); }, 1000);
-                } else if (response.RespStatus == 1) {
-                    Swal.fire("House Room Not saved", response.RespMessage, "warning");
-                }
-                else {
-                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                }
-                document.getElementById("savesystempropertyroomid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
-            });
-        }
-
         document.addEventListener('input', function (event) {
             var target = event.target;
             if (target.closest('#roommeterreadingtable')) {
@@ -185,12 +159,46 @@
                     var meterconsumedamount = movedmeterunits * 200;
                     meterconsumedamount = Math.max(meterconsumedamount, 0); // Ensure amount is non-negative
                     row.querySelector('.system-property-house-room-meter-cost').value = meterconsumedamount.toFixed(2);
-
-
                 });
             }
 
         });
+
+
+        function savesystempropertyroomdata() {
+            document.getElementById("savesystempropertyroomid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+
+            $('#Continuewithouttenantid').prop('checked');
+
+            var uil = {
+                Systempropertyhouseroomid: $('#Systempropertyhouseroomid').val(), Kitchentypeid: $('#Kitchentypeid').val(), Systempropertyhousesizeid: $('#Systempropertyhousesizeid').val(),
+                Systempropertyhousesizename: $('#Systempropertyhousesizenameid').val(), Forcaretaker: $('#Forcaretakerid').prop('checked'), Isshop: $('#Isshopid').prop('checked'), Isgroundfloor: $('#Isgroundfloorid').prop('checked'),
+                Hasbalcony: $('#Hasbalconyid').prop('checked'), Isunderrenovation: $('#Isunderrenovationid').prop('checked'),Systempropertyhousemeterid: $('.system-property-house-meterid').val(),
+                Systempropertyhouseroommeternumber: $('.system-property-house-room-meter-number').val(),Openingmeter: parseFloat($('.system-property-house-room-opening-meter').val()),Closingmeter: parseFloat($('.system-property-house-room-closing-meter').val()),
+                Movedmeter: parseFloat($('.system-property-house-room-moved-meter').val()), Consumedamount: parseFloat($('.system-property-house-room-meter-cost').val()),Tenantid: $('#systemstaffid').val(),
+                Createdby: $('#systemLoggedinedUserid').val(),Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+            };
+            alert(JSON.stringify(uil));
+            $.post("/Property/Addpropertyhouseroomdata", uil, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#Uttambsolutionsmodal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("House Room Not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystempropertyroomid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+
+
 
         function savesystempropertyroommeterdata() {
             document.getElementById("savesystempropertyroommeterid").disabled = true;
