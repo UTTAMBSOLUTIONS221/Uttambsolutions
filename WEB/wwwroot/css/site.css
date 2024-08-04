@@ -32,17 +32,17 @@ textarea {
 }
 
     .custom-badge.unique-color-1 {
-        background-color: #FF5733;
+        background-color: #FF5733 !important;
         color: white;
     }
 
     .custom-badge.unique-color-2 {
-        background-color: #33FF57;
+        background-color: #33FF57 !important;
         color: white;
     }
 
     .custom-badge.unique-color-3 {
-        background-color: #3357FF;
+        background-color: #3357FF !important;
         color: white;
     }
 /* Hide spinner arrows for number inputs */

@@ -22,10 +22,10 @@
                                 <img src="@Url.Content(property.Primaryimageurl ?? "~/images/house.png")" alt="@property.Propertyhousename" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover; margin-right: 7px;" />
                                 <div class="d-flex flex-column justify-content-center">
                                     <p class="mb-0">
-                                        <span class="badge badge-primary custom-badge"><strong>Rent:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
-                                        @if (!property.Systempropertyhousesizedeposit)
+                                        <span class="badge badge-primary custom-badge"><strong>Rent:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0")</span>
+                                        @if (property.Systempropertyhousesizedeposit)
                                         {
-                                            <span class="badge badge-warning custom-badge"><strong>Deposit:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0.00")</span>
+                                            <span class="badge badge-warning custom-badge"><strong>Deposit:</strong> Kes. @property.Systempropertyhousesizerent.ToString("#,##0")</span>
                                         }
                                     </p>
                                     <p class="mb-0"><span class="badge badge-success custom-badge"><strong>Is Shop:</strong> @property.Propertyhouseshop</span></p>
