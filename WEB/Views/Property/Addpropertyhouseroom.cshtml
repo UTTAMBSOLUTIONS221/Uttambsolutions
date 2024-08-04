@@ -76,15 +76,6 @@
     </div>
     <hr />
     <div class="row">
-        <div class="col-sm-5">
-            <div class="input-group">
-                <input type="number" class="form-control form-control-sm" id="Systemstaffidnumberid" placeholder="Enter id number to search" aria-label="Idnumbersearch" />
-                <div class="input-group-append">
-                    <button class="btn btn-sm btn-secondary" onclick="searchsystemstaffdata()">Search</button>
-                </div>
-            </div>
-            <div id="searchResults" class="col-sm-12 d-none"></div>
-        </div>
         <div class="col-sm-7">
             <div class="row">
                 <div class="col-sm-12 table-responsive">
@@ -102,13 +93,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td hidden><input type="text" class="form-control form-control-sm font-weight-light system-property-house-meterid" value="@Model.Meterdata.Systempropertyhousemeterid" /></td>
-                                <td hidden><input type="text" class="form-control form-control-sm font-weight-light system-property-house-roomid" value="@Model.Meterdata.Systempropertyhouseroomid" /></td>
-                                <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-room-meter-number" value="@Model.Meterdata.Systempropertyhouseroommeternumber" /></td>
-                                <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-room-opening-meter" value="@Model.Meterdata.Openingmeter" @((Model.Meterdata.Hasprevious && Model.Meterdata.Openingmeter != 0) ? "readonly" : "") /></td>
-                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-closing-meter" value="@Model.Meterdata.Closingmeter" required /></td>
-                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-moved-meter" value="@Model.Meterdata.Movedmeter" readonly /></td>
-                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-meter-cost" value="@Model.Meterdata.Consumedamount" readonly /></td>
+                                <td hidden><input type="text" class="form-control form-control-sm font-weight-light system-property-house-meterid" value="@Model.Systempropertyhousemeterid" /></td>
+                                <td hidden><input type="text" class="form-control form-control-sm font-weight-light system-property-house-roomid" value="@Model.Systempropertyhouseroomid" /></td>
+                                <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-room-meter-number" value="@Model.Systempropertyhouseroommeternumber" /></td>
+                                <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-room-opening-meter" value="@Model.Openingmeter" @((Model.Hasprevious && Model.Openingmeter != 0) ? "readonly" : "") /></td>
+                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-closing-meter" value="@Model.Closingmeter" required /></td>
+                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-moved-meter" value="@Model.Movedmeter" readonly /></td>
+                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-meter-cost" value="@Model.Consumedamount" readonly /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -128,9 +119,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (Model != null && Model.Meterdata != null && Model.Meterdata.Data != null)
+                            @if (Model != null && Model.Data != null)
                             {
-                                foreach (var item in Model.Meterdata.Data)
+                                foreach (var item in Model.Data)
                                 {
                                     <tr>
                                         <td class="font-weight-light fw-light text-sm">@item.Systempropertyhouseroommeternumber</td>
@@ -145,6 +136,16 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="input-group">
+                <input type="number" class="form-control form-control-sm" id="Systemstaffidnumberid" placeholder="Enter id number to search" aria-label="Idnumbersearch" />
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-secondary" onclick="searchsystemstaffdata()">Search</button>
+                </div>
+            </div>
+            <div id="searchResults" class="col-sm-12 d-none">
             </div>
         </div>
     </div>
