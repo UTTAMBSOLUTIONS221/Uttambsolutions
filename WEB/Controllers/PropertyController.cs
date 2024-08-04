@@ -76,7 +76,7 @@ namespace WEB.Controllers
                 Text = x.Text,
                 Value = x.Value
             }).ToList();
-            ViewData["Systemkitchentypelists"] = bl.GetListModel(ListModelType.Systempropertyhousesizes).Result.Select(x => new SelectListItem
+            ViewData["Systemkitchentypelists"] = bl.GetListModel(ListModelType.Systemkitchentype).Result.Select(x => new SelectListItem
             {
                 Text = x.Text,
                 Value = x.Value
