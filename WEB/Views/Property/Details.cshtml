@@ -187,8 +187,6 @@
             if (!uil.Systempropertyhouseroomid) errors.push("Room ID is required.");
             if (!uil.Systempropertyhousesizeid) errors.push("House size ID is required.");
             if (!uil.Systempropertyhouseroommeternumber) errors.push("Meter number is required.");
-            if (!uil.Tenantid) errors.push("Tenant ID is required.");
-            if (!uil.Createdby) errors.push("Creator ID is required.");
 
             // Validate numeric fields
             if (isNaN(uil.Openingmeter) || uil.Openingmeter < 0) errors.push("Opening meter must be a non-negative number.");
