@@ -22,6 +22,9 @@
         public bool Hasagent { get; set; }
         public int Propertyhousestatus { get; set; }
         public int Watertypeid { get; set; }
+        public decimal Waterunitprice { get; set; }
+        public decimal Monthlybinfee { get; set; }
+        public DateTime? Rentduedate { get; set; }
         public string? Propertyhousestatusdata { get; set; }
         public string? Extra { get; set; }
         public string? Extra1 { get; set; }
