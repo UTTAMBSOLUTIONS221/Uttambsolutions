@@ -75,6 +75,9 @@ namespace DBL
                 obj.Username = obj.Emailaddress;
                 obj.Datecreated = DateTime.Now;
                 obj.Datemodified = DateTime.Now;
+                obj.Lastlogin = DateTime.Now;
+                obj.Loginstatus = 1;
+                obj.Updateprofile = true;
                 obj.Passwordresetdate = DateTime.Now.AddDays(90);
                 var Resp = db.AccountRepository.Registersystemstaffdata(JsonConvert.SerializeObject(obj));
                 return Resp;
