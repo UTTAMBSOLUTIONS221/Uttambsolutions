@@ -936,6 +936,76 @@ namespace DBL
 
         #region Mpesa Processes
 
+        #region Stk Call Back
+        public void ProcessMPesaSTKCallback(int serviceCode, string content)
+        {
+            Task.Run(() =>
+            {
+                Genericmodel result = null;
+                ExprCallbackModel dataModel = JsonConvert.DeserializeObject<ExprCallbackModel>(content);
+                if (dataModel != null)
+                {
+                    ExprCallbackDataModel callbackData = new ExprCallbackDataModel
+                    {
+                        CheckoutRequestID = dataModel.CallbackBody.CallbackContent.CheckoutRequestID,
+                        ResultCode = dataModel.CallbackBody.CallbackContent.ResultCode,
+                        ResultDesc = dataModel.CallbackBody.CallbackContent.ResultDesc,
+                        CustomerDets = ""
+                    };
+
+                    if (dataModel.CallbackBody.CallbackContent.ResultCode == 0)
+                    {
+                        var item = dataModel.CallbackBody.CallbackContent.CallbackData.CallbackValues
+                        .Where(x => x.ItemName == "MpesaReceiptNumber").FirstOrDefault();
+                        if (item != null)
+                            callbackData.RefNo = item.ItemValue;
+
+                        item = dataModel.CallbackBody.CallbackContent.CallbackData.CallbackValues
+                        .Where(x => x.ItemName == "TransactionDate").FirstOrDefault();
+                        if (item != null)
+                            callbackData.TxnDate = item.ItemValue;
+
+                        item = dataModel.CallbackBody.CallbackContent.CallbackData.CallbackValues
+                        .Where(x => x.ItemName == "PhoneNumber").FirstOrDefault();
+                        if (item != null)
+                            callbackData.PhoneNo = item.ItemValue;
+
+                        item = dataModel.CallbackBody.CallbackContent.CallbackData.CallbackValues
+                        .Where(x => x.ItemName == "Amount").FirstOrDefault();
+                        if (item != null)
+                            callbackData.Amount = Convert.ToDecimal(item.ItemValue);
+                    }
+
+                    result = db.PaymentRepository.ProcessExprCallback(serviceCode, callbackData);
+                    db.Reset();
+
+                    if (result.RespStatus == 0)
+                    {
+                        //---- Notify 3rd party client
+                        if (!string.IsNullOrEmpty(result.Data1))
+                        {
+                            PaymentNotificationData notificationData = new PaymentNotificationData
+                            {
+                                AccountBalance = callbackData.Balance,
+                                PayAccountNo = result.Data4,
+                                Amount = callbackData.Amount,
+                                CustomerName = callbackData.CustomerDets,
+                                CustomerNo = callbackData.PhoneNo,
+                                ReferenceNo = callbackData.RefNo,
+                                SourceRef = result.Data3
+                            };
+
+                            //---- Update 3rd party application
+                            //SendPaymentNotifTo3P(result.Data1, notificationData, result.Data2);
+                        }
+
+                    }
+                }
+            });
+        }
+        #endregion
+
+
         #region Stk push
         public async Task<PayResponse> MakeExpressPayment(PesaAppRequestData requestData)
         {
