@@ -164,6 +164,7 @@
         Updateprofile: false,
         Createdby: $('#UserId').val(),
         Modifiedby: $('#UserId').val(),
+        Lastlogin: new Date().toISOString().slice(0, 19).replace('T', ' '),
         Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
         Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' ')
     };
