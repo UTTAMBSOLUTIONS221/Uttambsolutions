@@ -76,11 +76,11 @@ namespace WEB.Controllers
             {
                 if (resp.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
                 {
-                    return RedirectToAction("Verifyaccount", "Account", new { Usercode = resp.Usermodel.Userid, Phonenumber = resp.Usermodel.Phonenumber });
+                    return RedirectToAction("Verifyaccount", "Account", new { Code = Guid.NewGuid(), Usercode = Guid.NewGuid(), Staffid = resp.Usermodel.Userid, Phonenumber = resp.Usermodel.Phonenumber });
                 }
                 else if (resp.Usermodel.Updateprofile)
                 {
-                    return RedirectToAction("Updatemyprofile", "Account", new { Usercode = resp.Usermodel.Userid });
+                    return RedirectToAction("Updatemyprofile", "Account", new { Code = Guid.NewGuid(), Usercode = Guid.NewGuid(), Staffid = resp.Usermodel.Userid, });
                 }
                 SetUserLoggedIn(resp, false);
                 return RedirectToLocal(returnUrl, resp.Usermodel.Rolename);
@@ -98,16 +98,16 @@ namespace WEB.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Updatemyprofile(long Usercode)
+        public async Task<IActionResult> Updatemyprofile(long Staffid)
         {
-            var data = await bl.Getsystemstaffdatabyid(Usercode);
+            var data = await bl.Getsystemstaffdatabyid(Staffid);
             return View(data);
         }
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Verifyaccount(long Usercode)
+        public async Task<IActionResult> Verifyaccount(long Staffid, string Phonenumber)
         {
-            var data = await bl.Getsystemstaffdatabyid(Usercode);
+            var data = await bl.Getsystemstaffdatabyid(Staffid);
             return View(data);
         }
 
