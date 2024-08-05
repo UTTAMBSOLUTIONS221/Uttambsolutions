@@ -166,7 +166,7 @@
                         <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder text-uppercase">Cancel</a>
                     </div>
                     <div class="col-6">
-                        <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemstaffprofileid" onclick="savesystemstaffprofiledata();">
+                        <button class="btn btn-sm btn-info font-weight-bold float-right" type="button" id="savesystemstaffprofileid" onclick="savesystemstaffprofiledata();">
                             <span id="buttonText">Update Profile</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
                         </button>
                     </div>
@@ -184,10 +184,11 @@
     <script src="~/dist/js/adminlte.min.js"></script>
     <script src="~/js/site.js"></script>
     <script type="text/javascript">
-         function savesystemstaffprofiledata() {
+        function savesystemstaffprofiledata() {
             document.getElementById("savesystemstaffprofileid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
+
             // Validation checks
             let isValid = true;
             let validationMessage = '';
@@ -206,6 +207,18 @@
             }
             if ($('#PhonenumberId').val() === '') {
                 validationMessage += 'Phone number is required.\n';
+                isValid = false;
+            }
+            if ($('#IdnumberId').val() === '') {
+                validationMessage += 'ID number is required.\n';
+                isValid = false;
+            }
+            if ($('#Genderid').val() === '' || $('#Genderid').val() == 0) {
+                validationMessage += 'Gender is required.\n';
+                isValid = false;
+            }
+            if ($('#Maritalstatusid').val() === '' || $('#Maritalstatusid').val() == 0) {
+                validationMessage += 'Marital status is required.\n';
                 isValid = false;
             }
             if ($('#StaffRoleId').val() === '' || $('#StaffRoleId').val() == 0) {
