@@ -95,6 +95,14 @@ namespace WEB.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Updatemyprofile(long Usercode)
+        {
+            var data = await bl.Getsystemstaffdatabyid(Usercode);
+            return View(data);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Logout()
         {

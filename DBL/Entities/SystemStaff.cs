@@ -2,7 +2,7 @@
 
 namespace DBL.Entities
 {
-    public class SystemStaff
+    public class Systemstaff
     {
         public int Userid { get; set; }
         [Required(ErrorMessage = "Firstname is Required!")]
@@ -16,23 +16,25 @@ namespace DBL.Entities
         [Required(ErrorMessage = "Emailaddress is Required!")]
         [DataType(DataType.EmailAddress)]
         public string? Emailaddress { get; set; }
+        public int Genderid { get; set; }
+        public int Maritalstatusid { get; set; }
         public int Roleid { get; set; }
-        public string? Rolename { get; set; }
-
         public string? Passharsh { get; set; }
-
         [Required(ErrorMessage = "Password is Required!")]
         public string? Passwords { get; set; }
         [Required(ErrorMessage = "Confirm Password is required.")]
         [DataType(DataType.Password)]
         [Compare("Passwords", ErrorMessage = "The password and confirmation password do not match.")]
-        public string? Confirmpasswords { get; set; }
         public bool Isactive { get; set; }
         public bool Isdeleted { get; set; }
         public bool Isdefault { get; set; }
-        public int Loginstatus { get; set; }
+        public bool Loginstatus { get; set; }
         public DateTime? Passwordresetdate { get; set; }
         public int? Parentid { get; set; }
+        public string? Userprofileimageurl { get; set; }
+        public string? Usercurriculumvitae { get; set; }
+        public string? Idnumber { get; set; }
+        public bool Updateprofile { get; set; }
         public string? Extra { get; set; }
         public string? Extra1 { get; set; }
         public string? Extra2 { get; set; }
@@ -41,7 +43,6 @@ namespace DBL.Entities
         public string? Extra5 { get; set; }
         public int Createdby { get; set; }
         public int Modifiedby { get; set; }
-        public int Idnumber { get; set; }
         public DateTime? Lastlogin { get; set; }
         public DateTime Datemodified { get; set; }
         public DateTime Datecreated { get; set; }
