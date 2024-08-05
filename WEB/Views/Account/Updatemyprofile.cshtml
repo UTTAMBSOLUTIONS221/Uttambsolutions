@@ -57,122 +57,120 @@
                         }
                     </div>
                 </div>
-                <form id="updateProfileForm" asp-action="Register" asp-controller="Account" method="post">
-                    <div class="row">
-                        <input asp-for="Userid" type="number" class="form-control form-control-sm" id="UserId" hidden>
-                        <input asp-for="Roleid" type="number" class="form-control form-control-sm" id="StaffRoleId" hidden>
-                        <div class="col-sm-6">
-                            <label class="text-sm fontweight-light">First Name</label>
-                            <div class="input-group mb-3">
-                                <input asp-for="Firstname" type="text" class="form-control form-control-sm" id="FirstnameId" placeholder="First Name">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fa fa-user"></span>
-                                    </div>
+                <div class="row">
+                    <input asp-for="Userid" type="number" class="form-control form-control-sm" id="UserId" hidden>
+                    <input asp-for="Roleid" type="number" class="form-control form-control-sm" id="StaffRoleId" hidden>
+                    <div class="col-sm-6">
+                        <label class="text-sm fontweight-light">First Name</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Firstname" type="text" class="form-control form-control-sm" id="FirstnameId" placeholder="First Name">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-user"></span>
                                 </div>
                             </div>
-                            <span asp-validation-for="Firstname" class="text-danger"></span>
                         </div>
-                        <div class="col-sm-6">
-                            <label>Last Name</label>
-                            <div class="input-group mb-3">
-                                <input asp-for="Lastname" type="text" class="form-control form-control-sm" placeholder="Last Name" id="LastnameId">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fa fa-user"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span asp-validation-for="Lastname" class="text-danger"></span>
-                        </div>
+                        <span asp-validation-for="Firstname" class="text-danger"></span>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <label>Email Address</label>
-                            <div class="input-group mb-3">
-                                <input asp-for="Emailaddress" type="email" class="form-control form-control-sm" placeholder="Email Address" id="EmailAddressId">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fa fa-envelope"></span>
-                                    </div>
+                    <div class="col-sm-6">
+                        <label>Last Name</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Lastname" type="text" class="form-control form-control-sm" placeholder="Last Name" id="LastnameId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-user"></span>
                                 </div>
                             </div>
-                            <span asp-validation-for="Emailaddress" class="text-danger"></span>
                         </div>
+                        <span asp-validation-for="Lastname" class="text-danger"></span>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label>Phone Number</label>
-                            <div class="input-group mb-3">
-                                <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number" id="PhonenumberId">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fa fa-phone"></span>
-                                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Email Address</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Emailaddress" type="email" class="form-control form-control-sm" placeholder="Email Address" id="EmailAddressId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-envelope"></span>
                                 </div>
                             </div>
-                            <span asp-validation-for="Phonenumber" class="text-danger"></span>
                         </div>
-                        <div class="col-sm-6">
-                            <label>ID Number</label>
-                            <div class="input-group mb-3">
-                                <input asp-for="Idnumber" type="tel" class="form-control form-control-sm" placeholder="Id Number" id="IdnumberId">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fa fa-card"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span asp-validation-for="Idnumber" class="text-danger"></span>
-                        </div>
+                        <span asp-validation-for="Emailaddress" class="text-danger"></span>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label>Gender</label>
-                            <div class="input-group mb-3">
-                                <select asp-for="Genderid" class="form-control form-control-sm" id="Genderid">
-                                    <option value="">---select---</option>
-                                    <option value="0">Not Set</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
-                                </select>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fa fa-card"></span>
-                                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Phone Number</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number" id="PhonenumberId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-phone"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <label>Marital Status</label>
-                            <div class="input-group mb-3">
-                                <select asp-for="Maritalstatusid" class="form-control form-control-sm" id="Maritalstatusid">
-                                    <option value="">---select---</option>
-                                    <option value="0">Not Set</option>
-                                    <option value="1">Single</option>
-                                    <option value="2">Married</option>
-                                    <option value="3">Divorced</option>
-                                </select>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fa fa-card"></span>
-                                    </div>
+                        <span asp-validation-for="Phonenumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>ID Number</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Idnumber" type="tel" class="form-control form-control-sm" placeholder="Id Number" id="IdnumberId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-card"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Idnumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Gender</label>
+                        <div class="input-group mb-3">
+                            <select asp-for="Genderid" class="form-control form-control-sm" id="Genderid">
+                                <option value="">---select---</option>
+                                <option value="0">Not Set</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                            </select>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-card"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder btn-block text-uppercase">Cancel</a>
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-                            <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemstaffprofileid" onclick="savesystemstaffprofiledata();">
-                                <span id="buttonText">Update Profile</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
-                            </button>
+                    <div class="col-sm-6">
+                        <label>Marital Status</label>
+                        <div class="input-group mb-3">
+                            <select asp-for="Maritalstatusid" class="form-control form-control-sm" id="Maritalstatusid">
+                                <option value="">---select---</option>
+                                <option value="0">Not Set</option>
+                                <option value="1">Single</option>
+                                <option value="2">Married</option>
+                                <option value="3">Divorced</option>
+                            </select>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-card"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </form>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder btn-block text-uppercase">Cancel</a>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                        <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemstaffprofileid" onclick="savesystemstaffprofiledata();">
+                            <span id="buttonText">Update Profile</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
