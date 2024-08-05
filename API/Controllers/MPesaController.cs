@@ -14,6 +14,7 @@ namespace API.Controllers
         }
 
         #region MPESA C2B
+        [HttpPost]
         [Route("api/v1/channelm/expr/callback/{id:int}")]
         public async Task MPesaSTKPushCallback(int id)
         {
