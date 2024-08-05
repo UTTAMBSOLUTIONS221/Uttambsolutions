@@ -29,82 +29,82 @@ namespace DBL.Helpers
         /// <param name="imageUrls">List of image URLs to include</param>
         /// <param name="blogLink">Link to the blog post</param>
         /// <returns>Status message</returns>
-        public async Task<string> PublishBlogPostAsync(string summary, List<string> imageUrls, string blogLink)
-        {
-            try
-            {
-                var imageIds = new List<string>();
-                foreach (var imageUrl in imageUrls)
-                {
-                    var uploadResult = await UploadPhotoAsync(imageUrl);
-                    if (uploadResult.Item1 != 200)
-                    {
-                        var error = ParseError(uploadResult.Item2);
-                        return $"Error uploading photo to Facebook: {error}";
-                    }
+        //public async Task<string> PublishBlogPostAsync(string summary, List<string> imageUrls, string blogLink)
+        //{
+        //    try
+        //    {
+        //        var imageIds = new List<string>();
+        //        foreach (var imageUrl in imageUrls)
+        //        {
+        //            var uploadResult = await UploadPhotoAsync(imageUrl);
+        //            if (uploadResult.Item1 != 200)
+        //            {
+        //                var error = ParseError(uploadResult.Item2);
+        //                return $"Error uploading photo to Facebook: {error}";
+        //            }
 
-                    var uploadResponse = JObject.Parse(uploadResult.Item2);
-                    imageIds.Add(uploadResponse["id"].Value<string>());
-                }
+        //            var uploadResponse = JObject.Parse(uploadResult.Item2);
+        //            imageIds.Add(uploadResponse["id"].Value<string>());
+        //        }
 
-                var pagePostResult = await PublishPostAsync(_pageAccessToken, _postToPageURL, summary, imageIds, blogLink);
-                if (pagePostResult.Item1 != 200)
-                {
-                    var error = ParseError(pagePostResult.Item2);
-                    return $"Error posting to Facebook page: {error}";
-                }
+        //        var pagePostResult = await PublishPostAsync(_pageAccessToken, _postToPageURL, summary, imageIds, blogLink);
+        //        if (pagePostResult.Item1 != 200)
+        //        {
+        //            var error = ParseError(pagePostResult.Item2);
+        //            return $"Error posting to Facebook page: {error}";
+        //        }
 
-                var profilePostResult = await PublishPostAsync(_accessToken, _postToProfileURL, summary, imageIds, blogLink);
-                if (profilePostResult.Item1 != 200)
-                {
-                    var error = ParseError(profilePostResult.Item2);
-                    return $"Error posting to Facebook profile: {error}";
-                }
+        //        var profilePostResult = await PublishPostAsync(_accessToken, _postToProfileURL, summary, imageIds, blogLink);
+        //        if (profilePostResult.Item1 != 200)
+        //        {
+        //            var error = ParseError(profilePostResult.Item2);
+        //            return $"Error posting to Facebook profile: {error}";
+        //        }
 
-                return "Post published successfully!";
-            }
-            catch (Exception ex)
-            {
-                // Log exception somewhere
-                return $"Unknown error publishing post to Facebook: {ex.Message}";
-            }
-        }
+        //        return "Post published successfully!";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Log exception somewhere
+        //        return $"Unknown error publishing post to Facebook: {ex.Message}";
+        //    }
+        //}
 
-        private async Task<Tuple<int, string>> UploadPhotoAsync(string photoUrl)
-        {
-            using (var http = new HttpClient())
-            {
-                var postData = new Dictionary<string, string>
-            {
-                { "access_token", _pageAccessToken },
-                { "url", photoUrl }
-            };
+        //private async Task<Tuple<int, string>> UploadPhotoAsync(string photoUrl)
+        //{
+        //    using (var http = new HttpClient("", "", null))
+        //    {
+        //        var postData = new Dictionary<string, string>
+        //    {
+        //        { "access_token", _pageAccessToken },
+        //        { "url", photoUrl }
+        //    };
 
-                var httpResponse = await http.PostAsync(_postToPagePhotosURL, new FormUrlEncodedContent(postData));
-                var httpContent = await httpResponse.Content.ReadAsStringAsync();
+        //        var httpResponse = await http.PostAsync(_postToPagePhotosURL, new FormUrlEncodedContent(postData));
+        //        var httpContent = await httpResponse.Content.ReadAsStringAsync();
 
-                return new Tuple<int, string>((int)httpResponse.StatusCode, httpContent);
-            }
-        }
+        //        return new Tuple<int, string>((int)httpResponse.StatusCode, httpContent);
+        //    }
+        //}
 
-        private async Task<Tuple<int, string>> PublishPostAsync(string accessToken, string postUrl, string message, List<string> imageIds, string link)
-        {
-            using (var http = new HttpClient())
-            {
-                var postData = new Dictionary<string, string>
-            {
-                { "access_token", accessToken },
-                { "message", message },
-                { "link", link },
-                { "attached_media", string.Join(",", imageIds.ConvertAll(id => $"{{\"media_fbid\":\"{id}\"}}")) }
-            };
+        //private async Task<Tuple<int, string>> PublishPostAsync(string accessToken, string postUrl, string message, List<string> imageIds, string link)
+        //{
+        //    using (var http = new HttpClient())
+        //    {
+        //        var postData = new Dictionary<string, string>
+        //    {
+        //        { "access_token", accessToken },
+        //        { "message", message },
+        //        { "link", link },
+        //        { "attached_media", string.Join(",", imageIds.ConvertAll(id => $"{{\"media_fbid\":\"{id}\"}}")) }
+        //    };
 
-                var httpResponse = await http.PostAsync(postUrl, new FormUrlEncodedContent(postData));
-                var httpContent = await httpResponse.Content.ReadAsStringAsync();
+        //        var httpResponse = await http.PostAsync(postUrl, new FormUrlEncodedContent(postData));
+        //        var httpContent = await httpResponse.Content.ReadAsStringAsync();
 
-                return new Tuple<int, string>((int)httpResponse.StatusCode, httpContent);
-            }
-        }
+        //        return new Tuple<int, string>((int)httpResponse.StatusCode, httpContent);
+        //    }
+        //}
 
         private string ParseError(string jsonResponse)
         {
