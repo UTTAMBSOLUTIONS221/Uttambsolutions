@@ -74,13 +74,13 @@ namespace WEB.Controllers
             var resp = await bl.ValidateSystemStaff(model.username, model.password);
             if (resp.RespStatus == 0)
             {
-                if (resp.Usermodel.Updateprofile)
-                {
-                    return RedirectToAction("Updatemyprofile", "Account", new { Usercode = resp.Usermodel.Userid });
-                }
-                else if (resp.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
+                if (resp.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
                 {
                     return RedirectToAction("VerifyAccount", "Account", new { Usercode = resp.Usermodel.Userid, Phonenumber = resp.Usermodel.Phonenumber });
+                }
+                else if (resp.Usermodel.Updateprofile)
+                {
+                    return RedirectToAction("Updatemyprofile", "Account", new { Usercode = resp.Usermodel.Userid });
                 }
                 SetUserLoggedIn(resp, false);
                 return RedirectToLocal(returnUrl, resp.Usermodel.Rolename);
