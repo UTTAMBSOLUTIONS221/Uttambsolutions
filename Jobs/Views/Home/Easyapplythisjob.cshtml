@@ -2,7 +2,7 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @{
     Layout = null;
-    var profileImageUrl = Model.User.UserProfileImageUrl;
+    var profileImageUrl = Model.User.Userprofileimageurl;
     var defaultImageUrl = Url.Content("~/images/user.png");
     var imageUrl = !string.IsNullOrEmpty(profileImageUrl) ? Url.Content(profileImageUrl) : defaultImageUrl;
 }

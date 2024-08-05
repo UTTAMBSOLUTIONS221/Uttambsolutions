@@ -30,7 +30,7 @@
         authenticated = true;
         currentUserData = Util.GetCurrentUserData(User.Identities);
         IConfiguration config = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
-        var profileImageUrl = Model.UserProfileImageUrl;
+        var profileImageUrl = Model.Userprofileimageurl;
         var defaultImageUrl = Url.Content("~/images/user.png");
          imageUrl = !string.IsNullOrEmpty(profileImageUrl) ? Url.Content(profileImageUrl) : defaultImageUrl;
     }

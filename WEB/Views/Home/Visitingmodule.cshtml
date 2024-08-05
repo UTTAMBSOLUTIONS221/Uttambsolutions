@@ -1,7 +1,7 @@
 ﻿@model DBL.Models.Visitingmodulemodel
 @{
     Layout = null;
-    var profileImageUrl = Model.user.UserProfileImageUrl;
+    var profileImageUrl = Model.user.Userprofileimageurl;
     var defaultImageUrl = Url.Content("~/images/user.png");
     var imageUrl = !string.IsNullOrEmpty(profileImageUrl) ? Url.Content(profileImageUrl) : defaultImageUrl;
 }
