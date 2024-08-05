@@ -17,7 +17,7 @@
         public bool Isactive { get; set; }
         public bool Isdeleted { get; set; }
         public bool Isdefault { get; set; }
-        public bool Loginstatus { get; set; }
+        public int Loginstatus { get; set; }
         public DateTime? Passwordresetdate { get; set; }
         public int? Parentid { get; set; }
         public string? Userprofileimageurl { get; set; }
