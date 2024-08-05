@@ -151,9 +151,21 @@
         return;
     }
     var uil = {
-        Userid: $('#UserId').val(), Firstname: $('#FirstnameId').val(), Lastname: $('#LastnameId').val(), Emailaddress: $('#EmailAddressId').val(), Phonenumber: $('#PhonenumberId').val(),
-        Roleid: $('#StaffRoleId').val(), Createdby: $('#systemLoggedinedUserid').val(), Modifiedby: $('#systemLoggedinedUserid').val(),Lastlogin: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), 
-        Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+        Userid: $('#UserId').val(),
+        Firstname: $('#FirstnameId').val(),
+        Lastname: $('#LastnameId').val(),
+        Emailaddress: $('#EmailAddressId').val(),
+        Phonenumber: $('#PhonenumberId').val(),
+        Idnumber: $('#IdnumberId').val(),
+        Genderid: $('#Genderid').val(),
+        Maritalstatusid: $('#Maritalstatusid').val(),
+        Roleid: $('#StaffRoleId').val(),
+        Parentid: $('#Parentid').val(),
+        Updateprofile: false,
+        Createdby: $('#UserId').val(),
+        Modifiedby: $('#UserId').val(),
+        Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
+        Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' ')
     };
     $.post("/Staff/Addsystemstaffdata", uil, function (response) {
         if (response.RespStatus == 0) {
