@@ -2,14 +2,183 @@
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Updatemyprofile</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta name="keywords" content="Uttamb Solutions, web development, e-commerce, fuel card systems, digital marketing, blogs" />
+    <meta name="author" content="Uttamb Solutions" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@ViewData["Title"] - Uttamb Solutions" />
+    <meta property="og:description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta property="og:image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
+    <meta property="og:url" content="https://uttambsolutions.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@ViewData["Title"] - Uttamb Solutions" />
+    <meta name="twitter:description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta name="twitter:image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
+
+    <!-- Schema.org Markup for Google+ -->
+    <meta itemprop="name" content="@ViewData["Title"] - Uttamb Solutions" />
+    <meta itemprop="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta itemprop="image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5600633497493641"
+            crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-info card-outline">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg font-weight-light text-dark text-uppercase font-weight-bold">Update Profile</p>
+                <div class="row mt-1">
+                    <div class="col-sm-12" id="AlertsContainer">
+                        @{
+                            await Html.RenderPartialAsync("_Alerts");
+                        }
+                    </div>
+                </div>
+                <form asp-action="Register" asp-controller="Account" method="post">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="text-sm fontweight-light">First Name</label>
+                            <div class="input-group mb-3">
+                                <input asp-for="Firstname" type="text" class="form-control form-control-sm" placeholder="First Name">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Firstname" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Last Name</label>
+                            <div class="input-group mb-3">
+                                <input asp-for="Lastname" type="text" class="form-control form-control-sm" placeholder="Last Name">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Lastname" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Email Address</label>
+                            <div class="input-group mb-3">
+                                <input asp-for="Emailaddress" type="email" class="form-control form-control-sm" placeholder="Email Address">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-envelope"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Emailaddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Phone Number</label>
+                            <div class="input-group mb-3">
+                                <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Phonenumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>ID Number</label>
+                            <div class="input-group mb-3">
+                                <input asp-for="Idnumber" type="tel" class="form-control form-control-sm" placeholder="Id Number">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-card"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Idnumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Gender</label>
+                            <div class="input-group mb-3">
+                                <select asp-for="Genderid" class="form-control form-control-sm" placeholder="Gender">
+                                    <option value="">---select---</option>
+                                    <option value="0">Not Set</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-card"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Marital Status</label>
+                            <div class="input-group mb-3">
+                                <select asp-for="Maritalstatusid" class="form-control form-control-sm" placeholder="Marital Status">
+                                    <option value="">---select---</option>
+                                    <option value="0">Not Set</option>
+                                    <option value="1">Single</option>
+                                    <option value="2">Married</option>
+                                    <option value="3">Divorced</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-card"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder btn-block text-uppercase">cancel</a>
+                        </div>
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-sm btn-info font-weight-bolder btn-block text-uppercase">Update Profile</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/lib/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script src="~/js/site.js"></script>
 </body>
 </html>
