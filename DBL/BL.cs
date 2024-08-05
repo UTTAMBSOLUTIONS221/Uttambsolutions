@@ -21,6 +21,7 @@ namespace DBL
         Stringgenerator str = new Stringgenerator();
         EmailSenderHelper emlsnd = new EmailSenderHelper();
         FacebookHelper facebook = new FacebookHelper();
+        public string LogFile { get; set; }
         public BL(string connString)
         {
             this._connString = connString;
@@ -1038,7 +1039,7 @@ namespace DBL
 
                         var payResp = mpesaApi.MakeExprPayment(payUrl, exprData, authToken);
                         //---- Update DB
-                        if (payResp.Status == MPesaAPI.Enums.ResponseStatus.Success)
+                        if (payResp.Status == ResponseStatus.Success)
                         {
                             status = 1;
                             newRef = (string)payResp.Data;

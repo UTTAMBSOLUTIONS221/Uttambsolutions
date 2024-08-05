@@ -138,9 +138,5 @@ namespace API.Controllers
             return new B2CResp();
         }
         #endregion
-
-        #region MPESA B2B
-
-        #endregion
     }
 }
