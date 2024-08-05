@@ -24,6 +24,7 @@
         public string? Usercurriculumvitae { get; set; }
         public string? Idnumber { get; set; }
         public bool Updateprofile { get; set; }
+        public int Accountnumber { get; set; } = 0;
         public decimal Walletbalance { get; set; } = 0;
         public string? Rolename { get; set; }
         public string? RoleDescription { get; set; }

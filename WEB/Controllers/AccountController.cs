@@ -57,13 +57,7 @@ namespace WEB.Controllers
             }
             return View();
         }
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<JsonResult> Updatesystemstaffprofiledata(SystemStaff model)
-        {
-            var resp = await bl.Registersystemstaffdata(model);
-            return Json(resp);
-        }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Signin(string returnUrl = null)
@@ -82,7 +76,7 @@ namespace WEB.Controllers
             {
                 if (resp.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
                 {
-                    return RedirectToAction("Verifyaccount", "Account", new { Code = Guid.NewGuid(), Usercode = Guid.NewGuid(), Staffid = resp.Usermodel.Userid, Phonenumber = resp.Usermodel.Phonenumber });
+                    return RedirectToAction("Verifyaccount", "Account", new { Code = Guid.NewGuid(), Usercode = Guid.NewGuid(), Staffid = resp.Usermodel.Userid, Accountnumber = resp.Usermodel.Accountnumber, Phonenumber = resp.Usermodel.Phonenumber });
                 }
                 else if (resp.Usermodel.Updateprofile)
                 {
@@ -109,11 +103,21 @@ namespace WEB.Controllers
             var data = await bl.Getsystemstaffdatabyid(Staffid);
             return View(data);
         }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<JsonResult> Updatesystemstaffprofiledata(SystemStaff model)
+        {
+            var resp = await bl.Registersystemstaffdata(model);
+            return Json(resp);
+        }
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Verifyaccount(long Staffid, string Phonenumber)
+        public async Task<IActionResult> Verifyaccount(long Staffid, long Accountnumber, string Phonenumber)
         {
-            var data = await bl.Getsystemstaffdatabyid(Staffid);
+            Verifyaccountmodel data = new Verifyaccountmodel();
+            data.Userid = Staffid;
+            data.Accountnumber = Accountnumber;
+            data.Phonenumber = Phonenumber;
             return View(data);
         }
 

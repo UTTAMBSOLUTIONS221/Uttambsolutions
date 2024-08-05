@@ -1,0 +1,93 @@
+﻿@model DBL.Entities.Verifyaccountmodel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta name="keywords" content="Uttamb Solutions, web development, e-commerce, fuel card systems, digital marketing, blogs" />
+    <meta name="author" content="Uttamb Solutions" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@ViewData["Title"] - Uttamb Solutions" />
+    <meta property="og:description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta property="og:image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
+    <meta property="og:url" content="https://uttambsolutions.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@ViewData["Title"] - Uttamb Solutions" />
+    <meta name="twitter:description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta name="twitter:image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
+
+    <!-- Schema.org Markup for Google+ -->
+    <meta itemprop="name" content="@ViewData["Title"] - Uttamb Solutions" />
+    <meta itemprop="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta itemprop="image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5600633497493641"
+            crossorigin="anonymous"></script>
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-info card-outline">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg font-weight-light text-dark text-uppercase font-weight-bold">Verify account to operate</p>
+
+                <div class="row">
+                    <input asp-for="Userid" type="number" class="form-control form-control-sm" id="UserId" hidden>
+                    <div class="col-sm-12">
+                        <label>Phone Number</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number" required id="PhonenumberId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-phone"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Phonenumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder text-uppercase">Cancel</a>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-sm btn-info font-weight-bold float-right" type="button" id="savesystemstaffprofileid" onclick="savesystemstaffprofiledata();">
+                            <span id="buttonText">Update Profile</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/lib/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script src="~/js/site.js"></script>
+    </script>
+</body>
+</html>

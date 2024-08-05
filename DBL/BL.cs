@@ -275,6 +275,7 @@ namespace DBL
                                 Usercurriculumvitae = resp.Usermodel.Usercurriculumvitae,
                                 Idnumber = resp.Usermodel.Idnumber,
                                 Updateprofile = resp.Usermodel.Updateprofile,
+                                Accountnumber = resp.Usermodel.Accountnumber,
                                 Walletbalance = resp.Usermodel.Walletbalance,
                                 Rolename = resp.Usermodel.Rolename,
                                 RoleDescription = resp.Usermodel.RoleDescription,

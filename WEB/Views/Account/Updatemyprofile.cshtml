@@ -50,13 +50,6 @@
         <div class="card card-info card-outline">
             <div class="card-body login-card-body">
                 <p class="login-box-msg font-weight-light text-dark text-uppercase font-weight-bold">Update Profile</p>
-                <div class="row mt-1">
-                    <div class="col-sm-12" id="AlertsContainer">
-                        @{
-                            await Html.RenderPartialAsync("_Alerts");
-                        }
-                    </div>
-                </div>
                 <div class="row">
                     <input asp-for="Userid" type="number" class="form-control form-control-sm" id="UserId" hidden>
                     <input asp-for="Roleid" type="number" class="form-control form-control-sm" id="StaffRoleId" hidden>
@@ -253,7 +246,7 @@
             $.post("/Account/Updatesystemstaffprofiledata", uil, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire("Staff Detail", "Staff has been added and email sent.", "success");
-                    setTimeout(function () { location.reload(); }, 500);
+                    window.location.href = '/Account/Signin';
                 } else {
                     Swal.fire("Staff Detail Not Created", response.RespMessage, "error");
                 }
