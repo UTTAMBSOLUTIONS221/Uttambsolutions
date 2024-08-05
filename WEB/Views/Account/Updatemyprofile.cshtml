@@ -60,6 +60,7 @@
                 <div class="row">
                     <input asp-for="Userid" type="number" class="form-control form-control-sm" id="UserId" hidden>
                     <input asp-for="Roleid" type="number" class="form-control form-control-sm" id="StaffRoleId" hidden>
+                    <input asp-for="Parentid" type="number" class="form-control form-control-sm" id="Parentid" hidden>
                     <div class="col-sm-6">
                         <label class="text-sm fontweight-light">First Name</label>
                         <div class="input-group mb-3">
@@ -228,6 +229,7 @@
                 Genderid: $('#Genderid').val(),
                 Maritalstatusid: $('#Maritalstatusid').val(),
                 Roleid: $('#StaffRoleId').val(),
+                Parentid: $('#Parentid').val(),
                 Updateprofile: false,
                 Createdby: $('#UserId').val(),
                 Modifiedby: $('#UserId').val(),
