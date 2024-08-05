@@ -27,10 +27,10 @@ builder.Services.AddSingleton<IJobFactory, SingletonJobFactory>();
 builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
 
 // Add our job
-builder.Services.AddSingleton<PublishJobandBlogtoLinkedinJob>();
-builder.Services.AddSingleton(new JobSchedule(
-    jobType: typeof(PublishJobandBlogtoLinkedinJob),
-    cronExpression: "0 * * * * ?")); // Cron expression for running every minute
+//builder.Services.AddSingleton<PublishJobandBlogtoLinkedinJob>();
+//builder.Services.AddSingleton(new JobSchedule(
+//jobType: typeof(PublishJobandBlogtoLinkedinJob),
+// cronExpression: "0 * * * * ?")); // Cron expression for running every minute
 
 builder.Services.AddSession(options =>
 {
