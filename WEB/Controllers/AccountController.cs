@@ -76,7 +76,7 @@ namespace WEB.Controllers
             {
                 if (resp.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
                 {
-                    return RedirectToAction("VerifyAccount", "Account", new { Usercode = resp.Usermodel.Userid, Phonenumber = resp.Usermodel.Phonenumber });
+                    return RedirectToAction("Verifyaccount", "Account", new { Usercode = resp.Usermodel.Userid, Phonenumber = resp.Usermodel.Phonenumber });
                 }
                 else if (resp.Usermodel.Updateprofile)
                 {
@@ -97,7 +97,15 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Updatemyprofile(long Usercode)
+        {
+            var data = await bl.Getsystemstaffdatabyid(Usercode);
+            return View(data);
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Verifyaccount(long Usercode)
         {
             var data = await bl.Getsystemstaffdatabyid(Usercode);
             return View(data);

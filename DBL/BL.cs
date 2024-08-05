@@ -78,6 +78,7 @@ namespace DBL
                 obj.Lastlogin = DateTime.Now;
                 obj.Loginstatus = 1;
                 obj.Updateprofile = true;
+                obj.Parentid = 0;
                 obj.Passwordresetdate = DateTime.Now.AddDays(90);
                 var Resp = db.AccountRepository.Registersystemstaffdata(JsonConvert.SerializeObject(obj));
                 return Resp;
