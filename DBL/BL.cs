@@ -1,9 +1,13 @@
 ﻿using DBL.Entities;
+using DBL.Entities.Mpesa;
 using DBL.Enum;
 using DBL.Helpers;
 using DBL.Models;
+using DBL.Models.Mpesa;
 using DBL.UOW;
+using DBL.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text;
 
 namespace DBL
@@ -926,6 +930,148 @@ namespace DBL
                 return Resp;
             });
         }
+        #endregion
+
+
+        #region Mpesa Processes
+
+        #region Stk push
+        public async Task<PayResponse> MakeExpressPayment(PesaAppRequestData requestData)
+        {
+            return await Task.Run(() =>
+            {
+                PayResponse resp = new PayResponse { Status = 1, Message = "Request was not processed!" };
+
+                //---- Get service settings
+                var settings = db.PaymentRepository.GetExprSettings(requestData.ServiceCode);
+                if (settings.RespStatus != 0)
+                {
+                    resp.Message = settings.RespMessage;
+                    return resp;
+                }
+
+                string payUrl = settings.Data1;
+                string authUrl = settings.Data2;
+                string consumerKey = settings.Data3;
+                string consumerSecret = settings.Data4;
+                string passKey = settings.Data5;
+                string callbackUrl = settings.Data6 + requestData.ServiceCode;
+                string shortCode = settings.Data7;
+                string txnType = settings.Data8;
+                string txnDescr = settings.Data9;
+                string partyB = settings.Data10;
+
+                string txnRef = "";
+                string newRef = "";
+                string message = "";
+                int status = 0;
+
+                //---- Get Mpesa auth token
+                MPesaApi mpesaApi = new MPesaApi();
+                var authToken = mpesaApi.GetMPesaAuthToken(authUrl, consumerKey, consumerSecret);
+                if (string.IsNullOrEmpty(authToken))
+                    return new PayResponse
+                    {
+                        Status = 1,
+                        Message = "Failed to generate M-Pesa authorization details!"
+                    };
+
+                var paymentData = JsonConvert.DeserializeObject<MakePaymentData>(new JObject(requestData.Data).ToString());
+
+                //---- Loop through payments
+                Parallel.ForEach(paymentData.Payments, p =>
+                {
+                    string phoneNo = Util.FormatPhoneNo(p.AccountNo, "254").Replace("+", "");
+
+                    //---- Save the payment to the DB
+                    Payment payment = new Payment();
+                    payment.ServiceCode = requestData.ServiceCode;
+                    payment.AccountNo = phoneNo;
+                    payment.AccountName = "";
+                    payment.Amount = p.Amount;
+                    payment.PType = (int)PaymentType.Express;
+                    payment.TPRef = p.RefNo;
+                    payment.TPStat = 2;
+                    payment.ExtRef = "";
+                    payment.Extra1 = p.AccountRef;
+                    payment.Extra2 = paymentData.BatchNo;
+                    payment.AppCode = requestData.AppCode;
+                    payment.PStatus = 0;//--- Pending
+
+                    //---- Create payment
+                    var result = db.PaymentRepository.CreatePayment(payment);
+                    db.Reset();
+
+                    if (result.RespStatus == 0)
+                    {
+                        txnRef = result.Data1;
+
+                        string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+                        string password = shortCode + passKey + timestamp;
+
+                        //----Encode the password to Base64
+                        Encoding iso = Encoding.GetEncoding("ISO-8859-1");
+                        Encoding utf8 = Encoding.UTF8;
+                        byte[] utfBytes = utf8.GetBytes(password);
+                        byte[] isoBytes = Encoding.Convert(Encoding.UTF8, iso, utfBytes);
+                        password = Convert.ToBase64String(isoBytes);
+
+                        //---- Initiate payment to M-Pesa
+                        ExprPaymentData exprData = new ExprPaymentData
+                        {
+                            Amount = Math.Round(p.Amount, 0).ToString(),
+                            AccountReference = p.AccountRef,
+                            BusinessShortCode = shortCode,
+                            CallBackURL = callbackUrl,
+                            PartyA = phoneNo,
+                            PartyB = partyB,
+                            Password = password,
+                            PhoneNumber = phoneNo,
+                            Timestamp = timestamp,
+                            TransactionDesc = txnDescr,
+                            TransactionType = txnType
+                        };
+
+                        //---- Log data
+                        string myData = JsonConvert.SerializeObject(exprData);
+                        Util.LogError(this.LogFile, "Bl.MakeExpressPayment", new Exception(myData), false);
+
+                        var payResp = mpesaApi.MakeExprPayment(payUrl, exprData, authToken);
+                        //---- Update DB
+                        if (payResp.Status == MPesaAPI.Enums.ResponseStatus.Success)
+                        {
+                            status = 1;
+                            newRef = (string)payResp.Data;
+
+                            resp.Status = 0;
+                            resp.Message = "Payment initiated successfully.";
+                        }
+                        else
+                        {
+                            status = 3;
+                            message = payResp.Message.Replace("Error!", "").Trim();
+
+                            resp.Message = "Initiating payment record failed!";
+                        }
+
+                        var updateResp = db.PaymentRepository.UpdateMPesa(txnRef, status, message, newRef);
+                        db.Reset();
+                    }
+                    else
+                    {
+                        if (result.RespStatus == 1)
+                            resp.Message = "Failed to create the payment record! " + result.RespMessage;
+                        else
+                            throw new Exception(result.RespMessage);
+                    }
+                });
+
+                //---- Respond back to the caller
+
+                return resp;
+            });
+        }
+        #endregion
         #endregion
     }
 }

@@ -24,6 +24,11 @@ namespace DBL.UOW
 
 
 
+
+        private IPaymentRepository paymentRepository;
+
+
+
         public UnitOfWork(string connectionString) => connString = connectionString;
         public IGeneralRepository GeneralRepository
         {
@@ -82,6 +87,12 @@ namespace DBL.UOW
             get { return propertyRepository ?? (propertyRepository = new PropertyRepository(connString)); }
         }
 
+
+        public IPaymentRepository PaymentRepository
+        {
+            get { return paymentRepository ?? (paymentRepository = new PaymentRepository(connString)); }
+        }
+
         public void Reset()
         {
             generalRepository = null;
@@ -96,6 +107,10 @@ namespace DBL.UOW
             categoryRepository = null;
             productRepository = null;
             propertyRepository = null;
+
+
+
+            paymentRepository = null;
         }
 
         public void Dispose()

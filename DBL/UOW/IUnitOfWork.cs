@@ -21,5 +21,10 @@ namespace DBL.UOW
         IProductRepository ProductRepository { get; }
         IPropertyRepository PropertyRepository { get; }
 
+
+
+
+        IPaymentRepository PaymentRepository { get; }
+
     }
 }
