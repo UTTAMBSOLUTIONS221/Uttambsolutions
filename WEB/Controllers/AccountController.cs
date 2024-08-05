@@ -57,9 +57,11 @@ namespace WEB.Controllers
             }
             return View();
         }
+        [HttpPost]
+        [AllowAnonymous]
         public async Task<JsonResult> Updatesystemstaffprofiledata(SystemStaff model)
         {
-            var resp = await bl.Registersystemportalstaffdata(model);
+            var resp = await bl.Registersystemstaffdata(model);
             return Json(resp);
         }
         [HttpGet]

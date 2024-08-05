@@ -70,16 +70,20 @@ namespace DBL
             {
                 string Passwordhash = str.RandomString(12);
                 //string Password = str.RandomString(8).ToString();
-                obj.Passwords = sec.Encrypt(obj.Passwords, Passwordhash);
-                obj.Passharsh = Passwordhash;
-                obj.Username = obj.Emailaddress;
-                obj.Datecreated = DateTime.Now;
-                obj.Datemodified = DateTime.Now;
-                obj.Lastlogin = DateTime.Now;
-                obj.Loginstatus = 1;
-                obj.Updateprofile = true;
-                obj.Parentid = 0;
-                obj.Passwordresetdate = DateTime.Now.AddDays(90);
+                if (obj.Userid == 0)
+                {
+                    obj.Passwords = sec.Encrypt(obj.Passwords, Passwordhash);
+                    obj.Passharsh = Passwordhash;
+                    obj.Username = obj.Emailaddress;
+                    obj.Datecreated = DateTime.Now;
+                    obj.Datemodified = DateTime.Now;
+                    obj.Lastlogin = DateTime.Now;
+                    obj.Loginstatus = 1;
+                    obj.Updateprofile = true;
+                    obj.Parentid = 0;
+                    obj.Passwordresetdate = DateTime.Now.AddDays(90);
+                }
+
                 var Resp = db.AccountRepository.Registersystemstaffdata(JsonConvert.SerializeObject(obj));
                 return Resp;
             });

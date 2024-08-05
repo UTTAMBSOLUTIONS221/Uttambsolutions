@@ -63,7 +63,7 @@
                     <div class="col-sm-6">
                         <label class="text-sm fontweight-light">First Name</label>
                         <div class="input-group mb-3">
-                            <input asp-for="Firstname" type="text" class="form-control form-control-sm" id="FirstnameId" placeholder="First Name">
+                            <input asp-for="Firstname" type="text" class="form-control form-control-sm" id="FirstnameId" required placeholder="First Name">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fa fa-user"></span>
@@ -75,7 +75,7 @@
                     <div class="col-sm-6">
                         <label>Last Name</label>
                         <div class="input-group mb-3">
-                            <input asp-for="Lastname" type="text" class="form-control form-control-sm" placeholder="Last Name" id="LastnameId">
+                            <input asp-for="Lastname" type="text" class="form-control form-control-sm" placeholder="Last Name" required id="LastnameId">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fa fa-user"></span>
@@ -89,7 +89,7 @@
                     <div class="col-sm-12">
                         <label>Email Address</label>
                         <div class="input-group mb-3">
-                            <input asp-for="Emailaddress" type="email" class="form-control form-control-sm" placeholder="Email Address" id="EmailAddressId">
+                            <input asp-for="Emailaddress" type="email" class="form-control form-control-sm" placeholder="Email Address" required id="EmailAddressId">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fa fa-envelope"></span>
@@ -103,7 +103,7 @@
                     <div class="col-sm-6">
                         <label>Phone Number</label>
                         <div class="input-group mb-3">
-                            <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number" id="PhonenumberId">
+                            <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number" required id="PhonenumberId">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fa fa-phone"></span>
@@ -115,7 +115,7 @@
                     <div class="col-sm-6">
                         <label>ID Number</label>
                         <div class="input-group mb-3">
-                            <input asp-for="Idnumber" type="tel" class="form-control form-control-sm" placeholder="Id Number" id="IdnumberId">
+                            <input asp-for="Idnumber" type="tel" class="form-control form-control-sm" placeholder="Id Number" required id="IdnumberId">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fa fa-card"></span>
@@ -129,7 +129,7 @@
                     <div class="col-sm-6">
                         <label>Gender</label>
                         <div class="input-group mb-3">
-                            <select asp-for="Genderid" class="form-control form-control-sm" id="Genderid">
+                            <select asp-for="Genderid" class="form-control form-control-sm" id="Genderid" required>
                                 <option value="">---select---</option>
                                 <option value="0">Not Set</option>
                                 <option value="1">Male</option>
@@ -145,7 +145,7 @@
                     <div class="col-sm-6">
                         <label>Marital Status</label>
                         <div class="input-group mb-3">
-                            <select asp-for="Maritalstatusid" class="form-control form-control-sm" id="Maritalstatusid">
+                            <select asp-for="Maritalstatusid" class="form-control form-control-sm" id="Maritalstatusid" required>
                                 <option value="">---select---</option>
                                 <option value="0">Not Set</option>
                                 <option value="1">Single</option>
@@ -211,7 +211,6 @@
                 validationMessage += 'Role is required.\n';
                 isValid = false;
             }
-
             if (!isValid) {
                 Swal.fire('Validation Error', validationMessage, 'warning');
                 document.getElementById("savesystemstaffprofileid").disabled = false;
@@ -230,9 +229,8 @@
                 Maritalstatusid: $('#Maritalstatusid').val(),
                 Roleid: $('#StaffRoleId').val(),
                 Updateprofile: false,
-                Createdby: $('#systemLoggedinedUserid').val(),
-                Modifiedby: $('#systemLoggedinedUserid').val(),
-                Lastlogin: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Createdby: $('#UserId').val(),
+                Modifiedby: $('#UserId').val(),
                 Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
                 Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' ')
             };
