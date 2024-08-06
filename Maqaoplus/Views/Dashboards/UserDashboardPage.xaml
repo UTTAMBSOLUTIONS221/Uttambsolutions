@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Maqaoplus.ViewModels.HouseTenant"
+             xmlns:local="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.Dashboards.UserDashboardPage"
              Title="Tenant Dashboard">
 
@@ -10,9 +10,33 @@
         <Color>White</Color>
     </ContentPage.BackgroundColor>
 
+    <ContentPage.Resources>
+        <!-- Inverse Boolean Converter -->
+        <ResourceDictionary>
+            <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <AbsoluteLayout>
+        <!-- Placeholder image while data is loading -->
+        <Image Source="placeholder.png"
+               IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}"
+               Aspect="AspectFill"
+               AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <!-- Centered loading spinner -->
+        <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                           Color="#0a506c"
+                           WidthRequest="60" 
+                           HeightRequest="60"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize"
+                           AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
         <!-- Main content -->
-        <ScrollView>
+        <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
             <Grid Padding="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -25,9 +49,9 @@
                 <!-- Tenant Information Frame -->
                 <Frame Grid.Row="0" Padding="15" BackgroundColor="White" CornerRadius="10" HasShadow="False">
                     <StackLayout>
-                        <Label Text="Tenant Information" FontAttributes="Bold" FontSize="Large"/>
-                        <Label Text="{Binding TenantData.Firstname}" FontSize="Medium"/>
-                        <Label Text="{Binding TenantData.Lastname}" FontSize="Medium"/>
+                        <Label Text="Tenant Information" FontAttributes="Bold" FontSize="24"/>
+                        <Label Text="{Binding TenantData.Firstname}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Lastname}" FontSize="18"/>
                     </StackLayout>
                 </Frame>
 
@@ -35,13 +59,13 @@
                 <Frame Grid.Row="1" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="False">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
                         <StackLayout>
-                            <Label Text="Last Meter Reading" FontAttributes="Bold" FontSize="Medium"/>
-                            <Label Text="{Binding TenantData.Tenantroomdata.Previousmeters}" FontSize="Medium"/>
+                            <Label Text="Last Meter Reading" FontAttributes="Bold" FontSize="18"/>
+                            <Label Text="{Binding TenantData.Tenantroomdata.Previousmeters}" FontSize="18"/>
                         </StackLayout>
                         <BoxView WidthRequest="1" BackgroundColor="Gray" VerticalOptions="FillAndExpand"/>
                         <StackLayout>
-                            <Label Text="Wallet Balance" FontAttributes="Bold" FontSize="Medium"/>
-                            <Label Text="{Binding TenantData.Walletbalance}" FontSize="Medium"/>
+                            <Label Text="Wallet Balance" FontAttributes="Bold" FontSize="18"/>
+                            <Label Text="{Binding TenantData.Walletbalance}" FontSize="18"/>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
@@ -49,14 +73,14 @@
                 <!-- Tenant Room Payments Frame -->
                 <Frame Grid.Row="2" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="False">
                     <StackLayout>
-                        <Label Text="Tenant Room Payments" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="Tenant Room Payments" FontAttributes="Bold" FontSize="24"/>
                         <!-- Check if payments are empty -->
                         <CollectionView ItemsSource="{Binding TenantData.Tenantroomdata.Tenantroompayments}">
                             <CollectionView.EmptyView>
                                 <Label Text="No payments available" 
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"
-                                       FontSize="Medium"
+                                       FontSize="18"
                                        TextColor="Gray"/>
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
@@ -75,14 +99,14 @@
                 <!-- Tenant Room History Frame -->
                 <Frame Grid.Row="3" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="False">
                     <StackLayout>
-                        <Label Text="Tenant Room History" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="Tenant Room History" FontAttributes="Bold" FontSize="24"/>
                         <!-- Check if history is empty -->
                         <CollectionView ItemsSource="{Binding TenantData.Tenantroomdata.Tenantroomhistory}">
                             <CollectionView.EmptyView>
                                 <Label Text="No history available" 
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"
-                                       FontSize="Medium"
+                                       FontSize="18"
                                        TextColor="Gray"/>
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
@@ -99,15 +123,5 @@
                 </Frame>
             </Grid>
         </ScrollView>
-
-        <!-- Centered loading spinner -->
-        <ActivityIndicator IsRunning="{Binding IsLoading}" 
-                           Color="#0a506c"
-                           WidthRequest="60" 
-                           HeightRequest="60"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize"
-                           AbsoluteLayout.LayoutFlags="PositionProportional"/>
     </AbsoluteLayout>
 </ContentPage>
