@@ -60,26 +60,74 @@
                 </Grid.RowDefinitions>
 
                 <!-- Tenant Information Frame -->
-                <Frame Grid.Row="0">
-                    <StackLayout>
-                        <Label Text="Tenant Information" FontAttributes="Bold" FontSize="24"/>
-                        <Label Text="{Binding TenantData.Firstname}" FontSize="18"/>
-                        <Label Text="{Binding TenantData.Lastname}" FontSize="18"/>
+                <Frame Grid.Row="0" Padding="10" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc">
+                    <StackLayout Padding="10">
+                        <!-- Header Section -->
+                        <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <Label Text="Tenant Information" 
+                   FontAttributes="Bold" 
+                   HorizontalTextAlignment="Center" 
+                   TextColor="#0a506c" 
+                   TextTransform="Uppercase" 
+                   FontSize="20" 
+                   Margin="0,0,0,10"/>
+                            <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+
+                        <!-- Tenant Information Details -->
+                        <StackLayout Padding="0" Spacing="8">
+                            <Grid ColumnSpacing="10" RowSpacing="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Tenant Name -->
+                                <Label Text="Name:" FontSize="18" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Spacing="5" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding TenantData.Firstname}" FontSize="18" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                    <Label Text="{Binding TenantData.Lastname}" FontSize="18" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                </StackLayout>
+
+                                <!-- Tenant Email -->
+                                <Label Text="Email:" FontSize="18" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Emailaddress}" FontSize="18" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+
+                                <!-- Tenant Status -->
+                                <Label Text="Status:" FontSize="18" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Loginstatus}" FontSize="18" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+
+                                <!-- Wallet Balance -->
+                                <Label Text="My Wallet:" FontSize="18" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Walletbalance}" TextColor="Red" FontSize="18" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                            </Grid>
+                        </StackLayout>
                     </StackLayout>
                 </Frame>
 
                 <!-- Last Meter Reading and Wallet Balance Frame -->
-                <Frame Grid.Row="1">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
-                        <StackLayout>
-                            <Label Text="Last Meter Reading" FontAttributes="Bold"/>
-                            <Label Text="{Binding TenantData.Tenantroomdata.Previousmeters}"/>
-                        </StackLayout>
-                        <BoxView WidthRequest="1" BackgroundColor="Gray" VerticalOptions="FillAndExpand"/>
-                        <StackLayout>
-                            <Label Text="Wallet Balance" FontAttributes="Bold"/>
-                            <Label Text="{Binding TenantData.Walletbalance}"/>
-                        </StackLayout>
+                <Frame Grid.Row="1" IsVisible="{Binding Path=TenantData, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackLayout>
+                        <Label Text="Other Tenant Data" FontAttributes="Bold" FontSize="24"/>
+                        <Label Text="{Binding TenantData.Systempropertyhousetenantentryid}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Systempropertyhouseroomid}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Propertyhousename}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Isoccupant}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Houseoccupationstatus}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Systempropertyhousesizerentdeposit}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Systempropertyhousesizerent}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Monthlybinfee}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Waterunitprice}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Previousmeteramount}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Systempropertyhousesizename}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Datecreated, StringFormat='{}{0:MM/dd/yyyy}'}" FontSize="18"/>
+                        <Label Text="{Binding TenantData.Datemodified, StringFormat='{}{0:MM/dd/yyyy}'}" FontSize="18"/>
                     </StackLayout>
                 </Frame>
 
