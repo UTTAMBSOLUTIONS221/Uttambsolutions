@@ -10,98 +10,104 @@
         <Color>White</Color>
     </ContentPage.BackgroundColor>
 
-    <ScrollView>
-        <Grid Padding="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+    <AbsoluteLayout>
+        <!-- Main content -->
+        <ScrollView>
+            <Grid Padding="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <!-- Centered loading spinner -->
-            <ActivityIndicator IsRunning="{Binding IsLoading}" 
-                               Color="#0a506c"  
-                Grid.Row="4"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"/>
-
-            <!-- Tenant Information Frame -->
-            <Frame Grid.Row="0" Padding="15" BackgroundColor="White" CornerRadius="10" HasShadow="True">
-                <StackLayout>
-                    <Label Text="Tenant Information" FontAttributes="Bold" FontSize="Large"/>
-                    <Label Text="{Binding TenantData.Firstname}" FontSize="Medium"/>
-                    <Label Text="{Binding TenantData.Lastname}" FontSize="Medium"/>
-                </StackLayout>
-            </Frame>
-
-            <!-- Last Meter Reading and Wallet Balance Frame -->
-            <Frame Grid.Row="1" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="True">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
+                <!-- Tenant Information Frame -->
+                <Frame Grid.Row="0" Padding="15" BackgroundColor="White" CornerRadius="10" HasShadow="True">
                     <StackLayout>
-                        <Label Text="Last Meter Reading" FontAttributes="Bold" FontSize="Medium"/>
-                        <Label Text="{Binding TenantData.Tenantroomdata.Previousmeters}" FontSize="Medium"/>
+                        <Label Text="Tenant Information" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="{Binding TenantData.Firstname}" FontSize="Medium"/>
+                        <Label Text="{Binding TenantData.Lastname}" FontSize="Medium"/>
                     </StackLayout>
-                    <BoxView WidthRequest="1" BackgroundColor="Gray" VerticalOptions="FillAndExpand"/>
+                </Frame>
+
+                <!-- Last Meter Reading and Wallet Balance Frame -->
+                <Frame Grid.Row="1" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="True">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
+                        <StackLayout>
+                            <Label Text="Last Meter Reading" FontAttributes="Bold" FontSize="Medium"/>
+                            <Label Text="{Binding TenantData.Tenantroomdata.Previousmeters}" FontSize="Medium"/>
+                        </StackLayout>
+                        <BoxView WidthRequest="1" BackgroundColor="Gray" VerticalOptions="FillAndExpand"/>
+                        <StackLayout>
+                            <Label Text="Wallet Balance" FontAttributes="Bold" FontSize="Medium"/>
+                            <Label Text="{Binding TenantData.Walletbalance}" FontSize="Medium"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Tenant Room Payments Frame -->
+                <Frame Grid.Row="2" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="True">
                     <StackLayout>
-                        <Label Text="Wallet Balance" FontAttributes="Bold" FontSize="Medium"/>
-                        <Label Text="{Binding TenantData.Walletbalance}" FontSize="Medium"/>
+                        <Label Text="Tenant Room Payments" FontAttributes="Bold" FontSize="Large"/>
+                        <!-- Check if payments are empty -->
+                        <CollectionView ItemsSource="{Binding TenantData.Tenantroomdata.Tenantroompayments}">
+                            <CollectionView.EmptyView>
+                                <Label Text="No payments available" 
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       FontSize="Medium"
+                                       TextColor="Gray"/>
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Horizontal" Padding="5">
+                                        <Label Text="{Binding Paymentamount}" FontAttributes="Bold" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Monthlyrentamount}" VerticalOptions="Center" Margin="10,0"/>
+                                        <Label Text="{Binding Datecreated, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </StackLayout>
-                </StackLayout>
-            </Frame>
+                </Frame>
 
-            <!-- Tenant Room Payments Frame -->
-            <Frame Grid.Row="2" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="True">
-                <StackLayout>
-                    <Label Text="Tenant Room Payments" FontAttributes="Bold" FontSize="Large"/>
-                    <!-- Check if payments are empty -->
-                    <CollectionView ItemsSource="{Binding TenantData.Tenantroomdata.Tenantroompayments}">
-                        <CollectionView.EmptyView>
-                            <Label Text="No payments available" 
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"
-                                   FontSize="Medium"
-                                   TextColor="Gray"/>
-                        </CollectionView.EmptyView>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout Orientation="Horizontal" Padding="5">
-                                    <Label Text="{Binding Paymentamount}" FontAttributes="Bold" VerticalOptions="Center"/>
-                                    <Label Text="{Binding Monthlyrentamount}" VerticalOptions="Center" Margin="10,0"/>
-                                    <Label Text="{Binding Datecreated, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center"/>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </StackLayout>
-            </Frame>
+                <!-- Tenant Room History Frame -->
+                <Frame Grid.Row="3" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="True">
+                    <StackLayout>
+                        <Label Text="Tenant Room History" FontAttributes="Bold" FontSize="Large"/>
+                        <!-- Check if history is empty -->
+                        <CollectionView ItemsSource="{Binding TenantData.Tenantroomdata.Tenantroomhistory}">
+                            <CollectionView.EmptyView>
+                                <Label Text="No history available" 
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       FontSize="Medium"
+                                       TextColor="Gray"/>
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Vertical" Padding="5">
+                                        <Label Text="{Binding Propertyhousename}" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Systempropertyhousesizename}"/>
+                                        <Label Text="{Binding Datecreated, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </ScrollView>
 
-            <!-- Tenant Room History Frame -->
-            <Frame Grid.Row="3" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="True">
-                <StackLayout>
-                    <Label Text="Tenant Room History" FontAttributes="Bold" FontSize="Large"/>
-                    <!-- Check if history is empty -->
-                    <CollectionView ItemsSource="{Binding TenantData.Tenantroomdata.Tenantroomhistory}">
-                        <CollectionView.EmptyView>
-                            <Label Text="No history available" 
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"
-                                   FontSize="Medium"
-                                   TextColor="Gray"/>
-                        </CollectionView.EmptyView>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout Orientation="Vertical" Padding="5">
-                                    <Label Text="{Binding Propertyhousename}" FontAttributes="Bold"/>
-                                    <Label Text="{Binding Systempropertyhousesizename}"/>
-                                    <Label Text="{Binding Datecreated, StringFormat='{}{0:MM/dd/yyyy}'}"/>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </StackLayout>
-            </Frame>
-        </Grid>
-    </ScrollView>
+        <!-- Centered loading spinner -->
+        <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                           Color="#0a506c"
+                           WidthRequest="60" 
+                           HeightRequest="60"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize"
+                           AbsoluteLayout.LayoutFlags="PositionProportional"/>
+    </AbsoluteLayout>
 </ContentPage>
