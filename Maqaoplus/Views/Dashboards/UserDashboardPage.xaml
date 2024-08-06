@@ -60,7 +60,8 @@
                 </Grid.RowDefinitions>
 
                 <!-- Tenant Information Frame -->
-                <Frame Grid.Row="0" Padding="10" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc">
+                <!-- Tenant Information Frame -->
+                <Frame Grid.Row="0" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
                     <StackLayout Padding="10">
                         <!-- Header Section -->
                         <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
@@ -76,7 +77,7 @@
 
                         <!-- Tenant Information Details -->
                         <StackLayout Padding="0" Spacing="8">
-                            <Grid ColumnSpacing="10" RowSpacing="5">
+                            <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*" />
@@ -99,9 +100,14 @@
                                 <Label Text="Email:" FontSize="18" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
                                 <Label Text="{Binding TenantData.Emailaddress}" FontSize="18" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
-                                <!-- Tenant Status -->
-                                <Label Text="Status:" FontSize="18" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                                <Label Text="{Binding TenantData.Loginstatus}" FontSize="18" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <!-- Phone Number and Status -->
+                                <Label Text="Phone:" FontSize="18" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Phonenumber}" FontSize="18" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+
+
+                                <!-- Status -->
+                                <Label Text="Status:" FontSize="18" FontAttributes="Bold" Grid.Row="3" Grid.Column="2"/>
+                                <Label Text="{Binding TenantData.Loginstatus}" FontSize="18" Grid.Row="3" Grid.Column="4" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                 <!-- Wallet Balance -->
                                 <Label Text="My Wallet:" FontSize="18" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
@@ -110,6 +116,7 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
+
 
                 <!-- Last Meter Reading and Wallet Balance Frame -->
                 <Frame Grid.Row="1" IsVisible="{Binding Path=TenantData, Converter={StaticResource BooleanToVisibilityConverter}}">
