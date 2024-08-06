@@ -227,8 +227,6 @@
                     <StackLayout Grid.Row="4" Padding="10" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="End">
                         <Label Text="Thank you for choosing our service!" FontSize="16" TextColor="Gray" HorizontalOptions="Center"/>
                     </StackLayout>
-
-
                 </Grid>
             </Grid>
         </ScrollView>
