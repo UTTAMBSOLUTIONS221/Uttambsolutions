@@ -16,7 +16,7 @@
             <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
             <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <Style TargetType="Label">
-                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontSize" Value="16"/>
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="Margin" Value="5,0"/>
             </Style>
@@ -83,21 +83,21 @@
                                 </Grid.RowDefinitions>
 
                                 <!-- Tenant Name -->
-                                <Label Text="Name:" FontSize="18" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="Name:" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
                                 <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Spacing="5" HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding TenantData.Fullname}" FontSize="18" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                    <Label Text="{Binding TenantData.Fullname}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                 </StackLayout>
 
                                 <!-- Tenant Email -->
-                                <Label Text="Email:" FontSize="18" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                                <Label Text="{Binding TenantData.Emailaddress}" FontSize="18" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="Email:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Emailaddress}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                 <!-- Phone Number  -->
-                                <Label Text="Phone:" FontSize="18" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                                <Label Text="{Binding TenantData.Phonenumber}" FontSize="18" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="Phone:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Phonenumber}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                 <!-- Wallet Balance -->
-                                <Label Text="My Wallet:" FontSize="18" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                                <Label Text="{Binding TenantData.Walletbalance}" TextColor="Red" FontSize="18" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="My Wallet:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Walletbalance}" TextColor="Red" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                             </Grid>
                         </StackLayout>
                     </StackLayout>
@@ -133,35 +133,33 @@
                                 </Grid.RowDefinitions>
 
                                 <!-- House Name -->
-                                <Label Text="{Binding TenantData.Tenantroomdata.Propertyhousename}" FontSize="18" LineBreakMode="TailTruncation" Grid.Row="0" TextTransform="Uppercase" FontAttributes="Bold" Grid.Column="0" HorizontalTextAlignment="Center" Padding="0"/>
+                                <Label Text="{Binding TenantData.Tenantroomdata.Propertyhousename}" FontSize="16" LineBreakMode="TailTruncation" Grid.Row="0" TextTransform="Uppercase" FontAttributes="Bold" Grid.Column="0" HorizontalTextAlignment="Center" Padding="0"/>
                                 <!-- Room -->
                                 <Label Text="{Binding TenantData.Tenantroomdata.Systempropertyhousesizename}" FontSize="14" LineBreakMode="TailTruncation" TextTransform="Uppercase" FontAttributes="Bold"  Grid.Row="1"  Grid.Column="0"  HorizontalTextAlignment="Center" Padding="0"/>
 
                                 <!-- Location -->
-                                <Label Text="From:" FontSize="18" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                                <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Spacing="5" HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding TenantData.Tenantroomdata.Datecreated}" FontSize="18" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                </StackLayout>
+                                <Label Text="From:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Tenantroomdata.Datecreated, StringFormat='{0:MM/dd/yyyy}'}" FontSize="16"  Grid.Row="2" Grid.Column="1"  LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
 
                                 <!-- Rent Amount -->
-                                <Label Text="Rent Amount:" FontSize="18" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                                <Label Text="{Binding TenantData.Tenantroomdata.Systempropertyhousesizerent}" FontSize="18" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand" Padding="0"/>
+                                <Label Text="Rent Amount:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Tenantroomdata.Systempropertyhousesizerent}" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand" Padding="0"/>
 
                                 <!-- Bin Fees -->
-                                <Label Text="Bin Fees:" FontSize="18" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
-                                <Label Text="{Binding TenantData.Tenantroomdata.Monthlybinfee}"   FontSize="18"  Grid.Row="4"  Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="Bin Fees:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Tenantroomdata.Monthlybinfee}"   FontSize="16"  Grid.Row="4"  Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                 <!-- Water Price per Unit -->
-                                <Label Text="Meter per Unit:" FontSize="18" FontAttributes="Bold" Grid.Row="5" Grid.Column="0"/>
-                                <Label Text="{Binding TenantData.Tenantroomdata.Waterunitprice}" FontSize="18" Grid.Row="5"  Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="Meter per Unit:" FontSize="16" FontAttributes="Bold" Grid.Row="5" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Tenantroomdata.Waterunitprice}" FontSize="16" Grid.Row="5"  Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                 <!-- Previous Meter Read -->
-                                <Label Text="Last Water Units:" FontSize="18" FontAttributes="Bold" Grid.Row="6" Grid.Column="0"/>
-                                <Label Text="{Binding TenantData.Tenantroomdata.Watermetrecurrentreading}" FontSize="18" Grid.Row="6"  Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="Last Water Units:" FontSize="16" FontAttributes="Bold" Grid.Row="6" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Tenantroomdata.Previousmeters}" FontSize="16" Grid.Row="6"  Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                 <!-- Current Meter Read -->
-                                <Label Text="Current Water Units:" FontSize="18" FontAttributes="Bold" Grid.Row="7" Grid.Column="0"/>
-                                <Label Text="{Binding TenantData.Tenantroomdata.Waterpreviousreading}" FontSize="18" Grid.Row="7"  Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="Last Water Bill:" FontSize="16" FontAttributes="Bold" Grid.Row="7" Grid.Column="0"/>
+                                <Label Text="{Binding TenantData.Tenantroomdata.previousmeteramount}" FontSize="16" Grid.Row="7"  Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                             </Grid>
                         </StackLayout>
                     </StackLayout>
@@ -195,24 +193,24 @@
                                                     </Grid.RowDefinitions>
 
                                                     <!-- Payment ID -->
-                                                    <Label Text="Transaction ID:" FontSize="18" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                                                    <Label Text="{Binding Systempaymentid}" FontSize="18" Grid.Row="0" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Transaction ID:" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                                    <Label Text="{Binding Systempaymentid}" FontSize="16" Grid.Row="0" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Payment Date -->
-                                                    <Label Text="Payment Date:" FontSize="18" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                                                    <Label Text="{Binding Datecreated}" FontSize="18" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Payment Date:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                                    <Label Text="{Binding Datecreated}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Payment Mode -->
-                                                    <Label Text="Payment Mode:" FontSize="18" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                                                    <Label Text="{Binding Paymentmode}" FontSize="18" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Payment Mode:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                                    <Label Text="{Binding Paymentmode}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Payment Amount -->
-                                                    <Label Text="Amount Paid:" FontSize="18" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                                                    <Label Text="{Binding Amountpaid}" FontSize="18" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Amount Paid:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                                                    <Label Text="{Binding Amountpaid}" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Payment For -->
-                                                    <Label Text="Paid For:" FontSize="18" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
-                                                    <Label Text="{Binding Paymentreason}" FontSize="18" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Paid For:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
+                                                    <Label Text="{Binding Paymentreason}" FontSize="16" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                                 </Grid>
                                             </StackLayout>
                                         </Frame>
@@ -251,24 +249,24 @@
                                                     </Grid.RowDefinitions>
 
                                                     <!-- Billing ID -->
-                                                    <Label Text="Bill ID:" FontSize="18" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                                                    <Label Text="{Binding Billid}" FontSize="18" Grid.Row="0" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Bill ID:" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                                    <Label Text="{Binding Billid}" FontSize="16" Grid.Row="0" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Billing Date -->
-                                                    <Label Text="Billing Date:" FontSize="18" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                                                    <Label Text="{Binding Datecreated}" FontSize="18" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Billing Date:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                                    <Label Text="{Binding Datecreated}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Billing Mode -->
-                                                    <Label Text="Bill Mode:" FontSize="18" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                                                    <Label Text="{Binding Billingreason}" FontSize="18" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Bill Mode:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                                    <Label Text="{Binding Billingreason}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Bill Amount -->
-                                                    <Label Text="Amount Billed:" FontSize="18" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                                                    <Label Text="{Binding Amountbilled}" FontSize="18" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Amount Billed:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                                                    <Label Text="{Binding Amountbilled}" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Payment Status -->
-                                                    <Label Text="Payment Status:" FontSize="18" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
-                                                    <Label Text="{Binding Paymentstatus}" FontSize="18" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Payment Status:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
+                                                    <Label Text="{Binding Paymentstatus}" FontSize="16" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                                 </Grid>
                                             </StackLayout>
                                         </Frame>
