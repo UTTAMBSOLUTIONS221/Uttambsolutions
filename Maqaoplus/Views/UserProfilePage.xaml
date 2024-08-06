@@ -2,11 +2,44 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.UserProfilePage"
-             Title="UserProfilePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="User Profile">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="Margin" Value="10,0"/>
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="Margin" Value="10,0"/>
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <!-- Profile Picture -->
+            <Frame HasShadow="False" Padding="0" HorizontalOptions="Center">
+                <Image Source="profile_placeholder.png" WidthRequest="120" HeightRequest="120" Aspect="AspectFill"/>
+            </Frame>
+            <!-- User Info -->
+            <VerticalStackLayout>
+                <Label Text="Name" FontAttributes="Bold"/>
+                <Entry Placeholder="John Doe" IsReadOnly="True"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Email" FontAttributes="Bold"/>
+                <Entry Placeholder="john.doe@example.com" IsReadOnly="True"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Phone" FontAttributes="Bold"/>
+                <Entry Placeholder="+1234567890" IsReadOnly="True"/>
+            </VerticalStackLayout>
+            <!-- Additional Info -->
+            <VerticalStackLayout>
+                <Label Text="Address" FontAttributes="Bold"/>
+                <Entry Placeholder="1234 Street, City, Country" IsReadOnly="True"/>
+            </VerticalStackLayout>
+            <Button Text="Edit Profile" BackgroundColor="#0a506c" TextColor="White" CornerRadius="10" HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
