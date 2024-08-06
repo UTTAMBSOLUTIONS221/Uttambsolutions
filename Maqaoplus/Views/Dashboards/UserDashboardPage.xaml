@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Maqaoplus.ViewModels.HouseTenant"
              x:Class="Maqaoplus.Views.Dashboards.UserDashboardPage"
-             Title="Dashboard">
+             Title="Tenant Dashboard">
 
     <ContentPage.BindingContext>
         <local:Propertyhousetenantviewmodel />
@@ -45,12 +45,12 @@
             <Frame Grid.Row="2" Padding="10" BackgroundColor="LightGray" CornerRadius="10" Margin="0,10,0,0">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
                     <StackLayout>
-                        <Label Text="Opening Meter" FontAttributes="Bold" FontSize="Medium"/>
+                        <Label Text="Previous Meter" FontAttributes="Bold" FontSize="Medium"/>
                         <Label Text="{Binding TenantData.Data.Previousmeters}" FontSize="Medium"/>
                     </StackLayout>
                     <BoxView WidthRequest="1" BackgroundColor="Black" VerticalOptions="FillAndExpand"/>
                     <StackLayout>
-                        <Label Text="Closing Meter" FontAttributes="Bold" FontSize="Medium"/>
+                        <Label Text="Previous Meter Amount" FontAttributes="Bold" FontSize="Medium"/>
                         <Label Text="{Binding TenantData.Data.Previousmeteramount}" FontSize="Medium"/>
                     </StackLayout>
                 </StackLayout>

@@ -2,15 +2,18 @@
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.HouseTenant
 {
     public class Propertyhousetenantviewmodel : INotifyPropertyChanged
     {
-        private readonly HttpClient _httpClient;
+        private readonly Services.ServiceProvider _serviceProvider;
         private PropertyHouseRoomTenantData _tenantData;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public ICommand LoadItemsCommand { get; }
 
         public PropertyHouseRoomTenantData TenantData
         {
@@ -22,16 +25,55 @@ namespace Maqaoplus.ViewModels.HouseTenant
             }
         }
 
-        public Propertyhousetenantviewmodel()
+        private bool _isLoading;
+        public bool IsLoading
         {
-            _httpClient = new HttpClient();
-            LoadData();
+            get => _isLoading;
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged();
+            }
         }
 
-        private async void LoadData()
+        private bool _isDataLoaded;
+        public bool IsDataLoaded
         {
-            var response = await _httpClient.GetStringAsync("https://yourapiurl.com/api/tenantdata");
-            TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response);
+            get => _isDataLoaded;
+            set
+            {
+                _isDataLoaded = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Propertyhousetenantviewmodel(Services.ServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+            LoadItemsCommand = new Command(async () => await LoadItems());
+        }
+        private async Task LoadItems()
+        {
+            IsLoading = true;
+            IsDataLoaded = false;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedatabyowner/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null)
+                {
+                    TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
+                }
+                IsDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
