@@ -73,7 +73,7 @@
                             <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -159,78 +159,15 @@
 
                                 <!-- Current Meter Read -->
                                 <Label Text="Last Water Bill:" FontSize="16" FontAttributes="Bold" Grid.Row="7" Grid.Column="0"/>
-                                <Label Text="{Binding TenantData.Tenantroomdata.previousmeteramount}" FontSize="16" Grid.Row="7"  Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="{Binding TenantData.Tenantroomdata.Previousmeteramount}" FontSize="16" Grid.Row="7"  Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                             </Grid>
                         </StackLayout>
-                    </StackLayout>
-                </Frame>
-
-                <!-- Payment History Section -->
-                <Frame Grid.Row="2" Padding="0" IsVisible="{Binding Path=TenantData.Tenantpaymenthistory, Converter={StaticResource BooleanToVisibilityConverter}}" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
-                    <StackLayout Padding="0" Margin="0,0,0,0" Spacing="0">
-                        <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                            <Label Text="Payment History" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="20" Margin="0,0,0,10"/>
-                            <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Padding="0" Margin="10,0,0,0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <Label Text="Meter Readings History" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
                         </StackLayout>
 
                         <StackLayout Padding="0" Spacing="8">
-                            <CollectionView ItemsSource="{Binding TenantData.Tenantpaymenthistory}" Margin="0">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Frame Padding="5" Margin="0,5" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc">
-                                            <StackLayout Spacing="8">
-                                                <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                    </Grid.RowDefinitions>
-
-                                                    <!-- Payment ID -->
-                                                    <Label Text="Transaction ID:" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                                                    <Label Text="{Binding Systempaymentid}" FontSize="16" Grid.Row="0" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-
-                                                    <!-- Payment Date -->
-                                                    <Label Text="Payment Date:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                                                    <Label Text="{Binding Datecreated}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-
-                                                    <!-- Payment Mode -->
-                                                    <Label Text="Payment Mode:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                                                    <Label Text="{Binding Paymentmode}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-
-                                                    <!-- Payment Amount -->
-                                                    <Label Text="Amount Paid:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                                                    <Label Text="{Binding Amountpaid}" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-
-                                                    <!-- Payment For -->
-                                                    <Label Text="Paid For:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
-                                                    <Label Text="{Binding Paymentreason}" FontSize="16" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                                </Grid>
-                                            </StackLayout>
-                                        </Frame>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
-
-                <!-- Billing History Section -->
-                <Frame Grid.Row="3" Padding="0" IsVisible="{Binding Path=TenantData.Tenantbillinghistory, Converter={StaticResource BooleanToVisibilityConverter}}" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
-                    <StackLayout Padding="0" Margin="0,0,0,0" Spacing="0">
-                        <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                            <Label Text="Billing History" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="20" Margin="0,0,0,10"/>
-                            <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
-                        </StackLayout>
-
-                        <StackLayout Padding="0" Spacing="8">
-                            <CollectionView ItemsSource="{Binding TenantData.Tenantbillinghistory}" Margin="0">
+                            <CollectionView ItemsSource="{Binding TenantData.Tenantroomdata.Tenantroommeter}" Margin="0">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Frame Padding="5" Margin="0,5" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc">
@@ -267,6 +204,257 @@
                                                     <!-- Payment Status -->
                                                     <Label Text="Payment Status:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
                                                     <Label Text="{Binding Paymentstatus}" FontSize="16" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+
+                        <StackLayout Padding="0" Margin="10,0,0,0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <Label Text="Room Payment History" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
+                        </StackLayout>
+
+                        <StackLayout Padding="0" Spacing="8">
+                            <CollectionView ItemsSource="{Binding TenantData.Tenantroomdata.Tenantroommeter}" Margin="0">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Padding="5" Margin="0,5" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc">
+                                            <StackLayout Spacing="8">
+                                                <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+
+                                                    <!-- Billing ID -->
+                                                    <Label Text="Bill ID:" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                                    <Label Text="{Binding Billid}" FontSize="16" Grid.Row="0" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Billing Date -->
+                                                    <Label Text="Billing Date:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                                    <Label Text="{Binding Datecreated}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Billing Mode -->
+                                                    <Label Text="Bill Mode:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                                    <Label Text="{Binding Billingreason}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Bill Amount -->
+                                                    <Label Text="Amount Billed:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                                                    <Label Text="{Binding Amountbilled}" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Payment Status -->
+                                                    <Label Text="Payment Status:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
+                                                    <Label Text="{Binding Paymentstatus}" FontSize="16" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Payment History Section -->
+                <Frame Grid.Row="2" Padding="0" 
+       IsVisible="{Binding Path=TenantData.Tenantroomhistory, Converter={StaticResource BooleanToVisibilityConverter}}" 
+       HasShadow="True" 
+       CornerRadius="8" 
+       BorderColor="#dcdcdc" 
+       HorizontalOptions="FillAndExpand">
+                    <StackLayout Padding="0" Margin="0" Spacing="0">
+                        <!-- Header Section -->
+                        <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <Label Text="Renting History" 
+                   FontAttributes="Bold" 
+                   HorizontalTextAlignment="Center" 
+                   TextColor="#0a506c" 
+                   TextTransform="Uppercase" 
+                   FontSize="20" 
+                   Margin="0,0,0,10"/>
+                            <BoxView Color="#0a506c" 
+                     HeightRequest="2" 
+                     HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+
+                        <!-- Content Section -->
+                        <StackLayout Padding="0" Spacing="8">
+                            <CollectionView ItemsSource="{Binding TenantData.Tenantroomhistory}" Margin="0">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Padding="10" 
+                               Margin="0,5" 
+                               HasShadow="True" 
+                               CornerRadius="8" 
+                               BorderColor="#dcdcdc">
+                                            <StackLayout Spacing="8">
+                                                <Grid ColumnSpacing="5" 
+                                      RowSpacing="10" 
+                                      HorizontalOptions="FillAndExpand">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+
+                                                    <!-- County Name -->
+                                                    <Label Text="County:" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           Grid.Row="0" 
+                                           Grid.Column="0"/>
+                                                    <Label Text="{Binding Countyname}" 
+                                           FontSize="16" 
+                                           Grid.Row="0" 
+                                           Grid.Column="1" 
+                                           LineBreakMode="TailTruncation" 
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Subcounty Name -->
+                                                    <Label Text="Subcounty:" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           Grid.Row="1" 
+                                           Grid.Column="0"/>
+                                                    <Label Text="{Binding Subcountyname}" 
+                                           FontSize="16" 
+                                           Grid.Row="1" 
+                                           Grid.Column="1" 
+                                           LineBreakMode="TailTruncation" 
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Subcounty Ward Name -->
+                                                    <Label Text="Ward:" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           Grid.Row="2" 
+                                           Grid.Column="0"/>
+                                                    <Label Text="{Binding Subcountywardname}" 
+                                           FontSize="16" 
+                                           Grid.Row="2" 
+                                           Grid.Column="1" 
+                                           LineBreakMode="TailTruncation" 
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Street or Landmark -->
+                                                    <Label Text="Street/Landmark:" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           Grid.Row="3" 
+                                           Grid.Column="0"/>
+                                                    <Label Text="{Binding Streetorlandmark}" 
+                                           FontSize="16" 
+                                           Grid.Row="3" 
+                                           Grid.Column="1" 
+                                           LineBreakMode="TailTruncation" 
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Property House Name -->
+                                                    <Label Text="Property House:" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           Grid.Row="4" 
+                                           Grid.Column="0"/>
+                                                    <Label Text="{Binding Propertyhousename}" 
+                                           FontSize="16" 
+                                           Grid.Row="4" 
+                                           Grid.Column="1" 
+                                           LineBreakMode="TailTruncation" 
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Property Owner Name -->
+                                                    <Label Text="Owner:" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           Grid.Row="5" 
+                                           Grid.Column="0"/>
+                                                    <Label Text="{Binding Peopertyownwename}" 
+                                           FontSize="16" 
+                                           Grid.Row="5" 
+                                           Grid.Column="1" 
+                                           LineBreakMode="TailTruncation" 
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Property Size Name -->
+                                                    <Label Text="Size:" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           Grid.Row="6" 
+                                           Grid.Column="0"/>
+                                                    <Label Text="{Binding Systempropertyhousesizename}" 
+                                           FontSize="16" 
+                                           Grid.Row="6" 
+                                           Grid.Column="1" 
+                                           LineBreakMode="TailTruncation" 
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Outstanding Balance -->
+                                                    <Label Text="Outstanding Balance:" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           Grid.Row="7" 
+                                           Grid.Column="0"/>
+                                                    <Label Text="{Binding Outstandingbalance, StringFormat='${0:0.00}'}" 
+                                           FontSize="16" 
+                                           Grid.Row="7" 
+                                           Grid.Column="1" 
+                                           LineBreakMode="TailTruncation" 
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Created By -->
+                                                    <Label Text="Created By:" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           Grid.Row="8" 
+                                           Grid.Column="0"/>
+                                                    <Label Text="{Binding Createdby}" 
+                                           FontSize="16" 
+                                           Grid.Row="8" 
+                                           Grid.Column="1" 
+                                           LineBreakMode="TailTruncation" 
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Modified By -->
+                                                    <Label Text="Modified By:" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           Grid.Row="9" 
+                                           Grid.Column="0"/>
+                                                    <Label Text="{Binding Modifiedby}" 
+                                           FontSize="16" 
+                                           Grid.Row="9" 
+                                           Grid.Column="1" 
+                                           LineBreakMode="TailTruncation" 
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                                    <!-- Date Modified -->
+                                                    <Label Text="Date Modified:" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           Grid.Row="10" 
+                                           Grid.Column="0"/>
+                                                    <Label Text="{Binding Datemodified}" 
+                                           FontSize="16" 
+                                           Grid.Row="10" 
+                                           Grid.Column="1" 
+                                           LineBreakMode="TailTruncation" 
+                                           HorizontalOptions="FillAndExpand"/>
                                                 </Grid>
                                             </StackLayout>
                                         </Frame>
