@@ -4,11 +4,6 @@
              xmlns:local="clr-namespace:Maqaoplus.ViewModels.HouseTenant"
              x:Class="Maqaoplus.Views.Dashboards.UserDashboardPage"
              Title="Tenant Dashboard">
-
-    <ContentPage.BindingContext>
-        <local:Propertyhousetenantviewmodel />
-    </ContentPage.BindingContext>
-
     <ScrollView>
         <Grid Padding="20">
             <Grid.RowDefinitions>

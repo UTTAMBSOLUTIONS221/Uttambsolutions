@@ -1,11 +1,13 @@
 ﻿using Maqaoplus.Helpers;
 using Maqaoplus.ViewModels;
 using Maqaoplus.ViewModels.Dashboards;
+using Maqaoplus.ViewModels.HouseTenant;
 using Maqaoplus.ViewModels.PropertyHouse;
 using Maqaoplus.ViewModels.Startup;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.Startup;
+
 namespace Maqaoplus
 {
     public static class MauiProgram
@@ -38,6 +40,8 @@ namespace Maqaoplus
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddSingleton<DashboardPage>();
             builder.Services.AddSingleton<PropertyHousesDetailPage>();
+            builder.Services.AddTransient<UserDashboardPage>();
+
 
 
             // View Models
@@ -48,6 +52,9 @@ namespace Maqaoplus
             builder.Services.AddSingleton<DashboardPageViewModel>();
             builder.Services.AddSingleton<PropertyHouseViewModel>();
             builder.Services.AddSingleton<PropertyHouseDetailViewModel>();
+
+            builder.Services.AddTransient<Propertyhousetenantviewmodel>();
+
             return builder.Build();
         }
     }

@@ -3,11 +3,18 @@ using Maqaoplus.ViewModels.HouseTenant;
 namespace Maqaoplus.Views.Dashboards;
 public partial class UserDashboardPage : ContentPage
 {
-    private Propertyhousetenantviewmodel _viewModel;
-    public UserDashboardPage()
+    public UserDashboardPage(Propertyhousetenantviewmodel viewModel)
     {
         InitializeComponent();
-        _viewModel = BindingContext as Propertyhousetenantviewmodel;
-        _viewModel.LoadItemsCommand.Execute(null);
+        BindingContext = viewModel;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is Propertyhousetenantviewmodel viewModel && viewModel.LoadItemsCommand.CanExecute(null))
+        {
+            viewModel.LoadItemsCommand.Execute(null);
+        }
     }
 }
