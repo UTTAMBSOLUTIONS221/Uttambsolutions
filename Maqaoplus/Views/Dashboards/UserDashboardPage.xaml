@@ -23,7 +23,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- Tenant Information Frame -->
-                <Frame Grid.Row="0" Padding="15" BackgroundColor="White" CornerRadius="10" HasShadow="True">
+                <Frame Grid.Row="0" Padding="15" BackgroundColor="White" CornerRadius="10" HasShadow="False">
                     <StackLayout>
                         <Label Text="Tenant Information" FontAttributes="Bold" FontSize="Large"/>
                         <Label Text="{Binding TenantData.Firstname}" FontSize="Medium"/>
@@ -32,7 +32,7 @@
                 </Frame>
 
                 <!-- Last Meter Reading and Wallet Balance Frame -->
-                <Frame Grid.Row="1" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="True">
+                <Frame Grid.Row="1" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="False">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
                         <StackLayout>
                             <Label Text="Last Meter Reading" FontAttributes="Bold" FontSize="Medium"/>
@@ -47,7 +47,7 @@
                 </Frame>
 
                 <!-- Tenant Room Payments Frame -->
-                <Frame Grid.Row="2" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="True">
+                <Frame Grid.Row="2" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="False">
                     <StackLayout>
                         <Label Text="Tenant Room Payments" FontAttributes="Bold" FontSize="Large"/>
                         <!-- Check if payments are empty -->
@@ -73,7 +73,7 @@
                 </Frame>
 
                 <!-- Tenant Room History Frame -->
-                <Frame Grid.Row="3" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="True">
+                <Frame Grid.Row="3" Padding="15" BackgroundColor="White" CornerRadius="10" Margin="0,10,0,0" HasShadow="False">
                     <StackLayout>
                         <Label Text="Tenant Room History" FontAttributes="Bold" FontSize="Large"/>
                         <!-- Check if history is empty -->
