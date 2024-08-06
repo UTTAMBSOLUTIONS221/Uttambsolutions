@@ -3,6 +3,7 @@ using DBL.Entities;
 using DBL.Models;
 using DBL.Repositories.DBL.Repositories;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -75,6 +76,7 @@ namespace DBL.Repositories
 
         public PropertyHouseRoomTenantModel Getsystempropertyhousetenantdatabytenantid(long TenantId)
         {
+            PropertyHouseRoomTenantModel TenantResponseModel = new PropertyHouseRoomTenantModel();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -85,11 +87,15 @@ namespace DBL.Repositories
                 string systempropertydataJson = parameters.Get<string>("@SystemPropertyHouseTenantData");
                 if (systempropertydataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<PropertyHouseRoomTenantModel>(systempropertydataJson);
+                    JObject responseJson = JObject.Parse(systempropertydataJson);
+                    string TenantDetailJson = responseJson["Data"].ToString();
+                    PropertyHouseRoomTenantData TenantResponse = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(TenantDetailJson);
+                    TenantResponseModel.Data = TenantResponse;
+                    return TenantResponseModel;
                 }
                 else
                 {
-                    return new PropertyHouseRoomTenantModel();
+                    return TenantResponseModel;
                 }
             }
         }
