@@ -1,4 +1,5 @@
 ﻿using Maqaoplus.Controls;
+using Maqaoplus.Views;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
 
@@ -122,9 +123,15 @@ namespace Maqaoplus.Constants
                             {
                                 new ShellContent
                                 {
+                                    Icon = Icons.Dashboard,
+                                    Title = " Dashboard",
+                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
+                                },
+                                new ShellContent
+                                {
                                     Icon = Icons.user,
                                     Title = "Profile",
-                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
                                 },
                             }
                 };
