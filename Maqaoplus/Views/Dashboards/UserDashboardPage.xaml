@@ -78,7 +78,7 @@
                                 <Label Text="Phone:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
                                 <Label Text="{Binding TenantData.Phonenumber}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                 <Label Text="My Wallet:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                                <Label Text="{Binding TenantData.Walletbalance}" TextColor="Red" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="{Binding TenantData.Walletbalance,StringFormat='{0:#,##0.00}'}" TextColor="Red" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                             </Grid>
                         </StackLayout>
                     </StackLayout>
@@ -111,15 +111,15 @@
                             <Label Text="From:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
                             <Label Text="{Binding TenantData.Tenantroomdata.Datecreated, StringFormat='{0:MM/dd/yyyy}'}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation"/>
                             <Label Text="Rent Amount:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                            <Label Text="{Binding TenantData.Tenantroomdata.Systempropertyhousesizerent}" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation"/>
+                            <Label Text="{Binding TenantData.Tenantroomdata.Systempropertyhousesizerent, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation"/>
                             <Label Text="Bin Fees:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
-                            <Label Text="{Binding TenantData.Tenantroomdata.Monthlybinfee}" FontSize="16" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation"/>
+                            <Label Text="{Binding TenantData.Tenantroomdata.Monthlybinfee, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation"/>
                             <Label Text="Meter per Unit:" FontSize="16" FontAttributes="Bold" Grid.Row="5" Grid.Column="0"/>
-                            <Label Text="{Binding TenantData.Tenantroomdata.Waterunitprice}" FontSize="16" Grid.Row="5" Grid.Column="1" LineBreakMode="TailTruncation"/>
+                            <Label Text="{Binding TenantData.Tenantroomdata.Waterunitprice, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Row="5" Grid.Column="1" LineBreakMode="TailTruncation"/>
                             <Label Text="Last Water Units:" FontSize="16" FontAttributes="Bold" Grid.Row="6" Grid.Column="0"/>
-                            <Label Text="{Binding TenantData.Tenantroomdata.Previousmeters}" FontSize="16" Grid.Row="6" Grid.Column="1" LineBreakMode="TailTruncation"/>
+                            <Label Text="{Binding TenantData.Tenantroomdata.Previousmeters, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Row="6" Grid.Column="1" LineBreakMode="TailTruncation"/>
                             <Label Text="Last Water Bill:" FontSize="16" FontAttributes="Bold" Grid.Row="7" Grid.Column="0"/>
-                            <Label Text="{Binding TenantData.Tenantroomdata.Previousmeteramount}" FontSize="16" Grid.Row="7" Grid.Column="1" LineBreakMode="TailTruncation"/>
+                            <Label Text="{Binding TenantData.Tenantroomdata.Previousmeteramount, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Row="7" Grid.Column="1" LineBreakMode="TailTruncation"/>
                         </Grid>
                     </StackLayout>
                 </Frame>
@@ -151,51 +151,37 @@
                                                         <RowDefinition Height="Auto"/>
                                                         <RowDefinition Height="Auto"/>
                                                         <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
                                                     </Grid.RowDefinitions>
 
                                                     <!-- County Name -->
                                                     <Label Text="County:" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
                                                     <Label Text="{Binding Countyname}" FontSize="16"  Grid.Row="0"  Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
-                                                    <!-- Subcounty Name -->
-                                                    <Label Text="Subcounty:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                                                    <Label Text="{Binding Subcountyname}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-
                                                     <!-- Subcounty Ward Name -->
-                                                    <Label Text="Ward:"  FontSize="16"  FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                                                    <Label Text="{Binding Subcountywardname}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation"  HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Ward:"  FontSize="16"  FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                                    <Label Text="{Binding Subcountywardname}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation"  HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Street or Landmark -->
-                                                    <Label Text="Street/Landmark:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                                                    <Label Text="{Binding Streetorlandmark}" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation"  HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Street/Landmark:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                                    <Label Text="{Binding Streetorlandmark}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation"  HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Property House Name -->
-                                                    <Label Text="Property House:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
-                                                    <Label Text="{Binding Propertyhousename}" FontSize="16" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="House:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                                                    <Label Text="{Binding Propertyhousename}" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Property Owner Name -->
-                                                    <Label Text="Owner:" FontSize="16" FontAttributes="Bold" Grid.Row="5" Grid.Column="0"/>
-                                                    <Label Text="{Binding Peopertyownwename}" FontSize="16" Grid.Row="5" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Owner:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
+                                                    <Label Text="{Binding Peopertyownwename}" FontSize="16" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Property Size Name -->
-                                                    <Label Text="Size:" FontSize="16" FontAttributes="Bold" Grid.Row="6" Grid.Column="0"/>
-                                                    <Label Text="{Binding Systempropertyhousesizename}"  FontSize="16" Grid.Row="6" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Size:" FontSize="16" FontAttributes="Bold" Grid.Row="5" Grid.Column="0"/>
+                                                    <Label Text="{Binding Systempropertyhousesizename}"  FontSize="16" Grid.Row="5" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
                                                     <!-- Outstanding Balance -->
-                                                    <Label Text="Outstanding Balance:" FontSize="16" FontAttributes="Bold" Grid.Row="7" Grid.Column="0"/>
-                                                    <Label Text="{Binding Outstandingbalance, StringFormat='${0:0.00}'}" FontSize="16" Grid.Row="7" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                    <Label Text="Outstanding Balance:" FontSize="16" FontAttributes="Bold" Grid.Row="6" Grid.Column="0"/>
+                                                    <Label Text="{Binding Outstandingbalance, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Row="6" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
 
-                                                    <!-- Created By -->
-                                                    <Label Text="Created By:" FontSize="16" FontAttributes="Bold" Grid.Row="8" Grid.Column="0"/>
-                                                    <Label Text="{Binding Createdby}" FontSize="16" Grid.Row="8" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-
-                                                    <!-- Modified By -->
-                                                    <Label Text="Modified By:" FontSize="16" FontAttributes="Bold" Grid.Row="9" Grid.Column="0"/>
-                                                    <Label Text="{Binding Modifiedby}" FontSize="16" Grid.Row="9" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-
-                                                    <!-- Date Modified -->
-                                                    <Label Text="Date Modified:" FontSize="16" FontAttributes="Bold" Grid.Row="10" Grid.Column="0"/>
-                                                    <Label Text="{Binding Datemodified}" FontSize="16" Grid.Row="10" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                                 </Grid>
                                             </StackLayout>
                                         </Frame>
