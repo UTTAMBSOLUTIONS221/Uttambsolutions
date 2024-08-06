@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-
-namespace DBL.Models
+﻿namespace DBL.Models
 {
+
     public class PropertyHouseRoomTenantModel
     {
         public PropertyHouseRoomTenantData Data { get; set; }
     }
-
     public class PropertyHouseRoomTenantData
     {
         public int Userid { get; set; }
@@ -37,24 +35,8 @@ namespace DBL.Models
         public DateTime? Lastlogin { get; set; }
         public DateTime? Datemodified { get; set; }
         public DateTime? Datecreated { get; set; }
-
-        [JsonProperty("Tenantroomdata")]
-        public string TenantroomdataJson { get; set; }
-
-        [JsonIgnore]
-        public Systempropertyhousetenantsroom Tenantroomdata
-        {
-            get
-            {
-                return string.IsNullOrEmpty(TenantroomdataJson) ? null : JsonConvert.DeserializeObject<Systempropertyhousetenantsroom>(TenantroomdataJson);
-            }
-            set
-            {
-                TenantroomdataJson = JsonConvert.SerializeObject(value);
-            }
-        }
+        public Systempropertyhousetenantsroom Tenantroomdata { get; set; }
     }
-
     public class Systempropertyhousetenantsroom
     {
         public int Systempropertyhousetenantentryid { get; set; }
@@ -76,7 +58,6 @@ namespace DBL.Models
         public List<PropertyHousetenantroomhistory> Tenantroomhistory { get; set; }
         public List<PropertyHousetenantroompayments> Tenantroompayments { get; set; }
     }
-
     public class PropertyHousetenantroomhistory
     {
         public int Houseid { get; set; }
@@ -85,7 +66,6 @@ namespace DBL.Models
         public DateTime? Datecreated { get; set; }
         public DateTime? Datemodified { get; set; }
     }
-
     public class PropertyHousetenantroommeter
     {
         public int Houseid { get; set; }
@@ -96,7 +76,6 @@ namespace DBL.Models
         public DateTime? Datecreated { get; set; }
         public DateTime? Datemodified { get; set; }
     }
-
     public class PropertyHousetenantroompayments
     {
         public int Houseid { get; set; }
