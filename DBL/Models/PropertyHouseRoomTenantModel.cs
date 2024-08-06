@@ -20,18 +20,18 @@
         public bool Isactive { get; set; }
         public bool Isdeleted { get; set; }
         public bool Isdefault { get; set; }
-        public bool Loginstatus { get; set; }
+        public int Loginstatus { get; set; }
         public DateTime? Passwordresetdate { get; set; }
         public int? Parentid { get; set; }
         public string Userprofileimageurl { get; set; }
         public string Usercurriculumvitae { get; set; }
-        public string Idnumber { get; set; }
+        public int Idnumber { get; set; }
         public bool Updateprofile { get; set; }
-        public string Accountnumber { get; set; }
+        public int Accountnumber { get; set; }
         public int Accountid { get; set; }
         public decimal Walletbalance { get; set; }
-        public string Createdby { get; set; }
-        public string Modifiedby { get; set; }
+        public int Createdby { get; set; }
+        public int Modifiedby { get; set; }
         public DateTime? Lastlogin { get; set; }
         public DateTime? Datemodified { get; set; }
         public DateTime? Datecreated { get; set; }
