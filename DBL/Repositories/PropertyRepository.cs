@@ -78,6 +78,8 @@ namespace DBL.Repositories
         {
             PropertyHouseRoomTenantModel TenantResponseModel = new PropertyHouseRoomTenantModel();
             PropertyHouseRoomTenantData TenantDataResponse = new PropertyHouseRoomTenantData();
+            Systempropertyhousetenantsroom TenantRoomDataResponse = new Systempropertyhousetenantsroom();
+            List<PropertyHousetenantroomhistory> Tenantroomhistory = new List<PropertyHousetenantroomhistory>();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -90,20 +92,12 @@ namespace DBL.Repositories
                 {
                     JObject responseJson = JObject.Parse(systempropertydataJson);
                     JObject tenantreponseJson = JObject.Parse(responseJson["Data"].ToString());
-                    JObject tenantroomdatareponseJson = JObject.Parse(tenantreponseJson["Tenantroomdata"].ToString());
                     TenantDataResponse.Userid = Convert.ToInt32(tenantreponseJson["Userid"]);
-                    TenantDataResponse.Firstname = tenantreponseJson["Firstname"].ToString();
-                    TenantDataResponse.Lastname = tenantreponseJson["Lastname"].ToString();
+                    TenantDataResponse.Fullname = tenantreponseJson["Fullname"].ToString();
                     TenantDataResponse.Phonenumber = tenantreponseJson["Phonenumber"].ToString();
-                    TenantDataResponse.Username = tenantreponseJson["Username"].ToString();
                     TenantDataResponse.Emailaddress = tenantreponseJson["Emailaddress"].ToString();
-                    TenantDataResponse.Genderid = Convert.ToInt32(tenantreponseJson["Genderid"]);
                     TenantDataResponse.Gender = tenantreponseJson["Gender"].ToString();
-                    TenantDataResponse.Maritalstatusid = Convert.ToInt32(tenantreponseJson["Maritalstatusid"]);
                     TenantDataResponse.Maritalstatus = tenantreponseJson["Maritalstatus"].ToString();
-                    TenantDataResponse.Isactive = Convert.ToBoolean(tenantreponseJson["Isactive"]);
-                    TenantDataResponse.Isdeleted = Convert.ToBoolean(tenantreponseJson["Isdeleted"]);
-                    TenantDataResponse.Isdefault = Convert.ToBoolean(tenantreponseJson["Isdefault"]);
                     TenantDataResponse.Loginstatus = Convert.ToInt32(tenantreponseJson["Loginstatus"]);
                     TenantDataResponse.Parentid = Convert.ToInt32(tenantreponseJson["Parentid"]);
                     TenantDataResponse.Userprofileimageurl = tenantreponseJson["Userprofileimageurl"].ToString();
@@ -113,14 +107,21 @@ namespace DBL.Repositories
                     TenantDataResponse.Accountnumber = Convert.ToInt32(tenantreponseJson["Accountnumber"]);
                     TenantDataResponse.Accountid = Convert.ToInt32(tenantreponseJson["Accountid"]);
                     TenantDataResponse.Walletbalance = Convert.ToDecimal(tenantreponseJson["Walletbalance"]);
-                    TenantDataResponse.Createdby = Convert.ToInt32(tenantreponseJson["Createdby"]);
-                    TenantDataResponse.Modifiedby = Convert.ToInt32(tenantreponseJson["Modifiedby"]);
                     TenantDataResponse.Datemodified = Convert.ToDateTime(tenantreponseJson["Datemodified"]);
                     TenantDataResponse.Datecreated = Convert.ToDateTime(tenantreponseJson["Datecreated"]);
-                    string TenantroomJson = tenantreponseJson["Tenantroomdata"].ToString();
-                    Systempropertyhousetenantsroom TenantroomResponse = JsonConvert.DeserializeObject<Systempropertyhousetenantsroom>(TenantroomJson);
+                    if (tenantreponseJson["Tenantroomhistory"] != null)
+                    {
+                        string TenantroomhistoryJson = tenantreponseJson["Tenantroomhistory"].ToString();
+                        Tenantroomhistory = JsonConvert.DeserializeObject<List<PropertyHousetenantroomhistory>>(TenantroomhistoryJson);
+                        TenantDataResponse.Tenantroomhistory = Tenantroomhistory;
+                    }
                     TenantResponseModel.Data = TenantDataResponse;
-                    TenantResponseModel.Data.Tenantroomdata = TenantroomResponse;
+                    if (tenantreponseJson["Tenantroomdata"] != null)
+                    {
+                        string TenantroomJson = tenantreponseJson["Tenantroomdata"].ToString();
+                        TenantRoomDataResponse = JsonConvert.DeserializeObject<Systempropertyhousetenantsroom>(TenantroomJson);
+                        TenantResponseModel.Data.Tenantroomdata = TenantRoomDataResponse;
+                    }
                     return TenantResponseModel;
                 }
                 else
