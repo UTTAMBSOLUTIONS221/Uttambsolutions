@@ -103,15 +103,10 @@
                                 <!-- Phone Number and Status -->
                                 <Label Text="Phone:" FontSize="18" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
                                 <Label Text="{Binding TenantData.Phonenumber}" FontSize="18" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-
-
-                                <!-- Status -->
-                                <Label Text="Status:" FontSize="18" FontAttributes="Bold" Grid.Row="3" Grid.Column="2"/>
-                                <Label Text="{Binding TenantData.Loginstatus}" FontSize="18" Grid.Row="3" Grid.Column="4" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-
                                 <!-- Wallet Balance -->
                                 <Label Text="My Wallet:" FontSize="18" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
                                 <Label Text="{Binding TenantData.Walletbalance}" TextColor="Red" FontSize="18" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+
                             </Grid>
                         </StackLayout>
                     </StackLayout>
