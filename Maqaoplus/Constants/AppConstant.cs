@@ -122,31 +122,7 @@ namespace Maqaoplus.Constants
                             {
                                 new ShellContent
                                 {
-                                    Icon = Icons.Dashboard,
-                                    Title = "Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.People,
-                                    Title = "Bible",
-                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.People,
-                                    Title = "Forums",
-                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.People,
-                                    Title = "Groups",
-                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.AboutUs,
+                                    Icon = Icons.user,
                                     Title = "Profile",
                                     ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
                                 },
