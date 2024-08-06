@@ -36,6 +36,7 @@
         public DateTime? Datemodified { get; set; }
         public DateTime? Datecreated { get; set; }
         public Systempropertyhousetenantsroom Tenantroomdata { get; set; }
+        public List<PropertyHousetenantroomhistory> Tenantroomhistory { get; set; }
     }
     public class Systempropertyhousetenantsroom
     {
@@ -53,9 +54,7 @@
         public string Systempropertyhousesizename { get; set; }
         public DateTime? Datecreated { get; set; }
         public DateTime? Datemodified { get; set; }
-
         public List<PropertyHousetenantroommeter> Tenantroommeter { get; set; }
-        public List<PropertyHousetenantroomhistory> Tenantroomhistory { get; set; }
         public List<PropertyHousetenantroompayments> Tenantroompayments { get; set; }
     }
     public class PropertyHousetenantroomhistory

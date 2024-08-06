@@ -17,13 +17,13 @@ namespace API.Controllers
             bl = new BL(Util.ShareConnectionString(config));
             _config = config;
         }
-        [AllowAnonymous]
+
         [HttpGet("Getsystempropertyhousedatabyowner/{OwnerId}")]
         public async Task<Systempropertyhousedata> Getsystempropertyhousedatabyowner(long OwnerId)
         {
             return await bl.Getsystempropertyhousedatabyowner(OwnerId);
         }
-
+        [AllowAnonymous]
         [HttpGet("Getsystempropertyhousetenantdatabytenantid/{TenantId}")]
         public async Task<PropertyHouseRoomTenantModel> Getsystempropertyhousetenantdatabytenantid(long TenantId)
         {
