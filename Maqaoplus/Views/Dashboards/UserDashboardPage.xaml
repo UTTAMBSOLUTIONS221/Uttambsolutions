@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.Dashboards.UserDashboardPage"
-             Title="Tenant Dashboard">
+             Title="Dashboard">
 
     <!-- Set the background color of the ContentPage to white -->
     <ContentPage.BackgroundColor>
