@@ -46,11 +46,13 @@ namespace Maqaoplus.ViewModels.HouseTenant
                 OnPropertyChanged();
             }
         }
-
+        public Propertyhousetenantviewmodel()
+        {
+            LoadItemsCommand = new Command(async () => await LoadItems());
+        }
         public Propertyhousetenantviewmodel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            LoadItemsCommand = new Command(async () => await LoadItems());
         }
         private async Task LoadItems()
         {
@@ -59,7 +61,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedatabyowner/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null)
                 {
                     TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());

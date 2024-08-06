@@ -1,5 +1,10 @@
 ﻿namespace DBL.Models
 {
+
+    public class PropertyHouseRoomTenantModel
+    {
+        public PropertyHouseRoomTenantData Data { get; set; }
+    }
     public class PropertyHouseRoomTenantData
     {
         public int Userid { get; set; }
@@ -30,7 +35,7 @@
         public DateTime? Lastlogin { get; set; }
         public DateTime? Datemodified { get; set; }
         public DateTime? Datecreated { get; set; }
-        public Systempropertyhousetenantsroom Data { get; set; }
+        public Systempropertyhousetenantsroom Tenantroomdata { get; set; }
     }
     public class Systempropertyhousetenantsroom
     {
