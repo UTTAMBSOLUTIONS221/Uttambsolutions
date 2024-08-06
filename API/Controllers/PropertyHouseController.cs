@@ -17,7 +17,7 @@ namespace API.Controllers
             bl = new BL(Util.ShareConnectionString(config));
             _config = config;
         }
-
+        [AllowAnonymous]
         [HttpGet("Getsystempropertyhousedatabyowner/{OwnerId}")]
         public async Task<Systempropertyhousedata> Getsystempropertyhousedatabyowner(long OwnerId)
         {
