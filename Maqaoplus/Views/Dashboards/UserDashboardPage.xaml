@@ -1,10 +1,92 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Maqaoplus.ViewModels.HouseTenant"
              x:Class="Maqaoplus.Views.Dashboards.UserDashboardPage"
-             Title="UserDashboardPage">
-    <StackLayout Padding="10">
-        <Label FontSize="18" Text="Welcome to User Dashboard Page" />
+             Title="Dashboard">
 
-    </StackLayout>
+    <ContentPage.BindingContext>
+        <local:Propertyhousetenantviewmodel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Tenant Information -->
+            <Frame Grid.Row="0" Padding="10" BackgroundColor="LightGray" CornerRadius="10">
+                <StackLayout>
+                    <Label Text="Tenant Information" FontAttributes="Bold" FontSize="Large"/>
+                    <Label Text="{Binding TenantData.Firstname}" FontSize="Medium"/>
+                    <Label Text="{Binding TenantData.Lastname}" FontSize="Medium"/>
+                    <Label Text="{Binding TenantData.Phonenumber}" FontSize="Medium"/>
+                    <Label Text="{Binding TenantData.Emailaddress}" FontSize="Medium"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Room Details -->
+            <Frame Grid.Row="1" Padding="10" BackgroundColor="LightGray" CornerRadius="10" Margin="0,10,0,0">
+                <StackLayout>
+                    <Label Text="Room Details" FontAttributes="Bold" FontSize="Large"/>
+                    <Label Text="{Binding TenantData.Data.Propertyhousename}" FontSize="Medium"/>
+                    <Label Text="{Binding TenantData.Data.Systempropertyhousesizename}" FontSize="Medium"/>
+                    <Label Text="{Binding TenantData.Data.Houseoccupationstatus}" FontSize="Medium"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Meter Readings -->
+            <Frame Grid.Row="2" Padding="10" BackgroundColor="LightGray" CornerRadius="10" Margin="0,10,0,0">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
+                    <StackLayout>
+                        <Label Text="Opening Meter" FontAttributes="Bold" FontSize="Medium"/>
+                        <Label Text="{Binding TenantData.Data.Previousmeters}" FontSize="Medium"/>
+                    </StackLayout>
+                    <BoxView WidthRequest="1" BackgroundColor="Black" VerticalOptions="FillAndExpand"/>
+                    <StackLayout>
+                        <Label Text="Closing Meter" FontAttributes="Bold" FontSize="Medium"/>
+                        <Label Text="{Binding TenantData.Data.Previousmeteramount}" FontSize="Medium"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <!-- Wallet Balance -->
+            <Frame Grid.Row="3" Padding="10" BackgroundColor="LightGray" CornerRadius="10" Margin="0,10,0,0">
+                <StackLayout>
+                    <Label Text="Wallet Balance" FontAttributes="Bold" FontSize="Large"/>
+                    <Label Text="{Binding TenantData.Walletbalance}" FontSize="Medium"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Historical Data -->
+            <Frame Grid.Row="4" Padding="10" BackgroundColor="LightGray" CornerRadius="10" Margin="0,10,0,0">
+                <Label Text="Historical Data" FontAttributes="Bold" FontSize="Large"/>
+            </Frame>
+
+            <!-- Historical Data CollectionView -->
+            <CollectionView Grid.Row="5" ItemsSource="{Binding TenantData.Data.Tenantroomhistory}" Margin="0,10,0,0">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="0,5" BackgroundColor="White" CornerRadius="10">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
+                                <Label Text="{Binding Datecreated, StringFormat='{}{0:dd/MM/yyyy}'}" FontSize="Small"/>
+                                <BoxView WidthRequest="1" BackgroundColor="Black" VerticalOptions="FillAndExpand"/>
+                                <Label Text="{Binding Propertyhousename}" FontSize="Small"/>
+                                <Label Text="{Binding Systempropertyhousesizename}" FontSize="Small"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
 </ContentPage>
