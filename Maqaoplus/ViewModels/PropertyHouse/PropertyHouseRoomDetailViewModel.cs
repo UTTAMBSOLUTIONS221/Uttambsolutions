@@ -27,6 +27,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private ObservableCollection<Systempropertyhouseroommeterhistory> _meterReadings;
         private string _searchId;
         private string _searchResults;
+        private bool _isOpeningMeterReadOnly;
 
         private bool _isStep1Visible;
         private bool _isStep2Visible;
@@ -45,7 +46,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadRoomDetailCommand = new Command(async () => await LoadRoomDetails());
             SaveCommand = new Command(async () => await SaveRoomDetails());
             SearchCommand = new Command(async () => await Search());
-            CloseCommand = new Command(() => Close());
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
 
@@ -137,15 +137,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public bool ContinueWithoutTenant
-        {
-            get => _continueWithoutTenant;
-            set
-            {
-                _continueWithoutTenant = value;
-                OnPropertyChanged();
-            }
-        }
+
 
         public bool Forcaretaker
         {
@@ -196,6 +188,100 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        public string OpeningMeter
+        {
+            get => _openingMeter;
+            set
+            {
+                if (_openingMeter != value)
+                {
+                    _openingMeter = value;
+                    OnPropertyChanged();
+                    UpdateReadOnlyStatus();
+                    CalculateMovedMeter();
+                    CalculateConsumedAmount();
+                }
+            }
+        }
+
+        public string ClosingMeter
+        {
+            get => _closingMeter;
+            set
+            {
+                if (_closingMeter != value)
+                {
+                    _closingMeter = value;
+                    OnPropertyChanged();
+                    CalculateMovedMeter();
+                    CalculateConsumedAmount();
+                }
+            }
+        }
+
+        public string MovedMeter
+        {
+            get => _movedMeter;
+            set
+            {
+                if (_movedMeter != value)
+                {
+                    _movedMeter = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string ConsumedAmount
+        {
+            get => _consumedAmount;
+            set
+            {
+                if (_consumedAmount != value)
+                {
+                    _consumedAmount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsOpeningMeterReadOnly
+        {
+            get => _isOpeningMeterReadOnly;
+            set
+            {
+                if (_isOpeningMeterReadOnly != value)
+                {
+                    _isOpeningMeterReadOnly = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private void UpdateReadOnlyStatus()
+        {
+            IsOpeningMeterReadOnly = OpeningMeter != "0";
+        }
+
+        private void CalculateMovedMeter()
+        {
+            if (decimal.TryParse(ClosingMeter, out var closing) &&
+                decimal.TryParse(OpeningMeter, out var opening))
+            {
+                MovedMeter = (closing - opening).ToString();
+            }
+        }
+
+        private void CalculateConsumedAmount()
+        {
+            if (decimal.TryParse(MovedMeter, out var moved) &&
+                decimal.TryParse(UnitPrice, out var unitPrice))
+            {
+                ConsumedAmount = (moved * unitPrice).ToString();
+            }
+        }
+
+        public string UnitPrice { get; set; } = "1"; // Example value, replace with actual
 
         public ObservableCollection<Systempropertyhouseroommeterhistory> MeterReadings
         {
@@ -292,7 +378,35 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsLoading = false;
             }
         }
+        private void AddMeterReading()
+        {
 
+            if (string.IsNullOrEmpty(NewMeterNumber) || string.IsNullOrEmpty(NewOpeningMeter) ||
+                string.IsNullOrEmpty(NewClosingMeter) || string.IsNullOrEmpty(NewMovedMeter) ||
+                string.IsNullOrEmpty(NewConsumedAmount))
+            {
+                Application.Current.MainPage.DisplayAlert("Validation Error", "Please fill in all fields.", "OK");
+                return;
+            }
+
+            var newReading = new Systempropertyhouseroommeterhistory
+            {
+                Systempropertyhouseroommeternumber = NewMeterNumber,
+                Openingmeter = Convert.ToDecimal(NewOpeningMeter),
+                Closingmeter = Convert.ToDecimal(NewClosingMeter),
+                Movedmeter = Convert.ToDecimal(NewMovedMeter),
+                Consumedamount = Convert.ToDecimal(NewConsumedAmount)
+            };
+
+            MeterReadings.Add(newReading);
+
+            // Clear input fields after adding
+            NewMeterNumber = string.Empty;
+            NewOpeningMeter = string.Empty;
+            NewClosingMeter = string.Empty;
+            NewMovedMeter = string.Empty;
+            NewConsumedAmount = string.Empty;
+        }
         private async Task LoadDropdownData()
         {
             try
@@ -361,10 +475,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             // Implement search logic
         }
 
-        private void Close()
-        {
-            // Implement close logic
-        }
 
         private void NextStep()
         {

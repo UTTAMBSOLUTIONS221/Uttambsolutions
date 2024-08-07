@@ -13,7 +13,7 @@
     </ContentPage.Resources>
 
     <ScrollView Padding="16">
-       
+
         <VerticalStackLayout>
             <!-- Step 1 -->
             <StackLayout IsVisible="{Binding IsStep1Visible}" Padding="16" Spacing="16">
@@ -87,7 +87,7 @@
                 <Label Text="Meter Readings" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
 
                 <!-- Display a Grid for Adding New Meter Readings -->
-                <Grid IsVisible="{Binding IsMeterReadingsEmpty}">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -101,21 +101,22 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Header Row -->
-                    <Label Grid.Row="0" Grid.Column="0" Text="Meter Number" FontAttributes="Bold" />
-                    <Label Grid.Row="0" Grid.Column="1" Text="Opening Meter" FontAttributes="Bold" />
-                    <Label Grid.Row="0" Grid.Column="2" Text="Closing Meter" FontAttributes="Bold" />
-                    <Label Grid.Row="0" Grid.Column="3" Text="Moved Meter" FontAttributes="Bold" />
-                    <Label Grid.Row="0" Grid.Column="4" Text="Consumed Amount" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="0" Text="Meter" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="Opening" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="2" Text="Closing" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="3" Text="Units" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="4" Text="Amount" FontAttributes="Bold" />
 
                     <!-- New Reading Input Row -->
-                    <Entry Grid.Row="1" Grid.Column="0" Placeholder="Enter Meter Number" Text="{Binding NewMeterNumber}" />
-                    <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Opening Meter" Text="{Binding NewOpeningMeter}" />
-                    <Entry Grid.Row="1" Grid.Column="2" Placeholder="Enter Closing Meter" Text="{Binding NewClosingMeter}" />
-                    <Entry Grid.Row="1" Grid.Column="3" Placeholder="Enter Moved Meter" Text="{Binding NewMovedMeter}" />
-                    <Entry Grid.Row="1" Grid.Column="4" Placeholder="Enter Consumed Amount" Text="{Binding NewConsumedAmount}" />
+                    <Entry Grid.Row="1" Grid.Column="0" Placeholder="Enter Meter Number" Text="{Binding HouseroomData.Systempropertyhouseroommeternumber}" />
 
-                    <!-- Button to Add New Reading -->
-                    <Button Grid.Row="2" Grid.ColumnSpan="5" Text="Add Reading" Command="{Binding AddReadingCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" />
+                    <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Opening Meter" Text="{Binding HouseroomData.Openingmeter}" IsReadOnly="{Binding IsOpeningMeterReadOnly}" />
+
+                    <Entry Grid.Row="1" Grid.Column="2" Placeholder="Enter Closing Meter" Text="{Binding HouseroomData.Closingmeter}" />
+
+                    <Entry Grid.Row="1" Grid.Column="3" Placeholder="Moved Meter" Text="{Binding HouseroomData.Movedmeter}" IsReadOnly="True" />
+
+                    <Entry Grid.Row="1" Grid.Column="4" Placeholder="Consumed Amount" Text="{Binding HouseroomData.Consumedamount}" IsReadOnly="True" />
                 </Grid>
 
                 <!-- CollectionView for Meter Readings -->
@@ -186,10 +187,10 @@
                 <Label x:Name="SearchResults" Text="{Binding SearchResults}" IsVisible="{Binding IsNotEmpty}" />
 
                 <!-- Navigation Buttons -->
-                <HorizontalStackLayout>
-                    <Button Text="Previous" Command="{Binding PreviousCommand}" />
-                    <Button Text="Finish" Command="{Binding SaveCommand}" />
-                </HorizontalStackLayout>
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
+                    <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
+                    <Button Text="Finish" Command="{Binding SaveCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
+                </FlexLayout>
             </StackLayout>
         </VerticalStackLayout>
     </ScrollView>
