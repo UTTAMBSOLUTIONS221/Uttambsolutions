@@ -16,6 +16,9 @@ namespace Maqaoplus.Constants
             var customerDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(CustomerDashboardPage)).FirstOrDefault();
             if (customerDashboardInfo != null) AppShell.Current.Items.Remove(customerDashboardInfo);
 
+            var propertyOwnerDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(PropertyOwnerDashboardPage)).FirstOrDefault();
+            if (propertyOwnerDashboardInfo != null) AppShell.Current.Items.Remove(propertyOwnerDashboardInfo);
+
             var userDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(UserDashboardPage)).FirstOrDefault();
             if (userDashboardInfo != null) AppShell.Current.Items.Remove(userDashboardInfo);
 
@@ -35,6 +38,12 @@ namespace Maqaoplus.Constants
                                     Icon = Icons.Dashboard,
                                     Title = "Admin Dashboard",
                                     ContentTemplate = new DataTemplate(typeof(AdminDashboardPage)),
+                                },
+                                new ShellContent
+                                {
+                                    Icon = Icons.user,
+                                    Title = "Profile",
+                                    ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
                                 },
                                 new ShellContent
                                 {
@@ -66,7 +75,7 @@ namespace Maqaoplus.Constants
                 var flyoutItem = new FlyoutItem()
                 {
                     Title = "Dashboard",
-                    Route = nameof(CustomerDashboardPage),
+                    Route = nameof(PropertyOwnerDashboardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
                             {
@@ -74,7 +83,13 @@ namespace Maqaoplus.Constants
                                 {
                                     Icon = Icons.Dashboard,
                                     Title = "Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
+                                    ContentTemplate = new DataTemplate(typeof(PropertyOwnerDashboardPage)),
+                                },
+                                new ShellContent
+                                {
+                                    Icon = Icons.user,
+                                    Title = "Profile",
+                                    ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
                                 },
                                 new ShellContent
                                 {
@@ -103,12 +118,12 @@ namespace Maqaoplus.Constants
                     {
                         AppShell.Current.Dispatcher.Dispatch(async () =>
                         {
-                            await Shell.Current.GoToAsync($"//{nameof(CustomerDashboardPage)}");
+                            await Shell.Current.GoToAsync($"//{nameof(PropertyOwnerDashboardPage)}");
                         });
                     }
                     else
                     {
-                        await Shell.Current.GoToAsync($"//{nameof(CustomerDashboardPage)}");
+                        await Shell.Current.GoToAsync($"//{nameof(PropertyOwnerDashboardPage)}");
                     }
                 }
             }
