@@ -32,7 +32,7 @@
                             <!-- Tap Gesture Recognizer -->
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}"
-                                                      CommandParameter="{Binding Propertyhouseid}" />
+                                                      CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
                             <Grid Padding="5">
                                 <Grid.RowDefinitions>

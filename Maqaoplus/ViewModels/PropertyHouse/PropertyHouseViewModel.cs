@@ -40,12 +40,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             Items = new ObservableCollection<Systemproperty>();
             LoadItemsCommand = new Command(async () => await LoadItems());
-            ViewDetailsCommand = new Command<int>(async (propertyId) =>
-            {
-                // For now, just display an alert to ensure the command is working
-                await Application.Current.MainPage.DisplayAlert("Property ID", $"You tapped on property ID: {propertyId}", "OK");
-                // Implement your navigation logic here
-            });
+            ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
         }
 
         // Constructor with ServiceProvider parameter
@@ -83,7 +78,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        private async Task ViewDetails(int propertyId)
+        private async Task ViewDetails(long propertyId)
         {
             try
             {
@@ -98,4 +93,5 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
     }
+
 }
