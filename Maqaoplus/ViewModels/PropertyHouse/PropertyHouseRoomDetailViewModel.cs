@@ -3,6 +3,8 @@ using DBL.Enum;
 using DBL.Models;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.PropertyHouse
@@ -59,6 +61,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep2Visible = false;
             _isStep3Visible = false;
             _isStep4Visible = false;
+
+            // Initialize properties
+            OpeningMeter = "0";
+            ClosingMeter = "0";
+            UnitPrice = "200";
         }
 
         public PropertyHouseRoomDetailViewModel(Services.ServiceProvider serviceProvider) : this()
@@ -263,6 +270,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        public string UnitPrice { get; set; }
+
         private void UpdateReadOnlyStatus()
         {
             IsOpeningMeterReadOnly = OpeningMeter != "0";
@@ -273,7 +282,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             if (decimal.TryParse(ClosingMeter, out var closing) &&
                 decimal.TryParse(OpeningMeter, out var opening))
             {
-                MovedMeter = (closing - opening).ToString();
+                if (closing >= opening)
+                {
+                    MovedMeter = (closing - opening).ToString();
+                }
+                else
+                {
+                    // Handle the case where closing meter is less than opening meter
+                    MovedMeter = "0";
+                }
+            }
+            else
+            {
+                MovedMeter = "0";
             }
         }
 
@@ -284,10 +305,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 ConsumedAmount = (moved * unitPrice).ToString();
             }
+            else
+            {
+                ConsumedAmount = "0";
+            }
         }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public string UnitPrice { get; set; } = "1"; // Example value, replace with actual
-
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public ObservableCollection<Systempropertyhouseroommeterhistory> MeterReadings
         {
             get => _meterReadings;
