@@ -2,35 +2,93 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Maqaoplus.ViewModels.PropertyHouse"
+             xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.PropertyHouse.PropertyHousesDetailPage"
              Title="Property House Details">
 
     <ContentPage.Resources>
-        <!-- Define any converters or resources here -->
+        <ResourceDictionary>
+            <converters:NullToImageConverter x:Key="NullToImageConverter" />
+        </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.Content>
-        <StackLayout>
-            <!-- Loading Indicator -->
-            <ActivityIndicator IsRunning="{Binding IsLoading}" 
-                               IsVisible="{Binding IsLoading}" 
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" 
-                               Color="#0a506c" />
+    <ContentPage.BindingContext>
+        <viewmodels:PropertyHouseDetailViewModel />
+    </ContentPage.BindingContext>
 
-            <!-- Rooms List -->
-            <CollectionView ItemsSource="{Binding Rooms}" IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
+    <Grid Padding="10">
+        <!-- ActivityIndicator -->
+        <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                           IsVisible="{Binding IsLoading}" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center" 
+                           Color="#0a506c" />
+
+        <ScrollView IsVisible="{Binding IsDataLoaded}">
+            <CollectionView x:Name="PropertyHousesCollectionView"
+                            ItemsSource="{Binding Rooms}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="10" Margin="5" HasShadow="True" BorderColor="LightGray" CornerRadius="5">
-                            <StackLayout>
-                                <Label Text="{Binding RoomName}" FontSize="16" FontAttributes="Bold" />
-                                <Label Text="{Binding RoomSize}" FontSize="14" />
-                            </StackLayout>
+                        <Frame Padding="8" Margin="8" HasShadow="True" BorderColor="LightGray" CornerRadius="12" HeightRequest="350">
+                            <!-- Tap Gesture Recognizer -->
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}"
+                                                      CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <!-- Larger Image with Null Handling -->
+                                <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" HeightRequest="200" Grid.Row="0" />
+
+                                <!-- Property Name and Size -->
+                                <Grid Grid.Row="1" ColumnSpacing="10" Padding="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding Propertyhousename}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" LineBreakMode="TailTruncation" Grid.Column="0" />
+                                    <Label Text="{Binding Systempropertyhousesizename}" FontSize="16" TextColor="#0a506c" HorizontalOptions="End" Grid.Column="1" />
+                                </Grid>
+
+                                <!-- Location Information -->
+                                <Grid Grid.Row="2" ColumnSpacing="10" Padding="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding Countyname}" FontSize="14" TextColor="DarkGray" Grid.Column="0" />
+                                    <Label Text="{Binding Subcountyname}" FontSize="14" TextColor="DarkGray" Grid.Column="1"/>
+                                    <Label Text="{Binding Subcountywardname}" FontSize="14" TextColor="DarkGray" Grid.Column="2" />
+                                </Grid>
+
+                                <!-- Street or Landmark -->
+                                <Label Text="{Binding Streetorlandmark}" FontSize="14" TextColor="DarkGray" Grid.Row="3" />
+
+                                <!-- Vacancy Information -->
+                                <Grid Grid.Row="4" ColumnSpacing="10" Padding="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="Vacant:" FontSize="14" TextColor="DarkGray" Grid.Column="0"/>
+                                    <Label Text="{Binding Propertyhousevacant}" FontSize="14" TextColor="DarkGray" Grid.Column="1"/>
+                                </Grid>
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </StackLayout>
-    </ContentPage.Content>
+        </ScrollView>
+    </Grid>
 </ContentPage>

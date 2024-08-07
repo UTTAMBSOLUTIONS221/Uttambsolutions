@@ -23,11 +23,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public PropertyHouseDetailViewModel(Services.ServiceProvider serviceProvider)
+        // Parameterless constructor
+        public PropertyHouseDetailViewModel()
         {
-            _serviceProvider = serviceProvider;
             Rooms = new ObservableCollection<PropertyHouseDetails>();
             LoadRoomsCommand = new Command(async () => await LoadRooms());
+        }
+
+        // Constructor with parameter
+        public PropertyHouseDetailViewModel(Services.ServiceProvider serviceProvider) : this()
+        {
+            _serviceProvider = serviceProvider;
         }
 
         public void SetPropertyId(long propertyId)
@@ -63,4 +69,5 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
     }
+
 }
