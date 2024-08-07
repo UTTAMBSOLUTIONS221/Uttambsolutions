@@ -174,6 +174,9 @@ namespace DBL.Repositories
         }
         public Systempropertyhouseroomdata Getsystempropertyhouseroomdatabyid(long Houseroomid)
         {
+            Systempropertyhouseroomdata response = new Systempropertyhouseroomdata();
+            Systempropertyhouserooms responseData = new Systempropertyhouserooms();
+            List<Systempropertyhouseroommeterhistory> responseMeterData = new List<Systempropertyhouseroommeterhistory>();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -184,11 +187,43 @@ namespace DBL.Repositories
                 string systempropertyroomdataJson = parameters.Get<string>("@Systempropertyhouseroomdata");
                 if (systempropertyroomdataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<Systempropertyhouseroomdata>(systempropertyroomdataJson);
+                    JObject responseJson = JObject.Parse(systempropertyroomdataJson);
+                    JObject roomResponseJson = JObject.Parse(responseJson["Data"].ToString());
+                    response.Data = new Systempropertyhouserooms
+                    {
+                        Hasprevious = Convert.ToBoolean(roomResponseJson["Hasprevious"]),
+                        Systempropertyhouseroomid = Convert.ToInt64(roomResponseJson["Systempropertyhouseroomid"]),
+                        Systempropertyhouseid = Convert.ToInt64(roomResponseJson["Systempropertyhouseid"]),
+                        Systempropertyhousesizeid = Convert.ToInt64(roomResponseJson["Systempropertyhousesizeid"]),
+                        Systempropertyhousesizename = roomResponseJson["Systempropertyhousesizename"]?.ToString(),
+                        Isvacant = Convert.ToBoolean(roomResponseJson["Isvacant"]),
+                        Isunderrenovation = Convert.ToBoolean(roomResponseJson["Isunderrenovation"]),
+                        Isshop = Convert.ToBoolean(roomResponseJson["Isshop"]),
+                        Isgroundfloor = Convert.ToBoolean(roomResponseJson["Isgroundfloor"]),
+                        Hasbalcony = Convert.ToBoolean(roomResponseJson["Hasbalcony"]),
+                        Forcaretaker = Convert.ToBoolean(roomResponseJson["Forcaretaker"]),
+                        Kitchentypeid = Convert.ToInt64(roomResponseJson["Kitchentypeid"]),
+                        Systempropertyhousemeterid = Convert.ToInt32(roomResponseJson["Systempropertyhousemeterid"]),
+                        Systempropertyhouseroommeternumber = roomResponseJson["Systempropertyhouseroommeternumber"]?.ToString(),
+                        Openingmeter = Convert.ToDecimal(roomResponseJson["Openingmeter"]),
+                        Movedmeter = Convert.ToDecimal(roomResponseJson["Movedmeter"]),
+                        Closingmeter = Convert.ToDecimal(roomResponseJson["Closingmeter"]),
+                        Consumedamount = Convert.ToDecimal(roomResponseJson["Consumedamount"]),
+                        Tenantid = Convert.ToInt64(roomResponseJson["Tenantid"]),
+                        Createdby = Convert.ToInt32(roomResponseJson["Createdby"]),
+                        Datecreated = Convert.ToDateTime(roomResponseJson["Datecreated"])
+                    };
+                    if (roomResponseJson["Meterhistorydata"] != null)
+                    {
+                        string MeterhistoryJson = roomResponseJson["Meterhistorydata"].ToString();
+                        responseMeterData = JsonConvert.DeserializeObject<List<Systempropertyhouseroommeterhistory>>(MeterhistoryJson);
+                        responseData.Meterhistorydata = responseMeterData;
+                    }
+                    return response;
                 }
                 else
                 {
-                    return new Systempropertyhouseroomdata();
+                    return response;
                 }
             }
         }
