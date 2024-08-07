@@ -7,5 +7,6 @@
         public const string AboutUs = "about_us.png";
         public const string People = "team.png";
         public const string user = "user.png";
+        public const string house = "house.png";
     }
 }
