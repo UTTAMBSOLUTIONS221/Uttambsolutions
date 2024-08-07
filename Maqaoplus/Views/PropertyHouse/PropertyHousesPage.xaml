@@ -28,10 +28,10 @@
                             ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="200">
+                        <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="300">
                             <!-- Tap Gesture Recognizer -->
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PropertyHouseViewModel}}, Path=ViewDetailsCommand}"
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PropertyHouseViewModel}}, Path=BindingContext.ViewDetailsCommand}"
                                                       CommandParameter="{Binding Propertyhouseid}" />
                             </Frame.GestureRecognizers>
                             <Grid Padding="5">
@@ -43,8 +43,8 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <!-- Image with Null Handling -->
-                                <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" HeightRequest="100" Grid.Row="0" />
+                                <!-- Larger Image with Null Handling -->
+                                <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" HeightRequest="200" Grid.Row="0" />
 
                                 <!-- Property Name and Room Count in the same row -->
                                 <Grid Grid.Row="1" ColumnSpacing="5">
