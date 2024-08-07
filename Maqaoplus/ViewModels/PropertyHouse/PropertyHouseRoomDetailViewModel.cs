@@ -1,5 +1,5 @@
-﻿using DBL.Models;
-using System.Collections.ObjectModel;
+﻿using DBL.Entities;
+using Newtonsoft.Json;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.PropertyHouse
@@ -8,8 +8,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
     {
         private readonly Services.ServiceProvider _serviceProvider;
         private long _propertyRoomId;
-
-        public ObservableCollection<PropertyHouseDetails> Rooms { get; }
+        private Systempropertyhouserooms _houseroomData;
         public ICommand LoadRoomDetailCommand { get; }
 
         private bool _isLoading;
@@ -22,11 +21,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        public Systempropertyhouserooms HouseroomData
+        {
+            get => _houseroomData;
+            set
+            {
+                _houseroomData = value;
+                OnPropertyChanged();
+            }
+        }
 
         // Parameterless constructor
         public PropertyHouseRoomDetailViewModel()
         {
-            Rooms = new ObservableCollection<PropertyHouseDetails>();
             LoadRoomDetailCommand = new Command(async () => await LoadRoomDetails());
         }
 
@@ -49,14 +56,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabypropertyidandownerid/" + _propertyRoomId, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                if (response != null)
                 {
-                    Rooms.Clear();
-                    foreach (var item in items)
-                    {
-                        var room = item.ToObject<PropertyHouseDetails>();
-                        Rooms.Add(room);
-                    }
+                    HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
                 }
             }
             catch (Exception ex)
