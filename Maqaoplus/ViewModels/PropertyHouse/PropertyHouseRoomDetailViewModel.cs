@@ -398,8 +398,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 {
                     HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
                     await LoadDropdownData();
-                    // Also ensure meter readings are loaded if applicable
-                    await LoadMeterReadings();
                 }
             }
             catch (Exception ex)
@@ -434,24 +432,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
-
-        private async Task LoadMeterReadings()
-        {
-            try
-            {
-                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/GetMeterReadingsByRoomId/" + _propertyRoomId, HttpMethod.Get, null);
-
-                if (response != null)
-                {
-                    MeterReadings = JsonConvert.DeserializeObject<ObservableCollection<Systempropertyhouseroommeterhistory>>(response.Data.ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-        }
-
         private async Task SaveRoomDetails()
         {
             IsLoading = true;
