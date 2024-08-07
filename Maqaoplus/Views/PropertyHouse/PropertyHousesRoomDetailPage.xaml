@@ -1,12 +1,119 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Maqaoplus.Views.PropertyHouse"
+             xmlns:controls="clr-namespace:Maqaoplus.Controls"
              x:Class="Maqaoplus.Views.PropertyHouse.PropertyHousesRoomDetailPage"
              Title="House Room Details">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Define converters or resources here if needed -->
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView Padding="16">
+        <VerticalStackLayout>
+            <!-- Hidden Field for Systempropertyhouseroomid -->
+            <Entry x:Name="Systempropertyhouseroomid" IsVisible="False" />
+
+            <!-- Kitchen Type -->
+            <Label Text="Kitchen Type" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding Systemkitchentype}" 
+                    SelectedItem="{Binding SelectedKitchentype}" />
+
+            <!-- Size Name -->
+            <Label Text="Size Name" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding Systempropertyhousesize}" 
+                    SelectedItem="{Binding SelectedSize}" />
+
+            <!-- House Room # -->
+            <Label Text="House Room #" FontAttributes="Bold" />
+            <Entry Text="{Binding Systempropertyhousesizename}" />
+
+            <!-- Continue without Tenant -->
+            <Switch IsToggled="{Binding ContinueWithoutTenant}" />
+            <Label Text="Continue without Tenant?" />
+
+            <!-- Checkboxes -->
+            <CheckBox IsChecked="{Binding Forcaretaker}" />
+            <Label Text="For Caretaker?" />
+
+            <CheckBox IsChecked="{Binding Isshop}" />
+            <Label Text="Is Shop?" />
+
+            <CheckBox IsChecked="{Binding Isgroundfloor}" />
+            <Label Text="Ground Floor?" />
+
+            <CheckBox IsChecked="{Binding Hasbalcony}" />
+            <Label Text="Has Balcony?" />
+
+            <CheckBox IsChecked="{Binding Isunderrenovation}" />
+            <Label Text="Under Renovation?" />
+
+            <!-- Table for Meter Readings -->
+            <Label Text="Meter Readings" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding MeterReadings}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="{Binding MeterNumber}" />
+                            <Label Grid.Column="1" Text="{Binding OpeningMeter}" />
+                            <Label Grid.Column="2" Text="{Binding ClosingMeter}" />
+                            <Label Grid.Column="3" Text="{Binding MovedMeter}" />
+                            <Label Grid.Column="4" Text="{Binding ConsumedAmount}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Table for All System Data -->
+            <Label Text="All System Data" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding AllSystemData}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="{Binding Meter}" />
+                            <Label Grid.Column="1" Text="{Binding Opening}" />
+                            <Label Grid.Column="2" Text="{Binding Closing}" />
+                            <Label Grid.Column="3" Text="{Binding Units}" />
+                            <Label Grid.Column="4" Text="{Binding Bill}" />
+                            <Label Grid.Column="5" Text="{Binding Date}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Search Input -->
+            <Entry x:Name="SearchIdEntry" Placeholder="Enter id number to search" Keyboard="Numeric" />
+            <Button Text="Search" Command="{Binding SearchCommand}" />
+
+            <!-- Search Results -->
+            <Label x:Name="SearchResults" IsVisible="False" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+    <ContentPage.BottomToolbar>
+        <ToolBar>
+            <ToolBarItem Text="Close" Command="{Binding CloseCommand}" />
+            <ToolBarItem Text="Save" Command="{Binding SaveCommand}" />
+        </ToolBar>
+    </ContentPage.BottomToolbar>
 </ContentPage>
