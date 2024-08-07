@@ -1,5 +1,4 @@
 ﻿using DBL;
-using DBL.Entities;
 using DBL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +37,7 @@ namespace API.Controllers
         }
         [AllowAnonymous]
         [HttpGet("Getsystempropertyhouseroomdatabyid/{Houseroomid}")]
-        public async Task<Systempropertyhouserooms> Getsystempropertyhouseroomdatabyid(long Houseroomid)
+        public async Task<Systempropertyhouseroomdata> Getsystempropertyhouseroomdatabyid(long Houseroomid)
         {
             return await bl.Getsystempropertyhouseroomdatabyid(Houseroomid);
         }

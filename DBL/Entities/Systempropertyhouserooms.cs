@@ -23,7 +23,7 @@
         public long Tenantid { get; set; }
         public int Createdby { get; set; }
         public DateTime Datecreated { get; set; }
-        public List<Systempropertyhouseroommeterhistory>? Data { get; set; }
+        public List<Systempropertyhouseroommeterhistory>? Meterhistorydata { get; set; }
     }
 
 }

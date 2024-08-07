@@ -8,10 +8,10 @@ namespace Maqaoplus.Views.PropertyHouse
         public long PropertyRoomId { get; set; }
         private PropertyHouseRoomDetailViewModel _viewModel;
 
-        public PropertyHousesRoomDetailPage()
+        public PropertyHousesRoomDetailPage(PropertyHouseRoomDetailViewModel viewModel)
         {
             InitializeComponent();
-            _viewModel = new PropertyHouseRoomDetailViewModel();
+            _viewModel = viewModel;
             BindingContext = _viewModel;
         }
 

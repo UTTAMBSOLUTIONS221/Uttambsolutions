@@ -172,7 +172,7 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registerpropertyhouseroomdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
-        public Systempropertyhouserooms Getsystempropertyhouseroomdatabyid(long Houseroomid)
+        public Systempropertyhouseroomdata Getsystempropertyhouseroomdatabyid(long Houseroomid)
         {
             using (var connection = new SqlConnection(_connString))
             {
@@ -184,11 +184,11 @@ namespace DBL.Repositories
                 string systempropertyroomdataJson = parameters.Get<string>("@Systempropertyhouseroomdata");
                 if (systempropertyroomdataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<Systempropertyhouserooms>(systempropertyroomdataJson);
+                    return JsonConvert.DeserializeObject<Systempropertyhouseroomdata>(systempropertyroomdataJson);
                 }
                 else
                 {
-                    return new Systempropertyhouserooms();
+                    return new Systempropertyhouseroomdata();
                 }
             }
         }

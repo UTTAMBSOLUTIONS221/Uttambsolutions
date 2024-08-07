@@ -861,7 +861,7 @@ namespace DBL
             });
         }
 
-        public Task<Systempropertyhouserooms> Getsystempropertyhouseroomdatabyid(long Houseroomid)
+        public Task<Systempropertyhouseroomdata> Getsystempropertyhouseroomdatabyid(long Houseroomid)
         {
             return Task.Run(() =>
             {

@@ -37,9 +37,7 @@ namespace Maqaoplus
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddSingleton<DashboardPage>();
             builder.Services.AddSingleton<PropertyHousesDetailPage>();
-            builder.Services.AddTransient<UserDashboardPage>();
-
-
+            builder.Services.AddSingleton<PropertyHousesRoomDetailPage>();
 
             // View Models
             builder.Services.AddSingleton<AppShellViewModel>();
@@ -49,8 +47,8 @@ namespace Maqaoplus
             builder.Services.AddSingleton<DashboardPageViewModel>();
             builder.Services.AddSingleton<PropertyHouseViewModel>();
             builder.Services.AddSingleton<PropertyHouseDetailViewModel>();
-            builder.Services.AddTransient<Propertyhousetenantviewmodel>();
-            builder.Services.AddTransient<PropertyHouseRoomDetailViewModel>();
+            builder.Services.AddSingleton<Propertyhousetenantviewmodel>();
+            builder.Services.AddSingleton<PropertyHouseRoomDetailViewModel>();
 
             return builder.Build();
         }

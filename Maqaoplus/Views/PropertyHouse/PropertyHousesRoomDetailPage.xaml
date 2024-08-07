@@ -31,9 +31,6 @@
             <Label Text="House Room #" FontAttributes="Bold" />
             <Entry Text="{Binding Systempropertyhousesizename}" />
 
-            <!-- Continue without Tenant -->
-            <Switch IsToggled="{Binding ContinueWithoutTenant}" />
-            <Label Text="Continue without Tenant?" />
 
             <!-- Checkboxes -->
             <CheckBox IsChecked="{Binding Forcaretaker}" />
