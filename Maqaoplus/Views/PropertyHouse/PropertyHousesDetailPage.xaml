@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Maqaoplus.Views.PropertyHouse.PropertyHousesDetailPage">
-    <StackLayout>
-        <Label x:Name="PropertyNameLabel" FontSize="24" FontAttributes="Bold" />
-        <Label x:Name="PropertyOwnerLabel" FontSize="18" />
-        <Label x:Name="PropertyCountyLabel" FontSize="18" />
-        <Label x:Name="PropertySubCountyLabel" FontSize="18" />
-        <Label x:Name="PropertyStreetLabel" FontSize="18" />
-        <Label x:Name="PropertyStatusLabel" FontSize="18" />
-    </StackLayout>
+             xmlns:viewmodels="clr-namespace:Maqaoplus.ViewModels.PropertyHouse"
+             x:Class="Maqaoplus.Views.PropertyHouse.PropertyHousesDetailPage"
+             Title="Property House Details">
+
+    <ContentPage.Resources>
+        <!-- Define any converters or resources here -->
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <!-- Loading Indicator -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                               IsVisible="{Binding IsLoading}" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" 
+                               Color="#0a506c" />
+
+            <!-- Rooms List -->
+            <CollectionView ItemsSource="{Binding Rooms}" IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" HasShadow="True" BorderColor="LightGray" CornerRadius="5">
+                            <StackLayout>
+                                <Label Text="{Binding RoomName}" FontSize="16" FontAttributes="Bold" />
+                                <Label Text="{Binding RoomSize}" FontSize="14" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
-   
