@@ -14,97 +14,130 @@
 
     <ScrollView Padding="16">
         <VerticalStackLayout>
-            <!-- Hidden Field for Systempropertyhouseroomid -->
-            <Entry x:Name="Systempropertyhouseroomid" IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
+            <!-- Step 1 -->
+            <StackLayout IsVisible="{Binding IsStep1Visible}">
+                <!-- Hidden Field for Systempropertyhouseroomid -->
+                <Entry x:Name="Systempropertyhouseroomid" IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
 
-            <!-- Kitchen Type -->
-            <Label Text="Kitchen Type" FontAttributes="Bold" />
-            <Picker ItemsSource="{Binding Systemkitchentype}" 
-                    SelectedItem="{Binding SelectedKitchentype}" 
-                    ItemDisplayBinding="{Binding Name}" />
+                <!-- Kitchen Type -->
+                <Label Text="Kitchen Type" FontAttributes="Bold" />
+                <Picker ItemsSource="{Binding Systemkitchentype}" 
+                        SelectedItem="{Binding SelectedKitchentype}" 
+                        ItemDisplayBinding="{Binding Name}" />
 
-            <!-- Size Name -->
-            <Label Text="Size Name" FontAttributes="Bold" />
-            <Picker ItemsSource="{Binding Systempropertyhousesize}" 
-                    SelectedItem="{Binding SelectedSize}" 
-                    ItemDisplayBinding="{Binding Name}" />
+                <!-- Size Name -->
+                <Label Text="Size Name" FontAttributes="Bold" />
+                <Picker ItemsSource="{Binding Systempropertyhousesize}" 
+                        SelectedItem="{Binding SelectedSize}" 
+                        ItemDisplayBinding="{Binding Name}" />
 
-            <!-- House Room # -->
-            <Label Text="House Room #" FontAttributes="Bold" />
-            <Entry Text="{Binding Systempropertyhousesizename}" />
+                <!-- House Room # -->
+                <Label Text="House Room #" FontAttributes="Bold" />
+                <Entry Text="{Binding Systempropertyhousesizename}" />
 
-            <!-- Checkboxes -->
-            <CheckBox IsChecked="{Binding Forcaretaker}" />
-            <Label Text="For Caretaker?" />
+                <!-- Navigation Buttons -->
+                <Button Text="Next" Command="{Binding NextCommand}" />
+            </StackLayout>
 
-            <CheckBox IsChecked="{Binding Isshop}" />
-            <Label Text="Is Shop?" />
+            <!-- Step 2 -->
+            <StackLayout IsVisible="{Binding IsStep2Visible}">
+                <!-- Checkboxes -->
+                <CheckBox IsChecked="{Binding Forcaretaker}" />
+                <Label Text="For Caretaker?" />
 
-            <CheckBox IsChecked="{Binding Isgroundfloor}" />
-            <Label Text="Ground Floor?" />
+                <CheckBox IsChecked="{Binding Isshop}" />
+                <Label Text="Is Shop?" />
 
-            <CheckBox IsChecked="{Binding Hasbalcony}" />
-            <Label Text="Has Balcony?" />
+                <CheckBox IsChecked="{Binding Isgroundfloor}" />
+                <Label Text="Ground Floor?" />
 
-            <CheckBox IsChecked="{Binding Isunderrenovation}" />
-            <Label Text="Under Renovation?" />
+                <CheckBox IsChecked="{Binding Hasbalcony}" />
+                <Label Text="Has Balcony?" />
 
-            <!-- Table for Meter Readings -->
-            <Label Text="Meter Readings" FontAttributes="Bold" />
-            <CollectionView ItemsSource="{Binding MeterReadings}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                <CheckBox IsChecked="{Binding Isunderrenovation}" />
+                <Label Text="Under Renovation?" />
 
-                            <Label Grid.Column="0" Text="{Binding MeterNumber}" />
-                            <Label Grid.Column="1" Text="{Binding OpeningMeter}" />
-                            <Label Grid.Column="2" Text="{Binding ClosingMeter}" />
-                            <Label Grid.Column="3" Text="{Binding MovedMeter}" />
-                            <Label Grid.Column="4" Text="{Binding ConsumedAmount}" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                <!-- Navigation Buttons -->
+                <HorizontalStackLayout>
+                    <Button Text="Previous" Command="{Binding PreviousCommand}" />
+                    <Button Text="Next" Command="{Binding NextCommand}" />
+                </HorizontalStackLayout>
+            </StackLayout>
 
-            <!-- Table for All System Data -->
-            <Label Text="All System Data" FontAttributes="Bold" />
-            <CollectionView ItemsSource="{Binding AllSystemData}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+            <!-- Step 3 -->
+            <StackLayout IsVisible="{Binding IsStep3Visible}">
+                <!-- Table for Meter Readings -->
+                <Label Text="Meter Readings" FontAttributes="Bold" />
+                <CollectionView ItemsSource="{Binding MeterReadings}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="0" Text="{Binding Meter}" />
-                            <Label Grid.Column="1" Text="{Binding Opening}" />
-                            <Label Grid.Column="2" Text="{Binding Closing}" />
-                            <Label Grid.Column="3" Text="{Binding Units}" />
-                            <Label Grid.Column="4" Text="{Binding Bill}" />
-                            <Label Grid.Column="5" Text="{Binding Date}" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                <Label Grid.Column="0" Text="{Binding MeterNumber}" />
+                                <Label Grid.Column="1" Text="{Binding OpeningMeter}" />
+                                <Label Grid.Column="2" Text="{Binding ClosingMeter}" />
+                                <Label Grid.Column="3" Text="{Binding MovedMeter}" />
+                                <Label Grid.Column="4" Text="{Binding ConsumedAmount}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-            <!-- Search Input -->
-            <Entry x:Name="SearchIdEntry" Placeholder="Enter id number to search" Keyboard="Numeric" Text="{Binding SearchId}" />
-            <Button Text="Search" Command="{Binding SearchCommand}" />
+                <!-- Table for All System Data -->
+                <Label Text="All System Data" FontAttributes="Bold" />
+                <CollectionView ItemsSource="{Binding AllSystemData}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-            <!-- Search Results -->
-            <Label x:Name="SearchResults" Text="{Binding SearchResults}" IsVisible="{Binding IsNotEmpty}" />
+                                <Label Grid.Column="0" Text="{Binding Meter}" />
+                                <Label Grid.Column="1" Text="{Binding Opening}" />
+                                <Label Grid.Column="2" Text="{Binding Closing}" />
+                                <Label Grid.Column="3" Text="{Binding Units}" />
+                                <Label Grid.Column="4" Text="{Binding Bill}" />
+                                <Label Grid.Column="5" Text="{Binding Date}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Navigation Buttons -->
+                <HorizontalStackLayout>
+                    <Button Text="Previous" Command="{Binding PreviousCommand}" />
+                    <Button Text="Next" Command="{Binding NextCommand}" />
+                </HorizontalStackLayout>
+            </StackLayout>
+
+            <!-- Step 4 -->
+            <StackLayout IsVisible="{Binding IsStep4Visible}">
+                <!-- Search Input -->
+                <Entry x:Name="SearchIdEntry" Placeholder="Enter id number to search" Keyboard="Numeric" Text="{Binding SearchId}" />
+                <Button Text="Search" Command="{Binding SearchCommand}" />
+
+                <!-- Search Results -->
+                <Label x:Name="SearchResults" Text="{Binding SearchResults}" IsVisible="{Binding IsNotEmpty}" />
+
+                <!-- Navigation Buttons -->
+                <HorizontalStackLayout>
+                    <Button Text="Previous" Command="{Binding PreviousCommand}" />
+                    <Button Text="Finish" Command="{Binding FinishCommand}" />
+                </HorizontalStackLayout>
+            </StackLayout>
         </VerticalStackLayout>
     </ScrollView>
 

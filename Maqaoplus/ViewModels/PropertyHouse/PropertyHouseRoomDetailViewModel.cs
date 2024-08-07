@@ -28,16 +28,28 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private string _searchId;
         private string _searchResults;
 
+        private bool _isStep1Visible;
+        private bool _isStep2Visible;
+        private bool _isStep3Visible;
+
         public ICommand LoadRoomDetailCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand CloseCommand { get; }
+        public ICommand NextCommand { get; }
+        public ICommand PreviousCommand { get; }
+
         public PropertyHouseRoomDetailViewModel()
         {
             LoadRoomDetailCommand = new Command(async () => await LoadRoomDetails());
             SaveCommand = new Command(async () => await SaveRoomDetails());
             SearchCommand = new Command(async () => await Search());
             CloseCommand = new Command(() => Close());
+            NextCommand = new Command(NextStep);
+            PreviousCommand = new Command(PreviousStep);
+            _isStep1Visible = true;
+            _isStep2Visible = false;
+            _isStep3Visible = false;
         }
 
         public PropertyHouseRoomDetailViewModel(Services.ServiceProvider serviceProvider) : this()
@@ -211,6 +223,36 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        public bool IsStep1Visible
+        {
+            get => _isStep1Visible;
+            set
+            {
+                _isStep1Visible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsStep2Visible
+        {
+            get => _isStep2Visible;
+            set
+            {
+                _isStep2Visible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsStep3Visible
+        {
+            get => _isStep3Visible;
+            set
+            {
+                _isStep3Visible = value;
+                OnPropertyChanged();
+            }
+        }
+
         private async Task LoadRoomDetails()
         {
             IsLoading = true;
@@ -222,7 +264,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response != null)
                 {
                     HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
-                    // Populate other properties if needed
                     await LoadDropdownData();
                 }
             }
@@ -265,8 +306,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/SaveRoomDetails", HttpMethod.Post, JsonConvert.SerializeObject(HouseroomData)
-                );
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/SaveRoomDetails", HttpMethod.Post, JsonConvert.SerializeObject(HouseroomData));
 
                 if (response != null)
                 {
@@ -291,6 +331,34 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private void Close()
         {
             // Implement close logic, if needed
+        }
+
+        private void NextStep()
+        {
+            if (IsStep1Visible)
+            {
+                IsStep1Visible = false;
+                IsStep2Visible = true;
+            }
+            else if (IsStep2Visible)
+            {
+                IsStep2Visible = false;
+                IsStep3Visible = true;
+            }
+        }
+
+        private void PreviousStep()
+        {
+            if (IsStep3Visible)
+            {
+                IsStep3Visible = false;
+                IsStep2Visible = true;
+            }
+            else if (IsStep2Visible)
+            {
+                IsStep2Visible = false;
+                IsStep1Visible = true;
+            }
         }
     }
 }
