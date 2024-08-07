@@ -1,26 +1,28 @@
 using Maqaoplus.ViewModels.PropertyHouse;
-namespace Maqaoplus.Views.PropertyHouse;
 
-[QueryProperty(nameof(PropertyRoomId), "PropertyRoomId")]
-public partial class PropertyHousesRoomDetailPage : ContentPage
+namespace Maqaoplus.Views.PropertyHouse
 {
-    public long PropertyRoomId { get; set; }
-    private PropertyHouseRoomDetailViewModel _viewModel;
-
-    public PropertyHousesRoomDetailPage(PropertyHouseRoomDetailViewModel viewModel)
+    [QueryProperty(nameof(PropertyRoomId), "PropertyRoomId")]
+    public partial class PropertyHousesRoomDetailPage : ContentPage
     {
-        InitializeComponent();
-        BindingContext = viewModel;
-        _viewModel = viewModel;
-    }
+        public long PropertyRoomId { get; set; }
+        private PropertyHouseRoomDetailViewModel _viewModel;
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (BindingContext is PropertyHouseRoomDetailViewModel viewModel)
+        public PropertyHousesRoomDetailPage()
         {
-            viewModel.SetPropertyRoomId(PropertyRoomId);
+            InitializeComponent();
+            _viewModel = new PropertyHouseRoomDetailViewModel(); // Parameterless constructor
+            BindingContext = _viewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext is PropertyHouseRoomDetailViewModel viewModel)
+            {
+                viewModel.SetPropertyRoomId(PropertyRoomId);
+            }
         }
     }
 }
