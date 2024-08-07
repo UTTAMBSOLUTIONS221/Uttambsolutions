@@ -15,29 +15,44 @@
     <ScrollView Padding="16">
         <VerticalStackLayout>
             <!-- Step 1 -->
-            <StackLayout IsVisible="{Binding IsStep1Visible}">
+            <!-- Step 1 -->
+            <StackLayout IsVisible="{Binding IsStep1Visible}" Padding="16" Spacing="16">
                 <!-- Hidden Field for Systempropertyhouseroomid -->
                 <Entry x:Name="Systempropertyhouseroomid" IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
 
                 <!-- Kitchen Type -->
-                <Label Text="Kitchen Type" FontAttributes="Bold" />
-                <Picker ItemsSource="{Binding Systemkitchentype}" 
-                        SelectedItem="{Binding SelectedKitchentype}" 
-                        ItemDisplayBinding="{Binding Name}" />
+                <Label Text="Kitchen Type" FontAttributes="Bold" FontSize="16" Margin="0,0,0,8"/>
+                <Picker ItemsSource="{Binding HouseroomData.KitchenTypes}" 
+            SelectedItem="{Binding HouseroomData.SelectedKitchenType}" 
+            ItemDisplayBinding="{Binding Text}" 
+            Title="Select Kitchen Type" 
+            Margin="0,0,0,16"/>
 
                 <!-- Size Name -->
-                <Label Text="Size Name" FontAttributes="Bold" />
-                <Picker ItemsSource="{Binding Systempropertyhousesize}" 
-                        SelectedItem="{Binding SelectedSize}" 
-                        ItemDisplayBinding="{Binding Name}" />
+                <Label Text="Size Name" FontAttributes="Bold" FontSize="16" Margin="0,0,0,8"/>
+                <Picker ItemsSource="{Binding HouseroomData.Systempropertyhousesize}" 
+        SelectedItem="{Binding HouseroomData.SelectedSize}" 
+        ItemDisplayBinding="{Binding Text}" 
+        Title="Select Size" 
+        Margin="0,0,0,16"/>
 
                 <!-- House Room # -->
-                <Label Text="House Room #" FontAttributes="Bold" />
-                <Entry Text="{Binding Systempropertyhousesizename}" />
+                <Label Text="House Room #" FontAttributes="Bold" FontSize="16" Margin="0,0,0,8"/>
+                <Entry Text="{Binding HouseroomData.Systempropertyhousesizename}" 
+           Placeholder="Enter house room number" 
+           Keyboard="Numeric" 
+           Margin="0,0,0,16"/>
 
-                <!-- Navigation Buttons -->
-                <Button Text="Next" Command="{Binding NextCommand}" />
+                <!-- Navigation Button -->
+                <Button Text="Next" 
+            Command="{Binding NextCommand}" 
+            BackgroundColor="#0a506c" 
+            TextColor="White" 
+            CornerRadius="5" 
+            Padding="12" 
+            HeightRequest="50" />
             </StackLayout>
+
 
             <!-- Step 2 -->
             <StackLayout IsVisible="{Binding IsStep2Visible}">
