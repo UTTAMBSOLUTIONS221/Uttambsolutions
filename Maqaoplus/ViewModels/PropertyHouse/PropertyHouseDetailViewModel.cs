@@ -42,12 +42,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data != null)
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabypropertyidandownerid/" + _propertyId + "/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null && response.Data is List<dynamic> items)
                 {
                     Rooms.Clear();
-                    foreach (var room in response.Data)
+                    foreach (var item in items)
                     {
+                        var room = item.ToObject<PropertyHouseDetails>();
                         Rooms.Add(room);
                     }
                 }

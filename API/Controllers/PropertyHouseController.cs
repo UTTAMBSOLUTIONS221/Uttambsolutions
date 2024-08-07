@@ -29,5 +29,11 @@ namespace API.Controllers
         {
             return await bl.Getsystempropertyhousetenantdatabytenantid(TenantId);
         }
+        [AllowAnonymous]
+        [HttpGet("Getsystempropertyhousedetaildatabypropertyidandownerid/{PropertyId}/{OwnerId}")]
+        public async Task<PropertyHouseDetailData> Getsystempropertyhousedetaildatabypropertyidandownerid(long PropertyId, long OwnerId)
+        {
+            return await bl.Getsystempropertyhousedetaildatabypropertyidandownerid(PropertyId, OwnerId);
+        }
     }
 }
