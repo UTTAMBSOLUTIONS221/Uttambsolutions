@@ -15,22 +15,23 @@
     <ScrollView Padding="16">
         <VerticalStackLayout>
             <!-- Hidden Field for Systempropertyhouseroomid -->
-            <Entry x:Name="Systempropertyhouseroomid" IsVisible="False" />
+            <Entry x:Name="Systempropertyhouseroomid" IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
 
             <!-- Kitchen Type -->
             <Label Text="Kitchen Type" FontAttributes="Bold" />
             <Picker ItemsSource="{Binding Systemkitchentype}" 
-                    SelectedItem="{Binding SelectedKitchentype}" />
+                    SelectedItem="{Binding SelectedKitchentype}" 
+                    ItemDisplayBinding="{Binding Name}" />
 
             <!-- Size Name -->
             <Label Text="Size Name" FontAttributes="Bold" />
             <Picker ItemsSource="{Binding Systempropertyhousesize}" 
-                    SelectedItem="{Binding SelectedSize}" />
+                    SelectedItem="{Binding SelectedSize}" 
+                    ItemDisplayBinding="{Binding Name}" />
 
             <!-- House Room # -->
             <Label Text="House Room #" FontAttributes="Bold" />
             <Entry Text="{Binding Systempropertyhousesizename}" />
-
 
             <!-- Checkboxes -->
             <CheckBox IsChecked="{Binding Forcaretaker}" />
@@ -99,11 +100,11 @@
             </CollectionView>
 
             <!-- Search Input -->
-            <Entry x:Name="SearchIdEntry" Placeholder="Enter id number to search" Keyboard="Numeric" />
+            <Entry x:Name="SearchIdEntry" Placeholder="Enter id number to search" Keyboard="Numeric" Text="{Binding SearchId}" />
             <Button Text="Search" Command="{Binding SearchCommand}" />
 
             <!-- Search Results -->
-            <Label x:Name="SearchResults" IsVisible="False" />
+            <Label x:Name="SearchResults" Text="{Binding SearchResults}" IsVisible="{Binding IsNotEmpty}" />
         </VerticalStackLayout>
     </ScrollView>
 

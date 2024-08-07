@@ -1,6 +1,7 @@
 ﻿using DBL;
 using DBL.Entities;
 using DBL.Enum;
+using DBL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -81,7 +82,7 @@ namespace WEB.Controllers
                 Text = x.Text,
                 Value = x.Value
             }).ToList();
-            Systempropertyhouserooms model = new Systempropertyhouserooms();
+            Systempropertyhouseroomdata model = new Systempropertyhouseroomdata();
             if (Houseroomid > 0)
             {
                 model = await bl.Getsystempropertyhouseroomdatabyid(Houseroomid);
