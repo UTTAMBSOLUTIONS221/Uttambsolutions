@@ -32,11 +32,13 @@
                         <Frame Padding="8" Margin="8" HasShadow="True" BorderColor="LightGray" CornerRadius="12" HeightRequest="350">
                             <!-- Tap Gesture Recognizer -->
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}"
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}"
                                                       CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
-                            <Grid Padding="10">
+                            <Grid Padding="3">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -47,42 +49,21 @@
                                 <!-- Larger Image with Null Handling -->
                                 <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" HeightRequest="200" Grid.Row="0" />
 
-                                <!-- Property Name and Size -->
-                                <Grid Grid.Row="1" ColumnSpacing="10" Padding="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Text="{Binding Propertyhousename}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" LineBreakMode="TailTruncation" Grid.Column="0" />
-                                    <Label Text="{Binding Systempropertyhousesizename}" FontSize="16" TextColor="#0a506c" HorizontalOptions="End" Grid.Column="1" />
-                                </Grid>
-
-                                <!-- Location Information -->
-                                <Grid Grid.Row="2" ColumnSpacing="10" Padding="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Text="{Binding Countyname}" FontSize="14" TextColor="DarkGray" Grid.Column="0" />
-                                    <Label Text="{Binding Subcountyname}" FontSize="14" TextColor="DarkGray" Grid.Column="1"/>
-                                    <Label Text="{Binding Subcountywardname}" FontSize="14" TextColor="DarkGray" Grid.Column="2" />
-                                </Grid>
-
+                                <Label Text="{Binding Propertyhousename}" FontAttributes="Bold" TextTransform="Uppercase" FontSize="14" TextColor="#0a506c" MaxLines="2" LineBreakMode="TailTruncation" Grid.Row="1" />
+                                <Label Text="{Binding Systempropertyhousesizename}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="DarkGray" Grid.Row="2"  />
+                                <Label Text="{Binding Subcountywardname}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="DarkGray" Grid.Row="3" />
                                 <!-- Street or Landmark -->
-                                <Label Text="{Binding Streetorlandmark}" FontSize="14" TextColor="DarkGray" Grid.Row="3" />
+                                <Label Text="{Binding Streetorlandmark}" FontSize="13" TextColor="DarkGray" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
 
                                 <!-- Vacancy Information -->
-                                <Grid Grid.Row="4" ColumnSpacing="10" Padding="0">
+                                <Grid Grid.Row="5" ColumnSpacing="10" Padding="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Text="Vacant:" FontSize="14" TextColor="DarkGray" Grid.Column="0"/>
-                                    <Label Text="{Binding Propertyhousevacant}" FontSize="14" TextColor="DarkGray" Grid.Column="1"/>
+                                    <Label Text="Vacant:" FontSize="14" TextColor="Red" Grid.Column="0"/>
+                                    <Label Text="{Binding Propertyhousevacant}" FontSize="14" TextColor="Red" Grid.Column="1"/>
                                 </Grid>
                             </Grid>
                         </Frame>
