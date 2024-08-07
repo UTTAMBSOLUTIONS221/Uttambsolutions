@@ -11,7 +11,7 @@ namespace Maqaoplus.Views.PropertyHouse
         public PropertyHousesRoomDetailPage()
         {
             InitializeComponent();
-            _viewModel = new PropertyHouseRoomDetailViewModel(); // Parameterless constructor
+            _viewModel = new PropertyHouseRoomDetailViewModel();
             BindingContext = _viewModel;
         }
 

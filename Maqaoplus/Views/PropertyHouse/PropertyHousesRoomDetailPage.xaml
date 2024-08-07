@@ -110,10 +110,8 @@
         </VerticalStackLayout>
     </ScrollView>
 
-    <ContentPage.BottomToolbar>
-        <ToolBar>
-            <ToolBarItem Text="Close" Command="{Binding CloseCommand}" />
-            <ToolBarItem Text="Save" Command="{Binding SaveCommand}" />
-        </ToolBar>
-    </ContentPage.BottomToolbar>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Close" Command="{Binding CloseCommand}" />
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+    </ContentPage.ToolbarItems>
 </ContentPage>

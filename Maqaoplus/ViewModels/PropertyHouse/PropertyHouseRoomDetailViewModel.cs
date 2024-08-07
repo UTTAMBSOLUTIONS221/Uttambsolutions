@@ -1,4 +1,5 @@
 ﻿using DBL.Entities;
+using DBL.Models;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -11,10 +12,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private long _propertyRoomId;
         private Systempropertyhouserooms _houseroomData;
         private bool _isLoading;
-        private ObservableCollection<Systempropertykitchentype> _systemkitchentype;
-        private Systempropertykitchentype _selectedKitchentype;
-        private ObservableCollection<Systempropertyhousesize> _systempropertyhousesize;
-        private Systempropertyhousesize _selectedSize;
+        private ObservableCollection<ListModel> _systemkitchentype;
+        private ListModel _selectedKitchentype;
+        private ObservableCollection<ListModel> _systempropertyhousesize;
+        private ListModel _selectedSize;
         private string _systempropertyhousesizename;
         private bool _continueWithoutTenant;
         private bool _forcaretaker;
@@ -22,8 +23,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isgroundfloor;
         private bool _hasbalcony;
         private bool _isunderrenovation;
-        private ObservableCollection<MeterReading> _meterReadings;
-        private ObservableCollection<AllSystemData> _allSystemData;
+        private ObservableCollection<Systempropertyhouseroommeterhistory> _meterReadings;
         private string _searchId;
         private string _searchResults;
 
@@ -31,7 +31,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand SaveCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand CloseCommand { get; }
-
         public PropertyHouseRoomDetailViewModel()
         {
             LoadRoomDetailCommand = new Command(async () => await LoadRoomDetails());
@@ -40,20 +39,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             CloseCommand = new Command(() => Close());
         }
 
-        public PropertyHouseRoomDetailViewModel(Services.ServiceProvider serviceProvider) : this()
+        public PropertyHouseRoomDetailViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        public long PropertyRoomId
+        public void SetPropertyRoomId(long propertyRoomId)
         {
-            get => _propertyRoomId;
-            set
-            {
-                _propertyRoomId = value;
-                OnPropertyChanged();
-                LoadRoomDetailCommand.Execute(null);
-            }
+            _propertyRoomId = propertyRoomId;
+            LoadRoomDetailCommand.Execute(null);
         }
 
         public Systempropertyhouserooms HouseroomData
@@ -76,7 +70,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public ObservableCollection<Systempropertykitchentype> Systemkitchentype
+        public ObservableCollection<ListModel> Systemkitchentype
         {
             get => _systemkitchentype;
             set
@@ -86,7 +80,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public Systempropertykitchentype SelectedKitchentype
+        public ListModel SelectedKitchentype
         {
             get => _selectedKitchentype;
             set
@@ -96,7 +90,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public ObservableCollection<Systempropertyhousesize> Systempropertyhousesize
+        public ObservableCollection<ListModel> Systempropertyhousesize
         {
             get => _systempropertyhousesize;
             set
@@ -106,7 +100,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public Systempropertyhousesize SelectedSize
+        public ListModel SelectedSize
         {
             get => _selectedSize;
             set
@@ -186,22 +180,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public ObservableCollection<MeterReading> MeterReadings
+        public ObservableCollection<Systempropertyhouseroommeterhistory> MeterReadings
         {
             get => _meterReadings;
             set
             {
                 _meterReadings = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ObservableCollection<AllSystemData> AllSystemData
-        {
-            get => _allSystemData;
-            set
-            {
-                _allSystemData = value;
                 OnPropertyChanged();
             }
         }
@@ -232,15 +216,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>(
-                    $"/api/PropertyHouse/Getsystempropertyhousedetaildatabypropertyidandownerid/{_propertyRoomId}",
-                    HttpMethod.Get, null
-                );
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/{_propertyRoomId}", HttpMethod.Get, null);
 
                 if (response != null)
                 {
                     HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
                     // Populate other properties if needed
+                    await LoadDropdownData();
                 }
             }
             catch (Exception ex)
@@ -250,6 +232,37 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             finally
             {
                 IsLoading = false;
+            }
+        }
+
+        private async Task LoadDropdownData()
+        {
+            try
+            {
+                var kitchentypeResponse = await _serviceProvider.CallAuthWebApi<object>(
+                    "/api/PropertyHouse/GetKitchentypes",
+                    HttpMethod.Get, null
+                );
+                var sizeResponse = await _serviceProvider.CallAuthWebApi<object>(
+                    "/api/PropertyHouse/GetSizes",
+                    HttpMethod.Get, null
+                );
+
+                if (kitchentypeResponse != null)
+                {
+                    var kitchentypes = JsonConvert.DeserializeObject<List<ListModel>>(kitchentypeResponse.Data.ToString());
+                    Systemkitchentype = new ObservableCollection<ListModel>(kitchentypes);
+                }
+
+                if (sizeResponse != null)
+                {
+                    var sizes = JsonConvert.DeserializeObject<List<ListModel>>(sizeResponse.Data.ToString());
+                    Systempropertyhousesize = new ObservableCollection<ListModel>(sizes);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
 
