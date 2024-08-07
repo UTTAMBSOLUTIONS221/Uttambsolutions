@@ -31,7 +31,7 @@
                         <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="300">
                             <!-- Tap Gesture Recognizer -->
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PropertyHouseViewModel}}, Path=BindingContext.ViewDetailsCommand}"
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}"
                                                       CommandParameter="{Binding Propertyhouseid}" />
                             </Frame.GestureRecognizers>
                             <Grid Padding="5">
