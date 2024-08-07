@@ -133,6 +133,18 @@ namespace Maqaoplus.Constants
                                     Title = "Profile",
                                     ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
                                 },
+                                new ShellContent
+                                {
+                                    Icon = Icons.user,
+                                    Title = "Monthly Bills",
+                                    ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                                },
+                                 new ShellContent
+                                {
+                                    Icon = Icons.user,
+                                    Title = "Payment History",
+                                    ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                                },
                             }
                 };
                 if (!AppShell.Current.Items.Contains(flyoutItem))
