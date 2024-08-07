@@ -13,77 +13,113 @@
     </ContentPage.Resources>
 
     <ScrollView Padding="16">
+       
         <VerticalStackLayout>
             <!-- Step 1 -->
-            <!-- Step 1 -->
             <StackLayout IsVisible="{Binding IsStep1Visible}" Padding="16" Spacing="16">
+                <!-- Header -->
+                <Label Text="Step 1: Basic Room Details" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
+
                 <!-- Hidden Field for Systempropertyhouseroomid -->
                 <Entry x:Name="Systempropertyhouseroomid" IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
 
                 <!-- Kitchen Type -->
                 <Label Text="Kitchen Type" FontAttributes="Bold" FontSize="16" Margin="0,0,0,8"/>
-                <Picker ItemsSource="{Binding HouseroomData.KitchenTypes}" 
-            SelectedItem="{Binding HouseroomData.SelectedKitchenType}" 
-            ItemDisplayBinding="{Binding Text}" 
-            Title="Select Kitchen Type" 
-            Margin="0,0,0,16"/>
+                <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding SelectedKitchentype}" ItemDisplayBinding="{Binding Text}" Title="Select Kitchen Type" Margin="0,0,0,16"/>
 
                 <!-- Size Name -->
-                <Label Text="Size Name" FontAttributes="Bold" FontSize="16" Margin="0,0,0,8"/>
-                <Picker ItemsSource="{Binding HouseroomData.Systempropertyhousesize}" 
-        SelectedItem="{Binding HouseroomData.SelectedSize}" 
-        ItemDisplayBinding="{Binding Text}" 
-        Title="Select Size" 
-        Margin="0,0,0,16"/>
+                <Label Text="House Room Size" FontAttributes="Bold" FontSize="16" Margin="0,0,0,8"/>
+                <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding SelectedSize}"  ItemDisplayBinding="{Binding Text}"  Title="Select Size" Margin="0,0,0,16"/>
 
                 <!-- House Room # -->
                 <Label Text="House Room #" FontAttributes="Bold" FontSize="16" Margin="0,0,0,8"/>
-                <Entry Text="{Binding HouseroomData.Systempropertyhousesizename}" 
-           Placeholder="Enter house room number" 
-           Keyboard="Numeric" 
-           Margin="0,0,0,16"/>
+                <Entry Text="{Binding HouseroomData.Systempropertyhousesizename}" Placeholder="Enter house room number" Keyboard="Numeric" Margin="0,0,0,16"/>
 
                 <!-- Navigation Button -->
-                <Button Text="Next" 
-            Command="{Binding NextCommand}" 
-            BackgroundColor="#0a506c" 
-            TextColor="White" 
-            CornerRadius="5" 
-            Padding="12" 
-            HeightRequest="50" />
+                <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" HeightRequest="50" />
             </StackLayout>
 
-
             <!-- Step 2 -->
-            <StackLayout IsVisible="{Binding IsStep2Visible}">
-                <!-- Checkboxes -->
-                <CheckBox IsChecked="{Binding Forcaretaker}" />
-                <Label Text="For Caretaker?" />
+            <StackLayout IsVisible="{Binding IsStep2Visible}" Padding="16" Spacing="16">
+                <!-- Header -->
+                <Label Text="Step 2: Other Room Details" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
 
-                <CheckBox IsChecked="{Binding Isshop}" />
-                <Label Text="Is Shop?" />
+                <!-- Checkboxes and Labels Inline -->
+                <VerticalStackLayout Spacing="12">
+                    <HorizontalStackLayout Spacing="8">
+                        <CheckBox IsChecked="{Binding Forcaretaker}" />
+                        <Label Text="For Caretaker?" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-                <CheckBox IsChecked="{Binding Isgroundfloor}" />
-                <Label Text="Ground Floor?" />
+                    <HorizontalStackLayout Spacing="8">
+                        <CheckBox IsChecked="{Binding Isshop}" />
+                        <Label Text="Is Shop?" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-                <CheckBox IsChecked="{Binding Hasbalcony}" />
-                <Label Text="Has Balcony?" />
+                    <HorizontalStackLayout Spacing="8">
+                        <CheckBox IsChecked="{Binding Isgroundfloor}" />
+                        <Label Text="Ground Floor?" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-                <CheckBox IsChecked="{Binding Isunderrenovation}" />
-                <Label Text="Under Renovation?" />
+                    <HorizontalStackLayout Spacing="8">
+                        <CheckBox IsChecked="{Binding Hasbalcony}" />
+                        <Label Text="Has Balcony?" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-                <!-- Navigation Buttons -->
-                <HorizontalStackLayout>
-                    <Button Text="Previous" Command="{Binding PreviousCommand}" />
-                    <Button Text="Next" Command="{Binding NextCommand}" />
-                </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <CheckBox IsChecked="{Binding Isunderrenovation}" />
+                        <Label Text="Under Renovation?" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <!-- Navigation Buttons at Start and End -->
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
+                    <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
+                    <!-- Adjusted WidthRequest -->
+                    <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
+                    <!-- Adjusted WidthRequest -->
+                </FlexLayout>
             </StackLayout>
 
             <!-- Step 3 -->
-            <StackLayout IsVisible="{Binding IsStep3Visible}">
-                <!-- Table for Meter Readings -->
-                <Label Text="Meter Readings" FontAttributes="Bold" />
-                <CollectionView ItemsSource="{Binding MeterReadings}">
+            <StackLayout IsVisible="{Binding IsStep3Visible}" Padding="16" Spacing="16">
+                <!-- Section Header for Meter Readings -->
+                <Label Text="Meter Readings" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
+
+                <!-- Display a Grid for Adding New Meter Readings -->
+                <Grid IsVisible="{Binding IsMeterReadingsEmpty}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Header Row -->
+                    <Label Grid.Row="0" Grid.Column="0" Text="Meter Number" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="Opening Meter" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="2" Text="Closing Meter" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="3" Text="Moved Meter" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="4" Text="Consumed Amount" FontAttributes="Bold" />
+
+                    <!-- New Reading Input Row -->
+                    <Entry Grid.Row="1" Grid.Column="0" Placeholder="Enter Meter Number" Text="{Binding NewMeterNumber}" />
+                    <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Opening Meter" Text="{Binding NewOpeningMeter}" />
+                    <Entry Grid.Row="1" Grid.Column="2" Placeholder="Enter Closing Meter" Text="{Binding NewClosingMeter}" />
+                    <Entry Grid.Row="1" Grid.Column="3" Placeholder="Enter Moved Meter" Text="{Binding NewMovedMeter}" />
+                    <Entry Grid.Row="1" Grid.Column="4" Placeholder="Enter Consumed Amount" Text="{Binding NewConsumedAmount}" />
+
+                    <!-- Button to Add New Reading -->
+                    <Button Grid.Row="2" Grid.ColumnSpan="5" Text="Add Reading" Command="{Binding AddReadingCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" />
+                </Grid>
+
+                <!-- CollectionView for Meter Readings -->
+                <CollectionView ItemsSource="{Binding MeterReadings}" IsVisible="{Binding IsMeterReadingsVisible}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -105,8 +141,10 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <!-- Table for All System Data -->
-                <Label Text="All System Data" FontAttributes="Bold" />
+                <!-- Section Header for All System Data -->
+                <Label Text="All System Data" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
+
+                <!-- CollectionView for All System Data -->
                 <CollectionView ItemsSource="{Binding AllSystemData}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -132,10 +170,10 @@
                 </CollectionView>
 
                 <!-- Navigation Buttons -->
-                <HorizontalStackLayout>
-                    <Button Text="Previous" Command="{Binding PreviousCommand}" />
-                    <Button Text="Next" Command="{Binding NextCommand}" />
-                </HorizontalStackLayout>
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
+                    <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
+                    <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
+                </FlexLayout>
             </StackLayout>
 
             <!-- Step 4 -->
@@ -150,14 +188,9 @@
                 <!-- Navigation Buttons -->
                 <HorizontalStackLayout>
                     <Button Text="Previous" Command="{Binding PreviousCommand}" />
-                    <Button Text="Finish" Command="{Binding FinishCommand}" />
+                    <Button Text="Finish" Command="{Binding SaveCommand}" />
                 </HorizontalStackLayout>
             </StackLayout>
         </VerticalStackLayout>
     </ScrollView>
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Close" Command="{Binding CloseCommand}" />
-        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
-    </ContentPage.ToolbarItems>
 </ContentPage>

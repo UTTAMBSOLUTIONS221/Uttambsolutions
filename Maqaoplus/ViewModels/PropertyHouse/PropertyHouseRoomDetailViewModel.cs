@@ -31,6 +31,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isStep1Visible;
         private bool _isStep2Visible;
         private bool _isStep3Visible;
+        private bool _isStep4Visible;
 
         public ICommand LoadRoomDetailCommand { get; }
         public ICommand SaveCommand { get; }
@@ -47,9 +48,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             CloseCommand = new Command(() => Close());
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
+
+            // Initialize steps
             _isStep1Visible = true;
             _isStep2Visible = false;
             _isStep3Visible = false;
+            _isStep4Visible = false;
         }
 
         public PropertyHouseRoomDetailViewModel(Services.ServiceProvider serviceProvider) : this()
@@ -253,6 +257,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        public bool IsStep4Visible
+        {
+            get => _isStep4Visible;
+            set
+            {
+                _isStep4Visible = value;
+                OnPropertyChanged();
+            }
+        }
+
         private async Task LoadRoomDetails()
         {
             IsLoading = true;
@@ -265,6 +279,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 {
                     HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
                     await LoadDropdownData();
+                    // Also ensure meter readings are loaded if applicable
+                    await LoadMeterReadings();
                 }
             }
             catch (Exception ex)
@@ -300,6 +316,23 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        private async Task LoadMeterReadings()
+        {
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/GetMeterReadingsByRoomId/" + _propertyRoomId, HttpMethod.Get, null);
+
+                if (response != null)
+                {
+                    MeterReadings = JsonConvert.DeserializeObject<ObservableCollection<Systempropertyhouseroommeterhistory>>(response.Data.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
         private async Task SaveRoomDetails()
         {
             IsLoading = true;
@@ -325,40 +358,60 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async Task Search()
         {
-            // Implement search logic based on SearchId
+            // Implement search logic
         }
 
         private void Close()
         {
-            // Implement close logic, if needed
+            // Implement close logic
         }
 
         private void NextStep()
         {
-            if (IsStep1Visible)
+            // Move to the next step
+            if (_isStep1Visible)
             {
-                IsStep1Visible = false;
-                IsStep2Visible = true;
+                _isStep1Visible = false;
+                _isStep2Visible = true;
             }
-            else if (IsStep2Visible)
+            else if (_isStep2Visible)
             {
-                IsStep2Visible = false;
-                IsStep3Visible = true;
+                _isStep2Visible = false;
+                _isStep3Visible = true;
             }
+            else if (_isStep3Visible)
+            {
+                _isStep3Visible = false;
+                _isStep4Visible = true;
+            }
+            OnPropertyChanged(nameof(IsStep1Visible));
+            OnPropertyChanged(nameof(IsStep2Visible));
+            OnPropertyChanged(nameof(IsStep3Visible));
+            OnPropertyChanged(nameof(IsStep4Visible));
         }
 
         private void PreviousStep()
         {
-            if (IsStep3Visible)
+            // Move to the previous step
+            if (_isStep4Visible)
             {
-                IsStep3Visible = false;
-                IsStep2Visible = true;
+                _isStep4Visible = false;
+                _isStep3Visible = true;
             }
-            else if (IsStep2Visible)
+            else if (_isStep3Visible)
             {
-                IsStep2Visible = false;
-                IsStep1Visible = true;
+                _isStep3Visible = false;
+                _isStep2Visible = true;
             }
+            else if (_isStep2Visible)
+            {
+                _isStep2Visible = false;
+                _isStep1Visible = true;
+            }
+            OnPropertyChanged(nameof(IsStep1Visible));
+            OnPropertyChanged(nameof(IsStep2Visible));
+            OnPropertyChanged(nameof(IsStep3Visible));
+            OnPropertyChanged(nameof(IsStep4Visible));
         }
     }
 }
