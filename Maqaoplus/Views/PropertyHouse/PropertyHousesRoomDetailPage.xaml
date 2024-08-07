@@ -33,7 +33,7 @@
 
                 <!-- House Room # -->
                 <Label Text="House Room #" FontAttributes="Bold" FontSize="16" Margin="0,0,0,8"/>
-                <Entry Text="{Binding HouseroomData.Systempropertyhousesizename}" Placeholder="Enter house room number" Keyboard="Numeric" Margin="0,0,0,16"/>
+                <Entry Text="{Binding HouseroomData.Systempropertyhousesizename}" Placeholder="Enter house room number" Keyboard="Text" Margin="0,0,0,16"/>
 
                 <!-- Navigation Button -->
                 <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" HeightRequest="50" />
