@@ -11,6 +11,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         public ObservableCollection<PropertyHouseDetails> Rooms { get; }
         public ICommand LoadRoomsCommand { get; }
+        public ICommand ViewRoomDetailsCommand { get; }
 
         private bool _isLoading;
         public bool IsLoading
@@ -28,6 +29,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             Rooms = new ObservableCollection<PropertyHouseDetails>();
             LoadRoomsCommand = new Command(async () => await LoadRooms());
+            ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewDetails(propertyRoom.Systempropertyhouseroomid));
         }
 
         // Constructor with parameter
@@ -68,6 +70,24 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsLoading = false;
             }
         }
-    }
 
+        private async Task ViewDetails(long propertyRoomId)
+        {
+            IsLoading = true;
+            try
+            {
+                var encodedPropertyRoomId = Uri.EscapeDataString(propertyRoomId.ToString());
+                System.Diagnostics.Debug.WriteLine($"Navigating to PropertyHousesDetailPage with PropertyRoomId={encodedPropertyRoomId}");
+                await Shell.Current.GoToAsync($"PropertyHousesRoomDetailPage?PropertyRoomId={encodedPropertyRoomId}");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Navigation Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+    }
 }

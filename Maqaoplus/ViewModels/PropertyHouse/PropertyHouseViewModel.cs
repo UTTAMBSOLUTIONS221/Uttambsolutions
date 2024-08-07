@@ -78,17 +78,23 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
         private async Task ViewDetails(long propertyId)
         {
+            IsLoading = true;
+            IsDataLoaded = false;
             try
             {
                 var encodedPropertyId = Uri.EscapeDataString(propertyId.ToString());
                 System.Diagnostics.Debug.WriteLine($"Navigating to PropertyHousesDetailPage with PropertyId={encodedPropertyId}");
                 await Shell.Current.GoToAsync($"PropertyHousesDetailPage?PropertyId={encodedPropertyId}");
+                IsDataLoaded = true;
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Navigation Error", ex.Message, "OK");
             }
+            finally
+            {
+                IsLoading = false;
+            }
         }
     }
-
 }

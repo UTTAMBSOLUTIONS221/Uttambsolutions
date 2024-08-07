@@ -28,9 +28,6 @@ namespace Maqaoplus
             // Services
             builder.Services.AddSingleton<Services.ServiceProvider>();
 
-            // Register routes here
-            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
-
             // Register services
             builder.Services.AddSingleton<AppShell>();
 
