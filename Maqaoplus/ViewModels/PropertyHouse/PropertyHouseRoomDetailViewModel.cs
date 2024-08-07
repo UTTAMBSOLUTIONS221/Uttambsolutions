@@ -27,6 +27,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private ObservableCollection<Systempropertyhouseroommeterhistory> _meterReadings;
         private string _searchId;
         private string _searchResults;
+
+        private string _openingMeter;
+        private string _closingMeter;
+        private string _movedMeter;
+        private string _consumedAmount;
         private bool _isOpeningMeterReadOnly;
 
         private bool _isStep1Visible;
@@ -378,35 +383,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsLoading = false;
             }
         }
-        private void AddMeterReading()
-        {
 
-            if (string.IsNullOrEmpty(NewMeterNumber) || string.IsNullOrEmpty(NewOpeningMeter) ||
-                string.IsNullOrEmpty(NewClosingMeter) || string.IsNullOrEmpty(NewMovedMeter) ||
-                string.IsNullOrEmpty(NewConsumedAmount))
-            {
-                Application.Current.MainPage.DisplayAlert("Validation Error", "Please fill in all fields.", "OK");
-                return;
-            }
-
-            var newReading = new Systempropertyhouseroommeterhistory
-            {
-                Systempropertyhouseroommeternumber = NewMeterNumber,
-                Openingmeter = Convert.ToDecimal(NewOpeningMeter),
-                Closingmeter = Convert.ToDecimal(NewClosingMeter),
-                Movedmeter = Convert.ToDecimal(NewMovedMeter),
-                Consumedamount = Convert.ToDecimal(NewConsumedAmount)
-            };
-
-            MeterReadings.Add(newReading);
-
-            // Clear input fields after adding
-            NewMeterNumber = string.Empty;
-            NewOpeningMeter = string.Empty;
-            NewClosingMeter = string.Empty;
-            NewMovedMeter = string.Empty;
-            NewConsumedAmount = string.Empty;
-        }
         private async Task LoadDropdownData()
         {
             try
