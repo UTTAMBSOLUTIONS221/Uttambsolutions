@@ -21,7 +21,7 @@ namespace Maqaoplus.Constants
 
             var serviceProvider = App.Current.Handler.MauiContext.Services.GetService<Services.ServiceProvider>();
 
-            if (App.UserDetails.Usermodel.Rolename == "Super Admin")
+            if (App.UserDetails.Usermodel.Rolename == "Super Admin" || App.UserDetails.Usermodel.Rolename == "System Admin")
             {
                 var flyoutItem = new FlyoutItem()
                 {
