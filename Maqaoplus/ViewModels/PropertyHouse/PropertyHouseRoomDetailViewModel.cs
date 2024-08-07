@@ -239,10 +239,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             try
             {
-                var kitchentypeResponse = await _serviceProvider.CallAuthWebApi<object>(
-                    "/api/PropertyHouse/GetKitchentypes",
-                    HttpMethod.Get, null
-                );
+                var kitchentypeResponse = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/GetKitchentypes", HttpMethod.Get, null);
                 var sizeResponse = await _serviceProvider.CallAuthWebApi<object>(
                     "/api/PropertyHouse/GetSizes",
                     HttpMethod.Get, null
