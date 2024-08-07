@@ -49,8 +49,8 @@ namespace Maqaoplus
             builder.Services.AddSingleton<DashboardPageViewModel>();
             builder.Services.AddSingleton<PropertyHouseViewModel>();
             builder.Services.AddSingleton<PropertyHouseDetailViewModel>();
-
             builder.Services.AddTransient<Propertyhousetenantviewmodel>();
+            builder.Services.AddTransient<PropertyHouseRoomDetailViewModel>();
 
             return builder.Build();
         }

@@ -24,6 +24,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        private bool _isDataLoaded;
+        public bool IsDataLoaded
+        {
+            get => _isDataLoaded;
+            set
+            {
+                _isDataLoaded = value;
+                OnPropertyChanged();
+            }
+        }
+
         // Parameterless constructor
         public PropertyHouseDetailViewModel()
         {
@@ -47,6 +58,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task LoadRooms()
         {
             IsLoading = true;
+            IsDataLoaded = false;
 
             try
             {
@@ -59,6 +71,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         var room = item.ToObject<PropertyHouseDetails>();
                         Rooms.Add(room);
                     }
+                    IsDataLoaded = true; // Data is loaded after processing
                 }
             }
             catch (Exception ex)
@@ -67,7 +80,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             finally
             {
-                IsLoading = false;
+                IsLoading = false; // Stop loading indicator
             }
         }
 
@@ -77,7 +90,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             try
             {
                 var encodedPropertyRoomId = Uri.EscapeDataString(propertyRoomId.ToString());
-                System.Diagnostics.Debug.WriteLine($"Navigating to PropertyHousesDetailPage with PropertyRoomId={encodedPropertyRoomId}");
+                System.Diagnostics.Debug.WriteLine($"Navigating to PropertyHousesRoomDetailPage with PropertyRoomId={encodedPropertyRoomId}");
                 await Shell.Current.GoToAsync($"PropertyHousesRoomDetailPage?PropertyRoomId={encodedPropertyRoomId}");
             }
             catch (Exception ex)
@@ -86,8 +99,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             finally
             {
-                IsLoading = false;
+                IsLoading = false; // Stop loading indicator
             }
         }
     }
+
 }

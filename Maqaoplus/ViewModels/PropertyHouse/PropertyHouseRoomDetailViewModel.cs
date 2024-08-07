@@ -39,7 +39,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             CloseCommand = new Command(() => Close());
         }
 
-        public PropertyHouseRoomDetailViewModel(Services.ServiceProvider serviceProvider)
+        public PropertyHouseRoomDetailViewModel(Services.ServiceProvider serviceProvider) : this()
         {
             _serviceProvider = serviceProvider;
         }
@@ -216,7 +216,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/{_propertyRoomId}", HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/" + _propertyRoomId, HttpMethod.Get, null);
 
                 if (response != null)
                 {
