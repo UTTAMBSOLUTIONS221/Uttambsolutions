@@ -1,5 +1,4 @@
 ﻿using DBL.Entities;
-using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -77,15 +76,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsLoading = false;
             }
         }
-
         private async Task ViewDetails(long propertyId)
         {
             try
             {
-                var jsonProperty = JsonConvert.SerializeObject(propertyId);
-                var encodedProperty = Uri.EscapeDataString(jsonProperty);
-                System.Diagnostics.Debug.WriteLine($"Navigating to PropertyHousesDetailPage with PropertyId={encodedProperty}");
-                await Shell.Current.GoToAsync($"PropertyHousesDetailPage?PropertyId={encodedProperty}");
+                var encodedPropertyId = Uri.EscapeDataString(propertyId.ToString());
+                System.Diagnostics.Debug.WriteLine($"Navigating to PropertyHousesDetailPage with PropertyId={encodedPropertyId}");
+                await Shell.Current.GoToAsync($"PropertyHousesDetailPage?PropertyId={encodedPropertyId}");
             }
             catch (Exception ex)
             {
