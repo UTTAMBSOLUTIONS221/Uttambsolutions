@@ -150,5 +150,20 @@ namespace Maqaoplus.Services
                 };
             }
         }
+
+        public async Task<List<ListModel>> GetSystemDropDownData(string apiUrl, HttpMethod httpMethod)
+        {
+            List<ListModel> list = new List<ListModel>();
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + App.UserDetails.Token);
+                using (var response = await httpClient.GetAsync(_devHttpHelper.ApiUrl + apiUrl))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    list = JsonConvert.DeserializeObject<List<ListModel>>(apiResponse);
+                }
+            }
+            return list;
+        }
     }
 }

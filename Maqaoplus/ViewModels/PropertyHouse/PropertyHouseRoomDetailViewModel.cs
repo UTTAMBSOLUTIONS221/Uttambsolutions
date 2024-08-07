@@ -1,4 +1,5 @@
 ﻿using DBL.Entities;
+using DBL.Enum;
 using DBL.Models;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -239,22 +240,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             try
             {
-                var kitchentypeResponse = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/GetKitchentypes", HttpMethod.Get, null);
-                var sizeResponse = await _serviceProvider.CallAuthWebApi<object>(
-                    "/api/PropertyHouse/GetSizes",
-                    HttpMethod.Get, null
-                );
+                var kitchentypeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemkitchentype, HttpMethod.Get);
+                var sizeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyhousesizes, HttpMethod.Get);
 
                 if (kitchentypeResponse != null)
                 {
-                    var kitchentypes = JsonConvert.DeserializeObject<List<ListModel>>(kitchentypeResponse.Data.ToString());
-                    Systemkitchentype = new ObservableCollection<ListModel>(kitchentypes);
+                    Systemkitchentype = new ObservableCollection<ListModel>(kitchentypeResponse);
                 }
 
                 if (sizeResponse != null)
                 {
-                    var sizes = JsonConvert.DeserializeObject<List<ListModel>>(sizeResponse.Data.ToString());
-                    Systempropertyhousesize = new ObservableCollection<ListModel>(sizes);
+                    Systempropertyhousesize = new ObservableCollection<ListModel>(sizeResponse);
                 }
             }
             catch (Exception ex)
@@ -269,10 +265,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>(
-                    "/api/PropertyHouse/SaveRoomDetails",
-                    HttpMethod.Post,
-                    JsonConvert.SerializeObject(HouseroomData)
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/SaveRoomDetails", HttpMethod.Post, JsonConvert.SerializeObject(HouseroomData)
                 );
 
                 if (response != null)
