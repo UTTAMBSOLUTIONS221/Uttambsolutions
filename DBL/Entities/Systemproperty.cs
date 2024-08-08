@@ -24,7 +24,7 @@
         public int Watertypeid { get; set; }
         public decimal Waterunitprice { get; set; }
         public int Rentdueday { get; set; }
-        public int RentDepositMonthid { get; set; }
+        public int Rentdepositmonth { get; set; }
         public string? Propertyhousestatusdata { get; set; }
         public string? Extra { get; set; }
         public string? Extra1 { get; set; }
