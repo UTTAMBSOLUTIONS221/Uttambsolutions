@@ -96,6 +96,15 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Addpropertyhouseroompayment(long Houseroomid, long Houseroomtenantid)
+        {
+            ViewData["Systempaymentmodelists"] = bl.GetListModel(ListModelType.Systemcashpaymentmodetype).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            TenantHouseRoomPayment model = new TenantHouseRoomPayment();
+            model.TenanthouserroomId = Houseroomid;
+            model.TenantId = Houseroomtenantid;
+            return PartialView(model);
+        }
+        [HttpGet]
         public async Task<IActionResult> Addpropertyhouseroommeter(long Houseroomid)
         {
             var model = await bl.Getsystempropertyhouseroommeterdatabyid(Houseroomid);

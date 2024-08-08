@@ -37,5 +37,7 @@
         Systempropertyhousesizes = 22,
         Systemhousewatertype = 23,
         Systemkitchentype = 24,
+        Systempaymentmodetype = 25,
+        Systemcashpaymentmodetype = 215,
     }
 }

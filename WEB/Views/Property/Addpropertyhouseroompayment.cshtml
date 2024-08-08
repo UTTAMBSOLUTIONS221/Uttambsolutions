@@ -1,0 +1,44 @@
+﻿@model DBL.Entities.TenantHouseRoomPayment
+@{
+    var Systempaymentmodes = ViewData["Systempaymentmodelists"] as List<SelectListItem>;
+}
+<div class="modal-header">
+    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Tenant Payment Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <input class="form-control form-control-sm" asp-for="TenantId" id="TenantId" hidden />
+        <input class="form-control form-control-sm" asp-for="TenanthouserroomId" id="TenanthouserroomId" hidden />
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Payment Mode</label>
+                <select class="form-control form-control-sm" asp-for="@Model.PaymentModeId" asp-items="@Systempaymentmodes" id="SystemPaymentModeId" required>
+                    <option value="">---Select---</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Amount</label>
+                <input class="form-control form-control-sm" type="number" asp-for="@Model.Amount" id="Systempropertyhousesizenameid" required/>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Payment Date</label>
+                <input class="form-control form-control-sm" type="datetime-local" asp-for="@Model.TransactionDate" id="Systempropertyhousesizenameid" required />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer d-none" id="searchresultbuttons">
+    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystempropertyhouseroomtenantdataid" onclick="savesystempropertyhouseroomtenantdata();">
+        <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+    </button>
+</div>
