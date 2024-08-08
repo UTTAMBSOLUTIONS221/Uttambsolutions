@@ -25,6 +25,12 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Privacy()
+        {
+            return View();
+        }
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var data = await bl.Getsystempropertyhousedata();
