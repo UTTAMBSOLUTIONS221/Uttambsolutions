@@ -1152,6 +1152,66 @@ namespace DBL
             });
         }
         #endregion
+
+
+        public void ProcessC2BConfirmation(int serviceCode, string jsonData)
+        {
+            Task.Run(() =>
+            {
+                var results = JsonConvert.DeserializeObject<C2BConfirmData>(jsonData);
+
+                if (results != null)
+                {
+                    Payment payment = new Payment();
+                    payment.ServiceCode = serviceCode;
+                    payment.AccountNo = results.MSISDN;
+                    payment.AccountName = results.FirstName + " " + results.MiddleName + " " + results.LastName;
+                    payment.Amount = results.TransAmount;
+                    payment.PType = (int)PaymentType.C2B;
+                    payment.TPRef = "";
+                    payment.ExtRef = results.TransID;
+                    payment.Extra1 = results.BillRefNumber;
+                    payment.Extra2 = results.TransTime;
+                    payment.Extra3 = results.BusinessShortCode;
+                    payment.Extra4 = results.OrgAccountBalance + "";
+                    payment.PStatus = 2;//--- Completed
+
+                    //---- Create payment
+                    var resp = db.PesaServiceRepository.CreatePayment(payment);
+                    db.Reset();
+
+                    if (resp.RespStatus == 0)
+                    {
+                        if (!string.IsNullOrEmpty(resp.Data1))
+                        {
+                            PaymentNotificationData notificationData = new PaymentNotificationData
+                            {
+                                AccountBalance = results.OrgAccountBalance,
+                                PayAccountNo = results.BillRefNumber,
+                                Amount = results.TransAmount,
+                                CustomerName = results.FirstName + " " + results.MiddleName + " " + results.LastName,
+                                CustomerNo = results.MSISDN,
+                                ReferenceNo = results.TransID,
+                                SourceRef = results.BusinessShortCode
+                            };
+
+                            //---- Update 3rd party application
+                            SendPaymentNotifTo3P(resp.Data1, notificationData, resp.Data2);
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception(resp.RespMessage);
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid confirmation data!");
+                }
+
+            });
+        }
+
         #endregion
     }
 }

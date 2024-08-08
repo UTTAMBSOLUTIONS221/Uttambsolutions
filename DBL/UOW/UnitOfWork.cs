@@ -26,6 +26,7 @@ namespace DBL.UOW
 
 
         private IPaymentRepository paymentRepository;
+        private IPesaServiceRepository pesaServiceRepository;
 
 
 
@@ -92,6 +93,10 @@ namespace DBL.UOW
         {
             get { return paymentRepository ?? (paymentRepository = new PaymentRepository(connString)); }
         }
+        public IPesaServiceRepository PesaServiceRepository
+        {
+            get { return pesaServiceRepository ?? (pesaServiceRepository = new PesaServiceRepository(connString)); }
+        }
 
         public void Reset()
         {
@@ -111,6 +116,7 @@ namespace DBL.UOW
 
 
             paymentRepository = null;
+            pesaServiceRepository = null;
         }
 
         public void Dispose()

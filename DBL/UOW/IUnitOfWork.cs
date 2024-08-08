@@ -25,6 +25,7 @@ namespace DBL.UOW
 
 
         IPaymentRepository PaymentRepository { get; }
+        IPesaServiceRepository PesaServiceRepository { get; }
 
     }
 }
