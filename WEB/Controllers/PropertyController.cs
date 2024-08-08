@@ -1,12 +1,15 @@
 ﻿using DBL;
 using DBL.Entities;
+using DBL.Entities.Mpesa;
 using DBL.Enum;
 using DBL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
-
+using System.Net.Http.Headers;
+using System.Text;
+using WEB.Services;
 namespace WEB.Controllers
 {
 
@@ -14,10 +17,13 @@ namespace WEB.Controllers
     public class PropertyController : BaseController
     {
         private readonly BL bl;
+        private readonly Mpesaservices mpesaservices;
         public PropertyController(IConfiguration config)
         {
             bl = new BL(Util.ShareConnectionString(config));
+            mpesaservices = new Mpesaservices();
         }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -126,11 +132,75 @@ namespace WEB.Controllers
             model.TenantId = Houseroomtenantid;
             return PartialView(model);
         }
-        public async Task<JsonResult> Confirmhouseroompaymentdata(TenantHouseRoomPayment model)
+        public async Task<IActionResult> Confirmhouseroompaymentdata(TenantHouseRoomPayment model)
         {
+            Encoding iso = Encoding.GetEncoding("ISO-8859-1");
+            string securityPassword = "847798hjktfrejtr7438743"; // Your API password or key
+            byte[] isoBytes = iso.GetBytes(securityPassword);
+            string securityCredential = Convert.ToBase64String(isoBytes);
+
+            var transactionStatusQuery = new TransactionStatusQueryModel
+            {
+                Initiator = "francis",
+                SecurityCredential = securityCredential,
+                CommandID = "TransactionStatusQuery",
+                TransactionID = "SH81E5K8J5",
+                PartyA = "222111",  // Bank Paybill number
+                IdentifierType = 4,  // 4 for Paybill, 2 for Till Number
+                ResultURL = "https://mainapi.uttambsolutions.com/api/v1/channelm/b2c/result",
+                QueueTimeOutURL = "https://mainapi.uttambsolutions.com/api/v1/channelm/b2c/timeout",
+                Remarks = "Checking transaction status",
+                Occasion = "CustomerPayment"
+            };
+
+            var accessToken = await GetAccessTokenAsync();
+
+            using (var client = new System.Net.Http.HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                var jsonContent = JsonConvert.SerializeObject(transactionStatusQuery);
+                var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync("https://sandbox.safaricom.co.ke/mpesa/transactionstatus/v1/query", httpContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(result);
+                }
+                else
+                {
+                    var errorResponse = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Error Response: " + errorResponse);
+                }
+            }
             var resp = await bl.Registerpropertyhouseroommeterdata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
+        public async Task<string> GetAccessTokenAsync()
+        {
+            using (var client = new System.Net.Http.HttpClient())
+            {
+                var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes("WF5ODAoTZWZlEzkCSIGm6tUzR6RsK2Yk:tAxvOyQdBedKGtiF"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+
+                var response = await client.GetAsync("https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    dynamic json = JsonConvert.DeserializeObject(content);
+                    return json.access_token;
+                }
+                else
+                {
+                    throw new Exception("Unable to get access token");
+                }
+            }
+        }
+
 
         [HttpGet]
         public JsonResult Getsystemsubcountydatabyid(long Id)

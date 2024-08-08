@@ -93,8 +93,9 @@ namespace API.Controllers
         #endregion
 
         #region MPESA B2C
-        [HttpGet, Route("api/v1/channelm/b2c/result/{id:int}")]
-        public async Task<B2CResp> MPesaB2CResults(int id)
+        [HttpPost]
+        [Route("api/v1/channelm/b2c/result")]
+        public async Task<B2CResp> MPesaB2CResults()
         {
             try
             {
@@ -105,8 +106,8 @@ namespace API.Controllers
                     content = await reader.ReadToEndAsync();
                 }
 
-                Util.LogError("MPesa-MPesaB2CResults", new Exception(content), false);
-                bl.ProcessB2CResult(id, content);
+                Util.LogError("MPesa-MPesaB2CResults Now", new Exception(content), false);
+                //bl.ProcessB2CResult(id, content);
             }
             catch (Exception ex)
             {
@@ -115,9 +116,9 @@ namespace API.Controllers
 
             return new B2CResp();
         }
-
-        [HttpGet, Route("api/v1/channelm/b2c/timeout/{id:int}")]
-        public async Task<B2CResp> MPesaB2CTimeout(int id)
+        [HttpPost]
+        [Route("api/v1/channelm/b2c/timeout")]
+        public async Task<B2CResp> MPesaB2CTimeout()
         {
             try
             {
@@ -128,8 +129,8 @@ namespace API.Controllers
                     content = await reader.ReadToEndAsync();
                 }
 
-                Util.LogError("Pesa-MPesaB2CTimeout", new Exception(content), false);
-                bl.ProcessB2CResult(id, content);
+                Util.LogError("Pesa-MPesaB2CTimeout Now", new Exception(content), false);
+                //bl.ProcessB2CResult(id, content);
             }
             catch (Exception ex)
             {
