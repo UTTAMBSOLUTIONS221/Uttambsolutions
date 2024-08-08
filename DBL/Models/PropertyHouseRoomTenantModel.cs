@@ -52,7 +52,7 @@
         public string? Subcountywardname { get; set; }
         public string? Streetorlandmark { get; set; }
         public string? Propertyhousename { get; set; }
-        public string? Peopertyownwename { get; set; }
+        public string? Peopertyownername { get; set; }
         public string? Systempropertyhousesizename { get; set; }
         public decimal Outstandingbalance { get; set; }
         public string? Createdby { get; set; }

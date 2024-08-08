@@ -36,6 +36,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddSingleton<DashboardPage>();
+            builder.Services.AddSingleton<UserDashboardPage>();
             builder.Services.AddSingleton<PropertyHousesDetailPage>();
             builder.Services.AddSingleton<PropertyHousesRoomDetailPage>();
 
