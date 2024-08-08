@@ -15,7 +15,7 @@ namespace API.Controllers
         }
 
         #region MPESA C2B
-        [Route("api/v1/channelm/expr/callback/{id:int}")]
+        [HttpGet, Route("api/v1/channelm/expr/callback/{id:int}")]
         public async Task MPesaSTKPushCallback(int id)
         {
             try
@@ -36,7 +36,7 @@ namespace API.Controllers
             }
         }
 
-        [Route("api/v1/channelm/c2b/validate/{id:int}")]
+        [HttpGet, Route("api/v1/channelm/c2b/validate/{id:int}")]
         public async Task<C2BValidationResp> Validation(int id)
         {
             try
@@ -64,7 +64,7 @@ namespace API.Controllers
             };
         }
 
-        [Route("api/v1/channelm/c2b/confirm/{id:int}")]
+        [HttpGet, Route("api/v1/channelm/c2b/confirm/{id:int}")]
         public async Task<C2BConfirmResp> Confirmation(int id)
         {
             try
@@ -93,7 +93,7 @@ namespace API.Controllers
         #endregion
 
         #region MPESA B2C
-        [Route("api/v1/channelm/b2c/result/{id:int}")]
+        [HttpGet, Route("api/v1/channelm/b2c/result/{id:int}")]
         public async Task<B2CResp> MPesaB2CResults(int id)
         {
             try
@@ -116,7 +116,7 @@ namespace API.Controllers
             return new B2CResp();
         }
 
-        [Route("api/v1/channelm/b2c/timeout/{id:int}")]
+        [HttpGet, Route("api/v1/channelm/b2c/timeout/{id:int}")]
         public async Task<B2CResp> MPesaB2CTimeout(int id)
         {
             try
