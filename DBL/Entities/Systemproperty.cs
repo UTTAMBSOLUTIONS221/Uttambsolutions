@@ -23,7 +23,6 @@
         public int Propertyhousestatus { get; set; }
         public int Watertypeid { get; set; }
         public decimal Waterunitprice { get; set; }
-        public decimal Monthlybinfee { get; set; }
         public int Rentdueday { get; set; }
         public string? Propertyhousestatusdata { get; set; }
         public string? Extra { get; set; }
