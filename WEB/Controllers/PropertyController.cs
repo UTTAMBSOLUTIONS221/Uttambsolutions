@@ -126,6 +126,11 @@ namespace WEB.Controllers
             model.TenantId = Houseroomtenantid;
             return PartialView(model);
         }
+        public async Task<JsonResult> Confirmhouseroompaymentdata(TenantHouseRoomPayment model)
+        {
+            var resp = await bl.Registerpropertyhouseroommeterdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
 
         [HttpGet]
         public JsonResult Getsystemsubcountydatabyid(long Id)

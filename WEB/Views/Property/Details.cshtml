@@ -275,5 +275,32 @@
             });
         }
 
+        function savesystempropertyhouseroompaymentdata() {
+            document.getElementById("savesystempropertyhouseroompaymentid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            var meterData = {
+                TenantId: $('#TenantId').val(),
+                TenanthouserroomId: $('#TenanthouserroomId').val(),
+                TransactionReference: $('#Systempmpesatransactionreferenceid').val(),
+                Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+            };
+            $.post("/Property/Confirmhouseroompaymentdata", meterData, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#Uttambsolutionsmodal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Payment Not Verified", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystempropertyhouseroompaymentid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "CONFIRM PAYMENT";
+            });
+        }
+
     </script>
 }
