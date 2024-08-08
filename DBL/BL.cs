@@ -1211,7 +1211,131 @@ namespace DBL
 
             });
         }
+        public void ProcessB2CResult(int serviceCode, string jsonData)
+        {
+            Task.Run(() =>
+            {
+                var results = JsonConvert.DeserializeObject<B2CResultModel>(jsonData);
+                if (results != null)
+                {
+                    if (results.Result != null)
+                    {
 
+                        B2CResultData rData = new B2CResultData()
+                        {
+                            OrgRef = results.Result.ConversationID,
+                            Receiver = "",
+                            ReceiverReg = "",
+                            ResultCode = results.Result.ResultCode.ToString(),
+                            ResultDescr = results.Result.ResultDesc,
+                            TxnID = results.Result.TransactionID
+                        };
+
+                        if (results.Result.ResultParameters != null)
+                        {
+                            var rParams = results.Result.ResultParameters.ResultParameter.ToList();
+
+                            //----- Get charge
+                            var d = rParams.Where(x => x.Key == "B2CChargesPaidAccountAvailableFunds").FirstOrDefault();
+                            if (d != null)
+                                rData.Charge = Convert.ToDecimal(d.Value);
+
+                            //----- Get transaction amout
+                            d = rParams.Where(x => x.Key == "TransactionAmount").FirstOrDefault();
+                            if (d != null)
+                                rData.TxnAmount = Convert.ToDecimal(d.Value);
+
+                            //----- Get Receiver
+                            d = rParams.Where(x => x.Key == "ReceiverPartyPublicName").FirstOrDefault();
+                            if (d != null)
+                                rData.Receiver = d.Value;
+
+                            //----- Get Receiver Registered
+                            d = rParams.Where(x => x.Key == "B2CRecipientIsRegisteredCustomer").FirstOrDefault();
+                            if (d != null)
+                                rData.ReceiverReg = d.Value;
+
+                            //----- Get utility balance
+                            d = rParams.Where(x => x.Key == "B2CUtilityAccountAvailableFunds").FirstOrDefault();
+                            if (d != null)
+                                rData.UtilityBalance = Convert.ToDecimal(d.Value);
+
+                            //----- Get working balance
+                            d = rParams.Where(x => x.Key == "B2CWorkingAccountAvailableFunds").FirstOrDefault();
+                            if (d != null)
+                                rData.WorkingBalance = Convert.ToDecimal(d.Value);
+
+                        }
+
+                        var resp = db.PaymentRepository.ProcessB2CResult(serviceCode, rData);
+                        db.Reset();
+
+                        if (resp.RespStatus == 0)
+                        {
+                            string url = resp.Data1;
+                            if (!string.IsNullOrEmpty(url))
+                            {
+                                string custName = rData.Receiver;
+                                string custPhone = "";
+                                string[] custData = rData.Receiver.Split('-');
+                                if (custData.Length >= 2)
+                                {
+                                    custPhone = custData[0].Trim();
+                                    custName = rData.Receiver.Replace(custPhone, "").Trim();
+                                }
+
+                                PaymentNotificationData notificationData = new PaymentNotificationData
+                                {
+                                    AccountBalance = rData.WorkingBalance,
+                                    PayAccountNo = "",
+                                    Amount = rData.TxnAmount,
+                                    CustomerName = custName,
+                                    CustomerNo = custPhone,
+                                    ReferenceNo = results.Result.TransactionID,
+                                    SourceRef = resp.Data3
+                                };
+
+                                //---- Update 3rd party application
+                                SendPaymentNotifTo3P(url, notificationData, resp.Data2);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        private void SendPaymentNotifTo3P(string url, PaymentNotificationData notifData, string paymentRef)
+        {
+            //---- Update 3rd party application
+            HttpClient httpClient = new HttpClient(url, HttpClient.RequestType.Post);
+            string jsonData = JsonConvert.SerializeObject(notifData);
+
+            Exception ex;
+            int status = 0;
+            string message = "";
+            var notifResp = httpClient.SendRequest(jsonData, out ex);
+            if (ex != null)
+            {
+                status = 2;
+                message = ex.Message;
+            }
+            else
+            {
+                var respData = JsonConvert.DeserializeObject<ThirdPartyPaymentResponse>(notifResp);
+                if (respData == null)
+                {
+                    status = 2;
+                    message = "Failed to understand the received response!";
+                }
+                else
+                {
+                    status = respData.Status == 0 ? 1 : 2;
+                    message = respData.Message;
+                }
+            }
+
+            //---- Update payment status
+            db.PesaServiceRepository.UpdatePayment3PStatus(paymentRef, status, message);
+        }
         #endregion
     }
 }
