@@ -2,7 +2,15 @@
 <resources>
 	<!-- Base application theme -->
 	<style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-		<item name="android:windowBackground">@drawable/splash_screen</item>
+		<!-- Customize your theme here -->
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+		<item name="colorOnPrimary">@color/colorOnPrimary</item>
+		<item name="colorBackground">@color/colorBackground</item>
 	</style>
 
+	<!-- Splash screen theme -->
+	<style name="MainTheme" parent="Theme.AppCompat.NoActionBar">
+		<item name="android:windowBackground">@drawable/splash_screen</item>
+	</style>
 </resources>

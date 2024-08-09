@@ -85,7 +85,6 @@
 	  <None Remove="Resources\Images\mpesalogo.png" />
 	  <None Remove="Resources\Images\passwordicon.png" />
 	  <None Remove="Resources\Images\phone.png" />
-	  <None Remove="Resources\Images\splashscreen.png" />
 	  <None Remove="Resources\Splash\splash_screen.png" />
 	</ItemGroup>
 
@@ -150,10 +149,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DBL\DBL.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Resources\Splash\" />
 	</ItemGroup>
 
 </Project>
