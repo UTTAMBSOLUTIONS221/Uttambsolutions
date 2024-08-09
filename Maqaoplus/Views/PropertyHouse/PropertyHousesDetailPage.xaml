@@ -16,15 +16,9 @@
         <viewmodels:PropertyHouseDetailViewModel />
     </ContentPage.BindingContext>
 
-    <Grid Padding="10">
-        <!-- ActivityIndicator -->
-        <ActivityIndicator IsRunning="{Binding IsLoading}" 
-                           IsVisible="{Binding IsLoading}" 
-                           HorizontalOptions="Center" 
-                           VerticalOptions="Center" 
-                           Color="#0a506c" />
-
-        <ScrollView IsVisible="{Binding IsDataLoaded}">
+    <AbsoluteLayout Padding="10">
+        <!-- ScrollView with CollectionView -->
+        <ScrollView IsVisible="{Binding IsDataLoaded}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
             <CollectionView x:Name="PropertyHousesCollectionView"
                             ItemsSource="{Binding Rooms}">
                 <CollectionView.ItemTemplate>
@@ -71,5 +65,16 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-    </Grid>
+
+        <!-- ActivityIndicator overlay -->
+        <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                           IsVisible="{Binding IsLoading}" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center" 
+                           Color="#0a506c" 
+                           WidthRequest="100" 
+                           HeightRequest="100" 
+                           AbsoluteLayout.LayoutFlags="All" 
+                           AbsoluteLayout.LayoutBounds="0,0,1,1" />
+    </AbsoluteLayout>
 </ContentPage>

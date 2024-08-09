@@ -22,7 +22,9 @@
                            IsVisible="{Binding IsLoading}" 
                            HorizontalOptions="Center" 
                            VerticalOptions="Center" 
-                           Color="#0a506c" />
+                           Color="#0a506c" 
+                           WidthRequest="100" 
+                           HeightRequest="100"  />
 
         <ScrollView IsVisible="{Binding IsDataLoaded}">
             <CollectionView x:Name="PropertyHousesCollectionView"
