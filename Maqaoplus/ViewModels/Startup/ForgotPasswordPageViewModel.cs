@@ -48,9 +48,9 @@ namespace Maqaoplus.ViewModels.Startup
 
         private async Task ForgotPasswordAsync()
         {
-            if (IsProcessing || !IsValidInput())
-                return;
 
+            if (IsProcessing || string.IsNullOrWhiteSpace(EmailAddress))
+                return;
             try
             {
                 IsProcessing = true;
@@ -83,10 +83,6 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 IsProcessing = false;
             }
-        }
-        private bool IsValidInput()
-        {
-            return !string.IsNullOrWhiteSpace(EmailAddress);
         }
     }
 }
