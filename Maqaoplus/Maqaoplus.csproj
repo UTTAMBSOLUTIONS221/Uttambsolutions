@@ -76,6 +76,8 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\house.png" />
+	  <None Remove="Resources\Images\maqaopluslogo.png" />
+	  <None Remove="Resources\Images\passwordicon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
