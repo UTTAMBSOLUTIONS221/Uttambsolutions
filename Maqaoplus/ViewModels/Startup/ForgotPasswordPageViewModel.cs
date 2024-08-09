@@ -64,7 +64,7 @@ namespace Maqaoplus.ViewModels.Startup
                 var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, request);
                 if (response.StatusCode == 200)
                 {
-                    await Shell.Current.GoToAsync("LoginPage");
+                    await Shell.Current.GoToAsync("//LoginPage");
                 }
                 else if (response.StatusCode == 1)
                 {
