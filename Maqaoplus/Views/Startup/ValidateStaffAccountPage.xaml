@@ -94,6 +94,7 @@
                                     </StackLayout>
                                     <Label Text="Use the Phone number below or change to the one with funds" FontSize="16" Grid.Row="4" Grid.Column="0"  MaxLines="2" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                     <Label Text="{Binding StaffData.Phonenumber}" FontSize="16" Grid.Row="5" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                    <Label Text="{Binding StaffData.Accountnumber}" FontSize="16" Grid.Row="6" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                 </Grid>
                                 <Button BackgroundColor="#0a506c" Command="{Binding LoginCommand}" CornerRadius="8" Text="Continue" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" />
                             </StackLayout>
