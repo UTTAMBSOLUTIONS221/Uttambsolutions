@@ -5,6 +5,7 @@
              x:Class="Maqaoplus.App">
     <Application.Resources>
         <ResourceDictionary>
+            <BitmapImage x:Key="SplashScreen" UriSource="Assets/splash_screen.png" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
