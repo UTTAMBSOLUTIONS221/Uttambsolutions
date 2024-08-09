@@ -1,5 +1,4 @@
 ﻿using DBL.Entities;
-using Maqaoplus.Views.Startup;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -65,15 +64,15 @@ namespace Maqaoplus.ViewModels.Startup
                 var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, request);
                 if (response.StatusCode == 200)
                 {
-                    await Shell.Current.GoToAsync(nameof(LoginPage));
+                    await Shell.Current.GoToAsync("LoginPage");
                 }
-                //else if (response.StatusCode == 1)
-                //{
-                //    await Shell.Current.DisplayAlert("Warning", response.StatusMessage, "OK");
-                //}
+                else if (response.StatusCode == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
+                }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Error", "Database error occured kindly Contact Admin", "OK");
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
                 }
             }
             catch (Exception ex)
