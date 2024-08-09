@@ -3,8 +3,6 @@ using DBL.Enum;
 using DBL.Models;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.PropertyHouse
@@ -61,11 +59,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep2Visible = false;
             _isStep3Visible = false;
             _isStep4Visible = false;
-
-            // Initialize properties
-            OpeningMeter = "0";
-            ClosingMeter = "0";
-            UnitPrice = "200";
         }
 
         public PropertyHouseRoomDetailViewModel(Services.ServiceProvider serviceProvider) : this()
@@ -270,8 +263,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public string UnitPrice { get; set; }
-
         private void UpdateReadOnlyStatus()
         {
             IsOpeningMeterReadOnly = OpeningMeter != "0";
@@ -282,19 +273,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             if (decimal.TryParse(ClosingMeter, out var closing) &&
                 decimal.TryParse(OpeningMeter, out var opening))
             {
-                if (closing >= opening)
-                {
-                    MovedMeter = (closing - opening).ToString();
-                }
-                else
-                {
-                    // Handle the case where closing meter is less than opening meter
-                    MovedMeter = "0";
-                }
-            }
-            else
-            {
-                MovedMeter = "0";
+                MovedMeter = (closing - opening).ToString();
             }
         }
 
@@ -305,17 +284,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 ConsumedAmount = (moved * unitPrice).ToString();
             }
-            else
-            {
-                ConsumedAmount = "0";
-            }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public string UnitPrice { get; set; } = "1"; // Example value, replace with actual
+
         public ObservableCollection<Systempropertyhouseroommeterhistory> MeterReadings
         {
             get => _meterReadings;
@@ -398,6 +370,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 {
                     HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
                     await LoadDropdownData();
+                    // Also ensure meter readings are loaded if applicable
+                    await LoadMeterReadings();
                 }
             }
             catch (Exception ex)
@@ -432,6 +406,24 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
+
+        private async Task LoadMeterReadings()
+        {
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/GetMeterReadingsByRoomId/" + _propertyRoomId, HttpMethod.Get, null);
+
+                if (response != null)
+                {
+                    MeterReadings = JsonConvert.DeserializeObject<ObservableCollection<Systempropertyhouseroommeterhistory>>(response.Data.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
         private async Task SaveRoomDetails()
         {
             IsLoading = true;
