@@ -75,7 +75,7 @@ namespace API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("Getsystemstaffdetaildatabyid{UserId}"), HttpGet]
+        [Route("Getsystemstaffdetaildatabyid/{UserId}"), HttpGet]
         public async Task<Systemdataffdata> Getsystemstaffdetaildatabyid(long UserId)
         {
             return await bl.Getsystemstaffdetaildatabyid(UserId);
