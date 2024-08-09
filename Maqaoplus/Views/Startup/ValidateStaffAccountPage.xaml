@@ -111,7 +111,7 @@
                                     </Label>
                                     <Label Text="Once you recieve the Mpesa Confirmation" FontSize="16" Grid.Row="6" Grid.Column="0" LineBreakMode="WordWrap" HorizontalOptions="Fill"/>
                                 </Grid>
-                                <Button BackgroundColor="#0a506c" Command="{Binding LoginCommand}" CornerRadius="8" Text="Continue" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" />
+                                <Button BackgroundColor="#0a506c" Command="{Binding CheckUserLoginStatusCommand}" CornerRadius="8" Text="Continue" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" />
                             </StackLayout>
                         </StackLayout>
                     </Frame>

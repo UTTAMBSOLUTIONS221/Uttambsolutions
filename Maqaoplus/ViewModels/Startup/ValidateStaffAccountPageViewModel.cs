@@ -14,7 +14,8 @@ namespace Maqaoplus.ViewModels.Startup
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand LoadCurrentUserCommand { get; }
-
+        public ICommand CheckUserLoginStatusCommand { get; }
+        private bool _isProcessing;
         public SystemStaff StaffData
         {
             get => _tenantData;
@@ -46,11 +47,21 @@ namespace Maqaoplus.ViewModels.Startup
                 OnPropertyChanged();
             }
         }
-
+        public bool IsProcessing
+        {
+            get => _isProcessing;
+            set
+            {
+                _isProcessing = value;
+                OnPropertyChanged();
+                ((Command)CheckUserLoginStatusCommand).ChangeCanExecute();
+            }
+        }
         public ValidateStaffAccountPageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserData());
+            CheckUserLoginStatusCommand = new Command(async () => await LoadCurrentUserData(), () => !IsProcessing);
         }
 
         private async Task LoadCurrentUserData()
@@ -76,7 +87,6 @@ namespace Maqaoplus.ViewModels.Startup
                 IsLoading = false;
             }
         }
-
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
