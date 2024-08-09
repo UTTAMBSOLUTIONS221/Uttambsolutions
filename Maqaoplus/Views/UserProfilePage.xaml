@@ -39,7 +39,7 @@
                 <Label Text="Address" FontAttributes="Bold"/>
                 <Entry Placeholder="1234 Street, City, Country" IsReadOnly="True"/>
             </VerticalStackLayout>
-            <Button Text="Edit Profile" BackgroundColor="#0a506c" TextColor="White" CornerRadius="10" HorizontalOptions="Center"/>
+            <Button BackgroundColor="#0a506c" Command="{Binding CheckUserLoginStatusCommand}" CornerRadius="8" Text="Update" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

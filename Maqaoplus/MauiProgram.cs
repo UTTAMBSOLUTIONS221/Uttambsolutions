@@ -4,6 +4,7 @@ using Maqaoplus.ViewModels.Dashboards;
 using Maqaoplus.ViewModels.HouseTenant;
 using Maqaoplus.ViewModels.PropertyHouse;
 using Maqaoplus.ViewModels.Startup;
+using Maqaoplus.Views;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.Startup;
@@ -39,6 +40,7 @@ namespace Maqaoplus
             builder.Services.AddTransient<ValidateStaffAccountPage>();
             builder.Services.AddSingleton<DashboardPage>();
             builder.Services.AddSingleton<UserDashboardPage>();
+            builder.Services.AddSingleton<UserProfilePage>();
             builder.Services.AddSingleton<PropertyHousesDetailPage>();
             builder.Services.AddSingleton<PropertyHousesRoomDetailPage>();
 
@@ -50,6 +52,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<ForgotPasswordPageViewModel>();
             builder.Services.AddSingleton<ValidateStaffAccountPageViewModel>();
             builder.Services.AddSingleton<DashboardPageViewModel>();
+            builder.Services.AddSingleton<UserProfilePageViewModel>();
             builder.Services.AddSingleton<PropertyHouseViewModel>();
             builder.Services.AddSingleton<PropertyHouseDetailViewModel>();
             builder.Services.AddSingleton<Propertyhousetenantviewmodel>();
