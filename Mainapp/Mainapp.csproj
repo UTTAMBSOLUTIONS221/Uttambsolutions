@@ -30,7 +30,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <AndroidResource Remove="Platforms\Android\Resources\drawable\splash_image.png" />
         <AndroidResource Remove="Platforms\Android\Resources\drawable\splash_screen.xml" />
         <AndroidResource Remove="Platforms\Android\Resources\values\styles.xml" />
     </ItemGroup>
