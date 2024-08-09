@@ -9,6 +9,7 @@ namespace DBL.Entities
         public string? Firstname { get; set; }
         [Required(ErrorMessage = "Lastname is Required!")]
         public string? Lastname { get; set; }
+        public string? Fullname { get; set; }
         [Required(ErrorMessage = "Phonenumber is Required!")]
         [DataType(DataType.PhoneNumber)]
         public string? Phonenumber { get; set; }
@@ -46,6 +47,7 @@ namespace DBL.Entities
         public string? Extra5 { get; set; }
         public int Createdby { get; set; }
         public int Modifiedby { get; set; }
+        public int Accountnumber { get; set; }
         public decimal Subscriptionamount { get; set; } = 1;
         public DateTime? Lastlogin { get; set; }
         public DateTime Datemodified { get; set; }

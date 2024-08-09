@@ -78,25 +78,24 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Spacing="5" HorizontalOptions="FillAndExpand">
-                                        <Label Text="Dear" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                        <Label Text="{Binding StaffData.Firstname}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                        <Label Text="{Binding StaffData.Lastname}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                        <Label Text="Dear" FontSize="18" FontAttributes="Bold" TextColor="Grey" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                        <Label Text="{Binding StaffData.Firstname}" FontSize="16" TextColor="#0a506c" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                        <Label Text="{Binding StaffData.Lastname}" FontSize="16" TextColor="#0a506c" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                     </StackLayout>
                                     <Label Text="You need to activate your account through" FontSize="16" Grid.Row="1" Grid.Column="0" MaxLines="2" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                    <Image Source="mpesalogo.png" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center"/>
-
+                                    <Image Source="mpesalogo.png" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center" MaximumHeightRequest="100"/>
                                     <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Spacing="5" HorizontalOptions="FillAndExpand">
                                         <Label Text="You subscription amount is Ksh." FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                         <Label Text="{Binding StaffData.Subscriptionamount}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                     </StackLayout>
-                                    <Label Text="{Binding StaffData.Emailaddress}" FontSize="16" Grid.Row="4" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                    <Label Text="Phone:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
-                                    <Label Text="{Binding StaffData.Phonenumber}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                    <Label Text="My Wallet:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                                    <Label Text="{Binding StaffData.Walletbalance,StringFormat='{0:#,##0.00}'}" TextColor="Red" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <Label Text="Use the Phone number below or change to the one with funds" FontSize="16" Grid.Row="4" Grid.Column="0"  MaxLines="2" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                    <Label Text="{Binding StaffData.Phonenumber}" FontSize="16" Grid.Row="5" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                 </Grid>
+                                <Button BackgroundColor="#0a506c" Command="{Binding LoginCommand}" CornerRadius="8" Text="Continue" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" />
                             </StackLayout>
                         </StackLayout>
                     </Frame>
