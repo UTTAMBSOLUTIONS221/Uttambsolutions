@@ -73,5 +73,12 @@ namespace API.Controllers
         {
             return await bl.ValidateSystemForgotpasswordStaff(Model.Emailaddress);
         }
+
+        [AllowAnonymous]
+        [Route("Getsystemstaffdetaildatabyid{UserId}"), HttpGet]
+        public async Task<Systemdataffdata> Getsystemstaffdetaildatabyid(long UserId)
+        {
+            return await bl.Getsystemstaffdetaildatabyid(UserId);
+        }
     }
 }

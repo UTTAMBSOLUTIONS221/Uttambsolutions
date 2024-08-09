@@ -1,4 +1,4 @@
-﻿using DBL.Models;
+﻿using DBL.Entities;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,7 +9,7 @@ namespace Maqaoplus.ViewModels.Startup
     public class ValidateStaffAccountPageViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
-        private PropertyHouseRoomTenantData _tenantData;
+        private SystemStaff _tenantData;
         private long _userId;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -20,7 +20,7 @@ namespace Maqaoplus.ViewModels.Startup
             _userId = userId;
             LoadCurrentUserCommand.Execute(null);
         }
-        public PropertyHouseRoomTenantData StaffData
+        public SystemStaff StaffData
         {
             get => _tenantData;
             set
@@ -70,11 +70,10 @@ namespace Maqaoplus.ViewModels.Startup
 
             try
             {
-                //var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + 2, HttpMethod.Get, null);
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffdetaildatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null)
                 {
-                    StaffData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
+                    StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
                 }
                 IsDataLoaded = true;
             }
