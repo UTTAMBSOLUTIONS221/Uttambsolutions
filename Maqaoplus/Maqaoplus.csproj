@@ -27,8 +27,8 @@
 		<ApplicationId>com.uttambsolutions.maqaoplus</ApplicationId>
 
 		<!-- Versions -->
-        <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
+       <AndroidVersionCode>2</AndroidVersionCode> 
+       <AndroidVersionName>1.0.0</AndroidVersionName> 
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
@@ -73,6 +73,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Platforms\Android\Resources\values\strings.xml" />
 	  <AndroidResource Remove="Platforms\Android\Resources\values\styles.xml" />
 	</ItemGroup>
 
