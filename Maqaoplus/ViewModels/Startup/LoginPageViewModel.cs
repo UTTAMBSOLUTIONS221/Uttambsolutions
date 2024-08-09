@@ -1,7 +1,6 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using Maqaoplus.Constants;
-using Maqaoplus.Services;
 using Maqaoplus.Views.Startup;
 using Newtonsoft.Json;
 using System.ComponentModel;
@@ -94,8 +93,9 @@ namespace Maqaoplus.ViewModels.Startup
                     }
                     else if (response.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
                     {
-                        NavigationService.UserModel = response.Usermodel;
-                        await Shell.Current.GoToAsync(nameof(ValidateStaffAccountPage));
+                        var encodedStaffId = Uri.EscapeDataString(response.Usermodel.Userid.ToString());
+                        System.Diagnostics.Debug.WriteLine($"Navigating to ValidateStaffAccountPage with UserId={encodedStaffId}");
+                        await Shell.Current.GoToAsync($"ValidateStaffAccountPage?UserId={encodedStaffId}");
                     }
                     else
                     {
