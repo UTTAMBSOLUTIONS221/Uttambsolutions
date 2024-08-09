@@ -10,16 +10,11 @@ namespace Maqaoplus.ViewModels.Startup
     {
         private readonly Services.ServiceProvider _serviceProvider;
         private SystemStaff _tenantData;
-        private long _userId;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand LoadCurrentUserCommand { get; }
-        public void SetUserId(long userId)
-        {
-            _userId = userId;
-            LoadCurrentUserCommand.Execute(null);
-        }
+
         public SystemStaff StaffData
         {
             get => _tenantData;
@@ -52,15 +47,10 @@ namespace Maqaoplus.ViewModels.Startup
             }
         }
 
-        public ValidateStaffAccountPageViewModel()
-        {
-            LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserData());
-        }
-
-        // Constructor with parameter
-        public ValidateStaffAccountPageViewModel(Services.ServiceProvider serviceProvider) : this()
+        public ValidateStaffAccountPageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserData());
         }
 
         private async Task LoadCurrentUserData()
