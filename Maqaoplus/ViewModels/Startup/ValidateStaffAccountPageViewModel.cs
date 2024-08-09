@@ -1,4 +1,5 @@
 ﻿using DBL.Entities;
+using DBL.Enum;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -61,7 +62,7 @@ namespace Maqaoplus.ViewModels.Startup
         {
             _serviceProvider = serviceProvider;
             LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserData());
-            CheckUserLoginStatusCommand = new Command(async () => await LoadCurrentUserData(), () => !IsProcessing);
+            CheckUserLoginStatusCommand = new Command(async () => await CheckUserLoginStatusAsync(), () => !IsProcessing);
         }
 
         private async Task LoadCurrentUserData()
@@ -75,6 +76,34 @@ namespace Maqaoplus.ViewModels.Startup
                 if (response != null)
                 {
                     StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+                }
+                IsDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        private async Task CheckUserLoginStatusAsync()
+        {
+            IsLoading = true;
+            IsDataLoaded = false;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffdetaildatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null)
+                {
+                    StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+                    if (StaffData.Loginstatus == (int)UserLoginStatus.Ok)
+                    {
+                        await Shell.Current.GoToAsync("//LoginPage");
+                    }
                 }
                 IsDataLoaded = true;
             }

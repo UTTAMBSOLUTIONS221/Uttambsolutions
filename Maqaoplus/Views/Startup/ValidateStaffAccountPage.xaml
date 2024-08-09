@@ -82,21 +82,29 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Spacing="5" HorizontalOptions="FillAndExpand">
-                                        <Label Text="Dear" FontSize="18" FontAttributes="Bold" TextColor="Grey" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                        <Label Text="{Binding StaffData.Fullname}" FontSize="16" TextColor="#0a506c" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                    </StackLayout>
+                                    <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="0" Grid.Column="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Greetings " />
+                                                <Span Text="{Binding StaffData.Fullname}" FontAttributes="Bold" FontSize="18" TextColor="#0a506c" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
                                     <Label Text="You need to activate your account through" FontSize="16" Grid.Row="1" Grid.Column="0" MaxLines="2" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                     <Image Source="mpesalogo.png" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center" MaximumHeightRequest="100"/>
-                                    <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Spacing="5" HorizontalOptions="FillAndExpand">
-                                        <Label Text="You subscription amount is Ksh." FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                        <Label Text="{Binding StaffData.Subscriptionamount}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                    </StackLayout>
+                                    <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="3" Grid.Column="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="You activation amount is Ksh." />
+                                                <Span Text="{Binding StaffData.Subscriptionamount}" FontAttributes="Bold" FontSize="16" TextColor="#0a506c" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
                                     <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" Grid.Column="0">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Go to Lipa na mpesa paybill " />
-                                                <Span Text="{Binding StaffData.Accountnumber}" FontAttributes="Bold" FontSize="22" TextColor="#0a506c" />
+                                                <Span Text="{Binding StaffData.Mpesapaybill}" FontAttributes="Bold" FontSize="22" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>

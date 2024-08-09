@@ -47,6 +47,7 @@ namespace DBL.Entities
         public string? Extra5 { get; set; }
         public int Createdby { get; set; }
         public int Modifiedby { get; set; }
+        public int Mpesapaybill { get; set; }
         public int Accountnumber { get; set; }
         public decimal Subscriptionamount { get; set; } = 1;
         public DateTime? Lastlogin { get; set; }
