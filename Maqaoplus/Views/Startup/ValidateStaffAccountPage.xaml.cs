@@ -10,4 +10,12 @@ public partial class ValidateStaffAccountPage : ContentPage
         _viewModel = viewModel;
         BindingContext = _viewModel;
     }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is ValidateStaffAccountPageViewModel viewModel && viewModel.LoadCurrentUserCommand.CanExecute(null))
+        {
+            viewModel.LoadCurrentUserCommand.Execute(null);
+        }
+    }
 }
