@@ -6,7 +6,7 @@
              Title="Login"
              BackgroundColor="#F4F4F4">
 
-    <Grid Padding="20">
+    <Grid Padding="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -19,10 +19,10 @@
         </VerticalStackLayout>
 
         <!-- Main Content Layer -->
-        <VerticalStackLayout Grid.Row="1" Spacing="8" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" WidthRequest="350">
+        <VerticalStackLayout Grid.Row="1" Spacing="7" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" WidthRequest="350">
 
             <!-- Username Entry -->
-            <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="8" Margin="0,8" HasShadow="True">
+            <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,8" HasShadow="True">
                 <HorizontalStackLayout Spacing="3">
                     <Image Source="user.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
                     <Entry Placeholder="Username" ReturnType="Next" Text="{Binding UserName}" TextColor="Black" FontSize="18" PlaceholderColor="#888888"/>
@@ -30,7 +30,7 @@
             </Frame>
 
             <!-- Password Entry -->
-            <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="8" Margin="0,8" HasShadow="True">
+            <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,8" HasShadow="True">
                 <HorizontalStackLayout Spacing="3">
                     <Image Source="passwordicon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
                     <Entry IsPassword="True" Placeholder="Password" ReturnType="Done" Text="{Binding Password}" TextColor="Black" FontSize="18" PlaceholderColor="#888888"/>
