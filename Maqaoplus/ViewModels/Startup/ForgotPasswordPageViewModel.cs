@@ -73,7 +73,7 @@ namespace Maqaoplus.ViewModels.Startup
                 {
                     Emailaddress = UserName,
                 };
-                var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Registerstaff", HttpMethod.Post, request);
+                var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, request);
                 if (response.StatusCode == 200)
                 {
                     await Shell.Current.GoToAsync(nameof(LoginPage));

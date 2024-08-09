@@ -1,4 +1,5 @@
 ﻿using DBL.Entities;
+using DBL.Enum;
 using Maqaoplus.Constants;
 using Maqaoplus.Views.Startup;
 using Newtonsoft.Json;
@@ -86,13 +87,23 @@ namespace Maqaoplus.ViewModels.Startup
 
                 if (response.RespStatus == 200)
                 {
-                    // Store user details locally (e.g., using Preferences)
-                    string userDetailStr = JsonConvert.SerializeObject(response);
-                    Preferences.Set(nameof(App.UserDetails), userDetailStr);
-                    App.UserDetails = response;
-
-                    // Example additional logic after successful login
-                    await AppConstant.AddFlyoutMenusDetails();
+                    if (response.Usermodel.Updateprofile)
+                    {
+                        await Shell.Current.GoToAsync(nameof(LoginPage));
+                    }
+                    else if (response.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
+                    {
+                        await Shell.Current.GoToAsync(nameof(ValidateStaffAccountPage));
+                    }
+                    else
+                    {
+                        // Store user details locally (e.g., using Preferences)
+                        string userDetailStr = JsonConvert.SerializeObject(response);
+                        Preferences.Set(nameof(App.UserDetails), userDetailStr);
+                        App.UserDetails = response;
+                        // Example additional logic after successful login
+                        await AppConstant.AddFlyoutMenusDetails();
+                    }
                 }
                 else
                 {
