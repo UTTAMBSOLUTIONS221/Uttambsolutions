@@ -33,6 +33,7 @@ namespace Maqaoplus
 
             // Views
             builder.Services.AddSingleton<LoadingPage>();
+            builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<ForgotPasswordPage>();
             builder.Services.AddSingleton<DashboardPage>();
