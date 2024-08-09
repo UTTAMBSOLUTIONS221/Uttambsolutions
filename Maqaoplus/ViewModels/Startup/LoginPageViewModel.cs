@@ -87,6 +87,7 @@ namespace Maqaoplus.ViewModels.Startup
 
                 if (response.RespStatus == 200)
                 {
+                    App.UserDetails = response;
                     if (response.Usermodel.Updateprofile)
                     {
                         await Shell.Current.GoToAsync(nameof(LoginPage));
@@ -102,7 +103,7 @@ namespace Maqaoplus.ViewModels.Startup
                         // Store user details locally (e.g., using Preferences)
                         string userDetailStr = JsonConvert.SerializeObject(response);
                         Preferences.Set(nameof(App.UserDetails), userDetailStr);
-                        App.UserDetails = response;
+
                         // Example additional logic after successful login
                         await AppConstant.AddFlyoutMenusDetails();
                     }
