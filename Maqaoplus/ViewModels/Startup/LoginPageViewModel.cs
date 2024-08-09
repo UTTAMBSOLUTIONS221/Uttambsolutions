@@ -1,6 +1,7 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using Maqaoplus.Constants;
+using Maqaoplus.Services;
 using Maqaoplus.Views.Startup;
 using Newtonsoft.Json;
 using System.ComponentModel;
@@ -93,6 +94,7 @@ namespace Maqaoplus.ViewModels.Startup
                     }
                     else if (response.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
                     {
+                        NavigationService.UserModel = response.Usermodel;
                         await Shell.Current.GoToAsync(nameof(ValidateStaffAccountPage));
                     }
                     else
