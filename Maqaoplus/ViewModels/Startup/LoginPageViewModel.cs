@@ -1,6 +1,7 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using Maqaoplus.Constants;
+using Maqaoplus.Views;
 using Maqaoplus.Views.Startup;
 using Newtonsoft.Json;
 using System.ComponentModel;
@@ -90,7 +91,7 @@ namespace Maqaoplus.ViewModels.Startup
                     App.UserDetails = response;
                     if (response.Usermodel.Updateprofile)
                     {
-                        await Shell.Current.GoToAsync(nameof(LoginPage));
+                        await Shell.Current.GoToAsync(nameof(UserProfilePage));
                     }
                     else if (response.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
                     {
