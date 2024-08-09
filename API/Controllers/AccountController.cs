@@ -66,5 +66,12 @@ namespace API.Controllers
         {
             return await bl.Registersystemstaffdata(Model);
         }
+
+        [AllowAnonymous]
+        [Route("Forgotstaffpassword"), HttpPost]
+        public async Task<Genericmodel> Forgotstaffpassword(Forgotpassword Model)
+        {
+            return await bl.ValidateSystemForgotpasswordStaff(Model.Emailaddress);
+        }
     }
 }
