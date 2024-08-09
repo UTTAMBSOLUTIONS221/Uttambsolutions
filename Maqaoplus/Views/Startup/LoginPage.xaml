@@ -50,7 +50,7 @@
             <!-- Register Now -->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="3" Margin="0,15,0,0">
                 <Label Text="Not a member?" TextColor="#888888" FontSize="17" />
-                <Label Text="Register now" TextColor="#0a506c" FontSize="17" FontAttributes="Bold" FontFamily="Arial">
+                <Label Text="Register now" TextColor="#0a506c" FontSize="17" FontFamily="Arial">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding RegisterCommand}" />
                     </Label.GestureRecognizers>
