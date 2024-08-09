@@ -22,6 +22,10 @@ namespace Maqaoplus
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            builder.ConfigureMauiHandlers(handlers =>
+            {
+                handlers.AddHandler(typeof(ISplashScreen), typeof(SplashScreenHandler));
+            });
 
             string apiUrl = "https://mainapi.uttambsolutions.com";
             builder.Services.AddSingleton(new DevHttpConnectionHelper(apiUrl));

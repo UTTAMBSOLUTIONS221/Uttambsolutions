@@ -8,4 +8,8 @@
 		<item name="colorOnPrimary">@color/colorOnPrimary</item>
 		<item name="colorBackground">@color/colorBackground</item>
 	</style>
+	<style name="MainTheme" parent="Theme.Maui.Splash">
+		<item name="android:windowBackground">@drawable/splash_screen</item>
+	</style>
+
 </resources>
