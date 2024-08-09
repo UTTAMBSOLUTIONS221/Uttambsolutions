@@ -22,9 +22,6 @@ namespace Maqaoplus.ViewModels.Startup
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
-
-
         public string EmailAddress
         {
             get => _emailAddress;
