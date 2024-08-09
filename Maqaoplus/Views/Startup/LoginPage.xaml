@@ -24,8 +24,8 @@
             <!-- Username Entry -->
             <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,8" HasShadow="True">
                 <HorizontalStackLayout Spacing="3">
-                    <Image Source="user.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
-                    <Entry Placeholder="Username" ReturnType="Next" Text="{Binding UserName}" TextColor="Black" FontSize="18" PlaceholderColor="#888888"/>
+                    <Image Source="email.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
+                    <Entry Placeholder="Email Address" ReturnType="Next" Text="{Binding UserName}" TextColor="Black" FontSize="18" PlaceholderColor="#888888"/>
                 </HorizontalStackLayout>
             </Frame>
 
