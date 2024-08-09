@@ -83,8 +83,7 @@
                                     </Grid.RowDefinitions>
                                     <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Spacing="5" HorizontalOptions="FillAndExpand">
                                         <Label Text="Dear" FontSize="18" FontAttributes="Bold" TextColor="Grey" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                        <Label Text="{Binding StaffData.Firstname}" FontSize="16" TextColor="#0a506c" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                        <Label Text="{Binding StaffData.Lastname}" FontSize="16" TextColor="#0a506c" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                        <Label Text="{Binding StaffData.Fullname}" FontSize="16" TextColor="#0a506c" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                     </StackLayout>
                                     <Label Text="You need to activate your account through" FontSize="16" Grid.Row="1" Grid.Column="0" MaxLines="2" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                     <Image Source="mpesalogo.png" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center" MaximumHeightRequest="100"/>
