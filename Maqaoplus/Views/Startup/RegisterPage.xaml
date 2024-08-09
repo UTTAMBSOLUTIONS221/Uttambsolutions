@@ -2,70 +2,186 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.Startup.RegisterPage"
-             Title="Register">
+             Title="Register"
+             BackgroundColor="#F4F4F4">
 
     <ContentPage.Content>
-        <ScrollView Padding="20">
-            <VerticalStackLayout Spacing="15">
-                <Label Text="Sign up to start interaction"
-                       FontSize="24"
-                       HorizontalOptions="Center"
-                       TextColor="#0a506c"
-                       FontAttributes="Bold" />
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <Frame BackgroundColor="White"
-                       BorderColor="Transparent"
-                       CornerRadius="8"
-                       HasShadow="True"
-                       Padding="10"
-                       Margin="0,10">
-                    <VerticalStackLayout Spacing="10">
-                        <Entry Placeholder="First Name"
-                               ReturnType="Next"
-                               Text="{Binding FirstName}"
-                               TextColor="Black"
-                               FontSize="16" />
-                        <Entry Placeholder="Last Name"
-                               ReturnType="Next"
-                               Text="{Binding LastName}"
-                               TextColor="Black"
-                               FontSize="16" />
-                        <Entry Placeholder="Email Address"
-                               Text="{Binding EmailAddress}"
-                               Keyboard="Email"
-                               FontSize="16"
-                               TextColor="Black" />
-                        <Entry Placeholder="Phone Number"
-                               Text="{Binding PhoneNumber}"
-                               Keyboard="Telephone"
-                               FontSize="16"
-                               TextColor="Black" />
-                        <Entry Placeholder="Password"
-                               Text="{Binding Password}"
-                               IsPassword="True"
-                               FontSize="16"
-                               TextColor="Black" />
-                        <Entry Placeholder="Confirm Password"
-                               Text="{Binding ConfirmPassword}"
-                               IsPassword="True"
-                               FontSize="16"
-                               TextColor="Black" />
-                    </VerticalStackLayout>
-                </Frame>
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Sign up to start interaction"
+                           FontSize="26"
+                           HorizontalOptions="Center"
+                           TextColor="#0a506c"
+                           FontAttributes="Bold" />
 
-                <Button BackgroundColor="#0a506c"
-                        Command="{Binding SignUpCommand}"
-                        CornerRadius="8"
-                        Text="Register"
-                        TextColor="White"
-                        FontSize="18"
-                        HeightRequest="50" />
+                    <Frame BackgroundColor="White"
+                           BorderColor="#e0e0e0"
+                           CornerRadius="10"
+                           HasShadow="True"
+                           Padding="15"
+                           Margin="0,10">
+                        <VerticalStackLayout Spacing="12">
 
-                <Label Text="* Required fields"
-                       FontSize="12"
-                       HorizontalOptions="Center"
-                       TextColor="Gray" />
-            </VerticalStackLayout>
-        </ScrollView>
+                            <!-- First Name Entry with Frame and Image -->
+                            <Frame BackgroundColor="White" 
+                                   BorderColor="#e0e0e0" 
+                                   CornerRadius="10" 
+                                   Padding="8" 
+                                   Margin="0,8" 
+                                   HasShadow="True">
+                                <HorizontalStackLayout Spacing="3">
+                                    <Image Source="user.png" 
+                                           WidthRequest="20" 
+                                           HeightRequest="20" 
+                                           VerticalOptions="Center" />
+                                    <Entry Placeholder="First Name"
+                                           ReturnType="Next"
+                                           Text="{Binding FirstName}"
+                                           TextColor="Black"
+                                           FontSize="16" 
+                                           PlaceholderColor="#888888"/>
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                            <!-- Last Name Entry with Frame and Image -->
+                            <Frame BackgroundColor="White" 
+                                   BorderColor="#e0e0e0" 
+                                   CornerRadius="10" 
+                                   Padding="8" 
+                                   Margin="0,8" 
+                                   HasShadow="True">
+                                <HorizontalStackLayout Spacing="3">
+                                    <Image Source="user.png" 
+                                           WidthRequest="20" 
+                                           HeightRequest="20" 
+                                           VerticalOptions="Center" />
+                                    <Entry Placeholder="Last Name"
+                                           ReturnType="Next"
+                                           Text="{Binding LastName}"
+                                           TextColor="Black"
+                                           FontSize="16"
+                                           PlaceholderColor="#888888"/>
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                            <!-- Email Address Entry with Frame and Image -->
+                            <Frame BackgroundColor="White" 
+                                   BorderColor="#e0e0e0" 
+                                   CornerRadius="10" 
+                                   Padding="8" 
+                                   Margin="0,8" 
+                                   HasShadow="True">
+                                <HorizontalStackLayout Spacing="3">
+                                    <Image Source="email.png" 
+                                           WidthRequest="20" 
+                                           HeightRequest="20" 
+                                           VerticalOptions="Center" />
+                                    <Entry Placeholder="Email Address"
+                                           Text="{Binding EmailAddress}"
+                                           Keyboard="Email"
+                                           FontSize="16"
+                                           TextColor="Black"
+                                           PlaceholderColor="#888888"/>
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                            <!-- Phone Number Entry with Frame and Image -->
+                            <Frame BackgroundColor="White" 
+                                   BorderColor="#e0e0e0" 
+                                   CornerRadius="10" 
+                                   Padding="8" 
+                                   Margin="0,8" 
+                                   HasShadow="True">
+                                <HorizontalStackLayout Spacing="3">
+                                    <Image Source="phone.png" 
+                                           WidthRequest="20" 
+                                           HeightRequest="20" 
+                                           VerticalOptions="Center" />
+                                    <Entry Placeholder="Phone Number"
+                                           Text="{Binding PhoneNumber}"
+                                           Keyboard="Telephone"
+                                           FontSize="16"
+                                           TextColor="Black"
+                                           PlaceholderColor="#888888"/>
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                            <!-- Password Entry with Frame and Image -->
+                            <Frame BackgroundColor="White" 
+                                   BorderColor="#e0e0e0" 
+                                   CornerRadius="10" 
+                                   Padding="8" 
+                                   Margin="0,8" 
+                                   HasShadow="True">
+                                <HorizontalStackLayout Spacing="3">
+                                    <Image Source="passwordicon.png" 
+                                           WidthRequest="20" 
+                                           HeightRequest="20" 
+                                           VerticalOptions="Center" />
+                                    <Entry IsPassword="True" 
+                                           Placeholder="Password" 
+                                           ReturnType="Done" 
+                                           Text="{Binding Password}" 
+                                           TextColor="Black" 
+                                           FontSize="16" 
+                                           PlaceholderColor="#888888"/>
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                            <!-- Confirm Password Entry with Frame and Image -->
+                            <Frame BackgroundColor="White" 
+                                   BorderColor="#e0e0e0" 
+                                   CornerRadius="10" 
+                                   Padding="8" 
+                                   Margin="0,8" 
+                                   HasShadow="True">
+                                <HorizontalStackLayout Spacing="3">
+                                    <Image Source="passwordicon.png" 
+                                           WidthRequest="20" 
+                                           HeightRequest="20" 
+                                           VerticalOptions="Center" />
+                                    <Entry Placeholder="Confirm Password"
+                                           Text="{Binding ConfirmPassword}"
+                                           IsPassword="True"
+                                           FontSize="16"
+                                           TextColor="Black"
+                                           PlaceholderColor="#888888"/>
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Button BackgroundColor="#0a506c"
+                            Command="{Binding SignUpCommand}"
+                            CornerRadius="8"
+                            Text="Register"
+                            TextColor="White"
+                            FontSize="18"
+                            HeightRequest="50"
+                            FontAttributes="Bold" />
+
+                    <Label Text="* Required fields"
+                           FontSize="12"
+                           HorizontalOptions="Center"
+                           TextColor="Gray" />
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Footer -->
+            <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="End">
+                <Label Text="© 2024 Maqaoplus" 
+                       HorizontalOptions="Center" 
+                       TextColor="#0a506c" 
+                       TextTransform="Uppercase" 
+                       FontAttributes="Bold"/>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
