@@ -73,6 +73,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Platforms\Android\Resources\drawable\splash_screen.xml" />
 	  <AndroidResource Remove="Platforms\Android\Resources\values\strings.xml" />
 	  <AndroidResource Remove="Platforms\Android\Resources\values\styles.xml" />
 	</ItemGroup>
@@ -83,7 +84,7 @@
 	  <None Remove="Resources\Images\maqaopluslogo.png" />
 	  <None Remove="Resources\Images\passwordicon.png" />
 	  <None Remove="Resources\Images\phone.png" />
-	  <None Remove="Resources\Images\splash_screen.png" />
+	  <None Remove="Resources\Images\splashscreen.png" />
 	  <None Remove="Resources\Splash\splash_screen.png" />
 	</ItemGroup>
 
@@ -148,7 +149,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Platforms\Android\Resources\drawable\" />
 	  <Folder Include="Resources\Splash\" />
 	</ItemGroup>
 
