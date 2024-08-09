@@ -80,6 +80,7 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Spacing="5" HorizontalOptions="FillAndExpand">
                                         <Label Text="Dear" FontSize="18" FontAttributes="Bold" TextColor="Grey" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
@@ -91,9 +92,24 @@
                                         <Label Text="You subscription amount is Ksh." FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                         <Label Text="{Binding StaffData.Subscriptionamount}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                     </StackLayout>
-                                    <Label Text="Use the Phone number below or change to the one with funds" FontSize="16" Grid.Row="4" Grid.Column="0"  MaxLines="2" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                    <Label Text="{Binding StaffData.Phonenumber}" FontSize="16" Grid.Row="5" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                    <Label Text="{Binding StaffData.Accountnumber}" FontSize="16" Grid.Row="6" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                    <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" Grid.Column="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Go to Lipa na mpesa paybill " />
+                                                <Span Text="{Binding StaffData.Accountnumber}" FontAttributes="Bold" FontSize="22" TextColor="#0a506c" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="5" Grid.Column="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="and use " />
+                                                <Span Text="{Binding StaffData.Accountnumber}" FontAttributes="Bold" FontSize="22" TextColor="#0a506c" />
+                                                <Span Text=" as account number" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="Once you recieve the Mpesa Confirmation" FontSize="16" Grid.Row="6" Grid.Column="0" LineBreakMode="WordWrap" HorizontalOptions="Fill"/>
                                 </Grid>
                                 <Button BackgroundColor="#0a506c" Command="{Binding LoginCommand}" CornerRadius="8" Text="Continue" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" />
                             </StackLayout>
