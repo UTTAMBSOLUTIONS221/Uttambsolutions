@@ -18,6 +18,7 @@ namespace Maqaoplus.ViewModels.Startup
             _serviceProvider = serviceProvider;
             LoginCommand = new Command(async () => await LoginAsync(), () => !IsProcessing);
             RegisterCommand = new Command(OnRegister);
+            ForgotPasswordCommand = new Command(OnForgotPassword);
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -64,6 +65,7 @@ namespace Maqaoplus.ViewModels.Startup
 
         public ICommand LoginCommand { get; }
         public ICommand RegisterCommand { get; }
+        public ICommand ForgotPasswordCommand { get; }
 
         private async Task LoginAsync()
         {
@@ -109,6 +111,10 @@ namespace Maqaoplus.ViewModels.Startup
         private async void OnRegister()
         {
             await Shell.Current.GoToAsync(nameof(RegisterPage));
+        }
+        private async void OnForgotPassword()
+        {
+            await Shell.Current.GoToAsync(nameof(ForgotPasswordPage));
         }
     }
 }
