@@ -7,41 +7,30 @@ namespace Maqaoplus.ViewModels.Startup
 {
     public class ForgotPasswordPageViewModel : INotifyPropertyChanged
     {
+        private string _emailAddress;
+        private bool _isProcessing;
+
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
 
         public ForgotPasswordPageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            ForgotPasswordCommand = new Command(async () => await ForgotPasswordAsync(), () => !IsProcessing);
         }
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private string _userName;
-        private string _password;
-        private bool _isProcessing;
 
-        public string UserName
+
+
+        public string EmailAddress
         {
-            get => _userName;
+            get => _emailAddress;
             set
             {
-                _userName = value;
-                OnPropertyChanged();
-                ((Command)ForgotPasswordCommand).ChangeCanExecute();
-            }
-        }
-
-        public string Password
-        {
-            get => _password;
-            set
-            {
-                _password = value;
+                _emailAddress = value;
                 OnPropertyChanged();
                 ((Command)ForgotPasswordCommand).ChangeCanExecute();
             }
@@ -58,11 +47,12 @@ namespace Maqaoplus.ViewModels.Startup
             }
         }
 
-        public ICommand ForgotPasswordCommand { get; }
+        public ICommand ForgotPasswordCommand => new Command(async () => await ForgotPasswordAsync(), () => !IsProcessing);
+
 
         private async Task ForgotPasswordAsync()
         {
-            if (IsProcessing || string.IsNullOrWhiteSpace(UserName))
+            if (IsProcessing || !IsValidInput())
                 return;
 
             try
@@ -71,26 +61,36 @@ namespace Maqaoplus.ViewModels.Startup
 
                 var request = new Forgotpassword
                 {
-                    Emailaddress = UserName,
+                    Emailaddress = EmailAddress
                 };
+
+                // Call your registration service here
                 var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, request);
                 if (response.StatusCode == 200)
                 {
                     await Shell.Current.GoToAsync(nameof(LoginPage));
                 }
+                //else if (response.StatusCode == 1)
+                //{
+                //    await Shell.Current.DisplayAlert("Warning", response.StatusMessage, "OK");
+                //}
                 else
                 {
-                    await Shell.Current.DisplayAlert("Uttamb Solutions", response.StatusMessage, "OK");
+                    await Shell.Current.DisplayAlert("Error", "Database error occured kindly Contact Admin", "OK");
                 }
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Uttamb Solutions", ex.Message, "OK");
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {
                 IsProcessing = false;
             }
+        }
+        private bool IsValidInput()
+        {
+            return !string.IsNullOrWhiteSpace(EmailAddress);
         }
     }
 }
