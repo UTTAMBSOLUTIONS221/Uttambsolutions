@@ -87,7 +87,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\Splash\splash_screen.png" />
+	  <MauiImage Include="Platforms\Android\Resources\drawable\splash_screen.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -148,6 +148,10 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DBL\DBL.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resources\Splash\" />
 	</ItemGroup>
 
 </Project>
