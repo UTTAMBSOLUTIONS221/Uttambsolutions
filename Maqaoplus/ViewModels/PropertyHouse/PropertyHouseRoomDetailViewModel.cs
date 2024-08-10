@@ -222,10 +222,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 _openingMeter = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsOpeningMeterReadOnly));
                 CalculateMeterValues();
             }
         }
-
+        public bool IsOpeningMeterReadOnly => OpeningMeter > 0;
         public decimal ClosingMeter
         {
             get => _closingMeter;
@@ -260,20 +261,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public bool IsOpeningMeterReadOnly
-        {
-            get => _isOpeningMeterReadOnly;
-            set
-            {
-                _isOpeningMeterReadOnly = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private void UpdateReadOnlyStatus()
-        {
-            IsOpeningMeterReadOnly = HouseroomData.Openingmeter != 0;
-        }
 
         private void CalculateMeterValues()
         {

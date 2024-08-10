@@ -141,7 +141,7 @@
 
                     <!-- New Reading Input Row -->
                     <Entry Grid.Row="1" Grid.Column="0" Placeholder="Enter Meter Number" Text="{Binding HouseroomData.Systempropertyhouseroommeternumber}" />
-                    <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Opening Meter" Text="{Binding HouseroomData.Openingmeter, Mode=TwoWay}" IsReadOnly="{Binding IsOpeningMeterReadOnly}" />
+                    <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Opening Meter" Text="{Binding HouseroomData.Openingmeter, Mode=TwoWay}" IsReadOnly="{Binding  Path=IsOpeningMeterReadOnly}" />
                     <Entry Grid.Row="1" Grid.Column="2" Placeholder="Enter Closing Meter" Text="{Binding ClosingMeter, Mode=TwoWay}" />
                     <Entry Grid.Row="1" Grid.Column="3" Placeholder="Moved Meter" Text="{Binding MovedMeter}" IsReadOnly="True" />
                     <Entry Grid.Row="1" Grid.Column="4" Placeholder="Consumed Amount" Text="{Binding ConsumedAmount}" IsReadOnly="True" />

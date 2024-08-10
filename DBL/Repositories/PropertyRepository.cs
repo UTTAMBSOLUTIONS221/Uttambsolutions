@@ -209,6 +209,7 @@ namespace DBL.Repositories
                         Movedmeter = Convert.ToDecimal(roomResponseJson["Movedmeter"]),
                         Closingmeter = Convert.ToDecimal(roomResponseJson["Closingmeter"]),
                         Consumedamount = Convert.ToDecimal(roomResponseJson["Consumedamount"]),
+                        Waterunitprice = Convert.ToDecimal(roomResponseJson["Waterunitprice"]),
                         Tenantid = Convert.ToInt64(roomResponseJson["Tenantid"]),
                         Createdby = Convert.ToInt32(roomResponseJson["Createdby"]),
                         Datecreated = Convert.ToDateTime(roomResponseJson["Datecreated"])
