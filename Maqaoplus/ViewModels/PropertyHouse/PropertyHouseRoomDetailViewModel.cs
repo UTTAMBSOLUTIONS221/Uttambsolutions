@@ -491,12 +491,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private void OnOkClicked()
         {
             PropertyRoomTenantId = TenantStaffData.Userid;
+            SearchId = string.Empty;
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
         private void OnCancelClicked()
         {
             PropertyRoomTenantId = 0;
+            SearchId = string.Empty;
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
