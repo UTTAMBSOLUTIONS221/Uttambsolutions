@@ -430,6 +430,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             if (_isDisposed)
                 return;
             IsLoading = true;
+            if (IsProcessing || PropertyRoomTenantId == 0)
+                return;
 
             var aggregatedData = new Systempropertyhouserooms
             {
