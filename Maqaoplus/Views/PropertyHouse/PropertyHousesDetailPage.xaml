@@ -16,20 +16,20 @@
         <viewmodels:PropertyHouseDetailViewModel />
     </ContentPage.BindingContext>
 
-    <AbsoluteLayout Padding="3">
+    <AbsoluteLayout>
         <!-- ScrollView with CollectionView -->
         <ScrollView IsVisible="{Binding IsDataLoaded}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
             <CollectionView x:Name="PropertyHousesCollectionView"
                             ItemsSource="{Binding Rooms}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="8" Margin="8" HasShadow="True" BorderColor="LightGray" CornerRadius="12" HeightRequest="350">
+                        <Frame Padding="7" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="12" HeightRequest="350">
                             <!-- Tap Gesture Recognizer -->
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}"
                                                       CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
-                            <Grid Padding="3">
+                            <Grid Padding="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -50,7 +50,7 @@
                                 <Label Text="{Binding Streetorlandmark}" FontSize="13" TextColor="DarkGray" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
 
                                 <!-- Vacancy Information -->
-                                <Grid Grid.Row="5" ColumnSpacing="7" Padding="0">
+                                <Grid Grid.Row="5" ColumnSpacing="4" Padding="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
