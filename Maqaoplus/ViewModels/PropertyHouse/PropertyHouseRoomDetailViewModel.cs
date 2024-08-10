@@ -1,6 +1,7 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
+using Maqaoplus.Views;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -444,6 +445,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
                 return;
+
             IsLoading = true;
 
             try
@@ -453,6 +455,18 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response != null)
                 {
                     TenantStaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+
+                    // Navigate to the modal with the customer data
+                    var modalPage = new StaffDetailModalPage(
+                        TenantStaffData,
+                        new Command(OnOkClicked),
+                        new Command(OnCancelClicked)
+                    );
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                }
+                else
+                {
+                    SearchResults = "No results found.";
                 }
             }
             catch (Exception ex)
@@ -465,6 +479,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        private void OnOkClicked()
+        {
+            // Update the form entry with the tenant ID or other relevant data
+            // Example: PropertyIdEntry.Text = TenantStaffData.Id;
+            // Close the modal
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+
+        private void OnCancelClicked()
+        {
+            // Do nothing or handle cancel logic
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
 
         private void NextStep()
         {
