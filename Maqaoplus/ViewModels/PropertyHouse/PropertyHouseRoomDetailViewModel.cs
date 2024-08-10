@@ -35,7 +35,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private decimal _closingMeter;
         private decimal _movedMeter;
         private decimal _consumedAmount;
-        private bool _isOpeningMeterReadOnly;
 
         private bool _isStep1Visible;
         private bool _isStep2Visible;
@@ -222,11 +221,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 _openingMeter = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(IsOpeningMeterReadOnly));
                 CalculateMeterValues();
             }
         }
-        public bool IsOpeningMeterReadOnly => OpeningMeter > 0;
         public decimal ClosingMeter
         {
             get => _closingMeter;

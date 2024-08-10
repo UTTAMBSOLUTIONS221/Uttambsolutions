@@ -69,12 +69,12 @@
 
                     <!-- First Row -->
                     <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding Forcaretaker}" />
+                        <CheckBox IsChecked="{Binding HouseroomData.Forcaretaker}" />
                         <Label Text="For Caretaker/Owner?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding Isshop}" />
+                        <CheckBox IsChecked="{Binding HouseroomData.Isshop}" />
                         <Label Text="Is Shop?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
                 </Grid>
@@ -87,12 +87,12 @@
 
                     <!-- Second Row -->
                     <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding Isgroundfloor}" />
+                        <CheckBox IsChecked="{Binding HouseroomData.Isgroundfloor}" />
                         <Label Text="Ground Floor?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding Hasbalcony}" />
+                        <CheckBox IsChecked="{Binding HouseroomData.Hasbalcony}" />
                         <Label Text="Has Balcony?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
                 </Grid>
@@ -105,7 +105,7 @@
 
                     <!-- Third Row -->
                     <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding Isunderrenovation}" />
+                        <CheckBox IsChecked="{Binding HouseroomData.Isunderrenovation}" />
                         <Label Text="Under Renovation?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
                 </Grid>
