@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.StaffDetailModalPage"
              BackgroundColor="White"
              Padding="16">
     <StackLayout Spacing="16">
-        <Label Text="Customer Details" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Label Text="User Details" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
         <Label Text="{Binding Fullname}" FontSize="18" />
         <Label Text="{Binding Phonenumber}" FontSize="18" />
         <Label Text="{Binding Idnumber}" FontSize="18" />
