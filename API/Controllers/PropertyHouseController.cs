@@ -1,7 +1,9 @@
 ﻿using DBL;
+using DBL.Entities;
 using DBL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace API.Controllers
 {
@@ -41,5 +43,12 @@ namespace API.Controllers
         {
             return await bl.Getsystempropertyhouseroomdatabyid(Houseroomid);
         }
+        [AllowAnonymous]
+        [HttpPost("Registerpropertyhouseroomdata")]
+        public async Task<Genericmodel> Registerpropertyhouseroomdata(Systempropertyhouserooms model)
+        {
+            return await bl.Registerpropertyhouseroomdata(JsonConvert.SerializeObject(model));
+        }
+
     }
 }
