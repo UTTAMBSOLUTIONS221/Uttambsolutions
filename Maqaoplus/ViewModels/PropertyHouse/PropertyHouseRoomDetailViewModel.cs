@@ -31,10 +31,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isProcessing;
         private string _searchResults;
 
-        private string _openingMeter;
-        private string _closingMeter;
-        private string _movedMeter;
-        private string _consumedAmount;
+        private decimal _openingMeter;
+        private decimal _closingMeter;
+        private decimal _movedMeter;
+        private decimal _consumedAmount;
         private bool _isOpeningMeterReadOnly;
 
         private bool _isStep1Visible;
@@ -215,60 +215,48 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-        public string OpeningMeter
+        public decimal OpeningMeter
         {
             get => _openingMeter;
             set
             {
-                if (_openingMeter != value)
-                {
-                    _openingMeter = value;
-                    OnPropertyChanged();
-                    UpdateReadOnlyStatus();
-                    CalculateMovedMeter();
-                    CalculateConsumedAmount();
-                }
+                _openingMeter = value;
+                OnPropertyChanged();
+                CalculateMeterValues();
             }
         }
 
-        public string ClosingMeter
+        public decimal ClosingMeter
         {
             get => _closingMeter;
             set
             {
-                if (_closingMeter != value)
+                _closingMeter = value;
+                OnPropertyChanged();
+                if (ClosingMeter > 0)
                 {
-                    _closingMeter = value;
-                    OnPropertyChanged();
-                    CalculateMovedMeter();
-                    CalculateConsumedAmount();
+                    CalculateMeterValues();
                 }
             }
         }
 
-        public string MovedMeter
+        public decimal MovedMeter
         {
             get => _movedMeter;
             set
             {
-                if (_movedMeter != value)
-                {
-                    _movedMeter = value;
-                    OnPropertyChanged();
-                }
+                _movedMeter = value;
+                OnPropertyChanged();
             }
         }
 
-        public string ConsumedAmount
+        public decimal ConsumedAmount
         {
             get => _consumedAmount;
             set
             {
-                if (_consumedAmount != value)
-                {
-                    _consumedAmount = value;
-                    OnPropertyChanged();
-                }
+                _consumedAmount = value;
+                OnPropertyChanged();
             }
         }
 
@@ -277,34 +265,34 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             get => _isOpeningMeterReadOnly;
             set
             {
-                if (_isOpeningMeterReadOnly != value)
-                {
-                    _isOpeningMeterReadOnly = value;
-                    OnPropertyChanged();
-                }
+                _isOpeningMeterReadOnly = value;
+                OnPropertyChanged();
             }
         }
 
         private void UpdateReadOnlyStatus()
         {
-            IsOpeningMeterReadOnly = OpeningMeter != "0";
+            IsOpeningMeterReadOnly = HouseroomData.Openingmeter != 0;
         }
 
-        private void CalculateMovedMeter()
+        private void CalculateMeterValues()
         {
-            if (decimal.TryParse(ClosingMeter, out var closing) &&
-                decimal.TryParse(OpeningMeter, out var opening))
+            if (HouseroomData.Openingmeter >= 0 && ClosingMeter > 0)
             {
-                MovedMeter = (closing - opening).ToString();
+                MovedMeter = ClosingMeter - HouseroomData.Openingmeter;
+                CalculateConsumedAmount();
             }
         }
 
         private void CalculateConsumedAmount()
         {
-            if (decimal.TryParse(MovedMeter, out var moved) &&
-                decimal.TryParse(UnitPrice, out var unitPrice))
+            if (decimal.TryParse(UnitPrice, out var unitPrice))
             {
-                ConsumedAmount = (moved * unitPrice).ToString();
+                ConsumedAmount = MovedMeter * 100;
+            }
+            else
+            {
+                ConsumedAmount = 0;
             }
         }
         public void Dispose()
@@ -450,8 +438,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 Systempropertyhouseroommeternumber = HouseroomData.Systempropertyhouseroommeternumber,
                 Openingmeter = HouseroomData.Openingmeter,
                 Movedmeter = HouseroomData.Movedmeter,
-                Closingmeter = HouseroomData.Closingmeter,
-                Consumedamount = HouseroomData.Consumedamount,
+                Closingmeter = ClosingMeter,
+                Consumedamount = ConsumedAmount,
                 Tenantid = PropertyRoomTenantId,
                 Createdby = App.UserDetails.Usermodel.Userid,
                 Datecreated = DateTime.Now,
