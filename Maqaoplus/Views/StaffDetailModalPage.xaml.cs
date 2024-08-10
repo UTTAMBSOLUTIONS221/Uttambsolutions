@@ -7,10 +7,10 @@ public partial class StaffDetailModalPage : ContentPage
     public ICommand OkCommand { get; }
     public ICommand CancelCommand { get; }
 
-    public StaffDetailModalPage(SystemStaff customerData, ICommand okCommand, ICommand cancelCommand)
+    public StaffDetailModalPage(SystemStaff tenantStaffData, ICommand okCommand, ICommand cancelCommand)
     {
         InitializeComponent();
-        BindingContext = customerData;
+        BindingContext = tenantStaffData;
         OkCommand = okCommand;
         CancelCommand = cancelCommand;
     }
