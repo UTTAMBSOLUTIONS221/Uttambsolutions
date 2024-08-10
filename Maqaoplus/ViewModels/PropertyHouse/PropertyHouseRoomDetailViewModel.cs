@@ -408,7 +408,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 Systempropertyhousemeterid = HouseroomData.Systempropertyhousemeterid,
                 Systempropertyhouseroommeternumber = HouseroomData.Systempropertyhouseroommeternumber,
                 Openingmeter = HouseroomData.Openingmeter,
-                Movedmeter = HouseroomData.Movedmeter,
+                Movedmeter = MovedMeter,
                 Closingmeter = ClosingMeter,
                 Consumedamount = ConsumedAmount,
                 Tenantid = PropertyRoomTenantId,
