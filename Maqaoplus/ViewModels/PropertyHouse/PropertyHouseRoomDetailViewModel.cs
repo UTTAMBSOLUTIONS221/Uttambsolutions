@@ -25,6 +25,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _hasbalcony;
         private bool _isunderrenovation;
         private string _searchId;
+        private bool _isProcessing;
         private string _searchResults;
 
         private string _openingMeter;
@@ -289,6 +290,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             _isDisposed = true;
         }
+        public bool IsProcessing
+        {
+            get => _isProcessing;
+            set
+            {
+                _isProcessing = value;
+                OnPropertyChanged();
+                ((Command)SearchCommand).ChangeCanExecute();
+            }
+        }
         public string UnitPrice { get; set; } = "1"; // Example value, replace with actual
 
         public string SearchId
@@ -420,6 +431,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async Task Search()
         {
+            if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
+                return;
             // Implement search logic
         }
 
