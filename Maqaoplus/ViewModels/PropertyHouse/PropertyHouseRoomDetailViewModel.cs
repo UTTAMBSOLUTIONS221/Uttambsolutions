@@ -450,7 +450,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 Movedmeter = HouseroomData.Movedmeter,
                 Closingmeter = HouseroomData.Closingmeter,
                 Consumedamount = HouseroomData.Consumedamount,
-                Tenantid = HouseroomData.Tenantid,
+                Tenantid = PropertyRoomTenantId,
                 Createdby = App.UserDetails.Usermodel.Userid,
                 Datecreated = DateTime.Now,
                 Meterhistorydata = HouseroomData.Meterhistorydata
