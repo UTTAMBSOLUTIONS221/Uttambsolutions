@@ -433,7 +433,25 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
                 return;
-            // Implement search logic
+            IsLoading = true;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/" + _propertyRoomId, HttpMethod.Get, null);
+
+                if (response != null)
+                {
+                    HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
 
