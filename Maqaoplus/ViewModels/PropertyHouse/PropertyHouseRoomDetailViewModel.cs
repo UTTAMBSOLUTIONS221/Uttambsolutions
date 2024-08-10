@@ -24,7 +24,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isgroundfloor;
         private bool _hasbalcony;
         private bool _isunderrenovation;
-        private ObservableCollection<Systempropertyhouseroommeterhistory> _meterReadings;
         private string _searchId;
         private string _searchResults;
 
@@ -291,16 +290,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isDisposed = true;
         }
         public string UnitPrice { get; set; } = "1"; // Example value, replace with actual
-
-        public ObservableCollection<Systempropertyhouseroommeterhistory> MeterReadings
-        {
-            get => _meterReadings;
-            set
-            {
-                _meterReadings = value;
-                OnPropertyChanged();
-            }
-        }
 
         public string SearchId
         {

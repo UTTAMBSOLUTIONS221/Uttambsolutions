@@ -153,7 +153,7 @@
                 <Label Text="Previos Meter Data" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
 
                 <!-- CollectionView for Meter Readings -->
-                <CollectionView ItemsSource="{Binding MeterReadings}" IsVisible="{Binding IsMeterReadingsVisible}">
+                <CollectionView ItemsSource="{Binding HouseroomData.Meterhistorydata}" IsVisible="{Binding IsMeterReadingsVisible}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
