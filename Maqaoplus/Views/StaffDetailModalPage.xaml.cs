@@ -13,5 +13,9 @@ public partial class StaffDetailModalPage : ContentPage
         BindingContext = staffData;
         OkCommand = okCommand;
         CancelCommand = cancelCommand;
+
+        // Bind the commands to the buttons explicitly
+        okButton.Command = OkCommand;
+        cancelButton.Command = CancelCommand;
     }
 }

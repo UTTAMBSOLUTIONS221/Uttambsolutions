@@ -481,24 +481,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private void OnOkClicked()
         {
-            // Debug log to verify if this method is called
             Console.WriteLine("OK button clicked");
-
-            // Update the form entry with the tenant ID or other relevant data
-            // Example: PropertyIdEntry.Text = TenantStaffData.Id;
-
-            // Close the modal
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
         private void OnCancelClicked()
         {
-            // Debug log to verify if this method is called
             Console.WriteLine("Cancel button clicked");
-
-            // Do nothing or handle cancel logic
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
+
 
 
         private void NextStep()
