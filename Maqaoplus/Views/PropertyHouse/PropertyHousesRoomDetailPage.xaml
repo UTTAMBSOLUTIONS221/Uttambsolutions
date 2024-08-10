@@ -21,8 +21,8 @@
                 <Label Text="Step 1: Basic Room Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" />
 
                 <!-- Hidden Field for Systempropertyhouseroomid -->
-                <Entry x:Name="Systempropertyhouseroomid" IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
-                <Entry x:Name="Systemtenantstaffid" IsVisible="False" Text="{Binding PropertyRoomTenantId}" />
+                <Entry x:Name="Systempropertyhouseroomid" IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid, Mode=TwoWay}" />
+                <Entry x:Name="Systemtenantstaffid" IsVisible="False" Text="{Binding PropertyRoomTenantId, Mode=TwoWay}" />
 
                 <Grid ColumnSpacing="8" RowSpacing="0">
                     <!-- Define two equal-width columns -->
@@ -38,7 +38,7 @@
 
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding SelectedKitchentype}" ItemDisplayBinding="{Binding Text}" Title="Select Kitchen Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding SelectedKitchentype, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Kitchen Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
 
@@ -49,7 +49,7 @@
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding SelectedSize}" ItemDisplayBinding="{Binding Text}" Title="Select Size" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding SelectedSize, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Size" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
                 </Grid>
@@ -58,7 +58,7 @@
                 <Label Text="House Room #" FontAttributes="Bold" FontSize="16" Margin="0,0,0,4"/>
                 <!-- House Room # Entry (Styled like an Input Box) -->
                 <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                    <Entry Text="{Binding HouseroomData.Systempropertyhousesizename}" Placeholder="Enter house room number" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                    <Entry Text="{Binding HouseroomData.Systempropertyhousesizename, Mode=TwoWay}" Placeholder="Enter house room number" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                 </Frame>
                 <Grid ColumnSpacing="8" RowSpacing="12">
                     <!-- Define two equal-width columns -->
@@ -69,12 +69,12 @@
 
                     <!-- First Row -->
                     <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding HouseroomData.Forcaretaker}" />
+                        <CheckBox IsChecked="{Binding HouseroomData.Forcaretaker, Mode=TwoWay}" />
                         <Label Text="For Caretaker/Owner?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding HouseroomData.Isshop}" />
+                        <CheckBox IsChecked="{Binding HouseroomData.Isshop, Mode=TwoWay}" />
                         <Label Text="Is Shop?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
                 </Grid>
@@ -87,12 +87,12 @@
 
                     <!-- Second Row -->
                     <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding HouseroomData.Isgroundfloor}" />
+                        <CheckBox IsChecked="{Binding HouseroomData.Isgroundfloor, Mode=TwoWay}" />
                         <Label Text="Ground Floor?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding HouseroomData.Hasbalcony}" />
+                        <CheckBox IsChecked="{Binding HouseroomData.Hasbalcony, Mode=TwoWay}" />
                         <Label Text="Has Balcony?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
                 </Grid>
@@ -143,8 +143,8 @@
                     <Entry Grid.Row="1" Grid.Column="0" Placeholder="Enter Meter Number" Text="{Binding HouseroomData.Systempropertyhouseroommeternumber}" />
                     <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Opening Meter" Text="{Binding HouseroomData.Openingmeter, Mode=TwoWay}" IsReadOnly="{Binding HouseroomData.Hasprevious}" />
                     <Entry Grid.Row="1" Grid.Column="2" Placeholder="Enter Closing Meter" Text="{Binding ClosingMeter, Mode=TwoWay}" />
-                    <Entry Grid.Row="1" Grid.Column="3" Placeholder="Moved Meter" Text="{Binding MovedMeter}" IsReadOnly="True" />
-                    <Entry Grid.Row="1" Grid.Column="4" Placeholder="Consumed Amount" Text="{Binding ConsumedAmount}" IsReadOnly="True" />
+                    <Entry Grid.Row="1" Grid.Column="3" Placeholder="Moved Meter" Text="{Binding MovedMeter, Mode=TwoWay}" IsReadOnly="True" />
+                    <Entry Grid.Row="1" Grid.Column="4" Placeholder="Consumed Amount" Text="{Binding ConsumedAmount, Mode=TwoWay}" IsReadOnly="True" />
                 </Grid>
                 <!-- Section Header for All System Data -->
                 <Label Text="Previos Meter Data" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
