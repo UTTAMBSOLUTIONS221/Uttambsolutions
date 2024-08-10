@@ -275,7 +275,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             if (decimal.TryParse(UnitPrice, out var unitPrice))
             {
-                ConsumedAmount = MovedMeter * 100;
+                ConsumedAmount = MovedMeter * HouseroomData.Waterunitprice;
             }
             else
             {
