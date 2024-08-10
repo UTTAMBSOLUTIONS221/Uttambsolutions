@@ -12,6 +12,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private readonly Services.ServiceProvider _serviceProvider;
         private long _propertyRoomId;
         private Systempropertyhouserooms _houseroomData;
+        private SystemStaff _tenantStaffData;
         private bool _isLoading;
         private ObservableCollection<ListModel> _systemkitchentype;
         private ListModel _selectedKitchentype;
@@ -79,6 +80,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _houseroomData = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public SystemStaff TenantStaffData
+        {
+            get => _tenantStaffData;
+            set
+            {
+                _tenantStaffData = value;
                 OnPropertyChanged();
             }
         }
@@ -441,7 +452,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                 if (response != null)
                 {
-                    HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
+                    TenantStaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
                 }
             }
             catch (Exception ex)
