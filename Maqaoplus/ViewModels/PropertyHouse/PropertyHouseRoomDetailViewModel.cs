@@ -458,7 +458,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/SaveRoomDetails", HttpMethod.Post, JsonConvert.SerializeObject(HouseroomData));
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, JsonConvert.SerializeObject(HouseroomData));
 
                 if (response != null)
                 {

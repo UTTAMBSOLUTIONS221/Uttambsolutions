@@ -21,8 +21,8 @@
                 <Label Text="Step 1: Basic Room Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" />
 
                 <!-- Hidden Field for Systempropertyhouseroomid -->
-                <Entry x:Name="Systempropertyhouseroomid" IsVisible="true" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
-                <Entry x:Name="Systemtenantstaffid" IsVisible="True" Text="{Binding PropertyRoomTenantId}" />
+                <Entry x:Name="Systempropertyhouseroomid" IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
+                <Entry x:Name="Systemtenantstaffid" IsVisible="False" Text="{Binding PropertyRoomTenantId}" />
 
                 <Grid ColumnSpacing="8" RowSpacing="0">
                     <!-- Define two equal-width columns -->
