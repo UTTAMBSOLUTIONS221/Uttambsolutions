@@ -264,19 +264,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             if (HouseroomData.Openingmeter >= 0 && ClosingMeter > 0)
             {
                 MovedMeter = ClosingMeter - HouseroomData.Openingmeter;
-                CalculateConsumedAmount();
-            }
-        }
-
-        private void CalculateConsumedAmount()
-        {
-            if (decimal.TryParse(UnitPrice, out var unitPrice))
-            {
                 ConsumedAmount = MovedMeter * HouseroomData.Waterunitprice;
-            }
-            else
-            {
-                ConsumedAmount = 0;
             }
         }
         public void Dispose()
@@ -293,7 +281,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 ((Command)SearchCommand).ChangeCanExecute();
             }
         }
-        public string UnitPrice { get; set; } = "1"; // Example value, replace with actual
 
         public string SearchId
         {
