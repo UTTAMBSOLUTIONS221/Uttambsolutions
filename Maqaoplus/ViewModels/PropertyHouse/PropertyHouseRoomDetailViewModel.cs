@@ -12,6 +12,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
     {
         private readonly Services.ServiceProvider _serviceProvider;
         private long _propertyRoomId;
+        private long _propertyRoomTenantId;
         private Systempropertyhouserooms _houseroomData;
         private SystemStaff _tenantStaffData;
         private bool _isLoading;
@@ -74,7 +75,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _propertyRoomId = propertyRoomId;
             LoadRoomDetailCommand.Execute(null);
         }
-
+        public long PropertyRoomTenantId
+        {
+            get => _propertyRoomTenantId;
+            set
+            {
+                _propertyRoomTenantId = value;
+                OnPropertyChanged();
+            }
+        }
         public Systempropertyhouserooms HouseroomData
         {
             get => _houseroomData;
@@ -481,17 +490,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private void OnOkClicked()
         {
-            Console.WriteLine("OK button clicked");
+            PropertyRoomTenantId = TenantStaffData.Userid;
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
         private void OnCancelClicked()
         {
-            Console.WriteLine("Cancel button clicked");
+            PropertyRoomTenantId = 0;
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
-
-
 
         private void NextStep()
         {
