@@ -16,7 +16,7 @@
         <viewmodels:PropertyHouseDetailViewModel />
     </ContentPage.BindingContext>
 
-    <AbsoluteLayout Padding="10">
+    <AbsoluteLayout Padding="3">
         <!-- ScrollView with CollectionView -->
         <ScrollView IsVisible="{Binding IsDataLoaded}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
             <CollectionView x:Name="PropertyHousesCollectionView"
@@ -50,7 +50,7 @@
                                 <Label Text="{Binding Streetorlandmark}" FontSize="13" TextColor="DarkGray" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
 
                                 <!-- Vacancy Information -->
-                                <Grid Grid.Row="5" ColumnSpacing="10" Padding="0">
+                                <Grid Grid.Row="5" ColumnSpacing="7" Padding="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
