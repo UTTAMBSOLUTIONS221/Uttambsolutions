@@ -38,6 +38,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isStep2Visible;
         private bool _isStep3Visible;
 
+        private bool _isDisposed;
+
+
         public ICommand LoadRoomDetailCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand SearchCommand { get; }
@@ -283,7 +286,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 ConsumedAmount = (moved * unitPrice).ToString();
             }
         }
-
+        public void Dispose()
+        {
+            _isDisposed = true;
+        }
         public string UnitPrice { get; set; } = "1"; // Example value, replace with actual
 
         public ObservableCollection<Systempropertyhouseroommeterhistory> MeterReadings
@@ -348,6 +354,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async Task LoadRoomDetails()
         {
+            if (_isDisposed)
+                return;
+
             IsLoading = true;
 
             try
@@ -374,6 +383,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async Task LoadDropdownData()
         {
+            if (_isDisposed)
+                return;
+
             try
             {
                 var kitchentypeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemkitchentype, HttpMethod.Get);
@@ -397,6 +409,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async Task LoadMeterReadings()
         {
+            if (_isDisposed)
+                return;
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/GetMeterReadingsByRoomId/" + _propertyRoomId, HttpMethod.Get, null);
@@ -414,6 +428,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async Task SaveRoomDetails()
         {
+            if (_isDisposed)
+                return;
             IsLoading = true;
 
             try
