@@ -431,6 +431,31 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 return;
             IsLoading = true;
 
+            var aggregatedData = new Systempropertyhouserooms
+            {
+                Systempropertyhouseroomid = HouseroomData.Systempropertyhouseroomid,
+                Systempropertyhouseid = HouseroomData.Systempropertyhouseid,
+                Systempropertyhousesizeid = HouseroomData.Systempropertyhousesizeid,
+                Systempropertyhousesizename = HouseroomData.Systempropertyhousesizename,
+                Isvacant = HouseroomData.Isvacant,
+                Isunderrenovation = HouseroomData.Isunderrenovation,
+                Isshop = HouseroomData.Isshop,
+                Isgroundfloor = HouseroomData.Isgroundfloor,
+                Hasbalcony = HouseroomData.Hasbalcony,
+                Forcaretaker = HouseroomData.Forcaretaker,
+                Kitchentypeid = HouseroomData.Kitchentypeid,
+                Systempropertyhousemeterid = HouseroomData.Systempropertyhousemeterid,
+                Systempropertyhouseroommeternumber = HouseroomData.Systempropertyhouseroommeternumber,
+                Openingmeter = HouseroomData.Openingmeter,
+                Movedmeter = HouseroomData.Movedmeter,
+                Closingmeter = HouseroomData.Closingmeter,
+                Consumedamount = HouseroomData.Consumedamount,
+                Tenantid = HouseroomData.Tenantid,
+                Createdby = App.UserDetails.Usermodel.Userid,
+                Datecreated = DateTime.Now,
+                Meterhistorydata = HouseroomData.Meterhistorydata
+            };
+
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/SaveRoomDetails", HttpMethod.Post, JsonConvert.SerializeObject(HouseroomData));
