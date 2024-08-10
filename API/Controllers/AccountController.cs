@@ -80,5 +80,11 @@ namespace API.Controllers
         {
             return await bl.Getsystemstaffdetaildatabyid(UserId);
         }
+        [AllowAnonymous]
+        [Route("Getsystemstaffdetaildatabyidnumber/{Idnumber}"), HttpGet]
+        public async Task<Systemdataffdata> Getsystemstaffdetaildatabyidnumber(int Idnumber)
+        {
+            return await bl.Getsystemstaffdetaildatabyidnumber(Idnumber);
+        }
     }
 }
