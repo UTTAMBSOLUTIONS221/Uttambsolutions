@@ -593,8 +593,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         public async Task SavePropertyHouseAsync()
         {
+            IsLoading = true;
+
+            await Task.Delay(500);
             if (SystempropertyData == null)
+            {
+                IsLoading = false;
                 return;
+            }
+
             SystempropertyData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
@@ -603,6 +610,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SystempropertyData.Datemodified = DateTime.Now;
             // Save the data to API or other service
             await SaveSystemPropertyAsync(SystempropertyData);
+            IsLoading = false;
         }
 
         private Task SaveSystemPropertyAsync(Systemproperty systemProperty)
