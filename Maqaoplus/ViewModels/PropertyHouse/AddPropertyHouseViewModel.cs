@@ -1,4 +1,5 @@
-﻿using DBL.Enum;
+﻿using DBL.Entities;
+using DBL.Enum;
 using DBL.Models;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
     public class AddPropertyHouseViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
-        private PropertyHouseRoomTenantData _tenantData;
+        private Systemproperty _systempropertyData;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -170,12 +171,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-        public PropertyHouseRoomTenantData TenantData
+        public Systemproperty SystempropertyData
         {
-            get => _tenantData;
+            get => _systempropertyData;
             set
             {
-                _tenantData = value;
+                _systempropertyData = value;
                 OnPropertyChanged();
             }
         }
@@ -187,10 +188,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid", HttpMethod.Get, null);
                 if (response != null)
                 {
-                    TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
+                    SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
                 }
                 IsDataLoaded = true;
             }
