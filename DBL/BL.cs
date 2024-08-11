@@ -187,7 +187,7 @@ namespace DBL
                     {
                         StringBuilder StrBodyEmail = new StringBuilder(commtempdata.Templatebody);
                         StrBodyEmail.Replace("@CompanyName", "Uttamb Solutions");
-                        StrBodyEmail.Replace("@CompanyEmail", "contact@uttambsolutions.com");
+                        StrBodyEmail.Replace("@CompanyEmail", "support@uttambsolutions.com");
                         StrBodyEmail.Replace("@Fullname", resp.Usermodel.Fullname);
                         StrBodyEmail.Replace("@Username", resp.Usermodel.Username);
                         StrBodyEmail.Replace("@Password", sec.Decrypt(resp.Usermodel.Passwords, resp.Usermodel.Passharsh));
