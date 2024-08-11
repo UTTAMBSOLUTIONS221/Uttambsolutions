@@ -5,7 +5,6 @@ using Maqaoplus.Views;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.PropertyHouse
@@ -18,7 +17,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private string _searchId;
         private Systempropertyhouserooms _houseroomData;
         private SystemStaff _tenantStaffData;
-        public event PropertyChangedEventHandler PropertyChanged;
 
 
         private decimal _openingMeter;
@@ -39,7 +37,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _isLoading = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsLoading));
             }
         }
         private bool _isProcessing;
@@ -49,7 +47,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _isProcessing = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsProcessing));
                 ((Command)SearchCommand).ChangeCanExecute();
             }
         }
@@ -60,7 +58,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _isDataLoaded = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsDataLoaded));
             }
         }
         private bool _isValid;
@@ -72,7 +70,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (_isValid != value)
                 {
                     _isValid = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(IsValid));
                 }
             }
         }
@@ -91,7 +89,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _searchId = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(SearchId));
             }
         }
 
@@ -101,7 +99,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _houseroomData = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(HouseroomData));
             }
         }
         public SystemStaff TenantStaffData
@@ -110,7 +108,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _tenantStaffData = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(TenantStaffData));
             }
         }
         public void SetPropertyRoomId(long propertyRoomId)
@@ -124,7 +122,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _propertyRoomTenantId = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(PropertyRoomTenantId));
             }
         }
         public ObservableCollection<ListModel> Systemkitchentype
@@ -133,7 +131,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _systemkitchentype = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Systemkitchentype));
             }
         }
         private ListModel _selectedKitchentype;
@@ -170,7 +168,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _systempropertyhousesize = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Systempropertyhousesize));
             }
         }
         private ListModel _selectedPropertyhousesize;
@@ -208,7 +206,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _propertyHouseRoomNumberError = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(PropertyHouseRoomNumberError));
             }
         }
 
@@ -219,7 +217,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _propertyHouseKitchenTypeError = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(PropertyHouseKitchenTypeError));
             }
         }
 
@@ -230,7 +228,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _propertyHouseSizeError = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(PropertyHouseSizeError));
             }
         }
         public PropertyHouseRoomDetailViewModel(Services.ServiceProvider serviceProvider)
@@ -391,7 +389,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _openingMeter = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(OpeningMeter));
                 CalculateMeterValues();
             }
         }
@@ -401,7 +399,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _closingMeter = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(ClosingMeter));
                 if (ClosingMeter > 0)
                 {
                     CalculateMeterValues();
@@ -415,7 +413,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _movedMeter = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(MovedMeter));
             }
         }
 
@@ -425,7 +423,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _consumedAmount = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(ConsumedAmount));
             }
         }
 
@@ -458,7 +456,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _isStep1Visible = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsStep1Visible));
             }
         }
 
@@ -468,7 +466,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _isStep2Visible = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsStep2Visible));
             }
         }
 
@@ -478,7 +476,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _isStep3Visible = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsStep3Visible));
             }
         }
 
@@ -488,7 +486,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _isStep4Visible = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsStep4Visible));
             }
         }
         private async void NextStep()
@@ -591,10 +589,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             return isValid;
         }
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
     }
 }

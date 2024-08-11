@@ -3,13 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Maqaoplus.Views.PropertyHouse"
              xmlns:controls="clr-namespace:Maqaoplus.Controls"
-             xmlns:viewmodels="Maqaoplus.ViewModels.PropertyHouse"
              x:Class="Maqaoplus.Views.PropertyHouse.PropertyHousesRoomDetailPage"
              Title="House Room Details">
 
-    <ContentPage.BindingContext>
-        <viewmodels:PropertyHouseRoomDetailViewModel />
-    </ContentPage.BindingContext>
 
     <ScrollView Padding="8">
 
