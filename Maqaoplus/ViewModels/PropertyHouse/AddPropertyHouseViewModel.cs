@@ -533,7 +533,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
 
             // Validate Property House Status
-            if (SystempropertyData?.Propertyhousestatus == 0)
+            if (SystempropertyData?.Propertyhousestatus < 0)
             {
                 PropertyHouseStatusError = "Property House Status is required.";
                 isValid = false;
