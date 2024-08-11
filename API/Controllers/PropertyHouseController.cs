@@ -25,6 +25,11 @@ namespace API.Controllers
         {
             return await bl.Getsystempropertyhousedatabyowner(OwnerId);
         }
+        [HttpGet("Getsystempropertyhousedetaildatabyid/{Propertyid}")]
+        public async Task<Systempropertydata> Getsystempropertyhousedetaildatabyid(long Propertyid)
+        {
+            return await bl.Getsystempropertyhousedetaildatabyid(Propertyid);
+        }
         [AllowAnonymous]
         [HttpGet("Getsystempropertyhousetenantdatabytenantid/{TenantId}")]
         public async Task<PropertyHouseRoomTenantModel> Getsystempropertyhousetenantdatabytenantid(long TenantId)
@@ -49,6 +54,5 @@ namespace API.Controllers
         {
             return await bl.Registerpropertyhouseroomdata(JsonConvert.SerializeObject(model));
         }
-
     }
 }
