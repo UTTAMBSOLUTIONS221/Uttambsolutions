@@ -23,9 +23,9 @@
                     Color="#0a506c" 
                     WidthRequest="100" 
                     HeightRequest="100"  
-                    Grid.Row="0" />
+                    Grid.Row="1" />
 
-        <ScrollView>
+        <ScrollView Padding="4" Grid.Row="1">
             <VerticalStackLayout>
                 <!-- Step 1 -->
                 <StackLayout IsVisible="{Binding IsStep1Visible}" Padding="4,8" Spacing="8">
@@ -88,7 +88,7 @@
 
                             <!-- Kitchen Type Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                                <Picker ItemsSource="{Binding Systemcounty}" SelectedItem="{Binding SystempropertyData.Countyid}" ItemDisplayBinding="{Binding Text}" Title="Select County" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                                <Picker ItemsSource="{Binding Systemcounty}" SelectedItem="{Binding SelectedCounty}" ItemDisplayBinding="{Binding Text}" Title="Select County" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                             </Frame>
                             <Label Text="{Binding PropertyHouseCountyError}" TextColor="Red" />
                         </StackLayout>
@@ -100,7 +100,7 @@
 
                             <!-- House Room Size Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                                <Picker ItemsSource="{Binding Systemsubcounty}" SelectedItem="{Binding SystempropertyData.Subcountyid}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                                <Picker ItemsSource="{Binding Systemsubcounty}" SelectedItem="{Binding SelectedSubcounty}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                             </Frame>
                             <Label Text="{Binding PropertyHouseSubcountyError}" TextColor="Red" />
                         </StackLayout>
