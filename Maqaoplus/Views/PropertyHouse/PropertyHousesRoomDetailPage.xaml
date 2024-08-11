@@ -40,6 +40,7 @@
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
                             <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding SelectedKitchentype, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Kitchen Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
+                        <Label Text="{Binding PropertyHouseKitchenTypeError}" TextColor="Red" />
                     </StackLayout>
 
                     <!-- House Room Size Section -->
@@ -51,6 +52,7 @@
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
                             <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding SelectedPropertyhousesize, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Size" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
+                        <Label Text="{Binding PropertyHouseSizeError}" TextColor="Red" />
                     </StackLayout>
                 </Grid>
 
@@ -60,6 +62,7 @@
                 <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
                     <Entry Text="{Binding HouseroomData.Systempropertyhousesizename, Mode=TwoWay}" Placeholder="Enter house room number" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                 </Frame>
+                <Label Text="{Binding PropertyHouseRoomNumberError}" TextColor="Red" />
                 <Grid ColumnSpacing="8" RowSpacing="12">
                     <!-- Define two equal-width columns -->
                     <Grid.ColumnDefinitions>
