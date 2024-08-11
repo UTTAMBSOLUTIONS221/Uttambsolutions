@@ -18,7 +18,7 @@
                     <Label Text="House Name" FontAttributes="Bold" FontSize="13"  Margin="0,0,0,4" TextColor="#0a506c"/>
                     <!-- House Room # Entry (Styled like an Input Box) -->
                     <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,10"  HeightRequest="40">
-                        <Entry Text="{Binding Systempropertyhousesizename}" Placeholder="Enter house name" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                        <Entry Text="{Binding Propertyhousename}" Placeholder="Enter house name" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
                     </Frame>
                 </StackLayout>
 
@@ -36,7 +36,7 @@
 
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select House Entry Status" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding Propertyhousestatus}" ItemDisplayBinding="{Binding Text}" Title="Select House Entry Status" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
 
@@ -47,7 +47,7 @@
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemhousewatertype}" SelectedItem="{Binding Systemhousewatertypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Water Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemhousewatertype}" SelectedItem="{Binding Watertypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Water Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
                 </Grid>
@@ -66,7 +66,7 @@
 
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemcounty}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select County" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemcounty}" SelectedItem="{Binding Countyid}" ItemDisplayBinding="{Binding Text}" Title="Select County" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
 
@@ -77,7 +77,7 @@
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemsubcounty}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemsubcounty}" SelectedItem="{Binding Subcountyid}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
                 </Grid>
@@ -96,7 +96,7 @@
 
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemsubcountyward}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty Ward" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemsubcountyward}" SelectedItem="{Binding Subcountywardid}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty Ward" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
 
@@ -107,7 +107,7 @@
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemhouserentdueday}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid}" ItemDisplayBinding="{Binding Text}" Title="Select Rent Due Day" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemhouserentdueday}" SelectedItem="{Binding Rentdueday}" ItemDisplayBinding="{Binding Text}" Title="Select Rent Due Day" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
                 </Grid>
@@ -122,16 +122,16 @@
 
                     <!-- First Row -->
                     <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding HouseroomData.Forcaretaker, Mode=TwoWay}" />
+                        <CheckBox IsChecked="{Binding Hasagent}" />
                         <Label Text="Has Agent?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding HouseroomData.Isshop, Mode=TwoWay}" />
+                        <CheckBox IsChecked="{Binding Hashousedeposit}" />
                         <Label Text="Has Deposit?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Grid.Row="0" Grid.Column="2" Spacing="8" HorizontalOptions="Start">
-                        <CheckBox IsChecked="{Binding HouseroomData.Isshop, Mode=TwoWay}" />
+                        <CheckBox IsChecked="{Binding Hashousewatermeter}" />
                         <Label Text="Water Metered?" VerticalOptions="Center" />
                     </HorizontalStackLayout>
                 </Grid>
@@ -150,7 +150,7 @@
                         <Label Text="Deposit Month(s)" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemhousedepostmonths}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemhousedepostmonths}" SelectedItem="{Binding Rentdepositmonth}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
 
@@ -161,7 +161,7 @@
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemhousevacantnoticeperiod}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid}" ItemDisplayBinding="{Binding Text}" Title="Select Vacation Notice Period" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemhousevacantnoticeperiod}" SelectedItem="{Binding Vacantnoticeperion}" ItemDisplayBinding="{Binding Text}" Title="Select Vacation Notice Period" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
                     <!-- House Room Size Section -->
@@ -171,7 +171,7 @@
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Entry Text="{Binding Systempropertyhousesizename}" Placeholder="Enter Price per Unit " PlaceholderColor="#0a506c" Keyboard="Numeric" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                            <Entry Text="{Binding Waterunitprice}" Placeholder="Enter Price per Unit " PlaceholderColor="#0a506c" Keyboard="Numeric" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
                         </Frame>
                     </StackLayout>
                 </Grid>
@@ -181,7 +181,7 @@
                     <Label Text="Street or landmark" FontAttributes="Bold" FontSize="13"  Margin="0,0,0,4" TextColor="#0a506c"/>
                     <!-- House Room # Entry (Styled like an Input Box) -->
                     <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,10"  HeightRequest="40">
-                        <Entry Text="{Binding Systempropertyhousesizename}" Placeholder="Start with near land mark and next to a landmark" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                        <Entry Text="{Binding Streetorlandmark}" Placeholder="Start with near land mark and next to a landmark" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
                     </Frame>
                 </StackLayout>
                 <StackLayout>
@@ -189,7 +189,7 @@
                     <Label Text="Contact Details if vacant" FontAttributes="Bold" FontSize="13"  Margin="0,0,0,4" TextColor="#0a506c"/>
                     <!-- House Room # Entry (Styled like an Input Box) -->
                     <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,10"  HeightRequest="40">
-                        <Entry Text="{Binding Systempropertyhousesizename}" Placeholder="Phonenumber1,Phonenumber2,Phonenumber3,....." PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                        <Entry Text="{Binding Contactdetails}" Placeholder="Phonenumber1,Phonenumber2,Phonenumber3,....." PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
                     </Frame>
                 </StackLayout>
                 <!-- Navigation Button -->
@@ -243,7 +243,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-              
+
                 <!-- Navigation Buttons at Start and End -->
                 <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
                     <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
