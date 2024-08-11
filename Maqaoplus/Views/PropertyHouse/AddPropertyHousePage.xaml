@@ -11,8 +11,187 @@
             <!-- Step 1 -->
             <StackLayout IsVisible="{Binding IsStep1Visible}" Padding="4,8" Spacing="8">
                 <!-- Header -->
-                <Label Text="Step 1: Basic Room Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="Step 1: Basic House Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" />
 
+                <StackLayout>
+                    <!-- House Room # Label -->
+                    <Label Text="House Name" FontAttributes="Bold" FontSize="13"  Margin="0,0,0,4" TextColor="#0a506c"/>
+                    <!-- House Room # Entry (Styled like an Input Box) -->
+                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,10"  HeightRequest="40">
+                        <Entry Text="{Binding Systempropertyhousesizename}" Placeholder="Enter house name" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                    </Frame>
+                </StackLayout>
+
+                <Grid ColumnSpacing="8" RowSpacing="0">
+                    <!-- Define two equal-width columns -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Kitchen Type Section -->
+                    <StackLayout Grid.Column="0">
+                        <!-- Kitchen Type Label -->
+                        <Label Text="House Status" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+
+                        <!-- Kitchen Type Picker (Styled like an Input Box) -->
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                            <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Status" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- House Room Size Section -->
+                    <StackLayout Grid.Column="1">
+                        <!-- House Room Size Label -->
+                        <Label Text="Water Type" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+
+                        <!-- House Room Size Picker (Styled like an Input Box) -->
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                            <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid}" ItemDisplayBinding="{Binding Text}" Title="Select Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+
+                <Grid ColumnSpacing="8" RowSpacing="0">
+                    <!-- Define two equal-width columns -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Kitchen Type Section -->
+                    <StackLayout Grid.Column="0">
+                        <!-- Kitchen Type Label -->
+                        <Label Text="County" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+
+                        <!-- Kitchen Type Picker (Styled like an Input Box) -->
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                            <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select County" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- House Room Size Section -->
+                    <StackLayout Grid.Column="1">
+                        <!-- House Room Size Label -->
+                        <Label Text="Sub County" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+
+                        <!-- House Room Size Picker (Styled like an Input Box) -->
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                            <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+
+                <Grid ColumnSpacing="8" RowSpacing="0">
+                    <!-- Define two equal-width columns -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Kitchen Type Section -->
+                    <StackLayout Grid.Column="0">
+                        <!-- Kitchen Type Label -->
+                        <Label Text="Subcounty Ward" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+
+                        <!-- Kitchen Type Picker (Styled like an Input Box) -->
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                            <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty Ward" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- House Room Size Section -->
+                    <StackLayout Grid.Column="1">
+                        <!-- House Room Size Label -->
+                        <Label Text="Rent Due Day" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+
+                        <!-- House Room Size Picker (Styled like an Input Box) -->
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                            <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid}" ItemDisplayBinding="{Binding Text}" Title="Select Rent Due Day" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+
+                <Grid ColumnSpacing="8" RowSpacing="12">
+                    <!-- Define two equal-width columns -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- First Row -->
+                    <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="8" HorizontalOptions="Start">
+                        <CheckBox IsChecked="{Binding HouseroomData.Forcaretaker, Mode=TwoWay}" />
+                        <Label Text="Has Agent?" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="8" HorizontalOptions="Start">
+                        <CheckBox IsChecked="{Binding HouseroomData.Isshop, Mode=TwoWay}" />
+                        <Label Text="Has Deposit?" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Grid.Row="0" Grid.Column="2" Spacing="8" HorizontalOptions="Start">
+                        <CheckBox IsChecked="{Binding HouseroomData.Isshop, Mode=TwoWay}" />
+                        <Label Text="Water Metered?" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <Grid ColumnSpacing="8" RowSpacing="0">
+                    <!-- Define two equal-width columns -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Kitchen Type Section -->
+                    <StackLayout Grid.Column="0">
+                        <!-- Kitchen Type Label -->
+                        <Label Text="Deposit Month(s)" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+                        <!-- Kitchen Type Picker (Styled like an Input Box) -->
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                            <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty Ward" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- House Room Size Section -->
+                    <StackLayout Grid.Column="1">
+                        <!-- House Room Size Label -->
+                        <Label Text="Notice Period" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+
+                        <!-- House Room Size Picker (Styled like an Input Box) -->
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                            <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid}" ItemDisplayBinding="{Binding Text}" Title="Select Rent Due Day" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                        </Frame>
+                    </StackLayout>
+                    <!-- House Room Size Section -->
+                    <StackLayout Grid.Column="2">
+                        <!-- House Room Size Label -->
+                        <Label Text="Water Unit Price" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+
+                        <!-- House Room Size Picker (Styled like an Input Box) -->
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                            <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid}" ItemDisplayBinding="{Binding Text}" Title="Select Rent Due Day" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+                
+                <StackLayout>
+                    <!-- House Room # Label -->
+                    <Label Text="Street or landmark" FontAttributes="Bold" FontSize="13"  Margin="0,0,0,4" TextColor="#0a506c"/>
+                    <!-- House Room # Entry (Styled like an Input Box) -->
+                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,10"  HeightRequest="40">
+                        <Entry Text="{Binding Systempropertyhousesizename}" Placeholder="Start with near land mark and next to a landmark" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <!-- House Room # Label -->
+                    <Label Text="Contact Details if vacant" FontAttributes="Bold" FontSize="13"  Margin="0,0,0,4" TextColor="#0a506c"/>
+                    <!-- House Room # Entry (Styled like an Input Box) -->
+                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,10"  HeightRequest="40">
+                        <Entry Text="{Binding Systempropertyhousesizename}" Placeholder="Phonenumber1,Phonenumber2,Phonenumber3,....." PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                    </Frame>
+                </StackLayout>
                 <!-- Navigation Button -->
                 <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50" />
             </StackLayout>
@@ -20,7 +199,7 @@
             <!-- Step 2 -->
             <StackLayout IsVisible="{Binding IsStep2Visible}" Padding="16" Spacing="16">
                 <!-- Header -->
-                <Label Text="Step 2: Room Water Meter Reading" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="Step 2: House Rooms and Amount" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
 
                 <!-- Navigation Buttons at Start and End -->
                 <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
@@ -34,9 +213,9 @@
             <!-- Step 3 -->
             <StackLayout IsVisible="{Binding IsStep3Visible}" Padding="16" Spacing="16">
                 <!-- Section Header for Tenant Details -->
-                <Label Text="Tenant Details" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
+                <Label Text="Step 2: House Deposits and Amount" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
 
-               
+
                 <!-- Navigation Buttons -->
                 <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
                     <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
