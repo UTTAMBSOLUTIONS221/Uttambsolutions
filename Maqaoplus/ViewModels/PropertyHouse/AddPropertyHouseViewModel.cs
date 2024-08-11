@@ -250,12 +250,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             if (SystempropertyData == null)
                 return;
-
-            // Update the SystemProperty object with data from collections
-            SystempropertyData.Propertyhousesize = PropertyHouseSizes.ToList();
-            SystempropertyData.Propertyhousedepositfee = PropertyHouseDepositFees.ToList();
-            SystempropertyData.Propertyhousebenefit = PropertyHouseBenefits.ToList();
-
+            SystempropertyData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Datecreated = DateTime.Now;
+            SystempropertyData.Datemodified = DateTime.Now;
             // Save the data to API or other service
             await SaveSystemPropertyAsync(SystempropertyData);
         }
