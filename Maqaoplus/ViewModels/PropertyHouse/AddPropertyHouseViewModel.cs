@@ -601,21 +601,29 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsLoading = false;
                 return;
             }
-
             SystempropertyData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Propertyhouseposter = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Datecreated = DateTime.Now;
             SystempropertyData.Datemodified = DateTime.Now;
-            // Save the data to API or other service
-            await SaveSystemPropertyAsync(SystempropertyData);
-            IsLoading = false;
-        }
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, JsonConvert.SerializeObject(SystempropertyData));
 
-        private Task SaveSystemPropertyAsync(Systemproperty systemProperty)
-        {
-            throw new NotImplementedException();
+                if (response != null)
+                {
+                    // Handle response and show success message if needed
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
         public bool IsStep1Visible
         {
