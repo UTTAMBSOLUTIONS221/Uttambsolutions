@@ -212,7 +212,7 @@
                         </Frame>
                     </StackLayout>
                     <!-- Navigation Button -->
-                    <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50" />
+                    <Button Text="Next" Command="{Binding NextCommand}"   IsEnabled="{Binding IsValid}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50" />
                 </StackLayout>
 
                 <!-- Step 2 -->

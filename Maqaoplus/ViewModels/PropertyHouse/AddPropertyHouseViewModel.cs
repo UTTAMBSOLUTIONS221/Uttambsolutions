@@ -41,6 +41,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        private bool _isValid;
+        public bool IsValid
+        {
+            get => _isValid;
+            private set
+            {
+                if (_isValid != value)
+                {
+                    _isValid = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private bool _isProcessing;
 
         private ObservableCollection<ListModel> _systemcounty;
@@ -310,6 +323,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             // Move to the next step
             if (_isStep1Visible)
             {
+                if (!ValidateStep1())
+                {
+                    return;
+                }
                 _isStep1Visible = false;
                 _isStep2Visible = true;
             }
@@ -357,6 +374,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnPropertyChanged(nameof(IsStep2Visible));
             OnPropertyChanged(nameof(IsStep3Visible));
             OnPropertyChanged(nameof(IsStep4Visible));
+        }
+
+        private bool ValidateStep1()
+        {
+            bool isValid = true;
+            if (string.IsNullOrWhiteSpace(SystempropertyData?.Propertyhousename))
+            {
+                return !isValid;
+            }
+            IsValid = isValid;
+            return isValid;
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
