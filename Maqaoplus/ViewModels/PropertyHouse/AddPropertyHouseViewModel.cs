@@ -609,7 +609,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SystempropertyData.Datemodified = DateTime.Now;
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registersystempropertyhousedata", HttpMethod.Post, JsonConvert.SerializeObject(SystempropertyData));
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registersystempropertyhousedata", HttpMethod.Post, SystempropertyData);
 
                 if (response != null)
                 {
