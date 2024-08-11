@@ -25,6 +25,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private ObservableCollection<ListModel> _systemcounty;
         private ObservableCollection<ListModel> _systemsubcounty;
         private ObservableCollection<ListModel> _systemsubcountyward;
+        private ObservableCollection<ListModel> _systemhouseentrystatus;
         private ObservableCollection<ListModel> _systemhousewatertype;
         private ObservableCollection<ListModel> _systemhouserentdueday;
         private ObservableCollection<ListModel> _systemhouserentdepositmonths;
@@ -44,6 +45,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep2Visible = false;
             _isStep3Visible = false;
             _isStep4Visible = false;
+            Systemhouseentrystatus = new ObservableCollection<ListModel>
+            {
+                new ListModel { Value = "0", Text = "First Tenants" },
+                new ListModel { Value = "1", Text = "Second Tenants" },
+
+            };
             Systemhouserentdueday = new ObservableCollection<ListModel>();
             for (int i = 1; i <= 28; i++)
             {
@@ -97,6 +104,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        public ObservableCollection<ListModel> Systemhouseentrystatus
+        {
+            get => _systemhouseentrystatus;
+            set
+            {
+                _systemhouseentrystatus = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<ListModel> Systemhousewatertype
         {
             get => _systemhousewatertype;

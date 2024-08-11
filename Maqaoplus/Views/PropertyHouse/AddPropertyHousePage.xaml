@@ -36,7 +36,7 @@
 
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Status" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select House Entry Status" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
 
@@ -47,7 +47,7 @@
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemhousewatertype}" SelectedItem="{Binding Systemhousewatertypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemhousewatertype}" SelectedItem="{Binding Systemhousewatertypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Water Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
                 </Grid>
@@ -150,7 +150,7 @@
                         <Label Text="Deposit Month(s)" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemhousedepostmonths}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty Ward" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemhousedepostmonths}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
 
@@ -161,7 +161,7 @@
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemhousevacantnoticeperiod}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid}" ItemDisplayBinding="{Binding Text}" Title="Select Rent Due Day" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemhousevacantnoticeperiod}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid}" ItemDisplayBinding="{Binding Text}" Title="Select Vacation Notice Period" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
                     <!-- House Room Size Section -->
@@ -171,7 +171,7 @@
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid}" ItemDisplayBinding="{Binding Text}" Title="Select Rent Due Day" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Entry Text="{Binding Systempropertyhousesizename}" Placeholder="Enter Price per Unit " PlaceholderColor="#0a506c" Keyboard="Numeric" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
                         </Frame>
                     </StackLayout>
                 </Grid>
