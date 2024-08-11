@@ -25,7 +25,7 @@
                     HeightRequest="100"  
                     Grid.Row="0" />
 
-        <ScrollView Padding="8">
+        <ScrollView>
             <VerticalStackLayout>
                 <!-- Step 1 -->
                 <StackLayout IsVisible="{Binding IsStep1Visible}" Padding="4,8" Spacing="8">
