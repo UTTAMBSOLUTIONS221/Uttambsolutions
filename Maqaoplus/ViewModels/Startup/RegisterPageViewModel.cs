@@ -126,7 +126,14 @@ namespace Maqaoplus.ViewModels.Startup
                     Emailaddress = EmailAddress,
                     Phonenumber = PhoneNumber,
                     Passwords = Password,
-                    Confirmpasswords = ConfirmPassword
+                    Confirmpasswords = ConfirmPassword,
+                    Datecreated = DateTime.Now,
+                    Datemodified = DateTime.Now,
+                    Lastlogin = DateTime.Now,
+                    Loginstatus = 1,
+                    Updateprofile = true,
+                    Parentid = 0,
+                    Passwordresetdate = DateTime.Now.AddDays(90),
                 };
 
                 // Call your registration service here
