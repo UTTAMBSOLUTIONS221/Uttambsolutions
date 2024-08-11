@@ -55,12 +55,29 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadItemsCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
+        public ICommand SavePropertyHouseCommand { get; }
+
+        public Systemproperty SystempropertyData
+        {
+            get => _systempropertyData;
+            set
+            {
+                _systempropertyData = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<Systempropertyhousesize> PropertyHouseSizes { get; set; } = new ObservableCollection<Systempropertyhousesize>();
+        public ObservableCollection<Systempropertyhousedepositfees> PropertyHouseDepositFees { get; set; } = new ObservableCollection<Systempropertyhousedepositfees>();
+        public ObservableCollection<Systempropertyhousebenefits> PropertyHouseBenefits { get; set; } = new ObservableCollection<Systempropertyhousebenefits>();
+
         public AddPropertyHouseViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             LoadItemsCommand = new Command(async () => await LoadItems());
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
+            LoadItemsCommand = new Command(async () => await LoadItems());
+            SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
 
             // Initialize steps
             _isStep1Visible = true;
@@ -171,15 +188,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-        public Systemproperty SystempropertyData
-        {
-            get => _systempropertyData;
-            set
-            {
-                _systempropertyData = value;
-                OnPropertyChanged();
-            }
-        }
 
         private async Task LoadItems()
         {
@@ -235,6 +243,26 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
+        }
+
+
+        public async Task SavePropertyHouseAsync()
+        {
+            if (SystempropertyData == null)
+                return;
+
+            // Update the SystemProperty object with data from collections
+            SystempropertyData.Propertyhousesize = PropertyHouseSizes.ToList();
+            SystempropertyData.Propertyhousedepositfee = PropertyHouseDepositFees.ToList();
+            SystempropertyData.Propertyhousebenefit = PropertyHouseBenefits.ToList();
+
+            // Save the data to API or other service
+            await SaveSystemPropertyAsync(SystempropertyData);
+        }
+
+        private Task SaveSystemPropertyAsync(Systemproperty systemProperty)
+        {
+            throw new NotImplementedException();
         }
         public bool IsStep1Visible
         {
