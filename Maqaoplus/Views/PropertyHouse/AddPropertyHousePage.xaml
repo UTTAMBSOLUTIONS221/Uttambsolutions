@@ -36,9 +36,10 @@
                         <!-- House Room # Label -->
                         <Label Text="House Name" FontAttributes="Bold" FontSize="13"  Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- House Room # Entry (Styled like an Input Box) -->
-                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,10"  HeightRequest="40">
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0"  HeightRequest="40">
                             <Entry Text="{Binding SystempropertyData.Propertyhousename}" Placeholder="Enter house name" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
                         </Frame>
+                        <Label Text="{Binding PropertyHouseNameError}" TextColor="Red" />
                     </StackLayout>
 
                     <Grid ColumnSpacing="8" RowSpacing="0">
@@ -212,7 +213,7 @@
                         </Frame>
                     </StackLayout>
                     <!-- Navigation Button -->
-                    <Button Text="Next" Command="{Binding NextCommand}"   IsEnabled="{Binding IsValid}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50" />
+                    <Button Text="Next" Command="{Binding NextCommand}"  BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50" />
                 </StackLayout>
 
                 <!-- Step 2 -->

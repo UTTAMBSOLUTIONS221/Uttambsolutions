@@ -52,7 +52,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
         private async void AddPropertyHouseAsync()
         {
+            IsLoading = true;
             await Shell.Current.GoToAsync(nameof(AddPropertyHousePage));
+            IsLoading = false;
         }
         private async Task LoadItems()
         {
