@@ -32,6 +32,12 @@ namespace API.Controllers
             return await bl.Getsystempropertyhousedetaildatabyid(Propertyid);
         }
         [AllowAnonymous]
+        [HttpPost("Registersystempropertyhousedata")]
+        public async Task<Genericmodel> Registersystempropertyhousedata(Systemproperty model)
+        {
+            return await bl.Registersystempropertyhousedata(JsonConvert.SerializeObject(model));
+        }
+        [AllowAnonymous]
         [HttpGet("Getsystempropertyhousetenantdatabytenantid/{TenantId}")]
         public async Task<PropertyHouseRoomTenantModel> Getsystempropertyhousetenantdatabytenantid(long TenantId)
         {
