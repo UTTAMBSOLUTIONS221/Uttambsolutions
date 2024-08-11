@@ -1,4 +1,8 @@
-﻿using System.ComponentModel;
+﻿using DBL.Entities;
+using DBL.Enum;
+using DBL.Models;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -34,8 +38,43 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep2Visible = false;
             _isStep3Visible = false;
             _isStep4Visible = false;
+            await LoadDropdownData();
         }
+        private async Task LoadDropdownData()
+        {
+            if (_isDisposed)
+                return;
 
+            try
+            {
+                var SystemcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemCounty, HttpMethod.Get);
+                var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemSubCounty, HttpMethod.Get);
+                var SystemsubcountywardResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemSubCountyWard, HttpMethod.Get);
+                var SystemhousewatertypeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemhousewatertype, HttpMethod.Get);
+
+                if (SystemcountyResponse != null)
+                {
+                    Systemkitchentype = new ObservableCollection<ListModel>(SystemcountyResponse);
+                }
+
+                if (SystemsubcountyResponse != null)
+                {
+                    Systempropertyhousesize = new ObservableCollection<ListModel>(SystemsubcountyResponse);
+                }
+                if (SystemsubcountywardResponse != null)
+                {
+                    Systempropertyhousesize = new ObservableCollection<ListModel>(SystemsubcountywardResponse);
+                }
+                if (SystemhousewatertypeResponse != null)
+                {
+                    Systempropertyhousesize = new ObservableCollection<ListModel>(SystemhousewatertypeResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
         public bool IsStep1Visible
         {
             get => _isStep1Visible;

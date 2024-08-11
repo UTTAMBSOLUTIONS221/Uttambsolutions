@@ -11,7 +11,7 @@
             <!-- Step 1 -->
             <StackLayout IsVisible="{Binding IsStep1Visible}" Padding="4,8" Spacing="8">
                 <!-- Header -->
-                <Label Text="Step 1: Basic House Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="Step 1: Basic House Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#0a506c"/>
 
                 <StackLayout>
                     <!-- House Room # Label -->
@@ -32,7 +32,7 @@
                     <!-- Kitchen Type Section -->
                     <StackLayout Grid.Column="0">
                         <!-- Kitchen Type Label -->
-                        <Label Text="House Status" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+                        <Label Text="House Status" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
 
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
@@ -43,7 +43,7 @@
                     <!-- House Room Size Section -->
                     <StackLayout Grid.Column="1">
                         <!-- House Room Size Label -->
-                        <Label Text="Water Type" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+                        <Label Text="Water Type" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
@@ -62,7 +62,7 @@
                     <!-- Kitchen Type Section -->
                     <StackLayout Grid.Column="0">
                         <!-- Kitchen Type Label -->
-                        <Label Text="County" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+                        <Label Text="County" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
 
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
@@ -73,7 +73,7 @@
                     <!-- House Room Size Section -->
                     <StackLayout Grid.Column="1">
                         <!-- House Room Size Label -->
-                        <Label Text="Sub County" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+                        <Label Text="Sub County" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
@@ -92,7 +92,7 @@
                     <!-- Kitchen Type Section -->
                     <StackLayout Grid.Column="0">
                         <!-- Kitchen Type Label -->
-                        <Label Text="Subcounty Ward" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+                        <Label Text="Subcounty Ward" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
 
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
@@ -103,7 +103,7 @@
                     <!-- House Room Size Section -->
                     <StackLayout Grid.Column="1">
                         <!-- House Room Size Label -->
-                        <Label Text="Rent Due Day" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+                        <Label Text="Rent Due Day" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
@@ -147,7 +147,7 @@
                     <!-- Kitchen Type Section -->
                     <StackLayout Grid.Column="0">
                         <!-- Kitchen Type Label -->
-                        <Label Text="Deposit Month(s)" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+                        <Label Text="Deposit Month(s)" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
                             <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding HouseroomData.Kitchentypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty Ward" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
@@ -157,7 +157,7 @@
                     <!-- House Room Size Section -->
                     <StackLayout Grid.Column="1">
                         <!-- House Room Size Label -->
-                        <Label Text="Notice Period" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+                        <Label Text="Notice Period" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
@@ -167,7 +167,7 @@
                     <!-- House Room Size Section -->
                     <StackLayout Grid.Column="2">
                         <!-- House Room Size Label -->
-                        <Label Text="Water Unit Price" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4"/>
+                        <Label Text="Water Unit Price" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
