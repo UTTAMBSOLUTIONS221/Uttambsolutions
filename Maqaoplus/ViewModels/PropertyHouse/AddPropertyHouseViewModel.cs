@@ -1,5 +1,6 @@
 ﻿using DBL.Enum;
 using DBL.Models;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,18 +10,37 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 {
     public class AddPropertyHouseViewModel : INotifyPropertyChanged
     {
+        private readonly Services.ServiceProvider _serviceProvider;
+        private PropertyHouseRoomTenantData _tenantData;
 
-
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private bool _isStep1Visible;
         private bool _isStep2Visible;
         private bool _isStep3Visible;
         private bool _isStep4Visible;
 
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _isDataLoaded;
+        public bool IsDataLoaded
+        {
+            get => _isDataLoaded;
+            set
+            {
+                _isDataLoaded = value;
+                OnPropertyChanged();
+            }
+        }
         private bool _isProcessing;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private readonly Services.ServiceProvider _serviceProvider;
 
         private ObservableCollection<ListModel> _systemcounty;
         private ObservableCollection<ListModel> _systemsubcounty;
@@ -31,12 +51,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private ObservableCollection<ListModel> _systemhouserentdepositmonths;
         private ObservableCollection<ListModel> _systemhousevacantnoticeperiod;
 
+        public ICommand LoadItemsCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
         public AddPropertyHouseViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-
+            LoadItemsCommand = new Command(async () => await LoadItems());
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
 
@@ -147,6 +168,39 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 _systemhousevacantnoticeperiod = value;
                 OnPropertyChanged();
+            }
+        }
+        public PropertyHouseRoomTenantData TenantData
+        {
+            get => _tenantData;
+            set
+            {
+                _tenantData = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private async Task LoadItems()
+        {
+            IsLoading = true;
+            IsDataLoaded = false;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null)
+                {
+                    TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
+                }
+                IsDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
         private async Task LoadDropdownData()

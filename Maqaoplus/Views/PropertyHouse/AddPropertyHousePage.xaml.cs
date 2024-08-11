@@ -8,4 +8,12 @@ public partial class AddPropertyHousePage : ContentPage
         InitializeComponent();
         this.BindingContext = viewModel;
     }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is AddPropertyHouseViewModel viewModel && viewModel.LoadItemsCommand.CanExecute(null))
+        {
+            viewModel.LoadItemsCommand.Execute(null);
+        }
+    }
 }
