@@ -9,6 +9,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private readonly Services.ServiceProvider _serviceProvider;
         public ObservableCollection<Systemproperty> Items { get; }
 
+        public ICommand AddNewHouseCommand { get; }
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
 
@@ -38,6 +39,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public PropertyHouseViewModel()
         {
             Items = new ObservableCollection<Systemproperty>();
+            AddNewHouseCommand = new Command(OnAddNewHouse);
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
         }
@@ -47,7 +49,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             _serviceProvider = serviceProvider;
         }
-
+        private async void OnAddNewHouse()
+        {
+            await Shell.Current.GoToAsync(nameof(ForgotPasswordPage));
+        }
         private async Task LoadItems()
         {
             IsLoading = true;

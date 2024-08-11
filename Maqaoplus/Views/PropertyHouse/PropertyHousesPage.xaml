@@ -17,6 +17,25 @@
     </ContentPage.BindingContext>
 
     <Grid>
+        <!-- Define Row Heights for Header and Content -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- For Header (Button) -->
+            <RowDefinition Height="*" />
+            <!-- For Content (ScrollView) -->
+        </Grid.RowDefinitions>
+
+        <!-- Button to Add New House -->
+        <Button Text="Add New House"
+                Command="{Binding AddNewHouseCommand}" 
+            BackgroundColor="#0a506c"
+                TextColor="White"
+                FontSize="16"
+                Padding="10"
+                HorizontalOptions="FillAndExpand"
+                Grid.Row="0"
+                Margin="5" />
+
         <!-- ActivityIndicator -->
         <ActivityIndicator IsRunning="{Binding IsLoading}" 
                            IsVisible="{Binding IsLoading}" 
@@ -24,9 +43,11 @@
                            VerticalOptions="Center" 
                            Color="#0a506c" 
                            WidthRequest="100" 
-                           HeightRequest="100"  />
+                           HeightRequest="100"  
+                           Grid.Row="1" />
 
-        <ScrollView IsVisible="{Binding IsDataLoaded}">
+        <!-- ScrollView with CollectionView -->
+        <ScrollView IsVisible="{Binding IsDataLoaded}" Grid.Row="1">
             <CollectionView x:Name="PropertyHousesCollectionView"
                             ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>
