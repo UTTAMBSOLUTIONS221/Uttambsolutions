@@ -44,6 +44,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep2Visible = false;
             _isStep3Visible = false;
             _isStep4Visible = false;
+            Systemhouserentdueday = new ObservableCollection<ListModel>();
             for (int i = 1; i <= 28; i++)
             {
                 string suffix = i switch
@@ -55,10 +56,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 };
                 Systemhouserentdueday.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
             }
+            var Systemhousedepostmonths = new ObservableCollection<ListModel>();
             for (int i = 1; i <= 6; i++)
             {
                 Systemhousedepostmonths.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
             }
+            var Systemhousevacantnoticeperiod = new ObservableCollection<ListModel>();
             for (int i = 1; i <= 12; i++)
             {
                 Systemhousevacantnoticeperiod.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
