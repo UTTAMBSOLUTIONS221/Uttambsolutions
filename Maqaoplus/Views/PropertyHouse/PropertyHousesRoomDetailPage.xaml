@@ -38,7 +38,7 @@
 
                         <!-- Kitchen Type Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding HouseroomData.Kitchentypeid, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Kitchen Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding SelectedKitchentype, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Kitchen Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
 
@@ -49,7 +49,7 @@
 
                         <!-- House Room Size Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                            <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding HouseroomData.Systempropertyhousesizeid, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Size" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding SelectedPropertyhousesize, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Size" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                         </Frame>
                     </StackLayout>
                 </Grid>

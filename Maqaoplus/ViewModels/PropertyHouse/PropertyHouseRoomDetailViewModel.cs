@@ -1,90 +1,71 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
-using Maqaoplus.Views;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.PropertyHouse
 {
-    public class PropertyHouseRoomDetailViewModel : BaseViewModel
+    public class PropertyHouseRoomDetailViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
         private long _propertyRoomId;
         private long _propertyRoomTenantId;
         private Systempropertyhouserooms _houseroomData;
-        private SystemStaff _tenantStaffData;
-        private bool _isLoading;
-        private ObservableCollection<ListModel> _systemkitchentype;
-        private ListModel _selectedKitchentype;
-        private ObservableCollection<ListModel> _systempropertyhousesize;
-        private ListModel _selectedSize;
-        private string _systempropertyhousesizename;
-        private bool _continueWithoutTenant;
-        private bool _forcaretaker;
-        private bool _isshop;
-        private bool _isgroundfloor;
-        private bool _hasbalcony;
-        private bool _isunderrenovation;
-        private string _searchId;
-        private bool _isProcessing;
-        private string _searchResults;
 
-        private decimal _openingMeter;
-        private decimal _closingMeter;
-        private decimal _movedMeter;
-        private decimal _consumedAmount;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private bool _isStep1Visible;
         private bool _isStep2Visible;
         private bool _isStep3Visible;
         private bool _isStep4Visible;
 
-        private bool _isDisposed;
-
-
-        public ICommand LoadRoomDetailCommand { get; }
-        public ICommand SaveCommand { get; }
-        public ICommand SearchCommand { get; }
-        public ICommand CloseCommand { get; }
-        public ICommand NextCommand { get; }
-        public ICommand PreviousCommand { get; }
-
-        public PropertyHouseRoomDetailViewModel()
+        private bool _isLoading;
+        public bool IsLoading
         {
-            LoadRoomDetailCommand = new Command(async () => await LoadRoomDetails());
-            SaveCommand = new Command(async () => await SaveRoomDetails());
-            SearchCommand = new Command(async () => await Search());
-            NextCommand = new Command(NextStep);
-            PreviousCommand = new Command(PreviousStep);
-
-            // Initialize steps
-            _isStep1Visible = true;
-            _isStep2Visible = false;
-            _isStep3Visible = false;
-            _isStep4Visible = false;
-        }
-
-        public PropertyHouseRoomDetailViewModel(Services.ServiceProvider serviceProvider) : this()
-        {
-            _serviceProvider = serviceProvider;
-        }
-
-        public void SetPropertyRoomId(long propertyRoomId)
-        {
-            _propertyRoomId = propertyRoomId;
-            LoadRoomDetailCommand.Execute(null);
-        }
-        public long PropertyRoomTenantId
-        {
-            get => _propertyRoomTenantId;
+            get => _isLoading;
             set
             {
-                _propertyRoomTenantId = value;
+                _isLoading = value;
                 OnPropertyChanged();
             }
         }
+        private bool _isDataLoaded;
+        public bool IsDataLoaded
+        {
+            get => _isDataLoaded;
+            set
+            {
+                _isDataLoaded = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _isValid;
+        public bool IsValid
+        {
+            get => _isValid;
+            private set
+            {
+                if (_isValid != value)
+                {
+                    _isValid = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool _isProcessing;
+
+        private ObservableCollection<ListModel> _systemkitchentype;
+        private ObservableCollection<ListModel> _systempropertyhousesize;
+
+        public ICommand LoadItemsCommand { get; }
+        public ICommand NextCommand { get; }
+        public ICommand PreviousCommand { get; }
+        public ICommand SavePropertyHouseCommand { get; }
+
         public Systempropertyhouserooms HouseroomData
         {
             get => _houseroomData;
@@ -94,25 +75,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-
-        public SystemStaff TenantStaffData
+        public void SetPropertyRoomId(long propertyRoomId)
         {
-            get => _tenantStaffData;
-            set
-            {
-                _tenantStaffData = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set
-            {
-                _isLoading = value;
-                OnPropertyChanged();
-            }
+            _propertyRoomId = propertyRoomId;
+            LoadItemsCommand.Execute(null);
         }
 
         public ObservableCollection<ListModel> Systemkitchentype
@@ -124,16 +90,33 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-
+        private ListModel _selectedKitchentype;
         public ListModel SelectedKitchentype
         {
             get => _selectedKitchentype;
             set
             {
                 _selectedKitchentype = value;
-                OnPropertyChanged();
+
+                // Ensure SystempropertyData is not null
+                if (HouseroomData != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int kitchentypeid))
+                    {
+                        HouseroomData.Kitchentypeid = kitchentypeid;
+                    }
+                    else
+                    {
+                        HouseroomData.Kitchentypeid = 0;
+                    }
+
+                    OnPropertyChanged(nameof(SelectedKitchentype));
+                    OnPropertyChanged(nameof(HouseroomData.Kitchentypeid));
+                }
             }
         }
+
 
         public ObservableCollection<ListModel> Systempropertyhousesize
         {
@@ -144,163 +127,210 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-
-        public ListModel SelectedSize
+        private ListModel _selectedPropertyhousesize;
+        public ListModel SelectedPropertyhousesize
         {
-            get => _selectedSize;
+            get => _selectedPropertyhousesize;
             set
             {
-                _selectedSize = value;
-                OnPropertyChanged();
-            }
-        }
+                _selectedPropertyhousesize = value;
 
-        public string Systempropertyhousesizename
-        {
-            get => _systempropertyhousesizename;
-            set
-            {
-                _systempropertyhousesizename = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-
-        public bool Forcaretaker
-        {
-            get => _forcaretaker;
-            set
-            {
-                _forcaretaker = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Isshop
-        {
-            get => _isshop;
-            set
-            {
-                _isshop = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Isgroundfloor
-        {
-            get => _isgroundfloor;
-            set
-            {
-                _isgroundfloor = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Hasbalcony
-        {
-            get => _hasbalcony;
-            set
-            {
-                _hasbalcony = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Isunderrenovation
-        {
-            get => _isunderrenovation;
-            set
-            {
-                _isunderrenovation = value;
-                OnPropertyChanged();
-            }
-        }
-        public decimal OpeningMeter
-        {
-            get => _openingMeter;
-            set
-            {
-                _openingMeter = value;
-                OnPropertyChanged();
-                CalculateMeterValues();
-            }
-        }
-        public decimal ClosingMeter
-        {
-            get => _closingMeter;
-            set
-            {
-                _closingMeter = value;
-                OnPropertyChanged();
-                if (ClosingMeter > 0)
+                // Ensure SystempropertyData is not null
+                if (HouseroomData != null)
                 {
-                    CalculateMeterValues();
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int systempropertyhousesizeid))
+                    {
+                        HouseroomData.Systempropertyhousesizeid = systempropertyhousesizeid;
+                    }
+                    else
+                    {
+                        HouseroomData.Systempropertyhousesizeid = 0;
+                    }
+
+                    OnPropertyChanged(nameof(SelectedPropertyhousesize));
+                    OnPropertyChanged(nameof(HouseroomData.Systempropertyhousesizeid));
                 }
             }
         }
 
-        public decimal MovedMeter
+
+
+        // Error properties
+        private string _propertyHouseNameError;
+        public string PropertyHouseNameError
         {
-            get => _movedMeter;
+            get => _propertyHouseNameError;
             set
             {
-                _movedMeter = value;
+                _propertyHouseNameError = value;
                 OnPropertyChanged();
             }
         }
 
-        public decimal ConsumedAmount
+        private string _streetOrLandmarkError;
+        public string StreetOrLandmarkError
         {
-            get => _consumedAmount;
+            get => _streetOrLandmarkError;
             set
             {
-                _consumedAmount = value;
+                _streetOrLandmarkError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _contactDetailsError;
+        public string ContactDetailsError
+        {
+            get => _contactDetailsError;
+            set
+            {
+                _contactDetailsError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _propertyHouseStatusError;
+        public string PropertyHouseStatusError
+        {
+            get => _propertyHouseStatusError;
+            set
+            {
+                _propertyHouseStatusError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _propertyHouseWaterTypeError;
+        public string PropertyHouseWaterTypeError
+        {
+            get => _propertyHouseWaterTypeError;
+            set
+            {
+                _propertyHouseWaterTypeError = value;
                 OnPropertyChanged();
             }
         }
 
 
-        private void CalculateMeterValues()
+        private string _propertyHouseCountyError;
+        public string PropertyHouseCountyError
         {
-            if (HouseroomData.Openingmeter >= 0 && ClosingMeter > 0)
-            {
-                MovedMeter = ClosingMeter - HouseroomData.Openingmeter;
-                ConsumedAmount = MovedMeter * HouseroomData.Waterunitprice;
-            }
-        }
-        public void Dispose()
-        {
-            _isDisposed = true;
-        }
-        public bool IsProcessing
-        {
-            get => _isProcessing;
+            get => _propertyHouseCountyError;
             set
             {
-                _isProcessing = value;
-                OnPropertyChanged();
-                ((Command)SearchCommand).ChangeCanExecute();
-            }
-        }
-
-        public string SearchId
-        {
-            get => _searchId;
-            set
-            {
-                _searchId = value;
+                _propertyHouseCountyError = value;
                 OnPropertyChanged();
             }
         }
 
-        public string SearchResults
+        private string _propertyHouseSubcountyError;
+        public string PropertyHouseSubcountyError
         {
-            get => _searchResults;
+            get => _propertyHouseSubcountyError;
             set
             {
-                _searchResults = value;
+                _propertyHouseSubcountyError = value;
                 OnPropertyChanged();
+            }
+        }
+        private string _propertyHouseSubcountyWardError;
+        public string PropertyHouseSubcountyWardError
+        {
+            get => _propertyHouseSubcountyWardError;
+            set
+            {
+                _propertyHouseSubcountyWardError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _propertyHouseRentDueDayError;
+        public string PropertyHouseRentDueDayError
+        {
+            get => _propertyHouseRentDueDayError;
+            set
+            {
+                _propertyHouseRentDueDayError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _propertyHouseRentDepositMonthsError;
+        public string PropertyHouseRentDepositMonthsError
+        {
+            get => _propertyHouseRentDepositMonthsError;
+            set
+            {
+                _propertyHouseRentDepositMonthsError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _propertyHouseRentVacationPeriodMonthsError;
+        public string PropertyHouseRentVacationPeriodMonthsError
+        {
+            get => _propertyHouseRentVacationPeriodMonthsError;
+            set
+            {
+                _propertyHouseRentVacationPeriodMonthsError = value;
+                OnPropertyChanged();
+            }
+        }
+        public PropertyHouseRoomDetailViewModel(Services.ServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+            LoadItemsCommand = new Command(async () => await LoadRoomDetails());
+            NextCommand = new Command(NextStep);
+            PreviousCommand = new Command(PreviousStep);
+
+            // Initialize steps
+            _isStep1Visible = true;
+            _isStep2Visible = false;
+            _isStep3Visible = false;
+            _isStep4Visible = false;
+            LoadDropdownData();
+        }
+
+        private async Task LoadRoomDetails()
+        {
+            IsLoading = true;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/" + _propertyRoomId, HttpMethod.Get, null);
+
+                if (response != null)
+                {
+                    HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+        private async Task LoadDropdownData()
+        {
+            try
+            {
+                var kitchentypeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemkitchentype, HttpMethod.Get);
+                var sizeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyhousesizes, HttpMethod.Get);
+
+                if (kitchentypeResponse != null)
+                {
+                    Systemkitchentype = new ObservableCollection<ListModel>(kitchentypeResponse);
+                }
+
+                if (sizeResponse != null)
+                {
+                    Systempropertyhousesize = new ObservableCollection<ListModel>(sizeResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
 
@@ -343,169 +373,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-
-
-        private async Task LoadRoomDetails()
+        private async void NextStep()
         {
-            if (_isDisposed)
-                return;
-
             IsLoading = true;
 
-            try
-            {
-                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/" + _propertyRoomId, HttpMethod.Get, null);
-
-                if (response != null)
-                {
-                    HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
-                    await LoadDropdownData();
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-        }
-
-        private async Task LoadDropdownData()
-        {
-            if (_isDisposed)
-                return;
-
-            try
-            {
-                var kitchentypeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemkitchentype, HttpMethod.Get);
-                var sizeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyhousesizes, HttpMethod.Get);
-
-                if (kitchentypeResponse != null)
-                {
-                    Systemkitchentype = new ObservableCollection<ListModel>(kitchentypeResponse);
-                }
-
-                if (sizeResponse != null)
-                {
-                    Systempropertyhousesize = new ObservableCollection<ListModel>(sizeResponse);
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-        }
-        private async Task SaveRoomDetails()
-        {
-            if (_isDisposed)
-                return;
-            IsLoading = true;
-            if (IsProcessing || PropertyRoomTenantId == 0)
-                return;
-
-            var aggregatedData = new Systempropertyhouserooms
-            {
-                Systempropertyhouseroomid = HouseroomData.Systempropertyhouseroomid,
-                Systempropertyhouseid = HouseroomData.Systempropertyhouseid,
-                Systempropertyhousesizeid = HouseroomData.Systempropertyhousesizeid,
-                Systempropertyhousesizename = HouseroomData.Systempropertyhousesizename,
-                Isvacant = HouseroomData.Isvacant,
-                Isunderrenovation = HouseroomData.Isunderrenovation,
-                Isshop = HouseroomData.Isshop,
-                Isgroundfloor = HouseroomData.Isgroundfloor,
-                Hasbalcony = HouseroomData.Hasbalcony,
-                Forcaretaker = HouseroomData.Forcaretaker,
-                Kitchentypeid = HouseroomData.Kitchentypeid,
-                Systempropertyhousemeterid = HouseroomData.Systempropertyhousemeterid,
-                Systempropertyhouseroommeternumber = HouseroomData.Systempropertyhouseroommeternumber,
-                Openingmeter = HouseroomData.Openingmeter,
-                Movedmeter = MovedMeter,
-                Closingmeter = ClosingMeter,
-                Consumedamount = ConsumedAmount,
-                Tenantid = PropertyRoomTenantId,
-                Createdby = App.UserDetails.Usermodel.Userid,
-                Datecreated = DateTime.Now,
-                Meterhistorydata = HouseroomData.Meterhistorydata
-            };
-
-            try
-            {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, JsonConvert.SerializeObject(aggregatedData));
-
-                if (response != null)
-                {
-                    // Handle response and show success message if needed
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-        }
-
-        private async Task Search()
-        {
-            if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
-                return;
-
-            IsLoading = true;
-
-            try
-            {
-                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
-
-                if (response != null)
-                {
-                    TenantStaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
-
-                    // Navigate to the modal with the customer data
-                    var modalPage = new StaffDetailModalPage(
-                        TenantStaffData,
-                        new Command(OnOkClicked),
-                        new Command(OnCancelClicked)
-                    );
-                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
-                }
-                else
-                {
-                    SearchResults = "No results found.";
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-        }
-
-        private void OnOkClicked()
-        {
-            PropertyRoomTenantId = TenantStaffData.Userid;
-            SearchId = string.Empty;
-            Application.Current.MainPage.Navigation.PopModalAsync();
-        }
-
-        private void OnCancelClicked()
-        {
-            PropertyRoomTenantId = 0;
-            SearchId = string.Empty;
-            Application.Current.MainPage.Navigation.PopModalAsync();
-        }
-
-        private void NextStep()
-        {
+            await Task.Delay(500);
             // Move to the next step
             if (_isStep1Visible)
             {
+                if (!ValidateStep1())
+                {
+                    IsLoading = false;
+                    return;
+                }
                 _isStep1Visible = false;
                 _isStep2Visible = true;
             }
@@ -519,14 +399,18 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep3Visible = false;
                 _isStep4Visible = true;
             }
+            IsLoading = false;
             OnPropertyChanged(nameof(IsStep1Visible));
             OnPropertyChanged(nameof(IsStep2Visible));
             OnPropertyChanged(nameof(IsStep3Visible));
             OnPropertyChanged(nameof(IsStep4Visible));
         }
 
-        private void PreviousStep()
+        private async void PreviousStep()
         {
+            IsLoading = true;
+
+            await Task.Delay(500);
             // Move to the previous step
             if (_isStep4Visible)
             {
@@ -543,10 +427,139 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep2Visible = false;
                 _isStep1Visible = true;
             }
+            IsLoading = false;
+
             OnPropertyChanged(nameof(IsStep1Visible));
             OnPropertyChanged(nameof(IsStep2Visible));
             OnPropertyChanged(nameof(IsStep3Visible));
             OnPropertyChanged(nameof(IsStep4Visible));
         }
+        private bool ValidateStep1()
+        {
+            bool isValid = true;
+
+            // Validate Property Name
+            if (string.IsNullOrWhiteSpace(SystempropertyData?.Propertyhousename))
+            {
+                PropertyHouseNameError = "Property Name is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseNameError = null;
+            }
+
+            // Validate Street or Landmark
+            if (string.IsNullOrWhiteSpace(SystempropertyData?.Streetorlandmark))
+            {
+                StreetOrLandmarkError = "Street or Landmark is required.";
+                isValid = false;
+            }
+            else
+            {
+                StreetOrLandmarkError = null;
+            }
+
+            // Validate Contact Details
+            if (string.IsNullOrWhiteSpace(SystempropertyData?.Contactdetails))
+            {
+                ContactDetailsError = "Contact Details are required.";
+                isValid = false;
+            }
+            else
+            {
+                ContactDetailsError = null;
+            }
+
+            // Validate Property House Status
+            if (SystempropertyData?.Propertyhousestatus < 0)
+            {
+                PropertyHouseStatusError = "Property House Status is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseStatusError = null;
+            }
+            // Validate Property House Water Type
+            if (SystempropertyData?.Watertypeid == 0)
+            {
+                PropertyHouseWaterTypeError = "Property House Water Type is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseWaterTypeError = null;
+            }
+            // Validate Property House County
+            if (SystempropertyData?.Countyid == 0)
+            {
+                PropertyHouseCountyError = "Property House County is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseCountyError = null;
+            }
+            // Validate Property House Sub County
+            if (SystempropertyData?.Subcountyid == 0)
+            {
+                PropertyHouseSubcountyError = "Property House Subcounty is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseSubcountyError = null;
+            }
+            // Validate Property House sub County Ward
+            if (SystempropertyData?.Subcountywardid == 0)
+            {
+                PropertyHouseSubcountyWardError = "Property House Subcounty Ward is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseSubcountyWardError = null;
+            }
+            // Validate Property House Rent Deposit
+            if (SystempropertyData?.Rentdueday == 0)
+            {
+                PropertyHouseRentDueDayError = "Property House Rent Due Day is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentDueDayError = null;
+            }
+            // Validate Property House Rent Deposit Months
+            if (SystempropertyData?.Rentdepositmonth == 0)
+            {
+                PropertyHouseRentDepositMonthsError = "Property House Rent Deposit Months is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentDepositMonthsError = null;
+            }
+            // Validate Property House Vacation Period
+            if (SystempropertyData?.Vacantnoticeperiod == 0)
+            {
+                PropertyHouseRentVacationPeriodMonthsError = "Property House Vacation Period Months is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentVacationPeriodMonthsError = null;
+            }
+            // Update overall IsValid property
+            IsValid = isValid;
+
+            return isValid;
+        }
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }
