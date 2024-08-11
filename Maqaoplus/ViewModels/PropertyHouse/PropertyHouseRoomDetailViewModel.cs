@@ -338,30 +338,34 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             if (IsProcessing || PropertyRoomTenantId == 0)
                 return;
 
-            var aggregatedData = new Systempropertyhouserooms
+            await Task.Delay(500);
+            if (HouseroomData == null)
             {
-                Systempropertyhouseroomid = HouseroomData.Systempropertyhouseroomid,
-                Systempropertyhouseid = HouseroomData.Systempropertyhouseid,
-                Systempropertyhousesizeid = HouseroomData.Systempropertyhousesizeid,
-                Systempropertyhousesizename = HouseroomData.Systempropertyhousesizename,
-                Isvacant = HouseroomData.Isvacant,
-                Isunderrenovation = HouseroomData.Isunderrenovation,
-                Isshop = HouseroomData.Isshop,
-                Isgroundfloor = HouseroomData.Isgroundfloor,
-                Hasbalcony = HouseroomData.Hasbalcony,
-                Forcaretaker = HouseroomData.Forcaretaker,
-                Kitchentypeid = HouseroomData.Kitchentypeid,
-                Systempropertyhousemeterid = HouseroomData.Systempropertyhousemeterid,
-                Systempropertyhouseroommeternumber = HouseroomData.Systempropertyhouseroommeternumber,
-                Openingmeter = HouseroomData.Openingmeter,
-                Movedmeter = MovedMeter,
-                Closingmeter = ClosingMeter,
-                Consumedamount = ConsumedAmount,
-                Tenantid = PropertyRoomTenantId,
-                Createdby = App.UserDetails.Usermodel.Userid,
-                Datecreated = DateTime.Now,
-                Meterhistorydata = HouseroomData.Meterhistorydata
-            };
+                IsLoading = false;
+                return;
+            }
+            Systempropertyhouserooms aggregatedData = new Systempropertyhouserooms();
+            aggregatedData.Systempropertyhouseroomid = HouseroomData.Systempropertyhouseroomid;
+            aggregatedData.Systempropertyhouseid = HouseroomData.Systempropertyhouseid;
+            aggregatedData.Systempropertyhousesizeid = HouseroomData.Systempropertyhousesizeid;
+            aggregatedData.Systempropertyhousesizename = HouseroomData.Systempropertyhousesizename;
+            aggregatedData.Isvacant = HouseroomData.Isvacant;
+            aggregatedData.Isunderrenovation = HouseroomData.Isunderrenovation;
+            aggregatedData.Isshop = HouseroomData.Isshop;
+            aggregatedData.Isgroundfloor = HouseroomData.Isgroundfloor;
+            aggregatedData.Hasbalcony = HouseroomData.Hasbalcony;
+            aggregatedData.Forcaretaker = HouseroomData.Forcaretaker;
+            aggregatedData.Kitchentypeid = HouseroomData.Kitchentypeid;
+            aggregatedData.Systempropertyhousemeterid = HouseroomData.Systempropertyhousemeterid;
+            aggregatedData.Systempropertyhouseroommeternumber = HouseroomData.Systempropertyhouseroommeternumber;
+            aggregatedData.Openingmeter = HouseroomData.Openingmeter;
+            aggregatedData.Movedmeter = MovedMeter;
+            aggregatedData.Closingmeter = ClosingMeter;
+            aggregatedData.Consumedamount = ConsumedAmount;
+            aggregatedData.Tenantid = PropertyRoomTenantId;
+            aggregatedData.Createdby = App.UserDetails.Usermodel.Userid;
+            aggregatedData.Datecreated = DateTime.Now;
+            aggregatedData.Meterhistorydata = HouseroomData.Meterhistorydata;
 
             try
             {

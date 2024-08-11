@@ -6,12 +6,6 @@
              x:Class="Maqaoplus.Views.PropertyHouse.PropertyHousesRoomDetailPage"
              Title="House Room Details">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <!-- Define converters or resources here if needed -->
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ScrollView Padding="8">
 
         <VerticalStackLayout>
