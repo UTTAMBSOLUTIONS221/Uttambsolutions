@@ -598,6 +598,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SystempropertyData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Propertyhouseposter = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Datecreated = DateTime.Now;
             SystempropertyData.Datemodified = DateTime.Now;
             // Save the data to API or other service
