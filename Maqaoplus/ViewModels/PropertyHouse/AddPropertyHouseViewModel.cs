@@ -188,7 +188,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid", HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/0", HttpMethod.Get, null);
                 if (response != null)
                 {
                     SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
