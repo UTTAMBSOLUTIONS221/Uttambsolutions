@@ -288,7 +288,7 @@
                                 <!-- Amount -->
                                 <Entry Text="{Binding Systempropertyhousedepositfeeamount}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill"/>
                                 <!-- We have? -->
-                                <CheckBox IsChecked="{Binding Systempropertyhousesizewehave}" Grid.Column="2"/>
+                                <CheckBox IsChecked="{Binding Systempropertyhousesizedepositfeewehave}" Grid.Column="2"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
