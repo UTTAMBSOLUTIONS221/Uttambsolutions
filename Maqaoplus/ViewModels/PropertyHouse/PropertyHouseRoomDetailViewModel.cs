@@ -1,6 +1,7 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
+using Maqaoplus.Views;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,9 +15,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private readonly Services.ServiceProvider _serviceProvider;
         private long _propertyRoomId;
         private long _propertyRoomTenantId;
+        private string _searchId;
         private Systempropertyhouserooms _houseroomData;
-
+        private SystemStaff _tenantStaffData;
         public event PropertyChangedEventHandler PropertyChanged;
+
+
+        private decimal _openingMeter;
+        private decimal _closingMeter;
+        private decimal _movedMeter;
+        private decimal _consumedAmount;
 
         private bool _isStep1Visible;
         private bool _isStep2Visible;
@@ -24,6 +32,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isStep4Visible;
 
         private bool _isLoading;
+
         public bool IsLoading
         {
             get => _isLoading;
@@ -31,6 +40,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 _isLoading = value;
                 OnPropertyChanged();
+            }
+        }
+        private bool _isProcessing;
+        public bool IsProcessing
+        {
+            get => _isProcessing;
+            set
+            {
+                _isProcessing = value;
+                OnPropertyChanged();
+                ((Command)SearchCommand).ChangeCanExecute();
             }
         }
         private bool _isDataLoaded;
@@ -56,7 +76,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 }
             }
         }
-        private bool _isProcessing;
 
         private ObservableCollection<ListModel> _systemkitchentype;
         private ObservableCollection<ListModel> _systempropertyhousesize;
@@ -64,7 +83,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadItemsCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
-        public ICommand SavePropertyHouseCommand { get; }
+        public ICommand SearchCommand { get; }
+        public ICommand SaveCommand { get; }
+        public string SearchId
+        {
+            get => _searchId;
+            set
+            {
+                _searchId = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Systempropertyhouserooms HouseroomData
         {
@@ -75,12 +104,29 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        public SystemStaff TenantStaffData
+        {
+            get => _tenantStaffData;
+            set
+            {
+                _tenantStaffData = value;
+                OnPropertyChanged();
+            }
+        }
         public void SetPropertyRoomId(long propertyRoomId)
         {
             _propertyRoomId = propertyRoomId;
             LoadItemsCommand.Execute(null);
         }
-
+        public long PropertyRoomTenantId
+        {
+            get => _propertyRoomTenantId;
+            set
+            {
+                _propertyRoomTenantId = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<ListModel> Systemkitchentype
         {
             get => _systemkitchentype;
@@ -193,6 +239,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadItemsCommand = new Command(async () => await LoadRoomDetails());
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
+            SearchCommand = new Command(async () => await Search());
+            SaveCommand = new Command(async () => await SaveRoomDetails());
 
             // Initialize steps
             _isStep1Visible = true;
@@ -245,6 +293,159 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
+        }
+
+        private async Task Search()
+        {
+            if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
+                return;
+
+            IsLoading = true;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
+
+                if (response != null)
+                {
+                    TenantStaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+
+                    // Navigate to the modal with the customer data
+                    var modalPage = new StaffDetailModalPage(
+                        TenantStaffData,
+                        new Command(OnOkClicked),
+                        new Command(OnCancelClicked)
+                    );
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                }
+                else
+                {
+                    TenantStaffData = new SystemStaff();
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+        private async Task SaveRoomDetails()
+        {
+            IsLoading = true;
+            if (IsProcessing || PropertyRoomTenantId == 0)
+                return;
+
+            var aggregatedData = new Systempropertyhouserooms
+            {
+                Systempropertyhouseroomid = HouseroomData.Systempropertyhouseroomid,
+                Systempropertyhouseid = HouseroomData.Systempropertyhouseid,
+                Systempropertyhousesizeid = HouseroomData.Systempropertyhousesizeid,
+                Systempropertyhousesizename = HouseroomData.Systempropertyhousesizename,
+                Isvacant = HouseroomData.Isvacant,
+                Isunderrenovation = HouseroomData.Isunderrenovation,
+                Isshop = HouseroomData.Isshop,
+                Isgroundfloor = HouseroomData.Isgroundfloor,
+                Hasbalcony = HouseroomData.Hasbalcony,
+                Forcaretaker = HouseroomData.Forcaretaker,
+                Kitchentypeid = HouseroomData.Kitchentypeid,
+                Systempropertyhousemeterid = HouseroomData.Systempropertyhousemeterid,
+                Systempropertyhouseroommeternumber = HouseroomData.Systempropertyhouseroommeternumber,
+                Openingmeter = HouseroomData.Openingmeter,
+                Movedmeter = MovedMeter,
+                Closingmeter = ClosingMeter,
+                Consumedamount = ConsumedAmount,
+                Tenantid = PropertyRoomTenantId,
+                Createdby = App.UserDetails.Usermodel.Userid,
+                Datecreated = DateTime.Now,
+                Meterhistorydata = HouseroomData.Meterhistorydata
+            };
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, JsonConvert.SerializeObject(aggregatedData));
+
+                if (response != null)
+                {
+                    // Handle response and show success message if needed
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+        public decimal OpeningMeter
+        {
+            get => _openingMeter;
+            set
+            {
+                _openingMeter = value;
+                OnPropertyChanged();
+                CalculateMeterValues();
+            }
+        }
+        public decimal ClosingMeter
+        {
+            get => _closingMeter;
+            set
+            {
+                _closingMeter = value;
+                OnPropertyChanged();
+                if (ClosingMeter > 0)
+                {
+                    CalculateMeterValues();
+                }
+            }
+        }
+
+        public decimal MovedMeter
+        {
+            get => _movedMeter;
+            set
+            {
+                _movedMeter = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal ConsumedAmount
+        {
+            get => _consumedAmount;
+            set
+            {
+                _consumedAmount = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private void CalculateMeterValues()
+        {
+            if (HouseroomData.Openingmeter >= 0 && ClosingMeter > 0)
+            {
+                MovedMeter = ClosingMeter - HouseroomData.Openingmeter;
+                ConsumedAmount = MovedMeter * HouseroomData.Waterunitprice;
+            }
+        }
+        private void OnOkClicked()
+        {
+            PropertyRoomTenantId = TenantStaffData.Userid;
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+
+        private void OnCancelClicked()
+        {
+            PropertyRoomTenantId = 0;
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
         public bool IsStep1Visible
