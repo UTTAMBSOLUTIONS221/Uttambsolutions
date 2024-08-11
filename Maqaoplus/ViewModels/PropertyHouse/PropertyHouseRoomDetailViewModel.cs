@@ -154,123 +154,36 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-
-
         // Error properties
-        private string _propertyHouseNameError;
-        public string PropertyHouseNameError
+        private string _propertyHouseRoomNumberError;
+        public string PropertyHouseRoomNumberError
         {
-            get => _propertyHouseNameError;
+            get => _propertyHouseRoomNumberError;
             set
             {
-                _propertyHouseNameError = value;
+                _propertyHouseRoomNumberError = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _streetOrLandmarkError;
-        public string StreetOrLandmarkError
+        private string _propertyHouseKitchenTypeError;
+        public string PropertyHouseKitchenTypeError
         {
-            get => _streetOrLandmarkError;
+            get => _propertyHouseKitchenTypeError;
             set
             {
-                _streetOrLandmarkError = value;
+                _propertyHouseKitchenTypeError = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _contactDetailsError;
-        public string ContactDetailsError
+        private string _propertyHouseSizeError;
+        public string PropertyHouseSizeError
         {
-            get => _contactDetailsError;
+            get => _propertyHouseSizeError;
             set
             {
-                _contactDetailsError = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _propertyHouseStatusError;
-        public string PropertyHouseStatusError
-        {
-            get => _propertyHouseStatusError;
-            set
-            {
-                _propertyHouseStatusError = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _propertyHouseWaterTypeError;
-        public string PropertyHouseWaterTypeError
-        {
-            get => _propertyHouseWaterTypeError;
-            set
-            {
-                _propertyHouseWaterTypeError = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        private string _propertyHouseCountyError;
-        public string PropertyHouseCountyError
-        {
-            get => _propertyHouseCountyError;
-            set
-            {
-                _propertyHouseCountyError = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _propertyHouseSubcountyError;
-        public string PropertyHouseSubcountyError
-        {
-            get => _propertyHouseSubcountyError;
-            set
-            {
-                _propertyHouseSubcountyError = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _propertyHouseSubcountyWardError;
-        public string PropertyHouseSubcountyWardError
-        {
-            get => _propertyHouseSubcountyWardError;
-            set
-            {
-                _propertyHouseSubcountyWardError = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _propertyHouseRentDueDayError;
-        public string PropertyHouseRentDueDayError
-        {
-            get => _propertyHouseRentDueDayError;
-            set
-            {
-                _propertyHouseRentDueDayError = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _propertyHouseRentDepositMonthsError;
-        public string PropertyHouseRentDepositMonthsError
-        {
-            get => _propertyHouseRentDepositMonthsError;
-            set
-            {
-                _propertyHouseRentDepositMonthsError = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _propertyHouseRentVacationPeriodMonthsError;
-        public string PropertyHouseRentVacationPeriodMonthsError
-        {
-            get => _propertyHouseRentVacationPeriodMonthsError;
-            set
-            {
-                _propertyHouseRentVacationPeriodMonthsError = value;
+                _propertyHouseSizeError = value;
                 OnPropertyChanged();
             }
         }
@@ -439,117 +352,34 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             bool isValid = true;
 
             // Validate Property Name
-            if (string.IsNullOrWhiteSpace(SystempropertyData?.Propertyhousename))
+            if (string.IsNullOrWhiteSpace(HouseroomData?.Systempropertyhousesizename))
             {
-                PropertyHouseNameError = "Property Name is required.";
+                PropertyHouseRoomNumberError = "Property House Number is required.";
                 isValid = false;
             }
             else
             {
-                PropertyHouseNameError = null;
-            }
-
-            // Validate Street or Landmark
-            if (string.IsNullOrWhiteSpace(SystempropertyData?.Streetorlandmark))
-            {
-                StreetOrLandmarkError = "Street or Landmark is required.";
-                isValid = false;
-            }
-            else
-            {
-                StreetOrLandmarkError = null;
-            }
-
-            // Validate Contact Details
-            if (string.IsNullOrWhiteSpace(SystempropertyData?.Contactdetails))
-            {
-                ContactDetailsError = "Contact Details are required.";
-                isValid = false;
-            }
-            else
-            {
-                ContactDetailsError = null;
-            }
-
-            // Validate Property House Status
-            if (SystempropertyData?.Propertyhousestatus < 0)
-            {
-                PropertyHouseStatusError = "Property House Status is required.";
-                isValid = false;
-            }
-            else
-            {
-                PropertyHouseStatusError = null;
+                PropertyHouseRoomNumberError = null;
             }
             // Validate Property House Water Type
-            if (SystempropertyData?.Watertypeid == 0)
+            if (HouseroomData?.Kitchentypeid == 0)
             {
-                PropertyHouseWaterTypeError = "Property House Water Type is required.";
+                PropertyHouseKitchenTypeError = "Property House Kitchen Type is required.";
                 isValid = false;
             }
             else
             {
-                PropertyHouseWaterTypeError = null;
+                PropertyHouseKitchenTypeError = null;
             }
             // Validate Property House County
-            if (SystempropertyData?.Countyid == 0)
+            if (HouseroomData?.Systempropertyhousesizeid == 0)
             {
-                PropertyHouseCountyError = "Property House County is required.";
+                PropertyHouseSizeError = "Property House Size is required.";
                 isValid = false;
             }
             else
             {
-                PropertyHouseCountyError = null;
-            }
-            // Validate Property House Sub County
-            if (SystempropertyData?.Subcountyid == 0)
-            {
-                PropertyHouseSubcountyError = "Property House Subcounty is required.";
-                isValid = false;
-            }
-            else
-            {
-                PropertyHouseSubcountyError = null;
-            }
-            // Validate Property House sub County Ward
-            if (SystempropertyData?.Subcountywardid == 0)
-            {
-                PropertyHouseSubcountyWardError = "Property House Subcounty Ward is required.";
-                isValid = false;
-            }
-            else
-            {
-                PropertyHouseSubcountyWardError = null;
-            }
-            // Validate Property House Rent Deposit
-            if (SystempropertyData?.Rentdueday == 0)
-            {
-                PropertyHouseRentDueDayError = "Property House Rent Due Day is required.";
-                isValid = false;
-            }
-            else
-            {
-                PropertyHouseRentDueDayError = null;
-            }
-            // Validate Property House Rent Deposit Months
-            if (SystempropertyData?.Rentdepositmonth == 0)
-            {
-                PropertyHouseRentDepositMonthsError = "Property House Rent Deposit Months is required.";
-                isValid = false;
-            }
-            else
-            {
-                PropertyHouseRentDepositMonthsError = null;
-            }
-            // Validate Property House Vacation Period
-            if (SystempropertyData?.Vacantnoticeperiod == 0)
-            {
-                PropertyHouseRentVacationPeriodMonthsError = "Property House Vacation Period Months is required.";
-                isValid = false;
-            }
-            else
-            {
-                PropertyHouseRentVacationPeriodMonthsError = null;
+                PropertyHouseSizeError = null;
             }
             // Update overall IsValid property
             IsValid = isValid;
