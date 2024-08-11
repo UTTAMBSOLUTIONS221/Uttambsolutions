@@ -1,4 +1,5 @@
 ﻿using DBL.Entities;
+using Maqaoplus.Views.PropertyHouse;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -9,7 +10,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private readonly Services.ServiceProvider _serviceProvider;
         public ObservableCollection<Systemproperty> Items { get; }
 
-        public ICommand AddNewHouseCommand { get; }
+        public ICommand AddPropertyHouseCommand { get; }
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
 
@@ -39,7 +40,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public PropertyHouseViewModel()
         {
             Items = new ObservableCollection<Systemproperty>();
-            AddNewHouseCommand = new Command(OnAddNewHouse);
+            AddPropertyHouseCommand = new Command(AddPropertyHouseAsync);
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
         }
@@ -49,9 +50,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             _serviceProvider = serviceProvider;
         }
-        private async void OnAddNewHouse()
+        private async void AddPropertyHouseAsync()
         {
-            await Shell.Current.GoToAsync(nameof(ForgotPasswordPage));
+            await Shell.Current.GoToAsync(nameof(AddPropertyHousePage));
         }
         private async Task LoadItems()
         {

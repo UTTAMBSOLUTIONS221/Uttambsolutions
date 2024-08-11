@@ -27,7 +27,7 @@
 
         <!-- Button to Add New House -->
         <Button Text="Add New House"
-                Command="{Binding AddNewHouseCommand}" 
+                Command="{Binding AddPropertyHouseCommand}" 
             BackgroundColor="#0a506c"
                 TextColor="White"
                 FontSize="16"
