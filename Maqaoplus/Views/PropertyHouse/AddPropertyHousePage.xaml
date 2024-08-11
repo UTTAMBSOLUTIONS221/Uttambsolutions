@@ -331,7 +331,7 @@
                                 <Entry Text="{Binding Housebenefitid}" IsVisible="False"/>
 
                                 <!-- Room Size -->
-                                <Entry Text="{Binding Housebenefitname}" IsReadOnly="True" Grid.Column="0" HorizontalOptions="Fill"/>
+                                <Label Text="{Binding Housebenefitname}"  Grid.Column="0"  LineBreakMode="WordWrap"  VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
                                 <!-- We have? -->
                                 <CheckBox IsChecked="{Binding Systempropertyhousebenefitwehave}" Grid.Column="2"/>
@@ -345,7 +345,7 @@
                 <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
                     <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                     <!-- Adjusted WidthRequest -->
-                    <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                    <Button Text="Complete" Command="{Binding SavePropertyHouseCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                     <!-- Adjusted WidthRequest -->
                 </FlexLayout>
             </StackLayout>
