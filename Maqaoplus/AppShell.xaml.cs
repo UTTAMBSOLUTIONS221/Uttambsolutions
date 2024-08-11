@@ -16,6 +16,7 @@ namespace Maqaoplus
             Routing.RegisterRoute(nameof(UserProfilePage), typeof(UserProfilePage));
             Routing.RegisterRoute(nameof(AddPropertyHousePage), typeof(AddPropertyHousePage));
             Routing.RegisterRoute(nameof(PropertyHousesDetailPage), typeof(PropertyHousesDetailPage));
+            Routing.RegisterRoute(nameof(PropertyHousesPage), typeof(PropertyHousesPage));
             Routing.RegisterRoute(nameof(PropertyHousesRoomDetailPage), typeof(PropertyHousesRoomDetailPage));
         }
     }
