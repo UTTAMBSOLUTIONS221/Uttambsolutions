@@ -56,7 +56,7 @@
 
                             <!-- Kitchen Type Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                                <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding SystempropertyData.Propertyhousestatus}" ItemDisplayBinding="{Binding Text}" Title="Select House Entry Status" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                                <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding SelectedHouseentrystatus}" ItemDisplayBinding="{Binding Text}" Title="Select House Entry Status" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                             </Frame>
                             <Label Text="{Binding PropertyHouseStatusError}" TextColor="Red" />
                         </StackLayout>
@@ -68,7 +68,7 @@
 
                             <!-- House Room Size Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                                <Picker ItemsSource="{Binding Systemhousewatertype}" SelectedItem="{Binding SystempropertyData.Watertypeid}" ItemDisplayBinding="{Binding Text}" Title="Select Water Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                                <Picker ItemsSource="{Binding Systemhousewatertype}" SelectedItem="{Binding SelectedHousewatertype}" ItemDisplayBinding="{Binding Text}" Title="Select Water Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                             </Frame>
                             <Label Text="{Binding PropertyHouseWaterTypeError}" TextColor="Red" />
                         </StackLayout>
@@ -120,7 +120,7 @@
 
                             <!-- Kitchen Type Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                                <Picker ItemsSource="{Binding Systemsubcountyward}" SelectedItem="{Binding SystempropertyData.Subcountywardid}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty Ward" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                                <Picker ItemsSource="{Binding Systemsubcountyward}" SelectedItem="{Binding SelectedSubcountyward}" ItemDisplayBinding="{Binding Text}" Title="Select Subcounty Ward" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                             </Frame>
                             <Label Text="{Binding PropertyHouseSubcountyWardError}" TextColor="Red" />
                         </StackLayout>
@@ -132,7 +132,7 @@
 
                             <!-- House Room Size Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                                <Picker ItemsSource="{Binding Systemhouserentdueday}" SelectedItem="{Binding SystempropertyData.Rentdueday}" ItemDisplayBinding="{Binding Text}" Title="Select Rent Due Day" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                                <Picker ItemsSource="{Binding Systemhouserentdueday}" SelectedItem="{Binding SelectedHouserentdueday}" ItemDisplayBinding="{Binding Text}" Title="Select Rent Due Day" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                             </Frame>
                             <Label Text="{Binding PropertyHouseRentDueDayError}" TextColor="Red" />
                         </StackLayout>
@@ -176,7 +176,7 @@
                             <Label Text="Deposit Month(s)" FontAttributes="Bold" FontSize="13" Margin="0,0,0,0" TextColor="#0a506c"/>
                             <!-- Kitchen Type Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                                <Picker ItemsSource="{Binding Systemhousedepostmonths}" SelectedItem="{Binding SystempropertyData.Rentdepositmonth}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                                <Picker ItemsSource="{Binding Systemhousedepostmonths}" SelectedItem="{Binding SelectedHousedepostmonths}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                             </Frame>
                             <Label Text="{Binding PropertyHouseRentDepositMonthsError}" TextColor="Red" />
                         </StackLayout>
@@ -188,7 +188,7 @@
 
                             <!-- House Room Size Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                                <Picker ItemsSource="{Binding Systemhousevacantnoticeperiod}" SelectedItem="{Binding SystempropertyData.Vacantnoticeperion}" ItemDisplayBinding="{Binding Text}" Title="Select Vacation Notice Period" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                                <Picker ItemsSource="{Binding Systemhousevacantnoticeperiod}" SelectedItem="{Binding SelectedHousevacantnoticeperiod}" ItemDisplayBinding="{Binding Text}" Title="Select Vacation Notice Period" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
                             </Frame>
                             <Label Text="{Binding PropertyHouseRentVacationPeriodMonthsError}" TextColor="Red" />
                         </StackLayout>

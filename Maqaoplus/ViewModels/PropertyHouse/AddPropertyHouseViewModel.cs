@@ -436,6 +436,32 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        private ListModel _selectedHouserentdueday;
+        public ListModel SelectedHouserentdueday
+        {
+            get => _selectedHouserentdueday;
+            set
+            {
+                _selectedHouserentdueday = value;
+
+                // Ensure SystempropertyData is not null
+                if (SystempropertyData != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int rentdueday))
+                    {
+                        SystempropertyData.Rentdueday = rentdueday;
+                    }
+                    else
+                    {
+                        SystempropertyData.Rentdueday = 0;
+                    }
+
+                    OnPropertyChanged(nameof(SelectedHouserentdueday));
+                    OnPropertyChanged(nameof(SystempropertyData.Rentdueday));
+                }
+            }
+        }
         public ObservableCollection<ListModel> Systemhousedepostmonths
         {
             get => _systemhouserentdepositmonths;
@@ -443,6 +469,32 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 _systemhouserentdepositmonths = value;
                 OnPropertyChanged();
+            }
+        }
+        private ListModel _selectedHousedepostmonths;
+        public ListModel SelectedHousedepostmonths
+        {
+            get => _selectedHousedepostmonths;
+            set
+            {
+                _selectedHousedepostmonths = value;
+
+                // Ensure SystempropertyData is not null
+                if (SystempropertyData != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int rentdepositmonth))
+                    {
+                        SystempropertyData.Rentdepositmonth = rentdepositmonth;
+                    }
+                    else
+                    {
+                        SystempropertyData.Rentdepositmonth = 0;
+                    }
+
+                    OnPropertyChanged(nameof(SelectedHousedepostmonths));
+                    OnPropertyChanged(nameof(SystempropertyData.Rentdepositmonth));
+                }
             }
         }
         public ObservableCollection<ListModel> Systemhousevacantnoticeperiod
@@ -454,6 +506,33 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        private ListModel _selectedHousevacantnoticeperiod;
+        public ListModel SelectedHousevacantnoticeperiod
+        {
+            get => _selectedHousevacantnoticeperiod;
+            set
+            {
+                _selectedHousevacantnoticeperiod = value;
+
+                // Ensure SystempropertyData is not null
+                if (SystempropertyData != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int vacantnoticeperiod))
+                    {
+                        SystempropertyData.Vacantnoticeperiod = vacantnoticeperiod;
+                    }
+                    else
+                    {
+                        SystempropertyData.Vacantnoticeperiod = 0;
+                    }
+
+                    OnPropertyChanged(nameof(SelectedHousevacantnoticeperiod));
+                    OnPropertyChanged(nameof(SystempropertyData.Vacantnoticeperiod));
+                }
+            }
+        }
+
 
         private async Task LoadItems()
         {
@@ -737,7 +816,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseRentDepositMonthsError = null;
             }
             // Validate Property House Vacation Period
-            if (SystempropertyData?.Vacantnoticeperion == 0)
+            if (SystempropertyData?.Vacantnoticeperiod == 0)
             {
                 PropertyHouseRentVacationPeriodMonthsError = "Property House Vacation Period Months is required.";
                 isValid = false;
