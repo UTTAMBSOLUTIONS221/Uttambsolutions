@@ -199,7 +199,7 @@
             <!-- Step 2 -->
             <StackLayout IsVisible="{Binding IsStep2Visible}" Padding="16" Spacing="16">
                 <!-- Header -->
-                <Label Text="Step 2: House Rooms and Amount" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="Step 2: House Rooms and Amount" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center"  TextColor="#0a506c"/>
 
                 <!-- Navigation Buttons at Start and End -->
                 <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
@@ -213,7 +213,7 @@
             <!-- Step 3 -->
             <StackLayout IsVisible="{Binding IsStep3Visible}" Padding="16" Spacing="16">
                 <!-- Section Header for Tenant Details -->
-                <Label Text="Step 2: House Deposits and Amount" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
+                <Label Text="Step 3: House Deposits and Fees" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
 
 
                 <!-- Navigation Buttons -->
