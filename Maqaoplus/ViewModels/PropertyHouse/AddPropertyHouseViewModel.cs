@@ -302,8 +302,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-        private void NextStep()
+        private async void NextStep()
         {
+            IsLoading = true;
+
+            await Task.Delay(500);
             // Move to the next step
             if (_isStep1Visible)
             {
@@ -320,14 +323,18 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep3Visible = false;
                 _isStep4Visible = true;
             }
+            IsLoading = false;
             OnPropertyChanged(nameof(IsStep1Visible));
             OnPropertyChanged(nameof(IsStep2Visible));
             OnPropertyChanged(nameof(IsStep3Visible));
             OnPropertyChanged(nameof(IsStep4Visible));
         }
 
-        private void PreviousStep()
+        private async void PreviousStep()
         {
+            IsLoading = true;
+
+            await Task.Delay(500);
             // Move to the previous step
             if (_isStep4Visible)
             {
@@ -344,6 +351,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep2Visible = false;
                 _isStep1Visible = true;
             }
+            IsLoading = false;
+
             OnPropertyChanged(nameof(IsStep1Visible));
             OnPropertyChanged(nameof(IsStep2Visible));
             OnPropertyChanged(nameof(IsStep3Visible));
