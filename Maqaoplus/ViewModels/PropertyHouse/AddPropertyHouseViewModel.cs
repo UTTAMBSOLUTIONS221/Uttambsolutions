@@ -1,5 +1,4 @@
-﻿using DBL.Entities;
-using DBL.Enum;
+﻿using DBL.Enum;
 using DBL.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,6 +22,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
 
+        private ObservableCollection<ListModel> _systemcounty;
+        private ObservableCollection<ListModel> _systemsubcounty;
+        private ObservableCollection<ListModel> _systemsubcountyward;
+        private ObservableCollection<ListModel> _systemhousewatertype;
 
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
@@ -40,11 +43,45 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep4Visible = false;
             await LoadDropdownData();
         }
+        public ObservableCollection<ListModel> Systemcounty
+        {
+            get => _systemcounty;
+            set
+            {
+                _systemcounty = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<ListModel> Systemsubcounty
+        {
+            get => _systemsubcounty;
+            set
+            {
+                _systemsubcounty = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<ListModel> Systemsubcountyward
+        {
+            get => _systemsubcountyward;
+            set
+            {
+                _systemsubcountyward = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<ListModel> Systemhousewatertype
+        {
+            get => _systemhousewatertype;
+            set
+            {
+                _systemhousewatertype = value;
+                OnPropertyChanged();
+            }
+        }
         private async Task LoadDropdownData()
         {
-            if (_isDisposed)
-                return;
-
             try
             {
                 var SystemcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemCounty, HttpMethod.Get);
@@ -54,20 +91,20 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                 if (SystemcountyResponse != null)
                 {
-                    Systemkitchentype = new ObservableCollection<ListModel>(SystemcountyResponse);
+                    Systemcounty = new ObservableCollection<ListModel>(SystemcountyResponse);
                 }
 
                 if (SystemsubcountyResponse != null)
                 {
-                    Systempropertyhousesize = new ObservableCollection<ListModel>(SystemsubcountyResponse);
+                    Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
                 }
                 if (SystemsubcountywardResponse != null)
                 {
-                    Systempropertyhousesize = new ObservableCollection<ListModel>(SystemsubcountywardResponse);
+                    Systemsubcountyward = new ObservableCollection<ListModel>(SystemsubcountywardResponse);
                 }
                 if (SystemhousewatertypeResponse != null)
                 {
-                    Systempropertyhousesize = new ObservableCollection<ListModel>(SystemhousewatertypeResponse);
+                    Systemhousewatertype = new ObservableCollection<ListModel>(SystemhousewatertypeResponse);
                 }
             }
             catch (Exception ex)
