@@ -101,7 +101,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _houseroomData = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(HouseroomData));
             }
         }
         public SystemStaff TenantStaffData
