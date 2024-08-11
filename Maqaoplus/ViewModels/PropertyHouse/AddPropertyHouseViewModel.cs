@@ -41,7 +41,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep2Visible = false;
             _isStep3Visible = false;
             _isStep4Visible = false;
-            await LoadDropdownData();
+            LoadDropdownData();
         }
         public ObservableCollection<ListModel> Systemcounty
         {
