@@ -15,9 +15,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
         <!-- Summary Section -->
-        <Grid Grid.Row="1" ColumnSpacing="10" RowSpacing="10">
+        <Grid Grid.Row="1" ColumnSpacing="10" RowSpacing="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -28,67 +27,152 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Frame Grid.Row="0" Grid.Column="0" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+            <!-- Summary Cards -->
+            <Frame Grid.Row="0" Grid.Column="0"
+                   Padding="10"
+                   BorderColor="#0a506c"
+                   BackgroundColor="#f0f4f8"
+                   CornerRadius="10"
+                   HasShadow="True">
                 <StackLayout>
-                    <Label Text="Total Units" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
-                    <Label Text="{Binding DashBoardSummaryData.Propertyhouseunits}" FontSize="24" FontAttributes="Bold"/>
+                    <Label Text="Total Units"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#0a506c" />
+                    <Label Text="{Binding DashBoardSummaryData.Propertyhouseunits}"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
                 </StackLayout>
             </Frame>
 
-            <Frame Grid.Row="0" Grid.Column="1" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+            <Frame Grid.Row="0" Grid.Column="1"
+                   Padding="10"
+                   BorderColor="#0a506c"
+                   BackgroundColor="#f0f4f8"
+                   CornerRadius="10"
+                   HasShadow="True">
                 <StackLayout>
-                    <Label Text="Occupied Rooms" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
-                    <Label Text="{Binding DashBoardSummaryData.Systempropertyoccupiedroom}" FontSize="24" FontAttributes="Bold"/>
+                    <Label Text="Occupied Rooms"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#0a506c" />
+                    <Label Text="{Binding DashBoardSummaryData.Systempropertyoccupiedroom}"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
                 </StackLayout>
             </Frame>
 
-            <Frame Grid.Row="1" Grid.Column="0" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+            <Frame Grid.Row="1" Grid.Column="0"
+                   Padding="10"
+                   BorderColor="#0a506c"
+                   BackgroundColor="#f0f4f8"
+                   CornerRadius="10"
+                   HasShadow="True">
                 <StackLayout>
-                    <Label Text="Vacant Rooms" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
-                    <Label Text="{Binding Systempropertyvacantroom}" FontSize="24" FontAttributes="Bold"/>
+                    <Label Text="Vacant Rooms"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#0a506c" />
+                    <Label Text="{Binding DashBoardSummaryData.Systempropertyvacantroom}"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
                 </StackLayout>
             </Frame>
 
-            <Frame Grid.Row="1" Grid.Column="1" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+            <Frame Grid.Row="1" Grid.Column="1"
+                   Padding="15"
+                   BorderColor="#0a506c"
+                   BackgroundColor="#f0f4f8"
+                   CornerRadius="10"
+                   HasShadow="True">
                 <StackLayout>
-                    <Label Text="Rent Arrears" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
-                    <Label Text="{Binding DashBoardSummaryData.Rentarrears}" FontSize="24" FontAttributes="Bold"/>
+                    <Label Text="Rent Arrears"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#0a506c" />
+                    <Label Text="{Binding DashBoardSummaryData.Rentarrears}"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
                 </StackLayout>
             </Frame>
 
-            <Frame Grid.Row="2" Grid.Column="0" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+            <Frame Grid.Row="2" Grid.Column="0"
+                   Padding="15"
+                   BorderColor="#0a506c"
+                   BackgroundColor="#f0f4f8"
+                   CornerRadius="10"
+                   HasShadow="True">
                 <StackLayout>
-                    <Label Text="Uncollected Payments" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
-                    <Label Text="{Binding DashBoardSummaryData.Uncollectedpayments}" FontSize="24" FontAttributes="Bold"/>
+                    <Label Text="Uncollected Payments"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#0a506c" />
+                    <Label Text="{Binding DashBoardSummaryData.Uncollectedpayments}"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
                 </StackLayout>
             </Frame>
 
-            <Frame Grid.Row="2" Grid.Column="1" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+            <Frame Grid.Row="2" Grid.Column="1"
+                   Padding="15"
+                   BorderColor="#0a506c"
+                   BackgroundColor="#f0f4f8"
+                   CornerRadius="10"
+                   HasShadow="True">
                 <StackLayout>
-                    <Label Text="Consumed Meters" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
-                    <Label Text="{Binding DashBoardSummaryData.Consumedmeters}" FontSize="24" FontAttributes="Bold"/>
+                    <Label Text="Consumed Water Meters"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#0a506c" />
+                    <Label Text="{Binding DashBoardSummaryData.Consumedmeters}"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
                 </StackLayout>
             </Frame>
         </Grid>
-
-        <!-- Properties Section -->
-        <CollectionView ItemsSource="{Binding DashBoardSummaryData.Propertybysummary}" Grid.Row="2" Margin="0,20,0,0">
+   <!-- Properties Section -->
+        <CollectionView ItemsSource="{Binding DashBoardSummaryData.Propertybysummary}"
+                        Grid.Row="2"
+                        Margin="0,20,0,0">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="2"/>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="15" Margin="10" BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" HasShadow="True">
+                    <Frame Padding="20"
+                           Margin="10"
+                           BorderColor="#0a506c"
+                           BackgroundColor="White"
+                           CornerRadius="10"
+                           HasShadow="True">
                         <StackLayout Spacing="10">
-                            <Label Text="{Binding Propertyhousename}" FontSize="20" FontAttributes="Bold" TextColor="#0a506c"/>
-                            <Label Text="{Binding Propertyhouseunits, StringFormat='Units: {0}'}" FontSize="16"/>
-                            <Label Text="{Binding Systempropertyoccupiedroom, StringFormat='Occupied Rooms: {0}'}" FontSize="16"/>
-                            <Label Text="{Binding Systempropertyvacantroom, StringFormat='Vacant Rooms: {0}'}" FontSize="16"/>
-                            <Label Text="{Binding Consumedmeters, StringFormat='Consumed Meters: {0}'}" FontSize="16"/>
+                            <Label Text="{Binding Propertyhousename}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="#0a506c" />
+                            <Label Text="{Binding Propertyhouseunits, StringFormat='Units: {0}'}"
+                                   FontSize="16"
+                                   TextColor="#333" />
+                            <Label Text="{Binding Systempropertyoccupiedroom, StringFormat='Occupied Rooms: {0}'}"
+                                   FontSize="16"
+                                   TextColor="#333" />
+                            <Label Text="{Binding Systempropertyvacantroom, StringFormat='Vacant Rooms: {0}'}"
+                                   FontSize="16"
+                                   TextColor="#333" />
+                            <Label Text="{Binding Consumedmeters, StringFormat='Consumed Meters: {0}'}"
+                                   FontSize="16"
+                                   TextColor="#333" />
                         </StackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
+     
 </ContentPage>
