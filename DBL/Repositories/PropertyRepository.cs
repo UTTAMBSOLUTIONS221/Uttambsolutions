@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DBL.Entities;
 using DBL.Models;
+using DBL.Models.Dashboards;
 using DBL.Repositories.DBL.Repositories;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -50,6 +51,27 @@ namespace DBL.Repositories
                 else
                 {
                     return new Systemproperty();
+                }
+            }
+        }
+        public PropertyHouseSummaryDashboard Getsystempropertyhousedashboardsummarydatabyowner(long Ownerid, long Posterid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Ownerid", Ownerid);
+                parameters.Add("@Posterid", Posterid);
+                parameters.Add("@Systempropertydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystempropertyhousedashboardsummarydatabyowner", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Systempropertydata");
+                if (systempropertydataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<PropertyHouseSummaryDashboard>(systempropertydataJson);
+                }
+                else
+                {
+                    return new PropertyHouseSummaryDashboard();
                 }
             }
         }

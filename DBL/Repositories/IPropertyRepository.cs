@@ -1,5 +1,6 @@
 ﻿using DBL.Entities;
 using DBL.Models;
+using DBL.Models.Dashboards;
 
 namespace DBL.Repositories
 {
@@ -8,6 +9,7 @@ namespace DBL.Repositories
         IEnumerable<Systemproperty> Getsystempropertyhousedata();
         Genericmodel Registersystempropertyhousedata(string JsonData);
         Systemproperty Getsystempropertyhousedatabyid(long Propertyid);
+        PropertyHouseSummaryDashboard Getsystempropertyhousedashboardsummarydatabyowner(long Ownerid, long Posterid);
         Systempropertyhousedata Getsystempropertyhousedatabyowner(long Ownerid);
         PropertyHouseRoomTenantModel Getsystempropertyhousetenantdatabytenantid(long TenantId);
         PropertyHouseDetailData Getsystempropertyhousedetaildatabypropertyidandownerid(long Propertyid, long Ownerid);

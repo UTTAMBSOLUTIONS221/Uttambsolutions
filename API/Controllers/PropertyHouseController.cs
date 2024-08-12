@@ -1,6 +1,7 @@
 ﻿using DBL;
 using DBL.Entities;
 using DBL.Models;
+using DBL.Models.Dashboards;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -18,6 +19,12 @@ namespace API.Controllers
         {
             bl = new BL(Util.ShareConnectionString(config));
             _config = config;
+        }
+        [AllowAnonymous]
+        [HttpGet("Getsystempropertyhousedashboardsummarydatabyowner/{OwnerId}/{PosterId}")]
+        public async Task<PropertyHouseSummaryDashboard> Getsystempropertyhousedashboardsummarydatabyowner(long OwnerId, long PosterId)
+        {
+            return await bl.Getsystempropertyhousedashboardsummarydatabyowner(OwnerId, PosterId);
         }
 
         [HttpGet("Getsystempropertyhousedatabyowner/{OwnerId}")]

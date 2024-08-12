@@ -3,6 +3,7 @@ using DBL.Entities.Mpesa;
 using DBL.Enum;
 using DBL.Helpers;
 using DBL.Models;
+using DBL.Models.Dashboards;
 using DBL.Models.Mpesa;
 using DBL.UOW;
 using DBL.Utils;
@@ -843,6 +844,14 @@ namespace DBL
             return Task.Run(() =>
             {
                 Resp.Data = db.PropertyRepository.Getsystempropertyhousedatabyid(Propertyid);
+                return Resp;
+            });
+        }
+        public Task<PropertyHouseSummaryDashboard> Getsystempropertyhousedashboardsummarydatabyowner(long OwnerId, long PosterId)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Getsystempropertyhousedashboardsummarydatabyowner(OwnerId, PosterId);
                 return Resp;
             });
         }

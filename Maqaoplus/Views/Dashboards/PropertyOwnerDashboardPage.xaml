@@ -2,30 +2,97 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.Dashboards.PropertyOwnerDashboardPage"
-              Title="Dashboard">
+             Title="Dashboard"
+             BackgroundColor="White">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh" Command="{Binding LoadDataCommand}" />
     </ContentPage.ToolbarItems>
 
-    <Grid Padding="10">
+    <Grid Padding="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label Text="Property Dashboard" FontSize="24" FontAttributes="Bold" Grid.Row="0" />
+        <Label Text="Property Dashboard" 
+               FontSize="30" 
+               FontAttributes="Bold" 
+               TextColor="#0a506c" 
+               HorizontalOptions="Center" 
+               Grid.Row="0" 
+               Margin="0,0,0,20"/>
 
-        <CollectionView ItemsSource="{Binding Properties}" Grid.Row="1">
+        <!-- Summary Section -->
+        <Grid Grid.Row="1" ColumnSpacing="10" RowSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="0" Grid.Column="0" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+                <StackLayout>
+                    <Label Text="Total Units" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
+                    <Label Text="{Binding Propertyhouseunits}" FontSize="24" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="0" Grid.Column="1" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+                <StackLayout>
+                    <Label Text="Occupied Rooms" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
+                    <Label Text="{Binding Systempropertyoccupiedroom}" FontSize="24" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="1" Grid.Column="0" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+                <StackLayout>
+                    <Label Text="Vacant Rooms" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
+                    <Label Text="{Binding Systempropertyvacantroom}" FontSize="24" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="1" Grid.Column="1" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+                <StackLayout>
+                    <Label Text="Rent Arrears" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
+                    <Label Text="{Binding Rentarrears}" FontSize="24" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="2" Grid.Column="0" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+                <StackLayout>
+                    <Label Text="Uncollected Payments" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
+                    <Label Text="{Binding Uncollectedpayments}" FontSize="24" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="2" Grid.Column="1" Padding="10" BorderColor="#0a506c" BackgroundColor="LightGray" CornerRadius="8">
+                <StackLayout>
+                    <Label Text="Consumed Meters" FontSize="18" FontAttributes="Bold" TextColor="#0a506c"/>
+                    <Label Text="{Binding Consumedmeters}" FontSize="24" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+        <!-- Properties Section -->
+        <CollectionView ItemsSource="{Binding Propertybysummary}" Grid.Row="2" Margin="0,20,0,0">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2"/>
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" BorderColor="Gray">
-                        <StackLayout>
-                            <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold"/>
-                            <Label Text="{Binding Units, StringFormat='Units: {0}'}"/>
-                            <Label Text="{Binding OccupiedRooms, StringFormat='Occupied Rooms: {0}'}"/>
-                            <Label Text="{Binding VacantRooms, StringFormat='Vacant Rooms: {0}'}"/>
-                            <Label Text="{Binding ConsumedMeters, StringFormat='Consumed Meters: {0}'}"/>
+                    <Frame Padding="15" Margin="10" BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" HasShadow="True">
+                        <StackLayout Spacing="10">
+                            <Label Text="{Binding Propertyhousename}" FontSize="20" FontAttributes="Bold" TextColor="#0a506c"/>
+                            <Label Text="{Binding Propertyhouseunits, StringFormat='Units: {0}'}" FontSize="16"/>
+                            <Label Text="{Binding Systempropertyoccupiedroom, StringFormat='Occupied Rooms: {0}'}" FontSize="16"/>
+                            <Label Text="{Binding Systempropertyvacantroom, StringFormat='Vacant Rooms: {0}'}" FontSize="16"/>
+                            <Label Text="{Binding Consumedmeters, StringFormat='Consumed Meters: {0}'}" FontSize="16"/>
                         </StackLayout>
                     </Frame>
                 </DataTemplate>
