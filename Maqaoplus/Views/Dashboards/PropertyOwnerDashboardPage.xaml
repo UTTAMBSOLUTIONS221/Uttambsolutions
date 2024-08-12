@@ -35,14 +35,20 @@
                    CornerRadius="10"
                    HasShadow="True">
                 <StackLayout>
+                    <Image Source="house.png"
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           HorizontalOptions="Center" />
                     <Label Text="Total Units"
                            FontSize="16"
                            FontAttributes="Bold"
-                           TextColor="#0a506c" />
+                           TextColor="#0a506c"
+                           HorizontalOptions="Center" />
                     <Label Text="{Binding DashBoardSummaryData.Propertyhouseunits}"
                            FontSize="26"
                            FontAttributes="Bold"
-                           TextColor="#333" />
+                           TextColor="#333"
+                           HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
 
@@ -53,14 +59,20 @@
                    CornerRadius="10"
                    HasShadow="True">
                 <StackLayout>
+                    <Image Source="house.png"
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           HorizontalOptions="Center" />
                     <Label Text="Occupied Rooms"
                            FontSize="16"
                            FontAttributes="Bold"
-                           TextColor="#0a506c" />
+                           TextColor="#0a506c"
+                           HorizontalOptions="Center" />
                     <Label Text="{Binding DashBoardSummaryData.Systempropertyoccupiedroom}"
                            FontSize="26"
                            FontAttributes="Bold"
-                           TextColor="#333" />
+                           TextColor="#333"
+                           HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
 
@@ -71,72 +83,97 @@
                    CornerRadius="10"
                    HasShadow="True">
                 <StackLayout>
+                    <Image Source="house.png"
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           HorizontalOptions="Center" />
                     <Label Text="Vacant Rooms"
                            FontSize="16"
                            FontAttributes="Bold"
-                           TextColor="#0a506c" />
+                           TextColor="#0a506c"
+                           HorizontalOptions="Center" />
                     <Label Text="{Binding DashBoardSummaryData.Systempropertyvacantroom}"
                            FontSize="26"
                            FontAttributes="Bold"
-                           TextColor="#333" />
+                           TextColor="#333"
+                           HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
 
             <Frame Grid.Row="1" Grid.Column="1"
-                   Padding="15"
+                   Padding="10"
                    BorderColor="#0a506c"
                    BackgroundColor="#f0f4f8"
                    CornerRadius="10"
                    HasShadow="True">
                 <StackLayout>
+                    <Image Source="dollar.png"
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           HorizontalOptions="Center" />
                     <Label Text="Rent Arrears"
                            FontSize="16"
                            FontAttributes="Bold"
-                           TextColor="#0a506c" />
+                           TextColor="#0a506c"
+                           HorizontalOptions="Center" />
                     <Label Text="{Binding DashBoardSummaryData.Rentarrears}"
                            FontSize="26"
                            FontAttributes="Bold"
-                           TextColor="#333" />
+                           TextColor="#333"
+                           HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
 
             <Frame Grid.Row="2" Grid.Column="0"
-                   Padding="15"
+                   Padding="10"
                    BorderColor="#0a506c"
                    BackgroundColor="#f0f4f8"
                    CornerRadius="10"
                    HasShadow="True">
                 <StackLayout>
+                    <Image Source="dollar.png"
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           HorizontalOptions="Center" />
                     <Label Text="Uncollected Payments"
                            FontSize="16"
                            FontAttributes="Bold"
-                           TextColor="#0a506c" />
+                           TextColor="#0a506c"
+                           HorizontalOptions="Center" />
                     <Label Text="{Binding DashBoardSummaryData.Uncollectedpayments}"
                            FontSize="26"
                            FontAttributes="Bold"
-                           TextColor="#333" />
+                           TextColor="#333"
+                           HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
 
             <Frame Grid.Row="2" Grid.Column="1"
-                   Padding="15"
+                   Padding="10"
                    BorderColor="#0a506c"
                    BackgroundColor="#f0f4f8"
                    CornerRadius="10"
                    HasShadow="True">
                 <StackLayout>
+                    <Image Source="tap.png"
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           HorizontalOptions="Center" />
                     <Label Text="Consumed Water Meters"
                            FontSize="16"
                            FontAttributes="Bold"
-                           TextColor="#0a506c" />
+                           TextColor="#0a506c"
+                           HorizontalOptions="Center" />
                     <Label Text="{Binding DashBoardSummaryData.Consumedmeters}"
                            FontSize="26"
                            FontAttributes="Bold"
-                           TextColor="#333" />
+                           TextColor="#333"
+                           HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
         </Grid>
-   <!-- Properties Section -->
+
+        <!-- Properties Section -->
         <CollectionView ItemsSource="{Binding DashBoardSummaryData.Propertybysummary}"
                         Grid.Row="2"
                         Margin="0,20,0,0">
@@ -174,5 +211,5 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
-     
+
 </ContentPage>
