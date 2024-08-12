@@ -7,130 +7,141 @@
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="TextColor" Value="Black"/>
-            <Setter Property="Margin" Value="10,0"/>
+            <Setter Property="Margin" Value="2,0"/>
         </Style>
         <Style TargetType="Entry">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="TextColor" Value="Black"/>
-            <Setter Property="Margin" Value="10,0"/>
+            <Setter Property="Margin" Value="2,0"/>
+        </Style>
+        <Style TargetType="Frame">
+            <Setter Property="BorderColor" Value="#0a506c"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="HasShadow" Value="False"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#0a506c"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
         </Style>
     </ContentPage.Resources>
+
     <ScrollView>
-        <VerticalStackLayout Padding="10">
+        <VerticalStackLayout Padding="10" Spacing="3">
             <!-- Profile Picture -->
-            <Frame HasShadow="False" Padding="0" HorizontalOptions="Center">
+            <Frame HorizontalOptions="Center" Margin="20">
                 <Image Source="profile_placeholder.png" WidthRequest="120" HeightRequest="120" Aspect="AspectFill"/>
             </Frame>
+
             <!-- User Info -->
-            <Grid ColumnSpacing="8" RowSpacing="0">
-                <!-- Define two equal-width columns -->
+            <Grid ColumnSpacing="10" RowSpacing="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <!-- Added for Next of Kin Section -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Added for Next of Kin Section -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Added for Next of Kin Section -->
+                </Grid.RowDefinitions>
 
-                <!-- Kitchen Type Section -->
-                <StackLayout Grid.Column="0">
-                    <!-- Kitchen Type Label -->
-                    <Label Text="First Name" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
-
-                    <!-- Kitchen Type Picker (Styled like an Input Box) -->
-                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                        <Entry Text="{Binding StaffData.Firstname}" Placeholder="Enter first name" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                <!-- First Name -->
+                <StackLayout Grid.Column="0" Grid.Row="0">
+                    <Label Text="First Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                    <Frame>
+                        <Entry Text="{Binding StaffData.Firstname}" Placeholder="Enter first name" PlaceholderColor="#0a506c"/>
                     </Frame>
-                    <Label Text="{Binding PropertyHouseStatusError}" TextColor="Red" />
                 </StackLayout>
 
-                <!-- House Room Size Section -->
-                <StackLayout Grid.Column="1">
-                    <!-- House Room Size Label -->
-                    <Label Text="Last Nmae" FontAttributes="Bold" FontSize="13" Margin="0,0,0,0" TextColor="#0a506c"/>
-
-                    <!-- House Room Size Picker (Styled like an Input Box) -->
-                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                        <Entry Text="{Binding StaffData.Lastname}" Placeholder="Enter last name" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                <!-- Last Name -->
+                <StackLayout Grid.Column="1" Grid.Row="0">
+                    <Label Text="Last Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                    <Frame>
+                        <Entry Text="{Binding StaffData.Lastname}" Placeholder="Enter last name" PlaceholderColor="#0a506c"/>
                     </Frame>
-                    <Label Text="{Binding PropertyHouseWaterTypeError}" TextColor="Red" />
-                </StackLayout>
-            </Grid>
-
-            <StackLayout>
-                <!-- House Room # Label -->
-                <Label Text="Email Address" FontAttributes="Bold" FontSize="13"  Margin="0,0,0,0" TextColor="#0a506c"/>
-                <!-- House Room # Entry (Styled like an Input Box) -->
-                <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0"  HeightRequest="40">
-                    <Entry Text="{Binding StaffData.Emailaddress}" Placeholder="Enter email address" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
-                </Frame>
-                <Label Text="{Binding PropertyHouseNameError}" TextColor="Red" />
-            </StackLayout>
-
-            <Grid ColumnSpacing="8" RowSpacing="0">
-                <!-- Define two equal-width columns -->
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <!-- Kitchen Type Section -->
-                <StackLayout Grid.Column="0">
-                    <!-- Kitchen Type Label -->
-                    <Label Text="Phone Number" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
-
-                    <!-- Kitchen Type Picker (Styled like an Input Box) -->
-                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                        <Entry Text="{Binding StaffData.Phonenumber}" Placeholder="Enter phone number" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
-                    </Frame>
-                    <Label Text="{Binding PropertyHouseStatusError}" TextColor="Red" />
                 </StackLayout>
 
-                <!-- House Room Size Section -->
-                <StackLayout Grid.Column="1">
-                    <!-- House Room Size Label -->
-                    <Label Text="ID Number" FontAttributes="Bold" FontSize="13" Margin="0,0,0,0" TextColor="#0a506c"/>
-
-                    <!-- House Room Size Picker (Styled like an Input Box) -->
-                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                        <Entry Text="{Binding StaffData.Idnumber}" Placeholder="Enter last name" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                <!-- Email Address -->
+                <StackLayout Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+                    <Label Text="Email Address" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                    <Frame>
+                        <Entry Text="{Binding StaffData.Emailaddress}" Placeholder="Enter email address" PlaceholderColor="#0a506c"/>
                     </Frame>
-                    <Label Text="{Binding PropertyHouseWaterTypeError}" TextColor="Red" />
-                </StackLayout>
-            </Grid>
-
-            <Grid ColumnSpacing="8" RowSpacing="0">
-                <!-- Define two equal-width columns -->
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <!-- Kitchen Type Section -->
-                <StackLayout Grid.Column="0">
-                    <!-- Kitchen Type Label -->
-                    <Label Text="Gender" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
-
-                    <!-- Kitchen Type Picker (Styled like an Input Box) -->
-                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                        <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding SelectedHouseentrystatus}" ItemDisplayBinding="{Binding Text}" Title="Select gender" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
-                    </Frame>
-                    <Label Text="{Binding PropertyHouseStatusError}" TextColor="Red" />
                 </StackLayout>
 
-                <!-- House Room Size Section -->
-                <StackLayout Grid.Column="1">
-                    <!-- House Room Size Label -->
-                    <Label Text="Marital Status" FontAttributes="Bold" FontSize="13" Margin="0,0,0,0" TextColor="#0a506c"/>
-
-                    <!-- House Room Size Picker (Styled like an Input Box) -->
-                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                        <Picker ItemsSource="{Binding Systemhousewatertype}" SelectedItem="{Binding SelectedHousewatertype}" ItemDisplayBinding="{Binding Text}" Title="Select marital status" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                <!-- Phone Number -->
+                <StackLayout Grid.Column="0" Grid.Row="2">
+                    <Label Text="Phone Number" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                    <Frame>
+                        <Entry Text="{Binding StaffData.Phonenumber}" Placeholder="Enter phone number" PlaceholderColor="#0a506c"/>
                     </Frame>
-                    <Label Text="{Binding PropertyHouseWaterTypeError}" TextColor="Red" />
+                </StackLayout>
+
+                <!-- ID Number -->
+                <StackLayout Grid.Column="1" Grid.Row="2">
+                    <Label Text="ID Number" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                    <Frame>
+                        <Entry Text="{Binding StaffData.Idnumber}" Placeholder="Enter ID number" PlaceholderColor="#0a506c"/>
+                    </Frame>
+                </StackLayout>
+
+                <!-- Gender -->
+                <StackLayout Grid.Column="0" Grid.Row="3">
+                    <Label Text="Gender" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                    <Frame>
+                        <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding SelectedHouseentrystatus}" ItemDisplayBinding="{Binding Text}" Title="Select gender" TextColor="Black" FontSize="14"/>
+                    </Frame>
+                </StackLayout>
+
+                <!-- Marital Status -->
+                <StackLayout Grid.Column="1" Grid.Row="3">
+                    <Label Text="Marital Status" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                    <Frame>
+                        <Picker ItemsSource="{Binding Systemhousewatertype}" SelectedItem="{Binding SelectedHousewatertype}" ItemDisplayBinding="{Binding Text}" Title="Select marital status" TextColor="Black" FontSize="14"/>
+                    </Frame>
+                </StackLayout>
+
+                <!-- Next of Kin Name -->
+                <StackLayout Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
+                    <Label Text="Next of Kin Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                    <Frame>
+                        <Entry Text="{Binding NextOfKinData.Name}" Placeholder="Enter kin name" PlaceholderColor="#0a506c"/>
+                    </Frame>
+                </StackLayout>
+
+                <!-- Next of Kin Phone -->
+                <StackLayout Grid.Column="0" Grid.Row="5">
+                    <Label Text="Next of Kin Phone" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                    <Frame>
+                        <Entry Text="{Binding NextOfKinData.Phone}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c"/>
+                    </Frame>
+                </StackLayout>
+
+                <!-- Next of Kin Relationship -->
+                <StackLayout Grid.Column="1" Grid.Row="5">
+                    <Label Text="Relationship" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                    <Frame>
+                        <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding SelectedHouseentrystatus}" ItemDisplayBinding="{Binding Text}" Title="Select gender" TextColor="Black" FontSize="14"/>
+                    </Frame>
                 </StackLayout>
             </Grid>
 
+            <!-- Update Button -->
+            <Button Command="{Binding CheckUserLoginStatusCommand}" Text="Update" />
 
-
-            <Button BackgroundColor="#0a506c" Command="{Binding CheckUserLoginStatusCommand}" CornerRadius="8" Text="Update" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
