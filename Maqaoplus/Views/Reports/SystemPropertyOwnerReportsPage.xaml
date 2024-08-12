@@ -2,5 +2,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.Reports.SystemPropertyOwnerReportsPage"
-             Title="Reports">
+             Title="Reports"
+             BackgroundColor="White">
+
+    <StackLayout Padding="20" Spacing="10">
+        <Grid RowSpacing="10" ColumnSpacing="10">
+            <!-- Define two columns of equal width -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!-- Sales Report Button -->
+            <Button Text="Property Houses" Command="{Binding LoadReportModalCommand}" CommandParameter="propertyhousesandrooms" TextColor="#0a506c" BackgroundColor="Transparent" BorderWidth="0" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start"/>
+            <Button Text="Property House Tenants" Command="{Binding LoadReportModalCommand}" CommandParameter="propertyhousesandroomtenants" TextColor="#0a506c" BackgroundColor="Transparent" BorderWidth="0" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start"/>
+        </Grid>
+        <Grid RowSpacing="10" ColumnSpacing="10">
+            <!-- Define two columns of equal width -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!-- Sales Report Button -->
+            <Button Text="Property Houses Bills" Command="{Binding LoadReportModalCommand}" CommandParameter="propertyhousesandroombills" TextColor="#0a506c" BackgroundColor="Transparent" BorderWidth="0" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start"/>
+            <Button Text="Property House Payments" Command="{Binding LoadReportModalCommand}" CommandParameter="propertyhousesandroombillpayments" TextColor="#0a506c" BackgroundColor="Transparent" BorderWidth="0" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start"/>
+        </Grid>
+    </StackLayout>
 </ContentPage>

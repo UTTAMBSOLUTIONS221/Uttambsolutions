@@ -1,12 +1,21 @@
-﻿using Maqaoplus.Views;
+﻿using DBL.Enum;
+using DBL.Models;
+using Maqaoplus.Views;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
+
 namespace Maqaoplus.ViewModels.Reports
 {
     public class SystemReportsViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
+        private ObservableCollection<ListModel> _systempropertyhouses;
+
         private bool _isLoading;
+        private bool _isProcessing;
+        private bool _isDataLoaded;
+        private bool _isValid;
 
         public bool IsLoading
         {
@@ -17,7 +26,7 @@ namespace Maqaoplus.ViewModels.Reports
                 OnPropertyChanged(nameof(IsLoading));
             }
         }
-        private bool _isProcessing;
+
         public bool IsProcessing
         {
             get => _isProcessing;
@@ -28,7 +37,7 @@ namespace Maqaoplus.ViewModels.Reports
                 ((Command)LoadReportModalCommand).ChangeCanExecute();
             }
         }
-        private bool _isDataLoaded;
+
         public bool IsDataLoaded
         {
             get => _isDataLoaded;
@@ -38,7 +47,7 @@ namespace Maqaoplus.ViewModels.Reports
                 OnPropertyChanged(nameof(IsDataLoaded));
             }
         }
-        private bool _isValid;
+
         public bool IsValid
         {
             get => _isValid;
@@ -52,15 +61,46 @@ namespace Maqaoplus.ViewModels.Reports
             }
         }
 
-        public ICommand LoadReportModalCommand { get; }
+        // Collection for dropdown items
+        private ObservableCollection<string> _dropdownItems;
+        public ObservableCollection<string> DropdownItems
+        {
+            get => _dropdownItems;
+            set
+            {
+                _dropdownItems = value;
+                OnPropertyChanged(nameof(DropdownItems));
+            }
+        }
 
+        public ICommand LoadReportModalCommand { get; }
 
         public SystemReportsViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            LoadReportModalCommand = new Command(async () => await LoadReportModalAsync());
+            LoadReportModalCommand = new Command<string>(LoadReportModalAsync);
+            DropdownItems = new ObservableCollection<string>();
         }
-        private async Task LoadReportModalAsync()
+
+        public ObservableCollection<ListModel> Systempropertyhouses
+        {
+            get => _systempropertyhouses;
+            set
+            {
+                _systempropertyhouses = value;
+                OnPropertyChanged(nameof(Systempropertyhouses));
+            }
+        }
+        private ListModel _selectedSystempropertyhouses;
+        public ListModel SelectedSystempropertyhouses
+        {
+            get => _selectedSystempropertyhouses;
+            set
+            {
+                _selectedSystempropertyhouses = value;
+            }
+        }
+        private async Task LoadReportModalAsync(string reportType)
         {
             if (IsProcessing)
                 return;
@@ -69,6 +109,29 @@ namespace Maqaoplus.ViewModels.Reports
 
             try
             {
+                // Clear previous items
+                DropdownItems.Clear();
+
+                // Load data based on report type
+                switch (reportType)
+                {
+                    case "salesreport":
+                        // Load sales report data into dropdown
+                        var SystempropertyhousesResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyhouses, HttpMethod.Get);
+                        if (SystempropertyhousesResponse != null)
+                        {
+                            Systempropertyhouses = new ObservableCollection<ListModel>(SystempropertyhousesResponse);
+                        }
+                        break;
+
+                    case "anotherreport":
+
+                        break;
+
+                }
+
+                IsDataLoaded = true;
+
                 // Navigate to the modal with the customer data
                 var modalPage = new SystemReportDetailModalPage(
                     new Command(OnOkClicked),
@@ -95,6 +158,7 @@ namespace Maqaoplus.ViewModels.Reports
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

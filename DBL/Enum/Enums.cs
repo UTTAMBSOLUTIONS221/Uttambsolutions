@@ -42,6 +42,7 @@
         Systemgender = 26,
         Systemmaritalstatus = 27,
         Systemkinrelationship = 28,
+        Systempropertyhouses = 29,
 
     }
 }
