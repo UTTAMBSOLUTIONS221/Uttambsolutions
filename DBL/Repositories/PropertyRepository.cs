@@ -62,9 +62,9 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Ownerid", Ownerid);
                 parameters.Add("@Posterid", Posterid);
-                parameters.Add("@Systempropertydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                parameters.Add("@Systempropertyhousedashboardsummarydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystempropertyhousedashboardsummarydatabyowner", parameters, commandType: CommandType.StoredProcedure);
-                string systempropertydataJson = parameters.Get<string>("@Systempropertydata");
+                string systempropertydataJson = parameters.Get<string>("@Systempropertyhousedashboardsummarydata");
                 if (systempropertydataJson != null)
                 {
                     return JsonConvert.DeserializeObject<PropertyHouseSummaryDashboard>(systempropertydataJson);
