@@ -103,7 +103,7 @@ namespace Maqaoplus.ViewModels
                     }
                     else
                     {
-                        StaffData.Genderid = 0;
+                        StaffData.Genderid = 2;
                     }
 
                     OnPropertyChanged(nameof(Selectedstaffgender));
@@ -139,7 +139,7 @@ namespace Maqaoplus.ViewModels
                     }
                     else
                     {
-                        StaffData.Maritalstatusid = 0;
+                        StaffData.Maritalstatusid = 3;
                     }
 
                     OnPropertyChanged(nameof(Selectedstaffmaritalstatus));
@@ -169,17 +169,17 @@ namespace Maqaoplus.ViewModels
                 if (StaffData != null)
                 {
                     // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int maritalstatusid))
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int kinrelationshipid))
                     {
-                        StaffData.Maritalstatusid = maritalstatusid;
+                        StaffData.Kinrelationshipid = kinrelationshipid;
                     }
                     else
                     {
-                        StaffData.Maritalstatusid = 2;
+                        StaffData.Kinrelationshipid = 2;
                     }
 
                     OnPropertyChanged(nameof(Selectedstaffkinrelationship));
-                    OnPropertyChanged(nameof(StaffData.Maritalstatusid));
+                    OnPropertyChanged(nameof(StaffData.Kinrelationshipid));
                 }
             }
         }
