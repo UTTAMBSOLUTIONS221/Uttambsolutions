@@ -63,7 +63,7 @@ namespace Maqaoplus.ViewModels
             {
                 _isProcessing = value;
                 OnPropertyChanged();
-                ((Command)CheckUserLoginStatusCommand).ChangeCanExecute();
+                ((Command)UpdateCurrentUserDetailsCommand).ChangeCanExecute();
             }
         }
 
