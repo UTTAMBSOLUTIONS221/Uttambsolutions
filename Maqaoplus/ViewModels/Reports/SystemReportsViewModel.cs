@@ -60,18 +60,28 @@ namespace Maqaoplus.ViewModels.Reports
                 }
             }
         }
-
-        // Collection for dropdown items
-        private ObservableCollection<string> _dropdownItems;
-        public ObservableCollection<string> DropdownItems
+        private ObservableCollection<ObservableCollection<ListModel>> _dropdownCollections;
+        public ObservableCollection<ObservableCollection<ListModel>> DropdownCollections
         {
-            get => _dropdownItems;
+            get => _dropdownCollections;
             set
             {
-                _dropdownItems = value;
-                OnPropertyChanged(nameof(DropdownItems));
+                _dropdownCollections = value;
+                OnPropertyChanged(nameof(DropdownCollections));
             }
         }
+
+        private ObservableCollection<ListModel> _selectedSystempropertyhouses;
+        public ObservableCollection<ListModel> SelectedSystempropertyhouses
+        {
+            get => _selectedSystempropertyhouses;
+            set
+            {
+                _selectedSystempropertyhouses = value;
+                OnPropertyChanged(nameof(SelectedSystempropertyhouses));
+            }
+        }
+
 
         public ICommand LoadReportModalCommand { get; }
 
@@ -79,27 +89,11 @@ namespace Maqaoplus.ViewModels.Reports
         {
             _serviceProvider = serviceProvider;
             LoadReportModalCommand = new Command<string>(async (reportType) => await LoadReportModalAsync(reportType));
-            DropdownItems = new ObservableCollection<string>();
+            DropdownCollections = new ObservableCollection<ObservableCollection<ListModel>>();
+            SelectedSystempropertyhouses = new ObservableCollection<ListModel>();
         }
 
-        public ObservableCollection<ListModel> Systempropertyhouses
-        {
-            get => _systempropertyhouses;
-            set
-            {
-                _systempropertyhouses = value;
-                OnPropertyChanged(nameof(Systempropertyhouses));
-            }
-        }
-        private ListModel _selectedSystempropertyhouses;
-        public ListModel SelectedSystempropertyhouses
-        {
-            get => _selectedSystempropertyhouses;
-            set
-            {
-                _selectedSystempropertyhouses = value;
-            }
-        }
+
         private async Task LoadReportModalAsync(string reportType)
         {
             if (IsProcessing)
@@ -110,8 +104,9 @@ namespace Maqaoplus.ViewModels.Reports
             try
             {
                 // Clear previous items
-                DropdownItems.Clear();
+                DropdownCollections.Clear();
 
+                SelectedSystempropertyhouses.Clear();
                 // Load data based on report type
                 switch (reportType)
                 {
@@ -120,7 +115,9 @@ namespace Maqaoplus.ViewModels.Reports
                         var SystempropertyhousesResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.Systempropertyhouses + "&code=" + App.UserDetails.Usermodel.Userid, HttpMethod.Get);
                         if (SystempropertyhousesResponse != null)
                         {
-                            Systempropertyhouses = new ObservableCollection<ListModel>(SystempropertyhousesResponse);
+                            var collection = new ObservableCollection<ListModel>(SystempropertyhousesResponse);
+                            DropdownCollections.Add(collection);
+                            SelectedSystempropertyhouses.Add(collection.FirstOrDefault());
                         }
                         break;
 
