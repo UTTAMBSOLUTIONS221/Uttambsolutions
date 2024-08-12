@@ -99,6 +99,12 @@ namespace Maqaoplus.Constants
                                 },
                                 new ShellContent
                                 {
+                                    Icon = Icons.house,
+                                    Title = "Tenants",
+                                    ContentTemplate = new DataTemplate(() => new PropertyHousesPage(serviceProvider)),
+                                },
+                                new ShellContent
+                                {
                                     Icon = Icons.People,
                                     Title = "Statement",
                                     ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
