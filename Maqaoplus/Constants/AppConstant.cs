@@ -106,7 +106,7 @@ namespace Maqaoplus.Constants
                                 },
                                 new ShellContent
                                 {
-                                    Icon = Icons.People,
+                                    Icon = Icons.reports,
                                     Title = "Reports",
                                     ContentTemplate = new DataTemplate(typeof(SystemPropertyOwnerReportsPage)),
                                 },
