@@ -18,4 +18,9 @@ public partial class UserProfilePage : ContentPage
             viewModel.LoadCurrentUserCommand.Execute(null);
         }
     }
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _viewModel.CancelOperations();
+    }
 }

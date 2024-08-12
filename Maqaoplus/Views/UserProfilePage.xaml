@@ -118,7 +118,7 @@
                 <StackLayout Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
                     <Label Text="Next of Kin Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                     <Frame>
-                        <Entry Text="{Binding NextOfKinData.Name}" Placeholder="Enter kin name" PlaceholderColor="#0a506c"/>
+                        <Entry Text="{Binding NextOfKinData.Name}" Placeholder="Enter kin name" PlaceholderColor="#0a506c" FontSize="14"/>
                     </Frame>
                 </StackLayout>
 
@@ -126,7 +126,7 @@
                 <StackLayout Grid.Column="0" Grid.Row="5">
                     <Label Text="Next of Kin Phone" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                     <Frame>
-                        <Entry Text="{Binding NextOfKinData.Phone}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c"/>
+                        <Entry Text="{Binding NextOfKinData.Phone}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c" FontSize="14"/>
                     </Frame>
                 </StackLayout>
 
@@ -134,7 +134,7 @@
                 <StackLayout Grid.Column="1" Grid.Row="5">
                     <Label Text="Relationship" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                     <Frame>
-                        <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding SelectedHouseentrystatus}" ItemDisplayBinding="{Binding Text}" Title="Select relationship" TextColor="Black" FontSize="14"/>
+                        <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding SelectedHouseentrystatus}" ItemDisplayBinding="{Binding Text}" Title="Select relationship" TextColor="#0a506c" FontSize="14"/>
                     </Frame>
                 </StackLayout>
             </Grid>
