@@ -7,6 +7,7 @@ using Maqaoplus.ViewModels.Startup;
 using Maqaoplus.Views;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
+using Maqaoplus.Views.Reports;
 using Maqaoplus.Views.Startup;
 
 namespace Maqaoplus
@@ -45,6 +46,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<PropertyHousesPage>();
             builder.Services.AddSingleton<PropertyHousesDetailPage>();
             builder.Services.AddSingleton<PropertyHousesRoomDetailPage>();
+            builder.Services.AddSingleton<SystemReportsPage>();
 
             // View Models
             builder.Services.AddSingleton<AppShellViewModel>();

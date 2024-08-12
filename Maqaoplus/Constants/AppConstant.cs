@@ -2,6 +2,7 @@
 using Maqaoplus.Views;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
+using Maqaoplus.Views.Reports;
 
 namespace Maqaoplus.Constants
 {
@@ -106,8 +107,8 @@ namespace Maqaoplus.Constants
                                 new ShellContent
                                 {
                                     Icon = Icons.People,
-                                    Title = "Statement",
-                                    ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
+                                    Title = "Reports",
+                                    ContentTemplate = new DataTemplate(typeof(SystemReportsPage)),
                                 },
                                 new ShellContent
                                 {
