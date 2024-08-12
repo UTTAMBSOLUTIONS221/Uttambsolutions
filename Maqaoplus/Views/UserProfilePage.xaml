@@ -123,7 +123,7 @@
                         <StackLayout>
                             <Label Text="Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                             <Frame>
-                                <Entry Text="{Binding NextOfKinData.Name}" Placeholder="Enter kin name" PlaceholderColor="#0a506c" FontSize="14"/>
+                                <Entry Text="{Binding StaffData.Kinname}" Placeholder="Enter kin name" PlaceholderColor="#0a506c" FontSize="14"/>
                             </Frame>
                         </StackLayout>
 
@@ -138,7 +138,7 @@
                             <StackLayout Grid.Column="0">
                                 <Label Text="Phone" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                                 <Frame>
-                                    <Entry Text="{Binding NextOfKinData.Phone}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c" FontSize="14"/>
+                                    <Entry Text="{Binding StaffData.Kinphonenumber}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c" FontSize="14"/>
                                 </Frame>
                             </StackLayout>
 
