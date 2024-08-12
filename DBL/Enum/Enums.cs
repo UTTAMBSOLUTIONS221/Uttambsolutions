@@ -39,5 +39,9 @@
         Systemkitchentype = 24,
         Systempaymentmodetype = 25,
         Systemcashpaymentmodetype = 215,
+        Systemgender = 26,
+        Systemmaritalstatus = 27,
+        Systemkinrelationship = 28,
+
     }
 }
