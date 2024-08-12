@@ -175,7 +175,7 @@ namespace Maqaoplus.ViewModels
                     }
                     else
                     {
-                        StaffData.Maritalstatusid = 0;
+                        StaffData.Maritalstatusid = 2;
                     }
 
                     OnPropertyChanged(nameof(Selectedstaffkinrelationship));

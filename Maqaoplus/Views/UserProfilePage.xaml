@@ -127,21 +127,29 @@
                             </Frame>
                         </StackLayout>
 
-                        <!-- Next of Kin Phone -->
-                        <StackLayout>
-                            <Label Text="Phone" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
-                            <Frame>
-                                <Entry Text="{Binding NextOfKinData.Phone}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c" FontSize="14"/>
-                            </Frame>
-                        </StackLayout>
 
-                        <!-- Next of Kin Relationship -->
-                        <StackLayout>
-                            <Label Text="Relationship" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
-                            <Frame>
-                                <Picker ItemsSource="{Binding Systemkinrelationship}" SelectedItem="{Binding Selectedstaffkinrelationship}" ItemDisplayBinding="{Binding Text}" Title="Select relationship" TextColor="#0a506c" FontSize="14"/>
-                            </Frame>
-                        </StackLayout>
+                        <Grid ColumnSpacing="8" RowSpacing="0">
+                            <!-- Define two equal-width columns -->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Phone" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                                <Frame>
+                                    <Entry Text="{Binding NextOfKinData.Phone}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c" FontSize="14"/>
+                                </Frame>
+                            </StackLayout>
+
+                            <!-- Next of Kin Relationship -->
+                            <StackLayout  Grid.Column="1">
+                                <Label Text="Relationship" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                                <Frame>
+                                    <Picker ItemsSource="{Binding Systemkinrelationship}" SelectedItem="{Binding Selectedstaffkinrelationship}" ItemDisplayBinding="{Binding Text}" Title="Select relationship" TextColor="#0a506c" FontSize="14"/>
+                                </Frame>
+                            </StackLayout>
+                        </Grid>
                     </VerticalStackLayout>
                 </Frame>
             </Grid>
