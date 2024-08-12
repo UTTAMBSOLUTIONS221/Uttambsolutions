@@ -56,6 +56,9 @@ namespace DBL.Repositories
         }
         public PropertyHouseSummaryDashboard Getsystempropertyhousedashboardsummarydatabyowner(long Ownerid, long Posterid)
         {
+            PropertyHouseSummaryDashboard propertyHouseSummaryDashboard = new PropertyHouseSummaryDashboard();
+            PropertyHouseSummary propertyHouseSummary = new PropertyHouseSummary();
+            List<PropertySummary>? Propertybysummary = new List<PropertySummary>();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -64,14 +67,30 @@ namespace DBL.Repositories
                 parameters.Add("@Posterid", Posterid);
                 parameters.Add("@Systempropertyhousedashboardsummarydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystempropertyhousedashboardsummarydatabyowner", parameters, commandType: CommandType.StoredProcedure);
-                string systempropertydataJson = parameters.Get<string>("@Systempropertyhousedashboardsummarydata");
-                if (systempropertydataJson != null)
+                string systempropertyhousedashboardsummarydataJson = parameters.Get<string>("@Systempropertyhousedashboardsummarydata");
+                if (systempropertyhousedashboardsummarydataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<PropertyHouseSummaryDashboard>(systempropertydataJson);
+                    JObject responseJson = JObject.Parse(systempropertyhousedashboardsummarydataJson);
+                    JObject dashboardsummaryJson = JObject.Parse(responseJson["Data"].ToString());
+                    propertyHouseSummary.Propertyhouseunits = Convert.ToInt32(dashboardsummaryJson["Propertyhouseunits"]);
+                    propertyHouseSummary.Systempropertyoccupiedroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyoccupiedroom"]);
+                    propertyHouseSummary.Systempropertyvacantroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyvacantroom"]);
+                    propertyHouseSummary.Rentarrears = Convert.ToDecimal(dashboardsummaryJson["Rentarrears"]);
+                    propertyHouseSummary.Uncollectedpayments = Convert.ToDecimal(dashboardsummaryJson["Uncollectedpayments"]);
+                    propertyHouseSummary.Consumedmeters = Convert.ToDecimal(dashboardsummaryJson["Consumedmeters"]);
+                    if (dashboardsummaryJson["Propertybysummary"] != null)
+                    {
+                        string propertybysummaryJson = dashboardsummaryJson["Propertybysummary"].ToString();
+                        Propertybysummary = JsonConvert.DeserializeObject<List<PropertySummary>>(propertybysummaryJson);
+                        propertyHouseSummary.Propertybysummary = Propertybysummary;
+                    }
+                    propertyHouseSummaryDashboard.Data = propertyHouseSummary;
+
+                    return propertyHouseSummaryDashboard;
                 }
                 else
                 {
-                    return new PropertyHouseSummaryDashboard();
+                    return propertyHouseSummaryDashboard;
                 }
             }
         }
