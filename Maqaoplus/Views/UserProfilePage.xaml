@@ -94,7 +94,7 @@
                 <StackLayout Grid.Column="1" Grid.Row="2">
                     <Label Text="ID Number" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                     <Frame>
-                        <Entry Text="{Binding StaffData.Idnumber}" Placeholder="Enter ID number" PlaceholderColor="#0a506c"/>
+                        <Entry Text="{Binding StaffData.Idnumber}" Placeholder="Enter ID number" IsReadOnly="{Binding StaffData.Columnreadonly}" PlaceholderColor="#0a506c"/>
                     </Frame>
                 </StackLayout>
 
