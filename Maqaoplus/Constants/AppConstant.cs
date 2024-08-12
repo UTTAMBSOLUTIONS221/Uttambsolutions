@@ -110,12 +110,6 @@ namespace Maqaoplus.Constants
                                     Title = "Reports",
                                     ContentTemplate = new DataTemplate(typeof(SystemPropertyOwnerReportsPage)),
                                 },
-                                new ShellContent
-                                {
-                                    Icon = Icons.AboutUs,
-                                    Title = "Feedback",
-                                    ContentTemplate = new DataTemplate(typeof(CustomerDashboardPage)),
-                                },
                             }
                 };
                 if (!AppShell.Current.Items.Contains(flyoutItem))
