@@ -103,7 +103,7 @@ namespace Maqaoplus.ViewModels
                     }
                     else
                     {
-                        StaffData.Genderid = 2;
+                        StaffData.Genderid = StaffData.Genderid;
                     }
 
                     OnPropertyChanged(nameof(Selectedstaffgender));
@@ -139,7 +139,7 @@ namespace Maqaoplus.ViewModels
                     }
                     else
                     {
-                        StaffData.Maritalstatusid = 3;
+                        StaffData.Maritalstatusid = StaffData.Maritalstatusid;
                     }
 
                     OnPropertyChanged(nameof(Selectedstaffmaritalstatus));
@@ -175,7 +175,7 @@ namespace Maqaoplus.ViewModels
                     }
                     else
                     {
-                        StaffData.Kinrelationshipid = 2;
+                        StaffData.Kinrelationshipid = StaffData.Kinrelationshipid;
                     }
 
                     OnPropertyChanged(nameof(Selectedstaffkinrelationship));
