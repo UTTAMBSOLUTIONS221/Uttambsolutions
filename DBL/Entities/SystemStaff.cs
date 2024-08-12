@@ -42,7 +42,10 @@ namespace DBL.Entities
         public int Modifiedby { get; set; }
         public int Mpesapaybill { get; set; }
         public int Accountnumber { get; set; }
-        public decimal Subscriptionamount { get; set; } = 1;
+        public decimal Subscriptionamount { get; set; }
+        public string? Kinname { get; set; }
+        public string? Kinphonenumber { get; set; }
+        public int Kinrelationshipid { get; set; }
         public DateTime? Lastlogin { get; set; }
         public DateTime Datemodified { get; set; }
         public DateTime Datecreated { get; set; }
