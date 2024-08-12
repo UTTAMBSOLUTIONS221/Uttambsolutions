@@ -5,16 +5,12 @@ namespace DBL.Entities
     public class SystemStaff
     {
         public int Userid { get; set; }
-        [Required(ErrorMessage = "Firstname is Required!")]
         public string? Firstname { get; set; }
-        [Required(ErrorMessage = "Lastname is Required!")]
         public string? Lastname { get; set; }
         public string? Fullname { get; set; }
-        [Required(ErrorMessage = "Phonenumber is Required!")]
         [DataType(DataType.PhoneNumber)]
         public string? Phonenumber { get; set; }
         public string? Username { get; set; }
-        [Required(ErrorMessage = "Emailaddress is Required!")]
         [DataType(DataType.EmailAddress)]
         public string? Emailaddress { get; set; }
         public int Genderid { get; set; }
@@ -22,12 +18,9 @@ namespace DBL.Entities
         public int Roleid { get; set; }
         public string? Rolename { get; set; }
         public string? Passharsh { get; set; }
-        [Required(ErrorMessage = "Password is Required!")]
         [DataType(DataType.Password)]
         public string? Passwords { get; set; }
-        [Required(ErrorMessage = "Confirm Password is required.")]
         [DataType(DataType.Password)]
-        [Compare("Passwords", ErrorMessage = "The password and confirmation password do not match.")]
         public string? Confirmpasswords { get; set; }
         public bool Isactive { get; set; }
         public bool Isdeleted { get; set; }
