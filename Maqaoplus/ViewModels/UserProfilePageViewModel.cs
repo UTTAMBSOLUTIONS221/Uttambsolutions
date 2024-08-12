@@ -1,5 +1,8 @@
 ﻿using DBL.Entities;
+using DBL.Enum;
+using DBL.Models;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -13,6 +16,10 @@ namespace Maqaoplus.ViewModels
         private CancellationTokenSource _cancellationTokenSource;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private ObservableCollection<ListModel> _systemgender;
+        private ObservableCollection<ListModel> _systemmaritalstatus;
+        private ObservableCollection<ListModel> _systemkinrelationship;
 
         public ICommand LoadCurrentUserCommand { get; }
         public ICommand CheckUserLoginStatusCommand { get; }
@@ -64,6 +71,116 @@ namespace Maqaoplus.ViewModels
         {
             _serviceProvider = serviceProvider;
             LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserDataAsync());
+            LoadDropdownData();
+        }
+
+
+        public ObservableCollection<ListModel> Systemgender
+        {
+            get => _systemgender;
+            set
+            {
+                _systemgender = value;
+                OnPropertyChanged();
+            }
+        }
+        private ListModel _selectedstaffgender;
+        public ListModel Selectedstaffgender
+        {
+            get => _selectedstaffgender;
+            set
+            {
+                _selectedstaffgender = value;
+
+                // Ensure SystempropertyData is not null
+                if (StaffData != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int genderid))
+                    {
+                        StaffData.Genderid = genderid;
+                    }
+                    else
+                    {
+                        StaffData.Genderid = 0;
+                    }
+
+                    OnPropertyChanged(nameof(Selectedstaffgender));
+                    OnPropertyChanged(nameof(StaffData.Genderid));
+                }
+            }
+        }
+
+        public ObservableCollection<ListModel> Systemmaritalstatus
+        {
+            get => _systemmaritalstatus;
+            set
+            {
+                _systemmaritalstatus = value;
+                OnPropertyChanged();
+            }
+        }
+        private ListModel _selectedstaffmaritalstatus;
+        public ListModel Selectedstaffmaritalstatus
+        {
+            get => _selectedstaffmaritalstatus;
+            set
+            {
+                _selectedstaffmaritalstatus = value;
+
+                // Ensure SystempropertyData is not null
+                if (StaffData != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int maritalstatusid))
+                    {
+                        StaffData.Maritalstatusid = maritalstatusid;
+                    }
+                    else
+                    {
+                        StaffData.Maritalstatusid = 0;
+                    }
+
+                    OnPropertyChanged(nameof(Selectedstaffmaritalstatus));
+                    OnPropertyChanged(nameof(StaffData.Maritalstatusid));
+                }
+            }
+        }
+
+        public ObservableCollection<ListModel> Systemkinrelationship
+        {
+            get => _systemkinrelationship;
+            set
+            {
+                _systemkinrelationship = value;
+                OnPropertyChanged();
+            }
+        }
+        private ListModel _selectedstaffkinrelationship;
+        public ListModel Selectedstaffkinrelationship
+        {
+            get => _selectedstaffkinrelationship;
+            set
+            {
+                _selectedstaffkinrelationship = value;
+
+                // Ensure SystempropertyData is not null
+                if (StaffData != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int maritalstatusid))
+                    {
+                        StaffData.Maritalstatusid = maritalstatusid;
+                    }
+                    else
+                    {
+                        StaffData.Maritalstatusid = 0;
+                    }
+
+                    OnPropertyChanged(nameof(Selectedstaffkinrelationship));
+                    OnPropertyChanged(nameof(StaffData.Maritalstatusid));
+                }
+            }
         }
 
         private async Task LoadCurrentUserDataAsync()
@@ -98,7 +215,32 @@ namespace Maqaoplus.ViewModels
             }
         }
 
+        private async Task LoadDropdownData()
+        {
+            try
+            {
+                var SystemgenderResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemgender, HttpMethod.Get);
+                var SystemmaritalstatusResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemmaritalstatus, HttpMethod.Get);
+                var SystemkinrelationshipResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemkinrelationship, HttpMethod.Get);
+                if (SystemgenderResponse != null)
+                {
+                    Systemgender = new ObservableCollection<ListModel>(SystemgenderResponse);
+                }
 
+                if (SystemmaritalstatusResponse != null)
+                {
+                    Systemmaritalstatus = new ObservableCollection<ListModel>(SystemmaritalstatusResponse);
+                }
+                if (SystemkinrelationshipResponse != null)
+                {
+                    Systemkinrelationship = new ObservableCollection<ListModel>(SystemkinrelationshipResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
 
 
         private async Task Updateuserdetailsasync()
