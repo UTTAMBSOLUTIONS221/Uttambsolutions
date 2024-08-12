@@ -29,5 +29,16 @@ namespace API.Controllers
                 GroupName = x.GroupName,
             }).ToList();
         }
+        [HttpGet("Getdropdownitembycode")]
+        public List<ListModel> Systemdropdowns(ListModelType listType, long code)
+        {
+            return bl.GetListModelById(listType, code).Result.Select(x => new ListModel
+            {
+                Text = x.Text,
+                Value = x.Value,
+                GroupId = x.GroupId,
+                GroupName = x.GroupName,
+            }).ToList();
+        }
     }
 }

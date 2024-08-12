@@ -78,7 +78,7 @@ namespace Maqaoplus.ViewModels.Reports
         public SystemReportsViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            LoadReportModalCommand = new Command<string>(LoadReportModalAsync);
+            LoadReportModalCommand = new Command<string>(async (reportType) => await LoadReportModalAsync(reportType));
             DropdownItems = new ObservableCollection<string>();
         }
 
@@ -115,9 +115,9 @@ namespace Maqaoplus.ViewModels.Reports
                 // Load data based on report type
                 switch (reportType)
                 {
-                    case "salesreport":
+                    case "propertyhousesandrooms":
                         // Load sales report data into dropdown
-                        var SystempropertyhousesResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyhouses, HttpMethod.Get);
+                        var SystempropertyhousesResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.Systempropertyhouses + "&code=" + App.UserDetails.Usermodel.Userid, HttpMethod.Get);
                         if (SystempropertyhousesResponse != null)
                         {
                             Systempropertyhouses = new ObservableCollection<ListModel>(SystempropertyhousesResponse);
