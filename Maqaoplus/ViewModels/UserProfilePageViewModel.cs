@@ -98,6 +98,52 @@ namespace Maqaoplus.ViewModels
             }
         }
 
+
+
+
+        private async Task Updateuserdetailsasync()
+        {
+            IsLoading = true;
+
+            await Task.Delay(500);
+            if (StaffData == null)
+            {
+                IsLoading = false;
+                return;
+            }
+
+            try
+            {
+                IsProcessing = true;
+                StaffData.Updateprofile = false;
+                StaffData.Modifiedby = App.UserDetails.Usermodel.Userid;
+                StaffData.Datemodified = DateTime.Now;
+                // Call your registration service here
+                var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Registerstaff", HttpMethod.Post, StaffData);
+                if (response.StatusCode == 200)
+                {
+                    await Shell.Current.GoToAsync("//LoginPage");
+                }
+                else if (response.StatusCode == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

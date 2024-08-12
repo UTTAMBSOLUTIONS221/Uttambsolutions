@@ -114,29 +114,36 @@
                     </Frame>
                 </StackLayout>
 
-                <!-- Next of Kin Name -->
-                <StackLayout Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
-                    <Label Text="Next of Kin Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
-                    <Frame>
-                        <Entry Text="{Binding NextOfKinData.Name}" Placeholder="Enter kin name" PlaceholderColor="#0a506c" FontSize="14"/>
-                    </Frame>
-                </StackLayout>
+                <!-- Next of Kin Section -->
+                <Frame BackgroundColor="#f0f0f0" CornerRadius="8" Grid.ColumnSpan="2" Grid.Row="4" Margin="0,10,0,0">
+                    <VerticalStackLayout Padding="10">
+                        <Label Text="Next of Kin Details" FontAttributes="Bold" FontSize="16" TextColor="#0a506c"/>
 
-                <!-- Next of Kin Phone -->
-                <StackLayout Grid.Column="0" Grid.Row="5">
-                    <Label Text="Next of Kin Phone" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
-                    <Frame>
-                        <Entry Text="{Binding NextOfKinData.Phone}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c" FontSize="14"/>
-                    </Frame>
-                </StackLayout>
+                        <!-- Next of Kin Name -->
+                        <StackLayout>
+                            <Label Text="Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                            <Frame>
+                                <Entry Text="{Binding NextOfKinData.Name}" Placeholder="Enter kin name" PlaceholderColor="#0a506c" FontSize="14"/>
+                            </Frame>
+                        </StackLayout>
 
-                <!-- Next of Kin Relationship -->
-                <StackLayout Grid.Column="1" Grid.Row="5">
-                    <Label Text="Relationship" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
-                    <Frame>
-                        <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding SelectedHouseentrystatus}" ItemDisplayBinding="{Binding Text}" Title="Select relationship" TextColor="#0a506c" FontSize="14"/>
-                    </Frame>
-                </StackLayout>
+                        <!-- Next of Kin Phone -->
+                        <StackLayout>
+                            <Label Text="Phone" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                            <Frame>
+                                <Entry Text="{Binding NextOfKinData.Phone}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c" FontSize="14"/>
+                            </Frame>
+                        </StackLayout>
+
+                        <!-- Next of Kin Relationship -->
+                        <StackLayout>
+                            <Label Text="Relationship" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
+                            <Frame>
+                                <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding SelectedHouseentrystatus}" ItemDisplayBinding="{Binding Text}" Title="Select relationship" TextColor="#0a506c" FontSize="14"/>
+                            </Frame>
+                        </StackLayout>
+                    </VerticalStackLayout>
+                </Frame>
             </Grid>
 
             <!-- Update Button -->
