@@ -7,7 +7,7 @@
              Padding="20">
 
     <StackLayout Spacing="20">
-        <Label Text="User Summary Details" 
+        <Label Text="Report Summary Details" 
                FontSize="24" 
                FontAttributes="Bold" 
                HorizontalOptions="Center" 
@@ -23,9 +23,9 @@
                        FontAttributes="Bold" 
                        TextColor="Black"/>
                         <Picker ItemsSource="{Binding .}" 
-                        SelectedItem="{Binding SelectedSystempropertyhouses[0], Mode=TwoWay}" 
-                        FontSize="18"
-                        TextColor="Black"/>
+SelectedItem="{Binding Source={x:Reference Page}, Path=BindingContext.SelectedSystempropertyhouses}"
+FontSize="18"
+TextColor="Black"/>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
