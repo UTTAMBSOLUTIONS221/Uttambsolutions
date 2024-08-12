@@ -179,4 +179,6 @@
 	  <ProjectReference Include="..\DBL\DBL.csproj" />
 	</ItemGroup>
 
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadGenericExceptionInfoBarMaqaoplusHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+
 </Project>
