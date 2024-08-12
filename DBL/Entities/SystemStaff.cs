@@ -46,6 +46,7 @@ namespace DBL.Entities
         public string? Kinname { get; set; }
         public string? Kinphonenumber { get; set; }
         public int Kinrelationshipid { get; set; }
+        public bool Columnreadonly { get; set; }
         public DateTime? Lastlogin { get; set; }
         public DateTime Datemodified { get; set; }
         public DateTime Datecreated { get; set; }
