@@ -138,7 +138,16 @@
 	  <MauiXaml Update="Views\PropertyHouse\PropertyHousesRoomDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Reports\SystemReportsPage.xaml">
+	  <MauiXaml Update="Views\Reports\SystemAdminReportsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Reports\SystemAgencyReportsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Reports\SystemPropertyOwnerReportsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Reports\SystemTenantReportsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\StaffDetailModalPage.xaml">
