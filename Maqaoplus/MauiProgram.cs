@@ -42,6 +42,7 @@ namespace Maqaoplus
             builder.Services.AddTransient<ValidateStaffAccountPage>();
             builder.Services.AddSingleton<DashboardPage>();
             builder.Services.AddSingleton<UserDashboardPage>();
+            builder.Services.AddSingleton<PropertyOwnerDashboardPage>();
             builder.Services.AddSingleton<UserProfilePage>();
             builder.Services.AddSingleton<AddPropertyHousePage>();
             builder.Services.AddSingleton<PropertyHousesPage>();
@@ -58,6 +59,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<ValidateStaffAccountPageViewModel>();
             builder.Services.AddSingleton<DashboardPageViewModel>();
             builder.Services.AddSingleton<UserProfilePageViewModel>();
+            builder.Services.AddSingleton<SummaryDashBoardViewModel>();
             builder.Services.AddSingleton<PropertyHouseViewModel>();
             builder.Services.AddSingleton<AddPropertyHouseViewModel>();
             builder.Services.AddSingleton<PropertyHouseDetailViewModel>();
