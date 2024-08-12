@@ -1,4 +1,4 @@
-﻿using DBL.Models;
+﻿using DBL.Models.Dashboards;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,18 +9,18 @@ namespace Maqaoplus.ViewModels.Dashboards
     public class SummaryDashBoardViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
-        private PropertyHouseRoomTenantData _tenantData;
+        private PropertyHouseSummary _dashBoardSummaryData;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand LoadItemsCommand { get; }
 
-        public PropertyHouseRoomTenantData TenantData
+        public PropertyHouseSummary DashBoardSummaryData
         {
-            get => _tenantData;
+            get => _dashBoardSummaryData;
             set
             {
-                _tenantData = value;
+                _dashBoardSummaryData = value;
                 OnPropertyChanged();
             }
         }
@@ -60,11 +60,10 @@ namespace Maqaoplus.ViewModels.Dashboards
 
             try
             {
-                //var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + 2, HttpMethod.Get, null);
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedashboardsummarydatabyowner/" + App.UserDetails.Usermodel.Userid + "/0", HttpMethod.Get, null);
                 if (response != null)
                 {
-                    TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
+                    DashBoardSummaryData = JsonConvert.DeserializeObject<PropertyHouseSummary>(response.Data.ToString());
                 }
                 IsDataLoaded = true;
             }
