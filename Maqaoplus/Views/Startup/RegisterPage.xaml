@@ -37,9 +37,9 @@
                                 <Entry Placeholder="First Name"
                     ReturnType="Next"
                     Text="{Binding FirstName}"
-                    TextColor="Black"
+                    TextColor="#0a506c"
                     FontSize="16" 
-                    PlaceholderColor="#888888"/>
+                    PlaceholderColor="#0a506c" WidthRequest="300"/>
                             </HorizontalStackLayout>
                         </Frame>
 
@@ -58,9 +58,9 @@
                                 <Entry Placeholder="Last Name"
                     ReturnType="Next"
                     Text="{Binding LastName}"
-                    TextColor="Black"
+                    TextColor="#0a506c"
                     FontSize="16"
-                    PlaceholderColor="#888888"/>
+                     PlaceholderColor="#0a506c" WidthRequest="300"/>
                             </HorizontalStackLayout>
                         </Frame>
 
@@ -80,8 +80,8 @@
                     Text="{Binding EmailAddress}"
                     Keyboard="Email"
                     FontSize="16"
-                    TextColor="Black"
-                    PlaceholderColor="#888888"/>
+                    TextColor="#0a506c"
+                    PlaceholderColor="#0a506c" WidthRequest="300"/>
                             </HorizontalStackLayout>
                         </Frame>
 
@@ -101,8 +101,8 @@
                     Text="{Binding PhoneNumber}"
                     Keyboard="Telephone"
                     FontSize="16"
-                    TextColor="Black"
-                    PlaceholderColor="#888888"/>
+                    TextColor="#0a506c"
+                     PlaceholderColor="#0a506c" WidthRequest="300"/>
                             </HorizontalStackLayout>
                         </Frame>
 
@@ -122,9 +122,9 @@
                     Placeholder="Password" 
                     ReturnType="Done" 
                     Text="{Binding Password}" 
-                    TextColor="Black" 
+                    TextColor="#0a506c" 
                     FontSize="16" 
-                    PlaceholderColor="#888888"/>
+                     PlaceholderColor="#0a506c" WidthRequest="300"/>
                             </HorizontalStackLayout>
                         </Frame>
 
@@ -144,8 +144,8 @@
                     Text="{Binding ConfirmPassword}"
                     IsPassword="True"
                     FontSize="16"
-                    TextColor="Black"
-                    PlaceholderColor="#888888"/>
+                    TextColor="#0a506c"
+                    PlaceholderColor="#0a506c" WidthRequest="300"/>
                             </HorizontalStackLayout>
                         </Frame>
 
