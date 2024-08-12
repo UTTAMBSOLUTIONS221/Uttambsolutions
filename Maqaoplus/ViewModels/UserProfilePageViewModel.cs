@@ -22,7 +22,7 @@ namespace Maqaoplus.ViewModels
         private ObservableCollection<ListModel> _systemkinrelationship;
 
         public ICommand LoadCurrentUserCommand { get; }
-        public ICommand CheckUserLoginStatusCommand { get; }
+        public ICommand UpdateCurrentUserDetailsCommand { get; }
         private bool _isProcessing;
 
         public SystemStaff StaffData
@@ -72,6 +72,7 @@ namespace Maqaoplus.ViewModels
             _serviceProvider = serviceProvider;
             LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserDataAsync());
             LoadDropdownData();
+            UpdateCurrentUserDetailsCommand = new Command(async () => await Updateuserdetailsasync());
         }
 
 

@@ -147,7 +147,7 @@
             </Grid>
 
             <!-- Update Button -->
-            <Button Command="{Binding CheckUserLoginStatusCommand}" Text="Update" />
+            <Button Command="{Binding UpdateCurrentUserDetailsCommand}" Text="Update" />
 
         </VerticalStackLayout>
     </ScrollView>
