@@ -224,7 +224,6 @@ namespace Maqaoplus.ViewModels.Startup
             }
         }
 
-
         private bool IsValidInput()
         {
             bool isValid = true;
@@ -274,7 +273,7 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 SystemStaffPasswordError = null;
             }
-            if (Password == ConfirmPassword)
+            if (Password != ConfirmPassword)
             {
                 SystemStaffConfirmPasswordError = "Password Mismatch.";
                 isValid = false;
