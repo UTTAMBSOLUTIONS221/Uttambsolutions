@@ -82,7 +82,7 @@ namespace API.Controllers
         }
         [AllowAnonymous]
         [Route("Getsystemstaffdetaildatabyidnumber/{Idnumber}"), HttpGet]
-        public async Task<Systemdataffdata> Getsystemstaffdetaildatabyidnumber(int Idnumber)
+        public async Task<Systemtenantdetailsdata> Getsystemstaffdetaildatabyidnumber(int Idnumber)
         {
             return await bl.Getsystemstaffdetaildatabyidnumber(Idnumber);
         }

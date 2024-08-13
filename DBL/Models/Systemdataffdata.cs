@@ -4,6 +4,6 @@ namespace DBL.Models
 {
     public class Systemdataffdata
     {
-        public SystemStaff Data { get; set; }
+        public SystemStaff? Data { get; set; }
     }
 }

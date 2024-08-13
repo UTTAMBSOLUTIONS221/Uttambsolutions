@@ -161,13 +161,12 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<Systemdataffdata> Getsystemstaffdetaildatabyidnumber(int Idnumber)
+        public Task<Systemtenantdetailsdata> Getsystemstaffdetaildatabyidnumber(int Idnumber)
         {
-            Systemdataffdata model = new Systemdataffdata();
             return Task.Run(() =>
             {
-                model.Data = db.AccountRepository.Getsystemstaffdatabyidnumber(Idnumber);
-                return model;
+                var resp = db.AccountRepository.Getsystemstaffdatabyidnumber(Idnumber);
+                return resp;
             });
         }
         #endregion

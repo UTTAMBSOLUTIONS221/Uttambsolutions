@@ -100,14 +100,41 @@ namespace DBL.Repositories
             }
         }
 
-        public SystemStaff Getsystemstaffdatabyidnumber(int Idnumber)
+        public Systemtenantdetailsdata Getsystemstaffdatabyidnumber(int Idnumber)
         {
+            Systemtenantdetailsdata TenantResponseModel = new Systemtenantdetailsdata();
+            Systemtenantdetails TenantDataResponse = new Systemtenantdetails();
+            List<PropertyHouseTenant> Tenantroomhistory = new List<PropertyHouseTenant>();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Idnumber", Idnumber);
-                return connection.Query<SystemStaff>("Usp_Getsystemstaffdatabyidnumber", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                parameters.Add("@Systempropertyhouseroomtenantdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystemstaffdatabyidnumber", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Systempropertyhouseroomtenantdata");
+                if (systempropertydataJson != null)
+                {
+                    JObject responseJson = JObject.Parse(systempropertydataJson);
+                    JObject tenantreponseJson = JObject.Parse(responseJson["Data"].ToString());
+                    TenantDataResponse.Userid = Convert.ToInt32(tenantreponseJson["Userid"]);
+                    TenantDataResponse.Fullname = tenantreponseJson["Fullname"].ToString();
+                    TenantDataResponse.Phonenumber = tenantreponseJson["Phonenumber"].ToString();
+                    TenantDataResponse.Idnumber = Convert.ToInt32(tenantreponseJson["Idnumber"]);
+                    TenantDataResponse.Loginstatus = Convert.ToInt32(tenantreponseJson["Loginstatus"]);
+                    if (tenantreponseJson["Tenantroomhistory"] != null)
+                    {
+                        string TenantroomhistoryJson = tenantreponseJson["Tenantroomhistory"].ToString();
+                        Tenantroomhistory = JsonConvert.DeserializeObject<List<PropertyHouseTenant>>(TenantroomhistoryJson);
+                        TenantDataResponse.Tenantroomhistory = Tenantroomhistory;
+                    }
+                    TenantResponseModel.Data = TenantDataResponse;
+                    return TenantResponseModel;
+                }
+                else
+                {
+                    return TenantResponseModel;
+                }
             }
         }
         #endregion
