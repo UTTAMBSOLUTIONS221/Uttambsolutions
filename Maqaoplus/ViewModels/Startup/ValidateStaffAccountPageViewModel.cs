@@ -26,28 +26,6 @@ namespace Maqaoplus.ViewModels.Startup
                 OnPropertyChanged();
             }
         }
-
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set
-            {
-                _isLoading = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool _isDataLoaded;
-        public bool IsDataLoaded
-        {
-            get => _isDataLoaded;
-            set
-            {
-                _isDataLoaded = value;
-                OnPropertyChanged();
-            }
-        }
         public bool IsProcessing
         {
             get => _isProcessing;
@@ -67,8 +45,7 @@ namespace Maqaoplus.ViewModels.Startup
 
         private async Task LoadCurrentUserData()
         {
-            IsLoading = true;
-            IsDataLoaded = false;
+            IsProcessing = true;
 
             try
             {
@@ -77,7 +54,7 @@ namespace Maqaoplus.ViewModels.Startup
                 {
                     StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
                 }
-                IsDataLoaded = true;
+                IsProcessing = true;
             }
             catch (Exception ex)
             {
@@ -85,14 +62,13 @@ namespace Maqaoplus.ViewModels.Startup
             }
             finally
             {
-                IsLoading = false;
+                IsProcessing = false;
             }
         }
 
         private async Task CheckUserLoginStatusAsync()
         {
-            IsLoading = true;
-            IsDataLoaded = false;
+            IsProcessing = true;
 
             try
             {
@@ -105,7 +81,7 @@ namespace Maqaoplus.ViewModels.Startup
                         await Shell.Current.GoToAsync("//LoginPage");
                     }
                 }
-                IsDataLoaded = true;
+                IsProcessing = true;
             }
             catch (Exception ex)
             {
@@ -113,7 +89,7 @@ namespace Maqaoplus.ViewModels.Startup
             }
             finally
             {
-                IsLoading = false;
+                IsProcessing = false;
             }
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
