@@ -1,5 +1,6 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
+using DBL.Models;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -10,6 +11,7 @@ namespace Maqaoplus.ViewModels.Startup
     public class ValidateStaffAccountPageViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
+        private StaffDetailData _systemStaffTenantData;
         private SystemStaff _tenantData;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -17,6 +19,15 @@ namespace Maqaoplus.ViewModels.Startup
         public ICommand LoadCurrentUserCommand { get; }
         public ICommand CheckUserLoginStatusCommand { get; }
         private bool _isProcessing;
+        public StaffDetailData SystemStaffTenantData
+        {
+            get => _systemStaffTenantData;
+            set
+            {
+                _systemStaffTenantData = value;
+                OnPropertyChanged();
+            }
+        }
         public SystemStaff StaffData
         {
             get => _tenantData;
@@ -39,11 +50,11 @@ namespace Maqaoplus.ViewModels.Startup
         public ValidateStaffAccountPageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserData());
+            LoadCurrentUserCommand = new Command(async () => await LoadCurrentyStaffTenantData());
             CheckUserLoginStatusCommand = new Command(async () => await CheckUserLoginStatusAsync(), () => !IsProcessing);
         }
 
-        private async Task LoadCurrentUserData()
+        private async Task LoadCurrentyStaffTenantData()
         {
             IsProcessing = true;
 
@@ -52,7 +63,7 @@ namespace Maqaoplus.ViewModels.Startup
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffdetaildatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null)
                 {
-                    StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+                    SystemStaffTenantData = JsonConvert.DeserializeObject<StaffDetailData>(response.Data.ToString());
                 }
                 IsProcessing = true;
             }

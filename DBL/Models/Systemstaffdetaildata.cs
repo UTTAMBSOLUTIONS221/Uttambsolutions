@@ -13,7 +13,7 @@
         public int Loginstatus { get; set; }
         public int Accountid { get; set; }
         public int Accountnumber { get; set; }
-        public decimal Monthlysubscriptionfee { get; set; }
+        public decimal Subscriptionamount { get; set; }
         public List<AccountVerificationBank>? AccountVerificationBanks { get; set; }
     }
     public class AccountVerificationBank

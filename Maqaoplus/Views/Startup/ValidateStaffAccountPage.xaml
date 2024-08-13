@@ -69,7 +69,7 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Greetings " />
-                                                <Span Text="{Binding StaffData.Fullname}" FontAttributes="Bold" FontSize="18" TextColor="#0a506c" />
+                                                <Span Text="{Binding SystemStaffTenantData.Fullname}" FontAttributes="Bold" FontSize="18" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
@@ -79,7 +79,7 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="You activation amount is Ksh." />
-                                                <Span Text="{Binding StaffData.Subscriptionamount}" FontAttributes="Bold" FontSize="16" TextColor="#0a506c" />
+                                                <Span Text="{Binding SystemStaffTenantData.Subscriptionamount}" FontAttributes="Bold" FontSize="16" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
