@@ -2,7 +2,7 @@
 {
     public class PropertyHouseTenantData
     {
-        public PropertyHouseTenant? Data { get; set; }
+        public List<PropertyHouseTenant>? Data { get; set; }
     }
     public class PropertyHouseTenant
     {

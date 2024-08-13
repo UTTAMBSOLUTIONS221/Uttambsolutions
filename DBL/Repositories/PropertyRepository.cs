@@ -174,8 +174,6 @@ namespace DBL.Repositories
 
         public PropertyHouseTenantData Getsystempropertyhouseroomtenantsdata(long Ownerid, long Posterid)
         {
-            PropertyHouseTenantData propertyHouseTenantData = new PropertyHouseTenantData();
-            PropertyHouseTenant propertyHouseTenant = new PropertyHouseTenant();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -187,23 +185,11 @@ namespace DBL.Repositories
                 string systempropertyhouseroomtenantsdataJson = parameters.Get<string>("@Systempropertyhouseroomtenantsdata");
                 if (systempropertyhouseroomtenantsdataJson != null)
                 {
-                    JObject responseJson = JObject.Parse(systempropertyhouseroomtenantsdataJson);
-                    JObject houseroomtenantsdataJson = JObject.Parse(responseJson["Data"].ToString());
-                    propertyHouseTenant.Systempropertyhousetenantid = Convert.ToInt32(houseroomtenantsdataJson["Systempropertyhousetenantid"]);
-                    propertyHouseTenant.Tenantname = houseroomtenantsdataJson["propertyHouseTenant"].ToString();
-                    propertyHouseTenant.Propertyhousename = houseroomtenantsdataJson["Propertyhousename"].ToString();
-                    propertyHouseTenant.Propertyprimaryimage = houseroomtenantsdataJson["Propertyprimaryimage"].ToString();
-                    propertyHouseTenant.Systempropertyhousesizename = houseroomtenantsdataJson["Systempropertyhousesizename"].ToString();
-                    propertyHouseTenant.Isoccupant = Convert.ToBoolean(houseroomtenantsdataJson["Isoccupant"]);
-                    propertyHouseTenant.Datecreated = Convert.ToDateTime(houseroomtenantsdataJson["Datecreated"]);
-                    propertyHouseTenant.Datemodified = Convert.ToDateTime(houseroomtenantsdataJson["Datemodified"]);
-                    propertyHouseTenantData.Data = propertyHouseTenant;
-
-                    return propertyHouseTenantData;
+                    return JsonConvert.DeserializeObject<PropertyHouseTenantData>(systempropertyhouseroomtenantsdataJson);
                 }
                 else
                 {
-                    return propertyHouseTenantData;
+                    return new PropertyHouseTenantData();
                 }
             }
         }
