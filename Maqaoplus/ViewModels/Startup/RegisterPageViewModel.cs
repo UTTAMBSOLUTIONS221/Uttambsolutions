@@ -112,9 +112,12 @@ namespace Maqaoplus.ViewModels.Startup
 
         private async Task OnSignUp()
         {
-            if (IsProcessing || !IsValidInput())
+            IsProcessing = true;
+            if (!IsValidInput())
+            {
+                IsProcessing = false;
                 return;
-
+            }
             try
             {
                 IsProcessing = true;
