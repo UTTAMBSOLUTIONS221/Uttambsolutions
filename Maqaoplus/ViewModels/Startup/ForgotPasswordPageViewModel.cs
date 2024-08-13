@@ -45,12 +45,25 @@ namespace Maqaoplus.ViewModels.Startup
 
         public ICommand ForgotPasswordCommand => new Command(async () => await ForgotPasswordAsync(), () => !IsProcessing);
 
-
+        private string _systemStaffEmailAddressError;
+        public string SystemStaffEmailAddressError
+        {
+            get => _systemStaffEmailAddressError;
+            set
+            {
+                _systemStaffEmailAddressError = value;
+                OnPropertyChanged();
+            }
+        }
         private async Task ForgotPasswordAsync()
         {
-
-            if (IsProcessing || string.IsNullOrWhiteSpace(EmailAddress))
+            IsProcessing = true;
+            await Task.Delay(500);
+            if (!IsValidInput())
+            {
+                IsProcessing = false;
                 return;
+            }
             try
             {
                 IsProcessing = true;
@@ -83,6 +96,20 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 IsProcessing = false;
             }
+        }
+        private bool IsValidInput()
+        {
+            bool isValid = true;
+            if (string.IsNullOrWhiteSpace(EmailAddress))
+            {
+                SystemStaffEmailAddressError = "Email Address is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffEmailAddressError = null;
+            }
+            return isValid;
         }
     }
 }

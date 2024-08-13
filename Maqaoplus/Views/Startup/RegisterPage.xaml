@@ -10,6 +10,9 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <VerticalStackLayout Grid.Row="0" Spacing="0" HorizontalOptions="Center" VerticalOptions="Start">
+            <Image Source="maqaopluslogo.png" WidthRequest="170" HeightRequest="170" />
+        </VerticalStackLayout>
 
         <!-- Main Content -->
         <ScrollView Grid.Row="0">
