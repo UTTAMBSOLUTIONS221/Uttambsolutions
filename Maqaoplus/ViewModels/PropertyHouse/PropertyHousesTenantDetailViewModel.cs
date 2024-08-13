@@ -65,9 +65,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public PropertyHousesTenantDetailViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            LoadItemsCommand = new Command(async () => await PropertyHousesTenantDetails());
         }
 
-        private async Task LoadRoomDetails()
+        private async Task PropertyHousesTenantDetails()
         {
             IsProcessing = true;
 
