@@ -153,7 +153,7 @@ namespace DBL
             });
         }
 
-        public Task<SystemStaff> Getsystemstaffdatabyidnumber(int Idnumber)
+        public Task<Systemtenantdetailsdata> Getsystemstaffdatabyidnumber(int Idnumber)
         {
             return Task.Run(() =>
             {

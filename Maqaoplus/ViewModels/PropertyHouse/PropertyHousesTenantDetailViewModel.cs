@@ -1,4 +1,4 @@
-﻿using DBL.Entities;
+﻿using DBL.Models;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -9,7 +9,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
     {
         private readonly Services.ServiceProvider _serviceProvider;
         private long _propertyHousesTenantIdNumber;
-        private SystemStaff _SystemStaffData;
+        private Systemtenantdetails _tenantDetailData;
 
         private bool _isProcessing;
         public bool IsProcessing
@@ -47,13 +47,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadItemsCommand { get; }
 
 
-        public Systempropertyhouserooms HouseroomData
+        public Systemtenantdetails TenantDetailData
         {
-            get => _houseroomData;
+            get => _tenantDetailData;
             set
             {
-                _houseroomData = value;
-                OnPropertyChanged(nameof(HouseroomData));
+                _tenantDetailData = value;
+                OnPropertyChanged(nameof(TenantDetailData));
             }
         }
 
@@ -78,7 +78,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                 if (response != null)
                 {
-                    HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
+                    TenantDetailData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
                 }
             }
             catch (Exception ex)
