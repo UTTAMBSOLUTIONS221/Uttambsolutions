@@ -13,7 +13,7 @@
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
-        <viewmodels:PropertyHouseViewModel />
+        <viewmodels:PropertyHousesRoomTenantsViewModel />
     </ContentPage.BindingContext>
 
     <Grid>
@@ -37,7 +37,7 @@
 
         <!-- ScrollView with CollectionView -->
         <ScrollView IsVisible="{Binding IsDataLoaded}" Grid.Row="1">
-            <CollectionView x:Name="PropertyHousesCollectionView"
+            <CollectionView x:Name="PropertyHousesRoomTenantCollectionView"
                             ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

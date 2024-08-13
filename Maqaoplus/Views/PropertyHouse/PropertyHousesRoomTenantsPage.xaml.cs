@@ -15,7 +15,7 @@ public partial class PropertyHousesRoomTenantsPage : ContentPage
         _viewModel.Items.CollectionChanged += OnItemsCollectionChanged;
 
         // Set default layout
-        PropertyHousesCollectionView.ItemsLayout = new GridItemsLayout(2, ItemsLayoutOrientation.Vertical);
+        PropertyHousesRoomTenantCollectionView.ItemsLayout = new GridItemsLayout(2, ItemsLayoutOrientation.Vertical);
 
     }
 
@@ -29,11 +29,11 @@ public partial class PropertyHousesRoomTenantsPage : ContentPage
     }
     private void OnItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
-        if (PropertyHousesCollectionView.ItemsSource != null)
+        if (PropertyHousesRoomTenantCollectionView.ItemsSource != null)
         {
             var itemCount = _viewModel.Items.Count;
             var span = CalculateSpan(itemCount);
-            PropertyHousesCollectionView.ItemsLayout = new GridItemsLayout(span, ItemsLayoutOrientation.Vertical);
+            PropertyHousesRoomTenantCollectionView.ItemsLayout = new GridItemsLayout(span, ItemsLayoutOrientation.Vertical);
         }
     }
     private int CalculateSpan(int itemCount)
