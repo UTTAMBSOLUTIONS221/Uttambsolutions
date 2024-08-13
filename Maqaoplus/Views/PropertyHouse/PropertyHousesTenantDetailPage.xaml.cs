@@ -1,3 +1,4 @@
+using Maqaoplus.ViewModels.PropertyHouse;
 namespace Maqaoplus.Views.PropertyHouse;
 
 [QueryProperty(nameof(PropertyhousetenantId), "PropertyhousetenantId")]
@@ -19,7 +20,7 @@ public partial class PropertyHousesTenantDetailPage : ContentPage
 
         if (BindingContext is PropertyHousesTenantDetailViewModel viewModel)
         {
-            viewModel.SetPropertyId(PropertyhousetenantId);
+            viewModel.SetPropertyHousesTenantId(PropertyhousetenantId);
         }
     }
 }
