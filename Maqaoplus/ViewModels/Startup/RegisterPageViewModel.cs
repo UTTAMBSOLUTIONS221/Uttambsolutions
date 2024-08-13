@@ -163,16 +163,128 @@ namespace Maqaoplus.ViewModels.Startup
                 IsProcessing = false;
             }
         }
+        private string _systemStaffFirstNameError;
+        public string SystemStaffFirstNameError
+        {
+            get => _systemStaffFirstNameError;
+            set
+            {
+                _systemStaffFirstNameError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffLastNameError;
+        public string SystemStaffLastNameError
+        {
+            get => _systemStaffLastNameError;
+            set
+            {
+                _systemStaffLastNameError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffEmailAddressError;
+        public string SystemStaffEmailAddressError
+        {
+            get => _systemStaffEmailAddressError;
+            set
+            {
+                _systemStaffEmailAddressError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffPhonenumberError;
+        public string SystemStaffPhonenumberError
+        {
+            get => _systemStaffPhonenumberError;
+            set
+            {
+                _systemStaffPhonenumberError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffPasswordError;
+        public string SystemStaffPasswordError
+        {
+            get => _systemStaffPasswordError;
+            set
+            {
+                _systemStaffPasswordError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffConfirmPasswordError;
+        public string SystemStaffConfirmPasswordError
+        {
+            get => _systemStaffConfirmPasswordError;
+            set
+            {
+                _systemStaffConfirmPasswordError = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         private bool IsValidInput()
         {
-            // Implement your input validation logic here
-            return !string.IsNullOrWhiteSpace(FirstName) &&
-                   !string.IsNullOrWhiteSpace(LastName) &&
-                   !string.IsNullOrWhiteSpace(EmailAddress) &&
-                   !string.IsNullOrWhiteSpace(PhoneNumber) &&
-                   !string.IsNullOrWhiteSpace(Password) &&
-                   Password == ConfirmPassword;
+            bool isValid = true;
+            if (string.IsNullOrWhiteSpace(FirstName))
+            {
+                SystemStaffFirstNameError = "First Name is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffFirstNameError = null;
+            }
+            if (string.IsNullOrWhiteSpace(LastName))
+            {
+                SystemStaffLastNameError = "Last Name is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffLastNameError = null;
+            }
+
+            if (string.IsNullOrWhiteSpace(EmailAddress))
+            {
+                SystemStaffEmailAddressError = "Email Address is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffEmailAddressError = null;
+            }
+            if (string.IsNullOrWhiteSpace(PhoneNumber))
+            {
+                SystemStaffPhonenumberError = "Phonenumber Name is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffPhonenumberError = null;
+            }
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                SystemStaffPasswordError = "Password is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffPasswordError = null;
+            }
+            if (Password == ConfirmPassword)
+            {
+                SystemStaffConfirmPasswordError = "Password Mismatch.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffConfirmPasswordError = null;
+            }
+
+            return isValid;
         }
 
         private async Task OnCancel()
