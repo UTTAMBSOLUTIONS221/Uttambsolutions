@@ -5,10 +5,6 @@
              Title="Dashboard"
              BackgroundColor="White">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Refresh" Command="{Binding LoadDataCommand}" />
-    </ContentPage.ToolbarItems>
-
     <Grid Padding="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
