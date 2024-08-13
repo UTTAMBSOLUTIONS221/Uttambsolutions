@@ -87,7 +87,7 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Go to Lipa na mpesa paybill " />
-                                                <Span Text="{Binding StaffData.Mpesapaybill}" FontAttributes="Bold" FontSize="22" TextColor="#0a506c" />
+                                                <Span Text="{Binding SystemStaffTenantData.Mpesapaybill}" FontAttributes="Bold" FontSize="22" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
@@ -95,7 +95,7 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="and use " />
-                                                <Span Text="{Binding StaffData.Accountnumber}" FontAttributes="Bold" FontSize="22" TextColor="#0a506c" />
+                                                <Span Text="{Binding SystemStaffTenantData.Accountnumber}" FontAttributes="Bold" FontSize="22" TextColor="#0a506c" />
                                                 <Span Text=" as account number" />
                                             </FormattedString>
                                         </Label.FormattedText>
