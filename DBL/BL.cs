@@ -872,6 +872,15 @@ namespace DBL
                 return Resp;
             });
         }
+
+        public Task<PropertyHouseTenantData> Getsystempropertyhouseroomtenantsdata(long OwnerId, long PosterId)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Getsystempropertyhouseroomtenantsdata(OwnerId, PosterId);
+                return Resp;
+            });
+        }
         public Task<PropertyHouseDetailData> Getsystempropertyhousedetaildatabypropertyidandownerid(long Propertyid, long Ownerid)
         {
             return Task.Run(() =>
