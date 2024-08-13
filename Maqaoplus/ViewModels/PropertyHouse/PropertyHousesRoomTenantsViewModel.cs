@@ -81,7 +81,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             try
             {
                 var encodedPropertyhousetenantid = Uri.EscapeDataString(propertyhousetenantid.ToString());
-                await Shell.Current.GoToAsync($"PropertyHousesTenantDetailPage?Propertyhousetenantid={encodedPropertyhousetenantid}");
+                await Shell.Current.GoToAsync($"PropertyHousesTenantDetailPage?PropertyhousetenantId={encodedPropertyhousetenantid}");
                 IsDataLoaded = true;
             }
             catch (Exception ex)
