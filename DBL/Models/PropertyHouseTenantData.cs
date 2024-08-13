@@ -8,6 +8,7 @@
     {
         public int Systempropertyhousetenantid { get; set; }
         public string? Tenantname { get; set; }
+        public int Idnumber { get; set; }
         public string? Propertyhousename { get; set; }
         public string? Propertyprimaryimage { get; set; }
         public string? Systempropertyhousesizename { get; set; }

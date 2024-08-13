@@ -8,8 +8,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
     public class PropertyHousesTenantDetailViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
-        private long _propertyHousesTenantId;
-        private Systempropertyhouserooms _houseroomData;
+        private long _propertyHousesTenantIdNumber;
+        private SystemStaff _SystemStaffData;
 
         private bool _isProcessing;
         public bool IsProcessing
@@ -57,9 +57,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public void SetPropertyHousesTenantId(long propertyHousesTenantId)
+        public void SetPropertyHousesTenantIdNumber(long propertyHousesTenantIdNumber)
         {
-            _propertyHousesTenantId = propertyHousesTenantId;
+            _propertyHousesTenantIdNumber = propertyHousesTenantIdNumber;
             LoadItemsCommand.Execute(null);
         }
         public PropertyHousesTenantDetailViewModel(Services.ServiceProvider serviceProvider)
@@ -74,7 +74,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/" + _propertyHousesTenantId, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + _propertyHousesTenantIdNumber, HttpMethod.Get, null);
 
                 if (response != null)
                 {
