@@ -11,6 +11,8 @@
         public string? Fullname { get; set; }
         public string? Phonenumber { get; set; }
         public int Loginstatus { get; set; }
+        public int Accountid { get; set; }
+        public int Accountnumber { get; set; }
         public decimal Monthlysubscriptionfee { get; set; }
         public List<AccountVerificationBank>? AccountVerificationBanks { get; set; }
     }
