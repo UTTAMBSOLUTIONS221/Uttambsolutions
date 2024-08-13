@@ -14,11 +14,13 @@
         <!-- Main Content -->
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="4">
+                <!-- Reduced spacing between elements -->
                 <Label Text="Sign up to start interaction" FontSize="24" HorizontalOptions="Center" TextColor="#0a506c" FontAttributes="Bold" />
 
-                <VerticalStackLayout Spacing="2">
+                <VerticalStackLayout Spacing="4">
+                    <!-- Reduced spacing within the entry sections -->
                     <!-- First Name Entry with Frame and Image -->
-                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,8" HasShadow="True">
+                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,4" HasShadow="True">
                         <HorizontalStackLayout Spacing="3">
                             <Image Source="user.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
                             <Entry Placeholder="First Name" ReturnType="Next" Text="{Binding FirstName}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="300"/>
@@ -27,54 +29,52 @@
                     <Label Text="{Binding SystemStaffFirstNameError}" TextColor="Red" Padding="0"/>
 
                     <!-- Last Name Entry with Frame and Image -->
-                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,8" HasShadow="True">
+                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,4" HasShadow="True">
                         <HorizontalStackLayout Spacing="3">
                             <Image Source="user.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
                             <Entry Placeholder="Last Name" ReturnType="Next" Text="{Binding LastName}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="300"/>
                         </HorizontalStackLayout>
                     </Frame>
-                    <Label Text="{Binding SystemStaffLastNameError}" TextColor="Red" />
-
+                    <Label Text="{Binding SystemStaffLastNameError}" TextColor="Red" Padding="0"/>
 
                     <!-- Email Address Entry with Frame and Image -->
-                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,8" HasShadow="True">
+                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,4" HasShadow="True">
                         <HorizontalStackLayout Spacing="3">
                             <Image Source="email.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
                             <Entry Placeholder="Email Address" Text="{Binding EmailAddress}" Keyboard="Email" FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" WidthRequest="300"/>
                         </HorizontalStackLayout>
                     </Frame>
-                    <Label Text="{Binding SystemStaffEmailAddressError}" TextColor="Red" />
+                    <Label Text="{Binding SystemStaffEmailAddressError}" TextColor="Red" Padding="0"/>
 
                     <!-- Phone Number Entry with Frame and Image -->
-                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,8" HasShadow="True">
+                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,4" HasShadow="True">
                         <HorizontalStackLayout Spacing="3">
                             <Image Source="phone.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
                             <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}" Keyboard="Telephone" FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" WidthRequest="300"/>
                         </HorizontalStackLayout>
                     </Frame>
-                    <Label Text="{Binding SystemStaffPhonenumberError}" TextColor="Red" />
+                    <Label Text="{Binding SystemStaffPhonenumberError}" TextColor="Red" Padding="0"/>
 
                     <!-- Password Entry with Frame and Image -->
-                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,8" HasShadow="True">
+                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,4" HasShadow="True">
                         <HorizontalStackLayout Spacing="3">
                             <Image Source="passwordicon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
                             <Entry IsPassword="True" Placeholder="Password" ReturnType="Done" Text="{Binding Password}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="300"/>
                         </HorizontalStackLayout>
                     </Frame>
-                    <Label Text="{Binding SystemStaffPasswordError}" TextColor="Red" />
+                    <Label Text="{Binding SystemStaffPasswordError}" TextColor="Red" Padding="0"/>
 
                     <!-- Confirm Password Entry with Frame and Image -->
-                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,8" HasShadow="True">
+                    <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,4" HasShadow="True">
                         <HorizontalStackLayout Spacing="3">
                             <Image Source="passwordicon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
                             <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True" FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" WidthRequest="300"/>
                         </HorizontalStackLayout>
                     </Frame>
-                    <Label Text="{Binding SystemStaffConfirmPasswordError}" TextColor="Red" />
+                    <Label Text="{Binding SystemStaffConfirmPasswordError}" TextColor="Red" Padding="0"/>
                 </VerticalStackLayout>
-                <Button BackgroundColor="#0a506c" Command="{Binding SignUpCommand}" CornerRadius="8" Text="Register" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" />
 
-                <Label Text="* Required fields" FontSize="12" HorizontalOptions="Center" TextColor="Gray" />
+                <Button BackgroundColor="#0a506c" Command="{Binding SignUpCommand}" CornerRadius="8" Text="Register" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" Margin="0,0" />
             </VerticalStackLayout>
         </ScrollView>
 
@@ -84,7 +84,12 @@
         </StackLayout>
 
         <!-- Overlay Layer for ActivityIndicator -->
-        <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
+        <Grid>
+            <Grid IsVisible="{Binding IsProcessing}">
+                <BoxView Color="#C0000000" Opacity="0.5" />
+                <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="50" WidthRequest="50" />
+            </Grid>
+        </Grid>
     </Grid>
 
 </ContentPage>
