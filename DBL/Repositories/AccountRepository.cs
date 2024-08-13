@@ -123,7 +123,7 @@ namespace DBL.Repositories
                     staffResponseData.Accountid = Convert.ToInt32(staffreponseJson["Accountid"]);
                     staffResponseData.Accountnumber = Convert.ToInt32(staffreponseJson["Accountnumber"]);
                     staffResponseData.Loginstatus = Convert.ToInt32(staffreponseJson["Loginstatus"]);
-                    staffResponseData.Monthlysubscriptionfee = Convert.ToDecimal(staffreponseJson["Monthlysubscriptionfee"]);
+                    staffResponseData.Subscriptionamount = Convert.ToDecimal(staffreponseJson["Subscriptionamount"]);
                     if (staffreponseJson["AccountVerificationBanks"] != null)
                     {
                         string bankAccountsJson = staffreponseJson["AccountVerificationBanks"].ToString();
