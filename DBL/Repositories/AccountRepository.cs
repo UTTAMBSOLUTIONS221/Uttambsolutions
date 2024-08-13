@@ -100,6 +100,44 @@ namespace DBL.Repositories
             }
         }
 
+        public Systemstaffdetaildata Getsystemstaffdetaildatabyid(long Staffid)
+        {
+            Systemstaffdetaildata staffResponseModel = new Systemstaffdetaildata();
+            StaffDetailData staffResponseData = new StaffDetailData();
+            List<AccountVerificationBank> bankAccoutsResponseModel = new List<AccountVerificationBank>();
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Staffid", Staffid);
+                parameters.Add("@Systemstaffdetaildata ", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystemstaffdetaildatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Systemstaffdetaildata");
+                if (systempropertydataJson != null)
+                {
+                    JObject responseJson = JObject.Parse(systempropertydataJson);
+                    JObject staffreponseJson = JObject.Parse(responseJson["Data"].ToString());
+                    staffResponseData.Userid = Convert.ToInt32(staffreponseJson["Userid"]);
+                    staffResponseData.Fullname = staffreponseJson["Fullname"].ToString();
+                    staffResponseData.Phonenumber = staffreponseJson["Phonenumber"].ToString();
+                    staffResponseData.Loginstatus = Convert.ToInt32(staffreponseJson["Loginstatus"]);
+                    staffResponseData.Monthlysubscriptionfee = Convert.ToDecimal(staffreponseJson["Monthlysubscriptionfee"]);
+                    if (staffreponseJson["AccountVerificationBanks"] != null)
+                    {
+                        string bankAccountsJson = staffreponseJson["AccountVerificationBanks"].ToString();
+                        bankAccoutsResponseModel = JsonConvert.DeserializeObject<List<AccountVerificationBank>>(bankAccountsJson);
+                        staffResponseData.AccountVerificationBanks = bankAccoutsResponseModel;
+                    }
+                    staffResponseModel.Data = staffResponseData;
+                    return staffResponseModel;
+                }
+                else
+                {
+                    return staffResponseModel;
+                }
+            }
+        }
+
         public Systemtenantdetailsdata Getsystemstaffdatabyidnumber(int Idnumber)
         {
             Systemtenantdetailsdata TenantResponseModel = new Systemtenantdetailsdata();

@@ -110,13 +110,12 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<Systemdataffdata> Getsystemstaffdetaildatabyid(long Staffid)
+        public Task<Systemstaffdetaildata> Getsystemstaffdetaildatabyid(long Staffid)
         {
-            Systemdataffdata model = new Systemdataffdata();
             return Task.Run(() =>
             {
-                model.Data = db.AccountRepository.Getsystemstaffdatabyid(Staffid);
-                return model;
+                var Resp = db.AccountRepository.Getsystemstaffdetaildatabyid(Staffid);
+                return Resp;
             });
         }
 
