@@ -69,10 +69,38 @@ namespace Maqaoplus.ViewModels.Startup
         public ICommand RegisterCommand { get; }
         public ICommand ForgotPasswordCommand { get; }
 
+
+        private string _systemStaffUserNameError;
+        public string SystemStaffUserNameError
+        {
+            get => _systemStaffUserNameError;
+            set
+            {
+                _systemStaffUserNameError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _systemStaffPasswordError;
+        public string SystemStaffPasswordError
+        {
+            get => _systemStaffPasswordError;
+            set
+            {
+                _systemStaffPasswordError = value;
+                OnPropertyChanged();
+            }
+        }
+
         private async Task LoginAsync()
         {
-            if (IsProcessing || string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
+            IsProcessing = true;
+            await Task.Delay(500);
+            if (!IsValidInput())
+            {
+                IsProcessing = false;
                 return;
+            }
 
             try
             {
@@ -123,6 +151,35 @@ namespace Maqaoplus.ViewModels.Startup
                 IsProcessing = false;
             }
         }
+        private bool IsValidInput()
+        {
+            bool isValid = true;
+
+            if (string.IsNullOrWhiteSpace(UserName))
+            {
+                SystemStaffUserNameError = "Email Address is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffUserNameError = null;
+            }
+
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                SystemStaffPasswordError = "Password is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffPasswordError = null;
+            }
+
+
+            return isValid;
+        }
+
+
         private async void OnRegister()
         {
             await Shell.Current.GoToAsync(nameof(RegisterPage));
