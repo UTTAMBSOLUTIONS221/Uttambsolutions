@@ -41,7 +41,7 @@
                             ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="140">
+                        <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="180">
                             <!-- Tap Gesture Recognizer -->
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}"
@@ -54,15 +54,14 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <!-- Street or Landmark -->
-                                <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" LineBreakMode="TailTruncation" Grid.Row="0" />
+                                <Label Text="{Binding Propertyhousename}" FontSize="18" FontAttributes="Bold" TextColor="#0a506c" TextTransform="Uppercase" MaxLines="1" LineBreakMode="TailTruncation" Grid.Row="0" />
 
-                                <Label Text="{Binding Tenantname}" FontSize="12" LineBreakMode="WordWrap" MaxLines="2" TextColor="#0a506c" Grid.Row="1" />
-                                <Label Text="{Binding Systempropertyhousesizename}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="#0a506c" Grid.Row="2" />
-                                <Label Text="{Binding Datecreated}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="#0a506c" Grid.Row="3" />
-                                <Label Text="{Binding Datemodified}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="#0a506c" Grid.Row="4" />
+                                <Label Text="{Binding Tenantname}" FontSize="17" LineBreakMode="WordWrap" MaxLines="2" TextColor="#0a506c" Grid.Row="1" />
+                                <Label Text="{Binding Systempropertyhousesizename}" FontSize="17" LineBreakMode="WordWrap" MaxLines="2" TextColor="#0a506c" Grid.Row="2" />
+                                <Label Text="{Binding Datecreated, StringFormat='{0:MM/dd/yyyy}'}" FontSize="17" LineBreakMode="WordWrap" MaxLines="2" TextColor="#0a506c" Grid.Row="3" />
+                                <Label Text="{Binding Datemodified, StringFormat='{0:MM/dd/yyyy}'}" FontSize="17" LineBreakMode="WordWrap" MaxLines="2" TextColor="#0a506c" Grid.Row="4" />
                             </Grid>
                         </Frame>
                     </DataTemplate>
