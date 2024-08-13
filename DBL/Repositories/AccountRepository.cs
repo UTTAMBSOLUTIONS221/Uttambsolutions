@@ -110,7 +110,7 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Staffid", Staffid);
-                parameters.Add("@Systemstaffdetaildata ", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                parameters.Add("@Systemstaffdetaildata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystemstaffdetaildatabyid", parameters, commandType: CommandType.StoredProcedure);
                 string systempropertydataJson = parameters.Get<string>("@Systemstaffdetaildata");
                 if (systempropertydataJson != null)
@@ -120,6 +120,8 @@ namespace DBL.Repositories
                     staffResponseData.Userid = Convert.ToInt32(staffreponseJson["Userid"]);
                     staffResponseData.Fullname = staffreponseJson["Fullname"].ToString();
                     staffResponseData.Phonenumber = staffreponseJson["Phonenumber"].ToString();
+                    staffResponseData.Accountid = Convert.ToInt32(staffreponseJson["Accountid"]);
+                    staffResponseData.Accountnumber = Convert.ToInt32(staffreponseJson["Accountnumber"]);
                     staffResponseData.Loginstatus = Convert.ToInt32(staffreponseJson["Loginstatus"]);
                     staffResponseData.Monthlysubscriptionfee = Convert.ToDecimal(staffreponseJson["Monthlysubscriptionfee"]);
                     if (staffreponseJson["AccountVerificationBanks"] != null)
