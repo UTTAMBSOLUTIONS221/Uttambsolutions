@@ -152,7 +152,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     }
                     else
                     {
-                        HouseroomData.Kitchentypeid = 0;
+                        HouseroomData.Kitchentypeid = HouseroomData.Kitchentypeid;
                     }
 
                     OnPropertyChanged(nameof(SelectedKitchentype));
@@ -189,7 +189,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     }
                     else
                     {
-                        HouseroomData.Systempropertyhousesizeid = 0;
+                        HouseroomData.Systempropertyhousesizeid = HouseroomData.Systempropertyhousesizeid;
                     }
 
                     OnPropertyChanged(nameof(SelectedPropertyhousesize));
