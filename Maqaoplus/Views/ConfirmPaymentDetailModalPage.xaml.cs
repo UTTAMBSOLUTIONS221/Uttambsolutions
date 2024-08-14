@@ -1,22 +1,11 @@
-using DBL.Entities;
-using System.Windows.Input;
-
+using Maqaoplus.ViewModels.Startup;
 namespace Maqaoplus.Views;
 
 public partial class ConfirmPaymentDetailModalPage : ContentPage
 {
-    public ICommand OkCommand { get; }
-    public ICommand CancelCommand { get; }
-
-    public ConfirmPaymentDetailModalPage(SystemStaff staffData, ICommand okCommand, ICommand cancelCommand)
+    public ConfirmPaymentDetailModalPage(ValidateStaffAccountPageViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = staffData;
-        OkCommand = okCommand;
-        CancelCommand = cancelCommand;
-
-        // Bind the commands to the buttons explicitly
-        okButton.Command = OkCommand;
-        cancelButton.Command = CancelCommand;
+        BindingContext = viewModel;
     }
 }

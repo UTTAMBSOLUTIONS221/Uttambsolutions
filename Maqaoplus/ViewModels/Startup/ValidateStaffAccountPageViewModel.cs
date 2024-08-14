@@ -20,6 +20,8 @@ namespace Maqaoplus.ViewModels.Startup
 
         public ICommand LoadCurrentUserCommand { get; }
         public ICommand CheckUserLoginStatusCommand { get; }
+        public ICommand OnCancelClickedCommand { get; }
+        public ICommand OnOkClickedCommand { get; }
         private bool _isProcessing;
         public StaffDetailData SystemStaffTenantData
         {
@@ -76,6 +78,7 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _paymentReferenceCodeError = value;
                 OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
             }
         }
         public ValidateStaffAccountPageViewModel(Services.ServiceProvider serviceProvider)
@@ -83,6 +86,9 @@ namespace Maqaoplus.ViewModels.Startup
             _serviceProvider = serviceProvider;
             LoadCurrentUserCommand = new Command(async () => await LoadCurrentyStaffTenantData());
             CheckUserLoginStatusCommand = new Command(async () => await CheckUserLoginStatusAsync(), () => !IsProcessing);
+            OnCancelClickedCommand = new Command(OnCancelClicked);
+            OnOkClickedCommand = new Command(async () => await OnOkClickedAsync(), () => !IsProcessing);
+
         }
 
         private async Task LoadCurrentyStaffTenantData()
@@ -124,11 +130,7 @@ namespace Maqaoplus.ViewModels.Startup
                     }
                     else
                     {
-                        var modalPage = new ConfirmPaymentDetailModalPage(
-                        StaffData,
-                        new Command(OnOkClicked),
-                        new Command(OnCancelClicked)
-                    );
+                        var modalPage = new ConfirmPaymentDetailModalPage(this);
                         await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                     }
                 }
@@ -143,7 +145,7 @@ namespace Maqaoplus.ViewModels.Startup
                 IsProcessing = false;
             }
         }
-        private async void OnOkClicked()
+        private async Task OnOkClickedAsync()
         {
             IsProcessing = true;
             await Task.Delay(500);
