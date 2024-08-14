@@ -26,30 +26,11 @@
         </Grid.RowDefinitions>
 
         <!-- Button to Add New House -->
-        <Button Text="Add New House"
-                Command="{Binding AddPropertyHouseCommand}" 
-            BackgroundColor="#0a506c"
-                TextColor="White"
-                FontSize="16"
-                Padding="10"
-                HorizontalOptions="FillAndExpand"
-                Grid.Row="0"
-                Margin="5" />
-
-        <!-- ActivityIndicator -->
-        <ActivityIndicator IsRunning="{Binding IsLoading}" 
-                           IsVisible="{Binding IsLoading}" 
-                           HorizontalOptions="Center" 
-                           VerticalOptions="Center" 
-                           Color="#0a506c" 
-                           WidthRequest="100" 
-                           HeightRequest="100"  
-                           Grid.Row="1" />
+        <Button Text="Add New House" Command="{Binding AddPropertyHouseCommand}" BackgroundColor="#0a506c" TextColor="White" FontSize="16" Padding="10" HorizontalOptions="FillAndExpand" Grid.Row="0" Margin="5" IsVisible="{Binding IsDataLoaded}" />
 
         <!-- ScrollView with CollectionView -->
         <ScrollView IsVisible="{Binding IsDataLoaded}" Grid.Row="1">
-            <CollectionView x:Name="PropertyHousesCollectionView"
-                            ItemsSource="{Binding Items}">
+            <CollectionView x:Name="PropertyHousesCollectionView" ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="300">
@@ -90,5 +71,11 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
+
+        <!-- Overlay Grid to cover the entire screen -->
+        <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="2" BackgroundColor="Transparent">
+            <BoxView Color="#C0000000" Opacity="0.5" />
+            <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
+        </Grid>
     </Grid>
 </ContentPage>

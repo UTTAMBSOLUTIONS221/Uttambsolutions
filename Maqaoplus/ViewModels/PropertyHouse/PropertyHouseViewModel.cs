@@ -14,13 +14,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
 
-        private bool _isLoading;
-        public bool IsLoading
+        private bool _isProcessing;
+        public bool IsProcessing
         {
-            get => _isLoading;
+            get => _isProcessing;
             set
             {
-                _isLoading = value;
+                _isProcessing = value;
                 OnPropertyChanged();
             }
         }
@@ -52,13 +52,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
         private async void AddPropertyHouseAsync()
         {
-            IsLoading = true;
+            IsProcessing = true;
             await Shell.Current.GoToAsync(nameof(AddPropertyHousePage));
-            IsLoading = false;
+            IsProcessing = false;
         }
         private async Task LoadItems()
         {
-            IsLoading = true;
+            IsProcessing = true;
             IsDataLoaded = false;
 
             try
@@ -81,12 +81,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             finally
             {
-                IsLoading = false;
+                IsProcessing = false;
             }
         }
         private async Task ViewDetails(long propertyId)
         {
-            IsLoading = true;
+            IsProcessing = true;
             IsDataLoaded = false;
             try
             {
@@ -101,7 +101,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             finally
             {
-                IsLoading = false;
+                IsProcessing = false;
             }
         }
     }
