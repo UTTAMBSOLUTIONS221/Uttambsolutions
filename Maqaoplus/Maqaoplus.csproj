@@ -81,6 +81,7 @@
 	  <None Remove="Resources\Images\dollar.png" />
 	  <None Remove="Resources\Images\email.png" />
 	  <None Remove="Resources\Images\familybank.png" />
+	  <None Remove="Resources\Images\group-users.png" />
 	  <None Remove="Resources\Images\house.png" />
 	  <None Remove="Resources\Images\maqaopluslogo.png" />
 	  <None Remove="Resources\Images\mpesalogo.png" />
