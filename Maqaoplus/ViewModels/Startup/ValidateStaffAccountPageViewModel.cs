@@ -39,6 +39,10 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _tenantData = value;
                 OnPropertyChanged();
+                if (_tenantData != null)
+                {
+                    Userid = _tenantData.Userid;
+                }
             }
         }
         public string PaymentReferenceCode
