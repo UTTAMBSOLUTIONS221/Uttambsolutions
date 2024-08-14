@@ -87,12 +87,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task ViewDetails(long propertyId)
         {
             IsProcessing = true;
-            IsDataLoaded = false;
             try
             {
                 var encodedPropertyId = Uri.EscapeDataString(propertyId.ToString());
                 await Shell.Current.GoToAsync($"PropertyHousesDetailPage?PropertyId={encodedPropertyId}");
-                IsDataLoaded = true;
             }
             catch (Exception ex)
             {
