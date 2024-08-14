@@ -27,6 +27,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand OnOkButtonClickedCommand { get; }
         public ICommand SearchCommand { get; }
 
+        private decimal _openingMeter;
+        private decimal _closingMeter;
+        private decimal _movedMeter;
+        private decimal _consumedAmount;
+
         private bool _isProcessing;
         public bool IsProcessing
         {
@@ -407,6 +412,64 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged(nameof(PropertyHouseSizeError));
             }
         }
+
+
+        public decimal OpeningMeter
+        {
+            get => _openingMeter;
+            set
+            {
+                _openingMeter = value;
+                OnPropertyChanged(nameof(OpeningMeter));
+                CalculateMeterValues();
+            }
+        }
+        public decimal ClosingMeter
+        {
+            get => _closingMeter;
+            set
+            {
+                _closingMeter = value;
+                OnPropertyChanged(nameof(ClosingMeter));
+                if (ClosingMeter > 0)
+                {
+                    CalculateMeterValues();
+                }
+            }
+        }
+
+        public decimal MovedMeter
+        {
+            get => _movedMeter;
+            set
+            {
+                _movedMeter = value;
+                OnPropertyChanged(nameof(MovedMeter));
+            }
+        }
+
+        public decimal ConsumedAmount
+        {
+            get => _consumedAmount;
+            set
+            {
+                _consumedAmount = value;
+                OnPropertyChanged(nameof(ConsumedAmount));
+            }
+        }
+
+
+        private void CalculateMeterValues()
+        {
+            if (HouseroomData.Openingmeter >= 0 && ClosingMeter > 0)
+            {
+                MovedMeter = ClosingMeter - HouseroomData.Openingmeter;
+                ConsumedAmount = MovedMeter * HouseroomData.Waterunitprice;
+            }
+        }
+
+
+
 
         private async Task Search()
         {
