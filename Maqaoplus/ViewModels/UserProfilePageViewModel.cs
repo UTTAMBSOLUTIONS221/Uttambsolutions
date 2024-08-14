@@ -92,23 +92,7 @@ namespace Maqaoplus.ViewModels
             set
             {
                 _selectedstaffgender = value;
-
-                // Ensure SystempropertyData is not null
-                if (StaffData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int genderid))
-                    {
-                        StaffData.Genderid = genderid;
-                    }
-                    else
-                    {
-                        StaffData.Genderid = StaffData.Genderid;
-                    }
-
-                    OnPropertyChanged(nameof(Selectedstaffgender));
-                    OnPropertyChanged(nameof(StaffData.Genderid));
-                }
+                OnPropertyChanged();
             }
         }
 
@@ -128,23 +112,7 @@ namespace Maqaoplus.ViewModels
             set
             {
                 _selectedstaffmaritalstatus = value;
-
-                // Ensure SystempropertyData is not null
-                if (StaffData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int maritalstatusid))
-                    {
-                        StaffData.Maritalstatusid = maritalstatusid;
-                    }
-                    else
-                    {
-                        StaffData.Maritalstatusid = StaffData.Maritalstatusid;
-                    }
-
-                    OnPropertyChanged(nameof(Selectedstaffmaritalstatus));
-                    OnPropertyChanged(nameof(StaffData.Maritalstatusid));
-                }
+                OnPropertyChanged();
             }
         }
 
@@ -164,23 +132,7 @@ namespace Maqaoplus.ViewModels
             set
             {
                 _selectedstaffkinrelationship = value;
-
-                // Ensure SystempropertyData is not null
-                if (StaffData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int kinrelationshipid))
-                    {
-                        StaffData.Kinrelationshipid = kinrelationshipid;
-                    }
-                    else
-                    {
-                        StaffData.Kinrelationshipid = StaffData.Kinrelationshipid;
-                    }
-
-                    OnPropertyChanged(nameof(Selectedstaffkinrelationship));
-                    OnPropertyChanged(nameof(StaffData.Kinrelationshipid));
-                }
+                OnPropertyChanged();
             }
         }
 
@@ -192,7 +144,7 @@ namespace Maqaoplus.ViewModels
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffdetaildatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffprofiledatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
 
                 if (response != null)
                 {
@@ -226,15 +178,18 @@ namespace Maqaoplus.ViewModels
                 if (SystemgenderResponse != null)
                 {
                     Systemgender = new ObservableCollection<ListModel>(SystemgenderResponse);
+                    Selectedstaffgender = Systemgender.FirstOrDefault(x => x.Value == _staffData.Userid.ToString());
                 }
 
                 if (SystemmaritalstatusResponse != null)
                 {
                     Systemmaritalstatus = new ObservableCollection<ListModel>(SystemmaritalstatusResponse);
+                    Selectedstaffmaritalstatus = Systemmaritalstatus.FirstOrDefault(x => x.Value == _staffData.Maritalstatusid.ToString());
                 }
                 if (SystemkinrelationshipResponse != null)
                 {
                     Systemkinrelationship = new ObservableCollection<ListModel>(SystemkinrelationshipResponse);
+                    Selectedstaffkinrelationship = Systemkinrelationship.FirstOrDefault(x => x.Value == _staffData.Kinrelationshipid.ToString());
                 }
             }
             catch (Exception ex)
