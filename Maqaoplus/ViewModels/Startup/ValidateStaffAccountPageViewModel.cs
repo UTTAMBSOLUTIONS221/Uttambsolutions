@@ -1,11 +1,11 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
+using Maqaoplus.Views;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-
 namespace Maqaoplus.ViewModels.Startup
 {
     public class ValidateStaffAccountPageViewModel : INotifyPropertyChanged
