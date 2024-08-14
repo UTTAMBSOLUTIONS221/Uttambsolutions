@@ -69,7 +69,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     Items.Clear();
                     foreach (var item in items)
                     {
-                        var product = item.ToObject<Systemproperty>(); // Assuming item is of type JObject
+                        var product = item.ToObject<Systemproperty>();
                         Items.Add(product);
                     }
                 }
@@ -91,7 +91,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             try
             {
                 var encodedPropertyId = Uri.EscapeDataString(propertyId.ToString());
-                System.Diagnostics.Debug.WriteLine($"Navigating to PropertyHousesDetailPage with PropertyId={encodedPropertyId}");
                 await Shell.Current.GoToAsync($"PropertyHousesDetailPage?PropertyId={encodedPropertyId}");
                 IsDataLoaded = true;
             }

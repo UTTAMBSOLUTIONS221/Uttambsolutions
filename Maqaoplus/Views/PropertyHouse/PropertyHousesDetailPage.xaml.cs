@@ -4,24 +4,24 @@ using System.Collections.Specialized;
 namespace Maqaoplus.Views.PropertyHouse
 {
     [QueryProperty(nameof(PropertyId), "PropertyId")]
+
     public partial class PropertyHousesDetailPage : ContentPage
     {
         public long PropertyId { get; set; }
         private PropertyHouseDetailViewModel _viewModel;
 
-        public PropertyHousesDetailPage(PropertyHouseDetailViewModel viewModel)
+
+        public PropertyHousesDetailPage(Services.ServiceProvider serviceProvider)
         {
             InitializeComponent();
-            BindingContext = viewModel;
-            _viewModel = viewModel;
-
+            _viewModel = new PropertyHouseDetailViewModel(serviceProvider);
+            this.BindingContext = _viewModel;
             // Subscribe to the CollectionChanged event
             _viewModel.Rooms.CollectionChanged += OnItemsCollectionChanged;
 
             // Set default layout
             UpdateLayout();
         }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
