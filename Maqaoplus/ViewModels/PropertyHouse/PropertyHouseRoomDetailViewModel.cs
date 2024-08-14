@@ -1,7 +1,6 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
-using Maqaoplus.Views;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -237,7 +236,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadItemsCommand = new Command(async () => await LoadRoomDetails());
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
-            SearchCommand = new Command(async () => await Search());
             SaveCommand = new Command(async () => await SaveRoomDetails());
 
             // Initialize steps
@@ -292,96 +290,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
-
-        private async Task Search()
-        {
-            if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
-                return;
-
-            IsLoading = true;
-
-            try
-            {
-                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
-
-                if (response != null)
-                {
-                    TenantStaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
-
-                    // Navigate to the modal with the customer data
-                    var modalPage = new StaffDetailModalPage(
-                        TenantStaffData,
-                        new Command(OnOkClicked),
-                        new Command(OnCancelClicked)
-                    );
-                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
-                }
-                else
-                {
-                    TenantStaffData = new SystemStaff();
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-        }
         private async Task SaveRoomDetails()
         {
             IsLoading = true;
-            if (IsProcessing || PropertyRoomTenantId == 0)
-                return;
+            Systempropertyhouserooms model = null;
 
-            await Task.Delay(500);
-            if (HouseroomData == null)
-            {
-                IsLoading = false;
-                return;
-            }
-            Systempropertyhouserooms aggregatedData = new Systempropertyhouserooms();
-            aggregatedData.Systempropertyhouseroomid = HouseroomData.Systempropertyhouseroomid;
-            aggregatedData.Systempropertyhouseid = HouseroomData.Systempropertyhouseid;
-            aggregatedData.Systempropertyhousesizeid = HouseroomData.Systempropertyhousesizeid;
-            aggregatedData.Systempropertyhousesizename = HouseroomData.Systempropertyhousesizename;
-            aggregatedData.Isvacant = HouseroomData.Isvacant;
-            aggregatedData.Isunderrenovation = HouseroomData.Isunderrenovation;
-            aggregatedData.Isshop = HouseroomData.Isshop;
-            aggregatedData.Isgroundfloor = HouseroomData.Isgroundfloor;
-            aggregatedData.Hasbalcony = HouseroomData.Hasbalcony;
-            aggregatedData.Forcaretaker = HouseroomData.Forcaretaker;
-            aggregatedData.Kitchentypeid = HouseroomData.Kitchentypeid;
-            aggregatedData.Systempropertyhousemeterid = HouseroomData.Systempropertyhousemeterid;
-            aggregatedData.Systempropertyhouseroommeternumber = HouseroomData.Systempropertyhouseroommeternumber;
-            aggregatedData.Openingmeter = HouseroomData.Openingmeter;
-            aggregatedData.Movedmeter = MovedMeter;
-            aggregatedData.Closingmeter = ClosingMeter;
-            aggregatedData.Consumedamount = ConsumedAmount;
-            aggregatedData.Tenantid = PropertyRoomTenantId;
-            aggregatedData.Createdby = App.UserDetails.Usermodel.Userid;
-            aggregatedData.Datecreated = DateTime.Now;
-            aggregatedData.Meterhistorydata = HouseroomData.Meterhistorydata;
 
-            try
-            {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, aggregatedData);
 
-                if (response != null)
-                {
-                    // Handle response and show success message if needed
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                IsLoading = false;
-            }
+
         }
         public decimal OpeningMeter
         {
