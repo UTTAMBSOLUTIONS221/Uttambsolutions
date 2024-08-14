@@ -20,11 +20,6 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="7" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="12" HeightRequest="350">
-                            <!-- Tap Gesture Recognizer -->
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}"
-                                                      CommandParameter="{Binding .}" />
-                            </Frame.GestureRecognizers>
                             <Grid Padding="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -55,6 +50,13 @@
                                     <Label Text="Vacant:" FontSize="14" TextColor="Red" Grid.Column="0"/>
                                     <Label Text="{Binding Propertyhousevacant}" FontSize="14" TextColor="Red" Grid.Column="1"/>
                                 </Grid>
+
+                                <Label HorizontalOptions="Center" Margin="0,3,0,0" Text="Manage Room" TextColor="#0a506c" FontSize="17" FontAttributes="None" FontFamily="Arial">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}"
+                       CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </Grid>
                         </Frame>
                     </DataTemplate>
