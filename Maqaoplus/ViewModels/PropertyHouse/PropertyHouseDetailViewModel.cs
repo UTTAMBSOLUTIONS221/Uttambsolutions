@@ -545,13 +545,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
                 return;
             }
-
-            await Task.Delay(500);
-            if (HouseroomData == null)
-            {
-                IsProcessing = false;
-                return;
-            }
             try
             {
                 HouseroomData.Tenantid = Tenantid;
