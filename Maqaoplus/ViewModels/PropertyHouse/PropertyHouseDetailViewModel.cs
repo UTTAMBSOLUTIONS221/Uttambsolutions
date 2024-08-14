@@ -16,6 +16,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ObservableCollection<PropertyHouseDetails> Rooms { get; }
         private Systempropertyhouserooms _houseroomData;
         private Systemtenantdetails _tenantStaffData;
+        private Systemtenantdetails _newTenantStaffData;
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand NextCommand { get; }
@@ -191,6 +192,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        public Systemtenantdetails NewTenantStaffData
+        {
+            get => _newTenantStaffData;
+            set
+            {
+                _newTenantStaffData = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         private async Task LoadRooms()
         {
@@ -485,11 +496,23 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             Tenantid = TenantStaffData.Userid;
             SearchId = string.Empty;
+            NewTenantStaffData = new Systemtenantdetails
+            {
+                Fullname = TenantStaffData.Fullname,
+                Phonenumber = TenantStaffData.Phonenumber,
+                Idnumber = TenantStaffData.Idnumber,
+            };
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
         private void OnCancelButtonClicked()
         {
             Tenantid = 0;
+            NewTenantStaffData = new Systemtenantdetails
+            {
+                Fullname = "No Tenant selected",
+                Phonenumber = "No Tenant selected",
+                Idnumber = 0,
+            };
             SearchId = string.Empty;
             Application.Current.MainPage.Navigation.PopModalAsync();
             Application.Current.MainPage.Navigation.PopModalAsync();
