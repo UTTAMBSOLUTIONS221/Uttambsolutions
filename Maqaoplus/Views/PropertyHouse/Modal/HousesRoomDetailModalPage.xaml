@@ -11,7 +11,7 @@
             <Label Text="Step 1: Basic Room Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" />
 
             <!-- Hidden Field for Systempropertyhouseroomid -->
-            <Entry IsVisible="True" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
+            <Entry IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
 
             <Grid ColumnSpacing="8" RowSpacing="0">
                 <!-- Define two equal-width columns -->
@@ -65,7 +65,7 @@
                     <Label Text="For Caretaker/Owner?" VerticalOptions="Center" />
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="8" HorizontalOptions="Start">
+                <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="8" HorizontalOptions="Center">
                     <CheckBox IsChecked="{Binding HouseroomData.Isshop, Mode=TwoWay}" />
                     <Label Text="Is Shop?" VerticalOptions="Center" />
                 </HorizontalStackLayout>
@@ -83,7 +83,7 @@
                     <Label Text="Ground Floor?" VerticalOptions="Center" />
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8" HorizontalOptions="Start">
+                <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8" HorizontalOptions="Center">
                     <CheckBox IsChecked="{Binding HouseroomData.Hasbalcony, Mode=TwoWay}" />
                     <Label Text="Has Balcony?" VerticalOptions="Center" />
                 </HorizontalStackLayout>

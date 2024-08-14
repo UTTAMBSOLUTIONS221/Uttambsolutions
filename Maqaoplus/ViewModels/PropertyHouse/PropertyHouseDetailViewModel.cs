@@ -258,11 +258,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     if (kitchentypeResponse != null)
                     {
                         Systemkitchentype = new ObservableCollection<ListModel>(kitchentypeResponse);
+                        SelectedKitchentype = Systemkitchentype.FirstOrDefault(x => x.Value == _houseroomData.Kitchentypeid.ToString());
                     }
-
                     if (sizeResponse != null)
                     {
                         Systempropertyhousesize = new ObservableCollection<ListModel>(sizeResponse);
+                        SelectedPropertyhousesize = Systempropertyhousesize.FirstOrDefault(x => x.Value == _houseroomData.Systempropertyhousesizeid.ToString());
                     }
 
                     var modalPage = new HousesRoomDetailModalPage(this);
@@ -328,23 +329,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedKitchentype = value;
-
-                // Ensure SystempropertyData is not null
-                if (HouseroomData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int kitchentypeid))
-                    {
-                        HouseroomData.Kitchentypeid = kitchentypeid;
-                    }
-                    else
-                    {
-                        HouseroomData.Kitchentypeid = HouseroomData.Kitchentypeid;
-                    }
-
-                    OnPropertyChanged();
-                    OnPropertyChanged();
-                }
+                OnPropertyChanged();
             }
         }
 
@@ -364,22 +349,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             get => _selectedPropertyhousesize;
             set
             {
-                _selectedPropertyhousesize = value;
-
-                // Ensure SystempropertyData is not null
-                if (HouseroomData != null)
+                if (_selectedPropertyhousesize != value)
                 {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int systempropertyhousesizeid))
-                    {
-                        HouseroomData.Systempropertyhousesizeid = systempropertyhousesizeid;
-                    }
-                    else
-                    {
-                        HouseroomData.Systempropertyhousesizeid = HouseroomData.Systempropertyhousesizeid;
-                    }
-
-                    OnPropertyChanged();
+                    _selectedPropertyhousesize = value;
                     OnPropertyChanged();
                 }
             }
