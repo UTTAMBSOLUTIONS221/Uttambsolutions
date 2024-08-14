@@ -187,7 +187,46 @@
             <Button Text="Search" Command="{Binding SearchCommand}" FontSize="18" />
 
             <!-- Search Results -->
-            <Label x:Name="SearchResults"  Text="{Binding SearchResults}" IsVisible="{Binding IsNotEmpty}" TextColor="Black" FontSize="18" Margin="0,8,0,0"/>
+            <ScrollView Grid.Row="0">
+                <Grid Padding="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Tenant Information Frame -->
+                    <Frame Grid.Row="0" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
+                        <StackLayout Padding="10">
+                            <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                <Label Text="New Tenant Details" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="20" Margin="0,0,0,10"/>
+                                <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                            <StackLayout Padding="0" Spacing="8">
+                                <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Text="Name: " FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                    <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Spacing="5" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding TenantStaffData.Fullname}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                    </StackLayout>
+                                    <Label Text="Phone: " FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                    <Label Text="{Binding TenantStaffData.Phonenumber}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                    <Label Text="Idnumber: " FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                    <Label Text="{Binding TenantStaffData.Idnumber}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                   </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+            </ScrollView>
 
             <!-- Navigation Buttons -->
             <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
