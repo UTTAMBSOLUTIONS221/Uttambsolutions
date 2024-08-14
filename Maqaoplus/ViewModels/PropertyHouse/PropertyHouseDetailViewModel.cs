@@ -17,6 +17,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private Systempropertyhouserooms _houseroomData;
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
+        public ICommand NextCommand { get; }
+        public ICommand PreviousCommand { get; }
         public ICommand OnOkClickedCommand { get; }
 
         private bool _isProcessing;
@@ -46,10 +48,117 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             Rooms = new ObservableCollection<PropertyHouseDetails>();
             LoadRoomsCommand = new Command(async () => await LoadRooms());
             ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewDetails(propertyRoom.Systempropertyhouseroomid));
+            NextCommand = new Command(NextStep);
+            PreviousCommand = new Command(PreviousStep);
+            //SearchCommand = new Command(async () => await Search());
             OnOkClickedCommand = new Command(async () => await SaveHouseRoomDetailsAsync());
 
+            // Initialize steps
+            _isStep1Visible = true;
+            _isStep2Visible = false;
+            _isStep3Visible = false;
+            _isStep4Visible = false;
+        }
+        public bool IsStep1Visible
+        {
+            get => _isStep1Visible;
+            set
+            {
+                _isStep1Visible = value;
+                OnPropertyChanged(nameof(IsStep1Visible));
+            }
         }
 
+        public bool IsStep2Visible
+        {
+            get => _isStep2Visible;
+            set
+            {
+                _isStep2Visible = value;
+                OnPropertyChanged(nameof(IsStep2Visible));
+            }
+        }
+
+        public bool IsStep3Visible
+        {
+            get => _isStep3Visible;
+            set
+            {
+                _isStep3Visible = value;
+                OnPropertyChanged(nameof(IsStep3Visible));
+            }
+        }
+
+        public bool IsStep4Visible
+        {
+            get => _isStep4Visible;
+            set
+            {
+                _isStep4Visible = value;
+                OnPropertyChanged(nameof(IsStep4Visible));
+            }
+        }
+        private async void NextStep()
+        {
+            IsProcessing = true;
+
+            await Task.Delay(500);
+            // Move to the next step
+            if (_isStep1Visible)
+            {
+                if (!ValidateStep1())
+                {
+                    IsProcessing = false;
+                    return;
+                }
+                _isStep1Visible = false;
+                _isStep2Visible = true;
+            }
+            else if (_isStep2Visible)
+            {
+                _isStep2Visible = false;
+                _isStep3Visible = true;
+            }
+            else if (_isStep3Visible)
+            {
+                _isStep3Visible = false;
+                _isStep4Visible = true;
+            }
+            IsProcessing = false;
+            OnPropertyChanged(nameof(IsStep1Visible));
+            OnPropertyChanged(nameof(IsStep2Visible));
+            OnPropertyChanged(nameof(IsStep3Visible));
+            OnPropertyChanged(nameof(IsStep4Visible));
+        }
+
+        private async void PreviousStep()
+        {
+            IsProcessing = true;
+
+            await Task.Delay(500);
+            // Move to the previous step
+            if (_isStep4Visible)
+            {
+                _isStep4Visible = false;
+                _isStep3Visible = true;
+            }
+            else if (_isStep3Visible)
+            {
+                _isStep3Visible = false;
+                _isStep2Visible = true;
+            }
+            else if (_isStep2Visible)
+            {
+                _isStep2Visible = false;
+                _isStep1Visible = true;
+            }
+            IsProcessing = false;
+
+            OnPropertyChanged(nameof(IsStep1Visible));
+            OnPropertyChanged(nameof(IsStep2Visible));
+            OnPropertyChanged(nameof(IsStep3Visible));
+            OnPropertyChanged(nameof(IsStep4Visible));
+        }
         public void SetPropertyId(long propertyId)
         {
             _propertyId = propertyId;
@@ -137,6 +246,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
 
         //maibupation of the House Room Details
+        private bool _isStep1Visible;
+        private bool _isStep2Visible;
+        private bool _isStep3Visible;
+        private bool _isStep4Visible;
+
+
         public long _systempropertyhouseroomid;
         public long Systempropertyhouseroomid
         {
@@ -245,7 +360,39 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 }
             }
         }
+        // Error properties
+        private string _propertyHouseRoomNumberError;
+        public string PropertyHouseRoomNumberError
+        {
+            get => _propertyHouseRoomNumberError;
+            set
+            {
+                _propertyHouseRoomNumberError = value;
+                OnPropertyChanged(nameof(PropertyHouseRoomNumberError));
+            }
+        }
 
+        private string _propertyHouseKitchenTypeError;
+        public string PropertyHouseKitchenTypeError
+        {
+            get => _propertyHouseKitchenTypeError;
+            set
+            {
+                _propertyHouseKitchenTypeError = value;
+                OnPropertyChanged(nameof(PropertyHouseKitchenTypeError));
+            }
+        }
+
+        private string _propertyHouseSizeError;
+        public string PropertyHouseSizeError
+        {
+            get => _propertyHouseSizeError;
+            set
+            {
+                _propertyHouseSizeError = value;
+                OnPropertyChanged(nameof(PropertyHouseSizeError));
+            }
+        }
 
 
 
@@ -254,11 +401,58 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async Task SaveHouseRoomDetailsAsync()
         {
+            IsProcessing = true;
+            await Task.Delay(500);
+            if (!ValidateStep1())
+            {
+                IsProcessing = false;
+                return;
+            }
             var data = new Systempropertyhouserooms()
             {
 
             };
         }
+        private bool ValidateStep1()
+        {
+            bool isValid = true;
+
+            // Validate Property Name
+            if (string.IsNullOrWhiteSpace(HouseroomData?.Systempropertyhousesizename))
+            {
+                PropertyHouseRoomNumberError = "Property House Number is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomNumberError = null;
+            }
+            // Validate Property House Water Type
+            if (HouseroomData?.Kitchentypeid == 0)
+            {
+                PropertyHouseKitchenTypeError = "Property House Kitchen Type is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseKitchenTypeError = null;
+            }
+            // Validate Property House County
+            if (HouseroomData?.Systempropertyhousesizeid == 0)
+            {
+                PropertyHouseSizeError = "Property House Size is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseSizeError = null;
+            }
+            // Update overall IsValid property
+            IsProcessing = isValid;
+
+            return isValid;
+        }
+
 
     }
 }
