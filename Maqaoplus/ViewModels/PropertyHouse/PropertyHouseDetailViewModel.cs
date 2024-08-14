@@ -20,6 +20,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
+        public ICommand OnCancelClickedCommand { get; }
         public ICommand OnOkClickedCommand { get; }
 
         private bool _isProcessing;
@@ -52,6 +53,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
             //SearchCommand = new Command(async () => await Search());
+            OnCancelClickedCommand = new Command(OnCancelClicked);
             OnOkClickedCommand = new Command(async () => await SaveHouseRoomDetailsAsync());
 
             // Initialize steps
@@ -625,6 +627,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 Datecreated = DateTime.Now,
 
             };
+        }
+
+        private void OnCancelClicked()
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
         private bool ValidateStep1()
         {
