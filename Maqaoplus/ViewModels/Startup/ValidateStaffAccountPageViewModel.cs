@@ -66,7 +66,6 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _isProcessing = value;
                 OnPropertyChanged();
-                ((Command)CheckUserLoginStatusCommand).ChangeCanExecute();
             }
         }
 
@@ -78,7 +77,6 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _paymentReferenceCodeError = value;
                 OnPropertyChanged();
-                ((Command)OnOkClickedCommand).ChangeCanExecute();
             }
         }
         public ValidateStaffAccountPageViewModel(Services.ServiceProvider serviceProvider)
@@ -87,7 +85,7 @@ namespace Maqaoplus.ViewModels.Startup
             LoadCurrentUserCommand = new Command(async () => await LoadCurrentyStaffTenantData());
             CheckUserLoginStatusCommand = new Command(async () => await CheckUserLoginStatusAsync(), () => !IsProcessing);
             OnCancelClickedCommand = new Command(OnCancelClicked);
-            OnOkClickedCommand = new Command(async () => await OnOkClickedAsync(), () => !IsProcessing);
+            OnOkClickedCommand = new Command(OnOkClickedAsync);
 
         }
 
@@ -145,14 +143,13 @@ namespace Maqaoplus.ViewModels.Startup
                 IsProcessing = false;
             }
         }
-        private async Task OnOkClickedAsync()
+        private async void OnOkClickedAsync()
         {
             IsProcessing = true;
             await Task.Delay(500);
-            if (string.IsNullOrWhiteSpace(PaymentReferenceCode))
+            if (!IsValidInput())
             {
                 IsProcessing = false;
-                await Application.Current.MainPage.DisplayAlert("Warning", "Payment Reference Code is required", "OK");
                 return;
             }
             var request = new PaymentConfirmation
@@ -166,6 +163,20 @@ namespace Maqaoplus.ViewModels.Startup
         private void OnCancelClicked()
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+        private bool IsValidInput()
+        {
+            bool isValid = true;
+            if (string.IsNullOrWhiteSpace(PaymentReferenceCode))
+            {
+                PaymentReferenceCodeError = "Payment Reference Code is required.";
+                isValid = false;
+            }
+            else
+            {
+                PaymentReferenceCodeError = null;
+            }
+            return isValid;
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
