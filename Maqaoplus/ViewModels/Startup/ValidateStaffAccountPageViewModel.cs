@@ -14,6 +14,7 @@ namespace Maqaoplus.ViewModels.Startup
         private StaffDetailData _systemStaffTenantData;
         private SystemStaff _tenantData;
         private string _paymentReferenceCode;
+        private long _userid;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -44,6 +45,15 @@ namespace Maqaoplus.ViewModels.Startup
             set
             {
                 _paymentReferenceCode = value;
+                OnPropertyChanged();
+            }
+        }
+        public long Userid
+        {
+            get => _userid;
+            set
+            {
+                _userid = value;
                 OnPropertyChanged();
             }
         }
@@ -137,32 +147,23 @@ namespace Maqaoplus.ViewModels.Startup
         {
             IsProcessing = true;
             await Task.Delay(500);
-            if (!IsValidInput())
+            if (string.IsNullOrWhiteSpace(PaymentReferenceCode))
             {
                 IsProcessing = false;
+                await Application.Current.MainPage.DisplayAlert("Warning", "Payment Reference Code is required", "OK");
                 return;
             }
+            var request = new PaymentConfirmation
+            {
+                Userid = Userid,
+                PaymentReferenceCode = PaymentReferenceCode
+            };
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
         private void OnCancelClicked()
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
-        }
-
-        private bool IsValidInput()
-        {
-            bool isValid = true;
-            if (string.IsNullOrWhiteSpace(PaymentReferenceCode))
-            {
-                PaymentReferenceCodeError = "Payment Reference Code is required.";
-                isValid = false;
-            }
-            else
-            {
-                PaymentReferenceCodeError = null;
-            }
-            return isValid;
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
