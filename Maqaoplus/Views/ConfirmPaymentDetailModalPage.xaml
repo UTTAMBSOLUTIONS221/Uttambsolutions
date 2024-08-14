@@ -21,7 +21,7 @@
         <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,4" HasShadow="True">
             <HorizontalStackLayout Spacing="3">
                 <Image Source="dollar.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
-                <Entry Placeholder="Enter payment reference code " Text="{Binding PayementRefereneceCode, Mode=TwoWay}" Keyboard="Text" FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" WidthRequest="300"/>
+                <Entry Placeholder="Enter payment reference code " Text="{Binding PaymentReferenceCode}" Keyboard="Text" FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" WidthRequest="300"/>
             </HorizontalStackLayout>
         </Frame>
         <Label Text="{Binding PaymentReferenceCodeError}" TextColor="Red" Padding="0"/>
