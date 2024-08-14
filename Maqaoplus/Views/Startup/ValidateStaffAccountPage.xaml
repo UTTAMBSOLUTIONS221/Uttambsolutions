@@ -87,7 +87,7 @@
                                         </Label.FormattedText>
                                     </Label>
 
-                                    <Image Source="familybank.png" Grid.Row="3" HorizontalOptions="Center" VerticalOptions="Center" MaximumHeightRequest="100"/>
+                                    <Image Source="familybank.png" Grid.Row="3" HorizontalOptions="Center" VerticalOptions="Center" MaximumHeightRequest="50"/>
 
                                     <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" Grid.Column="0">
                                         <Label.FormattedText>
@@ -126,7 +126,8 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    <Label Text="Once you receive the Confirmation Message click the confirm button" FontSize="16" Grid.Row="9" LineBreakMode="WordWrap" HorizontalOptions="Fill"/>
+                                    <Label HorizontalTextAlignment="Center" Text="Once you receive the Confirmation," FontSize="16" Grid.Row="9" FontAttributes="Bold" TextColor="#0a506c" TextTransform="Uppercase"  LineBreakMode="WordWrap" HorizontalOptions="Fill"/>
+                                    <Label HorizontalTextAlignment="Center" Text="Click the confirm button" FontSize="16" Grid.Row="10" FontAttributes="Bold" TextColor="#0a506c" TextTransform="Uppercase" LineBreakMode="WordWrap" HorizontalOptions="Fill"/>
                                 </Grid>
                                 <Button BackgroundColor="#0a506c" Command="{Binding CheckUserLoginStatusCommand}" CornerRadius="8" Text="Confirm" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" />
                             </StackLayout>

@@ -91,6 +91,10 @@ namespace Maqaoplus.ViewModels.Startup
                     {
                         await Shell.Current.GoToAsync("//LoginPage");
                     }
+                    else
+                    {
+
+                    }
                 }
                 IsProcessing = true;
             }
