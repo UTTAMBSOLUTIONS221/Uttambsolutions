@@ -140,11 +140,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             else if (_isStep3Visible)
             {
-                if (!ValidateStep3())
-                {
-                    IsProcessing = false;
-                    return;
-                }
                 _isStep3Visible = false;
                 _isStep4Visible = true;
             }
@@ -434,6 +429,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        private string _propertyHouseRoomTenantidError;
+        public string PropertyHouseRoomTenantidError
+        {
+            get => _propertyHouseRoomTenantidError;
+            set
+            {
+                _propertyHouseRoomTenantidError = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public decimal OpeningMeter
         {
@@ -488,10 +494,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 ConsumedAmount = MovedMeter * HouseroomData.Waterunitprice;
             }
         }
-
-
-
-
         private async Task Search()
         {
             if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
@@ -529,9 +531,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = true;
             if (Tenantid == 0)
             {
-                IsProcessing = false;
+                PropertyHouseRoomTenantidError = "New Tenant is required.";
                 return;
             }
+
             if (!ValidateStep1())
             {
                 IsProcessing = false;
@@ -654,22 +657,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             else
             {
                 PropertyHouseRoomClosingMeterError = null;
-            }
-            return isValid;
-        }
-        private bool ValidateStep3()
-        {
-            bool isValid = true;
-
-            // Validate Property Name
-            if (Tenantid == 0)
-            {
-                PropertyHouseRoomNumberError = "Property House Number is required.";
-                isValid = false;
-            }
-            else
-            {
-                PropertyHouseRoomNumberError = null;
             }
             return isValid;
         }
