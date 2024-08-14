@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Maqaoplus.ViewModels.PropertyHouse"
@@ -67,7 +66,7 @@
         </ScrollView>
 
         <!-- Overlay Grid to cover the entire screen -->
-        <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="2" BackgroundColor="Transparent">
+        <Grid IsVisible="{Binding IsProcessing}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
             <BoxView Color="#C0000000" Opacity="0.5" />
             <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
         </Grid>
