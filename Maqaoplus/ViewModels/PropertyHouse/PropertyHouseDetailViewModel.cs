@@ -13,13 +13,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
 
-        private bool _isLoading;
-        public bool IsLoading
+        private bool _isProcessing;
+        public bool IsProcessing
         {
-            get => _isLoading;
+            get => _isProcessing;
             set
             {
-                _isLoading = value;
+                _isProcessing = value;
                 OnPropertyChanged();
             }
         }
@@ -57,7 +57,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async Task LoadRooms()
         {
-            IsLoading = true;
+            IsProcessing = true;
             IsDataLoaded = false;
 
             try
@@ -80,13 +80,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             finally
             {
-                IsLoading = false; // Stop loading indicator
+                IsProcessing = false; // Stop loading indicator
             }
         }
 
         private async Task ViewDetails(long propertyRoomId)
         {
-            IsLoading = true;
+            IsProcessing = true;
             try
             {
                 var encodedPropertyRoomId = Uri.EscapeDataString(propertyRoomId.ToString());
@@ -99,7 +99,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             finally
             {
-                IsLoading = false; // Stop loading indicator
+                IsProcessing = false; // Stop loading indicator
             }
         }
     }
