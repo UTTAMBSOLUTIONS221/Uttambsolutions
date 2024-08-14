@@ -1,4 +1,7 @@
-﻿using DBL.Models;
+﻿using DBL.Entities;
+using DBL.Models;
+using Maqaoplus.Views.PropertyHouse.Modal;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -10,6 +13,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private long _propertyId;
 
         public ObservableCollection<PropertyHouseDetails> Rooms { get; }
+        private Systempropertyhouserooms _houseroomData;
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
 
@@ -49,6 +53,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadRoomsCommand.Execute(null);
         }
 
+        public Systempropertyhouserooms HouseroomData
+        {
+            get => _houseroomData;
+            set
+            {
+                _houseroomData = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private async Task LoadRooms()
         {
             IsProcessing = true;
@@ -83,8 +98,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = true;
             try
             {
-                var encodedPropertyRoomId = Uri.EscapeDataString(propertyRoomId.ToString());
-                await Shell.Current.GoToAsync($"PropertyHousesRoomDetailPage?PropertyRoomId={encodedPropertyRoomId}");
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/" + propertyRoomId, HttpMethod.Get, null);
+
+                if (response != null && response.Data != null)
+                {
+                    HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
+
+
+                    var modalPage = new HousesRoomDetailModalPage(this);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                }
+
+                //var encodedPropertyRoomId = Uri.EscapeDataString(propertyRoomId.ToString());
+                //await Shell.Current.GoToAsync($"PropertyHousesRoomDetailPage?PropertyRoomId={encodedPropertyRoomId}");
             }
             catch (Exception ex)
             {

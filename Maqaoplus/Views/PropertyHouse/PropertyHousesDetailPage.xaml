@@ -27,8 +27,10 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <!-- This will take up the remaining space -->
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
+                                    <!-- Manage Room Label will be at the bottom -->
                                 </Grid.RowDefinitions>
 
                                 <!-- Larger Image with Null Handling -->
@@ -51,14 +53,15 @@
                                     <Label Text="{Binding Propertyhousevacant}" FontSize="14" TextColor="Red" Grid.Column="1"/>
                                 </Grid>
 
-                                <Label HorizontalOptions="Center" Margin="0,3,0,0" Text="Manage Room" TextColor="#0a506c" FontSize="17" FontAttributes="None" FontFamily="Arial">
+                                <!-- Manage Room Label at the Bottom -->
+                                <Label HorizontalOptions="Center" Margin="0,3,0,0" Text="Manage Room" TextColor="#0a506c" FontSize="17" FontAttributes="None" FontFamily="Arial" Grid.Row="6">
                                     <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}"
-                       CommandParameter="{Binding .}" />
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}" CommandParameter="{Binding .}" />
                                     </Label.GestureRecognizers>
                                 </Label>
                             </Grid>
                         </Frame>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

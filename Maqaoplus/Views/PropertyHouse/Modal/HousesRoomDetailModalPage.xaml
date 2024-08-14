@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maqaoplus.Views.PropertyHouse.Modal.HousesRoomDetailModalPage"
+             BackgroundColor="White"
+             Padding="16">
+    <StackLayout Spacing="16">
+        <Entry IsVisible="true" Text="{Binding Userid}" />
+
+        <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span FontSize="18" Text="Dear, " />
+                    <Span Text="{Binding StaffData.Fullname}" FontAttributes="Bold" FontSize="16" TextTransform="Uppercase" TextColor="#0a506c" />
+                    <Span FontSize="18" Text=", Kindly Confirm Payment Details" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label Text="Enter the reference code below and submit" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" Margin="0,4" HasShadow="True">
+            <HorizontalStackLayout Spacing="3">
+                <Image Source="dollar.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
+                <Entry Placeholder="Enter payment reference code " Text="{Binding PaymentReferenceCode}" Keyboard="Text" FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" WidthRequest="300"/>
+            </HorizontalStackLayout>
+        </Frame>
+        <Label Text="{Binding PaymentReferenceCodeError}" TextColor="Red" Padding="0"/>
+
+        <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+            <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" WidthRequest="150" />
+            <Button Text="Submit" Command="{Binding OnOkClickedCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" WidthRequest="150" />
+        </FlexLayout>
+    </StackLayout>
+</ContentPage>
