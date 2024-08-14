@@ -93,7 +93,12 @@ namespace Maqaoplus.ViewModels.Startup
                     }
                     else
                     {
-
+                        var modalPage = new ConfirmPaymentDetailModalPage(
+                        StaffData,
+                        new Command(OnOkClicked),
+                        new Command(OnCancelClicked)
+                    );
+                        await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                     }
                 }
                 IsProcessing = true;
@@ -106,6 +111,15 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 IsProcessing = false;
             }
+        }
+        private void OnOkClicked()
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+
+        private void OnCancelClicked()
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
