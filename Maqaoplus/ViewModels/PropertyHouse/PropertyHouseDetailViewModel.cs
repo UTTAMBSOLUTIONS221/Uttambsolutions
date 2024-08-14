@@ -241,10 +241,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                     var modalPage = new HousesRoomDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                    IsProcessing = false;
                 }
-
-                //var encodedPropertyRoomId = Uri.EscapeDataString(propertyRoomId.ToString());
-                //await Shell.Current.GoToAsync($"PropertyHousesRoomDetailPage?PropertyRoomId={encodedPropertyRoomId}");
             }
             catch (Exception ex)
             {
