@@ -48,6 +48,7 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _paymentReferenceCode = value;
                 OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
             }
         }
         public long Userid
@@ -57,6 +58,7 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _userid = value;
                 OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
             }
         }
         public bool IsProcessing
@@ -83,9 +85,9 @@ namespace Maqaoplus.ViewModels.Startup
         {
             _serviceProvider = serviceProvider;
             LoadCurrentUserCommand = new Command(async () => await LoadCurrentyStaffTenantData());
-            CheckUserLoginStatusCommand = new Command(async () => await CheckUserLoginStatusAsync(), () => !IsProcessing);
+            CheckUserLoginStatusCommand = new Command(async () => await CheckUserLoginStatusAsync());
             OnCancelClickedCommand = new Command(OnCancelClicked);
-            OnOkClickedCommand = new Command(OnOkClickedAsync);
+            OnOkClickedCommand = new Command(async () => await OnOkClickedAsync());
 
         }
 
@@ -143,7 +145,7 @@ namespace Maqaoplus.ViewModels.Startup
                 IsProcessing = false;
             }
         }
-        private async void OnOkClickedAsync()
+        private async Task OnOkClickedAsync()
         {
             IsProcessing = true;
             await Task.Delay(500);
