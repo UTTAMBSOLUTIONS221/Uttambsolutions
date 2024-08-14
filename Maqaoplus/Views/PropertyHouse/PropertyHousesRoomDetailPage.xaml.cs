@@ -7,12 +7,11 @@ namespace Maqaoplus.Views.PropertyHouse
     {
         public long PropertyRoomId { get; set; }
         private PropertyHouseRoomDetailViewModel _viewModel;
-
-        public PropertyHousesRoomDetailPage(PropertyHouseRoomDetailViewModel viewModel)
+        public PropertyHousesRoomDetailPage(Services.ServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _viewModel = viewModel;
-            BindingContext = _viewModel;
+            _viewModel = new PropertyHouseRoomDetailViewModel(serviceProvider);
+            this.BindingContext = _viewModel;
         }
 
         protected override void OnAppearing()

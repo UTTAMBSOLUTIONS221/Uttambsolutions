@@ -11,9 +11,6 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.BindingContext>
-        <viewmodels:PropertyHouseDetailViewModel />
-    </ContentPage.BindingContext>
 
     <AbsoluteLayout>
         <!-- ScrollView with CollectionView -->

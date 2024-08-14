@@ -34,19 +34,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-
-        // Parameterless constructor
-        public PropertyHouseDetailViewModel()
+        public PropertyHouseDetailViewModel(Services.ServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             Rooms = new ObservableCollection<PropertyHouseDetails>();
             LoadRoomsCommand = new Command(async () => await LoadRooms());
             ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewDetails(propertyRoom.Systempropertyhouseroomid));
-        }
 
-        // Constructor with parameter
-        public PropertyHouseDetailViewModel(Services.ServiceProvider serviceProvider) : this()
-        {
-            _serviceProvider = serviceProvider;
         }
 
         public void SetPropertyId(long propertyId)
@@ -90,7 +84,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             try
             {
                 var encodedPropertyRoomId = Uri.EscapeDataString(propertyRoomId.ToString());
-                System.Diagnostics.Debug.WriteLine($"Navigating to PropertyHousesRoomDetailPage with PropertyRoomId={encodedPropertyRoomId}");
                 await Shell.Current.GoToAsync($"PropertyHousesRoomDetailPage?PropertyRoomId={encodedPropertyRoomId}");
             }
             catch (Exception ex)

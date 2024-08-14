@@ -9,8 +9,6 @@ namespace Maqaoplus.Views.PropertyHouse
     {
         public long PropertyId { get; set; }
         private PropertyHouseDetailViewModel _viewModel;
-
-
         public PropertyHousesDetailPage(Services.ServiceProvider serviceProvider)
         {
             InitializeComponent();
