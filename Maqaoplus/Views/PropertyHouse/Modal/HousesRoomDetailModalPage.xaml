@@ -215,13 +215,13 @@
                                     </Grid.RowDefinitions>
                                     <Label Text="Name: " FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
                                     <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Spacing="5" HorizontalOptions="FillAndExpand">
-                                        <Label Text="{Binding TenantStaffData.Fullname}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                        <Label Text="{Binding NewTenantStaffData.Fullname}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                     </StackLayout>
                                     <Label Text="Phone: " FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                                    <Label Text="{Binding TenantStaffData.Phonenumber}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                    <Label Text="{Binding NewTenantStaffData.Phonenumber}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                     <Label Text="Idnumber: " FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                                    <Label Text="{Binding TenantStaffData.Idnumber}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                   </Grid>
+                                    <Label Text="{Binding NewTenantStaffData.Idnumber}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                </Grid>
                             </StackLayout>
                         </StackLayout>
                     </Frame>

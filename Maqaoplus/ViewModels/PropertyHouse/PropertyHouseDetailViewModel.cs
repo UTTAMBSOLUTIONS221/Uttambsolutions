@@ -130,11 +130,21 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             else if (_isStep2Visible)
             {
+                if (!ValidateStep2())
+                {
+                    IsProcessing = false;
+                    return;
+                }
                 _isStep2Visible = false;
                 _isStep3Visible = true;
             }
             else if (_isStep3Visible)
             {
+                if (!ValidateStep3())
+                {
+                    IsProcessing = false;
+                    return;
+                }
                 _isStep3Visible = false;
                 _isStep4Visible = true;
             }
@@ -620,6 +630,37 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             return isValid;
         }
 
+        private bool ValidateStep2()
+        {
+            bool isValid = true;
 
+            // Validate Property Name
+            if (ClosingMeter < OpeningMeter)
+            {
+                PropertyHouseRoomNumberError = "Property House Number is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomNumberError = null;
+            }
+            return isValid;
+        }
+        private bool ValidateStep3()
+        {
+            bool isValid = true;
+
+            // Validate Property Name
+            if (Tenantid == 0)
+            {
+                PropertyHouseRoomNumberError = "Property House Number is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomNumberError = null;
+            }
+            return isValid;
+        }
     }
 }
