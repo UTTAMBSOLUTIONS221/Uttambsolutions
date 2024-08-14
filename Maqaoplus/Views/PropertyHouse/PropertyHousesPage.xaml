@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
         <!-- Button to Add New House -->
-        <Button Text="Add New House" Command="{Binding AddPropertyHouseCommand}" BackgroundColor="#0a506c" TextColor="White"  FontSize="18" Padding="10" HorizontalOptions="FillAndExpand" Grid.Row="0" Margin="5" IsVisible="{Binding IsDataLoaded}" />
+        <Button Text="Add New House" Command="{Binding AddPropertyHouseCommand}" BackgroundColor="#0a506c" TextColor="White"  FontSize="18" FontAttributes="Bold" Padding="10" HorizontalOptions="FillAndExpand" Grid.Row="0" Margin="5" IsVisible="{Binding IsDataLoaded}" />
 
         <!-- ScrollView with CollectionView -->
         <ScrollView IsVisible="{Binding IsDataLoaded}" Grid.Row="1">
