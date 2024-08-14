@@ -6,7 +6,7 @@
              Padding="16">
     <StackLayout Spacing="16">
         <Label Text="User Summary Details" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
-        <Label Text="{Binding Fullname}" FontSize="18" />
+        <Label Text="{Binding SystemStaffTenantData.Fullname}" FontSize="18" />
         <Label Text="{Binding Phonenumber}" FontSize="18" />
         <Label Text="{Binding Idnumber}" FontSize="18" />
 

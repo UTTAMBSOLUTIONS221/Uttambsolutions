@@ -1,21 +1,11 @@
-using DBL.Entities;
-using System.Windows.Input;
-
+using Maqaoplus.ViewModels.PropertyHouse;
 namespace Maqaoplus.Views;
+
 public partial class StaffDetailModalPage : ContentPage
 {
-    public ICommand OkCommand { get; }
-    public ICommand CancelCommand { get; }
-
-    public StaffDetailModalPage(SystemStaff staffData, ICommand okCommand, ICommand cancelCommand)
+    public StaffDetailModalPage(PropertyHouseDetailViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = staffData;
-        OkCommand = okCommand;
-        CancelCommand = cancelCommand;
-
-        // Bind the commands to the buttons explicitly
-        okButton.Command = OkCommand;
-        cancelButton.Command = CancelCommand;
+        BindingContext = viewModel;
     }
 }

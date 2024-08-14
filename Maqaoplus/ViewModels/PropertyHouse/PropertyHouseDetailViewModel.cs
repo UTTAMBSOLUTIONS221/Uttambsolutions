@@ -1,11 +1,11 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
+using Maqaoplus.Views;
 using Maqaoplus.Views.PropertyHouse.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-
 namespace Maqaoplus.ViewModels.PropertyHouse
 {
     public class PropertyHouseDetailViewModel : BaseViewModel
@@ -22,6 +22,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand OnOkClickedCommand { get; }
+        public ICommand SearchCommand { get; }
 
         private bool _isProcessing;
         public bool IsProcessing
@@ -52,7 +53,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewDetails(propertyRoom.Systempropertyhouseroomid));
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
-            //SearchCommand = new Command(async () => await Search());
+            SearchCommand = new Command(async () => await Search());
             OnCancelClickedCommand = new Command(OnCancelClicked);
             OnOkClickedCommand = new Command(async () => await SaveHouseRoomDetailsAsync());
 
@@ -261,6 +262,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isStep4Visible;
 
 
+        public string _searchId;
+        public string SearchId
+        {
+            get => _searchId;
+            set
+            {
+                _searchId = value;
+                OnPropertyChanged(nameof(SearchId));
+            }
+        }
 
         public long _tenantid;
         public long Tenantid
@@ -382,16 +393,44 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        private async Task Search()
+        {
+            if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
+                return;
 
+            IsProcessing = true;
 
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
 
+                if (response != null)
+                {
+                    TenantStaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
 
+                    // Navigate to the modal with the customer data
+                    var modalPage = new StaffDetailModalPage(this);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                }
+                else
+                {
+                    TenantStaffData = new SystemStaff();
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
 
         private async Task SaveHouseRoomDetailsAsync()
         {
             IsProcessing = true;
-            await Task.Delay(500);
-            if (HouseroomData == null)
+            if (Tenantid == 0)
             {
                 IsProcessing = false;
                 return;
@@ -401,31 +440,35 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
                 return;
             }
-            var data = new Systempropertyhouserooms()
+            if (HouseroomData == null)
             {
-                Systempropertyhouseroomid = Systempropertyhouseroomid,
-                Systempropertyhouseid = Systempropertyhouseid,
-                Systempropertyhousesizeid = Systempropertyhousesizeid,
-                Systempropertyhousesizename = Systempropertyhousesizename,
-                Isvacant = Isvacant,
-                Isunderrenovation = Isunderrenovation,
-                Isshop = Isshop,
-                Isgroundfloor = Isgroundfloor,
-                Hasbalcony = Hasbalcony,
-                Forcaretaker = Forcaretaker,
-                Kitchentypeid = Kitchentypeid,
-                Systempropertyhousemeterid = Systempropertyhousemeterid,
-                Systempropertyhouseroommeternumber = Systempropertyhouseroommeternumber,
-                Openingmeter = Openingmeter,
-                Movedmeter = Movedmeter,
-                Closingmeter = Closingmeter,
-                Consumedamount = Consumedamount,
-                Waterunitprice = Waterunitprice,
-                Tenantid = Tenantid,
-                Createdby = App.UserDetails.Usermodel.Userid,
-                Datecreated = DateTime.Now,
+                IsProcessing = false;
+                return;
+            }
 
-            };
+            await Task.Delay(500);
+            if (HouseroomData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, HouseroomData);
+
+                if (response != null)
+                {
+                    // Handle response and show success message if needed
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
         }
 
         private void OnCancelClicked()
