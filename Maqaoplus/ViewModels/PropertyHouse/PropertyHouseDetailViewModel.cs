@@ -20,8 +20,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
+        public ICommand OnCancelButtonClickedCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand OnOkClickedCommand { get; }
+        public ICommand OnOkButtonClickedCommand { get; }
         public ICommand SearchCommand { get; }
 
         private bool _isProcessing;
@@ -54,7 +56,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
             SearchCommand = new Command(async () => await Search());
+            OnCancelButtonClickedCommand = new Command(OnCancelButtonClicked);
             OnCancelClickedCommand = new Command(OnCancelClicked);
+            OnOkButtonClickedCommand = new Command(OnOkButtonClicked);
             OnOkClickedCommand = new Command(async () => await SaveHouseRoomDetailsAsync());
 
             // Initialize steps
@@ -185,11 +189,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 _tenantStaffData = value;
                 OnPropertyChanged();
-                if (_tenantStaffData != null)
-                {
-                    Tenantid = _tenantStaffData.Userid;
-                }
-
             }
         }
 
@@ -480,6 +479,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private void OnCancelClicked()
         {
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+        private void OnOkButtonClicked()
+        {
+            Tenantid = TenantStaffData.Userid;
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+        private void OnCancelButtonClicked()
+        {
+            Tenantid = 0;
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
         private bool ValidateStep1()

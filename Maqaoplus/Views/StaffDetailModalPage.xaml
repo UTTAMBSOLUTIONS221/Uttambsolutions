@@ -11,7 +11,7 @@
         <Label Text="{Binding Idnumber}" FontSize="18" />
 
         <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-            <Button x:Name="cancelButton" Text="Cancel" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
+            <Button Command="{Binding OnCancelButtonClickedCommand}" Text="Cancel" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
             <Button x:Name="okButton" Text="OK" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
         </FlexLayout>
     </StackLayout>
