@@ -15,6 +15,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         public ObservableCollection<PropertyHouseDetails> Rooms { get; }
         private Systempropertyhouserooms _houseroomData;
+        private SystemStaff _tenantStaffData;
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand NextCommand { get; }
@@ -174,7 +175,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-
+        public SystemStaff TenantStaffData
+        {
+            get => _tenantStaffData;
+            set
+            {
+                _tenantStaffData = value;
+                OnPropertyChanged(nameof(TenantStaffData));
+            }
+        }
 
         private async Task LoadRooms()
         {
@@ -263,19 +272,29 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 ((Command)OnOkClickedCommand).ChangeCanExecute();
             }
         }
-
-        public long _propertyRoomTenantId;
-        public long PropertyRoomTenantId
+        public long _systempropertyhouseid;
+        public long Systempropertyhouseid
         {
-            get => _propertyRoomTenantId;
+            get => _systempropertyhouseid;
             set
             {
-                _propertyRoomTenantId = value;
+                _systempropertyhouseid = value;
                 OnPropertyChanged();
                 ((Command)OnOkClickedCommand).ChangeCanExecute();
             }
         }
 
+        public long _systempropertyhousesizeid;
+        public long Systempropertyhousesizeid
+        {
+            get => _systempropertyhousesizeid;
+            set
+            {
+                _systempropertyhousesizeid = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
         public string _systempropertyhousesizename;
         public string Systempropertyhousesizename
         {
@@ -287,6 +306,174 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 ((Command)OnOkClickedCommand).ChangeCanExecute();
             }
         }
+        public bool _isvacant;
+        public bool Isvacant
+        {
+            get => _isvacant;
+            set
+            {
+                _isvacant = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public bool _isunderrenovation;
+        public bool Isunderrenovation
+        {
+            get => _isunderrenovation;
+            set
+            {
+                _isunderrenovation = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public bool _isshop;
+        public bool Isshop
+        {
+            get => _isshop;
+            set
+            {
+                _isshop = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public bool _isgroundfloor;
+        public bool Isgroundfloor
+        {
+            get => _isgroundfloor;
+            set
+            {
+                _isgroundfloor = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public bool _hasbalcony;
+        public bool Hasbalcony
+        {
+            get => _hasbalcony;
+            set
+            {
+                _hasbalcony = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public bool _forcaretaker;
+        public bool Forcaretaker
+        {
+            get => _forcaretaker;
+            set
+            {
+                _forcaretaker = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+
+        public long _kitchentypeid;
+        public long Kitchentypeid
+        {
+            get => _kitchentypeid;
+            set
+            {
+                _kitchentypeid = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public int _systempropertyhousemeterid;
+        public int Systempropertyhousemeterid
+        {
+            get => _systempropertyhousemeterid;
+            set
+            {
+                _systempropertyhousemeterid = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public string _systempropertyhouseroommeternumber;
+        public string Systempropertyhouseroommeternumber
+        {
+            get => _systempropertyhouseroommeternumber;
+            set
+            {
+                _systempropertyhouseroommeternumber = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public decimal _openingmeter;
+        public decimal Openingmeter
+        {
+            get => _openingmeter;
+            set
+            {
+                _openingmeter = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public decimal _movedmeter;
+        public decimal Movedmeter
+        {
+            get => _movedmeter;
+            set
+            {
+                _movedmeter = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public decimal _closingmeter;
+        public decimal Closingmeter
+        {
+            get => _closingmeter;
+            set
+            {
+                _closingmeter = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public decimal _consumedamount;
+        public decimal Consumedamount
+        {
+            get => _consumedamount;
+            set
+            {
+                _consumedamount = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public decimal _waterunitprice;
+        public decimal Waterunitprice
+        {
+            get => _waterunitprice;
+            set
+            {
+                _waterunitprice = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+        public long _tenantid;
+        public long Tenantid
+        {
+            get => _tenantid;
+            set
+            {
+                _tenantid = value;
+                OnPropertyChanged();
+                ((Command)OnOkClickedCommand).ChangeCanExecute();
+            }
+        }
+
+
         private ObservableCollection<ListModel> _systemkitchentype;
         public ObservableCollection<ListModel> Systemkitchentype
         {
@@ -403,6 +590,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
             await Task.Delay(500);
+            if (HouseroomData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
             if (!ValidateStep1())
             {
                 IsProcessing = false;
@@ -410,6 +602,27 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             var data = new Systempropertyhouserooms()
             {
+                Systempropertyhouseroomid = Systempropertyhouseroomid,
+                Systempropertyhouseid = Systempropertyhouseid,
+                Systempropertyhousesizeid = Systempropertyhousesizeid,
+                Systempropertyhousesizename = Systempropertyhousesizename,
+                Isvacant = Isvacant,
+                Isunderrenovation = Isunderrenovation,
+                Isshop = Isshop,
+                Isgroundfloor = Isgroundfloor,
+                Hasbalcony = Hasbalcony,
+                Forcaretaker = Forcaretaker,
+                Kitchentypeid = Kitchentypeid,
+                Systempropertyhousemeterid = Systempropertyhousemeterid,
+                Systempropertyhouseroommeternumber = Systempropertyhouseroommeternumber,
+                Openingmeter = Openingmeter,
+                Movedmeter = Movedmeter,
+                Closingmeter = Closingmeter,
+                Consumedamount = Consumedamount,
+                Waterunitprice = Waterunitprice,
+                Tenantid = Tenantid,
+                Createdby = App.UserDetails.Usermodel.Userid,
+                Datecreated = DateTime.Now,
 
             };
         }

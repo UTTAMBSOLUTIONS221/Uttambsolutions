@@ -99,6 +99,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 _houseroomData = value;
                 OnPropertyChanged(nameof(HouseroomData));
+
             }
         }
         public SystemStaff TenantStaffData
@@ -140,23 +141,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedKitchentype = value;
-
-                // Ensure SystempropertyData is not null
-                if (HouseroomData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int kitchentypeid))
-                    {
-                        HouseroomData.Kitchentypeid = kitchentypeid;
-                    }
-                    else
-                    {
-                        HouseroomData.Kitchentypeid = HouseroomData.Kitchentypeid;
-                    }
-
-                    OnPropertyChanged(nameof(SelectedKitchentype));
-                    OnPropertyChanged(nameof(HouseroomData.Kitchentypeid));
-                }
+                OnPropertyChanged(nameof(SelectedKitchentype));
             }
         }
 
@@ -177,23 +162,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedPropertyhousesize = value;
-
-                // Ensure SystempropertyData is not null
-                if (HouseroomData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int systempropertyhousesizeid))
-                    {
-                        HouseroomData.Systempropertyhousesizeid = systempropertyhousesizeid;
-                    }
-                    else
-                    {
-                        HouseroomData.Systempropertyhousesizeid = HouseroomData.Systempropertyhousesizeid;
-                    }
-
-                    OnPropertyChanged(nameof(SelectedPropertyhousesize));
-                    OnPropertyChanged(nameof(HouseroomData.Systempropertyhousesizeid));
-                }
+                OnPropertyChanged(nameof(SelectedPropertyhousesize));
             }
         }
 
@@ -292,10 +261,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
         private async Task SaveRoomDetails()
         {
-            IsLoading = true;
-            Systempropertyhouserooms model = null;
-
-
 
 
         }
