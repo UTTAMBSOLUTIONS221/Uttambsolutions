@@ -559,10 +559,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 HouseroomData.Datecreated = DateTime.UtcNow;
 
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, HouseroomData);
-
-                if (response != null)
+                if (response.StatusCode == 200)
                 {
-                    // Handle response and show success message if needed
+                    await Shell.Current.GoToAsync($"PropertyHousesDetailPage?PropertyId={HouseroomData.Systempropertyhouseid}");
+                }
+                else if (response.StatusCode == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
                 }
             }
             catch (Exception ex)
