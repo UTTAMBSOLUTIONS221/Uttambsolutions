@@ -141,6 +141,7 @@
                 <Entry Grid.Row="1" Grid.Column="3" Placeholder="Moved Meter" Text="{Binding MovedMeter}" IsReadOnly="True" />
                 <Entry Grid.Row="1" Grid.Column="4" Placeholder="Consumed Amount" Text="{Binding ConsumedAmount}" IsReadOnly="True" />
             </Grid>
+            <Label Text="{Binding PropertyHouseRoomClosingMeterError}" TextColor="Red" />
             <!-- Section Header for All System Data -->
             <Label Text="Previos Meter Data" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
 

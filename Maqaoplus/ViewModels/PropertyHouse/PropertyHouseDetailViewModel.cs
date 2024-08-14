@@ -299,7 +299,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _searchId = value;
-                OnPropertyChanged(nameof(SearchId));
+                OnPropertyChanged();
             }
         }
 
@@ -323,7 +323,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _systemkitchentype = value;
-                OnPropertyChanged(nameof(Systemkitchentype));
+                OnPropertyChanged();
             }
         }
         private ListModel _selectedKitchentype;
@@ -347,8 +347,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         HouseroomData.Kitchentypeid = HouseroomData.Kitchentypeid;
                     }
 
-                    OnPropertyChanged(nameof(SelectedKitchentype));
-                    OnPropertyChanged(nameof(HouseroomData.Kitchentypeid));
+                    OnPropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -360,7 +360,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _systempropertyhousesize = value;
-                OnPropertyChanged(nameof(Systempropertyhousesize));
+                OnPropertyChanged();
             }
         }
         private ListModel _selectedPropertyhousesize;
@@ -384,8 +384,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         HouseroomData.Systempropertyhousesizeid = HouseroomData.Systempropertyhousesizeid;
                     }
 
-                    OnPropertyChanged(nameof(SelectedPropertyhousesize));
-                    OnPropertyChanged(nameof(HouseroomData.Systempropertyhousesizeid));
+                    OnPropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -397,7 +397,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _propertyHouseRoomNumberError = value;
-                OnPropertyChanged(nameof(PropertyHouseRoomNumberError));
+                OnPropertyChanged();
             }
         }
 
@@ -408,7 +408,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _propertyHouseKitchenTypeError = value;
-                OnPropertyChanged(nameof(PropertyHouseKitchenTypeError));
+                OnPropertyChanged();
             }
         }
 
@@ -419,7 +419,18 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _propertyHouseSizeError = value;
-                OnPropertyChanged(nameof(PropertyHouseSizeError));
+                OnPropertyChanged();
+            }
+        }
+
+        private string _propertyHouseRoomClosingMeterError;
+        public string PropertyHouseRoomClosingMeterError
+        {
+            get => _propertyHouseRoomClosingMeterError;
+            set
+            {
+                _propertyHouseRoomClosingMeterError = value;
+                OnPropertyChanged();
             }
         }
 
@@ -430,7 +441,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _openingMeter = value;
-                OnPropertyChanged(nameof(OpeningMeter));
+                OnPropertyChanged();
                 CalculateMeterValues();
             }
         }
@@ -440,7 +451,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _closingMeter = value;
-                OnPropertyChanged(nameof(ClosingMeter));
+                OnPropertyChanged();
                 if (ClosingMeter > 0)
                 {
                     CalculateMeterValues();
@@ -454,7 +465,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _movedMeter = value;
-                OnPropertyChanged(nameof(MovedMeter));
+                OnPropertyChanged();
             }
         }
 
@@ -464,7 +475,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _consumedAmount = value;
-                OnPropertyChanged(nameof(ConsumedAmount));
+                OnPropertyChanged();
             }
         }
 
@@ -635,14 +646,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             bool isValid = true;
 
             // Validate Property Name
-            if (ClosingMeter < OpeningMeter)
+            if (ClosingMeter < HouseroomData.Openingmeter)
             {
-                PropertyHouseRoomNumberError = "Property House Number is required.";
+                PropertyHouseRoomClosingMeterError = "Closing Meter Cant be  is required.";
                 isValid = false;
             }
             else
             {
-                PropertyHouseRoomNumberError = null;
+                PropertyHouseRoomClosingMeterError = null;
             }
             return isValid;
         }
