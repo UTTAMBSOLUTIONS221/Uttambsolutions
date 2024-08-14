@@ -15,7 +15,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         public ObservableCollection<PropertyHouseDetails> Rooms { get; }
         private Systempropertyhouserooms _houseroomData;
-        private SystemStaff _tenantStaffData;
+        private Systemtenantdetails _tenantStaffData;
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand NextCommand { get; }
@@ -178,13 +178,18 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-        public SystemStaff TenantStaffData
+        public Systemtenantdetails TenantStaffData
         {
             get => _tenantStaffData;
             set
             {
                 _tenantStaffData = value;
-                OnPropertyChanged(nameof(TenantStaffData));
+                OnPropertyChanged();
+                if (_tenantStaffData != null)
+                {
+                    Tenantid = _tenantStaffData.Userid;
+                }
+
             }
         }
 
@@ -406,15 +411,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                 if (response != null)
                 {
-                    TenantStaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
-
-                    // Navigate to the modal with the customer data
+                    TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
                     var modalPage = new StaffDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                 }
                 else
                 {
-                    TenantStaffData = new SystemStaff();
+                    TenantStaffData = new Systemtenantdetails();
                 }
             }
             catch (Exception ex)
@@ -454,6 +457,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             try
             {
+                HouseroomData.Tenantid = Tenantid;
+                HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
+                HouseroomData.Datecreated = DateTime.UtcNow;
+
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, HouseroomData);
 
                 if (response != null)
