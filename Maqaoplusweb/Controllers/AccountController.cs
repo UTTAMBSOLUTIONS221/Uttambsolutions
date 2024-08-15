@@ -174,29 +174,27 @@ namespace Maqaoplusweb.Controllers
         }
         private IActionResult RedirectToLocal(string returnUrl, string Designation)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (Designation == "Owner")
+            {
+                return RedirectToAction(nameof(HomeController.OwnerDashboard), "Home", new { area = "" });
+            }
+            else if (Designation == "Agent")
+            {
+                return RedirectToAction(nameof(HomeController.AgentDashboard), "Home", new { area = "" });
+            }
+            else if (Designation == "Tenant")
+            {
+                return RedirectToAction(nameof(HomeController.TenantDashboard), "Home", new { area = "" });
+            }
+            else if (Designation == "System Admin")
+            {
+                return RedirectToAction(nameof(HomeController.Dashboard), "Home", new { area = "" });
+            }
+            else if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
-            else
-            {
-                if (Designation == "Owner")
-                {
-                    return RedirectToAction(nameof(HomeController.OwnerDashboard), "Home", new { area = "" });
-                }
-                else if (Designation == "Agent")
-                {
-                    return RedirectToAction(nameof(HomeController.AgentDashboard), "Home", new { area = "" });
-                }
-                else if (Designation == "Tenant")
-                {
-                    return RedirectToAction(nameof(HomeController.TenantDashboard), "Home", new { area = "" });
-                }
-                else
-                {
-                    return RedirectToAction(nameof(HomeController.Dashboard), "Home", new { area = "" });
-                }
-            }
+            else { return RedirectToAction("Signin", "Account"); }
         }
         #endregion
 
