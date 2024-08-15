@@ -188,15 +188,14 @@ namespace Maqaoplus.ViewModels.Startup
                 };
 
                 // Call your registration service here
-                var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Registerstaff", HttpMethod.Post, request);
-                if (response.StatusCode == 200)
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/Account/Registerstaff", request);
+                if (response.RespStatus == 0 || response.RespStatus == 200)
                 {
-                    request = new SystemStaff();
                     await Shell.Current.GoToAsync("//LoginPage");
                 }
-                else if (response.StatusCode == 1)
+                else if (response.RespStatus == 1)
                 {
-                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
                 }
                 else
                 {

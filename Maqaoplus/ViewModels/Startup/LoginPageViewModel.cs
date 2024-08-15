@@ -182,6 +182,7 @@ namespace Maqaoplus.ViewModels.Startup
 
         private async void OnRegister()
         {
+            SystemStaff systemStaff = null;
             await Shell.Current.GoToAsync(nameof(RegisterPage));
         }
         private async void OnForgotPassword()

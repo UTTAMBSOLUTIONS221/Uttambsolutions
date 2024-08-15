@@ -55,7 +55,20 @@ namespace Maqaoplus.Services
                 };
             }
         }
-
+        public async Task<Genericmodel> CallCustomUnAuthWebApi(string endpoint, dynamic obj)
+        {
+            Genericmodel resp = new Genericmodel();
+            using (var httpClient = new HttpClient())
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
+                using (var response = await httpClient.PostAsync(_devHttpHelper.ApiUrl + endpoint, content))
+                {
+                    string outPut = response.Content.ReadAsStringAsync().Result;
+                    resp = JsonConvert.DeserializeObject<Genericmodel>(outPut);
+                }
+            }
+            return resp;
+        }
         public async Task<BaseResponse> CallUnAuthWebApi<TRequest>(string apiUrl, HttpMethod httpMethod, TRequest request)
         {
             var httpRequestMessage = new HttpRequestMessage
