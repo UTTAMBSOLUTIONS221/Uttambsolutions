@@ -6,6 +6,9 @@
     var Systemhousebenefit = ViewData["Systemhousebenefitslists"] as List<SelectListItem>;
     var Systemhousedepositfee = ViewData["Systemhousedepositfeeslists"] as List<SelectListItem>;
     var Systemhousewatertype = ViewData["Systemhousewatertypelists"] as List<SelectListItem>;
+    var Systemhouserentdueday = ViewData["Systemhouserentduedaylists"] as List<SelectListItem>;
+    var Systemhousedepostmonths = ViewData["Systemhousedepostmonthslists"] as List<SelectListItem>;
+    var Systemhousevacantnoticeperiod = ViewData["Systemhousevacantnoticeperiodlists"] as List<SelectListItem>;
     bool isChecked = false;
 }
 <div class="modal-header">
@@ -107,32 +110,9 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Rent Due Day</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Rentdueday" id="Rentduedayid" required>
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdueday" asp-items="@Systemhouserentdueday" id="Rentduedayid" required>
                         <option value="">---Select---</option>
-                        @for (int i = 1; i <= 28; i++)
-                        {
-                            string suffix;
-                            switch (i)
-                            {
-                                case 1:
-                                case 21:
-                                case 31:
-                                    suffix = "st";
-                                    break;
-                                case 2:
-                                case 22:
-                                    suffix = "nd";
-                                    break;
-                                case 3:
-                                case 23:
-                                    suffix = "rd";
-                                    break;
-                                default:
-                                    suffix = "th";
-                                    break;
-                            }
-                            <option value="@i">@Model.Rentdueday @suffix</option>
-                        }
+                     
                     </select>
                 </div>
             </div>
@@ -140,12 +120,8 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Vacating Notice</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Vacantnoticeperiod" id="Vacantnoticeperiodid" required>
+                    <select class="form-control form-control-sm" asp-for="@Model.Vacantnoticeperiod" asp-items="@Systemhousevacantnoticeperiod" id="Vacantnoticeperiodid" required>
                         <option value="">---Select---</option>
-                        @for (int i = 0; i <= 6; i++)
-                        {
-                            <option value="@i">@i Month Rent</option>
-                        }
                     </select>
                 </div>
             </div>
@@ -158,12 +134,8 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Rent Deposit</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth" id="Rentdepositmonthid" required>
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth" asp-items="@Systemhousedepostmonths" id="Rentdepositmonthid" required>
                         <option value="">---Select---</option>
-                        @for (int i = 0; i <= 12; i++)
-                        {
-                            <option value="@i">@i Month Rent</option>
-                        }
                     </select>
                 </div>
             </div>

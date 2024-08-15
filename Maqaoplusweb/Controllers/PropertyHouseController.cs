@@ -49,6 +49,32 @@ namespace Maqaoplusweb.Controllers
                 Text = x.Text,
                 Value = x.Value
             }).ToList();
+            List<ListModel> Systemhouserentdueday = new List<ListModel>();
+            for (int i = 1; i <= 28; i++)
+            {
+                string suffix = i switch
+                {
+                    1 or 21 => "st",
+                    2 or 22 => "nd",
+                    3 or 23 => "rd",
+                    _ => "th"
+                };
+                Systemhouserentdueday.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
+            }
+            List<ListModel> Systemhousedepostmonths = new List<ListModel>();
+            for (int i = 1; i <= 6; i++)
+            {
+                Systemhousedepostmonths.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
+            }
+            List<ListModel> Systemhousevacantnoticeperiod = new List<ListModel>();
+            for (int i = 1; i <= 12; i++)
+            {
+                Systemhousevacantnoticeperiod.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
+            }
+            ViewData["Systemhouserentduedaylists"] = Systemhouserentdueday;
+            ViewData["Systemhousedepostmonthslists"] = Systemhousedepostmonths;
+            ViewData["Systemhousevacantnoticeperiodlists"] = Systemhousevacantnoticeperiod;
+
             var data = await bl.Getsystempropertyhousedatabyid(Propertyid);
             return PartialView(data);
         }
