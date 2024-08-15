@@ -1,5 +1,4 @@
 using Maqaoplus.ViewModels.PropertyHouseTenants;
-using System.Collections.Specialized;
 namespace Maqaoplus.Views.PropertyHouseTenants;
 
 public partial class PropertyHousesRoomTenantsPage : ContentPage
@@ -11,11 +10,6 @@ public partial class PropertyHousesRoomTenantsPage : ContentPage
         InitializeComponent();
         _viewModel = new PropertyHousesRoomTenantsViewModel(serviceProvider);
         this.BindingContext = _viewModel;
-        // Subscribe to the CollectionChanged event
-        _viewModel.Items.CollectionChanged += OnItemsCollectionChanged;
-
-        // Set default layout
-        PropertyHousesRoomTenantCollectionView.ItemsLayout = new GridItemsLayout(2, ItemsLayoutOrientation.Vertical);
 
     }
 
@@ -26,27 +20,5 @@ public partial class PropertyHousesRoomTenantsPage : ContentPage
         {
             _viewModel.LoadItemsCommand.Execute(null);
         }
-    }
-    private void OnItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (PropertyHousesRoomTenantCollectionView.ItemsSource != null)
-        {
-            var itemCount = _viewModel.Items.Count;
-            var span = CalculateSpan(itemCount);
-            PropertyHousesRoomTenantCollectionView.ItemsLayout = new GridItemsLayout(span, ItemsLayoutOrientation.Vertical);
-        }
-    }
-    private int CalculateSpan(int itemCount)
-    {
-        if (itemCount == 1)
-            return 2; // Fill the page row
-
-        if (itemCount == 2 || itemCount == 4)
-            return 2; // Divide by two
-
-        if (itemCount == 3 || itemCount == 5)
-            return 3; // Three on top and two below or similar
-
-        return 2; // Default span
     }
 }
