@@ -20,6 +20,23 @@ namespace Maqaoplusweb.Controllers
             return View();
         }
 
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+        public IActionResult OwnerDashboard()
+        {
+            return View();
+        }
+        public IActionResult AgentDashboard()
+        {
+            return View();
+        }
+        public IActionResult TenantDashboard()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

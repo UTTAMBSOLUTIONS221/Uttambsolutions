@@ -292,6 +292,7 @@ namespace DBL
                                 Isdeleted = resp.Usermodel.Isdeleted,
                                 Isdefault = resp.Usermodel.Isdefault,
                                 Loginstatus = resp.Usermodel.Loginstatus,
+                                Designation = resp.Usermodel.Designation,
                                 Passwordresetdate = resp.Usermodel.Passwordresetdate,
                                 Parentid = resp.Usermodel.Parentid,
                                 Userprofileimageurl = resp.Usermodel.Userprofileimageurl,
