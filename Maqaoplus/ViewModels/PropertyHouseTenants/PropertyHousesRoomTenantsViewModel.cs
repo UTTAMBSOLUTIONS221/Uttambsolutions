@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace Maqaoplus.ViewModels.PropertyHouse
+namespace Maqaoplus.ViewModels.PropertyHouseTenants
 {
     public class PropertyHousesRoomTenantsViewModel : BaseViewModel
     {
@@ -11,14 +11,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
 
-        private bool _isLoading;
-        public bool IsLoading
+        private bool _isProcessing;
+        public bool IsProcessing
         {
-            get => _isLoading;
+            get => _isProcessing;
             set
             {
-                _isLoading = value;
-                OnPropertyChanged();
+                _isProcessing = value;
+                OnPropertyChanged(nameof(IsProcessing));
             }
         }
 
@@ -48,7 +48,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
         private async Task LoadItems()
         {
-            IsLoading = true;
+            IsProcessing = true;
             IsDataLoaded = false;
 
             try
@@ -71,12 +71,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             finally
             {
-                IsLoading = false;
+                IsProcessing = false;
             }
         }
         private async Task ViewDetails(long propertyhousetenantidnumber)
         {
-            IsLoading = true;
+            IsProcessing = true;
             IsDataLoaded = false;
             try
             {
@@ -90,7 +90,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             finally
             {
-                IsLoading = false;
+                IsProcessing = false;
             }
         }
     }

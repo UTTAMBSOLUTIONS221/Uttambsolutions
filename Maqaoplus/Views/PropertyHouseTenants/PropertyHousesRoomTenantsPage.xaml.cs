@@ -1,6 +1,6 @@
-using Maqaoplus.ViewModels.PropertyHouse;
+using Maqaoplus.ViewModels.PropertyHouseTenants;
 using System.Collections.Specialized;
-namespace Maqaoplus.Views.PropertyHouse;
+namespace Maqaoplus.Views.PropertyHouseTenants;
 
 public partial class PropertyHousesRoomTenantsPage : ContentPage
 {

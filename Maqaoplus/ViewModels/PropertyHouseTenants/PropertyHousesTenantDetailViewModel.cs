@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Windows.Input;
 
-namespace Maqaoplus.ViewModels.PropertyHouse
+namespace Maqaoplus.ViewModels.PropertyHouseTenants
 {
     public class PropertyHousesTenantDetailViewModel : INotifyPropertyChanged
     {

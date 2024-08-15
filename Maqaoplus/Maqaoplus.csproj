@@ -145,10 +145,10 @@
 	  <MauiXaml Update="Views\PropertyHouse\PropertyHousesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\PropertyTenants\PropertyHousesRoomTenantsPage.xaml">
+	  <MauiXaml Update="Views\PropertyHouseTenants\PropertyHousesRoomTenantsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\PropertyTenants\PropertyHousesTenantDetailPage.xaml">
+	  <MauiXaml Update="Views\PropertyHouseTenants\PropertyHousesTenantDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Reports\SystemAdminReportsPage.xaml">

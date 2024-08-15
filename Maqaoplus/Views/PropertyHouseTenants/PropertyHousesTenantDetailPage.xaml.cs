@@ -1,5 +1,5 @@
-using Maqaoplus.ViewModels.PropertyHouse;
-namespace Maqaoplus.Views.PropertyHouse;
+using Maqaoplus.ViewModels.PropertyHouseTenants;
+namespace Maqaoplus.Views.PropertyHouseTenants;
 
 [QueryProperty(nameof(Propertyhousetenantidnumber), "Propertyhousetenantidnumber")]
 public partial class PropertyHousesTenantDetailPage : ContentPage
