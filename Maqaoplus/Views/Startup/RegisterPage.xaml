@@ -92,10 +92,7 @@
                         <!-- Removed padding -->
                         <HorizontalStackLayout Spacing="3">
                             <Image Source="user.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
-                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
-                                <Picker ItemsSource="{Binding Systemstaffdesignation}" SelectedItem="{Binding SelectedStaffdesignation}" ItemDisplayBinding="{Binding Text}" Title="Select House Entry Status" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
-                            </Frame>
-                            <!-- Reduced WidthRequest -->
+                            <Picker ItemsSource="{Binding Systemstaffdesignation}" SelectedItem="{Binding SelectedStaffdesignation}" ItemDisplayBinding="{Binding Text}" Title="Select Desgnation" TextColor="Black" FontSize="17" BackgroundColor="White" Margin="8,0,0,0"/>
                         </HorizontalStackLayout>
                     </Frame>
                     <Label Text="{Binding SystemStaffLastNameError}" TextColor="Red" Padding="0"/>
