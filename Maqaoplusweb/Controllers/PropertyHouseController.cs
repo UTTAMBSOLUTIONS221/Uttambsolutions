@@ -91,11 +91,16 @@ namespace Maqaoplusweb.Controllers
                 Value = x.Value
             }).ToList();
             Systempropertyhouseroomdata model = new Systempropertyhouseroomdata();
+            Systempropertyhouserooms modeldata = new Systempropertyhouserooms();
             if (Houseroomid > 0)
             {
                 model = await bl.Getsystempropertyhouseroomdatabyid(Houseroomid);
+                if (model.Data != null)
+                {
+                    modeldata = model.Data;
+                }
             }
-            return PartialView(model);
+            return PartialView(modeldata);
         }
         public async Task<JsonResult> Addpropertyhouseroomdata(Systempropertyhouserooms model)
         {
