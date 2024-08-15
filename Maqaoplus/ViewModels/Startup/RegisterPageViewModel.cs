@@ -261,7 +261,7 @@ namespace Maqaoplus.ViewModels.Startup
             }
             if (string.IsNullOrWhiteSpace(PhoneNumber))
             {
-                SystemStaffPhonenumberError = "Phonenumber Name is required.";
+                SystemStaffPhonenumberError = "Phonenumber is required.";
                 isValid = false;
             }
             else
