@@ -182,19 +182,19 @@ namespace Maqaoplusweb.Controllers
             {
                 if (Designation == "Owner")
                 {
-                    return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "" });
+                    return RedirectToAction(nameof(HomeController.OwnerDashboard), "Home", new { area = "" });
                 }
                 else if (Designation == "Agent")
                 {
-                    return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "" });
+                    return RedirectToAction(nameof(HomeController.AgentDashboard), "Home", new { area = "" });
                 }
                 else if (Designation == "Tenant")
                 {
-                    return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "" });
+                    return RedirectToAction(nameof(HomeController.TenantDashboard), "Home", new { area = "" });
                 }
                 else
                 {
-                    return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "" });
+                    return RedirectToAction(nameof(HomeController.Dashboard), "Home", new { area = "" });
                 }
             }
         }
