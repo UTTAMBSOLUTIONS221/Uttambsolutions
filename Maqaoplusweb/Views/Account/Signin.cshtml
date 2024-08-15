@@ -22,13 +22,6 @@
         <div class="card card-info card-outline">
             <div class="card-body login-card-body">
                 <p class="login-box-msg font-weight-light text-dark text-uppercase font-weight-bold">Sign in to start your session</p>
-                <div class="row mt-1">
-                    <div class="col-sm-12" id="AlertsContainer">
-                        @{
-                            await Html.RenderPartialAsync("_Alerts");
-                        }
-                    </div>
-                </div>
                 <form asp-action="Signin" asp-controller="Account" method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
                     <div class="row">
                         <div class="col-sm-12">
