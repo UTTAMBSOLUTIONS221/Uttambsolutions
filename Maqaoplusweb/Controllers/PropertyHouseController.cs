@@ -72,6 +72,12 @@ namespace Maqaoplusweb.Controllers
             return PartialView(model);
         }
         [HttpGet]
+        public async Task<IActionResult> Propertyhouseroom()
+        {
+            var data = await bl.Getsystempropertyhousedetaildatabyownerid(SessionUserData.Usermodel.Userid);
+            return View(data);
+        }
+        [HttpGet]
         public async Task<IActionResult> Addpropertyhouseroom(long Houseroomid)
         {
             ViewData["Systempropertyhousesizelists"] = bl.GetListModel(ListModelType.Systempropertyhousesizes).Result.Select(x => new SelectListItem
