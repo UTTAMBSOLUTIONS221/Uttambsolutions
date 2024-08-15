@@ -191,6 +191,7 @@ namespace Maqaoplus.ViewModels.Startup
                 var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Registerstaff", HttpMethod.Post, request);
                 if (response.StatusCode == 200)
                 {
+                    request = new SystemStaff();
                     await Shell.Current.GoToAsync("//LoginPage");
                 }
                 else if (response.StatusCode == 1)
