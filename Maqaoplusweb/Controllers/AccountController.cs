@@ -27,35 +27,13 @@ namespace Maqaoplusweb.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }
+
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(SystemStaff model)
+        public async Task<JsonResult> Addsystemstaffdata(SystemStaff model)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var resp = await bl.Registersystemstaffdata(model);
-                    if (resp.RespStatus == 0)
-                    {
-                        Success(resp.RespMessage, true);
-                        return RedirectToAction("Signin", "Account");
-                    }
-                    else if (resp.RespStatus == 401)
-                    {
-                        Warning(resp.RespMessage, true);
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, resp.RespMessage);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Util.LogError("Register Staff", ex, true);
-                }
-            }
-            return View();
+            var resp = await bl.Registersystemportalstaffdata(model);
+            return Json(resp);
         }
 
         [HttpGet]
