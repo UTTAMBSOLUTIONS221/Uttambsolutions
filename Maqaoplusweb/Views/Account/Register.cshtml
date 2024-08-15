@@ -267,12 +267,12 @@
                 Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
                 Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' '),
                 Lastlogin: new Date().toISOString().slice(0, 19).replace('T', ' '),
-                Loginstatus = Loginstatus,
-                Isactive = true,
-                Isdeleted = false,
-                Isdefault = false,
-                Updateprofile = Updateprofile,
-                Parentid = 0,
+                Loginstatus: Loginstatus,
+                Isactive: true,
+                Isdeleted: false,
+                Isdefault: false,
+                Updateprofile: Updateprofile,
+                Parentid: 0,
                 Passwordresetdate: Passwordresetdate,
             };
             $.post("/Account/Addsystemstaffdata", uil, function (response) {
