@@ -119,12 +119,11 @@ namespace Maqaoplus.ViewModels.Startup
                     App.UserDetails = response;
                     if (response.Usermodel.Updateprofile)
                     {
-                        await Shell.Current.GoToAsync(nameof(UserProfilePage));
+                        await Shell.Current.GoToAsync(nameof(UpdateUserProfilePage));
                     }
                     else if (response.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
                     {
                         var encodedStaffId = Uri.EscapeDataString(response.Usermodel.Userid.ToString());
-                        System.Diagnostics.Debug.WriteLine($"Navigating to ValidateStaffAccountPage with UserId={encodedStaffId}");
                         await Shell.Current.GoToAsync($"ValidateStaffAccountPage?UserId={encodedStaffId}");
                     }
                     else

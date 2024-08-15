@@ -23,6 +23,7 @@ namespace Maqaoplus.ViewModels
 
         public ICommand LoadCurrentUserCommand { get; }
         public ICommand UpdateCurrentUserDetailsCommand { get; }
+        public ICommand SubmitCurrentUserDetailsCommand { get; }
         private bool _isProcessing;
 
         public SystemStaff StaffData
@@ -73,6 +74,7 @@ namespace Maqaoplus.ViewModels
             LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserDataAsync());
             LoadDropdownData();
             UpdateCurrentUserDetailsCommand = new Command(async () => await Updateuserdetailsasync());
+            SubmitCurrentUserDetailsCommand = new Command(async () => await Submituserdetailsasync());
         }
 
 
@@ -241,6 +243,48 @@ namespace Maqaoplus.ViewModels
             }
         }
 
+
+        private async Task Submituserdetailsasync()
+        {
+            IsLoading = true;
+
+            await Task.Delay(500);
+            if (StaffData == null)
+            {
+                IsLoading = false;
+                return;
+            }
+
+            try
+            {
+                IsProcessing = true;
+                StaffData.Updateprofile = false;
+                StaffData.Modifiedby = App.UserDetails.Usermodel.Userid;
+                StaffData.Datemodified = DateTime.Now;
+                // Call your registration service here
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/Account/Registerstaff", StaffData);
+                if (response.RespStatus == 200 || response.RespStatus == 0)
+                {
+                    await Shell.Current.DisplayAlert("Success", response.RespMessage, "OK");
+                }
+                else if (response.RespStatus == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

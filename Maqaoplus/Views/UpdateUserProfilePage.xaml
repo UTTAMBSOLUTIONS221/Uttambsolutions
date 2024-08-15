@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Maqaoplus.Views.UserProfilePage"
+             x:Class="Maqaoplus.Views.UpdateUserProfilePage"
              Title="MY PROFILE">
     <ContentPage.Resources>
         <Style TargetType="Label">
@@ -162,7 +162,7 @@
                 </Grid>
 
                 <!-- Update Button -->
-                <Button Command="{Binding SubmitCurrentUserDetailsCommand}" Text="Update" />
+                <Button Command="{Binding UpdateCurrentUserDetailsCommand}" Text="Update" />
             </VerticalStackLayout>
         </ScrollView>
 
