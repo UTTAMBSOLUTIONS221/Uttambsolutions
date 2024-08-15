@@ -126,21 +126,11 @@
                     Systempropertyhousebenefitwehave: $(this).find('.system-property-house-benefit-wehave').prop('checked')
                 });
             });
-
-            var Propertyhouseowner, Propertyhouseposter;
-            if (document.getElementById('Ispropertyhouseagencyid').checked) {
-                Propertyhouseowner = $('#Propertyhouseownerid').val();
-                Propertyhouseposter = $('#systemLoggedinedUserid').val();
-            } else {
-                Propertyhouseowner = $('#systemLoggedinedUserid').val();
-                Propertyhouseposter = $('#systemLoggedinedUserid').val();
-            }
-
             var uil1 = {
                 Propertyhouseid: $('#Propertyhouseid').val(),
                 Isagency: $('#Ispropertyhouseagencyid').prop('checked'),
-                Propertyhouseowner: Propertyhouseowner,
-                Propertyhouseposter: Propertyhouseposter,
+                Propertyhouseowner: $('#systemLoggedinedUserid').val(),
+                Propertyhouseposter: $('#systemLoggedinedUserid').val(),
                 Propertyhousename: $('#Propertyhousenameid').val(),
                 Propertyhousestatus: $('#Propertyhousestatusid').val(),
                 Countyid: $('#Systemcountyid').val(),
