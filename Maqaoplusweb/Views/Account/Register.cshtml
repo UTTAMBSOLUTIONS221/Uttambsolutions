@@ -17,11 +17,15 @@
         <div class="card card-info card-outline">
             <div class="card-body login-card-body">
                 <p class="login-box-msg font-weight-light text-dark text-uppercase font-weight-bold">Sign up to start interaction</p>
+                <div class="row" hidden>
+                    <input class="form-control form-control-sm" asp-for="@Model.Userid" id="UserId" />
+                    <input class="form-control form-control-sm" asp-for="@Model.Parentid" id="Parentid" />
+                </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <label class="text-sm fontweight-light">First Name</label>
                         <div class="input-group mb-3">
-                            <input asp-for="Firstname" type="text" class="form-control form-control-sm" placeholder="First Name">
+                            <input asp-for="Firstname" type="text" class="form-control form-control-sm" placeholder="First Name" id="FirstnameId">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fa fa-user"></span>
@@ -33,7 +37,7 @@
                     <div class="col-sm-6">
                         <label>Last Name</label>
                         <div class="input-group mb-3">
-                            <input asp-for="Lastname" type="text" class="form-control form-control-sm" placeholder="Last Name">
+                            <input asp-for="Lastname" type="text" class="form-control form-control-sm" placeholder="Last Name" id="LastnameId">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fa fa-user"></span>
@@ -47,7 +51,7 @@
                     <div class="col-sm-12">
                         <label>Email Address</label>
                         <div class="input-group mb-3">
-                            <input asp-for="Emailaddress" type="email" class="form-control form-control-sm" placeholder="Email Address">
+                            <input asp-for="Emailaddress" type="email" class="form-control form-control-sm" placeholder="Email Address" id="EmailAddressId">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fa fa-envelope"></span>
@@ -61,7 +65,7 @@
                     <div class="col-sm-7">
                         <label>Phone Number</label>
                         <div class="input-group mb-3">
-                            <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number">
+                            <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number" id="PhonenumberId">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fa fa-phone"></span>
@@ -92,7 +96,7 @@
                     <div class="col-sm-6">
                         <label>Password</label>
                         <div class="input-group mb-3">
-                            <input asp-for="Passwords" type="password" class="form-control form-control-sm" placeholder="Password">
+                            <input asp-for="Passwords" type="password" class="form-control form-control-sm" placeholder="Password" id="StaffPasswordid">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fa fa-lock"></span>
@@ -104,7 +108,7 @@
                     <div class="col-sm-6">
                         <label>Confirm Password</label>
                         <div class="input-group mb-3">
-                            <input asp-for="Confirmpasswords" type="password" class="form-control form-control-sm" placeholder="Confirm Password">
+                            <input asp-for="Confirmpasswords" type="password" class="form-control form-control-sm" placeholder="Confirm Password" id="StaffConfirmPasswordid">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fa fa-lock"></span>
@@ -171,6 +175,33 @@
             }
             if ($('#StaffDesignationid').val() == '') {
                 Swal.fire("Staff Detail Not Created", 'Designation is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            }
+            if ($('#StaffPasswordid').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Password is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            } 
+            if ($('#StaffConfirmPasswordid').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Confirm Password is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            }
+            if ($('#StaffConfirmPasswordid').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Confirm Password is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            } if ($('#StaffConfirmPasswordid').val() != $('#StaffConfirmPasswordid').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Password Mismatch', "warning");
                 document.getElementById("savesystemstaffid").disabled = false;
                 document.getElementById("processingSpinner").style.display = "none";
                 document.getElementById("buttonText").innerText = "SIGN UP";
