@@ -3,47 +3,99 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Maqaoplusweb</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Maqaoplusweb.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"] - Maqao Plus | Rental Management System</title>
+    <meta name="description" content="Maqao Plus is a comprehensive rental management system that simplifies the collection of rental fees, tracks tenant history, and manages expenses efficiently. Experience seamless property management with Maqao Plus." />
+    <meta name="keywords" content="Maqao Plus, rental management, property management, tenant history, expense management, rental collection, property software" />
+    <meta name="author" content="Maqao Plus" />
+    <meta name="google-adsense-account" content="ca-pub-5600633497493641">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@ViewData["Title"] - Maqao Plus | Rental Management System" />
+    <meta property="og:description" content="Maqao Plus streamlines rental management by simplifying the collection of fees, tracking tenant history, and managing expenses. Improve your property management process with Maqao Plus." />
+    <meta property="og:image" content="https://maqao.uttambsolutions.com/images/maqaopluslogo.png" />
+    <meta property="og:url" content="https://maqao.uttambsolutions.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@ViewData["Title"] - Maqao Plus | Rental Management System" />
+    <meta name="twitter:description" content="Manage your rental properties effortlessly with Maqao Plus. From rental fee collection to tenant history and expense tracking, we've got you covered." />
+    <meta name="twitter:image" content="https://maqao.uttambsolutions.com/images/maqaopluslogo.png" />
+
+    <!-- Schema.org Markup -->
+    <meta itemprop="name" content="@ViewData["Title"] - Maqao Plus | Rental Management System" />
+    <meta itemprop="description" content="Maqao Plus is designed for easy rental management, helping you collect fees, manage tenant history, and track expenses effectively." />
+    <meta itemprop="image" content="https://maqao.uttambsolutions.com/images/maqaopluslogo.png" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link href="~/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5600633497493641"
+            crossorigin="anonymous"></script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-5600633497493641?ers=1" nonce="dDYKvq_VdPZaU6r2X5lJmw"></script>
+    <script nonce="dDYKvq_VdPZaU6r2X5lJmw">(function () { function signalGooglefcPresent() { if (!window.frames['googlefcPresent']) { if (document.body) { const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe); } else { setTimeout(signalGooglefcPresent, 0); } } } signalGooglefcPresent(); })();</script>
+
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+<body class="hold-transition layout-top-nav layout-navbar-fixed">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white bg-custom">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Maqaoplusweb</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                    <img src="~/images/maqaopluslogo.png" alt="Maqao Plus Logo" class="brand-image elevation-3">
+                    <span class="brand-text font-weight-light text-white font-weight-bold fw-bold text-uppercase">Maqao Plus</span>
+                </a>
+
+                <!-- Right navbar links for large screens -->
+                <ul class="nav-item order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                    <li class="nav-item">
+                        <a asp-action="Signin" asp-controller="Account" asp-area="" class="nav-link text-white fw-bold font-weight-bold text-uppercase">SIGNIN</a>
+                    </li>
+                </ul>
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Maqaoplusweb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="content-wrapper">
+            <section class="content">
+                <div class="container-fluid">
+                    <main role="main" class="pb-3 mt-2 pt-2">
+                        @RenderBody()
+                    </main>
+                </div>
+            </section>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    </div>
+    <script src="~/lib/plugins/jquery/jquery.min.js"></script>
+    <script src="~/lib/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/datatables-buttons/js/datatables.buttons.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/lib/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/lib/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z24LLL0113"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-Z24LLL0113');
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
