@@ -1,8 +1,184 @@
-﻿
+﻿@model IEnumerable<DBL.Entities.Systemproperty>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h6 class="font-weight-bold text-sm card-title">Properties</h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <a asp-action="Addproperty" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Propertyid="0" asp-area="" id="CAN_ADD_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Property</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive table-responsive-sm">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <thead>
+                        <tr>
+                            @*  <th>Image</th> *@
+                            <th>House</th>
+                            <th>Rooms</th>
+                            <th>County</th>
+                            <th>Sub County</th>
+                            <th>Ward</th>
+                            <th>Land Mark</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                @*  <td><img src="@Url.Content(item.Primaryimageurl)" height="40" width="40" /></td> *@
+                                <td>@item.Propertyhousename</td>
+                                <td>@item.Roomscount</td>
+                                <td>@item.Countyname</td>
+                                <td>@item.Subcountyname</td>
+                                <td>@item.Subcountywardname</td>
+                                <td class="text-wrap">@item.Streetorlandmark</td>
+                                <td class="text-right">
+                                    <a asp-action="Addproperty" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Propertyid="@item.Propertyhouseid" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                    <a asp-action="Details" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Propertyid="@item.Propertyhouseid" asp-route-Ownerid="0" asp-area="" id="CAN_VIEW_PROPERTY_HOUSE_DETAILS" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Details</a>
+                                </td>
+                            </tr>
+                        }
 
-<h1>Index</h1>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        function toggleOwnerName() {
+            var isChecked = $('#Ispropertyhouseagencyid').prop('checked');
+            var ownerNameSelect = $('#Propertyhouseownerid');
+            if (isChecked) {
+                $('#OwnerNameContainer').css('display', 'block');
+                $('#HouseNameContainer').removeClass('col-sm-10').addClass('col-sm-7');
+                ownerNameSelect.prop('required', true);
+            } else {
+                $('#OwnerNameContainer').css('display', 'none');
+                $('#HouseNameContainer').removeClass('col-sm-7').addClass('col-sm-10');
+                ownerNameSelect.prop('required', false);
+            }
+        }
 
+        // Call toggleOwnerName on page load to set the initial state based on the checkbox value
+        $(document).ready(function () {
+            toggleOwnerName();
+        });
+    </script>
+
+    <script type="text/javascript">
+        function savepropertyhousedata() {
+            document.getElementById("savepropertyhouseid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+
+            // Validate owner if agency is checked
+            if (document.getElementById('Ispropertyhouseagencyid').checked) {
+                if ($("#Propertyhouseownerid").val() === "") {
+                    $("#Propertyhouseownerid").addClass('is-invalid');
+                } else {
+                    $("#Propertyhouseownerid").removeClass('is-invalid').addClass('is-valid');
+                }
+            }
+
+            var Systsempropertyhousesizedata = [];
+            var Systempropertyhousedepositfeedata = [];
+            var Systempropertyhousebenefitata = [];
+
+            // Collect table data
+            $('#AllsystemDataTables2').DataTable().$('tr', { "filter": "applied" }).each(function () {
+                Systsempropertyhousesizedata.push({
+                    Systempropertyhousesizeid: $(this).find('td').eq(0).text(),
+                    Systemhousesizeid: $(this).find('td').eq(1).text(),
+                    Systemhousesizename: $(this).find('.system-house-size-name').val(),
+                    Systempropertyhousesizeunits: $(this).find('.system-property-house-size-unit').val(),
+                    Systempropertyhousesizerent: $(this).find('.system-property-house-size-rent').val(),
+                    Systempropertyhousesizewehave: $(this).find('.system-property-house-size-wehave').prop('checked')
+                });
+            });
+
+            $('#AllsystemDataTables3').DataTable().$('tr', { "filter": "applied" }).each(function () {
+                Systempropertyhousedepositfeedata.push({
+                    Systempropertyhousedepositfeeid: $(this).find('td').eq(0).text(),
+                    Housedepositfeeid: $(this).find('td').eq(1).text(),
+                    Housedepositfeename: $(this).find('.house-deposit-fee-name').val(),
+                    Systempropertyhousedepositfeeamount: $(this).find('.system-property-house-deposit-fee-amount').val(),
+                    Systempropertyhousesizedepositfeewehave: $(this).find('.system-property-house-size-deposit-fee-wehave').prop('checked')
+                });
+            });
+
+            $('#AllsystemDataTables4').DataTable().$('tr', { "filter": "applied" }).each(function () {
+                Systempropertyhousebenefitata.push({
+                    Systempropertyhousebenefitid: $(this).find('td').eq(0).text(),
+                    Housebenefitid: $(this).find('td').eq(1).text(),
+                    Housebenefitname: $(this).find('.house-benefit-name').val(),
+                    Systempropertyhousebenefitwehave: $(this).find('.system-property-house-benefit-wehave').prop('checked')
+                });
+            });
+
+            var Propertyhouseowner, Propertyhouseposter;
+            if (document.getElementById('Ispropertyhouseagencyid').checked) {
+                Propertyhouseowner = $('#Propertyhouseownerid').val();
+                Propertyhouseposter = $('#systemLoggedinedUserid').val();
+            } else {
+                Propertyhouseowner = $('#systemLoggedinedUserid').val();
+                Propertyhouseposter = $('#systemLoggedinedUserid').val();
+            }
+
+            var uil1 = {
+                Propertyhouseid: $('#Propertyhouseid').val(),
+                Isagency: $('#Ispropertyhouseagencyid').prop('checked'),
+                Propertyhouseowner: Propertyhouseowner,
+                Propertyhouseposter: Propertyhouseposter,
+                Propertyhousename: $('#Propertyhousenameid').val(),
+                Propertyhousestatus: $('#Propertyhousestatusid').val(),
+                Countyid: $('#Systemcountyid').val(),
+                Subcountyid: $('#Systemsubcountyid').val(),
+                Subcountywardid: $('#Systemsubcountywardid').val(),
+                Streetorlandmark: $('#Streetorlandmarkid').val(),
+                Contactdetails: $('#Contactdetailsid').val(),
+                Hasagent: $('#Hashousehasagentid').prop('checked'),
+                Vacantnoticeperiod: $('#Vacantnoticeperiodid').prop('checked'),
+                Hashousedeposit: $('#Hashousedepositid').prop('checked'),
+                Watertypeid: $('#Systemhousewatertypeid').val(),
+                Hashousewatermeter: $('#Hashousewatermeterid').val(),
+                Waterunitprice: $('#Waterunitpriceid').val(),
+                Rentdueday: $('#Rentduedayid').val(),
+                Rentdepositmonth: $('#Rentdepositmonthid').val(),
+                Createdby: $('#systemLoggedinedUserid').val(),
+                Modifiedby: $('#systemLoggedinedUserid').val(),
+                Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                Propertyhousesize: Systsempropertyhousesizedata,
+                Propertyhousedepositfee: Systempropertyhousedepositfeedata,
+                Propertyhousebenefit: Systempropertyhousebenefitata
+            };
+
+            $.post("/PropertyHouse/Addsystempropertyhousedata", uil1, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success');
+                    $('#Uttambsolutionsmodallarge').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Property house details not saved", response.RespMessage, "warning");
+                } else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occurred. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savepropertyhouseid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+    </script>
+}
