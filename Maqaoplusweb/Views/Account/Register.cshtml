@@ -239,7 +239,7 @@
                 document.getElementById("processingSpinner").style.display = "none";
                 document.getElementById("buttonText").innerText = "SIGN UP";
                 return;
-            } if ($('#StaffConfirmPasswordid').val() != $('#StaffConfirmPasswordid').val() == '') {
+            } if ($('#StaffConfirmPasswordid').val() != $('#StaffConfirmPasswordid').val()) {
                 Swal.fire("Staff Detail Not Created", 'Password Mismatch', "warning");
                 document.getElementById("savesystemstaffid").disabled = false;
                 document.getElementById("processingSpinner").style.display = "none";
