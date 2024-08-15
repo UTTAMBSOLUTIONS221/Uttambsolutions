@@ -148,7 +148,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <label><input type="checkbox" id="Accepttermsandconditionsid" /> Accept our <a>terms</a> of services and use of the system.</label>
+                    <label class="text-sm font-weight-normal"><input type="checkbox" id="Accepttermsandconditionsid" /> Accept our <a href="#">terms</a> of services and use of the system.</label>
                    
                 </div>
                 <div class="row">
@@ -283,7 +283,7 @@
             $.post("/Account/Addsystemstaffdata", uil, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire("User Detail", "Staff has been added and email sent.", "success");
-                    setTimeout(function () { location.reload(); }, 500);
+                    window.location.href = "/account/Signin";
                 } else {
                     Swal.fire("User Detail Not Created", response.RespMessage, "error");
                 }
