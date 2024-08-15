@@ -1,0 +1,306 @@
+﻿@model DBL.Entities.Systemproperty
+@{
+    var Systemcounty = ViewData["Systemcountylists"] as List<SelectListItem>;
+    var Systemsubcounty = ViewData["Systemsubcountylists"] as List<SelectListItem>;
+    var Systemsubcountyward = ViewData["Systemsubcountywardlists"] as List<SelectListItem>;
+    var Systemhousebenefit = ViewData["Systemhousebenefitslists"] as List<SelectListItem>;
+    var Systemhousedepositfee = ViewData["Systemhousedepositfeeslists"] as List<SelectListItem>;
+    var Systemhousewatertype = ViewData["Systemhousewatertypelists"] as List<SelectListItem>;
+    bool isChecked = false;
+}
+<div class="modal-header">
+    <h5 class="modal-title" id="Uttambsolutionsmodallabel">Properties Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <!-- Section 1: Job Details -->
+    <div id="section1" class="section">
+        <h6 class="mb-3">Step 1: House Details</h6>
+        <input class="form-control form-control-sm" asp-for="Propertyhouseid" id="Propertyhouseid" hidden />
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Agency?</label>
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isagency" id="Ispropertyhouseagencyid" onchange="toggleOwnerName()" />
+                </div>
+            </div>
+            <div class="col-sm-3" id="OwnerNameContainer" style="display: none;">
+                <div class="form-group">
+                    <label class="font-weight-light">Owner Name</label>
+                    <select class="form-control form-control-sm" id="Propertyhouseownerid" asp-for="@Model.Propertyhouseowner" asp-items="@Systemcounty">
+                        <option value="">---Select---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-10" id="HouseNameContainer">
+                <div class="form-group">
+                    <label class="font-weight-light">House Name</label>
+                    <input class="form-control form-control-sm" asp-for="Propertyhousename" id="Propertyhousenameid" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">House Status</label>
+                    <select class="form-control form-control-sm" id="Propertyhousestatusid" asp-for="@Model.Propertyhousestatus" required>
+                        <option value="">---Select---</option>
+                        <option value="0">First Tenants</option>
+                        <option value="1">Second Tenants</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">County</label>
+                    <select class="form-control form-control-sm" id="Systemcountyid" asp-for="@Model.Countyid" asp-items="@Systemcounty" onclick="getsystemcountysubcounty(this.value)" required>
+                        <option value="">---Select---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Sub County</label>
+                    <select class="form-control form-control-sm" id="Systemsubcountyid" asp-for="@Model.Subcountyid" asp-items="@Systemsubcounty" onclick="getsystemsubcountysubcounty(this.value)" required>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="font-weight-light">Town/Ward</label>
+                    <select class="form-control form-control-sm" id="Systemsubcountywardid" asp-for="@Model.Subcountywardid" asp-items="@Systemsubcountyward" required>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Street/Landmark</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Streetorlandmark" placeholder="start with near land mark and next to a landmark" id="Streetorlandmarkid" required />
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Water Type</label>
+                    <select class="form-control form-control-sm" id="Systemhousewatertypeid" asp-items="@Systemhousewatertype" asp-for="@Model.Watertypeid" required>
+                        <option value="">---Select---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Has Meter?</label>
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousewatermeter" id="Hashousewatermeterid" required />
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Water Unit Price</label>
+                    <input class="form-control form-control-sm" type="number" asp-for="@Model.Waterunitprice" id="Waterunitpriceid" required />
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Has Agent?</label>
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hasagent" id="Hashousehasagentid" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Contact Details if vacant</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Contactdetails" id="Contactdetailsid" required />
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Rent Due Day</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdueday" id="Rentduedayid" required>
+                        <option value="">---Select---</option>
+                        @for (int i = 1; i <= 28; i++)
+                        {
+                            string suffix;
+                            switch (i)
+                            {
+                                case 1:
+                                case 21:
+                                case 31:
+                                    suffix = "st";
+                                    break;
+                                case 2:
+                                case 22:
+                                    suffix = "nd";
+                                    break;
+                                case 3:
+                                case 23:
+                                    suffix = "rd";
+                                    break;
+                                default:
+                                    suffix = "th";
+                                    break;
+                            }
+                            <option value="@i">@i@suffix</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Vacating Notice</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.Vacantnoticeperiod" id="Vacantnoticeperiodid" required>
+                        <option value="">---Select---</option>
+                        @for (int i = 0; i <= 6; i++)
+                        {
+                            <option value="@i">@i Month Rent</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Has Deposit?</label>
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousedeposit" id="Hashousedepositid" required />
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Rent Deposit</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth" id="Rentdepositmonthid" required>
+                        <option value="">---Select---</option>
+                        @for (int i = 0; i <= 12; i++)
+                        {
+                            <option value="@i">@i Month Rent</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
+    </div>
+    <!-- Section 2: Key Responsibilities -->
+    <div id="section2" class="section" style="display: none;">
+        <h6 class="mb-4">Step 2: House Rooms and Amount</h6>
+        <div class="col-sm-12 table-responsive">
+            <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="AllsystemDataTables2">
+                <thead>
+                    <tr>
+                        <th hidden>Property room sizeid</th>
+                        <th hidden>Roomsizeid</th>
+                        <th class="font-weight-light fw-light">Room Size</th>
+                        <th class="font-weight-light fw-light">Units</th>
+                        <th class="font-weight-light fw-light">Rent Amount</th>
+                        <th class="font-weight-light fw-light">We have?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Propertyhousesize != null)
+                    {
+                        foreach (var data in Model.Propertyhousesize)
+                        {
+                            <tr>
+                                <td hidden>@data.Systempropertyhousesizeid</td>
+                                <td hidden>@data.Systemhousesizeid</td>
+                                <td><input type="text" class="form-control form-control-sm font-weight-light system-house-size-name" value="@data.Systemhousesizename" readonly /></td>
+                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-size-unit" value="@data.Systempropertyhousesizeunits" required /></td>
+                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-size-rent" value="@data.Systempropertyhousesizerent" required /></td>
+                                <td><input type="checkbox" class="form-control form-control-sm font-weight-light system-property-house-size-wehave" asp-for="@data.Systempropertyhousesizewehave" value="@data.Systempropertyhousesizewehave" /></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-sm btn-secondary" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-sm btn-secondary" onclick="nextSection()">Next</button>
+        </div>
+    </div>
+
+    <!-- Section 3: House Deposits and Fees -->
+    <div id="section3" class="section" style="display: none;">
+        <h6 class="mb-4">Step 3: House Deposits and Fees</h6>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="AllsystemDataTables3">
+                        <thead>
+                            <tr>
+                                <th hidden>Deposit Fee Id</th>
+                                <th hidden>DepositId</th>
+                                <th class="font-weight-light fw-light">Deposit Name</th>
+                                <th class="font-weight-light fw-light">Deposit Amount</th>
+                                <th class="font-weight-light fw-light">We have?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Propertyhousedepositfee != null)
+                            {
+                                foreach (var data in Model.Propertyhousedepositfee)
+                                {
+                                    <tr>
+                                        <td hidden>@data.Systempropertyhousedepositfeeid</td>
+                                        <td hidden>@data.Housedepositfeeid</td>
+                                        <td><input type="text" class="form-control form-control-sm font-weight-light house-deposit-fee-name" value="@data.Housedepositfeename" readonly /></td>
+                                        <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-deposit-fee-amount" value="@data.Systempropertyhousedepositfeeamount" required /></td>
+                                        <td><input type="checkbox" class="form-control form-control-sm font-weight-light system-property-house-size-deposit-fee-wehave" asp-for="@data.Systempropertyhousesizedepositfeewehave" value="@data.Systempropertyhousesizedepositfeewehave" /></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="nextSection()">Next</button>
+        </div>
+    </div>
+
+    <!-- Section 4: House Benefits -->
+    <div id="section4" class="section" style="display: none;">
+        <h6 class="mb-4">Step 4: House Benefits and Services to Enjoy</h6>
+        <input class="form-control form-control-sm" id="Jobfunctionid" hidden />
+        <div class="container">
+            <div class="col-sm-12 table-responsive">
+                <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="AllsystemDataTables4">
+                    <thead>
+                        <tr>
+                            <th hidden>Systempropertyhousebenefitid</th>
+                            <th hidden>Housebenefitid</th>
+                            <th class="font-weight-light fw-light">Benefit Name</th>
+                            <th class="font-weight-light fw-light">We have?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Propertyhousebenefit != null)
+                        {
+                            foreach (var data in Model.Propertyhousebenefit)
+                            {
+                                <tr>
+                                    <td hidden>@data.Systempropertyhousebenefitid</td>
+                                    <td hidden>@data.Housebenefitid</td>
+                                    <td><input type="text" class="form-control form-control-sm font-weight-light house-benefit-name" value="@data.Housebenefitname" readonly /></td>
+                                    <td><input type="checkbox" class="form-control form-control-sm font-weight-light system-property-house-benefit-wehave" asp-for="@data.Systempropertyhousebenefitwehave" value="@data.Systempropertyhousebenefitwehave" /></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-sm btn-info font-weight-bold" id="savepropertyhouseid" onclick="savepropertyhousedata();">
+                <span id="buttonText">Save</span>
+                <span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+            </button>
+        </div>
+    </div>
+</div>
