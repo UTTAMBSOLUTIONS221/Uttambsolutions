@@ -82,16 +82,6 @@
             document.getElementById("savepropertyhouseid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
-
-            // Validate owner if agency is checked
-            if (document.getElementById('Ispropertyhouseagencyid').checked) {
-                if ($("#Propertyhouseownerid").val() === "") {
-                    $("#Propertyhouseownerid").addClass('is-invalid');
-                } else {
-                    $("#Propertyhouseownerid").removeClass('is-invalid').addClass('is-valid');
-                }
-            }
-
             var Systsempropertyhousesizedata = [];
             var Systempropertyhousedepositfeedata = [];
             var Systempropertyhousebenefitata = [];
