@@ -29,7 +29,7 @@
 
         <!-- ScrollView with Grid -->
         <ScrollView IsVisible="{Binding IsDataLoaded}" Grid.Row="1">
-            <Grid Padding="10" RowSpacing="10" ColumnSpacing="10">
+            <Grid Padding="10" RowSpacing="5" ColumnSpacing="10">
                 <Grid.RowDefinitions>
                     <!-- Each row definition for a card -->
                     <RowDefinition Height="Auto" />
@@ -43,7 +43,7 @@
                 <CollectionView ItemsSource="{Binding Items}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Padding="10" Margin="10" HasShadow="True" BorderColor="LightGray" CornerRadius="10" BackgroundColor="White" HeightRequest="200">
+                            <Frame Padding="10" Margin="0,0,0,5" HasShadow="True" BorderColor="LightGray" CornerRadius="10" BackgroundColor="White" HeightRequest="200">
                                 <!-- Tap Gesture Recognizer -->
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}" CommandParameter="{Binding .}" />
