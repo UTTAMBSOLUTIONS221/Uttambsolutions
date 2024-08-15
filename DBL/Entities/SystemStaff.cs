@@ -26,6 +26,7 @@ namespace DBL.Entities
         public bool Isactive { get; set; }
         public bool Isdeleted { get; set; }
         public bool Isdefault { get; set; }
+        public bool Accepttermsandcondition { get; set; }
         public int Loginstatus { get; set; }
         public DateTime? Passwordresetdate { get; set; }
         public int? Parentid { get; set; }

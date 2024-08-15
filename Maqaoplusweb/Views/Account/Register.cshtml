@@ -278,7 +278,7 @@
                 Updateprofile: Updateprofile,
                 Parentid: 0,
                 Passwordresetdate: Passwordresetdate,
-                Vacantnoticeperiod: $('#Accepttermsandconditionsid').prop('checked'),
+                Accepttermsandcondition: $('#Accepttermsandconditionsid').prop('checked'),
             };
             $.post("/Account/Addsystemstaffdata", uil, function (response) {
                 if (response.RespStatus == 0) {
