@@ -252,9 +252,6 @@
             }
             var Updateprofile = true;
             var Loginstatus = 1;
-            let Passwordresetdate = new Date();
-            Passwordresetdate.setDate(Passwordresetdate.getDate() + 90);
-            let formattedDate = Passwordresetdate.toISOString().slice(0, 19).replace('T', ' ');
             if ($('#StaffDesignationid').val() == 'Owner' || $('#StaffDesignationid').val() == 'Agent') {
                 Updateprofile = false;
                 Loginstatus = 0;
@@ -277,7 +274,7 @@
                 Isdefault: false,
                 Updateprofile: Updateprofile,
                 Parentid: 0,
-                Passwordresetdate: Passwordresetdate,
+                Passwordresetdate: new Date().toISOString().slice(0, 19).replace('T', ' '),
                 Accepttermsandcondition: $('#Accepttermsandconditionsid').prop('checked'),
             };
             $.post("/Account/Addsystemstaffdata", uil, function (response) {
