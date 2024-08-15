@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-7">
                             <label>Phone Number</label>
                             <div class="input-group mb-3">
                                 <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number">
@@ -70,6 +70,23 @@
                                 </div>
                             </div>
                             <span asp-validation-for="Phonenumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-5">
+                            <label>Designation</label>
+                            <div class="input-group mb-3">
+                                <select asp-for="Designation" type="tel" class="form-control form-control-sm">
+                                    <option value="">--Select--</option>
+                                    <option value="Owner">Owner</option>
+                                    <option value="Agent">Agent</option>
+                                    <option value="Tenant">Tenant</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Designation" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -118,5 +135,77 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/dist/adminlte.js"></script>
+    <script type="text/javascript">
+        function savesystemstaffdata() {
+            document.getElementById("savesystemstaffid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+
+            if ($('#FirstnameId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Firstname is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#LastnameId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Lastname is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#EmailAddressId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Emailaddress is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#PhonenumberId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Phonenumber is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#StaffRoleId').val() == '' || $('#StaffRoleId').val() == 0) {
+                Swal.fire("Staff Detail Not Created", 'Role is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            var uil = {
+                Userid: $('#UserId').val(),
+                Firstname: $('#FirstnameId').val(),
+                Lastname: $('#LastnameId').val(),
+                Emailaddress: $('#EmailAddressId').val(),
+                Phonenumber: $('#PhonenumberId').val(),
+                Idnumber: $('#IdnumberId').val(),
+                Genderid: $('#Genderid').val(),
+                Maritalstatusid: $('#Maritalstatusid').val(),
+                Roleid: $('#StaffRoleId').val(),
+                Parentid: 0,
+                Updateprofile: true,
+                Createdby: $('#UserId').val(),
+                Modifiedby: $('#UserId').val(),
+                Lastlogin: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' ')
+            };
+            $.post("/Staff/Addsystemstaffdata", uil, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire("Staff Detail", "Staff has been added and email sent.", "success");
+                    setTimeout(function () { location.reload(); }, 500);
+                } else {
+                    Swal.fire("Staff Detail Not Created", response.RespMessage, "error");
+                }
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+    </script>
 </body>
 </html>
