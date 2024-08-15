@@ -20,21 +20,7 @@
         <h6 class="mb-3">Step 1: House Details</h6>
           <input class="form-control form-control-sm" asp-for="Propertyhouseid" id="Propertyhouseid" hidden />
      <div class="row">
-        <div class="col-sm-2">
-            <div class="form-group">
-                <label class="font-weight-light">Agency?</label>
-                <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Isagency" id="Ispropertyhouseagencyid" onchange="toggleOwnerName()" />
-            </div>
-        </div>
-        <div class="col-sm-3" id="OwnerNameContainer" style="display: none;">
-            <div class="form-group">
-                <label class="font-weight-light">Owner Name</label>
-                    <select class="form-control form-control-sm" id="Propertyhouseownerid" asp-for="@Model.Propertyhouseowner" asp-items="@Systemcounty">
-                    <option value="">---Select---</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-10" id="HouseNameContainer">
+        <div class="col-sm-12" id="HouseNameContainer">
             <div class="form-group">
                 <label class="font-weight-light">House Name</label>
                 <input class="form-control form-control-sm" asp-for="Propertyhousename" id="Propertyhousenameid" required />
