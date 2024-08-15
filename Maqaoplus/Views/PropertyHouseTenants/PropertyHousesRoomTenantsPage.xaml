@@ -71,8 +71,8 @@
                                     <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="1">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Property Name: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text="{Binding Propertyhousename}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text="Property Name: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text="{Binding Propertyhousename}" FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
