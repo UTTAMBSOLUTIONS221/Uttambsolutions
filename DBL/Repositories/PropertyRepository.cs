@@ -281,6 +281,7 @@ namespace DBL.Repositories
                         Systempropertyhousesizename = roomResponseJson["Systempropertyhousesizename"]?.ToString(),
                         Isvacant = Convert.ToBoolean(roomResponseJson["Isvacant"]),
                         Isunderrenovation = Convert.ToBoolean(roomResponseJson["Isunderrenovation"]),
+                        Hashousewatermeter = Convert.ToBoolean(roomResponseJson["Hashousewatermeter"]),
                         Isshop = Convert.ToBoolean(roomResponseJson["Isshop"]),
                         Isgroundfloor = Convert.ToBoolean(roomResponseJson["Isgroundfloor"]),
                         Hasbalcony = Convert.ToBoolean(roomResponseJson["Hasbalcony"]),

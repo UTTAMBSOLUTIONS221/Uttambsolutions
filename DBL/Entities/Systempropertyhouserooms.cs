@@ -21,7 +21,6 @@
         public decimal Closingmeter { get; set; }
         public decimal Consumedamount { get; set; }
         public bool Hashousewatermeter { get; set; }
-
         public decimal Waterunitprice { get; set; }
         public long Tenantid { get; set; }
         public int Createdby { get; set; }
