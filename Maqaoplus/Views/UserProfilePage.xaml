@@ -33,11 +33,6 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="10" Spacing="3">
-            <!-- Profile Picture -->
-            <Frame HorizontalOptions="Center" Margin="20">
-                <Image Source="user.png" WidthRequest="100" HeightRequest="100" Aspect="AspectFill"/>
-            </Frame>
-
             <!-- User Info -->
             <Grid ColumnSpacing="10" RowSpacing="10">
                 <Grid.ColumnDefinitions>
@@ -102,7 +97,7 @@
                 <StackLayout Grid.Column="0" Grid.Row="3">
                     <Label Text="Gender" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                     <Frame>
-                        <Picker ItemsSource="{Binding Systemgender}" SelectedItem="{Binding Selectedstaffgender}" ItemDisplayBinding="{Binding Text}" Title="Select gender" TextColor="Black" FontSize="14"/>
+                        <Picker ItemsSource="{Binding Systemgender}" SelectedItem="{Binding Selectedstaffgender}" ItemDisplayBinding="{Binding Text}" Title="Select gender" TextColor="Black" FontSize="17"/>
                     </Frame>
                 </StackLayout>
 
@@ -110,7 +105,7 @@
                 <StackLayout Grid.Column="1" Grid.Row="3">
                     <Label Text="Marital Status" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                     <Frame>
-                        <Picker ItemsSource="{Binding Systemmaritalstatus}" SelectedItem="{Binding Selectedstaffmaritalstatus}" ItemDisplayBinding="{Binding Text}" Title="Select marital status" TextColor="Black" FontSize="14"/>
+                        <Picker ItemsSource="{Binding Systemmaritalstatus}" SelectedItem="{Binding Selectedstaffmaritalstatus}" ItemDisplayBinding="{Binding Text}" Title="Select marital status" TextColor="Black" FontSize="17"/>
                     </Frame>
                 </StackLayout>
 
@@ -123,7 +118,7 @@
                         <StackLayout>
                             <Label Text="Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                             <Frame>
-                                <Entry Text="{Binding StaffData.Kinname}" Placeholder="Enter kin name" PlaceholderColor="#0a506c" FontSize="14"/>
+                                <Entry Text="{Binding StaffData.Kinname}" Placeholder="Enter kin name" PlaceholderColor="#0a506c"/>
                             </Frame>
                         </StackLayout>
 
@@ -138,7 +133,7 @@
                             <StackLayout Grid.Column="0">
                                 <Label Text="Phone" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                                 <Frame>
-                                    <Entry Text="{Binding StaffData.Kinphonenumber}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c" FontSize="14"/>
+                                    <Entry Text="{Binding StaffData.Kinphonenumber}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c"/>
                                 </Frame>
                             </StackLayout>
 
@@ -146,7 +141,7 @@
                             <StackLayout  Grid.Column="1">
                                 <Label Text="Relationship" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                                 <Frame>
-                                    <Picker ItemsSource="{Binding Systemkinrelationship}" SelectedItem="{Binding Selectedstaffkinrelationship}" ItemDisplayBinding="{Binding Text}" Title="Select relationship" TextColor="#0a506c" FontSize="14"/>
+                                    <Picker ItemsSource="{Binding Systemkinrelationship}" SelectedItem="{Binding Selectedstaffkinrelationship}" ItemDisplayBinding="{Binding Text}" Title="Select relationship" TextColor="#0a506c" FontSize="17"/>
                                 </Frame>
                             </StackLayout>
                         </Grid>
