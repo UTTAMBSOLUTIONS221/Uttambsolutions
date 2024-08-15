@@ -2,6 +2,7 @@
 using Maqaoplus.Views;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
+using Maqaoplus.Views.PropertyHouseTenants;
 using Maqaoplus.Views.Reports;
 
 namespace Maqaoplus.Constants
