@@ -18,7 +18,7 @@
         </VerticalStackLayout>
 
         <!-- Main Content Layer -->
-        <VerticalStackLayout Grid.Row="1" Spacing="0" HorizontalOptions="CenterAndExpand" Margin="0,4,0,0" VerticalOptions="CenterAndExpand" MaximumWidthRequest="380">
+        <VerticalStackLayout Grid.Row="1" Spacing="0" HorizontalOptions="CenterAndExpand" Margin="0,4,0,0" VerticalOptions="CenterAndExpand" MaximumWidthRequest="378">
             <!-- Reduced WidthRequest -->
             <Grid ColumnSpacing="8" RowSpacing="0">
                 <!-- Define two equal-width columns -->
@@ -53,16 +53,18 @@
                 </StackLayout>
             </Grid>
 
-            <!-- Email Address Entry with Frame and Image -->
-            <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="0" HasShadow="True" Margin="0,4,0,0">
-                <!-- Removed padding and reduced margin -->
-                <HorizontalStackLayout Spacing="3">
-                    <Image Source="email.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
-                    <Entry Placeholder="Email Address" Text="{Binding EmailAddress}" Keyboard="Email" FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" WidthRequest="320"/>
-                    <!-- Reduced WidthRequest -->
-                </HorizontalStackLayout>
-            </Frame>
-            <Label Text="{Binding SystemStaffEmailAddressError}" TextColor="Red" Padding="0"/>
+            <StackLayout Grid.Column="0">
+                <Label Text="Emailaddress" FontAttributes="Bold" FontSize="17" Margin="0,0,0,4" TextColor="#0a506c"/>
+                <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="0" HasShadow="True" Margin="0,4,0,0">
+                    <!-- Removed padding and reduced margin -->
+                    <HorizontalStackLayout Spacing="3">
+                        <Image Source="email.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
+                        <Entry Placeholder="Email Address" Text="{Binding EmailAddress}" Keyboard="Email" FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" WidthRequest="320"/>
+                        <!-- Reduced WidthRequest -->
+                    </HorizontalStackLayout>
+                </Frame>
+                <Label Text="{Binding SystemStaffEmailAddressError}" TextColor="Red" Padding="0"/>
+            </StackLayout>
 
 
             <Grid ColumnSpacing="8" RowSpacing="0">
