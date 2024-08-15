@@ -15,6 +15,7 @@ namespace Maqaoplus.ViewModels.Startup
         private string _lastName;
         private string _emailAddress;
         private string _phoneNumber;
+        private string _staffDesignation;
         private string _password;
         private string _confirmPassword;
         private bool _isProcessing;
@@ -49,6 +50,10 @@ namespace Maqaoplus.ViewModels.Startup
             set
             {
                 _selectedStaffdesignation = value;
+                if (value != null)
+                {
+                    StaffDesignation = value.Value?.ToString();
+                }
                 OnPropertyChanged();
             }
         }
@@ -96,6 +101,16 @@ namespace Maqaoplus.ViewModels.Startup
             set
             {
                 _phoneNumber = value;
+                OnPropertyChanged();
+                ((Command)SignUpCommand).ChangeCanExecute();
+            }
+        }
+        public string StaffDesignation
+        {
+            get => _staffDesignation;
+            set
+            {
+                _staffDesignation = value;
                 OnPropertyChanged();
                 ((Command)SignUpCommand).ChangeCanExecute();
             }
@@ -157,6 +172,7 @@ namespace Maqaoplus.ViewModels.Startup
                     Lastname = LastName,
                     Emailaddress = EmailAddress,
                     Phonenumber = PhoneNumber,
+                    Designation = StaffDesignation,
                     Passwords = Password,
                     Confirmpasswords = ConfirmPassword,
                     Datecreated = DateTime.Now,

@@ -10,6 +10,7 @@ namespace DBL.Entities
         public string? Fullname { get; set; }
         [DataType(DataType.PhoneNumber)]
         public string? Phonenumber { get; set; }
+        public string? Designation { get; set; }
         public string? Username { get; set; }
         [DataType(DataType.EmailAddress)]
         public string? Emailaddress { get; set; }
