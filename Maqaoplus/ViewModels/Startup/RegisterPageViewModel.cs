@@ -1,5 +1,7 @@
 ﻿using DBL.Entities;
+using DBL.Models;
 using Maqaoplus.Views.Startup;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -19,10 +21,36 @@ namespace Maqaoplus.ViewModels.Startup
 
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
+        private ObservableCollection<ListModel> _systemstaffdesignation;
 
         public RegisterPageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            Systemstaffdesignation = new ObservableCollection<ListModel>
+            {
+                new ListModel { Value = "Owner", Text = "Owner" },
+                new ListModel { Value = "Agent", Text = "Agent" },
+                new ListModel { Value = "Tenant", Text = "Tenant" },
+            };
+        }
+        public ObservableCollection<ListModel> Systemstaffdesignation
+        {
+            get => _systemstaffdesignation;
+            set
+            {
+                _systemstaffdesignation = value;
+                OnPropertyChanged();
+            }
+        }
+        private ListModel _selectedStaffdesignation;
+        public ListModel SelectedStaffdesignation
+        {
+            get => _selectedStaffdesignation;
+            set
+            {
+                _selectedStaffdesignation = value;
+                OnPropertyChanged();
+            }
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -227,6 +255,16 @@ namespace Maqaoplus.ViewModels.Startup
                 OnPropertyChanged();
             }
         }
+        private string _systemStaffDesignationError;
+        public string SystemStaffDesignationError
+        {
+            get => _systemStaffDesignationError;
+            set
+            {
+                _systemStaffDesignationError = value;
+                OnPropertyChanged();
+            }
+        }
 
         private bool IsValidInput()
         {
@@ -285,6 +323,15 @@ namespace Maqaoplus.ViewModels.Startup
             else
             {
                 SystemStaffConfirmPasswordError = null;
+            }
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                SystemStaffDesignationError = "Designation required!.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffDesignationError = null;
             }
 
             return isValid;

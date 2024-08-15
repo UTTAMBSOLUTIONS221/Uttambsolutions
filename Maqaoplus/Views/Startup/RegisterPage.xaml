@@ -87,12 +87,14 @@
                 </StackLayout>
 
                 <StackLayout Grid.Column="1">
-                    <Label Text="Lastname" FontAttributes="Bold" FontSize="17" Margin="0,0,0,0" TextColor="#0a506c"/>
+                    <Label Text="Designation" FontAttributes="Bold" FontSize="17" Margin="0,0,0,0" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="0" HasShadow="True">
                         <!-- Removed padding -->
                         <HorizontalStackLayout Spacing="3">
                             <Image Source="user.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
-                            <Entry Placeholder="Last Name" ReturnType="Next" Text="{Binding LastName}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="160"/>
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                                <Picker ItemsSource="{Binding Systemstaffdesignation}" SelectedItem="{Binding SelectedStaffdesignation}" ItemDisplayBinding="{Binding Text}" Title="Select House Entry Status" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                            </Frame>
                             <!-- Reduced WidthRequest -->
                         </HorizontalStackLayout>
                     </Frame>
