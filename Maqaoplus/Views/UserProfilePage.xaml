@@ -35,7 +35,7 @@
         <VerticalStackLayout Padding="10" Spacing="3">
             <!-- Profile Picture -->
             <Frame HorizontalOptions="Center" Margin="20">
-                <Image Source="profile_placeholder.png" WidthRequest="120" HeightRequest="120" Aspect="AspectFill"/>
+                <Image Source="user.png" WidthRequest="100" HeightRequest="100" Aspect="AspectFill"/>
             </Frame>
 
             <!-- User Info -->
