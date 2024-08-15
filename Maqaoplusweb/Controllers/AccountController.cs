@@ -32,7 +32,7 @@ namespace Maqaoplusweb.Controllers
         [AllowAnonymous]
         public async Task<JsonResult> Addsystemstaffdata(SystemStaff model)
         {
-            var resp = await bl.Registersystemportalstaffdata(model);
+            var resp = await bl.Registersystemstaffdata(model);
             return Json(resp);
         }
 
