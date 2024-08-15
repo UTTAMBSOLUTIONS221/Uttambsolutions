@@ -10,7 +10,43 @@
     <title>MAQAO PLUS | SIGNUP</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-toggle/css/bootstrap2-toggle.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link href="~/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <style type="text/css">
+        textarea {
+            resize: none;
+        }
+        /* Hide spinner arrows for number inputs */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield; /* Firefox */
+        }
+
+        .no-wrap-buttons {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 5px; /* Adjust the gap as needed */
+        }
+
+            .no-wrap-buttons a {
+                white-space: nowrap;
+            }
+
+    </style>
 </head>
 <body class="hold-transition login-page">
     <div class="login-box">
@@ -123,7 +159,7 @@
                         <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder btn-block text-uppercase">cancel</a>
                     </div>
                     <div class="col-6">
-                        <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemstaffid" onclick="savesystemstaffdata();">
+                        <button class="btn btn-sm btn-info btn-block font-weight-bold" type="button" id="savesystemstaffid" onclick="savesystemstaffdata();">
                             <span id="buttonText">SIGN UP</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
                         </button>
                     </div>
@@ -136,9 +172,12 @@
             </div>
         </div>
     </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/dist/adminlte.js"></script>
+
+    <script src="~/lib/plugins/jquery/jquery.min.js"></script>
+    <script src="~/lib/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/bootstrap-toggle/js/bootstrap2-toggle.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script type="text/javascript">
         function savesystemstaffdata() {
             document.getElementById("savesystemstaffid").disabled = true;
@@ -207,23 +246,34 @@
                 document.getElementById("buttonText").innerText = "SIGN UP";
                 return;
             }
+            var Updateprofile = true;
+            var Loginstatus = 1;
+            let Passwordresetdate = new Date();
+            Passwordresetdate.setDate(Passwordresetdate.getDate() + 90);
+            let formattedDate = Passwordresetdate.toISOString().slice(0, 19).replace('T', ' ');
+            if ($('#StaffDesignationid').val() == 'Owner' || $('#StaffDesignationid').val() == 'Agent') {
+                Updateprofile = false;
+                Loginstatus = 0;
+            }
             var uil = {
                 Userid: $('#UserId').val(),
                 Firstname: $('#FirstnameId').val(),
                 Lastname: $('#LastnameId').val(),
                 Emailaddress: $('#EmailAddressId').val(),
                 Phonenumber: $('#PhonenumberId').val(),
-                Idnumber: $('#IdnumberId').val(),
-                Genderid: $('#Genderid').val(),
-                Maritalstatusid: $('#Maritalstatusid').val(),
-                Roleid: $('#StaffRoleId').val(),
-                Parentid: 0,
-                Updateprofile: true,
-                Createdby: $('#UserId').val(),
-                Modifiedby: $('#UserId').val(),
-                Lastlogin: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Designation: $('#StaffDesignationid').val(),
+                Passwords: $('#StaffPasswordid').val(),
+                Confirmpasswords: $('#StaffConfirmPasswordid').val(),
                 Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
-                Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' ')
+                Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Lastlogin: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Loginstatus = Loginstatus,
+                Isactive = true,
+                Isdeleted = false,
+                Isdefault = false,
+                Updateprofile = Updateprofile,
+                Parentid = 0,
+                Passwordresetdate: Passwordresetdate,
             };
             $.post("/Account/Addsystemstaffdata", uil, function (response) {
                 if (response.RespStatus == 0) {
