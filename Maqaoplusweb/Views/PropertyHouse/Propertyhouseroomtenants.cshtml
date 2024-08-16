@@ -20,7 +20,7 @@
                             <th>House</th>
                             <th>Tenant</th>
                             <th>Room</th>
-                            <th>Is Occupant</th>
+                            <th>Occupant</th>
                             <th>Status</th>
                             <th>Balance</th>
                             <th>Tenant From</th>
@@ -37,7 +37,7 @@
                                 <tr>
                                     <td>@item.Propertyhousename</td>
                                     <td>@item.Tenantname</td>
-                                    <td>@item.Systempropertyhousesizename</td>
+                                    <td class="text-wrap">@item.Systempropertyhousesizename</td>
                                     <td>
                                         @if (item.Isoccupant)
                                         {
@@ -63,7 +63,7 @@
                                     </td>
                                     <td>@item.Datecreated.ToString("yyyy-MM-dd")</td>
                                       <td class="text-right">
-                                        <a asp-action="Addpropertyhouseroom" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Houseroomid="@item.Systempropertyhousetenantid" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Manage</a>
+                                        <a asp-action="Tenantdetails" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Propertytenantid="@item.Systempropertyhousetenantid" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Manage</a>
                                     </td>
                                 </tr>
                             }

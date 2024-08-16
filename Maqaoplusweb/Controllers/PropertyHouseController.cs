@@ -175,6 +175,14 @@ namespace Maqaoplusweb.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Tenantdetails(long Propertytenantid)
+        {
+            var data = await bl.Getsystempropertyhousetenantdatabytenantid(Propertytenantid);
+            return PartialView(data);
+        }
+
+
+        [HttpGet]
         public async Task<IActionResult> Confirmhouseroompayment(long Houseroomid, long Houseroomtenantid)
         {
             ViewData["Systempaymentmodelists"] = bl.GetListModel(ListModelType.Systemcashpaymentmodetype).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
