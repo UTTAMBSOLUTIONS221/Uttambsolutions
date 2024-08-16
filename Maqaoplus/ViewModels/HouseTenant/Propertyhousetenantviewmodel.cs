@@ -1,4 +1,5 @@
 ﻿using DBL.Models;
+using Maqaoplus.Views.PropertyHouseTenants.Modal;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -84,7 +85,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
         private async Task NeedtoVacatethisHouseAsync()
         {
             IsProcessing = true;
-            var modalPage = new HousesRoomDetailModalPage(this);
+            var modalPage = new TenantVacationNoticeModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

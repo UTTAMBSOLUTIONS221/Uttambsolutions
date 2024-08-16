@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maqaoplus.Views.PropertyHouseTenants.Modal.TenantVacationNoticeModalPage"
+               BackgroundColor="White" 
+             Padding="16">
+    <VerticalStackLayout Spacing="16">
+        <!-- Step 1 -->
+        <StackLayout IsVisible="{Binding IsStep1Visible}" Padding="4,8" Spacing="8">
+            <!-- Header -->
+            <Label Text="Step 1: Basic Room Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <!-- Hidden Field for Systempropertyhouseroomid -->
+            <Entry IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
+
+            <Grid ColumnSpacing="8" RowSpacing="0">
+                <!-- Define two equal-width columns -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Kitchen Type Section -->
+                <StackLayout Grid.Column="0">
+                    <!-- Kitchen Type Label -->
+                    <Label Text="Kitchen Type" FontAttributes="Bold" FontSize="16" Margin="0,0,0,4"/>
+
+                    <!-- Kitchen Type Picker (Styled like an Input Box) -->
+                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                        <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding SelectedKitchentype, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Kitchen Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                    </Frame>
+                    <Label Text="{Binding PropertyHouseKitchenTypeError}" TextColor="Red" />
+                </StackLayout>
+
+                <!-- House Room Size Section -->
+                <StackLayout Grid.Column="1">
+                    <!-- House Room Size Label -->
+                    <Label Text="House Room Size" FontAttributes="Bold" FontSize="16" Margin="0,0,0,4"/>
+
+                    <!-- House Room Size Picker (Styled like an Input Box) -->
+                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                        <Picker ItemsSource="{Binding Systempropertyhousesize}" SelectedItem="{Binding SelectedPropertyhousesize, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Size" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+                    </Frame>
+                    <Label Text="{Binding PropertyHouseSizeError}" TextColor="Red" />
+                </StackLayout>
+            </Grid>
+
+            <!-- House Room # Label -->
+            <Label Text="House Room #" FontAttributes="Bold" FontSize="16" Margin="0,0,0,4"/>
+            <!-- House Room # Entry (Styled like an Input Box) -->
+            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0">
+                <Entry Text="{Binding HouseroomData.Systempropertyhousesizename, Mode=TwoWay}" Placeholder="Enter house room number" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0,0,0"/>
+            </Frame>
+            <Label Text="{Binding PropertyHouseRoomNumberError}" TextColor="Red" />
+            <Grid ColumnSpacing="8" RowSpacing="12">
+                <!-- Define two equal-width columns -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- First Row -->
+                <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="8" HorizontalOptions="Start">
+                    <CheckBox IsChecked="{Binding HouseroomData.Forcaretaker, Mode=TwoWay}" />
+                    <Label Text="For Caretaker/Owner?" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="8" HorizontalOptions="Center">
+                    <CheckBox IsChecked="{Binding HouseroomData.Isshop, Mode=TwoWay}" />
+                    <Label Text="Is Shop?" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Grid>
+            <Grid ColumnSpacing="8" RowSpacing="12">
+                <!-- Define two equal-width columns -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Second Row -->
+                <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Spacing="8" HorizontalOptions="Start">
+                    <CheckBox IsChecked="{Binding HouseroomData.Isgroundfloor, Mode=TwoWay}" />
+                    <Label Text="Ground Floor?" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8" HorizontalOptions="Center">
+                    <CheckBox IsChecked="{Binding HouseroomData.Hasbalcony, Mode=TwoWay}" />
+                    <Label Text="Has Balcony?" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Grid>
+            <Grid ColumnSpacing="8" RowSpacing="12">
+                <!-- Define two equal-width columns -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Third Row -->
+                <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="8" HorizontalOptions="Start">
+                    <CheckBox IsChecked="{Binding HouseroomData.Isunderrenovation}" />
+                    <Label Text="Under Renovation?" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Grid>
+            <!-- Navigation Button -->
+            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
+                <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="150" />
+                <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50"  WidthRequest="150"/>
+            </FlexLayout>
+        </StackLayout>
+
+        <!-- Step 2 -->
+        <StackLayout IsVisible="{Binding IsStep2Visible}" Padding="16" Spacing="16">
+            <!-- Header -->
+            <Label Text="Step 2: Room Water Meter Reading" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <!-- Display a Grid for Adding New Meter Readings -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Header Row -->
+                <Label Grid.Row="0" Grid.Column="0" Text="Meter" FontAttributes="Bold" />
+                <Label Grid.Row="0" Grid.Column="1" Text="Opening" FontAttributes="Bold" />
+                <Label Grid.Row="0" Grid.Column="2" Text="Closing" FontAttributes="Bold" />
+                <Label Grid.Row="0" Grid.Column="3" Text="Units" FontAttributes="Bold" />
+                <Label Grid.Row="0" Grid.Column="4" Text="Amount" FontAttributes="Bold" />
+
+                <!-- New Reading Input Row -->
+                <Entry Grid.Row="1" Grid.Column="0" Placeholder="Enter Meter Number" Text="{Binding HouseroomData.Systempropertyhouseroommeternumber}" />
+                <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Opening Meter" Text="{Binding HouseroomData.Openingmeter, Mode=TwoWay}" IsReadOnly="{Binding HouseroomData.Hasprevious}" />
+                <Entry Grid.Row="1" Grid.Column="2" Placeholder="Enter Closing Meter" Text="{Binding ClosingMeter}" />
+                <Entry Grid.Row="1" Grid.Column="3" Placeholder="Moved Meter" Text="{Binding MovedMeter}" IsReadOnly="True" />
+                <Entry Grid.Row="1" Grid.Column="4" Placeholder="Consumed Amount" Text="{Binding ConsumedAmount}" IsReadOnly="True" />
+            </Grid>
+            <Label Text="{Binding PropertyHouseRoomClosingMeterError}" TextColor="Red" />
+            <!-- Section Header for All System Data -->
+            <Label Text="Previos Meter Data" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
+
+            <!-- CollectionView for Meter Readings -->
+            <CollectionView ItemsSource="{Binding HouseroomData.Meterhistorydata}" IsVisible="{Binding IsMeterReadingsVisible}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="{Binding MeterNumber}" />
+                            <Label Grid.Column="1" Text="{Binding OpeningMeter}" />
+                            <Label Grid.Column="2" Text="{Binding ClosingMeter}" />
+                            <Label Grid.Column="3" Text="{Binding MovedMeter}" />
+                            <Label Grid.Column="4" Text="{Binding ConsumedAmount}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Navigation Buttons at Start and End -->
+            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
+                <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                <!-- Adjusted WidthRequest -->
+                <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                <!-- Adjusted WidthRequest -->
+            </FlexLayout>
+        </StackLayout>
+
+        <!-- Step 3 -->
+        <StackLayout IsVisible="{Binding IsStep3Visible}" Padding="16" Spacing="16">
+            <!-- Section Header for Tenant Details -->
+            <Label Text="Tenant Details" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
+
+            <!-- Search Input -->
+            <Entry x:Name="SearchIdEntry" Placeholder="Enter tenant ID number to search" Keyboard="Numeric" PlaceholderColor="#0a506c" TextColor="#0a506c" FontSize="18" Text="{Binding SearchId, Mode=TwoWay}" ClearButtonVisibility="WhileEditing"/>
+            <!-- Search Button -->
+            <Button Text="Search" Command="{Binding SearchCommand}" FontSize="18" />
+
+            <!-- Search Results -->
+            <ScrollView Grid.Row="0">
+                <Grid Padding="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Tenant Information Frame -->
+                    <Frame Grid.Row="0" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
+                        <StackLayout Padding="10">
+                            <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                <Label Text="New Tenant Details" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="20" Margin="0,0,0,10"/>
+                                <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                            <StackLayout Padding="0" Spacing="8">
+                                <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Text="Name: " FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                    <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Spacing="5" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding NewTenantStaffData.Fullname}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                    </StackLayout>
+                                    <Label Text="Phone: " FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                    <Label Text="{Binding NewTenantStaffData.Phonenumber}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                    <Label Text="Idnumber: " FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                    <Label Text="{Binding NewTenantStaffData.Idnumber}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+            </ScrollView>
+            <Label Text="{Binding PropertyHouseRoomTenantidError}" TextColor="Red" />
+            <!-- Navigation Buttons -->
+            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
+                <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12"  CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                <Button Text="Finish" Command="{Binding OnOkClickedCommand}"  BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" WidthRequest="150" />
+            </FlexLayout>
+        </StackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>
