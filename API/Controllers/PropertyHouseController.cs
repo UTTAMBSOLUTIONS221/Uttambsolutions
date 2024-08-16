@@ -45,10 +45,10 @@ namespace API.Controllers
             return await bl.Registersystempropertyhousedata(JsonConvert.SerializeObject(model));
         }
         [AllowAnonymous]
-        [HttpGet("Getsystempropertyhouseroomtenantsdata/{OwnerId}/{PosterId}")]
-        public async Task<PropertyHouseTenantData> Getsystempropertyhouseroomtenantsdata(long OwnerId, long PosterId)
+        [HttpGet("Getsystempropertyhouseroomtenantsdata/{OwnerId}")]
+        public async Task<PropertyHouseTenantData> Getsystempropertyhouseroomtenantsdata(long OwnerId)
         {
-            return await bl.Getsystempropertyhouseroomtenantsdata(OwnerId, PosterId);
+            return await bl.Getsystempropertyhouseroomtenantsdata(OwnerId);
         }
 
         [AllowAnonymous]
