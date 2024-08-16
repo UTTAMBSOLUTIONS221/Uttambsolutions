@@ -73,7 +73,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
         {
             IsProcessing = true;
             IsDataLoaded = false;
-
+            TenantData.Tenantroomdata.Isvisible = false;
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
@@ -81,6 +81,10 @@ namespace Maqaoplus.ViewModels.HouseTenant
                 {
                     TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
                     TenantData.Tenantroomdata.Expectedvacatingdate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
+                    if (TenantData.Tenantroomdata.Occupationalstatus == "Tenant")
+                    {
+                        TenantData.Tenantroomdata.Isvisible = true;
+                    }
                 }
                 IsDataLoaded = true;
             }
