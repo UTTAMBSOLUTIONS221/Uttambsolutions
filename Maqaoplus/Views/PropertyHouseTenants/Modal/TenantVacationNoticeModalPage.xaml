@@ -87,7 +87,7 @@
                                 <StackLayout Orientation="Horizontal" Spacing="10">
                                     <Label Text="Planned Vacating Date:" FontSize="16" FontAttributes="Bold"/>
                                     <DatePicker Date="{Binding TenantData.Tenantroomdata.Plannedvacatingdate}" Format="MM/dd/yyyy" FontSize="16" WidthRequest="180" TextColor="Black"/>
-                                    <Label Text="{Binding PropertyHouseNameError}" TextColor="Red" />
+                                    <Label Text="{Binding PropertyHousePlannedVacatingDateError}" TextColor="Red" />
                                 </StackLayout>
                                 <StackLayout>
                                     <!-- House Room # Label -->

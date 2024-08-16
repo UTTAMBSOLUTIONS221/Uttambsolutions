@@ -68,17 +68,6 @@ namespace Maqaoplus.ViewModels.HouseTenant
             OnCancelClickedCommand = new Command(OnCancelClicked);
             OnOkClickedCommand = new Command(async () => await SubmitVacatingRequestAsync());
         }
-        // Error properties
-        private DateTime _expectedVacatingDate;
-        public DateTime ExpectedVacatingDate
-        {
-            get => _expectedVacatingDate;
-            set
-            {
-                _expectedVacatingDate = value;
-                OnPropertyChanged();
-            }
-        }
         private async Task LoadItems()
         {
             IsProcessing = true;
@@ -117,9 +106,29 @@ namespace Maqaoplus.ViewModels.HouseTenant
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
+        private string _propertyHousePlannedVacatingDateError;
+        public string PropertyHousePlannedVacatingDateError
+        {
+            get => _propertyHousePlannedVacatingDateError;
+            set
+            {
+                _propertyHousePlannedVacatingDateError = value;
+                OnPropertyChanged();
+            }
+        }
         private async Task SubmitVacatingRequestAsync()
         {
             IsProcessing = true;
+            if (!ValidateData())
+            {
+                IsProcessing = false;
+                return;
+            }
+            if (TenantData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
             var tenantVacatingRequest = TenantData;
             try
             {
@@ -147,6 +156,25 @@ namespace Maqaoplus.ViewModels.HouseTenant
             {
                 IsProcessing = false;
             }
+        }
+        private bool ValidateData()
+        {
+            bool isValid = true;
+            // Validate Planned Vacating Date
+            if (TenantData.Tenantroomdata.Plannedvacatingdate == null || TenantData.Tenantroomdata.Plannedvacatingdate == DateTime.MinValue)
+            {
+                PropertyHousePlannedVacatingDateError = "Planned Vacating Date is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHousePlannedVacatingDateError = null;
+            }
+
+            // Update overall IsValid property
+            IsProcessing = isValid;
+
+            return isValid;
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
