@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="row text-nowrap">
-        <table class="table">
+        <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap">
             <thead>
                 <tr>
                     <th class="text-sm font-weight-light fw-light">Name: @Model.Data.Fullname</th>
@@ -24,11 +24,11 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>House: @Model.Data.Tenantroomdata.Propertyhousename</td>
-                    <td>Room: @Model.Data.Tenantroomdata.Systempropertyhousesizename</td>
-                    <td>Status: @Model.Data.Tenantroomdata.Houseoccupationstatus</td>
-                    <td>Rent: @Model.Data.Tenantroomdata.Systempropertyhousesizerent.ToString("#,##0.00")</td>
-                    <td>Water Price: @Model.Data.Tenantroomdata.Waterunitprice</td>
+                    <td class="text-sm font-weight-light fw-light">House: @Model.Data.Tenantroomdata.Propertyhousename</td>
+                    <td class="text-sm font-weight-light fw-light">Room: @Model.Data.Tenantroomdata.Systempropertyhousesizename</td>
+                    <td class="text-sm font-weight-light fw-light">Status: @Model.Data.Tenantroomdata.Houseoccupationstatus</td>
+                    <td class="text-sm font-weight-light fw-light">Rent: @Model.Data.Tenantroomdata.Systempropertyhousesizerent.ToString("#,##0.00")</td>
+                    <td class="text-sm font-weight-light fw-light">Water Price: @Model.Data.Tenantroomdata.Waterunitprice</td>
                 </tr>
             </tbody>
         </table>
@@ -56,12 +56,12 @@
                                 {
                                     foreach (var item in Model.Data.Tenantroomhistory)
                                     {
-                                        <td>@item.Propertyhousename</td>
-                                        <td>@item.Propertyownername</td>
-                                        <td class="text-wrap wrap">@item.Systempropertyhousesizename</td>
-                                        <td class="text-wrap wrap">@item.Countyname</td>
-                                        <td class="text-wrap wrap">@item.Streetorlandmark</td>
-                                        <td>@item.Outstandingbalance</td>
+                                        <td class="text-sm font-weight-light fw-light">@item.Propertyhousename</td>
+                                        <td class="text-sm font-weight-light fw-light">@item.Propertyownername</td>
+                                        <td class="text-sm font-weight-light fw-light text-wrap wrap">@item.Systempropertyhousesizename</td>
+                                        <td class="text-sm font-weight-light fw-light text-wrap wrap">@item.Countyname</td>
+                                        <td class="text-sm font-weight-light fw-light text-wrap wrap">@item.Streetorlandmark</td>
+                                        <td class="text-sm font-weight-light fw-light">@item.Outstandingbalance</td>
                                     }
                                 }
                             </tr>
@@ -90,12 +90,12 @@
                                 {
                                     foreach (var item in Model.Data.Tenantroomdata.Tenantroommeter)
                                     {
-                                        <td>@item.Systempropertyhouseroommeternumber</td>
-                                        <td>@item.Openingmeter</td>
-                                        <td>@item.Closingmeter</td>
-                                        <td>@item.Movedmeter</td>
-                                        <td>@item.Consumedamount</td>
-                                        <td>@item.Datecreated.ToString("MMMM")</td>
+                                        <td class="text-sm font-weight-light fw-light">@item.Systempropertyhouseroommeternumber</td>
+                                        <td class="text-sm font-weight-light fw-light">@item.Openingmeter</td>
+                                        <td class="text-sm font-weight-light fw-light">@item.Closingmeter</td>
+                                        <td class="text-sm font-weight-light fw-light">@item.Movedmeter</td>
+                                        <td class="text-sm font-weight-light fw-light">@item.Consumedamount</td>
+                                        <td class="text-sm font-weight-light fw-light">@item.Datecreated.ToString("MMMM")</td>
 
                                     }
                                 }
