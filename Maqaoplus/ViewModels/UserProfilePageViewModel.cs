@@ -25,6 +25,7 @@ namespace Maqaoplus.ViewModels
         public ICommand UpdateCurrentUserDetailsCommand { get; }
         public ICommand SubmitCurrentUserDetailsCommand { get; }
         private bool _isProcessing;
+        private bool _isSubmitProcessing;
 
         public SystemStaff StaffData
         {
@@ -65,6 +66,16 @@ namespace Maqaoplus.ViewModels
                 _isProcessing = value;
                 OnPropertyChanged();
                 ((Command)UpdateCurrentUserDetailsCommand).ChangeCanExecute();
+            }
+        }
+        public bool IsSubmitProcessing
+        {
+            get => _isSubmitProcessing;
+            set
+            {
+                _isSubmitProcessing = value;
+                OnPropertyChanged();
+                ((Command)SubmitCurrentUserDetailsCommand).ChangeCanExecute();
             }
         }
 
@@ -203,12 +214,12 @@ namespace Maqaoplus.ViewModels
 
         private async Task Updateuserdetailsasync()
         {
-            IsLoading = true;
+            IsProcessing = true;
 
             await Task.Delay(500);
             if (StaffData == null)
             {
-                IsLoading = false;
+                IsProcessing = false;
                 return;
             }
 
@@ -246,18 +257,18 @@ namespace Maqaoplus.ViewModels
 
         private async Task Submituserdetailsasync()
         {
-            IsLoading = true;
+            IsSubmitProcessing = true;
 
             await Task.Delay(500);
             if (StaffData == null)
             {
-                IsLoading = false;
+                IsSubmitProcessing = false;
                 return;
             }
 
             try
             {
-                IsProcessing = true;
+                IsSubmitProcessing = true;
                 StaffData.Updateprofile = false;
                 StaffData.Modifiedby = App.UserDetails.Usermodel.Userid;
                 StaffData.Datemodified = DateTime.Now;
@@ -282,7 +293,7 @@ namespace Maqaoplus.ViewModels
             }
             finally
             {
-                IsProcessing = false;
+                IsSubmitProcessing = false;
             }
         }
 
