@@ -25,14 +25,13 @@ namespace Maqaoplus.ViewModels.HouseTenant
                 OnPropertyChanged();
             }
         }
-
-        private bool _isLoading;
-        public bool IsLoading
+        private bool _isProcessing;
+        public bool IsProcessing
         {
-            get => _isLoading;
+            get => _isProcessing;
             set
             {
-                _isLoading = value;
+                _isProcessing = value;
                 OnPropertyChanged();
             }
         }
@@ -57,7 +56,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
 
         private async Task LoadItems()
         {
-            IsLoading = true;
+            IsProcessing = true;
             IsDataLoaded = false;
 
             try
@@ -76,7 +75,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
             }
             finally
             {
-                IsLoading = false;
+                IsProcessing = false;
             }
         }
 
@@ -85,50 +84,8 @@ namespace Maqaoplus.ViewModels.HouseTenant
         private async Task NeedtoVacatethisHouseAsync()
         {
             IsProcessing = true;
-            if (Tenantid == 0)
-            {
-                PropertyHouseRoomTenantidError = "New Tenant is required.";
-                return;
-            }
-
-            if (!ValidateStep1())
-            {
-                IsProcessing = false;
-                return;
-            }
-            if (HouseroomData == null)
-            {
-                IsProcessing = false;
-                return;
-            }
-            try
-            {
-                HouseroomData.Tenantid = Tenantid;
-                HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
-                HouseroomData.Datecreated = DateTime.UtcNow;
-
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, HouseroomData);
-                if (response.StatusCode == 200)
-                {
-                    Application.Current.MainPage.Navigation.PopModalAsync();
-                }
-                else if (response.StatusCode == 1)
-                {
-                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
-                }
-                else
-                {
-                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                IsProcessing = false;
-            }
+            var modalPage = new HousesRoomDetailModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
