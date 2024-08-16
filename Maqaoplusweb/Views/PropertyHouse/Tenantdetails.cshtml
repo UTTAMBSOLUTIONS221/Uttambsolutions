@@ -12,45 +12,34 @@
         </div>
     </div>
     <div class="row text-nowrap">
-        <div class="col-sm-3">
-            <p class="text-sm">Name: @Model.Data.Fullname</p>
-        </div>
-        <div class="col-sm-3">
-            <p class="text-sm">Phone: @Model.Data.Phonenumber</p>
-        </div>
-        <div class="col-sm-2">
-            <p class="text-sm">Idnumber: @Model.Data.Idnumber</p>
-        </div>
-        <div class="col-sm-2">
-            <p class="text-sm">Account: @Model.Data.Accountnumber</p>
-        </div>
-        <div class="col-sm-2">
-            <p class="text-sm">Walletbalance: @Model.Data.Walletbalance</p>
-        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-sm font-weight-light fw-light">Name: @Model.Data.Fullname</th>
+                    <th class="text-sm font-weight-light fw-light">Phone: @Model.Data.Phonenumber</th>
+                    <th class="text-sm font-weight-light fw-light">Idnumber: @Model.Data.Idnumber</th>
+                    <th class="text-sm font-weight-light fw-light">Account: @Model.Data.Accountnumber</th>
+                    <th class="text-sm font-weight-light fw-light">Walletbalance: @Model.Data.Walletbalance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>House: @Model.Data.Tenantroomdata.Propertyhousename</td>
+                    <td>Room: @Model.Data.Tenantroomdata.Systempropertyhousesizename</td>
+                    <td>Status: @Model.Data.Tenantroomdata.Houseoccupationstatus</td>
+                    <td>Rent: @Model.Data.Tenantroomdata.Systempropertyhousesizerent.ToString("#,##0.00")</td>
+                    <td>Water Price: @Model.Data.Tenantroomdata.Waterunitprice</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="row text-nowrap">
-        <div class="col-sm-3">
-            <p class="text-sm">House: @Model.Data.Tenantroomdata.Propertyhousename</p>
-        </div>
-        <div class="col-sm-3">
-            <p class="text-sm">Room: @Model.Data.Tenantroomdata.Systempropertyhousesizename</p>
-        </div>
-        <div class="col-sm-3">
-            <p class="text-sm">Status: @Model.Data.Tenantroomdata.Houseoccupationstatus</p>
-        </div>
-        <div class="col-sm-1">
-            <p class="text-sm">Rent: @Model.Data.Tenantroomdata.Systempropertyhousesizerent.ToString("#,##0.00")</p>
-        </div>
-        <div class="col-sm-2">
-            <p class="text-sm">Water Price: @Model.Data.Tenantroomdata.Waterunitprice</p>
-        </div>
-    </div>
+    
     <div class="row">
         <div class="col-sm-12">          
             <div class="row">
                 <h4 class="text-custom text-sm">Tenant Renting History</h4>
                 <div class="col-sm-12 table-responsive table-responsive-sm">
-                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables1">
                         <thead>
                             <tr>
                                 <th class="text-sm font-weight-light fw-light">House</th>
@@ -84,7 +73,7 @@
             <div class="row">
                 <h4 class="text-custom text-sm">Tenant Room Meter History</h4>
                 <div class="col-sm-12 table-responsive table-responsive-sm">
-                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables1">
+                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables2">
                         <thead>
                             <tr>
                                 <th class="text-sm font-weight-light fw-light">Meter</th>
