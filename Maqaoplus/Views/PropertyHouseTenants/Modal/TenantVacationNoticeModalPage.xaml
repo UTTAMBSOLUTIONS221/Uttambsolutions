@@ -81,19 +81,27 @@
                                     <Label Text="{Binding TenantData.Tenantroomdata.Depositbalance, StringFormat='{0:#,##0.00}'}" FontSize="16" TextColor="Red" LineBreakMode="TailTruncation"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Label Text="Expected Vacating Date:" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Text="{Binding TenantData.Tenantroomdata.Expectedvacatingdate, StringFormat='{0:yyyy-MM-dd}'}" FontSize="16" TextColor="Red" LineBreakMode="TailTruncation"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Label Text="Planned Vacating Date:" FontSize="16" FontAttributes="Bold"/>
+                                    <DatePicker Date="{Binding TenantData.Tenantroomdata.Plannedvacatingdate}" Format="MM/dd/yyyy" FontSize="16" WidthRequest="180" TextColor="Black"/>
+                                    <Label Text="{Binding PropertyHouseNameError}" TextColor="Red" />
+                                </StackLayout>
+                                <StackLayout>
+                                    <!-- House Room # Label -->
+                                    <Label Text="Vacating Reason(Optional)" FontAttributes="Bold" FontSize="17"  Margin="0,0,0,4" TextColor="Black"/>
+                                    <!-- House Room # Entry (Styled like an Input Box) -->
+                                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0"  HeightRequest="40">
+                                        <Entry Text="{Binding TenantData.Tenantroomdata.Systempropertyhousevacatingreason}" Placeholder="Enter vacating Reason" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                                    </Frame>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
                                     <Entry IsVisible="False" Text="{Binding TenantData.Userid}" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Spacing="10">
                                     <Entry IsVisible="False" Text="{Binding TenantData.Tenantroomdata.Systempropertyhouseroomid}" Grid.Row="4" />
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal" Spacing="10">
-                                    <Label Text="Expected Vacating Date:" FontSize="16" FontAttributes="Bold"/>
-                                    <Label Text="{Binding ExpectedVacatingDate, StringFormat='{0:MM/dd/yyyy}'}" FontSize="16" TextColor="Red" LineBreakMode="TailTruncation"/>
-                                </StackLayout>
-
-                                <StackLayout Orientation="Horizontal" Spacing="10">
-                                    <Label Text="Vacating Date:" FontSize="16" FontAttributes="Bold"/>
-                                    <Label Text="{Binding TenantData.Tenantroomdata.Depositbalance, StringFormat='{0:#,##0.00}'}" FontSize="16" TextColor="Red" LineBreakMode="TailTruncation"/>
                                 </StackLayout>
                                 <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
                                     <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="150" />

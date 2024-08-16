@@ -88,7 +88,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
                 if (response != null)
                 {
                     TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
-                    ExpectedVacatingDate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
+                    TenantData.Tenantroomdata.Expectedvacatingdate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
                 }
                 IsDataLoaded = true;
             }
