@@ -97,7 +97,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
             IsVacatingProcessing = true;
             var modalPage = new TenantVacationNoticeModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
-
+            IsVacatingProcessing = false;
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
