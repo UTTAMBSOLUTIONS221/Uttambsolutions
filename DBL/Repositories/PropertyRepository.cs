@@ -172,7 +172,7 @@ namespace DBL.Repositories
             }
         }
 
-        public PropertyHouseTenantData Getsystempropertyhouseroomtenantsdata(long Ownerid, long Posterid)
+        public PropertyHouseTenantData Getsystempropertyhouseroomtenantsdata(long Ownerid)
         {
             using (var connection = new SqlConnection(_connString))
             {

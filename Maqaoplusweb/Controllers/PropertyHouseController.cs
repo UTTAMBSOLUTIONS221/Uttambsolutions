@@ -167,6 +167,12 @@ namespace Maqaoplusweb.Controllers
             return Json(resp);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Propertyhouseroomtenants()
+        {
+            var data = await bl.Getsystempropertyhouseroomtenantsdata(SessionUserData.Usermodel.Userid);
+            return View(data);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Confirmhouseroompayment(long Houseroomid, long Houseroomtenantid)
