@@ -61,11 +61,12 @@
     }
     public class PropertyHousetenantroommeter
     {
+        public string? Systempropertyhouseroommeternumber { get; set; }
         public decimal Openingmeter { get; set; }
         public decimal Movedmeter { get; set; }
         public decimal Closingmeter { get; set; }
         public decimal Consumedamount { get; set; }
-        public string? Createdby { get; set; }
+        public long Createdby { get; set; }
         public DateTime Datecreated { get; set; }
     }
     public class PropertyHousetenantroompayments

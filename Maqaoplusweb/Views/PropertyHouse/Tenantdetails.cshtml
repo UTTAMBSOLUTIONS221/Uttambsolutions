@@ -97,16 +97,15 @@
                         </thead>
                         <tbody>
                             <tr>
-                                @if (Model.Data != null && Model.Data.Tenantroommeter != null)
+                                @if (Model.Data != null && Model.Data.Tenantroomdata.Tenantroommeter != null)
                                 {
-                                    foreach (var item in Model.Data.Tenantroommeter)
+                                    foreach (var item in Model.Data.Tenantroomdata.Tenantroommeter)
                                     {
                                         <td>@item.Systempropertyhouseroommeternumber</td>
                                         <td>@item.Openingmeter</td>
                                         <td>@item.Closingmeter</td>
                                         <td>@item.Movedmeter</td>
                                         <td>@item.Consumedamount</td>
-                                        <td>@item.Outstandingbalance</td>
                                         <td>@item.Datecreated.ToString("MMMM")</td>
 
                                     }
