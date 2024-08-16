@@ -28,7 +28,52 @@
             <p class="text-sm">Walletbalance: @Model.Data.Walletbalance</p>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="text-custom text-sm">Tenant Renting History</h4>
+                </div>
+                <div class="card-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @if (Model.Data != null && Model.Data.Tenantroomhistory != null)
+                                {
+                                    foreach (var item in Model.Data.Tenantroomhistory)
+                                    {
+                                        <td>@item.Propertyhousename</td>
+                                        <td>@item.Propertyownername</td>
+                                        <td>@item.Systempropertyhousesizename</td>
+                                        <td>@item.Countyname</td>
+                                        <td>@item.Subcountyname</td>
+                                        <td>@item.Subcountywardname</td>
+                                        <td>@item.Streetorlandmark</td>
+                                        <td>@item.Outstandingbalance</td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+         <div class="col-sm-6">
 
+        </div>
+    </div>
     
 </div>
 <div class="modal-footer">
