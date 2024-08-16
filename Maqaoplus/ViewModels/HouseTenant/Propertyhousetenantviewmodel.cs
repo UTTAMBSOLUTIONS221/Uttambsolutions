@@ -101,8 +101,6 @@ namespace Maqaoplus.ViewModels.HouseTenant
             }
         }
 
-
-
         private async Task NeedtoVacatethisHouseAsync()
         {
             IsVacatingProcessing = true;
