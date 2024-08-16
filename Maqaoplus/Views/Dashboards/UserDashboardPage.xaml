@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.Dashboards.UserDashboardPage"
-             Title="Dashboard">
+             Title="DASHBOARD">
     <ContentPage.BackgroundColor>
         <Color>White</Color>
     </ContentPage.BackgroundColor>
@@ -120,7 +120,7 @@
                                     <Label Text="Deposit Balance:" FontSize="16" FontAttributes="Bold"/>
                                     <Label Text="{Binding TenantData.Tenantroomdata.Depositbalance, StringFormat='{0:#,##0.00}'}" FontSize="16" TextColor="Red" LineBreakMode="TailTruncation"/>
                                 </StackLayout>
-                                <StackLayout Orientation="Horizontal" Spacing="10" IsVisible="{Binding Path=TenantData.Isvisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
+                                <StackLayout Orientation="Horizontal" Spacing="10" IsVisible="{Binding Isvisible}" >
                                     <Button BackgroundColor="#0a506c" Command="{Binding NeedtoVacateCommand}" CornerRadius="8" Text="Need to Vacate" TextColor="White" FontSize="18" HeightRequest="40" WidthRequest="340" FontAttributes="Bold" />
                                 </StackLayout>
                             </StackLayout>

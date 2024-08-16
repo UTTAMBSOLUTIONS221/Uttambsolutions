@@ -60,6 +60,17 @@ namespace Maqaoplus.ViewModels.HouseTenant
                 OnPropertyChanged();
             }
         }
+        private bool _isvisible;
+
+        public bool Isvisible
+        {
+            get => _isvisible;
+            set
+            {
+                _isvisible = value;
+                OnPropertyChanged(nameof(Isvisible));
+            }
+        }
 
         public Propertyhousetenantviewmodel(Services.ServiceProvider serviceProvider)
         {
@@ -80,14 +91,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
                 {
                     TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
                     TenantData.Tenantroomdata.Expectedvacatingdate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
-                    if (TenantData.Tenantroomdata.Occupationalstatus == "Occupant")
-                    {
-                        TenantData.Isvisible = true;
-                    }
-                    else
-                    {
-                        TenantData.Isvisible = false;
-                    }
+                    Isvisible = TenantData.Tenantroomdata.Occupationalstatus == "Occupant";
                 }
                 IsDataLoaded = true;
             }
