@@ -47,6 +47,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
             {
                 _isVacatingProcessing = value;
                 OnPropertyChanged();
+                ((Command)NeedtoVacateCommand).ChangeCanExecute();
             }
         }
 
@@ -82,11 +83,11 @@ namespace Maqaoplus.ViewModels.HouseTenant
                     TenantData.Tenantroomdata.Expectedvacatingdate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
                     if (TenantData.Tenantroomdata.Occupationalstatus == "Occupant")
                     {
-                        TenantData.Tenantroomdata.Isvisible = true;
+                        TenantData.Isvisible = true;
                     }
                     else
                     {
-                        TenantData.Tenantroomdata.Isvisible = false;
+                        TenantData.Isvisible = false;
                     }
                 }
                 IsDataLoaded = true;
@@ -108,7 +109,6 @@ namespace Maqaoplus.ViewModels.HouseTenant
             IsVacatingProcessing = true;
             var modalPage = new TenantVacationNoticeModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
-            IsVacatingProcessing = false;
         }
         private void OnCancelClicked()
         {

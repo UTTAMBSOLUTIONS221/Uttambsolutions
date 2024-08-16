@@ -14,6 +14,7 @@
         public string? Gender { get; set; }
         public string? Maritalstatus { get; set; }
         public int Loginstatus { get; set; }
+        public bool Isvisible { get; set; }
         public int Parentid { get; set; }
         public string? Userprofileimageurl { get; set; }
         public string? Usercurriculumvitae { get; set; }
@@ -34,7 +35,6 @@
         public string? Propertyhousename { get; set; }
         public string? Houseoccupationstatus { get; set; }
         public string? Occupationalstatus { get; set; }
-        public bool Isvisible { get; set; }
         public decimal Systempropertyhousesizerentdeposit { get; set; }
         public decimal Systempropertyhousesizerent { get; set; }
         public decimal Monthlybinfee { get; set; }
