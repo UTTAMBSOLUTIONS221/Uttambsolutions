@@ -127,8 +127,9 @@ namespace Maqaoplus.ViewModels.HouseTenant
         private async Task SubmitVacatingRequestAsync()
         {
             IsVacatingProcessing = true;
-            if (!ValidateData())
+            if (TenantData.Tenantroomdata.Plannedvacatingdate == null || TenantData.Tenantroomdata.Plannedvacatingdate == DateTime.MinValue)
             {
+                await Shell.Current.DisplayAlert("Warning", "Planned Vacating Date is required.", "OK");
                 IsVacatingProcessing = false;
                 return;
             }
@@ -173,25 +174,6 @@ namespace Maqaoplus.ViewModels.HouseTenant
             {
                 IsVacatingProcessing = false;
             }
-        }
-        private bool ValidateData()
-        {
-            bool isValid = true;
-            // Validate Planned Vacating Date
-            if (TenantData.Tenantroomdata.Plannedvacatingdate == null || TenantData.Tenantroomdata.Plannedvacatingdate == DateTime.MinValue)
-            {
-                PropertyHousePlannedVacatingDateError = "Planned Vacating Date is required.";
-                isValid = false;
-            }
-            else
-            {
-                PropertyHousePlannedVacatingDateError = null;
-            }
-
-            // Update overall IsValid property
-            IsProcessing = isValid;
-
-            return isValid;
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
