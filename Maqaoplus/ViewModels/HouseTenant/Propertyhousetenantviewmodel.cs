@@ -132,15 +132,15 @@ namespace Maqaoplus.ViewModels.HouseTenant
             }
             var tenantVacatingRequest = new SystemPropertyHouseVacatingRequest
             {
-                SystemPropertyHouseTenantId = App.UserDetails.Usermodel.Userid,
-                SystemPropertyHouseRoomId = TenantData.Tenantroomdata.Systempropertyhouseroomid,
-                PlannedVacatingDate = TenantData.Tenantroomdata.Plannedvacatingdate,
-                ExpectedVacatingDate = TenantData.Tenantroomdata.Expectedvacatingdate,
-                VacatingReason = TenantData.Tenantroomdata.Systempropertyhousevacatingreason,
-                VacatingStatus = 2,
-                ApprovedBy = 0,
-                DateCreated = DateTime.UtcNow,
-                DateApproved = DateTime.UtcNow
+                Systempropertyhousetenantid = App.UserDetails.Usermodel.Userid,
+                Systempropertyhouseroomid = TenantData.Tenantroomdata.Systempropertyhouseroomid,
+                Plannedvacatingdate = TenantData.Tenantroomdata.Plannedvacatingdate,
+                Expectedvacatingdate = TenantData.Tenantroomdata.Expectedvacatingdate,
+                Vacatingreason = TenantData.Tenantroomdata.Systempropertyhousevacatingreason,
+                Vacatingstatus = 2,
+                Approvedby = 0,
+                Datecreated = DateTime.UtcNow,
+                Dateapproved = DateTime.UtcNow
             };
             try
             {

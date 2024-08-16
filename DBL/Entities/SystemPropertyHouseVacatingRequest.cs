@@ -2,15 +2,15 @@
 {
     public class SystemPropertyHouseVacatingRequest
     {
-        public long VacatingRequestId { get; set; }
-        public long SystemPropertyHouseTenantId { get; set; }
-        public long SystemPropertyHouseRoomId { get; set; }
-        public DateTime? PlannedVacatingDate { get; set; }
-        public DateTime? ExpectedVacatingDate { get; set; }
-        public string? VacatingReason { get; set; }
-        public int VacatingStatus { get; set; }
-        public long ApprovedBy { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime? DateApproved { get; set; }
+        public long Vacatingrequestid { get; set; }
+        public long Systempropertyhousetenantid { get; set; }
+        public long Systempropertyhouseroomid { get; set; }
+        public DateTime? Plannedvacatingdate { get; set; }
+        public DateTime? Expectedvacatingdate { get; set; }
+        public string? Vacatingreason { get; set; }
+        public int Vacatingstatus { get; set; }
+        public long Approvedby { get; set; }
+        public DateTime Datecreated { get; set; }
+        public DateTime? Dateapproved { get; set; }
     }
 }
