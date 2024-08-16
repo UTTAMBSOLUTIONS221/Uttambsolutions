@@ -31,34 +31,38 @@
     <div class="row">
         <div class="col-sm-8">
             <h4 class="text-custom text-sm">Tenant Renting History</h4>
-            <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
-                <thead>
-                    <tr>
-                        <th class="text-sm font-weight-light fw-light">House</th>
-                        <th class="text-sm font-weight-light fw-light">Owner</th>
-                        <th class="text-sm font-weight-light fw-light">Room</th>
-                        <th class="text-sm font-weight-light fw-light">Location</th>
-                        <th class="text-sm font-weight-light fw-light">Landmark</th>
-                        <th class="text-sm font-weight-light fw-light">Balance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        @if (Model.Data != null && Model.Data.Tenantroomhistory != null)
-                        {
-                            foreach (var item in Model.Data.Tenantroomhistory)
-                            {
-                                <td>@item.Propertyhousename</td>
-                                <td>@item.Propertyownername</td>
-                                <td class="text-wrap wrap">@item.Systempropertyhousesizename</td>
-                                <td class="text-wrap wrap">@item.Countyname</td>
-                                <td class="text-wrap wrap">@item.Streetorlandmark</td>
-                                <td>@item.Outstandingbalance</td>
-                            }
-                        }
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-sm-12 table-responsive table-responsive-sm">
+                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                        <thead>
+                            <tr>
+                                <th class="text-sm font-weight-light fw-light">House</th>
+                                <th class="text-sm font-weight-light fw-light">Owner</th>
+                                <th class="text-sm font-weight-light fw-light">Room</th>
+                                <th class="text-sm font-weight-light fw-light">Location</th>
+                                <th class="text-sm font-weight-light fw-light">Landmark</th>
+                                <th class="text-sm font-weight-light fw-light">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @if (Model.Data != null && Model.Data.Tenantroomhistory != null)
+                                {
+                                    foreach (var item in Model.Data.Tenantroomhistory)
+                                    {
+                                        <td>@item.Propertyhousename</td>
+                                        <td>@item.Propertyownername</td>
+                                        <td class="text-wrap wrap">@item.Systempropertyhousesizename</td>
+                                        <td class="text-wrap wrap">@item.Countyname</td>
+                                        <td class="text-wrap wrap">@item.Streetorlandmark</td>
+                                        <td>@item.Outstandingbalance</td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
          <div class="col-sm-4">
 
