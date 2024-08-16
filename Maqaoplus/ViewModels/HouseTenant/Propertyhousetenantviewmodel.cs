@@ -1,4 +1,5 @@
-﻿using DBL.Models;
+﻿using DBL.Entities;
+using DBL.Models;
 using Maqaoplus.Views.PropertyHouseTenants.Modal;
 using Newtonsoft.Json;
 using System.ComponentModel;
@@ -129,12 +130,23 @@ namespace Maqaoplus.ViewModels.HouseTenant
                 IsProcessing = false;
                 return;
             }
-            var tenantVacatingRequest = TenantData;
+            var tenantVacatingRequest = new SystemPropertyHouseVacatingRequest
+            {
+                SystemPropertyHouseTenantId = App.UserDetails.Usermodel.Userid,
+                SystemPropertyHouseRoomId = TenantData.Tenantroomdata.Systempropertyhouseroomid,
+                PlannedVacatingDate = TenantData.Tenantroomdata.Plannedvacatingdate,
+                ExpectedVacatingDate = TenantData.Tenantroomdata.Expectedvacatingdate,
+                VacatingReason = TenantData.Tenantroomdata.Systempropertyhousevacatingreason,
+                VacatingStatus = 2,
+                ApprovedBy = 0,
+                DateCreated = DateTime.UtcNow,
+                DateApproved = DateTime.UtcNow
+            };
             try
             {
 
 
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, tenantVacatingRequest);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhousevacaterequestdata", HttpMethod.Post, tenantVacatingRequest);
                 if (response.StatusCode == 200)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
