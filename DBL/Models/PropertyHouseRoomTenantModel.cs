@@ -34,6 +34,7 @@
         public string? Propertyhousename { get; set; }
         public string? Houseoccupationstatus { get; set; }
         public string? Occupationalstatus { get; set; }
+        public bool Isvisible { get; set; }
         public decimal Systempropertyhousesizerentdeposit { get; set; }
         public decimal Systempropertyhousesizerent { get; set; }
         public decimal Monthlybinfee { get; set; }
