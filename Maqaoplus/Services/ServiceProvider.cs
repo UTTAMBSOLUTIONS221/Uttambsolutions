@@ -58,6 +58,7 @@ namespace Maqaoplus.Services
         public async Task<Genericmodel> CallCustomUnAuthWebApi(string endpoint, dynamic obj)
         {
             Genericmodel resp = new Genericmodel();
+            var data = JsonConvert.SerializeObject(obj);
             using (var httpClient = new HttpClient())
             {
                 var content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
