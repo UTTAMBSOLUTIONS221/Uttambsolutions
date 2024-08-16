@@ -352,5 +352,26 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registerpropertyhouseroommeterdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+
+        public SystemPropertyHouseVacatingRequestModel Gettenantvacatingrequestsdatabyownerid(long Ownerid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Ownerid", Ownerid);
+                parameters.Add("@Systempropertyvacatingrequestdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Gettenantvacatingrequestsdatabyownerid", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Systempropertyvacatingrequestdata");
+                if (systempropertydataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<SystemPropertyHouseVacatingRequestModel>(systempropertydataJson);
+                }
+                else
+                {
+                    return new SystemPropertyHouseVacatingRequestModel();
+                }
+            }
+        }
     }
 }

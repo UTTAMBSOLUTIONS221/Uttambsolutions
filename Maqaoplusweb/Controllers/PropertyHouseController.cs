@@ -181,6 +181,13 @@ namespace Maqaoplusweb.Controllers
             return PartialView(data);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Tenantvacatingrequests()
+        {
+            var data = await bl.Gettenantvacatingrequestsdatabyownerid(SessionUserData.Usermodel.Userid);
+            return PartialView(data);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Confirmhouseroompayment(long Houseroomid, long Houseroomtenantid)

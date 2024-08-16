@@ -958,6 +958,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<SystemPropertyHouseVacatingRequestModel> Gettenantvacatingrequestsdatabyownerid(long Ownerid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Gettenantvacatingrequestsdatabyownerid(Ownerid);
+                return Resp;
+            });
+        }
 
         //public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
         //{
