@@ -43,8 +43,8 @@
         public string? Systempropertyhousesizename { get; set; }
         public DateTime Datecreated { get; set; }
         public DateTime Datemodified { get; set; }
-        public DateTime Expectedvacatingdate { get; set; }
-        public DateTime Plannedvacatingdate { get; set; }
+        public DateTime? Expectedvacatingdate { get; set; }
+        public DateTime? Plannedvacatingdate { get; set; }
         public string? Systempropertyhousevacatingreason { get; set; }
         public List<PropertyHousetenantroommeter>? Tenantroommeter { get; set; }
         public List<PropertyHousetenantroompayments>? Tenantroompayments { get; set; }
