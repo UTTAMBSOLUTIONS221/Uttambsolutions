@@ -6,7 +6,7 @@
              Padding="16"  
              Title="Confirm Payment">
     <StackLayout Spacing="16">
-        <Entry IsVisible="true" Text="{Binding Userid}" />
+        <Entry IsVisible="False" Text="{Binding Userid}" />
 
         <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation">
             <Label.FormattedText>
