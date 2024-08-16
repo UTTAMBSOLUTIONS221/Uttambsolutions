@@ -38,14 +38,12 @@
                     <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th>House</th>
+                                <th>Owner</th>
+                                <th>Room</th>
+                                <th>Location</th>
+                                <th>Landmark</th>
+                                <th>Balance</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,11 +54,9 @@
                                     {
                                         <td>@item.Propertyhousename</td>
                                         <td>@item.Propertyownername</td>
-                                        <td>@item.Systempropertyhousesizename</td>
-                                        <td>@item.Countyname</td>
-                                        <td>@item.Subcountyname</td>
-                                        <td>@item.Subcountywardname</td>
-                                        <td>@item.Streetorlandmark</td>
+                                        <td class="text-wrap wrap">@item.Systempropertyhousesizename</td>
+                                        <td class="text-wrap wrap">@item.Countyname</td>
+                                        <td class="text-wrap wrap">@item.Streetorlandmark</td>
                                         <td>@item.Outstandingbalance</td>
                                     }
                                 }
