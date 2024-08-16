@@ -144,8 +144,6 @@ namespace Maqaoplus.ViewModels.HouseTenant
             };
             try
             {
-
-
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registerpropertyhousevacaterequestdata", tenantVacatingRequest);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
