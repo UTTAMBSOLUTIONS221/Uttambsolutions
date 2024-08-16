@@ -73,7 +73,6 @@ namespace Maqaoplus.ViewModels.HouseTenant
         {
             IsProcessing = true;
             IsDataLoaded = false;
-            TenantData.Tenantroomdata.Isvisible = false;
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
@@ -84,6 +83,10 @@ namespace Maqaoplus.ViewModels.HouseTenant
                     if (TenantData.Tenantroomdata.Occupationalstatus == "Tenant")
                     {
                         TenantData.Tenantroomdata.Isvisible = true;
+                    }
+                    else
+                    {
+                        TenantData.Tenantroomdata.Isvisible = false;
                     }
                 }
                 IsDataLoaded = true;
