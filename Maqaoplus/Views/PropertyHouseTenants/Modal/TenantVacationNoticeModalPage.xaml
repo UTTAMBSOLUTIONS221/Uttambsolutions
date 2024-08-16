@@ -14,7 +14,7 @@
 
             <!-- Scrollable Content -->
             <ScrollView Grid.Row="0">
-                <Grid Padding="20">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -80,7 +80,15 @@
                                     <Label Text="{Binding TenantData.Tenantroomdata.Depositbalance, StringFormat='{0:#,##0.00}'}" FontSize="16" TextColor="Red" LineBreakMode="TailTruncation"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Spacing="10">
-                                    <Button BackgroundColor="#0a506c" Command="{Binding NeedtoVacateCommand}" CornerRadius="8" Text="Request" TextColor="White" FontSize="18" HeightRequest="40" WidthRequest="340" FontAttributes="Bold" />
+                                    <Entry IsVisible="False" Text="{Binding TenantData.Userid}" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Entry IsVisible="False" Text="{Binding TenantData.Tenantroomdata.Systempropertyhouseroomid}" Grid.Row="4" />
+                                </StackLayout>
+
+                
+                                <StackLayout Orientation="Horizontal" Padding="4" Spacing="10">
+                                    <Button BackgroundColor="#0a506c" Command="{Binding NeedtoVacateCommand}" CornerRadius="8" Text="Submit Request" TextColor="White" FontSize="18" HeightRequest="47" WidthRequest="347" FontAttributes="Bold" />
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
