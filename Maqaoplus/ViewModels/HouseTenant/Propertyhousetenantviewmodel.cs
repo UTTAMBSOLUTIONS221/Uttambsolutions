@@ -36,6 +36,16 @@ namespace Maqaoplus.ViewModels.HouseTenant
                 OnPropertyChanged();
             }
         }
+        private bool _isVacatingProcessing;
+        public bool IsVacatingProcessing
+        {
+            get => _isVacatingProcessing;
+            set
+            {
+                _isVacatingProcessing = value;
+                OnPropertyChanged();
+            }
+        }
 
         private bool _isDataLoaded;
         public bool IsDataLoaded
@@ -84,9 +94,10 @@ namespace Maqaoplus.ViewModels.HouseTenant
 
         private async Task NeedtoVacatethisHouseAsync()
         {
-            IsProcessing = true;
+            IsVacatingProcessing = true;
             var modalPage = new TenantVacationNoticeModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
