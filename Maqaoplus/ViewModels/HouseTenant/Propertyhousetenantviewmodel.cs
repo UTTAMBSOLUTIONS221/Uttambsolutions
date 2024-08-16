@@ -16,6 +16,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
 
         public ICommand LoadItemsCommand { get; }
         public ICommand NeedtoVacateCommand { get; }
+        public ICommand OnCancelClickedCommand { get; }
 
         public PropertyHouseRoomTenantData TenantData
         {
@@ -63,6 +64,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
             _serviceProvider = serviceProvider;
             LoadItemsCommand = new Command(async () => await LoadItems());
             NeedtoVacateCommand = new Command(async () => await NeedtoVacatethisHouseAsync());
+            OnCancelClickedCommand = new Command(OnCancelClicked);
         }
         // Error properties
         private DateTime _expectedVacatingDate;
@@ -108,6 +110,10 @@ namespace Maqaoplus.ViewModels.HouseTenant
             var modalPage = new TenantVacationNoticeModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsVacatingProcessing = false;
+        }
+        private void OnCancelClicked()
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
