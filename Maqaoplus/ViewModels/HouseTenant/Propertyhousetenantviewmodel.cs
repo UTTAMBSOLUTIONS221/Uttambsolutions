@@ -64,7 +64,17 @@ namespace Maqaoplus.ViewModels.HouseTenant
             LoadItemsCommand = new Command(async () => await LoadItems());
             NeedtoVacateCommand = new Command(async () => await NeedtoVacatethisHouseAsync());
         }
-
+        // Error properties
+        private DateTime _expectedVacatingDate;
+        public DateTime ExpectedVacatingDate
+        {
+            get => _expectedVacatingDate;
+            set
+            {
+                _expectedVacatingDate = value;
+                OnPropertyChanged();
+            }
+        }
         private async Task LoadItems()
         {
             IsProcessing = true;
@@ -72,11 +82,11 @@ namespace Maqaoplus.ViewModels.HouseTenant
 
             try
             {
-                //var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + 2, HttpMethod.Get, null);
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null)
                 {
                     TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
+                    ExpectedVacatingDate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
                 }
                 IsDataLoaded = true;
             }

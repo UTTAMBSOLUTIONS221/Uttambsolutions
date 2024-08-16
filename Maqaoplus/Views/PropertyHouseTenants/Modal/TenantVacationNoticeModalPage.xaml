@@ -88,7 +88,7 @@
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Spacing="10">
                                     <Label Text="Expected Vacating Date:" FontSize="16" FontAttributes="Bold"/>
-                                    <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MM/dd/yyyy}'}" FontSize="16" TextColor="Red" LineBreakMode="TailTruncation"/>
+                                    <Label Text="{Binding ExpectedVacatingDate, StringFormat='{0:MM/dd/yyyy}'}" FontSize="16" TextColor="Red" LineBreakMode="TailTruncation"/>
                                 </StackLayout>
 
                                 <StackLayout Orientation="Horizontal" Spacing="10">
