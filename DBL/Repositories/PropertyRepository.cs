@@ -179,7 +179,6 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Ownerid", Ownerid);
-                parameters.Add("@Posterid", Posterid);
                 parameters.Add("@Systempropertyhouseroomtenantsdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystempropertyhouseroomtenantsdata", parameters, commandType: CommandType.StoredProcedure);
                 string systempropertyhouseroomtenantsdataJson = parameters.Get<string>("@Systempropertyhouseroomtenantsdata");
