@@ -146,7 +146,11 @@ namespace Maqaoplusweb.Controllers
             var permissions = await bl.Getsystempermissiondatabyroleid(RoleId);
             return Json(permissions);
         }
-
+        public async Task<JsonResult> Getsystemstaffdatabyidnumber(int Idnumber)
+        {
+            var resp = await bl.Getsystemstaffdatabyidnumber(Idnumber);
+            return Json(resp);
+        }
         #region Other Methods
 
         private async void SetUserLoggedIn(UsermodelResponce user, bool rememberMe)
