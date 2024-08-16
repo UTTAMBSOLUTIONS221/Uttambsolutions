@@ -14,6 +14,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand LoadItemsCommand { get; }
+        public ICommand NeedtoVacateCommand { get; }
 
         public PropertyHouseRoomTenantData TenantData
         {
@@ -51,6 +52,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
         {
             _serviceProvider = serviceProvider;
             LoadItemsCommand = new Command(async () => await LoadItems());
+            NeedtoVacateCommand = new Command(async () => await NeedtoVacatethisHouseAsync());
         }
 
         private async Task LoadItems()
@@ -78,6 +80,56 @@ namespace Maqaoplus.ViewModels.HouseTenant
             }
         }
 
+
+
+        private async Task NeedtoVacatethisHouseAsync()
+        {
+            IsProcessing = true;
+            if (Tenantid == 0)
+            {
+                PropertyHouseRoomTenantidError = "New Tenant is required.";
+                return;
+            }
+
+            if (!ValidateStep1())
+            {
+                IsProcessing = false;
+                return;
+            }
+            if (HouseroomData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
+            try
+            {
+                HouseroomData.Tenantid = Tenantid;
+                HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
+                HouseroomData.Datecreated = DateTime.UtcNow;
+
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, HouseroomData);
+                if (response.StatusCode == 200)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else if (response.StatusCode == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

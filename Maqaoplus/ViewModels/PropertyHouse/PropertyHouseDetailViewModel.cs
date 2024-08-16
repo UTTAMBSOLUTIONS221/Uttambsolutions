@@ -574,7 +574,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             };
             SearchId = string.Empty;
             Application.Current.MainPage.Navigation.PopModalAsync();
-            Application.Current.MainPage.Navigation.PopModalAsync();
         }
         private bool ValidateStep1()
         {
