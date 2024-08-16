@@ -19,11 +19,11 @@
 
         public DateTime PlannedVacatingDate { get; set; }
 
-        public DateTime? ExpectedVacatingDate { get; set; }
+        public DateTime ExpectedVacatingDate { get; set; }
 
         public string? VacatingReason { get; set; }
 
-        public string? VacatingStatus { get; set; }
+        public int VacatingStatus { get; set; }
 
         public string? OccupationalStatus { get; set; }
 

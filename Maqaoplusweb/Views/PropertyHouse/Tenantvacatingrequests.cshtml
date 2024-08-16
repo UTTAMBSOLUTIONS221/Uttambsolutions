@@ -1,8 +1,65 @@
-﻿
+﻿@model DBL.Models.SystemPropertyHouseVacatingRequestModel
 @{
     ViewData["Title"] = "Tenantvacatingrequests";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h6 class="font-weight-bold text-sm card-title">Property Rooms Vacating Requests</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive table-responsive-sm">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <thead>
+                        <tr>
+                            <th>Tenant</th>
+                            <th>House</th>
+                            <th>Expected Vacating Date</th>
+                            <th>Planned Vacating Date</th>
+                            <th>Vacating Reason</th>
+                            <th>Status</th>
+                            <th>Accepted</th>
+                            <th>Date Created</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Data != null)
+                        {
+                            foreach (var item in Model.Data)
+                            {
+                                <tr>
+                                    <td>@item.SystemTenantName</td>
+                                    <td>@item.SystemPropertyHouseSizeName</td>
+                                    <td>@item.ExpectedVacatingDate.ToString("yyyy-MMM-dd")</td>
+                                    <td>@item.PlannedVacatingDate.ToString("yyyy-MMM-dd")</td>
+                                    <td>@item.VacatingReason</td>
+                                    <td>@item.OccupationalStatus</td>
+                                    <td>
+                                        @if (item.VacatingStatus == 0)
+                                        {
+                                            <p class="mb-0"><span class="badge badge-secondary custom-badge"><strong>Recieved</strong></span></p>
+                                        }
+                                        else if (item.VacatingStatus == 1)
+                                        {
+                                            <p class="mb-0"><span class="badge badge-secondary custom-badge"><strong>Accepted</strong></span></p>
+                                        }
 
-<h1>Tenantvacatingrequests</h1>
-
+                                    </td>
+                                    <td>@item.DateCreated.ToString("yyyy-MMM-dd HH:mm")</td>
+                                    <td class="text-right">
+                                         </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
