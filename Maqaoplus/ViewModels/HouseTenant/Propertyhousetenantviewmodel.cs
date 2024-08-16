@@ -17,6 +17,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
         public ICommand LoadItemsCommand { get; }
         public ICommand NeedtoVacateCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
+        public ICommand OnOkClickedCommand { get; }
 
         public PropertyHouseRoomTenantData TenantData
         {
@@ -65,6 +66,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
             LoadItemsCommand = new Command(async () => await LoadItems());
             NeedtoVacateCommand = new Command(async () => await NeedtoVacatethisHouseAsync());
             OnCancelClickedCommand = new Command(OnCancelClicked);
+            OnOkClickedCommand = new Command(async () => await SubmitVacatingRequestAsync());
         }
         // Error properties
         private DateTime _expectedVacatingDate;
@@ -114,6 +116,37 @@ namespace Maqaoplus.ViewModels.HouseTenant
         private void OnCancelClicked()
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+        private async Task SubmitVacatingRequestAsync()
+        {
+            IsProcessing = true;
+            var tenantVacatingRequest = TenantData;
+            try
+            {
+
+
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, tenantVacatingRequest);
+                if (response.StatusCode == 200)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else if (response.StatusCode == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

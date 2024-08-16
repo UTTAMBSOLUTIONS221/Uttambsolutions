@@ -105,7 +105,7 @@
                                 </StackLayout>
                                 <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
                                     <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="150" />
-                                    <Button Text="Submit" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50"  WidthRequest="150"/>
+                                    <Button Text="Submit" Command="{Binding OnOkClickedCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50"  WidthRequest="150"/>
                                 </FlexLayout>
                             </StackLayout>
                         </StackLayout>
