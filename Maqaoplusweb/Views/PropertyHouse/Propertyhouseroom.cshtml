@@ -64,7 +64,7 @@
                                     </td>
                                     <td><p class="mb-0"><span class="badge badge-success custom-badge"><strong>Has Balcony:</strong> @item.Propertyhousebalcony</span></p></td>
                                     <td class="text-right">
-                                        <a asp-action="Addpropertyhouseroom" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Houseroomid="@item.Systempropertyhouseroomid" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                        <a asp-action="Addpropertyhouseroom" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Houseroomid="@item.Systempropertyhouseroomid" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Manage</a>
                                       @*   <a asp-action="Details" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Houseroomid="@item.Systempropertyhouseroomid" asp-route-Ownerid="0" asp-area="" id="CAN_VIEW_PROPERTY_HOUSE_DETAILS" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Details</a> *@
                                     </td>
                                 </tr>
@@ -76,3 +76,236 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function searchsystemstaffdata() {
+            var idNumber = $('#Systemstaffidnumberid').val();
+            if (idNumber.trim() === "") {
+                $("#Systemstaffidnumberid").addClass('is-invalid');
+                return;
+            } else {
+                $("#Systemstaffidnumberid").removeClass('is-invalid').addClass('is-valid');
+            }
+
+            $.ajax({
+                url: '/Staff/Getsystemstaffdatabyidnumber',
+                type: 'GET',
+                data: { Idnumber: idNumber },
+                success: function (response) {
+                    var resultsContainer = $('#searchResults');
+                    resultsContainer.empty();
+                    if (response) {
+                        var cardHtml =
+                            '<input type="text" id="systemstaffid" value="' + response.Userid + '" class="form-control mb-2" hidden />' +
+                            '<h5 class="card-title">Name: ' + response.Firstname + ' ' + response.Lastname + '</h5>' +
+                            '<p class="card-text">ID Number: ' + response.Idnumber + '</p>' +
+                            '<p class="card-text">Email Address: ' + response.Emailaddress + '</p>' +
+                            '<p class="card-text">Phone Number: ' + response.Phonenumber + '</p>';
+
+                        resultsContainer.append(cardHtml);
+                    } else {
+                        resultsContainer.append('<tr><td colspan="4" class="text-center">No results found.</td></tr>');
+                    }
+
+                    resultsContainer.removeClass('d-none');
+                    $("#searchresultbuttons").removeClass('d-none');
+                },
+                error: function () {
+                    alert('An error occurred while searching. Please try again.');
+                }
+            });
+        }
+
+        function savesystempropertyhouseroomtenantdata() {
+            document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            var uil = {
+                Houseroomid: $('#Houseroomid').val(), Tenantid: $('#systemstaffid').val(),
+                Createdby: $('#systemLoggedinedUserid').val(),
+                Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+            };
+            $.post("/PropertyHouse/Addsystempropertyhouseroomtenantdata", uil, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#Uttambsolutionsmodal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Tenant Not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "Save changes";
+            }).fail(function () {
+                Swal.fire("Oops! Something Went Wrong", "A critical error has occurred. Kindly Contact our support team.", "error");
+                document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "Save changes";
+            });
+        }
+
+        document.addEventListener('input', function (event) {
+            var target = event.target;
+            if (target.closest('#roommeterreadingtable')) {
+                var detailRows = document.querySelectorAll('#roommeterreadingtable tbody tr');
+                detailRows.forEach(function (row) {
+                    var roomopeningmeter = parseFloat(row.querySelector('.system-property-house-room-opening-meter').value) || 0;
+                    var roomclosingmeter = parseFloat(row.querySelector('.system-property-house-room-closing-meter').value) || 0;
+                    var movedmeterunits = parseFloat(row.querySelector('.system-property-house-room-moved-meter').value) || 0;
+                    var rowIsValid = true;
+
+                    // Validate roomclosingmeter to ensure it's greater than or equal to roomopeningmeter
+                    if (roomclosingmeter < roomopeningmeter) {
+                        row.querySelector('.system-property-house-room-closing-meter').classList.add('is-invalid');
+                        rowIsValid = false;
+                    } else {
+                        row.querySelector('.system-property-house-room-closing-meter').classList.remove('is-invalid');
+                    }
+
+                    // Calculate moved meter units
+                    movedmeterunits = roomclosingmeter - roomopeningmeter;
+                    movedmeterunits = Math.max(movedmeterunits, 0);
+                    row.querySelector('.system-property-house-room-moved-meter').value = movedmeterunits.toFixed(2);
+
+                    // Calculate meter consumed amount
+                    var meterconsumedamount = movedmeterunits * 200;
+                    meterconsumedamount = Math.max(meterconsumedamount, 0); // Ensure amount is non-negative
+                    row.querySelector('.system-property-house-room-meter-cost').value = meterconsumedamount.toFixed(2);
+                });
+            }
+        });
+
+
+
+        function savesystempropertyroomdata() {
+            document.getElementById("savesystempropertyroomid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+
+            $('#Continuewithouttenantid').prop('checked');
+
+            var uil = {
+                Systempropertyhouseroomid: $('#Systempropertyhouseroomid').val(), Kitchentypeid: $('#Kitchentypeid').val(), Systempropertyhousesizeid: $('#Systempropertyhousesizeid').val(),
+                Systempropertyhousesizename: $('#Systempropertyhousesizenameid').val(), Forcaretaker: $('#Forcaretakerid').prop('checked'), Isshop: $('#Isshopid').prop('checked'), Isgroundfloor: $('#Isgroundfloorid').prop('checked'),
+                Hasbalcony: $('#Hasbalconyid').prop('checked'), Isunderrenovation: $('#Isunderrenovationid').prop('checked'),Systempropertyhousemeterid: $('.system-property-house-meterid').val(),
+                Systempropertyhouseroommeternumber: $('.system-property-house-room-meter-number').val(),Openingmeter: parseFloat($('.system-property-house-room-opening-meter').val()),Closingmeter: parseFloat($('.system-property-house-room-closing-meter').val()),
+                Movedmeter: parseFloat($('.system-property-house-room-moved-meter').val()), Consumedamount: parseFloat($('.system-property-house-room-meter-cost').val()),Tenantid: $('#systemstaffid').val(),
+                Createdby: $('#systemLoggedinedUserid').val(),Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+            };
+
+            // Validate form data
+            var errors = [];
+
+            // Ensure required fields are not empty
+            if (!uil.Systempropertyhouseroomid) errors.push("Room ID is required.");
+            if (!uil.Systempropertyhousesizeid) errors.push("House size ID is required.");
+            if (!uil.Systempropertyhouseroommeternumber) errors.push("Meter number is required.");
+
+            // Validate numeric fields
+            if (isNaN(uil.Openingmeter) || uil.Openingmeter < 0) errors.push("Opening meter must be a non-negative number.");
+            if (isNaN(uil.Closingmeter) || uil.Closingmeter < 0) errors.push("Closing meter must be a non-negative number.");
+            if (isNaN(uil.Movedmeter) || uil.Movedmeter < 0) errors.push("Moved meter must be a non-negative number.");
+            if (isNaN(uil.Consumedamount) || uil.Consumedamount < 0) errors.push("Consumed amount must be a non-negative number.");
+
+            // Logical validation
+            //if (uil.Closingmeter < uil.Openingmeter) errors.push("Closing meter cannot be less than the opening meter.");
+
+            // If there are validation errors, show them and exit
+            if (errors.length > 0) {
+                Swal.fire("Validation Error", errors.join('<br>'), "error");
+                document.getElementById("savesystempropertyroomid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+
+            $.post("/PropertyHouse/Addpropertyhouseroomdata", uil, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#Uttambsolutionsmodal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("House Room Not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystempropertyroomid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+
+
+
+        function savesystempropertyroommeterdata() {
+            document.getElementById("savesystempropertyroommeterid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            var meterData = {
+                Systempropertyhousemeterid: $('.system-property-house-meterid').val(),
+                Systempropertyhouseroomid: $('.system-property-house-roomid').val(),
+                Systempropertyhouseroommeternumber: $('.system-property-house-room-meter-number').val(),
+                Openingmeter: parseFloat($('.system-property-house-room-opening-meter').val()),
+                Closingmeter: parseFloat($('.system-property-house-room-closing-meter').val()),
+                Movedmeter: parseFloat($('.system-property-house-room-moved-meter').val()),
+                Consumedamount: parseFloat($('.system-property-house-room-meter-cost').val()),
+                Createdby: $('#systemLoggedinedUserid').val(),
+                Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+            };
+
+            // Client-side validation
+            if (isNaN(meterData.Openingmeter) || isNaN(meterData.Closingmeter) || meterData.Openingmeter > meterData.Closingmeter) {
+                alert("Please ensure all meter readings are valid and the closing meter is greater than or equal to the opening meter.");
+                return;
+            }
+            $.post("/PropertyHouse/Addpropertyhouseroommeterdata", meterData, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#Uttambsolutionsmodal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("House Room Meter Not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystempropertyroommeterid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+
+        function savesystempropertyhouseroompaymentdata() {
+            document.getElementById("savesystempropertyhouseroompaymentid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            var meterData = {
+                TenantId: $('#TenantId').val(),
+                TenanthouserroomId: $('#TenanthouserroomId').val(),
+                TransactionReference: $('#Systempmpesatransactionreferenceid').val(),
+                Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+            };
+            $.post("/PropertyHouse/Confirmhouseroompaymentdata", meterData, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#Uttambsolutionsmodal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Payment Not Verified", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystempropertyhouseroompaymentid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "CONFIRM PAYMENT";
+            });
+        }
+
+    </script>
+}
