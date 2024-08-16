@@ -126,15 +126,15 @@ namespace Maqaoplus.ViewModels.HouseTenant
         }
         private async Task SubmitVacatingRequestAsync()
         {
-            IsProcessing = true;
+            IsVacatingProcessing = true;
             if (!ValidateData())
             {
-                IsProcessing = false;
+                IsVacatingProcessing = false;
                 return;
             }
             if (TenantData == null)
             {
-                IsProcessing = false;
+                IsVacatingProcessing = false;
                 return;
             }
             var tenantVacatingRequest = new SystemPropertyHouseVacatingRequest
@@ -171,7 +171,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
             }
             finally
             {
-                IsProcessing = false;
+                IsVacatingProcessing = false;
             }
         }
         private bool ValidateData()
