@@ -36,6 +36,7 @@
         public decimal Systempropertyhousesizerentdeposit { get; set; }
         public decimal Systempropertyhousesizerent { get; set; }
         public decimal Monthlybinfee { get; set; }
+        public int Vacatingperioddays { get; set; }
         public decimal Waterunitprice { get; set; }
         public int Previousmeters { get; set; }
         public decimal Previousmeteramount { get; set; }
