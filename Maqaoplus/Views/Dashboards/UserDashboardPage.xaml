@@ -120,8 +120,18 @@
                                     <Label Text="Deposit Balance:" FontSize="16" FontAttributes="Bold"/>
                                     <Label Text="{Binding TenantData.Tenantroomdata.Depositbalance, StringFormat='{0:#,##0.00}'}" FontSize="16" TextColor="Red" LineBreakMode="TailTruncation"/>
                                 </StackLayout>
+
                                 <StackLayout Orientation="Horizontal" Spacing="10">
-                                    <Button BackgroundColor="#0a506c" Command="{Binding NeedtoVacateCommand}" CornerRadius="8" Text="Need to Vacate" TextColor="White" FontSize="18" HeightRequest="40" WidthRequest="340" FontAttributes="Bold" />
+                                    <Button BackgroundColor="#0a506c" Command="{Binding NeedtoVacateCommand}" CornerRadius="8" Text="Need to Vacate" TextColor="White" FontSize="18" HeightRequest="40" WidthRequest="340" FontAttributes="Bold">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding Occupationalstatus}" Value="Tenant">
+                                                <Setter Property="IsVisible" Value="True" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding Occupationalstatus}" Value="{x:Null}">
+                                                <Setter Property="IsVisible" Value="False" />
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
