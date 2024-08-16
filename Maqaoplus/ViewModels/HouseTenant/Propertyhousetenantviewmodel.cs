@@ -146,14 +146,14 @@ namespace Maqaoplus.ViewModels.HouseTenant
             {
 
 
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhousevacaterequestdata", HttpMethod.Post, tenantVacatingRequest);
-                if (response.StatusCode == 200)
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registerpropertyhousevacaterequestdata", tenantVacatingRequest);
+                if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
                 }
-                else if (response.StatusCode == 1)
+                else if (response.RespStatus == 1)
                 {
-                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
                 }
                 else
                 {
