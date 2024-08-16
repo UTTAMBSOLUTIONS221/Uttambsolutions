@@ -43,7 +43,7 @@
 
             <!-- Scrollable Content -->
             <ScrollView Grid.Row="0" IsVisible="{Binding IsProcessing, Converter={StaticResource InverseBooleanConverter}}">
-                <Grid Padding="20">
+                <Grid Padding="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
