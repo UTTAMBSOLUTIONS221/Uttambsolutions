@@ -80,7 +80,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
                 {
                     TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
                     TenantData.Tenantroomdata.Expectedvacatingdate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
-                    if (TenantData.Tenantroomdata.Occupationalstatus == "Tenant")
+                    if (TenantData.Tenantroomdata.Occupationalstatus == "Occupant")
                     {
                         TenantData.Tenantroomdata.Isvisible = true;
                     }
