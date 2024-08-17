@@ -41,7 +41,7 @@
                                     <td>@item.VacatingReason</td>
                                     <td>@item.OccupationalStatus</td>
                                     <td>
-                                        @if (!item.VacatingStatus)
+                                        @if (item.VacatingStatus)
                                         {
                                             <p class="mb-0"><span class="badge badge-secondary custom-badge"><strong>Recieved</strong></span></p>
                                         }
