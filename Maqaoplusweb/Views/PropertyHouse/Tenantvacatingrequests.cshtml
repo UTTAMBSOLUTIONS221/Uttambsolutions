@@ -91,7 +91,7 @@
                     var Systempropertyhouseroomid = acceptRequestBtn.getAttribute('data-Systempropertyhouseroomid');
                 var uil =
                 {
-                        Entryid: Vacatingrequestid, Systempropertyhousetenantid: Systempropertyhousetenantid, Systempropertyhouseroomid: Systempropertyhouseroomid, Approvedby: $('#systemLoggedinedUserId').val(), Dateapproved: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+                        Vacatingrequestid: Entryid, Systempropertyhousetenantid: Systempropertyhousetenantid, Systempropertyhouseroomid: Systempropertyhouseroomid, Approvedby: $('#systemLoggedinedUserId').val(), Dateapproved: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
                 };
                     $.post("/PropertyHouse/Acceptthisvacatingrequest", uil, function (response) {
                     if (response.RespStatus == 0) {
