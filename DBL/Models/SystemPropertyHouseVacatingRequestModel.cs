@@ -23,7 +23,7 @@
 
         public string? VacatingReason { get; set; }
 
-        public int VacatingStatus { get; set; }
+        public bool VacatingStatus { get; set; }
 
         public string? OccupationalStatus { get; set; }
 
