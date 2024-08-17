@@ -95,7 +95,7 @@
                 };
                     $.post("/PropertyHouse/Acceptthisvacatingrequest", uil, function (response) {
                     if (response.RespStatus == 0) {
-                        Swal.fire('Item Activated!', 'Good.', 'success')
+                        Swal.fire('Request Accepted!', 'Good.', 'success')
                         setTimeout(function () { location.reload(); }, 1000);
                     } else if (response.RespStatus == 1) {
                         Swal.fire("Oops!", response.RespMessage, "warning");
