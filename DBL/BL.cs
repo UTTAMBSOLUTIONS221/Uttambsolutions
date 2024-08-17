@@ -966,7 +966,14 @@ namespace DBL
                 return Resp;
             });
         }
-
+        public Task<Genericmodel> Approvepropertyhousevacatingrequest(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Approvepropertyhousevacatingrequest(Obj);
+                return Resp;
+            });
+        }
         //public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
         //{
         //    return Task.Run(() =>

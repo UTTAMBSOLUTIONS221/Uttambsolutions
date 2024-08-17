@@ -53,6 +53,14 @@
                                     </td>
                                     <td>@item.DateCreated.ToString("yyyy-MMM-dd HH:mm")</td>
                                     <td class="text-right">
+                                        @if (item.VacatingStatus)
+                                        {
+                                            <a onclick="acceptthisvacatingrequest(event)" data-Entryid="@item.VacatingRequestId" data-Systempropertyhousetenantid="@item.SystemPropertyHouseTenantId" data-Systempropertyhouseroomid="@item.SystemPropertyHouseRoomId" id="CAN_ACCEPT_VACATING_REQUEST" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Accept</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Accepted</a>
+                                        }
                                          </td>
                                 </tr>
                             }
@@ -63,3 +71,43 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+    function acceptthisvacatingrequest(event) {
+        Swal.fire({
+            title: "Are you sure you want to accept this?",
+            text: "Accepting this allows you to make checks on the room for items to replace !",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, accept it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var acceptRequestBtn = event.target;
+                    var Entryid = acceptRequestBtn.getAttribute('data-Entryid');
+                    var Systempropertyhousetenantid = acceptRequestBtn.getAttribute('data-Systempropertyhousetenantid');
+                    var Systempropertyhouseroomid = acceptRequestBtn.getAttribute('data-Systempropertyhouseroomid');
+                var uil =
+                {
+                        Entryid: Vacatingrequestid, Systempropertyhousetenantid: Systempropertyhousetenantid, Systempropertyhouseroomid: Systempropertyhouseroomid, Approvedby: $('#systemLoggedinedUserId').val(), Dateapproved: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+                };
+                    $.post("/PropertyHouse/Acceptthisvacatingrequest", uil, function (response) {
+                    if (response.RespStatus == 0) {
+                        Swal.fire('Item Activated!', 'Good.', 'success')
+                        setTimeout(function () { location.reload(); }, 1000);
+                    } else if (response.RespStatus == 1) {
+                        Swal.fire("Oops!", response.RespMessage, "warning");
+                    }
+                    else {
+                        Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                    }
+                });
+            } else {
+                Swal.fire("Thank you!", "Accept once you are sure", "info");
+            }
+        });
+    };
+    </script>
+}

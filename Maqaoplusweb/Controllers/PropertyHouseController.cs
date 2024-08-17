@@ -187,6 +187,11 @@ namespace Maqaoplusweb.Controllers
             var data = await bl.Gettenantvacatingrequestsdatabyownerid(SessionUserData.Usermodel.Userid);
             return PartialView(data);
         }
+        public async Task<JsonResult> Acceptthisvacatingrequest(SystemPropertyHouseVacatingRequest model)
+        {
+            var resp = await bl.Approvepropertyhousevacatingrequest(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
 
 
         [HttpGet]

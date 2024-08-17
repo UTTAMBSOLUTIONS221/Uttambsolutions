@@ -373,5 +373,17 @@ namespace DBL.Repositories
                 }
             }
         }
+
+        public Genericmodel Approvepropertyhousevacatingrequest(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Approvepropertyhousevacatingrequest", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
     }
 }
