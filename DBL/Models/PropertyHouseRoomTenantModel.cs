@@ -25,6 +25,10 @@
         public decimal Walletbalance { get; set; }
         public DateTime Datemodified { get; set; }
         public DateTime Datecreated { get; set; }
+        public PropertyHouseRoomTenantData()
+        {
+            Tenantroomdata = new Systempropertyhousetenantsroom();
+        }
         public Systempropertyhousetenantsroom? Tenantroomdata { get; set; }
         public List<PropertyHousetenantroomhistory>? Tenantroomhistory { get; set; }
     }

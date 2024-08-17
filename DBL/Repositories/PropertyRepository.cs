@@ -161,8 +161,8 @@ namespace DBL.Repositories
                     {
                         string TenantroomJson = tenantreponseJson["Tenantroomdata"].ToString();
                         TenantRoomDataResponse = JsonConvert.DeserializeObject<Systempropertyhousetenantsroom>(TenantroomJson);
-                        TenantResponseModel.Data.Tenantroomdata = TenantRoomDataResponse;
                     }
+                    TenantDataResponse.Tenantroomdata = TenantRoomDataResponse;
                     return TenantResponseModel;
                 }
                 else
