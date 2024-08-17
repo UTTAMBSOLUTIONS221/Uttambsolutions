@@ -312,8 +312,9 @@ namespace DBL.Repositories
                     {
                         string MeterhistoryJson = roomResponseJson["Meterhistorydata"].ToString();
                         responseMeterData = JsonConvert.DeserializeObject<List<Systempropertyhouseroommeterhistory>>(MeterhistoryJson);
-                        responseData.Meterhistorydata = responseMeterData;
                     }
+                    responseData.Meterhistorydata = responseMeterData;
+                    response.Data = responseData;
                     return response;
                 }
                 else
