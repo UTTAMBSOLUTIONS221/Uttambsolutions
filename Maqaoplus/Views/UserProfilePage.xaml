@@ -85,7 +85,7 @@
                     <StackLayout Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
                         <Label Text="Email Address" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                         <Frame>
-                            <Entry Text="{Binding StaffData.Emailaddress}" Placeholder="Enter email address" PlaceholderColor="#0a506c"/>
+                            <Entry Text="{Binding StaffData.Emailaddress}" Keyboard="Email" Placeholder="Enter email address" PlaceholderColor="#0a506c"/>
                         </Frame>
                     </StackLayout>
 
@@ -93,7 +93,7 @@
                     <StackLayout Grid.Column="0" Grid.Row="2">
                         <Label Text="Phone Number" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                         <Frame>
-                            <Entry Text="{Binding StaffData.Phonenumber}" Placeholder="Enter phone number" PlaceholderColor="#0a506c"/>
+                            <Entry Text="{Binding StaffData.Phonenumber}" Keyboard="Telephone" Placeholder="Enter phone number" PlaceholderColor="#0a506c"/>
                         </Frame>
                     </StackLayout>
 
@@ -145,7 +145,7 @@
                                 <StackLayout Grid.Column="0">
                                     <Label Text="Phone" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                                     <Frame>
-                                        <Entry Text="{Binding StaffData.Kinphonenumber}" Placeholder="Enter kin phone" PlaceholderColor="#0a506c"/>
+                                        <Entry Text="{Binding StaffData.Kinphonenumber}" Keyboard="Telephone" Placeholder="Enter kin phone" PlaceholderColor="#0a506c"/>
                                     </Frame>
                                 </StackLayout>
 
