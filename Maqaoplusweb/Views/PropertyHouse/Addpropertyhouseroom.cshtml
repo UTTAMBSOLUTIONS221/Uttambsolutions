@@ -18,7 +18,7 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Kitchen Type</label>
-                <select class="form-control form-control-sm" asp-for="@Model.Kitchentypeid" asp-items="@Systemkitchentype" id="Kitchentypeid">
+                <select class="form-control form-control-sm" asp-for="@Model.Kitchentypeid" asp-items="@Systemkitchentype" id="Kitchentypeid" required>
                     <option value="">---Select---</option>
                 </select>
             </div>
@@ -26,7 +26,7 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Size Name</label>
-                <select class="form-control form-control-sm" asp-for="@Model.Systempropertyhousesizeid" asp-items="@Systempropertyhousesize" id="Systempropertyhousesizeid">
+                <select class="form-control form-control-sm" asp-for="@Model.Systempropertyhousesizeid" asp-items="@Systempropertyhousesize" id="Systempropertyhousesizeid" required>
                     <option value="">---Select---</option>
                 </select>
             </div>
@@ -34,13 +34,13 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">House Room #</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Systempropertyhousesizename" id="Systempropertyhousesizenameid" />
+                <input class="form-control form-control-sm" asp-for="@Model.Systempropertyhousesizename" id="Systempropertyhousesizenameid" required />
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Rent Amount</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Systempropertyhousesizerent" id="Systempropertyhousesizerentid" />
+                <input class="form-control form-control-sm" asp-for="@Model.Systempropertyhousesizerent" id="Systempropertyhousesizerentid" required />
             </div>
         </div>
     </div>
