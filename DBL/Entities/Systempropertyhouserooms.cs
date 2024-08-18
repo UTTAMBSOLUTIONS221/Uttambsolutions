@@ -7,6 +7,8 @@
         public long Systempropertyhouseid { get; set; }
         public long Systempropertyhousesizeid { get; set; }
         public string? Systempropertyhousesizename { get; set; }
+        public decimal Systempropertyhousesizerent { get; set; }
+        public bool Systempropertyhousesizedeposit { get; set; }
         public bool Isvacant { get; set; }
         public bool Isunderrenovation { get; set; }
         public bool Isshop { get; set; }
