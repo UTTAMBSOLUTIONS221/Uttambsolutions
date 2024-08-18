@@ -34,47 +34,42 @@
         </table>
     </div>
     <hr />
-    @if (Model?.Data?.Tenantroomdata != null)
-    {
-        <div class="row">
-            <h4 class="text-custom text-sm">Tenant Room Meter History</h4>
-            <div class="col-sm-12 table-responsive table-responsive-sm">
-                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables2">
-                    <thead>
-                        <tr>
-                            <th class="text-sm font-weight-light fw-light">Meter</th>
-                            <th class="text-sm font-weight-light fw-light">Opening</th>
-                            <th class="text-sm font-weight-light fw-light">Closing</th>
-                            <th class="text-sm font-weight-light fw-light">Moved</th>
-                            <th class="text-sm font-weight-light fw-light">Amount</th>
-                            <th class="text-sm font-weight-light fw-light">Month</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            @if (Model.Data != null && Model.Data.Tenantroomdata != null && Model.Data.Tenantroomdata.Tenantroommeter != null)
-                            {
-                                foreach (var item in Model.Data.Tenantroomdata.Tenantroommeter)
-                                {
-                                    <td class="text-sm font-weight-light fw-light">@item.Systempropertyhouseroommeternumber</td>
-                                    <td class="text-sm font-weight-light fw-light">@item.Openingmeter</td>
-                                    <td class="text-sm font-weight-light fw-light">@item.Closingmeter</td>
-                                    <td class="text-sm font-weight-light fw-light">@item.Movedmeter</td>
-                                    <td class="text-sm font-weight-light fw-light">@item.Consumedamount</td>
-                                    <td class="text-sm font-weight-light fw-light">@item.Datecreated.ToString("MMMM")</td>
-
-                                }
-                            }
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <div class="row">
+        <h4 class="text-custom text-sm">Tenant Room Meter History</h4>
+        <div class="col-sm-12 table-responsive table-responsive-sm">
+            <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables2">
+                <thead>
+                    <tr>
+                        <th class="text-sm font-weight-light fw-light">Meter</th>
+                        <th class="text-sm font-weight-light fw-light">Opening</th>
+                        <th class="text-sm font-weight-light fw-light">Closing</th>
+                        <th class="text-sm font-weight-light fw-light">Moved</th>
+                        <th class="text-sm font-weight-light fw-light">Amount</th>
+                        <th class="text-sm font-weight-light fw-light">Month</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Data != null && Model.Data.Tenantroomdata != null && Model.Data.Tenantroomdata.Tenantroommeter != null)
+                    {
+                        foreach (var item in Model.Data.Tenantroomdata.Tenantroommeter)
+                        {
+                            <tr>
+                                <td class="text-sm font-weight-light fw-light">@item.Systempropertyhouseroommeternumber</td>
+                                <td class="text-sm font-weight-light fw-light">@item.Openingmeter</td>
+                                <td class="text-sm font-weight-light fw-light">@item.Closingmeter</td>
+                                <td class="text-sm font-weight-light fw-light">@item.Movedmeter</td>
+                                <td class="text-sm font-weight-light fw-light">@item.Consumedamount</td>
+                                <td class="text-sm font-weight-light fw-light">@item.Datecreated.ToString("MMMM")</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
         </div>
-    }
-    
+    </div>
     <hr />
     <div class="row">
-        <div class="col-sm-12">          
+        <div class="col-sm-12">
             <div class="row">
                 <h4 class="text-custom text-sm">Tenant Renting History</h4>
                 <div class="col-sm-12 table-responsive table-responsive-sm">
@@ -90,29 +85,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                @if (Model.Data != null && Model.Data.Tenantroomhistory != null)
+                            @if (Model.Data != null && Model.Data.Tenantroomhistory != null)
+                            {
+                                foreach (var item in Model.Data.Tenantroomhistory)
                                 {
-                                    foreach (var item in Model.Data.Tenantroomhistory)
-                                    {
+                                    <tr>
                                         <td class="text-sm font-weight-light fw-light">@item.Propertyhousename</td>
                                         <td class="text-sm font-weight-light fw-light">@item.Propertyownername</td>
                                         <td class="text-sm font-weight-light fw-light text-wrap wrap">@item.Systempropertyhousesizename</td>
                                         <td class="text-sm font-weight-light fw-light text-wrap wrap">@item.Countyname</td>
                                         <td class="text-sm font-weight-light fw-light text-wrap wrap">@item.Streetorlandmark</td>
                                         <td class="text-sm font-weight-light fw-light">@item.Outstandingbalance</td>
-                                    }
+                                    </tr>
                                 }
-                            </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
             </div>
-
-          
         </div>
     </div>
-    
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
