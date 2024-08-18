@@ -153,7 +153,6 @@
                         <th hidden>Roomsizeid</th>
                         <th class="font-weight-light fw-light">Room Size</th>
                         <th class="font-weight-light fw-light">Units</th>
-                        <th class="font-weight-light fw-light">Rent Amount</th>
                         <th class="font-weight-light fw-light">We have?</th>
                     </tr>
                 </thead>
@@ -167,7 +166,6 @@
                                 <td hidden>@data.Systemhousesizeid</td>
                                 <td><input type="text" class="form-control form-control-sm font-weight-light system-house-size-name" value="@data.Systemhousesizename" readonly /></td>
                                 <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-size-unit" value="@data.Systempropertyhousesizeunits" required /></td>
-                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-size-rent" value="@data.Systempropertyhousesizerent" required /></td>
                                 <td><input type="checkbox" class="form-control form-control-sm font-weight-light system-property-house-size-wehave" asp-for="@data.Systempropertyhousesizewehave" value="@data.Systempropertyhousesizewehave" /></td>
                             </tr>
                         }
