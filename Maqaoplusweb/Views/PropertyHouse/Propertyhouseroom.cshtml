@@ -122,6 +122,17 @@
             document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
+             const inputs = section.querySelectorAll('input[required], select[required], textarea[required]');
+             let isValid = true;
+             inputs.forEach(input => {
+                 if (!input.value.trim()) {
+                     input.classList.add('is-invalid');
+                     isValid = false;
+                 } else {
+                     input.classList.remove('is-invalid');
+                 }
+             });
+             return isValid;
             var uil = {
                 Houseroomid: $('#Houseroomid').val(), Tenantid: $('#systemstaffid').val(),
                 Createdby: $('#systemLoggedinedUserid').val(),
