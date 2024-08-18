@@ -23,9 +23,15 @@
         <h6 class="mb-3">Step 1: House Details</h6>
         <input class="form-control form-control-sm" asp-for="Propertyhouseid" id="Propertyhouseid" hidden />
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-8">
                 <div class="form-group">
                     <label class="font-weight-light">House Name</label>
+                    <input class="form-control form-control-sm" asp-for="Propertyhousename" id="Propertyhousenameid" required />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Expected Monthly Collections</label>
                     <input class="form-control form-control-sm" asp-for="Propertyhousename" id="Propertyhousenameid" required />
                 </div>
             </div>
@@ -134,7 +140,7 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Rent Deposit</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth" asp-items="@Systemhousedepostmonths" id="Rentdepositmonthid" required>
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth" asp-items="@Systemhousedepostmonths" id="Rentdepositmonthid">
                         <option value="">---Select---</option>
                     </select>
                 </div>
