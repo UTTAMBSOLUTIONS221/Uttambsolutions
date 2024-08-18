@@ -122,17 +122,6 @@
             document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
-             const inputs = section.querySelectorAll('input[required], select[required], textarea[required]');
-             let isValid = true;
-             inputs.forEach(input => {
-                 if (!input.value.trim()) {
-                     input.classList.add('is-invalid');
-                     isValid = false;
-                 } else {
-                     input.classList.remove('is-invalid');
-                 }
-             });
-             return isValid;
             var uil = {
                 Houseroomid: $('#Houseroomid').val(), Tenantid: $('#systemstaffid').val(),
                 Createdby: $('#systemLoggedinedUserid').val(),
@@ -215,16 +204,16 @@
             // Ensure required fields are not empty
             if (!uil.Systempropertyhouseroomid) errors.push("Room ID is required.");
             if (!uil.Systempropertyhousesizeid) errors.push("House size ID is required.");
-            if (!uil.Systempropertyhouseroommeternumber) errors.push("Meter number is required.");
+            if($('#Systempropertyhousesizerentid').val()==='' ||$('#Systempropertyhousesizerentid').val()===0 )errors.push("Room rent is required.");
 
-            // Validate numeric fields
-            if (isNaN(uil.Openingmeter) || uil.Openingmeter < 0) errors.push("Opening meter must be a non-negative number.");
-            if (isNaN(uil.Closingmeter) || uil.Closingmeter < 0) errors.push("Closing meter must be a non-negative number.");
-            if (isNaN(uil.Movedmeter) || uil.Movedmeter < 0) errors.push("Moved meter must be a non-negative number.");
-            if (isNaN(uil.Consumedamount) || uil.Consumedamount < 0) errors.push("Consumed amount must be a non-negative number.");
-
-            // Logical validation
-            //if (uil.Closingmeter < uil.Openingmeter) errors.push("Closing meter cannot be less than the opening meter.");
+            if($('#Systempropertyhousehashousewatermeterid').prop('checked')){
+                 if (!uil.Systempropertyhouseroommeternumber) errors.push("Meter number is required.");
+                // Validate numeric fields
+                if (isNaN(uil.Openingmeter) || uil.Openingmeter < 0) errors.push("Opening meter must be a non-negative number.");
+                if (isNaN(uil.Closingmeter) || uil.Closingmeter < 0) errors.push("Closing meter must be a non-negative number.");
+                if (isNaN(uil.Movedmeter) || uil.Movedmeter < 0) errors.push("Moved meter must be a non-negative number.");
+                if (isNaN(uil.Consumedamount) || uil.Consumedamount < 0) errors.push("Consumed amount must be a non-negative number.");
+            }
 
             // If there are validation errors, show them and exit
             if (errors.length > 0) {
