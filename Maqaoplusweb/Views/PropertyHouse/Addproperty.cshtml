@@ -210,11 +210,21 @@
                                         <td hidden>@data.Systempropertyhousedepositfeeid</td>
                                         <td hidden>@data.Housedepositfeeid</td>
                                         <td><input type="text" class="form-control form-control-sm font-weight-light house-deposit-fee-name" value="@data.Housedepositfeename" readonly /></td>
-                                        <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-deposit-fee-amount" value="@data.Systempropertyhousedepositfeeamount" required /></td>
-                                        <td><input type="checkbox" class="form-control form-control-sm font-weight-light system-property-house-size-deposit-fee-wehave" asp-for="@data.Systempropertyhousesizedepositfeewehave" value="@data.Systempropertyhousesizedepositfeewehave" /></td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm font-weight-light system-property-house-deposit-fee-amount" value="@data.Systempropertyhousedepositfeeamount"
+                                            @if (data.Housedepositfeename == "House Deposit" || data.Housedepositfeename == "House Rent" || data.Housedepositfeename == "Water Bill")
+                                            {
+                                                @:readonly
+                                            }
+                                                   required />
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="form-control form-control-sm font-weight-light system-property-house-size-deposit-fee-wehave" asp-for="@data.Systempropertyhousesizedepositfeewehave" value="@data.Systempropertyhousesizedepositfeewehave" />
+                                        </td>
                                     </tr>
                                 }
                             }
+
                         </tbody>
                     </table>
                 </div>
