@@ -54,8 +54,6 @@
         public int Systempropertyhousesizeunits { get; set; }
         public long? Systemhousesizeid { get; set; }
         public string? Systemhousesizename { get; set; }
-        public decimal Systempropertyhousesizerent { get; set; }
-        public bool Systempropertyhousesizedeposit { get; set; }
         public bool Systempropertyhousesizewehave { get; set; }
     }
 
