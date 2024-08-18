@@ -28,6 +28,7 @@
         public int Rentdepositmonth { get; set; }
         public int Vacantnoticeperiod { get; set; }
         public string? Propertyhousestatusdata { get; set; }
+        public decimal Monthlycollection { get; set; }
         public string? Extra { get; set; }
         public string? Extra1 { get; set; }
         public string? Extra2 { get; set; }
