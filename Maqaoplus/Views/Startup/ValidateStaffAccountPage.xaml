@@ -107,7 +107,7 @@
                                         </Label.FormattedText>
                                     </Label>
 
-                                    <Image Source="mpesalogo.png" Grid.Row="6" HorizontalOptions="Center" VerticalOptions="Center" MaximumHeightRequest="100"/>
+                                    <!--<Image Source="mpesalogo.png" Grid.Row="6" HorizontalOptions="Center" VerticalOptions="Center" MaximumHeightRequest="100"/>
 
                                     <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="7" Grid.Column="0">
                                         <Label.FormattedText>
@@ -125,7 +125,7 @@
                                                 <Span Text=" as account number" />
                                             </FormattedString>
                                         </Label.FormattedText>
-                                    </Label>
+                                    </Label>-->
                                     <Label HorizontalTextAlignment="Center" Text="Once you receive the Confirmation," FontSize="16" Grid.Row="9" FontAttributes="Bold" TextColor="#0a506c" TextTransform="Uppercase"  LineBreakMode="WordWrap" HorizontalOptions="Fill"/>
                                     <Label HorizontalTextAlignment="Center" Text="Click the confirm button" FontSize="16" Grid.Row="10" FontAttributes="Bold" TextColor="#0a506c" TextTransform="Uppercase" LineBreakMode="WordWrap" HorizontalOptions="Fill"/>
                                 </Grid>
