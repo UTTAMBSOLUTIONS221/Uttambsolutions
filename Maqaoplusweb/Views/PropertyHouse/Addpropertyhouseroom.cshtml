@@ -12,10 +12,10 @@
 <div class="modal-body">
     <div class="row">
         <input class="form-control form-control-sm" asp-for="@Model.Systempropertyhouseroomid" id="Systempropertyhouseroomid" hidden />
-        <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousewatermeter" id="Systempropertyhousehashousewatermeterid" />
+        <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousewatermeter" id="Systempropertyhousehashousewatermeterid" hidden />
     </div>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Kitchen Type</label>
                 <select class="form-control form-control-sm" asp-for="@Model.Kitchentypeid" asp-items="@Systemkitchentype" id="Kitchentypeid">
@@ -23,7 +23,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Size Name</label>
                 <select class="form-control form-control-sm" asp-for="@Model.Systempropertyhousesizeid" asp-items="@Systempropertyhousesize" id="Systempropertyhousesizeid">
@@ -31,10 +31,16 @@
                 </select>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">House Room #</label>
                 <input class="form-control form-control-sm" asp-for="@Model.Systempropertyhousesizename" id="Systempropertyhousesizenameid" />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="font-weight-light">Rent Amount</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Systempropertyhousesizerent" id="Systempropertyhousesizerentid" />
             </div>
         </div>
     </div>
