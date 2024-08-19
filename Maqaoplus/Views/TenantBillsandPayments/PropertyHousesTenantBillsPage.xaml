@@ -36,7 +36,7 @@
                 <CollectionView ItemsSource="{Binding Items}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Padding="10" Margin="0,0,0,5" HasShadow="True" BorderColor="LightGray" CornerRadius="10" BackgroundColor="White" HeightRequest="110">
+                            <Frame Padding="10" Margin="0,0,0,5" HasShadow="True" BorderColor="LightGray" CornerRadius="10" BackgroundColor="White" HeightRequest="130">
                                 <!-- Tap Gesture Recognizer -->
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}" CommandParameter="{Binding .}" />
@@ -48,15 +48,14 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="0">
+                                    <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="0" HorizontalTextAlignment="Center"> 
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Tenant: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
-                                                <Span Text="{Binding Tenantname}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text=" "/>
-                                                <Span Text="{Binding Systempropertyhousesizename}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text="Invoice #: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text="{Binding Invoiceno}" FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
@@ -64,22 +63,45 @@
                                     <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="1">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Property Name: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text="{Binding Propertyhousename}" FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text="House: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
+                                                <Span Text="{Binding Systemhousesizename}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text=" - "/>
+                                                <Span Text="{Binding Systempropertyhousesizename}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+  
+                                    <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="2">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Amount: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text="{Binding Balance, StringFormat='{0:#,##0.00}'}" FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    
+                                    <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="3">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Status: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
+                                                <Span Text="{Binding Paidstatus}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text=" Due Date: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
+                                                <Span Text="{Binding Duedate, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
 
-                                    <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="2">
+                                    <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Tenant From: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c"/>
-                                                <Span Text="{Binding Datecreated, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold" FontSize="12" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text=" To: "  FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c"/>
-                                                <Span Text="{Binding Datemodified, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold" FontSize="12" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text="Generated On: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
+                                                <Span Text="{Binding Datecreated, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text=" Sent: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
+                                                <Span Text="{Binding Issent}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
+
                                 </Grid>
                             </Frame>
                         </DataTemplate>
