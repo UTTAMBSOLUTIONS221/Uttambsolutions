@@ -446,6 +446,8 @@ namespace DBL.Repositories
                 }
             }
         }
+
+
         public TenantMonthlyInvoiceDetailData Gettenantmonthlyinvoicedetaildatabyinvoiceid(long Invoiceid)
         {
             TenantMonthlyInvoiceDetailData response = new TenantMonthlyInvoiceDetailData();
@@ -457,12 +459,29 @@ namespace DBL.Repositories
                 parameters.Add("@Invoiceid", Invoiceid);
                 parameters.Add("@Systemtenantmonthlyinvoicedetaildata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Gettenantmonthlyinvoicedetaildatabyinvoiceid", parameters, commandType: CommandType.StoredProcedure);
-                string systemtenantmonthlyinvoicedetaildataJson = parameters.Get<string>("@Systemtenantmonthlyinvoicedetaildata");
-                if (systemtenantmonthlyinvoicedetaildataJson != null)
+                string systempropertyroomdataJson = parameters.Get<string>("@Systemtenantmonthlyinvoicedetaildata");
+                if (systempropertyroomdataJson != null)
                 {
-                    Object responseJson = JObject.Parse(systemtenantmonthlyinvoicedetaildataJson);
-                    JObject roomResponseJson = JObject.Parse(responseJson["Data"].ToString());
-                    return JsonConvert.DeserializeObject<TenantMonthlyInvoiceDetailData>(systemtenantmonthlyinvoicedetaildataJson);
+                    JObject responseJson = JObject.Parse(systempropertyroomdataJson);
+                    JObject invoiceResponseJson = JObject.Parse(responseJson["Data"].ToString());
+                    responseData.Invoiceid = Convert.ToInt32(invoiceResponseJson["Invoiceid"]);
+                    responseData.Financetransactionid = Convert.ToInt32(invoiceResponseJson["Financetransactionid"]);
+                    responseData.Transactioncode = invoiceResponseJson["TransactionCode"]?.ToString();
+                    responseData.Invoiceno = invoiceResponseJson["Invoiceno"]?.ToString();
+                    responseData.Propertyrouseroomid = Convert.ToInt32(invoiceResponseJson["Propertyrouseroomid"]);
+                    responseData.Systemhousesizename = invoiceResponseJson["Systemhousesizename"]?.ToString();
+                    responseData.Systempropertyhousesizename = invoiceResponseJson["Systempropertyhousesizename"]?.ToString();
+                    responseData.Propertyhouseroomtenantid = Convert.ToInt32(invoiceResponseJson["Propertyhouseroomtenantid"]);
+                    responseData.Tenantname = invoiceResponseJson["Tenantname"]?.ToString();
+                    responseData.Datecreated = Convert.ToDateTime(invoiceResponseJson["Datecreated"]);
+                    responseData.Duedate = Convert.ToDateTime(invoiceResponseJson["Duedate"]);
+                    responseData.Amount = Convert.ToDecimal(invoiceResponseJson["Amount"]);
+                    responseData.Discount = Convert.ToDecimal(invoiceResponseJson["Discount"]);
+                    responseData.Balance = Convert.ToDecimal(invoiceResponseJson["Balance"]);
+                    responseData.Ispaid = Convert.ToBoolean(invoiceResponseJson["Ispaid"]);
+                    responseData.Paidamount = Convert.ToDecimal(invoiceResponseJson["Paidamount"]);
+                    responseData.Issent = Convert.ToBoolean(invoiceResponseJson["Issent"]);
+                    responseData.Paidstatus = invoiceResponseJson["Paidstatus"]?.ToString();
                     response.Data = responseData;
                     return response;
                 }

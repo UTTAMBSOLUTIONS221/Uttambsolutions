@@ -14,7 +14,7 @@
         public int Financetransactionid { get; set; }
         public string? Transactioncode { get; set; }
         public string? Invoiceno { get; set; }
-        public int Propertyrouseroomid { get; set; }
+        public int Propertyhouseroomid { get; set; }
         public string? Systemhousesizename { get; set; }
         public string? Systempropertyhousesizename { get; set; }
         public int Propertyhouseroomtenantid { get; set; }
