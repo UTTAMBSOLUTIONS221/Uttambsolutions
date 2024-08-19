@@ -20,7 +20,7 @@
                         <tr>
                             <th>Invoice #</th>
                             <th>Room size</th>
-                            <th>Rent</th>
+                            <th>Amount</th>
                             <th>Paid Amount</th>
                             <th>Balance</th>
                             <th>Ispaid</th>
@@ -37,9 +37,9 @@
                                 <tr>
                                     <td>@item.Invoiceno</td>
                                     <td>@(item.Systemhousesizename+ " "+ item.Systempropertyhousesizename)</td>
-                                    <td>@item.Amount</td>                                   
-                                    <td>@item.Paidamount</td>
-                                    <td>@item.Balance</td>
+                                    <td>@item.Amount.ToString("#,##0.00")</td>
+                                    <td>@item.Paidamount.ToString("#,##0.00")</td>
+                                    <td>@item.Balance.ToString("#,##0.00")</td>
                                     <td>
                                         @if (item.Ispaid)
                                         {
