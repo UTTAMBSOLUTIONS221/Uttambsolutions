@@ -991,6 +991,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<TenantMonthlyInvoiceData> Gettenantmonthlyinvoicedatabytenantid(long Tenantid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Gettenantmonthlyinvoicedatabytenantid(Tenantid);
+                return Resp;
+            });
+        }
 
         //public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
         //{
