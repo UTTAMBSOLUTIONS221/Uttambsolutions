@@ -78,40 +78,6 @@
 
 @section Scripts {
     <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function () {
-            const checkbox = document.getElementById('Systempropertyhousehashousewatermeterid');
-            const waterMetersDiv = document.getElementById('SystempropertyhouseroomwatermetersId');
-            const tenantsDiv = document.getElementById('SystempropertyhouseroomtenantsId');
-
-            // Function to toggle visibility and classes
-            function toggleVisibility() {
-                if (checkbox.checked) {
-                    // Show both divs with the specified column sizes
-                    waterMetersDiv.style.display = 'block';
-                    waterMetersDiv.classList.remove('col-sm-0'); // Just in case it was hidden
-                    waterMetersDiv.classList.add('col-sm-7');
-
-                    tenantsDiv.classList.remove('col-sm-12');
-                    tenantsDiv.classList.add('col-sm-5');
-                } else {
-                    // Hide the water meters div and expand tenants div
-                    waterMetersDiv.style.display = 'none';
-                    waterMetersDiv.classList.remove('col-sm-7');
-
-                    tenantsDiv.classList.remove('col-sm-5');
-                    tenantsDiv.classList.add('col-sm-12');
-                }
-            }
-
-            // Initialize the visibility based on the current checkbox state
-            toggleVisibility();
-
-            // Add an event listener to toggle on change
-            checkbox.addEventListener('change', toggleVisibility);
-        });
-
-
-
         function searchsystemstaffdata() {
             var idNumber = $('#Systemstaffidnumberid').val();
             if (idNumber.trim() === "") {
