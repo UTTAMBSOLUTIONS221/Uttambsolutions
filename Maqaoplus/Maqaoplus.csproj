@@ -115,6 +115,9 @@
 	  <MauiXaml Update="Resources\Resources\Styles\Styles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="ViewModels\TenantBillsandPayments\Modals\HousesRoomTenantInvoiceDetailModalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ConfirmPaymentDetailModalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

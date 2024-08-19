@@ -1,4 +1,6 @@
 ﻿using DBL.Models;
+using Maqaoplus.ViewModels.TenantBillsandPayments.Modals;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -8,6 +10,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
     {
         private readonly Services.ServiceProvider _serviceProvider;
         public ObservableCollection<MonthlyRentInvoiceModel> Items { get; }
+        private MonthlyRentInvoiceModel _tenantInvoiceDetailData;
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
 
@@ -33,19 +36,25 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             }
         }
 
-        // Parameterless constructor for XAML support
-        public PropertyHousesTenantBillsViewModel()
+        public MonthlyRentInvoiceModel TenantInvoiceDetailData
         {
+            get => _tenantInvoiceDetailData;
+            set
+            {
+                _tenantInvoiceDetailData = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Parameterless constructor for XAML support
+        public PropertyHousesTenantBillsViewModel(Services.ServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
             Items = new ObservableCollection<MonthlyRentInvoiceModel>();
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<MonthlyRentInvoiceModel>(async (propertyhouseinvoice) => await ViewDetails(propertyhouseinvoice.Invoiceid));
         }
 
-        // Constructor with ServiceProvider parameter
-        public PropertyHousesTenantBillsViewModel(Services.ServiceProvider serviceProvider) : this()
-        {
-            _serviceProvider = serviceProvider;
-        }
         private async Task LoadItems()
         {
             IsProcessing = true;
@@ -80,9 +89,21 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             IsDataLoaded = false;
             try
             {
-                var encodedPropertyInvoiceid = Uri.EscapeDataString(Invoiceid.ToString());
-                await Shell.Current.GoToAsync($"PropertyHousesTenantDetailPage?Propertyhousetenantidnumber={encodedPropertyInvoiceid}");
-                IsDataLoaded = true;
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/" + Invoiceid, HttpMethod.Get, null);
+                if (response != null && response.Data != null)
+                {
+                    TenantInvoiceDetailData = JsonConvert.DeserializeObject<MonthlyRentInvoiceModel>(response.Data.ToString());
+                    //var kitchentypeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemkitchentype, HttpMethod.Get);
+
+                    //if (kitchentypeResponse != null)
+                    //{
+                    //    Systemkitchentype = new ObservableCollection<ListModel>(kitchentypeResponse);
+                    //    SelectedKitchentype = Systemkitchentype.FirstOrDefault(x => x.Value == _houseroomData.Kitchentypeid.ToString());
+                    //}
+                    var modalPage = new HousesRoomTenantInvoiceDetailModalPage(this);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                    IsDataLoaded = true;
+                }
             }
             catch (Exception ex)
             {
