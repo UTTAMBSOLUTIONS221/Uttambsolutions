@@ -193,7 +193,12 @@ namespace Maqaoplusweb.Controllers
             var resp = await bl.Approvepropertyhousevacatingrequest(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
-
+        [HttpGet]
+        public async Task<IActionResult> Tenantmonthlyinvoicedata()
+        {
+            var data = await bl.Gettenantmonthlyinvoicedatabyownerid(SessionUserData.Usermodel.Userid);
+            return PartialView(data);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Confirmhouseroompayment(long Houseroomid, long Houseroomtenantid)

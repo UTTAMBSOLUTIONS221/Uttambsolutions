@@ -24,5 +24,6 @@ namespace DBL.Repositories
         Genericmodel Registerpropertyhouseroommeterdata(string JsonData);
         SystemPropertyHouseVacatingRequestModel Gettenantvacatingrequestsdatabyownerid(long Ownerid);
         Genericmodel Approvepropertyhousevacatingrequest(string JsonData);
+        TenantMonthlyInvoiceData Gettenantmonthlyinvoicedatabyownerid(long Ownerid);
     }
 }
