@@ -21,15 +21,14 @@
                 <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
                     <thead>
                         <tr>
-                            <th>House</th>
-                            <th>Size</th>
-                            <th>Room</th>
+                            <th>Invoice #</th>
+                            <th>Room size</th>
                             <th>Rent</th>
-                            <th>Ishop</th>
-                            <th>Isvacant</th>
-                            <th>Renovated</th>
-                            <th>Ground Floor</th>
-                            <th>Balcony</th>
+                            <th>Paid Amount</th>
+                            <th>Balance</th>
+                            <th>Ispaid</th>
+                            <th>Issent</th>
+                            <th>Status</th>
                             <th class="text-right">Action</th>
                         </tr>
                     </thead>
@@ -39,33 +38,34 @@
                             foreach (var item in Model.Data)
                             {
                                 <tr>
-                                    <td>@item.Propertyhousename</td>
-                                    <td>@item.Systemhousesizename</td>
-                                    <td>@item.Systempropertyhousesizename</td>
+                                    <td>@item.Invoiceno</td>
+                                    <td>@(item.Systemhousesizename+ " "+ item.Systempropertyhousesizename)</td>
+                                    <td>@item.Amount</td>                                   
+                                    <td>@item.Paidamount</td>                                   
+                                    <td>@item.Paidamount</td>                                   
                                     <td>
-                                        <p class="mb-0">
-                                            <span class="badge badge-primary custom-badge"><strong>Rent:</strong> Kes. @item.Systempropertyhousesizerent.ToString("#,##0")</span>
-                                            @if (item.Systempropertyhousesizedeposit)
-                                            {
-                                                <span class="badge badge-warning custom-badge"><strong>Deposit:</strong> Kes. @item.Systempropertyhousesizerent.ToString("#,##0")</span>
-                                            }
-                                        </p>
+                                        @if (item.Ispaid)
+                                        {
+                                            <p class="mb-0"><span class="badge badge-success"><strong>Paid</strong></span></p>
+                                        }
+                                        else
+                                        {
+                                            <p class="mb-0"><span class="badge badge-warning"><strong>Not Paid</strong></span></p>
+                                        }
                                     </td>
-                                    <td>
-                                        <p class="mb-0"><span class="badge badge-success custom-badge"><strong>Is Shop:</strong> @item.Propertyhouseshop</span></p>
+                                   <td>
+                                        @if (item.Issent)
+                                        {
+                                            <p class="mb-0"><span class="badge badge-success"><strong>Sent</strong></span></p>
+                                        }
+                                        else
+                                        {
+                                            <p class="mb-0"><span class="badge badge-warning"><strong>Not Sent</strong></span></p>
+                                        }
                                     </td>
-                                    <td>
-                                        <p class="mb-0"><span class="badge badge-danger custom-badge"><strong>Is Vacant:</strong> @item.Propertyhousevacant</span></p>
-                                    </td>
-                                    <td>
-                                        <p class="mb-0"><span class="badge badge-warning custom-badge"><strong>Under Renovation:</strong> @item.Propertyhouseunderrenovation</span></p>
-                                    </td>
-                                    <td>
-                                        <p class="mb-0"><span class="badge badge-success custom-badge"><strong>Is Ground Floor:</strong> @item.Propertyhousegroundfloor</span></p>
-                                    </td>
-                                    <td><p class="mb-0"><span class="badge badge-success custom-badge"><strong>Has Balcony:</strong> @item.Propertyhousebalcony</span></p></td>
+                                    <td>@item.Paidstatus</td>
                                     <td class="text-right">
-                                        <a asp-action="Addpropertyhouseroom" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Houseroomid="@item.Systempropertyhouseroomid" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Manage</a>
+                                        <a asp-action="Addpropertyhouseroom" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Houseroomid="@item.Invoiceid" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Manage</a>
                                     </td>
                                 </tr>
                             }
