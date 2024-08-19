@@ -12,6 +12,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
         private MonthlyRentInvoiceModel _tenantInvoiceDetailData;
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
+        public ICommand OnCancelClickedCommand { get; }
 
         private bool _isProcessing;
         public bool IsProcessing
@@ -52,6 +53,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             Items = new ObservableCollection<MonthlyRentInvoiceModel>();
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<MonthlyRentInvoiceModel>(async (propertyhouseinvoice) => await ViewDetails(propertyhouseinvoice.Invoiceid));
+            OnCancelClickedCommand = new Command(OnCancelClicked);
         }
 
         private async Task LoadItems()
@@ -112,6 +114,10 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             {
                 IsProcessing = false;
             }
+        }
+        private void OnOkButtonClicked()
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
     }
 }
