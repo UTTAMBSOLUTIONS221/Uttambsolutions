@@ -53,7 +53,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomtenantsdata/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicedatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
                     Items.Clear();
