@@ -89,7 +89,7 @@ namespace API.Controllers
         }
         [AllowAnonymous]
         [HttpGet("Gettenantmonthlyinvoicedetaildatabyinvoiceid/{InvoiceId}")]
-        public async Task<MonthlyRentInvoiceModel> Gettenantmonthlyinvoicedetaildatabyinvoiceid(long InvoiceId)
+        public async Task<TenantMonthlyInvoiceDetailData> Gettenantmonthlyinvoicedetaildatabyinvoiceid(long InvoiceId)
         {
             return await bl.Gettenantmonthlyinvoicedetaildatabyinvoiceid(InvoiceId);
         }

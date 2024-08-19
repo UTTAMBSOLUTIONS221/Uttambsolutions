@@ -4,6 +4,10 @@
     {
         public List<MonthlyRentInvoiceModel>? Data { get; set; }
     }
+    public class TenantMonthlyInvoiceDetailData
+    {
+        public MonthlyRentInvoiceModel? Data { get; set; }
+    }
     public class MonthlyRentInvoiceModel
     {
         public int Invoiceid { get; set; }

@@ -446,7 +446,7 @@ namespace DBL.Repositories
                 }
             }
         }
-        public MonthlyRentInvoiceModel Gettenantmonthlyinvoicedetaildatabyinvoiceid(long Invoiceid)
+        public TenantMonthlyInvoiceDetailData Gettenantmonthlyinvoicedetaildatabyinvoiceid(long Invoiceid)
         {
             using (var connection = new SqlConnection(_connString))
             {
@@ -458,11 +458,11 @@ namespace DBL.Repositories
                 string systemtenantmonthlyinvoicedetaildataJson = parameters.Get<string>("@Systemtenantmonthlyinvoicedetaildata");
                 if (systemtenantmonthlyinvoicedetaildataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<MonthlyRentInvoiceModel>(systemtenantmonthlyinvoicedetaildataJson);
+                    return JsonConvert.DeserializeObject<TenantMonthlyInvoiceDetailData>(systemtenantmonthlyinvoicedetaildataJson);
                 }
                 else
                 {
-                    return new MonthlyRentInvoiceModel();
+                    return new TenantMonthlyInvoiceDetailData();
                 }
             }
         }

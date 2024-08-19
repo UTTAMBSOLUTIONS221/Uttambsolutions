@@ -999,7 +999,7 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<MonthlyRentInvoiceModel> Gettenantmonthlyinvoicedetaildatabyinvoiceid(long InvoiceId)
+        public Task<TenantMonthlyInvoiceDetailData> Gettenantmonthlyinvoicedetaildatabyinvoiceid(long InvoiceId)
         {
             return Task.Run(() =>
             {

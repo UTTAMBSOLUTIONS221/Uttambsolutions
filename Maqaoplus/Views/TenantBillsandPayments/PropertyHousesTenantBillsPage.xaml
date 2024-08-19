@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:Maqaoplus.ViewModels.TenantBillsandPayments"
              x:Class="Maqaoplus.Views.TenantBillsandPayments.PropertyHousesTenantBillsPage"
-             Title="Bills">
-
-    <ContentPage.BindingContext>
-        <viewmodels:PropertyHousesTenantBillsViewModel />
-    </ContentPage.BindingContext>
+             Title="BILLS">
 
     <Grid>
         <!-- Define Row Heights for Header and Content -->
@@ -51,7 +46,7 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="0" HorizontalTextAlignment="Center"> 
+                                    <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="0" HorizontalTextAlignment="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Invoice #: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
@@ -70,7 +65,7 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-  
+
                                     <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="2">
                                         <Label.FormattedText>
                                             <FormattedString>
@@ -79,7 +74,7 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    
+
                                     <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="3">
                                         <Label.FormattedText>
                                             <FormattedString>
