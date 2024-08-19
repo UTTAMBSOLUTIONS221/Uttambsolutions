@@ -65,7 +65,6 @@
                                     <td><p class="mb-0"><span class="badge badge-success custom-badge"><strong>Has Balcony:</strong> @item.Propertyhousebalcony</span></p></td>
                                     <td class="text-right">
                                         <a asp-action="Addpropertyhouseroom" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Houseroomid="@item.Systempropertyhouseroomid" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Manage</a>
-                                      @*   <a asp-action="Details" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Houseroomid="@item.Systempropertyhouseroomid" asp-route-Ownerid="0" asp-area="" id="CAN_VIEW_PROPERTY_HOUSE_DETAILS" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Details</a> *@
                                     </td>
                                 </tr>
                             }
