@@ -115,7 +115,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
                 IsProcessing = false;
             }
         }
-        private void OnOkButtonClicked()
+        private void OnCancelClicked()
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
