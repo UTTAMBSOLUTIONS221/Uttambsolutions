@@ -1,9 +1,8 @@
 ﻿using DBL.Models;
-using Maqaoplus.ViewModels.TenantBillsandPayments.Modals;
+using Maqaoplus.Views.TenantBillsandPayments.Modals;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-
 namespace Maqaoplus.ViewModels.TenantBillsandPayments
 {
     public class PropertyHousesTenantBillsViewModel : BaseViewModel

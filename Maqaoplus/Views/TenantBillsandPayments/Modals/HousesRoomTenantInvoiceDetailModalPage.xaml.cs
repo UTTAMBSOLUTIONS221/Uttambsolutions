@@ -1,4 +1,5 @@
-namespace Maqaoplus.ViewModels.TenantBillsandPayments.Modals;
+using Maqaoplus.ViewModels.TenantBillsandPayments;
+namespace Maqaoplus.Views.TenantBillsandPayments.Modals;
 
 public partial class HousesRoomTenantInvoiceDetailModalPage : ContentPage
 {
