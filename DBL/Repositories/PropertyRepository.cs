@@ -448,6 +448,8 @@ namespace DBL.Repositories
         }
         public TenantMonthlyInvoiceDetailData Gettenantmonthlyinvoicedetaildatabyinvoiceid(long Invoiceid)
         {
+            TenantMonthlyInvoiceDetailData response = new TenantMonthlyInvoiceDetailData();
+            MonthlyRentInvoiceModel responseData = new MonthlyRentInvoiceModel();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -458,11 +460,15 @@ namespace DBL.Repositories
                 string systemtenantmonthlyinvoicedetaildataJson = parameters.Get<string>("@Systemtenantmonthlyinvoicedetaildata");
                 if (systemtenantmonthlyinvoicedetaildataJson != null)
                 {
+                    Object responseJson = JObject.Parse(systemtenantmonthlyinvoicedetaildataJson);
+                    JObject roomResponseJson = JObject.Parse(responseJson["Data"].ToString());
                     return JsonConvert.DeserializeObject<TenantMonthlyInvoiceDetailData>(systemtenantmonthlyinvoicedetaildataJson);
+                    response.Data = responseData;
+                    return response;
                 }
                 else
                 {
-                    return new TenantMonthlyInvoiceDetailData();
+                    return response;
                 }
             }
         }
