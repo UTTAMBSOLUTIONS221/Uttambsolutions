@@ -19,6 +19,7 @@
         public DateTime Duedate { get; set; }
         public decimal Amount { get; set; }
         public decimal Discount { get; set; }
+        public decimal Balance { get; set; }
         public bool Ispaid { get; set; }
         public decimal Paidamount { get; set; }
         public bool Issent { get; set; }
