@@ -6,12 +6,14 @@ using Maqaoplus.ViewModels.PropertyHouse;
 using Maqaoplus.ViewModels.PropertyHouseTenants;
 using Maqaoplus.ViewModels.Reports;
 using Maqaoplus.ViewModels.Startup;
+using Maqaoplus.ViewModels.TenantBillsandPayments;
 using Maqaoplus.Views;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.PropertyHouseTenants;
 using Maqaoplus.Views.Reports;
 using Maqaoplus.Views.Startup;
+using Maqaoplus.Views.TenantBillsandPayments;
 
 namespace Maqaoplus
 {
@@ -52,6 +54,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<PropertyHousesDetailPage>();
             builder.Services.AddSingleton<PropertyHousesTenantDetailPage>();
             builder.Services.AddSingleton<SystemPropertyOwnerReportsPage>();
+            builder.Services.AddSingleton<PropertyHousesTenantBillsPage>();
 
             // View Models
             builder.Services.AddSingleton<AppShellViewModel>();
@@ -69,6 +72,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<Propertyhousetenantviewmodel>();
             builder.Services.AddSingleton<PropertyHousesTenantDetailViewModel>();
             builder.Services.AddSingleton<SystemReportsViewModel>();
+            builder.Services.AddSingleton<PropertyHousesTenantBillsViewModel>();
 
             return builder.Build();
         }

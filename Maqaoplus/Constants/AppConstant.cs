@@ -4,6 +4,7 @@ using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.PropertyHouseTenants;
 using Maqaoplus.Views.Reports;
+using Maqaoplus.Views.TenantBillsandPayments;
 
 namespace Maqaoplus.Constants
 {
@@ -154,7 +155,7 @@ namespace Maqaoplus.Constants
                                 {
                                     Icon = Icons.user,
                                     Title = "Monthly Bills",
-                                    ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                                    ContentTemplate = new DataTemplate(() => new PropertyHousesTenantBillsPage(serviceProvider)),
                                 },
                                  new ShellContent
                                 {
