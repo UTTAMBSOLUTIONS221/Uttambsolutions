@@ -329,9 +329,9 @@
             }
         }
         function validateHouseDepositandFees(depositAmountInput, depositCheckboxInput) {
-            const unitValue = parseInt(depositAmountInput.value, 10) || 0;
+            const depositUnitValue = parseInt(depositAmountInput.value, 10) || 0;
 
-            if (unitValue > 0) {
+            if (depositUnitValue > 0) {
                 depositCheckboxInput.classList.add('is-invalid');
                 depositCheckboxInput.required = true;
                 depositCheckboxInput.checked = true;
