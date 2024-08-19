@@ -159,7 +159,7 @@
                         <th hidden>Roomsizeid</th>
                         <th class="font-weight-light fw-light">Room Size</th>
                         <th class="font-weight-light fw-light">Units</th>
-                        <th class="font-weight-light fw-light">We have?</th>
+                        <th class="font-weight-light fw-light" hidden>We have?</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -172,7 +172,7 @@
                                 <td hidden>@data.Systemhousesizeid</td>
                                 <td><input type="text" class="form-control form-control-sm font-weight-light system-house-size-name" value="@data.Systemhousesizename" readonly /></td>
                                 <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-size-unit" value="@data.Systempropertyhousesizeunits" required /></td>
-                                <td><input type="checkbox" class="form-control form-control-sm font-weight-light system-property-house-size-wehave" asp-for="@data.Systempropertyhousesizewehave" value="@data.Systempropertyhousesizewehave" /></td>
+                                <td><input type="checkbox" class="form-control form-control-sm font-weight-light system-property-house-size-wehave" asp-for="@data.Systempropertyhousesizewehave" value="@data.Systempropertyhousesizewehave" hidden/></td>
                             </tr>
                         }
                     }
@@ -198,7 +198,7 @@
                                 <th hidden>DepositId</th>
                                 <th class="font-weight-light fw-light">Deposit Name</th>
                                 <th class="font-weight-light fw-light">Deposit Amount</th>
-                                <th class="font-weight-light fw-light">We have?</th>
+                                <th class="font-weight-light fw-light" hidden>We have?</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -219,7 +219,7 @@
                                                    required />
                                         </td>
                                         <td>
-                                            <input type="checkbox" class="form-control form-control-sm font-weight-light system-property-house-size-deposit-fee-wehave" asp-for="@data.Systempropertyhousesizedepositfeewehave" value="@data.Systempropertyhousesizedepositfeewehave" />
+                                            <input type="checkbox" class="form-control form-control-sm font-weight-light system-property-house-size-deposit-fee-wehave" asp-for="@data.Systempropertyhousesizedepositfeewehave" value="@data.Systempropertyhousesizedepositfeewehave" hidden />
                                         </td>
                                     </tr>
                                 }
