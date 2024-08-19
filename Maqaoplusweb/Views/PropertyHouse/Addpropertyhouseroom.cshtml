@@ -78,7 +78,7 @@
     </div>
     <hr />
     <div class="row">
-        <div class="col-sm-7">
+        <div class="col-sm-7" id="SystempropertyhouseroomwatermetersId" style="display: none;">
             <div class="row">
                 <div class="col-sm-12 table-responsive">
                     <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="roommeterreadingtable">
@@ -140,11 +140,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-5">
-            <div class="input-group">
-                <input type="number" class="form-control form-control-sm" id="Systemstaffidnumberid" placeholder="Enter id number to search" aria-label="Idnumbersearch" />
-                <div class="input-group-append">
-                    <button class="btn btn-sm btn-secondary" onclick="searchsystemstaffdata()">Search</button>
+        <div class="col-sm-5" id="SystempropertyhouseroomtenantsId">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="input-group">
+                        <input type="number" class="form-control form-control-sm" id="Systemstaffidnumberid" placeholder="Enter id number to search" aria-label="Idnumbersearch" />
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-secondary" onclick="searchsystemstaffdata()">Search</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="searchResults" class="col-sm-12 d-none">
