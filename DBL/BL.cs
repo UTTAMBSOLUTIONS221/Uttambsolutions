@@ -999,6 +999,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<MonthlyRentInvoiceModel> Gettenantmonthlyinvoicedetaildatabyinvoiceid(long InvoiceId)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Gettenantmonthlyinvoicedetaildatabyinvoiceid(InvoiceId);
+                return Resp;
+            });
+        }
 
         //public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
         //{
