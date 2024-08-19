@@ -23,6 +23,7 @@
         public bool Ispaid { get; set; }
         public decimal Paidamount { get; set; }
         public bool Issent { get; set; }
+        public string Sentstatus => Issent ? "Sent" : "Not Sent";
         public string? Paidstatus { get; set; }
     }
 
