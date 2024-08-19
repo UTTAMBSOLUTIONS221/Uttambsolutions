@@ -256,22 +256,92 @@
                  if (navigationButtons) navigationButtons.classList.remove('d-none');
              }
          }
-
          function validateSection(sectionNumber) {
-             const section = document.querySelector('#section' + sectionNumber);
-             const inputs = section.querySelectorAll('input[required], select[required], textarea[required]');
-             let isValid = true;
-             inputs.forEach(input => {
-                 if (!input.value.trim()) {
-                     input.classList.add('is-invalid');
-                     isValid = false;
-                 } else {
-                     input.classList.remove('is-invalid');
-                 }
-             });
-             return isValid;
-         }
+            const section = document.querySelector('#section' + sectionNumber);
+            const inputs = section.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
 
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            });
+
+            // Additional validation for the rows
+            const rowHouseSizes = section.querySelectorAll("tr");
+
+            rowHouseSizes.forEach(row => {
+                const unitInput = row.querySelector(".system-property-house-size-unit");
+                const checkboxInput = row.querySelector(".system-property-house-size-wehave");
+
+                // Ensure both inputs exist before validating
+                if (unitInput && checkboxInput) {
+                    // Initial validation for each row when the page loads
+                    validateHouseSizes(unitInput, checkboxInput);
+
+                    // Validate when the unit input changes
+                    unitInput.addEventListener("input", function () {
+                        validateHouseSizes(unitInput, checkboxInput);
+                    });
+                } else {
+                    console.warn("One or both inputs are missing in this row.");
+                }
+            });
+              // Additional validation for the rows
+            const rowHouseDepositsandFees = section.querySelectorAll("tr");
+
+             rowHouseDepositsandFees.forEach(row => {
+                const depositAmountInput = row.querySelector(".system-property-house-deposit-fee-amount");
+                const depositCheckboxInput = row.querySelector(".system-property-house-size-wehave");
+
+                // Ensure both inputs exist before validating
+                if (depositAmountInput && depositCheckboxInput) {
+                    // Initial validation for each row when the page loads
+                    validateHouseDepositandFees(depositAmountInput, depositCheckboxInput);
+
+                    // Validate when the unit input changes
+                    depositAmountInput.addEventListener("input", function () {
+                        validateHouseDepositandFees(depositAmountInput, depositCheckboxInput);
+                    });
+                } else {
+                    console.warn("One or both inputs are missing in this row.");
+                }
+            });
+
+
+            return isValid;
+        }
+
+       function validateHouseSizes(unitInput, checkboxInput) {
+            const unitValue = parseInt(unitInput.value, 10) || 0;
+
+            if (unitValue > 0) {
+                checkboxInput.classList.add('is-invalid');
+                checkboxInput.required = true;
+                checkboxInput.checked = true;
+            } else {
+                checkboxInput.classList.remove('is-invalid');
+                checkboxInput.required = false;
+                checkboxInput.checked = false;
+            }
+        }
+        function validateHouseDepositandFees(depositAmountInput, depositCheckboxInput) {
+            const unitValue = parseInt(depositAmountInput.value, 10) || 0;
+
+            if (unitValue > 0) {
+                depositCheckboxInput.classList.add('is-invalid');
+                depositCheckboxInput.required = true;
+                depositCheckboxInput.checked = true;
+            } else {
+                depositCheckboxInput.classList.remove('is-invalid');
+                depositCheckboxInput.required = false;
+                depositCheckboxInput.checked = false;
+            }
+        }
+         
          function nextSection() {
              if (validateSection(currentSection)) {
                  const sections = document.querySelectorAll('.section');
