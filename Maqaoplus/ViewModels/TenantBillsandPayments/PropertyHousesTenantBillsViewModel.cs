@@ -38,7 +38,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
         {
             Items = new ObservableCollection<MonthlyRentInvoiceModel>();
             LoadItemsCommand = new Command(async () => await LoadItems());
-            //ViewDetailsCommand = new Command<MonthlyRentInvoiceModel>(async (propertyhousetenant) => await ViewDetails(propertyhousetenant.Idnumber));
+            ViewDetailsCommand = new Command<MonthlyRentInvoiceModel>(async (propertyhouseinvoice) => await ViewDetails(propertyhouseinvoice.Invoiceid));
         }
 
         // Constructor with ServiceProvider parameter
@@ -74,14 +74,14 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
                 IsProcessing = false;
             }
         }
-        private async Task ViewDetails(long propertyhousetenantidnumber)
+        private async Task ViewDetails(long Invoiceid)
         {
             IsProcessing = true;
             IsDataLoaded = false;
             try
             {
-                var encodedPropertyhousetenantidnumber = Uri.EscapeDataString(propertyhousetenantidnumber.ToString());
-                await Shell.Current.GoToAsync($"PropertyHousesTenantDetailPage?Propertyhousetenantidnumber={encodedPropertyhousetenantidnumber}");
+                var encodedPropertyInvoiceid = Uri.EscapeDataString(Invoiceid.ToString());
+                await Shell.Current.GoToAsync($"PropertyHousesTenantDetailPage?Propertyhousetenantidnumber={encodedPropertyInvoiceid}");
                 IsDataLoaded = true;
             }
             catch (Exception ex)
