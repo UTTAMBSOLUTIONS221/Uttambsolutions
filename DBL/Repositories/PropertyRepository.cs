@@ -468,7 +468,7 @@ namespace DBL.Repositories
                     responseData.Financetransactionid = Convert.ToInt32(invoiceResponseJson["Financetransactionid"]);
                     responseData.Transactioncode = invoiceResponseJson["TransactionCode"]?.ToString();
                     responseData.Invoiceno = invoiceResponseJson["Invoiceno"]?.ToString();
-                    responseData.Propertyrouseroomid = Convert.ToInt32(invoiceResponseJson["Propertyrouseroomid"]);
+                    responseData.Propertyhouseroomid = Convert.ToInt32(invoiceResponseJson["Propertyhouseroomid"]);
                     responseData.Systemhousesizename = invoiceResponseJson["Systemhousesizename"]?.ToString();
                     responseData.Systempropertyhousesizename = invoiceResponseJson["Systempropertyhousesizename"]?.ToString();
                     responseData.Propertyhouseroomtenantid = Convert.ToInt32(invoiceResponseJson["Propertyhouseroomtenantid"]);
