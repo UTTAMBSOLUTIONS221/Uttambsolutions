@@ -110,9 +110,10 @@ namespace Maqaoplusweb.Controllers
             return PartialView(model);
         }
         [HttpGet]
-        public async Task<IActionResult> Propertyhouseroom()
+        public async Task<IActionResult> Propertyhouseroom(long Propertyhouseid)
         {
-            var data = await bl.Getsystempropertyhousedetaildatabyownerid(SessionUserData.Usermodel.Userid);
+            // var data = await bl.Getsystempropertyhousedetaildatabyownerid(SessionUserData.Usermodel.Userid);
+            var data = await bl.Getsystempropertyhousedetaildatabyhouseid(Propertyhouseid);
             return View(data);
         }
         [HttpGet]
