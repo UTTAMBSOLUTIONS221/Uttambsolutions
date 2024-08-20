@@ -510,6 +510,26 @@ namespace DBL.Repositories
             }
         }
 
+        public TenantMonthlyInvoicePaymentData Gettenantmonthlyinvoicepaymentdatabyownerid(long Ownerid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Ownerid", Ownerid);
+                parameters.Add("@Systemtenantmonthlyinvoicepaymentdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Gettenantmonthlyinvoicepaymentdatabyownerid", parameters, commandType: CommandType.StoredProcedure);
+                string systemtenantmonthlyinvoicedataJson = parameters.Get<string>("@Systemtenantmonthlyinvoicepaymentdata");
+                if (systemtenantmonthlyinvoicedataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<TenantMonthlyInvoicePaymentData>(systemtenantmonthlyinvoicedataJson);
+                }
+                else
+                {
+                    return new TenantMonthlyInvoicePaymentData();
+                }
+            }
+        }
         public TenantMonthlyInvoicePaymentData Gettenantmonthlyinvoicepaymentdatabytenantid(long Tenantid)
         {
             using (var connection = new SqlConnection(_connString))
@@ -517,9 +537,9 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Tenantid", Tenantid);
-                parameters.Add("@Systemtenantmonthlyinvoicedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                parameters.Add("@Systemtenantmonthlyinvoicepaymentdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Gettenantmonthlyinvoicepaymentdatabytenantid", parameters, commandType: CommandType.StoredProcedure);
-                string systemtenantmonthlyinvoicedataJson = parameters.Get<string>("@Systemtenantmonthlyinvoicedata");
+                string systemtenantmonthlyinvoicedataJson = parameters.Get<string>("@Systemtenantmonthlyinvoicepaymentdata");
                 if (systemtenantmonthlyinvoicedataJson != null)
                 {
                     return JsonConvert.DeserializeObject<TenantMonthlyInvoicePaymentData>(systemtenantmonthlyinvoicedataJson);

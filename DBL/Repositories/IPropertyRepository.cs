@@ -29,5 +29,6 @@ namespace DBL.Repositories
         TenantMonthlyInvoiceDetailData Gettenantmonthlyinvoicedetaildatabyinvoiceid(long Invoiceid);
         Genericmodel Registerpropertyhouseroomrentpaymentrequestdata(string JsonData);
         TenantMonthlyInvoicePaymentData Gettenantmonthlyinvoicepaymentdatabytenantid(long Tenantid);
+        TenantMonthlyInvoicePaymentData Gettenantmonthlyinvoicepaymentdatabyownerid(long Ownerid);
     }
 }

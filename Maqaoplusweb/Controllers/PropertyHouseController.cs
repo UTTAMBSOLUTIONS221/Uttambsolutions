@@ -199,6 +199,12 @@ namespace Maqaoplusweb.Controllers
             var data = await bl.Gettenantmonthlyinvoicedatabyownerid(SessionUserData.Usermodel.Userid);
             return PartialView(data);
         }
+        [HttpGet]
+        public async Task<IActionResult> TenantmonthlyinvoicePaymentdata()
+        {
+            var data = await bl.Gettenantmonthlyinvoicepaymentdatabyownerid(SessionUserData.Usermodel.Userid);
+            return PartialView(data);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Confirmhouseroompayment(long Houseroomid, long Houseroomtenantid)
