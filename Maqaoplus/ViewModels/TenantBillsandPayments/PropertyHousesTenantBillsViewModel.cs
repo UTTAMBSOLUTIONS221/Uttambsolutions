@@ -78,6 +78,38 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             }
         }
 
+        private string _InvoicePayemtCode;
+        public string InvoicePayemtCode
+        {
+            get => _InvoicePayemtCode;
+            set
+            {
+                _InvoicePayemtCode = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _invoicePayemtModeError;
+        public string InvoicePayemtModeError
+        {
+            get => _invoicePayemtModeError;
+            set
+            {
+                _invoicePayemtModeError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _invoicePayemtCodeError;
+        public string InvoicePayemtCodeError
+        {
+            get => _invoicePayemtCodeError;
+            set
+            {
+                _invoicePayemtCodeError = value;
+                OnPropertyChanged();
+            }
+        }
         private async Task LoadItems()
         {
             IsProcessing = true;
