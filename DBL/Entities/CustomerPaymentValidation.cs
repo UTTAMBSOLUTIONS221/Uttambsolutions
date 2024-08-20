@@ -4,6 +4,8 @@
     {
         public long CustomerPaymentId { get; set; }
         public long FinanceTransactionId { get; set; }
+        public long Houseroomid { get; set; }
+        public long Tenantid { get; set; }
         public string? TransactionReference { get; set; }
         public decimal Paidamount { get; set; }
         public decimal Actualamount { get; set; }
