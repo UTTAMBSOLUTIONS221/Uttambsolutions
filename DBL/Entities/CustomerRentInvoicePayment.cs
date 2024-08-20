@@ -16,12 +16,8 @@
         public string? Memo { get; set; }
         public string? Drawerbank { get; set; }
         public string? Depositbank { get; set; }
-        public bool Isactive { get; set; }
-        public bool Isdeleted { get; set; }
         public long Paidby { get; set; }
         public string? Slipreference { get; set; }
-        public string? Provider { get; set; }
-        public long Createdby { get; set; }
         public DateTime Datecreated { get; set; }
     }
 }
