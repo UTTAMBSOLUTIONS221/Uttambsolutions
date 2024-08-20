@@ -205,7 +205,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
                 InvoicePaymentData.Tenantid = TenantInvoiceDetailData.Propertyhouseroomtenantid;
                 InvoicePaymentData.Houseromid = TenantInvoiceDetailData.Propertyhouseroomid;
                 InvoicePaymentData.Paymentmodeid = Convert.ToInt64(SelectedPaymentModes.Value);
-                InvoicePaymentData.Amount = 0;
+                InvoicePaymentData.Amount = TenantInvoiceDetailData.Amount;
                 InvoicePaymentData.Transactionreference = InvoicePayemtCode;
                 InvoicePaymentData.Transactiondate = DateTime.UtcNow;
                 InvoicePaymentData.Ispaymentvalidated = false;
