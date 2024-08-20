@@ -88,44 +88,58 @@
                     </StackLayout>
                 </Frame>
 
-
                 <Frame Grid.Row="2" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
                     <StackLayout Padding="10">
                         <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                            <Label Text="Payment Details" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="18" Margin="0,0,0,10"/>
+                            <Label Text="Payment Details" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
                             <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
                         </StackLayout>
+
                         <StackLayout Padding="0" Spacing="8">
-                            <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                            <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Label Text="Name:" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Spacing="5" HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding TenantInvoiceDetailData.Tenantname}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                </StackLayout>
-                                <Label Text="Invoice #:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                                <Label Text="{Binding TenantInvoiceDetailData.Invoiceno}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                <Label Text="House #:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                                <Label Text="{Binding TenantInvoiceDetailData.Systemhousesizename}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                <Label Text="Amount:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                                <Label Text="{Binding TenantInvoiceDetailData.Balance,StringFormat='{0:#,##0.00}'}" TextColor="Red" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+
+                                <!-- Table Headers -->
+                                <Label Text="Pay Mode" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" HorizontalOptions="StartAndExpand"/>
+                                <Label Text="Institution" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center"/>
+                                <Label Text="Paybill" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="2" HorizontalOptions="End"/>
+                                <Label Text="Account" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="3" HorizontalOptions="End"/>
                             </Grid>
+
+                            <!-- Dynamic Table Content -->
+                            <CollectionView ItemsSource="{Binding TenantInvoiceDetailData.InvoiceDetails}" Margin="0">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Text="{Binding Housedepositfeename}" FontSize="16" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                            <Label Text="{Binding Housedepositfeename}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                            <Label Text="{Binding Units, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Column="2" LineBreakMode="TailTruncation" HorizontalOptions="Center"/>
+                                            <Label Text="{Binding Price, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Column="3" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
 
+
                 <Frame Grid.Row="3" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
                     <StackLayout Padding="10">
                         <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                            <Label Text="Payment Confirmation" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="18" Margin="0,0,0,10"/>
+                            <Label Text="Payment Confirmation" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
                             <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
                         </StackLayout>
                         <StackLayout Padding="0" Spacing="8">
@@ -150,15 +164,20 @@
                                 </StackLayout>
                             </Grid>
                         </StackLayout>
+                        <!-- Navigation Buttons -->
+                        <StackLayout Padding="10" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0" Padding="10">
+                                <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="#808080" TextColor="White" Padding="12" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
+                                <Button Text="Confirm" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
+                            </FlexLayout>
+                        </StackLayout>
                     </StackLayout>
                 </Frame>
             </Grid>
-
-            <!-- Navigation Buttons -->
-            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0" Padding="10">
-                <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="#808080" TextColor="White" Padding="12" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
-                <Button Text="Confirm" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
-            </FlexLayout>
+            <!-- Footer -->
+            <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="© 2024 Maqaoplus" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+            </StackLayout>
         </StackLayout>
     </VerticalStackLayout>
 </ContentPage>
