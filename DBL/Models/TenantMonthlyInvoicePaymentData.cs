@@ -14,6 +14,30 @@
         public string? PropertyHouseName { get; set; }
         public string? SystemPropertyHouseSizeName { get; set; }
         public string? SystemHouseSizeName { get; set; }
+        public string? SystemHouseRoomSizeName
+        {
+            get
+            {
+                // Ensure that both properties are not null before concatenating
+                if (!string.IsNullOrEmpty(SystemPropertyHouseSizeName) && !string.IsNullOrEmpty(SystemHouseSizeName))
+                {
+                    return $"{SystemPropertyHouseSizeName} - {SystemHouseSizeName}";
+                }
+                // Handle cases where one or both properties might be null or empty
+                else if (!string.IsNullOrEmpty(SystemPropertyHouseSizeName))
+                {
+                    return SystemPropertyHouseSizeName;
+                }
+                else if (!string.IsNullOrEmpty(SystemHouseSizeName))
+                {
+                    return SystemHouseSizeName;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
         public int PaymentModeId { get; set; }
         public string? PaymentMode { get; set; }
         public int FinanceTransactionId { get; set; }
