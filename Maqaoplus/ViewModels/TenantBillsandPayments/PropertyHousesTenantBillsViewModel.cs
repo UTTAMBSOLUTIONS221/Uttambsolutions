@@ -219,7 +219,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
                 InvoicePaymentData.Datecreated = DateTime.UtcNow;
 
 
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, InvoicePaymentData);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomrentpaymentrequestdata", HttpMethod.Post, InvoicePaymentData);
                 if (response.StatusCode == 200)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
