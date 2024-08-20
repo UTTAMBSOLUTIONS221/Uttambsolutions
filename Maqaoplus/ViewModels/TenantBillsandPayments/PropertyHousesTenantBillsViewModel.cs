@@ -11,10 +11,8 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
     {
         private readonly Services.ServiceProvider _serviceProvider;
         public ObservableCollection<MonthlyRentInvoiceModel> Items { get; }
-        public ObservableCollection<CustomerPaymentData> PaymentItems { get; }
         private MonthlyRentInvoiceModel _tenantInvoiceDetailData;
         public ICommand LoadItemsCommand { get; }
-        public ICommand LoadPaymentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand OnOkClickedCommand { get; }
@@ -56,9 +54,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
         {
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<MonthlyRentInvoiceModel>();
-            PaymentItems = new ObservableCollection<CustomerPaymentData>();
             LoadItemsCommand = new Command(async () => await LoadItems());
-            LoadPaymentItemsCommand = new Command(async () => await LoadPaymentItems());
             ViewDetailsCommand = new Command<MonthlyRentInvoiceModel>(async (propertyhouseinvoice) => await ViewDetails(propertyhouseinvoice.Invoiceid));
             OnCancelClickedCommand = new Command(OnCancelClicked);
             OnOkClickedCommand = new Command(async () => await SaveHouseInvoicePaymentDataAsync());
@@ -274,36 +270,6 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             IsProcessing = isValid;
 
             return isValid;
-        }
-
-
-        private async Task LoadPaymentItems()
-        {
-            IsProcessing = true;
-            IsDataLoaded = false;
-
-            try
-            {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicepaymentdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
-                {
-                    PaymentItems.Clear();
-                    foreach (var item in items)
-                    {
-                        var payments = item.ToObject<CustomerPaymentData>();
-                        PaymentItems.Add(payments);
-                    }
-                }
-                IsDataLoaded = true;
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                IsProcessing = false;
-            }
         }
     }
 }
