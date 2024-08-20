@@ -31,11 +31,28 @@
                 <CollectionView ItemsSource="{Binding Items}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Padding="10" Margin="0,0,0,5" HasShadow="True" BorderColor="LightGray" CornerRadius="10" BackgroundColor="White" HeightRequest="130">
+                            <Frame Padding="10" Margin="0,0,0,5" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="130">
+                                <!-- Set background color based on Paidstatus -->
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding Paidstatus}" Value="PAID">
+                                        <Setter Property="BackgroundColor" Value="#DFF0D8" />
+                                        <!-- Greenish background -->
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding Paidstatus}" Value="NOT PAID">
+                                        <Setter Property="BackgroundColor" Value="#F2DEDE" />
+                                        <!-- Reddish background -->
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding Paidstatus}" Value="PARTIALLY PAID">
+                                        <Setter Property="BackgroundColor" Value="#FCF8E3" />
+                                        <!-- Yellowish background -->
+                                    </DataTrigger>
+                                </Frame.Triggers>
+
                                 <!-- Tap Gesture Recognizer -->
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}" CommandParameter="{Binding .}" />
                                 </Frame.GestureRecognizers>
+
                                 <Grid Padding="5">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -108,7 +125,6 @@
                                             </DataTrigger>
                                         </Label.Triggers>
                                     </Label>
-
                                 </Grid>
                             </Frame>
                         </DataTemplate>
