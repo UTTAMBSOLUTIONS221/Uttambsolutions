@@ -1,4 +1,5 @@
-﻿using DBL.Models;
+﻿using DBL.Enum;
+using DBL.Models;
 using Maqaoplus.Views.TenantBillsandPayments.Modals;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -55,6 +56,27 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             ViewDetailsCommand = new Command<MonthlyRentInvoiceModel>(async (propertyhouseinvoice) => await ViewDetails(propertyhouseinvoice.Invoiceid));
             OnCancelClickedCommand = new Command(OnCancelClicked);
         }
+        private ObservableCollection<ListModel> _systemPaymentModes;
+        public ObservableCollection<ListModel> SystemPaymentModes
+        {
+            get => _systemPaymentModes;
+            set
+            {
+                _systemPaymentModes = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ListModel _selectedPaymentModes;
+        public ListModel SelectedPaymentModes
+        {
+            get => _selectedPaymentModes;
+            set
+            {
+                _selectedPaymentModes = value;
+                OnPropertyChanged();
+            }
+        }
 
         private async Task LoadItems()
         {
@@ -94,13 +116,11 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
                 if (response != null && response.Data != null)
                 {
                     TenantInvoiceDetailData = JsonConvert.DeserializeObject<MonthlyRentInvoiceModel>(response.Data.ToString());
-                    //var kitchentypeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemkitchentype, HttpMethod.Get);
-
-                    //if (kitchentypeResponse != null)
-                    //{
-                    //    Systemkitchentype = new ObservableCollection<ListModel>(kitchentypeResponse);
-                    //    SelectedKitchentype = Systemkitchentype.FirstOrDefault(x => x.Value == _houseroomData.Kitchentypeid.ToString());
-                    //}
+                    var SystemPaymentModeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemcashpaymentmodetype, HttpMethod.Get);
+                    if (SystemPaymentModeResponse != null)
+                    {
+                        SystemPaymentModes = new ObservableCollection<ListModel>(SystemPaymentModeResponse);
+                    }
                     var modalPage = new HousesRoomTenantInvoiceDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                     IsDataLoaded = true;
