@@ -1007,6 +1007,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Registerpropertyhouseroomrentpaymentrequestdata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Registerpropertyhouseroomrentpaymentrequestdata(Obj);
+                return Resp;
+            });
+        }
 
         //public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
         //{

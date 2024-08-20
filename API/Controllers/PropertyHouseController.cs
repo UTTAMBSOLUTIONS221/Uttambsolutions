@@ -93,6 +93,11 @@ namespace API.Controllers
         {
             return await bl.Gettenantmonthlyinvoicedetaildatabyinvoiceid(InvoiceId);
         }
-
+        [AllowAnonymous]
+        [HttpPost("Registerpropertyhouseroomrentpaymentrequestdata")]
+        public async Task<Genericmodel> Registerpropertyhouseroomrentpaymentrequestdata(CustomerRentInvoicePayment model)
+        {
+            return await bl.Registerpropertyhouseroomrentpaymentrequestdata(JsonConvert.SerializeObject(model));
+        }
     }
 }
