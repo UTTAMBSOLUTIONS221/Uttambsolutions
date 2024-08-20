@@ -259,7 +259,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             }
             if (SelectedPaymentModes == null)
             {
-                InvoicePayemtModeError = "Payment mode is required.";
+                InvoicePayemtModeError = "Pay mode is required.";
                 isValid = false;
             }
             else

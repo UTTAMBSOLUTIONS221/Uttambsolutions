@@ -7,10 +7,7 @@
         <!-- Step 1 -->
         <StackLayout Padding="0" Spacing="4">
             <!-- Header -->
-            <Label Text="{Binding TenantInvoiceDetailData.Invoiceno, StringFormat='#{0} - Invoice Details'}" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="18"  Margin="0,0,0,10"/>
-            <!-- Hidden Field for Systempropertyhouseroomid -->
-            <Entry IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
-            <Label Text="{Binding HouseRoomIdError}" TextColor="Red" Margin="0,4,0,0"/>
+            <Label Text="{Binding TenantInvoiceDetailData.Invoiceno, StringFormat='#{0} - Invoice Details'}" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="18"  Margin="0,0,0,0"/>
             <Grid Padding="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -27,7 +24,7 @@
                             <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
                         </StackLayout>
                         <StackLayout Padding="0" Spacing="8">
-                            <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                            <Grid ColumnSpacing="2" RowSpacing="0" HorizontalOptions="FillAndExpand">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -38,9 +35,11 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Label Text="{Binding TenantInvoiceDetailData.Tenantname, StringFormat='Tenant Name: {0}'}" Grid.Row="0" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
-                                <Label Text="{Binding TenantInvoiceDetailData.Systemhousesizename, StringFormat='House #: {0}'}" Grid.Row="1" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
-                                <Label Text="{Binding TenantInvoiceDetailData.Balance, StringFormat='Amount: {0:#,##0.00}'}" Grid.Row="2" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                <Entry IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" Grid.Row="0" Grid.Column="0" Margin="0,0,0,0" />
+                                <Label Text="{Binding HouseRoomIdError}" TextColor="Red" Margin="0,0,0,0" Grid.Row="0" Grid.Column="1" />
+                                <Label Text="{Binding TenantInvoiceDetailData.Tenantname, StringFormat='Tenant Name: {0}'}" Grid.Row="1" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                <Label Text="{Binding TenantInvoiceDetailData.Systemhousesizename, StringFormat='House #: {0}'}" Grid.Row="2" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                <Label Text="{Binding TenantInvoiceDetailData.Balance, StringFormat='Amount: {0:#,##0.00}'}" Grid.Row="3" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
                             </Grid>
                         </StackLayout>
                     </StackLayout>
@@ -143,36 +142,47 @@
                             <Label Text="Payment Confirmation" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
                             <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
                         </StackLayout>
-                        <StackLayout Padding="0" Spacing="8">
+                        <StackLayout Padding="0" Spacing="4">
                             <!-- Details Grid -->
-                            <Grid ColumnSpacing="12" RowSpacing="16">
+                            <Grid ColumnSpacing="12" RowSpacing="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <StackLayout Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout Grid.Row="0" Grid.Column="0">
                                     <Label Text="Payement Mode: " FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
                                     <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="0" HasShadow="False">
                                         <Picker ItemsSource="{Binding SystemPaymentModes}" SelectedItem="{Binding SelectedPaymentModes}" ItemDisplayBinding="{Binding Text}" Title="Select Payment Mode" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0"/>
                                     </Frame>
                                     <Label Text="{Binding InvoicePayemtModeError}" TextColor="Red" Margin="0,4,0,0"/>
                                 </StackLayout>
-                                <StackLayout Grid.Column="1">
+                                <StackLayout Grid.Row="0" Grid.Column="1">
                                     <Label Text="Payment Code: " FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
                                     <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="0" HasShadow="False">
                                         <Entry Text="{Binding InvoicePayemtCode}" />
                                     </Frame>
                                     <Label Text="{Binding InvoicePayemtCodeError}" TextColor="Red" Margin="0,4,0,0"/>
                                 </StackLayout>
+                                <StackLayout  Grid.Row="1" Grid.Column="0" Padding="8" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0">
+                                        <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="#808080" TextColor="White" Padding="8" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
+                                    </FlexLayout>
+                                </StackLayout>
+                                <StackLayout  Grid.Row="1" Grid.Column="1" Padding="8" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0">
+                                        <Button Text="Confirm" Command="{Binding OnOkClickedCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="8" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
+                                    </FlexLayout>
+                                </StackLayout>
                             </Grid>
                         </StackLayout>
                         <!-- Navigation Buttons -->
-                        <StackLayout Padding="10" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0" Padding="10">
-                                <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="#808080" TextColor="White" Padding="12" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
-                                <Button Text="Confirm" Command="{Binding OnOkClickedCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
-                            </FlexLayout>
-                        </StackLayout>
+                        
                     </StackLayout>
                 </Frame>
             </Grid>
