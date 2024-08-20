@@ -1020,7 +1020,7 @@ namespace DBL
         {
             return Task.Run(() =>
             {
-                var Resp = db.PropertyRepository.Gettenantmonthlyinvoicepaymentdatabyownerid(Tenantid);
+                var Resp = db.PropertyRepository.Gettenantmonthlyinvoicepaymentdatabyownerid(Ownerid);
                 return Resp;
             });
         }
