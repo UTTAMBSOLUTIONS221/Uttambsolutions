@@ -2,55 +2,160 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.TenantBillsandPayments.Modals.HousesRoomTenantInvoiceDetailModalPage"
-             BackgroundColor="White"
-             Padding="10">
+             BackgroundColor="White">
     <VerticalStackLayout>
         <!-- Step 1 -->
-        <StackLayout Padding="0" Spacing="16">
+        <StackLayout Padding="0" Spacing="8">
             <!-- Header -->
-            <Label Text="Payment Details" FontSize="22" FontAttributes="Bold" Padding="8,0" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#0a506c"/>
-
+            <Label Text="{Binding TenantInvoiceDetailData.Invoiceno, StringFormat='#{0} - Invoice Details'}" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="18"  Margin="0,0,0,10"/>
             <!-- Hidden Field for Systempropertyhouseroomid -->
             <Entry IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
-            <StackLayout>
-                <Label Text="Invoice: " FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
-                <Label Text="{Binding TenantInvoiceDetailData.Invoiceno}" FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
-            </StackLayout>
+            <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <StackLayout>
-                <Label Text="House: " FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
-                <Label Text="{Binding TenantInvoiceDetailData.Systemhousesizename}" FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
-            </StackLayout>
-            <StackLayout>
-                <Label Text="Amount: " FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
-                <Label Text="{Binding TenantInvoiceDetailData.Balance}" FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
-            </StackLayout>
+                <!-- Tenant Information Frame -->
+                <Frame Grid.Row="0" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
+                    <StackLayout Padding="10">
+                        <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <Label Text="Tenant Basic Information" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,7"/>
+                            <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Padding="0" Spacing="8">
+                            <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding TenantInvoiceDetailData.Tenantname, StringFormat='Tenant Name: {0}'}" Grid.Row="0" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                <Label Text="{Binding TenantInvoiceDetailData.Systemhousesizename, StringFormat='House #: {0}'}" Grid.Row="1" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                <Label Text="{Binding TenantInvoiceDetailData.Balance, StringFormat='Amount: {0:#,##0.00}'}" Grid.Row="2" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
+                    <StackLayout Padding="10">
+                        <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <Label Text="Invoice Details" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
+                            <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+
+                        <StackLayout Padding="0" Spacing="8">
+                            <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Table Headers -->
+                                <Label Text="Name" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" HorizontalOptions="Start"/>
+                                <Label Text="Unit" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center"/>
+                                <Label Text="Amount" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="2" HorizontalOptions="End"/>
+                            </Grid>
+
+                            <!-- Dynamic Table Content -->
+                            <CollectionView ItemsSource="{Binding TenantInvoiceDetailDataList}" Margin="0">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Text="{Binding Tenantname}" FontSize="16" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                            <Label Text="{Binding Systemhousesizename}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
+                                            <Label Text="{Binding Balance, StringFormat='{0:#,##0.00}'}" TextColor="Red" FontSize="16" Grid.Column="2" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
 
 
+                <Frame Grid.Row="2" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
+                    <StackLayout Padding="10">
+                        <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <Label Text="Payment Details" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="18" Margin="0,0,0,10"/>
+                            <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Padding="0" Spacing="8">
+                            <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="Name:" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Spacing="5" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding TenantInvoiceDetailData.Tenantname}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                </StackLayout>
+                                <Label Text="Invoice #:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                <Label Text="{Binding TenantInvoiceDetailData.Invoiceno}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="House #:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                <Label Text="{Binding TenantInvoiceDetailData.Systemhousesizename}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="Amount:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                                <Label Text="{Binding TenantInvoiceDetailData.Balance,StringFormat='{0:#,##0.00}'}" TextColor="Red" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
 
-            <!-- Details Grid -->
-            <Grid ColumnSpacing="12" RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <StackLayout Grid.Column="0">
-                    <Label Text="Payement Mode: " FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
-                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="0" HasShadow="False">
-                        <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding SelectedKitchentype, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Kitchen Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0"/>
-                    </Frame>
-                    <Label Text="{Binding PropertyHouseKitchenTypeError}" TextColor="Red" Margin="0,4,0,0"/>
-                </StackLayout>
-                <StackLayout Grid.Column="1">
-                    <Label Text="Payment Code: " FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
-                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="0" HasShadow="False">
-                        <Entry Text="{Binding TenantInvoiceDetailData.Invoiceno}" />
-                    </Frame>
-                </StackLayout>
+                <Frame Grid.Row="3" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
+                    <StackLayout Padding="10">
+                        <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <Label Text="Payment Confirmation" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="18" Margin="0,0,0,10"/>
+                            <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Padding="0" Spacing="8">
+                            <!-- Details Grid -->
+                            <Grid ColumnSpacing="12" RowSpacing="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0">
+                                    <Label Text="Payement Mode: " FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
+                                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="0" HasShadow="False">
+                                        <Picker ItemsSource="{Binding Systemkitchentype}" SelectedItem="{Binding SelectedKitchentype, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Kitchen Type" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0"/>
+                                    </Frame>
+                                    <Label Text="{Binding PropertyHouseKitchenTypeError}" TextColor="Red" Margin="0,4,0,0"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="1">
+                                    <Label Text="Payment Code: " FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
+                                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="0" HasShadow="False">
+                                        <Entry Text="{Binding TenantInvoiceDetailData.Invoiceno}" />
+                                    </Frame>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
             </Grid>
 
             <!-- Navigation Buttons -->
-            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0">
+            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0" Padding="10">
                 <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="#808080" TextColor="White" Padding="12" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
                 <Button Text="Confirm" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
             </FlexLayout>
