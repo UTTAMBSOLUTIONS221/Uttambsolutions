@@ -170,19 +170,15 @@
                                     <Label Text="{Binding InvoicePayemtCodeError}" TextColor="Red" Margin="0,4,0,0"/>
                                 </StackLayout>
                                 <StackLayout  Grid.Row="1" Grid.Column="0" Padding="8" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0">
-                                        <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="#808080" TextColor="White" Padding="8" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
-                                    </FlexLayout>
+                                    <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="#808080" TextColor="White" Padding="8" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
                                 </StackLayout>
                                 <StackLayout  Grid.Row="1" Grid.Column="1" Padding="8" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0">
-                                        <Button Text="Confirm" Command="{Binding OnOkClickedCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="8" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
-                                    </FlexLayout>
+                                    <Button Text="Confirm" Command="{Binding OnOkClickedCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="8" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
                                 </StackLayout>
                             </Grid>
                         </StackLayout>
                         <!-- Navigation Buttons -->
-                        
+
                     </StackLayout>
                 </Frame>
             </Grid>
