@@ -14,6 +14,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
+        public ICommand OnOkClickedCommand { get; }
 
         private bool _isProcessing;
         public bool IsProcessing
@@ -55,6 +56,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<MonthlyRentInvoiceModel>(async (propertyhouseinvoice) => await ViewDetails(propertyhouseinvoice.Invoiceid));
             OnCancelClickedCommand = new Command(OnCancelClicked);
+            OnOkClickedCommand = new Command(async () => await SaveHouseInvoicePaymentDataAsync());
         }
         private ObservableCollection<ListModel> _systemPaymentModes;
         public ObservableCollection<ListModel> SystemPaymentModes
@@ -85,6 +87,17 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             set
             {
                 _InvoicePayemtCode = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _houseRoomIdError;
+        public string HouseRoomIdError
+        {
+            get => _houseRoomIdError;
+            set
+            {
+                _houseRoomIdError = value;
                 OnPropertyChanged();
             }
         }
@@ -170,6 +183,78 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
         private void OnCancelClicked()
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+        private async Task SaveHouseInvoicePaymentDataAsync()
+        {
+            IsProcessing = true;
+            if (TenantInvoiceDetailData.Propertyhouseroomid == 0)
+            {
+                HouseRoomIdError = "Room is required.";
+                return;
+            }
+
+            if (!ValidatePaymentData())
+            {
+                IsProcessing = false;
+                return;
+            }
+            try
+            {
+                HouseroomData.Tenantid = Tenantid;
+                HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
+                HouseroomData.Datecreated = DateTime.UtcNow;
+
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, HouseroomData);
+                if (response.StatusCode == 200)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else if (response.StatusCode == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
+        private bool ValidatePaymentData()
+        {
+            bool isValid = true;
+
+            // Validate Property Name
+            if (string.IsNullOrWhiteSpace(InvoicePayemtCode))
+            {
+                InvoicePayemtCodeError = "Payment code is required.";
+                isValid = false;
+            }
+            else
+            {
+                InvoicePayemtCodeError = null;
+            }
+            if (SelectedPaymentModes.Value == "" || string.IsNullOrWhiteSpace(SelectedPaymentModes.Value))
+            {
+                InvoicePayemtModeError = "Payment mode is required.";
+                isValid = false;
+            }
+            else
+            {
+                InvoicePayemtModeError = null;
+            }
+            // Update overall IsValid property
+            IsProcessing = isValid;
+
+            return isValid;
         }
     }
 }

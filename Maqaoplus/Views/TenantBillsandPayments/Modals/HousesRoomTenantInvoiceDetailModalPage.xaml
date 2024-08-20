@@ -10,6 +10,7 @@
             <Label Text="{Binding TenantInvoiceDetailData.Invoiceno, StringFormat='#{0} - Invoice Details'}" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="18"  Margin="0,0,0,10"/>
             <!-- Hidden Field for Systempropertyhouseroomid -->
             <Entry IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" />
+            <Label Text="{Binding HouseRoomIdError}" TextColor="Red" Margin="0,4,0,0"/>
             <Grid Padding="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -169,7 +170,7 @@
                         <StackLayout Padding="10" Orientation="Vertical" HorizontalOptions="FillAndExpand">
                             <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0" Padding="10">
                                 <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="#808080" TextColor="White" Padding="12" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
-                                <Button Text="Confirm" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
+                                <Button Text="Confirm" Command="{Binding OnOkClickedCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
                             </FlexLayout>
                         </StackLayout>
                     </StackLayout>
