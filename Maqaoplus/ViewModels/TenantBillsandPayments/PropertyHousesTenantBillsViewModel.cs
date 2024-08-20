@@ -162,7 +162,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
                 if (response != null && response.Data != null)
                 {
                     TenantInvoiceDetailData = JsonConvert.DeserializeObject<MonthlyRentInvoiceModel>(response.Data.ToString());
-                    var SystemPaymentModeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemcashpaymentmodetype, HttpMethod.Get);
+                    var SystemPaymentModeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempaymentmodetype, HttpMethod.Get);
                     if (SystemPaymentModeResponse != null)
                     {
                         SystemPaymentModes = new ObservableCollection<ListModel>(SystemPaymentModeResponse);
