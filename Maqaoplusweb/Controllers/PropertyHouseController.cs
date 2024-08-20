@@ -200,7 +200,7 @@ namespace Maqaoplusweb.Controllers
             return PartialView(data);
         }
         [HttpGet]
-        public async Task<IActionResult> TenantmonthlyinvoicePaymentdata()
+        public async Task<IActionResult> Tenantmonthlyinvoicepaymentdata()
         {
             var data = await bl.Gettenantmonthlyinvoicepaymentdatabyownerid(SessionUserData.Usermodel.Userid);
             return PartialView(data);
