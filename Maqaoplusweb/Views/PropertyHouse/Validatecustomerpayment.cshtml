@@ -10,19 +10,19 @@
         <input class="form-control form-control-sm" asp-for="@Model.CustomerPaymentId" id="Systemcustomerpaymentid" hidden />
     </div>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Transaction Code</label>
-                <input class="form-control form-control-sm" asp-for="@Model.TransactionReference" id="SystemtransactionReferenceid" required />
+                <input class="form-control form-control-sm" asp-for="@Model.TransactionReference" id="SystemtransactionReferenceid" required readonly />
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Paid Amount</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Paidamount" id="Systemhouserentpaidamountid" required />
+                <input class="form-control form-control-sm" asp-for="@Model.Paidamount" id="Systemhouserentpaidamountid" required readonly />
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Actual Amount</label>
                 <input class="form-control form-control-sm" asp-for="@Model.Actualamount" id="Systemhouserentactualamountid" required />
