@@ -29,6 +29,17 @@
         public bool Issent { get; set; }
         public string Sentstatus => Issent ? "Sent" : "Not Sent";
         public string? Paidstatus { get; set; }
+        public List<MonthlyRentInvoiceItem>? InvoiceDetails { get; set; }
     }
 
+    public class MonthlyRentInvoiceItem
+    {
+        public int Invoiceitemid { get; set; }
+        public int Invoiceid { get; set; }
+        public int Systempropertyhousedepositfeeid { get; set; }
+        public string? Housedepositfeename { get; set; }
+        public int Units { get; set; }
+        public decimal Price { get; set; }
+        public decimal Discount { get; set; }
+    }
 }

@@ -67,7 +67,7 @@
                             </Grid>
 
                             <!-- Dynamic Table Content -->
-                            <CollectionView ItemsSource="{Binding TenantInvoiceDetailDataList}" Margin="0">
+                            <CollectionView ItemsSource="{Binding InvoiceDetails}" Margin="0">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
@@ -77,9 +77,9 @@
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <Label Text="{Binding Tenantname}" FontSize="16" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                            <Label Text="{Binding Systemhousesizename}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
-                                            <Label Text="{Binding Balance, StringFormat='{0:#,##0.00}'}" TextColor="Red" FontSize="16" Grid.Column="2" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
+                                            <Label Text="{Binding Housedepositfeename}" FontSize="16" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                            <Label Text="{Binding Units, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
+                                            <Label Text="{Binding Price, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
                                         </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>

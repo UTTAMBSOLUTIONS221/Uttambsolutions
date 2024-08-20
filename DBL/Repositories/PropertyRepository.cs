@@ -452,6 +452,7 @@ namespace DBL.Repositories
         {
             TenantMonthlyInvoiceDetailData response = new TenantMonthlyInvoiceDetailData();
             MonthlyRentInvoiceModel responseData = new MonthlyRentInvoiceModel();
+            List<MonthlyRentInvoiceItem> responseInvoiceDetailData = new List<MonthlyRentInvoiceItem>();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -482,6 +483,12 @@ namespace DBL.Repositories
                     responseData.Paidamount = Convert.ToDecimal(invoiceResponseJson["Paidamount"]);
                     responseData.Issent = Convert.ToBoolean(invoiceResponseJson["Issent"]);
                     responseData.Paidstatus = invoiceResponseJson["Paidstatus"]?.ToString();
+                    if (invoiceResponseJson["InvoiceDetails"] != null)
+                    {
+                        string TenantroomhistoryJson = invoiceResponseJson["InvoiceDetails"].ToString();
+                        responseInvoiceDetailData = JsonConvert.DeserializeObject<List<MonthlyRentInvoiceItem>>(TenantroomhistoryJson);
+                    }
+                    responseData.InvoiceDetails = responseInvoiceDetailData;
                     response.Data = responseData;
                     return response;
                 }
