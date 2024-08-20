@@ -205,6 +205,11 @@ namespace Maqaoplusweb.Controllers
             var data = await bl.Gettenantmonthlyinvoicepaymentdatabyownerid(SessionUserData.Usermodel.Userid);
             return View(data);
         }
+        [HttpGet]
+        public async Task<IActionResult> Validatecustomerpayment(long Customerpaymentid)
+        {
+            return PartialView();
+        }
 
         [HttpGet]
         public async Task<IActionResult> Confirmhouseroompayment(long Houseroomid, long Houseroomtenantid)
