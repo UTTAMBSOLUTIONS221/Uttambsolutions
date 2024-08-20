@@ -1,4 +1,5 @@
-﻿using DBL.Enum;
+﻿using DBL.Entities;
+using DBL.Enum;
 using DBL.Models;
 using Maqaoplus.Views.TenantBillsandPayments.Modals;
 using Newtonsoft.Json;
@@ -200,11 +201,26 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             }
             try
             {
-                HouseroomData.Tenantid = Tenantid;
-                HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
-                HouseroomData.Datecreated = DateTime.UtcNow;
+                CustomerRentInvoicePayment InvoicePaymentData = new CustomerRentInvoicePayment();
+                InvoicePaymentData.Customerpaymentid = 0;
+                InvoicePaymentData.Tenantid = TenantInvoiceDetailData.Propertyhouseroomtenantid;
+                InvoicePaymentData.Houseromid = TenantInvoiceDetailData.Propertyhouseroomid;
+                InvoicePaymentData.Paymentmodeid = Convert.ToInt64(SelectedPaymentModes.Value);
+                InvoicePaymentData.Financetransactionid = 0;
+                InvoicePaymentData.Amount = 0;
+                InvoicePaymentData.Transactionreference = InvoicePayemtCode;
+                InvoicePaymentData.Transactiondate = DateTime.UtcNow;
+                InvoicePaymentData.Ispaymentvalidated = false;
+                InvoicePaymentData.Chequeno = "";
+                InvoicePaymentData.Chequedate = DateTime.UtcNow;
+                InvoicePaymentData.Memo = "";
+                InvoicePaymentData.Drawerbank = "";
+                InvoicePaymentData.Depositbank = "";
+                InvoicePaymentData.Paidby = App.UserDetails.Usermodel.Userid;
+                InvoicePaymentData.Slipreference = InvoicePayemtCode;
+                InvoicePaymentData.Datecreated = DateTime.UtcNow;
 
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, HouseroomData);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, InvoicePaymentData);
                 if (response.StatusCode == 200)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
