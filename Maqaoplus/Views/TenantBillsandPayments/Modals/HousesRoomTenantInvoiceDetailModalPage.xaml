@@ -7,7 +7,7 @@
         <!-- Step 1 -->
         <StackLayout Padding="0" Spacing="4">
             <!-- Header -->
-            <Label Text="{Binding TenantInvoiceDetailData.Invoiceno, StringFormat='#{0} - Invoice Details'}" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="18"  Margin="0,0,0,0"/>
+            <Label Text="{Binding TenantInvoiceDetailData.Invoiceno, StringFormat='Invoice # - {0} - Details'}" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="18"  Margin="0,0,0,0"/>
             <Grid Padding="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
