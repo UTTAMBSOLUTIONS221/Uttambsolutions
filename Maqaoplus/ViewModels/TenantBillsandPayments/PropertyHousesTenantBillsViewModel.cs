@@ -202,18 +202,16 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             try
             {
                 CustomerRentInvoicePayment InvoicePaymentData = new CustomerRentInvoicePayment();
-                InvoicePaymentData.Customerpaymentid = 0;
                 InvoicePaymentData.Tenantid = TenantInvoiceDetailData.Propertyhouseroomtenantid;
                 InvoicePaymentData.Houseromid = TenantInvoiceDetailData.Propertyhouseroomid;
                 InvoicePaymentData.Paymentmodeid = Convert.ToInt64(SelectedPaymentModes.Value);
-                InvoicePaymentData.Financetransactionid = 0;
                 InvoicePaymentData.Amount = 0;
                 InvoicePaymentData.Transactionreference = InvoicePayemtCode;
                 InvoicePaymentData.Transactiondate = DateTime.UtcNow;
                 InvoicePaymentData.Ispaymentvalidated = false;
                 InvoicePaymentData.Chequeno = "";
                 InvoicePaymentData.Chequedate = DateTime.UtcNow;
-                InvoicePaymentData.Memo = "";
+                InvoicePaymentData.Memo = "Tenant Validating His Renatal Payments";
                 InvoicePaymentData.Drawerbank = "";
                 InvoicePaymentData.Depositbank = "";
                 InvoicePaymentData.Paidby = App.UserDetails.Usermodel.Userid;
