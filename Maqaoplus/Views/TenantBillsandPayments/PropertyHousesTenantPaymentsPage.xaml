@@ -28,7 +28,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Dynamically create frames for each tenant -->
-                <CollectionView ItemsSource="{Binding Items}">
+                <CollectionView ItemsSource="{Binding PaymentItems}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame Padding="10" Margin="0,0,0,5" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="130">

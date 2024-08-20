@@ -161,7 +161,7 @@ namespace Maqaoplus.Constants
                                 {
                                     Icon = Icons.dollar,
                                     Title = "Payment History",
-                                    ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                                    ContentTemplate = new DataTemplate(() => new PropertyHousesTenantPaymentsPage(serviceProvider)),
                                 },
                             }
                 };
