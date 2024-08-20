@@ -509,5 +509,26 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registerpropertyhouseroomrentpaymentrequestdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+
+        public TenantMonthlyInvoicePaymentData Gettenantmonthlyinvoicepaymentdatabytenantid(long Tenantid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Tenantid", Tenantid);
+                parameters.Add("@Systemtenantmonthlyinvoicedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Gettenantmonthlyinvoicepaymentdatabytenantid", parameters, commandType: CommandType.StoredProcedure);
+                string systemtenantmonthlyinvoicedataJson = parameters.Get<string>("@Systemtenantmonthlyinvoicedata");
+                if (systemtenantmonthlyinvoicedataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<TenantMonthlyInvoicePaymentData>(systemtenantmonthlyinvoicedataJson);
+                }
+                else
+                {
+                    return new TenantMonthlyInvoicePaymentData();
+                }
+            }
+        }
     }
 }
