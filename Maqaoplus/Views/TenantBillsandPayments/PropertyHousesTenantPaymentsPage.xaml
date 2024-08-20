@@ -31,101 +31,31 @@
                 <CollectionView ItemsSource="{Binding PaymentItems}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Padding="10" Margin="0,0,0,5" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="130">
-                                <!-- Set background color based on Paidstatus -->
-                                <Frame.Triggers>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Paidstatus}" Value="PAID">
-                                        <Setter Property="BackgroundColor" Value="#DFF0D8" />
-                                        <!-- Greenish background -->
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Paidstatus}" Value="NOT PAID">
-                                        <Setter Property="BackgroundColor" Value="#F2DEDE" />
-                                        <!-- Reddish background -->
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Frame" Binding="{Binding Paidstatus}" Value="PARTIALLY PAID">
-                                        <Setter Property="BackgroundColor" Value="#FCF8E3" />
-                                        <!-- Yellowish background -->
-                                    </DataTrigger>
-                                </Frame.Triggers>
+                            <Frame Padding="10" Margin="0,5" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc">
+                                <StackLayout Spacing="5">
+                                    <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
 
-                                <!-- Tap Gesture Recognizer -->
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}" CommandParameter="{Binding .}" />
-                                </Frame.GestureRecognizers>
-
-                                <Grid Padding="5">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="0" HorizontalTextAlignment="Center">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Invoice #: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text="{Binding Invoiceno}" FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-
-                                    <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="1">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="House: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
-                                                <Span Text="{Binding Systemhousesizename}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text=" - "/>
-                                                <Span Text="{Binding Systempropertyhousesizename}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-
-                                    <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="2">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Amount: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text="{Binding Balance, StringFormat='{0:#,##0.00}'}" FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-
-                                    <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="3">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Status: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
-                                                <Span Text="{Binding Paidstatus}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text=" Due Date: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
-                                                <Span Text="{Binding Duedate, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-
-                                    <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="4">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Generated On: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
-                                                <Span Text="{Binding Datecreated, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text=" Sent:" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Label FontSize="14" FontAttributes="Bold" TextTransform="Uppercase" Grid.Row="4" VerticalOptions="Start" HorizontalOptions="End">
-                                        <Label.Text>
-                                            <Binding Path="Sentstatus" />
-                                        </Label.Text>
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Issent}" Value="True">
-                                                <Setter Property="TextColor" Value="#28a745" />
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Issent}" Value="False">
-                                                <Setter Property="TextColor" Value="#dc3545" />
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                </Grid>
+                                        <Label Text="{Binding PropertyHouseName, StringFormat='Room: {0}'}" Grid.Row="0" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                        <Label Text="{Binding PaymentMode, StringFormat='Payment Mode: {0}'}" Grid.Row="1" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                        <Label Text="{Binding TransactionReference, StringFormat='Transaction Code: {0}'}" Grid.Row="2" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                        <Label Text="{Binding Amount, StringFormat='Amount: {0:#,##0.00}'}" Grid.Row="3" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                        <Label Text="{Binding PaymentValidationstatus, StringFormat='Payment Validated: {0}'}" Grid.Row="4" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                        <Label Text="{Binding TransactionDate, StringFormat='Date: {0:yyyy-MM-dd}'}" Grid.Row="5" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                    </Grid>
+                                </StackLayout>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

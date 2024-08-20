@@ -22,6 +22,7 @@
         public string? TransactionReference { get; set; }
         public DateTime TransactionDate { get; set; }
         public bool IsPaymentValidated { get; set; }
+        public string PaymentValidationstatus => IsPaymentValidated ? "Validated" : "Not Validated";
         public string? ChequeNo { get; set; }
         public DateTime? ChequeDate { get; set; }
         public string? Memo { get; set; }
