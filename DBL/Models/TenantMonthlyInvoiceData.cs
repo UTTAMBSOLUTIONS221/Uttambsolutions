@@ -38,7 +38,7 @@
         public int Invoiceid { get; set; }
         public int Systempropertyhousedepositfeeid { get; set; }
         public string? Housedepositfeename { get; set; }
-        public int Units { get; set; }
+        public decimal Units { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
     }
