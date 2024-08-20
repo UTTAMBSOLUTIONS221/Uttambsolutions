@@ -1,8 +1,63 @@
-﻿
+﻿@model DBL.Models.TenantMonthlyInvoicePaymentData
 @{
     ViewData["Title"] = "Tenantmonthlyinvoicepaymentdata";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Tenantmonthlyinvoicepaymentdata</h1>
-
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h6 class="font-weight-bold text-sm card-title">Property House Rooms Payments</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive table-responsive-sm">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <thead>
+                        <tr>
+                            <th>Code </th>
+                            <th>Room</th>
+                            <th>Tenant</th>
+                            <th>Amount</th>
+                            <th>Validated</th>
+                            <th>Date</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Data != null)
+                        {
+                            foreach (var item in Model.Data)
+                            {
+                                <tr>
+                                    <td>@item.TransactionReference</td>
+                                    <td>@(item.PropertyHouseName + " " + item.SystemHouseSizeName + " " + item.SystemPropertyHouseSizeName)</td>
+                                    <td>@item.HouseTenantName</td>
+                                    <td>@item.Amount.ToString("#,##0.00")</td>
+                                    <td>
+                                        @if (item.IsPaymentValidated)
+                                        {
+                                            <p class="mb-0"><span class="badge badge-success"><strong>Validate</strong></span></p>
+                                        }
+                                        else
+                                        {
+                                            <p class="mb-0"><span class="badge badge-warning"><strong>Not Validated</strong></span></p>
+                                        }
+                                    </td>
+                                    <td>@item.TransactionDate.ToString("yyyy-MM-dd")</td>
+                                    <td class="text-right">
+                                        <a asp-action="Validatecustomerpayment" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Customerpaymentid="@item.CustomerPaymentId" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Validate</a>
+                                        <a asp-action="Addpropertyhouseroom" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Customerpaymentid="@item.CustomerPaymentId" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Manage</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
