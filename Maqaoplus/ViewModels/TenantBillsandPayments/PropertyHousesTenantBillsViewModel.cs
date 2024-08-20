@@ -218,6 +218,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
                 InvoicePaymentData.Slipreference = InvoicePayemtCode;
                 InvoicePaymentData.Datecreated = DateTime.UtcNow;
 
+
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, InvoicePaymentData);
                 if (response.StatusCode == 200)
                 {
@@ -256,7 +257,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             {
                 InvoicePayemtCodeError = null;
             }
-            if (SelectedPaymentModes.Value == "" || string.IsNullOrWhiteSpace(SelectedPaymentModes.Value))
+            if (SelectedPaymentModes == null)
             {
                 InvoicePayemtModeError = "Payment mode is required.";
                 isValid = false;

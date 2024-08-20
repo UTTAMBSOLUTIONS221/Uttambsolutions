@@ -153,7 +153,7 @@
                                 <StackLayout Grid.Column="0">
                                     <Label Text="Payement Mode: " FontAttributes="Bold" FontSize="16" TextColor="#0a506c" Margin="0,0,0,8"/>
                                     <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="0" HasShadow="False">
-                                        <Picker ItemsSource="{Binding SystemPaymentModes}" SelectedItem="{Binding SelectedPaymentModes, Mode=TwoWay}" ItemDisplayBinding="{Binding Text}" Title="Select Payment Mode" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0"/>
+                                        <Picker ItemsSource="{Binding SystemPaymentModes}" SelectedItem="{Binding SelectedPaymentModes}" ItemDisplayBinding="{Binding Text}" Title="Select Payment Mode" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="8,0"/>
                                     </Frame>
                                     <Label Text="{Binding InvoicePayemtModeError}" TextColor="Red" Margin="0,4,0,0"/>
                                 </StackLayout>
