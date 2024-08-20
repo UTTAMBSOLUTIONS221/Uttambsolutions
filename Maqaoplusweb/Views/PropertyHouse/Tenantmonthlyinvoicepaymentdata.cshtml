@@ -49,7 +49,10 @@
                                     </td>
                                     <td>@item.TransactionDate.ToString("yyyy-MM-dd")</td>
                                     <td class="text-right">
-                                        <a asp-action="Validatecustomerpayment" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Customerpaymentid="@item.CustomerPaymentId" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Validate</a>
+                                        @if (!item.IsPaymentValidated)
+                                        {
+                                            <a asp-action="Validatecustomerpayment" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Customerpaymentid="@item.CustomerPaymentId" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Validate</a>
+                                        }  
                                         <a asp-action="Addpropertyhouseroom" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Customerpaymentid="@item.CustomerPaymentId" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Manage</a>
                                     </td>
                                 </tr>
