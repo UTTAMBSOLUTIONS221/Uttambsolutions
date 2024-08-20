@@ -56,30 +56,30 @@
                             <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Table Headers -->
-                                <Label Text="Name" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" HorizontalOptions="Start"/>
+                                <Label Text="Name" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" HorizontalOptions="StartAndExpand"/>
                                 <Label Text="Unit" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center"/>
                                 <Label Text="Amount" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="2" HorizontalOptions="End"/>
                             </Grid>
 
                             <!-- Dynamic Table Content -->
-                            <CollectionView ItemsSource="{Binding InvoiceDetails}" Margin="0">
+                            <CollectionView ItemsSource="{Binding TenantInvoiceDetailData.InvoiceDetails}" Margin="0">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
 
                                             <Label Text="{Binding Housedepositfeename}" FontSize="16" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                            <Label Text="{Binding Units, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
-                                            <Label Text="{Binding Price, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
+                                            <Label Text="{Binding Units, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="Center"/>
+                                            <Label Text="{Binding Price, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Column="2" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
                                         </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
