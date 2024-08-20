@@ -6,5 +6,7 @@
         public string? TransactionReference { get; set; }
         public decimal Paidamount { get; set; }
         public decimal Actualamount { get; set; }
+        public DateTime Datecreated { get; set; }
+        public DateTime Datemodified { get; set; }
     }
 }
