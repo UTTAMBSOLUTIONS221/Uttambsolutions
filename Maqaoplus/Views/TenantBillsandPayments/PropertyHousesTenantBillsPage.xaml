@@ -86,15 +86,27 @@
                                         </Label.FormattedText>
                                     </Label>
 
-                                    <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4">
+                                    <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="4" Grid.Column="0" >
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Generated On: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
                                                 <Span Text="{Binding Datecreated, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
                                                 <Span Text=" Sent: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
-                                                <Span Text="{Binding Sentstatus}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
+                                    </Label>
+                                    <Label FontSize="14" FontAttributes="Bold" TextTransform="Uppercase" Grid.Row="4" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="End">
+                                        <Label.Text>
+                                            <Binding Path="Sentstatus" />
+                                        </Label.Text>
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Issent}" Value="True">
+                                                <Setter Property="TextColor" Value="#28a745" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Issent}" Value="False">
+                                                <Setter Property="TextColor" Value="#dc3545" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
                                     </Label>
 
                                 </Grid>
