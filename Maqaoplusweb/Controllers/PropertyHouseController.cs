@@ -214,6 +214,11 @@ namespace Maqaoplusweb.Controllers
             Model.Paidamount = Paidamount;
             return PartialView(Model);
         }
+        public async Task<JsonResult> Savevalidatecustomerpaymentrequest(CustomerPaymentValidation model)
+        {
+            var resp = await bl.Registervalidatecustomerpaymentrequestdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Confirmhouseroompayment(long Houseroomid, long Houseroomtenantid)

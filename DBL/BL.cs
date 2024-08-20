@@ -1032,6 +1032,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Registervalidatecustomerpaymentrequestdata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Registervalidatecustomerpaymentrequestdata(Obj);
+                return Resp;
+            });
+        }
 
         //public Task<IEnumerable<SystemJob>> Getsystemallunpublishedopportunitydata()
         //{

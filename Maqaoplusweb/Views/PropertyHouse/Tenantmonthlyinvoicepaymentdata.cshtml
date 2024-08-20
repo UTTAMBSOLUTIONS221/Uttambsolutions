@@ -79,7 +79,7 @@
                 Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
             };
 
-            $.post("/PropertyHouse/Addsystempropertyhousedata", uil1, function (response) {
+            $.post("/PropertyHouse/Savevalidatecustomerpaymentrequest", uil1, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire('Saved!', response.RespMessage, 'success');
                     $('#Uttambsolutionsmodal').hide();
