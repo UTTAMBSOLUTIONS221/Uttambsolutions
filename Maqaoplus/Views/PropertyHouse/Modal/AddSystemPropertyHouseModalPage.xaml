@@ -127,12 +127,12 @@
                         </StackLayout>
                     </Grid>
 
-                    <Grid ColumnSpacing="12" RowSpacing="12" Padding="10,0">
+                    <Grid ColumnSpacing="12" RowSpacing="12">
                         <!-- Define three equal-width columns -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
                         <!-- First Row - Has Agent -->

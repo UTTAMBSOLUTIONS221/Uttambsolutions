@@ -222,6 +222,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         // Parameterless constructor for XAML support
         public PropertyHouseViewModel()
         {
+            _serviceProvider = serviceProvider;
             Items = new ObservableCollection<Systemproperty>();
             AddPropertyHouseCommand = new Command(AddPropertyHouseAsync);
             LoadItemsCommand = new Command(async () => await LoadItems());
@@ -231,13 +232,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
         }
-
-        // Constructor with ServiceProvider parameter
-        public PropertyHouseViewModel(Services.ServiceProvider serviceProvider) : this()
-        {
-            _serviceProvider = serviceProvider;
-        }
-
         public ObservableCollection<ListModel> Systemcounty
         {
             get => _systemcounty;
