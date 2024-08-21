@@ -220,7 +220,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + _propertyId, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyhouseid/" + _propertyId, HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
                     Rooms.Clear();
