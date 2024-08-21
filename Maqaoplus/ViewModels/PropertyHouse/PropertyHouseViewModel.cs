@@ -2,7 +2,6 @@
 using DBL.Enum;
 using DBL.Models;
 using Maqaoplus.Views.PropertyHouse.Modal;
-using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -556,11 +555,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 Systemhousevacantnoticeperiod.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
             }
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/0", HttpMethod.Get, null);
-            if (response != null)
-            {
-                SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
-            }
             LoadDropdownData();
             var modalPage = new AddSystemPropertyHouseModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
@@ -580,7 +574,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 {
                     Systemcounty = new ObservableCollection<ListModel>(SystemcountyResponse);
                 }
-
                 if (SystemsubcountyResponse != null)
                 {
                     Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
