@@ -4,7 +4,7 @@
              xmlns:viewmodels="clr-namespace:Maqaoplus.ViewModels.PropertyHouse"
              xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.PropertyHouse.PropertyHousesPage"
-             Title="My Houses">
+             Title="MY HOUSES">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -26,7 +26,17 @@
         </Grid.RowDefinitions>
 
         <!-- Button to Add New House -->
-        <Button Text="Add New House" Command="{Binding AddPropertyHouseCommand}" BackgroundColor="#0a506c" TextColor="White"  FontSize="18" FontAttributes="Bold" Padding="10" HorizontalOptions="FillAndExpand" Grid.Row="0" Margin="5" IsVisible="{Binding IsDataLoaded}" />
+        <Button Text="Add New House" 
+                Command="{Binding AddPropertyHouseCommand}" 
+                BackgroundColor="#0a506c" 
+                TextColor="White"  
+                FontSize="18" 
+                FontAttributes="Bold" 
+                Padding="10" 
+                HorizontalOptions="FillAndExpand" 
+                Grid.Row="0" 
+                Margin="5" 
+                IsVisible="{Binding IsDataLoaded}" />
 
         <!-- ScrollView with CollectionView -->
         <ScrollView IsVisible="{Binding IsDataLoaded}" Grid.Row="1">
@@ -71,10 +81,12 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
+
         <!-- Footer -->
         <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="End">
             <Label Text="© 2024 Maqaoplus" HorizontalOptions="Center" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
         </StackLayout>
+
         <!-- Overlay Grid to cover the entire screen -->
         <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="2" BackgroundColor="Transparent">
             <BoxView Color="#C0000000" Opacity="0.5" />

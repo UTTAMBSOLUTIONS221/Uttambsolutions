@@ -3,7 +3,7 @@
              xmlns:viewmodels="clr-namespace:Maqaoplus.ViewModels.PropertyHouse"
              xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.PropertyHouse.PropertyHousesDetailPage"
-             Title="Property House Details">
+             Title="PROPERTY HOUSE DETAILS">
 
     <ContentPage.Resources>
         <ResourceDictionary>

@@ -26,7 +26,7 @@ namespace API.Controllers
         {
             return await bl.Getsystempropertyhousedashboardsummarydatabyowner(OwnerId, PosterId);
         }
-
+        [AllowAnonymous]
         [HttpGet("Getsystempropertyhousedatabyowner/{OwnerId}")]
         public async Task<Systempropertyhousedata> Getsystempropertyhousedatabyowner(long OwnerId)
         {
