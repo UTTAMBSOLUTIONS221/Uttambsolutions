@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.PropertyHouse.Modal.AddSystemPropertyHouseModalPage"
              BackgroundColor="White">
-    <Grid Padding="4">
+    <Grid Padding="10">
         <!-- Define Row Heights for Header and Content -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -15,11 +15,11 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout>
                 <!-- Step 1 -->
-                <StackLayout IsVisible="{Binding IsStep1Visible}" Padding="4,0" Spacing="4">
+                <StackLayout IsVisible="{Binding IsStep1Visible}">
                     <!-- Header -->
                     <Label Text="Step 1: Basic House Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#0a506c"/>
 
-                    <StackLayout Spacing="4">
+                    <StackLayout>
                         <!-- House Room # Label -->
                         <Label Text="House Name" FontAttributes="Bold" FontSize="14"  Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- House Room # Entry (Styled like an Input Box) -->
@@ -38,7 +38,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- House Status Section -->
-                        <StackLayout Grid.Column="0" Spacing="4">
+                        <StackLayout Grid.Column="0">
                             <!-- House Status Label -->
                             <Label Text="House Status" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
@@ -70,7 +70,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- House Status Section -->
-                        <StackLayout Grid.Column="0" Spacing="4">
+                        <StackLayout Grid.Column="0">
                             <!-- House Status Label -->
                             <Label Text="County" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
@@ -82,7 +82,7 @@
                         </StackLayout>
 
                         <!-- Water Type Section -->
-                        <StackLayout Grid.Column="1" Spacing="4">
+                        <StackLayout Grid.Column="1">
                             <!-- Water Type Label -->
                             <Label Text="Sub County" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- Water Type Picker (Styled like an Input Box) -->
@@ -193,7 +193,7 @@
                         </StackLayout>
                     </Grid>
 
-                    <StackLayout Spacing="4">
+                    <StackLayout>
                         <!-- House Room # Label -->
                         <Label Text="Street or landmark" FontAttributes="Bold" FontSize="14"  Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- House Room # Entry (Styled like an Input Box) -->
@@ -204,7 +204,7 @@
                         <Label Text="{Binding StreetOrLandmarkError}" TextColor="Red" FontSize="12"  Margin="0,2,0,0"/>
                     </StackLayout>
 
-                    <StackLayout Spacing="4">
+                    <StackLayout>
                         <!-- House Room # Label -->
                         <Label Text="Contact Details if vacant" FontAttributes="Bold" FontSize="14"  Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- House Room # Entry (Styled like an Input Box) -->
@@ -216,7 +216,7 @@
                     </StackLayout>
 
                     <!-- Navigation Button -->
-                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
+                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,4">
                         <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="150" />
                         <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50"  WidthRequest="150"/>
                     </FlexLayout>
