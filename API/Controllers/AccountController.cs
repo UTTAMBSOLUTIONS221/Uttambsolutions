@@ -2,8 +2,10 @@
 using DBL.Entities;
 using DBL.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -43,22 +45,49 @@ namespace API.Controllers
                      new Claim("UserId", _userData.Usermodel.Userid.ToString()),
                  };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(
-                _config["Jwt:Issuer"],
-                _config["Jwt:Audience"],
-                claims,
-                expires: DateTime.UtcNow.AddMinutes(30),
-                signingCredentials: signIn);
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+            //var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            //var token = new JwtSecurityToken(
+            //    _config["Jwt:Issuer"],
+            //    _config["Jwt:Audience"],
+            //    claims,
+            //    expires: DateTime.UtcNow.AddMinutes(30),
+            //    signingCredentials: signIn);
+            //var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+            var accessToken = GenerateJwtToken(_userData.Usermodel.Username, _config["Jwt:Key"], _config["Jwt:Issuer"], _config["Jwt:Audience"]);
+            var refreshToken = GenerateRefreshTokenAsync(_userData.Usermodel.Userid);
 
             return Ok(new UsermodelResponce
             {
                 RespStatus = 200,
                 RespMessage = "Ok",
-                Token = tokenString,
+                Token = accessToken,
                 Usermodel = _userData.Usermodel
             });
+        }
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] RefreshRequest request)
+        {
+            var Data = await bl.Getsystemstaffdatabyrefreshtoken(request.RefreshToken);
+            if (Data == null || Data.Expirydate < DateTime.UtcNow)
+            {
+                return Unauthorized();
+            }
+            var newAccessToken = GenerateJwtToken(Data.Username, _config["Jwt:Key"], _config["Jwt:Issuer"], _config["Jwt:Audience"]);
+
+            return Ok(new { accessToken = newAccessToken });
+        }
+        private async Task<string> GenerateRefreshTokenAsync(long userId)
+        {
+            var token = Guid.NewGuid().ToString();
+            var expiryDate = DateTime.UtcNow.AddDays(7);
+            RefreshToken refreshtoken = new RefreshToken
+            {
+                Token = token,
+                Expirydate = expiryDate,
+                Userid = userId
+            };
+            var responce = await bl.SaveStaffRefreshToken(JsonConvert.SerializeObject(refreshtoken));
+            return token;
         }
         [AllowAnonymous]
         [Route("Registerstaff"), HttpPost]
@@ -91,6 +120,30 @@ namespace API.Controllers
         public async Task<Systemtenantdetailsdata> Getsystemstaffdetaildatabyidnumber(int Idnumber)
         {
             return await bl.Getsystemstaffdetaildatabyidnumber(Idnumber);
+        }
+
+
+        public static string GenerateJwtToken(string username, string secretKey, string issuer, string audience)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                new Claim(JwtRegisteredClaimNames.Sub, username),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                }),
+                Expires = DateTime.UtcNow.AddMinutes(15),
+                Issuer = issuer,
+                Audience = audience,
+                SigningCredentials = credentials
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

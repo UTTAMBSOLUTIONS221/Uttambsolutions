@@ -33,6 +33,8 @@ namespace DBL.Entities
         public string? Userprofileimageurl { get; set; }
         public string? Usercurriculumvitae { get; set; }
         public string? Idnumber { get; set; }
+        public string? Token { get; set; }
+        public DateTime? Expirydate { get; set; }
         public bool Updateprofile { get; set; }
         public string? Extra { get; set; }
         public string? Extra1 { get; set; }

@@ -7,11 +7,13 @@ namespace DBL.Repositories
     {
         IEnumerable<SystemStaff> Getsystemstaffdata(int Page, int PageSize);
         Genericmodel Registersystemstaffdata(string JsonData);
+        Genericmodel SaveStaffRefreshToken(string JsonData);
         SystemStaff Getsystemstaffdatabyid(long Staffid);
         SystemUserProfileData Getsystemuserprofiledata(long Userid);
         Genericmodel Updatestaffprofilepicturedata(string JsonData);
         Genericmodel Updatestaffcurriculumdata(string JsonData);
         Systemstaffdetaildata Getsystemstaffdetaildatabyid(long Staffid);
+        SystemStaff Getsystemstaffdatabyrefreshtoken(string Refreshtoken);
         Systemtenantdetailsdata Getsystemstaffdatabyidnumber(int Idnumber);
         Genericmodel Registersystemjobapplicationdata(string JsonData);
         UsermodelResponce VerifySystemStaff(string Username);

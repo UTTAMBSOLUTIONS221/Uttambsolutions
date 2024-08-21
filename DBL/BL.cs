@@ -86,6 +86,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> SaveStaffRefreshToken(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.SaveStaffRefreshToken(JsonConvert.SerializeObject(obj));
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Registersystemportalstaffdata(SystemStaff obj)
         {
             return Task.Run(() =>
@@ -107,6 +115,14 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.AccountRepository.Getsystemstaffdatabyid(Staffid);
+                return Resp;
+            });
+        }
+        public Task<SystemStaff> Getsystemstaffdatabyrefreshtoken(string Refreshtoken)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Getsystemstaffdatabyrefreshtoken(Refreshtoken);
                 return Resp;
             });
         }

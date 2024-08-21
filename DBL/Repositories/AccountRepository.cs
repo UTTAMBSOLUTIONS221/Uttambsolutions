@@ -36,6 +36,17 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registersystemstaffdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+
+        public Genericmodel SaveStaffRefreshToken(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Savestaffrefreshtokendata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         public SystemStaff Getsystemstaffdatabyid(long Staffid)
         {
             using (var connection = new SqlConnection(_connString))
@@ -44,6 +55,16 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Staffid", Staffid);
                 return connection.Query<SystemStaff>("Usp_Getsystemstaffdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        public SystemStaff Getsystemstaffdatabyrefreshtoken(string Refreshtoken)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Refreshtoken", Refreshtoken);
+                return connection.Query<SystemStaff>("Usp_Getsystemstaffdatabyrefreshtoken", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
         public SystemUserProfileData Getsystemuserprofiledata(long Userid)
