@@ -154,13 +154,13 @@ namespace Maqaoplus.Constants
                                 new ShellContent
                                 {
                                     Icon = Icons.invoice,
-                                    Title = "Monthly Bills",
+                                    Title = "Bills",
                                     ContentTemplate = new DataTemplate(() => new PropertyHousesTenantBillsPage(serviceProvider)),
                                 },
                                  new ShellContent
                                 {
                                     Icon = Icons.dollar,
-                                    Title = "Payment History",
+                                    Title = "Payments",
                                     ContentTemplate = new DataTemplate(() => new PropertyHousesTenantPaymentsPage(serviceProvider)),
                                 },
                             }
