@@ -1,5 +1,4 @@
 ﻿using DBL.Entities;
-using DBL.Enum;
 using DBL.Models;
 using Maqaoplus.Views.OwnerBillsandPayments.Modals;
 using Newtonsoft.Json;
@@ -163,11 +162,6 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
                 if (response != null && response.Data != null)
                 {
                     TenantInvoiceDetailData = JsonConvert.DeserializeObject<MonthlyRentInvoiceModel>(response.Data.ToString());
-                    var SystemPaymentModeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempaymentmodetype, HttpMethod.Get);
-                    if (SystemPaymentModeResponse != null)
-                    {
-                        SystemPaymentModes = new ObservableCollection<ListModel>(SystemPaymentModeResponse);
-                    }
                     var modalPage = new HousesRoomOwnerInvoiceDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                     IsDataLoaded = true;

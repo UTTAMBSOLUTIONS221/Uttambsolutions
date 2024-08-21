@@ -8,6 +8,6 @@
                 <Image Source="user.png" Aspect="AspectFill"/>
             </Frame>
         </Frame>
-        <Label x:Name="lblUserName" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Label x:Name="lblUserName" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" TextTransform="Uppercase" />
     </VerticalStackLayout>
 </StackLayout>
