@@ -1,5 +1,5 @@
 ﻿using DBL.Entities;
-using Maqaoplus.Views.PropertyHouse;
+using Maqaoplus.Views.PropertyHouse.Modal;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -53,7 +53,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async void AddPropertyHouseAsync()
         {
             IsProcessing = true;
-            await Shell.Current.GoToAsync(nameof(AddPropertyHousePage));
+            var modalPage = new AddSystemPropertyHouseModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
         private async Task LoadItems()
