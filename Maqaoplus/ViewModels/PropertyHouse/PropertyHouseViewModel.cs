@@ -26,6 +26,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
+        public ICommand SavePropertyHouseCommand { get; }
 
 
         private bool _isLoading;
@@ -228,6 +229,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
+            SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
         }
 
         // Constructor with ServiceProvider parameter
@@ -746,6 +748,47 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private void OnCancelClicked()
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+        public async Task SavePropertyHouseAsync()
+        {
+            IsLoading = true;
+
+            await Task.Delay(500);
+            if (SystempropertyData == null)
+            {
+                IsLoading = false;
+                return;
+            }
+            SystempropertyData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Propertyhouseposter = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Datecreated = DateTime.Now;
+            SystempropertyData.Datemodified = DateTime.Now;
+            try
+            {
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhousedata", SystempropertyData);
+                if (response.RespStatus == 200 || response.RespStatus == 0)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else if (response.RespStatus == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
         private bool ValidateStep1()
