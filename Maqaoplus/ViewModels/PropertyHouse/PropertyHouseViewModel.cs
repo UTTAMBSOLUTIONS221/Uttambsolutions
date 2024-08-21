@@ -751,12 +751,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
         public async Task SavePropertyHouseAsync()
         {
-            IsLoading = true;
+            IsProcessing = true;
 
             await Task.Delay(500);
             if (SystempropertyData == null)
             {
-                IsLoading = false;
+                IsProcessing = false;
                 return;
             }
             SystempropertyData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
@@ -787,7 +787,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             finally
             {
-                IsLoading = false;
+                IsProcessing = false;
             }
         }
 
