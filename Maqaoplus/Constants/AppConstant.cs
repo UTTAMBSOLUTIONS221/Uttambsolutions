@@ -1,6 +1,7 @@
 ﻿using Maqaoplus.Controls;
 using Maqaoplus.Views;
 using Maqaoplus.Views.Dashboards;
+using Maqaoplus.Views.OwnerBillsandPayments;
 using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.PropertyHouseTenants;
 using Maqaoplus.Views.Reports;
@@ -99,6 +100,18 @@ namespace Maqaoplus.Constants
                             Icon = Icons.groupusers,
                             Title = "Tenants",
                             ContentTemplate = new DataTemplate(() => new PropertyHousesRoomTenantsPage(serviceProvider)),
+                        },
+                         new ShellContent
+                        {
+                            Icon = Icons.invoice,
+                            Title = "Bills",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesOwnerBillsPage(serviceProvider)),
+                        },
+                            new ShellContent
+                        {
+                            Icon = Icons.dollar,
+                            Title = "Payments",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesOwnerPaymentsPage(serviceProvider)),
                         },
                         new ShellContent
                         {

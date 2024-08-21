@@ -116,6 +116,12 @@
 	  <MauiXaml Update="Resources\Resources\Styles\Styles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\OwnerBillsandPayments\PropertyHousesOwnerBillsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\OwnerBillsandPayments\PropertyHousesOwnerPaymentsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\TenantBillsandPayments\Modals\HousesRoomTenantInvoiceDetailModalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
