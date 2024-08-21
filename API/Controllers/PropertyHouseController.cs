@@ -106,6 +106,12 @@ namespace API.Controllers
             return await bl.Registerpropertyhouseroomrentpaymentrequestdata(JsonConvert.SerializeObject(model));
         }
         [AllowAnonymous]
+        [HttpGet("Gettenantmonthlyinvoicepaymentdatabyownerid/{OwnerId}")]
+        public async Task<TenantMonthlyInvoicePaymentData> Gettenantmonthlyinvoicepaymentdatabyownerid(long OwnerId)
+        {
+            return await bl.Gettenantmonthlyinvoicepaymentdatabyownerid(OwnerId);
+        }
+        [AllowAnonymous]
         [HttpGet("Gettenantmonthlyinvoicepaymentdatabytenantid/{TenantId}")]
         public async Task<TenantMonthlyInvoicePaymentData> Gettenantmonthlyinvoicepaymentdatabytenantid(long TenantId)
         {
