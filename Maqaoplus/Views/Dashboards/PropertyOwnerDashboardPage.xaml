@@ -25,57 +25,51 @@
             </Grid.RowDefinitions>
 
             <!-- Summary Cards -->
-            <!-- Total Units -->
             <Frame Grid.Row="0" Grid.Column="0" Padding="10" BorderColor="#0a506c" BackgroundColor="#f0f4f8" CornerRadius="10" HasShadow="True">
                 <StackLayout>
                     <Image Source="house.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" />
                     <Label Text="Total Units" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" HorizontalOptions="Center" />
-                    <Label Text="{Binding DashBoardSummaryData.Propertyhouseunits, TargetNullValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
+                    <Label Text="{Binding DashBoardSummaryData.Propertyhouseunits, TargetNullValue='0', FallbackValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
 
-            <!-- Occupied Rooms -->
             <Frame Grid.Row="0" Grid.Column="1" Padding="10" BorderColor="#0a506c" BackgroundColor="#f0f4f8" CornerRadius="10" HasShadow="True">
                 <StackLayout>
                     <Image Source="house.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" />
                     <Label Text="Occupied Rooms" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" HorizontalOptions="Center" />
-                    <Label Text="{Binding DashBoardSummaryData.Systempropertyoccupiedroom, TargetNullValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
+                    <Label Text="{Binding DashBoardSummaryData.Systempropertyoccupiedroom, TargetNullValue='0', FallbackValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
 
-            <!-- Vacant Rooms -->
             <Frame Grid.Row="1" Grid.Column="0" Padding="10" BorderColor="#0a506c" BackgroundColor="#f0f4f8" CornerRadius="10" HasShadow="True">
                 <StackLayout>
                     <Image Source="house.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" />
                     <Label Text="Vacant Rooms" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" HorizontalOptions="Center" />
-                    <Label Text="{Binding DashBoardSummaryData.Systempropertyvacantroom, TargetNullValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
+                    <Label Text="{Binding DashBoardSummaryData.Systempropertyvacantroom, TargetNullValue='0', FallbackValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
 
-            <!-- Rent Arrears -->
             <Frame Grid.Row="1" Grid.Column="1" Padding="10" BorderColor="#0a506c" BackgroundColor="#f0f4f8" CornerRadius="10" HasShadow="True">
                 <StackLayout>
                     <Image Source="dollar.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" />
                     <Label Text="Rent Arrears" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" HorizontalOptions="Center" />
-                    <Label Text="{Binding DashBoardSummaryData.Rentarrears, TargetNullValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
+                    <Label Text="{Binding DashBoardSummaryData.Rentarrears, TargetNullValue='0', FallbackValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
 
-            <!-- Uncollected Payments -->
             <Frame Grid.Row="2" Grid.Column="0" Padding="10" BorderColor="#0a506c" BackgroundColor="#f0f4f8" CornerRadius="10" HasShadow="True">
                 <StackLayout>
                     <Image Source="dollar.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" />
                     <Label Text="Uncollected Payments" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" HorizontalOptions="Center" />
-                    <Label Text="{Binding DashBoardSummaryData.Uncollectedpayments, TargetNullValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
+                    <Label Text="{Binding DashBoardSummaryData.Uncollectedpayments, TargetNullValue='0', FallbackValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
 
-            <!-- Consumed Water Meters -->
             <Frame Grid.Row="2" Grid.Column="1" Padding="10" BorderColor="#0a506c" BackgroundColor="#f0f4f8" CornerRadius="10" HasShadow="True">
                 <StackLayout>
                     <Image Source="tap.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" />
                     <Label Text="Consumed Water Meters" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" HorizontalOptions="Center" />
-                    <Label Text="{Binding DashBoardSummaryData.Consumedmeters, TargetNullValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
+                    <Label Text="{Binding DashBoardSummaryData.Consumedmeters, TargetNullValue='0', FallbackValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
         </Grid>
@@ -90,17 +84,18 @@
                     <DataTemplate>
                         <Frame Padding="20" Margin="10" BorderColor="#0a506c" BackgroundColor="White" CornerRadius="10" HasShadow="True">
                             <StackLayout Spacing="10">
-                                <Label Text="{Binding Propertyhousename}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" />
-                                <Label Text="{Binding Propertyhouseunits, StringFormat='Units: {0}'}" FontSize="16" TextColor="#333" />
-                                <Label Text="{Binding Systempropertyoccupiedroo, StringFormat='Occupied Rooms: {0}'}" FontSize="16" TextColor="#333" />
-                                <Label Text="{Binding Systempropertyvacantroom, StringFormat='Vacant Rooms: {0}'}" FontSize="16" TextColor="#333" />
-                                <Label Text="{Binding Consumedmeters, StringFormat='Consumed Meters: {0}'}" FontSize="16" TextColor="#333" />
+                                <Label Text="{Binding Propertyhousename, TargetNullValue='N/A', FallbackValue='N/A'}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" />
+                                <Label Text="{Binding Propertyhouseunits, StringFormat='Units: {0}', TargetNullValue='0', FallbackValue='0'}" FontSize="16" TextColor="#333" />
+                                <Label Text="{Binding Systempropertyoccupiedroom, StringFormat='Occupied Rooms: {0}', TargetNullValue='0', FallbackValue='0'}" FontSize="16" TextColor="#333" />
+                                <Label Text="{Binding Systempropertyvacantroom, StringFormat='Vacant Rooms: {0}', TargetNullValue='0', FallbackValue='0'}" FontSize="16" TextColor="#333" />
+                                <Label Text="{Binding Consumedmeters, StringFormat='Consumed Meters: {0}', TargetNullValue='0', FallbackValue='0'}" FontSize="16" TextColor="#333" />
                             </StackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
+
 
         <!-- Footer -->
         <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
