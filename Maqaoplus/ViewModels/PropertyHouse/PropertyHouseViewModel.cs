@@ -4,11 +4,12 @@ using DBL.Models;
 using Maqaoplus.Views.PropertyHouse.Modal;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.PropertyHouse
 {
-    public class PropertyHouseViewModel : BaseViewModel
+    public class PropertyHouseViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -220,7 +221,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ObservableCollection<Systempropertyhousebenefits> PropertyHouseBenefits { get; set; } = new ObservableCollection<Systempropertyhousebenefits>();
 
         // Parameterless constructor for XAML support
-        public PropertyHouseViewModel()
+        public PropertyHouseViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<Systemproperty>();
@@ -232,6 +233,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
         }
+
         public ObservableCollection<ListModel> Systemcounty
         {
             get => _systemcounty;
@@ -790,7 +792,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             bool isValid = true;
 
             // Validate Property Name
-            if (string.IsNullOrWhiteSpace(SystempropertyData?.Propertyhousename))
+            if (string.IsNullOrWhiteSpace(SystempropertyData.Propertyhousename))
             {
                 PropertyHouseNameError = "Property Name is required.";
                 isValid = false;
@@ -906,6 +908,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsValid = isValid;
 
             return isValid;
+        }
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
