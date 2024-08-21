@@ -36,24 +36,18 @@ namespace Maqaoplus.Constants
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
                     {
-                                new ShellContent
-                                {
-                                    Icon = Icons.Dashboard,
-                                    Title = "Admin Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(AdminDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.user,
-                                    Title = "Profile",
-                                    ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.AboutUs,
-                                    Title = "Admin Profile",
-                                    ContentTemplate = new DataTemplate(typeof(AdminDashboardPage)),
-                                },
+                        new ShellContent
+                        {
+                            Icon = Icons.Dashboard,
+                            Title = "Admin Dashboard",
+                            ContentTemplate = new DataTemplate(typeof(AdminDashboardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.user,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                        },
                    }
                 };
 
@@ -81,38 +75,38 @@ namespace Maqaoplus.Constants
                     Route = nameof(PropertyOwnerDashboardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
-                            {
-                                new ShellContent
-                                {
-                                    Icon = Icons.Dashboard,
-                                    Title = "Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(PropertyOwnerDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.user,
-                                    Title = "Profile",
-                                    ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.house,
-                                    Title = "Houses",
-                                    ContentTemplate = new DataTemplate(() => new PropertyHousesPage(serviceProvider)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.groupusers,
-                                    Title = "Tenants",
-                                    ContentTemplate = new DataTemplate(() => new PropertyHousesRoomTenantsPage(serviceProvider)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.reports,
-                                    Title = "Reports",
-                                    ContentTemplate = new DataTemplate(typeof(SystemPropertyOwnerReportsPage)),
-                                },
-                            }
+                    {
+                        new ShellContent
+                        {
+                            Icon = Icons.Dashboard,
+                            Title = "Dashboard",
+                            ContentTemplate = new DataTemplate(typeof(PropertyOwnerDashboardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.user,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.house,
+                            Title = "Houses",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesPage(serviceProvider)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.groupusers,
+                            Title = "Tenants",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesRoomTenantsPage(serviceProvider)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.reports,
+                            Title = "Reports",
+                            ContentTemplate = new DataTemplate(typeof(SystemPropertyOwnerReportsPage)),
+                        },
+                    }
                 };
                 if (!AppShell.Current.Items.Contains(flyoutItem))
                 {
@@ -138,32 +132,32 @@ namespace Maqaoplus.Constants
                     Route = nameof(UserDashboardPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
-                            {
-                                new ShellContent
-                                {
-                                    Icon = Icons.Dashboard,
-                                    Title = " Dashboard",
-                                    ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.user,
-                                    Title = "Profile",
-                                    ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
-                                },
-                                new ShellContent
-                                {
-                                    Icon = Icons.invoice,
-                                    Title = "Bills",
-                                    ContentTemplate = new DataTemplate(() => new PropertyHousesTenantBillsPage(serviceProvider)),
-                                },
-                                 new ShellContent
-                                {
-                                    Icon = Icons.dollar,
-                                    Title = "Payments",
-                                    ContentTemplate = new DataTemplate(() => new PropertyHousesTenantPaymentsPage(serviceProvider)),
-                                },
-                            }
+                    {
+                        new ShellContent
+                        {
+                            Icon = Icons.Dashboard,
+                            Title = " Dashboard",
+                            ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.user,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.invoice,
+                            Title = "Bills",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesTenantBillsPage(serviceProvider)),
+                        },
+                            new ShellContent
+                        {
+                            Icon = Icons.dollar,
+                            Title = "Payments",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesTenantPaymentsPage(serviceProvider)),
+                        },
+                    }
                 };
                 if (!AppShell.Current.Items.Contains(flyoutItem))
                 {
