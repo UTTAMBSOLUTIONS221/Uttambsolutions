@@ -223,7 +223,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
-            LoadItemsCommand = new Command(async () => await LoadItems());
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
 
             // Initialize steps
