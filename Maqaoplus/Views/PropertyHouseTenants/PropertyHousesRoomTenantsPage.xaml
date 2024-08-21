@@ -4,7 +4,7 @@
              xmlns:viewmodels="clr-namespace:Maqaoplus.ViewModels.PropertyHouseTenants"
              xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.PropertyHouseTenants.PropertyHousesRoomTenantsPage"
-             Title="My Tenants">
+             Title="MY TENANTS">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -60,7 +60,7 @@
                                     <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="0">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Tenant: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c"/>
+                                                <Span Text="Tenant: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="Black"/>
                                                 <Span Text="{Binding Tenantname}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
                                                 <Span Text=" "/>
                                                 <Span Text="{Binding Systempropertyhousesizename}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
@@ -71,7 +71,7 @@
                                     <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="1">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Property Name: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text="Property Name: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="Black" />
                                                 <Span Text="{Binding Propertyhousename}" FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
@@ -80,9 +80,9 @@
                                     <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="2">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Tenant From: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c"/>
+                                                <Span Text="Tenant From: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="Black"/>
                                                 <Span Text="{Binding Datecreated, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold" FontSize="12" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text=" To: "  FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c"/>
+                                                <Span Text=" To: "  FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="Black"/>
                                                 <Span Text="{Binding Datemodified, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold" FontSize="12" TextTransform="Uppercase" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
