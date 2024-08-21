@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Dynamically create frames for each tenant -->
+                <!-- Dynamically create frames for each payment -->
                 <CollectionView ItemsSource="{Binding PaymentItems}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -48,13 +48,68 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
-                                        <Label Text="{Binding PropertyHouseName, StringFormat='House: {0}'}" Grid.Row="0" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
-                                        <Label Text="{Binding SystemHouseRoomSizeName, StringFormat='Room: {0}'}" Grid.Row="1" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
-                                        <Label Text="{Binding PaymentMode, StringFormat='Payment Mode: {0}'}" Grid.Row="2" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
-                                        <Label Text="{Binding TransactionReference, StringFormat='Transaction Code: {0}'}" Grid.Row="3" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
-                                        <Label Text="{Binding Amount, StringFormat='Amount: {0:#,##0.00}'}" Grid.Row="4" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
-                                        <Label Text="{Binding PaymentValidationstatus, StringFormat='Payment Validated: {0}'}" Grid.Row="5" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
-                                        <Label Text="{Binding TransactionDate, StringFormat='Date: {0:yyyy-MM-dd}'}" Grid.Row="6" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                        <Label Grid.Row="0" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="House: " FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Span Text="{Binding PropertyHouseName}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label Grid.Row="1" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Room: " FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Span Text="{Binding SystemHouseRoomSizeName}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label Grid.Row="2" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Payment Mode: " FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Span Text="{Binding PaymentMode}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label Grid.Row="3" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Transaction Code: " FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Span Text="{Binding TransactionReference}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label Grid.Row="4" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Amount: " FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Span Text="{Binding Amount, StringFormat='{0:#,##0.00}'}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label Grid.Row="5" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Payment Validated: " FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Span Text="{Binding PaymentValidationstatus}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label Grid.Row="6" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Date: " FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Span Text="{Binding TransactionDate, StringFormat='{0:yyyy-MM-dd}'}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
                                     </Grid>
                                 </StackLayout>
                             </Frame>
