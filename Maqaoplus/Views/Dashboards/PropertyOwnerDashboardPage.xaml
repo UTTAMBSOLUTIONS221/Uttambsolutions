@@ -5,7 +5,7 @@
              Title="DASHBOARD"
              BackgroundColor="White">
 
-    <Grid Padding="20">
+    <Grid Padding="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

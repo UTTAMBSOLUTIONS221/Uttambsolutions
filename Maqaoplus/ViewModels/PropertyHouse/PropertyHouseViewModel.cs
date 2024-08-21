@@ -230,6 +230,21 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep2Visible = false;
             _isStep3Visible = false;
             _isStep4Visible = false;
+
+        }
+        public ObservableCollection<Systempropertyhousesize> PropertyHouseSizes { get; set; } = new ObservableCollection<Systempropertyhousesize>();
+        public ObservableCollection<Systempropertyhousedepositfees> PropertyHouseDepositFees { get; set; } = new ObservableCollection<Systempropertyhousedepositfees>();
+        public ObservableCollection<Systempropertyhousebenefits> PropertyHouseBenefits { get; set; } = new ObservableCollection<Systempropertyhousebenefits>();
+
+
+        // Constructor with ServiceProvider parameter
+        public PropertyHouseViewModel(Services.ServiceProvider serviceProvider) : this()
+        {
+            _serviceProvider = serviceProvider;
+        }
+        private async void AddPropertyHouseAsync()
+        {
+            IsProcessing = true;
             Systemhouseentrystatus = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "0", Text = "First Tenants" },
@@ -260,16 +275,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
 
             LoadDropdownData();
-        }
-
-        // Constructor with ServiceProvider parameter
-        public PropertyHouseViewModel(Services.ServiceProvider serviceProvider) : this()
-        {
-            _serviceProvider = serviceProvider;
-        }
-        private async void AddPropertyHouseAsync()
-        {
-            IsProcessing = true;
             var modalPage = new AddSystemPropertyHouseModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
