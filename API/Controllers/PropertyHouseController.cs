@@ -117,5 +117,11 @@ namespace API.Controllers
         {
             return await bl.Gettenantmonthlyinvoicepaymentdatabytenantid(TenantId);
         }
+        [AllowAnonymous]
+        [HttpPost("Validatepropertyhouseroomrentpaymentrequestdata")]
+        public async Task<Genericmodel> Validatepropertyhouseroomrentpaymentrequestdata(CustomerPaymentValidation model)
+        {
+            return await bl.Registervalidatecustomerpaymentrequestdata(JsonConvert.SerializeObject(model));
+        }
     }
 }
