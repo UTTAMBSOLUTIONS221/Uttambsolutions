@@ -1,6 +1,7 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
+using Maqaoplus.Views.OwnerBillsandPayments.Modals;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -167,7 +168,7 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
                     {
                         SystemPaymentModes = new ObservableCollection<ListModel>(SystemPaymentModeResponse);
                     }
-                    var modalPage = new HousesRoomTenantInvoiceDetailModalPage(this);
+                    var modalPage = new HousesRoomOwnerInvoiceDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                     IsDataLoaded = true;
                 }
