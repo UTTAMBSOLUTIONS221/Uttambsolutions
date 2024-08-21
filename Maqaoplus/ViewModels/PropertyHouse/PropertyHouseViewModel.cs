@@ -15,9 +15,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ObservableCollection<Systemproperty> Items { get; }
         private Systemproperty _systempropertyData;
 
+        private bool _isStep1Visible;
+        private bool _isStep2Visible;
+        private bool _isStep3Visible;
+        private bool _isStep4Visible;
+
         public ICommand AddPropertyHouseCommand { get; }
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
+        public ICommand NextCommand { get; }
+        public ICommand PreviousCommand { get; }
 
 
         private bool _isLoading;
@@ -217,7 +224,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             AddPropertyHouseCommand = new Command(AddPropertyHouseAsync);
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
-
+            NextCommand = new Command(NextStep);
+            PreviousCommand = new Command(PreviousStep);
         }
 
         // Constructor with ServiceProvider parameter
@@ -514,6 +522,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async void AddPropertyHouseAsync()
         {
             IsProcessing = true;
+            // Initialize steps
+            _isStep1Visible = true;
+            _isStep2Visible = false;
+            _isStep3Visible = false;
+            _isStep4Visible = false;
             Systemhouseentrystatus = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "0", Text = "First Tenants" },
@@ -628,6 +641,228 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        public bool IsStep1Visible
+        {
+            get => _isStep1Visible;
+            set
+            {
+                _isStep1Visible = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public bool IsStep2Visible
+        {
+            get => _isStep2Visible;
+            set
+            {
+                _isStep2Visible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsStep3Visible
+        {
+            get => _isStep3Visible;
+            set
+            {
+                _isStep3Visible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsStep4Visible
+        {
+            get => _isStep4Visible;
+            set
+            {
+                _isStep4Visible = value;
+                OnPropertyChanged();
+            }
+        }
+        private async void NextStep()
+        {
+            IsLoading = true;
+
+            await Task.Delay(500);
+            // Move to the next step
+            if (_isStep1Visible)
+            {
+                if (!ValidateStep1())
+                {
+                    IsLoading = false;
+                    return;
+                }
+                _isStep1Visible = false;
+                _isStep2Visible = true;
+            }
+            else if (_isStep2Visible)
+            {
+                _isStep2Visible = false;
+                _isStep3Visible = true;
+            }
+            else if (_isStep3Visible)
+            {
+                _isStep3Visible = false;
+                _isStep4Visible = true;
+            }
+            IsLoading = false;
+            OnPropertyChanged(nameof(IsStep1Visible));
+            OnPropertyChanged(nameof(IsStep2Visible));
+            OnPropertyChanged(nameof(IsStep3Visible));
+            OnPropertyChanged(nameof(IsStep4Visible));
+        }
+
+        private async void PreviousStep()
+        {
+            IsLoading = true;
+
+            await Task.Delay(500);
+            // Move to the previous step
+            if (_isStep4Visible)
+            {
+                _isStep4Visible = false;
+                _isStep3Visible = true;
+            }
+            else if (_isStep3Visible)
+            {
+                _isStep3Visible = false;
+                _isStep2Visible = true;
+            }
+            else if (_isStep2Visible)
+            {
+                _isStep2Visible = false;
+                _isStep1Visible = true;
+            }
+            IsLoading = false;
+
+            OnPropertyChanged(nameof(IsStep1Visible));
+            OnPropertyChanged(nameof(IsStep2Visible));
+            OnPropertyChanged(nameof(IsStep3Visible));
+            OnPropertyChanged(nameof(IsStep4Visible));
+        }
+
+        private bool ValidateStep1()
+        {
+            bool isValid = true;
+
+            // Validate Property Name
+            if (string.IsNullOrWhiteSpace(SystempropertyData?.Propertyhousename))
+            {
+                PropertyHouseNameError = "Property Name is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseNameError = null;
+            }
+
+            // Validate Street or Landmark
+            if (string.IsNullOrWhiteSpace(SystempropertyData?.Streetorlandmark))
+            {
+                StreetOrLandmarkError = "Street or Landmark is required.";
+                isValid = false;
+            }
+            else
+            {
+                StreetOrLandmarkError = null;
+            }
+
+            // Validate Contact Details
+            if (string.IsNullOrWhiteSpace(SystempropertyData?.Contactdetails))
+            {
+                ContactDetailsError = "Contact Details are required.";
+                isValid = false;
+            }
+            else
+            {
+                ContactDetailsError = null;
+            }
+
+            // Validate Property House Status
+            if (SystempropertyData?.Propertyhousestatus < 0)
+            {
+                PropertyHouseStatusError = "Property House Status is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseStatusError = null;
+            }
+            // Validate Property House Water Type
+            if (SystempropertyData?.Watertypeid == 0)
+            {
+                PropertyHouseWaterTypeError = "Property House Water Type is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseWaterTypeError = null;
+            }
+            // Validate Property House County
+            if (SystempropertyData?.Countyid == 0)
+            {
+                PropertyHouseCountyError = "Property House County is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseCountyError = null;
+            }
+            // Validate Property House Sub County
+            if (SystempropertyData?.Subcountyid == 0)
+            {
+                PropertyHouseSubcountyError = "Property House Subcounty is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseSubcountyError = null;
+            }
+            // Validate Property House sub County Ward
+            if (SystempropertyData?.Subcountywardid == 0)
+            {
+                PropertyHouseSubcountyWardError = "Property House Subcounty Ward is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseSubcountyWardError = null;
+            }
+            // Validate Property House Rent Deposit
+            if (SystempropertyData?.Rentdueday == 0)
+            {
+                PropertyHouseRentDueDayError = "Property House Rent Due Day is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentDueDayError = null;
+            }
+            // Validate Property House Rent Deposit Months
+            if (SystempropertyData?.Rentdepositmonth == 0)
+            {
+                PropertyHouseRentDepositMonthsError = "Property House Rent Deposit Months is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentDepositMonthsError = null;
+            }
+            // Validate Property House Vacation Period
+            if (SystempropertyData?.Vacantnoticeperiod == 0)
+            {
+                PropertyHouseRentVacationPeriodMonthsError = "Property House Vacation Period Months is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentVacationPeriodMonthsError = null;
+            }
+            // Update overall IsValid property
+            IsValid = isValid;
+
+            return isValid;
+        }
     }
 }
