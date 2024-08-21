@@ -196,25 +196,13 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
             }
             try
             {
-                CustomerRentInvoicePayment InvoicePaymentData = new CustomerRentInvoicePayment();
-                InvoicePaymentData.Tenantid = TenantInvoiceDetailData.Propertyhouseroomtenantid;
-                InvoicePaymentData.Houseromid = TenantInvoiceDetailData.Propertyhouseroomid;
-                InvoicePaymentData.Paymentmodeid = Convert.ToInt64(SelectedPaymentModes.Value);
-                InvoicePaymentData.Amount = TenantInvoiceDetailData.Amount;
-                InvoicePaymentData.Transactionreference = InvoicePayemtCode;
-                InvoicePaymentData.Transactiondate = DateTime.UtcNow;
-                InvoicePaymentData.Ispaymentvalidated = false;
-                InvoicePaymentData.Chequeno = "";
-                InvoicePaymentData.Chequedate = DateTime.UtcNow;
-                InvoicePaymentData.Memo = "Tenant Validating His Renatal Payments";
-                InvoicePaymentData.Drawerbank = "";
-                InvoicePaymentData.Depositbank = "";
-                InvoicePaymentData.Paidby = App.UserDetails.Usermodel.Userid;
-                InvoicePaymentData.Slipreference = InvoicePayemtCode;
-                InvoicePaymentData.Datecreated = DateTime.UtcNow;
+                CustomerPaymentValidation InvoicePaymentValidationData = new CustomerPaymentValidation();
+                InvoicePaymentValidationData.CustomerPaymentId = TenantInvoiceDetailData.Propertyhouseroomtenantid;
+                InvoicePaymentValidationData.Confirmedby = App.UserDetails.Usermodel.Userid;
+                InvoicePaymentValidationData.Datemodified = DateTime.UtcNow;
 
 
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomrentpaymentrequestdata", HttpMethod.Post, InvoicePaymentData);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Validatepropertyhouseroomrentpaymentrequestdata", HttpMethod.Post, InvoicePaymentValidationData);
                 if (response.StatusCode == 200)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
