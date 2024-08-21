@@ -25,6 +25,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand ViewDetailsCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
+        public ICommand OnCancelClickedCommand { get; }
 
 
         private bool _isLoading;
@@ -226,6 +227,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
+            OnCancelClickedCommand = new Command(OnCancelClicked);
         }
 
         // Constructor with ServiceProvider parameter
@@ -707,10 +709,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep4Visible = true;
             }
             IsLoading = false;
-            OnPropertyChanged(nameof(IsStep1Visible));
-            OnPropertyChanged(nameof(IsStep2Visible));
-            OnPropertyChanged(nameof(IsStep3Visible));
-            OnPropertyChanged(nameof(IsStep4Visible));
+            OnPropertyChanged();
+            //OnPropertyChanged(nameof(IsStep2Visible));
+            //OnPropertyChanged(nameof(IsStep3Visible));
+            //OnPropertyChanged(nameof(IsStep4Visible));
         }
 
         private async void PreviousStep()
@@ -736,10 +738,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             IsLoading = false;
 
-            OnPropertyChanged(nameof(IsStep1Visible));
-            OnPropertyChanged(nameof(IsStep2Visible));
-            OnPropertyChanged(nameof(IsStep3Visible));
-            OnPropertyChanged(nameof(IsStep4Visible));
+            OnPropertyChanged();
+            //OnPropertyChanged(nameof(IsStep2Visible));
+            //OnPropertyChanged(nameof(IsStep3Visible));
+            //OnPropertyChanged(nameof(IsStep4Visible));
+        }
+        private void OnCancelClicked()
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
         private bool ValidateStep1()
