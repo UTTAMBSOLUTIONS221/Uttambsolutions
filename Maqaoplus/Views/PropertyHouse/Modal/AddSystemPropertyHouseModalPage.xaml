@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.PropertyHouse.Modal.AddSystemPropertyHouseModalPage"
              BackgroundColor="White"
-             Padding="16">
+             Padding="10">
     <Grid>
         <!-- Define Row Heights for Header and Content -->
         <Grid.RowDefinitions>
