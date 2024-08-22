@@ -10,7 +10,7 @@
             <div class="card-header py-1">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h6 class="font-weight-bold text-sm card-title">Properties</h6>
+                        <h6 class="font-weight-bold text-sm card-title">Properties House Rentals</h6>
                     </div>
                     <div class="col-sm-4">
                         <a asp-action="Addproperty" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Propertyid="0" asp-area="" id="CAN_ADD_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Property</a>
@@ -24,6 +24,7 @@
                             @*  <th>Image</th> *@
                             <th>House</th>
                             <th>Rooms</th>
+                            <th>Montly Collections</th>
                             <th>County</th>
                             <th>Sub County</th>
                             <th>Ward</th>
@@ -38,6 +39,7 @@
                                 @*  <td><img src="@Url.Content(item.Primaryimageurl)" height="40" width="40" /></td> *@
                                 <td>@item.Propertyhousename</td>
                                 <td>@item.Roomscount</td>
+                                <td>@item.Monthlycollection</td>
                                 <td>@item.Countyname</td>
                                 <td>@item.Subcountyname</td>
                                 <td>@item.Subcountywardname</td>
