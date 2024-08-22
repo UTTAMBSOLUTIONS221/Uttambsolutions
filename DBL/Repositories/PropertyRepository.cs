@@ -15,6 +15,15 @@ namespace DBL.Repositories
         public PropertyRepository(string connectionString) : base(connectionString)
         {
         }
+
+        public Systempropertyhousedata Getallsystempropertyvacanthouses(int Page, int PageSize)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                return connection.Query<Systempropertyhousedata>("Usp_Getallsystempropertyvacanthousesdata", null, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         public IEnumerable<Systemproperty> Getsystempropertyhousedata()
         {
             using (var connection = new SqlConnection(_connString))

@@ -15,9 +15,10 @@ namespace Maqaoplusweb.Controllers
             bl = new BL(Util.ShareConnectionString(config));
         }
         [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var data = await bl.Getallsystempropertyvacanthouses(0, 10000);
+            return View(data);
         }
 
         public IActionResult Dashboard()
