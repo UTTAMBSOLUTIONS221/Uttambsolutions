@@ -830,11 +830,11 @@ namespace DBL
         #endregion
 
         #region System Properties Houses
-        public Task<Systempropertyhousedata> Getallsystempropertyvacanthouses(int Page, int PageSize)
+        public Task<PropertyHouseDetailData> Getallsystempropertyvacanthouses(int Page, int PageSize)
         {
             return Task.Run(() =>
             {
-                var Resp = db.PropertyRepository.Getallsystempropertyvacanthouses(Page, PageSize);
+                var Resp = db.PropertyRepository.Getallsystempropertyvacanthousesdata(Page, PageSize);
                 return Resp;
             });
         }

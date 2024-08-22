@@ -6,7 +6,7 @@ namespace DBL.Repositories
 {
     public interface IPropertyRepository
     {
-        Systempropertyhousedata Getallsystempropertyvacanthousesdata(int Page, int PageSize);
+        PropertyHouseDetailData Getallsystempropertyvacanthousesdata(int Page, int PageSize);
         IEnumerable<Systemproperty> Getsystempropertyhousedata();
         Genericmodel Registersystempropertyhousedata(string JsonData);
         Systemproperty Getsystempropertyhousedatabyid(long Propertyid);

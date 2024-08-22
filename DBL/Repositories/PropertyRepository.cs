@@ -16,7 +16,7 @@ namespace DBL.Repositories
         {
         }
 
-        public Systempropertyhousedata Getallsystempropertyvacanthousesdata(int Page, int PageSize)
+        public PropertyHouseDetailData Getallsystempropertyvacanthousesdata(int Page, int PageSize)
         {
             using (var connection = new SqlConnection(_connString))
             {
@@ -27,11 +27,11 @@ namespace DBL.Repositories
                 string systempropertydataJson = parameters.Get<string>("@Systempropertydata");
                 if (systempropertydataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<Systempropertyhousedata>(systempropertydataJson);
+                    return JsonConvert.DeserializeObject<PropertyHouseDetailData>(systempropertydataJson);
                 }
                 else
                 {
-                    return new Systempropertyhousedata();
+                    return new PropertyHouseDetailData();
                 }
             }
         }

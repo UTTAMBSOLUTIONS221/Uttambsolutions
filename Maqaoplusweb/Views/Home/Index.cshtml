@@ -1,3 +1,31 @@
-﻿@{
+﻿@model DBL.Models.PropertyHouseDetailData
+@{
     ViewData["Title"] = "Home Page";
+}
+@if (Model != null && Model.Data != null && Model.Data.Any())
+{
+    <div class="container mt-4">
+        <div class="row">
+            @foreach (var item in Model.Data)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card border-0 shadow-sm">
+                        <img src="~/images/house.png" class="card-img-top" alt="@item.Systemhousesizename" />
+                        <div class="card-body">
+                            <h4 class="card-title mb-2">@(item.Systemhousesizename +" "+item.Systempropertyhousesizerent)</h4>
+                            <p class="card-text mb-1"><strong>County:</strong> @(item.Countyname +" "+item.Subcountyname)</p>
+                            <p class="card-text mb-1"><strong>Ward:</strong> @item.Subcountywardname</p>
+                            <p class="card-text mb-1"><strong>Landmark:</strong> @item.Streetorlandmark</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="container mt-4">
+        <p class="text-center">No vacant rental items available at the moment.</p>
+    </div>
 }
