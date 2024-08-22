@@ -1,4 +1,6 @@
-﻿namespace DBL.Models
+﻿using DBL.Entities;
+
+namespace DBL.Models
 {
     public class TenantMonthlyInvoiceData
     {
@@ -30,6 +32,7 @@
         public string Sentstatus => Issent ? "Sent" : "Not Sent";
         public string? Paidstatus { get; set; }
         public List<MonthlyRentInvoiceItem>? InvoiceDetails { get; set; }
+        public List<Propertyhousebankingdetail>? Propertyhousebankingdetail { get; set; }
     }
 
     public class MonthlyRentInvoiceItem
