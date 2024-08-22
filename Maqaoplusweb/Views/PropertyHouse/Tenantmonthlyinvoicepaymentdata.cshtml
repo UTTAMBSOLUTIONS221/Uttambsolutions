@@ -71,11 +71,6 @@
             document.getElementById("buttonText").innerText = "Processing...";
             var uil1 = {
                 CustomerPaymentId: $('#Systemcustomerpaymentid').val(),
-                FinanceTransactionId: $('#Systemcustomerpaymentfinancetransactionid').val(),
-                Houseroomid: $('#Systemhouseroomid').val(),
-                Tenantid: $('#Systemtenantid').val(),
-                TransactionReference: $('#SystemtransactionReferenceid').val(),
-                Paidamount: $('#Systemhouserentpaidamountid').val(),
                 Actualamount: $('#Systemhouserentactualamountid').val(),
                 Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
                 Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
