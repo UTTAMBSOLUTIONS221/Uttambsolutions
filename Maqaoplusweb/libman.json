@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "libraries": [
+    {
+      "provider": "cdnjs",
+      "library": "rateYo@2.3.4",
+      "destination": "wwwroot/lib/rateYo/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "rateYo@2.3.4",
+      "destination": "wwwroot/lib/rateYo/"
+    }
+  ]
+}
