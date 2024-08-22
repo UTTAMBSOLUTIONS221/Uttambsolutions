@@ -51,7 +51,7 @@
                                     <td class="text-right">
                                         @if (!item.IsPaymentValidated)
                                         {
-                                            <a asp-action="Validatecustomerpayment" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Customerpaymentid="@item.CustomerPaymentId" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Validate</a>
+                                            <a asp-action="Validatecustomerpayment" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Customerpaymentid="@item.CustomerPaymentId" asp-route-Houseroomid="@item.HouseRoomId" asp-route-Tenantid="@item.HouseRoomTenantId" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Validate</a>
                                         }  
                                     </td>
                                 </tr>
@@ -71,6 +71,8 @@
             document.getElementById("buttonText").innerText = "Processing...";
             var uil1 = {
                 CustomerPaymentId: $('#Systemcustomerpaymentid').val(),
+                Houseroomid: $('#Systemhouseroomid').val(),
+                Tenantid: $('#Systemtenantid').val(),
                 Actualamount: $('#Systemhouserentactualamountid').val(),
                 Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
                 Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
