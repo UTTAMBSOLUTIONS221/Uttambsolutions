@@ -63,6 +63,18 @@ BEGIN
 		INSERT (Propertyhouseid,Housedepositfeeid,Systempropertyhousedepositfeeamount,Systempropertyhousesizedepositfeewehave)
 		VALUES (source.Propertyhouseid,source.Housedepositfeeid,source.Systempropertyhousedepositfeeamount,source.Systempropertyhousesizedepositfeewehave);
 
+		-- Assuming you have a table named Propertyhousebanks
+		MERGE INTO Systempropertybankaccounts AS target
+		USING (SELECT Systempropertybankaccountid,ISNULL(@Propertyhouseid, Propertyhouseid) AS Propertyhouseid,Systembankid,Systempropertybankaccount,Systempropertyhousebankwehave
+		FROM OPENJSON(@JsonObjectdata, '$.Propertyhousebankingdetail')
+		WITH (Systempropertybankaccountid BIGINT '$.Systempropertybankaccountid',Propertyhouseid BIGINT '$.Propertyhouseid',Systembankid INT '$.Systembankid',Systempropertybankaccount VARCHAR(20) '$.Systempropertybankaccount',Systempropertyhousebankwehave BIT '$.Systempropertyhousebankwehave')) AS source
+		ON target.Systempropertybankaccountid = source.Systempropertybankaccountid
+		WHEN MATCHED THEN
+		UPDATE SET target.Systembankid = source.Systembankid,target.Systempropertybankaccount = source.Systempropertybankaccount,target.Systempropertyhousebankwehave = source.Systempropertyhousebankwehave
+		WHEN NOT MATCHED BY TARGET THEN
+		INSERT (Propertyhouseid,Systembankid,Systempropertybankaccount,Systempropertyhousebankwehave)
+		VALUES (source.Propertyhouseid,source.Systembankid,source.Systempropertybankaccount,source.Systempropertyhousebankwehave);
+
 		-- Assuming you have a table named Propertyhousebenefits
 		MERGE INTO Systempropertyhousebenefits AS target
 		USING (SELECT Systempropertyhousebenefitid,ISNULL(@Propertyhouseid, Propertyhouseid) AS Propertyhouseid,Housebenefitid,Systempropertyhousebenefitwehave

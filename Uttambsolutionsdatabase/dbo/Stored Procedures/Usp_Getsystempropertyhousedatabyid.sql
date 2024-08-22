@@ -32,6 +32,17 @@ BEGIN
 					) AS Propertyhousesize,
 					(
 						SELECT 
+							0 AS Systempropertybankaccountid,
+							0 AS Propertyhouseid,
+							ISNULL(Systemsupportedbank.Systembankid, 0) AS Systembankid,
+							ISNULL(Systemsupportedbank.Systembankname+' '+ Systemsupportedbank.Systembankpaybill, '') AS Systembanknameandpaybill,
+							''  AS Systempropertybankaccount,
+							0 AS Systempropertyhousebankwehave
+						FROM Systemsupportedbanks Systemsupportedbank
+						FOR JSON PATH
+					) AS Propertyhousebankingdetail,
+					(
+						SELECT 
 							0 AS Systempropertyhousedepositfeeid,
 							0 AS Propertyhouseid,
 							ISNULL(Systemhousedepositfee.Housedepositfeeid, 0) AS Housedepositfeeid,
@@ -87,6 +98,19 @@ BEGIN
 						WHERE Systempropertyhouse.Propertyhouseid=Systempropertyhousedepositfee.Propertyhouseid
 						FOR JSON PATH
 					) AS Propertyhousedepositfee,
+					(
+						SELECT 
+							ISNULL(Systempropertybankaccount.Systempropertybankaccountid, 0) AS Systempropertybankaccountid,
+							ISNULL(Systempropertybankaccount.Propertyhouseid, 0) AS Propertyhouseid,
+							ISNULL(Systemsupportedbank.Systembankid, 0) AS Systembankid,
+							ISNULL(Systemsupportedbank.Systembankname+' '+ Systemsupportedbank.Systembankpaybill, '') AS Systembanknameandpaybill,
+							ISNULL(Systempropertybankaccount.Systempropertybankaccount, 0) AS Systempropertybankaccount,
+							ISNULL(Systempropertybankaccount.Systempropertyhousebankwehave, 0) AS Systempropertyhousebankwehave
+						FROM Systemsupportedbanks Systemsupportedbank
+						LEFT JOIN Systempropertybankaccounts Systempropertybankaccount ON Systemsupportedbank.Systembankid = Systempropertybankaccount.Systembankid
+						WHERE Systempropertyhouse.Propertyhouseid=Systempropertybankaccount.Propertyhouseid
+						FOR JSON PATH
+					) AS Propertyhousebankingdetail,
 					(
 						SELECT 
 							ISNULL(Systempropertyhousebenefit.Systempropertyhousebenefitid, 0) AS Systempropertyhousebenefitid,

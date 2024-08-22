@@ -247,5 +247,7 @@
     <Build Include="dbo\Sequences\PaymentTransactionCodeSequence.sql" />
     <Build Include="dbo\Sequences\PropertyHouseCodeSequence.sql" />
     <Build Include="dbo\Sequences\TransactionCodeSequence.sql" />
+    <Build Include="dbo\Tables\Systemsupportedbanks.sql" />
+    <Build Include="dbo\Tables\Systempropertybankaccounts.sql" />
   </ItemGroup>
 </Project>
