@@ -37,6 +37,8 @@ namespace Maqaoplusweb.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();
