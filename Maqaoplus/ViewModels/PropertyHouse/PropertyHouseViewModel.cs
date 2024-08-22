@@ -233,6 +233,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             PreviousCommand = new Command(PreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
+
+
+            // Initialize steps
+            _isStep1Visible = true;
+            _isStep2Visible = false;
+            _isStep3Visible = false;
+            _isStep4Visible = false;
         }
 
         public ObservableCollection<ListModel> Systemcounty
@@ -523,11 +530,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async void AddPropertyHouseAsync()
         {
             IsProcessing = true;
-            // Initialize steps
-            _isStep1Visible = true;
-            _isStep2Visible = false;
-            _isStep3Visible = false;
-            _isStep4Visible = false;
+
             Systemhouseentrystatus = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "0", Text = "First Tenants" },
@@ -711,10 +714,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep4Visible = true;
             }
             IsLoading = false;
-            OnPropertyChanged();
-            //OnPropertyChanged(nameof(IsStep2Visible));
-            //OnPropertyChanged(nameof(IsStep3Visible));
-            //OnPropertyChanged(nameof(IsStep4Visible));
+            OnPropertyChanged(nameof(IsStep1Visible));
+            OnPropertyChanged(nameof(IsStep2Visible));
+            OnPropertyChanged(nameof(IsStep3Visible));
+            OnPropertyChanged(nameof(IsStep4Visible));
         }
 
         private async void PreviousStep()
@@ -740,10 +743,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             IsLoading = false;
 
-            OnPropertyChanged();
-            //OnPropertyChanged(nameof(IsStep2Visible));
-            //OnPropertyChanged(nameof(IsStep3Visible));
-            //OnPropertyChanged(nameof(IsStep4Visible));
+            OnPropertyChanged(nameof(IsStep1Visible));
+            OnPropertyChanged(nameof(IsStep2Visible));
+            OnPropertyChanged(nameof(IsStep3Visible));
+            OnPropertyChanged(nameof(IsStep4Visible));
         }
         private void OnCancelClicked()
         {
