@@ -4,6 +4,7 @@
     {
         public long CustomerPaymentId { get; set; }
         public long Confirmedby { get; set; }
+        public decimal Amountpaid { get; set; }
         public DateTime Datemodified { get; set; }
     }
 }
