@@ -188,11 +188,21 @@ namespace Maqaoplusweb.Controllers
             var data = await bl.Gettenantvacatingrequestsdatabyownerid(SessionUserData.Usermodel.Userid);
             return PartialView(data);
         }
+        [HttpGet]
+        public async Task<IActionResult> Acceptcustomerrequest(long Vacatingrequestid, long Systempropertyhousetenantid, long Systempropertyhouseroomid)
+        {
+            SystemPropertyHouseVacatingRequest model = new SystemPropertyHouseVacatingRequest();
+            model.Vacatingrequestid = Vacatingrequestid;
+            model.Systempropertyhousetenantid = Systempropertyhousetenantid;
+            model.Systempropertyhouseroomid = Systempropertyhouseroomid;
+            return PartialView(model);
+        }
         public async Task<JsonResult> Acceptthisvacatingrequest(SystemPropertyHouseVacatingRequest model)
         {
             var resp = await bl.Approvepropertyhousevacatingrequest(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
+
         [HttpGet]
         public async Task<IActionResult> Tenantmonthlyinvoicedata()
         {

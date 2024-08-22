@@ -55,13 +55,13 @@
                                     <td class="text-right">
                                         @if (item.VacatingStatus)
                                         {
-                                            <a onclick="acceptthisvacatingrequest(event)" data-Entryid="@item.VacatingRequestId" data-Systempropertyhousetenantid="@item.SystemPropertyHouseTenantId" data-Systempropertyhouseroomid="@item.SystemPropertyHouseRoomId" id="CAN_ACCEPT_VACATING_REQUEST" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Accept</a>
+                                            <a asp-action="Acceptcustomerrequest" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Vacatingrequestid="@item.VacatingRequestId" asp-route-Systempropertyhousetenantid="@item.SystemPropertyHouseTenantId" asp-route-Systempropertyhouseroomid="@item.SystemPropertyHouseRoomId" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Accept</a>
                                         }
                                         else
                                         {
-                                            <a href="#" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Accepted</a>
+                                            <p class="mb-0"><span class="badge badge-info text-white"><strong>ACCEPTED</strong></span></p>
                                         }
-                                         </td>
+                                    </td>
                                 </tr>
                             }
                         }
