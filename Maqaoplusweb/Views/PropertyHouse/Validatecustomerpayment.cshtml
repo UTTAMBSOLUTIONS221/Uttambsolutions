@@ -10,7 +10,13 @@
         <input class="form-control form-control-sm" asp-for="@Model.CustomerPaymentId" id="Systemcustomerpaymentid" hidden />
     </div>
     <div class="row">
-        <input class="form-control form-control-sm" asp-for="@Model.Actualamount" id="Systemhouserentactualamountid" type="number" />
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Actual Recieved Amount</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Actualamount" id="Systemhouserentactualamountid" type="number"  required/>
+            </div>
+        </div>
+     
     </div>
 </div>
 <div class="modal-footer">
