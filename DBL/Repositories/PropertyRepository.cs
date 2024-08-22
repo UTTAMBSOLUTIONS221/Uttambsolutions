@@ -489,9 +489,9 @@ namespace DBL.Repositories
                         string TenantroomhistoryJson = invoiceResponseJson["InvoiceDetails"].ToString();
                         responseInvoiceDetailData = JsonConvert.DeserializeObject<List<MonthlyRentInvoiceItem>>(TenantroomhistoryJson);
                     }
-                    if (invoiceResponseJson["propertyhousebankingdetail"] != null)
+                    if (invoiceResponseJson["Propertyhousebankingdetail"] != null)
                     {
-                        string PropertyhousebankingdetailJson = invoiceResponseJson["propertyhousebankingdetail"].ToString();
+                        string PropertyhousebankingdetailJson = invoiceResponseJson["Propertyhousebankingdetail"].ToString();
                         responseInvoiceBankDetailData = JsonConvert.DeserializeObject<List<Propertyhousebankingdetail>>(PropertyhousebankingdetailJson);
                     }
                     responseData.InvoiceDetails = responseInvoiceDetailData;
