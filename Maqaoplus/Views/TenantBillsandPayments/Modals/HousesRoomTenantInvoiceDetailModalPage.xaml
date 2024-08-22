@@ -20,7 +20,7 @@
                 <Frame Grid.Row="0" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
                     <StackLayout Padding="10">
                         <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                            <Label Text="Tenant Basic Information" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,7"/>
+                            <Label Text="Tenant Basic Information" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="14" Margin="0,0,0,7"/>
                             <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
                         </StackLayout>
                         <StackLayout Padding="0" Spacing="8">
@@ -48,7 +48,7 @@
                 <Frame Grid.Row="1" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
                     <StackLayout Padding="10">
                         <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                            <Label Text="Invoice Details" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
+                            <Label Text="Invoice Details" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="14" Margin="0,0,0,10"/>
                             <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
                         </StackLayout>
 
@@ -91,15 +91,13 @@
                 <Frame Grid.Row="2" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
                     <StackLayout Padding="10">
                         <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                            <Label Text="Payment Details" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
+                            <Label Text="Payment Details" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="14" Margin="0,0,0,10"/>
                             <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
                         </StackLayout>
 
                         <StackLayout Padding="0" Spacing="8">
                             <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
@@ -115,8 +113,8 @@
                                     <DataTemplate>
                                         <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Label Text="{Binding Systembanknameandpaybill}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                             <Label Text="{Binding Systempropertybankaccount}" FontSize="16" Grid.Column="2" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
