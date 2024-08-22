@@ -705,6 +705,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             else if (_isStep2Visible)
             {
+
                 _isStep2Visible = false;
                 _isStep3Visible = true;
             }

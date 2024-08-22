@@ -368,6 +368,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        private string _propertyHouseRoomRentError;
+        public string PropertyHouseRoomRentError
+        {
+            get => _propertyHouseRoomRentError;
+            set
+            {
+                _propertyHouseRoomRentError = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string _propertyHouseKitchenTypeError;
         public string PropertyHouseKitchenTypeError
         {
@@ -598,6 +609,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             else
             {
                 PropertyHouseKitchenTypeError = null;
+            }
+            if (HouseroomData?.Systempropertyhousesizerent == 0)
+            {
+                PropertyHouseRoomRentError = "Property House Rent is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomRentError = null;
             }
             // Validate Property House County
             if (HouseroomData?.Systempropertyhousesizeid == 0)
