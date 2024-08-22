@@ -111,8 +111,17 @@
                     Systempropertyhousesizedepositfeewehave: $(this).find('.system-property-house-size-deposit-fee-wehave').prop('checked')
                 });
             });
-
             $('#AllsystemDataTables4').DataTable().$('tr', { "filter": "applied" }).each(function () {
+                Systempropertyhousedepositfeedata.push({
+                    Systempropertyhousedepositfeeid: $(this).find('td').eq(0).text(),
+                    Housedepositfeeid: $(this).find('td').eq(1).text(),
+                    Housedepositfeename: $(this).find('.house-deposit-fee-name').val(),
+                    Systempropertyhousedepositfeeamount: $(this).find('.system-property-house-deposit-fee-amount').val(),
+                    Systempropertyhousesizedepositfeewehave: $(this).find('.system-property-house-size-deposit-fee-wehave').prop('checked')
+                });
+            });
+
+            $('#AllsystemDataTables5').DataTable().$('tr', { "filter": "applied" }).each(function () {
                 Systempropertyhousebenefitata.push({
                     Systempropertyhousebenefitid: $(this).find('td').eq(0).text(),
                     Housebenefitid: $(this).find('td').eq(1).text(),

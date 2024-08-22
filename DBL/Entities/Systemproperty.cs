@@ -46,6 +46,7 @@
         public DateTime Datemodified { get; set; }
         public List<Systempropertyhousesize>? Propertyhousesize { get; set; }
         public List<Systempropertyhousedepositfees>? Propertyhousedepositfee { get; set; }
+        public List<Propertyhousebankingdetail>? Propertyhousebankingdetail { get; set; }
         public List<Systempropertyhousebenefits>? Propertyhousebenefit { get; set; }
     }
     public class Systempropertyhousesize
@@ -56,6 +57,19 @@
         public long? Systemhousesizeid { get; set; }
         public string? Systemhousesizename { get; set; }
         public bool Systempropertyhousesizewehave { get; set; }
+    }
+
+    public class Propertyhousebankingdetail
+    {
+        public int Systempropertybankaccountid { get; set; }
+        public int Propertyhouseid { get; set; }
+
+        public int Systembankid { get; set; }
+        public string? Systembanknameandpaybill { get; set; }
+
+        public string? Systempropertybankaccount { get; set; }
+
+        public bool Systempropertyhousebankwehave { get; set; }
     }
 
     public class Systempropertyhousedepositfees

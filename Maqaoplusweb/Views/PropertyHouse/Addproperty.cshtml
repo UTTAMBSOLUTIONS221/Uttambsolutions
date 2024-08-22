@@ -236,13 +236,57 @@
         </div>
     </div>
 
-    <!-- Section 4: House Benefits -->
+    <!-- Section 3: House Deposits and Fees -->
     <div id="section4" class="section" style="display: none;">
-        <h6 class="mb-4">Step 4: House Benefits and Services to Enjoy</h6>
+        <h6 class="mb-4">Step 4: House Bank Accounts</h6>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="AllsystemDataTables4">
+                        <thead>
+                            <tr>
+                                <th hidden>Bank Id</th>
+                                <th hidden>HouseBankId</th>
+                                <th class="font-weight-light fw-light">Bank and Paybill</th>
+                                <th class="font-weight-light fw-light">Accont Number</th>
+                                <th class="font-weight-light fw-light">We Use?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Propertyhousebankingdetail != null)
+                            {
+                                foreach (var data in Model.Propertyhousebankingdetail)
+                                {
+                                    <tr>
+                                        <td hidden>@data.Systempropertybankaccountid</td>
+                                        <td hidden>@data.Systembankid</td>
+                                        <td><input type="text" class="form-control form-control-sm font-weight-light house-system-bank-name-and-paybill" value="@data.Systembanknameandpaybill" readonly /></td>
+                                        <td><input type="text" class="form-control form-control-sm font-weight-light house-system-property-bank-account" value="@data.Systempropertybankaccount" /></td>
+                                        <td hidden>
+                                            <input type="checkbox" class="form-control form-control-sm font-weight-light house-system-property-house-bank-wehave" asp-for="@data.Systempropertyhousebankwehave" value="@data.Systempropertyhousebankwehave" />
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="prevSection()">Previous</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="nextSection()">Next</button>
+        </div>
+    </div>
+
+    <!-- Section 4: House Benefits -->
+    <div id="section5" class="section" style="display: none;">
+        <h6 class="mb-4">Step 5: House Benefits and Services to Enjoy</h6>
         <input class="form-control form-control-sm" id="Jobfunctionid" hidden />
         <div class="container">
             <div class="col-sm-12 table-responsive">
-                <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="AllsystemDataTables4">
+                <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="AllsystemDataTables5">
                     <thead>
                         <tr>
                             <th hidden>Systempropertyhousebenefitid</th>
