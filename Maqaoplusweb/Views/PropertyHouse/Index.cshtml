@@ -88,6 +88,7 @@
             document.getElementById("buttonText").innerText = "Processing...";
             var Systsempropertyhousesizedata = [];
             var Systempropertyhousedepositfeedata = [];
+            var Systempropertyhousebankingdetaildata = [];
             var Systempropertyhousebenefitata = [];
 
             // Collect table data
@@ -112,12 +113,12 @@
                 });
             });
             $('#AllsystemDataTables4').DataTable().$('tr', { "filter": "applied" }).each(function () {
-                Systempropertyhousedepositfeedata.push({
-                    Systempropertyhousedepositfeeid: $(this).find('td').eq(0).text(),
-                    Housedepositfeeid: $(this).find('td').eq(1).text(),
-                    Housedepositfeename: $(this).find('.house-deposit-fee-name').val(),
-                    Systempropertyhousedepositfeeamount: $(this).find('.system-property-house-deposit-fee-amount').val(),
-                    Systempropertyhousesizedepositfeewehave: $(this).find('.system-property-house-size-deposit-fee-wehave').prop('checked')
+                Systempropertyhousebankingdetaildata.push({
+                    Systempropertybankaccountid: $(this).find('td').eq(0).text(),
+                    Systembankid: $(this).find('td').eq(1).text(),
+                    Systembanknameandpaybill: $(this).find('.house-system-bank-name-and-paybill').val(),
+                    Systempropertybankaccount: $(this).find('.house-system-property-bank-account"').val(),
+                    Systempropertyhousebankwehave: $(this).find('.house-system-property-house-bank-wehave').prop('checked')
                 });
             });
 
