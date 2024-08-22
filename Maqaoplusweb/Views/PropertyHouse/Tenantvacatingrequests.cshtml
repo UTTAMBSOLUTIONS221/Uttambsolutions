@@ -74,47 +74,13 @@
 
 @section Scripts {
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const stars = document.querySelectorAll('.rating .fa-star');
-            let currentRating = parseInt(document.getElementById('ratingValue').value) || 0;
-
-            // Initialize star rating display based on current rating
-            updateStarRatings(currentRating);
-
-            stars.forEach(star => {
-                star.addEventListener('click', function () {
-                    const value = parseInt(this.getAttribute('data-value'));
-                    document.getElementById('ratingValue').value = value;
-                    currentRating = value;
-                    updateStarRatings(value);
-                });
-
-                // Handle mouseover for hover effect
-                star.addEventListener('mouseover', function () {
-                    const value = parseInt(this.getAttribute('data-value'));
-                    updateStarRatings(value);
-                });
-
-                // Reset to current rating on mouseout
-                star.addEventListener('mouseout', function () {
-                    updateStarRatings(currentRating);
-                });
+        $(function () {
+            $("#rateYo").rateYo({
+                onChange: function (rating, rateYoInstance) {
+                    $("#Ratingvalueid").val(rating);
+                }
             });
-
-            function updateStarRatings(value) {
-                stars.forEach(star => {
-                    if (parseInt(star.getAttribute('data-value')) <= value) {
-                        star.classList.add('checked');
-                    } else {
-                        star.classList.remove('checked');
-                    }
-                });
-            }
         });
-
-
-
-
 
         function acceptthisvacatingrequest(event) {
             Swal.fire({

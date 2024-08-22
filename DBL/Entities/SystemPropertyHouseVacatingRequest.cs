@@ -9,6 +9,7 @@
         public DateTime? Expectedvacatingdate { get; set; }
         public string? Vacatingreason { get; set; }
         public int Vacatingstatus { get; set; }
+        public float Ratingvalue { get; set; }
         public long Approvedby { get; set; }
         public DateTime Datecreated { get; set; }
         public DateTime? Dateapproved { get; set; }

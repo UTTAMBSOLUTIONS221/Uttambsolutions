@@ -14,14 +14,11 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <label for="rating">Rating:</label>
-            <div class="rating">
-                @for (int i = 1; i <= 5; i++)
-                {
-                    <span class="fa fa-star" data-value="@i"></span>
-                }
+            <div class="form-group">
+                <label for="rating">Rating:</label>
+                <input asp-for="Ratingvalue" readonly class="form-control counter" id="Ratingvalueid"  />
+                <div id="rateYo"></div>
             </div>
-            <input type="hidden" id="ratingValue" name="ratingValue" value="0" />
         </div>
     </div>
     <div class="row">
@@ -37,23 +34,3 @@
         <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
     </button>
 </div>
-
-<!-- CSS for styling the star rating -->
-<style>
-    .rating {
-        display: flex;
-        direction: row-reverse;
-        font-size: 24px;
-        unicode-bidi: bidi-override;
-        cursor: pointer;
-    }
-
-        .rating span {
-            color: #ddd;
-            transition: color 0.2s;
-        }
-
-            .rating span.checked {
-                color: #f39c12;
-            }
-</style>
