@@ -16,12 +16,23 @@ namespace DBL.Repositories
         {
         }
 
-        public Systempropertyhousedata Getallsystempropertyvacanthouses(int Page, int PageSize)
+        public Systempropertyhousedata Getallsystempropertyvacanthousesdata(int Page, int PageSize)
         {
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
-                return connection.Query<Systempropertyhousedata>("Usp_Getallsystempropertyvacanthousesdata", null, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Systempropertydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getallsystempropertyvacanthousesdata", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Systempropertydata");
+                if (systempropertydataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Systempropertyhousedata>(systempropertydataJson);
+                }
+                else
+                {
+                    return new Systempropertyhousedata();
+                }
             }
         }
         public IEnumerable<Systemproperty> Getsystempropertyhousedata()
