@@ -23,7 +23,7 @@ namespace Maqaoplusweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var data = await bl.Getsystempropertyhousedata();
+            var data = await bl.Getsystempropertyhousedatabyowner(SessionUserData.Usermodel.Userid);
             return View(data);
         }
         [HttpGet]
