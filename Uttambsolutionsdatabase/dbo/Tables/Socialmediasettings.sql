@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[Socialmediasettings] (
+    [Socialsettingid] BIGINT        IDENTITY (1, 1) NOT NULL,
+    [Socialowner]     BIGINT        NOT NULL,
+    [Socialpagename]  VARCHAR (70)  NOT NULL,
+    [Appid]           VARCHAR (200) NOT NULL,
+    [Appsecret]       VARCHAR (200) NOT NULL,
+    [Useraccesstoken] VARCHAR (200) NOT NULL,
+    [Pageaccesstoken] VARCHAR (200) NOT NULL,
+    [Pageid]          VARCHAR (200) NOT NULL,
+    [Pagetype]        VARCHAR (70)  NOT NULL,
+    [Extra]           VARCHAR (200) NULL,
+    [Extra1]          VARCHAR (200) NULL,
+    [Extra2]          VARCHAR (200) NULL,
+    [Extra3]          VARCHAR (200) NULL,
+    [Extra4]          VARCHAR (200) NULL,
+    [Extra5]          VARCHAR (200) NULL,
+    [Extra6]          VARCHAR (200) NULL,
+    [Extra7]          VARCHAR (200) NULL,
+    [Extra8]          VARCHAR (200) NULL,
+    [Extra9]          VARCHAR (200) NULL,
+    [Extra10]         VARCHAR (200) NULL,
+    [Createdby]       BIGINT        NOT NULL,
+    [Modifiedby]      BIGINT        NOT NULL,
+    [Datecreated]     DATETIME      NOT NULL,
+    [Datemodified]    DATETIME      NOT NULL,
+    PRIMARY KEY CLUSTERED ([Socialsettingid] ASC)
+);
+

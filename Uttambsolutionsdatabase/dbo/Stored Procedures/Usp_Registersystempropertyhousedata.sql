@@ -1,0 +1,94 @@
+﻿CREATE PROCEDURE [dbo].[Usp_Registersystempropertyhousedata]
+@JsonObjectdata VARCHAR(MAX)
+AS
+BEGIN
+   BEGIN
+	DECLARE @RespStat int = 0,
+			@RespMsg varchar(150) = '',
+			@Propertyhouseid BIGINT = NULL;
+		  
+	BEGIN
+		BEGIN TRY	
+		--Validate
+
+		BEGIN TRANSACTION;
+		DECLARE @Systempropertyhousedata TABLE (Propertyhouseid BIGINT);
+
+		DECLARE @TempData TABLE (Propertyhouseid BIGINT,Isagency BIT,Propertyhouseowner VARCHAR(100),Propertyhouseposter VARCHAR(100),Propertyhousename VARCHAR(255),Countyid INT,Subcountyid INT,Subcountywardid INT,Streetorlandmark VARCHAR(255),Contactdetails VARCHAR(255),Hashousedeposit BIT,
+		Rentdepositmonth INT,Hasagent BIT,Propertyhousestatus VARCHAR(50),Watertypeid BIGINT,Hashousewatermeter BIT,Waterunitprice DECIMAL(10, 2),Rentdueday INT,Vacantnoticeperiod INT,Monthlycollection DECIMAL(18,2),Createdby BIGINT,Modifiedby BIGINT,Datecreated DATETIME2,Datemodified DATETIME2);
+
+       INSERT INTO @TempData
+       SELECT Propertyhouseid, Isagency, Propertyhouseowner, Propertyhouseposter, Propertyhousename, Countyid, Subcountyid,Subcountywardid, Streetorlandmark, Contactdetails, Hashousedeposit, Rentdepositmonth, Hasagent, Propertyhousestatus,Watertypeid, Hashousewatermeter, Waterunitprice, Rentdueday, Vacantnoticeperiod, Monthlycollection, Createdby,Modifiedby, Datecreated, Datemodified
+       FROM OPENJSON(@JsonObjectdata)
+       WITH (Propertyhouseid BIGINT '$.Propertyhouseid',Isagency BIT '$.Isagency',Propertyhouseowner VARCHAR(100) '$.Propertyhouseowner',Propertyhouseposter VARCHAR(100) '$.Propertyhouseposter',Propertyhousename VARCHAR(255) '$.Propertyhousename',Countyid INT '$.Countyid',
+       Subcountyid INT '$.Subcountyid',Subcountywardid INT '$.Subcountywardid',Streetorlandmark VARCHAR(255) '$.Streetorlandmark',Contactdetails VARCHAR(255) '$.Contactdetails',Hashousedeposit BIT '$.Hashousedeposit', Rentdepositmonth INT '$.Rentdepositmonth',Hasagent BIT '$.Hasagent',Propertyhousestatus VARCHAR(50) '$.Propertyhousestatus',Watertypeid BIGINT '$.Watertypeid',
+	   Hashousewatermeter BIT '$.Hashousewatermeter',Waterunitprice DECIMAL(10,2) '$.Waterunitprice',Rentdueday INT '$.Rentdueday',Vacantnoticeperiod INT '$.Vacantnoticeperiod', Monthlycollection DECIMAL(18,2) '$.Monthlycollection',Createdby BIGINT '$.Createdby',Modifiedby BIGINT '$.Modifiedby',Datecreated DATETIME2 '$.Datecreated', Datemodified DATETIME2 '$.Datemodified');
+
+       -- Perform the update
+       UPDATE Systempropertyhouses SET Isagency = source.Isagency,Propertyhouseowner = source.Propertyhouseowner,Propertyhouseposter = source.Propertyhouseposter,Propertyhousename = source.Propertyhousename,Countyid = source.Countyid,Subcountyid = source.Subcountyid,Subcountywardid = source.Subcountywardid,Streetorlandmark = source.Streetorlandmark,Contactdetails = source.Contactdetails,
+	   Hashousedeposit = source.Hashousedeposit,Rentdepositmonth = source.Rentdepositmonth,Hasagent = source.Hasagent,Propertyhousestatus = source.Propertyhousestatus,Watertypeid = source.Watertypeid,Hashousewatermeter = source.Hashousewatermeter, Waterunitprice = source.Waterunitprice,Rentdueday = source.Rentdueday,Vacantnoticeperiod = source.Vacantnoticeperiod,
+	   Monthlycollection = source.Monthlycollection,Createdby = source.Createdby,Modifiedby = source.Modifiedby,Datecreated = source.Datecreated,Datemodified = source.Datemodified
+       FROM Systempropertyhouses target
+       JOIN @TempData source ON target.Propertyhouseid = source.Propertyhouseid;
+
+       -- Perform the insert
+       INSERT INTO Systempropertyhouses (Housecode, Isagency, Propertyhouseowner, Propertyhouseposter, Propertyhousename, Countyid, Subcountyid, Subcountywardid, Streetorlandmark, Contactdetails, Hashousedeposit, Rentdepositmonth, Hasagent, Propertyhousestatus, Watertypeid, Hashousewatermeter, Waterunitprice, Rentdueday, Vacantnoticeperiod, Monthlycollection, Createdby, Modifiedby, Datecreated, Datemodified)
+       SELECT 'MQP' + CONVERT(VARCHAR(70), NEXT VALUE FOR PropertyHouseCodeSequence), Isagency, Propertyhouseowner, Propertyhouseposter, Propertyhousename, Countyid, Subcountyid, Subcountywardid, Streetorlandmark, Contactdetails, Hashousedeposit, Rentdepositmonth, Hasagent, Propertyhousestatus, Watertypeid, Hashousewatermeter, Waterunitprice, Rentdueday, Vacantnoticeperiod, Monthlycollection, Createdby, Modifiedby, Datecreated, Datemodified
+       FROM @TempData source
+       WHERE NOT EXISTS (SELECT 1 FROM Systempropertyhouses target WHERE target.Propertyhouseid = source.Propertyhouseid);
+	   SET @Propertyhouseid = SCOPE_IDENTITY();
+
+
+		-- Assuming you have a table named Propertyhousesizes
+		MERGE INTO Systempropertyhousesizes AS target
+		USING (SELECT Systempropertyhousesizeid,ISNULL(@Propertyhouseid, Propertyhouseid) AS Propertyhouseid, Systemhousesizeid,Systempropertyhousesizeunits,Systempropertyhousesizewehave
+		FROM OPENJSON(@JsonObjectdata, '$.Propertyhousesize')
+		WITH (Systempropertyhousesizeid BIGINT '$.Systempropertyhousesizeid',Propertyhouseid BIGINT '$.Propertyhouseid',Systemhousesizeid INT '$.Systemhousesizeid',Systempropertyhousesizeunits INT '$.Systempropertyhousesizeunits',Systempropertyhousesizewehave BIT '$.Systempropertyhousesizewehave')) AS source
+		ON target.Systempropertyhousesizeid = source.Systempropertyhousesizeid
+		WHEN MATCHED THEN
+		UPDATE SET target.Systemhousesizeid = source.Systemhousesizeid,target.Systempropertyhousesizeunits = source.Systempropertyhousesizeunits,target.Systempropertyhousesizewehave = source.Systempropertyhousesizewehave
+		WHEN NOT MATCHED BY TARGET THEN
+		INSERT (Propertyhouseid,Systemhousesizeid,Systempropertyhousesizeunits,Systempropertyhousesizewehave)
+		VALUES (source.Propertyhouseid,source.Systemhousesizeid,source.Systempropertyhousesizeunits,source.Systempropertyhousesizewehave);
+
+	 -- Assuming you have a table named Propertyhousedepositfees
+		MERGE INTO Systempropertyhousedepositfees AS target
+		USING (SELECT Systempropertyhousedepositfeeid,ISNULL(@Propertyhouseid, Propertyhouseid) AS Propertyhouseid,Housedepositfeeid,Systempropertyhousedepositfeeamount,Systempropertyhousesizedepositfeewehave
+		FROM OPENJSON(@JsonObjectdata, '$.Propertyhousedepositfee')
+		WITH (Systempropertyhousedepositfeeid BIGINT '$.Systempropertyhousedepositfeeid',Propertyhouseid BIGINT '$.Propertyhouseid',Housedepositfeeid INT '$.Housedepositfeeid',Systempropertyhousedepositfeeamount DECIMAL(10, 2) '$.Systempropertyhousedepositfeeamount',Systempropertyhousesizedepositfeewehave BIT '$.Systempropertyhousesizedepositfeewehave')) AS source
+		ON target.Systempropertyhousedepositfeeid = source.Systempropertyhousedepositfeeid
+		WHEN MATCHED THEN
+		UPDATE SET target.Housedepositfeeid = source.Housedepositfeeid,target.Systempropertyhousedepositfeeamount = source.Systempropertyhousedepositfeeamount,target.Systempropertyhousesizedepositfeewehave = source.Systempropertyhousesizedepositfeewehave
+		WHEN NOT MATCHED BY TARGET THEN
+		INSERT (Propertyhouseid,Housedepositfeeid,Systempropertyhousedepositfeeamount,Systempropertyhousesizedepositfeewehave)
+		VALUES (source.Propertyhouseid,source.Housedepositfeeid,source.Systempropertyhousedepositfeeamount,source.Systempropertyhousesizedepositfeewehave);
+
+		-- Assuming you have a table named Propertyhousebenefits
+		MERGE INTO Systempropertyhousebenefits AS target
+		USING (SELECT Systempropertyhousebenefitid,ISNULL(@Propertyhouseid, Propertyhouseid) AS Propertyhouseid,Housebenefitid,Systempropertyhousebenefitwehave
+		FROM OPENJSON(@JsonObjectdata, '$.Propertyhousebenefit')
+		WITH (Systempropertyhousebenefitid BIGINT '$.Systempropertyhousebenefitid',Propertyhouseid INT '$.Propertyhouseid',Housebenefitid INT '$.Housebenefitid',Systempropertyhousebenefitwehave BIT '$.Systempropertyhousebenefitwehave')) AS source
+		ON target.Systempropertyhousebenefitid = source.Systempropertyhousebenefitid
+		WHEN MATCHED THEN
+		UPDATE SET target.Housebenefitid = source.Housebenefitid,target.Systempropertyhousebenefitwehave = source.Systempropertyhousebenefitwehave
+		WHEN NOT MATCHED BY TARGET THEN
+		INSERT (Propertyhouseid,Housebenefitid,Systempropertyhousebenefitwehave)
+		VALUES (source.Propertyhouseid,source.Housebenefitid,source.Systempropertyhousebenefitwehave);
+
+		Set @RespMsg ='Success'
+		Set @RespStat =0; 
+		COMMIT TRANSACTION;
+		Select @RespStat as RespStatus, @RespMsg as RespMessage;
+
+		END TRY
+		BEGIN CATCH
+		ROLLBACK TRANSACTION
+		PRINT ''
+		PRINT 'Error ' + error_message();
+		Select 2 as RespStatus, '0 - Error(s) Occurred' + error_message() as RespMessage
+		END CATCH
+		Select @RespStat as RespStatus, @RespMsg as RespMessage;
+		RETURN; 
+		END;
+	END
+END

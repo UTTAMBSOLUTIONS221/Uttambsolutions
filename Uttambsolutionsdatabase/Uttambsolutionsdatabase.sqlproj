@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Uttambsolutionsdatabase</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{96eb7c88-75a9-4ab5-a743-aca74253a9ea}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Uttambsolutionsdatabase</RootNamespace>
+    <AssemblyName>Uttambsolutionsdatabase</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\Sequences\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\SettingItems.sql" />
+    <Build Include="dbo\Tables\Shopproductfeature.sql" />
+    <Build Include="dbo\Tables\Shopproductimages.sql" />
+    <Build Include="dbo\Tables\Shopproductwhatsinbox.sql" />
+    <Build Include="dbo\Tables\Socialmediasettings.sql" />
+    <Build Include="dbo\Tables\Subscriptionmultiplier.sql" />
+    <Build Include="dbo\Tables\Systemaccountverifaction.sql" />
+    <Build Include="dbo\Tables\Systemblogcategories.sql" />
+    <Build Include="dbo\Tables\Systemblogparagraphs.sql" />
+    <Build Include="dbo\Tables\Systemblogs.sql" />
+    <Build Include="dbo\Tables\Systemcounty.sql" />
+    <Build Include="dbo\Tables\Systemgender.sql" />
+    <Build Include="dbo\Tables\Systemhousebenefits.sql" />
+    <Build Include="dbo\Tables\Systemhousedepositfees.sql" />
+    <Build Include="dbo\Tables\Systemhouseitems.sql" />
+    <Build Include="dbo\Tables\Systemhousekitchentype.sql" />
+    <Build Include="dbo\Tables\Systemhousesizes.sql" />
+    <Build Include="dbo\Tables\Systemhousewatertype.sql" />
+    <Build Include="dbo\Tables\Systemjobapplications.sql" />
+    <Build Include="dbo\Tables\Systemjobbenefit.sql" />
+    <Build Include="dbo\Tables\Systemjobfunction.sql" />
+    <Build Include="dbo\Tables\Systemjobqualification.sql" />
+    <Build Include="dbo\Tables\Systemjobs.sql" />
+    <Build Include="dbo\Tables\Systemjobskill.sql" />
+    <Build Include="dbo\Tables\Systemkinrelationship.sql" />
+    <Build Include="dbo\Tables\Systemmaritalstatus.sql" />
+    <Build Include="dbo\Tables\Systemmodules.sql" />
+    <Build Include="dbo\Tables\Systemorganizations.sql" />
+    <Build Include="dbo\Tables\Systempermissions.sql" />
+    <Build Include="dbo\Tables\Systempropertyhousebenefits.sql" />
+    <Build Include="dbo\Tables\Actions.sql" />
+    <Build Include="dbo\Tables\Systempropertyhousedepositfees.sql" />
+    <Build Include="dbo\Tables\Channels.sql" />
+    <Build Include="dbo\Tables\Systempropertyhouseroommeters.sql" />
+    <Build Include="dbo\Tables\ChannelSettings.sql" />
+    <Build Include="dbo\Tables\Systempropertyhouserooms.sql" />
+    <Build Include="dbo\Tables\Systempropertyhouseroomstenant.sql" />
+    <Build Include="dbo\Tables\ChartofAccounts.sql" />
+    <Build Include="dbo\Tables\Systempropertyhouses.sql" />
+    <Build Include="dbo\Tables\ChartofAccountsSubTypes.sql" />
+    <Build Include="dbo\Tables\ChartofAccountTypes.sql" />
+    <Build Include="dbo\Tables\Systempropertyhousesizes.sql" />
+    <Build Include="dbo\Tables\CustomerPayments.sql" />
+    <Build Include="dbo\Tables\Communicationtemplates.sql" />
+    <Build Include="dbo\Tables\Systempropertyhousevacatingrequests.sql" />
+    <Build Include="dbo\Tables\Systemroleperms.sql" />
+    <Build Include="dbo\Tables\Systemroles.sql" />
+    <Build Include="dbo\Tables\DepartmentEmployee.sql" />
+    <Build Include="dbo\Tables\Systemstaffdesignations.sql" />
+    <Build Include="dbo\Tables\EmailLogs.sql" />
+    <Build Include="dbo\Tables\Systemstaffkins.sql" />
+    <Build Include="dbo\Tables\FinanceTransactions.sql" />
+    <Build Include="dbo\Tables\Systemstaffs.sql" />
+    <Build Include="dbo\Tables\FinanceTransactionSubTypes.sql" />
+    <Build Include="dbo\Tables\Systemstaffsaccount.sql" />
+    <Build Include="dbo\Tables\FinanceTransactionTypes.sql" />
+    <Build Include="dbo\Tables\GLTransactions.sql" />
+    <Build Include="dbo\Tables\Systemstafftermandservices.sql" />
+    <Build Include="dbo\Tables\Initiatives.sql" />
+    <Build Include="dbo\Tables\Systemsubcounty.sql" />
+    <Build Include="dbo\Tables\Invoicesettlement.sql" />
+    <Build Include="dbo\Tables\Systemsubcountyward.sql" />
+    <Build Include="dbo\Tables\Jobexperiences.sql" />
+    <Build Include="dbo\Tables\SystemTickets.sql" />
+    <Build Include="dbo\Tables\Jobfunctions.sql" />
+    <Build Include="dbo\Tables\Systemuserlogs.sql" />
+    <Build Include="dbo\Tables\Jobindustries.sql" />
+    <Build Include="dbo\Tables\TicketlinePayments.sql" />
+    <Build Include="dbo\Tables\Joblocations.sql" />
+    <Build Include="dbo\Tables\Ticketlines.sql" />
+    <Build Include="dbo\Tables\Jobtypes.sql" />
+    <Build Include="dbo\Tables\KeyResults.sql" />
+    <Build Include="dbo\Tables\Monthlyrentinvoiceitems.sql" />
+    <Build Include="dbo\Tables\Monthlyrentinvoices.sql" />
+    <Build Include="dbo\Tables\Newsapiarticles.sql" />
+    <Build Include="dbo\Tables\Objectives.sql" />
+    <Build Include="dbo\Tables\Organization.sql" />
+    <Build Include="dbo\Tables\OrganizationDepartment.sql" />
+    <Build Include="dbo\Tables\Organizationshopproducts.sql" />
+    <Build Include="dbo\Tables\Paymentmodes.sql" />
+    <Build Include="dbo\Tables\Paymentmodetypes.sql" />
+    <Build Include="dbo\Tables\Productbrand.sql" />
+    <Build Include="dbo\Tables\Productcategories.sql" />
+    <Build Include="dbo\Tables\Products.sql" />
+    <Build Include="dbo\Tables\Propertyhousesubscriptions.sql" />
+    <Build Include="dbo\Tables\RefreshTokens.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemopportunitydatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemorganizationdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemorganizationdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemorganizationdetaildatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemorganizationshopproductdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemorganizationshopproductsdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemorganizationshopproductsdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempermissiondata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempermissiondatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempermissiondatabyroleid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemproductbranddata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemproductbranddatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemproductdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemproductdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousedashboardsummarydatabyowner.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousedatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousedatabyownerid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousedetaildatabyhouseid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousedetaildatabyownerid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroommeterdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomtenantsdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousetenantdatabytenantid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemroledata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemroledatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemsocialmediadata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemsocialmediadatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemstaffdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemstaffdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemstaffdatabyidnumber.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemstaffdatabyrefreshtoken.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemstaffdetaildatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemuserprofiledata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Gettenantmonthlyinvoicedatabyownerid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Gettenantmonthlyinvoicedatabytenantid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Gettenantmonthlyinvoicedetaildatabyinvoiceid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Gettenantmonthlyinvoicepaymentdatabyownerid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Gettenantmonthlyinvoicepaymentdatabytenantid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Gettenantvacatingrequestsdatabyownerid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registerarticlesandsourcesdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registerorganizationshopproductdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registerpropertyhouseroomdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registerpropertyhouseroommeterdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registerpropertyhouseroomrentpaymentrequestdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registerpropertyhousevacaterequestdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemblogcategorydata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemblogdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemcategorydata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemcommunicationtemplatedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_RegisterSystemEmailLogs.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemjobapplicationdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemmoduledata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemopportunitydata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemorganizationdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystempermissiondata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemproductbranddata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemproductdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystempropertyhousedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemroledata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemsocialmediapagedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemstaffdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemuseractivitydata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registervalidatecustomerpaymentrequestdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Savestaffrefreshtokendata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Updateaccesstokenonlinkedinpagetokendata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Updatelinkedinpagetokendata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Updatepublishedblogdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Updatestaffcurriculumdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Updatestaffprofilepicturedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_verifysystemuser.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Approvepropertyhousevacatingrequest.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_GetListModel.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_GetListModelbycode.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemalllinkedinsocialmediadata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemallopportunitydata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemallsocialmediadata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemallunpublishedblogdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemallunpublishedopportunitydata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemblogcategorydata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemblogcategorydatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemblogdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemblogdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemcategorydata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemcategorydatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemcommunicationtemplatedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemcommunicationtemplatedatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemcommunicationtemplatedatabyname.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemlinkedinsocialmediadatabyappid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemlinkedinsocialmediadatabypageid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemmoduledata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemmoduledatabyid.sql" />
+    <Build Include="dbo\Sequences\AccountNumberSequence.sql" />
+    <Build Include="dbo\Sequences\InvoiceTransactionCodeSequence.sql" />
+    <Build Include="dbo\Sequences\PaymentTransactionCodeSequence.sql" />
+    <Build Include="dbo\Sequences\PropertyHouseCodeSequence.sql" />
+    <Build Include="dbo\Sequences\TransactionCodeSequence.sql" />
+  </ItemGroup>
+</Project>

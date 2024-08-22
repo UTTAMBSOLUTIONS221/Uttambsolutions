@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[Organizationshopproducts] (
+    [Shopproductid]        BIGINT          IDENTITY (1, 1) NOT NULL,
+    [Productid]            BIGINT          NOT NULL,
+    [Wholesaleprice]       DECIMAL (18, 2) NOT NULL,
+    [Productname]          VARCHAR (255)   NULL,
+    [Organizationid]       BIGINT          NOT NULL,
+    [Marketprice]          DECIMAL (18, 2) NOT NULL,
+    [Productdescription]   VARCHAR (1000)  NULL,
+    [ProductSize]          VARCHAR (50)    NULL,
+    [ProductColor]         VARCHAR (50)    NULL,
+    [ProductModel]         VARCHAR (50)    NULL,
+    [ProductStatus]        VARCHAR (50)    NULL,
+    [ProductGender]        VARCHAR (50)    NULL,
+    [ProductAgeGroup]      VARCHAR (50)    NULL,
+    [ProductMaterial]      VARCHAR (100)   NULL,
+    [ProductStock]         DECIMAL (18, 2) NOT NULL,
+    [Islipalater]          BIT             NOT NULL,
+    [Productdepositamount] DECIMAL (18, 2) NOT NULL,
+    [Productinterestrate]  DECIMAL (18, 2) NOT NULL,
+    [PaymentTerm]          INT             NOT NULL,
+    [Periodicamount]       DECIMAL (18, 2) NOT NULL,
+    [DateCreated]          DATETIME        NOT NULL,
+    PRIMARY KEY CLUSTERED ([Shopproductid] ASC)
+);
+

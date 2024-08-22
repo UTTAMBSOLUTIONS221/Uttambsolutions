@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mainapp", "Mainapp\Mainapp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maqaoplus", "Maqaoplus\Maqaoplus.csproj", "{9E6A574C-C333-47F8-ACC4-1428FB3578BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maqaoplusweb", "Maqaoplusweb\Maqaoplusweb.csproj", "{4CDF0F62-8D1B-4682-86DC-2BFDF035CF11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maqaoplusweb", "Maqaoplusweb\Maqaoplusweb.csproj", "{4CDF0F62-8D1B-4682-86DC-2BFDF035CF11}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Uttambsolutionsdatabase", "Uttambsolutionsdatabase\Uttambsolutionsdatabase.sqlproj", "{96EB7C88-75A9-4AB5-A743-ACA74253A9EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,12 @@ Global
 		{4CDF0F62-8D1B-4682-86DC-2BFDF035CF11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CDF0F62-8D1B-4682-86DC-2BFDF035CF11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CDF0F62-8D1B-4682-86DC-2BFDF035CF11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96EB7C88-75A9-4AB5-A743-ACA74253A9EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96EB7C88-75A9-4AB5-A743-ACA74253A9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96EB7C88-75A9-4AB5-A743-ACA74253A9EA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{96EB7C88-75A9-4AB5-A743-ACA74253A9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96EB7C88-75A9-4AB5-A743-ACA74253A9EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96EB7C88-75A9-4AB5-A743-ACA74253A9EA}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
