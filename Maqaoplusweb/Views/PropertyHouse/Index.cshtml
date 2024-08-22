@@ -117,7 +117,7 @@
                     Systempropertybankaccountid: $(this).find('td').eq(0).text(),
                     Systembankid: $(this).find('td').eq(1).text(),
                     Systembanknameandpaybill: $(this).find('.house-system-bank-name-and-paybill').val(),
-                    Systempropertybankaccount: $(this).find('.house-system-property-bank-account"').val(),
+                    Systempropertybankaccount: $(this).find('.house-system-property-bank-account').val(),
                     Systempropertyhousebankwehave: $(this).find('.house-system-property-house-bank-wehave').prop('checked')
                 });
             });
@@ -157,7 +157,7 @@
                 Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
                 Propertyhousesize: Systsempropertyhousesizedata,
                 Propertyhousedepositfee: Systempropertyhousedepositfeedata,
-                Propertyhousebenefit: Systempropertyhousebenefitata
+                Propertyhousebenefit: Systempropertyhousebenefitata,Propertyhousebankingdetail: Systempropertyhousebankingdetaildata
             };
 
             $.post("/PropertyHouse/Addsystempropertyhousedata", uil1, function (response) {
