@@ -40,7 +40,7 @@
                                     <td>
                                         @if (item.IsPaymentValidated)
                                         {
-                                            <p class="mb-0"><span class="badge badge-success text-white"><strong>VALIDATE</strong></span></p>
+                                            <p class="mb-0"><span class="badge badge-success text-white"><strong>VALIDATED</strong></span></p>
                                         }
                                         else
                                         {
@@ -52,7 +52,9 @@
                                         @if (!item.IsPaymentValidated)
                                         {
                                             <a asp-action="Validatecustomerpayment" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Customerpaymentid="@item.CustomerPaymentId" asp-route-Houseroomid="@item.HouseRoomId" asp-route-Tenantid="@item.HouseRoomTenantId" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Validate</a>
-                                        }  
+                                        }else{
+                                              <p class="mb-0"><span class="badge badge-info text-white"><strong>VALIDATED</strong></span></p>
+                                        }
                                     </td>
                                 </tr>
                             }
