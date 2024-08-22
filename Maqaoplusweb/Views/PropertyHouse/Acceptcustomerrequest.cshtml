@@ -1,6 +1,7 @@
 ﻿@model DBL.Entities.SystemPropertyHouseVacatingRequest
+
 <div class="modal-header">
-    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Validate Invoice Payyment</h5>
+    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Accept the vacating Request</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -8,23 +9,25 @@
 <div class="modal-body">
     <div class="row">
         <input class="form-control form-control-sm" asp-for="@Model.Vacatingrequestid" id="Systempropertyhousevacatingrequestid" hidden />
-        <input class="form-control form-control-sm" asp-for="@Model.Tenantid" id="Systempropertyhousetenantid" hidden />
-        <input class="form-control form-control-sm" asp-for="@Model.Tenantid" id="Systempropertyhouseroomid" hidden />
+        <input class="form-control form-control-sm" asp-for="@Model.Systempropertyhousetenantid" id="Systempropertyhousetenantid" hidden />
+        <input class="form-control form-control-sm" asp-for="@Model.Systempropertyhouseroomid" id="Systempropertyhouseroomid" hidden />
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <select name="ratingValue" id="ratingValue">
+            <label for="rating">Rating:</label>
+            <div class="rating">
                 @for (int i = 1; i <= 5; i++)
                 {
-                    <option value="@i">@i</option>
+                    <span class="fa fa-star" data-value="@i"></span>
                 }
-            </select>
+            </div>
+            <input type="hidden" id="ratingValue" name="ratingValue" value="0" />
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
             <label for="comment">Comment:</label>
-            <textarea name="comment" id="comment"></textarea>
+            <textarea name="comment" id="comment" class="form-control form-control-sm"></textarea>
         </div>
     </div>
 </div>
@@ -34,3 +37,51 @@
         <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
     </button>
 </div>
+
+<!-- CSS for styling the star rating -->
+<style>
+    .rating {
+        display: flex;
+        direction: row-reverse;
+        font-size: 24px;
+        unicode-bidi: bidi-override;
+        cursor: pointer;
+    }
+
+        .rating span {
+            color: #ddd;
+            transition: color 0.2s;
+        }
+
+            .rating span.checked,
+            .rating span:hover,
+            .rating span:hover ~ span {
+                color: #f39c12;
+            }
+</style>
+
+<!-- JavaScript for handling star rating click events -->
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const stars = document.querySelectorAll('.rating .fa-star');
+        stars.forEach(star => {
+            star.addEventListener('click', function () {
+                const value = this.getAttribute('data-value');
+                console.log('Star clicked, value:', value); // Debugging line
+                document.getElementById('ratingValue').value = value;
+                updateStarRatings(value);
+            });
+        });
+
+        function updateStarRatings(value) {
+            stars.forEach(star => {
+                if (parseInt(star.getAttribute('data-value')) <= value) {
+                    star.classList.add('checked');
+                } else {
+                    star.classList.remove('checked');
+                }
+            });
+        }
+    });
+</script>
+upda
