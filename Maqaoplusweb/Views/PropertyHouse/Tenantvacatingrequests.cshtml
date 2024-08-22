@@ -74,40 +74,82 @@
 
 @section Scripts {
     <script type="text/javascript">
-    function acceptthisvacatingrequest(event) {
-        Swal.fire({
-            title: "Are you sure you want to accept this?",
-            text: "Accepting this allows you to make checks on the room for items to replace !",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, accept it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                var acceptRequestBtn = event.target;
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const stars = document.querySelectorAll('.rating .fa-star');
+            let currentRating = parseInt(document.getElementById('ratingValue').value) || 0;
+
+            // Initialize star rating display based on current rating
+            updateStarRatings(currentRating);
+
+            stars.forEach(star => {
+                star.addEventListener('click', function () {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    document.getElementById('ratingValue').value = value;
+                    currentRating = value;
+                    updateStarRatings(value);
+                });
+
+                // Handle mouseover for hover effect
+                star.addEventListener('mouseover', function () {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    updateStarRatings(value);
+                });
+
+                // Reset to current rating on mouseout
+                star.addEventListener('mouseout', function () {
+                    updateStarRatings(currentRating);
+                });
+            });
+
+            function updateStarRatings(value) {
+                stars.forEach(star => {
+                    if (parseInt(star.getAttribute('data-value')) <= value) {
+                        star.classList.add('checked');
+                    } else {
+                        star.classList.remove('checked');
+                    }
+                });
+            }
+        });
+
+
+
+
+
+        function acceptthisvacatingrequest(event) {
+            Swal.fire({
+                title: "Are you sure you want to accept this?",
+                text: "Accepting this allows you to make checks on the room for items to replace !",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, accept it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var acceptRequestBtn = event.target;
                     var Entryid = acceptRequestBtn.getAttribute('data-Entryid');
                     var Systempropertyhousetenantid = acceptRequestBtn.getAttribute('data-Systempropertyhousetenantid');
                     var Systempropertyhouseroomid = acceptRequestBtn.getAttribute('data-Systempropertyhouseroomid');
-                var uil =
-                {
+                    var uil =
+                    {
                         Vacatingrequestid: Entryid, Systempropertyhousetenantid: Systempropertyhousetenantid, Systempropertyhouseroomid: Systempropertyhouseroomid, Approvedby: $('#systemLoggedinedUserId').val(), Dateapproved: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
-                };
+                    };
                     $.post("/PropertyHouse/Acceptthisvacatingrequest", uil, function (response) {
-                    if (response.RespStatus == 0) {
-                        Swal.fire('Request Accepted!', 'Good.', 'success')
-                        setTimeout(function () { location.reload(); }, 1000);
-                    } else if (response.RespStatus == 1) {
-                        Swal.fire("Oops!", response.RespMessage, "warning");
-                    }
-                    else {
-                        Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                    }
-                });
-            } else {
-                Swal.fire("Thank you!", "Accept once you are sure", "info");
-            }
-        });
-    };
+                        if (response.RespStatus == 0) {
+                            Swal.fire('Request Accepted!', 'Good.', 'success')
+                            setTimeout(function () { location.reload(); }, 1000);
+                        } else if (response.RespStatus == 1) {
+                            Swal.fire("Oops!", response.RespMessage, "warning");
+                        }
+                        else {
+                            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                        }
+                    });
+                } else {
+                    Swal.fire("Thank you!", "Accept once you are sure", "info");
+                }
+            });
+        };
     </script>
 }

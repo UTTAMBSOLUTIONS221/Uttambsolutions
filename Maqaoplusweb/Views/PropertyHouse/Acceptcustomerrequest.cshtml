@@ -53,34 +53,7 @@
             transition: color 0.2s;
         }
 
-            .rating span.checked,
-            .rating span:hover,
-            .rating span:hover ~ span {
+            .rating span.checked {
                 color: #f39c12;
             }
 </style>
-
-<!-- JavaScript for handling star rating click events -->
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const stars = document.querySelectorAll('.rating .fa-star');
-        stars.forEach(star => {
-            star.addEventListener('click', function () {
-                const value = this.getAttribute('data-value');
-                console.log('Star clicked, value:', value); // Debugging line
-                document.getElementById('ratingValue').value = value;
-                updateStarRatings(value);
-            });
-        });
-
-        function updateStarRatings(value) {
-            stars.forEach(star => {
-                if (parseInt(star.getAttribute('data-value')) <= value) {
-                    star.classList.add('checked');
-                } else {
-                    star.classList.remove('checked');
-                }
-            });
-        }
-    });
-</script>
