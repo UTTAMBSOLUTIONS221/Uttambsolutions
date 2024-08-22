@@ -116,7 +116,7 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label Text="{Binding Systembanknameandpaybill}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                            <Label Text="{Binding Systembanknameandpaybill}" FontSize="16" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                             <Label Text="{Binding Systempropertybankaccount}" FontSize="16" Grid.Column="2" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                         </Grid>
                                     </DataTemplate>
