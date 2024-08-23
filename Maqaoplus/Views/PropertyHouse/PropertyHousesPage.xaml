@@ -35,7 +35,7 @@
             <CollectionView x:Name="PropertyHousesCollectionView" ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="150">
+                        <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="170">
                             <Grid Padding="5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -59,10 +59,10 @@
 
                                     <!-- Data on the Right -->
                                     <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-                                        <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" LineBreakMode="TailTruncation" />
-                                        <Label Text="{Binding Roomscount}" FontSize="Small" TextColor="#0a506c" />
-                                        <Label Text="{Binding Streetorlandmark}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" />
-                                        <Label Text="{Binding Countyname}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" />
+                                        <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" TextTransform="Uppercase" MaxLines="1" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding Roomscount}" FontSize="14" TextColor="#0a506c" />
+                                        <Label Text="{Binding Streetorlandmark}" FontSize="14" LineBreakMode="WordWrap" MaxLines="2" TextColor="Black" />
+                                        <Label Text="{Binding Countyname}" FontSize="14" LineBreakMode="WordWrap" MaxLines="2" TextColor="Black" />
                                     </StackLayout>
                                 </Grid>
 
