@@ -100,7 +100,7 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="Date: " TextColor="Black"/>
-                                                    <Span Text="{Binding TransactionDate, StringFormat='yyyy-MM-dd'}" TextColor="#0a506c"/>
+                                                    <Span Text="{Binding TransactionDate, StringFormat='{0:yyyy-MM-dd}'}" TextColor="#0a506c"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
