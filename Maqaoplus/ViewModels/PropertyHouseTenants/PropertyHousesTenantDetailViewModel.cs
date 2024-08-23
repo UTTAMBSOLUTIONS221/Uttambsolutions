@@ -8,6 +8,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
     public class PropertyHousesTenantDetailViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         private long _propertyHousesTenantIdNumber;
         private Systemtenantdetails _tenantDetailData;
 

@@ -102,8 +102,8 @@
         </Grid>
 
         <!-- Footer -->
-        <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="End">
-            <Label Text="© 2024 Maqaoplus" HorizontalOptions="Center" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+        <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
         </StackLayout>
     </Grid>
 </ContentPage>

@@ -8,6 +8,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
     {
         private readonly Services.ServiceProvider _serviceProvider;
         public ObservableCollection<PropertyHouseTenant> Items { get; }
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
 
