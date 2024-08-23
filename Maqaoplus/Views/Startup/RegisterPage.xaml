@@ -28,7 +28,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackLayout Grid.Column="0">
-                    <Label Text="Firstname" FontAttributes="Bold" FontSize="17" Margin="0,0,0,4" TextColor="#0a506c"/>
+                    <Label Text="Firstname" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True">
                         <!-- Removed padding -->
                         <HorizontalStackLayout Spacing="3">
@@ -41,7 +41,7 @@
                 </StackLayout>
 
                 <StackLayout Grid.Column="1">
-                    <Label Text="Lastname" FontAttributes="Bold" FontSize="17" Margin="0,0,0,0" TextColor="#0a506c"/>
+                    <Label Text="Lastname" FontAttributes="Bold" FontSize="14" Margin="0,0,0,0" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True">
                         <!-- Removed padding -->
                         <HorizontalStackLayout Spacing="3">
@@ -55,7 +55,7 @@
             </Grid>
 
             <StackLayout Grid.Column="0">
-                <Label Text="Emailaddress" FontAttributes="Bold" FontSize="17" Margin="0,0,0,4" TextColor="#0a506c"/>
+                <Label Text="Emailaddress" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                 <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
                     <!-- Removed padding and reduced margin -->
                     <HorizontalStackLayout Spacing="3">
@@ -75,7 +75,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackLayout Grid.Column="0">
-                    <Label Text="Phonenumber" FontAttributes="Bold" FontSize="17" Margin="0,0,0,4" TextColor="#0a506c"/>
+                    <Label Text="Phonenumber" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
                         <!-- Removed padding and reduced margin -->
                         <HorizontalStackLayout Spacing="3">
@@ -88,7 +88,7 @@
                 </StackLayout>
 
                 <StackLayout Grid.Column="1">
-                    <Label Text="Designation" FontAttributes="Bold" FontSize="17" Margin="0,0,0,4" TextColor="#0a506c"/>
+                    <Label Text="Designation" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True">
                         <!-- Removed padding -->
                         <HorizontalStackLayout Spacing="3">
@@ -107,7 +107,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackLayout Grid.Column="0">
-                    <Label Text="Password" FontAttributes="Bold" FontSize="17" Margin="0,0,0,4" TextColor="#0a506c"/>
+                    <Label Text="Password" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="15" Padding="5" HasShadow="True">
                         <HorizontalStackLayout Spacing="10">
                             <Image Source="passwordicon.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
@@ -124,7 +124,7 @@
                 </StackLayout>
 
                 <StackLayout Grid.Column="1">
-                    <Label Text="Confirm Password" FontAttributes="Bold" FontSize="17" Margin="0,0,0,0" TextColor="#0a506c"/>
+                    <Label Text="Confirm Password" FontAttributes="Bold" FontSize="14" Margin="0,0,0,0" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
                         <HorizontalStackLayout Spacing="10">
                             <Image Source="passwordicon.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
