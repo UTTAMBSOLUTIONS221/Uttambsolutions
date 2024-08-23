@@ -25,10 +25,10 @@
 
             <!-- ScrollView with CollectionView -->
             <ScrollView Grid.Row="1" IsVisible="{Binding IsDataLoaded}">
-                <CollectionView x:Name="PropertyHousesCollectionView" ItemsSource="{Binding Items}">
+            <CollectionView x:Name="PropertyHousesCollectionView" ItemsSource="{Binding Rooms}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="170">
+                            <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="204">
                                 <Grid Padding="5">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -50,19 +50,23 @@
                                         <!-- Image on the Left -->
                                         <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" HeightRequest="100" Grid.Column="0" />
 
-                                        <!-- Data on the Right -->
-                                        <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-                                            <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" TextTransform="Uppercase" MaxLines="1" LineBreakMode="TailTruncation" />
-                                            <Label Text="{Binding Roomscount}" FontSize="14" TextColor="#0a506c" />
-                                            <Label Text="{Binding Streetorlandmark}" FontSize="14" LineBreakMode="WordWrap" MaxLines="2" TextColor="Black" />
-                                            <Label Text="{Binding Countyname}" FontSize="14" LineBreakMode="WordWrap" MaxLines="2" TextColor="Black" />
-                                        </StackLayout>
-                                    </Grid>
+                                    <!-- Data on the Right -->
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding Propertyhousename}" FontAttributes="Bold" TextTransform="Uppercase" FontSize="14" TextColor="#0a506c" MaxLines="2" LineBreakMode="TailTruncation" Grid.Row="1" />
+                                        <Label Text="{Binding Systempropertyhousesizename,StringFormat='Room #: {0}'}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="DarkGray" Grid.Row="2"  />
+                                        <Label Text="{Binding Countyname}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="DarkGray" Grid.Row="3" />
+                                        <Label Text="{Binding Subcountyname}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="DarkGray" Grid.Row="3" />
+                                        <Label Text="{Binding Subcountywardname}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="DarkGray" Grid.Row="3" />
+                                        <Label Text="{Binding Streetorlandmark}" FontSize="13" TextColor="DarkGray" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
+                                        <Label Text="{Binding Systempropertyhousesizerent,StringFormat='Rent: {0}'}" FontSize="13" TextColor="DarkGray" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
+
+                                    </StackLayout>
+                                </Grid>
 
                                     <!-- Buttons at the Bottom -->
                                     <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
-                                        <Button Text="Edit"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditPropertyHouseCommand}"
+                                    <Button Text="Manage Room"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}"
                                             CommandParameter="{Binding .}"
                                             BackgroundColor="#0a506c"
                                             TextColor="White"
@@ -70,16 +74,7 @@
                                             FontAttributes="Bold"
                                             HorizontalOptions="FillAndExpand"
                                             Margin="5" />
-                                        <Button Text="Manage"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}"
-                                            CommandParameter="{Binding .}"
-                                            BackgroundColor="#0a506c"
-                                            TextColor="White"
-                                            FontSize="14"
-                                            FontAttributes="Bold"
-                                            HorizontalOptions="FillAndExpand"
-                                            Margin="5" />
-                                    </StackLayout>
+                                </StackLayout>
                                 </Grid>
                             </Frame>
                         </DataTemplate>
