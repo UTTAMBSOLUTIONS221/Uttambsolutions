@@ -11,6 +11,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+
     <Grid>
         <!-- Define Row Heights for Header and Content -->
         <Grid.RowDefinitions>
@@ -79,7 +80,7 @@
 
         <!-- Footer -->
         <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="End">
-            <Label Text="© 2024 Maqaoplus" HorizontalOptions="Center" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
         </StackLayout>
 
         <!-- Overlay Grid to cover the entire screen -->
