@@ -14,10 +14,38 @@ namespace Maqaoplus.ViewModels.Startup
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
+        private bool _isPasswordHidden;
+        private string _passwordIconSource;
+        public string CopyrightText => $"UTTAMB SOLUTIONS LIMITED © 2020 - {DateTime.Now.Year} ";
+
+        public bool IsPasswordHidden
+        {
+            get => _isPasswordHidden;
+            set
+            {
+                _isPasswordHidden = value;
+                OnPropertyChanged(nameof(IsPasswordHidden));
+                PasswordIconSource = _isPasswordHidden ? "unvisible.png" : "visible.png";
+            }
+        }
+
+        public string PasswordIconSource
+        {
+            get => _passwordIconSource;
+            set
+            {
+                _passwordIconSource = value;
+                OnPropertyChanged(nameof(PasswordIconSource));
+            }
+        }
+
+
 
         public LoginPageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            IsPasswordHidden = true; // Default to hidden password
+            TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
             LoginCommand = new Command(async () => await LoginAsync(), () => !IsProcessing);
             RegisterCommand = new Command(OnRegister);
             ForgotPasswordCommand = new Command(OnForgotPassword);
@@ -64,7 +92,7 @@ namespace Maqaoplus.ViewModels.Startup
                 ((Command)LoginCommand).ChangeCanExecute();
             }
         }
-
+        public ICommand TogglePasswordVisibilityCommand { get; }
         public ICommand LoginCommand { get; }
         public ICommand RegisterCommand { get; }
         public ICommand ForgotPasswordCommand { get; }
@@ -92,6 +120,10 @@ namespace Maqaoplus.ViewModels.Startup
             }
         }
 
+        private void TogglePasswordVisibility()
+        {
+            IsPasswordHidden = !IsPasswordHidden;
+        }
         private async Task LoginAsync()
         {
             IsProcessing = true;

@@ -90,6 +90,8 @@
 	  <None Remove="Resources\Images\phone.png" />
 	  <None Remove="Resources\Images\reports.png" />
 	  <None Remove="Resources\Images\tap.png" />
+	  <None Remove="Resources\Images\unvisible.png" />
+	  <None Remove="Resources\Images\visible.png" />
 	  <None Remove="Resources\Splash\splashscreen.png" />
 	  <None Remove="Resources\Splash\splash_screen.png" />
 	</ItemGroup>
