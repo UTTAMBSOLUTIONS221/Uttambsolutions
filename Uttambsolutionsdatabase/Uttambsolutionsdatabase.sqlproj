@@ -249,5 +249,6 @@
     <Build Include="dbo\Sequences\TransactionCodeSequence.sql" />
     <Build Include="dbo\Tables\Systemsupportedbanks.sql" />
     <Build Include="dbo\Tables\Systempropertybankaccounts.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getallsystempropertyvacanthousesdata.sql" />
   </ItemGroup>
 </Project>

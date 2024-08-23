@@ -35,8 +35,8 @@ BEGIN
 							0 AS Systempropertybankaccountid,
 							0 AS Propertyhouseid,
 							ISNULL(Systemsupportedbank.Systembankid, 0) AS Systembankid,
-							ISNULL(Systemsupportedbank.Systembankname+' '+ Systemsupportedbank.Systembankpaybill, '') AS Systembanknameandpaybill,
-							''  AS Systempropertybankaccount,
+							ISNULL(Systemsupportedbank.Systembankname+' - '+ CONVERT(VARCHAR(10), Systemsupportedbank.Systembankpaybill), '') AS Systembanknameandpaybill,
+							'0'  AS Systempropertybankaccount,
 							0 AS Systempropertyhousebankwehave
 						FROM Systemsupportedbanks Systemsupportedbank
 						FOR JSON PATH
@@ -103,7 +103,7 @@ BEGIN
 							ISNULL(Systempropertybankaccount.Systempropertybankaccountid, 0) AS Systempropertybankaccountid,
 							ISNULL(Systempropertybankaccount.Propertyhouseid, 0) AS Propertyhouseid,
 							ISNULL(Systemsupportedbank.Systembankid, 0) AS Systembankid,
-							ISNULL(Systemsupportedbank.Systembankname+' '+ Systemsupportedbank.Systembankpaybill, '') AS Systembanknameandpaybill,
+							ISNULL(Systemsupportedbank.Systembankname+' - '+ CONVERT(VARCHAR(10), Systemsupportedbank.Systembankpaybill), '') AS Systembanknameandpaybill,
 							ISNULL(Systempropertybankaccount.Systempropertybankaccount, 0) AS Systempropertybankaccount,
 							ISNULL(Systempropertybankaccount.Systempropertyhousebankwehave, 0) AS Systempropertyhousebankwehave
 						FROM Systemsupportedbanks Systemsupportedbank

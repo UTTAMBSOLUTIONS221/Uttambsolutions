@@ -21,7 +21,12 @@ BEGIN
 					   INNER JOIN Systemhousedepositfees SDF ON SPDF.Systempropertyhousedepositfeeid=SDF.Housedepositfeeid
 					   WHERE MRI.Invoiceid= MRID.Invoiceid
 					   FOR JSON PATH
-					  ) AS InvoiceDetails
+					  ) AS InvoiceDetails,
+					  (SELECT SPBD.Systempropertybankaccountid,SPBD.Propertyhouseid,SPBD.Systembankid,SSB.Systembankname+' - '+CONVERT(VARCHAR(10),SSB.Systembankpaybill) AS Systembanknameandpaybill,SPBD.Systempropertybankaccount,SPBD.Systempropertyhousebankwehave
+						FROM Systempropertybankaccounts SPBD INNER JOIN Systemsupportedbanks SSB ON SPBD.Systembankid=SSB.Systembankid
+						 WHERE SPBD.Systempropertyhousebankwehave=1 AND SPBD.Propertyhouseid= room.Systempropertyhouseid
+						 FOR JSON PATH
+						) AS Propertyhousebankingdetail
 					  FROM Monthlyrentinvoices MRI
 					  INNER JOIN FinanceTransactions FT ON MRI.Financetransactionid= FT.FinanceTransactionId
 					  INNER JOIN Systempropertyhouserooms room ON MRI.Propertyhouseroomid= room.Systempropertyhouseroomid
