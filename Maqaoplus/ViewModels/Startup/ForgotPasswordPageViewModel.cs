@@ -8,6 +8,7 @@ namespace Maqaoplus.ViewModels.Startup
     {
         private string _emailAddress;
         private bool _isProcessing;
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
