@@ -74,7 +74,7 @@
             </Frame>
         </Grid>
 
-        <!-- Properties Section --><!--
+         <!--Properties Section--> 
         <ScrollView Grid.Row="1">
             <CollectionView ItemsSource="{Binding DashBoardSummaryData.Propertybysummary}" Margin="0,20,0,0">
                 <CollectionView.ItemsLayout>
@@ -94,7 +94,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </ScrollView>-->
+        </ScrollView>
 
 
         <!-- Footer -->
