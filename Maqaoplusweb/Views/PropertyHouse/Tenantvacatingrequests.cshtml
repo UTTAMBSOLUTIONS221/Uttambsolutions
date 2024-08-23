@@ -71,3 +71,33 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function Acceptsystempropertyroomvacatingrequestdata() {
+            document.getElementById("Acceptsystempropertyroomvacatingrequestid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            var uil =
+            {
+                Vacatingrequestid: $('#Systempropertyhousevacatingrequestid').val(), Systempropertyhousetenantid: $('#Systempropertyhousetenantid').val(), Systempropertyhouseroomid: $('#Systempropertyhouseroomid').val(),
+                Ratingvalue: $('#Systempropertyhouseroomtenantratingid').val(), Propertyhouseownercomment: $('#Systempropertyhouseroomtenantcommentid').val(), Approvedby: $('#systemLoggedinedUserid').val(), Dateapproved: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+            };
+            $.post("/PropertyHouse/Acceptthisvacatingrequest", uil, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success');
+                    $('#Uttambsolutionsmodal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Oops!", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("Acceptsystempropertyroomvacatingrequestid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+    </script>
+}

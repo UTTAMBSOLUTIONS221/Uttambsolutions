@@ -11,6 +11,8 @@
         public int Vacatingstatus { get; set; }
         public float Ratingvalue { get; set; }
         public long Approvedby { get; set; }
+
+        public string? Propertyhouseownercomment { get; set; }
         public DateTime Datecreated { get; set; }
         public DateTime? Dateapproved { get; set; }
     }
