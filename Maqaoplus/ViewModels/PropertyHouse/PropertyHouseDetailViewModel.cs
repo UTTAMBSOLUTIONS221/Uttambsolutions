@@ -12,7 +12,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
     {
         private readonly Services.ServiceProvider _serviceProvider;
         private long _propertyId;
-
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ObservableCollection<PropertyHouseDetails> Rooms { get; }
         private Systempropertyhouserooms _houseroomData;
         private Systemtenantdetails _tenantStaffData;

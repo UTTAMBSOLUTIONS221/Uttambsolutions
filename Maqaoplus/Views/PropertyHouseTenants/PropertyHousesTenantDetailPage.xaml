@@ -150,11 +150,12 @@
                     </Frame>
                 </Grid>
             </ScrollView>
-
-            <!-- Footer -->
-            <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
-            </StackLayout>
         </Grid>
+
+        <!-- Footer -->
+        <!-- Footer -->
+        <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+        </StackLayout>
     </AbsoluteLayout>
 </ContentPage>
