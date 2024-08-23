@@ -10,6 +10,13 @@
             <converters:NullToImageConverter x:Key="NullToImageConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <!-- Toolbar Item with Icon and Text -->
+        <ToolbarItem Text="ADD NEW HOUSE"
+                     Command="{Binding AddPropertyHouseCommand}"
+                     Priority="0">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
 
     <Grid>
         <!-- Define Row Heights for Header, Content, and Footer -->
@@ -21,33 +28,6 @@
             <RowDefinition Height="Auto" />
             <!-- For Footer -->
         </Grid.RowDefinitions>
-
-        <!-- Header with a Button -->
-        <StackLayout Grid.Row="0" Orientation="Horizontal" Padding="10" Spacing="10">
-            <!-- Button to Add New House -->
-            <Button Text="Add New House" 
-                    Command="{Binding AddPropertyHouseCommand}" 
-                    BackgroundColor="#0a506c" 
-                    TextColor="White"  
-                    FontSize="18" 
-                    FontAttributes="Bold" 
-                    Padding="10" 
-                    HorizontalOptions="Start" 
-                    Margin="5" 
-                    IsVisible="{Binding IsDataLoaded}" />
-
-            <!-- Additional Button (e.g., "Manage Houses") -->
-            <Button Text="Manage Houses"
-                    Command="{Binding ManageHousesCommand}" 
-                    BackgroundColor="#007ACC" 
-                    TextColor="White"  
-                    FontSize="18" 
-                    FontAttributes="Bold" 
-                    Padding="10" 
-                    HorizontalOptions="End" 
-                    Margin="5" />
-        </StackLayout>
-
         <!-- ScrollView with CollectionView -->
         <ScrollView Grid.Row="1" IsVisible="{Binding IsDataLoaded}">
             <CollectionView x:Name="PropertyHousesCollectionView" ItemsSource="{Binding Items}">
