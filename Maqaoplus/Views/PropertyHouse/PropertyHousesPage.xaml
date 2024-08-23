@@ -10,6 +10,7 @@
             <converters:NullToImageConverter x:Key="NullToImageConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
         <!-- Toolbar Item with Icon and Text -->
         <ToolbarItem Text="ADD NEW HOUSE"
@@ -28,17 +29,13 @@
             <RowDefinition Height="Auto" />
             <!-- For Footer -->
         </Grid.RowDefinitions>
+
         <!-- ScrollView with CollectionView -->
         <ScrollView Grid.Row="1" IsVisible="{Binding IsDataLoaded}">
             <CollectionView x:Name="PropertyHousesCollectionView" ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="300">
-                            <!-- Tap Gesture Recognizer -->
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}"
-                                                      CommandParameter="{Binding .}" />
-                            </Frame.GestureRecognizers>
+                        <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="150">
                             <Grid Padding="5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -48,23 +45,48 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <!-- Larger Image with Null Handling -->
-                                <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" HeightRequest="200" Grid.Row="0" />
-
-                                <!-- Property Name and Room Count in the same row -->
-                                <Grid Grid.Row="1" ColumnSpacing="5">
+                                <!-- Horizontal Grid for Image and Data -->
+                                <Grid Grid.Row="0" ColumnSpacing="10">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
+                                        <!-- For Image -->
+                                        <ColumnDefinition Width="*" />
+                                        <!-- For Data -->
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" LineBreakMode="TailTruncation" Grid.Column="0" />
-                                    <Label Text="{Binding Roomscount}" FontSize="Small" TextColor="#0a506c" HorizontalOptions="End" Grid.Column="1" />
+                                    <!-- Image on the Left -->
+                                    <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" HeightRequest="100" Grid.Column="0" />
+
+                                    <!-- Data on the Right -->
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding Roomscount}" FontSize="Small" TextColor="#0a506c" />
+                                        <Label Text="{Binding Streetorlandmark}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" />
+                                        <Label Text="{Binding Countyname}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" />
+                                    </StackLayout>
                                 </Grid>
 
-                                <!-- Street or Landmark -->
-                                <Label Text="{Binding Streetorlandmark}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" Grid.Row="2" />
-                                <Label Text="{Binding Countyname}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="2" TextColor="DarkGray" Grid.Row="3" />
+                                <!-- Buttons at the Bottom -->
+                                <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
+                                    <Button Text="Edit"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#0a506c"
+                                            TextColor="White"
+                                            FontSize="14"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="FillAndExpand"
+                                            Margin="5" />
+                                    <Button Text="Manage"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ManageCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#0a506c"
+                                            TextColor="White"
+                                            FontSize="14"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="FillAndExpand"
+                                            Margin="5" />
+                                </StackLayout>
                             </Grid>
                         </Frame>
                     </DataTemplate>
@@ -77,6 +99,7 @@
             <BoxView Color="#C0000000" Opacity="0.5" />
             <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
         </Grid>
+
         <!-- Footer -->
         <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="End">
             <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
