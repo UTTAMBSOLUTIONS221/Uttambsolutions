@@ -86,13 +86,22 @@
                                     <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="2">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Amount: " FontAttributes="Bold" FontSize="13" TextColor="Black" />
+                                                <Span Text="Paid Aount: " FontAttributes="Bold" FontSize="13" TextColor="Black" />
+                                                <Span Text="{Binding Paidamount, StringFormat='{0:#,##0.00}'}" FontAttributes="Bold" FontSize="13" TextColor="#0a506c" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="3">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Balance: " FontAttributes="Bold" FontSize="13" TextColor="Black" />
                                                 <Span Text="{Binding Balance, StringFormat='{0:#,##0.00}'}" FontAttributes="Bold" FontSize="13" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
 
-                                    <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="3">
+                                    <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Status: " FontAttributes="Bold" FontSize="14" TextColor="Black" />
@@ -103,7 +112,7 @@
                                         </Label.FormattedText>
                                     </Label>
 
-                                    <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="4">
+                                    <Label FontSize="20" LineBreakMode="TailTruncation" Grid.Row="5">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Generated On: " FontAttributes="Bold" FontSize="14" TextColor="Black" />
@@ -113,7 +122,7 @@
                                         </Label.FormattedText>
                                     </Label>
 
-                                    <Label FontSize="14" FontAttributes="Bold" TextTransform="Uppercase" Grid.Row="4" VerticalOptions="Start" HorizontalOptions="End">
+                                    <Label FontSize="14" FontAttributes="Bold" TextTransform="Uppercase" Grid.Row="5" VerticalOptions="Start" HorizontalOptions="End">
                                         <Label.Text>
                                             <Binding Path="Sentstatus" />
                                         </Label.Text>
