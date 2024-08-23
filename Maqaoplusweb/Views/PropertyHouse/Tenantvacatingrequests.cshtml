@@ -73,13 +73,24 @@
 </div>
 
 @section Scripts {
+    <!-- Include RateYo CSS -->
+    <link href="~/lib/rateyo/jquery.rateyo.min.css" rel="stylesheet" /> 
+    <!-- Include RateYo JS -->
+    <script src="~/lib/rateyo/jquery.rateyo.min.js"></script>
+
     <script type="text/javascript">
+        $("#rateYo").rateYo();
+
         $(function () {
+
             $("#rateYo").rateYo({
-                onChange: function (rating, rateYoInstance) {
-                    $("#Ratingvalueid").val(rating);
+                rating: 0,  // Set the initial rating value
+                fullStar: true,  // Only full star ratings
+                onSet: function (rating, rateYoInstance) {
+                    $("#rating").val(rating);  // Set the rating value in a hidden input field
                 }
             });
         });
+       
     </script>
 }
