@@ -19,6 +19,7 @@ namespace Maqaoplus.ViewModels.Startup
         private string _password;
         private string _confirmPassword;
         private bool _isProcessing;
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
