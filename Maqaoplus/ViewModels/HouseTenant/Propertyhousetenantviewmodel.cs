@@ -12,6 +12,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
     {
         private readonly Services.ServiceProvider _serviceProvider;
         private PropertyHouseRoomTenantData _tenantData;
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
