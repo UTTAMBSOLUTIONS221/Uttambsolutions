@@ -13,8 +13,9 @@
         </Grid.RowDefinitions>
 
         <!-- Header Section with Logo and Title -->
-        <VerticalStackLayout Grid.Row="0" Spacing="0" HorizontalOptions="Center" VerticalOptions="Start">
-            <Image Source="maqaopluslogo.png" WidthRequest="170" HeightRequest="170" />
+        <VerticalStackLayout Grid.Row="0" Spacing="10" HorizontalOptions="Center" VerticalOptions="Start">
+            <Image Source="maqaopluslogo.png" WidthRequest="150" HeightRequest="150" />
+            <Label Text="Create Your Account" FontSize="24" FontAttributes="Bold" TextColor="#0a506c" />
         </VerticalStackLayout>
 
         <!-- Main Content Layer -->
@@ -151,8 +152,8 @@
         </Grid>
 
         <!-- Footer -->
-        <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="End">
-            <Label Text="© 2024 Maqaoplus" HorizontalOptions="Center" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+        <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
         </StackLayout>
     </Grid>
 </ContentPage>
