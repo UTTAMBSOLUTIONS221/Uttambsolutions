@@ -85,90 +85,20 @@
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
                         </StackLayout>
-                    </StackLayout>
-                </Frame>
-
-                <Frame Grid.Row="2" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
-                    <StackLayout Padding="10">
-                        <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                            <Label Text="Payment Details" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
-                            <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
-                        </StackLayout>
-
-                        <StackLayout Padding="0" Spacing="8">
-                            <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Table Headers -->
-                                <Label Text="Pay Mode" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" HorizontalOptions="StartAndExpand"/>
-                                <Label Text="Institution" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center"/>
-                                <Label Text="Paybill" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="2" HorizontalOptions="End"/>
-                                <Label Text="Account" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="3" HorizontalOptions="End"/>
-                            </Grid>
-
-                            <!-- Dynamic Table Content -->
-                            <CollectionView ItemsSource="{Binding TenantInvoiceDetailData.InvoiceDetails}" Margin="0">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <Label Text="{Binding Housedepositfeename}" FontSize="16" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                            <Label Text="{Binding Housedepositfeename}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
-                                            <Label Text="{Binding Units, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Column="2" LineBreakMode="TailTruncation" HorizontalOptions="Center"/>
-                                            <Label Text="{Binding Price, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Column="3" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
-
-
-                <Frame Grid.Row="3" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
-                    <StackLayout Padding="10">
-                        <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                            <Label Text="Payment Confirmation" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
-                            <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
-                        </StackLayout>
-                        <StackLayout Padding="0" Spacing="4">
-                            <!-- Details Grid -->
-                            <Grid ColumnSpacing="12" RowSpacing="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackLayout  Grid.Row="1" Grid.Column="0" Padding="8" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                                    <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="#808080" TextColor="White" Padding="8" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
-                                </StackLayout>
-                                <StackLayout  Grid.Row="1" Grid.Column="1" Padding="8" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                                    <Button Text="Confirm" Command="{Binding OnOkClickedCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="8" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="150"/>
-                                </StackLayout>
-                            </Grid>
-                        </StackLayout>
-                        <!-- Navigation Buttons -->
-
+                        <Grid ColumnSpacing="12" RowSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackLayout  Grid.Row="1" Grid.Column="0" Padding="8" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="#808080" TextColor="White" Padding="8" CornerRadius="8" FontSize="16" FontAttributes="Bold" HeightRequest="50" WidthRequest="350"/>
+                            </StackLayout>
+                        </Grid>
                     </StackLayout>
                 </Frame>
             </Grid>
             <!-- Footer -->
-            <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="© 2024 Maqaoplus" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+            <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
             </StackLayout>
         </StackLayout>
     </VerticalStackLayout>
