@@ -262,18 +262,22 @@ namespace Maqaoplus.ViewModels
 
         private async Task Submituserdetailsasync()
         {
-            IsSubmitProcessing = true;
-
+            IsProcessing = true;
             await Task.Delay(500);
+            if (!IsValidInput())
+            {
+                IsProcessing = false;
+                return;
+            }
             if (StaffData == null)
             {
-                IsSubmitProcessing = false;
+                IsProcessing = false;
                 return;
             }
 
             try
             {
-                IsSubmitProcessing = true;
+                IsProcessing = true;
                 StaffData.Updateprofile = false;
                 StaffData.Modifiedby = App.UserDetails.Usermodel.Userid;
                 StaffData.Datemodified = DateTime.Now;
@@ -298,7 +302,7 @@ namespace Maqaoplus.ViewModels
             }
             finally
             {
-                IsSubmitProcessing = false;
+                IsProcessing = false;
             }
         }
         private string _systemStaffFirstNameError;
