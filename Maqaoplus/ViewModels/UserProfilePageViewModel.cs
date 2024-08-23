@@ -26,6 +26,7 @@ namespace Maqaoplus.ViewModels
         public ICommand SubmitCurrentUserDetailsCommand { get; }
         private bool _isProcessing;
         private bool _isSubmitProcessing;
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
         public SystemStaff StaffData
         {
