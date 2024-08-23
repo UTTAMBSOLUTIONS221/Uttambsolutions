@@ -4,7 +4,7 @@
              x:Class="Maqaoplus.Views.UserProfilePage"
              Title="MY PROFILE">
 
-    <Grid>
+    <Grid Padding="10">
         <!-- Define Row Heights for Header and Content -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -17,9 +17,9 @@
 
         <!-- ScrollView with Grid -->
         <ScrollView IsVisible="{Binding IsDataLoaded}" Grid.Row="1">
-            <VerticalStackLayout Padding="10" Spacing="3">
+            <VerticalStackLayout Padding="0" Spacing="3">
                 <!-- User Info -->
-                <Grid ColumnSpacing="10" RowSpacing="10">
+                <Grid ColumnSpacing="10" RowSpacing="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -42,7 +42,7 @@
                     <StackLayout Grid.Column="0" Grid.Row="0">
                         <Label Text="First Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                         <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
-                            <Entry Text="{Binding StaffData.Firstname}" Placeholder="Enter first name"  FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" />
+                            <Entry Text="{Binding StaffData.Firstname}" Placeholder="Enter first name"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
                         </Frame>
                     </StackLayout>
 
@@ -50,7 +50,7 @@
                     <StackLayout Grid.Column="1" Grid.Row="0">
                         <Label Text="Last Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                         <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
-                            <Entry Text="{Binding StaffData.Lastname}" Placeholder="Enter last name"  FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" />
+                            <Entry Text="{Binding StaffData.Lastname}" Placeholder="Enter last name"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
                         </Frame>
                     </StackLayout>
 
@@ -58,7 +58,7 @@
                     <StackLayout Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
                         <Label Text="Email Address" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                         <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
-                            <Entry Text="{Binding StaffData.Emailaddress}" Keyboard="Email" Placeholder="Enter email address"  FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" />
+                            <Entry Text="{Binding StaffData.Emailaddress}" Keyboard="Email" Placeholder="Enter email address"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
                         </Frame>
                     </StackLayout>
 
@@ -66,7 +66,7 @@
                     <StackLayout Grid.Column="0" Grid.Row="2">
                         <Label Text="Phone Number" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                         <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
-                            <Entry Text="{Binding StaffData.Phonenumber}" Keyboard="Telephone" Placeholder="Enter phone number"  FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" />
+                            <Entry Text="{Binding StaffData.Phonenumber}" Keyboard="Telephone" Placeholder="Enter phone number"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
                         </Frame>
                     </StackLayout>
 
@@ -74,7 +74,7 @@
                     <StackLayout Grid.Column="1" Grid.Row="2">
                         <Label Text="ID Number" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                         <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
-                            <Entry Text="{Binding StaffData.Idnumber}" Placeholder="Enter ID number" IsReadOnly="{Binding StaffData.Columnreadonly}"  FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" />
+                            <Entry Text="{Binding StaffData.Idnumber}" Placeholder="Enter ID number" IsReadOnly="{Binding StaffData.Columnreadonly}"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
                         </Frame>
                     </StackLayout>
 
@@ -95,15 +95,15 @@
                     </StackLayout>
 
                     <!-- Next of Kin Section -->
-                    <Frame BackgroundColor="#f0f0f0" CornerRadius="8" Grid.ColumnSpan="2" Grid.Row="4" Margin="0,10,0,0">
-                        <VerticalStackLayout Padding="10">
+                    <Frame BackgroundColor="#f0f0f0" CornerRadius="8" Grid.ColumnSpan="2" Grid.Row="4" Margin="0,4,0,0">
+                        <VerticalStackLayout Padding="0">
                             <Label Text="Next of Kin Details" FontAttributes="Bold" FontSize="16" TextColor="#0a506c"/>
 
                             <!-- Next of Kin Name -->
                             <StackLayout>
                                 <Label Text="Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                                 <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
-                                    <Entry Text="{Binding StaffData.Kinname}" Placeholder="Enter kin name" FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" />
+                                    <Entry Text="{Binding StaffData.Kinname}" Placeholder="Enter kin name" FontSize="16" TextColor="#0a506c" PlaceholderColor="Black" />
                                 </Frame>
                             </StackLayout>
 
@@ -118,7 +118,7 @@
                                 <StackLayout Grid.Column="0">
                                     <Label Text="Phone" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
-                                        <Entry Text="{Binding StaffData.Kinphonenumber}" Keyboard="Telephone" Placeholder="Enter kin phone"  FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" />
+                                        <Entry Text="{Binding StaffData.Kinphonenumber}" Keyboard="Telephone" Placeholder="Enter kin phone"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
                                     </Frame>
                                 </StackLayout>
 
@@ -126,7 +126,7 @@
                                 <StackLayout  Grid.Column="1">
                                     <Label Text="Relationship" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
-                                        <Picker ItemsSource="{Binding Systemkinrelationship}" SelectedItem="{Binding Selectedstaffkinrelationship}" ItemDisplayBinding="{Binding Text}" Title="Select relationship" TextColor="#0a506c" FontSize="17"/>
+                                        <Picker ItemsSource="{Binding Systemkinrelationship}" SelectedItem="{Binding Selectedstaffkinrelationship}" ItemDisplayBinding="{Binding Text}" Title="Select relationship" TextColor="Black" FontSize="17"/>
                                     </Frame>
                                 </StackLayout>
                             </Grid>
@@ -135,7 +135,7 @@
                 </Grid>
 
                 <!-- Update Button -->
-                <Button BackgroundColor="#0a506c" Command="{Binding SubmitCurrentUserDetailsCommand}" CornerRadius="8" Text="Update" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" Margin="0,10,0,0" WidthRequest="320"/>
+                <Button BackgroundColor="#0a506c" Command="{Binding SubmitCurrentUserDetailsCommand}" CornerRadius="8" Text="Update" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" Margin="0,0,0,0" WidthRequest="370"/>
             </VerticalStackLayout>
         </ScrollView>
 
