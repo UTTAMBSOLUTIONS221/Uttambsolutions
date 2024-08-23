@@ -9,6 +9,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
         private readonly Services.ServiceProvider _serviceProvider;
         public ObservableCollection<CustomerPaymentData> PaymentItems { get; }
         private MonthlyRentInvoiceModel _tenantInvoiceDetailData;
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ICommand LoadPaymentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
 
