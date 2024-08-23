@@ -185,7 +185,7 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _isConfirmPasswordHidden = value;
                 OnPropertyChanged(nameof(IsConfirmPasswordHidden));
-                ConfirmPasswordIconSource = _isPasswordHidden ? "unvisible.png" : "visible.png";
+                ConfirmPasswordIconSource = _isConfirmPasswordHidden ? "unvisible.png" : "visible.png";
             }
         }
 
