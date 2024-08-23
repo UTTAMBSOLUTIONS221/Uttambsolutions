@@ -3,12 +3,12 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "rateYo@2.3.4",
-      "destination": "wwwroot/lib/rateYo/"
-    },
-    {
       "library": "bootstrap-toggle@2.2.2",
       "destination": "wwwroot/lib/bootstrap-toggle/"
+    },
+    {
+      "library": "rateYo@2.3.4",
+      "destination": "wwwroot/lib/rateYo/"
     }
   ]
 }
