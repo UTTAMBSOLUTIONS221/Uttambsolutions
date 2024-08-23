@@ -22,7 +22,7 @@
                             <th>Expected Vacating Date</th>
                             <th>Planned Vacating Date</th>
                             <th>Vacating Reason</th>
-                            <th>Status</th>
+                        @*     <th>Status</th> *@
                             <th>Accepted</th>
                             <th>Date Created</th>
                             <th class="text-right">Action</th>
@@ -39,7 +39,7 @@
                                     <td>@item.ExpectedVacatingDate.ToString("yyyy-MMM-dd")</td>
                                     <td>@item.PlannedVacatingDate.ToString("yyyy-MMM-dd")</td>
                                     <td>@item.VacatingReason</td>
-                                    <td>@item.OccupationalStatus</td>
+                                    @* <td>@item.OccupationalStatus</td> *@
                                     <td>
                                         @if (item.VacatingStatus)
                                         {
