@@ -152,7 +152,7 @@ namespace Maqaoplus.ViewModels
 
         private async Task LoadCurrentUserDataAsync()
         {
-            IsLoading = true;
+            IsProcessing = true;
             IsDataLoaded = false;
             _cancellationTokenSource = new CancellationTokenSource();
 
@@ -176,7 +176,7 @@ namespace Maqaoplus.ViewModels
             }
             finally
             {
-                IsLoading = false;
+                IsProcessing = false;
                 _cancellationTokenSource.Dispose();
                 _cancellationTokenSource = null;
             }
@@ -216,8 +216,13 @@ namespace Maqaoplus.ViewModels
         private async Task Updateuserdetailsasync()
         {
             IsProcessing = true;
-
+            IsProcessing = true;
             await Task.Delay(500);
+            if (!IsValidInput())
+            {
+                IsProcessing = false;
+                return;
+            }
             if (StaffData == null)
             {
                 IsProcessing = false;
@@ -297,7 +302,174 @@ namespace Maqaoplus.ViewModels
                 IsSubmitProcessing = false;
             }
         }
+        private string _systemStaffFirstNameError;
+        public string SystemStaffFirstNameError
+        {
+            get => _systemStaffFirstNameError;
+            set
+            {
+                _systemStaffFirstNameError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffLastNameError;
+        public string SystemStaffLastNameError
+        {
+            get => _systemStaffLastNameError;
+            set
+            {
+                _systemStaffLastNameError = value;
+                OnPropertyChanged();
+            }
+        }
 
+        private string _systemStaffEmailAddressError;
+        public string SystemStaffEmailAddressError
+        {
+            get => _systemStaffEmailAddressError;
+            set
+            {
+                _systemStaffEmailAddressError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffPhonenumberError;
+        public string SystemStaffPhonenumberError
+        {
+            get => _systemStaffPhonenumberError;
+            set
+            {
+                _systemStaffPhonenumberError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffIdnumberError;
+        public string SystemStaffIdnumberError
+        {
+            get => _systemStaffIdnumberError;
+            set
+            {
+                _systemStaffIdnumberError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffGenderError;
+        public string SystemStaffGenderError
+        {
+            get => _systemStaffGenderError;
+            set
+            {
+                _systemStaffGenderError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffMaritalstatusError;
+        public string SystemStaffMaritalstatusError
+        {
+            get => _systemStaffMaritalstatusError;
+            set
+            {
+                _systemStaffMaritalstatusError = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool IsValidInput()
+        {
+            bool isValid = true;
+            if (string.IsNullOrWhiteSpace(StaffData.Firstname))
+            {
+                SystemStaffFirstNameError = "First Name is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffFirstNameError = null;
+            }
+            if (string.IsNullOrWhiteSpace(StaffData.Lastname))
+            {
+                SystemStaffLastNameError = "Last Name is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffLastNameError = null;
+            }
+
+            if (string.IsNullOrWhiteSpace(StaffData.Emailaddress))
+            {
+                SystemStaffEmailAddressError = "Email Address is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffEmailAddressError = null;
+            }
+            if (string.IsNullOrWhiteSpace(StaffData.Phonenumber))
+            {
+                SystemStaffPhonenumberError = "Phonenumber is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffPhonenumberError = null;
+            }
+            if (string.IsNullOrWhiteSpace(StaffData.Idnumber))
+            {
+                SystemStaffIdnumberError = "Idnumber is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffIdnumberError = null;
+            }
+            if (StaffData.Genderid == 0)
+            {
+                SystemStaffGenderError = "Gender is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffGenderError = null;
+            }
+            if (StaffData.Maritalstatusid == 0)
+            {
+                SystemStaffMaritalstatusError = "Marital status is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffMaritalstatusError = null;
+            }
+            //if (string.IsNullOrWhiteSpace(StaffData.Kinname))
+            //{
+            //    SystemStaffKinnameError = "Kin Name is required.";
+            //    isValid = false;
+            //}
+            //else
+            //{
+            //    SystemStaffKinnameError = null;
+            //}
+            //if (string.IsNullOrWhiteSpace(StaffData.Kinname))
+            //{
+            //    SystemStaffKinnameError = "Kin Name is required.";
+            //    isValid = false;
+            //}
+            //else
+            //{
+            //    SystemStaffKinnameError = null;
+            //}
+            //if (StaffData.Kinrelationshipid == 0)
+            //{
+            //    SystemStaffKinrelationshipError = "Kin Relationship is required.";
+            //    isValid = false;
+            //}
+            //else
+            //{
+            //    SystemStaffKinrelationshipError = null;
+            //}
+
+            return isValid;
+        }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
