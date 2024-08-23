@@ -16,7 +16,7 @@ namespace Maqaoplus.ViewModels.Startup
         private readonly Services.ServiceProvider _serviceProvider;
         private bool _isPasswordHidden;
         private string _passwordIconSource;
-        public string CopyrightText => $"UTTAMB SOLUTIONS LIMITED © 2020 - {DateTime.Now.Year} ";
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
         public bool IsPasswordHidden
         {
