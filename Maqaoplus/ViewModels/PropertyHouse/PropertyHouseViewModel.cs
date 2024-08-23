@@ -14,6 +14,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
     {
         private readonly Services.ServiceProvider _serviceProvider;
         public event PropertyChangedEventHandler PropertyChanged;
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ObservableCollection<Systemproperty> Items { get; }
         private Systemproperty _systempropertyData;
 

@@ -74,20 +74,20 @@
             </Frame>
         </Grid>
 
-
-        <Frame Grid.Row="1" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
-            <StackLayout Padding="10">
-                <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                    <Label Text="Property  Summary" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
+        <!-- Property Summary Section -->
+        <Frame Grid.Row="1" Padding="10" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout>
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                    <Label Text="Property Summary" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
                     <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
 
-                <StackLayout Padding="0" Spacing="8">
+                <StackLayout Spacing="8">
                     <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
@@ -95,7 +95,7 @@
                         <!-- Table Headers -->
                         <Label Text="House" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" HorizontalOptions="StartAndExpand"/>
                         <Label Text="Units" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center"/>
-                        <Label Text="Occupieds" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="2" HorizontalOptions="End"/>
+                        <Label Text="Occupied" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="2" HorizontalOptions="End"/>
                         <Label Text="Vacants" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="3" HorizontalOptions="End"/>
                         <Label Text="Meters" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="4" HorizontalOptions="End"/>
                     </Grid>
@@ -106,14 +106,14 @@
                             <DataTemplate>
                                 <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Text="{Binding Propertyhousename}" FontSize="16" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                    <Label Text="{Binding Propertyhousename}" FontSize="16" Grid.Column="0" MaxLines="3" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                     <Label Text="{Binding Propertyhouseunits}" FontSize="16" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
                                     <Label Text="{Binding Systempropertyoccupiedroom}" FontSize="16" Grid.Column="2" LineBreakMode="TailTruncation" HorizontalOptions="Center"/>
                                     <Label Text="{Binding Systempropertyvacantroom}" FontSize="16" Grid.Column="3" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
@@ -128,7 +128,7 @@
 
         <!-- Footer -->
         <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-            <Label Text="© 2024 Maqaoplus" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
         </StackLayout>
     </Grid>
 </ContentPage>
