@@ -24,6 +24,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isStep4Visible;
 
         public ICommand AddPropertyHouseCommand { get; }
+        public ICommand EditPropertyHouseCommand { get; }
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand NextCommand { get; }
@@ -228,6 +229,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<Systemproperty>();
             AddPropertyHouseCommand = new Command(AddPropertyHouseAsync);
+            EditPropertyHouseCommand = new Command<Systemproperty>(async (property) => await EditPropertyHouseAsync(property.Propertyhouseid));
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             NextCommand = new Command(NextStep);
@@ -571,6 +573,52 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = false;
         }
 
+
+        private async
+
+        Task
+EditPropertyHouseAsync(long propertyId)
+        {
+            IsProcessing = true;
+
+            Systemhouseentrystatus = new ObservableCollection<ListModel>
+            {
+                new ListModel { Value = "0", Text = "First Tenants" },
+                new ListModel { Value = "1", Text = "Second Tenants" },
+
+            };
+            Systemhouserentdueday = new ObservableCollection<ListModel>();
+            for (int i = 1; i <= 28; i++)
+            {
+                string suffix = i switch
+                {
+                    1 or 21 => "st",
+                    2 or 22 => "nd",
+                    3 or 23 => "rd",
+                    _ => "th"
+                };
+                Systemhouserentdueday.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
+            }
+            Systemhousedepostmonths = new ObservableCollection<ListModel>();
+            for (int i = 1; i <= 6; i++)
+            {
+                Systemhousedepostmonths.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
+            }
+            Systemhousevacantnoticeperiod = new ObservableCollection<ListModel>();
+            for (int i = 1; i <= 12; i++)
+            {
+                Systemhousevacantnoticeperiod.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
+            }
+            LoadDropdownData();
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + propertyId, HttpMethod.Get, null);
+            if (response != null)
+            {
+                SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
+            }
+            var modalPage = new AddSystemPropertyHouseModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            IsProcessing = false;
+        }
         private async Task LoadDropdownData()
         {
             try

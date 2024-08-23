@@ -69,7 +69,7 @@
                                 <!-- Buttons at the Bottom -->
                                 <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
                                     <Button Text="Edit"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditCommand}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditPropertyHouseCommand}"
                                             CommandParameter="{Binding .}"
                                             BackgroundColor="#0a506c"
                                             TextColor="White"
@@ -78,7 +78,7 @@
                                             HorizontalOptions="FillAndExpand"
                                             Margin="5" />
                                     <Button Text="Manage"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ManageCommand}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}"
                                             CommandParameter="{Binding .}"
                                             BackgroundColor="#0a506c"
                                             TextColor="White"
