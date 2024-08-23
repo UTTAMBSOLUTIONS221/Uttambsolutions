@@ -19,6 +19,10 @@ namespace Maqaoplus.ViewModels.Startup
         private string _password;
         private string _confirmPassword;
         private bool _isProcessing;
+        private bool _isPasswordHidden;
+        private string _passwordIconSource;
+        private bool _isConfirmPasswordHidden;
+        private string _confirmPasswordIconSource;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -28,6 +32,10 @@ namespace Maqaoplus.ViewModels.Startup
         public RegisterPageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            IsPasswordHidden = true; // Default to hidden password
+            IsConfirmPasswordHidden = true; // Default to hidden password
+            TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
+            ToggleConfirmPasswordVisibilityCommand = new Command(ToggleConfirmPasswordVisibility);
             Systemstaffdesignation = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "Owner", Text = "Owner" },
@@ -149,11 +157,61 @@ namespace Maqaoplus.ViewModels.Startup
                 ((Command)SignUpCommand).ChangeCanExecute();
             }
         }
+        public bool IsPasswordHidden
+        {
+            get => _isPasswordHidden;
+            set
+            {
+                _isPasswordHidden = value;
+                OnPropertyChanged(nameof(IsPasswordHidden));
+                PasswordIconSource = _isPasswordHidden ? "unvisible.png" : "visible.png";
+            }
+        }
 
+        public string PasswordIconSource
+        {
+            get => _passwordIconSource;
+            set
+            {
+                _passwordIconSource = value;
+                OnPropertyChanged(nameof(PasswordIconSource));
+            }
+        }
+
+        public bool IsConfirmPasswordHidden
+        {
+            get => _isConfirmPasswordHidden;
+            set
+            {
+                _isConfirmPasswordHidden = value;
+                OnPropertyChanged(nameof(IsConfirmPasswordHidden));
+                ConfirmPasswordIconSource = _isPasswordHidden ? "unvisible.png" : "visible.png";
+            }
+        }
+
+        public string ConfirmPasswordIconSource
+        {
+            get => _confirmPasswordIconSource;
+            set
+            {
+                _confirmPasswordIconSource = value;
+                OnPropertyChanged(nameof(ConfirmPasswordIconSource));
+            }
+        }
+
+        public ICommand TogglePasswordVisibilityCommand { get; }
+        public ICommand ToggleConfirmPasswordVisibilityCommand { get; }
         public ICommand SignUpCommand => new Command(async () => await OnSignUp(), () => !IsProcessing);
         public ICommand CancelCommand => new Command(async () => await OnCancel());
         public ICommand SignInCommand => new Command(async () => await OnSignIn());
-
+        private void TogglePasswordVisibility()
+        {
+            IsPasswordHidden = !IsPasswordHidden;
+        }
+        private void ToggleConfirmPasswordVisibility()
+        {
+            IsConfirmPasswordHidden = !IsConfirmPasswordHidden;
+        }
         private async Task OnSignUp()
         {
             IsProcessing = true;
