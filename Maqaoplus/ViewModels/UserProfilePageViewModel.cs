@@ -216,7 +216,6 @@ namespace Maqaoplus.ViewModels
         private async Task Updateuserdetailsasync()
         {
             IsProcessing = true;
-            IsProcessing = true;
             await Task.Delay(500);
             if (!IsValidInput())
             {
