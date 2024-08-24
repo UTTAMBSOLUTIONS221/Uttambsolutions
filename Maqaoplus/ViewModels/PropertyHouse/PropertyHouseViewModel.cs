@@ -28,6 +28,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand EditPropertyHouseCommand { get; }
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
+        public ICommand ViewPropertyAgreementCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
@@ -233,6 +234,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             EditPropertyHouseCommand = new Command<Systemproperty>(async (property) => await EditPropertyHouseAsync(property.Propertyhouseid));
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
+            ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid));
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
@@ -679,6 +681,23 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
         private async Task ViewDetails(long propertyId)
+        {
+            IsProcessing = true;
+            try
+            {
+                var encodedPropertyId = Uri.EscapeDataString(propertyId.ToString());
+                await Shell.Current.GoToAsync($"PropertyHousesDetailPage?PropertyId={encodedPropertyId}");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Navigation Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+        private async Task ViewPropertyAgreementDetails(long propertyId)
         {
             IsProcessing = true;
             try
