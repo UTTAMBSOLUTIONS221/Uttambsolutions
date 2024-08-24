@@ -53,12 +53,12 @@
                                     <!-- Data on the Right -->
                                     <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                                         <Label Text="{Binding Propertyhousename}" FontAttributes="Bold" TextTransform="Uppercase" FontSize="14" TextColor="#0a506c" MaxLines="2" LineBreakMode="TailTruncation" Grid.Row="1" />
-                                        <Label Text="{Binding Systempropertyhousesizename,StringFormat='Room #: {0}'}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="DarkGray" Grid.Row="2"  />
-                                        <Label Text="{Binding Countyname}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="DarkGray" Grid.Row="3" />
-                                        <Label Text="{Binding Subcountyname}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="DarkGray" Grid.Row="3" />
-                                        <Label Text="{Binding Subcountywardname}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="DarkGray" Grid.Row="3" />
-                                        <Label Text="{Binding Streetorlandmark}" FontSize="13" TextColor="DarkGray" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
-                                        <Label Text="{Binding Systempropertyhousesizerent,StringFormat='Rent: {0}'}" FontSize="13" TextColor="DarkGray" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
+                                        <Label Text="{Binding Systempropertyhousesizename,StringFormat='Room #: {0}'}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="2"  />
+                                        <Label Text="{Binding Countyname,StringFormat='County #: {0}'}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="3" />
+                                        <Label Text="{Binding Subcountyname ,StringFormat='Subcounty #: {0}'}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="3" />
+                                        <Label Text="{Binding Subcountywardname ,StringFormat='Ward #: {0}'}" FontAttributes="Bold" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="3" />
+                                        <Label Text="{Binding Streetorlandmark}" FontSize="13" TextColor="Black" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
+                                        <Label Text="{Binding Systempropertyhousesizerent,StringFormat='Rent: {0}'}" FontSize="13" TextColor="Black" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
 
                                     </StackLayout>
                                 </Grid>
