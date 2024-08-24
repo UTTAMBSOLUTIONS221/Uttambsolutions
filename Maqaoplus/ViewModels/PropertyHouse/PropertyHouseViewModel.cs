@@ -34,6 +34,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand SavePropertyHouseCommand { get; }
+        public ICommand AgreePropertyHouseAgreementCommand { get; }
 
 
         private bool _isLoading;
@@ -240,6 +241,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             PreviousCommand = new Command(PreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
+            AgreePropertyHouseAgreementCommand = new Command(async () => await AgreePropertyHouseAgreementasync());
 
 
             // Initialize steps
@@ -845,6 +847,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     Date: __________________________
                 ";
             var modalPage = new SystemPropertyHouseAgreementModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            IsProcessing = false;
+        }
+
+
+
+        private async Task AgreePropertyHouseAgreementasync()
+        {
+            IsProcessing = true;
+            var modalPage = new SystemPropertyHouseAgreementSignatureModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
