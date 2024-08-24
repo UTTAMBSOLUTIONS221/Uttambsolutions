@@ -64,18 +64,11 @@
                                 </Grid>
 
                                     <!-- Buttons at the Bottom -->
-                                    <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
-                                    <Button Text="Manage Room"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}"
-                                            CommandParameter="{Binding .}"
-                                            BackgroundColor="#0a506c"
-                                            TextColor="White"
-                                            FontSize="14"
-                                            FontAttributes="Bold"
-                                            HorizontalOptions="FillAndExpand"
-                                            Margin="5" />
+                                <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
+                                    <Button Text="Room Agreement" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Margin="5" />
+                                    <Button Text="Manage Room" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Margin="5" />
                                 </StackLayout>
-                                </Grid>
+                            </Grid>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

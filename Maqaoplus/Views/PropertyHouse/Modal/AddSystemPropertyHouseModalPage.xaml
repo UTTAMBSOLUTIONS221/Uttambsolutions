@@ -252,7 +252,7 @@
                                     <Entry Text="{Binding Systemhousesizeid}" IsVisible="False"/>
 
                                     <!-- Room Size -->
-                                    <Entry Text="{Binding Systemhousesizename}" IsReadOnly="True" Grid.Column="0" HorizontalOptions="Fill"/>
+                                    <Label Text="{Binding Systemhousesizename}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2"/>
 
                                     <!-- Units -->
                                     <Entry Text="{Binding Systempropertyhousesizeunits}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill"/>
@@ -302,7 +302,7 @@
                                     <Entry Text="{Binding Housedepositfeeid}" IsVisible="False"/>
 
                                     <!-- Room Size -->
-                                    <Entry Text="{Binding Housedepositfeename}" IsReadOnly="True" Grid.Column="0" HorizontalOptions="Fill"/>
+                                    <Label Text="{Binding Housedepositfeename}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2"/>
 
                                     <!-- Amount -->
                                     <Entry Text="{Binding Systempropertyhousedepositfeeamount}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill"/>
@@ -334,10 +334,10 @@
                             <Grid ColumnDefinitions="2*,2*,1*" BackgroundColor="#e0e0e0">
 
                                 <!-- Room Size Column -->
-                                <Label Text="Deposit Name" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" Padding="2"/>
+                                <Label Text="Bank Name and Paybill" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" Padding="2"/>
 
                                 <!-- Units Column -->
-                                <Label Text="Deposit Amount" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start"/>
+                                <Label Text="Account Nuber" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start"/>
                                 <!-- We have? Column -->
                                 <Label Text="We have?" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Center"/>
                             </Grid>
@@ -348,17 +348,19 @@
                                 <Grid ColumnDefinitions="2*,2*,1*">
 
                                     <!-- Hidden fields (not visually represented) -->
-                                    <Entry Text="{Binding Systempropertyhousedepositfeeid}" IsVisible="False"/>
+                                    <Entry Text="{Binding Systembankid}" IsVisible="False"/>
 
-                                    <Entry Text="{Binding Housedepositfeeid}" IsVisible="False"/>
+                                    <Entry Text="{Binding Propertyhouseid}" IsVisible="False"/>
 
                                     <!-- Room Size -->
-                                    <Entry Text="{Binding Housedepositfeename}" IsReadOnly="True" Grid.Column="0" HorizontalOptions="Fill"/>
+                                    <Label Text="{Binding Systembanknameandpaybill}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2"/>
+
+                     
 
                                     <!-- Amount -->
-                                    <Entry Text="{Binding Systempropertyhousedepositfeeamount}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill"/>
+                                    <Entry Text="{Binding Systempropertybankaccount}" Keyboard="Text" Grid.Column="1" HorizontalOptions="Fill"/>
                                     <!-- We have? -->
-                                    <CheckBox IsChecked="{Binding Systempropertyhousesizedepositfeewehave}" Grid.Column="2"/>
+                                    <CheckBox IsChecked="{Binding Systempropertyhousebankwehave}" Grid.Column="2"/>
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
