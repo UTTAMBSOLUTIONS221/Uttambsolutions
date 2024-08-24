@@ -22,6 +22,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isStep2Visible;
         private bool _isStep3Visible;
         private bool _isStep4Visible;
+        private bool _isStep5Visible;
 
         public ICommand AddPropertyHouseCommand { get; }
         public ICommand EditPropertyHouseCommand { get; }
@@ -243,6 +244,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep2Visible = false;
             _isStep3Visible = false;
             _isStep4Visible = false;
+            _isStep5Visible = false;
         }
 
         public ObservableCollection<ListModel> Systemcounty
@@ -574,10 +576,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
 
 
-        private async
-
-        Task
-EditPropertyHouseAsync(long propertyId)
+        private async Task EditPropertyHouseAsync(long propertyId)
         {
             IsProcessing = true;
 
@@ -736,6 +735,15 @@ EditPropertyHouseAsync(long propertyId)
                 OnPropertyChanged();
             }
         }
+        public bool IsStep5Visible
+        {
+            get => _isStep5Visible;
+            set
+            {
+                _isStep5Visible = value;
+                OnPropertyChanged();
+            }
+        }
         private async void NextStep()
         {
             IsLoading = true;
@@ -763,11 +771,18 @@ EditPropertyHouseAsync(long propertyId)
                 _isStep3Visible = false;
                 _isStep4Visible = true;
             }
+            else if (_isStep4Visible)
+            {
+                _isStep4Visible = false;
+                _isStep5Visible = true;
+
+            }
             IsLoading = false;
             OnPropertyChanged(nameof(IsStep1Visible));
             OnPropertyChanged(nameof(IsStep2Visible));
             OnPropertyChanged(nameof(IsStep3Visible));
             OnPropertyChanged(nameof(IsStep4Visible));
+            OnPropertyChanged(nameof(IsStep5Visible));
         }
 
         private async void PreviousStep()
@@ -776,7 +791,12 @@ EditPropertyHouseAsync(long propertyId)
 
             await Task.Delay(500);
             // Move to the previous step
-            if (_isStep4Visible)
+            if (_isStep5Visible)
+            {
+                _isStep5Visible = false;
+                _isStep4Visible = true;
+            }
+            else if (_isStep4Visible)
             {
                 _isStep4Visible = false;
                 _isStep3Visible = true;
@@ -797,6 +817,7 @@ EditPropertyHouseAsync(long propertyId)
             OnPropertyChanged(nameof(IsStep2Visible));
             OnPropertyChanged(nameof(IsStep3Visible));
             OnPropertyChanged(nameof(IsStep4Visible));
+            OnPropertyChanged(nameof(IsStep5Visible));
         }
         private void OnCancelClicked()
         {
