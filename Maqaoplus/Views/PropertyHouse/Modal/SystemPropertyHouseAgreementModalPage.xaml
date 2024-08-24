@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maqaoplus.Views.PropertyHouse.Modal.SystemPropertyHouseAgreementModalPage"
+             Title="SystemPropertyHouseAgreementModalPage">
+    <ScrollView>
+        <StackLayout Padding="20">
+            <Label Text="Rental Management System Agreement" 
+                   FontAttributes="Bold" 
+                   FontSize="20" 
+                   HorizontalOptions="Center" />
+
+            <Label Text="{Binding AgreementText}" 
+                   FontSize="14" 
+                   Margin="0,20,0,20" />
+
+            <Button Text="I Agree" 
+                    HorizontalOptions="Center" 
+                    Clicked="OnAgreeClicked" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -15,6 +15,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private readonly Services.ServiceProvider _serviceProvider;
         public event PropertyChangedEventHandler PropertyChanged;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
+        public string AgreementText { get; set; }
         public ObservableCollection<Systemproperty> Items { get; }
         private Systemproperty _systempropertyData;
 
@@ -700,19 +701,152 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task ViewPropertyAgreementDetails(long propertyId)
         {
             IsProcessing = true;
-            try
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + propertyId, HttpMethod.Get, null);
+            if (response != null)
             {
-                var encodedPropertyId = Uri.EscapeDataString(propertyId.ToString());
-                await Shell.Current.GoToAsync($"PropertyHousesDetailPage?PropertyId={encodedPropertyId}");
+                SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
             }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Navigation Error", ex.Message, "OK");
-            }
-            finally
-            {
-                IsProcessing = false;
-            }
+
+            AgreementText = $@"
+                    RENTAL MANAGEMENT SYSTEM AGREEMENT
+
+                    This Agreement is made on {DateTime.Now.ToString("yyyy-MM-dd")} between:
+
+                    Property Owner:
+                    -----------------------------------------------------------------------
+                    Name:           [Owner's Full Name]
+                    Address:        [Owner's Address]
+                    Phone:          [Owner's Phone Number]
+                    Email:          [Owner's Email Address]
+                    -----------------------------------------------------------------------
+
+                    Rental Management System Provider:
+                    -----------------------------------------------------------------------
+                    Name:           [Company Name]
+                    Address:        [Company Address]
+                    Phone:          [Company Phone Number]
+                    Email:          [Company Email Address]
+                    -----------------------------------------------------------------------
+
+                    1. PURPOSE OF THE AGREEMENT
+                    -----------------------------------------------------------------------
+                    The purpose of this Agreement is to outline the terms and conditions 
+                    under which [Company Name] (hereinafter referred to as ""Management 
+                    System Provider"") will provide rental management services to [Owner's 
+                    Full Name] (hereinafter referred to as ""Property Owner"") for the 
+                    property located at [Property Address] (hereinafter referred to as 
+                    ""Property"").
+
+                    2. SERVICES PROVIDED
+                    -----------------------------------------------------------------------
+                    The Management System Provider agrees to provide the following services:
+                    - Advertising and Marketing: Listing the Property on various platforms 
+                      to attract potential tenants.
+                    - Tenant Screening: Conducting background checks and verifying tenant 
+                      credentials.
+                    - Rent Collection: Facilitating the collection of rent payments from 
+                      tenants.
+                    - Property Maintenance: Coordinating with contractors for repairs and 
+                      regular maintenance of the Property.
+                    - Reporting: Providing regular reports on the status of the Property, 
+                      rent collection, and any issues that arise.
+
+                    3. FEES AND PAYMENTS
+                    -----------------------------------------------------------------------
+                    - Service Fee: The Property Owner agrees to pay the Management System 
+                      Provider a service fee of [Percentage]% of the monthly rent collected 
+                      or a fixed monthly fee of [Amount].
+                    - Subscription Payment: The Property Owner agrees to pay a subscription 
+                      fee for the services rendered by the Management System Provider. The 
+                      subscription fee shall be paid monthly to the following bank account:
+
+                        Bank Name:      [Bank Name]
+                        Account Name:   [Account Name]
+                        Account Number: [Account Number]
+                        Branch:         [Branch Name]
+
+                    - Payment Terms: The service fee will be deducted automatically from the 
+                      rent collected before the remainder is transferred to the Property 
+                      Owner's designated account. The subscription fee is due on the [Day] 
+                      of each month.
+                    - Additional Costs: Any costs related to property maintenance, legal fees, 
+                      or other services not covered under this Agreement will be billed 
+                      separately with the Property Owner's prior approval.
+
+                    4. PROPERTY OWNER RESPONSIBILITIES
+                    -----------------------------------------------------------------------
+                    - Property Upkeep: The Property Owner agrees to maintain the Property in 
+                      a condition suitable for rental.
+                    - Insurance: The Property Owner is responsible for obtaining and 
+                      maintaining appropriate insurance coverage for the Property.
+                    - Legal Compliance: The Property Owner agrees to comply with all local, 
+                      county, and national laws relating to the rental and maintenance of the 
+                      Property.
+
+                    5. DATA PROTECTION AND PRIVACY
+                    -----------------------------------------------------------------------
+                    - Compliance with Data Protection Act, 2019: The Management System 
+                      Provider shall ensure that all personal data collected, processed, and 
+                      stored as part of the rental management services is handled in 
+                      accordance with the Data Protection Act, 2019 of Kenya.
+                    - Data Security: Both parties agree to implement appropriate technical and 
+                      organizational measures to protect personal data against unauthorized 
+                      or unlawful processing, accidental loss, destruction, or damage.
+
+                    6. TERM AND TERMINATION
+                    -----------------------------------------------------------------------
+                    - Term: This Agreement will begin on [Start Date] and will continue until 
+                      terminated by either party.
+                    - Termination: Either party may terminate this Agreement with [Number] 
+                      days' written notice. Upon termination, the Property Owner is 
+                      responsible for any outstanding fees and obligations under this 
+                      Agreement.
+
+                    7. INDEMNIFICATION
+                    -----------------------------------------------------------------------
+                    The Property Owner agrees to indemnify and hold harmless the Management 
+                    System Provider from any claims, liabilities, or damages arising out of 
+                    the management of the Property, except in cases of gross negligence or 
+                    willful misconduct by the Management System Provider.
+
+                    8. CONFIDENTIALITY
+                    -----------------------------------------------------------------------
+                    Both parties agree to keep all information regarding the Property and 
+                    this Agreement confidential, except as required by law.
+
+                    9. GOVERNING LAW
+                    -----------------------------------------------------------------------
+                    This Agreement shall be governed by and construed in accordance with the 
+                    laws of Kenya, and any disputes arising from this Agreement shall be 
+                    subject to the jurisdiction of Kenyan courts.
+
+                    10. DISPUTE RESOLUTION
+                    -----------------------------------------------------------------------
+                    Any disputes arising from this Agreement will be resolved through 
+                    mediation or arbitration before seeking judicial remedies.
+
+                    11. ENTIRE AGREEMENT
+                    -----------------------------------------------------------------------
+                    This Agreement constitutes the entire understanding between the parties 
+                    and supersedes all prior agreements or understandings, whether written or 
+                    oral.
+
+                    12. AMENDMENTS
+                    -----------------------------------------------------------------------
+                    Any amendments or modifications to this Agreement must be made in writing 
+                    and signed by both parties.
+
+                    SIGNATURES
+                    -----------------------------------------------------------------------
+                    Property Owner Signature: ____________________________________________
+                    Date: __________________________
+
+                    Management System Provider Signature: _______________________________
+                    Date: __________________________
+                ";
+            var modalPage = new SystemPropertyHouseAgreementModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            IsProcessing = false;
         }
 
         public bool IsStep1Visible
