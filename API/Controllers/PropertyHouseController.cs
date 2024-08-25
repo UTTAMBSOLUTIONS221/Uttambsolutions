@@ -70,6 +70,12 @@ namespace API.Controllers
             return await bl.Getsystempropertyhousedetaildatabypropertyidandownerid(PropertyId, OwnerId);
         }
         [AllowAnonymous]
+        [HttpGet("Getsystempropertyhouseagreementdetaildatabypropertyidandownerid/{PropertyId}/{OwnerTenantId}")]
+        public async Task<OwnerTenantAgreementDetailDataModel> Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(long PropertyId, long OwnerTenantId)
+        {
+            return await bl.Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(PropertyId, OwnerTenantId);
+        }
+        [AllowAnonymous]
         [HttpGet("Getsystempropertyhouseroomdatabyid/{Houseroomid}")]
         public async Task<Systempropertyhouseroomdata> Getsystempropertyhouseroomdatabyid(long Houseroomid)
         {

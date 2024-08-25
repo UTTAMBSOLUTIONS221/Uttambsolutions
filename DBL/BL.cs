@@ -913,6 +913,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<OwnerTenantAgreementDetailDataModel> Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(long Propertyid, long Ownertenantid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(Propertyid, Ownertenantid);
+                return Resp;
+            });
+        }
 
         public Task<PropertyHouseDetailData> Getsystempropertyhousedetaildatabyownerid(long Ownerid)
         {

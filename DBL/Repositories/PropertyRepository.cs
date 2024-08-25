@@ -234,6 +234,28 @@ namespace DBL.Repositories
             }
         }
 
+        public OwnerTenantAgreementDetailDataModel Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(long Propertyid, long Ownertenantid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Propetyhouseid", Propertyid);
+                parameters.Add("@Ownerortenantid", Ownertenantid);
+                parameters.Add("@OwnerTenantAgreementDetailData", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystempropertyownertenantagreementdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@OwnerTenantAgreementDetailData");
+                if (systempropertydataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<OwnerTenantAgreementDetailDataModel>(systempropertydataJson);
+                }
+                else
+                {
+                    return new OwnerTenantAgreementDetailDataModel();
+                }
+            }
+        }
+
         public PropertyHouseDetailData Getsystempropertyhousedetaildatabyhouseid(long Propertyhouseid)
         {
             using (var connection = new SqlConnection(_connString))

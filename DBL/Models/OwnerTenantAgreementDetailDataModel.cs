@@ -2,7 +2,7 @@
 {
     public class OwnerTenantAgreementDetailDataModel
     {
-        public OwnerTenantAgreementDetailData Data { get; set; }
+        public OwnerTenantAgreementDetailData? Data { get; set; }
     }
     public class OwnerTenantAgreementDetailData
     {
