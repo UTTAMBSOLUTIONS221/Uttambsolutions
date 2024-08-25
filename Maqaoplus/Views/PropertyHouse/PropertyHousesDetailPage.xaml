@@ -28,7 +28,7 @@
             <CollectionView x:Name="PropertyHousesCollectionView" ItemsSource="{Binding Rooms}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="212">
+                            <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="200">
                                 <Grid Padding="5">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
