@@ -81,10 +81,10 @@
 
 
             <!-- Rental Management System Provider Signature -->
-            <Label Text="Rental Management System Provider:" FontSize="17" FontAttributes="Bold" Margin="0,0,0,5" />
-
+            <Label Text="Rental Management System Provider Signature:" FontSize="17" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Image Source="mysignature.png" WidthRequest="300" HeightRequest="100" />
             <Label Text="Signature: ____________________________" FontSize="14" Margin="0,0,0,5" />
-            <Label Text="Date: ____________________________" FontSize="14" Margin="0,0,0,20" />
+            <Label Text="Date: ____________________________" FontSize="14" Margin="0,20,0,20" />
 
             <!-- Closing -->
             <Label Text="This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements, whether written or oral, relating to the subject matter herein." FontSize="14" Margin="0,0,0,20" />
