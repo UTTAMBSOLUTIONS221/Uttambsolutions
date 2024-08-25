@@ -175,46 +175,22 @@
             <!-- Signatures Section -->
             <Label Text="SIGNATURES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,20" />
             <!-- Property Owner Signature -->
-            <Label Text="Property Owner:" FontSize="17" Margin="0,0,0,5" />
+            <Label Text="Property Owner Signature:" FontSize="17" FontAttributes="Bold" Margin="0,0,0,5" />
             <VerticalStackLayout Spacing="25" Padding="3,0" VerticalOptions="Center">
-
-                <mct:DrawingView x:Name="DrawBoard" LineColor="Black" LineWidth="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="200" IsMultiLineModeEnabled="True" DrawingLineCompleted="DrawBoard_DrawingLineCompleted" BackgroundColor="AliceBlue"/>
-
-                <Image x:Name="ImageView"
-                    HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"
-                   BackgroundColor="White"
-       HeightRequest="200"/>
-
-                <Button Text="Clear Board"
-                    Clicked="Button_Clicked"/>
-
+                <mct:DrawingView x:Name="DrawBoard" LineColor="Black" LineWidth="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="140" IsMultiLineModeEnabled="True" DrawingLineCompleted="DrawBoard_DrawingLineCompleted" BackgroundColor="AliceBlue"/>
+                <Image x:Name="ImageView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="100"/>
+                <Button Text="Clear Board" Clicked="Button_Clicked"/>
             </VerticalStackLayout>
-            <Label Text="Signature: ____________________________"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="Date: ____________________________"
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="Date: ____________________________" FontSize="14" Margin="30,0,0,20"  />
 
             <!-- Rental Management System Provider Signature -->
-            <Label Text="Rental Management System Provider:"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
+            <Label Text="Rental Management System Provider:" FontSize="17" FontAttributes="Bold" Margin="0,0,0,5" />
 
-            <Label Text="Signature: ____________________________"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="Date: ____________________________"
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="Signature: ____________________________" FontSize="14" Margin="0,0,0,5" />
+            <Label Text="Date: ____________________________" FontSize="14" Margin="0,0,0,20" />
 
             <!-- Closing -->
-            <Label Text="This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements, whether written or oral, relating to the subject matter herein."
-                   FontSize="14"
-                   Margin="0,0,0,20" />
-
-
+            <Label Text="This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements, whether written or oral, relating to the subject matter herein." FontSize="14" Margin="0,0,0,20" />
         </StackLayout>
     </ScrollView>
 </ContentPage>
