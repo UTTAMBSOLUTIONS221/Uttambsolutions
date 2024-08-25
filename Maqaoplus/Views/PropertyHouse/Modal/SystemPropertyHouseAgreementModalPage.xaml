@@ -15,7 +15,15 @@
             <!-- Property Owner -->
             <Label Text="{Binding OwnerTenantAgreementDetailData.Fullname,StringFormat='Property: {0}'}" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
             <Label Text="{Binding OwnerTenantAgreementDetailData.Fullname,StringFormat='Name: {0}'}" FontSize="16" Margin="0,0,0,5" />
-            <Label Text="{Binding OwnerTenantAgreementDetailData.Countyname,StringFormat='Address: {0}'}" FontSize="16" Margin="0,0,0,5" />
+            <Label FontSize="16" Margin="0,0,0,5">
+                <Label.Text>
+                    <MultiBinding StringFormat="Address: {0}, {1}, {2}">
+                        <Binding Path="OwnerTenantAgreementDetailData.Countyname" />
+                        <Binding Path="OwnerTenantAgreementDetailData.Subcountyname" />
+                        <Binding Path="OwnerTenantAgreementDetailData.Subcountywardname" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
             <Label Text="{Binding OwnerTenantAgreementDetailData.Phonenumber,StringFormat='Phone: {0}'}" FontSize="16" Margin="0,0,0,5" />
             <Label Text="{Binding OwnerTenantAgreementDetailData.Emailaddress,StringFormat='Email: {0}'}" FontSize="16" Margin="0,0,0,20" />
 
