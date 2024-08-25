@@ -18,6 +18,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public string AgreementText { get; set; }
         public ObservableCollection<Systemproperty> Items { get; }
         private Systemproperty _systempropertyData;
+        private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
 
         private bool _isStep1Visible;
         private bool _isStep2Visible;
@@ -100,6 +101,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _systempropertyData = value;
+                OnPropertyChanged();
+            }
+        }
+        public OwnerTenantAgreementDetailData OwnerTenantAgreementDetailData
+        {
+            get => _ownerTenantAgreementDetailData;
+            set
+            {
+                _ownerTenantAgreementDetailData = value;
                 OnPropertyChanged();
             }
         }
@@ -235,7 +245,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             EditPropertyHouseCommand = new Command<Systemproperty>(async (property) => await EditPropertyHouseAsync(property.Propertyhouseid));
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
-            ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid));
+            ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseowner));
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
@@ -698,13 +708,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
-        private async Task ViewPropertyAgreementDetails(long propertyId)
+        private async Task ViewPropertyAgreementDetails(long propertyId, long Ownerid)
         {
             IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + propertyId, HttpMethod.Get, null);
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/PropertyHouse/Getsystempropertyhouseagreementdetaildatabypropertyidandownerid/" + propertyId + "/" + Ownerid, HttpMethod.Get, null);
             if (response != null)
             {
-                SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
+                OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
             }
             var modalPage = new SystemPropertyHouseAgreementModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);

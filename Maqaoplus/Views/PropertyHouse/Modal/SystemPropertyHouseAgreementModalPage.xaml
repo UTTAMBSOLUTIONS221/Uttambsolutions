@@ -10,10 +10,10 @@
             <Label Text="RENTAL MANAGEMENT SYSTEM AGREEMENT" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,20" />
 
             <!-- Date -->
-            <Label Text="Date:" FontSize="14" Margin="0,0,0,20" />
+            <Label Text="{Binding OwnerTenantAgreementDetailData.OwnerDatecreated,StringFormat='Date: {0}'}" FontSize="14" Margin="0,0,0,20" />
 
             <!-- Property Owner -->
-            <Label Text="Property Owner:" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="{Binding OwnerTenantAgreementDetailData.Fullname,StringFormat='Property Owner: {0}'}" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
             <Label Text="Name: [Owner's Full Name]" FontSize="14" Margin="0,0,0,5" />
             <Label Text="Address: [Owner's Address]" FontSize="14" Margin="0,0,0,5" />
             <Label Text="Phone: [Owner's Phone Number]" FontSize="14" Margin="0,0,0,5" />

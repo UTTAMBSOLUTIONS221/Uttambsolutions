@@ -245,7 +245,7 @@ namespace DBL.Repositories
                 parameters.Add("@Propetyhouseid", Propertyid);
                 parameters.Add("@Ownerortenantid", Ownertenantid);
                 parameters.Add("@OwnerTenantAgreementDetailData", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_Getsystempropertyownertenantagreementdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                var queryResult = connection.Query("Usp_Getsystempropertyhouseagreementdetaildatabypropertyidandownerid", parameters, commandType: CommandType.StoredProcedure);
                 string systempropertydataJson = parameters.Get<string>("@OwnerTenantAgreementDetailData");
                 if (systempropertydataJson != null)
                 {
