@@ -35,7 +35,7 @@ public partial class SystemPropertyHouseAgreementModalPage : ContentPage
 
 
 
-    private async Task SaveSignatureAsync()
+    private async Task Button_Save_Signature_Clicked()
     {
         var filePath = Path.Combine(FileSystem.AppDataDirectory, "signature.png");
 
