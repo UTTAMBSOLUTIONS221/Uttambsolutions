@@ -1,5 +1,6 @@
 using Firebase.Storage;
 using Maqaoplus.ViewModels.PropertyHouse;
+using SkiaSharp;
 
 namespace Maqaoplus.Views.PropertyHouse.Modal;
 
@@ -11,31 +12,63 @@ public partial class SystemPropertyHouseAgreementModalPage : ContentPage
         BindingContext = viewModel;
     }
 
-    private void DrawBoard_DrawingLineCompleted(System.Object sender, CommunityToolkit.Maui.Core.DrawingLineCompletedEventArgs e)
+    private async void DrawBoard_DrawingLineCompleted(System.Object sender, CommunityToolkit.Maui.Core.DrawingLineCompletedEventArgs e)
     {
-        ImageView.Dispatcher.Dispatch(async () =>
+        await ImageView.Dispatcher.DispatchAsync(async () =>
         {
-            // Ensure the stream is converted to a local copy and properly disposed
-            using (var stream = await DrawBoard.GetImageStream(300, 300))
+            var targetWidth = 300;
+            var targetHeight = 100;
+
+            // Get the image stream from DrawBoard
+            using (var originalStream = await DrawBoard.GetImageStream(targetWidth, targetHeight))
             {
-                if (stream != null)
+                if (originalStream != null)
                 {
-                    var memoryStream = new MemoryStream();
-                    await stream.CopyToAsync(memoryStream);
-                    memoryStream.Seek(0, SeekOrigin.Begin); // Reset stream position
+                    // Use a MemoryStream to buffer the image data
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await originalStream.CopyToAsync(memoryStream);
+                        memoryStream.Seek(0, SeekOrigin.Begin); // Reset stream position
 
-                    ImageView.Source = ImageSource.FromStream(() => memoryStream);
-
-                    // Ensure stream is properly disposed to avoid recycling issues
-                    stream.Dispose();
+                        // Resize the image and create a new MemoryStream for it
+                        using (var resizedStream = await ResizeImageAsync(memoryStream, targetWidth, targetHeight))
+                        {
+                            ImageView.Source = ImageSource.FromStream(() => new MemoryStream(resizedStream.ToArray()));
+                        }
+                    }
                 }
             }
         });
     }
 
+    private async Task<MemoryStream> ResizeImageAsync(MemoryStream imageStream, int width, int height)
+    {
+        // Load the image into a SkiaSharp bitmap
+        using (var originalBitmap = SKBitmap.Decode(imageStream))
+        {
+            // Create a new bitmap with the desired size
+            var resizedBitmap = new SKBitmap(width, height);
 
+            // Scale the original bitmap to the new size
+            using (var canvas = new SKCanvas(resizedBitmap))
+            {
+                canvas.DrawBitmap(originalBitmap, SKRect.Create(width, height));
+            }
 
-    private async Task Button_Save_Signature_Clicked()
+            // Save the resized bitmap to a memory stream
+            var resizedStream = new MemoryStream();
+            using (var image = SKImage.FromBitmap(resizedBitmap))
+            using (var data = image.Encode())
+            {
+                data.SaveTo(resizedStream);
+                resizedStream.Seek(0, SeekOrigin.Begin);
+            }
+
+            return resizedStream;
+        }
+    }
+
+    private async void Button_Save_Signature_Clicked(object sender, EventArgs e)
     {
         var filePath = Path.Combine(FileSystem.AppDataDirectory, "signature.png");
 
