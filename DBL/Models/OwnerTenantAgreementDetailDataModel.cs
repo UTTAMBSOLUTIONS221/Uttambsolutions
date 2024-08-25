@@ -20,6 +20,8 @@
         public DateTime Datecreated { get; set; }
         public string? OwnerSignatureimageurl { get; set; }
         public string? TenantSignatureimageurl { get; set; }
+        public string? Agreementname { get; set; }
+        public string? Ownerortenant { get; set; }
         public string? Signatureimageurl { get; set; }
     }
 
