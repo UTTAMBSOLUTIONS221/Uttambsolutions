@@ -236,6 +236,8 @@ namespace DBL.Repositories
 
         public OwnerTenantAgreementDetailDataModel Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(long Propertyid, long Ownertenantid)
         {
+            OwnerTenantAgreementDetailDataModel response = new OwnerTenantAgreementDetailDataModel();
+            OwnerTenantAgreementDetailData responseData = new OwnerTenantAgreementDetailData();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -247,11 +249,27 @@ namespace DBL.Repositories
                 string systempropertydataJson = parameters.Get<string>("@OwnerTenantAgreementDetailData");
                 if (systempropertydataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<OwnerTenantAgreementDetailDataModel>(systempropertydataJson);
+                    JObject responseJson = JObject.Parse(systempropertydataJson);
+                    JObject tenantreponseJson = JObject.Parse(responseJson["Data"].ToString());
+                    responseData.Propertyhouseid = Convert.ToInt64(tenantreponseJson["Propertyhouseid"]);
+                    responseData.Propertyhouseowner = Convert.ToInt64(tenantreponseJson["Propertyhouseowner"]);
+                    responseData.Fullname = tenantreponseJson["Fullname"].ToString();
+                    responseData.Phonenumber = tenantreponseJson["Phonenumber"].ToString();
+                    responseData.Emailaddress = tenantreponseJson["Emailaddress"].ToString();
+                    responseData.Countyname = tenantreponseJson["Countyname"].ToString();
+                    responseData.Subcountyname = tenantreponseJson["Subcountyname"].ToString();
+                    responseData.Subcountywardname = tenantreponseJson["Subcountywardname"].ToString();
+                    responseData.OwnerDatecreated = Convert.ToDateTime(tenantreponseJson["OwnerDatecreated"]);
+                    responseData.TenantDatecreated = Convert.ToDateTime(tenantreponseJson["TenantDatecreated"]);
+                    responseData.OwnerSignatureimageurl = tenantreponseJson["OwnerSignatureimageurl"].ToString();
+                    responseData.TenantSignatureimageurl = tenantreponseJson["TenantSignatureimageurl"].ToString();
+
+                    response.Data = responseData;
+                    return response;
                 }
                 else
                 {
-                    return new OwnerTenantAgreementDetailDataModel();
+                    return response;
                 }
             }
         }
