@@ -7,170 +7,66 @@
     <ScrollView Padding="20">
         <StackLayout>
             <!-- Title -->
-            <Label Text="RENTAL MANAGEMENT SYSTEM AGREEMENT"
-                   FontSize="14"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   Margin="0,0,0,20" />
+            <Label Text="RENTAL MANAGEMENT SYSTEM AGREEMENT" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,20" />
 
             <!-- Date -->
-            <Label Text="Date:"
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="Date:" FontSize="14" Margin="0,0,0,20" />
 
             <!-- Property Owner -->
-            <Label Text="Property Owner:"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,5" />
-            <Label Text="Name: [Owner's Full Name]"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="Address: [Owner's Address]"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="Phone: [Owner's Phone Number]"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="Email: [Owner's Email Address]"
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="Property Owner:" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="Name: [Owner's Full Name]" FontSize="14" Margin="0,0,0,5" />
+            <Label Text="Address: [Owner's Address]" FontSize="14" Margin="0,0,0,5" />
+            <Label Text="Phone: [Owner's Phone Number]" FontSize="14" Margin="0,0,0,5" />
+            <Label Text="Email: [Owner's Email Address]" FontSize="14" Margin="0,0,0,20" />
 
             <!-- Rental Management System Provider -->
-            <Label Text="Rental Management System Provider:"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,5" />
-            <Label Text="Name: [Company Name]"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="Address: [Company Address]"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="Phone: [Company Phone Number]"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="Email: [Company Email Address]"
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="Rental Management System Provider:" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="Name: [Company Name]" FontSize="14" Margin="0,0,0,5" />
+            <Label Text="Address: [Company Address]" FontSize="14"  Margin="0,0,0,5" />
+            <Label Text="Phone: [Company Phone Number]" FontSize="14" Margin="0,0,0,5" />
+            <Label Text="Email: [Company Email Address]" FontSize="14" Margin="0,0,0,20" />
 
             <!-- Agreement Sections -->
-            <Label Text="1. PURPOSE OF THE AGREEMENT"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,5" />
-            <Label Text="The purpose of this Agreement is to outline the terms and conditions under which [Company Name] (hereinafter referred to as the Management System Provider) will provide rental management services to [Owner's Full Name] (hereinafter referred to as the Property Owner) for the property located at [Property Address] (hereinafter referred to as the Property)."
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="1. PURPOSE OF THE AGREEMENT" FontSize="16" FontAttributes="Bold"  Margin="0,0,0,5" />
+            <Label Text="The purpose of this Agreement is to outline the terms and conditions under which UTTAMB SOLUTIONS LIMITED (hereinafter referred to as the Management System Provider) will provide rental management services to [Owner's Full Name] (hereinafter referred to as the Property Owner) for the property located at [Property Address] (hereinafter referred to as the Property)." FontSize="14" Margin="0,0,0,20" />
 
-            <Label Text="2. SERVICES PROVIDED"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,5" />
-            <Label Text="- Advertising and Marketing: Listing the Property on various platforms to attract potential tenants."
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="- Tenant Screening: Conducting background checks and verifying tenant credentials."
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="- Rent Collection: Facilitating the collection of rent payments from tenants."
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="- Property Maintenance: Coordinating with contractors for repairs and regular maintenance of the Property."
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="- Reporting: Providing regular reports on the status of the Property, rent collection, and any issues that arise."
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="2. SERVICES PROVIDED" FontSize="16"  FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="- Advertising and Marketing: Listing the Property on various platforms to attract potential tenants." FontSize="14"  Margin="0,0,0,5" />
+            <Label Text="- Tenant Screening: Conducting background checks and verifying tenant credentials." FontSize="14" Margin="0,0,0,5" />
+            <Label Text="- Rent Collection: Facilitating the collection of rent payments from tenants." FontSize="14" Margin="0,0,0,5" />
+            <Label Text="- Property Maintenance: Coordinating with contractors for repairs and regular maintenance of the Property." FontSize="14" Margin="0,0,0,5" />
+            <Label Text="- Reporting: Providing regular reports on the status of the Property, rent collection, and any issues that arise." FontSize="14" Margin="0,0,0,20" />
 
-            <Label Text="3. FEES AND PAYMENTS"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,5" />
-            <Label Text="- Service Fee: The Property Owner agrees to pay the Management System Provider a service fee of [Percentage]% of the monthly rent collected or a fixed monthly fee of [Amount]."
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="- Subscription Payment: The Property Owner agrees to pay a subscription fee for the services rendered by the Management System Provider. The subscription fee shall be paid monthly to the following bank account:"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="  Bank Name: [Bank Name]"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="  Account Name: [Account Name]"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="  Account Number: [Account Number]"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="  Branch: [Branch Name]"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="- Payment Terms: The service fee will be deducted automatically from the rent collected before the remainder is transferred to the Property Owner's designated account. The subscription fee is due on the [Day] of each month."
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="- Additional Costs: Any costs related to property maintenance, legal fees, or other services not covered under this Agreement will be billed separately with the Property Owner's prior approval."
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="3. FEES AND PAYMENTS" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="- Service Fee: The Property Owner agrees to pay the Management System Provider a service fee of 1% of the monthly rent collected." FontSize="14" Margin="0,0,0,5" />
+            <Label Text="- Subscription Payment: The Property Owner agrees to pay a subscription fee for the services rendered by the Management System Provider. The subscription fee shall be paid monthly to the following bank account:" FontSize="14" Margin="0,0,0,5" />
+            <Label Text="  Bank Name: FAMILY BANK" FontSize="14" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="  Pay Bill: 222111" FontSize="14" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="  Account Number: [Account Number]" FontSize="14" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="- Payment Terms: The service fee will be deducted automatically from the rent collected before the remainder is transferred to the Property Owner's designated account. The subscription fee is due on the [Day] of each month." FontSize="14" Margin="0,0,0,5" />
+            <Label Text="- Additional Costs: Any costs related to property maintenance, legal fees, or other services not covered under this Agreement will be billed separately with the Property Owner's prior approval." FontSize="14" Margin="0,0,0,20" />
 
-            <Label Text="4. PROPERTY OWNER RESPONSIBILITIES"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,5" />
-            <Label Text="- Property Upkeep: The Property Owner agrees to maintain the Property in a condition suitable for rental."
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="- Insurance: The Property Owner is responsible for obtaining and maintaining appropriate insurance coverage for the Property."
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="- Legal Compliance: The Property Owner agrees to comply with all local, county, and national laws relating to the rental and maintenance of the Property."
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="4. PROPERTY OWNER RESPONSIBILITIES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="- Property Upkeep: The Property Owner agrees to maintain the Property in a condition suitable for rental." FontSize="14" Margin="0,0,0,5" />
+            <Label Text="- Insurance: The Property Owner is responsible for obtaining and maintaining appropriate insurance coverage for the Property." FontSize="14" Margin="0,0,0,5" />
+            <Label Text="- Legal Compliance: The Property Owner agrees to comply with all local, county, and national laws relating to the rental and maintenance of the Property." FontSize="14" Margin="0,0,0,20" />
 
-            <Label Text="5. DATA PROTECTION AND PRIVACY"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,5" />
-            <Label Text="- Compliance with Data Protection Act, 2019: The Management System Provider shall ensure that all personal data collected, processed, and stored as part of the rental management services is handled in accordance with the Data Protection Act, 2019 of Kenya."
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="- Data Security: Both parties agree to implement appropriate technical and organizational measures to protect personal data against unauthorized or unlawful processing, accidental loss, destruction, or damage."
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="5. DATA PROTECTION AND PRIVACY" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="- Compliance with Data Protection Act, 2019: The Management System Provider shall ensure that all personal data collected, processed, and stored as part of the rental management services is handled in accordance with the Data Protection Act, 2019 of Kenya." FontSize="14" Margin="0,0,0,5" />
+            <Label Text="- Data Security: Both parties agree to implement appropriate technical and organizational measures to protect personal data against unauthorized or unlawful processing, accidental loss, destruction, or damage." FontSize="14" Margin="0,0,0,20" />
 
-            <Label Text="6. TERM AND TERMINATION"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,5" />
-            <Label Text="- Term: This Agreement will begin on [Start Date] and will continue until terminated by either party."
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <Label Text="- Termination: Either party may terminate this Agreement with [Number] days' written notice. Upon termination, the Property Owner is responsible for any outstanding fees and obligations under this Agreement."
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="6. TERM AND TERMINATION" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="- Term: This Agreement will begin on [Start Date] and will continue until terminated by either party." FontSize="14" Margin="0,0,0,5" />
+            <Label Text="- Termination: Either party may terminate this Agreement with [Number] days' written notice. Upon termination, the Property Owner is responsible for any outstanding fees and obligations under this Agreement." FontSize="14" Margin="0,0,0,20" />
 
-            <Label Text="7. INDEMNIFICATION"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,5" />
-            <Label Text="The Property Owner agrees to indemnify and hold harmless the Management System Provider from any claims, liabilities, or damages arising out of the management of the Property, except in cases of gross negligence or willful misconduct by the Management System Provider."
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="7. INDEMNIFICATION" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="The Property Owner agrees to indemnify and hold harmless the Management System Provider from any claims, liabilities, or damages arising out of the management of the Property, except in cases of gross negligence or willful misconduct by the Management System Provider." FontSize="14" Margin="0,0,0,20" />
 
-            <Label Text="8. CONFIDENTIALITY"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,5" />
-            <Label Text="Both parties agree to keep all information regarding the Property and this Agreement confidential, except as required by law."
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="8. CONFIDENTIALITY" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="Both parties agree to keep all information regarding the Property and this Agreement confidential, except as required by law." FontSize="14" Margin="0,0,0,20" />
 
-            <Label Text="9. GOVERNING LAW"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,5" />
-            <Label Text="This Agreement shall be governed by and construed in accordance with the laws of Kenya, and any disputes arising out of or in connection with this Agreement shall be resolved in the courts of Kenya."
-                   FontSize="14"
-                   Margin="0,0,0,20" />
+            <Label Text="9. GOVERNING LAW" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="This Agreement shall be governed by and construed in accordance with the laws of Kenya, and any disputes arising out of or in connection with this Agreement shall be resolved in the courts of Kenya." FontSize="14" Margin="0,0,0,20" />
 
             <!-- Signatures Section -->
             <Label Text="SIGNATURES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,20" />
