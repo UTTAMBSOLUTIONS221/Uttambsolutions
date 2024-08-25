@@ -173,29 +173,12 @@
                    Margin="0,0,0,20" />
 
             <!-- Signatures Section -->
-            <Label Text="SIGNATURES"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,20" />
-
+            <Label Text="SIGNATURES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,20" />
             <!-- Property Owner Signature -->
-            <Label Text="Property Owner:"
-                   FontSize="14"
-                   Margin="0,0,0,5" />
-            <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+            <Label Text="Property Owner:" FontSize="17" Margin="0,0,0,5" />
+            <VerticalStackLayout Spacing="25" Padding="3,0" VerticalOptions="Center">
 
-                <mct:DrawingView x:Name="DrawBoard"
-                   LineColor="Black"
-                   LineWidth="5"
-                   HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"
-                             HeightRequest="250"
-                   IsMultiLineModeEnabled="True"
-                   DrawingLineCompleted="DrawBoard_DrawingLineCompleted"
-                   BackgroundColor="AliceBlue"/>
+                <mct:DrawingView x:Name="DrawBoard" LineColor="Black" LineWidth="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="200" IsMultiLineModeEnabled="True" DrawingLineCompleted="DrawBoard_DrawingLineCompleted" BackgroundColor="AliceBlue"/>
 
                 <Image x:Name="ImageView"
                     HorizontalOptions="FillAndExpand"
