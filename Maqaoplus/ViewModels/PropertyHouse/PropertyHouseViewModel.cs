@@ -1,7 +1,6 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
-using Firebase.Storage;
 using Maqaoplus.Views.PropertyHouse.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -35,7 +34,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand SavePropertyHouseCommand { get; }
-        public ICommand AgreePropertyHouseAgreementCommand { get; }
 
 
         private bool _isLoading;
@@ -242,7 +240,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             PreviousCommand = new Command(PreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
-            AgreePropertyHouseAgreementCommand = new Command(async () => await AgreePropertyHouseAgreementasync());
 
 
             // Initialize steps
@@ -714,70 +711,47 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = false;
         }
 
-
-
-        private async Task AgreePropertyHouseAgreementasync()
+        public async Task AgreeToPropertyHouseAgreementasync(string imageUrl)
         {
-            if (IsProcessing)
-                return;
-
             IsProcessing = true;
 
+            await Task.Delay(500);
+            if (SystempropertyData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
+            SystempropertyData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Propertyhouseposter = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Datecreated = DateTime.Now;
+            SystempropertyData.Datemodified = DateTime.Now;
             try
             {
-                // Define file paths and names
-                var filePath = Path.Combine(FileSystem.AppDataDirectory, "signature.png");
-
-                // Save the drawn signature to a file
-                using (var stream = await DrawBoard.GetImageStream(300, 100)) // Adjust dimensions if needed
-                using (var fileStream = File.Create(filePath))
-                {
-                    await stream.CopyToAsync(fileStream);
-                }
-
-                // Upload the image to Firebase Storage and get the URL
-                var imageUrl = await UploadImageToFirebaseAsync(filePath, "signature.png");
-
-                // Save the URL to Firebase Realtime Database or Firestore
-                //await SaveImageUrlToDatabaseAsync(imageUrl); // For Realtime Database
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhousedata", SystempropertyData);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
-                    // Notify user or perform any additional actions
-                    await Shell.Current.DisplayAlert("Success", response.RespMessage, "OK");
+                    Application.Current.MainPage.Navigation.PopModalAsync();
                 }
                 else if (response.RespStatus == 1)
                 {
-                    // Notify user or perform any additional actions
                     await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Danger", "Server error occured. Kindly Contact Admin", "OK");
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
                 }
             }
             catch (Exception ex)
             {
-                // Handle any exceptions that occur
-                await Shell.Current.DisplayAlert("Danger", $"An error occurred: {ex.Message}", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {
-                // Ensure processing state is updated correctly
                 IsProcessing = false;
-                await Application.Current.MainPage.Navigation.PopModalAsync();
             }
         }
-
-        public async Task<string> UploadImageToFirebaseAsync(string filePath, string fileName)
-        {
-            var stream = File.Open(filePath, FileMode.Open);
-            var firebaseStorage = new FirebaseStorage("uttambsolutions-4ec2a.appspot.com");
-            var uploadTask = firebaseStorage.Child("images").Child(fileName).PutAsync(stream);
-            var downloadUrl = await uploadTask;
-            return downloadUrl;
-        }
-
 
         public bool IsStep1Visible
         {

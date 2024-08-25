@@ -1,3 +1,4 @@
+using Firebase.Storage;
 using Maqaoplus.ViewModels.PropertyHouse;
 
 namespace Maqaoplus.Views.PropertyHouse.Modal;
@@ -32,8 +33,35 @@ public partial class SystemPropertyHouseAgreementModalPage : ContentPage
         });
     }
 
+
+
+    private async Task SaveSignatureAsync()
+    {
+        var filePath = Path.Combine(FileSystem.AppDataDirectory, "signature.png");
+
+        // Save the drawn signature to a file
+        using (var stream = await DrawBoard.GetImageStream(300, 100))
+        using (var fileStream = File.Create(filePath))
+        {
+            await stream.CopyToAsync(fileStream);
+        }
+
+        // Upload the image to Firebase Storage and get the URL
+        var imageUrl = await UploadImageToFirebaseAsync(filePath, "signature.png");
+
+        // Use the image URL with the ViewModel or make an API call
+        await ((PropertyHouseViewModel)BindingContext).AgreeToPropertyHouseAgreementasync(imageUrl);
+    }
     void Button_Clicked(System.Object sender, System.EventArgs e)
     {
         DrawBoard.Lines.Clear();
+    }
+    public async Task<string> UploadImageToFirebaseAsync(string filePath, string fileName)
+    {
+        var stream = File.Open(filePath, FileMode.Open);
+        var firebaseStorage = new FirebaseStorage("uttambsolutions-4ec2a.appspot.com");
+        var uploadTask = firebaseStorage.Child("images").Child(fileName).PutAsync(stream);
+        var downloadUrl = await uploadTask;
+        return downloadUrl;
     }
 }
