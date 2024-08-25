@@ -726,20 +726,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = true;
 
             await Task.Delay(500);
-            if (SystempropertyData == null)
+            if (OwnerTenantAgreementDetailData == null)
             {
                 IsProcessing = false;
                 return;
             }
-            SystempropertyData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
-            SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
-            SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
-            SystempropertyData.Propertyhouseposter = App.UserDetails.Usermodel.Userid;
-            SystempropertyData.Datecreated = DateTime.Now;
-            SystempropertyData.Datemodified = DateTime.Now;
+            OwnerTenantAgreementDetailData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
+            OwnerTenantAgreementDetailData.Signatureimageurl = imageUrl;
+            OwnerTenantAgreementDetailData.Datecreated = DateTime.UtcNow;
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhousedata", SystempropertyData);
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();

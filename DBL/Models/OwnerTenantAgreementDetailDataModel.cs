@@ -17,8 +17,10 @@
         public string? Subcountywardname { get; set; }
         public DateTime OwnerDatecreated { get; set; }
         public DateTime TenantDatecreated { get; set; }
+        public DateTime Datecreated { get; set; }
         public string? OwnerSignatureimageurl { get; set; }
         public string? TenantSignatureimageurl { get; set; }
+        public string? Signatureimageurl { get; set; }
     }
 
 }

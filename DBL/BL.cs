@@ -921,6 +921,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Registersystempropertyhouseagreementdata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Registersystempropertyhouseagreementdata(Obj);
+                return Resp;
+            });
+        }
 
         public Task<PropertyHouseDetailData> Getsystempropertyhousedetaildatabyownerid(long Ownerid)
         {
