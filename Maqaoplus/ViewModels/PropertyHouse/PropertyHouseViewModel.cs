@@ -860,6 +860,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
+        public async Task<string> UploadImageToFirebaseAsync(string filePath, string fileName)
+        {
+            var stream = File.Open(filePath, FileMode.Open);
+            var firebaseStorage = new FirebaseStorage("your-firebase-storage-bucket-url");
+            var uploadTask = firebaseStorage
+                .Child("images")
+                .Child(fileName)
+                .PutAsync(stream);
+
+            var downloadUrl = await uploadTask;
+            return downloadUrl;
+        }
+
 
         public bool IsStep1Visible
         {
