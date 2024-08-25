@@ -1,4 +1,5 @@
-﻿using Maqaoplus.Helpers;
+﻿using CommunityToolkit.Maui;
+using Maqaoplus.Helpers;
 using Maqaoplus.ViewModels;
 using Maqaoplus.ViewModels.Dashboards;
 using Maqaoplus.ViewModels.HouseTenant;
@@ -23,7 +24,7 @@ namespace Maqaoplus
         {
             var builder = MauiApp.CreateBuilder();
             builder
-                .UseMauiApp<App>()
+                .UseMauiApp<App>().UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
