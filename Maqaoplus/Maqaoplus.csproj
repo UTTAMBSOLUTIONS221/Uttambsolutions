@@ -86,6 +86,7 @@
 	  <None Remove="Resources\Images\invoice.png" />
 	  <None Remove="Resources\Images\maqaopluslogo.png" />
 	  <None Remove="Resources\Images\mpesalogo.png" />
+	  <None Remove="Resources\Images\mysignature.jpg" />
 	  <None Remove="Resources\Images\passwordicon.png" />
 	  <None Remove="Resources\Images\phone.png" />
 	  <None Remove="Resources\Images\reports.png" />

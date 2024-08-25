@@ -77,7 +77,8 @@
                 <Image x:Name="ImageView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="100"/>
                 <Button Text="Clear Board" Clicked="Button_Clicked"/>
             </VerticalStackLayout>
-            <Label Text="Date: ____________________________" FontSize="14" Margin="30,0,0,20"  />
+            <Label Text="Date: ____________________________" FontSize="14" Margin="0,20,0,20" />
+
 
             <!-- Rental Management System Provider Signature -->
             <Label Text="Rental Management System Provider:" FontSize="17" FontAttributes="Bold" Margin="0,0,0,5" />
