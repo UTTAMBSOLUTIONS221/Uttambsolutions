@@ -70,7 +70,7 @@
                                 </Grid>
 
                                 <!-- Buttons at the Bottom -->
-                                <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
+                                <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                     <Button Text="Edit" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditPropertyHouseCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Margin="5" />
                                     <Button Text="Manage" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Margin="5" />
                                     <Button Text="Agreement" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewPropertyAgreementCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Margin="5" />
