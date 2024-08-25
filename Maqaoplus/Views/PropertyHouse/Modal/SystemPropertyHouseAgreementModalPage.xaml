@@ -15,9 +15,9 @@
             <!-- Property Owner -->
             <Label Text="{Binding OwnerTenantAgreementDetailData.Fullname,StringFormat='Property: {0}'}" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
             <Label Text="{Binding OwnerTenantAgreementDetailData.Fullname,StringFormat='Name: {0}'}" FontSize="16" Margin="0,0,0,5" />
-            <Label FontSize="16" Margin="0,0,0,5">
+            <Label FontSize="14" Margin="0,0,0,5">
                 <Label.Text>
-                    <MultiBinding StringFormat="Address: {0}, {1}, {2}">
+                    <MultiBinding StringFormat="Address: {0}-{1}-{2}">
                         <Binding Path="OwnerTenantAgreementDetailData.Countyname" />
                         <Binding Path="OwnerTenantAgreementDetailData.Subcountyname" />
                         <Binding Path="OwnerTenantAgreementDetailData.Subcountywardname" />
@@ -36,8 +36,16 @@
 
             <!-- Agreement Sections -->
             <Label Text="1. PURPOSE OF THE AGREEMENT" FontSize="16" FontAttributes="Bold"  Margin="0,0,0,5" />
-            <Label Text="{Binding OwnerTenantAgreementDetailData.Fullname,StringFormat='The purpose of this Agreement is to outline the terms and conditions under which UTTAMB SOLUTIONS LIMITED (hereinafter referred to as the Management System Provider) will provide rental management services to {0}(hereinafter referred to as the Property Owner) for the property located at [Property Address] (hereinafter referred to as the Property).'}" FontSize="14" Margin="0,0,0,20" />
-
+            <Label FontSize="14" Margin="0,0,0,5">
+                <Label.Text>
+                    <MultiBinding  StringFormat="The purpose of this Agreement is to outline the terms and conditions under which UTTAMB SOLUTIONS LIMITED (hereinafter referred to as the Management System Provider) will provide rental management services to {0}(hereinafter referred to as the Property Owner) for the property located at {1}-{2}-{3} (hereinafter referred to as the Property).">
+                        <Binding Path="OwnerTenantAgreementDetailData.Fullname" />
+                        <Binding Path="OwnerTenantAgreementDetailData.Countyname" />
+                        <Binding Path="OwnerTenantAgreementDetailData.Subcountyname" />
+                        <Binding Path="OwnerTenantAgreementDetailData.Subcountywardname" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
             <Label Text="2. SERVICES PROVIDED" FontSize="16"  FontAttributes="Bold" Margin="0,0,0,5" />
             <Label Text="- Advertising and Marketing: Listing the Property on various platforms to attract potential tenants." FontSize="14"  Margin="0,0,0,5" />
             <Label Text="- Tenant Screening: Conducting background checks and verifying tenant credentials." FontSize="14" Margin="0,0,0,5" />
