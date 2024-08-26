@@ -142,8 +142,7 @@
                 </Button>
 
                 <!-- Agree Button with inverse visibility logic -->
-                <Button Text="I Agree" Clicked="Button_Save_Signature_Clicked" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" FontSize="18" HeightRequest="50" WidthRequest="150"
-        IsVisible="{Binding IsSignatureAvailable, Converter={StaticResource InverseBooleanConverter}}" />
+                <Button Text="I Agree" Clicked="Button_Save_Signature_Clicked" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" FontSize="18" HeightRequest="50" WidthRequest="150" IsVisible="{Binding IsSignatureAvailable, Converter={StaticResource InverseBooleanConverter}}" />
             </FlexLayout>
         </StackLayout>
     </ScrollView>
