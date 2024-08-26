@@ -41,7 +41,7 @@ public partial class SystemPropertyHouseImagesModalPage : ContentPage
         var uploadTask = firebaseStorage.Child("maqaoplus").Child(fileName).PutAsync(stream);
         var imagePath = await uploadTask;
         // Get the download URL
-        var url = await firebaseStorage.Child(imagePath).GetDownloadUrlAsync();
-        await ((PropertyHouseViewModel)BindingContext).SavePropertyHouseImageasync(url);
+        //var url = await firebaseStorage.Child(imagePath).GetDownloadUrlAsync();
+        await ((PropertyHouseViewModel)BindingContext).SavePropertyHouseImageasync(imagePath);
     }
 }
