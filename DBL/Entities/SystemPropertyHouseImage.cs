@@ -8,5 +8,6 @@
         public string? Houseorroomimageurl { get; set; }
         public long Createdby { get; set; }
         public DateTime Datecreated { get; set; }
+        public List<SystemPropertyHouseImage>? PropertyHouseImage { get; set; }
     }
 }
