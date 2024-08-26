@@ -367,9 +367,9 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Houseroomid", Houseroomid);
-                parameters.Add("@Systempropertyhouseroomimagedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                parameters.Add("@Systempropertyhouseroomtenantsdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystempropertyhouseroomimagebyhouseroomid", parameters, commandType: CommandType.StoredProcedure);
-                string systempropertyhouseroomimagedataJson = parameters.Get<string>("@Systempropertyhouseroomimagedata");
+                string systempropertyhouseroomimagedataJson = parameters.Get<string>("@Systempropertyhouseroomtenantsdata");
                 if (systempropertyhouseroomimagedataJson != null)
                 {
                     JObject responseJson = JObject.Parse(systempropertyhouseroomimagedataJson);
