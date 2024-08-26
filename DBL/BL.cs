@@ -981,6 +981,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Registersystempropertyhouseroomfixturedata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Registersystempropertyhouseroomfixturedata(Obj);
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Registersystempropertyhouseroomimagedata(string Obj)
         {
             return Task.Run(() =>

@@ -381,6 +381,17 @@ namespace DBL.Repositories
                 }
             }
         }
+
+        public Genericmodel Registersystempropertyhouseroomfixturedata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registersystempropertyhouseroomfixturedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         public Genericmodel Registersystempropertyhouseroomimagedata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))
