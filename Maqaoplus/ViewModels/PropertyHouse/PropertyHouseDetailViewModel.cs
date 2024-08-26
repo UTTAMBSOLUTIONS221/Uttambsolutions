@@ -424,6 +424,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             if (SystempropertyfixturesResponse != null)
             {
                 Systempropertyfixturesdata = new ObservableCollection<ListModel>(SystempropertyfixturesResponse);
+                // Assuming Roomfixtures is a list and you want to match a specific Fixtureid
+                var selectedFixtureId = _systempropertyhouseroomfixturesData.Roomfixtures.FirstOrDefault()?.Fixtureid;
+                // Now select the fixture where Value matches the Fixtureid
+                SelectedFixture = Systempropertyfixturesdata.FirstOrDefault(x => x.Value == selectedFixtureId.ToString());
             }
             var modalPage = new SystemPropertyHouseRoomCheckListsModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
