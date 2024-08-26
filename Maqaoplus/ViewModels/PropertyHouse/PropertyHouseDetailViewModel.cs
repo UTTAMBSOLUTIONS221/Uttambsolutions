@@ -19,6 +19,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private Systemtenantdetails _newTenantStaffData;
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
+        Systempropertyhouseroomfixtures _systempropertyhouseroomfixturesData;
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand ViewPropertyRoomAgreementCommand { get; }
@@ -240,6 +241,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        public Systempropertyhouseroomfixtures SystempropertyhouseroomfixturesData
+        {
+            get => _systempropertyhouseroomfixturesData;
+            set
+            {
+                _systempropertyhouseroomfixturesData = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
         public bool IsSignatureImageVisible => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
@@ -382,10 +392,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task ViewPropertyRoomCheckListDetailAsync(long propertyHouseRoomId)
         {
             IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomimagebyhouseroomid/" + propertyHouseRoomId, HttpMethod.Get, null);
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomfixturesdatabyhouseroomid/" + propertyHouseRoomId, HttpMethod.Get, null);
             if (response != null)
             {
-                SystemPropertyHouseImageData = JsonConvert.DeserializeObject<SystemPropertyHouseImage>(response.Data.ToString());
+                SystempropertyhouseroomfixturesData = JsonConvert.DeserializeObject<Systempropertyhouseroomfixtures>(response.Data.ToString());
             }
             var modalPage = new SystemPropertyHouseRoomImagesModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
