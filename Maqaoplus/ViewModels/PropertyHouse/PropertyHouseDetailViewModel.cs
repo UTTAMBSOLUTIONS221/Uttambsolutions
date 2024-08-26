@@ -22,6 +22,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand ViewPropertyRoomAgreementCommand { get; }
+        public ICommand ViewPropertyRoomCheckListCommand { get; }
         public ICommand ViewPropertyRoomImageCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
@@ -64,6 +65,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadRoomsCommand = new Command(async () => await LoadRooms());
             ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewDetails(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomAgreementCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomAgreementDetails(propertyRoom.Systempropertyhouseroomid, 0));
+            ViewPropertyRoomCheckListCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomCheckListDetailAsync(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomImageCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomImagesDetails(propertyRoom.Systempropertyhouseroomid));
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
@@ -376,6 +378,21 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
+
+        private async Task ViewPropertyRoomCheckListDetailAsync(long propertyHouseRoomId)
+        {
+            IsProcessing = true;
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomimagebyhouseroomid/" + propertyHouseRoomId, HttpMethod.Get, null);
+            if (response != null)
+            {
+                SystemPropertyHouseImageData = JsonConvert.DeserializeObject<SystemPropertyHouseImage>(response.Data.ToString());
+            }
+            var modalPage = new SystemPropertyHouseRoomImagesModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            IsProcessing = false;
+        }
+
+
 
         //maibupation of the House Room Details
         private bool _isStep1Visible;
