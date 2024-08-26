@@ -22,7 +22,7 @@ BEGIN
 					  INNER JOIN Systempropertyhousesizes roomsizes ON room.Systempropertyhousesizeid= roomsizes.Systempropertyhousesizeid
 					  INNER JOIN Systemhousesizes sizes ON roomsizes.Systemhousesizeid=sizes.Systemhousesizeid
 					  INNER JOIN Systemstaffs tenant ON MRI.Propertyhouseroomtenantid= tenant.Userid
-					  WHERE MRI.Propertyhouseroomtenantid=@Tenantid
+					  WHERE MRI.Propertyhouseroomtenantid=@Tenantid ORDER BY MRI.Datecreated DESC
 					FOR JSON PATH
 				 ) AS Data
 				 FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER

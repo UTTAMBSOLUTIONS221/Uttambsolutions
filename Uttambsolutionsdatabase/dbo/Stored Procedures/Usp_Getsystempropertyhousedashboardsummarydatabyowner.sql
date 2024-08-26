@@ -15,20 +15,34 @@ BEGIN
 		BEGIN TRANSACTION;
 		SET @Systempropertyhousedashboardsummarydata= 
 		  (
-		       SELECT(SELECT SUM(Systempropertyhousesize.Systempropertyhousesizeunits) AS Propertyhouseunits, 0 AS Systempropertyoccupiedroom, 0 AS Systempropertyvacantroom,
-				0 Rentarrears,0 AS Uncollectedpayments,SUM(Systempropertyhouseroommeter.Movedmeter)  AS Consumedmeters,
-				(SELECT Systempropertyhouse.Propertyhousename,SUM(Systempropertyhousesize.Systempropertyhousesizeunits) AS Propertyhouseunits, 0 AS Systempropertyoccupiedroom, 0 AS Systempropertyvacantroom,
-				0 Rentarrears,0 AS Uncollectedpayments,SUM(Systempropertyhouseroommeter.Movedmeter)  AS Consumedmeters
-				FROM Systempropertyhouses Systempropertyhouse
-				INNER JOIN Systempropertyhouserooms Systempropertyhouseroom ON Systempropertyhouseroom.Systempropertyhouseid =Systempropertyhouse.Propertyhouseid
-				INNER JOIN Systempropertyhousesizes Systempropertyhousesize ON Systempropertyhousesize.Propertyhouseid=Systempropertyhouse.Propertyhouseid
-				INNER JOIN Systempropertyhouseroommeters Systempropertyhouseroommeter  ON Systempropertyhouseroom.Systempropertyhouseroomid=Systempropertyhouseroommeter.Systempropertyhouseroomid
-				GROUP BY Systempropertyhouse.Propertyhousename
-				FOR JSON PATH) AS Propertybysummary
-				FROM Systempropertyhouses Systempropertyhouse
-				INNER JOIN Systempropertyhouserooms Systempropertyhouseroom ON Systempropertyhouseroom.Systempropertyhouseid =Systempropertyhouse.Propertyhouseid
-				INNER JOIN Systempropertyhousesizes Systempropertyhousesize ON Systempropertyhousesize.Propertyhouseid=Systempropertyhouse.Propertyhouseid
-				INNER JOIN Systempropertyhouseroommeters Systempropertyhouseroommeter  ON Systempropertyhouseroom.Systempropertyhouseroomid=Systempropertyhouseroommeter.Systempropertyhouseroomid
+		       SELECT(SELECT 
+    ISNULL(COUNT(Systempropertyhouseroom.Systempropertyhouseid), 0) AS Propertyhouseunits,
+      ISNULL(SUM(CASE WHEN Systempropertyhouseroom.Isvacant = 0 THEN 1 ELSE 0 END), 0) AS Systempropertyoccupiedroom,
+       ISNULL(SUM(CASE WHEN Systempropertyhouseroom.Isvacant = 1 THEN 1 ELSE 0 END), 0) AS Systempropertyvacantroom,
+    0 AS Rentarrears,
+    0 AS Uncollectedpayments,
+    ISNULL(SUM(Systempropertyhouseroommeter.Movedmeter), 0) AS Consumedmeters,
+    (
+        SELECT 
+            Systempropertyhouse.Propertyhousename,
+            ISNULL(COUNT(Systempropertyhouseroom.Systempropertyhouseid), 0) AS Propertyhouseunits,
+            ISNULL(SUM(CASE WHEN Systempropertyhouseroom.Isvacant = 0 THEN 1 ELSE 0 END), 0) AS Systempropertyoccupiedroom,
+            ISNULL(SUM(CASE WHEN Systempropertyhouseroom.Isvacant = 1 THEN 1 ELSE 0 END), 0) AS Systempropertyvacantroom,
+            0 AS Rentarrears,
+            0 AS Uncollectedpayments,
+            ISNULL(SUM(Systempropertyhouseroommeter.Movedmeter), 0) AS Consumedmeters
+        FROM Systempropertyhouses Systempropertyhouse
+        INNER JOIN Systempropertyhouserooms Systempropertyhouseroom ON Systempropertyhouse.Propertyhouseid = Systempropertyhouseroom.Systempropertyhouseid
+        LEFT JOIN Systempropertyhouseroommeters Systempropertyhouseroommeter ON Systempropertyhouseroom.Systempropertyhouseroomid = Systempropertyhouseroommeter.Systempropertyhouseroomid
+        WHERE Systempropertyhouse.Propertyhouseid = Systempropertyhouse.Propertyhouseid
+        GROUP BY Systempropertyhouse.Propertyhousename
+        FOR JSON PATH
+    ) AS Propertybysummary
+FROM Systempropertyhouses Systempropertyhouse
+INNER JOIN Systempropertyhouserooms Systempropertyhouseroom ON Systempropertyhouse.Propertyhouseid = Systempropertyhouseroom.Systempropertyhouseid
+LEFT JOIN Systempropertyhouseroommeters Systempropertyhouseroommeter ON Systempropertyhouseroom.Systempropertyhouseroomid = Systempropertyhouseroommeter.Systempropertyhouseroomid
+WHERE Systempropertyhouse.Propertyhouseowner = @Ownerid
+GROUP BY Systempropertyhouse.Propertyhouseid
 				FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER
 				) AS Data
 				FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER

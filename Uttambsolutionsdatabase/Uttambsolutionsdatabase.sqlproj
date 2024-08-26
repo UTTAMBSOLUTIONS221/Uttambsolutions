@@ -250,5 +250,18 @@
     <Build Include="dbo\Tables\Systemsupportedbanks.sql" />
     <Build Include="dbo\Tables\Systempropertybankaccounts.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getallsystempropertyvacanthousesdata.sql" />
+    <Build Include="dbo\Tables\Systempropertyhouseimages.sql" />
+    <Build Include="dbo\Tables\Systempropertyhousechecklists.sql" />
+    <Build Include="dbo\Tables\Systempropertyhouseagreements.sql" />
+    <Build Include="dbo\Tables\Systemfixturestatushist.sql" />
+    <Build Include="dbo\Tables\Systemfixturestatus.sql" />
+    <Build Include="dbo\Tables\Systemfixtures.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystempropertyhouseroomimagedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystempropertyhouseroomfixturedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystempropertyhouseagreementdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomimagebyhouseroomid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomimagebyhouseid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomfixturesdatabyhouseroomid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseagreementdetaildatabypropertyidandownerid.sql" />
   </ItemGroup>
 </Project>

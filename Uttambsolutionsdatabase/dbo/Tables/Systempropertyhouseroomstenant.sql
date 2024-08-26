@@ -5,7 +5,7 @@
     [Isoccupant]                       BIT           DEFAULT ((0)) NOT NULL,
     [Occupationalstatus]               INT           NOT NULL,
     [Isnewtenant]                      BIT           DEFAULT ((0)) NOT NULL,
-    [Ratingvalue]                      DECIMAL(10, 2) DEFAULT ((0)) NOT NULL,
+    [Ratingvalue]                      INT           DEFAULT ((0)) NOT NULL,
     [Ownercomment]                     VARCHAR (200) DEFAULT ('Not Set') NOT NULL,
     [Createdby]                        INT           NOT NULL,
     [Modifiedby]                       INT           NOT NULL,
@@ -14,6 +14,8 @@
     [Datemodified]                     DATETIME      NOT NULL,
     PRIMARY KEY CLUSTERED ([Systempropertyhousetenantentryid] ASC)
 );
+
+
 
 
 GO

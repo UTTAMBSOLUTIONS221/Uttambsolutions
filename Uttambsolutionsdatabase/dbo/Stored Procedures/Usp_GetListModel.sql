@@ -52,5 +52,6 @@ If(@Type = 27)
 Select r.Maritalstatusname as Text, r.Maritalstatusid as Value From Systemmaritalstatus r;
 If(@Type = 28)
 Select r.Kinrelationshipname as Text, r.Kinrelationshipid as Value From Systemkinrelationship r;
-
+If(@Type = 30)
+Select r.Fixturestatus as Text, r.Fixturestatusid as Value From Systemfixturestatus r;
 END
