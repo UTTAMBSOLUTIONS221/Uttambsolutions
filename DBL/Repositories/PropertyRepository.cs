@@ -367,9 +367,47 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Houseroomid", Houseroomid);
-                parameters.Add("@Systempropertyhouseroomtenantsdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                parameters.Add("@Systempropertyhouseroomimagedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystempropertyhouseroomimagebyhouseroomid", parameters, commandType: CommandType.StoredProcedure);
-                string systempropertyhouseroomimagedataJson = parameters.Get<string>("@Systempropertyhouseroomtenantsdata");
+                string systempropertyhouseroomimagedataJson = parameters.Get<string>("@Systempropertyhouseroomimagedata");
+                if (systempropertyhouseroomimagedataJson != null)
+                {
+                    JObject responseJson = JObject.Parse(systempropertyhouseroomimagedataJson);
+                    JObject propertyhouseroomimageresponseJson = JObject.Parse(responseJson["Data"].ToString());
+                    propertyhouseroomimage.Propertyimageid = Convert.ToInt32(propertyhouseroomimageresponseJson["Propertyimageid"]);
+                    propertyhouseroomimage.Propertyhouseid = Convert.ToInt32(propertyhouseroomimageresponseJson["Propertyhouseid"]);
+                    propertyhouseroomimage.Houseorroom = propertyhouseroomimageresponseJson["Houseorroom"].ToString();
+                    propertyhouseroomimage.Houseorroomimageurl = propertyhouseroomimageresponseJson["Houseorroomimageurl"].ToString();
+                    propertyhouseroomimage.Datecreated = Convert.ToDateTime(propertyhouseroomimageresponseJson["Datecreated"]);
+                    if (propertyhouseroomimageresponseJson["PropertyHouseImage"] != null)
+                    {
+                        string propertyhouseroomimagesummaryJson = propertyhouseroomimageresponseJson["PropertyHouseImage"].ToString();
+                        propertyhouseroomimagesummary = JsonConvert.DeserializeObject<List<SystemPropertyHouseImage>>(propertyhouseroomimagesummaryJson);
+                    }
+                    propertyhouseroomimage.PropertyHouseImage = propertyhouseroomimagesummary;
+                    response.Data = propertyhouseroomimage;
+
+                    return response;
+                }
+                else
+                {
+                    return response;
+                }
+            }
+        }
+        public SystemPropertyHouseImageData Getsystempropertyhouseroomimagebyhouseid(long Houseid)
+        {
+            SystemPropertyHouseImageData response = new SystemPropertyHouseImageData();
+            SystemPropertyHouseImage propertyhouseroomimage = new SystemPropertyHouseImage();
+            List<SystemPropertyHouseImage>? propertyhouseroomimagesummary = new List<SystemPropertyHouseImage>();
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Houseid", Houseid);
+                parameters.Add("@Systempropertyhousedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystempropertyhouseroomimagebyhouseid", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertyhouseroomimagedataJson = parameters.Get<string>("@Systempropertyhousedata");
                 if (systempropertyhouseroomimagedataJson != null)
                 {
                     JObject responseJson = JObject.Parse(systempropertyhouseroomimagedataJson);
