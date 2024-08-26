@@ -19,6 +19,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ObservableCollection<Systemproperty> Items { get; }
         private Systemproperty _systempropertyData;
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
+        private SystemPropertyHouseImage _systemPropertyHouseImageData;
 
         private bool _isStep1Visible;
         private bool _isStep2Visible;
@@ -31,6 +32,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand ViewPropertyAgreementCommand { get; }
+        public ICommand ViewPropertyRoomImageCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
@@ -122,6 +124,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public bool IsSignatureAvailable => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
 
 
+        public SystemPropertyHouseImage SystemPropertyHouseImageData
+        {
+            get => _systemPropertyHouseImageData;
+            set
+            {
+                _systemPropertyHouseImageData = value;
+                OnPropertyChanged();
+            }
+        }
         // Error properties
         private string _propertyHouseNameError;
         public string PropertyHouseNameError
@@ -255,6 +266,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseowner));
+            ViewPropertyRoomImageCommand = new Command<Systemproperty>(async (property) => await ViewPropertyHouseImagesDetails(property.Propertyhouseid));
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
@@ -771,6 +783,58 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+
+        private async Task ViewPropertyHouseImagesDetails(long propertyHouseId)
+        {
+            IsProcessing = true;
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomimagebyhouseroomid/" + propertyHouseId, HttpMethod.Get, null);
+            if (response != null)
+            {
+                SystemPropertyHouseImageData = JsonConvert.DeserializeObject<SystemPropertyHouseImage>(response.Data.ToString());
+            }
+            var modalPage = new SystemPropertyHouseImagesModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            IsProcessing = false;
+        }
+        public async Task SavePropertyHouseImageasync(string imageUrl)
+        {
+            IsProcessing = true;
+
+            await Task.Delay(500);
+            if (SystemPropertyHouseImageData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
+            SystemPropertyHouseImageData.Createdby = App.UserDetails.Usermodel.Userid;
+            SystemPropertyHouseImageData.Houseorroomimageurl = imageUrl;
+            SystemPropertyHouseImageData.Houseorroom = "PropertyHouse";
+            SystemPropertyHouseImageData.Datecreated = DateTime.UtcNow;
+            try
+            {
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseroomimagedata", SystemPropertyHouseImageData);
+                if (response.RespStatus == 200 || response.RespStatus == 0)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else if (response.RespStatus == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
         public bool IsStep1Visible
         {
             get => _isStep1Visible;

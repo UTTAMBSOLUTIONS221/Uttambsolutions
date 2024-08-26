@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Maqaoplus.Views.PropertyHouse.Modal"
+             x:Class="Maqaoplus.Views.PropertyHouse.Modal.SystemPropertyHouseImagesModalPage"
+             Title="System Property House Room Images">
+
+
+
+    <!-- Root layout element -->
+    <Grid Padding="10" RowDefinitions="Auto, *, Auto, Auto">
+
+        <!-- FlexLayout for Capture Image and Pick Image Buttons -->
+        <FlexLayout Grid.Row="0" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,4">
+            <Button Text="Capture Image"
+                    Clicked="OnCaptureImageClicked"
+                    BackgroundColor="#0a506c"
+                    TextColor="White"
+                    Padding="12"
+                    CornerRadius="5"
+                    FontSize="18"
+                    HeightRequest="50"
+                    WidthRequest="150" />
+
+            <Button Text="Pick Image"
+                    Clicked="OnPickImageClicked"
+                    BackgroundColor="#0a506c"
+                    TextColor="White"
+                    Padding="12"
+                    CornerRadius="5"
+                    FontSize="18"
+                    HeightRequest="50"
+                    WidthRequest="150" />
+        </FlexLayout>
+        <!-- Hidden Entry to Bind Property House ID -->
+        <Entry IsVisible="False" Text="{Binding SystemPropertyHouseImageData.Propertyhouseid}" />
+        <!-- Image View to Display Selected Image -->
+        <Image x:Name="SelectedImage" Grid.Row="1" WidthRequest="300" HeightRequest="200" Aspect="AspectFill" Margin="0,10"
+               Source="{Binding SystemPropertyHouseImageData.PropertyHouseImage}" />
+
+        <!-- List View to Display Uploaded Images -->
+        <CollectionView x:Name="ImagesCollectionView" Grid.Row="2" ItemsSource="{Binding ImageUrls}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell ImageSource="{Binding .}" Text="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- FlexLayout for Cancel and Next Buttons -->
+        <FlexLayout Grid.Row="3" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,4" Padding="10">
+            <Button Text="Cancel"
+                    Command="{Binding OnCancelClickedCommand}"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    Padding="12"
+                    CornerRadius="5"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    HeightRequest="50"
+                    WidthRequest="150" />
+
+            <Button Text="Next"
+                    Command="{Binding NextCommand}"
+                    BackgroundColor="#0a506c"
+                    TextColor="White"
+                    CornerRadius="5"
+                    Padding="12"
+                    FontSize="18"
+                    HeightRequest="50"
+                    WidthRequest="150" />
+        </FlexLayout>
+
+    </Grid>
+</ContentPage>
