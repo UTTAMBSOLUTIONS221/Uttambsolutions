@@ -5,7 +5,7 @@ namespace Maqaoplus.Views.PropertyHouse.Modal
 {
     public partial class SystemPropertyHouseRoomImagesModalPage : ContentPage
     {
-        private const string FirebaseStorageBucket = "your-firebase-storage-bucket-url";
+        private const string FirebaseStorageBucket = "uttambsolutions-4ec2a.appspot.com";
 
         public SystemPropertyHouseRoomImagesModalPage(PropertyHouseDetailViewModel viewModel)
         {
@@ -54,10 +54,8 @@ namespace Maqaoplus.Views.PropertyHouse.Modal
 
             // Upload to Firebase Storage
             var firebaseStorage = new FirebaseStorage(FirebaseStorageBucket);
-            var imagePath = $"maqaoplus/{fileName}"; // Folder name 'maqaoplus'
-            var uploadTask = firebaseStorage.Child(imagePath).PutAsync(stream);
-
-            var imageUrl = await uploadTask;
+            var uploadTask = firebaseStorage.Child("maqaoplus").Child(fileName).PutAsync(stream);
+            var imagePath = await uploadTask;
             // Get the download URL
             var url = await firebaseStorage.Child(imagePath).GetDownloadUrlAsync();
 

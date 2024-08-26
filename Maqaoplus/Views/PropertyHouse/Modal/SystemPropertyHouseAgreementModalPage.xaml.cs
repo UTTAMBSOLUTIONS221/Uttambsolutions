@@ -93,8 +93,9 @@ public partial class SystemPropertyHouseAgreementModalPage : ContentPage
     {
         var stream = File.Open(filePath, FileMode.Open);
         var firebaseStorage = new FirebaseStorage("uttambsolutions-4ec2a.appspot.com");
-        var uploadTask = firebaseStorage.Child("images").Child(fileName).PutAsync(stream);
-        var downloadUrl = await uploadTask;
+        var uploadTask = firebaseStorage.Child("maqaoplus").Child(fileName).PutAsync(stream);
+        var imagePath = await uploadTask;
+        var downloadUrl = await firebaseStorage.Child(imagePath).GetDownloadUrlAsync();
         return downloadUrl;
     }
 }
