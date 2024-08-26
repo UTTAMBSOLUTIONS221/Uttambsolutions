@@ -138,9 +138,6 @@
 	  <MauiXaml Update="Views\PropertyHouse\Modal\SystemPropertyHouseAgreementModalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\PropertyHouse\Modal\SystemPropertyHouseAgreementSignatureModalPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\TenantBillsandPayments\Modals\HousesRoomTenantInvoiceDetailModalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -163,9 +160,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyHouseTenants\Modal\TenantVacationNoticeModalPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\PropertyHouse\AddPropertyHousePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyHouse\Modal\HousesRoomDetailModalPage.xaml">
