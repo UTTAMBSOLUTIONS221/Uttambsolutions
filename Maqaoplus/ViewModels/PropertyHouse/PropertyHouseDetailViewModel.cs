@@ -26,6 +26,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand ViewPropertyRoomAgreementCommand { get; }
         public ICommand ViewPropertyRoomCheckListCommand { get; }
         public ICommand ViewPropertyRoomImageCommand { get; }
+        public ICommand SavePropertyHouseRoomFixtureCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelButtonClickedCommand { get; }
@@ -76,6 +77,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnCancelClickedCommand = new Command(OnCancelClicked);
             OnOkButtonClickedCommand = new Command(OnOkButtonClicked);
             OnOkClickedCommand = new Command(async () => await SaveHouseRoomDetailsAsync());
+            SavePropertyHouseRoomFixtureCommand = new Command(async () => await SavePropertyHouseRoomFixtureasync());
 
             // Initialize steps
             _isStep1Visible = true;
