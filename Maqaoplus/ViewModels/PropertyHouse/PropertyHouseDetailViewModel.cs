@@ -331,7 +331,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomimagebyhouseroomid/" + propertyHouseRoomId, HttpMethod.Get, null);
             if (response != null)
             {
-                SystemPropertyHouseImageData = JsonConvert.DeserializeObject<SystemPropertyHouseImageData>(response.Data.ToString());
+                SystemPropertyHouseImageData = JsonConvert.DeserializeObject<SystemPropertyHouseImage>(response.Data.ToString());
             }
             var modalPage = new SystemPropertyHouseRoomImagesModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
