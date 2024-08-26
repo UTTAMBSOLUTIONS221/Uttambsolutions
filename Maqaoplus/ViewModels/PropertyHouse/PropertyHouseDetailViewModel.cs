@@ -20,7 +20,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
         private Systempropertyhouseroomfixtures _systempropertyhouseroomfixturesData;
-        private ObservableCollection<ListModel> _systempropertyfixturesdata;
+
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand ViewPropertyRoomAgreementCommand { get; }
@@ -253,27 +253,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-
-        public ObservableCollection<ListModel> Systempropertyfixturesdata
-        {
-            get => _systempropertyfixturesdata;
-            set
-            {
-                _systempropertyfixturesdata = value;
-                OnPropertyChanged();
-            }
-        }
-        private ListModel _selectedFixture;
-        public ListModel SelectedFixture
-        {
-            get => _selectedFixture;
-            set
-            {
-                _selectedFixture = value;
-                OnPropertyChanged(nameof(SelectedFixture));
-            }
-        }
-
         public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
         public bool IsSignatureImageVisible => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
         public bool IsSignatureAvailable => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
@@ -427,12 +406,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             var systemPropertyFixturesResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyfixtures, HttpMethod.Get);
             if (systemPropertyFixturesResponse != null)
             {
-                Systempropertyfixturesdata = new ObservableCollection<ListModel>(systemPropertyFixturesResponse);
-
                 // Set SelectedFixture for each RoomFixture
                 foreach (var item in SystempropertyhouseroomfixturesData.Roomfixtures)
                 {
-                    item.SelectedFixture = Systempropertyfixturesdata.FirstOrDefault(x => x.Value == item.Fixtureid.ToString());
+                    item.Systempropertyfixturesdata = new ObservableCollection<ListModel>(systemPropertyFixturesResponse);
+                    item.SelectedFixture = item.Systempropertyfixturesdata.FirstOrDefault(x => x.Value == item.Fixturestatusid.ToString());
                 }
             }
 
@@ -455,6 +433,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             try
             {
+                foreach (var fixture in SystempropertyhouseroomfixturesData.Roomfixtures)
+                {
+                    if (fixture.SelectedFixture != null)
+                    {
+                        // Set the Fixtureid to the selected value
+                        fixture.Fixturestatusid = int.Parse(fixture.SelectedFixture.Value);
+                    }
+                }
                 SystempropertyhouseroomfixturesData.Datecreated = DateTime.UtcNow;
                 SystempropertyhouseroomfixturesData.Createdby = App.UserDetails.Usermodel.Userid;
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseroomfixturedata", SystempropertyhouseroomfixturesData);

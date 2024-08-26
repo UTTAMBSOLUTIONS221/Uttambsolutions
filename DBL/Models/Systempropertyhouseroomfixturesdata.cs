@@ -1,4 +1,6 @@
-﻿namespace DBL.Models
+﻿using System.Collections.ObjectModel;
+
+namespace DBL.Models
 {
     public class Systempropertyhouseroomfixturesdata
     {
@@ -26,6 +28,7 @@
         public string? Descriptions { get; set; }
         public string? Category { get; set; }
         public ListModel? SelectedFixture { get; set; }
+        public ObservableCollection<ListModel>? Systempropertyfixturesdata { get; set; }
     }
 
 }
