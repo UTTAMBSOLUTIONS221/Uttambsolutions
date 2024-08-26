@@ -80,7 +80,14 @@
             <Label Text="This Agreement shall be governed by and construed in accordance with the laws of Kenya." FontSize="14" Margin="0,0,0,20" />
 
             <Label Text="12. ENTIRE AGREEMENT" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
-            <Label Text="This Agreement constitutes the entire agreement between the parties and supersedes all prior negotiations or agreements, whether written or oral. No modification of this Agreement shall be valid unless in writing and signed by both parties." FontSize="14" Margin="0,0,0,20" />
+            <Label Text="This Agreement constitutes the entire agreement between the parties and supersedes all prior agreements or understandings, whether written or oral, relating to the subject matter hereof." FontSize="14" Margin="0,0,0,20" />
+
+            <!-- Wear and Tear Clause -->
+            <Label Text="13. WEAR AND TEAR" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="Normal wear and tear refers to the deterioration of the premises and its fixtures caused by ordinary use over time, without negligence or abuse. Examples include minor scuffs on walls, worn carpet, or faded paint. Damage beyond normal wear and tear includes, but is not limited to, large holes in walls, broken windows, and significant damage to appliances or fixtures. The Tenant is responsible for repairs or costs associated with damage beyond normal wear and tear. The Landlord shall provide a written estimate for such repairs, and the Tenant shall have the right to contest the charges if they disagree." FontSize="14" Margin="0,0,0,20" />
+
+            <Label Text="14. DATA PROTECTION" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="The Landlord and Tenant agree to comply with all applicable data protection laws and regulations. The Tenant's personal data collected under this Agreement will be used solely for the purpose of managing the rental relationship and will not be shared with third parties without the Tenant's consent, except as required by law. The Tenant has the right to access, correct, or delete their personal data upon request." FontSize="14" Margin="0,0,0,20" />
 
             <!-- Signatures Section -->
             <Label Text="SIGNATURES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,20" />
