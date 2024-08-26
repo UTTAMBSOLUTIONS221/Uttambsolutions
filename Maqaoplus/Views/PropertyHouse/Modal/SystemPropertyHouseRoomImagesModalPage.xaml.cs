@@ -43,12 +43,6 @@ namespace Maqaoplus.Views.PropertyHouse.Modal
             // Get the download URL
             var url = await firebaseStorage.Child(imagePath).GetDownloadUrlAsync();
             await ((PropertyHouseDetailViewModel)BindingContext).SavePropertyHouseRoomImageasync(url);
-
-            // Assuming the view model has a method to add image URLs
-            var viewModel = (PropertyHouseDetailViewModel)BindingContext;
-            //viewModel.ImageUrls.Add(url);
-
-            // Optionally: Save URL to database (implementation needed)
         }
     }
 }
