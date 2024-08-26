@@ -15,6 +15,7 @@
         public int Propertychecklistid { get; set; }
         public int Propertyhouseroomid { get; set; }
         public int Fixturestatusid { get; set; }
+        public int Fixtureunits { get; set; }
         public string? Fixturestatus { get; set; }
         public int Createdby { get; set; }
         public DateTime Datecreated { get; set; }
