@@ -327,6 +327,46 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
+        public async Task SavePropertyHouseRoomImageasync(string imageUrl)
+        {
+            IsProcessing = true;
+
+            await Task.Delay(500);
+            if (OwnerTenantAgreementDetailData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
+            OwnerTenantAgreementDetailData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
+            OwnerTenantAgreementDetailData.Signatureimageurl = imageUrl;
+            OwnerTenantAgreementDetailData.Ownerortenant = "Owner";
+            OwnerTenantAgreementDetailData.Agreementname = OwnerTenantAgreementDetailData.Fullname + " Property " + OwnerTenantAgreementDetailData.Propertyhousename + " Owner Agreement";
+            OwnerTenantAgreementDetailData.Datecreated = DateTime.UtcNow;
+            try
+            {
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
+                if (response.RespStatus == 200 || response.RespStatus == 0)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else if (response.RespStatus == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
 
         //maibupation of the House Room Details
         private bool _isStep1Visible;
