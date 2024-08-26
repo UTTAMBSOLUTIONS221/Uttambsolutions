@@ -397,7 +397,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 SystempropertyhouseroomfixturesData = JsonConvert.DeserializeObject<Systempropertyhouseroomfixtures>(response.Data.ToString());
             }
-            var modalPage = new SystemPropertyHouseRoomImagesModalPage(this);
+            var modalPage = new SystemPropertyHouseRoomCheckListsModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
