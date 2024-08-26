@@ -54,9 +54,9 @@
                                     <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                                         <Label Text="{Binding Propertyhousename}" FontAttributes="Bold" TextTransform="Uppercase" FontSize="14" TextColor="#0a506c" MaxLines="2" LineBreakMode="TailTruncation" Grid.Row="1" />
                                         <Label Text="{Binding Systempropertyhousesizename,StringFormat='Room #: {0}'}" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="2"  />
-                                        <Label Text="{Binding Countyname,StringFormat='County #: {0}'}" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="3" />
-                                        <Label Text="{Binding Subcountyname ,StringFormat='Subcounty #: {0}'}" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="3" />
-                                        <Label Text="{Binding Subcountywardname ,StringFormat='Ward #: {0}'}" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="3" />
+                                        <Label Text="{Binding Countyname,StringFormat='County: {0}'}" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="3" />
+                                        <Label Text="{Binding Subcountyname ,StringFormat='Subcounty: {0}'}" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="3" />
+                                        <Label Text="{Binding Subcountywardname ,StringFormat='Ward: {0}'}" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="3" />
                                         <Label Text="{Binding Streetorlandmark}" FontSize="13" TextColor="Black" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
                                         <Label Text="{Binding Systempropertyhousesizerent,StringFormat='Rent: {0}'}" FontSize="13" TextColor="Black" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
 
@@ -66,7 +66,8 @@
                                     <!-- Buttons at the Bottom -->
                                 <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5">
                                     <Button Text="Manage" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Margin="5" />
-                                    <Button Text="Room" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewPropertyRoomAgreementCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Margin="5" />
+                                    <Button Text="Agreement" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewPropertyRoomAgreementCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Margin="5" />
+                                    <Button Text="Images" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewPropertyRoomAgreementCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Margin="5" />
                                 </StackLayout>
                             </Grid>
                             </Frame>
