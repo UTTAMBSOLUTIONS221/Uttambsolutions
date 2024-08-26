@@ -13,22 +13,6 @@ namespace Maqaoplus.Views.PropertyHouse.Modal
             BindingContext = viewModel;
         }
 
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            var viewModel = (PropertyHouseDetailViewModel)BindingContext;
-            await LoadImageUrlsAsync(viewModel);
-        }
-
-        private async Task LoadImageUrlsAsync(PropertyHouseDetailViewModel viewModel)
-        {
-            if (viewModel != null)
-            {
-                // Assuming the view model has a property that provides image URLs
-                //ImagesCollectionView.ItemsSource = viewModel.ImageUrls;
-            }
-        }
-
         private async void OnCaptureImageClicked(object sender, EventArgs e)
         {
             var result = await MediaPicker.CapturePhotoAsync();
