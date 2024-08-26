@@ -260,7 +260,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _systempropertyfixturesdata = value;
-                OnPropertyChanged(nameof(Systempropertyfixturesdata));
+                OnPropertyChanged();
             }
         }
         private ListModel _selectedFixture;
@@ -420,14 +420,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 SystempropertyhouseroomfixturesData = JsonConvert.DeserializeObject<Systempropertyhouseroomfixtures>(response.Data.ToString());
             }
+
             var SystempropertyfixturesResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyfixtures, HttpMethod.Get);
             if (SystempropertyfixturesResponse != null)
             {
                 Systempropertyfixturesdata = new ObservableCollection<ListModel>(SystempropertyfixturesResponse);
-                // Assuming Roomfixtures is a list and you want to match a specific Fixtureid
-                var selectedFixtureId = _systempropertyhouseroomfixturesData.Roomfixtures.FirstOrDefault()?.Fixtureid;
-                // Now select the fixture where Value matches the Fixtureid
-                SelectedFixture = Systempropertyfixturesdata.FirstOrDefault(x => x.Value == selectedFixtureId.ToString());
+                foreach (var item in SystempropertyhouseroomfixturesData.Roomfixtures)
+                {
+                    SelectedFixture = Systempropertyfixturesdata.FirstOrDefault(x => x.Value == item.Fixtureid.ToString());
+                }
             }
             var modalPage = new SystemPropertyHouseRoomCheckListsModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
