@@ -94,6 +94,12 @@ namespace API.Controllers
             return await bl.Registerpropertyhouseroomdata(JsonConvert.SerializeObject(model));
         }
         [AllowAnonymous]
+        [HttpPost("Registersystempropertyhouseroomimagedata")]
+        public async Task<Genericmodel> Registersystempropertyhouseroomimagedata(SystemPropertyHouseImage model)
+        {
+            return await bl.Registersystempropertyhouseroomimagedata(JsonConvert.SerializeObject(model));
+        }
+        [AllowAnonymous]
         [HttpPost("Registerpropertyhousevacaterequestdata")]
         public async Task<Genericmodel> Registerpropertyhousevacaterequestdata(SystemPropertyHouseVacatingRequest model)
         {
