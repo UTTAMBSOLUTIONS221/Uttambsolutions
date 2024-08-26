@@ -442,6 +442,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             try
             {
+                SystempropertyhouseroomfixturesData.Datecreated = DateTime.UtcNow;
+                SystempropertyhouseroomfixturesData.Createdby = App.UserDetails.Usermodel.Userid;
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseroomfixturedata", SystempropertyhouseroomfixturesData);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {

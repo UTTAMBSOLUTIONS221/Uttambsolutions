@@ -9,6 +9,8 @@
         public int Systempropertyhouseroomid { get; set; }
         public int Systempropertyhouseid { get; set; }
         public List<RoomFixture>? Roomfixtures { get; set; }
+        public int Createdby { get; set; }
+        public DateTime Datecreated { get; set; }
     }
     public class RoomFixture
     {
