@@ -353,7 +353,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SystemPropertyHouseImageData.Datecreated = DateTime.UtcNow;
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseroomimagedata", SystemPropertyHouseImageData);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
