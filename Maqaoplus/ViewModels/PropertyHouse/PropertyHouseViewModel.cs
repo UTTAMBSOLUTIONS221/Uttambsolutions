@@ -111,11 +111,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 _ownerTenantAgreementDetailData = value;
                 OnPropertyChanged(nameof(OwnerTenantAgreementDetailData));
-                OnPropertyChanged(nameof(IsSignatureImageAvailable));
+                OnPropertyChanged(nameof(IsSignatureDrawingVisible));
+                OnPropertyChanged(nameof(IsSignatureImageVisible));
+                OnPropertyChanged(nameof(IsSignatureAvailable));
             }
         }
 
-        public bool IsSignatureImageAvailable => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
+        public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
+        public bool IsSignatureImageVisible => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
+        public bool IsSignatureAvailable => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
+
 
         // Error properties
         private string _propertyHouseNameError;
