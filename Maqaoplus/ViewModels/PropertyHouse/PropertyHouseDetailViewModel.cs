@@ -21,6 +21,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand ViewPropertyRoomAgreementCommand { get; }
+        public ICommand ViewPropertyRoomImageCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelButtonClickedCommand { get; }
@@ -62,6 +63,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadRoomsCommand = new Command(async () => await LoadRooms());
             ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewDetails(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomAgreementCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomAgreementDetails(propertyRoom.Systempropertyhouseroomid, 0));
+            ViewPropertyRoomImageCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomImagesDetails(propertyRoom.Systempropertyhouseroomid));
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
             SearchCommand = new Command(async () => await Search());
@@ -310,6 +312,18 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
             }
             var modalPage = new SystemPropertyHouseRoomAgreementModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            IsProcessing = false;
+        }
+        private async Task ViewPropertyRoomImagesDetails(long propertyRoomId)
+        {
+            IsProcessing = true;
+            //var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabypropertyidandownerid/" + propertyRoomId + "/" + propertyRoomTenantid, HttpMethod.Get, null);
+            //if (response != null)
+            //{
+            //    OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
+            //}
+            var modalPage = new SystemPropertyHouseRoomImagesModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
