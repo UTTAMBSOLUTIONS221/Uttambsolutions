@@ -260,7 +260,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _systempropertyfixturesdata = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Systempropertyfixturesdata));
             }
         }
         private ListModel _selectedFixture;
