@@ -20,7 +20,7 @@
             <Label Text="{Binding OwnerTenantAgreementDetailData.OwnerDatecreated,StringFormat='Date: {0:yyyy-MM-dd}'}" FontSize="14" Margin="0,0,0,20" />
 
             <!-- Property Owner -->
-            <Label Text="{Binding OwnerTenantAgreementDetailData.Fullname,StringFormat='Property: {0}'}" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+            <Label Text="{Binding OwnerTenantAgreementDetailData.Propertyhousename,StringFormat='Property: {0}'}" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
             <Label Text="{Binding OwnerTenantAgreementDetailData.Fullname,StringFormat='Name: {0}'}" FontSize="16" Margin="0,0,0,5" />
             <Label FontSize="14" Margin="0,0,0,5">
                 <Label.Text>
