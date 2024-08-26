@@ -20,6 +20,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
         Systempropertyhouseroomfixtures _systempropertyhouseroomfixturesData;
+        private ObservableCollection<ListModel> _systempropertyfixtures;
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand ViewPropertyRoomAgreementCommand { get; }
@@ -251,6 +252,26 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        public ObservableCollection<ListModel> Systempropertyfixtures
+        {
+            get => _systempropertyfixtures;
+            set
+            {
+                _systempropertyfixtures = value;
+                OnPropertyChanged();
+            }
+        }
+        private ListModel _selectedFixture;
+        public ListModel SelectedFixture
+        {
+            get => _selectedFixture;
+            set
+            {
+                _selectedFixture = value;
+                OnPropertyChanged(nameof(SelectedFixture));
+            }
+        }
+
         public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
         public bool IsSignatureImageVisible => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
         public bool IsSignatureAvailable => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
@@ -396,6 +417,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             if (response != null)
             {
                 SystempropertyhouseroomfixturesData = JsonConvert.DeserializeObject<Systempropertyhouseroomfixtures>(response.Data.ToString());
+            }
+            var SystempropertyfixturesResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyfixtures, HttpMethod.Get);
+            if (SystempropertyfixturesResponse != null)
+            {
+                Systempropertyfixtures = new ObservableCollection<ListModel>(SystempropertyfixturesResponse);
             }
             var modalPage = new SystemPropertyHouseRoomCheckListsModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);

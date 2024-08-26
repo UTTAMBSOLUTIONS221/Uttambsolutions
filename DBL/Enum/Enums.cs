@@ -43,6 +43,7 @@
         Systemmaritalstatus = 27,
         Systemkinrelationship = 28,
         Systempropertyhouses = 29,
+        Systempropertyfixtures = 30,
 
     }
 }
