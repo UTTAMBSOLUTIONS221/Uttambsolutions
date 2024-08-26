@@ -20,7 +20,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
         Systempropertyhouseroomfixtures _systempropertyhouseroomfixturesData;
-        private ObservableCollection<ListModel> _systempropertyfixtures;
+        private ObservableCollection<ListModel> _systempropertyfixturesdata;
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand ViewPropertyRoomAgreementCommand { get; }
@@ -252,12 +252,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public ObservableCollection<ListModel> Systempropertyfixtures
+        public ObservableCollection<ListModel> Systempropertyfixturesdata
         {
-            get => _systempropertyfixtures;
+            get => _systempropertyfixturesdata;
             set
             {
-                _systempropertyfixtures = value;
+                _systempropertyfixturesdata = value;
                 OnPropertyChanged();
             }
         }
@@ -421,7 +421,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             var SystempropertyfixturesResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyfixtures, HttpMethod.Get);
             if (SystempropertyfixturesResponse != null)
             {
-                Systempropertyfixtures = new ObservableCollection<ListModel>(SystempropertyfixturesResponse);
+                Systempropertyfixturesdata = new ObservableCollection<ListModel>(SystempropertyfixturesResponse);
             }
             var modalPage = new SystemPropertyHouseRoomCheckListsModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);

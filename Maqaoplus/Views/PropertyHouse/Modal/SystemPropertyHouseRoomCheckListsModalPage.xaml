@@ -27,7 +27,7 @@
                             <Entry Text="{Binding Fixtureid}" IsVisible="False"/>
                             <Label Text="{Binding Fixturetype}" Grid.Column="0" VerticalOptions="Center"/>
                             <Entry Text="{Binding Fixtureunits}" Keyboard="Numeric" Grid.Column="1" VerticalOptions="Center" />
-                            <Picker ItemsSource="{Binding Systempropertyfixtures}" SelectedItem="{Binding SelectedFixture}" ItemDisplayBinding="{Binding Text}" Title="Select Status" TextColor="Black" Grid.Column="2" FontSize="15" BackgroundColor="White" Margin="0" />
+                            <Picker ItemsSource="{Binding Systempropertyfixturesdata}" SelectedItem="{Binding SelectedFixture}" ItemDisplayBinding="{Binding Text}" Title="Select Status" TextColor="Black" Grid.Column="2" FontSize="15" BackgroundColor="White" Margin="0" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
