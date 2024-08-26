@@ -25,6 +25,7 @@
         public string? Fixturetype { get; set; }
         public string? Descriptions { get; set; }
         public string? Category { get; set; }
+        public ListModel? SelectedFixture { get; set; }
     }
 
 }

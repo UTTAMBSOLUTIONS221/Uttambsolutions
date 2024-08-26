@@ -19,7 +19,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private Systemtenantdetails _newTenantStaffData;
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
-        Systempropertyhouseroomfixtures _systempropertyhouseroomfixturesData;
+        private Systempropertyhouseroomfixtures _systempropertyhouseroomfixturesData;
         private ObservableCollection<ListModel> _systempropertyfixturesdata;
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
@@ -415,25 +415,33 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task ViewPropertyRoomCheckListDetailAsync(long propertyHouseRoomId)
         {
             IsProcessing = true;
+
+            // Fetch the room fixtures data
             var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomfixturesdatabyhouseroomid/" + propertyHouseRoomId, HttpMethod.Get, null);
             if (response != null)
             {
                 SystempropertyhouseroomfixturesData = JsonConvert.DeserializeObject<Systempropertyhouseroomfixtures>(response.Data.ToString());
             }
 
-            var SystempropertyfixturesResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyfixtures, HttpMethod.Get);
-            if (SystempropertyfixturesResponse != null)
+            // Fetch the dropdown data
+            var systemPropertyFixturesResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyfixtures, HttpMethod.Get);
+            if (systemPropertyFixturesResponse != null)
             {
-                Systempropertyfixturesdata = new ObservableCollection<ListModel>(SystempropertyfixturesResponse);
+                Systempropertyfixturesdata = new ObservableCollection<ListModel>(systemPropertyFixturesResponse);
+
+                // Set SelectedFixture for each RoomFixture
                 foreach (var item in SystempropertyhouseroomfixturesData.Roomfixtures)
                 {
-                    SelectedFixture = Systempropertyfixturesdata.FirstOrDefault(x => x.Value == item.Fixtureid.ToString());
+                    item.SelectedFixture = Systempropertyfixturesdata.FirstOrDefault(x => x.Value == item.Fixtureid.ToString());
                 }
             }
+
+            // Navigate to the modal page
             var modalPage = new SystemPropertyHouseRoomCheckListsModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
+
 
         public async Task SavePropertyHouseRoomFixtureasync()
         {
