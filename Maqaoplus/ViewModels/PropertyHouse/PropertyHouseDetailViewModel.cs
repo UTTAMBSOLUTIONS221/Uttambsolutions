@@ -18,6 +18,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private Systemtenantdetails _tenantStaffData;
         private Systemtenantdetails _newTenantStaffData;
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
+        private SystemPropertyHouseImage _systemPropertyHouseImageData;
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand ViewPropertyRoomAgreementCommand { get; }
@@ -228,6 +229,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged(nameof(IsSignatureAvailable));
             }
         }
+        public SystemPropertyHouseImage SystemPropertyHouseImageData
+        {
+            get => _systemPropertyHouseImageData;
+            set
+            {
+                _systemPropertyHouseImageData = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
         public bool IsSignatureImageVisible => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
@@ -332,16 +342,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = true;
 
             await Task.Delay(500);
-            if (OwnerTenantAgreementDetailData == null)
+            if (SystemPropertyHouseImageData == null)
             {
                 IsProcessing = false;
                 return;
             }
-            OwnerTenantAgreementDetailData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
-            OwnerTenantAgreementDetailData.Signatureimageurl = imageUrl;
-            OwnerTenantAgreementDetailData.Ownerortenant = "HouseRoom";
-            OwnerTenantAgreementDetailData.Agreementname = OwnerTenantAgreementDetailData.Fullname + " Property " + OwnerTenantAgreementDetailData.Propertyhousename + " Owner Agreement";
-            OwnerTenantAgreementDetailData.Datecreated = DateTime.UtcNow;
+            SystemPropertyHouseImageData.Createdby = App.UserDetails.Usermodel.Userid;
+            SystemPropertyHouseImageData.Houseorroomimageurl = imageUrl;
+            SystemPropertyHouseImageData.Houseorroom = "HouseRoom";
+            SystemPropertyHouseImageData.Datecreated = DateTime.UtcNow;
             try
             {
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);

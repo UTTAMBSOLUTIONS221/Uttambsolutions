@@ -2,10 +2,11 @@
 {
     public class SystemPropertyHouseImage
     {
-        public long PropertyImageId { get; set; }
-        public long PropertyHouseId { get; set; }
-        public string? HouseOrRoom { get; set; }
-        public string? SignatureImageUrl { get; set; }
-        public DateTime DateCreated { get; set; }
+        public long Propertyimageid { get; set; }
+        public long Propertyhouseid { get; set; }
+        public string? Houseorroom { get; set; }
+        public string? Houseorroomimageurl { get; set; }
+        public long Createdby { get; set; }
+        public DateTime Datecreated { get; set; }
     }
 }
