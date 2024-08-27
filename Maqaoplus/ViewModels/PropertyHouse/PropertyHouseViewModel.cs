@@ -1248,10 +1248,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
 
                     // Add the signature image
-                    var imgPath = "resources/images/mysignature.png";
-                    var signatureImage = iTextSharp.text.Image.GetInstance(imgPath);
-                    signatureImage.ScaleToFit(200, 50);
-                    document.Add(signatureImage);
+                    //var imgPath = "resources/images/mysignature.png";
+                    //var signatureImage = iTextSharp.text.Image.GetInstance(imgPath);
+                    //signatureImage.ScaleToFit(200, 50);
+                    //document.Add(signatureImage);
                     document.Add(new Paragraph(" "));
                     document.Add(new Paragraph("Management System Provider", regularFont));
                     document.Add(new Paragraph(" "));
