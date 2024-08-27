@@ -313,6 +313,7 @@ namespace DBL.Repositories
                     responseData.Rentdepositrefunddays = Convert.ToInt32(tenantreponseJson["rentdepositrefunddays"]);
                     responseData.Monthlyrentterms = Convert.ToBoolean(tenantreponseJson["Monthlyrentterms"]);
                     responseData.Allowpets = Convert.ToBoolean(tenantreponseJson["Allowpets"]);
+                    responseData.Rentutilityinclusive = Convert.ToBoolean(tenantreponseJson["Rentutilityinclusive"]);
                     responseData.Waterunitprice = Convert.ToDecimal(tenantreponseJson["Waterunitprice"]);
                     responseData.Countyname = tenantreponseJson["Countyname"].ToString();
                     responseData.Subcountyname = tenantreponseJson["Subcountyname"].ToString();
@@ -325,6 +326,7 @@ namespace DBL.Repositories
                     responseData.Agreementdata = tenantreponseJson["Agreementdata"].ToString();
                     responseData.Propertyhouseutility = tenantreponseJson["Propertyhouseutility"].ToString();
                     responseData.Systempropertybankname = tenantreponseJson["Systempropertybankname"].ToString();
+                    responseData.Tenantsintheroom = tenantreponseJson["Tenantsintheroom"].ToString();
 
                     response.Data = responseData;
                     return response;

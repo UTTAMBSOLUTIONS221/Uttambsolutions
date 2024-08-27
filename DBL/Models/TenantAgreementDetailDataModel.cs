@@ -28,6 +28,7 @@
         public int Rentdepositrefunddays { get; set; }
         public bool Monthlyrentterms { get; set; }
         public bool Allowpets { get; set; }
+        public bool Rentutilityinclusive { get; set; }
         public decimal Waterunitprice { get; set; }
         public string? Countyname { get; set; }
         public string? Subcountyname { get; set; }
@@ -40,6 +41,7 @@
         public string? Agreementdata { get; set; }
         public string? Propertyhouseutility { get; set; }
         public string? Systempropertybankname { get; set; }
+        public string? Tenantsintheroom { get; set; }
     }
 
 }
