@@ -42,6 +42,14 @@
         public string? Propertyhouseutility { get; set; }
         public string? Systempropertybankname { get; set; }
         public string? Tenantsintheroom { get; set; }
+
+
+
+        public long Propertyhouseowner { get; set; }
+        public string? Signatureimageurl { get; set; }
+        public string? Agreementname { get; set; }
+        public DateTime Datecreated { get; set; }
+        public string? Ownerortenant { get; set; }
     }
 
 }

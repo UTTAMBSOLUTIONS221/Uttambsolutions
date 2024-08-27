@@ -1,12 +1,15 @@
 ﻿using DBL.Models;
 using Newtonsoft.Json;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
 {
-    public class PropertyHouseTenantAgreementViewModel : BaseViewModel
+    public class PropertyHouseTenantAgreementViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
+        public event PropertyChangedEventHandler PropertyChanged;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         private TenantAgreementDetailData _tenantAgreementDetailData;
         public ICommand ViewPropertyRoomAgreementCommand { get; }
@@ -89,11 +92,11 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
                 IsProcessing = false;
                 return;
             }
-            //TenantAgreementDetailData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
-            //TenantAgreementDetailData.Signatureimageurl = imageUrl;
-            // TenantAgreementDetailData.Ownerortenant = "Tenant";
-            //TenantAgreementDetailData.Agreementname = TenantAgreementDetailData.Tenantfullname + " Room " + TenantAgreementDetailData.Systempropertyhousesizename + " Tenant Agreement";
-            // TenantAgreementDetailData.Datecreated = DateTime.UtcNow;
+            TenantAgreementDetailData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
+            TenantAgreementDetailData.Signatureimageurl = imageUrl;
+            TenantAgreementDetailData.Ownerortenant = "Tenant";
+            TenantAgreementDetailData.Agreementname = TenantAgreementDetailData.Tenantfullname + " Room " + TenantAgreementDetailData.Propertyhousename + " " + TenantAgreementDetailData.Systempropertyhousesizename + " " + TenantAgreementDetailData.Systempropertyhousesizename + " Tenant Agreement";
+            TenantAgreementDetailData.Datecreated = DateTime.UtcNow;
             try
             {
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", TenantAgreementDetailData);
@@ -119,6 +122,9 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
                 IsProcessing = false;
             }
         }
-
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
