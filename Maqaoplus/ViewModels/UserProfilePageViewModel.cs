@@ -425,7 +425,7 @@ namespace Maqaoplus.ViewModels
             {
                 SystemStaffIdnumberError = null;
             }
-            if (StaffData.Genderid == 0)
+            if (Selectedstaffgender != null)
             {
                 SystemStaffGenderError = "Gender is required.";
                 isValid = false;
@@ -434,7 +434,7 @@ namespace Maqaoplus.ViewModels
             {
                 SystemStaffGenderError = null;
             }
-            if (StaffData.Maritalstatusid == 0)
+            if (Selectedstaffmaritalstatus != null)
             {
                 SystemStaffMaritalstatusError = "Marital status is required.";
                 isValid = false;
