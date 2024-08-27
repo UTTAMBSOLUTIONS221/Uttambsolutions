@@ -1237,7 +1237,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     var formattedDate = OwnerTenantAgreementDetailData.OwnerDatecreated.ToString("yyyy-MM-dd");
 
                     // Signatures
-                    document.Add(new Paragraph("_____________________________", regularFont));
+                    var signatureOwnerImage = iTextSharp.text.Image.GetInstance(OwnerTenantAgreementDetailData.OwnerSignatureimageurl);
+                    signatureOwnerImage.ScaleToFit(200, 50);
+                    document.Add(signatureOwnerImage);
                     document.Add(new Paragraph(" "));
                     document.Add(new Paragraph("Property Owner", regularFont));
                     document.Add(new Paragraph(" "));
