@@ -1241,12 +1241,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     document.Add(new Paragraph($"Date: {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd}", regularFont));
                     document.Add(new Paragraph(" "));
 
-                    document.Add(new Paragraph("_____________________________", regularFont));
-                    document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph("Management System Provider", regularFont));
-                    document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph($"Date: {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd}", regularFont));
-                    document.Add(new Paragraph(" "));
+
 
                     // Add the signature image
                     var imgPath = "resources/images/mysignature.png";
@@ -1254,6 +1249,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     signatureImage.ScaleToFit(200, 50);
                     document.Add(signatureImage);
                     document.Add(new Paragraph(" "));
+                    document.Add(new Paragraph("Management System Provider", regularFont));
+                    document.Add(new Paragraph(" "));
+                    document.Add(new Paragraph($"Date: {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd}", regularFont));
+                    document.Add(new Paragraph(" "));
+
 
                     // Close the document
                     document.Close();
