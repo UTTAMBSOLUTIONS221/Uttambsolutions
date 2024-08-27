@@ -274,6 +274,46 @@ namespace DBL.Repositories
                 }
             }
         }
+
+        public TenantAgreementDetailDataModel Getsystempropertyhouseroomagreementdetaildatabytenantid(long Propertytenantid)
+        {
+            TenantAgreementDetailDataModel response = new TenantAgreementDetailDataModel();
+            TenantAgreementDetailData responseData = new TenantAgreementDetailData();
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Propertytenantid", Propertytenantid);
+                parameters.Add("@TenantAgreementDetailData", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystempropertyhouseroomagreementdetaildatabytenantid", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@TenantAgreementDetailData");
+                if (systempropertydataJson != null)
+                {
+                    JObject responseJson = JObject.Parse(systempropertydataJson);
+                    JObject tenantreponseJson = JObject.Parse(responseJson["Data"].ToString());
+                    responseData.Propertyhouseid = Convert.ToInt64(tenantreponseJson["Propertyhouseid"]);
+                    responseData.Propertyhouseowner = Convert.ToInt64(tenantreponseJson["Propertyhouseowner"]);
+                    responseData.Propertyhousename = tenantreponseJson["Propertyhousename"].ToString();
+                    responseData.Fullname = tenantreponseJson["Fullname"].ToString();
+                    responseData.Phonenumber = tenantreponseJson["Phonenumber"].ToString();
+                    responseData.Emailaddress = tenantreponseJson["Emailaddress"].ToString();
+                    responseData.Countyname = tenantreponseJson["Countyname"].ToString();
+                    responseData.Subcountyname = tenantreponseJson["Subcountyname"].ToString();
+                    responseData.Subcountywardname = tenantreponseJson["Subcountywardname"].ToString();
+                    responseData.OwnerDatecreated = Convert.ToDateTime(tenantreponseJson["OwnerDatecreated"]);
+                    responseData.TenantDatecreated = Convert.ToDateTime(tenantreponseJson["TenantDatecreated"]);
+                    responseData.OwnerSignatureimageurl = tenantreponseJson["OwnerSignatureimageurl"].ToString();
+                    responseData.TenantSignatureimageurl = tenantreponseJson["TenantSignatureimageurl"].ToString();
+
+                    response.Data = responseData;
+                    return response;
+                }
+                else
+                {
+                    return response;
+                }
+            }
+        }
         public Genericmodel Registersystempropertyhouseagreementdata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))

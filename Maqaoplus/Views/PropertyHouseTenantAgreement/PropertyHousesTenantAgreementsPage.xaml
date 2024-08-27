@@ -32,7 +32,6 @@
             <Label Text="Tenant:" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
             <Label Text="Full Name: [Tenant's Full Name]" FontSize="14" Margin="0,0,0,5" />
             <Label Text="ID/Passport Number: [Tenant's ID/Passport Number]" FontSize="14" Margin="0,0,0,5" />
-            <Label Text="Address: [Tenant's Address]" FontSize="14" Margin="0,0,0,5" />
             <Label Text="Phone Number: [Phone Number]" FontSize="14" Margin="0,0,0,5" />
             <Label Text="Email Address: [Email Address]" FontSize="14" Margin="0,0,0,20" />
 

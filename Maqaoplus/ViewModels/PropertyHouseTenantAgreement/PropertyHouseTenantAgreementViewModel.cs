@@ -8,7 +8,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
     {
         private readonly Services.ServiceProvider _serviceProvider;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
-        private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
+        private TenantAgreementDetailData _tenantAgreementDetailData;
         public ICommand ViewPropertyRoomAgreementCommand { get; }
 
         private bool _isProcessing;
@@ -32,12 +32,12 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
                 OnPropertyChanged();
             }
         }
-        public OwnerTenantAgreementDetailData OwnerTenantAgreementDetailData
+        public TenantAgreementDetailData TenantAgreementDetailData
         {
-            get => _ownerTenantAgreementDetailData;
+            get => _tenantAgreementDetailData;
             set
             {
-                _ownerTenantAgreementDetailData = value;
+                _tenantAgreementDetailData = value;
                 OnPropertyChanged(nameof(OwnerTenantAgreementDetailData));
                 OnPropertyChanged(nameof(IsSignatureDrawingVisible));
                 OnPropertyChanged(nameof(IsSignatureImageVisible));
@@ -45,9 +45,9 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
             }
         }
 
-        public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
-        public bool IsSignatureImageVisible => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
-        public bool IsSignatureAvailable => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
+        public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(TenantAgreementDetailData?.TenantSignatureimageurl);
+        public bool IsSignatureImageVisible => !string.IsNullOrEmpty(TenantAgreementDetailData?.TenantSignatureimageurl);
+        public bool IsSignatureAvailable => !string.IsNullOrEmpty(TenantAgreementDetailData?.TenantSignatureimageurl);
         // Parameterless constructor for XAML support
         public PropertyHouseTenantAgreementViewModel(Services.ServiceProvider serviceProvider)
         {
@@ -65,7 +65,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomagreementdetaildatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null)
                 {
-                    OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
+                    TenantAgreementDetailData = JsonConvert.DeserializeObject<TenantAgreementDetailData>(response.Data.ToString());
                 }
                 IsDataLoaded = true;
             }
@@ -84,19 +84,19 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
             IsProcessing = true;
 
             await Task.Delay(500);
-            if (OwnerTenantAgreementDetailData == null)
+            if (TenantAgreementDetailData == null)
             {
                 IsProcessing = false;
                 return;
             }
-            OwnerTenantAgreementDetailData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
-            OwnerTenantAgreementDetailData.Signatureimageurl = imageUrl;
-            OwnerTenantAgreementDetailData.Ownerortenant = "Tenant";
-            OwnerTenantAgreementDetailData.Agreementname = OwnerTenantAgreementDetailData.Fullname + " Property " + OwnerTenantAgreementDetailData.Propertyhousename + " Owner Agreement";
-            OwnerTenantAgreementDetailData.Datecreated = DateTime.UtcNow;
+            TenantAgreementDetailData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
+            TenantAgreementDetailData.Signatureimageurl = imageUrl;
+            TenantAgreementDetailData.Ownerortenant = "Tenant";
+            TenantAgreementDetailData.Agreementname = TenantAgreementDetailData.Fullname + " Property " + TenantAgreementDetailData.Propertyhousename + " Owner Agreement";
+            TenantAgreementDetailData.Datecreated = DateTime.UtcNow;
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", TenantAgreementDetailData);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
