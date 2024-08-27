@@ -768,7 +768,20 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     OwnerTenantAgreementDetailData.OwnerSignatureimageurl = response.Data2;
                     OwnerTenantAgreementDetailData.Agreementdetailpdfurl = await GenerateAndUploadAgreementPdfAsync();
                     OwnerTenantAgreementDetailData.Agreementid = Convert.ToInt64(response.Data1);
-                    Application.Current.MainPage.Navigation.PopModalAsync();
+                    var responseAfter = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
+                    if (responseAfter.RespStatus == 200 || responseAfter.RespStatus == 0)
+                    {
+                        Application.Current.MainPage.Navigation.PopModalAsync();
+                    }
+                    else if (responseAfter.RespStatus == 1)
+                    {
+                        await Shell.Current.DisplayAlert("Warning", responseAfter.RespMessage, "OK");
+                    }
+                    else
+                    {
+                        await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+
+                    }
                 }
                 else if (response.RespStatus == 1)
                 {
@@ -1230,10 +1243,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     // Signatures
                     document.Add(new Paragraph("AGREED AND ACCEPTED", boldFont));
                     document.Add(new Paragraph(" ")); // Add spacing
-
-                    // Add the signature lines and labels
-                    // Assuming the existing code setup
-                    var formattedDate = OwnerTenantAgreementDetailData.OwnerDatecreated.ToString("yyyy-MM-dd");
 
                     // Signatures
                     var signatureOwnerImage = iTextSharp.text.Image.GetInstance(OwnerTenantAgreementDetailData.OwnerSignatureimageurl);
