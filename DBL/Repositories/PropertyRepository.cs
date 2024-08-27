@@ -261,9 +261,7 @@ namespace DBL.Repositories
                     responseData.Subcountyname = tenantreponseJson["Subcountyname"].ToString();
                     responseData.Subcountywardname = tenantreponseJson["Subcountywardname"].ToString();
                     responseData.OwnerDatecreated = Convert.ToDateTime(tenantreponseJson["OwnerDatecreated"]);
-                    responseData.TenantDatecreated = Convert.ToDateTime(tenantreponseJson["TenantDatecreated"]);
                     responseData.OwnerSignatureimageurl = tenantreponseJson["OwnerSignatureimageurl"].ToString();
-                    responseData.TenantSignatureimageurl = tenantreponseJson["TenantSignatureimageurl"].ToString();
 
                     response.Data = responseData;
                     return response;
