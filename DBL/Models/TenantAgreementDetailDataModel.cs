@@ -25,7 +25,7 @@
         public decimal Systempropertyhousesizerent { get; set; }
         public decimal Systempropertyhousesizerentdeposit { get; set; }
         public int Rentdepositmonth { get; set; }
-        public bool Rentterms { get; set; }
+        public bool Monthlyrentterms { get; set; }
         public decimal Waterunitprice { get; set; }
         public string? Countyname { get; set; }
         public string? Subcountyname { get; set; }

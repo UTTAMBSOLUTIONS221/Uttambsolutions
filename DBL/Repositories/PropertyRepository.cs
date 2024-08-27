@@ -310,7 +310,7 @@ namespace DBL.Repositories
                     responseData.Systempropertyhousesizerent = Convert.ToDecimal(tenantreponseJson["Systempropertyhousesizerent"]);
                     responseData.Systempropertyhousesizerentdeposit = Convert.ToDecimal(tenantreponseJson["Systempropertyhousesizerentdeposit"]);
                     responseData.Rentdepositmonth = Convert.ToInt32(tenantreponseJson["Rentdepositmonth"]);
-                    responseData.Rentterms = Convert.ToBoolean(tenantreponseJson["Rentterms"]);
+                    responseData.Monthlyrentterms = Convert.ToBoolean(tenantreponseJson["Monthlyrentterms"]);
                     responseData.Waterunitprice = Convert.ToDecimal(tenantreponseJson["Waterunitprice"]);
                     responseData.Countyname = tenantreponseJson["Countyname"].ToString();
                     responseData.Subcountyname = tenantreponseJson["Subcountyname"].ToString();
