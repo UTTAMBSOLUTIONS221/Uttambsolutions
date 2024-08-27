@@ -36,6 +36,7 @@
         public DateTime TenantDatecreated { get; set; }
         public DateTime Nextrentduedate { get; set; }
         public string? TenantSignatureimageurl { get; set; }
+        public string? OwnerSignatureimageurl { get; set; }
         public string? Agreementdata { get; set; }
         public string? Propertyhouseutility { get; set; }
         public string? Systempropertybankname { get; set; }
