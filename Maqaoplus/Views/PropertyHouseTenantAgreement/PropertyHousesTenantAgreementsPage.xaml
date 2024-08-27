@@ -84,7 +84,6 @@
             </Label>
             <StackLayout>
                 <Label Text="5. UTILITIES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
-
                 <!-- Grid for Rent Inclusive -->
                 <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
                     <CheckBox x:Name="RentInclusiveCheckBox" IsChecked="{Binding TenantAgreementDetailData.Rentutilityinclusive}" />
@@ -127,6 +126,40 @@
             <Label Text="☐ No pets are allowed on the premises." FontSize="14" Margin="0,0,0,5" />
             <Label Text="☐ Pets are allowed, subject to the following conditions:" FontSize="14" Margin="0,0,0,5" />
             <Label Text="[Specify Pet Policy, if any]" FontSize="14" Margin="0,0,0,20" />
+            
+            <StackLayout>
+                <Label Text="8. PETS" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <!-- Grid for Rent Inclusive -->
+                <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
+                    <CheckBox x:Name="RentAllowPetsCheckBox" IsChecked="{Binding TenantAgreementDetailData.Allowpets}" />
+                    <Label Text="Pets are allowed, subject to the following conditions:" FontSize="14" Grid.Column="1">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Allowpets}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Allowpets}" Value="False">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </Grid>
+
+                <!-- Grid for Rent Not Inclusive -->
+                <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
+                    <CheckBox x:Name="RentNotAllowPetsCheckBox" IsChecked="{Binding TenantAgreementDetailData.Allowpets, Mode=OneWay, Converter={StaticResource InverseBooleanConverter}}" />
+                    <Label Text="{Binding TenantAgreementDetailData.Allowpets, StringFormat='The Tenant shall be responsible for the payment of the following utilities: {0}'}" FontSize="14" Grid.Column="1">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Allowpets}" Value="True">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Allowpets}" Value="False">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </Grid>
+            </StackLayout>
+
 
             <Label Text="9. INSURANCE" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
             <Label Text="The Tenant is encouraged to obtain renter's insurance to cover personal property against loss or damage. The Landlord shall not be responsible for any loss or damage to the Tenant's personal property." FontSize="14" Margin="0,0,0,20" />
