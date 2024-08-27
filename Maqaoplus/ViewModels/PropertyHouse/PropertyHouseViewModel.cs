@@ -8,7 +8,6 @@ using Maqaoplus.Views.PropertyHouse.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -1133,128 +1132,204 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         public async Task<string> GenerateAndUploadAgreementPdfAsync()
         {
-            if (TenantAgreementDetailData == null)
+            if (OwnerTenantAgreementDetailData == null)
                 return null;
 
             // Initialize a memory stream to hold the PDF data
             using (var memoryStream = new MemoryStream())
             {
-                try
+                // Generate PDF
+                using (var writer = new PdfWriter(filePath))
                 {
-                    // Generate PDF
-                    using (var writer = new PdfWriter(memoryStream))
+                    using (var pdf = new PdfDocument(writer))
                     {
-                        using (var pdf = new PdfDocument(writer))
-                        {
-                            var document = new Document(pdf);
+                        var document = new Document(pdf);
 
-                            // Title
-                            document.Add(new Paragraph("RENTAL AGREEMENT")
-                                .SetFontSize(18)
-                                .SetBold()
-                                .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
+                        // Title
+                        document.Add(new Paragraph("RENTAL MANAGEMENT SYSTEM AGREEMENT").SetFontSize(14).SetBold().SetTextAlignment(TextAlignment.Center).SetMarginBottom(20));
 
-                            // Agreement Details
-                            document.Add(new Paragraph($"This Rental Agreement (Agreement) is made and entered into on this {TenantAgreementDetailData.TenantDatecreated:dd} day of {TenantAgreementDetailData.TenantDatecreated:MMM}, 20{TenantAgreementDetailData.TenantDatecreated:yy}, by and between:"));
+                        // Date
+                        document.Add(new Paragraph($"Date: {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd}")
+                            .SetFontSize(14)
+                            .SetMarginBottom(20));
 
-                            // Landlord Details
-                            document.Add(new Paragraph($"Landlord: {TenantAgreementDetailData.Ownerfullname}"));
-                            document.Add(new Paragraph($"Property Name: {TenantAgreementDetailData.Propertyhousename}"));
-                            document.Add(new Paragraph($"Address: {TenantAgreementDetailData.Countyname}-{TenantAgreementDetailData.Subcountyname}-{TenantAgreementDetailData.Subcountywardname}"));
-                            document.Add(new Paragraph($"Phone Number: {TenantAgreementDetailData.Ownerphonenumber}"));
-                            document.Add(new Paragraph($"Email Address: {TenantAgreementDetailData.Owneremailaddress}"));
+                        // Property Owner Details
+                        document.Add(new Paragraph($"Property: {OwnerTenantAgreementDetailData.Propertyhousename}")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph($"Name: {OwnerTenantAgreementDetailData.Fullname}")
+                            .SetFontSize(16)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph($"Address: {OwnerTenantAgreementDetailData.Countyname}-{OwnerTenantAgreementDetailData.Subcountyname}-{OwnerTenantAgreementDetailData.Subcountywardname}")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph($"Phone: {OwnerTenantAgreementDetailData.Phonenumber}")
+                            .SetFontSize(16)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph($"Email: {OwnerTenantAgreementDetailData.Emailaddress}")
+                            .SetFontSize(16)
+                            .SetMarginBottom(20));
 
-                            // Tenant Details
-                            document.Add(new Paragraph("AND"));
-                            document.Add(new Paragraph($"Tenant: {TenantAgreementDetailData.Tenantfullname}"));
-                            document.Add(new Paragraph($"ID/Passport Number: {TenantAgreementDetailData.Tenantidnumber}"));
-                            document.Add(new Paragraph($"Phone Number: {TenantAgreementDetailData.Tenantphonenumber}"));
-                            document.Add(new Paragraph($"Email Address: {TenantAgreementDetailData.Tenantemailaddress}"));
+                        // Rental Management System Provider
+                        document.Add(new Paragraph("Rental Management System Provider:")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("Name: UTTAMB SOLUTIONS LIMITED")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("Address: Nairobi Kenya")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("Phone: 0717850720")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("Email: support@utambsolutions.com")
+                            .SetFontSize(14)
+                            .SetMarginBottom(20));
 
-                            // Agreement Sections
-                            document.Add(new Paragraph($"1. PREMISES: The Landlord hereby agrees to rent to the Tenant, and the Tenant hereby agrees to rent from the Landlord {TenantAgreementDetailData.Propertyhousename}, the residential premises located at: {TenantAgreementDetailData.Countyname}-{TenantAgreementDetailData.Subcountyname}-{TenantAgreementDetailData.Subcountywardname}"));
-                            document.Add(new Paragraph($"Land Mark: {TenantAgreementDetailData.Streetorlandmark}"));
+                        // Agreement Sections
+                        document.Add(new Paragraph("1. PURPOSE OF THE AGREEMENT")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph($"The purpose of this Agreement is to outline the terms and conditions under which UTTAMB SOLUTIONS LIMITED (hereinafter referred to as the Management System Provider) will provide rental management services to {detailData.Fullname}(hereinafter referred to as the Property Owner) for the property located at {detailData.Countyname}-{detailData.Subcountyname}-{detailData.Subcountywardname} (hereinafter referred to as the Property).")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
 
-                            // Term
-                            var startDate = TenantAgreementDetailData.TenantDatecreated.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-                            var endDate = TenantAgreementDetailData.TenantDatecreated.AddMonths(12).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture); // Example of fixed-term lease
-                            document.Add(new Paragraph($"2. TERM: The term of this rental agreement shall commence on {startDate} (Start Date) and shall continue as follows:"));
-                            document.Add(new Paragraph(TenantAgreementDetailData.Monthlyrentterms
-                                ? $"Month-to-month tenancy beginning on {startDate}."
-                                : $"Fixed-term lease ending on {endDate}."));
+                        document.Add(new Paragraph("2. SERVICES PROVIDED")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Advertising and Marketing: Listing the Property on various platforms to attract potential tenants.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Tenant Screening: Conducting background checks and verifying tenant credentials.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Rent Collection: Facilitating the collection of rent payments from tenants.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Property Maintenance: Coordinating with contractors for repairs and regular maintenance of the Property.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Reporting: Providing regular reports on the status of the Property, rent collection, and any issues that arise.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(20));
 
-                            // Rent
-                            document.Add(new Paragraph($"3. RENT: The Tenant agrees to pay the Landlord a monthly rent of Ksh. {TenantAgreementDetailData.Systempropertyhousesizerent:#,##0.00}, payable in advance on or before the {TenantAgreementDetailData.Rentdueday} day of each month. The first rent payment is due on {TenantAgreementDetailData.Nextrentduedate:yyyy-MM-dd}."));
+                        document.Add(new Paragraph("3. FEES AND PAYMENTS")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Service Fee: The Property Owner agrees to pay the Management System Provider a service fee of 1% of the monthly rent collected.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Subscription Payment: The Property Owner agrees to pay a subscription fee for the services rendered by the Management System Provider. The subscription fee shall be paid monthly to the following bank account:")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("  Bank Name: FAMILY BANK")
+                            .SetFontSize(14)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("  Pay Bill: 222111")
+                            .SetFontSize(14)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("  Account Number: 2340982")
+                            .SetFontSize(14)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Payment Terms: The subscription fee is due on the 10th day of each month.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Additional Costs: Any costs related to property maintenance, legal fees, or other services not covered under this Agreement will be billed separately with the Property Owner's prior approval.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(20));
 
-                            // Security Deposit
-                            document.Add(new Paragraph($"4. SECURITY DEPOSIT: The Tenant agrees to pay a security deposit of Ksh. {TenantAgreementDetailData.Systempropertyhousesizerentdeposit:#,##0.00}, equivalent to {TenantAgreementDetailData.Rentdepositmonth} month's rent, to be held by the Landlord as security for the performance of the Tenant's obligations under this Agreement. The security deposit will be refunded to the Tenant within {TenantAgreementDetailData.Rentdepositrefunddays} days after vacating the premises, less any deductions for damages beyond normal wear and tear."));
+                        document.Add(new Paragraph("4. PROPERTY OWNER RESPONSIBILITIES")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Property Upkeep: The Property Owner agrees to maintain the Property in a condition suitable for rental.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Insurance: The Property Owner is responsible for obtaining and maintaining appropriate insurance coverage for the Property.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Legal Compliance: The Property Owner agrees to comply with all local, county, and national laws relating to the rental and maintenance of the Property.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(20));
 
-                            // Utilities
-                            document.Add(new Paragraph("5. UTILITIES:"));
-                            document.Add(new Paragraph(TenantAgreementDetailData.Rentutilityinclusive
-                                ? "All utilities (e.g., electricity, water) are included in the rent."
-                                : $"The Tenant shall be responsible for the payment of the following utilities: {TenantAgreementDetailData.Propertyhouseutility}"));
+                        document.Add(new Paragraph("5. DATA PROTECTION AND PRIVACY")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Compliance with Data Protection Act, 2019: The Management System Provider shall ensure that all personal data collected, processed, and stored as part of the rental management services is handled in accordance with the Data Protection Act, 2019 of Kenya.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Data Security: Both parties agree to implement appropriate technical and organizational measures to protect personal data against unauthorized or unlawful processing, accidental loss, destruction, or damage.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(20));
 
-                            // Additional Sections
-                            document.Add(new Paragraph("6. MAINTENANCE AND REPAIRS: The Tenant agrees to keep the premises in a clean and habitable condition and to promptly notify the Landlord of any necessary repairs. The Tenant shall not make any alterations to the premises without the prior written consent of the Landlord."));
-                            document.Add(new Paragraph($"7. OCCUPANTS: The premises shall be occupied by the Tenant and the following individuals:\n{TenantAgreementDetailData.Tenantsintheroom}"));
-                            document.Add(new Paragraph("8. PETS:"));
-                            document.Add(new Paragraph(TenantAgreementDetailData.Allowpets
-                                ? "Pets are allowed, subject to the following conditions: [Specify pet conditions here]"
-                                : "No pets are allowed on the premises"));
-                            document.Add(new Paragraph("9. PAYMENT DETAILS: The Tenant shall make all payments to the following bank account details:"));
-                            document.Add(new Paragraph($"Banking Details: {TenantAgreementDetailData.Systempropertybankname}"));
-                            document.Add(new Paragraph("10. INSURANCE: The Tenant is encouraged to obtain renter's insurance to cover personal property against loss or damage. The Landlord shall not be responsible for any loss or damage to the Tenant's personal property."));
-                            document.Add(new Paragraph("11. DISPUTE RESOLUTION: Any disputes arising out of or relating to this Agreement shall be resolved through mediation or arbitration, as per the laws of Kenya. The parties agree to seek resolution through these methods before pursuing any legal action."));
-                            document.Add(new Paragraph("12. GOVERNING LAW: This Agreement shall be governed by and construed in accordance with the laws of Kenya."));
-                            document.Add(new Paragraph("13. ENTIRE AGREEMENT: This Agreement constitutes the entire agreement between the parties and supersedes all prior agreements or understandings, whether written or oral, relating to the subject matter hereof."));
+                        document.Add(new Paragraph("6. TERM AND TERMINATION")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph($"- Term: This Agreement will begin on {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd} and will continue until terminated by either party.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("- Termination: Either party may terminate this Agreement with 14 days' written notice. Upon termination, the Property Owner is responsible for any outstanding fees and obligations under this Agreement.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(20));
 
-                            // Additional Clauses
-                            document.Add(new Paragraph("14. WEAR AND TEAR: Normal wear and tear refers to the deterioration of the premises and its fixtures caused by ordinary use over time, without negligence or abuse. Examples include minor scuffs on walls, worn carpet, or faded paint. Damage beyond normal wear and tear includes, but is not limited to, large holes in walls, broken windows, and significant damage to appliances or fixtures. The Tenant is responsible for repairs or costs associated with damage beyond normal wear and tear. The Landlord shall provide a written estimate for such repairs, and the Tenant shall have the right to contest the charges if they disagree."));
+                        document.Add(new Paragraph("7. INDEMNIFICATION")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("The Property Owner agrees to indemnify and hold harmless the Management System Provider from any claims, liabilities, or damages arising out of the management of the Property, except in cases of gross negligence or willful misconduct by the Management System Provider.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(20));
 
-                            document.Add(new Paragraph("15. DATA PROTECTION: The Landlord and Tenant agree to comply with all applicable data protection laws and regulations. The Tenant's personal data collected under this Agreement will be used solely for the purpose of managing the rental relationship and will not be shared with third parties without the Tenant's consent, except as required by law. The Tenant has the right to access, correct, or delete their personal data upon request."));
+                        document.Add(new Paragraph("8. CONFIDENTIALITY")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("Both parties agree to keep all information regarding the Property and this Agreement confidential, except as required by law.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(20));
 
-                            // Signatures Section
-                            document.Add(new Paragraph("SIGNATURES")
-                                .SetFontSize(16)
-                                .SetBold()
-                                .SetMarginBottom(20));
+                        document.Add(new Paragraph("9. GOVERNING LAW")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("This Agreement shall be governed by and construed in accordance with the laws of Kenya.")
+                            .SetFontSize(14)
+                            .SetMarginBottom(20));
 
-                            // Landlord Signature
-                            document.Add(new Paragraph("Landlord:")
-                                .SetFontSize(16)
-                                .SetBold()
-                                .SetMarginBottom(5));
-                            document.Add(new Paragraph($"Signature: ____________________________"));
-                            document.Add(new Paragraph($"Name: {TenantAgreementDetailData.Ownerfullname}"));
-                            document.Add(new Paragraph($"Property Owner: {TenantAgreementDetailData.Propertyhousename}"));
-                            document.Add(new Paragraph($"Date: {TenantAgreementDetailData.TenantDatecreated:yyyy-MM-dd}"));
+                        // Signatures
+                        document.Add(new Paragraph("SIGNATURES")
+                            .SetFontSize(16)
+                            .SetBold()
+                            .SetMarginBottom(20));
 
-                            // Tenant Signature
-                            document.Add(new Paragraph("Tenant:")
-                                .SetFontSize(16)
-                                .SetBold()
-                                .SetMarginBottom(5));
-                            document.Add(new Paragraph($"Signature: ____________________________"));
-                            document.Add(new Paragraph($"Name: {TenantAgreementDetailData.Tenantfullname}"));
-                            document.Add(new Paragraph($"Date: {TenantAgreementDetailData.TenantDatecreated:yyyy-MM-dd}"));
+                        document.Add(new Paragraph($"Property Owner: ____________________   Date: ____________________")
+                            .SetFontSize(14)
+                            .SetMarginBottom(10));
+                        document.Add(new Paragraph($"Management System Provider: ____________________   Date: ____________________")
+                            .SetFontSize(14)
+                            .SetMarginBottom(10));
 
-                            document.Close();
-                        }
+                        // Close the document
+                        document.Close();
                     }
-                    memoryStream.Position = 0;
-                    var firebaseStorage = new FirebaseStorage("uttambsolutions-4ec2a.appspot.com");
-                    var storageReference = firebaseStorage.Child("maqaoplus").Child("agreements").Child("RentalAgreement.pdf");
-                    var uploadTask = storageReference.PutAsync(memoryStream);
-                    var downloadUrl = await uploadTask;
-                    return downloadUrl.ToString();
                 }
-                catch (Exception ex)
-                {
-                    // Handle exceptions
-                    Debug.WriteLine($"An error occurred while generating or uploading the PDF: {ex.Message}");
-                    throw;
-                }
+                memoryStream.Position = 0;
+                var firebaseStorage = new FirebaseStorage("uttambsolutions-4ec2a.appspot.com");
+                var storageReference = firebaseStorage.Child("maqaoplus").Child("agreements").Child("RentalAgreement.pdf");
+                var uploadTask = storageReference.PutAsync(memoryStream);
+                var downloadUrl = await uploadTask;
+                return downloadUrl.ToString();
             }
         }
 
