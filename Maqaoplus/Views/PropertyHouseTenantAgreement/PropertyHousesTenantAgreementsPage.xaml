@@ -18,12 +18,11 @@
             <Label Text="RENTAL AGREEMENT" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,20" />
 
             <!-- Agreement Details -->
-            <Label Text="This Rental Agreement (Agreement) is made and entered into on this __ day of ________, 20__, by and between:" FontSize="14" Margin="0,0,0,10" />
+            <Label Text="{Binding OwnerTenantAgreementDetailData.OwnerDatecreated, StringFormat='This Rental Agreement (Agreement) is made and entered into on this {0:dd} day of {0:MMM}, 20{0:yy}, by and between:'}"  FontSize="14" Margin="0,0,0,10" />
 
             <!-- Landlord -->
             <Label Text="Landlord:" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
             <Label Text="Full Name: [Landlord's Full Name]" FontSize="14" Margin="0,0,0,5" />
-            <Label Text="ID/Passport Number: [Landlord's ID/Passport Number]" FontSize="14" Margin="0,0,0,5" />
             <Label Text="Address: [Landlord's Address]" FontSize="14" Margin="0,0,0,5" />
             <Label Text="Phone Number: [Phone Number]" FontSize="14" Margin="0,0,0,5" />
             <Label Text="Email Address: [Email Address]" FontSize="14" Margin="0,0,0,20" />
