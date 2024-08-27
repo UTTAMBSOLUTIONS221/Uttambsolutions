@@ -376,6 +376,39 @@ namespace Maqaoplus.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private string _systemStaffKinnameError;
+        public string SystemStaffKinnameError
+        {
+            get => _systemStaffKinnameError;
+            set
+            {
+                _systemStaffKinnameError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _systemStaffKinrelationshipError;
+        public string SystemStaffKinrelationshipError
+        {
+            get => _systemStaffKinrelationshipError;
+            set
+            {
+                _systemStaffKinrelationshipError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _systemStaffKinphonenumberError;
+        public string SystemStaffKinphonenumberError
+        {
+            get => _systemStaffKinphonenumberError;
+            set
+            {
+                _systemStaffKinphonenumberError = value;
+                OnPropertyChanged();
+            }
+        }
         private bool IsValidInput()
         {
             bool isValid = true;
@@ -443,33 +476,33 @@ namespace Maqaoplus.ViewModels
             {
                 SystemStaffMaritalstatusError = null;
             }
-            //if (string.IsNullOrWhiteSpace(StaffData.Kinname))
-            //{
-            //    SystemStaffKinnameError = "Kin Name is required.";
-            //    isValid = false;
-            //}
-            //else
-            //{
-            //    SystemStaffKinnameError = null;
-            //}
-            //if (string.IsNullOrWhiteSpace(StaffData.Kinname))
-            //{
-            //    SystemStaffKinnameError = "Kin Name is required.";
-            //    isValid = false;
-            //}
-            //else
-            //{
-            //    SystemStaffKinnameError = null;
-            //}
-            //if (StaffData.Kinrelationshipid == 0)
-            //{
-            //    SystemStaffKinrelationshipError = "Kin Relationship is required.";
-            //    isValid = false;
-            //}
-            //else
-            //{
-            //    SystemStaffKinrelationshipError = null;
-            //}
+            if (string.IsNullOrWhiteSpace(StaffData.Kinname))
+            {
+                SystemStaffKinnameError = "Kin Name is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffKinnameError = null;
+            }
+            if (string.IsNullOrWhiteSpace(StaffData.Kinphonenumber))
+            {
+                SystemStaffKinphonenumberError = "Kin phone number is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffKinphonenumberError = null;
+            }
+            if (StaffData.Kinrelationshipid == 0)
+            {
+                SystemStaffKinrelationshipError = "Kin Relationship is required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffKinrelationshipError = null;
+            }
 
             return isValid;
         }
