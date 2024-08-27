@@ -25,12 +25,16 @@
         public decimal Systempropertyhousesizerent { get; set; }
         public decimal Systempropertyhousesizerentdeposit { get; set; }
         public int Rentdepositmonth { get; set; }
+        public int Rentdepositrefunddays { get; set; }
         public bool Monthlyrentterms { get; set; }
+        public bool Allowpets { get; set; }
         public decimal Waterunitprice { get; set; }
         public string? Countyname { get; set; }
         public string? Subcountyname { get; set; }
         public string? Subcountywardname { get; set; }
+        public string? Streetorlandmark { get; set; }
         public DateTime TenantDatecreated { get; set; }
+        public DateTime Nextrentduedate { get; set; }
         public string? TenantSignatureimageurl { get; set; }
         public string? Agreementdata { get; set; }
         public string? Propertyhouseutility { get; set; }
