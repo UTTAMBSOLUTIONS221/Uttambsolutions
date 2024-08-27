@@ -1,6 +1,8 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
+using Firebase.Storage;
+using iTextSharp.text.pdf;
 using Maqaoplus.Views.PropertyHouse.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -1126,6 +1128,49 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             return isValid;
         }
+
+
+
+        public async Task<string> GeneratePdfFromImageAsync(Stream imageStream, string pdfFileName)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                PdfDocument document = new PdfDocument();
+                PdfPage page = document.AddPage();
+                XGraphics gfx = XGraphics.FromPdfPage(page);
+
+                // Load image from stream and draw it on the PDF
+                XImage image = XImage.FromStream(imageStream);
+                gfx.DrawImage(image, 0, 0, page.Width, page.Height);
+
+                document.Save(memoryStream, false);
+                byte[] pdfBytes = memoryStream.ToArray();
+
+                // Save to Firebase Storage
+                string pdfUrl = await SavePdfToFirebaseAsync(pdfBytes, pdfFileName);
+                return pdfUrl;
+            }
+        }
+        private async Task<string> SavePdfToFirebaseAsync(byte[] pdfBytes, string pdfFileName)
+        {
+            // Initialize Firebase Storage
+            var firebaseStorage = new FirebaseStorage("uttambsolutions-4ec2a.appspot.com");
+
+            // Reference to the "maqaoplus/agreements" folder
+            var storageReference = firebaseStorage.Child("maqaoplus").Child("agreements").Child(pdfFileName);
+
+            // Upload the PDF bytes
+            var uploadTask = storageReference.PutAsync(pdfBytes);
+
+            // Await the upload task to complete
+            await uploadTask;
+
+            // Get the download URL
+            var downloadUrl = await storageReference.GetDownloadUrlAsync();
+
+            return downloadUrl.ToString();
+        }
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
