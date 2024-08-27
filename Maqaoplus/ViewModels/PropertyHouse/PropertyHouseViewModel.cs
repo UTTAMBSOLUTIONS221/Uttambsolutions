@@ -4,7 +4,6 @@ using DBL.Models;
 using Firebase.Storage;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using Maqaoplus.Constants;
 using Maqaoplus.Views.PropertyHouse.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -1250,7 +1249,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                     // Add the signature image
                     var imgPath = "resources/images/mysignature.png";
-                    var signatureImage = iTextSharp.text.Image.GetInstance(Icons.mysignature);
+                    var signatureImage = iTextSharp.text.Image.GetInstance(imgPath);
                     signatureImage.ScaleToFit(200, 50);
                     document.Add(signatureImage);
                     document.Add(new Paragraph(" "));
