@@ -41,7 +41,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
             set
             {
                 _tenantAgreementDetailData = value;
-                OnPropertyChanged(nameof(OwnerTenantAgreementDetailData));
+                OnPropertyChanged(nameof(TenantAgreementDetailData));
                 OnPropertyChanged(nameof(IsSignatureDrawingVisible));
                 OnPropertyChanged(nameof(IsSignatureImageVisible));
                 OnPropertyChanged(nameof(IsSignatureAvailable));
