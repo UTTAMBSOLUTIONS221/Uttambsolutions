@@ -77,7 +77,7 @@ namespace API.Controllers
         }
         [AllowAnonymous]
         [HttpGet("Getsystempropertyhouseroomagreementdetaildatabytenantid/{PropertyTenantId}")]
-        public async Task<OwnerTenantAgreementDetailDataModel> Getsystempropertyhouseroomagreementdetaildatabytenantid(long PropertyTenantId)
+        public async Task<TenantAgreementDetailDataModel> Getsystempropertyhouseroomagreementdetaildatabytenantid(long PropertyTenantId)
         {
             return await bl.Getsystempropertyhouseroomagreementdetaildatabytenantid(PropertyTenantId);
         }

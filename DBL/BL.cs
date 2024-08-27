@@ -921,7 +921,7 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<OwnerTenantAgreementDetailDataModel> Getsystempropertyhouseroomagreementdetaildatabytenantid(long Propertytenantid)
+        public Task<TenantAgreementDetailDataModel> Getsystempropertyhouseroomagreementdetaildatabytenantid(long Propertytenantid)
         {
             return Task.Run(() =>
             {
