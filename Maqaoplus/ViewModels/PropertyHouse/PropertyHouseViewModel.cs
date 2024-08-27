@@ -2,6 +2,8 @@
 using DBL.Enum;
 using DBL.Models;
 using Firebase.Storage;
+using iText.IO.Font.Constants;
+using iText.Kernel.Font;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Maqaoplus.Views.PropertyHouse.Modal;
@@ -1135,18 +1137,25 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             if (OwnerTenantAgreementDetailData == null)
                 return null;
 
-            // Initialize a memory stream to hold the PDF data
             using (var memoryStream = new MemoryStream())
             {
-                // Generate PDF
-                using (var writer = new PdfWriter(filePath))
+                // Initialize PDF writer and document
+                using (var writer = new PdfWriter(memoryStream))
                 {
                     using (var pdf = new PdfDocument(writer))
                     {
                         var document = new Document(pdf);
 
+                        // Define fonts
+                        var boldFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+                        var regularFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
                         // Title
-                        document.Add(new Paragraph("RENTAL MANAGEMENT SYSTEM AGREEMENT").SetFontSize(14).SetBold().SetTextAlignment(TextAlignment.Center).SetMarginBottom(20));
+                        document.Add(new Paragraph("RENTAL MANAGEMENT SYSTEM AGREEMENT")
+                            .SetFont(boldFont)
+                            .SetFontSize(14)
+                            .SetTextAlignment(TextAlignment.CENTER)
+                            .SetMarginBottom(20));
 
                         // Date
                         document.Add(new Paragraph($"Date: {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd}")
@@ -1155,8 +1164,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                         // Property Owner Details
                         document.Add(new Paragraph($"Property: {OwnerTenantAgreementDetailData.Propertyhousename}")
+                            .SetFont(boldFont)
                             .SetFontSize(16)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph($"Name: {OwnerTenantAgreementDetailData.Fullname}")
                             .SetFontSize(16)
@@ -1173,8 +1182,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                         // Rental Management System Provider
                         document.Add(new Paragraph("Rental Management System Provider:")
+                            .SetFont(boldFont)
                             .SetFontSize(16)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph("Name: UTTAMB SOLUTIONS LIMITED")
                             .SetFontSize(14)
@@ -1191,16 +1200,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                         // Agreement Sections
                         document.Add(new Paragraph("1. PURPOSE OF THE AGREEMENT")
+                            .SetFont(boldFont)
                             .SetFontSize(16)
-                            .SetBold()
                             .SetMarginBottom(5));
-                        document.Add(new Paragraph($"The purpose of this Agreement is to outline the terms and conditions under which UTTAMB SOLUTIONS LIMITED (hereinafter referred to as the Management System Provider) will provide rental management services to {detailData.Fullname}(hereinafter referred to as the Property Owner) for the property located at {detailData.Countyname}-{detailData.Subcountyname}-{detailData.Subcountywardname} (hereinafter referred to as the Property).")
+                        document.Add(new Paragraph($"The purpose of this Agreement is to outline the terms and conditions under which UTTAMB SOLUTIONS LIMITED (hereinafter referred to as the Management System Provider) will provide rental management services to {OwnerTenantAgreementDetailData.Fullname} (hereinafter referred to as the Property Owner) for the property located at {OwnerTenantAgreementDetailData.Countyname}-{OwnerTenantAgreementDetailData.Subcountyname}-{OwnerTenantAgreementDetailData.Subcountywardname} (hereinafter referred to as the Property).")
                             .SetFontSize(14)
                             .SetMarginBottom(5));
 
                         document.Add(new Paragraph("2. SERVICES PROVIDED")
+                            .SetFont(boldFont)
                             .SetFontSize(16)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph("- Advertising and Marketing: Listing the Property on various platforms to attract potential tenants.")
                             .SetFontSize(14)
@@ -1219,8 +1228,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                             .SetMarginBottom(20));
 
                         document.Add(new Paragraph("3. FEES AND PAYMENTS")
+                            .SetFont(boldFont)
                             .SetFontSize(16)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph("- Service Fee: The Property Owner agrees to pay the Management System Provider a service fee of 1% of the monthly rent collected.")
                             .SetFontSize(14)
@@ -1229,16 +1238,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                             .SetFontSize(14)
                             .SetMarginBottom(5));
                         document.Add(new Paragraph("  Bank Name: FAMILY BANK")
+                            .SetFont(boldFont)
                             .SetFontSize(14)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph("  Pay Bill: 222111")
+                            .SetFont(boldFont)
                             .SetFontSize(14)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph("  Account Number: 2340982")
+                            .SetFont(boldFont)
                             .SetFontSize(14)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph("- Payment Terms: The subscription fee is due on the 10th day of each month.")
                             .SetFontSize(14)
@@ -1248,8 +1257,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                             .SetMarginBottom(20));
 
                         document.Add(new Paragraph("4. PROPERTY OWNER RESPONSIBILITIES")
+                            .SetFont(boldFont)
                             .SetFontSize(16)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph("- Property Upkeep: The Property Owner agrees to maintain the Property in a condition suitable for rental.")
                             .SetFontSize(14)
@@ -1262,8 +1271,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                             .SetMarginBottom(20));
 
                         document.Add(new Paragraph("5. DATA PROTECTION AND PRIVACY")
+                            .SetFont(boldFont)
                             .SetFontSize(16)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph("- Compliance with Data Protection Act, 2019: The Management System Provider shall ensure that all personal data collected, processed, and stored as part of the rental management services is handled in accordance with the Data Protection Act, 2019 of Kenya.")
                             .SetFontSize(14)
@@ -1273,8 +1282,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                             .SetMarginBottom(20));
 
                         document.Add(new Paragraph("6. TERM AND TERMINATION")
+                            .SetFont(boldFont)
                             .SetFontSize(16)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph($"- Term: This Agreement will begin on {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd} and will continue until terminated by either party.")
                             .SetFontSize(14)
@@ -1284,52 +1293,68 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                             .SetMarginBottom(20));
 
                         document.Add(new Paragraph("7. INDEMNIFICATION")
+                            .SetFont(boldFont)
                             .SetFontSize(16)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph("The Property Owner agrees to indemnify and hold harmless the Management System Provider from any claims, liabilities, or damages arising out of the management of the Property, except in cases of gross negligence or willful misconduct by the Management System Provider.")
                             .SetFontSize(14)
                             .SetMarginBottom(20));
 
-                        document.Add(new Paragraph("8. CONFIDENTIALITY")
+                        document.Add(new Paragraph("8. GOVERNING LAW")
+                            .SetFont(boldFont)
                             .SetFontSize(16)
-                            .SetBold()
-                            .SetMarginBottom(5));
-                        document.Add(new Paragraph("Both parties agree to keep all information regarding the Property and this Agreement confidential, except as required by law.")
-                            .SetFontSize(14)
-                            .SetMarginBottom(20));
-
-                        document.Add(new Paragraph("9. GOVERNING LAW")
-                            .SetFontSize(16)
-                            .SetBold()
                             .SetMarginBottom(5));
                         document.Add(new Paragraph("This Agreement shall be governed by and construed in accordance with the laws of Kenya.")
                             .SetFontSize(14)
                             .SetMarginBottom(20));
 
-                        // Signatures
-                        document.Add(new Paragraph("SIGNATURES")
+                        document.Add(new Paragraph("9. ENTIRE AGREEMENT")
+                            .SetFont(boldFont)
                             .SetFontSize(16)
-                            .SetBold()
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("This Agreement constitutes the entire agreement between the parties with respect to its subject matter and supersedes all prior agreements and understandings, whether written or oral.")
+                            .SetFontSize(14)
                             .SetMarginBottom(20));
 
-                        document.Add(new Paragraph($"Property Owner: ____________________   Date: ____________________")
+                        // Signatures
+                        document.Add(new Paragraph("AGREED AND ACCEPTED")
+                            .SetFont(boldFont)
+                            .SetFontSize(16)
+                            .SetMarginBottom(20));
+
+                        document.Add(new Paragraph("_____________________________")
                             .SetFontSize(14)
-                            .SetMarginBottom(10));
-                        document.Add(new Paragraph($"Management System Provider: ____________________   Date: ____________________")
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("Property Owner")
                             .SetFontSize(14)
-                            .SetMarginBottom(10));
+                            .SetMarginBottom(20));
+
+                        document.Add(new Paragraph("_____________________________")
+                            .SetFontSize(14)
+                            .SetMarginBottom(5));
+                        document.Add(new Paragraph("Management System Provider")
+                            .SetFontSize(14)
+                            .SetMarginBottom(20));
 
                         // Close the document
                         document.Close();
                     }
                 }
-                memoryStream.Position = 0;
-                var firebaseStorage = new FirebaseStorage("uttambsolutions-4ec2a.appspot.com");
-                var storageReference = firebaseStorage.Child("maqaoplus").Child("agreements").Child("RentalAgreement.pdf");
-                var uploadTask = storageReference.PutAsync(memoryStream);
-                var downloadUrl = await uploadTask;
-                return downloadUrl.ToString();
+
+                // Convert memory stream to byte array
+                var pdfBytes = memoryStream.ToArray();
+
+                // Upload to Firebase Storage
+                var storage = new FirebaseStorage("your_firebase_storage_bucket");
+                var stream = new MemoryStream(pdfBytes);
+
+                var fileName = $"agreement_{DateTime.Now:yyyyMMddHHmmss}.pdf";
+                var storageRef = storage.Child("agreements").Child(fileName);
+
+                var uploadTask = storageRef.PutAsync(stream);
+                await uploadTask;
+
+                return await storageRef.GetDownloadUrlAsync();
             }
         }
 
