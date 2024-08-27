@@ -3,6 +3,7 @@ using Maqaoplus.Views;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.OwnerBillsandPayments;
 using Maqaoplus.Views.PropertyHouse;
+using Maqaoplus.Views.PropertyHouseTenantAgreement;
 using Maqaoplus.Views.PropertyHouseTenants;
 using Maqaoplus.Views.TenantBillsandPayments;
 
@@ -160,10 +161,16 @@ namespace Maqaoplus.Constants
                         new ShellContent
                         {
                             Icon = Icons.invoice,
+                            Title = "Agreement",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesTenantAgreementsPage(serviceProvider)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.invoice,
                             Title = "Bills",
                             ContentTemplate = new DataTemplate(() => new PropertyHousesTenantBillsPage(serviceProvider)),
                         },
-                            new ShellContent
+                        new ShellContent
                         {
                             Icon = Icons.dollar,
                             Title = "Payments",
