@@ -45,6 +45,7 @@
 
 
 
+        public long Agreementid { get; set; }
         public long Propertyhouseowner { get; set; }
         public string? Signatureimageurl { get; set; }
         public string? Agreementname { get; set; }

@@ -766,6 +766,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
+                    OwnerTenantAgreementDetailData.OwnerSignatureimageurl = response.Data2;
+                    OwnerTenantAgreementDetailData.Agreementdetailpdfurl = await GenerateAndUploadAgreementPdfAsync();
+                    OwnerTenantAgreementDetailData.Agreementid = Convert.ToInt64(response.Data1);
                     Application.Current.MainPage.Navigation.PopModalAsync();
                 }
                 else if (response.RespStatus == 1)
