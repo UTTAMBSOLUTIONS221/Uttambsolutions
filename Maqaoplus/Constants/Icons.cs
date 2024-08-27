@@ -9,6 +9,7 @@
         public const string groupusers = "groupusers.png";
         public const string dollar = "dollar.png";
         public const string invoice = "invoice.png";
+        public const string agreement = "contract.png";
 
         public const string ContactUs = "contact_us.png";
         public const string AboutUs = "about_us.png";

@@ -160,7 +160,7 @@ namespace Maqaoplus.Constants
                         },
                         new ShellContent
                         {
-                            Icon = Icons.invoice,
+                            Icon = Icons.agreement,
                             Title = "Agreement",
                             ContentTemplate = new DataTemplate(() => new PropertyHousesTenantAgreementsPage(serviceProvider)),
                         },
