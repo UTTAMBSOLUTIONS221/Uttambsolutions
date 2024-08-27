@@ -58,7 +58,7 @@
                                         <Label Text="{Binding Subcountyname ,StringFormat='Subcounty: {0}'}" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="3" />
                                         <Label Text="{Binding Subcountywardname ,StringFormat='Ward: {0}'}" TextTransform="Uppercase"  FontSize="13" TextColor="Black" Grid.Row="3" />
                                         <Label Text="{Binding Streetorlandmark}" FontSize="13" TextColor="Black" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
-                                        <Label Text="{Binding Systempropertyhousesizerent,StringFormat='Rent: {0}'}" FontSize="13" TextColor="Black" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
+                                        <Label Text="{Binding Systempropertyhousesizerent,StringFormat='Rent: {0: #,##0.00}'}" FontSize="13" TextColor="Black" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" />
 
                                     </StackLayout>
                                 </Grid>
