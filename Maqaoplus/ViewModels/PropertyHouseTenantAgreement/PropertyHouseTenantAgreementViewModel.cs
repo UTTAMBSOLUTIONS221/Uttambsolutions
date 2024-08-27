@@ -89,11 +89,11 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
                 IsProcessing = false;
                 return;
             }
-            TenantAgreementDetailData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
-            TenantAgreementDetailData.Signatureimageurl = imageUrl;
-            TenantAgreementDetailData.Ownerortenant = "Tenant";
-            TenantAgreementDetailData.Agreementname = TenantAgreementDetailData.Fullname + " Property " + TenantAgreementDetailData.Propertyhousename + " Owner Agreement";
-            TenantAgreementDetailData.Datecreated = DateTime.UtcNow;
+            //TenantAgreementDetailData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
+            //TenantAgreementDetailData.Signatureimageurl = imageUrl;
+            // TenantAgreementDetailData.Ownerortenant = "Tenant";
+            //TenantAgreementDetailData.Agreementname = TenantAgreementDetailData.Tenantfullname + " Room " + TenantAgreementDetailData.Systempropertyhousesizename + " Tenant Agreement";
+            // TenantAgreementDetailData.Datecreated = DateTime.UtcNow;
             try
             {
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", TenantAgreementDetailData);
