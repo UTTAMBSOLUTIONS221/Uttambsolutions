@@ -4,6 +4,7 @@ using DBL.Models;
 using Firebase.Storage;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Maqaoplus.Constants;
 using Maqaoplus.Views.PropertyHouse.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -1232,19 +1233,27 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     // Assuming the existing code setup
                     var formattedDate = OwnerTenantAgreementDetailData.OwnerDatecreated.ToString("yyyy-MM-dd");
 
-                    // Add the signature lines and labels with date placeholders
+                    // Signatures
                     document.Add(new Paragraph("_____________________________", regularFont));
                     document.Add(new Paragraph(" "));
                     document.Add(new Paragraph("Property Owner", regularFont));
                     document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph($"Date: {formattedDate}", regularFont));
+                    document.Add(new Paragraph($"Date: {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd}", regularFont));
                     document.Add(new Paragraph(" "));
 
                     document.Add(new Paragraph("_____________________________", regularFont));
                     document.Add(new Paragraph(" "));
                     document.Add(new Paragraph("Management System Provider", regularFont));
                     document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph($"Date: {formattedDate}", regularFont));
+                    document.Add(new Paragraph($"Date: {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd}", regularFont));
+                    document.Add(new Paragraph(" "));
+
+                    // Add the signature image
+                    var imgPath = "resources/images/mysignature.png";
+                    var signatureImage = iTextSharp.text.Image.GetInstance(Icons.mysignature);
+                    signatureImage.ScaleToFit(200, 50);
+                    document.Add(signatureImage);
+                    document.Add(new Paragraph(" "));
 
                     // Close the document
                     document.Close();
