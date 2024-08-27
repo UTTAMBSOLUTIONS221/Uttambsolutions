@@ -85,62 +85,37 @@
             <StackLayout>
                 <Label Text="5. UTILITIES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
 
-                <!-- CheckBox for Rent Inclusive -->
-                <CheckBox x:Name="RentInclusiveCheckBox" IsChecked="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Margin="0,0,0,5">
-                    <CheckBox.Triggers>
-                        <DataTrigger TargetType="CheckBox" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="True">
-                            <Setter Property="IsChecked" Value="True" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="CheckBox" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="False">
-                            <Setter Property="IsChecked" Value="False" />
-                        </DataTrigger>
-                    </CheckBox.Triggers>
-                </CheckBox>
-                <Label Text="All utilities (e.g., electricity, water) are included in the rent." FontSize="14" Margin="0,0,0,5">
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="True">
-                            <Setter Property="IsVisible" Value="True" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="False">
-                            <Setter Property="IsVisible" Value="true" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
+                <!-- Grid for Rent Inclusive -->
+                <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
+                    <CheckBox x:Name="RentInclusiveCheckBox" IsChecked="{Binding TenantAgreementDetailData.Rentutilityinclusive}" />
+                    <Label Text="All utilities (e.g., electricity, water) are included in the rent." FontSize="14" Grid.Column="1">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="False">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </Grid>
 
-                <!-- CheckBox for Rent Not Inclusive -->
-                <CheckBox x:Name="RentNotInclusiveCheckBox" IsChecked="{Binding TenantAgreementDetailData.Rentutilityinclusive, Mode=OneWay, Converter={StaticResource InverseBooleanConverter}}" Margin="0,0,0,5">
-                    <CheckBox.Triggers>
-                        <DataTrigger TargetType="CheckBox" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="True">
-                            <Setter Property="IsChecked" Value="False" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="CheckBox" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="False">
-                            <Setter Property="IsChecked" Value="True" />
-                        </DataTrigger>
-                    </CheckBox.Triggers>
-                </CheckBox>
-                <Label Text="The Tenant shall be responsible for the payment of the following utilities:" FontSize="14" Margin="0,0,0,5">
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding Rentutilityinclusive}" Value="True">
-                            <Setter Property="IsVisible" Value="False" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Label" Binding="{Binding Rentutilityinclusive}" Value="False">
-                            <Setter Property="IsVisible" Value="True" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
-
-                <!-- Label for Specifying Utilities -->
-                <Label Text="{Binding TenantAgreementDetailData.Propertyhouseutility, StringFormat='Utility: {0}'}" FontSize="14" Margin="0,0,0,20">
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Propertyhouseutility}" Value="False">
-                            <Setter Property="IsVisible" Value="True" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Propertyhouseutility}" Value="True">
-                            <Setter Property="IsVisible" Value="False" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
+                <!-- Grid for Rent Not Inclusive -->
+                <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
+                    <CheckBox x:Name="RentNotInclusiveCheckBox" IsChecked="{Binding TenantAgreementDetailData.Rentutilityinclusive, Mode=OneWay, Converter={StaticResource InverseBooleanConverter}}" />
+                    <Label Text="{Binding TenantAgreementDetailData.Propertyhouseutility, StringFormat='The Tenant shall be responsible for the payment of the following utilities: {0}'}" FontSize="14" Grid.Column="1">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="True">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="False">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </Grid>
             </StackLayout>
+
 
             <Label Text="6. MAINTENANCE AND REPAIRS" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
             <Label Text="The Tenant agrees to keep the premises in a clean and habitable condition and to promptly notify the Landlord of any necessary repairs. The Tenant shall not make any alterations to the premises without the prior written consent of the Landlord." FontSize="14" Margin="0,0,0,20" />
