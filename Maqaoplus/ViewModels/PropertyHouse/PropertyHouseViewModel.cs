@@ -1,13 +1,13 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
+using Firebase.Storage;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Maqaoplus.Views.PropertyHouse.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -1149,7 +1149,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                     // Title
                     var titleParagraph = new Paragraph("RENTAL MANAGEMENT SYSTEM AGREEMENT", boldFont);
-                    titleParagraph.Alignment = Element.ALIGN_CENTER;
+                    titleParagraph.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
                     document.Add(titleParagraph);
                     document.Add(new Paragraph(" ")); // Add spacing
 
@@ -1228,13 +1228,23 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     document.Add(new Paragraph("AGREED AND ACCEPTED", boldFont));
                     document.Add(new Paragraph(" ")); // Add spacing
 
+                    // Add the signature lines and labels
+                    // Assuming the existing code setup
+                    var formattedDate = OwnerTenantAgreementDetailData.OwnerDatecreated.ToString("yyyy-MM-dd");
+
+                    // Add the signature lines and labels with date placeholders
                     document.Add(new Paragraph("_____________________________", regularFont));
+                    document.Add(new Paragraph(" "));
                     document.Add(new Paragraph("Property Owner", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
+                    document.Add(new Paragraph(" "));
+                    document.Add(new Paragraph($"Date: {formattedDate}", regularFont));
+                    document.Add(new Paragraph(" "));
 
                     document.Add(new Paragraph("_____________________________", regularFont));
+                    document.Add(new Paragraph(" "));
                     document.Add(new Paragraph("Management System Provider", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
+                    document.Add(new Paragraph(" "));
+                    document.Add(new Paragraph($"Date: {formattedDate}", regularFont));
 
                     // Close the document
                     document.Close();
@@ -1244,34 +1254,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 var pdfBytes = memoryStream.ToArray();
 
                 // Upload to Firebase Storage
-                var fileName = $"agreement_{DateTime.Now:yyyyMMddHHmmss}.pdf";
-                var uploadUrl = $"https://firebasestorage.googleapis.com/v0/b/your_firebase_storage_bucket/o/{Uri.EscapeDataString(fileName)}?uploadType=multipart";
+                var storage = new FirebaseStorage("uttambsolutions-4ec2a.appspot.com");
+                var stream = new MemoryStream(pdfBytes);
 
-                using (var client = new HttpClient())
-                {
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    using (var content = new MultipartFormDataContent())
-                    {
-                        var streamContent = new StreamContent(new MemoryStream(pdfBytes));
-                        streamContent.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
-                        content.Add(streamContent, "file", fileName);
-
-                        var response = await client.PostAsync(uploadUrl, content);
-
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var jsonResponse = await response.Content.ReadAsStringAsync();
-                            // Extract download URL from the response
-                            return jsonResponse; // Modify according to actual response structure
-                        }
-                        else
-                        {
-                            // Handle errors
-                            throw new Exception("Failed to upload PDF to Firebase Storage.");
-                        }
-                    }
-                }
+                // Sanitize the file name to avoid issues with special characters
+                string sanitizedFullName = OwnerTenantAgreementDetailData.Fullname.Replace(" ", "_").Replace("/", "_").Replace("\\", "_");
+                string sanitizedPropertyName = OwnerTenantAgreementDetailData.Propertyhousename.Replace(" ", "_").Replace("/", "_").Replace("\\", "_");
+                var fileName = $"{sanitizedFullName}_{sanitizedPropertyName}_Owner_Agreement.pdf";
+                var uploadTask = storage.Child("maqaoplus").Child("agreements").Child(fileName).PutAsync(stream);
+                var downloadUrl = await uploadTask;
+                return downloadUrl;
             }
         }
 
