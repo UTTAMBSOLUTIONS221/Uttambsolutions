@@ -50,6 +50,7 @@
         public string? Agreementname { get; set; }
         public DateTime Datecreated { get; set; }
         public string? Ownerortenant { get; set; }
+        public string? Agreementdetailpdfurl { get; set; }
     }
 
 }

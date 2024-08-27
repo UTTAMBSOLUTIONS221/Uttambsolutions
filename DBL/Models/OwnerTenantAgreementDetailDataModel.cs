@@ -21,6 +21,6 @@
         public string? Agreementname { get; set; }
         public string? Ownerortenant { get; set; }
         public string? Signatureimageurl { get; set; }
+        public string? Agreementdetailpdfurl { get; set; }
     }
-
 }
