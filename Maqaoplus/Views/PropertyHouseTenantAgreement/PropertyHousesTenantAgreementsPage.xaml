@@ -63,7 +63,7 @@
                 <!-- Grid for Rent Inclusive -->
                 <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
                     <CheckBox x:Name="MonthlyrenttermsCheckBox" IsChecked="{Binding TenantAgreementDetailData.Monthlyrentterms}" />
-                    <Label Text="All utilities (e.g., electricity, water) are included in the rent." FontSize="14" Grid.Column="1">
+                    <Label Text="{Binding TenantAgreementDetailData.TenantDatecreated, StringFormat='Month-to-month tenancy beginning on ___{0:yyyy-MM-dd}___.'}" FontSize="14" Grid.Column="1">
                         <Label.Triggers>
                             <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Monthlyrentterms}" Value="True">
                                 <Setter Property="IsVisible" Value="True" />
@@ -78,7 +78,7 @@
                 <!-- Grid for Rent Not Inclusive -->
                 <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
                     <CheckBox x:Name="MonthlyrenttermsNotCheckBox" IsChecked="{Binding TenantAgreementDetailData.Monthlyrentterms, Mode=OneWay, Converter={StaticResource InverseBooleanConverter}}" />
-                    <Label Text="{Binding TenantAgreementDetailData.Propertyhouseutility, StringFormat='The Tenant shall be responsible for the payment of the following utilities: {0}'}" FontSize="14" Grid.Column="1">
+                    <Label Text="{Binding TenantAgreementDetailData.TenantDatecreated, StringFormat='Fixed-term lease ending on ___{0:yyyy-MM-dd}___(End Date).'}" FontSize="14" Grid.Column="1">
                         <Label.Triggers>
                             <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Monthlyrentterms}" Value="True">
                                 <Setter Property="IsVisible" Value="True" />
@@ -90,11 +90,7 @@
                     </Label>
                 </Grid>
             </StackLayout>
-            <Label Text="2. TERM" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
-            <Label Text="{Binding TenantAgreementDetailData.TenantDatecreated, StringFormat='The term of this rental agreement shall commence on ___{0:yyyy-MM-dd}___ (Start Date) and shall continue as follows:'}" FontSize="14" Margin="0,0,0,5" />
-            <Label Text="☐ Fixed-term lease ending on ____________ (End Date)." FontSize="14" Margin="0,0,0,5" />
-            <Label Text="☐ Month-to-month tenancy beginning on ____________." FontSize="14" Margin="0,0,0,20" />
-
+            
             <Label Text="3. RENT" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
             <Label FontSize="14" Margin="0,0,0,5">
                 <Label.Text>
