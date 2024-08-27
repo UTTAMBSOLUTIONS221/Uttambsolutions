@@ -17,13 +17,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private Systempropertyhouserooms _houseroomData;
         private Systemtenantdetails _tenantStaffData;
         private Systemtenantdetails _newTenantStaffData;
-        private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
         private Systempropertyhouseroomfixtures _systempropertyhouseroomfixturesData;
 
         public ICommand LoadRoomsCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
-        public ICommand ViewPropertyRoomAgreementCommand { get; }
         public ICommand ViewPropertyRoomCheckListCommand { get; }
         public ICommand ViewPropertyRoomImageCommand { get; }
         public ICommand SavePropertyHouseRoomFixtureCommand { get; }
@@ -67,7 +65,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             Rooms = new ObservableCollection<PropertyHouseDetails>();
             LoadRoomsCommand = new Command(async () => await LoadRooms());
             ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewDetails(propertyRoom.Systempropertyhouseroomid));
-            ViewPropertyRoomAgreementCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomAgreementDetails(propertyRoom.Systempropertyhouseroomid, 0));
             ViewPropertyRoomCheckListCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomCheckListDetailAsync(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomImageCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomImagesDetails(propertyRoom.Systempropertyhouseroomid));
             NextCommand = new Command(NextStep);
@@ -223,18 +220,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-        public OwnerTenantAgreementDetailData OwnerTenantAgreementDetailData
-        {
-            get => _ownerTenantAgreementDetailData;
-            set
-            {
-                _ownerTenantAgreementDetailData = value;
-                OnPropertyChanged(nameof(OwnerTenantAgreementDetailData));
-                OnPropertyChanged(nameof(IsSignatureDrawingVisible));
-                OnPropertyChanged(nameof(IsSignatureImageVisible));
-                OnPropertyChanged(nameof(IsSignatureAvailable));
-            }
-        }
         public SystemPropertyHouseImage SystemPropertyHouseImageData
         {
             get => _systemPropertyHouseImageData;
@@ -253,11 +238,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-        public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
-        public bool IsSignatureImageVisible => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
-        public bool IsSignatureAvailable => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.TenantSignatureimageurl);
-
-
 
         private async Task LoadRooms()
         {
@@ -325,19 +305,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 IsProcessing = false; // Stop loading indicator
             }
-        }
-
-        private async Task ViewPropertyRoomAgreementDetails(long propertyRoomId, long propertyRoomTenantid)
-        {
-            IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabypropertyidandownerid/" + propertyRoomId + "/" + propertyRoomTenantid, HttpMethod.Get, null);
-            if (response != null)
-            {
-                OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
-            }
-            var modalPage = new SystemPropertyHouseRoomAgreementModalPage(this);
-            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
-            IsProcessing = false;
         }
         private async Task ViewPropertyRoomImagesDetails(long propertyHouseRoomId)
         {
