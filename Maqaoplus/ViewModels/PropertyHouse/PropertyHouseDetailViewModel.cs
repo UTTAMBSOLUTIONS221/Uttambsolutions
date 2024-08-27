@@ -440,6 +440,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         // Set the Fixtureid to the selected value
                         fixture.Fixturestatusid = int.Parse(fixture.SelectedFixture.Value);
                     }
+                    if (fixture.Fixtureunits > 0 && fixture.Fixturestatusid <= 0)
+                    {
+                        await Shell.Current.DisplayAlert("Validation Error", "Fixture status is required when units are greater than 0.", "OK");
+                        IsProcessing = false;
+                        return;
+                    }
                 }
                 SystempropertyhouseroomfixturesData.Datecreated = DateTime.UtcNow;
                 SystempropertyhouseroomfixturesData.Createdby = App.UserDetails.Usermodel.Userid;
