@@ -105,7 +105,7 @@
                     <Label Text="{Binding TenantAgreementDetailData.Propertyhouseutility, StringFormat='The Tenant shall be responsible for the payment of the following utilities: {0}'}" FontSize="14" Grid.Column="1">
                         <Label.Triggers>
                             <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="True">
-                                <Setter Property="IsVisible" Value="False" />
+                                <Setter Property="IsVisible" Value="True" />
                             </DataTrigger>
                             <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="False">
                                 <Setter Property="IsVisible" Value="True" />
@@ -147,7 +147,7 @@
                                 <Setter Property="IsVisible" Value="True" />
                             </DataTrigger>
                             <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Allowpets}" Value="False">
-                                <Setter Property="IsVisible" Value="False" />
+                                <Setter Property="IsVisible" Value="True" />
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
@@ -165,7 +165,7 @@
                     <Label Text="8. Right to Inspect: Landlord may inspect the premises periodically with notice." FontSize="14" Margin="0,0,0,5" />
                 </StackLayout>
             </StackLayout>
-            
+
             <Label Text="9. PAYMENT DETAILS" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
             <Label Text="The Tenant shall make all payments to the following bank account details:" FontSize="14" Margin="0,0,0,10" />
 
