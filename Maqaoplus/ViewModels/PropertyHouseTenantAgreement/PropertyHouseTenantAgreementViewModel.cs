@@ -99,7 +99,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
             TenantAgreementDetailData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
             TenantAgreementDetailData.Signatureimageurl = imageUrl;
             TenantAgreementDetailData.Ownerortenant = "Tenant";
-            TenantAgreementDetailData.Agreementname = TenantAgreementDetailData.Tenantfullname + " Room " + TenantAgreementDetailData.Propertyhousename + " " + TenantAgreementDetailData.Systempropertyhousesizename + " " + TenantAgreementDetailData.Systempropertyhousesizename + " Tenant Agreement";
+            TenantAgreementDetailData.Agreementname = TenantAgreementDetailData.Tenantfullname + " " + TenantAgreementDetailData.Propertyhousename + " Room Tenant Agreement";
             TenantAgreementDetailData.Datecreated = DateTime.UtcNow;
             try
             {
