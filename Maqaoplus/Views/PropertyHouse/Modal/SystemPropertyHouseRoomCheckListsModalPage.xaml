@@ -5,7 +5,7 @@
              Title="Room Check Lists">
 
     <!-- ScrollView to enable scrolling -->
-    <ScrollView Padding="15,15,15,15">
+    <ScrollView Padding="15,15,15,20">
         <VerticalStackLayout Spacing="10">
 
             <!-- CollectionView Header and Items -->
