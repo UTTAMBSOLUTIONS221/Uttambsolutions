@@ -414,7 +414,7 @@ namespace Maqaoplus.ViewModels
             bool isValid = true;
             if (string.IsNullOrWhiteSpace(StaffData.Firstname))
             {
-                SystemStaffFirstNameError = "Firstname is required.";
+                SystemStaffFirstNameError = "Required.";
                 isValid = false;
             }
             else
@@ -423,7 +423,7 @@ namespace Maqaoplus.ViewModels
             }
             if (string.IsNullOrWhiteSpace(StaffData.Lastname))
             {
-                SystemStaffLastNameError = "Lastname is required.";
+                SystemStaffLastNameError = "Required.";
                 isValid = false;
             }
             else
@@ -433,7 +433,7 @@ namespace Maqaoplus.ViewModels
 
             if (string.IsNullOrWhiteSpace(StaffData.Emailaddress))
             {
-                SystemStaffEmailAddressError = "Email is required.";
+                SystemStaffEmailAddressError = "Required.";
                 isValid = false;
             }
             else
@@ -442,7 +442,7 @@ namespace Maqaoplus.ViewModels
             }
             if (string.IsNullOrWhiteSpace(StaffData.Phonenumber))
             {
-                SystemStaffPhonenumberError = "Phonenumber is required.";
+                SystemStaffPhonenumberError = "Required.";
                 isValid = false;
             }
             else
@@ -451,7 +451,7 @@ namespace Maqaoplus.ViewModels
             }
             if (string.IsNullOrWhiteSpace(StaffData.Idnumber))
             {
-                SystemStaffIdnumberError = "Idnumber is required.";
+                SystemStaffIdnumberError = "Required.";
                 isValid = false;
             }
             else
@@ -460,7 +460,7 @@ namespace Maqaoplus.ViewModels
             }
             if (Selectedstaffgender == null)
             {
-                SystemStaffGenderError = "Gender is required.";
+                SystemStaffGenderError = "Required.";
                 isValid = false;
             }
             else
@@ -469,7 +469,7 @@ namespace Maqaoplus.ViewModels
             }
             if (Selectedstaffmaritalstatus == null)
             {
-                SystemStaffMaritalstatusError = "Marital is required.";
+                SystemStaffMaritalstatusError = "Required.";
                 isValid = false;
             }
             else
@@ -478,7 +478,7 @@ namespace Maqaoplus.ViewModels
             }
             if (string.IsNullOrWhiteSpace(StaffData.Kinname))
             {
-                SystemStaffKinnameError = "Name is required.";
+                SystemStaffKinnameError = "Required.";
                 isValid = false;
             }
             else
@@ -487,7 +487,7 @@ namespace Maqaoplus.ViewModels
             }
             if (string.IsNullOrWhiteSpace(StaffData.Kinphonenumber))
             {
-                SystemStaffKinphonenumberError = "Phone is required.";
+                SystemStaffKinphonenumberError = "Required.";
                 isValid = false;
             }
             else
@@ -496,7 +496,7 @@ namespace Maqaoplus.ViewModels
             }
             if (Selectedstaffkinrelationship == null)
             {
-                SystemStaffKinrelationshipError = "Relationship is required.";
+                SystemStaffKinrelationshipError = "Required.";
                 isValid = false;
             }
             else
