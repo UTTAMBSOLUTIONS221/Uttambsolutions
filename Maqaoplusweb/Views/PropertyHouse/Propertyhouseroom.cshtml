@@ -127,6 +127,25 @@
             });
         });
 
+        function accepttoofferhimherroom() {
+            var tenantid = $('#Systemuserid').val();
+            $('#Systempropertyhousetenantid').val(tenantid);
+            $('#Systemstaffidnumberid').val('');
+            // Properly hide the modal
+            $('#Uttambsolutionsmodal').modal('hide');
+        }
+
+        function rejecttoofferhimherroom() {
+            $('#Systemstaffidnumberid').val('');
+
+            // Properly hide the modal
+            $('#Uttambsolutionsmodal').modal('hide');
+
+            // Optionally, reload the page after the modal is hidden
+            $('#Uttambsolutionsmodal').on('hidden.bs.modal', function () {
+                location.reload();
+            });
+        }
 
         function savesystempropertyhouseroomtenantdata() {
             document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = true;
@@ -189,33 +208,6 @@
                 });
             }
         });
-
-
-        function accepttoofferhimherroom() {
-            document.getElementById("accepttoofferhimherroomid").disabled = true;
-            document.getElementById("processingSpinner").style.display = "inline-block";
-            document.getElementById("buttonText").innerText = "Processing...";
-            var tenantid = $('#Systemuserid').val();
-            $('#Systempropertyhousetenantid').val(tenantid);
-            $('#Systemstaffidnumberid').val('');
-            document.getElementById("accepttoofferhimherroomid").disabled = false;
-            document.getElementById("processingSpinner").style.display = "none";
-            document.getElementById("buttonText").innerText = "SEARCH";
-
-            $(this).removeData('bs.modal');
-            $('.modal-backdrop').remove();
-            $('#Uttambsolutionsmodal .modal-content').empty();
-        }
-
-        function rejecttoofferhimherroom() {
-            $('#Systemstaffidnumberid').val('');
-            $(this).removeData('bs.modal');
-            $('.modal-backdrop').remove();
-            $('#Uttambsolutionsmodal .modal-content').empty();
-            setTimeout(function () { location.reload(); }, 1000);
-        }
-
-
 
         function savesystempropertyroomdata() {
             document.getElementById("savesystempropertyroomid").disabled = true;
