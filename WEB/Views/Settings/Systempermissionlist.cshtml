@@ -70,12 +70,12 @@
                 return;
             }
             var uil1 = {
-                PermissionId: $('#Systempermissionid').val(), Permissionname: $('#Systempermissionnameid').val(), Isadmin: $('#Systempermissionisadminid').is(':checked')
+                PermissionId: $('#Systempermissionid').val(), Permissionname: $('#Systempermissionnameid').val(), Module: $('#SystempermissionModulenameid').val(), Isadmin: $('#Systempermissionisadminid').is(':checked')
             };
             $.post("/Settings/Addsystempermissiondata", uil1, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire('Saved!', response.RespMessage, 'success')
-                    $('#FuelcardsystemModal').hide();
+                    $('#Uttambsolutionsmodal').hide();
                     setTimeout(function () { location.reload(); }, 1000);
                 } else if (response.RespStatus == 1) {
                     Swal.fire("Permission details not saved", response.RespMessage, "warning");

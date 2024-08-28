@@ -11,7 +11,7 @@
         <input class="form-control form-control-sm" asp-for="PermissionId" id="Systempermissionid" hidden />
     </div>
     <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Permission Name</label>
                 <input class="form-control form-control-sm" asp-for="Permissionname" id="Systempermissionnameid" />
@@ -19,7 +19,13 @@
         </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label class="font-weight-light">Is Admin?</label>
+                <label class="font-weight-light">Module Name</label>
+                <input class="form-control form-control-sm" asp-for="Module" id="SystempermissionModulenameid" />
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="font-weight-light">Admin?</label>
                 <input class="form-control form-control-sm" asp-for="Isadmin" type="checkbox" id="Systempermissionisadminid" />
             </div>
         </div>
