@@ -166,13 +166,14 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Renting Terms</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth" id="Propertyhouserentingtermsid" required>
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth"  id="Propertyhouserentingtermsid" required>
                         <option value="">---Select---</option>
                         <option value="Month-to-Month">Monthly</option>
                         <option value="Fixedterm">Fixed Term</option>
                     </select>
                 </div>
             </div>
+            <input class="form-control form-control-sm" id="Propertyhouserentingtermsenddateid" />
         </div>
         <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
     </div>
