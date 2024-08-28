@@ -555,6 +555,7 @@ namespace DBL.Repositories
             Systempropertyhouseroomdata response = new Systempropertyhouseroomdata();
             Systempropertyhouserooms responseData = new Systempropertyhouserooms();
             List<Systempropertyhouseroommeterhistory> responseMeterData = new List<Systempropertyhouseroommeterhistory>();
+            List<PropertyHousetenantroomhistory>? Tenantroomhistory = new List<PropertyHousetenantroomhistory>();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -599,7 +600,13 @@ namespace DBL.Repositories
                         string MeterhistoryJson = roomResponseJson["Meterhistorydata"].ToString();
                         responseMeterData = JsonConvert.DeserializeObject<List<Systempropertyhouseroommeterhistory>>(MeterhistoryJson);
                     }
+                    if (roomResponseJson["Roomtenanthistorydata"] != null)
+                    {
+                        string RoomtenanthistoryJson = roomResponseJson["Roomtenanthistorydata"].ToString();
+                        Tenantroomhistory = JsonConvert.DeserializeObject<List<PropertyHousetenantroomhistory>>(RoomtenanthistoryJson);
+                    }
                     responseData.Meterhistorydata = responseMeterData;
+                    responseData.Roomtenanthistorydata = Tenantroomhistory;
                     response.Data = responseData;
                     return response;
                 }

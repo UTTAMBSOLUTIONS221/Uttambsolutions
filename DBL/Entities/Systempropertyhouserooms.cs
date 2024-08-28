@@ -1,4 +1,6 @@
-﻿namespace DBL.Entities
+﻿using DBL.Models;
+
+namespace DBL.Entities
 {
     public class Systempropertyhouserooms
     {
@@ -31,6 +33,7 @@
         public int Createdby { get; set; }
         public DateTime Datecreated { get; set; }
         public List<Systempropertyhouseroommeterhistory>? Meterhistorydata { get; set; }
+        public List<PropertyHousetenantroomhistory>? Roomtenanthistorydata { get; set; }
     }
 
 }
