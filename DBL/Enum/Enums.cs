@@ -14,7 +14,7 @@
         SystemRoles = 0,
         SystemPhoneCodes = 1,
         SystemOutlets = 2,
-        SystemBlogModule = 3,
+        SystemModules = 3,
         SystemCategory = 4,
         SystemBlogCategory = 5,
         Systemproductbrand = 6,

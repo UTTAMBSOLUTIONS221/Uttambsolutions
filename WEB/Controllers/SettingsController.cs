@@ -1,7 +1,9 @@
 ﻿using DBL;
 using DBL.Entities;
+using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace WEB.Controllers
@@ -32,6 +34,7 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Addsystempermissions(long Permissionid)
         {
+            ViewData["Systemmoduleslists"] = bl.GetListModel(ListModelType.SystemModules).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Systempermissions model = new Systempermissions();
             if (Permissionid > 0)
             {
