@@ -95,12 +95,9 @@
             var button = $(event.relatedTarget); // Button that triggered the modal
             var modal = $(this);
 
-            // Construct the URL for loading modal content
-            var url = '/Account/Getsystemstaffdatabyidnumber';
-
             // Load content into the modal using AJAX
             $.ajax({
-                url: url,
+                url: '/Account/Getsystemstaffdatabyidnumber',
                 type: 'GET',
                 data: { Idnumber: idNumber },
                 success: function (data) {
