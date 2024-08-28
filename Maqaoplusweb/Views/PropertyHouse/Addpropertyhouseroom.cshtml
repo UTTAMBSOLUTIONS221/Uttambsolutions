@@ -166,9 +166,43 @@
                             <a asp-action="Getsystemstaffdatabyidnumber" asp-controller="Account" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Search</a>
                         </div>
                     </div>
+                    <input id="Systempropertyhousetenantid" asp-for="@Model.Tenantid" hidden />
+                </div>
+            </div>          
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="AllsystemDataTables1">
+                        <thead>
+                            <tr>
+                                <th class="font-weight-light fw-light text-sm">County</th>
+                                <th class="font-weight-light fw-light text-sm">Ward</th>
+                                <th class="font-weight-light fw-light text-sm">Landmark</th>
+                                <th class="font-weight-light fw-light text-sm">House</th>
+                                <th class="font-weight-light fw-light text-sm">Room</th>
+                                <th class="font-weight-light fw-light text-sm">Balance</th>
+                                <th class="font-weight-light fw-light text-sm">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Roomtenanthistorydata != null)
+                            {
+                                foreach (var item in Model.Roomtenanthistorydata)
+                                {
+                                    <tr>
+                                        <td class="font-weight-light fw-light text-sm">@item.Countyname</td>
+                                        <td class="font-weight-light fw-light text-sm">@item.Subcountywardname</td>
+                                        <td class="font-weight-light fw-light text-sm">@item.Streetorlandmark</td>
+                                        <td class="font-weight-light fw-light text-sm">@item.Propertyhousename</td>
+                                        <td class="font-weight-light fw-light text-sm">@item.Systempropertyhousesizename</td>
+                                        <td class="font-weight-light fw-light text-sm">@item.Outstandingbalance</td>
+                                        <td class="font-weight-light fw-light text-sm">@item.Datecreated</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <input id="Systempropertyhousetenantid" asp-for="@Model.Tenantid" hidden />
         </div>
     </div>
 </div>
