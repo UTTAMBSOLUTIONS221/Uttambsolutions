@@ -61,27 +61,38 @@
 </div>
 @section Scripts {
     <script type="text/javascript">
-        function toggleOwnerName() {
-            var isChecked = $('#Ispropertyhouseagencyid').prop('checked');
-            var ownerNameSelect = $('#Propertyhouseownerid');
-            if (isChecked) {
-                $('#OwnerNameContainer').css('display', 'block');
-                $('#HouseNameContainer').removeClass('col-sm-10').addClass('col-sm-7');
-                ownerNameSelect.prop('required', true);
+        function handleRentingTermsChange(selectElement) {
+            var selectedValue = selectElement.value;
+            var fixedTermRow = document.getElementById("fixedTermRow");
+            var endDateInput = document.getElementById("Propertyhouserentingtermsenddateid");
+
+            if (selectedValue === "Fixedterm") {
+                fixedTermRow.style.display = "block";
+                endDateInput.setAttribute("required", "required");
             } else {
-                $('#OwnerNameContainer').css('display', 'none');
-                $('#HouseNameContainer').removeClass('col-sm-7').addClass('col-sm-10');
-                ownerNameSelect.prop('required', false);
+                fixedTermRow.style.display = "none";
+                endDateInput.removeAttribute("required");
+            }
+        }
+        function handleAllowPetsChange(checkboxElement) {
+            var petDetailsRow = document.getElementById("petDetailsRow");
+            var numberOfPets = document.getElementById("NumberOfPets");
+            var petDeposit = document.getElementById("PetDeposit");
+            var petItems = document.getElementById("PetItems");
+
+            if (checkboxElement.checked) {
+                petDetailsRow.style.display = "flex";
+                numberOfPets.setAttribute("required", "required");
+                petDeposit.setAttribute("required", "required");
+                petItems.setAttribute("required", "required");
+            } else {
+                petDetailsRow.style.display = "none";
+                numberOfPets.removeAttribute("required");
+                petDeposit.removeAttribute("required");
+                petItems.removeAttribute("required");
             }
         }
 
-        // Call toggleOwnerName on page load to set the initial state based on the checkbox value
-        $(document).ready(function () {
-            toggleOwnerName();
-        });
-    </script>
-
-    <script type="text/javascript">
         function savepropertyhousedata() {
             document.getElementById("savepropertyhouseid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
