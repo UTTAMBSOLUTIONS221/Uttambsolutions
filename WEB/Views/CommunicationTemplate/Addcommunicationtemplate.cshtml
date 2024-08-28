@@ -1,0 +1,54 @@
+﻿@model DBL.Entities.Communicationtemplate
+<div class="modal-header">
+    <h5 class="text-sm modal-title" id="SocialPesaModalLabel">Communication Template</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <input asp-for="@Model.Templateid" id="SystemcommTemplateId" hidden />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Template Name</label>
+                @if (Model.Templateid > 0)
+                {
+                    <input asp-for="Templatename" class="form-control form-control-sm" required id="SystemcommtemplatenamereadonleId" readonly />
+                    <input asp-for="Templatename" class="form-control form-control-sm" required id="SystemcommtemplatenameId" hidden />
+                }
+                else
+                {
+                    <input asp-for="Templatename" class="form-control form-control-sm" required id="SystemcommtemplatenameId" />
+                }
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="font-weight-light">Template Subject</label>
+                <input asp-for="Templatesubject" class="form-control form-control-sm" required id="SystemcommtemplatesubjectId" />
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="font-weight-light text-center ml-4">Is Email</label>
+                <input asp-for="Isemailsms" class="form-control form-control-sm" type="checkbox" id="SystemcommtemplateisemailsmsId" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="font-weight-light">Template Body</label>
+                <textarea asp-for="Templatebody" class="form-control form-control-sm" required id="SystemcommtemplatebodyId"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" onclick="Savesystemcommunicationtemplatedata();">Submit</button>
+</div>
