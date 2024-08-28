@@ -424,6 +424,22 @@
                  $(".blockoverlay").hide();
              });
          });
+        $('body').on('shown.bs.modal', '#Uttambsolutionsmodal', function () {
+            $(this).find('.select2').each(function () {
+                var dropdownParent = $(document.body);
+                if ($(this).parents('.modal.in:first').length !== 0)
+                    dropdownParent = $(this).parents('.modal.in:first');
+                $(this).select2({
+                    dropdownParent: dropdownParent,
+                    closeOnSelect: false,
+                    placeholder: 'Select options',
+                    selectAllText: 'Select All',
+                    searchPlaceholder: 'Search options',
+                    allowClear: true
+                });
+            });
+        });
+
          $('#Uttambsolutionsmodallarge').on('hidden.bs.modal', function () {
              $(this).removeData('bs.modal');
              $('.modal-backdrop').remove();

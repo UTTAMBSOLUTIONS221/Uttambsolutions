@@ -107,6 +107,13 @@
                     // Insert the retrieved content into the modal's body
                     modal.find('.modal-content').html(data);
 
+                    // Handle nested modals
+                    modal.find('.modal-content .modal').each(function () {
+                        $(this).on('show.bs.modal', function () {
+                            $(this).appendTo('body'); // Detach nested modals from parent to work independently
+                        });
+                    });
+
                     // Hide the loading overlay once content is loaded
                     $(".blockoverlay").hide();
                 },
@@ -119,6 +126,7 @@
                 }
             });
         });
+
 
         function savesystempropertyhouseroomtenantdata() {
             document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = true;
