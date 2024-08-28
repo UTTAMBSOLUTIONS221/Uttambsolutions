@@ -78,7 +78,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\contract.png" />
+	  <None Remove="Resources\Images\agreement.png" />
 	  <None Remove="Resources\Images\dollar.png" />
 	  <None Remove="Resources\Images\email.png" />
 	  <None Remove="Resources\Images\familybank.png" />
