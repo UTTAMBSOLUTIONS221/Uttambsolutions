@@ -49,10 +49,26 @@ public partial class SystemPropertyHouseAgreementModalPage : ContentPage
             // Create a new bitmap with the desired size
             var resizedBitmap = new SKBitmap(width, height);
 
-            // Scale the original bitmap to the new size
+            // Create a new canvas to draw on the bitmap
             using (var canvas = new SKCanvas(resizedBitmap))
             {
-                canvas.DrawBitmap(originalBitmap, SKRect.Create(width, height));
+                // Fill the background with white
+                canvas.Clear(SKColors.White);
+
+                // Calculate the scaling ratio
+                var ratioX = (float)width / originalBitmap.Width;
+                var ratioY = (float)height / originalBitmap.Height;
+                var ratio = Math.Min(ratioX, ratioY);
+
+                // Calculate the position (center the image)
+                var newWidth = originalBitmap.Width * ratio;
+                var newHeight = originalBitmap.Height * ratio;
+                var x = (width - newWidth) / 2;
+                var y = (height - newHeight) / 2;
+
+                // Scale and draw the original bitmap onto the new bitmap
+                var destRect = new SKRect(x, y, x + newWidth, y + newHeight);
+                canvas.DrawBitmap(originalBitmap, destRect);
             }
 
             // Save the resized bitmap to a memory stream
