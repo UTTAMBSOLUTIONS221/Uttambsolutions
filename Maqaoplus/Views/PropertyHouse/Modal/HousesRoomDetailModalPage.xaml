@@ -79,7 +79,7 @@
             <Grid ColumnSpacing="8" RowSpacing="0">
                 <!-- Define two equal-width columns -->
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
@@ -92,7 +92,7 @@
                         <Entry Text="{Binding HouseroomData.Roomoccupant, Mode=TwoWay}" Placeholder="Enter Occupants number" PlaceholderColor="#a0a0a0" Keyboard="Numeric" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
                     </Frame>
                     <!-- Error Message -->
-                    <Label Text="{Binding PropertyHouseRoomNumberError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                    <Label Text="{Binding PropertyHouseRoomoccupantError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                 </StackLayout>
 
                 <!-- House Status Section -->
@@ -104,7 +104,7 @@
                         <Entry Text="{Binding HouseroomData.Roomoccupantdetail, Mode=TwoWay}" Placeholder="Enter Occupants Details" PlaceholderColor="#a0a0a0" Keyboard="Text" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
                     </Frame>
                     <!-- Error Message -->
-                    <Label Text="{Binding PropertyHouseRoomRentError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                    <Label Text="{Binding PropertyHouseRoomoccupantdetailError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                 </StackLayout>
             </Grid>
 
@@ -126,7 +126,7 @@
                     <Label Text="Is Shop?" VerticalOptions="Center" />
                 </HorizontalStackLayout>
             </Grid>
- 
+
             <Grid ColumnSpacing="8" RowSpacing="12">
                 <!-- Define two equal-width columns -->
                 <Grid.ColumnDefinitions>
@@ -145,7 +145,7 @@
                     <Label Text="Has Balcony?" VerticalOptions="Center" />
                 </HorizontalStackLayout>
             </Grid>
-          
+
             <Grid ColumnSpacing="8" RowSpacing="12">
                 <!-- Define two equal-width columns -->
                 <Grid.ColumnDefinitions>

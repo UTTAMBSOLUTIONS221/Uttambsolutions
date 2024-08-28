@@ -537,6 +537,27 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        private string _propertyHouseRoomoccupantError;
+        public string PropertyHouseRoomoccupantError
+        {
+            get => _propertyHouseRoomoccupantError;
+            set
+            {
+                _propertyHouseRoomoccupantError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _propertyHouseRoomoccupantdetailError;
+        public string PropertyHouseRoomoccupantdetailError
+        {
+            get => _propertyHouseRoomoccupantdetailError;
+            set
+            {
+                _propertyHouseRoomoccupantdetailError = value;
+                OnPropertyChanged();
+            }
+        }
 
         private string _propertyHouseKitchenTypeError;
         public string PropertyHouseKitchenTypeError
@@ -752,7 +773,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             // Validate Property Name
             if (string.IsNullOrWhiteSpace(HouseroomData?.Systempropertyhousesizename))
             {
-                PropertyHouseRoomNumberError = "Property House Number is required.";
+                PropertyHouseRoomNumberError = "Required.";
                 isValid = false;
             }
             else
@@ -762,7 +783,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             // Validate Property House Water Type
             if (HouseroomData?.Kitchentypeid == 0)
             {
-                PropertyHouseKitchenTypeError = "Property House Kitchen Type is required.";
+                PropertyHouseKitchenTypeError = "Required.";
                 isValid = false;
             }
             else
@@ -771,7 +792,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             if (HouseroomData?.Systempropertyhousesizerent == 0)
             {
-                PropertyHouseRoomRentError = "Property House Rent is required.";
+                PropertyHouseRoomRentError = "Required.";
                 isValid = false;
             }
             else
@@ -781,13 +802,32 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             // Validate Property House County
             if (HouseroomData?.Systempropertyhousesizeid == 0)
             {
-                PropertyHouseSizeError = "Property House Size is required.";
+                PropertyHouseSizeError = "Required.";
                 isValid = false;
             }
             else
             {
                 PropertyHouseSizeError = null;
             }
+            if (HouseroomData?.Roomoccupant == 0)
+            {
+                PropertyHouseRoomoccupantError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomoccupantError = null;
+            }
+            if (string.IsNullOrWhiteSpace(HouseroomData?.Roomoccupantdetail))
+            {
+                PropertyHouseRoomoccupantdetailError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomoccupantdetailError = null;
+            }
+
             // Update overall IsValid property
             IsProcessing = isValid;
 
