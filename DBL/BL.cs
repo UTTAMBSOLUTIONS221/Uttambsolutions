@@ -85,8 +85,65 @@ namespace DBL
                 var Resp = db.AccountRepository.Registersystemstaffdata(JsonConvert.SerializeObject(obj));
                 if (Resp.RespStatus == 0 || Resp.RespStatus == 200)
                 {
-                    //Send Registration Email
+                    if (Resp.Data1 == "Insert")
+                    {
 
+                        var commtempdata = db.SettingsRepository.Getsystemcommunicationtemplatedatabyname(true, "Staffregistrationtemplate");
+                        if (commtempdata != null)
+                        {
+                            StringBuilder StrBodyEmail = new StringBuilder(commtempdata.Templatebody);
+                            StrBodyEmail.Replace("@CompanyLogo", "");
+                            StrBodyEmail.Replace("@CompanyName", obj.Systemmodulename ?? "UTTAMB SOLUTIONS");
+                            StrBodyEmail.Replace("@CompanyEmail", "support@uttambsolutions.com");
+                            StrBodyEmail.Replace("@Fullname", Resp.Data3);
+                            StrBodyEmail.Replace("@Username", Resp.Data6);
+                            StrBodyEmail.Replace("@Password", sec.Decrypt(Resp.Data4, Resp.Data5));
+                            StrBodyEmail.Replace("@CurrentYear", DateTime.Now.Year.ToString());
+                            string message = StrBodyEmail.ToString();
+                            //log Email Messages
+                            EmailLogs Logs = new EmailLogs
+                            {
+                                EmailLogId = 0,
+                                ModuleId = Convert.ToInt64(Resp.Data2),
+                                EmailAddress = Resp.Data7,
+                                EmailSubject = commtempdata.Templatesubject,
+                                EmailMessage = message,
+                                IsEmailSent = false,
+                                DateTimeSent = DateTime.Now,
+                                Datecreated = DateTime.Now,
+                            };
+                            var resp = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs));
+                            bool data = emlsnd.UttambsolutionssendemailAsync(Resp.Data7, commtempdata.Templatesubject + " " + (obj.Systemmodulename ?? "UTTAMB SOLUTIONS"), message, true, "", "", "");
+                            if (data)
+                            {
+                                Resp.RespStatus = 0;
+                                Resp.RespMessage = "Email Sent";
+                                //Update Email is sent 
+                                EmailLogs Logs1 = new EmailLogs
+                                {
+                                    EmailLogId = Convert.ToInt64(resp.Data1),
+                                    ModuleId = Convert.ToInt64(Resp.Data2),
+                                    EmailAddress = Resp.Data7,
+                                    EmailSubject = commtempdata.Templatesubject,
+                                    EmailMessage = message,
+                                    IsEmailSent = true,
+                                    DateTimeSent = DateTime.Now,
+                                    Datecreated = DateTime.Now,
+                                };
+                                var resp1 = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs1));
+                            }
+                            else
+                            {
+                                Resp.RespStatus = 1;
+                                Resp.RespMessage = "Email not Sent";
+                            }
+                        }
+                        else
+                        {
+                            Resp.RespStatus = 1;
+                            Resp.RespMessage = "Template not found!";
+                        }
+                    }
                 }
                 return Resp;
             });
