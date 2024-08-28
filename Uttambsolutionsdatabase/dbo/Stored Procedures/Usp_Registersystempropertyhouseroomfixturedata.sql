@@ -12,7 +12,7 @@ BEGIN
 		--Validate
 
 		BEGIN TRANSACTION;
-		DECLARE @Systempropertyhousedata TABLE (Propertyhouseid BIGINT);
+		DECLARE @InsertedIDs TABLE(Propertychecklistid BIGINT,Fixtureid INT);
 
 		MERGE INTO Systempropertyhousechecklists AS target
 		USING (SELECT rf.Propertychecklistid,sphf.Systempropertyhouseroomid,rf.Fixtureid,rf.Fixtureunits,rf.Fixturestatusid,sphf.Createdby,sphf.Datecreated
@@ -26,7 +26,16 @@ BEGIN
         UPDATE SET target.Fixtureunits = source.Fixtureunits,target.Fixturestatusid = source.Fixturestatusid,target.Createdby = source.Createdby,target.Datecreated = source.Datecreated
         WHEN NOT MATCHED BY TARGET THEN
         INSERT (Propertyhouseroomid,Fixtureid,Fixtureunits,Fixturestatusid,Createdby,Datecreated)
-		VALUES (source.Systempropertyhouseroomid,source.Fixtureid,source.Fixtureunits,source.Fixturestatusid,source.Createdby,source.Datecreated);
+		VALUES (source.Systempropertyhouseroomid,source.Fixtureid,source.Fixtureunits,source.Fixturestatusid,source.Createdby,source.Datecreated)
+		OUTPUT inserted.Propertychecklistid,inserted.Fixtureid INTO @InsertedIDs;
+
+		INSERT INTO Systemfixturestatushist (Propertychecklistid, Fixturestatusid, Fixtureunits)
+		SELECT i.Propertychecklistid, s.Fixturestatusid, s.Fixtureunits FROM @InsertedIDs i 
+		JOIN OPENJSON(@JsonObjectdata, '$.Roomfixtures') WITH (Propertychecklistid BIGINT '$.Propertychecklistid',Fixturestatusid INT '$.Fixturestatusid', Fixtureunits INT '$.Fixtureunits') AS s
+		ON i.Propertychecklistid = s.Propertychecklistid WHERE s.Fixtureunits > 0 AND (NOT EXISTS (
+        SELECT 1 FROM Systemfixturestatushist hist WHERE hist.Propertychecklistid = i.Propertychecklistid AND hist.Fixturestatusid = s.Fixturestatusid AND hist.Fixtureunits = s.Fixtureunits) 
+		OR s.Fixturestatusid <> (SELECT TOP 1 hist.Fixturestatusid FROM Systemfixturestatushist hist WHERE hist.Propertychecklistid = i.Propertychecklistid ORDER BY hist.Datecreated DESC)
+		OR s.Fixtureunits <> (SELECT TOP 1 hist.Fixtureunits  FROM Systemfixturestatushist hist  WHERE hist.Propertychecklistid = i.Propertychecklistid ORDER BY hist.Datecreated DESC));
 
 		Set @RespMsg ='Success'
 		Set @RespStat =0; 

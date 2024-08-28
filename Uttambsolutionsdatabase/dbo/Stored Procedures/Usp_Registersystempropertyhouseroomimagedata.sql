@@ -10,17 +10,9 @@ BEGIN
 		BEGIN TRY	
 		--Validate
 		BEGIN TRANSACTION;
-			MERGE INTO Systempropertyhouseimages AS target
-			USING (
-			SELECT Propertyimageid,Propertyhouseid,Houseorroom,HouseorroomImageurl,Createdby,Datecreated FROM OPENJSON(@JsonObjectdata)
-			WITH (Propertyimageid BIGINT '$.Propertyimageid',Propertyhouseid BIGINT '$.Propertyhouseid',Houseorroom VARCHAR(20) '$.Houseorroom',HouseorroomImageurl VARCHAR(200) '$.HouseorroomImageurl',Createdby BIGINT '$.Createdby', Datecreated DATETIME2 '$.Datecreated'
-			)) AS source
-			ON target.Propertyimageid = source.Propertyimageid AND target.Propertyhouseid = source.Propertyhouseid
-			WHEN MATCHED THEN
-			UPDATE SET target.HouseorroomImageurl =source.HouseorroomImageurl
-			WHEN NOT MATCHED BY TARGET THEN
-			INSERT (Propertyhouseid,Houseorroom,HouseorroomImageurl,Createdby,Datecreated)
-			VALUES (source.Propertyhouseid,source.Houseorroom,source.HouseorroomImageurl,source.Createdby,source.Datecreated);
+		  INSERT INTO Systempropertyhouseimages (Propertyhouseid, Houseorroom, HouseorroomImageurl, Createdby, Datecreated)
+          SELECT JSON_VALUE(@JsonObjectdata, '$.Propertyhouseid'),JSON_VALUE(@JsonObjectdata, '$.Houseorroom'),JSON_VALUE(@JsonObjectdata, '$.Houseorroomimageurl'), JSON_VALUE(@JsonObjectdata, '$.Createdby'),CAST(JSON_VALUE(@JsonObjectData, '$.Datecreated') AS DATETIME2);
+
 		Set @RespMsg ='Success'
 		Set @RespStat =0; 
 		COMMIT TRANSACTION;

@@ -263,5 +263,6 @@
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomimagebyhouseid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomfixturesdatabyhouseroomid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseagreementdetaildatabypropertyidandownerid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomagreementdetaildatabytenantid.sql" />
   </ItemGroup>
 </Project>

@@ -16,16 +16,17 @@ BEGIN
         USING (SELECT 
                    JSON_VALUE(@JsonObjectdata, '$.PermissionId') AS PermissionId, 
                    JSON_VALUE(@JsonObjectdata, '$.Permissionname') AS Permissionname,
+				   JSON_VALUE(@JsonObjectdata, '$.Module') AS Module,
                    JSON_VALUE(@JsonObjectdata, '$.Isadmin') AS Isadmin
                ) AS source
         ON (target.PermissionId = source.PermissionId)
         WHEN MATCHED AND source.PermissionId != 0 THEN
             UPDATE SET 
-                target.Permissionname = source.Permissionname,
+                target.Permissionname = source.Permissionname, target.Module = source.Module,
                 target.Isadmin = source.Isadmin
         WHEN NOT MATCHED AND source.PermissionId = 0 THEN
             INSERT (Permissionname, Isactive, Isdeleted, Module, Isadmin)
-            VALUES (source.Permissionname, 1, 0, 1, source.Isadmin)
+            VALUES (source.Permissionname, 1, 0, source.Module, source.Isadmin)
 		    OUTPUT inserted.PermissionId INTO @Systempermissionsdata;
 
         -- Set @Jobid to the new Jobid if an insert occurred

@@ -5,6 +5,8 @@ BEGIN
 SET NOCOUNT ON;
 If(@Type = 0)
 Select r.Rolename as Text, r.Roleid as Value From Systemroles r;
+If(@Type = 3)
+Select r.Modulename as Text, r.Moduleid as Value From Systemmodules r;
 If(@Type = 4)
 Select r.Categoryname as Text, r.Categoryid as Value From Productcategories r;
 If(@Type = 5)
