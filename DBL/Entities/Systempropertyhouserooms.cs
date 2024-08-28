@@ -32,6 +32,22 @@ namespace DBL.Entities
         public long Tenantid { get; set; }
         public int Createdby { get; set; }
         public DateTime Datecreated { get; set; }
+        public string? Fullname { get; set; }
+        public string? Phonenumber { get; set; }
+        public string? Emailaddress { get; set; }
+        public string? Gender { get; set; }
+        public string? Maritalstatus { get; set; }
+        public int Loginstatus { get; set; }
+        public bool Isvisible { get; set; }
+        public int Parentid { get; set; }
+        public string? Userprofileimageurl { get; set; }
+        public string? Usercurriculumvitae { get; set; }
+        public long Idnumber { get; set; }
+        public bool Updateprofile { get; set; }
+        public int Accountnumber { get; set; }
+        public int Accountid { get; set; }
+        public decimal Walletbalance { get; set; }
+        public DateTime Datemodified { get; set; }
         public List<Systempropertyhouseroommeterhistory>? Meterhistorydata { get; set; }
         public List<PropertyHousetenantroomhistory>? Roomtenanthistorydata { get; set; }
     }
