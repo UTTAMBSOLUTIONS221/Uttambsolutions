@@ -594,6 +594,21 @@ namespace DBL.Repositories
                     responseData.Roomoccupant = Convert.ToInt32(roomResponseJson["Roomoccupant"]);
                     responseData.Roomoccupantdetail = roomResponseJson["Roomoccupantdetail"].ToString();
                     responseData.Createdby = Convert.ToInt32(roomResponseJson["Createdby"]);
+                    responseData.Fullname = roomResponseJson["Fullname"].ToString();
+                    responseData.Phonenumber = roomResponseJson["Phonenumber"].ToString();
+                    responseData.Emailaddress = roomResponseJson["Emailaddress"].ToString();
+                    responseData.Gender = roomResponseJson["Gender"].ToString();
+                    responseData.Maritalstatus = roomResponseJson["Maritalstatus"].ToString();
+                    responseData.Loginstatus = Convert.ToInt32(roomResponseJson["Loginstatus"]);
+                    responseData.Parentid = Convert.ToInt32(roomResponseJson["Parentid"]);
+                    responseData.Userprofileimageurl = roomResponseJson["Userprofileimageurl"].ToString();
+                    responseData.Usercurriculumvitae = roomResponseJson["Usercurriculumvitae"].ToString();
+                    responseData.Idnumber = Convert.ToInt32(roomResponseJson["Idnumber"]);
+                    responseData.Updateprofile = Convert.ToBoolean(roomResponseJson["Updateprofile"]);
+                    responseData.Accountnumber = Convert.ToInt32(roomResponseJson["Accountnumber"]);
+                    responseData.Accountid = Convert.ToInt32(roomResponseJson["Accountid"]);
+                    responseData.Walletbalance = Convert.ToDecimal(roomResponseJson["Walletbalance"]);
+                    responseData.Datemodified = Convert.ToDateTime(roomResponseJson["Datemodified"]);
                     responseData.Datecreated = Convert.ToDateTime(roomResponseJson["Datecreated"]);
                     if (roomResponseJson["Meterhistorydata"] != null)
                     {
