@@ -168,22 +168,22 @@
                     </div>
                     <input id="Systempropertyhousetenantid" asp-for="@Model.Tenantid" hidden />
                 </div>
-            </div>          
+            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Current Tenant and History</h4>
+                            <h6 class="font-weight-light fw-light text-sm">Current Tenant and History</h6>
                         </div>
                         <div class="card-body">
-                            <!-- Main List Card -->
+                            <!-- Main Tenant Info -->
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <p><strong>Tenant: </strong> @Model.Data.Fullname</p>
-                                    <p><strong>Phone: </strong> @Model.Data.Phonenumber</p>
-                                    <p><strong>Email: </strong> @Model.Data.Emailaddress</p>
-                                    <p><strong>Id Number: </strong> @Model.Data.Idnumber</p>
-                                    <p><strong>Balance: </strong> @Model.Data.Walletbalance</p>
+                                    <p class="font-weight-light fw-light text-sm mb-0"><strong>Tenant: </strong> @Model.Fullname</p>
+                                    <p class="font-weight-light fw-light text-sm mb-0"><strong>Phone: </strong> @Model.Phonenumber</p>
+                                    <p class="font-weight-light fw-light text-sm mb-0"><strong>Email: </strong> @Model.Emailaddress</p>
+                                    <p class="font-weight-light fw-light text-sm mb-0"><strong>Id Number: </strong> @Model.Idnumber</p>
+                                    <p class="font-weight-light fw-light text-sm mb-0"><strong>Balance: </strong> @Model.Walletbalance</p>
                                 </div>
                             </div>
                             @if (Model != null && Model.Roomtenanthistorydata != null)
@@ -191,21 +191,21 @@
                                 foreach (var item in Model.Roomtenanthistorydata)
                                 {
                                     <div class="row">
-                                       <div class="col-sm-12">
-                                            <p class="font-weight-light fw-light text-sm"><strong>County: </strong> @item.Countyname</p>
-                                            <p class="font-weight-light fw-light text-sm"><strong>Subcounty: </strong> @item.Subcountywardname</p>
-                                            <p class="font-weight-light fw-light text-sm"><strong>Landmark: </strong> @item.Streetorlandmark</p>
-                                            <p class="font-weight-light fw-light text-sm"><strong>House: </strong> @item.Propertyhousename</p>
-                                            <p class="font-weight-light fw-light text-sm"><strong>Room: </strong> @item.Systempropertyhousesizename</p>
-                                            <p class="font-weight-light fw-light text-sm"><strong>Wallet: </strong> @item.Outstandingbalance</p>
-                                            <p class="font-weight-light fw-light text-sm"><strong>Date: </strong> @item.Datemodified</p>
+                                        <div class="col-sm-12">
+                                            <p class="font-weight-light fw-light text-sm mb-0"><strong>County: </strong> @item.Countyname</p>
+                                            <p class="font-weight-light fw-light text-sm mb-0"><strong>Subcounty: </strong> @item.Subcountywardname</p>
+                                            <p class="font-weight-light fw-light text-sm mb-0"><strong>Landmark: </strong> @item.Streetorlandmark</p>
+                                            <p class="font-weight-light fw-light text-sm mb-0"><strong>House: </strong> @item.Propertyhousename</p>
+                                            <p class="font-weight-light fw-light text-sm mb-0"><strong>Room: </strong> @item.Systempropertyhousesizename</p>
+                                            <p class="font-weight-light fw-light text-sm mb-0"><strong>Wallet: </strong> @item.Outstandingbalance</p>
+                                            <p class="font-weight-light fw-light text-sm mb-0"><strong>Date: </strong> @item.Datemodified</p>
                                         </div>
                                     </div>
                                 }
                             }
                         </div>
                     </div>
-                </div>             
+                </div>
             </div>
         </div>
     </div>
