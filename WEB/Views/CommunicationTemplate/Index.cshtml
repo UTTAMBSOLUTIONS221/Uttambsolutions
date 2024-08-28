@@ -67,7 +67,7 @@
                                         }
                                     </td>
                                     <td class="nowrap text-nowrap no-wrap-buttons">
-                                        <a asp-action="Addcommunicationtemplate" asp-controller="CommunicationTemplate" asp-route-Templateid="@item.Templateid" asp-area="" id="CAN_EDIT_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                        <a asp-action="Addcommunicationtemplate" asp-controller="CommunicationTemplate" asp-route-Templateid="@item.Templateid" asp-area="" id="CAN_EDIT_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
                                         @if (item.Isactive)
                                         {
                                             <a onclick="deactivatethis(event)" data-Tablename="Communicationtemplates" data-Columname="Isactive" data-Status="0" data-Columnidname="Templateid" data-Entryid="@item.Templateid" id="CAN_DEACTIVATE_TEMPLATES" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Deactivate</a>
