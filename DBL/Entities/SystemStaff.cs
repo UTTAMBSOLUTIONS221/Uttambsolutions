@@ -54,5 +54,6 @@ namespace DBL.Entities
         public DateTime? Lastlogin { get; set; }
         public DateTime Datemodified { get; set; }
         public DateTime Datecreated { get; set; }
+        public string? Systemmodulename { get; set; }
     }
 }

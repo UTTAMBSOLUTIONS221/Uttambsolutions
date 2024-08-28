@@ -83,6 +83,11 @@ namespace DBL
                 }
 
                 var Resp = db.AccountRepository.Registersystemstaffdata(JsonConvert.SerializeObject(obj));
+                if (Resp.RespStatus == 0 || Resp.RespStatus == 200)
+                {
+                    //Send Registration Email
+
+                }
                 return Resp;
             });
         }
