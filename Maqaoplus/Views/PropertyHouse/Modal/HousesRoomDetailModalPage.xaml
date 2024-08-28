@@ -204,27 +204,47 @@
             <Label Text="Previos Meter Data" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
 
             <!-- CollectionView for Meter Readings -->
-            <CollectionView ItemsSource="{Binding HouseroomData.Meterhistorydata}" IsVisible="{Binding IsMeterReadingsVisible}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+            <StackLayout Spacing="8">
+                <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="0" Text="{Binding MeterNumber}" />
-                            <Label Grid.Column="1" Text="{Binding OpeningMeter}" />
-                            <Label Grid.Column="2" Text="{Binding ClosingMeter}" />
-                            <Label Grid.Column="3" Text="{Binding MovedMeter}" />
-                            <Label Grid.Column="4" Text="{Binding ConsumedAmount}" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                    <!-- Table Headers -->
+                    <Label Text="Meter" FontSize="16" FontAttributes="None" Grid.Row="0" Grid.Column="0" HorizontalOptions="StartAndExpand"/>
+                    <Label Text="Opening" FontSize="16" FontAttributes="None" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center"/>
+                    <Label Text="Closing" FontSize="16" FontAttributes="None" Grid.Row="0" Grid.Column="2" HorizontalOptions="End"/>
+                    <Label Text="Moved" FontSize="16" FontAttributes="None" Grid.Row="0" Grid.Column="3" HorizontalOptions="End"/>
+                    <Label Text="Amount" FontSize="16" FontAttributes="None" Grid.Row="0" Grid.Column="4" HorizontalOptions="End"/>
+                </Grid>
+
+                <!-- Dynamic Table Content -->
+                <CollectionView ItemsSource="{Binding HouseroomData.Meterhistorydata}" Margin="0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnSpacing="10" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Systempropertyhouseroommeternumber}"  FontSize="14" Grid.Column="0" MaxLines="3" LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                                <Label Text="{Binding Openingmeter}" FontSize="14" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                <Label Text="{Binding Closingmeter}" FontSize="14" Grid.Column="2" LineBreakMode="TailTruncation" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Movedmeter}" FontSize="14" Grid.Column="3" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
+                                <Label Text="{Binding Consumedamount}" FontSize="14" Grid.Column="4" LineBreakMode="TailTruncation" HorizontalOptions="End"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
 
             <!-- Navigation Buttons at Start and End -->
             <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
