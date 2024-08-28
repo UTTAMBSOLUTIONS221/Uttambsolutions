@@ -20,30 +20,43 @@ BEGIN
                 INSERT INTO Systemroles (Rolename, RoleDescription, Tenantid, Isdefault, Isactive, Isdeleted, Createdby, Modifiedby, Datemodified, Datecreated)
                 VALUES ('Default User', 'Default User', 1, 1, 1, 0, 1, 1, GETDATE(), GETDATE());
             END
-
-            -- Get the RoleId of "Default User"
-            SELECT @RoleId = RoleId FROM Systemroles WHERE Rolename = 'Default User';
         END
-
         -- Check for duplicate email, username, or phone number
 		IF(JSON_VALUE(@JsonObjectData, '$.Userid')=0)
 		BEGIN
-        IF EXISTS(SELECT UserId FROM SystemStaffs WHERE EmailAddress = JSON_VALUE(@JsonObjectData, '$.Emailaddress'))
-        BEGIN
-            SELECT 1 AS RespStatus, 'Similar Email Address exists! Contact Admin!' AS RespMessage;
-            RETURN;
-        END
-        IF EXISTS(SELECT UserId FROM SystemStaffs WHERE UserName = JSON_VALUE(@JsonObjectData, '$.Username'))
-        BEGIN
-            SELECT 1 AS RespStatus, 'Similar username exists! Contact Admin!' AS RespMessage;
-            RETURN;
-        END
-        IF EXISTS(SELECT UserId FROM SystemStaffs WHERE PhoneNumber = JSON_VALUE(@JsonObjectData, '$.Phonenumber'))
-        BEGIN
-            SELECT 1 AS RespStatus, 'Similar PhoneNumber exists! Contact Admin!' AS RespMessage;
-            RETURN;
-        END
+			IF EXISTS(SELECT UserId FROM SystemStaffs WHERE EmailAddress = JSON_VALUE(@JsonObjectData, '$.Emailaddress'))
+			BEGIN
+				SELECT 1 AS RespStatus, 'Similar Email Address exists! Contact Admin!' AS RespMessage;
+				RETURN;
+			END
+			IF EXISTS(SELECT UserId FROM SystemStaffs WHERE UserName = JSON_VALUE(@JsonObjectData, '$.Username'))
+			BEGIN
+				SELECT 1 AS RespStatus, 'Similar username exists! Contact Admin!' AS RespMessage;
+				RETURN;
+			END
+			IF EXISTS(SELECT UserId FROM SystemStaffs WHERE PhoneNumber = JSON_VALUE(@JsonObjectData, '$.Phonenumber'))
+			BEGIN
+				SELECT 1 AS RespStatus, 'Similar PhoneNumber exists! Contact Admin!' AS RespMessage;
+				RETURN;
+			END
 		END
+		IF(JSON_VALUE(@JsonObjectData, '$.Designation')= 'Tenant')
+		BEGIN
+		 SELECT @RoleId = RoleId FROM Systemroles WHERE Rolename = 'Maqaoplus Property House Tenant';
+		END
+		ELSE IF(JSON_VALUE(@JsonObjectData, '$.Designation')= 'Owner')
+		BEGIN
+		SELECT @RoleId = RoleId FROM Systemroles WHERE Rolename = 'Maqaoplus Property House Owner';
+		END
+		ELSE IF(JSON_VALUE(@JsonObjectData, '$.Designation')= 'Agent')
+		BEGIN
+		SELECT @RoleId = RoleId FROM Systemroles WHERE Rolename = 'Maqaoplus Property House Agent';
+		END
+		ELSE
+		BEGIN
+		 SELECT @RoleId = RoleId FROM Systemroles WHERE Rolename = 'Default User';
+		END
+
         BEGIN TRANSACTION;
         DECLARE @Systemstaffdata TABLE (Action VARCHAR(100), UserId BIGINT, FullName VARCHAR(140), Passwords VARCHAR(100), PassHarsh VARCHAR(100), UserName VARCHAR(100), EmailAddress VARCHAR(100));
 
