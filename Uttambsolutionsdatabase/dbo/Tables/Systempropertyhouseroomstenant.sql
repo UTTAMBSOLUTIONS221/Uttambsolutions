@@ -4,6 +4,8 @@
     [Systempropertyhouseroomid]        INT           NOT NULL,
     [Isoccupant]                       BIT           DEFAULT ((0)) NOT NULL,
     [Occupationalstatus]               INT           NOT NULL,
+	[Roomoccupant]                     INT           DEFAULT ((0)) NOT NULL,
+	[Roomoccupantdetail]               VARCHAR(200) NOT NULL,
     [Isnewtenant]                      BIT           DEFAULT ((0)) NOT NULL,
     [Ratingvalue]                      DECIMAL(10, 2)  DEFAULT ((0)) NOT NULL,
     [Ownercomment]                     VARCHAR (200) DEFAULT ('Not Set') NOT NULL,
