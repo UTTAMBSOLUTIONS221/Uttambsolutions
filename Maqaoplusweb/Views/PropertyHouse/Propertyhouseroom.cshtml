@@ -196,14 +196,15 @@
 
             $(this).removeData('bs.modal');
             $('.modal-backdrop').remove();
-            $('#Uttambsolutionsmodallarge .modal-content').empty();
+            $('#Uttambsolutionsmodal .modal-content').empty();
         }
 
         function rejecttoofferhimherroom() {
             $('#Systemstaffidnumberid').val('');
             $(this).removeData('bs.modal');
             $('.modal-backdrop').remove();
-            $('#Uttambsolutionsmodallarge .modal-content').empty();
+            $('#Uttambsolutionsmodal .modal-content').empty();
+            setTimeout(function () { location.reload(); }, 1000);
         }
 
 
