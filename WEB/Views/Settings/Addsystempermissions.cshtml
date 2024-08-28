@@ -1,4 +1,7 @@
-﻿﻿@model DBL.Entities.Systempermissions
+﻿@model DBL.Entities.Systempermissions
+@{
+    var Systemmodules = ViewData["Systemmoduleslists"] as List<SelectListItem>;
+}
 <div class="modal-header">
     <h5 class="text-sm modal-title" id="SocialPesaModalLabel">Permission Data</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -19,7 +22,9 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Module Name</label>
-                <input class="form-control form-control-sm" asp-for="Module" id="SystempermissionModulenameid" />
+                <select class="form-control form-control-sm" asp-for="@Model.Module" asp-items="@Systemmodules" id="SystempermissionModulenameid" required>
+                    <option value="">---Select---</option>
+                </select>
             </div>
         </div>
         <div class="col-sm-2">
