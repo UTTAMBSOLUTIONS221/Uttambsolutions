@@ -487,7 +487,7 @@ namespace Maqaoplus.ViewModels
             }
             if (string.IsNullOrWhiteSpace(StaffData.Kinphonenumber))
             {
-                SystemStaffKinphonenumberError = "Phonenumber is required.";
+                SystemStaffKinphonenumberError = "Phone is required.";
                 isValid = false;
             }
             else

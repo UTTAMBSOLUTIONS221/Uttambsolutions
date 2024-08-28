@@ -9,7 +9,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <!-- For Header (Button) -->
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <!-- For Content (ScrollView) -->
             <RowDefinition Height="Auto" />
             <!-- For Footer -->
