@@ -20,6 +20,7 @@
         public string? Contactdetails { get; set; }
         public bool Hashousedeposit { get; set; }
         public bool Hasagent { get; set; }
+        public bool Rentinclusive { get; set; }
         public bool Hashousewatermeter { get; set; }
         public int Propertyhousestatus { get; set; }
         public int Watertypeid { get; set; }
