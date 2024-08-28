@@ -144,7 +144,7 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Rent Deposit</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositreturn" asp-items="@Systemhousedepositreturnday" id="Rentdepositreturnid">
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth" asp-items="@Systemhousedepostmonths" id="Rentdepositmonthid">
                         <option value="">---Select---</option>
                     </select>
                 </div>
@@ -152,7 +152,7 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Deposit Refund</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth" asp-items="@Systemhousedepostmonths" id="Rentdepositmonthid">
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositreturn" asp-items="@Systemhousedepositreturnday" id="Rentdepositreturnid">
                         <option value="">---Select---</option>
                     </select>
                 </div>
