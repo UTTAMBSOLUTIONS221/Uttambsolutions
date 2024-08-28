@@ -91,8 +91,11 @@ namespace DBL
                         var commtempdata = db.SettingsRepository.Getsystemcommunicationtemplatedatabyname(true, "Staffregistrationtemplate");
                         if (commtempdata != null)
                         {
+                            string imagePath = "/logo.png";
+                            string altText = obj.Systemmodulename ?? "UTTAMB SOLUTIONS";
+                            string imgTag = $"<img src='{imagePath}' alt='{altText}' />";
                             StringBuilder StrBodyEmail = new StringBuilder(commtempdata.Templatebody);
-                            StrBodyEmail.Replace("@CompanyLogo", "");
+                            StrBodyEmail.Replace("@CompanyLogo", imgTag);
                             StrBodyEmail.Replace("@CompanyName", obj.Systemmodulename ?? "UTTAMB SOLUTIONS");
                             StrBodyEmail.Replace("@CompanyEmail", "support@uttambsolutions.com");
                             StrBodyEmail.Replace("@Fullname", Resp.Data3);
