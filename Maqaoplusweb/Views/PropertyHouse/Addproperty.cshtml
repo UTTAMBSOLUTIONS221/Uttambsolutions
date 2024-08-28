@@ -9,6 +9,7 @@
     var Systemhouserentdueday = ViewData["Systemhouserentduedaylists"] as List<SelectListItem>;
     var Systemhousedepostmonths = ViewData["Systemhousedepostmonthslists"] as List<SelectListItem>;
     var Systemhousevacantnoticeperiod = ViewData["Systemhousevacantnoticeperiodlists"] as List<SelectListItem>;
+    var Systemhousedepositreturnday = ViewData["Systemhousedepositreturndaylists"] as List<SelectListItem>;
     bool isChecked = false;
 }
 <div class="modal-header">
@@ -76,9 +77,16 @@
                     <input class="form-control form-control-sm" asp-for="@Model.Streetorlandmark" placeholder="Start with near landmark and next to a landmark" id="Streetorlandmarkid" required />
                 </div>
             </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Rent Due Day</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdueday" asp-items="@Systemhouserentdueday" id="Rentduedayid" required>
+                        <option value="">---Select---</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="row">
-           
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Water Type</label>
@@ -105,25 +113,6 @@
                     <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hasagent" id="Hashousehasagentid" required />
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="font-weight-light">Contact Details if vacant</label>
-                    <input class="form-control form-control-sm" asp-for="@Model.Contactdetails" placeholder="Phonenumber1,Phonenumber2,Phonenumber3..." id="Contactdetailsid" required />
-                </div>
-            </div>
-
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label class="font-weight-light">Rent Due Day</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Rentdueday" asp-items="@Systemhouserentdueday" id="Rentduedayid" required>
-                        <option value="">---Select---</option>
-                     
-                    </select>
-                </div>
-            </div>
-
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Vacating Notice</label>
@@ -132,15 +121,37 @@
                     </select>
                 </div>
             </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="font-weight-light">Contact Details if vacant</label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Contactdetails" placeholder="Phonenumber1,Phonenumber2,Phonenumber3..." id="Contactdetailsid" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1">
+                <div class="form-group">
+                    <label class="font-weight-light">Deposit?</label>
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousedeposit" id="Hashousedepositid" required />
+                </div>
+            </div>
             <div class="col-sm-2">
                 <div class="form-group">
-                    <label class="font-weight-light">Has Deposit?</label>
+                    <label class="font-weight-light">Rent Inclusive?</label>
                     <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousedeposit" id="Hashousedepositid" required />
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Rent Deposit</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositreturn" asp-items="@Systemhousedepositreturnday" id="Rentdepositreturnid">
+                        <option value="">---Select---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Deposit Refund</label>
                     <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth" asp-items="@Systemhousedepostmonths" id="Rentdepositmonthid">
                         <option value="">---Select---</option>
                     </select>

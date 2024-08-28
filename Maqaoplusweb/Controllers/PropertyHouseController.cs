@@ -66,6 +66,18 @@ namespace Maqaoplusweb.Controllers
             {
                 Systemhousedepostmonths.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
             }
+            List<ListModel> Systemhousedepositreturnday = new List<ListModel>();
+            for (int i = 1; i <= 28; i++)
+            {
+                string suffix = i switch
+                {
+                    1 or 21 => "st",
+                    2 or 22 => "nd",
+                    3 or 23 => "rd",
+                    _ => "th"
+                };
+                Systemhousedepositreturnday.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
+            }
             List<ListModel> Systemhousevacantnoticeperiod = new List<ListModel>();
             for (int i = 1; i <= 12; i++)
             {
@@ -77,6 +89,11 @@ namespace Maqaoplusweb.Controllers
                 Value = x.Value
             }).ToList();
             ViewData["Systemhousedepostmonthslists"] = Systemhousedepostmonths.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
+            ViewData["Systemhousedepositreturndaylists"] = Systemhousedepositreturnday.Select(x => new SelectListItem
             {
                 Text = x.Text,
                 Value = x.Value

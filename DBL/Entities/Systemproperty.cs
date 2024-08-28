@@ -26,6 +26,7 @@
         public decimal Waterunitprice { get; set; }
         public int Rentdueday { get; set; }
         public int Rentdepositmonth { get; set; }
+        public int Rentdepositreturn { get; set; }
         public int Vacantnoticeperiod { get; set; }
         public string? Propertyhousestatusdata { get; set; }
         public decimal Monthlycollection { get; set; }
