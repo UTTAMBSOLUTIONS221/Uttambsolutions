@@ -494,7 +494,7 @@ namespace Maqaoplus.ViewModels
             {
                 SystemStaffKinphonenumberError = null;
             }
-            if (StaffData.Kinrelationshipid == 0)
+            if (Selectedstaffkinrelationship == null)
             {
                 SystemStaffKinrelationshipError = "Relationship is required.";
                 isValid = false;
