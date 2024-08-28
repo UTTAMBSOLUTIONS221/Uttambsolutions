@@ -21,6 +21,9 @@
         public decimal Openingmeter { get; set; }
         public decimal Movedmeter { get; set; }
         public decimal Closingmeter { get; set; }
+        public int Roomoccupant { get; set; }
+        public string? Roomoccupantdetail { get; set; }
+        public long Systempropertyhousetenantid { get; set; }
         public decimal Consumedamount { get; set; }
         public bool Hashousewatermeter { get; set; }
         public decimal Waterunitprice { get; set; }
