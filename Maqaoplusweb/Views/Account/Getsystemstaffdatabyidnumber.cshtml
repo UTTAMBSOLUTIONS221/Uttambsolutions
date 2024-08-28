@@ -8,19 +8,24 @@
 <div class="modal-body">
     <div class="row">
         <div class="col-sm-4">
-            <label class="text-sm fw-light fontweight-light"><strong>Fullname: </strong> @Model.Data.Fullname</label>
+            <input asp-for="@Model.Data.Userid" id="Systemuserid" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <p class="text-sm fw-light fontweight-light">Fullname:  @Model.Data.Fullname</p>
         </div>
         <div class="col-sm-4">
-            <label class="text-sm fw-light fontweight-light"><strong>Idnumber: </strong>@Model.Data.Idnumber</label>
+            <p class="text-sm fw-light fontweight-light">Idnumber: @Model.Data.Idnumber</p>
         </div>
         <div class="col-sm-4">
-            <label class="text-sm fw-light fontweight-light"><strong>Phone: </strong>@Model.Data.Phonenumber</label>
+            <p class="text-sm fw-light fontweight-light">Phone: @Model.Data.Phonenumber</p>
         </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystempropertyroomid" onclick="savesystempropertyroomdata();">
-        <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" onclick="rejecttoofferhimherroom();">Close</button>
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="accepttoofferhimherroomid" onclick="accepttoofferhimherroom();">
+        <span id="buttonText">Continue</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
     </button>
 </div>

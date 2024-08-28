@@ -183,6 +183,20 @@
         });
 
 
+        function accepttoofferhimherroom() {
+            document.getElementById("accepttoofferhimherroomid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            var tenantid = $('#Systemuserid').val();
+            $('#Systempropertyhousetenantid').val(tenantid);
+            $('#Systemstaffidnumberid').val('');
+        }
+
+        function rejecttoofferhimherroom() {
+            $('#Systemstaffidnumberid').val('');
+        }
+
+
 
         function savesystempropertyroomdata() {
             document.getElementById("savesystempropertyroomid").disabled = true;
@@ -195,7 +209,7 @@
                 Hasbalcony: $('#Hasbalconyid').prop('checked'), Isunderrenovation: $('#Isunderrenovationid').prop('checked'),Systempropertyhousemeterid: $('.system-property-house-meterid').val(),
                 Systempropertyhouseroommeternumber: $('.system-property-house-room-meter-number').val(),Openingmeter: parseFloat($('.system-property-house-room-opening-meter').val()),Closingmeter: parseFloat($('.system-property-house-room-closing-meter').val()),
                 Movedmeter: parseFloat($('.system-property-house-room-moved-meter').val()), Consumedamount: parseFloat($('.system-property-house-room-meter-cost').val()),
-                Tenantid: $('#systemstaffid').val(), Roomoccupant: $('#Systempropertyhouseroomoccupantid').val(), Roomoccupantdetail: $('#Systempropertyhouseroomoccupantdetailid').val(),
+                Tenantid: $('#Systempropertyhousetenantid').val(), Roomoccupant: $('#Systempropertyhouseroomoccupantid').val(), Roomoccupantdetail: $('#Systempropertyhouseroomoccupantdetailid').val(),
                 Createdby: $('#systemLoggedinedUserid').val(),Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
             };
 
