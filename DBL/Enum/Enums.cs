@@ -2,6 +2,18 @@
 {
     public enum UserLoginStatus { Ok = 0, VerifyAccount = 1, ChangePassword = 2, AccountClosed = 3, AccountLocked = 3 }
     public enum PaymentType { B2C = 1, C2B = 2, Express = 3 }
+
+    public static class Systemmodulelogos
+    {
+        public const string Maqaoplus = "/path/to/logo.png";
+    }
+
+    public static class Systemmoduleemails
+    {
+        public const string Maqaoplus = "support@uttambsolutions.com";
+    }
+
+
     public enum ResponseStatus
     {
         Success = 0,
