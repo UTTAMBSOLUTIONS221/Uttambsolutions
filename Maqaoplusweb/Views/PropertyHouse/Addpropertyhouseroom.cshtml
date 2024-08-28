@@ -176,7 +176,6 @@
                             <h6 class="font-weight-light fw-light text-sm">Current Tenant and History</h6>
                         </div>
                         <div class="card-body">
-                            <!-- Main Tenant Info -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <p class="font-weight-light fw-light text-sm mb-0"><strong>Tenant: </strong> @Model.Fullname</p>
@@ -186,6 +185,8 @@
                                     <p class="font-weight-light fw-light text-sm mb-0"><strong>Balance: </strong> @Model.Walletbalance</p>
                                 </div>
                             </div>
+                            <hr />
+                            <h6 class="font-weight-light fw-light text-sm">History</h6>
                             @if (Model != null && Model.Roomtenanthistorydata != null)
                             {
                                 foreach (var item in Model.Roomtenanthistorydata)
