@@ -166,7 +166,7 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Renting Terms</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth" id="Propertyhouserentingtermsid" required onchange="handleRentingTermsChange(this)">
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentingterms" id="Propertyhouserentingtermsid" required onchange="handleRentingTermsChange(this)">
                         <option value="">---Select---</option>
                         <option value="Month-to-Month">Monthly</option>
                         <option value="Fixedterm">Fixed Term</option>
@@ -177,26 +177,26 @@
         <div id="fixedTermRow" class="col-sm-12" style="display:none;">
             <div class="form-group">
                 <label class="font-weight-light">End Date</label>
-                <input type="date" class="form-control form-control-sm" id="Propertyhouserentingtermsenddateid" name="EndDate" required>
+                <input type="date" class="form-control form-control-sm" asp-for="@Model.Enddate" id="Propertyhouserentingtermsenddateid">
             </div>
         </div>
         <div id="petDetailsRow" style="display:none;">
             <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">Number of Pets</label>
-                    <input asp-for="@Model.Numberofpets" class="form-control form-control-sm" type="number" id="NumberOfPets" name="NumberOfPets" />
+                    <input asp-for="@Model.Numberofpets" class="form-control form-control-sm" type="number" id="Propertyhousenumberofpetsid" />
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">Pet Deposit</label>
-                    <input asp-for="@Model.Petdeposit" class="form-control form-control-sm" type="number" id="PetDeposit" name="PetDeposit" />
+                    <input asp-for="@Model.Petdeposit" class="form-control form-control-sm" type="number" id="Propertyhousepetsdepositid" />
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light">Pets allowed</label>
-                    <input class="form-control form-control-sm" asp-for="@Model.Petparticulars" type="text" id="PetItems" name="PetItems" />
+                    <input class="form-control form-control-sm" asp-for="@Model.Petparticulars" type="text" id="Propertyhousepetparticularsid" />
                 </div>
             </div>
         </div>

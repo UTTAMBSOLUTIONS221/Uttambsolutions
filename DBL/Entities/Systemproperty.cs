@@ -18,6 +18,8 @@
         public string? Subcountywardname { get; set; }
         public string? Streetorlandmark { get; set; }
         public string? Contactdetails { get; set; }
+        public string? Rentingterms { get; set; }
+        public DateTime Enddate { get; set; }
         public bool Hashousedeposit { get; set; }
         public bool Hasagent { get; set; }
         public bool Allowpets { get; set; }
