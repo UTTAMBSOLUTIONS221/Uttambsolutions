@@ -78,21 +78,48 @@
 
 @section Scripts {
     <script type="text/javascript">
-        function setSearchParameter() {
-            var idNumber = $('#Systemstaffidnumberid').val();
-            if (idNumber.trim() === "") {
+        $('#Uttambsolutionsmodal').on('show.bs.modal', function (event) {
+            $(".blockoverlay").show(); // Show the loading overlay
+
+            var idNumber = $('#Systemstaffidnumberid').val().trim();
+
+            // Validate if ID number is entered
+            if (idNumber === "") {
                 $("#Systemstaffidnumberid").addClass('is-invalid');
-                return;
+                $(".blockoverlay").hide(); // Hide the overlay if validation fails
+                return false; // Prevent modal from being shown
             } else {
                 $("#Systemstaffidnumberid").removeClass('is-invalid').addClass('is-valid');
             }
-            var routeCode = '@Guid.NewGuid()';
-            var url = '@Url.Action("Getsystemstaffdatabyidnumber", "Account", new { code = "" })'.replace('code=', 'code=' + routeCode) + '&id=' + encodeURIComponent(idNumber);
-            var button = $(event.relatedTarget);
-            var url = button.attr("href");
+
+            var button = $(event.relatedTarget); // Button that triggered the modal
             var modal = $(this);
-            modal.find('.modal-content').load(url);
-        }
+
+            // Construct the URL for loading modal content
+            var url = '/Account/Getsystemstaffdatabyidnumber';
+
+            // Load content into the modal using AJAX
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: { Idnumber: idNumber },
+                success: function (data) {
+                    // Insert the retrieved content into the modal's body
+                    modal.find('.modal-content').html(data);
+
+                    // Hide the loading overlay once content is loaded
+                    $(".blockoverlay").hide();
+                },
+                error: function () {
+                    // Handle errors (e.g., show a message or log the error)
+                    alert('Failed to load staff data. Please try again.');
+
+                    // Hide the loading overlay in case of an error
+                    $(".blockoverlay").hide();
+                }
+            });
+        });
+
         function savesystempropertyhouseroomtenantdata() {
             document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
