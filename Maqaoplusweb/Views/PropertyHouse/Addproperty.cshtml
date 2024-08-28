@@ -138,7 +138,7 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Rent Inclusive?</label>
-                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Rentinclusive" id="Rentinclusiveid" required />
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Rentutilityinclusive" id="Rentutilityinclusiveid" required />
                 </div>
             </div>
             <div class="col-sm-2">
@@ -152,7 +152,7 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Deposit Refund</label>
-                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositreturn" asp-items="@Systemhousedepositreturnday" id="Rentdepositreturnid">
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositreturndays" asp-items="@Systemhousedepositreturnday" id="Rentdepositreturndaysid">
                         <option value="">---Select---</option>
                     </select>
                 </div>
@@ -160,7 +160,7 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="font-weight-light">Allow Pets?</label>
-                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousedeposit" id="Propertyhouseallowpetsid" required onchange="handleAllowPetsChange(this)" />
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Allowpets" id="Propertyhouseallowpetsid" required onchange="handleAllowPetsChange(this)" />
                 </div>
             </div>
             <div class="col-sm-2">
@@ -184,19 +184,19 @@
             <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">Number of Pets</label>
-                    <input class="form-control form-control-sm" type="number" id="NumberOfPets" name="NumberOfPets" />
+                    <input asp-for="@Model.Numberofpets" class="form-control form-control-sm" type="number" id="NumberOfPets" name="NumberOfPets" />
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">Pet Deposit</label>
-                    <input class="form-control form-control-sm" type="number" id="PetDeposit" name="PetDeposit" />
+                    <input asp-for="@Model.Petdeposit" class="form-control form-control-sm" type="number" id="PetDeposit" name="PetDeposit" />
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light">Pets allowed</label>
-                    <input class="form-control form-control-sm" type="text" id="PetItems" name="PetItems" />
+                    <input class="form-control form-control-sm" asp-for="@Model.Petparticulars" type="text" id="PetItems" name="PetItems" />
                 </div>
             </div>
         </div>

@@ -20,14 +20,18 @@
         public string? Contactdetails { get; set; }
         public bool Hashousedeposit { get; set; }
         public bool Hasagent { get; set; }
-        public bool Rentinclusive { get; set; }
+        public bool Allowpets { get; set; }
+        public int Numberofpets { get; set; }
+        public decimal Petdeposit { get; set; }
+        public string? Petparticulars { get; set; }
+        public bool Rentutilityinclusive { get; set; }
         public bool Hashousewatermeter { get; set; }
         public int Propertyhousestatus { get; set; }
         public int Watertypeid { get; set; }
         public decimal Waterunitprice { get; set; }
         public int Rentdueday { get; set; }
         public int Rentdepositmonth { get; set; }
-        public int Rentdepositreturn { get; set; }
+        public int Rentdepositreturndays { get; set; }
         public int Vacantnoticeperiod { get; set; }
         public string? Propertyhousestatusdata { get; set; }
         public decimal Monthlycollection { get; set; }
