@@ -25,7 +25,7 @@
         public bool Allowpets { get; set; }
         public int Numberofpets { get; set; }
         public decimal Petdeposit { get; set; }
-        public string? Petparticulars { get; set; }
+        public string? Petparticulars { get; set; } = "Not Applicable";
         public bool Rentutilityinclusive { get; set; }
         public bool Hashousewatermeter { get; set; }
         public int Propertyhousestatus { get; set; }
