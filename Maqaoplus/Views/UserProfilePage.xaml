@@ -110,6 +110,7 @@
                             <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,0,0,0">
                                 <Entry Text="{Binding StaffData.Kinname}" Placeholder="Enter kin name" FontSize="16" TextColor="#0a506c" PlaceholderColor="Black" />
                             </Frame>
+                            <Label Text="{Binding SystemStaffKinnameError}" TextColor="Red" Padding="0"/>
                         </StackLayout>
 
 
@@ -125,6 +126,7 @@
                                 <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="2" HasShadow="True" Margin="0,0,0,0">
                                     <Entry Text="{Binding StaffData.Kinphonenumber}" Keyboard="Telephone" Placeholder="Enter kin phone"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
                                 </Frame>
+                                <Label Text="{Binding SystemStaffKinphonenumberError}" TextColor="Red" Padding="0"/>
                             </StackLayout>
 
                             <!-- Next of Kin Relationship -->
@@ -133,6 +135,7 @@
                                 <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="2" HasShadow="True" Margin="0,0,0,0">
                                     <Picker ItemsSource="{Binding Systemkinrelationship}" SelectedItem="{Binding Selectedstaffkinrelationship}" ItemDisplayBinding="{Binding Text}" Title="Select relationship" TextColor="Black" FontSize="17"/>
                                 </Frame>
+                                <Label Text="{Binding SystemStaffKinrelationshipError}" TextColor="Red" Padding="0"/>
                             </StackLayout>
                         </Grid>
                     </VerticalStackLayout>
