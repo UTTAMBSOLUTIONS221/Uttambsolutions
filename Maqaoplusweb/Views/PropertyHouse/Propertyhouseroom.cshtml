@@ -78,7 +78,7 @@
 
 @section Scripts {
     <script type="text/javascript">
-        function searchsystemstaffdata() {
+        function setSearchParameter() {
             var idNumber = $('#Systemstaffidnumberid').val();
             if (idNumber.trim() === "") {
                 $("#Systemstaffidnumberid").addClass('is-invalid');
@@ -86,37 +86,13 @@
             } else {
                 $("#Systemstaffidnumberid").removeClass('is-invalid').addClass('is-valid');
             }
-
-            $.ajax({
-                url: '/Account/Getsystemstaffdatabyidnumber',
-                type: 'GET',
-                data: { Idnumber: idNumber },
-                success: function (response) {
-                    var resultsContainer = $('#searchResults');
-                    resultsContainer.empty();
-                    if (response) {
-                        alert(JSON.stringify(response));
-                        var cardHtml =
-                            '<input type="text" id="systemstaffid" value="' + response.Data.Userid + '" class="form-control mb-2" hidden />' +
-                            '<h5 class="card-title">Name: ' + response.Data.Fullname + '</h5>' +
-                            '<p class="card-text">ID Number: ' + response.Data.Idnumber + '</p>' +
-                            '<p class="card-text">Email Address: ' + response.Data.Emailaddress + '</p>' +
-                            '<p class="card-text">Phone Number: ' + response.Data.Phonenumber + '</p>';
-
-                        resultsContainer.append(cardHtml);
-                    } else {
-                        resultsContainer.append('<tr><td colspan="4" class="text-center">No results found.</td></tr>');
-                    }
-
-                    resultsContainer.removeClass('d-none');
-                    $("#searchresultbuttons").removeClass('d-none');
-                },
-                error: function () {
-                    alert('An error occurred while searching. Please try again.');
-                }
-            });
+            var routeCode = '@Guid.NewGuid()';
+            var url = '@Url.Action("Getsystemstaffdatabyidnumber", "Account", new { code = "" })'.replace('code=', 'code=' + routeCode) + '&id=' + encodeURIComponent(idNumber);
+            var button = $(event.relatedTarget);
+            var url = button.attr("href");
+            var modal = $(this);
+            modal.find('.modal-content').load(url);
         }
-
         function savesystempropertyhouseroomtenantdata() {
             document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";

@@ -590,6 +590,8 @@ namespace DBL.Repositories
                     responseData.Consumedamount = Convert.ToDecimal(roomResponseJson["Consumedamount"]);
                     responseData.Waterunitprice = Convert.ToDecimal(roomResponseJson["Waterunitprice"]);
                     responseData.Tenantid = Convert.ToInt64(roomResponseJson["Tenantid"]);
+                    responseData.Roomoccupant = Convert.ToInt32(roomResponseJson["Roomoccupant"]);
+                    responseData.Roomoccupantdetail = roomResponseJson["Roomoccupantdetail"].ToString();
                     responseData.Createdby = Convert.ToInt32(roomResponseJson["Createdby"]);
                     responseData.Datecreated = Convert.ToDateTime(roomResponseJson["Datecreated"]);
                     if (roomResponseJson["Meterhistorydata"] != null)
