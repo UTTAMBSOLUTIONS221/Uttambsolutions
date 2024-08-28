@@ -75,7 +75,7 @@
         </Grid>
 
         <!-- Property Summary Section -->
-        <Frame Grid.Row="1" Padding="10" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Frame Grid.Row="1" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <StackLayout>
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                     <Label Text="Property Summary" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>

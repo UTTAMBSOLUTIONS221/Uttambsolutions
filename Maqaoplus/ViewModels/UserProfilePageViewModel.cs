@@ -414,7 +414,7 @@ namespace Maqaoplus.ViewModels
             bool isValid = true;
             if (string.IsNullOrWhiteSpace(StaffData.Firstname))
             {
-                SystemStaffFirstNameError = "First Name is required.";
+                SystemStaffFirstNameError = "Firstname is required.";
                 isValid = false;
             }
             else
@@ -423,7 +423,7 @@ namespace Maqaoplus.ViewModels
             }
             if (string.IsNullOrWhiteSpace(StaffData.Lastname))
             {
-                SystemStaffLastNameError = "Last Name is required.";
+                SystemStaffLastNameError = "Lastname is required.";
                 isValid = false;
             }
             else
@@ -433,7 +433,7 @@ namespace Maqaoplus.ViewModels
 
             if (string.IsNullOrWhiteSpace(StaffData.Emailaddress))
             {
-                SystemStaffEmailAddressError = "Email Address is required.";
+                SystemStaffEmailAddressError = "Email is required.";
                 isValid = false;
             }
             else
@@ -469,7 +469,7 @@ namespace Maqaoplus.ViewModels
             }
             if (Selectedstaffmaritalstatus == null)
             {
-                SystemStaffMaritalstatusError = "Marital status is required.";
+                SystemStaffMaritalstatusError = "Marital is required.";
                 isValid = false;
             }
             else
@@ -478,7 +478,7 @@ namespace Maqaoplus.ViewModels
             }
             if (string.IsNullOrWhiteSpace(StaffData.Kinname))
             {
-                SystemStaffKinnameError = "Kin Name is required.";
+                SystemStaffKinnameError = "Name is required.";
                 isValid = false;
             }
             else
@@ -487,7 +487,7 @@ namespace Maqaoplus.ViewModels
             }
             if (string.IsNullOrWhiteSpace(StaffData.Kinphonenumber))
             {
-                SystemStaffKinphonenumberError = "Kin phone number is required.";
+                SystemStaffKinphonenumberError = "Phonenumber is required.";
                 isValid = false;
             }
             else
@@ -496,7 +496,7 @@ namespace Maqaoplus.ViewModels
             }
             if (StaffData.Kinrelationshipid == 0)
             {
-                SystemStaffKinrelationshipError = "Kin Relationship is required.";
+                SystemStaffKinrelationshipError = "Relationship is required.";
                 isValid = false;
             }
             else
