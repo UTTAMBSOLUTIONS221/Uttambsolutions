@@ -85,7 +85,7 @@ namespace DBL
                 var Resp = db.AccountRepository.Registersystemstaffdata(JsonConvert.SerializeObject(obj));
                 if (Resp.RespStatus == 0 || Resp.RespStatus == 200)
                 {
-                    if (Resp.Data1 == "Insert")
+                    if (Resp.Data1 == "Insert" || Resp.Data1 == "INSERT")
                     {
 
                         var commtempdata = db.SettingsRepository.Getsystemcommunicationtemplatedatabyname(true, "Staffregistrationtemplate");
