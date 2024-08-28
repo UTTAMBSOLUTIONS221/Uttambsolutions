@@ -129,9 +129,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-1">
+            <div class="col-sm-2">
                 <div class="form-group">
-                    <label class="font-weight-light">Deposit?</label>
+                    <label class="font-weight-light">Has Deposit?</label>
                     <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousedeposit" id="Hashousedepositid" required />
                 </div>
             </div>
@@ -154,6 +154,22 @@
                     <label class="font-weight-light">Deposit Refund</label>
                     <select class="form-control form-control-sm" asp-for="@Model.Rentdepositreturn" asp-items="@Systemhousedepositreturnday" id="Rentdepositreturnid">
                         <option value="">---Select---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Allow Pets?</label>
+                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hashousedeposit" id="Hashousedepositid" required />
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="font-weight-light">Renting Terms</label>
+                    <select class="form-control form-control-sm" asp-for="@Model.Rentdepositmonth" id="Propertyhouserentingtermsid" required>
+                        <option value="">---Select---</option>
+                        <option value="Month-to-Month">Monthly</option>
+                        <option value="Fixedterm">Fixed Term</option>
                     </select>
                 </div>
             </div>
