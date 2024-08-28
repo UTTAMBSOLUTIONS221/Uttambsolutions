@@ -17,7 +17,7 @@
 
         <VerticalStackLayout Padding="0" Spacing="3" IsVisible="{Binding IsDataLoaded}" Grid.Row="1">
             <!-- User Info -->
-            <Grid ColumnSpacing="10" RowSpacing="4">
+            <Grid ColumnSpacing="10" RowSpacing="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -29,11 +29,8 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <!-- Added for Next of Kin Section -->
                     <RowDefinition Height="Auto" />
-                    <!-- Added for Next of Kin Section -->
                     <RowDefinition Height="Auto" />
-                    <!-- Added for Next of Kin Section -->
                 </Grid.RowDefinitions>
 
                 <!-- First Name -->
