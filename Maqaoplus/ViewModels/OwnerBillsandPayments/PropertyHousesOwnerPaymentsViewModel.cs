@@ -1,11 +1,14 @@
 ﻿using DBL.Models;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.OwnerBillsandPayments
 {
-    public class PropertyHousesOwnerPaymentsViewModel : BaseViewModel
+    public class PropertyHousesOwnerPaymentsViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ObservableCollection<CustomerPaymentData> PaymentItems { get; }
@@ -144,6 +147,10 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
             {
                 IsProcessing = false;
             }
+        }
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

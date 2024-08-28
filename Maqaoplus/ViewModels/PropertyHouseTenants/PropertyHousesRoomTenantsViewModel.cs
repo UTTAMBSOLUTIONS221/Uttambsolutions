@@ -1,11 +1,14 @@
 ﻿using DBL.Models;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.PropertyHouseTenants
 {
-    public class PropertyHousesRoomTenantsViewModel : BaseViewModel
+    public class PropertyHousesRoomTenantsViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
         public ObservableCollection<PropertyHouseTenant> Items { get; }
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
@@ -93,6 +96,10 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
             {
                 IsProcessing = false;
             }
+        }
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,11 +1,14 @@
 ﻿using DBL.Models;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.TenantBillsandPayments
 {
-    public class PropertyHousesTenantPaymentsViewModel : BaseViewModel
+    public class PropertyHousesTenantPaymentsViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
         public ObservableCollection<CustomerPaymentData> PaymentItems { get; }
         private MonthlyRentInvoiceModel _tenantInvoiceDetailData;
@@ -144,6 +147,10 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             {
                 IsProcessing = false;
             }
+        }
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -5,11 +5,14 @@ using Maqaoplus.Views;
 using Maqaoplus.Views.PropertyHouse.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 namespace Maqaoplus.ViewModels.PropertyHouse
 {
-    public class PropertyHouseDetailViewModel : BaseViewModel
+    public class PropertyHouseDetailViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
         private long _propertyId;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
@@ -848,6 +851,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseRoomClosingMeterError = null;
             }
             return isValid;
+        }
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

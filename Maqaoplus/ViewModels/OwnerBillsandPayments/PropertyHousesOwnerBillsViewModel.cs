@@ -3,12 +3,15 @@ using DBL.Models;
 using Maqaoplus.Views.OwnerBillsandPayments.Modals;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.OwnerBillsandPayments
 {
-    public class PropertyHousesOwnerBillsViewModel : BaseViewModel
+    public class PropertyHousesOwnerBillsViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ObservableCollection<MonthlyRentInvoiceModel> Items { get; }
@@ -254,6 +257,10 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
             IsProcessing = isValid;
 
             return isValid;
+        }
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
