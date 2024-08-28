@@ -36,13 +36,13 @@ namespace Maqaoplus.ViewModels.Dashboards
         }
 
 
-        private bool _isLoading;
-        public bool IsLoading
+        private bool _isProcessing;
+        public bool IsProcessing
         {
-            get => _isLoading;
+            get => _isProcessing;
             set
             {
-                _isLoading = value;
+                _isProcessing = value;
                 OnPropertyChanged();
             }
         }
@@ -77,7 +77,7 @@ namespace Maqaoplus.ViewModels.Dashboards
 
         private async Task LoadItems()
         {
-            IsLoading = true;
+            IsProcessing = true;
             IsDataLoaded = false;
 
             try
@@ -95,7 +95,7 @@ namespace Maqaoplus.ViewModels.Dashboards
             }
             finally
             {
-                IsLoading = false;
+                IsProcessing = false;
             }
         }
 
