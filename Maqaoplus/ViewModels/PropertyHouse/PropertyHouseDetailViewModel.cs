@@ -692,7 +692,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task SaveHouseRoomDetailsAsync()
         {
             IsProcessing = true;
-            if (Tenantid == 0)
+            if (HouseroomData.Tenantid == 0)
             {
                 PropertyHouseRoomTenantidError = "New Tenant is required.";
                 return;
@@ -710,7 +710,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             try
             {
-                HouseroomData.Tenantid = Tenantid;
                 HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
                 HouseroomData.Datecreated = DateTime.UtcNow;
 
@@ -744,7 +743,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
         private void OnOkButtonClicked()
         {
-            Tenantid = TenantStaffData.Userid;
+            HouseroomData.Tenantid = TenantStaffData.Userid;
             SearchId = string.Empty;
             NewTenantStaffData = new Systemtenantdetails
             {
