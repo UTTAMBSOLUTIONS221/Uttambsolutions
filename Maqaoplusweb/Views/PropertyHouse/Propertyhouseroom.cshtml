@@ -220,6 +220,7 @@
                 Tenantid: $('#Systempropertyhousetenantid').val(), Roomoccupant: $('#Systempropertyhouseroomoccupantid').val(), Roomoccupantdetail: $('#Systempropertyhouseroomoccupantdetailid').val(),
                 Createdby: $('#systemLoggedinedUserid').val(),Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
             };
+            alert(JSON.stringify(uil));
 
             // Validate form data
             var errors = [];
