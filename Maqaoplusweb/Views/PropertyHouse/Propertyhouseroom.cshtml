@@ -190,10 +190,20 @@
             var tenantid = $('#Systemuserid').val();
             $('#Systempropertyhousetenantid').val(tenantid);
             $('#Systemstaffidnumberid').val('');
+            document.getElementById("accepttoofferhimherroomid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SEARCH";
+
+            $(this).removeData('bs.modal');
+            $('.modal-backdrop').remove();
+            $('#Uttambsolutionsmodallarge .modal-content').empty();
         }
 
         function rejecttoofferhimherroom() {
             $('#Systemstaffidnumberid').val('');
+            $(this).removeData('bs.modal');
+            $('.modal-backdrop').remove();
+            $('#Uttambsolutionsmodallarge .modal-content').empty();
         }
 
 
