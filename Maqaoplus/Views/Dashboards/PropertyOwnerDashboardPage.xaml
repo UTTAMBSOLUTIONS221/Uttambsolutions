@@ -68,7 +68,7 @@
             <Frame Grid.Row="2" Grid.Column="1" Padding="10" BorderColor="#0a506c" BackgroundColor="#f0f4f8" CornerRadius="10" HasShadow="True">
                 <StackLayout>
                     <Image Source="tap.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" />
-                    <Label Text="Consumed Water Meters" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" HorizontalOptions="Center" />
+                    <Label Text="Water Units" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" HorizontalOptions="Center" />
                     <Label Text="{Binding DashBoardSummaryData.Consumedmeters, TargetNullValue='0', FallbackValue='0'}" FontSize="26" FontAttributes="Bold" TextColor="#333" HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
