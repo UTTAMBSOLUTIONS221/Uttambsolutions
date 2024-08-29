@@ -139,6 +139,17 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
                 OnPropertyChanged();
             }
         }
+
+        private string _paymentActualAmountError;
+        public string PaymentActualAmountError
+        {
+            get => _paymentActualAmountError;
+            set
+            {
+                _paymentActualAmountError = value;
+                OnPropertyChanged();
+            }
+        }
         private async Task LoadPaymentItems()
         {
             IsProcessing = true;
@@ -183,6 +194,11 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
         public async Task UpdatePaymentValidationData()
         {
             IsProcessing = true;
+            if (!Validate())
+            {
+                IsProcessing = false;
+                return;
+            }
 
             await Task.Delay(500);
             if (CustomerPaymentValidationData == null)
@@ -218,6 +234,24 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
                 IsProcessing = false;
             }
         }
+
+        private bool Validate()
+        {
+            bool isValid = true;
+            if (CustomerPaymentValidationData.Actualamount == 0)
+            {
+                PaymentActualAmountError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PaymentActualAmountError = null;
+            }
+            IsProcessing = isValid;
+
+            return isValid;
+        }
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
