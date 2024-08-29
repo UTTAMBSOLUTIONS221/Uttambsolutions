@@ -12,7 +12,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid IsVisible="{Binding IsDataLoaded}">
+    <Grid>
 
         <!-- Define Row Heights for Header and Content -->
         <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ScrollView Grid.Row="1" Padding="20">
+        <ScrollView Grid.Row="1" Padding="20" IsVisible="{Binding IsDataLoaded}">
             <StackLayout>
                 <!-- Title -->
                 <Label Text="AGREEMENT" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,4" />
