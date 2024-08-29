@@ -1213,11 +1213,22 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     document.Add(new Paragraph("AGREED AND ACCEPTED", sectionHeaderFont));
                     document.Add(new Paragraph(" ", regularFont)); // Add spacing
 
-                    // Owner Signature
-                    AddSignature(document, "Property Owner", OwnerTenantAgreementDetailData.OwnerSignatureimageurl, OwnerTenantAgreementDetailData.OwnerDatecreated);
+                    // Create a table with 2 columns
+                    var table = new PdfPTable(2)
+                    {
+                        WidthPercentage = 100
+                    };
 
-                    // Management System Provider Signature
-                    AddSignature(document, "Management System Provider", "https://firebasestorage.googleapis.com/v0/b/uttambsolutions-4ec2a.appspot.com/o/UttambSolutionsPrivate%2Fmysignature.jpg?alt=media&token=d970f2d8-f4bd-4a30-b47e-12d9f8d1edc9", OwnerTenantAgreementDetailData.OwnerDatecreated);
+                    // Set column widths (adjust as necessary)
+                    table.SetWidths(new float[] { 1f, 1f });
+                    // Add Management System Provider signature
+                    AddSignatureToTable(table, "Management System Provider", "Francis Kingori-Director \n Uttamb Solutions Limited", "https://firebasestorage.googleapis.com/v0/b/uttambsolutions-4ec2a.appspot.com/o/UttambSolutionsPrivate%2Fmysignature.jpg?alt=media&token=d970f2d8-f4bd-4a30-b47e-12d9f8d1edc9", OwnerTenantAgreementDetailData.OwnerDatecreated);
+                    // Add Property Owner signature
+                    AddSignatureToTable(table, "Property Owner", OwnerTenantAgreementDetailData.Fullname, OwnerTenantAgreementDetailData.OwnerSignatureimageurl, OwnerTenantAgreementDetailData.OwnerDatecreated);
+
+
+                    // Add the table to the document
+                    document.Add(table);
 
                     // Close the document
                     document.Close();
@@ -1247,19 +1258,48 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             document.Add(new Paragraph(" ", contentFont)); // Add spacing
         }
 
-
-        private void AddSignature(Document document, string role, string signatureImageUrl, DateTime date)
+        private void AddSignatureToTable(PdfPTable table, string role, string name, string signatureImageUrl, DateTime date)
         {
+            // Create a cell to hold the image and text
+            var cell = new PdfPCell
+            {
+                Border = Rectangle.NO_BORDER,
+                Padding = 5,
+                VerticalAlignment = iTextSharp.text.Element.ALIGN_TOP // Aligns the content to the top
+            };
+
+            // Add the image
             if (!string.IsNullOrEmpty(signatureImageUrl))
             {
-                var signatureImage = iTextSharp.text.Image.GetInstance(signatureImageUrl);
-                signatureImage.ScaleToFit(150, 75);
-                document.Add(signatureImage);
+                try
+                {
+                    var signatureImage = iTextSharp.text.Image.GetInstance(signatureImageUrl);
+                    signatureImage.ScaleToFit(150, 75); // Adjust size as needed
+
+                    // Create a paragraph for the image and text
+                    var imageParagraph = new Paragraph
+                {
+                    new Chunk(signatureImage, 0, 0),
+                    new Chunk($"\n{name}", FontFactory.GetFont(FontFactory.HELVETICA, 12)),
+                    new Chunk($"\n{role}", FontFactory.GetFont(FontFactory.HELVETICA, 12)),
+                    new Chunk($"\nDate: {date:yyyy-MM-dd}", FontFactory.GetFont(FontFactory.HELVETICA, 12))
+                };
+
+                    cell.AddElement(imageParagraph);
+                }
+                catch (Exception ex)
+                {
+                    // Handle image loading exceptions
+                    cell.AddElement(new Paragraph($"Error loading image: {ex.Message}", FontFactory.GetFont(FontFactory.HELVETICA, 12)));
+                }
+            }
+            else
+            {
+                cell.AddElement(new Paragraph($"No signature available for {role}.", FontFactory.GetFont(FontFactory.HELVETICA, 12)));
             }
 
-            document.Add(new Paragraph(role, FontFactory.GetFont(FontFactory.HELVETICA, 12)));
-            document.Add(new Paragraph($"Date: {date:yyyy-MM-dd}", FontFactory.GetFont(FontFactory.HELVETICA, 12)));
-            document.Add(new Paragraph(" ", FontFactory.GetFont(FontFactory.HELVETICA, 12))); // Add spacing
+            // Add cell to table
+            table.AddCell(cell);
         }
 
 
