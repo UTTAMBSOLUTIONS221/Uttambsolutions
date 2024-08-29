@@ -4,46 +4,55 @@
              x:Class="Maqaoplus.Views.PropertyHouse.Modal.SystemPropertyHouseRoomCheckListsModalPage"
              Title="Room Check Lists">
 
-    <!-- ScrollView to enable scrolling -->
-    <ScrollView Padding="15,15,15,20">
-        <VerticalStackLayout Spacing="10">
+    <Grid Padding="10" RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <!-- CollectionView Header and Items -->
-            <CollectionView ItemsSource="{Binding SystempropertyhouseroomfixturesData.Roomfixtures}" SelectionMode="None" Margin="0,0,0,0">
-                <CollectionView.Header>
-                    <Grid ColumnDefinitions="3*,2*,3*" BackgroundColor="#e0e0e0" Padding="5">
-                        <Label Text="Room Fixture" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center"/>
-                        <Label Text="Count" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center"/>
-                        <Label Text="Fixture Status" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center"/>
-                    </Grid>
-                </CollectionView.Header>
-
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="3*,2*,3*" Padding="5" Margin="0,0,0,0">
-                            <!-- Hidden fields -->
-                            <Entry Text="{Binding Propertychecklistid}" IsVisible="False"/>
-                            <Entry Text="{Binding Propertyhouseroomid}" IsVisible="False"/>
-                            <Entry Text="{Binding Fixtureid}" IsVisible="False"/>
-                            <Label Text="{Binding Fixturetype}" Grid.Column="0" VerticalOptions="Center"/>
-                            <Entry Text="{Binding Fixtureunits}" Keyboard="Numeric" Grid.Column="1" VerticalOptions="Center" />
-                            <Picker ItemsSource="{Binding Systempropertyfixturesdata}" SelectedItem="{Binding SelectedFixture}" ItemDisplayBinding="{Binding Text}" Title="Select Status" TextColor="Black" Grid.Column="2" FontSize="15" BackgroundColor="White" Margin="0" />
+        <!-- ScrollView to enable scrolling -->
+        <ScrollView  Grid.Row="0">
+            <VerticalStackLayout Padding="10" Spacing="10">
+                <!-- CollectionView Header and Items -->
+                <CollectionView ItemsSource="{Binding SystempropertyhouseroomfixturesData.Roomfixtures}" SelectionMode="None" Margin="0,0,0,0">
+                    <CollectionView.Header>
+                        <Grid ColumnDefinitions="3*,2*,3*" BackgroundColor="#e0e0e0" Padding="5">
+                            <Label Text="Room Fixture" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center"/>
+                            <Label Text="Count" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center"/>
+                            <Label Text="Fixture Status" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center"/>
                         </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                    </CollectionView.Header>
 
-            <!-- Navigation Buttons -->
-            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Padding="0,10,0,0" Margin="0,0,0,10">
-                <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="16" FontAttributes="Bold" WidthRequest="150" HeightRequest="50" />
-                <Button Text="Submit" Command="{Binding SavePropertyHouseRoomFixtureCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" FontSize="16" WidthRequest="150" HeightRequest="50" />
-            </FlexLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="3*,2*,3*" Padding="5" Margin="0,0,0,0">
+                                <!-- Hidden fields -->
+                                <Entry Text="{Binding Propertychecklistid}" IsVisible="False"/>
+                                <Entry Text="{Binding Propertyhouseroomid}" IsVisible="False"/>
+                                <Entry Text="{Binding Fixtureid}" IsVisible="False"/>
+                                <Label Text="{Binding Fixturetype}" Grid.Column="0" VerticalOptions="Center"/>
+                                <Entry Text="{Binding Fixtureunits}" Keyboard="Numeric" Grid.Column="1" VerticalOptions="Center" />
+                                <Picker ItemsSource="{Binding Systempropertyfixturesdata}" SelectedItem="{Binding SelectedFixture}" ItemDisplayBinding="{Binding Text}" Title="Select Status" TextColor="Black" Grid.Column="2" FontSize="15" BackgroundColor="White" Margin="0" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-            <!-- Loading Overlay -->
-            <Grid IsVisible="{Binding IsProcessing}" BackgroundColor="Transparent">
-                <BoxView Color="#C0000000" Opacity="0.5" />
-                <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100"/>
-            </Grid>
-        </VerticalStackLayout>
-    </ScrollView>
+                <!-- Navigation Buttons -->
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Padding="0,10,0,0" Margin="0,0,0,10">
+                    <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="16" FontAttributes="Bold" WidthRequest="150" HeightRequest="50" />
+                    <Button Text="Submit" Command="{Binding SavePropertyHouseRoomFixtureCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" FontSize="16" WidthRequest="150" HeightRequest="50" />
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid IsVisible="{Binding IsProcessing}" BackgroundColor="#00000066" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="1">
+            <BoxView Color="#C0000000" Opacity="0.5" />
+            <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
+        </Grid>
+        <!-- Footer -->
+        <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>
