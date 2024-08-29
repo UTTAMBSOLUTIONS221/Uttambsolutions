@@ -11,7 +11,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid Padding="10">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -157,6 +157,7 @@
             <BoxView Color="#C0000000" Opacity="0.5" />
             <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
         </Grid>
+        
         <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
             <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
         </StackLayout>
