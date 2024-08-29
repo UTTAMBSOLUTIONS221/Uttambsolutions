@@ -1,4 +1,6 @@
 ﻿using DBL.Models;
+using Maqaoplus.Views.PropertyHouseTenants;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -11,6 +13,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
         public ObservableCollection<PropertyHouseTenant> Items { get; }
+        private PropertyHouseRoomTenantData _tenantData;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
@@ -34,6 +37,28 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
             {
                 _isDataLoaded = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private bool _isvisible;
+
+        public bool Isvisible
+        {
+            get => _isvisible;
+            set
+            {
+                _isvisible = value;
+                OnPropertyChanged(nameof(Isvisible));
+            }
+        }
+
+        public PropertyHouseRoomTenantData TenantData
+        {
+            get => _tenantData;
+            set
+            {
+                _tenantData = value;
+                OnPropertyChanged(nameof(TenantData));
             }
         }
 
@@ -73,22 +98,20 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
                 IsProcessing = false;
             }
         }
-        private async Task ViewDetails(long propertyhousetenantidnumber)
+        private async Task ViewDetails(long Tenantid)
         {
             IsProcessing = true;
             IsDataLoaded = false;
-            try
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + Tenantid, HttpMethod.Get, null);
+            if (response != null)
             {
-                var encodedPropertyhousetenantidnumber = Uri.EscapeDataString(propertyhousetenantidnumber.ToString());
-                await Shell.Current.GoToAsync($"PropertyHousesTenantDetailPage?Propertyhousetenantidnumber={encodedPropertyhousetenantidnumber}");
+                TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
+                TenantData.Tenantroomdata.Expectedvacatingdate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
+                Isvisible = TenantData.Tenantroomdata.Occupationalstatus == "Occupant";
+                var detailPage = new PropertyHousesTenantDetailPage(this);
+
+                await Application.Current.MainPage.Navigation.PushAsync(detailPage);
                 IsDataLoaded = true;
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Navigation Error", ex.Message, "OK");
-            }
-            finally
-            {
                 IsProcessing = false;
             }
         }
