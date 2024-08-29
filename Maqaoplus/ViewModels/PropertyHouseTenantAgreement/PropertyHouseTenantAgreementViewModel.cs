@@ -113,7 +113,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
                     var responseAfter = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", TenantAgreementDetailData);
                     if (responseAfter.RespStatus == 200 || responseAfter.RespStatus == 0)
                     {
-                        Application.Current.MainPage.Navigation.PopModalAsync();
+                        (Shell.Current.CurrentPage.BindingContext as PropertyHouseTenantAgreementViewModel)?.ViewPropertyRoomAgreementCommand.Execute(null);
                     }
                     else if (responseAfter.RespStatus == 1)
                     {
