@@ -12,7 +12,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid Padding="10">
+    <Grid>
 
         <!-- Define Row Heights for Header and Content -->
         <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ScrollView Grid.Row="1" Padding="10">
+        <ScrollView Grid.Row="1" Padding="20">
             <StackLayout>
                 <!-- Title -->
                 <Label Text="RENTAL AGREEMENT" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,10" />
