@@ -1230,6 +1230,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     // Add the table to the document
                     document.Add(table);
 
+                    document.Add(new Paragraph(" ", regularFont)); // Add spacing
+                    document.Add(new Paragraph(" ", regularFont)); // Add spacing
+                    document.Add(new Paragraph("This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements, whether written or oral, relating to the subject matter herein.", regularFont));
+
                     // Close the document
                     document.Close();
                 }

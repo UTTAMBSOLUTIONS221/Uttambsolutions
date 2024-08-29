@@ -2,11 +2,12 @@
 using Firebase.Storage;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.draw;
 using Newtonsoft.Json;
 using System.ComponentModel;
-using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Font = iTextSharp.text.Font;
 
 namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
 {
@@ -151,111 +152,143 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
             using (var memoryStream = new MemoryStream())
             {
                 // Initialize PDF writer and document
-                using (var document = new Document(PageSize.A4))
+                using (var document = new Document(PageSize.A4, 50, 50, 50, 50))
                 {
                     PdfWriter.GetInstance(document, memoryStream);
                     document.Open();
 
                     // Define fonts
-                    var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16);
-                    var regularFont = FontFactory.GetFont(FontFactory.HELVETICA, 14);
+                    var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 20, BaseColor.Black);
+                    var headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.Black);
+                    var bodyFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.Black);
+                    var smallFont = FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.Black);
 
-                    // Title
-                    var titleParagraph = new Paragraph("TENANT RENTAL AGREEMENT", boldFont);
-                    titleParagraph.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+                    // Add a title with styling
+                    var titleParagraph = new Paragraph("TENANT RENTAL AGREEMENT", titleFont)
+                    {
+                        Alignment = iTextSharp.text.Element.ALIGN_CENTER,
+                        SpacingAfter = 20
+                    };
                     document.Add(titleParagraph);
-                    document.Add(new Paragraph(" ")); // Add spacing
 
-                    // Agreement Details
-                    document.Add(new Paragraph($"This Rental Agreement (Agreement) is made and entered into on this {TenantAgreementDetailData.TenantDatecreated:dd} day of {TenantAgreementDetailData.TenantDatecreated:MMM}, 20{TenantAgreementDetailData.TenantDatecreated:yy}, by and between:"));
+                    // Add a separator line
+                    var separator = new LineSeparator(1f, 100f, BaseColor.Black, iTextSharp.text.Element.ALIGN_CENTER, -2);
+                    document.Add(new Chunk(separator));
 
-                    // Landlord Details
-                    document.Add(new Paragraph($"Landlord: {TenantAgreementDetailData.Ownerfullname}"));
-                    document.Add(new Paragraph($"Property Name: {TenantAgreementDetailData.Propertyhousename}"));
-                    document.Add(new Paragraph($"Address: {TenantAgreementDetailData.Countyname}-{TenantAgreementDetailData.Subcountyname}-{TenantAgreementDetailData.Subcountywardname}"));
-                    document.Add(new Paragraph($"Phone Number: {TenantAgreementDetailData.Ownerphonenumber}"));
-                    document.Add(new Paragraph($"Email Address: {TenantAgreementDetailData.Owneremailaddress}"));
+                    // Add Agreement Date
+                    var dateParagraph = new Paragraph($"Date: {TenantAgreementDetailData.TenantDatecreated:dd MMMM yyyy}", smallFont)
+                    {
+                        Alignment = iTextSharp.text.Element.ALIGN_RIGHT,
+                        SpacingAfter = 10
+                    };
+                    document.Add(dateParagraph);
 
-                    // Tenant Details
-                    document.Add(new Paragraph("AND"));
-                    document.Add(new Paragraph($"Tenant: {TenantAgreementDetailData.Tenantfullname}"));
-                    document.Add(new Paragraph($"ID/Passport Number: {TenantAgreementDetailData.Tenantidnumber}"));
-                    document.Add(new Paragraph($"Phone Number: {TenantAgreementDetailData.Tenantphonenumber}"));
-                    document.Add(new Paragraph($"Email Address: {TenantAgreementDetailData.Tenantemailaddress}"));
+                    // Agreement Intro
+                    var introParagraph = new Paragraph(
+                        $"This Rental Agreement (\"Agreement\") is made and entered into on this {TenantAgreementDetailData.TenantDatecreated:dd} day of {TenantAgreementDetailData.TenantDatecreated:MMMM}, {TenantAgreementDetailData.TenantDatecreated:yyyy}, by and between:",
+                        bodyFont)
+                    {
+                        SpacingAfter = 20
+                    };
+                    document.Add(introParagraph);
+
+                    // Landlord and Tenant Details
+                    AddHeader(document, "Landlord Details", headerFont);
+                    AddDetail(document, $"Name: {TenantAgreementDetailData.Ownerfullname}", bodyFont);
+                    AddDetail(document, $"Property Name: {TenantAgreementDetailData.Propertyhousename}", bodyFont);
+                    AddDetail(document, $"Address: {TenantAgreementDetailData.Countyname}-{TenantAgreementDetailData.Subcountyname}-{TenantAgreementDetailData.Subcountywardname}", bodyFont);
+                    AddDetail(document, $"Phone Number: {TenantAgreementDetailData.Ownerphonenumber}", bodyFont);
+                    AddDetail(document, $"Email Address: {TenantAgreementDetailData.Owneremailaddress}", bodyFont);
+
+                    AddHeader(document, "Tenant Details", headerFont);
+                    AddDetail(document, $"Name: {TenantAgreementDetailData.Tenantfullname}", bodyFont);
+                    AddDetail(document, $"ID/Passport Number: {TenantAgreementDetailData.Tenantidnumber}", bodyFont);
+                    AddDetail(document, $"Phone Number: {TenantAgreementDetailData.Tenantphonenumber}", bodyFont);
+                    AddDetail(document, $"Email Address: {TenantAgreementDetailData.Tenantemailaddress}", bodyFont);
 
                     // Agreement Sections
-                    document.Add(new Paragraph($"1. PREMISES: The Landlord hereby agrees to rent to the Tenant, and the Tenant hereby agrees to rent from the Landlord {TenantAgreementDetailData.Propertyhousename}, the residential premises located at: {TenantAgreementDetailData.Countyname}-{TenantAgreementDetailData.Subcountyname}-{TenantAgreementDetailData.Subcountywardname}"));
-                    document.Add(new Paragraph($"Land Mark: {TenantAgreementDetailData.Streetorlandmark}"));
+                    AddHeader(document, "1. PREMISES", headerFont);
+                    AddDetail(document, $"The Landlord hereby agrees to rent to the Tenant, and the Tenant hereby agrees to rent from the Landlord {TenantAgreementDetailData.Propertyhousename}, the residential premises located at: {TenantAgreementDetailData.Countyname}-{TenantAgreementDetailData.Subcountyname}-{TenantAgreementDetailData.Subcountywardname}.", bodyFont);
+                    AddDetail(document, $"Land Mark: {TenantAgreementDetailData.Streetorlandmark}", bodyFont);
 
-                    // Term
-                    var startDate = TenantAgreementDetailData.TenantDatecreated.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-                    var endDate = TenantAgreementDetailData.TenantDatecreated.AddMonths(12).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture); // Example of fixed-term lease
-                    document.Add(new Paragraph($"2. TERM: The term of this rental agreement shall commence on {startDate} (Start Date) and shall continue as follows:"));
-                    document.Add(new Paragraph(TenantAgreementDetailData.Monthlyrentterms
-                        ? $"Month-to-month tenancy beginning on {startDate}."
-                        : $"Fixed-term lease ending on {endDate}."));
+                    AddHeader(document, "2. TERM", headerFont);
+                    AddDetail(document, $"The term of this rental agreement shall commence on {TenantAgreementDetailData.TenantDatecreated:yyyy-MM-dd} (Start Date) and shall continue as follows:", bodyFont);
+                    AddDetail(document, TenantAgreementDetailData.Monthlyrentterms ? "Month-to-month tenancy." : "Fixed-term lease.", bodyFont);
 
-                    // Rent
-                    document.Add(new Paragraph($"3. RENT: The Tenant agrees to pay the Landlord a monthly rent of Ksh. {TenantAgreementDetailData.Systempropertyhousesizerent:#,##0.00}, payable in advance on or before the {TenantAgreementDetailData.Rentdueday} day of each month. The first rent payment is due on {TenantAgreementDetailData.Nextrentduedate:yyyy-MM-dd}."));
+                    AddHeader(document, "3. RENT", headerFont);
+                    AddDetail(document, $"The Tenant agrees to pay the Landlord a monthly rent of Ksh. {TenantAgreementDetailData.Systempropertyhousesizerent:#,##0.00}, payable in advance on or before the {TenantAgreementDetailData.Rentdueday} day of each month. The first rent payment is due on {TenantAgreementDetailData.Nextrentduedate:yyyy-MM-dd}.", bodyFont);
 
-                    // Security Deposit
-                    document.Add(new Paragraph($"4. SECURITY DEPOSIT: The Tenant agrees to pay a security deposit of Ksh. {TenantAgreementDetailData.Systempropertyhousesizerentdeposit:#,##0.00}, equivalent to {TenantAgreementDetailData.Rentdepositmonth} month's rent, to be held by the Landlord as security for the performance of the Tenant's obligations under this Agreement. The security deposit will be refunded to the Tenant within {TenantAgreementDetailData.Rentdepositrefunddays} days after vacating the premises, less any deductions for damages beyond normal wear and tear."));
+                    AddHeader(document, "4. SECURITY DEPOSIT", headerFont);
+                    AddDetail(document, $"The Tenant agrees to pay a security deposit of Ksh. {TenantAgreementDetailData.Systempropertyhousesizerentdeposit:#,##0.00}, equivalent to {TenantAgreementDetailData.Rentdepositmonth} month's rent, to be held by the Landlord as security for the performance of the Tenant's obligations under this Agreement.", bodyFont);
+                    AddDetail(document, $"The security deposit will be refunded to the Tenant within {TenantAgreementDetailData.Rentdepositrefunddays} days after vacating the premises, less any deductions for damages beyond normal wear and tear.", bodyFont);
 
-                    // Utilities
-                    document.Add(new Paragraph("5. UTILITIES:"));
-                    document.Add(new Paragraph(TenantAgreementDetailData.Rentutilityinclusive
-                        ? "All utilities (e.g., electricity, water) are included in the rent."
-                        : $"The Tenant shall be responsible for the payment of the following utilities: {TenantAgreementDetailData.Propertyhouseutility}"));
+                    AddHeader(document, "5. UTILITIES", headerFont);
+                    AddDetail(document, TenantAgreementDetailData.Rentutilityinclusive ? "All utilities (e.g., electricity, water) are included in the rent." : $"The Tenant shall be responsible for the payment of the following utilities: {TenantAgreementDetailData.Propertyhouseutility}.", bodyFont);
 
-                    // Additional Sections
-                    document.Add(new Paragraph("6. MAINTENANCE AND REPAIRS: The Tenant agrees to keep the premises in a clean and habitable condition and to promptly notify the Landlord of any necessary repairs. The Tenant shall not make any alterations to the premises without the prior written consent of the Landlord."));
-                    document.Add(new Paragraph($"7. OCCUPANTS: The premises shall be occupied by the Tenant and the following individuals:\n{TenantAgreementDetailData.Tenantsintheroom}"));
-                    document.Add(new Paragraph("8. PETS:"));
-                    document.Add(new Paragraph(TenantAgreementDetailData.Allowpets
-                        ? "Pets are allowed, subject to the following conditions: [Specify pet conditions here]"
-                        : "No pets are allowed on the premises"));
-                    document.Add(new Paragraph("9. PAYMENT DETAILS: The Tenant shall make all payments to the following bank account details:"));
-                    document.Add(new Paragraph($"Banking Details: {TenantAgreementDetailData.Systempropertybankname}"));
-                    document.Add(new Paragraph("10. INSURANCE: The Tenant is encouraged to obtain renter's insurance to cover personal property against loss or damage. The Landlord shall not be responsible for any loss or damage to the Tenant's personal property."));
-                    document.Add(new Paragraph("11. DISPUTE RESOLUTION: Any disputes arising out of or relating to this Agreement shall be resolved through mediation or arbitration, as per the laws of Kenya. The parties agree to seek resolution through these methods before pursuing any legal action."));
-                    document.Add(new Paragraph("12. GOVERNING LAW: This Agreement shall be governed by and construed in accordance with the laws of Kenya."));
-                    document.Add(new Paragraph("13. ENTIRE AGREEMENT: This Agreement constitutes the entire agreement between the parties and supersedes all prior agreements or understandings, whether written or oral, relating to the subject matter hereof."));
+                    AddHeader(document, "6. MAINTENANCE AND REPAIRS", headerFont);
+                    AddDetail(document, "The Tenant agrees to keep the premises in a clean and habitable condition and to promptly notify the Landlord of any necessary repairs. The Tenant shall not make any alterations to the premises without the prior written consent of the Landlord.", bodyFont);
 
-                    // Additional Clauses
-                    document.Add(new Paragraph("14. WEAR AND TEAR: Normal wear and tear refers to the deterioration of the premises and its fixtures caused by ordinary use over time, without negligence or abuse. Examples include minor scuffs on walls, worn carpet, or faded paint. Damage beyond normal wear and tear includes, but is not limited to, large holes in walls, broken windows, and significant damage to appliances or fixtures. The Tenant is responsible for repairs or costs associated with damage beyond normal wear and tear. The Landlord shall provide a written estimate for such repairs, and the Tenant shall have the right to contest the charges if they disagree."));
+                    AddHeader(document, "7. OCCUPANTS", headerFont);
+                    AddDetail(document, $"The premises shall be occupied by the Tenant and the following individuals:\n{TenantAgreementDetailData.Tenantsintheroom}", bodyFont);
 
-                    document.Add(new Paragraph("15. DATA PROTECTION: The Landlord and Tenant agree to comply with all applicable data protection laws and regulations. The Tenant's personal data collected under this Agreement will be used solely for the purpose of managing the rental relationship and will not be shared with third parties without the Tenant's consent, except as required by law. The Tenant has the right to access, correct, or delete their personal data upon request."));
-                    // Signatures
-                    document.Add(new Paragraph("AGREED AND ACCEPTED", boldFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
+                    AddHeader(document, "8. PETS", headerFont);
+                    AddDetail(document, TenantAgreementDetailData.Allowpets ? "Pets are allowed, subject to the following conditions: [Specify pet conditions here]." : "No pets are allowed on the premises.", bodyFont);
 
-                    // Signatures
-                    var signatureOwnerImage = iTextSharp.text.Image.GetInstance(TenantAgreementDetailData.OwnerSignatureimageurl);
-                    signatureOwnerImage.ScaleToFit(200, 50);
-                    document.Add(signatureOwnerImage);
+                    AddHeader(document, "9. PAYMENT DETAILS", headerFont);
+                    AddDetail(document, $"The Tenant shall make all payments to the following bank account details:\n{TenantAgreementDetailData.Systempropertybankname}", bodyFont);
+
+                    AddHeader(document, "10. INSURANCE", headerFont);
+                    AddDetail(document, "The Tenant is encouraged to obtain renter's insurance to cover personal property against loss or damage. The Landlord shall not be responsible for any loss or damage to the Tenant's personal property.", bodyFont);
+
+                    AddHeader(document, "11. DISPUTE RESOLUTION", headerFont);
+                    AddDetail(document, "Any disputes arising out of or relating to this Agreement shall be resolved through mediation or arbitration, as per the laws of Kenya.", bodyFont);
+                    AddDetail(document, "The parties agree to seek resolution through these methods before pursuing any legal action.", bodyFont);
+
+                    AddHeader(document, "12. GOVERNING LAW", headerFont);
+                    AddDetail(document, "This Agreement shall be governed by and construed in accordance with the laws of Kenya.", bodyFont);
+
+                    AddHeader(document, "13. ENTIRE AGREEMENT", headerFont);
+                    AddDetail(document, "This Agreement constitutes the entire agreement between the parties and supersedes all prior agreements or understandings, whether written or oral, relating to the subject matter hereof.", bodyFont);
+
+                    AddHeader(document, "14. WEAR AND TEAR", headerFont);
+                    AddDetail(document, "Normal wear and tear refers to the deterioration of the premises and its fixtures caused by ordinary use over time, without negligence or abuse.", bodyFont);
+                    AddDetail(document, "The Tenant is responsible for repairs or costs associated with damage beyond normal wear and tear.", bodyFont);
+
+                    AddHeader(document, "15. DATA PROTECTION", headerFont);
+                    AddDetail(document, "The Landlord and Tenant agree to comply with all applicable data protection laws and regulations.", bodyFont);
+
+                    // Add Signatures
                     document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph("Property Owner", regularFont));
+                    document.Add(new Paragraph("AGREED AND ACCEPTED", headerFont)
+                    {
+                        Alignment = iTextSharp.text.Element.ALIGN_CENTER,
+                        SpacingBefore = 20,
+                        SpacingAfter = 20
+                    });
+
+                    // Create a table with 2 columns
+                    var table = new PdfPTable(2)
+                    {
+                        WidthPercentage = 100
+                    };
+
+                    // Set column widths (adjust as necessary)
+                    table.SetWidths(new float[] { 1f, 1f });
+                    // Add Property Owner signature
+                    AddSignatureToTable(table, "Property Owner", TenantAgreementDetailData.Ownerfullname, TenantAgreementDetailData.OwnerSignatureimageurl, TenantAgreementDetailData.TenantDatecreated);
+
+                    // Add Management System Provider signature
+                    AddSignatureToTable(table, "Property Owner", TenantAgreementDetailData.Tenantfullname, TenantAgreementDetailData.TenantSignatureimageurl, TenantAgreementDetailData.TenantDatecreated);
+                    // Add the table to the document
+                    document.Add(table);
+
                     document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph($"Date: {TenantAgreementDetailData.TenantDatecreated:yyyy-MM-dd}", regularFont));
                     document.Add(new Paragraph(" "));
+                    AddDetail(document, "This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements, whether written or oral, relating to the subject matter herein.", bodyFont);
 
 
-
-                    // Add the signature image
-                    var signatureTenantImage = iTextSharp.text.Image.GetInstance(TenantAgreementDetailData.TenantSignatureimageurl);
-                    signatureTenantImage.ScaleToFit(200, 50);
-                    document.Add(signatureTenantImage);
-                    document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph("Tenant:", regularFont));
-                    document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph($"Date: {TenantAgreementDetailData.TenantDatecreated:yyyy-MM-dd}", regularFont));
-                    document.Add(new Paragraph(" "));
-
-
-                    // Close the document
                     document.Close();
                 }
-
                 // Convert memory stream to byte array
                 var pdfBytes = memoryStream.ToArray();
 
@@ -272,6 +305,73 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
                 return downloadUrl;
             }
         }
+
+        private void AddHeader(Document document, string text, Font font)
+        {
+            var paragraph = new Paragraph(text, font)
+            {
+                SpacingBefore = 10,
+                SpacingAfter = 10
+            };
+            document.Add(paragraph);
+        }
+
+        private void AddDetail(Document document, string text, Font font)
+        {
+            var paragraph = new Paragraph(text, font)
+            {
+                FirstLineIndent = 20,
+                SpacingAfter = 5
+            };
+            document.Add(paragraph);
+        }
+
+        private void AddSignatureToTable(PdfPTable table, string role, string name, string signatureImageUrl, DateTime date)
+        {
+            // Create a cell to hold the image and text
+            var cell = new PdfPCell
+            {
+                Border = Rectangle.NO_BORDER,
+                Padding = 5,
+                VerticalAlignment = iTextSharp.text.Element.ALIGN_TOP // Aligns the content to the top
+            };
+
+            // Add the image
+            if (!string.IsNullOrEmpty(signatureImageUrl))
+            {
+                try
+                {
+                    var signatureImage = iTextSharp.text.Image.GetInstance(signatureImageUrl);
+                    signatureImage.ScaleToFit(150, 75); // Adjust size as needed
+
+                    // Create a paragraph for the image and text
+                    var imageParagraph = new Paragraph
+                {
+                    new Chunk(signatureImage, 0, 0),
+                    new Chunk($"\n{name}", FontFactory.GetFont(FontFactory.HELVETICA, 12)),
+                    new Chunk($"\n{role}", FontFactory.GetFont(FontFactory.HELVETICA, 12)),
+                    new Chunk($"\nDate: {date:yyyy-MM-dd}", FontFactory.GetFont(FontFactory.HELVETICA, 12))
+                };
+
+                    cell.AddElement(imageParagraph);
+                }
+                catch (Exception ex)
+                {
+                    // Handle image loading exceptions
+                    cell.AddElement(new Paragraph($"Error loading image: {ex.Message}", FontFactory.GetFont(FontFactory.HELVETICA, 12)));
+                }
+            }
+            else
+            {
+                cell.AddElement(new Paragraph($"No signature available for {role}.", FontFactory.GetFont(FontFactory.HELVETICA, 12)));
+            }
+
+            // Add cell to table
+            table.AddCell(cell);
+        }
+
+
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
