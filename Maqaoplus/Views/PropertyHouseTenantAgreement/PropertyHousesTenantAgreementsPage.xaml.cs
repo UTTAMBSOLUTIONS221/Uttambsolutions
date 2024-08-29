@@ -13,7 +13,6 @@ public partial class PropertyHousesTenantAgreementsPage : ContentPage
         InitializeComponent();
         _viewModel = new PropertyHouseTenantAgreementViewModel(serviceProvider);
         this.BindingContext = _viewModel;
-
     }
 
     protected override async void OnAppearing()

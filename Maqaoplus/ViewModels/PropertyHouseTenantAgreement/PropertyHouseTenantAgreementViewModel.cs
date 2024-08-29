@@ -41,6 +41,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
             }
         }
 
+
         public TenantAgreementDetailData TenantAgreementDetailData
         {
             get => _tenantAgreementDetailData;
@@ -56,7 +57,28 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
 
         public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(TenantAgreementDetailData?.TenantSignatureimageurl);
         public bool IsSignatureImageVisible => !string.IsNullOrEmpty(TenantAgreementDetailData?.TenantSignatureimageurl);
-        public bool IsSignatureAvailable => !string.IsNullOrEmpty(TenantAgreementDetailData?.TenantSignatureimageurl);
+        public bool IsSignatureAvailable
+        {
+            get
+            {
+                // Check if TenantAgreementDetailData is not null
+                if (TenantAgreementDetailData == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(TenantAgreementDetailData.TenantSignatureimageurl))
+                    {
+                        return !string.IsNullOrEmpty(TenantAgreementDetailData.TenantSignatureimageurl);
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
         // Parameterless constructor for XAML support
         public PropertyHouseTenantAgreementViewModel(Services.ServiceProvider serviceProvider)
         {
@@ -74,12 +96,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomagreementdetaildatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null)
                 {
-                    bool IsSignatureAvailable = true;
                     TenantAgreementDetailData = JsonConvert.DeserializeObject<TenantAgreementDetailData>(response.Data.ToString());
-                    if (TenantAgreementDetailData.Systempropertyhousesizerent == 0)
-                    {
-                        IsSignatureAvailable = false;
-                    }
                 }
                 IsDataLoaded = true;
             }
