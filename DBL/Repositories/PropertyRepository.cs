@@ -845,6 +845,27 @@ namespace DBL.Repositories
             }
         }
 
+        public CustomerPaymentValidationData Getsystempropertyroompaymentbypaymentid(long Paymentid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Paymentid", Paymentid);
+                parameters.Add("@Systempropertyroompaymentdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystempropertyroompaymentbypaymentid", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertyroompaymentdataJson = parameters.Get<string>("@Systempropertyroompaymentdata");
+                if (systempropertyroompaymentdataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<CustomerPaymentValidationData>(systempropertyroompaymentdataJson);
+                }
+                else
+                {
+                    return new CustomerPaymentValidationData();
+                }
+            }
+        }
+
         public Genericmodel Registervalidatecustomerpaymentrequestdata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))

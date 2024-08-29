@@ -173,6 +173,12 @@ namespace API.Controllers
             return await bl.Gettenantmonthlyinvoicepaymentdatabytenantid(TenantId);
         }
         [AllowAnonymous]
+        [HttpGet("Getsystempropertyroompaymentbypaymentid/{CustomerPaymentId}")]
+        public async Task<CustomerPaymentValidationData> Getsystempropertyroompaymentbypaymentid(long CustomerPaymentId)
+        {
+            return await bl.Getsystempropertyroompaymentbypaymentid(CustomerPaymentId);
+        }
+        [AllowAnonymous]
         [HttpPost("Validatepropertyhouseroomrentpaymentrequestdata")]
         public async Task<Genericmodel> Validatepropertyhouseroomrentpaymentrequestdata(CustomerPaymentValidation model)
         {

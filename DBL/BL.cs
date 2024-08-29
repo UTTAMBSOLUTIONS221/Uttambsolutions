@@ -1175,6 +1175,15 @@ namespace DBL
                 return Resp;
             });
         }
+
+        public Task<CustomerPaymentValidationData> Getsystempropertyroompaymentbypaymentid(long Paymentid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Getsystempropertyroompaymentbypaymentid(Paymentid);
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Registervalidatecustomerpaymentrequestdata(string Obj)
         {
             return Task.Run(() =>
