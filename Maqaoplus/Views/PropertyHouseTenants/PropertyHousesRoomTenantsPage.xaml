@@ -11,11 +11,6 @@
             <converters:NullToImageConverter x:Key="NullToImageConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
-    <ContentPage.BindingContext>
-        <viewmodels:PropertyHousesRoomTenantsViewModel />
-    </ContentPage.BindingContext>
-
     <Grid>
         <!-- Define Row Heights for Header and Content -->
         <Grid.RowDefinitions>

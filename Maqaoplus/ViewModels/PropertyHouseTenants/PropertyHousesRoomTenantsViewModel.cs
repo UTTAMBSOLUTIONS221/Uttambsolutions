@@ -37,18 +37,13 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
             }
         }
 
-        // Parameterless constructor for XAML support
-        public PropertyHousesRoomTenantsViewModel()
-        {
-            Items = new ObservableCollection<PropertyHouseTenant>();
-            LoadItemsCommand = new Command(async () => await LoadItems());
-            ViewDetailsCommand = new Command<PropertyHouseTenant>(async (propertyhousetenant) => await ViewDetails(propertyhousetenant.Idnumber));
-        }
-
         // Constructor with ServiceProvider parameter
-        public PropertyHousesRoomTenantsViewModel(Services.ServiceProvider serviceProvider) : this()
+        public PropertyHousesRoomTenantsViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            Items = new ObservableCollection<PropertyHouseTenant>();
+            LoadItemsCommand = new Command(async () => await LoadItems());
+            ViewDetailsCommand = new Command<PropertyHouseTenant>(async (propertyhousetenant) => await ViewDetails(propertyhousetenant.Systempropertyhousetenantid));
         }
         private async Task LoadItems()
         {

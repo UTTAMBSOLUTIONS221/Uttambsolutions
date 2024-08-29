@@ -101,8 +101,6 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
                 TenantData.Tenantroomdata.Expectedvacatingdate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
                 Isvisible = TenantData.Tenantroomdata.Occupationalstatus == "Occupant";
             }
-            //var modalPage = new HousesRoomDetailModalPage(this);
-            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
         public event PropertyChangedEventHandler PropertyChanged;

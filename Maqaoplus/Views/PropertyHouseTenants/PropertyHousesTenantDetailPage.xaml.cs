@@ -1,26 +1,11 @@
 using Maqaoplus.ViewModels.PropertyHouseTenants;
 namespace Maqaoplus.Views.PropertyHouseTenants;
-
-[QueryProperty(nameof(Propertyhousetenantidnumber), "Propertyhousetenantidnumber")]
 public partial class PropertyHousesTenantDetailPage : ContentPage
 {
-    public long Propertyhousetenantidnumber { get; set; }
-    private PropertyHousesTenantDetailViewModel _viewModel;
 
-    public PropertyHousesTenantDetailPage(PropertyHousesTenantDetailViewModel viewModel)
+    public PropertyHousesTenantDetailPage(PropertyHousesRoomTenantsViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
-        _viewModel = viewModel;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (BindingContext is PropertyHousesTenantDetailViewModel viewModel)
-        {
-            viewModel.SetPropertyHousesTenantIdNumber(Propertyhousetenantidnumber);
-        }
     }
 }
