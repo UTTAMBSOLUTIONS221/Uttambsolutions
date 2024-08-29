@@ -1,4 +1,5 @@
-﻿using DBL.Models;
+﻿using DBL.Entities;
+using DBL.Models;
 using Maqaoplus.Views.OwnerBillsandPayments.Modals;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -14,7 +15,7 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
         private readonly Services.ServiceProvider _serviceProvider;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ObservableCollection<CustomerPaymentData> PaymentItems { get; }
-        private CustomerPaymentData _customerPaymentData;
+        private CustomerPaymentValidation _customerPaymentValidationData;
         private MonthlyRentInvoiceModel _tenantInvoiceDetailData;
         public ICommand LoadPaymentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
@@ -53,12 +54,12 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
         }
 
 
-        public CustomerPaymentData CustomerPaymentData
+        public CustomerPaymentValidation CustomerPaymentValidationData
         {
-            get => _customerPaymentData;
+            get => _customerPaymentValidationData;
             set
             {
-                _customerPaymentData = value;
+                _customerPaymentValidationData = value;
                 OnPropertyChanged();
             }
         }
@@ -168,10 +169,10 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
         private async Task ValidateThisPaymentDetail(long CustomerPaymentId)
         {
             IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomimagebyhouseid/" + CustomerPaymentId, HttpMethod.Get, null);
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyroompaymentbypaymentid/" + CustomerPaymentId, HttpMethod.Get, null);
             if (response != null)
             {
-                CustomerPaymentData = JsonConvert.DeserializeObject<CustomerPaymentData>(response.Data.ToString());
+                CustomerPaymentValidationData = JsonConvert.DeserializeObject<CustomerPaymentValidation>(response.Data.ToString());
             }
             var modalPage = new ValidateThisPaymentDetailModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
