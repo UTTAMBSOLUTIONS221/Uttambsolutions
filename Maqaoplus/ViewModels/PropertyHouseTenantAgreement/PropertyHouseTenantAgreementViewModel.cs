@@ -278,7 +278,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
                     AddSignatureToTable(table, "Property Owner", TenantAgreementDetailData.Ownerfullname, TenantAgreementDetailData.OwnerSignatureimageurl, TenantAgreementDetailData.TenantDatecreated);
 
                     // Add Management System Provider signature
-                    AddSignatureToTable(table, "Property Owner", TenantAgreementDetailData.Tenantfullname, TenantAgreementDetailData.TenantSignatureimageurl, TenantAgreementDetailData.TenantDatecreated);
+                    AddSignatureToTable(table, "Property Tenant", TenantAgreementDetailData.Tenantfullname, TenantAgreementDetailData.TenantSignatureimageurl, TenantAgreementDetailData.TenantDatecreated);
                     // Add the table to the document
                     document.Add(table);
 
