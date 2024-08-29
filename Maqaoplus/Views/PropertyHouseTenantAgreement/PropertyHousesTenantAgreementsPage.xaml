@@ -12,7 +12,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid>
+    <Grid IsVisible="{Binding IsDataLoaded}">
 
         <!-- Define Row Heights for Header and Content -->
         <Grid.RowDefinitions>
