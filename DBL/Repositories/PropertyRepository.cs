@@ -308,7 +308,7 @@ namespace DBL.Repositories
                     responseData.Systempropertyhousesizerent = Convert.ToDecimal(tenantreponseJson["Systempropertyhousesizerent"]);
                     responseData.Systempropertyhousesizerentdeposit = Convert.ToDecimal(tenantreponseJson["Systempropertyhousesizerentdeposit"]);
                     responseData.Rentdepositmonth = Convert.ToInt32(tenantreponseJson["Rentdepositmonth"]);
-                    responseData.Rentdepositrefunddays = Convert.ToInt32(tenantreponseJson["rentdepositrefunddays"]);
+                    responseData.Rentdepositrefunddays = Convert.ToInt32(tenantreponseJson["Rentdepositrefunddays"]);
                     responseData.Monthlyrentterms = Convert.ToBoolean(tenantreponseJson["Monthlyrentterms"]);
                     responseData.Allowpets = Convert.ToBoolean(tenantreponseJson["Allowpets"]);
                     responseData.Rentutilityinclusive = Convert.ToBoolean(tenantreponseJson["Rentutilityinclusive"]);
