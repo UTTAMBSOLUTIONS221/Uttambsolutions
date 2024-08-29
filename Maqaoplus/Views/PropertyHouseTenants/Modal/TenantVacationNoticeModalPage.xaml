@@ -102,6 +102,7 @@
                                     </Frame>
                                 </StackLayout>
 
+
                                 <StackLayout Orientation="Horizontal" Spacing="10">
                                     <Entry IsVisible="False" Text="{Binding TenantData.Userid}" />
                                 </StackLayout>
