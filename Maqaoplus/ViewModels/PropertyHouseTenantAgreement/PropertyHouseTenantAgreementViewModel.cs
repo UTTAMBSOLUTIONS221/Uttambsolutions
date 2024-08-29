@@ -40,6 +40,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
                 OnPropertyChanged();
             }
         }
+
         public TenantAgreementDetailData TenantAgreementDetailData
         {
             get => _tenantAgreementDetailData;
@@ -73,7 +74,12 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomagreementdetaildatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null)
                 {
+                    bool IsSignatureAvailable = true;
                     TenantAgreementDetailData = JsonConvert.DeserializeObject<TenantAgreementDetailData>(response.Data.ToString());
+                    if (TenantAgreementDetailData.Systempropertyhousesizerent == 0)
+                    {
+                        IsSignatureAvailable = false;
+                    }
                 }
                 IsDataLoaded = true;
             }
