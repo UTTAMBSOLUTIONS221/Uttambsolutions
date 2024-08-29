@@ -4,12 +4,14 @@ using DBL.Models;
 using Firebase.Storage;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.draw;
 using Maqaoplus.Views.PropertyHouse.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Font = iTextSharp.text.Font;
 
 namespace Maqaoplus.ViewModels.PropertyHouse
 {
@@ -1153,120 +1155,69 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             using (var memoryStream = new MemoryStream())
             {
-                // Initialize PDF writer and document
-                using (var document = new Document(PageSize.A4))
+                using (var document = new Document(PageSize.A4, 50, 50, 50, 50))
                 {
                     PdfWriter.GetInstance(document, memoryStream);
                     document.Open();
 
                     // Define fonts
-                    var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16);
-                    var regularFont = FontFactory.GetFont(FontFactory.HELVETICA, 14);
+                    var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 20);
+                    var sectionHeaderFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16);
+                    var regularFont = FontFactory.GetFont(FontFactory.HELVETICA, 12);
+                    var smallFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
 
                     // Title
-                    var titleParagraph = new Paragraph("RENTAL MANAGEMENT SYSTEM AGREEMENT", boldFont);
+                    var titleParagraph = new Paragraph("RENTAL MANAGEMENT SYSTEM AGREEMENT", titleFont);
                     titleParagraph.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
                     document.Add(titleParagraph);
-                    document.Add(new Paragraph(" ")); // Add spacing
+                    document.Add(new Paragraph(" ", regularFont)); // Add spacing
+
+                    // Add a line separator
+                    var lineSeparator = new LineSeparator(1, 100, BaseColor.Black, iTextSharp.text.Element.ALIGN_CENTER, -2);
+                    document.Add(lineSeparator);
+                    document.Add(new Paragraph(" ", regularFont)); // Add spacing
 
                     // Date
-                    document.Add(new Paragraph($"Date: {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd}", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
+                    document.Add(new Paragraph($"Date: {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd}", smallFont));
+                    document.Add(new Paragraph(" ", smallFont)); // Add spacing
 
                     // Property Owner Details
-                    document.Add(new Paragraph($"Property: {OwnerTenantAgreementDetailData.Propertyhousename}", boldFont));
+                    document.Add(new Paragraph("Property Owner Details", sectionHeaderFont));
+                    document.Add(new Paragraph($"Property: {OwnerTenantAgreementDetailData.Propertyhousename}", regularFont));
                     document.Add(new Paragraph($"Name: {OwnerTenantAgreementDetailData.Fullname}", regularFont));
-                    document.Add(new Paragraph($"Address: {OwnerTenantAgreementDetailData.Countyname}-{OwnerTenantAgreementDetailData.Subcountyname}-{OwnerTenantAgreementDetailData.Subcountywardname}", regularFont));
+                    document.Add(new Paragraph($"Address: {OwnerTenantAgreementDetailData.Countyname}, {OwnerTenantAgreementDetailData.Subcountyname}, {OwnerTenantAgreementDetailData.Subcountywardname}", regularFont));
                     document.Add(new Paragraph($"Phone: {OwnerTenantAgreementDetailData.Phonenumber}", regularFont));
                     document.Add(new Paragraph($"Email: {OwnerTenantAgreementDetailData.Emailaddress}", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
+                    document.Add(new Paragraph(" ", regularFont)); // Add spacing
 
                     // Rental Management System Provider
-                    document.Add(new Paragraph("Rental Management System Provider:", boldFont));
+                    document.Add(new Paragraph("Rental Management System Provider", sectionHeaderFont));
                     document.Add(new Paragraph("Name: UTTAMB SOLUTIONS LIMITED", regularFont));
-                    document.Add(new Paragraph("Address: Nairobi Kenya", regularFont));
+                    document.Add(new Paragraph("Address: Nairobi, Kenya", regularFont));
                     document.Add(new Paragraph("Phone: 0717850720", regularFont));
                     document.Add(new Paragraph("Email: support@utambsolutions.com", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
+                    document.Add(new Paragraph(" ", regularFont)); // Add spacing
 
                     // Agreement Sections
-                    document.Add(new Paragraph("1. PURPOSE OF THE AGREEMENT", boldFont));
-                    document.Add(new Paragraph($"The purpose of this Agreement is to outline the terms and conditions under which UTTAMB SOLUTIONS LIMITED (hereinafter referred to as the Management System Provider) will provide rental management services to {OwnerTenantAgreementDetailData.Fullname} (hereinafter referred to as the Property Owner) for the property located at {OwnerTenantAgreementDetailData.Countyname}-{OwnerTenantAgreementDetailData.Subcountyname}-{OwnerTenantAgreementDetailData.Subcountywardname} (hereinafter referred to as the Property).", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
-
-                    document.Add(new Paragraph("2. SERVICES PROVIDED", boldFont));
-                    document.Add(new Paragraph("- Advertising and Marketing: Listing the Property on various platforms to attract potential tenants.", regularFont));
-                    document.Add(new Paragraph("- Tenant Screening: Conducting background checks and verifying tenant credentials.", regularFont));
-                    document.Add(new Paragraph("- Rent Collection: Facilitating the collection of rent payments from tenants.", regularFont));
-                    document.Add(new Paragraph("- Property Maintenance: Coordinating with contractors for repairs and regular maintenance of the Property.", regularFont));
-                    document.Add(new Paragraph("- Reporting: Providing regular reports on the status of the Property, rent collection, and any issues that arise.", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
-
-                    document.Add(new Paragraph("3. FEES AND PAYMENTS", boldFont));
-                    document.Add(new Paragraph("- Service Fee: The Property Owner agrees to pay the Management System Provider a service fee of 1% of the monthly rent collected.", regularFont));
-                    document.Add(new Paragraph("- Subscription Payment: The Property Owner agrees to pay a subscription fee for the services rendered by the Management System Provider. The subscription fee shall be paid monthly to the following bank account:", regularFont));
-                    document.Add(new Paragraph("  Bank Name: FAMILY BANK", boldFont));
-                    document.Add(new Paragraph("  Pay Bill: 222111", boldFont));
-                    document.Add(new Paragraph("  Account Number: 2340982", boldFont));
-                    document.Add(new Paragraph("- Payment Terms: The subscription fee is due on the 10th day of each month.", regularFont));
-                    document.Add(new Paragraph("- Additional Costs: Any costs related to property maintenance, legal fees, or other services not covered under this Agreement will be billed separately with the Property Owner's prior approval.", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
-
-                    document.Add(new Paragraph("4. PROPERTY OWNER RESPONSIBILITIES", boldFont));
-                    document.Add(new Paragraph("- Property Upkeep: The Property Owner agrees to maintain the Property in a condition suitable for rental.", regularFont));
-                    document.Add(new Paragraph("- Insurance: The Property Owner is responsible for obtaining and maintaining appropriate insurance coverage for the Property.", regularFont));
-                    document.Add(new Paragraph("- Legal Compliance: The Property Owner agrees to comply with all local, county, and national laws relating to the rental and maintenance of the Property.", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
-
-                    document.Add(new Paragraph("5. DATA PROTECTION AND PRIVACY", boldFont));
-                    document.Add(new Paragraph("- Compliance with Data Protection Act, 2019: The Management System Provider shall ensure that all personal data collected, processed, and stored as part of the rental management services is handled in accordance with the Data Protection Act, 2019 of Kenya.", regularFont));
-                    document.Add(new Paragraph("- Data Security: Both parties agree to implement appropriate technical and organizational measures to protect personal data against unauthorized or unlawful processing, accidental loss, destruction, or damage.", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
-
-                    document.Add(new Paragraph("6. TERM AND TERMINATION", boldFont));
-                    document.Add(new Paragraph($"- Term: This Agreement will begin on {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd} and will continue until terminated by either party.", regularFont));
-                    document.Add(new Paragraph("- Termination: Either party may terminate this Agreement with 14 days' written notice. Upon termination, the Property Owner is responsible for any outstanding fees and obligations under this Agreement.", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
-
-                    document.Add(new Paragraph("7. INDEMNIFICATION", boldFont));
-                    document.Add(new Paragraph("The Property Owner agrees to indemnify and hold harmless the Management System Provider from any claims, liabilities, or damages arising out of the management of the Property, except in cases of gross negligence or willful misconduct by the Management System Provider.", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
-
-                    document.Add(new Paragraph("8. GOVERNING LAW", boldFont));
-                    document.Add(new Paragraph("This Agreement shall be governed by and construed in accordance with the laws of Kenya.", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
-
-                    document.Add(new Paragraph("9. ENTIRE AGREEMENT", boldFont));
-                    document.Add(new Paragraph("This Agreement constitutes the entire agreement between the parties with respect to its subject matter and supersedes all prior agreements and understandings, whether written or oral.", regularFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
+                    AddAgreementSection(document, "1. PURPOSE OF THE AGREEMENT", sectionHeaderFont, regularFont, $"The purpose of this Agreement is to outline the terms and conditions under which UTTAMB SOLUTIONS LIMITED (hereinafter referred to as the Management System Provider) will provide rental management services to {OwnerTenantAgreementDetailData.Fullname} (hereinafter referred to as the Property Owner) for the property located at {OwnerTenantAgreementDetailData.Countyname}, {OwnerTenantAgreementDetailData.Subcountyname}, {OwnerTenantAgreementDetailData.Subcountywardname} (hereinafter referred to as the Property).");
+                    AddAgreementSection(document, "2. SERVICES PROVIDED", sectionHeaderFont, regularFont, "- Advertising and Marketing: Listing the Property on various platforms to attract potential tenants.\n- Tenant Screening: Conducting background checks and verifying tenant credentials.\n- Rent Collection: Facilitating the collection of rent payments from tenants.\n- Property Maintenance: Coordinating with contractors for repairs and regular maintenance of the Property.\n- Reporting: Providing regular reports on the status of the Property, rent collection, and any issues that arise.");
+                    AddAgreementSection(document, "3. FEES AND PAYMENTS", sectionHeaderFont, regularFont, $"- Service Fee: The Property Owner agrees to pay the Management System Provider a service fee of 1% of the monthly rent collected.\n- Subscription Payment: The Property Owner agrees to pay a subscription fee for the services rendered by the Management System Provider. The subscription fee shall be paid monthly to the following bank account:\n\n  Bank Name: FAMILY BANK\n  Pay Bill: 222111\n  Account Number: 2340982\n\n- Payment Terms: The subscription fee is due on the 10th day of each month.\n- Additional Costs: Any costs related to property maintenance, legal fees, or other services not covered under this Agreement will be billed separately with the Property Owner's prior approval.");
+                    AddAgreementSection(document, "4. PROPERTY OWNER RESPONSIBILITIES", sectionHeaderFont, regularFont, "- Property Upkeep: The Property Owner agrees to maintain the Property in a condition suitable for rental.\n- Insurance: The Property Owner is responsible for obtaining and maintaining appropriate insurance coverage for the Property.\n- Legal Compliance: The Property Owner agrees to comply with all local, county, and national laws relating to the rental and maintenance of the Property.");
+                    AddAgreementSection(document, "5. DATA PROTECTION AND PRIVACY", sectionHeaderFont, regularFont, "- Compliance with Data Protection Act, 2019: The Management System Provider shall ensure that all personal data collected, processed, and stored as part of the rental management services is handled in accordance with the Data Protection Act, 2019 of Kenya.\n- Data Security: Both parties agree to implement appropriate technical and organizational measures to protect personal data against unauthorized or unlawful processing, accidental loss, destruction, or damage.");
+                    AddAgreementSection(document, "6. TERM AND TERMINATION", sectionHeaderFont, regularFont, $"- Term: This Agreement will begin on {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd} and will continue until terminated by either party.\n- Termination: Either party may terminate this Agreement with 14 days' written notice. Upon termination, the Property Owner is responsible for any outstanding fees and obligations under this Agreement.");
+                    AddAgreementSection(document, "7. INDEMNIFICATION", sectionHeaderFont, regularFont, "The Property Owner agrees to indemnify and hold harmless the Management System Provider from any claims, liabilities, or damages arising out of the management of the Property, except in cases of gross negligence or willful misconduct by the Management System Provider.");
+                    AddAgreementSection(document, "8. GOVERNING LAW", sectionHeaderFont, regularFont, "This Agreement shall be governed by and construed in accordance with the laws of Kenya.");
+                    AddAgreementSection(document, "9. ENTIRE AGREEMENT", sectionHeaderFont, regularFont, "This Agreement constitutes the entire agreement between the parties with respect to its subject matter and supersedes all prior agreements and understandings, whether written or oral.");
 
                     // Signatures
-                    document.Add(new Paragraph("AGREED AND ACCEPTED", boldFont));
-                    document.Add(new Paragraph(" ")); // Add spacing
+                    document.Add(new Paragraph("AGREED AND ACCEPTED", sectionHeaderFont));
+                    document.Add(new Paragraph(" ", regularFont)); // Add spacing
 
-                    // Signatures
-                    var signatureOwnerImage = iTextSharp.text.Image.GetInstance(OwnerTenantAgreementDetailData.OwnerSignatureimageurl);
-                    signatureOwnerImage.ScaleToFit(200, 50);
-                    document.Add(signatureOwnerImage);
-                    document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph("Property Owner", regularFont));
-                    document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph($"Date: {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd}", regularFont));
-                    document.Add(new Paragraph(" "));
+                    // Owner Signature
+                    AddSignature(document, "Property Owner", OwnerTenantAgreementDetailData.OwnerSignatureimageurl, OwnerTenantAgreementDetailData.OwnerDatecreated);
 
-
-
-                    // Add the signature image
-                    //var imgPath = "resources/images/mysignature.png";
-                    //var signatureImage = iTextSharp.text.Image.GetInstance(imgPath);
-                    //signatureImage.ScaleToFit(200, 50);
-                    //document.Add(signatureImage);
-                    document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph("Management System Provider", regularFont));
-                    document.Add(new Paragraph(" "));
-                    document.Add(new Paragraph($"Date: {OwnerTenantAgreementDetailData.OwnerDatecreated:yyyy-MM-dd}", regularFont));
-                    document.Add(new Paragraph(" "));
-
+                    // Management System Provider Signature
+                    AddSignature(document, "Management System Provider", "Resources/Images/mysignature.png", OwnerTenantAgreementDetailData.OwnerDatecreated); // Replace with actual signature URL if available
 
                     // Close the document
                     document.Close();
@@ -1288,6 +1239,28 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 return downloadUrl;
             }
         }
+
+        private void AddAgreementSection(Document document, string title, Font titleFont, Font contentFont, string content)
+        {
+            document.Add(new Paragraph(title, titleFont));
+            document.Add(new Paragraph(content, contentFont));
+            document.Add(new Paragraph(" ", contentFont)); // Add spacing
+        }
+
+        private void AddSignature(Document document, string role, string signatureImageUrl, DateTime date)
+        {
+            if (!string.IsNullOrEmpty(signatureImageUrl))
+            {
+                var signatureImage = iTextSharp.text.Image.GetInstance(signatureImageUrl);
+                signatureImage.ScaleToFit(150, 75);
+                document.Add(signatureImage);
+            }
+
+            document.Add(new Paragraph(role, FontFactory.GetFont(FontFactory.HELVETICA, 12)));
+            document.Add(new Paragraph($"Date: {date:yyyy-MM-dd}", FontFactory.GetFont(FontFactory.HELVETICA, 12)));
+            document.Add(new Paragraph(" ", FontFactory.GetFont(FontFactory.HELVETICA, 12))); // Add spacing
+        }
+
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
