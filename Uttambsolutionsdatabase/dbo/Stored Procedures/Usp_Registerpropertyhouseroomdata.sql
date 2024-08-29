@@ -18,7 +18,7 @@ BEGIN
 			return;
 		END
 
-		IF EXISTS(SELECT Systempropertyhousetenantid FROM Systempropertyhouseroomstenant WHERE Systempropertyhousetenantid = JSON_VALUE(@JsonObjectdata, '$.Tenantid') AND Occupationalstatus=2)
+		IF EXISTS(SELECT Systempropertyhousetenantid FROM Systempropertyhouseroomstenant WHERE Systempropertyhousetenantid = JSON_VALUE(@JsonObjectdata, '$.Tenantid') AND Systempropertyhouseroomid != JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid') AND Occupationalstatus=2)
 		BEGIN
 			SELECT 1 AS RespStatus,'Tenant has not given vacating notice to current residence' AS RespMessage;
 			return;
@@ -44,7 +44,6 @@ BEGIN
 		    OUTPUT inserted.Systempropertyhouseroomid INTO @Systempropertyhouseroomsdata;
 			SET @Systempropertyhouseroomid = (SELECT TOP 1 Systempropertyhouseroomid FROM @Systempropertyhouseroomsdata);
 
-
 			--set room vacant if exists
 			IF EXISTS (SELECT Systempropertyhouseroomid FROM Systempropertyhouseroomstenant WHERE Systempropertyhousetenantid = JSON_VALUE(@JsonObjectdata, '$.Tenantid') AND Isoccupant=1 AND Occupationalstatus=1)
             BEGIN 
@@ -53,13 +52,15 @@ BEGIN
 			--insert tenant to tenants table
 			MERGE INTO Systempropertyhouseroomstenant AS target
 			USING(
-			SELECT Systempropertyhousetenantid,Systempropertyhouseroomid,Createdby,Modifiedby,Datecreated,Datemodified
+			SELECT Systempropertyhousetenantid,Systempropertyhouseroomid,Roomoccupant,Roomoccupantdetail,Createdby,Modifiedby,Datecreated,Datemodified
 			FROM OPENJSON(@JsonObjectdata)
-			WITH (Systempropertyhousetenantid BIGINT '$.Tenantid',Systempropertyhouseroomid BIGINT '$.Systempropertyhouseroomid',Createdby BIGINT '$.Createdby',Modifiedby BIGINT '$.Createdby',  Datecreated DATETIME2 '$.Datecreated',Datemodified DATETIME2 '$.Datecreated')) AS source
-			ON target.Systempropertyhousetenantid = source.Systempropertyhousetenantid AND target.Isoccupant = 1 AND Occupationalstatus= 2
+			WITH (Systempropertyhousetenantid BIGINT '$.Tenantid',Systempropertyhouseroomid BIGINT '$.Systempropertyhouseroomid',Roomoccupant INT '$.Roomoccupant',Roomoccupantdetail VARCHAR(200) '$.Roomoccupantdetail',Createdby BIGINT '$.Createdby',Modifiedby BIGINT '$.Createdby',  Datecreated DATETIME2 '$.Datecreated',Datemodified DATETIME2 '$.Datecreated')) AS source
+			ON target.Systempropertyhousetenantid = source.Systempropertyhousetenantid AND target.Systempropertyhouseroomid = source.Systempropertyhouseroomid AND target.Isoccupant = 1 AND Occupationalstatus= 2
+			WHEN MATCHED THEN
+			UPDATE SET target.Roomoccupant =source.Roomoccupant,target.Roomoccupantdetail = source.Roomoccupantdetail	
 			WHEN NOT MATCHED THEN
-			INSERT (Systempropertyhousetenantid, Systempropertyhouseroomid,Isoccupant,Occupationalstatus,Isnewtenant, Createdby, Modifiedby,Vacateddate, Datecreated, Datemodified)
-			VALUES (source.Systempropertyhousetenantid, source.Systempropertyhouseroomid,1,2,@Isnewtenant, source.Createdby, source.Modifiedby,source.Datecreated, source.Datecreated, source.Datemodified)
+			INSERT (Systempropertyhousetenantid, Systempropertyhouseroomid,Isoccupant,Occupationalstatus,Isnewtenant,Roomoccupant,Roomoccupantdetail, Createdby, Modifiedby,Vacateddate, Datecreated, Datemodified)
+			VALUES (source.Systempropertyhousetenantid, source.Systempropertyhouseroomid,1,2,@Isnewtenant,source.Roomoccupant, source.Roomoccupantdetail, source.Createdby, source.Modifiedby,source.Datecreated, source.Datecreated, source.Datemodified)
 			OUTPUT inserted.Systempropertyhousetenantentryid INTO @Systempropertyhouseroomstenantdata;
 		    SET @Systempropertyhousetenantentryid = (SELECT TOP 1 Systempropertyhousetenantentryid FROM @Systempropertyhouseroomstenantdata);
 

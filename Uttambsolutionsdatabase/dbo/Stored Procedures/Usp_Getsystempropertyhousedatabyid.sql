@@ -15,7 +15,7 @@ BEGIN
 			IF(@Propertyhouseid=0)
 			 BEGIN
 			  SET @Systempropertydata= 
-				  (SELECT 0 AS Propertyhouseid,0 AS Isagency,0 AS Propertyhouseowner,0 AS Propertyhouseposter,'' AS Propertyhousename,0 AS Countyid,0 AS Subcountyid,0 AS Subcountywardid,'' AS Streetorlandmark,'' AS Contactdetails,0 AS Hashousedeposit,0 AS Hasagent,3 AS Propertyhousestatus,0 AS Watertypeid,0 AS Waterunitprice,0 AS Monthlycollection,0 AS Rentdueday,'' AS Extra,'' AS Extra1,'' AS Extra2,'' AS Extra3,'' AS Extra4,'' AS Extra5,'' AS Extra6,'' AS Extra7,'' AS Extra8,'' AS Extra9,'' AS Extra10,0 AS Createdby,0 AS Modifiedby,GETDATE() AS Datecreated,GETDATE() AS Datemodified,
+				  (SELECT 0 AS Propertyhouseid,0 AS Isagency,0 AS Propertyhouseowner,0 AS Propertyhouseposter,'' AS Propertyhousename,0 AS Countyid,0 AS Subcountyid,0 AS Subcountywardid,'' AS Streetorlandmark,'' AS Contactdetails,0 AS Hashousedeposit,0 AS Hasagent,3 AS Propertyhousestatus,0 AS Watertypeid,0 AS Waterunitprice,0 AS Monthlycollection,0 AS Rentdueday,0 AS Rentutilityinclusive,0 AS Rentdepositreturndays,0 AS Allowpets,'' AS Rentingterms,GETDATE() AS Enddate,0 AS Numberofpets,0 AS Petdeposit,'' AS Petparticulars,'' AS Extra,'' AS Extra1,'' AS Extra2,'' AS Extra3,'' AS Extra4,'' AS Extra5,'' AS Extra6,'' AS Extra7,'' AS Extra8,'' AS Extra9,'' AS Extra10,0 AS Createdby,0 AS Modifiedby,GETDATE() AS Datecreated,GETDATE() AS Datemodified,
 					(
 						SELECT 
 							0 AS Systempropertyhousesizeid,
@@ -69,7 +69,10 @@ BEGIN
 			BEGIN
 			  SET @Systempropertydata= 
 				  (SELECT Systempropertyhouse.Propertyhouseid,Systempropertyhouse.Isagency,Systempropertyhouse.Propertyhouseowner,Systempropertyhouse.Propertyhouseposter,Systempropertyhouse.Propertyhousename,
-				   Systempropertyhouse.Countyid,Systempropertyhouse.Subcountyid,Systempropertyhouse.Subcountywardid,Systempropertyhouse.Streetorlandmark,Systempropertyhouse.Contactdetails,Systempropertyhouse.Hashousedeposit,Systempropertyhouse.Rentdepositmonth,Systempropertyhouse.Vacantnoticeperiod,Systempropertyhouse.Monthlycollection,Systempropertyhouse.Hasagent,Systempropertyhouse.Propertyhousestatus,Systempropertyhouse.Watertypeid,Systempropertyhouse.Hashousewatermeter,Systempropertyhouse.Waterunitprice,Systempropertyhouse.Rentdueday,
+				   Systempropertyhouse.Countyid,Systempropertyhouse.Subcountyid,Systempropertyhouse.Subcountywardid,Systempropertyhouse.Streetorlandmark,Systempropertyhouse.Contactdetails,Systempropertyhouse.Hashousedeposit,
+				   Systempropertyhouse.Rentdepositmonth,Systempropertyhouse.Vacantnoticeperiod,Systempropertyhouse.Monthlycollection,Systempropertyhouse.Hasagent,Systempropertyhouse.Propertyhousestatus,Systempropertyhouse.Watertypeid,
+				   Systempropertyhouse.Hashousewatermeter,Systempropertyhouse.Waterunitprice,Systempropertyhouse.Rentdueday,Systempropertyhouse.Rentutilityinclusive,Systempropertyhouse.Rentdepositreturndays,Systempropertyhouse.Allowpets,
+				   Systempropertyhouse.Rentingterms,Systempropertyhouse.Enddate,Systempropertyhouse.Numberofpets,Systempropertyhouse.Petdeposit,Systempropertyhouse.Petparticulars,
 				   Systempropertyhouse.Extra,Systempropertyhouse.Extra1,Systempropertyhouse.Extra2,Systempropertyhouse.Extra3,Systempropertyhouse.Extra4,Systempropertyhouse.Extra5,Systempropertyhouse.Extra6,Systempropertyhouse.Extra7,
 				   Systempropertyhouse.Extra8,Systempropertyhouse.Extra9,Systempropertyhouse.Extra10,Systempropertyhouse.Createdby,Systempropertyhouse.Modifiedby,Systempropertyhouse.Datecreated,Systempropertyhouse.Datemodified,
 					(
