@@ -10,17 +10,14 @@
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid Padding="10">
 
-        <!-- Define Row Heights for Header and Content -->
+    <Grid Padding="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <!-- For Header (Button) -->
-            <RowDefinition Height="*" />
-            <!-- For Content (ScrollView) -->
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <ScrollView Grid.Row="1" Padding="20">
+        <ScrollView Grid.Row="1" Padding="10">
             <StackLayout>
                 <!-- Title -->
                 <Label Text="RENTAL MANAGEMENT SYSTEM AGREEMENT" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,20" />
@@ -155,9 +152,13 @@
                 </FlexLayout>
             </StackLayout>
         </ScrollView>
-        <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="2" BackgroundColor="Transparent">
+
+        <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="1" BackgroundColor="Transparent">
             <BoxView Color="#C0000000" Opacity="0.5" />
             <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
         </Grid>
+        <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+        </StackLayout>
     </Grid>
 </ContentPage>
