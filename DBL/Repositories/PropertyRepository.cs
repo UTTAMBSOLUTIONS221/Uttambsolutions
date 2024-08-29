@@ -288,45 +288,47 @@ namespace DBL.Repositories
                 if (systempropertydataJson != null)
                 {
                     JObject responseJson = JObject.Parse(systempropertydataJson);
-                    JObject tenantreponseJson = JObject.Parse(responseJson["Data"].ToString());
-                    responseData.Userid = Convert.ToInt32(tenantreponseJson["Userid"]);
-                    responseData.Tenantfullname = tenantreponseJson["Tenantfullname"].ToString();
-                    responseData.Tenantphonenumber = tenantreponseJson["Tenantphonenumber"].ToString();
-                    responseData.Tenantemailaddress = tenantreponseJson["Tenantemailaddress"].ToString();
-                    responseData.Tenantidnumber = Convert.ToInt32(tenantreponseJson["Tenantidnumber"]);
-                    responseData.Ownerfullname = tenantreponseJson["Ownerfullname"].ToString();
-                    responseData.Ownerphonenumber = tenantreponseJson["Ownerphonenumber"].ToString();
-                    responseData.Owneremailaddress = tenantreponseJson["Owneremailaddress"].ToString();
-                    responseData.Owneridnumber = Convert.ToInt32(tenantreponseJson["Owneridnumber"]);
-                    responseData.Propertyhousename = tenantreponseJson["Propertyhousename"].ToString();
-                    responseData.Rentdueday = Convert.ToInt32(tenantreponseJson["Rentdueday"]);
-                    responseData.Vacantnoticeperiod = Convert.ToInt32(tenantreponseJson["Vacantnoticeperiod"]);
-                    responseData.Hasagent = Convert.ToBoolean(tenantreponseJson["Hasagent"]);
-                    responseData.Hashousewatermeter = Convert.ToBoolean(tenantreponseJson["Hashousewatermeter"]);
-                    responseData.Systemhousewatertypename = tenantreponseJson["Systemhousewatertypename"].ToString();
-                    responseData.Systempropertyhousesizename = tenantreponseJson["Systempropertyhousesizename"].ToString();
-                    responseData.Systempropertyhousesizerent = Convert.ToDecimal(tenantreponseJson["Systempropertyhousesizerent"]);
-                    responseData.Systempropertyhousesizerentdeposit = Convert.ToDecimal(tenantreponseJson["Systempropertyhousesizerentdeposit"]);
-                    responseData.Rentdepositmonth = Convert.ToInt32(tenantreponseJson["Rentdepositmonth"]);
-                    responseData.Rentdepositrefunddays = Convert.ToInt32(tenantreponseJson["Rentdepositrefunddays"]);
-                    responseData.Monthlyrentterms = Convert.ToBoolean(tenantreponseJson["Monthlyrentterms"]);
-                    responseData.Allowpets = Convert.ToBoolean(tenantreponseJson["Allowpets"]);
-                    responseData.Rentutilityinclusive = Convert.ToBoolean(tenantreponseJson["Rentutilityinclusive"]);
-                    responseData.Waterunitprice = Convert.ToDecimal(tenantreponseJson["Waterunitprice"]);
-                    responseData.Countyname = tenantreponseJson["Countyname"].ToString();
-                    responseData.Subcountyname = tenantreponseJson["Subcountyname"].ToString();
-                    responseData.Subcountywardname = tenantreponseJson["Subcountywardname"].ToString();
-                    responseData.Streetorlandmark = tenantreponseJson["Streetorlandmark"].ToString();
-                    responseData.TenantDatecreated = Convert.ToDateTime(tenantreponseJson["TenantDatecreated"]);
-                    responseData.Nextrentduedate = Convert.ToDateTime(tenantreponseJson["Nextrentduedate"]);
-                    responseData.TenantSignatureimageurl = tenantreponseJson["TenantSignatureimageurl"].ToString();
-                    responseData.OwnerSignatureimageurl = tenantreponseJson["OwnerSignatureimageurl"].ToString();
-                    responseData.Agreementdata = tenantreponseJson["Agreementdata"].ToString();
-                    responseData.Propertyhouseutility = tenantreponseJson["Propertyhouseutility"].ToString();
-                    responseData.Systempropertybankname = tenantreponseJson["Systempropertybankname"].ToString();
-                    responseData.Tenantsintheroom = tenantreponseJson["Tenantsintheroom"].ToString();
-                    responseData.Termenddate = tenantreponseJson["Termenddate"].ToString();
-
+                    if (responseJson["Data"] != null && responseJson["Data"].Type != JTokenType.Null)
+                    {
+                        JObject tenantreponseJson = JObject.Parse(responseJson["Data"].ToString());
+                        responseData.Userid = Convert.ToInt32(tenantreponseJson["Userid"]);
+                        responseData.Tenantfullname = tenantreponseJson["Tenantfullname"].ToString();
+                        responseData.Tenantphonenumber = tenantreponseJson["Tenantphonenumber"].ToString();
+                        responseData.Tenantemailaddress = tenantreponseJson["Tenantemailaddress"].ToString();
+                        responseData.Tenantidnumber = Convert.ToInt32(tenantreponseJson["Tenantidnumber"]);
+                        responseData.Ownerfullname = tenantreponseJson["Ownerfullname"].ToString();
+                        responseData.Ownerphonenumber = tenantreponseJson["Ownerphonenumber"].ToString();
+                        responseData.Owneremailaddress = tenantreponseJson["Owneremailaddress"].ToString();
+                        responseData.Owneridnumber = Convert.ToInt32(tenantreponseJson["Owneridnumber"]);
+                        responseData.Propertyhousename = tenantreponseJson["Propertyhousename"].ToString();
+                        responseData.Rentdueday = Convert.ToInt32(tenantreponseJson["Rentdueday"]);
+                        responseData.Vacantnoticeperiod = Convert.ToInt32(tenantreponseJson["Vacantnoticeperiod"]);
+                        responseData.Hasagent = Convert.ToBoolean(tenantreponseJson["Hasagent"]);
+                        responseData.Hashousewatermeter = Convert.ToBoolean(tenantreponseJson["Hashousewatermeter"]);
+                        responseData.Systemhousewatertypename = tenantreponseJson["Systemhousewatertypename"].ToString();
+                        responseData.Systempropertyhousesizename = tenantreponseJson["Systempropertyhousesizename"].ToString();
+                        responseData.Systempropertyhousesizerent = Convert.ToDecimal(tenantreponseJson["Systempropertyhousesizerent"]);
+                        responseData.Systempropertyhousesizerentdeposit = Convert.ToDecimal(tenantreponseJson["Systempropertyhousesizerentdeposit"]);
+                        responseData.Rentdepositmonth = Convert.ToInt32(tenantreponseJson["Rentdepositmonth"]);
+                        responseData.Rentdepositrefunddays = Convert.ToInt32(tenantreponseJson["Rentdepositrefunddays"]);
+                        responseData.Monthlyrentterms = Convert.ToBoolean(tenantreponseJson["Monthlyrentterms"]);
+                        responseData.Allowpets = Convert.ToBoolean(tenantreponseJson["Allowpets"]);
+                        responseData.Rentutilityinclusive = Convert.ToBoolean(tenantreponseJson["Rentutilityinclusive"]);
+                        responseData.Waterunitprice = Convert.ToDecimal(tenantreponseJson["Waterunitprice"]);
+                        responseData.Countyname = tenantreponseJson["Countyname"].ToString();
+                        responseData.Subcountyname = tenantreponseJson["Subcountyname"].ToString();
+                        responseData.Subcountywardname = tenantreponseJson["Subcountywardname"].ToString();
+                        responseData.Streetorlandmark = tenantreponseJson["Streetorlandmark"].ToString();
+                        responseData.TenantDatecreated = Convert.ToDateTime(tenantreponseJson["TenantDatecreated"]);
+                        responseData.Nextrentduedate = Convert.ToDateTime(tenantreponseJson["Nextrentduedate"]);
+                        responseData.TenantSignatureimageurl = tenantreponseJson["TenantSignatureimageurl"].ToString();
+                        responseData.OwnerSignatureimageurl = tenantreponseJson["OwnerSignatureimageurl"].ToString();
+                        responseData.Agreementdata = tenantreponseJson["Agreementdata"].ToString();
+                        responseData.Propertyhouseutility = tenantreponseJson["Propertyhouseutility"].ToString();
+                        responseData.Systempropertybankname = tenantreponseJson["Systempropertybankname"].ToString();
+                        responseData.Tenantsintheroom = tenantreponseJson["Tenantsintheroom"].ToString();
+                        responseData.Termenddate = tenantreponseJson["Termenddate"].ToString();
+                    }
                     response.Data = responseData;
                     return response;
                 }
