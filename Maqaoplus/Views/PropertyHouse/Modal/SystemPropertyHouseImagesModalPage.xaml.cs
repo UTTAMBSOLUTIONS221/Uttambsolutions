@@ -38,7 +38,7 @@ public partial class SystemPropertyHouseImagesModalPage : ContentPage
 
         // Upload to Firebase Storage
         var firebaseStorage = new FirebaseStorage(FirebaseStorageBucket);
-        var uploadTask = firebaseStorage.Child("maqaoplus").Child(fileName).PutAsync(stream);
+        var uploadTask = firebaseStorage.Child("maqaoplus").Child("houseroom").Child(fileName).PutAsync(stream);
         var imagePath = await uploadTask;
         // Get the download URL
         //var url = await firebaseStorage.Child(imagePath).GetDownloadUrlAsync();
