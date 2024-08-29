@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.OwnerBillsandPayments.PropertyHousesOwnerPaymentsPage"
              Title="PAYMENTS">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid>
         <!-- Define Row Heights for Header and Content -->
@@ -104,6 +111,7 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
+                                        <Button Grid.Row="7" Grid.Column="0" Text="Validate Payment" Command="{Binding ValidatePaymentCommand}" IsVisible="{Binding IsPaymentValidated, Converter={StaticResource InverseBooleanConverter}}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="18" HeightRequest="50" WidthRequest="350" />
                                     </Grid>
                                 </StackLayout>
                             </Frame>
