@@ -11,6 +11,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         private long _propertyHousesTenantIdNumber;
         private Systemtenantdetails _tenantDetailData;
+        private PropertyHouseRoomTenantData _tenantData;
 
         private bool _isProcessing;
         public bool IsProcessing
@@ -45,6 +46,18 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
                 }
             }
         }
+
+        private bool _isvisible;
+
+        public bool Isvisible
+        {
+            get => _isvisible;
+            set
+            {
+                _isvisible = value;
+                OnPropertyChanged(nameof(Isvisible));
+            }
+        }
         public ICommand LoadItemsCommand { get; }
 
 
@@ -58,6 +71,15 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
             }
         }
 
+        public PropertyHouseRoomTenantData TenantData
+        {
+            get => _tenantData;
+            set
+            {
+                _tenantData = value;
+                OnPropertyChanged(nameof(TenantData));
+            }
+        }
         public void SetPropertyHousesTenantIdNumber(long propertyHousesTenantIdNumber)
         {
             _propertyHousesTenantIdNumber = propertyHousesTenantIdNumber;
@@ -66,34 +88,24 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
         public PropertyHousesTenantDetailViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            LoadItemsCommand = new Command(async () => await PropertyHousesTenantDetails());
+            LoadItemsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await PropertyHousesTenantDetails(propertyRoom.Systempropertyhouseroomid));
         }
 
-        private async Task PropertyHousesTenantDetails()
+        private async Task PropertyHousesTenantDetails(long Tenantid)
         {
             IsProcessing = true;
-
-            try
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + Tenantid, HttpMethod.Get, null);
+            if (response != null)
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + _propertyHousesTenantIdNumber, HttpMethod.Get, null);
-
-                if (response != null)
-                {
-                    TenantDetailData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
-                }
+                TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
+                TenantData.Tenantroomdata.Expectedvacatingdate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
+                Isvisible = TenantData.Tenantroomdata.Occupationalstatus == "Occupant";
             }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                IsProcessing = false;
-            }
+            //var modalPage = new HousesRoomDetailModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            IsProcessing = false;
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
+        protected void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
