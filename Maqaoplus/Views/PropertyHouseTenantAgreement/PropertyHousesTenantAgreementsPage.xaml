@@ -89,7 +89,7 @@
                     <!-- Grid for Rent Not Inclusive -->
                     <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
                         <CheckBox x:Name="MonthlyrenttermsNotCheckBox" IsChecked="{Binding TenantAgreementDetailData.Monthlyrentterms, Mode=OneWay, Converter={StaticResource InverseBooleanConverter}}" />
-                        <Label Text="{Binding TenantAgreementDetailData.TenantDatecreated, StringFormat='Fixed-term lease ending on ___{0:yyyy-MM-dd}___(End Date).'}" FontSize="14" Grid.Column="1">
+                        <Label Text="{Binding TenantAgreementDetailData.Termenddate, StringFormat='Fixed-term lease ending on ___{0}___(End Date).'}" FontSize="14" Grid.Column="1">
                             <Label.Triggers>
                                 <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Monthlyrentterms}" Value="True">
                                     <Setter Property="IsVisible" Value="True" />

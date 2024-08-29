@@ -42,6 +42,7 @@
         public string? Propertyhouseutility { get; set; }
         public string? Systempropertybankname { get; set; }
         public string? Tenantsintheroom { get; set; }
+        public string? Termenddate { get; set; }
 
 
 

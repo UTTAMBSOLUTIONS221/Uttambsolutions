@@ -325,6 +325,7 @@ namespace DBL.Repositories
                     responseData.Propertyhouseutility = tenantreponseJson["Propertyhouseutility"].ToString();
                     responseData.Systempropertybankname = tenantreponseJson["Systempropertybankname"].ToString();
                     responseData.Tenantsintheroom = tenantreponseJson["Tenantsintheroom"].ToString();
+                    responseData.Termenddate = tenantreponseJson["Termenddate"].ToString();
 
                     response.Data = responseData;
                     return response;
