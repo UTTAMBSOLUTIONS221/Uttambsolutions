@@ -2,18 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.PropertyHouse.Modal.HousesRoomDetailModalPage"
-             BackgroundColor="White"
-             Padding="10">
+             BackgroundColor="White">
 
 
 
     <Grid Padding="10" RowSpacing="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <VerticalStackLayout Spacing="8" Grid.Row="0">
+        <VerticalStackLayout Grid.Row="0">
             <!-- Step 1 -->
             <StackLayout IsVisible="{Binding IsStep1Visible}" Padding="4,8" Spacing="8">
                 <!-- Header -->
@@ -214,7 +213,7 @@
 
                 <!-- CollectionView for Meter Readings -->
                 <StackLayout Spacing="8">
-                    <Grid>
+                    <Grid BackgroundColor="#e0e0e0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80" />
                             <ColumnDefinition Width="70" />
@@ -265,7 +264,7 @@
             </StackLayout>
 
             <!-- Step 3 -->
-            <StackLayout IsVisible="{Binding IsStep3Visible}" Padding="16" Spacing="16">
+            <StackLayout IsVisible="{Binding IsStep3Visible}" Padding="8" Spacing="8">
                 <!-- Section Header for Tenant Details -->
                 <Label Text="Tenant Details" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
 
@@ -389,10 +388,9 @@
                     </Grid>
                 </ScrollView>
 
-
                 <Label Text="{Binding PropertyHouseRoomTenantidError}" TextColor="Red" />
                 <!-- Navigation Buttons -->
-                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0">
                     <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12"  CornerRadius="5"  FontSize="18" WidthRequest="150" />
                     <Button Text="Finish" Command="{Binding OnOkClickedCommand}"  BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" WidthRequest="150" />
                 </FlexLayout>
