@@ -1195,7 +1195,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     document.Add(new Paragraph("Name: UTTAMB SOLUTIONS LIMITED", regularFont));
                     document.Add(new Paragraph("Address: Nairobi, Kenya", regularFont));
                     document.Add(new Paragraph("Phone: 0717850720", regularFont));
-                    document.Add(new Paragraph("Email: support@utambsolutions.com", regularFont));
+                    document.Add(new Paragraph("Email: support@uttambsolutions.com", regularFont));
                     document.Add(new Paragraph(" ", regularFont)); // Add spacing
 
                     // Agreement Sections
