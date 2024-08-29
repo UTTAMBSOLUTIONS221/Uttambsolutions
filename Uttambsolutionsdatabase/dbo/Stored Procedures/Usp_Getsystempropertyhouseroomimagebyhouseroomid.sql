@@ -13,7 +13,7 @@ BEGIN
 		BEGIN TRY
 		BEGIN TRANSACTION;
 		 SET @Systempropertyhouseroomimagedata= 
-			(SELECT(SELECT ISNULL(SPHI.Propertyimageid,0) AS Propertyimageid,ROOM.Systempropertyhouseid AS Propertyhouseid,ISNULL(SPHI.Houseorroom,'HouseRoom') AS Houseorroom,SPHI.Houseorroomimageurl,SPHI.Createdby,ISNULL(SPHI.Datecreated,GETDATE()) AS Datecreated,
+			(SELECT(SELECT ISNULL(SPHI.Propertyimageid,0) AS Propertyimageid,ROOM.Systempropertyhouseroomid AS Propertyhouseid,ISNULL(SPHI.Houseorroom,'HouseRoom') AS Houseorroom,SPHI.Houseorroomimageurl,SPHI.Createdby,ISNULL(SPHI.Datecreated,GETDATE()) AS Datecreated,
 			 (SELECT SPHID.Propertyimageid,SPHID.Propertyhouseid,SPHID.Houseorroom,SPHID.Houseorroomimageurl,SPHID.Createdby,SPHID.Datecreated FROM Systempropertyhouseimages SPHID  FOR JSON PATH) AS PropertyHouseImage
 			FROM Systempropertyhouserooms ROOM 
 			LEFT JOIN Systempropertyhouseimages SPHI ON ROOM.Systempropertyhouseid=SPHI.Propertyhouseid
