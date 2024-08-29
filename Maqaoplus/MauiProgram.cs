@@ -5,7 +5,6 @@ using Maqaoplus.ViewModels.Dashboards;
 using Maqaoplus.ViewModels.HouseTenant;
 using Maqaoplus.ViewModels.PropertyHouse;
 using Maqaoplus.ViewModels.PropertyHouseTenantAgreement;
-using Maqaoplus.ViewModels.PropertyHouseTenants;
 using Maqaoplus.ViewModels.Reports;
 using Maqaoplus.ViewModels.Startup;
 using Maqaoplus.ViewModels.TenantBillsandPayments;
@@ -73,7 +72,6 @@ namespace Maqaoplus
             builder.Services.AddSingleton<PropertyHouseViewModel>();
             builder.Services.AddSingleton<PropertyHouseDetailViewModel>();
             builder.Services.AddSingleton<Propertyhousetenantviewmodel>();
-            builder.Services.AddSingleton<PropertyHousesTenantDetailViewModel>();
             builder.Services.AddSingleton<SystemReportsViewModel>();
             builder.Services.AddSingleton<PropertyHousesTenantBillsViewModel>();
             builder.Services.AddSingleton<PropertyHousesTenantPaymentsViewModel>();

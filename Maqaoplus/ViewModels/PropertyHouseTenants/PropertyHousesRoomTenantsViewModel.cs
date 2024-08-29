@@ -12,9 +12,9 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ObservableCollection<PropertyHouseTenant> Items { get; }
         private PropertyHouseRoomTenantData _tenantData;
-        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
 
