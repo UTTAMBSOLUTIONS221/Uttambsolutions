@@ -1,4 +1,6 @@
 ﻿using DBL.Models;
+using Maqaoplus.Views.OwnerBillsandPayments.Modals;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -12,9 +14,11 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
         private readonly Services.ServiceProvider _serviceProvider;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ObservableCollection<CustomerPaymentData> PaymentItems { get; }
+        private CustomerPaymentData _customerPaymentData;
         private MonthlyRentInvoiceModel _tenantInvoiceDetailData;
         public ICommand LoadPaymentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
+        public ICommand ValidateThisPaymentCommand { get; }
 
         private bool _isProcessing;
         public bool IsProcessing
@@ -48,12 +52,24 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
             }
         }
 
+
+        public CustomerPaymentData CustomerPaymentData
+        {
+            get => _customerPaymentData;
+            set
+            {
+                _customerPaymentData = value;
+                OnPropertyChanged();
+            }
+        }
+
         // Parameterless constructor for XAML support
         public PropertyHousesOwnerPaymentsViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             PaymentItems = new ObservableCollection<CustomerPaymentData>();
             LoadPaymentItemsCommand = new Command(async () => await LoadPaymentItems());
+            ValidateThisPaymentCommand = new Command<CustomerPaymentData>(async (payment) => await ValidateThisPaymentDetail(payment.CustomerPaymentId));
         }
         private ObservableCollection<ListModel> _systemPaymentModes;
         public ObservableCollection<ListModel> SystemPaymentModes
@@ -147,6 +163,19 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
             {
                 IsProcessing = false;
             }
+        }
+
+        private async Task ValidateThisPaymentDetail(long CustomerPaymentId)
+        {
+            IsProcessing = true;
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomimagebyhouseid/" + CustomerPaymentId, HttpMethod.Get, null);
+            if (response != null)
+            {
+                CustomerPaymentData = JsonConvert.DeserializeObject<CustomerPaymentData>(response.Data.ToString());
+            }
+            var modalPage = new ValidateThisPaymentDetailModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            IsProcessing = false;
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

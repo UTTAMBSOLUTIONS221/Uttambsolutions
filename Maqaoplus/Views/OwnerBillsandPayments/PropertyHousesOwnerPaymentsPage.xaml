@@ -111,7 +111,7 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        <Button Grid.Row="7" Grid.Column="0" Text="Validate Payment" Command="{Binding ValidatePaymentCommand}" IsVisible="{Binding IsPaymentValidated, Converter={StaticResource InverseBooleanConverter}}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="18" HeightRequest="50" WidthRequest="350" />
+                                        <Button Grid.Row="7" Grid.Column="0" Text="Validate Payment" Command="{Binding ValidateThisPaymentCommand}" IsVisible="{Binding IsPaymentValidated, Converter={StaticResource InverseBooleanConverter}}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="18" HeightRequest="50" WidthRequest="350" />
                                     </Grid>
                                 </StackLayout>
                             </Frame>
