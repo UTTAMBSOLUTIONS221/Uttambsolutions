@@ -1,11 +1,50 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Maqaoplus.Views.OwnerBillsandPayments.Modals.ValidateThisPaymentDetailModalPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="Maqaoplus.Views.OwnerBillsandPayments.Modals.ValidateThisPaymentDetailModalPage"
+             BackgroundColor="White">
+    
+    
+    <Grid Padding="10">
+        <!-- Define Row Heights for Header and Content -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- For Header (Button) -->
+            <RowDefinition Height="*" />
+            <!-- For Content (ScrollView) -->
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout>
+                <!-- Step 1 -->
+                <StackLayout>
+                    <!-- Header -->
+                    <Label Text="Validate Payment Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#0a506c"/>
+
+                    <StackLayout>
+                        <!-- House Room # Label -->
+                        <Label Text="Amount Recieved" FontAttributes="Bold" FontSize="14"  Margin="0,0,0,4" TextColor="#0a506c"/>
+                        <!-- House Room # Entry (Styled like an Input Box) -->
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
+                            <Entry Text="{Binding CustomerPaymentValidationData.Actualamount}" Placeholder="Enter Amount Recieved" PlaceholderColor="#a0a0a0" Keyboard="Numeric" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
+                        </Frame>
+                        <!-- Error Message -->
+                        <Label Text="{Binding PropertyHouseNameError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                    </StackLayout>
+
+
+                    <!-- Navigation Button -->
+                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,4">
+                        <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="150" />
+                        <Button Text="Complete" Command="{Binding SavePropertyHouseCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                    </FlexLayout>
+                </StackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <!-- Overlay Grid to cover the entire screen -->
+        <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="2" BackgroundColor="Transparent">
+            <BoxView Color="#C0000000" Opacity="0.5" />
+            <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
+        </Grid>
+    </Grid>
 </ContentPage>
