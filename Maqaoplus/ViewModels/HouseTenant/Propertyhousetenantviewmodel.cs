@@ -91,8 +91,15 @@ namespace Maqaoplus.ViewModels.HouseTenant
                 if (response != null)
                 {
                     TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
-                    TenantData.Tenantroomdata.Expectedvacatingdate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
-                    Isvisible = TenantData.Tenantroomdata.Occupationalstatus == "Occupant";
+                    if (TenantData.Tenantroomdata != null)
+                    {
+                        TenantData.Tenantroomdata.Expectedvacatingdate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
+                        Isvisible = TenantData.Tenantroomdata.Occupationalstatus == "Occupant";
+                    }
+                    else
+                    {
+                        Isvisible = false;
+                    }
                 }
                 IsDataLoaded = true;
             }
