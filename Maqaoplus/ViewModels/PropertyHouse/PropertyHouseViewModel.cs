@@ -1217,7 +1217,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     AddSignature(document, "Property Owner", OwnerTenantAgreementDetailData.OwnerSignatureimageurl, OwnerTenantAgreementDetailData.OwnerDatecreated);
 
                     // Management System Provider Signature
-                    AddSignature(document, "Management System Provider", "mysignature.jpg", OwnerTenantAgreementDetailData.OwnerDatecreated);
+                    AddSignature(document, "Management System Provider", "https://firebasestorage.googleapis.com/v0/b/uttambsolutions-4ec2a.appspot.com/o/UttambSolutionsPrivate%2Fmysignature.jpg?alt=media&token=d970f2d8-f4bd-4a30-b47e-12d9f8d1edc9", OwnerTenantAgreementDetailData.OwnerDatecreated);
 
                     // Close the document
                     document.Close();
