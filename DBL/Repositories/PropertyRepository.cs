@@ -848,7 +848,7 @@ namespace DBL.Repositories
         public CustomerPaymentValidationData Getsystempropertyroompaymentbypaymentid(long Paymentid)
         {
             CustomerPaymentValidationData response = new CustomerPaymentValidationData();
-            MonthlyRentInvoiceModel responseData = new MonthlyRentInvoiceModel();
+            CustomerPaymentValidation responseData = new CustomerPaymentValidation();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -861,26 +861,29 @@ namespace DBL.Repositories
                 {
                     JObject responseJson = JObject.Parse(systempropertyroompaymentdataJson);
                     JObject invoiceResponseJson = JObject.Parse(responseJson["Data"].ToString());
-                    responseData.Invoiceid = Convert.ToInt32(invoiceResponseJson["Invoiceid"]);
+                    responseData.CustomerPaymentId = Convert.ToInt32(invoiceResponseJson["CustomerPaymentId"]);
+                    responseData.HouseRoomTenantId = Convert.ToInt32(invoiceResponseJson["HouseRoomTenantId"]);
+                    responseData.Houseroomid = Convert.ToInt32(invoiceResponseJson["Houseroomid"]);
+                    responseData.PaymentModeId = Convert.ToInt32(invoiceResponseJson["PaymentModeId"]);
                     responseData.Financetransactionid = Convert.ToInt32(invoiceResponseJson["Financetransactionid"]);
-                    responseData.Transactioncode = invoiceResponseJson["TransactionCode"]?.ToString();
-                    responseData.Invoiceno = invoiceResponseJson["Invoiceno"]?.ToString();
-                    responseData.Propertyhouseroomid = Convert.ToInt32(invoiceResponseJson["Propertyhouseroomid"]);
-                    responseData.Systemhousesizename = invoiceResponseJson["Systemhousesizename"]?.ToString();
-                    responseData.Systempropertyhousesizename = invoiceResponseJson["Systempropertyhousesizename"]?.ToString();
-                    responseData.Propertyhouseroomtenantid = Convert.ToInt32(invoiceResponseJson["Propertyhouseroomtenantid"]);
-                    responseData.Tenantname = invoiceResponseJson["Tenantname"]?.ToString();
-                    responseData.Datecreated = Convert.ToDateTime(invoiceResponseJson["Datecreated"]);
-                    responseData.Duedate = Convert.ToDateTime(invoiceResponseJson["Duedate"]);
+                    responseData.Tenantid = Convert.ToInt64(invoiceResponseJson["Tenantid"]);
+                    responseData.Confirmedby = Convert.ToInt64(invoiceResponseJson["Confirmedby"]);
                     responseData.Amount = Convert.ToDecimal(invoiceResponseJson["Amount"]);
-                    responseData.Discount = Convert.ToDecimal(invoiceResponseJson["Discount"]);
-                    responseData.Balance = Convert.ToDecimal(invoiceResponseJson["Balance"]);
-                    responseData.Ispaid = Convert.ToBoolean(invoiceResponseJson["Ispaid"]);
-                    responseData.Paidamount = Convert.ToDecimal(invoiceResponseJson["Paidamount"]);
-                    responseData.Issent = Convert.ToBoolean(invoiceResponseJson["Issent"]);
-                    responseData.Paidstatus = invoiceResponseJson["Paidstatus"]?.ToString();
-                    responseData.InvoiceDetails = responseInvoiceDetailData;
-                    responseData.Propertyhousebankingdetail = responseInvoiceBankDetailData;
+                    responseData.Actualamount = Convert.ToDecimal(invoiceResponseJson["Actualamount"]);
+                    responseData.TransactionReference = invoiceResponseJson["TransactionReference"]?.ToString();
+                    responseData.TransactionDate = Convert.ToDateTime(invoiceResponseJson["TransactionDate"]);
+                    responseData.IsPaymentValidated = Convert.ToBoolean(invoiceResponseJson["IsPaymentValidated"]);
+                    responseData.ChequeNo = invoiceResponseJson["ChequeNo"]?.ToString();
+                    responseData.ChequeDate = invoiceResponseJson["ChequeDate"] != null ? Convert.ToDateTime(invoiceResponseJson["ChequeDate"]) : (DateTime?)null;
+                    responseData.Memo = invoiceResponseJson["Memo"]?.ToString();
+                    responseData.DrawerBank = invoiceResponseJson["DrawerBank"]?.ToString();
+                    responseData.DepositBank = invoiceResponseJson["DepositBank"]?.ToString();
+                    responseData.PaidBy = Convert.ToInt32(invoiceResponseJson["PaidBy"]);
+                    responseData.ValidatedBy = Convert.ToInt32(invoiceResponseJson["ValidatedBy"]);
+                    responseData.SlipReference = invoiceResponseJson["SlipReference"]?.ToString();
+                    responseData.Datecreated = Convert.ToDateTime(invoiceResponseJson["Datecreated"]);
+                    responseData.Datemodified = Convert.ToDateTime(invoiceResponseJson["Datemodified"]);
+
                     response.Data = responseData;
                     return response;
                 }

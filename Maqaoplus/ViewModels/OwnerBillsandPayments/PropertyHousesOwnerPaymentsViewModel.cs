@@ -20,6 +20,7 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
         public ICommand LoadPaymentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand ValidateThisPaymentCommand { get; }
+        public ICommand UpdatePaymentValidationCommand { get; }
 
         private bool _isProcessing;
         public bool IsProcessing
@@ -71,6 +72,7 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
             PaymentItems = new ObservableCollection<CustomerPaymentData>();
             LoadPaymentItemsCommand = new Command(async () => await LoadPaymentItems());
             ValidateThisPaymentCommand = new Command<CustomerPaymentData>(async (payment) => await ValidateThisPaymentDetail(payment.CustomerPaymentId));
+            UpdatePaymentValidationCommand = new Command(async () => await UpdatePaymentValidationData());
         }
         private ObservableCollection<ListModel> _systemPaymentModes;
         public ObservableCollection<ListModel> SystemPaymentModes
@@ -177,6 +179,44 @@ namespace Maqaoplus.ViewModels.OwnerBillsandPayments
             var modalPage = new ValidateThisPaymentDetailModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
+        }
+        public async Task UpdatePaymentValidationData()
+        {
+            IsProcessing = true;
+
+            await Task.Delay(500);
+            if (CustomerPaymentValidationData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
+            CustomerPaymentValidationData.ValidatedBy = App.UserDetails.Usermodel.Userid;
+            CustomerPaymentValidationData.Datecreated = DateTime.UtcNow;
+            CustomerPaymentValidationData.Datemodified = DateTime.UtcNow;
+            try
+            {
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Validatepropertyhouseroomrentpaymentrequestdata", CustomerPaymentValidationData);
+                if (response.RespStatus == 200 || response.RespStatus == 0)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else if (response.RespStatus == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
