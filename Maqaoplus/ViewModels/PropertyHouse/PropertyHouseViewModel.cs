@@ -1217,7 +1217,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     AddSignature(document, "Property Owner", OwnerTenantAgreementDetailData.OwnerSignatureimageurl, OwnerTenantAgreementDetailData.OwnerDatecreated);
 
                     // Management System Provider Signature
-                    AddSignature(document, "Management System Provider", "Resources/Images/mysignature.png", OwnerTenantAgreementDetailData.OwnerDatecreated); // Replace with actual signature URL if available
+                    AddSignature(document, "Management System Provider", "mysignature.jpg", OwnerTenantAgreementDetailData.OwnerDatecreated);
 
                     // Close the document
                     document.Close();
@@ -1246,6 +1246,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             document.Add(new Paragraph(content, contentFont));
             document.Add(new Paragraph(" ", contentFont)); // Add spacing
         }
+
 
         private void AddSignature(Document document, string role, string signatureImageUrl, DateTime date)
         {
