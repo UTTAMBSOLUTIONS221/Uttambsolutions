@@ -91,21 +91,23 @@ namespace DBL.Repositories
                 if (systempropertyhousedashboardsummarydataJson != null)
                 {
                     JObject responseJson = JObject.Parse(systempropertyhousedashboardsummarydataJson);
-                    JObject dashboardsummaryJson = JObject.Parse(responseJson["Data"].ToString());
-                    propertyHouseSummary.Propertyhouseunits = Convert.ToInt32(dashboardsummaryJson["Propertyhouseunits"]);
-                    propertyHouseSummary.Systempropertyoccupiedroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyoccupiedroom"]);
-                    propertyHouseSummary.Systempropertyvacantroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyvacantroom"]);
-                    propertyHouseSummary.Rentarrears = Convert.ToDecimal(dashboardsummaryJson["Rentarrears"]);
-                    propertyHouseSummary.Uncollectedpayments = Convert.ToDecimal(dashboardsummaryJson["Uncollectedpayments"]);
-                    propertyHouseSummary.Consumedmeters = Convert.ToDecimal(dashboardsummaryJson["Consumedmeters"]);
-                    if (dashboardsummaryJson["Propertybysummary"] != null)
+                    if (responseJson["Data"] != null && responseJson["Data"].Type != JTokenType.Null)
                     {
-                        string propertybysummaryJson = dashboardsummaryJson["Propertybysummary"].ToString();
-                        Propertybysummary = JsonConvert.DeserializeObject<List<PropertySummary>>(propertybysummaryJson);
-                        propertyHouseSummary.Propertybysummary = Propertybysummary;
+                        JObject dashboardsummaryJson = JObject.Parse(responseJson["Data"].ToString());
+                        propertyHouseSummary.Propertyhouseunits = Convert.ToInt32(dashboardsummaryJson["Propertyhouseunits"]);
+                        propertyHouseSummary.Systempropertyoccupiedroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyoccupiedroom"]);
+                        propertyHouseSummary.Systempropertyvacantroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyvacantroom"]);
+                        propertyHouseSummary.Rentarrears = Convert.ToDecimal(dashboardsummaryJson["Rentarrears"]);
+                        propertyHouseSummary.Uncollectedpayments = Convert.ToDecimal(dashboardsummaryJson["Uncollectedpayments"]);
+                        propertyHouseSummary.Consumedmeters = Convert.ToDecimal(dashboardsummaryJson["Consumedmeters"]);
+                        if (dashboardsummaryJson["Propertybysummary"] != null)
+                        {
+                            string propertybysummaryJson = dashboardsummaryJson["Propertybysummary"].ToString();
+                            Propertybysummary = JsonConvert.DeserializeObject<List<PropertySummary>>(propertybysummaryJson);
+                            propertyHouseSummary.Propertybysummary = Propertybysummary;
+                        }
                     }
                     propertyHouseSummaryDashboard.Data = propertyHouseSummary;
-
                     return propertyHouseSummaryDashboard;
                 }
                 else
