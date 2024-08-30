@@ -17,9 +17,6 @@ namespace Maqaoplus.Constants
             var adminDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(AdminDashboardPage)).FirstOrDefault();
             if (adminDashboardInfo != null) AppShell.Current.Items.Remove(adminDashboardInfo);
 
-            var customerDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(CustomerDashboardPage)).FirstOrDefault();
-            if (customerDashboardInfo != null) AppShell.Current.Items.Remove(customerDashboardInfo);
-
             var propertyOwnerDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(PropertyOwnerDashboardPage)).FirstOrDefault();
             if (propertyOwnerDashboardInfo != null) AppShell.Current.Items.Remove(propertyOwnerDashboardInfo);
 
