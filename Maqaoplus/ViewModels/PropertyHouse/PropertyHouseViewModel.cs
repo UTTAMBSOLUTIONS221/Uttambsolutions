@@ -268,11 +268,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<Systemproperty>();
-            AddPropertyHouseCommand = new Command<Systemproperty>(async (property) =>
-            {
-                var propertyId = property?.Propertyhouseid ?? 0;
-                await AddPropertyHouseAsync(propertyId);
-            });
+            AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseowner));
