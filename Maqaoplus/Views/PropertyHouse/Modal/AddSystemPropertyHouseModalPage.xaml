@@ -158,14 +158,14 @@
                     <Grid ColumnSpacing="12" RowSpacing="12">
                         <!-- Define three equal-width columns -->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <!-- First Row - Has Agent -->
                         <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="6" VerticalOptions="Center">
                             <CheckBox IsChecked="{Binding SystempropertyData.Rentutilityinclusive}" Color="#0a506c" VerticalOptions="Center" />
-                            <Label Text="Rent Inclusive?" FontSize="14" VerticalOptions="Center" TextColor="Black" />
+                            <Label Text="Rent Inclusive Utilities?" FontSize="14" VerticalOptions="Center" TextColor="Black" />
                         </StackLayout>
 
                         <!-- First Row - Has Deposit -->
@@ -189,7 +189,7 @@
                             <Label Text="Deposit Month(s)" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
-                                <Picker ItemsSource="{Binding Systemhousedepostmonths}" SelectedItem="{Binding SelectedHousedepostmonths}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                                <Picker ItemsSource="{Binding Systemhousedepositmonths}" SelectedItem="{Binding SelectedHousedepositmonths}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
                             </Frame>
                             <!-- Error Message -->
                             <Label Text="{Binding PropertyHouseRentDepositMonthsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
@@ -211,6 +211,35 @@
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
                                 <Entry Text="{Binding SystempropertyData.Waterunitprice}" Placeholder="Enter Price per Unit " PlaceholderColor="#0a506c" Keyboard="Numeric" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
                             </Frame>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid ColumnSpacing="8" RowSpacing="0">
+                        <!-- Define two equal-width columns -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout Grid.Column="0">
+                            <!-- House Status Label -->
+                            <Label Text="Deposit Return Day(s)" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <!-- House Status Picker (Styled like an Input Box) -->
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
+                                <Picker ItemsSource="{Binding Systemhouserentdepositreturndays}" SelectedItem="{Binding SelectedHouserentdepositreturndays}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                            </Frame>
+                            <!-- Error Message -->
+                            <Label Text="{Binding PropertyHouseRentDepositMonthsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!-- House Status Label -->
+                            <Label Text="Renting Term(s)" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <!-- House Status Picker (Styled like an Input Box) -->
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
+                                <Picker ItemsSource="{Binding Systemhouserentingterms}" SelectedItem="{Binding SelectedHouserentingterms}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                            </Frame>
+                            <!-- Error Message -->
+                            <Label Text="{Binding PropertyHouseRentDepositMonthsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
                     </Grid>
 

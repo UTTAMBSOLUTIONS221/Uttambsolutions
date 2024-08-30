@@ -99,7 +99,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private ObservableCollection<ListModel> _systemhousewatertype;
         private ObservableCollection<ListModel> _systemhouserentdueday;
         private ObservableCollection<ListModel> _systemhouserentdepositmonths;
+        private ObservableCollection<ListModel> _systemhouserentdepositreturndays;
         private ObservableCollection<ListModel> _systemhousevacantnoticeperiod;
+        private ObservableCollection<ListModel> _systemhouserentingterms;
 
 
         public Systemproperty SystempropertyData
@@ -501,7 +503,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 }
             }
         }
-        public ObservableCollection<ListModel> Systemhousedepostmonths
+        public ObservableCollection<ListModel> Systemhousedepositmonths
         {
             get => _systemhouserentdepositmonths;
             set
@@ -510,13 +512,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-        private ListModel _selectedHousedepostmonths;
-        public ListModel SelectedHousedepostmonths
+
+        private ListModel _selectedHousedepositmonths;
+        public ListModel SelectedHousedepositmonths
         {
-            get => _selectedHousedepostmonths;
+            get => _selectedHousedepositmonths;
             set
             {
-                _selectedHousedepostmonths = value;
+                _selectedHousedepositmonths = value;
 
                 // Ensure SystempropertyData is not null
                 if (SystempropertyData != null)
@@ -531,11 +534,68 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         SystempropertyData.Rentdepositmonth = 0;
                     }
 
-                    OnPropertyChanged(nameof(SelectedHousedepostmonths));
+                    OnPropertyChanged(nameof(SelectedHousedepositmonths));
                     OnPropertyChanged(nameof(SystempropertyData.Rentdepositmonth));
                 }
             }
         }
+
+        public ObservableCollection<ListModel> Systemhouserentdepositreturndays
+        {
+            get => _systemhouserentdepositreturndays;
+            set
+            {
+                _systemhouserentdepositreturndays = value;
+                OnPropertyChanged();
+            }
+        }
+        private ListModel _selectedHouserentdepositreturndays;
+        public ListModel SelectedHouserentdepositreturndays
+        {
+            get => _selectedHouserentdepositreturndays;
+            set
+            {
+                _selectedHouserentdepositreturndays = value;
+
+                // Ensure SystempropertyData is not null
+                if (SystempropertyData != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int rentdepositreturndays))
+                    {
+                        SystempropertyData.Rentdepositreturndays = rentdepositreturndays;
+                    }
+                    else
+                    {
+                        SystempropertyData.Rentdepositreturndays = 0;
+                    }
+
+                    OnPropertyChanged(nameof(SelectedHouserentdepositreturndays));
+                    OnPropertyChanged(nameof(SystempropertyData.Rentdepositreturndays));
+                }
+            }
+        }
+
+        public ObservableCollection<ListModel> Systemhouserentingterms
+        {
+            get => _systemhouserentingterms;
+            set
+            {
+                _systemhouserentingterms = value;
+                OnPropertyChanged();
+            }
+        }
+        private ListModel _selectedHouserentingterms;
+        public ListModel SelectedHouserentingterms
+        {
+            get => _selectedHouserentingterms;
+            set
+            {
+                _selectedHouserentingterms = value;
+                OnPropertyChanged(nameof(SelectedHouserentingterms));
+            }
+        }
+
         public ObservableCollection<ListModel> Systemhousevacantnoticeperiod
         {
             get => _systemhousevacantnoticeperiod;
@@ -575,6 +635,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
 
+            Systemhouserentingterms = new ObservableCollection<ListModel>
+            {
+                new ListModel { Value = "Month-to-Month", Text = "Monthly" },
+                new ListModel { Value = "Fixedterm", Text = "Fixed Term" },
+
+            };
+
             Systemhouseentrystatus = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "0", Text = "First Tenants" },
@@ -593,11 +660,25 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 };
                 Systemhouserentdueday.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
             }
-            Systemhousedepostmonths = new ObservableCollection<ListModel>();
+            Systemhousedepositmonths = new ObservableCollection<ListModel>();
             for (int i = 1; i <= 6; i++)
             {
-                Systemhousedepostmonths.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
+                Systemhousedepositmonths.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
             }
+            Systemhouserentdepositreturndays = new ObservableCollection<ListModel>();
+            for (int i = 1; i <= 28; i++)
+            {
+                string suffix = i switch
+                {
+                    1 or 21 => "st",
+                    2 or 22 => "nd",
+                    3 or 23 => "rd",
+                    _ => "th"
+                };
+                Systemhouserentdepositreturndays.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
+            }
+
+
             Systemhousevacantnoticeperiod = new ObservableCollection<ListModel>();
             for (int i = 1; i <= 12; i++)
             {
@@ -637,10 +718,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 };
                 Systemhouserentdueday.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
             }
-            Systemhousedepostmonths = new ObservableCollection<ListModel>();
+            Systemhousedepositmonths = new ObservableCollection<ListModel>();
             for (int i = 1; i <= 6; i++)
             {
-                Systemhousedepostmonths.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
+                Systemhousedepositmonths.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
             }
             Systemhousevacantnoticeperiod = new ObservableCollection<ListModel>();
             for (int i = 1; i <= 12; i++)
