@@ -381,7 +381,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
 
-
+            LoadDropdownData();
             // Initialize steps
             _isStep1Visible = true;
             _isStep2Visible = false;
@@ -743,7 +743,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task AddPropertyHouseAsync(long Propertyhouseid)
         {
             IsProcessing = true;
-
             Systemhouserentingterms = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "Month-to-Month", Text = "Monthly" },
@@ -793,7 +792,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 Systemhousevacantnoticeperiod.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
             }
-            LoadDropdownData();
             var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + Propertyhouseid, HttpMethod.Get, null);
             if (response != null)
             {
