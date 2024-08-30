@@ -193,6 +193,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        private string _propertyHouseMonthlycollectionError;
+        public string PropertyHouseMonthlycollectionError
+        {
+            get => _propertyHouseMonthlycollectionError;
+            set
+            {
+                _propertyHouseMonthlycollectionError = value;
+                OnPropertyChanged();
+            }
+        }
 
         private string _streetOrLandmarkError;
         public string StreetOrLandmarkError
@@ -1223,6 +1233,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             else
             {
                 PropertyHouseNameError = null;
+            }
+
+            if (SystempropertyData.Monthlycollection == 0 || SystempropertyData.Monthlycollection < 10000)
+            {
+                PropertyHouseMonthlycollectionError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseMonthlycollectionError = null;
             }
 
             // Validate Street or Landmark
