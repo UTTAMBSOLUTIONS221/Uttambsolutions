@@ -229,7 +229,7 @@
                                 <Picker ItemsSource="{Binding Systemhouserentdepositreturndays}" SelectedItem="{Binding SelectedHouserentdepositreturndays}" ItemDisplayBinding="{Binding Text}" Title="Select deposit return days" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
                             </Frame>
                             <!-- Error Message -->
-                            <Label Text="{Binding PropertyHouseRentDepositMonthsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                            <Label Text="{Binding PropertyHouseRentDepositReturnDaysError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
                         <StackLayout Grid.Column="1">
                             <!-- House Status Label -->
@@ -239,7 +239,7 @@
                                 <Picker ItemsSource="{Binding Systemhouserentingterms}" SelectedItem="{Binding SelectedHouserentingterms}" ItemDisplayBinding="{Binding Text}" Title="Select renting terms" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
                             </Frame>
                             <!-- Error Message -->
-                            <Label Text="{Binding PropertyHouseRentDepositMonthsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                            <Label Text="{Binding PropertyHouseRentingTermsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
                     </Grid>
 

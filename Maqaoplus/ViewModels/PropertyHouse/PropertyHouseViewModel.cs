@@ -268,7 +268,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<Systemproperty>();
-            AddPropertyHouseCommand = new Command(AddPropertyHouseAsync);
+            AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => await AddPropertyHouseAsync(property.Propertyhouseid));
             EditPropertyHouseCommand = new Command<Systemproperty>(async (property) => await EditPropertyHouseAsync(property.Propertyhouseid));
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
@@ -631,7 +631,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 }
             }
         }
-        private async void AddPropertyHouseAsync()
+        private async void AddPropertyHouseAsync(long Propertyhouseid)
         {
             IsProcessing = true;
 
@@ -685,7 +685,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 Systemhousevacantnoticeperiod.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
             }
             LoadDropdownData();
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/0", HttpMethod.Get, null);
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + Propertyhouseid, HttpMethod.Get, null);
             if (response != null)
             {
                 SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
