@@ -13,9 +13,7 @@
 
     <ContentPage.ToolbarItems>
         <!-- Toolbar Item with Icon and Text -->
-        <ToolbarItem Text="ADD NEW HOUSE"
-                     Command="{Binding AddPropertyHouseCommand}"
-                     Priority="0">
+        <ToolbarItem Text="ADD NEW HOUSE" Command="{Binding AddPropertyHouseCommand}" Priority="0">
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
@@ -72,10 +70,10 @@
                                 <!-- Buttons at the Bottom -->
                                 <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" ColumnSpacing="5" Padding="4">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="65" />
+                                        <ColumnDefinition Width="95" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="75" />
                                     </Grid.ColumnDefinitions>
                                     <Button Text="Edit" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddPropertyHouseCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" Grid.Column="0" />
                                     <Button Text="Manage" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" Grid.Column="1" />

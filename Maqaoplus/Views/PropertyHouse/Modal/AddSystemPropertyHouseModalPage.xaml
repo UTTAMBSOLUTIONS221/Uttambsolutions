@@ -40,7 +40,7 @@
 
                         <StackLayout Grid.Column="1">
                             <!-- House Room # Label -->
-                            <Label Text="Expected Monthly Collection" FontAttributes="Bold" FontSize="14"  Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <Label Text="Monthly Collection" FontAttributes="Bold" FontSize="14"  Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Room # Entry (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
                                 <Entry Text="{Binding SystempropertyData.Monthlycollection}" Placeholder="Enter Expected Montly Collections" PlaceholderColor="#0a506c" Keyboard="Numeric" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
@@ -147,30 +147,30 @@
                         </StackLayout>
                     </Grid>
 
-                    <Grid ColumnSpacing="12" RowSpacing="12">
+                    <Grid ColumnSpacing="14" RowSpacing="12">
                         <!-- Define three equal-width columns -->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="95" />
+                            <ColumnDefinition Width="107" />
+                            <ColumnDefinition Width="100" />
                         </Grid.ColumnDefinitions>
 
                         <!-- First Row - Has Agent -->
-                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="6" VerticalOptions="Center">
+                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center">
                             <CheckBox IsChecked="{Binding SystempropertyData.Hasagent}" Color="#0a506c" VerticalOptions="Center" />
-                            <Label Text="Has Agent?" FontSize="14" VerticalOptions="Center" TextColor="Black" />
+                            <Label Text="Has Agent?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" />
                         </StackLayout>
 
                         <!-- First Row - Has Deposit -->
-                        <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="6" VerticalOptions="Center">
+                        <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
                             <CheckBox IsChecked="{Binding SystempropertyData.Hashousedeposit}" Color="#0a506c" VerticalOptions="Center" />
-                            <Label Text="Has Deposit?" FontSize="14" VerticalOptions="Center" TextColor="Black" />
+                            <Label Text="Has Deposit?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start"  TextColor="Black" />
                         </StackLayout>
 
                         <!-- First Row - Water Metered -->
-                        <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Spacing="6" VerticalOptions="Center">
+                        <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center">
                             <CheckBox IsChecked="{Binding SystempropertyData.Hashousewatermeter}" Color="#0a506c" VerticalOptions="Center" />
-                            <Label Text="Water Metered?" FontSize="14" VerticalOptions="Center" TextColor="Black" />
+                            <Label Text="Water Metered?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start"  TextColor="Black" />
                         </StackLayout>
                     </Grid>
 
@@ -182,15 +182,15 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- First Row - Has Agent -->
-                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="6" VerticalOptions="Center">
+                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center">
                             <CheckBox IsChecked="{Binding SystempropertyData.Rentutilityinclusive}" Color="#0a506c" VerticalOptions="Center" />
-                            <Label Text="Rent Inclusive Utilities?" FontSize="14" VerticalOptions="Center" TextColor="Black" />
+                            <Label Text="Rent Inclusive Utilities?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start"  TextColor="Black" />
                         </StackLayout>
 
                         <!-- First Row - Has Deposit -->
-                        <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="6" VerticalOptions="Center">
+                        <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
                             <CheckBox IsChecked="{Binding SystempropertyData.Allowpets}" Color="#0a506c" VerticalOptions="Center" />
-                            <Label Text="Allow Pets?" FontSize="14" VerticalOptions="Center" TextColor="Black" />
+                            <Label Text="Allow Pets?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" />
                         </StackLayout>
                     </Grid>
 
@@ -242,7 +242,7 @@
 
                         <StackLayout Grid.Column="0">
                             <!-- House Status Label -->
-                            <Label Text="Deposit Month(s)" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <Label Text="Depo. Month(s)" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
                                 <Picker ItemsSource="{Binding Systemhousedepositmonths}" SelectedItem="{Binding SelectedHousedepositmonths}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
