@@ -226,7 +226,7 @@
                             <Label Text="Deposit Return Day(s)" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
-                                <Picker ItemsSource="{Binding Systemhouserentdepositreturndays}" SelectedItem="{Binding SelectedHouserentdepositreturndays}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                                <Picker ItemsSource="{Binding Systemhouserentdepositreturndays}" SelectedItem="{Binding SelectedHouserentdepositreturndays}" ItemDisplayBinding="{Binding Text}" Title="Select deposit return days" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
                             </Frame>
                             <!-- Error Message -->
                             <Label Text="{Binding PropertyHouseRentDepositMonthsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
@@ -236,7 +236,7 @@
                             <Label Text="Renting Term(s)" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
-                                <Picker ItemsSource="{Binding Systemhouserentingterms}" SelectedItem="{Binding SelectedHouserentingterms}" ItemDisplayBinding="{Binding Text}" Title="Select Months for deposit without Current Rent" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                                <Picker ItemsSource="{Binding Systemhouserentingterms}" SelectedItem="{Binding SelectedHouserentingterms}" ItemDisplayBinding="{Binding Text}" Title="Select renting terms" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
                             </Frame>
                             <!-- Error Message -->
                             <Label Text="{Binding PropertyHouseRentDepositMonthsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
