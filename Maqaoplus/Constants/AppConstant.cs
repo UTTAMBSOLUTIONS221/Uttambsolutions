@@ -20,6 +20,9 @@ namespace Maqaoplus.Constants
             var propertyOwnerDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(PropertyOwnerDashboardPage)).FirstOrDefault();
             if (propertyOwnerDashboardInfo != null) AppShell.Current.Items.Remove(propertyOwnerDashboardInfo);
 
+            var agentDashboardPageInfo = AppShell.Current.Items.Where(f => f.Route == nameof(AgentDashboardPage)).FirstOrDefault();
+            if (agentDashboardPageInfo != null) AppShell.Current.Items.Remove(agentDashboardPageInfo);
+
             var userDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(UserDashboardPage)).FirstOrDefault();
             if (userDashboardInfo != null) AppShell.Current.Items.Remove(userDashboardInfo);
 
@@ -131,6 +134,69 @@ namespace Maqaoplus.Constants
                     else
                     {
                         await Shell.Current.GoToAsync($"//{nameof(PropertyOwnerDashboardPage)}");
+                    }
+                }
+            }
+            else if (App.UserDetails.Usermodel.Rolename == "Maqaoplus Property House Agent")
+            {
+                var flyoutItem = new FlyoutItem()
+                {
+                    Title = "Dashboard",
+                    Route = nameof(AgentDashboardPage),
+                    FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
+                    Items =
+                    {
+                        new ShellContent
+                        {
+                            Icon = Icons.Dashboard,
+                            Title = "Dashboard",
+                            ContentTemplate = new DataTemplate(typeof(AgentDashboardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.user,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.house,
+                            Title = "Houses",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesPage(serviceProvider)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.groupusers,
+                            Title = "Tenants",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesRoomTenantsPage(serviceProvider)),
+                        },
+                         new ShellContent
+                        {
+                            Icon = Icons.invoice,
+                            Title = "Bills",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesOwnerBillsPage(serviceProvider)),
+                        },
+                            new ShellContent
+                        {
+                            Icon = Icons.dollar,
+                            Title = "Payments",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesOwnerPaymentsPage(serviceProvider)),
+                        },
+                    }
+                };
+                if (!AppShell.Current.Items.Contains(flyoutItem))
+                {
+                    AppShell.Current.Items.Add(flyoutItem);
+                    if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                    {
+                        AppShell.Current.Dispatcher.Dispatch(async () =>
+                        {
+                            await Shell.Current.GoToAsync($"//{nameof(AgentDashboardPage)}");
+                        });
+                    }
+                    else
+                    {
+                        await Shell.Current.GoToAsync($"//{nameof(AgentDashboardPage)}");
                     }
                 }
             }
