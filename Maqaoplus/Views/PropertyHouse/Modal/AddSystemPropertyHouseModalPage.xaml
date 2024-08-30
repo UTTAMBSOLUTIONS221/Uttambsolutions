@@ -189,6 +189,7 @@
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
                                 <Entry Text="{Binding SystempropertyData.Numberofpets}" Placeholder="Enter number of pets" PlaceholderColor="#0a506c" Keyboard="Numeric" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
                             </Frame>
+                            <Label Text="{Binding PropertyHouseNumberofpetsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
 
                         <StackLayout Grid.Column="1">
@@ -198,6 +199,7 @@
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
                                 <Entry Text="{Binding SystempropertyData.Petdeposit}" Placeholder="Enter Pets deposit" PlaceholderColor="#0a506c" Keyboard="Numeric" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
                             </Frame>
+                            <Label Text="{Binding PropertyHousePetdepositError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
                         <StackLayout Grid.Column="2">
                             <!-- House Room Size Label -->
@@ -206,6 +208,7 @@
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
                                 <Entry Text="{Binding SystempropertyData.Petparticulars}" Placeholder="Enter Price per Unit " PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
                             </Frame>
+                            <Label Text="{Binding PropertyHousePetparticularsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
                     </Grid>
 

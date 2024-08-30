@@ -331,6 +331,37 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        private string _propertyHouseNumberofpetsError;
+        public string PropertyHouseNumberofpetsError
+        {
+            get => _propertyHouseNumberofpetsError;
+            set
+            {
+                _propertyHouseNumberofpetsError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _propertyHousePetdepositError;
+        public string PropertyHousePetdepositError
+        {
+            get => _propertyHousePetdepositError;
+            set
+            {
+                _propertyHousePetdepositError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _propertyHousePetparticularsError;
+        public string PropertyHousePetparticularsError
+        {
+            get => _propertyHousePetparticularsError;
+            set
+            {
+                _propertyHousePetparticularsError = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<Systempropertyhousesize> PropertyHouseSizes { get; set; } = new ObservableCollection<Systempropertyhousesize>();
         public ObservableCollection<Systempropertyhousedepositfees> PropertyHouseDepositFees { get; set; } = new ObservableCollection<Systempropertyhousedepositfees>();
         public ObservableCollection<Systempropertyhousebenefits> PropertyHouseBenefits { get; set; } = new ObservableCollection<Systempropertyhousebenefits>();
@@ -653,7 +684,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     {
                         SelectedHouserentdepositreturndays = Systemhouserentdepositreturndays.FirstOrDefault(x => x.Value == _systempropertyData.Rentdepositreturndays.ToString());
                     }
-                    if (!string.IsNullOrEmpty(SystempropertyData.Rentingterms))
+                    if (!string.IsNullOrWhiteSpace(SystempropertyData.Rentingterms))
                     {
                         SelectedHouserentingterms = Systemhouserentingterms.FirstOrDefault(x => x.Value == _systempropertyData.Rentingterms.ToString());
                     }
@@ -1155,6 +1186,40 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 PropertyHouseRentDepositReturnDaysError = null;
             }
+            if (SystempropertyData.Allowpets)
+            {
+                if (SystempropertyData.Numberofpets < 0)
+                {
+                    PropertyHouseNumberofpetsError = "Required.";
+                }
+                else
+                {
+                    PropertyHouseNumberofpetsError = null;
+                }
+                if (SystempropertyData.Petdeposit < 0)
+                {
+                    PropertyHousePetdepositError = "Required.";
+                }
+                else
+                {
+                    PropertyHousePetdepositError = null;
+                }
+                if (string.IsNullOrWhiteSpace(SystempropertyData.Petparticulars))
+                {
+                    PropertyHousePetparticularsError = "Required.";
+                }
+                else
+                {
+                    PropertyHousePetparticularsError = null;
+                }
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseNumberofpetsError = null;
+                PropertyHousePetdepositError = null;
+                PropertyHousePetparticularsError = null;
+            }
             if (SelectedHouserentingterms == null)
             {
                 PropertyHouseRentingTermsError = "Required.";
@@ -1162,13 +1227,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             else
             {
-                if (SystempropertyData.Enddate == null)
+                if (SelectedHouserentingterms.Value == "Fixedterm")
                 {
-                    PropertyHouseRentingTermsEnddateError = "Required.";
-                }
-                else
-                {
-                    PropertyHouseRentingTermsEnddateError = null;
+                    if (SystempropertyData.Enddate == null || SystempropertyData.Enddate >= DateTime.Now.Date)
+                    {
+                        PropertyHouseRentingTermsEnddateError = "Required.";
+                    }
+                    else
+                    {
+                        PropertyHouseRentingTermsEnddateError = null;
+                    }
                 }
                 PropertyHouseRentingTermsError = null;
             }
