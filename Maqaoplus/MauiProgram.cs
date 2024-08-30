@@ -56,6 +56,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<PropertyHousesPage>();
             builder.Services.AddSingleton<PropertyHousesDetailPage>();
             builder.Services.AddSingleton<PropertyAgentHousesPage>();
+            builder.Services.AddSingleton<PropertyAgentHousesDetailPage>();
             builder.Services.AddSingleton<PropertyHousesTenantDetailPage>();
             builder.Services.AddSingleton<SystemPropertyOwnerReportsPage>();
             builder.Services.AddSingleton<PropertyHousesTenantBillsPage>();
@@ -75,7 +76,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<PropertyHouseViewModel>();
             builder.Services.AddSingleton<PropertyHouseDetailViewModel>();
             builder.Services.AddSingleton<PropertyHouseAgentViewModel>();
-
+            builder.Services.AddSingleton<PropertyHouseAgentDetailViewModel>();
             builder.Services.AddSingleton<Propertyhousetenantviewmodel>();
             builder.Services.AddSingleton<SystemReportsViewModel>();
             builder.Services.AddSingleton<PropertyHousesTenantBillsViewModel>();
