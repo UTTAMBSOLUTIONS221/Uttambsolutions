@@ -51,6 +51,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<DashboardPage>();
             builder.Services.AddSingleton<UserDashboardPage>();
             builder.Services.AddSingleton<PropertyOwnerDashboardPage>();
+            builder.Services.AddSingleton<AgentDashboardPage>();
             builder.Services.AddSingleton<UserProfilePage>();
             builder.Services.AddSingleton<UpdateUserProfilePage>();
             builder.Services.AddSingleton<PropertyHousesPage>();
