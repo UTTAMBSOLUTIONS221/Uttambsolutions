@@ -12,6 +12,8 @@ namespace Maqaoplus.ViewModels
     public class UserProfilePageViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
+
         private SystemStaff _staffData;
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -26,7 +28,6 @@ namespace Maqaoplus.ViewModels
         public ICommand SubmitCurrentUserDetailsCommand { get; }
         private bool _isProcessing;
         private bool _isSubmitProcessing;
-        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
         public SystemStaff StaffData
         {

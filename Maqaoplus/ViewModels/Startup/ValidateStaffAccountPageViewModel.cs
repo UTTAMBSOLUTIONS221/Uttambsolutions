@@ -11,6 +11,8 @@ namespace Maqaoplus.ViewModels.Startup
     public class ValidateStaffAccountPageViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
+
         private StaffDetailData _systemStaffTenantData;
         private SystemStaff _tenantData;
         private string _paymentReferenceCode;
