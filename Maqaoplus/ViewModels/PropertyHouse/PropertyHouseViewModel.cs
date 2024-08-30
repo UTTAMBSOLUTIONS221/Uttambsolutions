@@ -89,22 +89,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
-        private bool _isPetsAllowedVisible;
-        public bool IsPetsAllowedVisible
-        {
-            get => _systempropertyData.Allowpets == true;
-            set
-            {
-                if (_isPetsAllowedVisible != value)
-                {
-                    _isPetsAllowedVisible = value;
-                    OnPropertyChanged(nameof(IsPetsAllowedVisible));
-                }
-            }
-        }
-
-
-
         private ObservableCollection<ListModel> _systemcounty;
         private ObservableCollection<ListModel> _systemsubcounty;
         private ObservableCollection<ListModel> _systemsubcountyward;
@@ -116,17 +100,23 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private ObservableCollection<ListModel> _systemhousevacantnoticeperiod;
         private ObservableCollection<ListModel> _systemhouserentingterms;
 
-
         public Systemproperty SystempropertyData
         {
             get => _systempropertyData;
             set
             {
-                _systempropertyData = value;
-                OnPropertyChanged(nameof(SystempropertyData));
-                OnPropertyChanged(nameof(IsPetsAllowedVisible));
+                if (_systempropertyData != value)
+                {
+                    _systempropertyData = value;
+
+                    OnPropertyChanged(nameof(SystempropertyData));
+                    OnPropertyChanged(nameof(IsPetsAllowedVisible));
+                }
             }
         }
+        public bool IsPetsAllowedVisible => SystempropertyData?.Allowpets ?? false;
+
+
         public OwnerTenantAgreementDetailData OwnerTenantAgreementDetailData
         {
             get => _ownerTenantAgreementDetailData;
