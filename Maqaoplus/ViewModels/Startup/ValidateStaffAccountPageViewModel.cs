@@ -165,12 +165,6 @@ namespace Maqaoplus.ViewModels.Startup
                 Userid = Userid,
                 PaymentReferenceCode = PaymentReferenceCode
             };
-            //Validate mpesa 
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffdetaildatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-            if (response != null)
-            {
-
-            }
             //Validate Family Bank 
             var response1 = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffdetaildatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
             if (response1 != null)
