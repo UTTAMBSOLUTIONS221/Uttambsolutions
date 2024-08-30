@@ -19,6 +19,7 @@ namespace API.Controllers
             _config = config;
         }
         [HttpGet]
+        [AllowAnonymous]
         public List<ListModel> Systemdropdowns(ListModelType listType)
         {
             return bl.GetListModel(listType).Result.Select(x => new ListModel
@@ -30,6 +31,7 @@ namespace API.Controllers
             }).ToList();
         }
         [HttpGet("Getdropdownitembycode")]
+        [AllowAnonymous]
         public List<ListModel> Systemdropdowns(ListModelType listType, long code)
         {
             return bl.GetListModelById(listType, code).Result.Select(x => new ListModel
