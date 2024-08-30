@@ -5,7 +5,6 @@ using Firebase.Storage;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.draw;
-using Maqaoplus.Views.PropertyHouse.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -850,7 +849,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
                     }
                 }
             }
-            var modalPage = new AddSystemPropertyHouseModalPage(this);
+            var modalPage = new AddSystemPropertyHouseAgentModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
@@ -939,7 +938,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             {
                 OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
             }
-            var modalPage = new SystemPropertyHouseAgreementModalPage(this);
+            var modalPage = new SystemPropertyHouseAgreementAgentModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
@@ -1008,7 +1007,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             {
                 SystemPropertyHouseImageData = JsonConvert.DeserializeObject<SystemPropertyHouseImage>(response.Data.ToString());
             }
-            var modalPage = new SystemPropertyHouseImagesModalPage(this);
+            var modalPage = new SystemPropertyHouseAgentImagesModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
