@@ -107,7 +107,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 if (_systempropertyData != value)
                 {
+                    if (_systempropertyData != null)
+                    {
+                        // Unsubscribe from previous instance's property change events
+                        _systempropertyData.PropertyChanged -= OnSystempropertyDataChanged;
+                    }
+
                     _systempropertyData = value;
+
+                    if (_systempropertyData != null)
+                    {
+                        // Subscribe to new instance's property change events
+                        _systempropertyData.PropertyChanged += OnSystempropertyDataChanged;
+                    }
 
                     OnPropertyChanged(nameof(SystempropertyData));
                     OnPropertyChanged(nameof(IsPetsAllowedVisible));
@@ -115,6 +127,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
         public bool IsPetsAllowedVisible => SystempropertyData?.Allowpets ?? false;
+        private void OnSystempropertyDataChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Systemproperty.Allowpets))
+            {
+                OnPropertyChanged(nameof(IsPetsAllowedVisible));
+            }
+            // Add checks for other properties if needed
+        }
 
 
         public OwnerTenantAgreementDetailData OwnerTenantAgreementDetailData

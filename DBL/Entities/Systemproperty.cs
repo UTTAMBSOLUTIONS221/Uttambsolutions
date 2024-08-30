@@ -1,6 +1,8 @@
-﻿namespace DBL.Entities
+﻿using System.ComponentModel;
+
+namespace DBL.Entities
 {
-    public class Systemproperty
+    public class Systemproperty : INotifyPropertyChanged
     {
         public long Propertyhouseid { get; set; }
         public bool Isagency { get; set; }
@@ -22,7 +24,7 @@
         public DateTime Enddate { get; set; } = DateTime.UtcNow;
         public bool Hashousedeposit { get; set; }
         public bool Hasagent { get; set; }
-        public bool Allowpets { get; set; }
+        //public bool Allowpets { get; set; }
         public int Numberofpets { get; set; }
         public decimal Petdeposit { get; set; }
         public string? Petparticulars { get; set; } = "Not Applicable";
@@ -56,6 +58,28 @@
         public List<Systempropertyhousedepositfees>? Propertyhousedepositfee { get; set; }
         public List<Propertyhousebankingdetail>? Propertyhousebankingdetail { get; set; }
         public List<Systempropertyhousebenefits>? Propertyhousebenefit { get; set; }
+
+        private bool _allowpets;
+
+        public bool Allowpets
+        {
+            get => _allowpets;
+            set
+            {
+                if (_allowpets != value)
+                {
+                    _allowpets = value;
+                    OnPropertyChanged(nameof(Allowpets));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
     public class Systempropertyhousesize
     {
