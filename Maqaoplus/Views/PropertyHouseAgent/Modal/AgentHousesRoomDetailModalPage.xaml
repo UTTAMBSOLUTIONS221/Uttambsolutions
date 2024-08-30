@@ -4,8 +4,6 @@
              x:Class="Maqaoplus.Views.PropertyHouseAgent.Modal.AgentHousesRoomDetailModalPage"
              BackgroundColor="White">
 
-
-
     <Grid Padding="10" RowSpacing="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
