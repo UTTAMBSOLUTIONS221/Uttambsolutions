@@ -20,7 +20,7 @@ namespace DBL.Entities
         public string? Subcountywardname { get; set; }
         public string? Streetorlandmark { get; set; }
         public string? Contactdetails { get; set; }
-        public string? Rentingterms { get; set; }
+        //public string? Rentingterms { get; set; }
         public DateTime Enddate { get; set; } = DateTime.UtcNow;
         public bool Hashousedeposit { get; set; }
         public bool Hasagent { get; set; }
@@ -73,6 +73,21 @@ namespace DBL.Entities
                 }
             }
         }
+        private string _rentingterms;
+
+        public string Rentingterms
+        {
+            get => _rentingterms;
+            set
+            {
+                if (_rentingterms != value)
+                {
+                    _rentingterms = value;
+                    OnPropertyChanged(nameof(Rentingterms));
+                }
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
