@@ -1,6 +1,7 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
+using Maqaoplus.Views;
 using Maqaoplus.Views.PropertyHouseAgent.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
