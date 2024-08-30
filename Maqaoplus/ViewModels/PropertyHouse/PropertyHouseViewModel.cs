@@ -273,9 +273,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 var propertyId = property?.Propertyhouseid ?? 0;
                 await AddPropertyHouseAsync(propertyId);
             });
-
-            //AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => await AddPropertyHouseAsync(property.Propertyhouseid));
-            EditPropertyHouseCommand = new Command<Systemproperty>(async (property) => await EditPropertyHouseAsync(property.Propertyhouseid));
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseowner));
@@ -310,27 +307,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedCounty = value;
-
-                // Ensure SystempropertyData is not null
-                if (SystempropertyData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int countyId))
-                    {
-                        SystempropertyData.Countyid = countyId;
-                    }
-                    else
-                    {
-                        SystempropertyData.Countyid = 0;
-                    }
-
-                    OnPropertyChanged(nameof(SelectedCounty));
-                    OnPropertyChanged(nameof(SystempropertyData.Countyid));
-                }
+                OnPropertyChanged(nameof(SelectedCounty));
             }
         }
-
-
         public ObservableCollection<ListModel> Systemsubcounty
         {
             get => _systemsubcounty;
@@ -347,23 +326,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedSubcounty = value;
-
-                // Ensure SystempropertyData is not null
-                if (SystempropertyData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int subCountyId))
-                    {
-                        SystempropertyData.Subcountyid = subCountyId;
-                    }
-                    else
-                    {
-                        SystempropertyData.Countyid = 0;
-                    }
-
-                    OnPropertyChanged(nameof(SelectedSubcounty));
-                    OnPropertyChanged(nameof(SystempropertyData.Subcountyid));
-                }
+                OnPropertyChanged(nameof(SelectedSubcounty));
             }
         }
 
@@ -384,23 +347,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedSubcountyward = value;
-
-                // Ensure SystempropertyData is not null
-                if (SystempropertyData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int subcountywardid))
-                    {
-                        SystempropertyData.Subcountywardid = subcountywardid;
-                    }
-                    else
-                    {
-                        SystempropertyData.Subcountywardid = 0;
-                    }
-
-                    OnPropertyChanged(nameof(SelectedSubcountyward));
-                    OnPropertyChanged(nameof(SystempropertyData.Subcountywardid));
-                }
+                OnPropertyChanged(nameof(SelectedSubcountyward));
             }
         }
 
@@ -420,23 +367,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedHouseentrystatus = value;
-
-                // Ensure SystempropertyData is not null
-                if (SystempropertyData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int propertyhousestatus))
-                    {
-                        SystempropertyData.Propertyhousestatus = propertyhousestatus;
-                    }
-                    else
-                    {
-                        SystempropertyData.Propertyhousestatus = 0;
-                    }
-
-                    OnPropertyChanged(nameof(SelectedHouseentrystatus));
-                    OnPropertyChanged(nameof(SystempropertyData.Propertyhousestatus));
-                }
+                OnPropertyChanged(nameof(SelectedHouseentrystatus));
             }
         }
         public ObservableCollection<ListModel> Systemhousewatertype
@@ -455,23 +386,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedHousewatertype = value;
-
-                // Ensure SystempropertyData is not null
-                if (SystempropertyData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int watertypeid))
-                    {
-                        SystempropertyData.Watertypeid = watertypeid;
-                    }
-                    else
-                    {
-                        SystempropertyData.Watertypeid = 0;
-                    }
-
-                    OnPropertyChanged(nameof(SelectedHousewatertype));
-                    OnPropertyChanged(nameof(SystempropertyData.Watertypeid));
-                }
+                OnPropertyChanged(nameof(SelectedHousewatertype));
             }
         }
         public ObservableCollection<ListModel> Systemhouserentdueday
@@ -490,23 +405,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedHouserentdueday = value;
-
-                // Ensure SystempropertyData is not null
-                if (SystempropertyData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int rentdueday))
-                    {
-                        SystempropertyData.Rentdueday = rentdueday;
-                    }
-                    else
-                    {
-                        SystempropertyData.Rentdueday = 0;
-                    }
-
-                    OnPropertyChanged(nameof(SelectedHouserentdueday));
-                    OnPropertyChanged(nameof(SystempropertyData.Rentdueday));
-                }
+                OnPropertyChanged(nameof(SelectedHouserentdueday));
             }
         }
         public ObservableCollection<ListModel> Systemhousedepositmonths
@@ -526,23 +425,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedHousedepositmonths = value;
-
-                // Ensure SystempropertyData is not null
-                if (SystempropertyData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int rentdepositmonth))
-                    {
-                        SystempropertyData.Rentdepositmonth = rentdepositmonth;
-                    }
-                    else
-                    {
-                        SystempropertyData.Rentdepositmonth = 0;
-                    }
-
-                    OnPropertyChanged(nameof(SelectedHousedepositmonths));
-                    OnPropertyChanged(nameof(SystempropertyData.Rentdepositmonth));
-                }
+                OnPropertyChanged(nameof(SelectedHousedepositmonths));
             }
         }
 
@@ -562,23 +445,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedHouserentdepositreturndays = value;
-
-                // Ensure SystempropertyData is not null
-                if (SystempropertyData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int rentdepositreturndays))
-                    {
-                        SystempropertyData.Rentdepositreturndays = rentdepositreturndays;
-                    }
-                    else
-                    {
-                        SystempropertyData.Rentdepositreturndays = 0;
-                    }
-
-                    OnPropertyChanged(nameof(SelectedHouserentdepositreturndays));
-                    OnPropertyChanged(nameof(SystempropertyData.Rentdepositreturndays));
-                }
+                OnPropertyChanged(nameof(SelectedHouserentdepositreturndays));
             }
         }
 
@@ -618,23 +485,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _selectedHousevacantnoticeperiod = value;
-
-                // Ensure SystempropertyData is not null
-                if (SystempropertyData != null)
-                {
-                    // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int vacantnoticeperiod))
-                    {
-                        SystempropertyData.Vacantnoticeperiod = vacantnoticeperiod;
-                    }
-                    else
-                    {
-                        SystempropertyData.Vacantnoticeperiod = 0;
-                    }
-
-                    OnPropertyChanged(nameof(SelectedHousevacantnoticeperiod));
-                    OnPropertyChanged(nameof(SystempropertyData.Vacantnoticeperiod));
-                }
+                OnPropertyChanged(nameof(SelectedHousevacantnoticeperiod));
             }
         }
         private async Task AddPropertyHouseAsync(long Propertyhouseid)
@@ -692,50 +543,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             LoadDropdownData();
             var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + Propertyhouseid, HttpMethod.Get, null);
-            if (response != null)
-            {
-                SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
-            }
-            var modalPage = new AddSystemPropertyHouseModalPage(this);
-            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
-            IsProcessing = false;
-        }
-
-
-        private async Task EditPropertyHouseAsync(long propertyId)
-        {
-            IsProcessing = true;
-
-            Systemhouseentrystatus = new ObservableCollection<ListModel>
-            {
-                new ListModel { Value = "0", Text = "First Tenants" },
-                new ListModel { Value = "1", Text = "Second Tenants" },
-
-            };
-            Systemhouserentdueday = new ObservableCollection<ListModel>();
-            for (int i = 1; i <= 28; i++)
-            {
-                string suffix = i switch
-                {
-                    1 or 21 => "st",
-                    2 or 22 => "nd",
-                    3 or 23 => "rd",
-                    _ => "th"
-                };
-                Systemhouserentdueday.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
-            }
-            Systemhousedepositmonths = new ObservableCollection<ListModel>();
-            for (int i = 1; i <= 6; i++)
-            {
-                Systemhousedepositmonths.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
-            }
-            Systemhousevacantnoticeperiod = new ObservableCollection<ListModel>();
-            for (int i = 1; i <= 12; i++)
-            {
-                Systemhousevacantnoticeperiod.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
-            }
-            LoadDropdownData();
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + propertyId, HttpMethod.Get, null);
             if (response != null)
             {
                 SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
