@@ -123,7 +123,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                     OnPropertyChanged(nameof(SystempropertyData));
                     OnPropertyChanged(nameof(IsPetsAllowedVisible));
-                    OnPropertyChanged(nameof(IsRentingTermsVisible));
                 }
             }
         }
@@ -526,6 +525,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 _selectedHouserentingterms = value;
                 OnPropertyChanged(nameof(SelectedHouserentingterms));
+                OnPropertyChanged(nameof(IsRentingTermsVisible));
             }
         }
 
