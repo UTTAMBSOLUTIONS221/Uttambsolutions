@@ -106,7 +106,22 @@ namespace Maqaoplus.ViewModels
             set
             {
                 _selectedstaffgender = value;
-                OnPropertyChanged();
+                // Ensure SystempropertyData is not null
+                if (Systemgender != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int genderid))
+                    {
+                        StaffData.Genderid = genderid;
+                    }
+                    else
+                    {
+                        StaffData.Genderid = 0;
+                    }
+
+                    OnPropertyChanged(nameof(Selectedstaffgender));
+                    OnPropertyChanged(nameof(StaffData.Genderid));
+                }
             }
         }
 
@@ -126,7 +141,22 @@ namespace Maqaoplus.ViewModels
             set
             {
                 _selectedstaffmaritalstatus = value;
-                OnPropertyChanged();
+                // Ensure SystempropertyData is not null
+                if (Systemmaritalstatus != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int maritalstatusid))
+                    {
+                        StaffData.Maritalstatusid = maritalstatusid;
+                    }
+                    else
+                    {
+                        StaffData.Maritalstatusid = 0;
+                    }
+
+                    OnPropertyChanged(nameof(Selectedstaffmaritalstatus));
+                    OnPropertyChanged(nameof(StaffData.Maritalstatusid));
+                }
             }
         }
 
@@ -146,7 +176,22 @@ namespace Maqaoplus.ViewModels
             set
             {
                 _selectedstaffkinrelationship = value;
-                OnPropertyChanged();
+                // Ensure SystempropertyData is not null
+                if (Systemkinrelationship != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int kinrelationshipid))
+                    {
+                        StaffData.Kinrelationshipid = kinrelationshipid;
+                    }
+                    else
+                    {
+                        StaffData.Kinrelationshipid = 0;
+                    }
+
+                    OnPropertyChanged(nameof(Selectedstaffkinrelationship));
+                    OnPropertyChanged(nameof(StaffData.Kinrelationshipid));
+                }
             }
         }
 
