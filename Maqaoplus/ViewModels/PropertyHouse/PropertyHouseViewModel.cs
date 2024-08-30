@@ -89,6 +89,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        private bool _isPetsAllowedVisible;
+        public bool IsPetsAllowedVisible
+        {
+            get => _systempropertyData.Allowpets == true;
+            set
+            {
+                if (_isPetsAllowedVisible != value)
+                {
+                    _isPetsAllowedVisible = value;
+                    OnPropertyChanged(nameof(IsPetsAllowedVisible));
+                }
+            }
+        }
 
 
 
@@ -110,8 +123,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _systempropertyData = value;
-                OnPropertyChanged(nameof(Ispetsallowedvisible));
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(SystempropertyData));
+                OnPropertyChanged(nameof(IsPetsAllowedVisible));
             }
         }
         public OwnerTenantAgreementDetailData OwnerTenantAgreementDetailData
@@ -130,8 +143,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
         public bool IsSignatureImageVisible => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
         public bool IsSignatureAvailable => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
-
-        public bool Ispetsallowedvisible => SystempropertyData.Allowpets;
 
         public SystemPropertyHouseImage SystemPropertyHouseImageData
         {

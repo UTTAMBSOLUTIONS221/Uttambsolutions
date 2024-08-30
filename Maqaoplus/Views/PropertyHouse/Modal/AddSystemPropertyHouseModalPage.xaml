@@ -175,7 +175,7 @@
                         </StackLayout>
                     </Grid>
 
-                    <Grid ColumnSpacing="8" RowSpacing="0" IsVisible="{Binding Ispetsallowedvisible}">
+                    <Grid ColumnSpacing="8" RowSpacing="0" IsVisible="{Binding IsPetsAllowedVisible}">
                         <!-- Define two equal-width columns -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
