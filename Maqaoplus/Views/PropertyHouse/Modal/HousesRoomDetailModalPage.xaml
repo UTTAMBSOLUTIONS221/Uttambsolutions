@@ -65,7 +65,7 @@
                         <Label Text="House Room #" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- House Status Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
-                            <Entry Text="{Binding HouseroomData.Systempropertyhousesizename, Mode=TwoWay}" Placeholder="Enter house room number" PlaceholderColor="#a0a0a0" Keyboard="Text" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
+                            <Entry Text="{Binding HouseroomData.Systempropertyhousesizename, Mode=TwoWay}" Placeholder="Enter house room number" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
                         </Frame>
                         <!-- Error Message -->
                         <Label Text="{Binding PropertyHouseRoomNumberError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
@@ -77,7 +77,7 @@
                         <Label Text="Room Rent Amount" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- House Status Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
-                            <Entry Text="{Binding HouseroomData.Systempropertyhousesizerent, Mode=TwoWay}" Placeholder="Enter Rent Amount" PlaceholderColor="#a0a0a0" Keyboard="Numeric" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
+                            <Entry Text="{Binding HouseroomData.Systempropertyhousesizerent, Mode=TwoWay}" Placeholder="Enter Rent Amount" PlaceholderColor="#0a506c" Keyboard="Numeric" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
                         </Frame>
                         <!-- Error Message -->
                         <Label Text="{Binding PropertyHouseRoomRentError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
@@ -97,7 +97,7 @@
                         <Label Text="Occupants" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- House Status Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
-                            <Entry Text="{Binding HouseroomData.Roomoccupant, Mode=TwoWay}" Placeholder="Enter Occupants number" PlaceholderColor="#a0a0a0" Keyboard="Numeric" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
+                            <Entry Text="{Binding HouseroomData.Roomoccupant, Mode=TwoWay}" Placeholder="Enter Occupants number" PlaceholderColor="#0a506c" Keyboard="Numeric" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
                         </Frame>
                         <!-- Error Message -->
                         <Label Text="{Binding PropertyHouseRoomoccupantError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
@@ -109,7 +109,7 @@
                         <Label Text="Occupants Details" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- House Status Picker (Styled like an Input Box) -->
                         <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
-                            <Entry Text="{Binding HouseroomData.Roomoccupantdetail, Mode=TwoWay}" Placeholder="Enter Occupants Details" PlaceholderColor="#a0a0a0" Keyboard="Text" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
+                            <Entry Text="{Binding HouseroomData.Roomoccupantdetail, Mode=TwoWay}" Placeholder="Enter Occupants Details" PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="15" BackgroundColor="White" VerticalOptions="Center" Margin="0"/>
                         </Frame>
                         <!-- Error Message -->
                         <Label Text="{Binding PropertyHouseRoomoccupantdetailError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>

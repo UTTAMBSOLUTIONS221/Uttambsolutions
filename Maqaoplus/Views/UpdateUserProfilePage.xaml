@@ -36,7 +36,7 @@
                 <StackLayout Grid.Column="0" Grid.Row="0">
                     <Label Text="First Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="2" HasShadow="True" Margin="0,0,0,0">
-                        <Entry Text="{Binding StaffData.Firstname}" Placeholder="Enter first name"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
+                        <Entry Text="{Binding StaffData.Firstname}" Placeholder="Enter first name"  FontSize="16" TextColor="Black" PlaceholderColor="#0a506c" />
                     </Frame>
                     <Label Text="{Binding SystemStaffFirstNameError}" TextColor="Red" Padding="0"/>
                 </StackLayout>
@@ -45,7 +45,7 @@
                 <StackLayout Grid.Column="1" Grid.Row="0">
                     <Label Text="Last Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="2" HasShadow="True" Margin="0,0,0,0">
-                        <Entry Text="{Binding StaffData.Lastname}" Placeholder="Enter last name"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
+                        <Entry Text="{Binding StaffData.Lastname}" Placeholder="Enter last name"  FontSize="16" TextColor="Black" PlaceholderColor="#0a506c" />
                     </Frame>
                     <Label Text="{Binding SystemStaffLastNameError}" TextColor="Red" Padding="0"/>
                 </StackLayout>
@@ -54,7 +54,7 @@
                 <StackLayout Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
                     <Label Text="Email Address" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="3" HasShadow="True" Margin="0,0,0,0">
-                        <Entry Text="{Binding StaffData.Emailaddress}" Keyboard="Email" Placeholder="Enter email address"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
+                        <Entry Text="{Binding StaffData.Emailaddress}" Keyboard="Email" Placeholder="Enter email address"  FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" />
                     </Frame>
                     <Label Text="{Binding SystemStaffEmailAddressError}" TextColor="Red" Padding="0"/>
                 </StackLayout>
@@ -63,7 +63,7 @@
                 <StackLayout Grid.Column="0" Grid.Row="2">
                     <Label Text="Phone Number" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="2" HasShadow="True" Margin="0,0,0,0">
-                        <Entry Text="{Binding StaffData.Phonenumber}" Keyboard="Telephone" Placeholder="Enter phone number"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
+                        <Entry Text="{Binding StaffData.Phonenumber}" Keyboard="Telephone" Placeholder="Enter phone number"  FontSize="16" TextColor="Black" PlaceholderColor="#0a506c" />
                     </Frame>
                     <Label Text="{Binding SystemStaffPhonenumberError}" TextColor="Red" Padding="0"/>
                 </StackLayout>
@@ -72,7 +72,7 @@
                 <StackLayout Grid.Column="1" Grid.Row="2">
                     <Label Text="ID Number" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="2" HasShadow="True" Margin="0,0,0,0">
-                        <Entry Text="{Binding StaffData.Idnumber}" Placeholder="Enter ID number" IsReadOnly="{Binding StaffData.Columnreadonly}"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
+                        <Entry Text="{Binding StaffData.Idnumber}" Placeholder="Enter ID number" IsReadOnly="{Binding StaffData.Columnreadonly}"  FontSize="16" TextColor="Black" PlaceholderColor="#0a506c" />
                     </Frame>
                     <Label Text="{Binding SystemStaffIdnumberError}" TextColor="Red" Padding="0"/>
                 </StackLayout>
@@ -104,7 +104,7 @@
                         <StackLayout>
                             <Label Text="Name" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                             <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,0,0,0">
-                                <Entry Text="{Binding StaffData.Kinname}" Placeholder="Enter kin name" FontSize="16" TextColor="#0a506c" PlaceholderColor="Black" />
+                                <Entry Text="{Binding StaffData.Kinname}" Placeholder="Enter kin name" FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" />
                             </Frame>
                             <Label Text="{Binding SystemStaffKinnameError}" TextColor="Red" Padding="0"/>
                         </StackLayout>
@@ -119,7 +119,7 @@
                             <StackLayout Grid.Column="0">
                                 <Label Text="Phone" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                                 <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="2" HasShadow="True" Margin="0,0,0,0">
-                                    <Entry Text="{Binding StaffData.Kinphonenumber}" Keyboard="Telephone" Placeholder="Enter kin phone"  FontSize="16" TextColor="Black" PlaceholderColor="Black" />
+                                    <Entry Text="{Binding StaffData.Kinphonenumber}" Keyboard="Telephone" Placeholder="Enter kin phone"  FontSize="16" TextColor="Black" PlaceholderColor="#0a506c" />
                                 </Frame>
                                 <Label Text="{Binding SystemStaffKinphonenumberError}" TextColor="Red" Padding="0"/>
                             </StackLayout>

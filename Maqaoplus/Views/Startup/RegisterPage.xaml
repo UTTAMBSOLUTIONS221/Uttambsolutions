@@ -111,7 +111,7 @@
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="15" Padding="5" HasShadow="True">
                         <HorizontalStackLayout Spacing="10">
                             <Image Source="passwordicon.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
-                            <Entry x:Name="PasswordEntry" IsPassword="{Binding IsPasswordHidden}" Placeholder="Password" ReturnType="Done" Text="{Binding Password}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#999" WidthRequest="104" />
+                            <Entry x:Name="PasswordEntry" IsPassword="{Binding IsPasswordHidden}" Placeholder="Password" ReturnType="Done" Text="{Binding Password}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="104" />
                             <Image Source="{Binding PasswordIconSource}" WidthRequest="24" HeightRequest="24" VerticalOptions="Center">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding TogglePasswordVisibilityCommand}" />
@@ -128,7 +128,7 @@
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="4" HasShadow="True" Margin="0,4,0,0">
                         <HorizontalStackLayout Spacing="10">
                             <Image Source="passwordicon.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
-                            <Entry x:Name="ConfirmPasswordEntry" IsPassword="{Binding IsConfirmPasswordHidden}" Placeholder="Confirm Password" ReturnType="Done" Text="{Binding ConfirmPassword}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#999" WidthRequest="104" />
+                            <Entry x:Name="ConfirmPasswordEntry" IsPassword="{Binding IsConfirmPasswordHidden}" Placeholder="Confirm Password" ReturnType="Done" Text="{Binding ConfirmPassword}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="104" />
                             <Image Source="{Binding ConfirmPasswordIconSource}" WidthRequest="24" HeightRequest="24" VerticalOptions="Center">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding ToggleConfirmPasswordVisibilityCommand}" />

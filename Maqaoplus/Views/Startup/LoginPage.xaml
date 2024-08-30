@@ -26,7 +26,7 @@
             <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="15" Padding="5" HasShadow="True">
                 <HorizontalStackLayout Spacing="10">
                     <Image Source="email.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
-                    <Entry Placeholder="Email Address" ReturnType="Next" Text="{Binding UserName}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#999" WidthRequest="300" />
+                    <Entry Placeholder="Email Address" ReturnType="Next" Text="{Binding UserName}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="300" />
                 </HorizontalStackLayout>
             </Frame>
             <Label Text="{Binding SystemStaffUserNameError}" TextColor="Red" Padding="0" FontSize="14"/>
@@ -35,7 +35,7 @@
             <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="15" Padding="5" HasShadow="True">
                 <HorizontalStackLayout Spacing="10">
                     <Image Source="passwordicon.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
-                    <Entry x:Name="PasswordEntry" IsPassword="{Binding IsPasswordHidden}" Placeholder="Password" ReturnType="Done" Text="{Binding Password}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#999" WidthRequest="260" />
+                    <Entry x:Name="PasswordEntry" IsPassword="{Binding IsPasswordHidden}" Placeholder="Password" ReturnType="Done" Text="{Binding Password}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="260" />
                     <Image Source="{Binding PasswordIconSource}" WidthRequest="24" HeightRequest="24" VerticalOptions="Center">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding TogglePasswordVisibilityCommand}" />
@@ -57,7 +57,7 @@
 
             <!-- Register Now -->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,20,0,0">
-                <Label Text="Not a member?" TextColor="#333" FontSize="16" />
+                <Label Text="Not a member?" TextColor="#000000" FontSize="16" />
                 <Label Text="Register now" TextColor="#0a506c" FontSize="16" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding RegisterCommand}" />
