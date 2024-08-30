@@ -161,9 +161,18 @@ namespace Maqaoplus.ViewModels
                 if (response != null)
                 {
                     StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
-                    Selectedstaffgender = Systemgender.FirstOrDefault(x => x.Value == _staffData.Genderid.ToString());
-                    Selectedstaffmaritalstatus = Systemmaritalstatus.FirstOrDefault(x => x.Value == _staffData.Maritalstatusid.ToString());
-                    Selectedstaffkinrelationship = Systemkinrelationship.FirstOrDefault(x => x.Value == _staffData.Kinrelationshipid.ToString());
+                    if (StaffData.Genderid > 0)
+                    {
+                        Selectedstaffgender = Systemgender.FirstOrDefault(x => x.Value == _staffData.Genderid.ToString());
+                    }
+                    if (StaffData.Maritalstatusid > 0)
+                    {
+                        Selectedstaffmaritalstatus = Systemmaritalstatus.FirstOrDefault(x => x.Value == _staffData.Maritalstatusid.ToString());
+                    }
+                    if (StaffData.Kinrelationshipid > 0)
+                    {
+                        Selectedstaffkinrelationship = Systemkinrelationship.FirstOrDefault(x => x.Value == _staffData.Kinrelationshipid.ToString());
+                    }
                 }
                 IsDataLoaded = true;
             }
