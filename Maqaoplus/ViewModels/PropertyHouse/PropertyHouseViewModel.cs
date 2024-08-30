@@ -110,6 +110,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _systempropertyData = value;
+                OnPropertyChanged(nameof(Ispetsallowedvisible));
                 OnPropertyChanged();
             }
         }
@@ -130,6 +131,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public bool IsSignatureImageVisible => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
         public bool IsSignatureAvailable => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
 
+        public bool Ispetsallowedvisible => SystempropertyData.Allowpets;
 
         public SystemPropertyHouseImage SystemPropertyHouseImageData
         {

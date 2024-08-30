@@ -175,6 +175,40 @@
                         </StackLayout>
                     </Grid>
 
+                    <Grid ColumnSpacing="8" RowSpacing="0" IsVisible="{Binding Ispetsallowedvisible}">
+                        <!-- Define two equal-width columns -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <!-- House Room Size Label -->
+                            <Label Text="Number of Pets" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <!-- House Room Size Picker (Styled like an Input Box) -->
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
+                                <Entry Text="{Binding SystempropertyData.Numberofpets}" Placeholder="Enter number of pets" PlaceholderColor="#0a506c" Keyboard="Numeric" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                            </Frame>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1">
+                            <!-- House Room Size Label -->
+                            <Label Text="Pets Deposit" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <!-- House Room Size Picker (Styled like an Input Box) -->
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
+                                <Entry Text="{Binding SystempropertyData.Petdeposit}" Placeholder="Enter Pets deposit" PlaceholderColor="#0a506c" Keyboard="Numeric" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <!-- House Room Size Label -->
+                            <Label Text="Allowed Pets" FontAttributes="Bold" FontSize="13" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <!-- House Room Size Picker (Styled like an Input Box) -->
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
+                                <Entry Text="{Binding SystempropertyData.Petparticulars}" Placeholder="Enter Price per Unit " PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" Margin="10,0,0,0" VerticalOptions="Center"/>
+                            </Frame>
+                        </StackLayout>
+                    </Grid>
+
 
                     <Grid ColumnSpacing="8" RowSpacing="0">
                         <!-- Define two equal-width columns -->
