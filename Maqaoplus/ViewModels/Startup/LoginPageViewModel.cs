@@ -6,6 +6,7 @@ using Maqaoplus.Views.Startup;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.Startup
@@ -182,6 +183,13 @@ namespace Maqaoplus.ViewModels.Startup
                 IsProcessing = false;
             }
         }
+        private bool IsValidEmail(string email)
+        {
+            // Define a simple email regex pattern
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            return Regex.IsMatch(email, emailPattern);
+        }
         private bool IsValidInput()
         {
             bool isValid = true;
@@ -189,6 +197,11 @@ namespace Maqaoplus.ViewModels.Startup
             if (string.IsNullOrWhiteSpace(UserName))
             {
                 SystemStaffUserNameError = "Email Address is required.";
+                isValid = false;
+            }
+            else if (!IsValidEmail(UserName))
+            {
+                SystemStaffUserNameError = "Invalid email address format.";
                 isValid = false;
             }
             else
