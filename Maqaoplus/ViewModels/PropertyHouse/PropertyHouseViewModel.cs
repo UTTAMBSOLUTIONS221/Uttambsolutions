@@ -123,6 +123,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                     OnPropertyChanged(nameof(SystempropertyData));
                     OnPropertyChanged(nameof(IsPetsAllowedVisible));
+                    OnPropertyChanged(nameof(IsRentingTermsVisible));
                 }
             }
         }
@@ -133,7 +134,27 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 OnPropertyChanged(nameof(IsPetsAllowedVisible));
             }
+            if (e.PropertyName == nameof(Systemproperty.Rentingterms))
+            {
+                OnPropertyChanged(nameof(IsRentingTermsVisible));
+            }
             // Add checks for other properties if needed
+        }
+
+        public bool IsRentingTermsVisible
+        {
+            get
+            {
+                // Check if SystempropertyData is not null and if Rentingterms is a fixed term
+                return SystempropertyData != null && IsFixedTerm(SystempropertyData.Rentingterms);
+            }
+        }
+
+        private bool IsFixedTerm(string rentingTerms)
+        {
+            // Define your logic for determining if the term is fixed
+            // For example, checking if the rentingTerms contains the word "fixed"
+            return !string.IsNullOrEmpty(rentingTerms) && rentingTerms.Contains("Fixedterm", StringComparison.OrdinalIgnoreCase);
         }
 
 
