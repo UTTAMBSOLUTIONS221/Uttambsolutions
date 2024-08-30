@@ -1235,7 +1235,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseNameError = null;
             }
 
-            if (SystempropertyData.Monthlycollection == 0 || SystempropertyData.Monthlycollection < 10000)
+            if (SystempropertyData.Monthlycollection == 0 || SystempropertyData.Monthlycollection < 20000)
             {
                 PropertyHouseMonthlycollectionError = "Required.";
                 isValid = false;
