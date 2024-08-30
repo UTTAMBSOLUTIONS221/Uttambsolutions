@@ -258,6 +258,26 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        private string _propertyHouseRentDepositReturnDaysError;
+        public string PropertyHouseRentDepositReturnDaysError
+        {
+            get => _propertyHouseRentDepositReturnDaysError;
+            set
+            {
+                _propertyHouseRentDepositReturnDaysError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _propertyHouseRentingTermsError;
+        public string PropertyHouseRentingTermsError
+        {
+            get => _propertyHouseRentingTermsError;
+            set
+            {
+                _propertyHouseRentingTermsError = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<Systempropertyhousesize> PropertyHouseSizes { get; set; } = new ObservableCollection<Systempropertyhousesize>();
         public ObservableCollection<Systempropertyhousedepositfees> PropertyHouseDepositFees { get; set; } = new ObservableCollection<Systempropertyhousedepositfees>();
@@ -953,7 +973,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
 
             // Validate Property House Status
-            if (SystempropertyData?.Propertyhousestatus < 0)
+            if (SelectedHouseentrystatus == null)
             {
                 PropertyHouseStatusError = "Required.";
                 isValid = false;
@@ -963,7 +983,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseStatusError = null;
             }
             // Validate Property House Water Type
-            if (SystempropertyData?.Watertypeid == 0)
+            if (SelectedHousewatertype == null)
             {
                 PropertyHouseWaterTypeError = "Required.";
                 isValid = false;
@@ -973,7 +993,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseWaterTypeError = null;
             }
             // Validate Property House County
-            if (SystempropertyData?.Countyid == 0)
+            if (SelectedCounty == null)
             {
                 PropertyHouseCountyError = "Required.";
                 isValid = false;
@@ -983,7 +1003,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseCountyError = null;
             }
             // Validate Property House Sub County
-            if (SystempropertyData?.Subcountyid == 0)
+            if (SelectedSubcounty == null)
             {
                 PropertyHouseSubcountyError = "Required.";
                 isValid = false;
@@ -993,7 +1013,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseSubcountyError = null;
             }
             // Validate Property House sub County Ward
-            if (SystempropertyData?.Subcountywardid == 0)
+            if (SelectedSubcountyward == null)
             {
                 PropertyHouseSubcountyWardError = "Required.";
                 isValid = false;
@@ -1003,7 +1023,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseSubcountyWardError = null;
             }
             // Validate Property House Rent Deposit
-            if (SystempropertyData?.Rentdueday == 0)
+            if (SelectedHouserentdueday == null)
             {
                 PropertyHouseRentDueDayError = "Required.";
                 isValid = false;
@@ -1013,7 +1033,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseRentDueDayError = null;
             }
             // Validate Property House Rent Deposit Months
-            if (SystempropertyData?.Rentdepositmonth == 0)
+            if (SelectedHousedepositmonths == null)
             {
                 PropertyHouseRentDepositMonthsError = "Required.";
                 isValid = false;
@@ -1023,7 +1043,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseRentDepositMonthsError = null;
             }
             // Validate Property House Vacation Period
-            if (SystempropertyData?.Vacantnoticeperiod == 0)
+            if (SelectedHousevacantnoticeperiod == null)
             {
                 PropertyHouseRentVacationPeriodMonthsError = "Required.";
                 isValid = false;
@@ -1031,6 +1051,24 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             else
             {
                 PropertyHouseRentVacationPeriodMonthsError = null;
+            }
+            if (SelectedHouserentdepositreturndays == null)
+            {
+                PropertyHouseRentDepositReturnDaysError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentDepositReturnDaysError = null;
+            }
+            if (SelectedHouserentingterms == null)
+            {
+                PropertyHouseRentingTermsError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentingTermsError = null;
             }
             // Update overall IsValid property
             IsValid = isValid;
