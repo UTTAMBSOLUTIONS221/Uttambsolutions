@@ -144,8 +144,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             get
             {
-                // Check if SystempropertyData is not null and if Rentingterms is a fixed term
-                return SystempropertyData != null && IsFixedTerm(SelectedHouserentingterms.Value);
+                return SystempropertyData != null && SelectedHouserentingterms?.Value != null && IsFixedTerm(SelectedHouserentingterms.Value);
             }
         }
 
