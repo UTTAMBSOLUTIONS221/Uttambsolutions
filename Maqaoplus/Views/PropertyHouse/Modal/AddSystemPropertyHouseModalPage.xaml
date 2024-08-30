@@ -254,7 +254,7 @@
                         <Label Text="{Binding StreetOrLandmarkError}" TextColor="Red" FontSize="12"  Margin="0,2,0,0"/>
                     </StackLayout>
 
-                    <StackLayout>
+                    <StackLayout Margin="0,0,0,20">
                         <!-- House Room # Label -->
                         <Label Text="Contact Details if vacant" FontAttributes="Bold" FontSize="14"  Margin="0,0,0,4" TextColor="#0a506c"/>
                         <!-- House Room # Entry (Styled like an Input Box) -->
