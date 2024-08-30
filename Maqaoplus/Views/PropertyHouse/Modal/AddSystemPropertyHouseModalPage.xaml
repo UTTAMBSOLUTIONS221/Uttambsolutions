@@ -285,7 +285,7 @@
                             <DatePicker Date="{Binding SystempropertyData.Enddate}" Format="MM/dd/yyyy" FontSize="16" TextColor="Black" HorizontalOptions="FillAndExpand"/>
                         </Frame>
                         <!-- Error Message -->
-                        <Label Text="{Binding StreetOrLandmarkError}" TextColor="Red" FontSize="12"  Margin="0,2,0,0"/>
+                        <Label Text="{Binding PropertyHouseRentingTermsEnddateError}" TextColor="Red" FontSize="12"  Margin="0,2,0,0"/>
                     </StackLayout>
 
                     <StackLayout>

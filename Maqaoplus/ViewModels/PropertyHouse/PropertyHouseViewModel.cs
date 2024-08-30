@@ -320,6 +320,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        private string _propertyHouseRentingTermsEnddateError;
+        public string PropertyHouseRentingTermsEnddateError
+        {
+            get => _propertyHouseRentingTermsEnddateError;
+            set
+            {
+                _propertyHouseRentingTermsEnddateError = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<Systempropertyhousesize> PropertyHouseSizes { get; set; } = new ObservableCollection<Systempropertyhousesize>();
         public ObservableCollection<Systempropertyhousedepositfees> PropertyHouseDepositFees { get; set; } = new ObservableCollection<Systempropertyhousedepositfees>();
@@ -799,8 +809,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
-
-
         private async Task ViewPropertyHouseImagesDetails(long propertyHouseId)
         {
             IsProcessing = true;
@@ -1154,6 +1162,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             else
             {
+                if (SystempropertyData.Enddate == null)
+                {
+                    PropertyHouseRentingTermsEnddateError = "Required.";
+                }
+                else
+                {
+                    PropertyHouseRentingTermsEnddateError = null;
+                }
                 PropertyHouseRentingTermsError = null;
             }
             // Update overall IsValid property
