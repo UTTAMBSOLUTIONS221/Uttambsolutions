@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.Startup.ValidateStaffAccountPage"
-             Title="Activate Account">
+             Title="ACTIVATE ACCOUNT">
     <ContentPage.BackgroundColor>
         <Color>White</Color>
     </ContentPage.BackgroundColor>
@@ -144,7 +144,7 @@
 
             <!-- Footer -->
             <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="© 2024 Maqaoplus" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+                <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
             </StackLayout>
         </Grid>
     </AbsoluteLayout>
