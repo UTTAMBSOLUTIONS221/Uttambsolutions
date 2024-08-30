@@ -631,7 +631,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 }
             }
         }
-        private async void AddPropertyHouseAsync(long Propertyhouseid)
+        private async Task AddPropertyHouseAsync(long Propertyhouseid)
         {
             IsProcessing = true;
 
