@@ -157,6 +157,9 @@
 	  <MauiXaml Update="Views\PropertyHouseAgent\Modal\SystemPropertyHouseAgreementAgentModalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PropertyHouseAgent\PropertyAgentHousesDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyHouseAgent\PropertyAgentHousesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
