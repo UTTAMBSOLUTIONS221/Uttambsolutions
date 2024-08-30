@@ -7,9 +7,9 @@
     <Grid Padding="10">
         <!-- Define Row Heights for Header and Content -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <!-- For Header (Button) -->
             <RowDefinition Height="*" />
+            <!-- For Header (Button) -->
+            <RowDefinition Height="Auto" />
             <!-- For Content (ScrollView) -->
         </Grid.RowDefinitions>
         <ScrollView Grid.Row="0">
@@ -17,7 +17,7 @@
             <VerticalStackLayout>
 
                 <!-- Step 1 -->
-                <StackLayout IsVisible="{Binding IsStep1Visible}">
+                <StackLayout IsVisible="{Binding IsStep1Visible}" Margin="0,0,0,20">
                     <!-- Header -->
                     <Label Text="Step 1: Basic House Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#0a506c"/>
                     <StackLayout>
@@ -152,6 +152,26 @@
                         <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Spacing="6" VerticalOptions="Center">
                             <CheckBox IsChecked="{Binding SystempropertyData.Hashousewatermeter}" Color="#0a506c" VerticalOptions="Center" />
                             <Label Text="Water Metered?" FontSize="14" VerticalOptions="Center" TextColor="Black" />
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid ColumnSpacing="12" RowSpacing="12">
+                        <!-- Define three equal-width columns -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- First Row - Has Agent -->
+                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="6" VerticalOptions="Center">
+                            <CheckBox IsChecked="{Binding SystempropertyData.Rentutilityinclusive}" Color="#0a506c" VerticalOptions="Center" />
+                            <Label Text="Rent Inclusive?" FontSize="14" VerticalOptions="Center" TextColor="Black" />
+                        </StackLayout>
+
+                        <!-- First Row - Has Deposit -->
+                        <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="6" VerticalOptions="Center">
+                            <CheckBox IsChecked="{Binding SystempropertyData.Allowpets}" Color="#0a506c" VerticalOptions="Center" />
+                            <Label Text="Allow Pets?" FontSize="14" VerticalOptions="Center" TextColor="Black" />
                         </StackLayout>
                     </Grid>
 
