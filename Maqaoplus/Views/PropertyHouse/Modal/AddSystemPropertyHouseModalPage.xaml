@@ -155,7 +155,7 @@
                         </StackLayout>
                     </Grid>
 
-                    <Grid ColumnSpacing="12" RowSpacing="12" Margin="0,10,0,0">
+                    <Grid ColumnSpacing="12" RowSpacing="12" Margin="0,10,0,10">
                         <!-- Define three equal-width columns -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -179,7 +179,7 @@
                         <!-- Define two equal-width columns -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="80" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <StackLayout Grid.Column="0">
