@@ -83,8 +83,8 @@ namespace Maqaoplus.ViewModels
         public UserProfilePageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserDataAsync());
             LoadDropdownData();
+            LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserDataAsync());
             UpdateCurrentUserDetailsCommand = new Command(async () => await Updateuserdetailsasync());
             SubmitCurrentUserDetailsCommand = new Command(async () => await Submituserdetailsasync());
         }
