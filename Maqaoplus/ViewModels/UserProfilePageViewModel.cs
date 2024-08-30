@@ -154,21 +154,18 @@ namespace Maqaoplus.ViewModels
         {
             IsProcessing = true;
             IsDataLoaded = false;
-            _cancellationTokenSource = new CancellationTokenSource();
 
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffprofiledatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-
                 if (response != null)
                 {
                     StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+                    Selectedstaffgender = Systemgender.FirstOrDefault(x => x.Value == _staffData.Genderid.ToString());
+                    Selectedstaffmaritalstatus = Systemmaritalstatus.FirstOrDefault(x => x.Value == _staffData.Maritalstatusid.ToString());
+                    Selectedstaffkinrelationship = Systemkinrelationship.FirstOrDefault(x => x.Value == _staffData.Kinrelationshipid.ToString());
                 }
                 IsDataLoaded = true;
-            }
-            catch (OperationCanceledException)
-            {
-                // Handle cancellation
             }
             catch (Exception ex)
             {
@@ -177,8 +174,6 @@ namespace Maqaoplus.ViewModels
             finally
             {
                 IsProcessing = false;
-                _cancellationTokenSource.Dispose();
-                _cancellationTokenSource = null;
             }
         }
 
@@ -192,18 +187,15 @@ namespace Maqaoplus.ViewModels
                 if (SystemgenderResponse != null)
                 {
                     Systemgender = new ObservableCollection<ListModel>(SystemgenderResponse);
-                    Selectedstaffgender = Systemgender.FirstOrDefault(x => x.Value == _staffData.Userid.ToString());
                 }
 
                 if (SystemmaritalstatusResponse != null)
                 {
                     Systemmaritalstatus = new ObservableCollection<ListModel>(SystemmaritalstatusResponse);
-                    Selectedstaffmaritalstatus = Systemmaritalstatus.FirstOrDefault(x => x.Value == _staffData.Maritalstatusid.ToString());
                 }
                 if (SystemkinrelationshipResponse != null)
                 {
                     Systemkinrelationship = new ObservableCollection<ListModel>(SystemkinrelationshipResponse);
-                    Selectedstaffkinrelationship = Systemkinrelationship.FirstOrDefault(x => x.Value == _staffData.Kinrelationshipid.ToString());
                 }
             }
             catch (Exception ex)
