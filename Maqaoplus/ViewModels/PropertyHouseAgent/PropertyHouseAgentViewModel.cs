@@ -1273,7 +1273,6 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
                 IsProcessing = false;
                 return;
             }
-            SystempropertyData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Propertyhouseposter = App.UserDetails.Usermodel.Userid;
