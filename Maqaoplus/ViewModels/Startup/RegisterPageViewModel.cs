@@ -40,7 +40,6 @@ namespace Maqaoplus.ViewModels.Startup
             Systemstaffdesignation = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "Owner", Text = "Owner" },
-                new ListModel { Value = "Caretaker", Text = "Care Taker" },
                 new ListModel { Value = "Agent", Text = "Agent" },
                 new ListModel { Value = "Tenant", Text = "Tenant" },
             };
