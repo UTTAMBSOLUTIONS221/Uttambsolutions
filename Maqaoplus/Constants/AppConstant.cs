@@ -21,6 +21,10 @@ namespace Maqaoplus.Constants
             var propertyOwnerDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(PropertyOwnerDashboardPage)).FirstOrDefault();
             if (propertyOwnerDashboardInfo != null) AppShell.Current.Items.Remove(propertyOwnerDashboardInfo);
 
+            var propertyCaretakerDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(PropertyCaretakerDashboardPage)).FirstOrDefault();
+            if (propertyCaretakerDashboardInfo != null) AppShell.Current.Items.Remove(propertyCaretakerDashboardInfo);
+
+
             var agentDashboardPageInfo = AppShell.Current.Items.Where(f => f.Route == nameof(AgentDashboardPage)).FirstOrDefault();
             if (agentDashboardPageInfo != null) AppShell.Current.Items.Remove(agentDashboardPageInfo);
 
