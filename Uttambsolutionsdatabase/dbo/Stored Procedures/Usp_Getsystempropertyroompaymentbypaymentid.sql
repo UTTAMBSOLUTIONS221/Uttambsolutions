@@ -13,7 +13,7 @@ BEGIN
 		BEGIN TRY
 		BEGIN TRANSACTION;
 			 SET @Systempropertyroompaymentdata= 
-				  (SELECT(SELECT CustomerPaymentId,HouseRoomTenantId,HouseRoomTenantId AS Tenantid,HouseRoomId,PaymentModeId,FinanceTransactionId,Amount,Actualamount ,TransactionReference,TransactionDate,IsPaymentValidated ,ChequeNo ,ChequeDate,Memo ,DrawerBank,DepositBank,PaidBy,ValidatedBy,SlipReference,DateCreated FROM CustomerPayments WHERE CustomerPaymentId=@Paymentid FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER) AS Data
+				  (SELECT(SELECT CustomerPaymentId,HouseRoomTenantId,HouseRoomTenantId AS Tenantid,HouseRoomId AS Houseroomid,PaymentModeId,FinanceTransactionId AS Financetransactionid,Amount,Actualamount ,TransactionReference,TransactionDate,IsPaymentValidated ,ChequeNo ,ChequeDate,Memo ,DrawerBank,DepositBank,PaidBy,ValidatedBy,SlipReference,DateCreated FROM CustomerPayments WHERE CustomerPaymentId=@Paymentid FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER) AS Data
 					FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER
 				 );
 	    Set @RespMsg ='Ok.'

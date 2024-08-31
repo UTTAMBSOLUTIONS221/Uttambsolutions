@@ -104,7 +104,6 @@ BEGIN
                 PhoneNumber = source.PhoneNumber,
                 UserName = source.EmailAddress,
                 EmailAddress = source.EmailAddress,
-                RoleId = source.RoleId,
 				Genderid = source.Genderid,
 				Maritalstatusid = source.Maritalstatusid,
                 LoginStatus = source.LoginStatus,

@@ -24,18 +24,18 @@ BEGIN
     ISNULL(SUM(Systempropertyhouseroommeter.Movedmeter), 0) AS Consumedmeters,
     (
         SELECT 
-            Systempropertyhouse.Propertyhousename,
+            Systempropertyhousedata.Propertyhousename,
             ISNULL(COUNT(Systempropertyhouseroom.Systempropertyhouseid), 0) AS Propertyhouseunits,
             ISNULL(SUM(CASE WHEN Systempropertyhouseroom.Isvacant = 0 THEN 1 ELSE 0 END), 0) AS Systempropertyoccupiedroom,
             ISNULL(SUM(CASE WHEN Systempropertyhouseroom.Isvacant = 1 THEN 1 ELSE 0 END), 0) AS Systempropertyvacantroom,
             0 AS Rentarrears,
             0 AS Uncollectedpayments,
             ISNULL(SUM(Systempropertyhouseroommeter.Movedmeter), 0) AS Consumedmeters
-        FROM Systempropertyhouses Systempropertyhouse
-        INNER JOIN Systempropertyhouserooms Systempropertyhouseroom ON Systempropertyhouse.Propertyhouseid = Systempropertyhouseroom.Systempropertyhouseid
+        FROM Systempropertyhouses Systempropertyhousedata
+        INNER JOIN Systempropertyhouserooms Systempropertyhouseroom ON Systempropertyhousedata.Propertyhouseid = Systempropertyhouseroom.Systempropertyhouseid
         LEFT JOIN Systempropertyhouseroommeters Systempropertyhouseroommeter ON Systempropertyhouseroom.Systempropertyhouseroomid = Systempropertyhouseroommeter.Systempropertyhouseroomid
-        WHERE Systempropertyhouse.Propertyhouseid = Systempropertyhouse.Propertyhouseid
-        GROUP BY Systempropertyhouse.Propertyhousename
+        WHERE Systempropertyhouse.Propertyhouseid = Systempropertyhousedata.Propertyhouseid
+        GROUP BY Systempropertyhousedata.Propertyhousename
         FOR JSON PATH
     ) AS Propertybysummary
 FROM Systempropertyhouses Systempropertyhouse
