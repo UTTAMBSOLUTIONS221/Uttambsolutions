@@ -42,13 +42,13 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.Dashboard,
                             Title = "Dashboard",
-                            ContentTemplate = new DataTemplate(typeof(AdminDashboardPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(typeof(AdminDashboardPage)),
                         },
                         new ShellContent
                         {
                             Icon = Icons.user,
                             Title = "Profile",
-                            ContentTemplate = new DataTemplate(typeof(UserProfilePage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new UserProfilePage(serviceProvider)),
                         },
                         new ShellContent
                         {
@@ -112,7 +112,7 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.user,
                             Title = "Profile",
-                            ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                            ContentTemplate = new DataTemplate(() => new UserProfilePage(serviceProvider)),
                         },
                         new ShellContent
                         {
@@ -181,7 +181,7 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.user,
                             Title = "Profile",
-                            ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                            ContentTemplate = new DataTemplate(() => new UserProfilePage(serviceProvider)),
                         },
                         new ShellContent
                         {
@@ -244,7 +244,7 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.user,
                             Title = "Profile",
-                            ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                            ContentTemplate = new DataTemplate(() => new UserProfilePage(serviceProvider)),
                         },
                         new ShellContent
                         {
