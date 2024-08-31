@@ -49,6 +49,7 @@ namespace Maqaoplus
             builder.Services.AddTransient<ForgotPasswordPage>();
             builder.Services.AddTransient<ValidateStaffAccountPage>();
             builder.Services.AddSingleton<DashboardPage>();
+            builder.Services.AddSingleton<AdminDashboardPage>();
             builder.Services.AddSingleton<UserDashboardPage>();
             builder.Services.AddSingleton<PropertyOwnerDashboardPage>();
             builder.Services.AddSingleton<AgentDashboardPage>();
