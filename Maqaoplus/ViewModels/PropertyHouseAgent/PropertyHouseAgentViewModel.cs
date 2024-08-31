@@ -5,6 +5,7 @@ using Firebase.Storage;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.draw;
+using Maqaoplus.Views;
 using Maqaoplus.Views.PropertyHouseAgent.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -43,6 +44,8 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand SavePropertyHouseCommand { get; }
+        public ICommand OnCancelButtonClickedCommand { get; }
+        public ICommand OnOkButtonClickedCommand { get; }
 
         public ICommand SearchCommand { get; }
 
@@ -414,6 +417,8 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             PreviousCommand = new Command(PreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
+            OnCancelButtonClickedCommand = new Command(OnCancelButtonClicked);
+            OnOkButtonClickedCommand = new Command(OnOkButtonClicked);
             SearchCommand = new Command(async () => await Search());
 
 
@@ -1107,6 +1112,19 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             {
                 IsProcessing = false;
             }
+        }
+
+        private void OnOkButtonClicked()
+        {
+            SystempropertyData.Propertyhouseowner = TenantStaffData.Userid;
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+        private void OnCancelButtonClicked()
+        {
+            SystempropertyData.Propertyhouseowner = 0;
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
         public bool IsStep1Visible
         {
