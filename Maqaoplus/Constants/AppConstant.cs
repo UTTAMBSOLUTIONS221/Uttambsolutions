@@ -42,13 +42,13 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.Dashboard,
                             Title = "Dashboard",
-                            ContentTemplate = new DataTemplate(typeof(AdminDashboardPage)),
+                            ContentTemplate = new DataTemplate(typeof(AdminDashboardPage(serviceProvider)),
                         },
                         new ShellContent
                         {
                             Icon = Icons.user,
                             Title = "Profile",
-                            ContentTemplate = new DataTemplate(typeof(UserProfilePage)),
+                            ContentTemplate = new DataTemplate(typeof(UserProfilePage(serviceProvider)),
                         },
                         new ShellContent
                         {

@@ -4,23 +4,20 @@ public partial class UserProfilePage : ContentPage
 {
     private UserProfilePageViewModel _viewModel;
 
-    public UserProfilePage(UserProfilePageViewModel viewModel)
+    public UserProfilePage(Services.ServiceProvider serviceProvider)
     {
         InitializeComponent();
-        _viewModel = viewModel;
-        BindingContext = _viewModel;
+        _viewModel = new UserProfilePageViewModel(serviceProvider);
+        this.BindingContext = _viewModel;
+
     }
-    protected override void OnAppearing()
+
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (BindingContext is UserProfilePageViewModel viewModel && viewModel.LoadCurrentUserCommand.CanExecute(null))
+        if (_viewModel.LoadCurrentUserCommand.CanExecute(null))
         {
-            viewModel.LoadCurrentUserCommand.Execute(null);
+            _viewModel.LoadCurrentUserCommand.Execute(null);
         }
-    }
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-        _viewModel.CancelOperations();
     }
 }
