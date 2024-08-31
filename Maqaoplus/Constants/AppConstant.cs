@@ -166,6 +166,69 @@ namespace Maqaoplus.Constants
                     }
                 }
             }
+            else if (App.UserDetails.Usermodel.Rolename == "Maqaoplus Property House CareTaker")
+            {
+                var flyoutItem = new FlyoutItem()
+                {
+                    Title = "Dashboard",
+                    Route = nameof(PropertyCaretakerDashboardPage),
+                    FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
+                    Items =
+                    {
+                        new ShellContent
+                        {
+                            Icon = Icons.Dashboard,
+                            Title = "Dashboard",
+                            ContentTemplate = new DataTemplate(typeof(PropertyCaretakerDashboardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.user,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(() => new UserProfilePage(serviceProvider)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.house,
+                            Title = "Houses",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesPage(serviceProvider)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.groupusers,
+                            Title = "Tenants",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesRoomTenantsPage(serviceProvider)),
+                        },
+                         new ShellContent
+                        {
+                            Icon = Icons.invoice,
+                            Title = "Bills",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesOwnerBillsPage(serviceProvider)),
+                        },
+                            new ShellContent
+                        {
+                            Icon = Icons.dollar,
+                            Title = "Payments",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesOwnerPaymentsPage(serviceProvider)),
+                        },
+                    }
+                };
+                if (!AppShell.Current.Items.Contains(flyoutItem))
+                {
+                    AppShell.Current.Items.Add(flyoutItem);
+                    if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                    {
+                        AppShell.Current.Dispatcher.Dispatch(async () =>
+                        {
+                            await Shell.Current.GoToAsync($"//{nameof(PropertyCaretakerDashboardPage)}");
+                        });
+                    }
+                    else
+                    {
+                        await Shell.Current.GoToAsync($"//{nameof(PropertyCaretakerDashboardPage)}");
+                    }
+                }
+            }
             else if (App.UserDetails.Usermodel.Rolename == "Maqaoplus Property House Agent")
             {
                 var flyoutItem = new FlyoutItem()
