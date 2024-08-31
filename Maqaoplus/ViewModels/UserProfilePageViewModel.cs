@@ -84,10 +84,10 @@ namespace Maqaoplus.ViewModels
         public UserProfilePageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+
             LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserDataAsync());
             UpdateCurrentUserDetailsCommand = new Command(async () => await Updateuserdetailsasync());
             SubmitCurrentUserDetailsCommand = new Command(async () => await Submituserdetailsasync());
-            LoadDropdownData();
         }
 
 
@@ -200,7 +200,7 @@ namespace Maqaoplus.ViewModels
         {
             IsProcessing = true;
             IsDataLoaded = false;
-
+            await LoadDropdownData();
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffprofiledatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
