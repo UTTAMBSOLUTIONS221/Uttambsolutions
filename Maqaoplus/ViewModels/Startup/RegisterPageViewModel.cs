@@ -238,7 +238,7 @@ namespace Maqaoplus.ViewModels.Startup
                     Datecreated = DateTime.Now,
                     Datemodified = DateTime.Now,
                     Lastlogin = DateTime.Now,
-                    Loginstatus = 1,
+                    Loginstatus = 0,
                     Isactive = true,
                     Isdeleted = false,
                     Isdefault = false,
