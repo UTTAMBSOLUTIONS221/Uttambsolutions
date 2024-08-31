@@ -209,6 +209,16 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             }
         }
         // Error properties
+        private string _propertyHouseOwnerError;
+        public string PropertyHouseOwnerError
+        {
+            get => _propertyHouseOwnerError;
+            set
+            {
+                _propertyHouseOwnerError = value;
+                OnPropertyChanged();
+            }
+        }
         private string _propertyHouseNameError;
         public string PropertyHouseNameError
         {
@@ -1300,6 +1310,15 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             bool isValid = true;
 
             // Validate Property Name
+            if (SystempropertyData.Propertyhouseowner == 0)
+            {
+                PropertyHouseOwnerError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseOwnerError = null;
+            }
             if (string.IsNullOrWhiteSpace(SystempropertyData.Propertyhousename))
             {
                 PropertyHouseNameError = "Required.";

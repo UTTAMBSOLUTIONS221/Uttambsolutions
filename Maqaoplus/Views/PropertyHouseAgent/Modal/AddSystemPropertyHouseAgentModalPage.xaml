@@ -33,14 +33,14 @@
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
                                 <Entry x:Name="SearchIdEntry" Placeholder="Enter tenant ID number to search" Keyboard="Numeric" PlaceholderColor="#0a506c" TextColor="#0a506c" FontSize="18" Text="{Binding SearchId, Mode=TwoWay}" ClearButtonVisibility="WhileEditing"/>
                             </Frame>
-                            <Label Text="{Binding PropertyHouseRoomTenantidError}" TextColor="Red" />
+                            <Label Text="{Binding PropertyHouseOwnerError}" TextColor="Red" />
                         </StackLayout>
 
                         <StackLayout Grid.Column="1" Margin="0,20,0,0" >
                             <Button Text="Search" Command="{Binding SearchCommand}" FontSize="18" HeightRequest="48" />
                         </StackLayout>
                     </Grid>
-                    
+
                     <Grid ColumnSpacing="8" RowSpacing="0">
                         <!-- Define two equal-width columns -->
                         <Grid.ColumnDefinitions>
