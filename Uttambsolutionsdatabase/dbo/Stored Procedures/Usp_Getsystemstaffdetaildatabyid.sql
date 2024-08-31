@@ -15,11 +15,11 @@ BEGIN
 
 		BEGIN TRANSACTION;
 		SET @Systemstaffdetaildata= 
-		  (SELECT(SELECT Systemstaff.Userid,Systemstaff.Firstname+' '+Systemstaff.Lastname AS Fullname,Systemstaff.Phonenumber,Systemstaff.Loginstatus,Systemstaffsaccount.Accountid,Systemstaffsaccount.Accountnumber,
+		  (SELECT(SELECT Systemstaff.Userid,Systemstaff.Firstname+' '+Systemstaff.Lastname AS Fullname,Systemstaff.Phonenumber,Systemstaff.Loginstatus,Systemstaffsaccount.Accountid,ISNULL(Systemstaffsaccount.Accountnumber,0) AS Accountnumber,
 		  CASE WHEN DESG.Staffdesignation='Owner' THEN (SELECT SUM(SUB.Propertyhousesubscriptionamount) FROM Propertyhousesubscriptions SUB WHERE SUB.Propertyownerid=Systemstaff.Userid) WHEN DESG.Staffdesignation='Tenant' THEN 50 WHEN DESG.Staffdesignation='Agent' THEN 2000  ELSE 50  END AS Subscriptionamount,
 		  (SELECT Systemaccountverifaction.Verificationid,Systemaccountverifaction.Verificationname,Systemaccountverifaction.Verificationtype,Systemaccountverifaction.Verificationshortcode,Systemaccountverifaction.Accountnumber,Systemaccountverifaction.Isactive FROM Systemaccountverifaction Systemaccountverifaction WHERE Systemaccountverifaction.Isactive=1 FOR JSON PATH) AS AccountVerificationBanks
 		 FROM Systemstaffs Systemstaff 
-		 INNER JOIN Systemstaffsaccount Systemstaffsaccount ON Systemstaff.Userid=Systemstaffsaccount.Userid
+		 LEFT JOIN Systemstaffsaccount Systemstaffsaccount ON Systemstaff.Userid=Systemstaffsaccount.Userid
 		 LEFT JOIN Systemstaffdesignations DESG ON Systemstaff.Userid=DESG.Systemstaffid
 		 WHERE Systemstaff.UserId=@Staffid
 		 FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER

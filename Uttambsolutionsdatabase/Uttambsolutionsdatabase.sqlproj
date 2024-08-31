@@ -62,6 +62,7 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\Sequences\" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\SettingItems.sql" />
@@ -265,5 +266,7 @@
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseagreementdetaildatabypropertyidandownerid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomagreementdetaildatabytenantid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyroompaymentbypaymentid.sql" />
+    <Build Include="Security\uttambadmin.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
   </ItemGroup>
 </Project>

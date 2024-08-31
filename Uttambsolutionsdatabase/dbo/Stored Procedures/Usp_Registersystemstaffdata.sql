@@ -52,10 +52,16 @@ BEGIN
 		BEGIN
 		SELECT @RoleId = RoleId FROM Systemroles WHERE Rolename = 'Maqaoplus Property House Agent';
 		END
+		ELSE IF(JSON_VALUE(@JsonObjectData, '$.Designation')= 'CareTaker')
+		BEGIN
+		SELECT @RoleId = RoleId FROM Systemroles WHERE Rolename = 'Maqaoplus Property House CareTaker';
+		END
 		ELSE
 		BEGIN
 		 SELECT @RoleId = RoleId FROM Systemroles WHERE Rolename = 'Default User';
 		END
+
+		select * From Systemroles
 
         BEGIN TRANSACTION;
         DECLARE @Systemstaffdata TABLE (Action VARCHAR(100), UserId BIGINT, FullName VARCHAR(140), Passwords VARCHAR(100), PassHarsh VARCHAR(100), UserName VARCHAR(100), EmailAddress VARCHAR(100));

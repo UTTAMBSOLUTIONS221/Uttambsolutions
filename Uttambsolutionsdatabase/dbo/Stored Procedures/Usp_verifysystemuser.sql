@@ -38,11 +38,11 @@ BEGIN
 						@RespMsg AS RespMessage,
 						(SELECT Systemstaff.Userid,Systemstaff.Firstname,Systemstaff.Lastname,Systemstaff.Firstname +' '+ Systemstaff.Lastname AS Fullname,Systemstaff.Phonenumber,Systemstaff.Username,
 							Systemstaff.Emailaddress,Systemstaff.Genderid ,Systemstaff.Maritalstatusid,Systemstaff.Roleid,Systemstaff.Passharsh,Systemstaff.Passwords,Systemstaff.Isactive,Systemstaff.Isdeleted,Systemstaff.Isdefault,
-							Systemstaff.Loginstatus,ISNULL(Systemstaffdesignation.Staffdesignation,'System Admin') AS Designation,Systemstaff.Passwordresetdate,Systemstaff.Parentid,Systemstaff.Userprofileimageurl,Systemstaff.Usercurriculumvitae,Systemstaff.Idnumber,Systemstaff.Updateprofile,Systemstaffsaccount.Accountnumber,0 AS Walletbalance,
+							Systemstaff.Loginstatus,ISNULL(Systemstaffdesignation.Staffdesignation,'System Admin') AS Designation,Systemstaff.Passwordresetdate,Systemstaff.Parentid,Systemstaff.Userprofileimageurl,Systemstaff.Usercurriculumvitae,Systemstaff.Idnumber,Systemstaff.Updateprofile,ISNULL(Systemstaffsaccount.Accountnumber,0) AS Accountnumber,0 AS Walletbalance,
 							Systemrole.Rolename,Systemrole.RoleDescription,Systemrole.Tenantid,Systemstaff.Createdby,Systemstaff.Modifiedby,Systemstaff.Lastlogin,Systemstaff.Datemodified,Systemstaff.Datecreated
 							FROM Systemstaffs Systemstaff
 							INNER JOIN Systemroles Systemrole ON Systemstaff.Roleid=Systemrole.Roleid
-							INNER JOIN Systemstaffsaccount Systemstaffsaccount ON Systemstaff.Userid=Systemstaffsaccount.Userid
+							LEFT JOIN Systemstaffsaccount Systemstaffsaccount ON Systemstaff.Userid=Systemstaffsaccount.Userid
 							LEFT JOIN Systemstaffdesignations Systemstaffdesignation ON Systemstaff.Userid=Systemstaffdesignation.Systemstaffid
 						WHERE Systemstaff.Username = @Username
 						FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER
@@ -52,4 +52,3 @@ BEGIN
 			END
 		END
 END
-
