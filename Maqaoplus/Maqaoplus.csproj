@@ -196,6 +196,9 @@
 	  <MauiXaml Update="Views\StaffAgentDetailModalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\StaffAgentOwnerDetailModalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\TenantBillsandPayments\Modals\HousesRoomTenantInvoiceDetailModalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -25,6 +25,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
         private Systemproperty _systempropertyData;
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
+        private Systemtenantdetails _tenantStaffData;
 
         private bool _isStep1Visible;
         private bool _isStep2Visible;
@@ -42,6 +43,8 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand SavePropertyHouseCommand { get; }
+
+        public ICommand SearchCommand { get; }
 
 
         private bool _isLoading;
@@ -86,6 +89,17 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             set
             {
                 _isDataLoaded = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string _searchId;
+        public string SearchId
+        {
+            get => _searchId;
+            set
+            {
+                _searchId = value;
                 OnPropertyChanged();
             }
         }
@@ -166,6 +180,15 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
                 OnPropertyChanged(nameof(IsSignatureDrawingVisible));
                 OnPropertyChanged(nameof(IsSignatureImageVisible));
                 OnPropertyChanged(nameof(IsSignatureAvailable));
+            }
+        }
+        public Systemtenantdetails TenantStaffData
+        {
+            get => _tenantStaffData;
+            set
+            {
+                _tenantStaffData = value;
+                OnPropertyChanged();
             }
         }
 
@@ -380,6 +403,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
         public PropertyHouseAgentViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            LoadDropdownData();
             Items = new ObservableCollection<Systemproperty>();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
@@ -390,8 +414,9 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             PreviousCommand = new Command(PreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
+            SearchCommand = new Command(async () => await Search());
 
-            LoadDropdownData();
+
             // Initialize steps
             _isStep1Visible = true;
             _isStep2Visible = false;
@@ -1040,6 +1065,38 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
                 else
                 {
                     await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
+        private async Task Search()
+        {
+            if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
+                return;
+
+            IsProcessing = true;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
+
+                if (response != null)
+                {
+                    TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
+                    var modalPage = new StaffAgentOwnerDetailModalPage(this);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                }
+                else
+                {
+                    TenantStaffData = new Systemtenantdetails();
                 }
             }
             catch (Exception ex)
