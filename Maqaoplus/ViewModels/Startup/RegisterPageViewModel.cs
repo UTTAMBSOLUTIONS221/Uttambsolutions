@@ -20,6 +20,7 @@ namespace Maqaoplus.ViewModels.Startup
         private string _password;
         private string _confirmPassword;
         private bool _isProcessing;
+        private bool _accepttermsandcondition;
         private bool _isPasswordHidden;
         private string _passwordIconSource;
         private bool _isConfirmPasswordHidden;
@@ -128,6 +129,16 @@ namespace Maqaoplus.ViewModels.Startup
             set
             {
                 _staffDesignation = value;
+                OnPropertyChanged();
+                ((Command)SignUpCommand).ChangeCanExecute();
+            }
+        }
+        public bool Accepttermsandcondition
+        {
+            get => _accepttermsandcondition;
+            set
+            {
+                _accepttermsandcondition = value;
                 OnPropertyChanged();
                 ((Command)SignUpCommand).ChangeCanExecute();
             }
@@ -246,6 +257,7 @@ namespace Maqaoplus.ViewModels.Startup
                     Datemodified = DateTime.Now,
                     Lastlogin = DateTime.Now,
                     Loginstatus = 0,
+                    Accepttermsandcondition = Accepttermsandcondition,
                     Isactive = true,
                     Isdeleted = false,
                     Isdefault = false,
@@ -348,6 +360,16 @@ namespace Maqaoplus.ViewModels.Startup
                 OnPropertyChanged();
             }
         }
+        private string _systemStaffAccepttermsandconditionError;
+        public string SystemStaffAccepttermsandconditionError
+        {
+            get => _systemStaffAccepttermsandconditionError;
+            set
+            {
+                _systemStaffAccepttermsandconditionError = value;
+                OnPropertyChanged();
+            }
+        }
         private bool IsValidEmail(string email)
         {
             // Define a simple email regex pattern
@@ -360,7 +382,7 @@ namespace Maqaoplus.ViewModels.Startup
             bool isValid = true;
             if (string.IsNullOrWhiteSpace(FirstName))
             {
-                SystemStaffFirstNameError = "First Name is required.";
+                SystemStaffFirstNameError = "Required.";
                 isValid = false;
             }
             else
@@ -369,7 +391,7 @@ namespace Maqaoplus.ViewModels.Startup
             }
             if (string.IsNullOrWhiteSpace(LastName))
             {
-                SystemStaffLastNameError = "Last Name is required.";
+                SystemStaffLastNameError = "Required.";
                 isValid = false;
             }
             else
@@ -379,12 +401,12 @@ namespace Maqaoplus.ViewModels.Startup
 
             if (string.IsNullOrWhiteSpace(EmailAddress))
             {
-                SystemStaffEmailAddressError = "Email Address is required.";
+                SystemStaffEmailAddressError = "Required.";
                 isValid = false;
             }
             else if (!IsValidEmail(EmailAddress))
             {
-                SystemStaffEmailAddressError = "Invalid email address format.";
+                SystemStaffEmailAddressError = "Required.";
                 isValid = false;
             }
             else
@@ -393,7 +415,7 @@ namespace Maqaoplus.ViewModels.Startup
             }
             if (string.IsNullOrWhiteSpace(PhoneNumber))
             {
-                SystemStaffPhonenumberError = "Phonenumber is required.";
+                SystemStaffPhonenumberError = "Required.";
                 isValid = false;
             }
             else
@@ -402,7 +424,7 @@ namespace Maqaoplus.ViewModels.Startup
             }
             if (string.IsNullOrWhiteSpace(Password))
             {
-                SystemStaffPasswordError = "Password is required.";
+                SystemStaffPasswordError = "Required.";
                 isValid = false;
             }
             else
@@ -411,21 +433,30 @@ namespace Maqaoplus.ViewModels.Startup
             }
             if (Password != ConfirmPassword)
             {
-                SystemStaffConfirmPasswordError = "Password Mismatch.";
+                SystemStaffConfirmPasswordError = "Required.";
                 isValid = false;
             }
             else
             {
                 SystemStaffConfirmPasswordError = null;
             }
-            if (string.IsNullOrWhiteSpace(Password))
+            if (string.IsNullOrWhiteSpace(StaffDesignation))
             {
-                SystemStaffDesignationError = "Designation required!.";
+                SystemStaffDesignationError = "Required!.";
                 isValid = false;
             }
             else
             {
                 SystemStaffDesignationError = null;
+            }
+            if (!Accepttermsandcondition)
+            {
+                SystemStaffAccepttermsandconditionError = "Required!.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffAccepttermsandconditionError = null;
             }
 
             return isValid;

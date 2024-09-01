@@ -141,7 +141,7 @@
                     </StackLayout>
                 </Grid>
                 <HorizontalStackLayout VerticalOptions="Center">
-                    <CheckBox IsChecked="{Binding SystempropertyData.Allowpets}" Color="#0a506c" VerticalOptions="Center" />
+                    <CheckBox IsChecked="{Binding Accepttermsandcondition}" Color="#0a506c" VerticalOptions="Center" />
                     <Label FontSize="14" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black">
                         <Label.FormattedText>
                             <FormattedString>
@@ -157,6 +157,7 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
+                    <Label Text="{Binding SystemStaffAccepttermsandconditionError}" TextColor="Red" Padding="0"/>
                 </HorizontalStackLayout>
 
 
