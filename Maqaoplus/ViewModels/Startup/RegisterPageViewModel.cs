@@ -29,6 +29,13 @@ namespace Maqaoplus.ViewModels.Startup
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
         private ObservableCollection<ListModel> _systemstaffdesignation;
+        public ICommand OpenPrivacyPolicyCommand => new Command<string>(async (url) =>
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred);
+            }
+        });
 
         public RegisterPageViewModel(Services.ServiceProvider serviceProvider)
         {

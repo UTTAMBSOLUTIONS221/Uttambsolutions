@@ -109,7 +109,7 @@
                     </Grid.ColumnDefinitions>
                     <StackLayout Grid.Column="0">
                         <Label Text="Password" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
-                        <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="15" Padding="5" HasShadow="True">
+                        <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="15" Padding="4" HasShadow="True">
                             <HorizontalStackLayout Spacing="10">
                                 <Image Source="passwordicon.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
                                 <Entry x:Name="PasswordEntry" IsPassword="{Binding IsPasswordHidden}" Placeholder="Password" ReturnType="Done" Text="{Binding Password}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="102" />
@@ -140,10 +140,25 @@
                         <Label Text="{Binding SystemStaffConfirmPasswordError}" TextColor="Red" Padding="0"/>
                     </StackLayout>
                 </Grid>
-                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                <HorizontalStackLayout VerticalOptions="Center">
                     <CheckBox IsChecked="{Binding SystempropertyData.Allowpets}" Color="#0a506c" VerticalOptions="Center" />
-                    <Label Text="Allow Pets?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" />
-                </StackLayout>
+                    <Label FontSize="14" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="By registering you accept our " />
+                                <Span Text="terms" TextColor="#0a506c">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer
+                            Command="{Binding OpenPrivacyPolicyCommand}"
+                            CommandParameter="https://maqaoplus.uttambsolutions.com/Home/Privacy" />
+                                    </Span.GestureRecognizers>
+                                </Span>
+                                <Span Text=" of services and use of the system." />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </HorizontalStackLayout>
+
 
                 <!-- Register Button -->
                 <Button BackgroundColor="#0a506c" Command="{Binding SignUpCommand}" CornerRadius="8" Text="Register" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" Margin="0,0,0,0" WidthRequest="380"/>
