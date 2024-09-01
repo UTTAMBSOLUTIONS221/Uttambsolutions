@@ -2,7 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Views.PropertyHouse.Modal.AddSystemPropertyHouseModalPage"
+             xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid Padding="10">
         <!-- Define Row Heights for Header and Content -->
@@ -420,12 +426,12 @@
                                     <Entry Text="{Binding Housedepositfeeid}" IsVisible="False"/>
 
                                     <!-- Room Size -->
-                                    <Label Text="{Binding Housedepositfeename}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2"/>
+                                    <Label Text="{Binding Housedepositfeename}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2" IsVisible="{Binding Isreadonly, Converter={StaticResource InverseBooleanConverter}}"/>
 
                                     <!-- Amount -->
-                                    <Entry Text="{Binding Systempropertyhousedepositfeeamount}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill"/>
+                                    <Entry Text="{Binding Systempropertyhousedepositfeeamount}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill" IsVisible="{Binding Isreadonly, Converter={StaticResource InverseBooleanConverter}}"/>
                                     <!-- We have? -->
-                                    <CheckBox IsChecked="{Binding Systempropertyhousesizedepositfeewehave}" Grid.Column="2"/>
+                                    <CheckBox IsChecked="{Binding Systempropertyhousesizedepositfeewehave}" Grid.Column="2" IsVisible="{Binding Isreadonly, Converter={StaticResource InverseBooleanConverter}}"/>
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
