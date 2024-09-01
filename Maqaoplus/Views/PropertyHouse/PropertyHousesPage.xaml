@@ -68,10 +68,10 @@
                                 </Grid>
 
                                 <!-- Buttons at the Bottom -->
-                                <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" ColumnSpacing="5" Padding="4">
+                                <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" ColumnSpacing="3" Padding="4">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="65" />
-                                        <ColumnDefinition Width="95" />
+                                        <ColumnDefinition Width="63" />
+                                        <ColumnDefinition Width="92" />
                                         <ColumnDefinition Width="100" />
                                         <ColumnDefinition Width="75" />
                                     </Grid.ColumnDefinitions>

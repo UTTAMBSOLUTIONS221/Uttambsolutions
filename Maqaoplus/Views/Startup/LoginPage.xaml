@@ -6,7 +6,7 @@
              Title="LOGIN"
              BackgroundColor="#F4F4F4">
 
-    <Grid Padding="10">
+    <Grid Padding="13">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
