@@ -137,14 +137,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 OnPropertyChanged(nameof(IsRentingTermsVisible));
             }
-            if (e.PropertyName == nameof(Systemproperty.Countyid))
-            {
-                LoadDropdownDataByCode();
-            }
-            if (e.PropertyName == nameof(Systemproperty.Subcountyid))
-            {
-                LoadDropdownDataByCode();
-            }
+
             // Add checks for other properties if needed
         }
 
@@ -439,6 +432,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                     OnPropertyChanged(nameof(SelectedCounty));
                     OnPropertyChanged(nameof(SystempropertyData.Countyid));
+                    LoadSubcountyDataCountyCode();
                 }
             }
         }
@@ -473,6 +467,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                     OnPropertyChanged(nameof(SelectedSubcounty));
                     OnPropertyChanged(nameof(SystempropertyData.Subcountyid));
+                    LoadSubcountyWardDataCountyCode();
                 }
             }
         }
@@ -895,16 +890,26 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
 
 
-        private async Task LoadDropdownDataByCode()
+        private async Task LoadSubcountyDataCountyCode()
         {
             try
             {
-                var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCounty + "&code=" + SelectedCounty.Value, HttpMethod.Get);
-                var SystemsubcountywardResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCountyWard + "&code=" + SelectedSubcounty.Value, HttpMethod.Get);
+                var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCounty + "&code=" + Convert.ToInt64(SelectedCounty.Value), HttpMethod.Get);
                 if (SystemsubcountyResponse != null)
                 {
                     Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
                 }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+        private async Task LoadSubcountyWardDataCountyCode()
+        {
+            try
+            {
+                var SystemsubcountywardResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCountyWard + "&code=" + Convert.ToInt64(SelectedSubcounty.Value), HttpMethod.Get);
                 if (SystemsubcountywardResponse != null)
                 {
                     Systemsubcountyward = new ObservableCollection<ListModel>(SystemsubcountywardResponse);
