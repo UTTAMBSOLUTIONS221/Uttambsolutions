@@ -49,6 +49,11 @@ BEGIN
             BEGIN 
 			   UPDATE Systempropertyhouseroomstenant SET Isoccupant=0,Occupationalstatus=0,Vacateddate =GETDATE() WHERE Systempropertyhouseroomid = (SELECT Systempropertyhouseroomid FROM Systempropertyhouseroomstenant WHERE Systempropertyhousetenantid = JSON_VALUE(@JsonObjectdata, '$.Tenantid'));
 			END
+			IF NOT EXISTS( SELECT Systempropertyhousetenantentryid FROM Systempropertyhouseroomstenant WHERE Systempropertyhousetenantid= JSON_VALUE(@JsonObjectdata, '$.Tenantid'))
+			BEGIN
+			 UPDATE Systemstaffs SET Loginstatus=1 WHERE Userid=JSON_VALUE(@JsonObjectdata, '$.Tenantid');
+			END
+
 			--insert tenant to tenants table
 			MERGE INTO Systempropertyhouseroomstenant AS target
 			USING(

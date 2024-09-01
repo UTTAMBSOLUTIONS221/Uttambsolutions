@@ -47,6 +47,7 @@ BEGIN
 							0 AS Propertyhouseid,
 							ISNULL(Systemhousedepositfee.Housedepositfeeid, 0) AS Housedepositfeeid,
 							ISNULL(Systemhousedepositfee.Housedepositfeename, '') AS Housedepositfeename,
+							CASE WHEN Systemhousedepositfee.Housedepositfeename='House Deposit' THEN 1 WHEN Systemhousedepositfee.Housedepositfeename='House Rent' THEN 1 WHEN Systemhousedepositfee.Housedepositfeename='Water Bill' THEN 1 ELSE 0 END AS Isreadonly,
 							0 AS Systempropertyhousedepositfeeamount,
 							0 AS Systempropertyhousesizedepositfeewehave
 						FROM Systemhousedepositfees Systemhousedepositfee
@@ -95,6 +96,7 @@ BEGIN
 							ISNULL(Systemhousedepositfee.Housedepositfeeid, 0) AS Housedepositfeeid,
 							ISNULL(Systemhousedepositfee.Housedepositfeename, '') AS Housedepositfeename,
 							ISNULL(Systempropertyhousedepositfee.Systempropertyhousedepositfeeamount, 0) AS Systempropertyhousedepositfeeamount,
+							CASE WHEN Systemhousedepositfee.Housedepositfeename='House Deposit' THEN 1 WHEN Systemhousedepositfee.Housedepositfeename='House Rent' THEN 1 WHEN Systemhousedepositfee.Housedepositfeename='Water Bill' THEN 1 ELSE 0 END AS Isreadonly,
 							ISNULL(Systempropertyhousedepositfee.Systempropertyhousesizedepositfeewehave, 0) AS Systempropertyhousesizedepositfeewehave
 						FROM Systemhousedepositfees Systemhousedepositfee
 						LEFT JOIN Systempropertyhousedepositfees Systempropertyhousedepositfee ON Systemhousedepositfee.Housedepositfeeid = Systempropertyhousedepositfee.Housedepositfeeid
