@@ -110,7 +110,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     if (_systempropertyData != null)
                     {
                         // Unsubscribe from previous instance's property change events
-                        _systempropertyData.PropertyChanged -= OnSystempropertyDataChanged;
+                        _systempropertyData.PropertyChanged -= OnSystempropertyDataChangedAsync;
                     }
 
                     _systempropertyData = value;
@@ -118,7 +118,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     if (_systempropertyData != null)
                     {
                         // Subscribe to new instance's property change events
-                        _systempropertyData.PropertyChanged += OnSystempropertyDataChanged;
+                        _systempropertyData.PropertyChanged += OnSystempropertyDataChangedAsync;
                     }
 
                     OnPropertyChanged(nameof(SystempropertyData));
@@ -127,7 +127,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
         public bool IsPetsAllowedVisible => SystempropertyData?.Allowpets ?? false;
-        private void OnSystempropertyDataChanged(object sender, PropertyChangedEventArgs e)
+        private void OnSystempropertyDataChangedAsync(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Systemproperty.Allowpets))
             {
@@ -136,6 +136,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             if (e.PropertyName == nameof(Systemproperty.Rentingterms))
             {
                 OnPropertyChanged(nameof(IsRentingTermsVisible));
+            }
+            if (e.PropertyName == nameof(Systemproperty.Countyid))
+            {
+                LoadDropdownDataByCode();
+            }
+            if (e.PropertyName == nameof(Systemproperty.Subcountyid))
+            {
+                LoadDropdownDataByCode();
             }
             // Add checks for other properties if needed
         }
@@ -878,6 +886,28 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (SystemhousewatertypeResponse != null)
                 {
                     Systemhousewatertype = new ObservableCollection<ListModel>(SystemhousewatertypeResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
+
+        private async Task LoadDropdownDataByCode()
+        {
+            try
+            {
+                var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCounty + "&code=" + SelectedCounty.Value, HttpMethod.Get);
+                var SystemsubcountywardResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCountyWard + "&code=" + SelectedSubcounty.Value, HttpMethod.Get);
+                if (SystemsubcountyResponse != null)
+                {
+                    Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
+                }
+                if (SystemsubcountywardResponse != null)
+                {
+                    Systemsubcountyward = new ObservableCollection<ListModel>(SystemsubcountywardResponse);
                 }
             }
             catch (Exception ex)
