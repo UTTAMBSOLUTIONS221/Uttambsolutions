@@ -108,6 +108,7 @@ namespace DBL.Entities
         public long Systempropertyhousedepositfeeid { get; set; }
         public long Propertyhouseid { get; set; }
         public long Housedepositfeeid { get; set; }
+        public bool Readonly { get; set; }
         public string? Housedepositfeename { get; set; }
         public decimal Systempropertyhousedepositfeeamount { get; set; }
         public bool Systempropertyhousesizedepositfeewehave { get; set; }
