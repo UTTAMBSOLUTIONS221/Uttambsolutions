@@ -431,6 +431,15 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 SystemStaffPasswordError = null;
             }
+            if (string.IsNullOrWhiteSpace(ConfirmPassword))
+            {
+                SystemStaffConfirmPasswordError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffConfirmPasswordError = null;
+            }
             if (Password != ConfirmPassword)
             {
                 SystemStaffConfirmPasswordError = "Required.";
