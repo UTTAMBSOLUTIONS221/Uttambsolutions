@@ -5,6 +5,7 @@ using Firebase.Storage;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.draw;
+using Maqaoplus.Views;
 using Maqaoplus.Views.PropertyHouse.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -25,6 +26,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private Systemproperty _systempropertyData;
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
+        private Systemtenantdetails _tenantStaffData;
+
 
         private bool _isStep1Visible;
         private bool _isStep2Visible;
@@ -42,6 +45,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand SavePropertyHouseCommand { get; }
+
+        public ICommand OnCancelButtonClickedCommand { get; }
+        public ICommand OnOkButtonClickedCommand { get; }
+        public ICommand SaveAgentPropertyHouseCommand { get; }
+        public ICommand SearchCommand { get; }
+
 
 
         private bool _isLoading;
@@ -86,6 +95,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _isDataLoaded = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string _searchId;
+        public string SearchId
+        {
+            get => _searchId;
+            set
+            {
+                _searchId = value;
                 OnPropertyChanged();
             }
         }
@@ -173,7 +193,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
         public bool IsSignatureImageVisible => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
         public bool IsSignatureAvailable => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
-
+        public Systemtenantdetails TenantStaffData
+        {
+            get => _tenantStaffData;
+            set
+            {
+                _tenantStaffData = value;
+                OnPropertyChanged();
+            }
+        }
         public SystemPropertyHouseImage SystemPropertyHouseImageData
         {
             get => _systemPropertyHouseImageData;
@@ -391,6 +419,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             PreviousCommand = new Command(PreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
+
+            OnCancelButtonClickedCommand = new Command(OnCancelButtonClicked);
+            OnOkButtonClickedCommand = new Command(OnOkButtonClicked);
+            SearchCommand = new Command(async () => await Search());
+            SaveAgentPropertyHouseCommand = new Command(async () => await SaveAgentPropertyHouseAsync());
 
             LoadDropdownData();
             // Initialize steps
@@ -1255,6 +1288,93 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+
+        private async Task Search()
+        {
+            if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
+                return;
+
+            IsProcessing = true;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
+
+                if (response != null)
+                {
+                    TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
+                    var modalPage = new StaffAgentOwnerDetailModalPage(this);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                }
+                else
+                {
+                    TenantStaffData = new Systemtenantdetails();
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
+        private void OnOkButtonClicked()
+        {
+            SystempropertyData.Propertyhouseowner = TenantStaffData.Userid;
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+        private void OnCancelButtonClicked()
+        {
+            SystempropertyData.Propertyhouseowner = 0;
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+
+        public async Task SaveAgentPropertyHouseAsync()
+        {
+            IsProcessing = true;
+
+            await Task.Delay(500);
+            if (SystempropertyData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
+            SystempropertyData.Isagency = true;
+            SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Propertyhouseposter = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Datecreated = DateTime.Now;
+            SystempropertyData.Datemodified = DateTime.Now;
+            try
+            {
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhousedata", SystempropertyData);
+                if (response.RespStatus == 200 || response.RespStatus == 0)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else if (response.RespStatus == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
         private bool ValidateStep1()
         {
             bool isValid = true;
