@@ -1,7 +1,6 @@
 ﻿using Maqaoplus.ViewModels;
 using Maqaoplus.Views;
 using Maqaoplus.Views.PropertyHouse;
-using Maqaoplus.Views.PropertyHouseAgent;
 using Maqaoplus.Views.PropertyHouseTenantAgreement;
 using Maqaoplus.Views.PropertyHouseTenants;
 using Maqaoplus.Views.Reports;
@@ -22,8 +21,7 @@ namespace Maqaoplus
             Routing.RegisterRoute(nameof(UpdateUserProfilePage), typeof(UpdateUserProfilePage));
             Routing.RegisterRoute(nameof(PropertyHousesPage), typeof(PropertyHousesPage));
             Routing.RegisterRoute(nameof(PropertyHousesDetailPage), typeof(PropertyHousesDetailPage));
-            Routing.RegisterRoute(nameof(PropertyAgentHousesPage), typeof(PropertyAgentHousesPage));
-            Routing.RegisterRoute(nameof(PropertyAgentHousesDetailPage), typeof(PropertyAgentHousesDetailPage));
+            Routing.RegisterRoute(nameof(AgentPropertyHousesPage), typeof(AgentPropertyHousesPage));
             Routing.RegisterRoute(nameof(PropertyHousesTenantDetailPage), typeof(PropertyHousesTenantDetailPage));
             Routing.RegisterRoute(nameof(SystemPropertyOwnerReportsPage), typeof(SystemPropertyOwnerReportsPage));
             Routing.RegisterRoute(nameof(PropertyHousesTenantBillsPage), typeof(PropertyHousesTenantBillsPage));
