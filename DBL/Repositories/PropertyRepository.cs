@@ -235,6 +235,27 @@ namespace DBL.Repositories
                 }
             }
         }
+
+        public PropertyHouseTenantData Getsystemagentpropertyhouseroomtenantsdata(long Agentid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Agentid", Agentid);
+                parameters.Add("@Systempropertyhouseroomtenantsdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystemagentpropertyhouseroomtenantsdata", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertyhouseroomtenantsdataJson = parameters.Get<string>("@Systempropertyhouseroomtenantsdata");
+                if (systempropertyhouseroomtenantsdataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<PropertyHouseTenantData>(systempropertyhouseroomtenantsdataJson);
+                }
+                else
+                {
+                    return new PropertyHouseTenantData();
+                }
+            }
+        }
         public PropertyHouseDetailData Getsystempropertyhousedetaildatabypropertyidandownerid(long Propertyid, long Ownerid)
         {
             using (var connection = new SqlConnection(_connString))

@@ -16,6 +16,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
         public ObservableCollection<PropertyHouseTenant> Items { get; }
         private PropertyHouseRoomTenantData _tenantData;
         public ICommand LoadItemsCommand { get; }
+        public ICommand LoadAgentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
 
         private bool _isProcessing;
@@ -68,6 +69,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<PropertyHouseTenant>();
             LoadItemsCommand = new Command(async () => await LoadItems());
+            LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<PropertyHouseTenant>(async (propertyhousetenant) => await ViewDetails(propertyhousetenant.Systempropertyhousetenantid));
         }
         private async Task LoadItems()
@@ -78,6 +80,34 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomtenantsdata/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null && response.Data is List<dynamic> items)
+                {
+                    Items.Clear();
+                    foreach (var item in items)
+                    {
+                        var product = item.ToObject<PropertyHouseTenant>();
+                        Items.Add(product);
+                    }
+                }
+                IsDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+        private async Task LoadAgentItems()
+        {
+            IsProcessing = true;
+            IsDataLoaded = false;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystemagentpropertyhouseroomtenantsdata/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
                     Items.Clear();

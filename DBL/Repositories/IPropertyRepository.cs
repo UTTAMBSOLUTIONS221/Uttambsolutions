@@ -15,6 +15,7 @@ namespace DBL.Repositories
         Systempropertyhousedata Getsystempropertyhousedatabyagent(long Agentid);
         PropertyHouseRoomTenantModel Getsystempropertyhousetenantdatabytenantid(long TenantId);
         PropertyHouseTenantData Getsystempropertyhouseroomtenantsdata(long Ownerid);
+        PropertyHouseTenantData Getsystemagentpropertyhouseroomtenantsdata(long Agentid);
         PropertyHouseDetailData Getsystempropertyhousedetaildatabypropertyidandownerid(long Propertyid, long Ownerid);
         OwnerTenantAgreementDetailDataModel Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(long Propertyid, long Ownertenantid);
         TenantAgreementDetailDataModel Getsystempropertyhouseroomagreementdetaildatabytenantid(long Propertytenantid);
