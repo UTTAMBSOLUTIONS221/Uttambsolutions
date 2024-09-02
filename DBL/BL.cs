@@ -1150,6 +1150,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<TenantMonthlyInvoiceData> Gettenantmonthlyinvoicedatabyagentid(long Agentid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Gettenantmonthlyinvoicedatabyagentid(Agentid);
+                return Resp;
+            });
+        }
         public Task<TenantMonthlyInvoiceData> Gettenantmonthlyinvoicedatabytenantid(long Tenantid)
         {
             return Task.Run(() =>

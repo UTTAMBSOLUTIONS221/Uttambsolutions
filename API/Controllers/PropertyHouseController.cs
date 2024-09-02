@@ -155,6 +155,12 @@ namespace API.Controllers
             return await bl.Gettenantmonthlyinvoicedatabyownerid(OwnerId);
         }
         [AllowAnonymous]
+        [HttpGet("Gettenantmonthlyinvoicedatabyagentid/{Agentid}")]
+        public async Task<TenantMonthlyInvoiceData> Gettenantmonthlyinvoicedatabyagentid(long Agentid)
+        {
+            return await bl.Gettenantmonthlyinvoicedatabyagentid(Agentid);
+        }
+        [AllowAnonymous]
         [HttpGet("Gettenantmonthlyinvoicedatabytenantid/{TenantId}")]
         public async Task<TenantMonthlyInvoiceData> Gettenantmonthlyinvoicedatabytenantid(long TenantId)
         {

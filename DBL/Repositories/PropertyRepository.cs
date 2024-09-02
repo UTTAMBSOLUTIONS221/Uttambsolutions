@@ -760,6 +760,26 @@ namespace DBL.Repositories
                 }
             }
         }
+        public TenantMonthlyInvoiceData Gettenantmonthlyinvoicedatabyagentid(long Agentid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Agentid", Agentid);
+                parameters.Add("@Systemtenantmonthlyinvoicedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Gettenantmonthlyinvoicedatabyagentid", parameters, commandType: CommandType.StoredProcedure);
+                string systemtenantmonthlyinvoicedataJson = parameters.Get<string>("@Systemtenantmonthlyinvoicedata");
+                if (systemtenantmonthlyinvoicedataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<TenantMonthlyInvoiceData>(systemtenantmonthlyinvoicedataJson);
+                }
+                else
+                {
+                    return new TenantMonthlyInvoiceData();
+                }
+            }
+        }
         public TenantMonthlyInvoiceData Gettenantmonthlyinvoicedatabytenantid(long Tenantid)
         {
             using (var connection = new SqlConnection(_connString))
