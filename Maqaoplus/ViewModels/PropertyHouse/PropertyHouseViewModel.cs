@@ -38,6 +38,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand AddPropertyHouseCommand { get; }
         public ICommand AddAgentPropertyHouseCommand { get; }
         public ICommand LoadItemsCommand { get; }
+        public ICommand LoadAgentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand ViewPropertyAgreementCommand { get; }
         public ICommand ViewPropertyHouseImageCommand { get; }
@@ -413,6 +414,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
+            LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseowner));
             ViewPropertyHouseImageCommand = new Command<Systemproperty>(async (property) => await ViewPropertyHouseImagesDetails(property.Propertyhouseid));
@@ -1071,6 +1073,35 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedatabyowner/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null && response.Data is List<dynamic> items)
+                {
+                    Items.Clear();
+                    foreach (var item in items)
+                    {
+                        var product = item.ToObject<Systemproperty>();
+                        Items.Add(product);
+                    }
+                }
+                IsDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
+        private async Task LoadAgentItems()
+        {
+            IsProcessing = true;
+            IsDataLoaded = false;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedatabyagent/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
                     Items.Clear();
