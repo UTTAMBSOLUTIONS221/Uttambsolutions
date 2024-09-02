@@ -935,11 +935,19 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<PropertyHouseSummaryDashboard> Getsystempropertyhousedashboardsummarydatabyowner(long OwnerId, long PosterId)
+        public Task<PropertyHouseSummaryDashboard> Getsystempropertyhousedashboardsummarydatabyowner(long OwnerId)
         {
             return Task.Run(() =>
             {
-                var Resp = db.PropertyRepository.Getsystempropertyhousedashboardsummarydatabyowner(OwnerId, PosterId);
+                var Resp = db.PropertyRepository.Getsystempropertyhousedashboardsummarydatabyowner(OwnerId);
+                return Resp;
+            });
+        }
+        public Task<PropertyHouseSummaryDashboard> Getsystempropertyhousedashboardsummarydatabyagent(long Agentid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Getsystempropertyhousedashboardsummarydatabyagent(Agentid);
                 return Resp;
             });
         }

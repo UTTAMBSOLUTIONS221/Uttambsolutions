@@ -82,7 +82,7 @@ namespace Maqaoplus.ViewModels.Dashboards
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedashboardsummarydatabyowner/" + App.UserDetails.Usermodel.Userid + "/0", HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedashboardsummarydatabyowner/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null)
                 {
                     DashBoardSummaryData = JsonConvert.DeserializeObject<PropertyHouseSummary>(response.Data.ToString());

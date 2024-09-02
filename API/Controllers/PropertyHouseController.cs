@@ -21,10 +21,16 @@ namespace API.Controllers
             _config = config;
         }
         [AllowAnonymous]
-        [HttpGet("Getsystempropertyhousedashboardsummarydatabyowner/{OwnerId}/{PosterId}")]
-        public async Task<PropertyHouseSummaryDashboard> Getsystempropertyhousedashboardsummarydatabyowner(long OwnerId, long PosterId)
+        [HttpGet("Getsystempropertyhousedashboardsummarydatabyowner/{OwnerId}")]
+        public async Task<PropertyHouseSummaryDashboard> Getsystempropertyhousedashboardsummarydatabyowner(long OwnerId)
         {
-            return await bl.Getsystempropertyhousedashboardsummarydatabyowner(OwnerId, PosterId);
+            return await bl.Getsystempropertyhousedashboardsummarydatabyowner(OwnerId);
+        }
+        [AllowAnonymous]
+        [HttpGet("Getsystempropertyhousedashboardsummarydatabyagent/{AgentId}")]
+        public async Task<PropertyHouseSummaryDashboard> Getsystempropertyhousedashboardsummarydatabyagent(long AgentId)
+        {
+            return await bl.Getsystempropertyhousedashboardsummarydatabyagent(AgentId);
         }
         [AllowAnonymous]
         [HttpGet("Getsystempropertyhousedatabyowner/{OwnerId}")]

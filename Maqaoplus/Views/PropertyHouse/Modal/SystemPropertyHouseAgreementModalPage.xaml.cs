@@ -122,39 +122,53 @@ public partial class SystemPropertyHouseAgreementModalPage : ContentPage
     {
         using (var stream = await DrawBoard.GetImageStream(300, 100))
         {
-            // Load the image into SkiaSharp
-            using (var skiaStream = new SKManagedStream(stream))
+            if (stream.Length == 0)
             {
-                var bitmap = SKBitmap.Decode(skiaStream);
+                return true; // Stream is empty
+            }
 
-                // Check if the bitmap is null or has no content
-                if (bitmap == null || bitmap.Width == 0 || bitmap.Height == 0)
+            try
+            {
+                // Load the image into SkiaSharp
+                using (var skiaStream = new SKManagedStream(stream))
                 {
-                    return true;
-                }
+                    var bitmap = SKBitmap.Decode(skiaStream);
 
-                // Analyze the image for non-transparent pixels
-                bool hasNonTransparentPixels = false;
-
-                for (int y = 0; y < bitmap.Height; y++)
-                {
-                    for (int x = 0; x < bitmap.Width; x++)
+                    if (bitmap == null || bitmap.Width == 0 || bitmap.Height == 0)
                     {
-                        var color = bitmap.GetPixel(x, y);
-                        if (color.Alpha > 0)
+                        return true; // Bitmap is null or has no dimensions
+                    }
+
+                    // Analyze the image for non-transparent pixels
+                    bool hasNonTransparentPixels = false;
+
+                    for (int y = 0; y < bitmap.Height; y++)
+                    {
+                        for (int x = 0; x < bitmap.Width; x++)
                         {
-                            hasNonTransparentPixels = true;
+                            var color = bitmap.GetPixel(x, y);
+                            if (color.Alpha > 0)
+                            {
+                                hasNonTransparentPixels = true;
+                                break;
+                            }
+                        }
+
+                        if (hasNonTransparentPixels)
+                        {
                             break;
                         }
                     }
 
-                    if (hasNonTransparentPixels)
-                    {
-                        break;
-                    }
+                    return !hasNonTransparentPixels;
                 }
-
-                return !hasNonTransparentPixels;
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions related to image processing
+                // Log or display the exception message
+                Console.WriteLine($"Error processing image: {ex.Message}");
+                return true; // Assume empty if an error occurs
             }
         }
     }

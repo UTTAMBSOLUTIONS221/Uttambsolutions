@@ -74,7 +74,7 @@ namespace DBL.Repositories
                 }
             }
         }
-        public PropertyHouseSummaryDashboard Getsystempropertyhousedashboardsummarydatabyowner(long Ownerid, long Posterid)
+        public PropertyHouseSummaryDashboard Getsystempropertyhousedashboardsummarydatabyowner(long Ownerid)
         {
             PropertyHouseSummaryDashboard propertyHouseSummaryDashboard = new PropertyHouseSummaryDashboard();
             PropertyHouseSummary propertyHouseSummary = new PropertyHouseSummary();
@@ -84,9 +84,50 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Ownerid", Ownerid);
-                parameters.Add("@Posterid", Posterid);
                 parameters.Add("@Systempropertyhousedashboardsummarydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystempropertyhousedashboardsummarydatabyowner", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertyhousedashboardsummarydataJson = parameters.Get<string>("@Systempropertyhousedashboardsummarydata");
+                if (systempropertyhousedashboardsummarydataJson != null)
+                {
+                    JObject responseJson = JObject.Parse(systempropertyhousedashboardsummarydataJson);
+                    if (responseJson["Data"] != null && responseJson["Data"].Type != JTokenType.Null)
+                    {
+                        JObject dashboardsummaryJson = JObject.Parse(responseJson["Data"].ToString());
+                        propertyHouseSummary.Propertyhouseunits = Convert.ToInt32(dashboardsummaryJson["Propertyhouseunits"]);
+                        propertyHouseSummary.Systempropertyoccupiedroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyoccupiedroom"]);
+                        propertyHouseSummary.Systempropertyvacantroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyvacantroom"]);
+                        propertyHouseSummary.Rentarrears = Convert.ToDecimal(dashboardsummaryJson["Rentarrears"]);
+                        propertyHouseSummary.Uncollectedpayments = Convert.ToDecimal(dashboardsummaryJson["Uncollectedpayments"]);
+                        propertyHouseSummary.Consumedmeters = Convert.ToDecimal(dashboardsummaryJson["Consumedmeters"]);
+                        if (dashboardsummaryJson["Propertybysummary"] != null)
+                        {
+                            string propertybysummaryJson = dashboardsummaryJson["Propertybysummary"].ToString();
+                            Propertybysummary = JsonConvert.DeserializeObject<List<PropertySummary>>(propertybysummaryJson);
+                            propertyHouseSummary.Propertybysummary = Propertybysummary;
+                        }
+                    }
+                    propertyHouseSummaryDashboard.Data = propertyHouseSummary;
+                    return propertyHouseSummaryDashboard;
+                }
+                else
+                {
+                    return propertyHouseSummaryDashboard;
+                }
+            }
+        }
+
+        public PropertyHouseSummaryDashboard Getsystempropertyhousedashboardsummarydatabyagent(long Agentid)
+        {
+            PropertyHouseSummaryDashboard propertyHouseSummaryDashboard = new PropertyHouseSummaryDashboard();
+            PropertyHouseSummary propertyHouseSummary = new PropertyHouseSummary();
+            List<PropertySummary>? Propertybysummary = new List<PropertySummary>();
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Agentid", Agentid);
+                parameters.Add("@Systempropertyhousedashboardsummarydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystempropertyhousedashboardsummarydatabyagent", parameters, commandType: CommandType.StoredProcedure);
                 string systempropertyhousedashboardsummarydataJson = parameters.Get<string>("@Systempropertyhousedashboardsummarydata");
                 if (systempropertyhousedashboardsummarydataJson != null)
                 {
