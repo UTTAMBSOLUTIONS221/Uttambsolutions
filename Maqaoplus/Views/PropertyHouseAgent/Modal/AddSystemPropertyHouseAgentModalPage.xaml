@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Class="Maqaoplus.Views.PropertyHouseAgent.Modal.AddSystemPropertyHouseAgentModalPage"
+             x:Class="Maqaoplus.Views.PropertyHouseAgent.Modal.AddSystemPropertyHouseAgentModalPage"
+             xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
 
     <Grid Padding="10">
         <!-- Define Row Heights for Header and Content -->
@@ -191,7 +198,7 @@
                         <!-- First Row - Water Metered -->
                         <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center">
                             <CheckBox IsChecked="{Binding SystempropertyData.Hashousewatermeter}" Color="#0a506c" VerticalOptions="Center" />
-                            <Label Text="Water Metered?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start"  TextColor="Black" />
+                            <Label Text="Has Submeters?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start"  TextColor="Black" />
                         </StackLayout>
                     </Grid>
 
@@ -410,12 +417,10 @@
                         <!-- Adjusted WidthRequest -->
                     </FlexLayout>
                 </StackLayout>
-
                 <!-- Step 3 -->
                 <StackLayout IsVisible="{Binding IsStep3Visible}" Padding="16" Spacing="16">
                     <!-- Section Header for Tenant Details -->
                     <Label Text="Step 3: House Deposits and Fees" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
-
 
                     <CollectionView ItemsSource="{Binding SystempropertyData.Propertyhousedepositfee}" SelectionMode="None">
                         <CollectionView.Header>
@@ -441,12 +446,12 @@
                                     <Entry Text="{Binding Housedepositfeeid}" IsVisible="False"/>
 
                                     <!-- Room Size -->
-                                    <Label Text="{Binding Housedepositfeename}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2"/>
+                                    <Label Text="{Binding Housedepositfeename}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2" IsVisible="{Binding Isreadonly, Converter={StaticResource InverseBooleanConverter}}"/>
 
                                     <!-- Amount -->
-                                    <Entry Text="{Binding Systempropertyhousedepositfeeamount}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill"/>
+                                    <Entry Text="{Binding Systempropertyhousedepositfeeamount}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill" IsVisible="{Binding Isreadonly, Converter={StaticResource InverseBooleanConverter}}"/>
                                     <!-- We have? -->
-                                    <CheckBox IsChecked="{Binding Systempropertyhousesizedepositfeewehave}" Grid.Column="2"/>
+                                    <CheckBox IsChecked="{Binding Systempropertyhousesizedepositfeewehave}" Grid.Column="2" IsVisible="{Binding Isreadonly, Converter={StaticResource InverseBooleanConverter}}"/>
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
