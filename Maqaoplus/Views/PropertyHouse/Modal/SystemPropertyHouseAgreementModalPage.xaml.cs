@@ -86,6 +86,11 @@ public partial class SystemPropertyHouseAgreementModalPage : ContentPage
 
     private async void Button_Save_Signature_Clicked(object sender, EventArgs e)
     {
+        if (await IsDrawBoardEmptyAsync())
+        {
+            await DisplayAlert("Error", "The signature board is empty. Please sign before saving.", "OK");
+            return;
+        }
         var filePath = Path.Combine(FileSystem.AppDataDirectory, "signature.png");
 
         // Save the drawn signature to a file
@@ -112,5 +117,45 @@ public partial class SystemPropertyHouseAgreementModalPage : ContentPage
         var uploadTask = firebaseStorage.Child("maqaoplus").Child(fileName).PutAsync(stream);
         var downloadUrl = await uploadTask;
         return downloadUrl;
+    }
+    private async Task<bool> IsDrawBoardEmptyAsync()
+    {
+        using (var stream = await DrawBoard.GetImageStream(300, 100))
+        {
+            // Load the image into SkiaSharp
+            using (var skiaStream = new SKManagedStream(stream))
+            {
+                var bitmap = SKBitmap.Decode(skiaStream);
+
+                // Check if the bitmap is null or has no content
+                if (bitmap == null || bitmap.Width == 0 || bitmap.Height == 0)
+                {
+                    return true;
+                }
+
+                // Analyze the image for non-transparent pixels
+                bool hasNonTransparentPixels = false;
+
+                for (int y = 0; y < bitmap.Height; y++)
+                {
+                    for (int x = 0; x < bitmap.Width; x++)
+                    {
+                        var color = bitmap.GetPixel(x, y);
+                        if (color.Alpha > 0)
+                        {
+                            hasNonTransparentPixels = true;
+                            break;
+                        }
+                    }
+
+                    if (hasNonTransparentPixels)
+                    {
+                        break;
+                    }
+                }
+
+                return !hasNonTransparentPixels;
+            }
+        }
     }
 }
