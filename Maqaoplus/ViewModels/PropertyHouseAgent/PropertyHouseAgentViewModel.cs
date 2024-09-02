@@ -28,6 +28,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
         private Systemtenantdetails _tenantStaffData;
 
+
         private bool _isStep1Visible;
         private bool _isStep2Visible;
         private bool _isStep3Visible;
@@ -95,7 +96,6 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
                 OnPropertyChanged();
             }
         }
-
         public string _searchId;
         public string SearchId
         {
@@ -127,7 +127,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
                     if (_systempropertyData != null)
                     {
                         // Unsubscribe from previous instance's property change events
-                        _systempropertyData.PropertyChanged -= OnSystempropertyDataChanged;
+                        _systempropertyData.PropertyChanged -= OnSystempropertyDataChangedAsync;
                     }
 
                     _systempropertyData = value;
@@ -135,7 +135,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
                     if (_systempropertyData != null)
                     {
                         // Subscribe to new instance's property change events
-                        _systempropertyData.PropertyChanged += OnSystempropertyDataChanged;
+                        _systempropertyData.PropertyChanged += OnSystempropertyDataChangedAsync;
                     }
 
                     OnPropertyChanged(nameof(SystempropertyData));
@@ -144,7 +144,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             }
         }
         public bool IsPetsAllowedVisible => SystempropertyData?.Allowpets ?? false;
-        private void OnSystempropertyDataChanged(object sender, PropertyChangedEventArgs e)
+        private void OnSystempropertyDataChangedAsync(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Systemproperty.Allowpets))
             {
@@ -154,6 +154,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             {
                 OnPropertyChanged(nameof(IsRentingTermsVisible));
             }
+
             // Add checks for other properties if needed
         }
 
@@ -209,16 +210,6 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             }
         }
         // Error properties
-        private string _propertyHouseOwnerError;
-        public string PropertyHouseOwnerError
-        {
-            get => _propertyHouseOwnerError;
-            set
-            {
-                _propertyHouseOwnerError = value;
-                OnPropertyChanged();
-            }
-        }
         private string _propertyHouseNameError;
         public string PropertyHouseNameError
         {
@@ -431,7 +422,6 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             OnOkButtonClickedCommand = new Command(OnOkButtonClicked);
             SearchCommand = new Command(async () => await Search());
 
-
             // Initialize steps
             _isStep1Visible = true;
             _isStep2Visible = false;
@@ -471,6 +461,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
 
                     OnPropertyChanged(nameof(SelectedCounty));
                     OnPropertyChanged(nameof(SystempropertyData.Countyid));
+                    LoadSubcountyDataCountyCode();
                 }
             }
         }
@@ -505,6 +496,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
 
                     OnPropertyChanged(nameof(SelectedSubcounty));
                     OnPropertyChanged(nameof(SystempropertyData.Subcountyid));
+                    LoadSubcountyWardDataCountyCode();
                 }
             }
         }
@@ -926,6 +918,38 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             }
         }
 
+
+        private async Task LoadSubcountyDataCountyCode()
+        {
+            try
+            {
+                var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCounty + "&code=" + Convert.ToInt64(SelectedCounty.Value), HttpMethod.Get);
+                if (SystemsubcountyResponse != null)
+                {
+                    Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+        private async Task LoadSubcountyWardDataCountyCode()
+        {
+            try
+            {
+                var SystemsubcountywardResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCountyWard + "&code=" + Convert.ToInt64(SelectedSubcounty.Value), HttpMethod.Get);
+                if (SystemsubcountywardResponse != null)
+                {
+                    Systemsubcountyward = new ObservableCollection<ListModel>(SystemsubcountywardResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
         private async Task LoadItems()
         {
             IsProcessing = true;
@@ -994,7 +1018,6 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
                 IsProcessing = false;
                 return;
             }
-            OwnerTenantAgreementDetailData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
             OwnerTenantAgreementDetailData.Signatureimageurl = imageUrl;
             OwnerTenantAgreementDetailData.Ownerortenant = "Owner";
             OwnerTenantAgreementDetailData.Agreementname = OwnerTenantAgreementDetailData.Fullname + " Property " + OwnerTenantAgreementDetailData.Propertyhousename + " Owner Agreement";
@@ -1090,51 +1113,6 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
             {
                 IsProcessing = false;
             }
-        }
-
-        private async Task Search()
-        {
-            if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
-                return;
-
-            IsProcessing = true;
-
-            try
-            {
-                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
-
-                if (response != null)
-                {
-                    TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
-                    var modalPage = new StaffAgentOwnerDetailModalPage(this);
-                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
-                }
-                else
-                {
-                    TenantStaffData = new Systemtenantdetails();
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                IsProcessing = false;
-            }
-        }
-
-        private void OnOkButtonClicked()
-        {
-            SystempropertyData.Propertyhouseowner = TenantStaffData.Userid;
-            SearchId = string.Empty;
-            Application.Current.MainPage.Navigation.PopModalAsync();
-        }
-        private void OnCancelButtonClicked()
-        {
-            SystempropertyData.Propertyhouseowner = 0;
-            SearchId = string.Empty;
-            Application.Current.MainPage.Navigation.PopModalAsync();
         }
         public bool IsStep1Visible
         {
@@ -1303,21 +1281,56 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgent
                 IsProcessing = false;
             }
         }
+        private async Task Search()
+        {
+            if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
+                return;
+
+            IsProcessing = true;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
+
+                if (response != null)
+                {
+                    TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
+                    var modalPage = new StaffAgentOwnerDetailModalPage(this);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                }
+                else
+                {
+                    TenantStaffData = new Systemtenantdetails();
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
+        private void OnOkButtonClicked()
+        {
+            SystempropertyData.Propertyhouseowner = TenantStaffData.Userid;
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+        private void OnCancelButtonClicked()
+        {
+            SystempropertyData.Propertyhouseowner = 0;
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
 
         private bool ValidateStep1()
         {
             bool isValid = true;
 
             // Validate Property Name
-            if (SystempropertyData.Propertyhouseowner == 0)
-            {
-                PropertyHouseOwnerError = "Required.";
-                isValid = false;
-            }
-            else
-            {
-                PropertyHouseOwnerError = null;
-            }
             if (string.IsNullOrWhiteSpace(SystempropertyData.Propertyhousename))
             {
                 PropertyHouseNameError = "Required.";
