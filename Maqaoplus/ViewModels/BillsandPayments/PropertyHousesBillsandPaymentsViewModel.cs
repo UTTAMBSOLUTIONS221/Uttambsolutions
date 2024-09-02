@@ -1,6 +1,6 @@
 ﻿using DBL.Entities;
 using DBL.Models;
-using Maqaoplus.Views.OwnerBillsandPayments.Modals;
+using Maqaoplus.Views.BillsandPayments.Modals;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -57,6 +57,17 @@ namespace Maqaoplus.ViewModels.BillsandPayments
             set
             {
                 _tenantInvoiceDetailData = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public CustomerPaymentValidation CustomerPaymentValidationData
+        {
+            get => _customerPaymentValidationData;
+            set
+            {
+                _customerPaymentValidationData = value;
                 OnPropertyChanged();
             }
         }
@@ -140,6 +151,17 @@ namespace Maqaoplus.ViewModels.BillsandPayments
                 OnPropertyChanged();
             }
         }
+
+        private string _paymentActualAmountError;
+        public string PaymentActualAmountError
+        {
+            get => _paymentActualAmountError;
+            set
+            {
+                _paymentActualAmountError = value;
+                OnPropertyChanged();
+            }
+        }
         private async Task LoadItems()
         {
             IsProcessing = true;
@@ -178,7 +200,7 @@ namespace Maqaoplus.ViewModels.BillsandPayments
                 if (response != null && response.Data != null)
                 {
                     TenantInvoiceDetailData = JsonConvert.DeserializeObject<MonthlyRentInvoiceModel>(response.Data.ToString());
-                    var modalPage = new HousesRoomOwnerInvoiceDetailModalPage(this);
+                    var modalPage = new HousesRoomInvoiceDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                     IsDataLoaded = true;
                 }
