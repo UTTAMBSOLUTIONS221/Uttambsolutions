@@ -36,7 +36,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isStep5Visible;
 
         public ICommand AddPropertyHouseCommand { get; }
-        public ICommand EditPropertyHouseCommand { get; }
+        public ICommand AddAgentPropertyHouseCommand { get; }
         public ICommand LoadItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand ViewPropertyAgreementCommand { get; }
@@ -411,6 +411,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<Systemproperty>();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
+            AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseowner));
@@ -890,6 +891,114 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
+
+
+        private async Task AddAgentPropertyHouseAsync(long Propertyhouseid)
+        {
+            IsProcessing = true;
+            Systemhouserentingterms = new ObservableCollection<ListModel>
+            {
+                new ListModel { Value = "Month-to-Month", Text = "Monthly" },
+                new ListModel { Value = "Fixedterm", Text = "Fixed Term" },
+
+            };
+
+            Systemhouseentrystatus = new ObservableCollection<ListModel>
+            {
+                new ListModel { Value = "0", Text = "First Tenants" },
+                new ListModel { Value = "1", Text = "Second Tenants" },
+
+            };
+            Systemhouserentdueday = new ObservableCollection<ListModel>();
+            for (int i = 1; i <= 28; i++)
+            {
+                string suffix = i switch
+                {
+                    1 or 21 => "st",
+                    2 or 22 => "nd",
+                    3 or 23 => "rd",
+                    _ => "th"
+                };
+                Systemhouserentdueday.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
+            }
+            Systemhousedepositmonths = new ObservableCollection<ListModel>();
+            for (int i = 1; i <= 6; i++)
+            {
+                Systemhousedepositmonths.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
+            }
+            Systemhouserentdepositreturndays = new ObservableCollection<ListModel>();
+            for (int i = 1; i <= 28; i++)
+            {
+                string suffix = i switch
+                {
+                    1 or 21 => "st",
+                    2 or 22 => "nd",
+                    3 or 23 => "rd",
+                    _ => "th"
+                };
+                Systemhouserentdepositreturndays.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
+            }
+
+
+            Systemhousevacantnoticeperiod = new ObservableCollection<ListModel>();
+            for (int i = 1; i <= 12; i++)
+            {
+                Systemhousevacantnoticeperiod.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
+            }
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + Propertyhouseid, HttpMethod.Get, null);
+            if (response != null)
+            {
+                SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
+                if (SystempropertyData != null)
+                {
+                    if (SystempropertyData.Propertyhousestatus > 0)
+                    {
+                        SelectedHouseentrystatus = Systemhouseentrystatus.FirstOrDefault(x => x.Value == _systempropertyData.Propertyhousestatus.ToString());
+                    }
+                    if (SystempropertyData.Watertypeid > 0)
+                    {
+                        SelectedHousewatertype = Systemhousewatertype.FirstOrDefault(x => x.Value == _systempropertyData.Watertypeid.ToString());
+                    }
+                    if (SystempropertyData.Countyid > 0)
+                    {
+                        SelectedCounty = Systemcounty.FirstOrDefault(x => x.Value == _systempropertyData.Countyid.ToString());
+                    }
+                    if (SystempropertyData.Subcountyid > 0)
+                    {
+                        SelectedSubcounty = Systemsubcounty.FirstOrDefault(x => x.Value == _systempropertyData.Subcountyid.ToString());
+                    }
+                    if (SystempropertyData.Subcountywardid > 0)
+                    {
+                        SelectedSubcountyward = Systemsubcountyward.FirstOrDefault(x => x.Value == _systempropertyData.Subcountywardid.ToString());
+                    }
+                    if (SystempropertyData.Rentdueday > 0)
+                    {
+                        SelectedHouserentdueday = Systemhouserentdueday.FirstOrDefault(x => x.Value == _systempropertyData.Rentdueday.ToString());
+                    }
+                    if (SystempropertyData.Rentdepositmonth > 0)
+                    {
+                        SelectedHousedepositmonths = Systemhousedepositmonths.FirstOrDefault(x => x.Value == _systempropertyData.Rentdepositmonth.ToString());
+                    }
+                    if (SystempropertyData.Vacantnoticeperiod > 0)
+                    {
+                        SelectedHousevacantnoticeperiod = Systemhousevacantnoticeperiod.FirstOrDefault(x => x.Value == _systempropertyData.Vacantnoticeperiod.ToString());
+                    }
+                    if (SystempropertyData.Rentdepositreturndays > 0)
+                    {
+                        SelectedHouserentdepositreturndays = Systemhouserentdepositreturndays.FirstOrDefault(x => x.Value == _systempropertyData.Rentdepositreturndays.ToString());
+                    }
+                    if (!string.IsNullOrWhiteSpace(SystempropertyData.Rentingterms))
+                    {
+                        SelectedHouserentingterms = Systemhouserentingterms.FirstOrDefault(x => x.Value == _systempropertyData.Rentingterms.ToString());
+                    }
+                }
+            }
+            var modalPage = new AddSystemPropertyHouseModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            IsProcessing = false;
+        }
+
+
         private async Task LoadDropdownData()
         {
             try
