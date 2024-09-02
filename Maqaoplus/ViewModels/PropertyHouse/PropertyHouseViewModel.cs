@@ -1161,7 +1161,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
             }
-            var modalPage = new SystemPropertyHouseAgreementModalPage(this);
+            var modalPage = new SystemAgentPropertyHouseAgreementModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
