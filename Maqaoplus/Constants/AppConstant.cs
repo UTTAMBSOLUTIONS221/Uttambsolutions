@@ -260,7 +260,7 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.groupusers,
                             Title = "Tenants",
-                            ContentTemplate = new DataTemplate(() => new PropertyHousesRoomTenantsPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new AgentPropertyHousesRoomTenantsPage(serviceProvider)),
                         },
                          new ShellContent
                         {
