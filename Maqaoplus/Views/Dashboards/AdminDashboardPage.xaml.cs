@@ -13,9 +13,9 @@ public partial class AdminDashboardPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        if (BindingContext is SummaryDashBoardViewModel viewModel && viewModel.LoadItemsCommand.CanExecute(null))
+        if (BindingContext is SummaryDashBoardViewModel viewModel && viewModel.LoadOwnerSummaryCommand.CanExecute(null))
         {
-            viewModel.LoadItemsCommand.Execute(null);
+            viewModel.LoadOwnerSummaryCommand.Execute(null);
         }
     }
 }
