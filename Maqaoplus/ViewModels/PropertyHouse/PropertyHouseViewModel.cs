@@ -995,7 +995,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     }
                 }
             }
-            var modalPage = new AddSystemPropertyHouseModalPage(this);
+            var modalPage = new AddSystemAgentPropertyHouseModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
