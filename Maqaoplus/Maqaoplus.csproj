@@ -136,6 +136,12 @@
 	  <MauiXaml Update="Views\BillsandPayments\AgentPropertyHousesPaymentsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\BillsandPayments\Modals\HousesRoomInvoiceDetailModalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\BillsandPayments\Modals\ValidateThisPaymentDetailModalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Dashboards\AgentDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -272,10 +278,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DBL\DBL.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Views\BillsandPayments\Modals\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadGenericExceptionInfoBarMaqaoplusHideInfoBar="True" /></VisualStudio></ProjectExtensions>
