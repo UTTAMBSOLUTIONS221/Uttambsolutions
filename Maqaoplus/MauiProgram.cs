@@ -13,7 +13,6 @@ using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.PropertyHouseTenantAgreement;
 using Maqaoplus.Views.PropertyHouseTenants;
-using Maqaoplus.Views.Reports;
 using Maqaoplus.Views.Startup;
 using Maqaoplus.Views.TenantBillsandPayments;
 
@@ -58,7 +57,6 @@ namespace Maqaoplus
             builder.Services.AddSingleton<PropertyHousesDetailPage>();
             builder.Services.AddSingleton<AgentPropertyHousesPage>();
             builder.Services.AddSingleton<PropertyHousesTenantDetailPage>();
-            builder.Services.AddSingleton<SystemPropertyOwnerReportsPage>();
             builder.Services.AddSingleton<PropertyHousesTenantBillsPage>();
             builder.Services.AddSingleton<PropertyHousesTenantPaymentsPage>();
             builder.Services.AddSingleton<PropertyHousesTenantAgreementsPage>();

@@ -3,7 +3,6 @@ using Maqaoplus.Views;
 using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.PropertyHouseTenantAgreement;
 using Maqaoplus.Views.PropertyHouseTenants;
-using Maqaoplus.Views.Reports;
 using Maqaoplus.Views.Startup;
 using Maqaoplus.Views.TenantBillsandPayments;
 namespace Maqaoplus
@@ -23,7 +22,6 @@ namespace Maqaoplus
             Routing.RegisterRoute(nameof(PropertyHousesDetailPage), typeof(PropertyHousesDetailPage));
             Routing.RegisterRoute(nameof(AgentPropertyHousesPage), typeof(AgentPropertyHousesPage));
             Routing.RegisterRoute(nameof(PropertyHousesTenantDetailPage), typeof(PropertyHousesTenantDetailPage));
-            Routing.RegisterRoute(nameof(SystemPropertyOwnerReportsPage), typeof(SystemPropertyOwnerReportsPage));
             Routing.RegisterRoute(nameof(PropertyHousesTenantBillsPage), typeof(PropertyHousesTenantBillsPage));
             Routing.RegisterRoute(nameof(PropertyHousesTenantPaymentsPage), typeof(PropertyHousesTenantPaymentsPage));
             Routing.RegisterRoute(nameof(PropertyHousesTenantAgreementsPage), typeof(PropertyHousesTenantAgreementsPage));
