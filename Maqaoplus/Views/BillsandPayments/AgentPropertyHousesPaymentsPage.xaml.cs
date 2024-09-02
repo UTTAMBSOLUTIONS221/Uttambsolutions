@@ -1,3 +1,5 @@
+using Maqaoplus.ViewModels.BillsandPayments;
+
 namespace Maqaoplus.Views.BillsandPayments;
 
 public partial class AgentPropertyHousesPaymentsPage : ContentPage
