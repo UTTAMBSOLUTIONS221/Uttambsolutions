@@ -41,12 +41,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadAgentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand ViewPropertyAgreementCommand { get; }
+        public ICommand ViewAgentPropertyAgreementCommand { get; }
         public ICommand ViewPropertyHouseImageCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand SavePropertyHouseCommand { get; }
-
         public ICommand OnCancelButtonClickedCommand { get; }
         public ICommand OnOkButtonClickedCommand { get; }
         public ICommand SaveAgentPropertyHouseCommand { get; }
@@ -417,6 +417,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseowner));
+            ViewAgentPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewAgentPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseposter));
             ViewPropertyHouseImageCommand = new Command<Systemproperty>(async (property) => await ViewPropertyHouseImagesDetails(property.Propertyhouseid));
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
@@ -1143,6 +1144,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
             var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabypropertyidandownerid/" + propertyId + "/" + Ownerid, HttpMethod.Get, null);
+            if (response != null)
+            {
+                OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
+            }
+            var modalPage = new SystemPropertyHouseAgreementModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            IsProcessing = false;
+        }
+
+        private async Task ViewAgentPropertyAgreementDetails(long propertyId, long Agentd)
+        {
+            IsProcessing = true;
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabypropertyidandownerid/" + propertyId + "/" + Agentd, HttpMethod.Get, null);
             if (response != null)
             {
                 OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
