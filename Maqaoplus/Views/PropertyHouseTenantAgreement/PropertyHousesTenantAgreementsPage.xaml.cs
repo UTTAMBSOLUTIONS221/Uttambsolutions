@@ -131,45 +131,58 @@ public partial class PropertyHousesTenantAgreementsPage : ContentPage
         var downloadUrl = await uploadTask;
         return downloadUrl;
     }
-
     private async Task<bool> IsDrawBoardEmptyAsync()
     {
-        using (var stream = await DrawBoard.GetImageStream(300, 100))
+        try
         {
-            // Load the image into SkiaSharp
-            using (var skiaStream = new SKManagedStream(stream))
+            using (var stream = await DrawBoard.GetImageStream(300, 100))
             {
-                var bitmap = SKBitmap.Decode(skiaStream);
-
-                // Check if the bitmap is null or has no content
-                if (bitmap == null || bitmap.Width == 0 || bitmap.Height == 0)
+                if (stream.Length == 0)
                 {
-                    return true;
+                    return true; // Stream is empty
                 }
 
-                // Analyze the image for non-transparent pixels
-                bool hasNonTransparentPixels = false;
+                // Reset the stream position to the beginning
+                stream.Seek(0, SeekOrigin.Begin);
 
-                for (int y = 0; y < bitmap.Height; y++)
+                using (var skiaStream = new SKManagedStream(stream))
                 {
-                    for (int x = 0; x < bitmap.Width; x++)
+                    var bitmap = SKBitmap.Decode(skiaStream);
+
+                    if (bitmap == null || bitmap.Width == 0 || bitmap.Height == 0)
                     {
-                        var color = bitmap.GetPixel(x, y);
-                        if (color.Alpha > 0)
+                        return true; // Bitmap is null or has no dimensions
+                    }
+
+                    bool hasNonTransparentPixels = false;
+
+                    for (int y = 0; y < bitmap.Height; y++)
+                    {
+                        for (int x = 0; x < bitmap.Width; x++)
                         {
-                            hasNonTransparentPixels = true;
+                            var color = bitmap.GetPixel(x, y);
+                            if (color.Alpha > 0)
+                            {
+                                hasNonTransparentPixels = true;
+                                break;
+                            }
+                        }
+
+                        if (hasNonTransparentPixels)
+                        {
                             break;
                         }
                     }
 
-                    if (hasNonTransparentPixels)
-                    {
-                        break;
-                    }
+                    return !hasNonTransparentPixels; // Return true if no non-transparent pixels are found
                 }
-
-                return !hasNonTransparentPixels;
             }
+        }
+        catch (Exception ex)
+        {
+            // Log the exception message
+            Console.WriteLine($"Error processing image: {ex.Message}");
+            return true; // Assume empty if an error occurs
         }
     }
 }

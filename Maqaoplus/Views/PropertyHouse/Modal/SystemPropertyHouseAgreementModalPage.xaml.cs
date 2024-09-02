@@ -120,16 +120,18 @@ public partial class SystemPropertyHouseAgreementModalPage : ContentPage
     }
     private async Task<bool> IsDrawBoardEmptyAsync()
     {
-        using (var stream = await DrawBoard.GetImageStream(300, 100))
+        try
         {
-            if (stream.Length == 0)
+            using (var stream = await DrawBoard.GetImageStream(300, 100))
             {
-                return true; // Stream is empty
-            }
+                if (stream.Length == 0)
+                {
+                    return true; // Stream is empty
+                }
 
-            try
-            {
-                // Load the image into SkiaSharp
+                // Reset the stream position to the beginning
+                stream.Seek(0, SeekOrigin.Begin);
+
                 using (var skiaStream = new SKManagedStream(stream))
                 {
                     var bitmap = SKBitmap.Decode(skiaStream);
@@ -139,7 +141,6 @@ public partial class SystemPropertyHouseAgreementModalPage : ContentPage
                         return true; // Bitmap is null or has no dimensions
                     }
 
-                    // Analyze the image for non-transparent pixels
                     bool hasNonTransparentPixels = false;
 
                     for (int y = 0; y < bitmap.Height; y++)
@@ -160,16 +161,15 @@ public partial class SystemPropertyHouseAgreementModalPage : ContentPage
                         }
                     }
 
-                    return !hasNonTransparentPixels;
+                    return !hasNonTransparentPixels; // Return true if no non-transparent pixels are found
                 }
             }
-            catch (Exception ex)
-            {
-                // Handle exceptions related to image processing
-                // Log or display the exception message
-                Console.WriteLine($"Error processing image: {ex.Message}");
-                return true; // Assume empty if an error occurs
-            }
+        }
+        catch (Exception ex)
+        {
+            // Log the exception message
+            Console.WriteLine($"Error processing image: {ex.Message}");
+            return true; // Assume empty if an error occurs
         }
     }
 }
