@@ -157,18 +157,6 @@
 	  <MauiXaml Update="Views\Dashboards\PropertyCaretakerDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\OwnerBillsandPayments\Modals\HousesRoomOwnerInvoiceDetailModalPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\OwnerBillsandPayments\Modals\ValidateThisPaymentDetailModalPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\OwnerBillsandPayments\PropertyHousesOwnerBillsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\OwnerBillsandPayments\PropertyHousesOwnerPaymentsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyHouseTenantAgreement\PropertyHousesTenantAgreementsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
