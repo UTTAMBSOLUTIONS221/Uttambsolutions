@@ -13,9 +13,9 @@ public partial class AgentDashboardPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        if (BindingContext is SummaryDashBoardViewModel viewModel && viewModel.LoadItemsCommand.CanExecute(null))
+        if (BindingContext is SummaryDashBoardViewModel viewModel && viewModel.LoadAgentSummaryCommand.CanExecute(null))
         {
-            viewModel.LoadItemsCommand.Execute(null);
+            viewModel.LoadAgentSummaryCommand.Execute(null);
         }
     }
 }

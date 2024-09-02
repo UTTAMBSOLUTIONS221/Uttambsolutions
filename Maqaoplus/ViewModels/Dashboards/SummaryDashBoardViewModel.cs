@@ -14,7 +14,8 @@ namespace Maqaoplus.ViewModels.Dashboards
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ICommand LoadItemsCommand { get; }
+        public ICommand LoadOwnerSummaryCommand { get; }
+        public ICommand LoadAgentSummaryCommand { get; }
 
         public PropertyHouseSummary DashBoardSummaryData
         {
@@ -72,10 +73,11 @@ namespace Maqaoplus.ViewModels.Dashboards
             };
 
             _serviceProvider = serviceProvider;
-            LoadItemsCommand = new Command(async () => await LoadItems());
+            LoadOwnerSummaryCommand = new Command(async () => await LoadOwnerSummary());
+            LoadAgentSummaryCommand = new Command(async () => await LoadAgentSummary());
         }
 
-        private async Task LoadItems()
+        private async Task LoadOwnerSummary()
         {
             IsProcessing = true;
             IsDataLoaded = false;
@@ -99,6 +101,29 @@ namespace Maqaoplus.ViewModels.Dashboards
             }
         }
 
+        private async Task LoadAgentSummary()
+        {
+            IsProcessing = true;
+            IsDataLoaded = false;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedashboardsummarydatabyagent/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null)
+                {
+                    DashBoardSummaryData = JsonConvert.DeserializeObject<PropertyHouseSummary>(response.Data.ToString());
+                }
+                IsDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
