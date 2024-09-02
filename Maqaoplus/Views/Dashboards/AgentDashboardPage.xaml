@@ -138,5 +138,7 @@
         <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
             <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
         </StackLayout>
+
+        <Button Text="💬" BackgroundColor="#25D366" TextColor="White" FontSize="24" CornerRadius="30" WidthRequest="60" HeightRequest="60" VerticalOptions="End" HorizontalOptions="End" Margin="10" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize" Clicked="OnWhatsAppButtonClicked"/>
     </Grid>
 </ContentPage>
