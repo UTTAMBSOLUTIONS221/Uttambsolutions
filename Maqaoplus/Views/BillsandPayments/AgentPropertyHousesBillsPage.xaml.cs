@@ -19,7 +19,7 @@ public partial class AgentPropertyHousesBillsPage : ContentPage
         base.OnAppearing();
         if (_viewModel.LoadAgentBillItemsCommand.CanExecute(null))
         {
-            _viewModel.LoadAgentBIllItemsCommand.Execute(null);
+            _viewModel.LoadAgentBillItemsCommand.Execute(null);
         }
     }
 }
