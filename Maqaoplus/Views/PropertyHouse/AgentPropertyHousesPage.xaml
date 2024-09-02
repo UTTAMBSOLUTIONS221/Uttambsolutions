@@ -75,7 +75,7 @@
                                         <ColumnDefinition Width="100" />
                                         <ColumnDefinition Width="75" />
                                     </Grid.ColumnDefinitions>
-                                    <Button Text="Edit" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddPropertyHouseCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" Grid.Column="0" />
+                                    <Button Text="Edit" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddAgentPropertyHouseCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" Grid.Column="0" />
                                     <Button Text="Manage" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" Grid.Column="1" />
                                     <Button Text="Agreement" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewPropertyAgreementCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" Grid.Column="2" />
                                     <Button Text="Images" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewPropertyHouseImageCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" Grid.Column="3" />
