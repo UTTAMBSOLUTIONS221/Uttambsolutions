@@ -198,7 +198,7 @@ namespace Maqaoplus.ViewModels.BillsandPayments
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicedatabyownerid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicedatabyagentid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
                     Items.Clear();
@@ -360,7 +360,7 @@ namespace Maqaoplus.ViewModels.BillsandPayments
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicepaymentdatabyownerid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicepaymentdatabyagentid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
                     PaymentItems.Clear();
