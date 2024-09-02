@@ -176,7 +176,7 @@
                         <!-- First Row - Water Metered -->
                         <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center">
                             <CheckBox IsChecked="{Binding SystempropertyData.Hashousewatermeter}" Color="#0a506c" VerticalOptions="Center" />
-                            <Label Text="Water Metered?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start"  TextColor="Black" />
+                            <Label Text="Has Submeters?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start"  TextColor="Black" />
                         </StackLayout>
                     </Grid>
 

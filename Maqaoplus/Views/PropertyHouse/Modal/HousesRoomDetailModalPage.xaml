@@ -177,7 +177,7 @@
             <!-- Step 2 -->
             <StackLayout IsVisible="{Binding IsStep2Visible}" Padding="16" Spacing="8">
                 <!-- Header -->
-                <Label Text="Step 2: Room Meter Reading" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="Step 2: Sub Meter Reading" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
 
                 <!-- Display a Grid for Adding New Meter Readings -->
                 <Grid>
