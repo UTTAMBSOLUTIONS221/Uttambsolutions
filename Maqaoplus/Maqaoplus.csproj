@@ -130,6 +130,12 @@
 	  <MauiXaml Update="Resources\Resources\Styles\Styles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\BillsandPayments\AgentPropertyHousesBillsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\BillsandPayments\AgentPropertyHousesPaymentsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Dashboards\AgentDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -266,6 +272,10 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DBL\DBL.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Views\BillsandPayments\Modals\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadGenericExceptionInfoBarMaqaoplusHideInfoBar="True" /></VisualStudio></ProjectExtensions>
