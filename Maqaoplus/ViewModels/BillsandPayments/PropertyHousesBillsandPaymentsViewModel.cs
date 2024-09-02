@@ -19,12 +19,13 @@ namespace Maqaoplus.ViewModels.BillsandPayments
         private MonthlyRentInvoiceModel _tenantInvoiceDetailData;
         private CustomerPaymentValidation _customerPaymentValidationData;
 
-        public ICommand LoadItemsCommand { get; }
+        public ICommand LoadOwnerBillItemsCommand { get; }
+        public ICommand LoadAgentBillItemsCommand { get; }
+        public ICommand LoadOwnerPaymentItemsCommand { get; }
+        public ICommand LoadAgentPaymentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand OnOkClickedCommand { get; }
-
-        public ICommand LoadPaymentItemsCommand { get; }
         public ICommand ViewPaymentDetailsCommand { get; }
         public ICommand ValidateThisPaymentCommand { get; }
         public ICommand UpdatePaymentValidationCommand { get; }
@@ -60,8 +61,6 @@ namespace Maqaoplus.ViewModels.BillsandPayments
                 OnPropertyChanged();
             }
         }
-
-
         public CustomerPaymentValidation CustomerPaymentValidationData
         {
             get => _customerPaymentValidationData;
@@ -77,12 +76,14 @@ namespace Maqaoplus.ViewModels.BillsandPayments
         {
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<MonthlyRentInvoiceModel>();
-            LoadItemsCommand = new Command(async () => await LoadItems());
+            LoadOwnerBillItemsCommand = new Command(async () => await LoadOwnerBillItems());
+            LoadAgentBillItemsCommand = new Command(async () => await LoadAgentBillItems());
+            LoadOwnerPaymentItemsCommand = new Command(async () => await LoadOwnerPaymentItems());
+            LoadAgentPaymentItemsCommand = new Command(async () => await LoadAgentPaymentItems());
             ViewDetailsCommand = new Command<MonthlyRentInvoiceModel>(async (propertyhouseinvoice) => await ViewDetails(propertyhouseinvoice.Invoiceid));
             OnCancelClickedCommand = new Command(OnCancelClicked);
             OnOkClickedCommand = new Command(async () => await SaveHouseInvoicePaymentDataAsync());
             PaymentItems = new ObservableCollection<CustomerPaymentData>();
-            LoadPaymentItemsCommand = new Command(async () => await LoadPaymentItems());
             ValidateThisPaymentCommand = new Command<CustomerPaymentData>(async (payment) => await ValidateThisPaymentDetail(payment.CustomerPaymentId));
             UpdatePaymentValidationCommand = new Command(async () => await UpdatePaymentValidationData());
         }
@@ -162,7 +163,7 @@ namespace Maqaoplus.ViewModels.BillsandPayments
                 OnPropertyChanged();
             }
         }
-        private async Task LoadItems()
+        private async Task LoadOwnerBillItems()
         {
             IsProcessing = true;
             IsDataLoaded = false;
@@ -190,6 +191,35 @@ namespace Maqaoplus.ViewModels.BillsandPayments
                 IsProcessing = false;
             }
         }
+        private async Task LoadAgentBillItems()
+        {
+            IsProcessing = true;
+            IsDataLoaded = false;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicedatabyownerid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null && response.Data is List<dynamic> items)
+                {
+                    Items.Clear();
+                    foreach (var item in items)
+                    {
+                        var product = item.ToObject<MonthlyRentInvoiceModel>();
+                        Items.Add(product);
+                    }
+                }
+                IsDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
         private async Task ViewDetails(long Invoiceid)
         {
             IsProcessing = true;
@@ -293,7 +323,7 @@ namespace Maqaoplus.ViewModels.BillsandPayments
             return isValid;
         }
 
-        private async Task LoadPaymentItems()
+        private async Task LoadOwnerPaymentItems()
         {
             IsProcessing = true;
             IsDataLoaded = false;
@@ -322,6 +352,35 @@ namespace Maqaoplus.ViewModels.BillsandPayments
             }
         }
 
+
+        private async Task LoadAgentPaymentItems()
+        {
+            IsProcessing = true;
+            IsDataLoaded = false;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicepaymentdatabyownerid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null && response.Data is List<dynamic> items)
+                {
+                    PaymentItems.Clear();
+                    foreach (var item in items)
+                    {
+                        var payments = item.ToObject<CustomerPaymentData>();
+                        PaymentItems.Add(payments);
+                    }
+                }
+                IsDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
         private async Task ValidateThisPaymentDetail(long CustomerPaymentId)
         {
             IsProcessing = true;

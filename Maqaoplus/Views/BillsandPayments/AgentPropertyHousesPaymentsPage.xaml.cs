@@ -17,9 +17,9 @@ public partial class AgentPropertyHousesPaymentsPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (_viewModel.LoadPaymentItemsCommand.CanExecute(null))
+        if (_viewModel.LoadAgentPaymentItemsCommand.CanExecute(null))
         {
-            _viewModel.LoadPaymentItemsCommand.Execute(null);
+            _viewModel.LoadAgentPaymentItemsCommand.Execute(null);
         }
     }
 }

@@ -17,9 +17,9 @@ public partial class OwnerPropertyHousesBillsPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (_viewModel.LoadItemsCommand.CanExecute(null))
+        if (_viewModel.LoadOwnerBillItemsCommand.CanExecute(null))
         {
-            _viewModel.LoadItemsCommand.Execute(null);
+            _viewModel.LoadOwnerBillItemsCommand.Execute(null);
         }
     }
 }
