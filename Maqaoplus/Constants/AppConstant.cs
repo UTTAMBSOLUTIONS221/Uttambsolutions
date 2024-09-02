@@ -134,13 +134,13 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.invoice,
                             Title = "Bills",
-                            ContentTemplate = new DataTemplate(() => new PropertyHousesOwnerBillsPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new OwnerPropertyHousesBillsPage(serviceProvider)),
                         },
                             new ShellContent
                         {
                             Icon = Icons.dollar,
                             Title = "Payments",
-                            ContentTemplate = new DataTemplate(() => new PropertyHousesOwnerPaymentsPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new OwnerPropertyHousesPaymentsPage(serviceProvider)),
                         },
                         //new ShellContent
                         //{
@@ -203,13 +203,13 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.invoice,
                             Title = "Bills",
-                            ContentTemplate = new DataTemplate(() => new PropertyHousesOwnerBillsPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new OwnerPropertyHousesBillsPage(serviceProvider)),
                         },
                             new ShellContent
                         {
                             Icon = Icons.dollar,
                             Title = "Payments",
-                            ContentTemplate = new DataTemplate(() => new PropertyHousesOwnerPaymentsPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new OwnerPropertyHousesPaymentsPage(serviceProvider)),
                         },
                     }
                 };
