@@ -1153,10 +1153,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = false;
         }
 
-        private async Task ViewAgentPropertyAgreementDetails(long propertyId, long Agentd)
+        private async Task ViewAgentPropertyAgreementDetails(long propertyId, long Agentid)
         {
             IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabypropertyidandownerid/" + propertyId + "/" + Agentd, HttpMethod.Get, null);
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabypropertyidandagentid/" + propertyId + "/" + Agentid, HttpMethod.Get, null);
             if (response != null)
             {
                 OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
