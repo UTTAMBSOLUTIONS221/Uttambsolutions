@@ -1,9 +1,9 @@
-using Maqaoplus.ViewModels.PropertyHouseAgent;
+using Maqaoplus.ViewModels.PropertyHouse;
 
 namespace Maqaoplus.Views;
 public partial class StaffAgentDetailModalPage : ContentPage
 {
-    public StaffAgentDetailModalPage(PropertyHouseAgentDetailViewModel viewModel)
+    public StaffAgentDetailModalPage(PropertyHouseDetailViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
