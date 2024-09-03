@@ -1680,37 +1680,46 @@ namespace DBL
         {
             StringBuilder body = new StringBuilder();
 
-            body.AppendLine("<table style=\"width: 100%; border-collapse: collapse;\">");
-            body.AppendLine("<thead style=\"background-color: #0a506c;color: #fff;\">");
+            // Start of the email content
+            body.AppendLine("<div style=\"font-family: Arial, sans-serif; color: #333; line-height: 1.6;\">");
+
+            // Header section with logo and company details
+            body.AppendLine("<table style=\"width: 100%; max-width: 600px; margin: 0 auto; border-collapse: collapse;\">");
+            body.AppendLine("<thead style=\"background-color: #0a506c; color: #fff;\">");
             body.AppendLine("<tr>");
-            body.AppendLine($"<th rowspan=\"2\" style=\"border: none; padding: 8px; text-align: left; color: #fff;\">");
-            body.AppendLine($"<img src=\"{logoUrl}\" alt=\"{companyName} Logo\" style=\"max-width: 100px; max-height: 100px;\" />");
+            body.AppendLine($"<th rowspan=\"2\" style=\"padding: 15px; text-align: left;\">");
+            body.AppendLine($"<img src=\"{logoUrl}\" alt=\"{companyName} Logo\" style=\"max-width: 120px; max-height: 120px;\" />");
             body.AppendLine("</th>");
-            body.AppendLine($"<th colspan=\"3\" style=\"border: none; padding: 8px; text-align: right; color: #fff;\">{companyName}</th>");
+            body.AppendLine($"<th colspan=\"2\" style=\"padding: 15px; text-align: right; font-size: 18px;\">{companyName}</th>");
             body.AppendLine("</tr>");
             body.AppendLine($"<tr>");
-            body.AppendLine($"<th colspan=\"3\" style=\"border: none; padding: 8px; text-align: right; color: #fff; text-decoration: none;\">Email: {companyEmail}</th>");
+            body.AppendLine($"<th colspan=\"2\" style=\"padding: 10px; text-align: right; font-size: 14px;\">Email: <a href=\"mailto:{companyEmail}\" style=\"color: #fff; text-decoration: none;\">{companyEmail}</a></th>");
             body.AppendLine("</tr>");
             body.AppendLine("</thead>");
 
-            // Append the table content that was passed as a parameter
             body.AppendLine(tableContent);
 
-            body.AppendLine("<tfoot style=\"background-color: #0a506c;\">");
+            // Footer section with company information and branding
+            body.AppendLine("<tfoot style=\"background-color: #0a506c; color: #fff;\">");
             body.AppendLine("<tr>");
-            body.AppendLine($"<td colspan=\"4\" style=\"border: none; padding: 8px; text-align: center; color: #fff;\">{companyName} &copy; 2022 - {currentYear}</td>");
+            body.AppendLine($"<td colspan=\"3\" style=\"padding: 15px; text-align: center; font-size: 14px;\">");
+            body.AppendLine($"{companyName} &copy; 2022 - {currentYear}");
+            body.AppendLine("</td>");
             body.AppendLine("</tr>");
             body.AppendLine("<tr>");
-            body.AppendLine("<td colspan=\"4\" style=\"border: none; padding: 8px; text-align: center; color: #fff;\">Vision: Utilizing Technology To Automate Modern Business</td>");
+            body.AppendLine("<td colspan=\"3\" style=\"padding: 10px; text-align: center; font-size: 12px;\">Vision: Utilizing Technology To Automate Modern Business</td>");
             body.AppendLine("</tr>");
             body.AppendLine("<tr>");
-            body.AppendLine("<td colspan=\"4\" style=\"border: none; padding: 8px; text-align: center; color: #fff;\">Mission: For Quality and Value</td>");
+            body.AppendLine("<td colspan=\"3\" style=\"padding: 10px; text-align: center; font-size: 12px;\">Mission: For Quality and Value</td>");
             body.AppendLine("</tr>");
             body.AppendLine("</tfoot>");
             body.AppendLine("</table>");
+
+            // End of the email content
+            body.AppendLine("</div>");
+
             return body.ToString();
         }
-
         #endregion
     }
 }
