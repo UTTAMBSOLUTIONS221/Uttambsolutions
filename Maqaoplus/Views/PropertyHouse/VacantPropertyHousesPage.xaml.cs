@@ -1,9 +1,25 @@
+using Maqaoplus.ViewModels.PropertyHouse;
+
 namespace Maqaoplus.Views.PropertyHouse;
 
 public partial class VacantPropertyHousesPage : ContentPage
 {
-	public VacantPropertyHousesPage()
-	{
-		InitializeComponent();
-	}
+    private PropertyHouseViewModel _viewModel;
+
+    public VacantPropertyHousesPage(Services.ServiceProvider serviceProvider)
+    {
+        InitializeComponent();
+        _viewModel = new PropertyHouseViewModel(serviceProvider);
+        this.BindingContext = _viewModel;
+
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (_viewModel.LoadItemsCommand.CanExecute(null))
+        {
+            _viewModel.LoadItemsCommand.Execute(null);
+        }
+    }
 }
