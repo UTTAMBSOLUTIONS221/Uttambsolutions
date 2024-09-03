@@ -52,8 +52,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand PreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand SavePropertyHouseCommand { get; }
-        public ICommand OnCancelButtonClickedCommand { get; }
-        public ICommand OnOkButtonClickedCommand { get; }
+        public ICommand OnCancelCareTakerButtonClickedCommand { get; }
+        public ICommand OnOkCareTakerButtonClickedCommand { get; }
         public ICommand SaveAgentPropertyHouseCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand SearchStaffsCommand { get; }
@@ -435,8 +435,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
 
-            OnCancelButtonClickedCommand = new Command(OnCancelButtonClicked);
-            OnOkButtonClickedCommand = new Command(OnOkButtonClicked);
+            OnCancelCareTakerButtonClickedCommand = new Command(OnCancelCareTakerButtonClicked);
+            OnOkCareTakerButtonClickedCommand = new Command(OnOkCareTakerButtonClicked);
             SearchCommand = new Command(async () => await Search());
             SearchStaffsCommand = new Command(async () => await SearchStaff());
             SaveAgentPropertyHouseCommand = new Command(async () => await SaveAgentPropertyHouseAsync());
@@ -1591,7 +1591,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             };
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
-        private void OnCancelCareTakerButtonClickedButtonClicked()
+        private void OnCancelCareTakerButtonClicked()
         {
             TenantStaffData = new Systemtenantdetails
             {
