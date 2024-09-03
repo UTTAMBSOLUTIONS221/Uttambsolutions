@@ -82,7 +82,7 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Ownerid", Ownerid);
                 parameters.Add("@Systempropertyhousecaretakerdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_Getsystempropertyhousecaretakerdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                var queryResult = connection.Query("Usp_Getsystempropertyhousecaretakerdatabyownerid", parameters, commandType: CommandType.StoredProcedure);
                 string systempropertydataJson = parameters.Get<string>("@Systempropertyhousecaretakerdata");
                 if (systempropertydataJson != null)
                 {
@@ -94,6 +94,49 @@ namespace DBL.Repositories
                 }
             }
         }
+
+        public SystemStaffData Getsystempropertyhousecaretakerdatabyid(long CareTakerid)
+        {
+            SystemStaffData CareTakerResponseModel = new SystemStaffData();
+            SystemStaff CareTakerResponse = new SystemStaff();
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@CareTakerid", CareTakerid);
+                parameters.Add("@Systempropertyhousecaretakerdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystempropertyhousecaretakerdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Systempropertyhousecaretakerdata");
+                if (systempropertydataJson != null)
+                {
+                    JObject responseJson = JObject.Parse(systempropertydataJson);
+                    JObject tenantreponseJson = JObject.Parse(responseJson["Data"].ToString());
+                    CareTakerResponse.Userid = Convert.ToInt32(tenantreponseJson["Userid"]);
+                    CareTakerResponse.Propertyhouseid = Convert.ToInt32(tenantreponseJson["Propertyhouseid"]);
+                    CareTakerResponse.Propertyhousename = tenantreponseJson["Propertyhousename"].ToString();
+                    CareTakerResponse.Fullname = tenantreponseJson["Fullname"].ToString();
+                    CareTakerResponse.Phonenumber = tenantreponseJson["Phonenumber"].ToString();
+                    CareTakerResponse.Emailaddress = tenantreponseJson["Emailaddress"].ToString();
+                    CareTakerResponse.Loginstatus = Convert.ToInt32(tenantreponseJson["Loginstatus"]);
+                    CareTakerResponse.Parentid = Convert.ToInt32(tenantreponseJson["Parentid"]);
+                    CareTakerResponse.Userprofileimageurl = tenantreponseJson["Userprofileimageurl"].ToString();
+                    CareTakerResponse.Usercurriculumvitae = tenantreponseJson["Usercurriculumvitae"].ToString();
+                    CareTakerResponse.Idnumber = Convert.ToInt32(tenantreponseJson["Idnumber"]);
+                    CareTakerResponse.Updateprofile = Convert.ToBoolean(tenantreponseJson["Updateprofile"]);
+                    CareTakerResponse.Accountnumber = Convert.ToInt32(tenantreponseJson["Accountnumber"]);
+                    CareTakerResponse.Datemodified = Convert.ToDateTime(tenantreponseJson["Datemodified"]);
+                    CareTakerResponse.Datecreated = Convert.ToDateTime(tenantreponseJson["Datecreated"]);
+                    CareTakerResponseModel.Data = CareTakerResponse;
+                    return CareTakerResponseModel;
+                }
+                else
+                {
+                    return CareTakerResponseModel;
+                }
+            }
+        }
+
+
         public PropertyHouseSummaryDashboard Getsystempropertyhousedashboardsummarydatabyowner(long Ownerid)
         {
             PropertyHouseSummaryDashboard propertyHouseSummaryDashboard = new PropertyHouseSummaryDashboard();

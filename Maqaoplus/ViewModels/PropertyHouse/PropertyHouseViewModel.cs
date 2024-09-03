@@ -1115,7 +1115,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadOwnerHousesByCode();
             if (caretakerId > 0)
             {
-
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousecaretakerdatabyid/" + caretakerId, HttpMethod.Get, null);
+                if (response != null)
+                {
+                    Systemstaffdata = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+                    if (Systemstaffdata.Propertyhouseid > 0)
+                    {
+                        Selectedownerhouse = Systemownerhouse.FirstOrDefault(x => x.Value == _systemstaffdata.Propertyhouseid.ToString());
+                    }
+                }
             }
             var modalPage = new AddPropertyHouseCareTakerModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
