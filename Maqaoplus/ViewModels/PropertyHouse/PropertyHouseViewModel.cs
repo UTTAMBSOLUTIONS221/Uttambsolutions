@@ -469,7 +469,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
 
             OnCancelCareTakerButtonClickedCommand = new Command(OnCancelCareTakerButtonClicked);
-            OnOkCareTakerButtonClickedCommand = new Command(async () => await OnOkCareTakerButtonClicked);
+            OnOkCareTakerButtonClickedCommand = new Command(async () => await OnOkCareTakerButtonClicked());
             SearchCommand = new Command(async () => await Search());
             SearchStaffsCommand = new Command(async () => await SearchStaff());
             SaveAgentPropertyHouseCommand = new Command(async () => await SaveAgentPropertyHouseAsync());
@@ -1681,13 +1681,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
         private void OnCancelCareTakerButtonClicked()
         {
-            Systemstaffdata = new SystemStaff
-            {
-                Fullname = "No Tenant selected",
-                Phonenumber = "No Tenant selected",
-                Idnumber = 0,
-                Userid = 0
-            };
+            Systemstaffdata = new SystemStaff();
             SearchId = string.Empty;
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
