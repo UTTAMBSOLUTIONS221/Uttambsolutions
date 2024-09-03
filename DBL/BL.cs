@@ -936,13 +936,11 @@ namespace DBL
             });
         }
 
-        public Task<SystemStaffData> Getsystempropertyhousecaretakerdatabyid(long Caretakerid)
+        public Task<SystemPropertyHouseCareTakerData> Getsystempropertyhousecaretakerdatabyid(long Caretakerid)
         {
-            SystemStaffData Resp = new SystemStaffData();
             return Task.Run(() =>
             {
-                Resp.Data = db.PropertyRepository.Getsystempropertyhousecaretakerdatabyid(Caretakerid);
-                return Resp;
+                return db.PropertyRepository.Getsystempropertyhousecaretakerdatabyid(Caretakerid); ;
             });
         }
         public Task<PropertyHouseSummaryDashboard> Getsystempropertyhousedashboardsummarydatabyowner(long OwnerId)

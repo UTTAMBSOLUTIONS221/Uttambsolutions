@@ -74,23 +74,23 @@ namespace DBL.Repositories
                 }
             }
         }
-        public SystemStaffData Getsystempropertyhousecaretakerdatabyid(long Caretakerid)
+        public SystemPropertyHouseCareTakerData Getsystempropertyhousecaretakerdatabyid(long Caretakerid)
         {
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Caretakerid", Caretakerid);
-                parameters.Add("@Systempropertydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                parameters.Add("@Systempropertyhousecaretakerdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystempropertyhousecaretakerdatabyid", parameters, commandType: CommandType.StoredProcedure);
-                string systempropertydataJson = parameters.Get<string>("@Systempropertydata");
+                string systempropertydataJson = parameters.Get<string>("@Systempropertyhousecaretakerdata");
                 if (systempropertydataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<SystemStaffData>(systempropertydataJson);
+                    return JsonConvert.DeserializeObject<SystemPropertyHouseCareTakerData>(systempropertydataJson);
                 }
                 else
                 {
-                    return new SystemStaffData();
+                    return new SystemPropertyHouseCareTakerData();
                 }
             }
         }
