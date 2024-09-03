@@ -23,6 +23,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public string AgreementText { get; set; }
         public ObservableCollection<Systemproperty> Items { get; }
+        public ObservableCollection<PropertyHouseDetails> VacantItems { get; }
         private Systemproperty _systempropertyData;
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
@@ -1105,14 +1106,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedatabyowner/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getallsystempropertyvacanthouses/" + 0 + "/" + 1000, HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
                     Items.Clear();
                     foreach (var item in items)
                     {
-                        var product = item.ToObject<Systemproperty>();
-                        Items.Add(product);
+                        var product = item.ToObject<PropertyHouseDetails>();
+                        VacantItems.Add(product);
                     }
                 }
                 IsDataLoaded = true;

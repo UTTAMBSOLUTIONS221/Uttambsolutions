@@ -44,6 +44,13 @@ namespace API.Controllers
         {
             return await bl.Getsystempropertyhousedatabyagent(AgentId);
         }
+
+        [AllowAnonymous]
+        [HttpGet("Getallsystempropertyvacanthouses/{offset}/{count}")]
+        public async Task<PropertyHouseDetailData> Getallsystempropertyvacanthouses(int offset, int count)
+        {
+            return await bl.Getallsystempropertyvacanthouses(offset, count);
+        }
         [AllowAnonymous]
         [HttpGet("Getsystempropertyhousedetaildatabyid/{Propertyid}")]
         public async Task<Systempropertydata> Getsystempropertyhousedetaildatabyid(long Propertyid)
