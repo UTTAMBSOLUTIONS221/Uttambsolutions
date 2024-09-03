@@ -38,6 +38,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         public ICommand AddPropertyHouseCommand { get; }
         public ICommand AddAgentPropertyHouseCommand { get; }
+        public ICommand AddPropertyHouseCareTakerCommand { get; }
         public ICommand LoadItemsCommand { get; }
         public ICommand LoadVacantPropertyHousesCommand { get; }
         public ICommand RefreshCommand { get; }
