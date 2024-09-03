@@ -24,10 +24,7 @@
 
         <!-- Pull to Refresh functionality -->
         <RefreshView Grid.Row="1" IsRefreshing="{Binding IsProcessing}" Command="{Binding RefreshCommand}">
-            <CollectionView x:Name="PropertyHousesCollectionView" 
-                            ItemsSource="{Binding VacantItems}"
-                            RemainingItemsThreshold="5"
-                            RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
+            <CollectionView x:Name="PropertyHousesCollectionView" ItemsSource="{Binding VacantItems}" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="180">
