@@ -38,6 +38,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand AddPropertyHouseCommand { get; }
         public ICommand AddAgentPropertyHouseCommand { get; }
         public ICommand LoadItemsCommand { get; }
+        public ICommand LoadVacantPropertyHousesCommand { get; }
         public ICommand LoadAgentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand ViewPropertyAgreementCommand { get; }
@@ -414,6 +415,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
+            LoadVacantPropertyHousesCommand = new Command(async () => await LoadVacantPropertyHouses());
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseowner));
@@ -1094,6 +1096,37 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
+
+
+        private async Task LoadVacantPropertyHouses()
+        {
+            IsProcessing = true;
+            IsDataLoaded = false;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedatabyowner/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null && response.Data is List<dynamic> items)
+                {
+                    Items.Clear();
+                    foreach (var item in items)
+                    {
+                        var product = item.ToObject<Systemproperty>();
+                        Items.Add(product);
+                    }
+                }
+                IsDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
 
         private async Task LoadAgentItems()
         {

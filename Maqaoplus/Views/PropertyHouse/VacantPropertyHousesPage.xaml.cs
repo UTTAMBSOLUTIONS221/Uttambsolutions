@@ -17,9 +17,9 @@ public partial class VacantPropertyHousesPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (_viewModel.LoadItemsCommand.CanExecute(null))
+        if (_viewModel.LoadVacantPropertyHousesCommand.CanExecute(null))
         {
-            _viewModel.LoadItemsCommand.Execute(null);
+            _viewModel.LoadVacantPropertyHousesCommand.Execute(null);
         }
     }
 }
