@@ -1628,6 +1628,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response != null)
                 {
                     TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
+                    var responseone = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffprofiledatabyid/" + TenantStaffData.Userid, HttpMethod.Get, null);
+                    if (responseone != null)
+                    {
+                        Systemstaffdata = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+                        if (Systemstaffdata.Propertyhouseid > 0)
+                        {
+                            Selectedownerhouse = Systemownerhouse.FirstOrDefault(x => x.Value == _systemstaffdata.Propertyhouseid.ToString());
+                        }
+                    }
                     var modalPage = new StaffCareTakerDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                 }
@@ -1741,7 +1750,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             Systemstaffdata.Datemodified = DateTime.Now;
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhousedata", SystempropertyData);
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhousedata", Systemstaffdata);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
