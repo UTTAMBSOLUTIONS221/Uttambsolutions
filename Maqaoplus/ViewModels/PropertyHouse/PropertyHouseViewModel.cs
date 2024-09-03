@@ -453,7 +453,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             VacantItems = new ObservableCollection<PropertyHouseDetails>();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
-            AddPropertyHouseCareTakerCommand = new Command<SystemStaff>(async (param) => { var propertyId = param.Propertyhouseid != 0 ? param.Propertyhouseid : 0; var caretakerId = param.Userid != 0 ? param.Userid : 0; await AddPropertyHouseCareTakerAsync(propertyId, caretakerId); });
+            AddPropertyHouseCareTakerCommand = new Command<SystemStaff>(async (param) => { var caretakerId = param?.Userid ?? 0; await AddPropertyHouseCareTakerAsync(caretakerId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadVacantPropertyHousesCommand = new Command(async () => await LoadVacantPropertyHouses());
             RefreshCommand = new Command(async () => await RefreshItemsAsync());
@@ -1105,11 +1105,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = false;
         }
 
-        private async Task AddPropertyHouseCareTakerAsync(long propertyId, long caretakerId)
+        private async Task AddPropertyHouseCareTakerAsync(long caretakerId)
         {
             IsProcessing = true;
             LoadOwnerHousesByCode();
-            if (propertyId != 0 && caretakerId != 0)
+            if (caretakerId > 0)
             {
 
             }
@@ -1752,6 +1752,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
                 return;
             }
+            Systemstaffdata.Propertyhouseid = Convert.ToInt32(Selectedownerhouse.Value);
             Systemstaffdata.Designation = "Caretaker";
             Systemstaffdata.Parentid = App.UserDetails.Usermodel.Userid;
             Systemstaffdata.Modifiedby = App.UserDetails.Usermodel.Userid;
