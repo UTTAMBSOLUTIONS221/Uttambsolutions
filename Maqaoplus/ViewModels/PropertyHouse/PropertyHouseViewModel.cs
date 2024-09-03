@@ -40,6 +40,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand AddAgentPropertyHouseCommand { get; }
         public ICommand LoadItemsCommand { get; }
         public ICommand LoadVacantPropertyHousesCommand { get; }
+        public ICommand RefreshCommand { get; }
+        public ICommand LoadMoreCommand { get; }
         public ICommand LoadAgentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand ViewPropertyAgreementCommand { get; }
@@ -54,7 +56,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand SaveAgentPropertyHouseCommand { get; }
         public ICommand SearchCommand { get; }
 
-
+        private bool _isRefreshing;
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set
+            {
+                _isRefreshing = value;
+                OnPropertyChanged();
+            }
+        }
 
         private bool _isLoading;
         public bool IsLoading
@@ -79,6 +90,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 }
             }
         }
+        private int _pageNumber = 1;
+        private bool _isLoadingMore;
 
         private bool _isProcessing;
         public bool IsProcessing
@@ -418,6 +431,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadVacantPropertyHousesCommand = new Command(async () => await LoadVacantPropertyHouses());
+            RefreshCommand = new Command(async () => await RefreshItemsAsync());
+            LoadMoreCommand = new Command(async () => await LoadMoreItemsAsync());
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseowner));
@@ -440,6 +455,31 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep3Visible = false;
             _isStep4Visible = false;
             _isStep5Visible = false;
+        }
+
+        private async Task RefreshItemsAsync()
+        {
+            IsRefreshing = true;
+            _pageNumber = 1;
+            VacantItems.Clear();
+
+            // Load the first page of items
+            await LoadVacantPropertyHouses();
+
+            IsRefreshing = false;
+        }
+
+        private async Task LoadMoreItemsAsync()
+        {
+            if (_isLoadingMore) return;
+
+            _isLoadingMore = true;
+
+            // Load the next page of items
+            _pageNumber++;
+            await LoadVacantPropertyHouses();
+
+            _isLoadingMore = false;
         }
 
         public ObservableCollection<ListModel> Systemcounty
@@ -1107,7 +1147,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getallsystempropertyvacanthouses/" + 0 + "/" + 1000, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getallsystempropertyvacanthouses/" + _pageNumber + "/" + 10, HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
                     VacantItems.Clear();
