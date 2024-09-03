@@ -5,6 +5,7 @@ namespace DBL.Entities
     public class SystemStaff
     {
         public int Userid { get; set; }
+        public int Propertyhouseid { get; set; }
         public string? Firstname { get; set; }
         public string? Lastname { get; set; }
         public string? Fullname { get; set; }
@@ -32,7 +33,7 @@ namespace DBL.Entities
         public int? Parentid { get; set; }
         public string? Userprofileimageurl { get; set; }
         public string? Usercurriculumvitae { get; set; }
-        public string? Idnumber { get; set; }
+        public int Idnumber { get; set; }
         public string? Token { get; set; }
         public DateTime? Expirydate { get; set; }
         public bool Updateprofile { get; set; }

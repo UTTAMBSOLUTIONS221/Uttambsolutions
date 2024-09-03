@@ -28,7 +28,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
         private Systemtenantdetails _tenantStaffData;
-        private Systemdataffdata _tenantStaffData;
+        private SystemStaff _systemstaffdata;
 
 
         private bool _isStep1Visible;
@@ -209,6 +209,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             set
             {
                 _tenantStaffData = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public SystemStaff Systemstaffdata
+        {
+            get => _systemstaffdata;
+            set
+            {
+                _systemstaffdata = value;
                 OnPropertyChanged();
             }
         }
@@ -747,15 +757,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     // Safely convert the selected value to long and assign it to Countyid
                     if (value != null && int.TryParse(value.Value?.ToString(), out int propertyhouseid))
                     {
-                        TenantStaffData.Propertyhouseid = propertyhouseid;
+                        Systemstaffdata.Propertyhouseid = propertyhouseid;
                     }
                     else
                     {
-                        TenantStaffData.Propertyhouseid = 0;
+                        Systemstaffdata.Propertyhouseid = 0;
                     }
 
                     OnPropertyChanged(nameof(Selectedownerhouse));
-                    OnPropertyChanged(nameof(TenantStaffData.Propertyhouseid));
+                    OnPropertyChanged(nameof(Systemstaffdata.Propertyhouseid));
                 }
             }
         }
@@ -1637,19 +1647,19 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
         private void OnOkCareTakerButtonClicked()
         {
-            TenantStaffData.Userid = TenantStaffData.Userid;
+            Systemstaffdata.Userid = TenantStaffData.Userid;
             SearchId = string.Empty;
-            TenantStaffData = new Systemtenantdetails
+            Systemstaffdata = new SystemStaff
             {
-                Fullname = TenantStaffData.Fullname,
-                Phonenumber = TenantStaffData.Phonenumber,
-                Idnumber = TenantStaffData.Idnumber,
+                Fullname = Systemstaffdata.Fullname,
+                Phonenumber = Systemstaffdata.Phonenumber,
+                Idnumber = Systemstaffdata.Idnumber,
             };
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
         private void OnCancelCareTakerButtonClicked()
         {
-            TenantStaffData = new Systemtenantdetails
+            Systemstaffdata = new SystemStaff
             {
                 Fullname = "No Tenant selected",
                 Phonenumber = "No Tenant selected",
@@ -1719,16 +1729,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = true;
 
             await Task.Delay(500);
-            if (TenantStaffData == null)
+            if (Systemstaffdata == null)
             {
                 IsProcessing = false;
                 return;
             }
-            TenantStaffData.Isagency = true;
-            TenantStaffData.Createdby = App.UserDetails.Usermodel.Userid;
-            TenantStaffData.Modifiedby = App.UserDetails.Usermodel.Userid;
-            SystempropertyData.Propertyhouseposter = App.UserDetails.Usermodel.Userid;
-            TenantStaffData.Datemodified = DateTime.Now;
+            Systemstaffdata.Designation = "Caretaker";
+            Systemstaffdata.Parentid = App.UserDetails.Usermodel.Userid;
+            Systemstaffdata.Modifiedby = App.UserDetails.Usermodel.Userid;
+            Systemstaffdata.Propertyhouseid = Systemstaffdata.Propertyhouseid;
+            Systemstaffdata.Datemodified = DateTime.Now;
             try
             {
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhousedata", SystempropertyData);
