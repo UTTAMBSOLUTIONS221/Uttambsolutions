@@ -40,7 +40,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Dynamically create frames for each tenant -->
-                <CollectionView ItemsSource="{Binding Items}">
+                <CollectionView ItemsSource="{Binding PropertyHouseCareTakerItems}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame Padding="10" Margin="0,0,0,5" HasShadow="True" BorderColor="LightGray" CornerRadius="10" BackgroundColor="White" HeightRequest="110">
@@ -60,10 +60,8 @@
                                     <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="0">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Tenant: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="Black"/>
-                                                <Span Text="{Binding Tenantname}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text=" "/>
-                                                <Span Text="{Binding Systempropertyhousesizename}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text="Name: " FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="Black"/>
+                                                <Span Text="{Binding Fullname}" FontAttributes="Bold" FontSize="14" TextTransform="Uppercase" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
@@ -80,13 +78,21 @@
                                     <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="2">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Tenant From: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="Black"/>
-                                                <Span Text="{Binding Datecreated, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold" FontSize="12" TextTransform="Uppercase" TextColor="#0a506c" />
-                                                <Span Text=" To: "  FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="Black"/>
-                                                <Span Text="{Binding Datemodified, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold" FontSize="12" TextTransform="Uppercase" TextColor="#0a506c" />
+                                                <Span Text="Phone: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="Black" />
+                                                <Span Text="{Binding Phonenumber}" FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
+                                    
+                                    <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="3">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Email: " FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="Black" />
+                                                <Span Text="{Binding Emailaddress}" FontAttributes="Bold" FontSize="13" TextTransform="Uppercase" TextColor="#0a506c" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
                                 </Grid>
                             </Frame>
                         </DataTemplate>
