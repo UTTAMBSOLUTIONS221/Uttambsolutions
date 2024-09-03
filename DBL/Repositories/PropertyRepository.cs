@@ -74,6 +74,27 @@ namespace DBL.Repositories
                 }
             }
         }
+        public SystemStaffData Getsystempropertyhousecaretakerdatabyid(long Propertyid, long Caretakerid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Propertyhouseid", Propertyid);
+                parameters.Add("@Caretakerid", Caretakerid);
+                parameters.Add("@Systempropertydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystempropertyhousecaretakerdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Systempropertydata");
+                if (systempropertydataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<SystemStaffData>(systempropertydataJson);
+                }
+                else
+                {
+                    return new SystemStaffData();
+                }
+            }
+        }
         public PropertyHouseSummaryDashboard Getsystempropertyhousedashboardsummarydatabyowner(long Ownerid)
         {
             PropertyHouseSummaryDashboard propertyHouseSummaryDashboard = new PropertyHouseSummaryDashboard();
