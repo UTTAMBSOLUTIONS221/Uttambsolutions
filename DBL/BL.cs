@@ -268,17 +268,25 @@ namespace DBL
                 var resp = db.AccountRepository.VerifySystemStaff(userName);
                 if (resp.RespStatus == 0)
                 {
+                    string companyname = "Maqao Plus";
                     //send email for reseting password
+                    StringBuilder StrBodyEmail = new StringBuilder();
+                    StringBuilder tableHtml = new StringBuilder();
+                    tableHtml.Append("<tbody>");
+                    tableHtml.Append($"<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\"><b>Dear {resp.Usermodel.Fullname}</b>,</td></tr>");
+                    tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">We have received a request to reset your password.</td></tr>");
+                    tableHtml.Append($"<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">Please click the link below to change your password:</td></tr>");
+                    tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">");
+                    tableHtml.Append($"<a href=\"{resp.ResetPasswordUrl}\"><b>Change Password</b></a>");
+                    tableHtml.Append("</td></tr>");
+                    tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">If you did not request a password change, please ignore this email.</td></tr>");
+                    tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">Thank you,</td></tr>");
+                    tableHtml.Append($"<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\"><b>{companyname}</b></td></tr>");
+                    tableHtml.Append("</tbody>");
+
                     string logoUrl = "https://uttambsolutions.com/images/uttambsolutionlogo.png";
-                    string body = GenerateEmailBody(logoUrl, "Uttamb Solutions", "info@uttambsolutions.com", DateTime.Now.Year.ToString());
-                    StringBuilder StrBodyEmail = new StringBuilder(commtempdata.Templatebody);
-                    StrBodyEmail.Replace("@CompanyName", "Uttamb Solutions");
-                    StrBodyEmail.Replace("@CompanyEmail", "support@uttambsolutions.com");
-                    StrBodyEmail.Replace("@Fullname", resp.Usermodel.Fullname);
-                    StrBodyEmail.Replace("@Username", resp.Usermodel.Username);
-                    StrBodyEmail.Replace("@Password", sec.Decrypt(resp.Usermodel.Passwords, resp.Usermodel.Passharsh));
-                    StrBodyEmail.Replace("@CurrentYear", DateTime.Now.Year.ToString());
-                    string message = StrBodyEmail.ToString();
+                    string message = GenerateEmailBody(logoUrl, "Uttamb Solutions", "info@uttambsolutions.com", tableHtml.ToString(), DateTime.Now.Year.ToString());
+
                     //log Email Messages
                     EmailLogs Logs = new EmailLogs
                     {
@@ -1667,37 +1675,41 @@ namespace DBL
         #endregion
 
         #region Email Template
-        private string GenerateEmailBody(string companyLogo, string companyName, string companyEmail, string currentYear)
+        public string GenerateEmailBody(string logoUrl, string companyName, string companyEmail, string tableContent, string currentYear)
         {
-            return $@"
-            <table style='width: 100%; font-family: Arial, sans-serif;'>
-                <thead style='background-color: #0a506c;color: #fff;'>
-                    <tr>
-                        <th rowspan='2' style='border: none; padding: 8px; text-align: left; color: #fff;'>
-                            <img src='{companyLogo}' alt='{companyName} Logo' style='max-width: 100px; max-height: 100px;' />
-                        </th>
-                        <th colspan='3' style='border: none; padding: 8px; text-align: right; color: #fff;'>{companyName}</th>
-                    </tr>
-                    <tr>
-                       <th colspan='3' style='border: none; padding: 8px; text-align: right; color: #fff; text-decoration: none;'>Email: {companyEmail}</th>
-                    </tr>
-                </thead>
-                <tbody style='min-height: 200px;'>
-   
-                </tbody>
-                <tfoot style='background-color: #0a506c;'>
-                    <tr>
-                        <td colspan='4' style='border: none; padding: 8px; text-align: center; color: #fff;'>Uttamb Solutions &copy; 2022 - {currentYear}</td>
-                    </tr>
-                    <tr>
-                        <td colspan='4' style='border: none; padding: 8px; text-align: center; color: #fff;'>Vision: Utilizing Technology To Automate Modern Business</td>
-                    </tr>
-                    <tr>
-                        <td colspan='4' style='border: none; padding: 8px; text-align: center; color: #fff;'>Mission: For Quality and Value</td>
-                    </tr>
-                </tfoot>
-            </table>";
+            StringBuilder body = new StringBuilder();
+
+            body.AppendLine("<table style=\"width: 100%; border-collapse: collapse;\">");
+            body.AppendLine("<thead style=\"background-color: #0a506c;color: #fff;\">");
+            body.AppendLine("<tr>");
+            body.AppendLine($"<th rowspan=\"2\" style=\"border: none; padding: 8px; text-align: left; color: #fff;\">");
+            body.AppendLine($"<img src=\"{logoUrl}\" alt=\"{companyName} Logo\" style=\"max-width: 100px; max-height: 100px;\" />");
+            body.AppendLine("</th>");
+            body.AppendLine($"<th colspan=\"3\" style=\"border: none; padding: 8px; text-align: right; color: #fff;\">{companyName}</th>");
+            body.AppendLine("</tr>");
+            body.AppendLine($"<tr>");
+            body.AppendLine($"<th colspan=\"3\" style=\"border: none; padding: 8px; text-align: right; color: #fff; text-decoration: none;\">Email: {companyEmail}</th>");
+            body.AppendLine("</tr>");
+            body.AppendLine("</thead>");
+
+            // Append the table content that was passed as a parameter
+            body.AppendLine(tableContent);
+
+            body.AppendLine("<tfoot style=\"background-color: #0a506c;\">");
+            body.AppendLine("<tr>");
+            body.AppendLine($"<td colspan=\"4\" style=\"border: none; padding: 8px; text-align: center; color: #fff;\">{companyName} &copy; 2022 - {currentYear}</td>");
+            body.AppendLine("</tr>");
+            body.AppendLine("<tr>");
+            body.AppendLine("<td colspan=\"4\" style=\"border: none; padding: 8px; text-align: center; color: #fff;\">Vision: Utilizing Technology To Automate Modern Business</td>");
+            body.AppendLine("</tr>");
+            body.AppendLine("<tr>");
+            body.AppendLine("<td colspan=\"4\" style=\"border: none; padding: 8px; text-align: center; color: #fff;\">Mission: For Quality and Value</td>");
+            body.AppendLine("</tr>");
+            body.AppendLine("</tfoot>");
+            body.AppendLine("</table>");
+            return body.ToString();
         }
+
         #endregion
     }
 }
