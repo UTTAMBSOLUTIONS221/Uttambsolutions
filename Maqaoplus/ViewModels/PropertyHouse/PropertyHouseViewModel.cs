@@ -469,7 +469,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
 
             OnCancelCareTakerButtonClickedCommand = new Command(OnCancelCareTakerButtonClicked);
-            OnOkCareTakerButtonClickedCommand = new Command(OnOkCareTakerButtonClicked);
+            OnOkCareTakerButtonClickedCommand = new Command(async () => await OnOkCareTakerButtonClicked);
             SearchCommand = new Command(async () => await Search());
             SearchStaffsCommand = new Command(async () => await SearchStaff());
             SaveAgentPropertyHouseCommand = new Command(async () => await SaveAgentPropertyHouseAsync());
@@ -1651,15 +1651,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response != null)
                 {
                     TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
-                    var responseone = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffprofiledatabyid/" + TenantStaffData.Userid, HttpMethod.Get, null);
-                    if (responseone != null)
-                    {
-                        Systemstaffdata = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
-                        if (Systemstaffdata.Propertyhouseid > 0)
-                        {
-                            Selectedownerhouse = Systemownerhouse.FirstOrDefault(x => x.Value == _systemstaffdata.Propertyhouseid.ToString());
-                        }
-                    }
                     var modalPage = new StaffCareTakerDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                 }
@@ -1677,16 +1668,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
-        private void OnOkCareTakerButtonClicked()
+
+        private async Task OnOkCareTakerButtonClicked()
         {
-            Systemstaffdata.Userid = TenantStaffData.Userid;
             SearchId = string.Empty;
-            Systemstaffdata = new SystemStaff
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffprofiledatabyid/" + TenantStaffData.Userid, HttpMethod.Get, null);
+            if (response != null)
             {
-                Fullname = Systemstaffdata.Fullname,
-                Phonenumber = Systemstaffdata.Phonenumber,
-                Idnumber = Systemstaffdata.Idnumber,
-            };
+                Systemstaffdata = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+            }
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
         private void OnCancelCareTakerButtonClicked()
