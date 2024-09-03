@@ -74,13 +74,12 @@ namespace DBL.Repositories
                 }
             }
         }
-        public SystemStaffData Getsystempropertyhousecaretakerdatabyid(long Propertyid, long Caretakerid)
+        public SystemStaffData Getsystempropertyhousecaretakerdatabyid(long Caretakerid)
         {
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@Propertyhouseid", Propertyid);
                 parameters.Add("@Caretakerid", Caretakerid);
                 parameters.Add("@Systempropertydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystempropertyhousecaretakerdatabyid", parameters, commandType: CommandType.StoredProcedure);
