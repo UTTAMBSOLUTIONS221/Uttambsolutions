@@ -1768,7 +1768,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/Account/Registerstaff", Systemstaffdata);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
-                    await Shell.Current.DisplayAlert("Success", response.RespMessage, "OK");
                     Application.Current.MainPage.Navigation.PopModalAsync();
                 }
                 else if (response.RespStatus == 1)
