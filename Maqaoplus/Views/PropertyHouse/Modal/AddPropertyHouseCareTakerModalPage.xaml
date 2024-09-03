@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maqaoplus.Views.PropertyHouse.Modal.AddPropertyHouseCareTakerModalPage"
+             BackgroundColor="White">
+
+    <Grid Padding="10">
+        <!-- Define Row Heights for Header and Content -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- For Header (Button) -->
+            <RowDefinition Height="Auto" />
+            <!-- For Content (ScrollView) -->
+        </Grid.RowDefinitions>
+
+        <!-- Overlay Grid to cover the entire screen -->
+        <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="1" BackgroundColor="Transparent">
+            <BoxView Color="#C0000000" Opacity="0.5" />
+            <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
+        </Grid>
+        <!-- Footer -->
+        <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>
