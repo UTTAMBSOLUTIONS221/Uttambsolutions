@@ -30,7 +30,7 @@
                             <Label Text="House" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
-                                <Picker ItemsSource="{Binding Systemhouseentrystatus}" SelectedItem="{Binding SelectedHouseentrystatus}" ItemDisplayBinding="{Binding Text}" Title="Select Entry Status" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                                <Picker ItemsSource="{Binding Systemownerhouse}" SelectedItem="{Binding Selectedownerhouse}" ItemDisplayBinding="{Binding Text}" Title="Select House" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
                             </Frame>
                             <!-- Error Message -->
                             <Label Text="{Binding PropertyHouseStatusError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>

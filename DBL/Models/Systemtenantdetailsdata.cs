@@ -11,6 +11,7 @@
         public string? Phonenumber { get; set; }
         public int Loginstatus { get; set; }
         public long Idnumber { get; set; }
+        public int Propertyhouseid { get; set; }
 
         public List<PropertyHouseTenant>? Tenantroomhistory { get; set; }
     }

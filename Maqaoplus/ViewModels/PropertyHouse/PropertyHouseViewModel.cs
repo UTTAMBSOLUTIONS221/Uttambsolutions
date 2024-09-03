@@ -126,6 +126,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private ObservableCollection<ListModel> _systemhouserentdepositreturndays;
         private ObservableCollection<ListModel> _systemhousevacantnoticeperiod;
         private ObservableCollection<ListModel> _systemhouserentingterms;
+        private ObservableCollection<ListModel> _systemownerhouse;
 
         public Systemproperty SystempropertyData
         {
@@ -720,6 +721,42 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        public ObservableCollection<ListModel> Systemownerhouse
+        {
+            get => _systemownerhouse;
+            set
+            {
+                _systemownerhouse = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ListModel _selectedownerhouse;
+        public ListModel Selectedownerhouse
+        {
+            get => _selectedownerhouse;
+            set
+            {
+                _selectedownerhouse = value;
+                // Ensure SystempropertyData is not null
+                if (SystempropertyData != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int propertyhouseid))
+                    {
+                        TenantStaffData.Propertyhouseid = propertyhouseid;
+                    }
+                    else
+                    {
+                        TenantStaffData.Propertyhouseid = 0;
+                    }
+
+                    OnPropertyChanged(nameof(Selectedownerhouse));
+                    OnPropertyChanged(nameof(TenantStaffData.Propertyhouseid));
+                }
+            }
+        }
+
         public ObservableCollection<ListModel> Systemhouserentdepositreturndays
         {
             get => _systemhouserentdepositreturndays;
@@ -1039,12 +1076,28 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task AddPropertyHouseCareTakerAsync()
         {
             IsProcessing = true;
-
+            LoadOwnerHousesByCode();
             var modalPage = new AddPropertyHouseCareTakerModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
 
+
+        private async Task LoadOwnerHousesByCode()
+        {
+            try
+            {
+                var SystemownerhousesResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.Systempropertyhouses + "&code=" + App.UserDetails.Usermodel.Userid, HttpMethod.Get);
+                if (SystemownerhousesResponse != null)
+                {
+                    Systemownerhouse = new ObservableCollection<ListModel>(SystemownerhousesResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
         private async Task LoadDropdownData()
         {
             try
