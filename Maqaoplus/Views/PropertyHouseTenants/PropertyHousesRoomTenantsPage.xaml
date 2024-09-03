@@ -11,6 +11,12 @@
             <converters:NullToImageConverter x:Key="NullToImageConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <!-- Toolbar Item with Icon and Text -->
+        <ToolbarItem Text="ADD CARETAKER" Command="{Binding AddPropertyHouseCareTakerCommand}" Priority="0">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <Grid>
         <!-- Define Row Heights for Header and Content -->
         <Grid.RowDefinitions>
