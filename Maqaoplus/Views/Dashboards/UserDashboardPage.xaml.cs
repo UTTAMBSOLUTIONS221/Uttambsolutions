@@ -39,51 +39,12 @@ public partial class UserDashboardPage : ContentPage
 
         // Construct the message
         var message = $"{greeting}, welcome to Maqao plus from tenant department. Your number one property management system. We are here to help";
-
-        var success = await OpenWhatsAppChatAsync(phoneNumber, message);
+        var uri = new Uri($"https://wa.me/{phoneNumber}?text={Uri.EscapeDataString(message)}");
+        var success = await Launcher.TryOpenAsync(uri);
 
         if (!success)
         {
             await DisplayAlert("Error", "Unable to open WhatsApp. Please ensure it is installed.", "OK");
-        }
-    }
-
-
-    private async Task<bool> OpenWhatsAppChatAsync(string phoneNumber, string message)
-    {
-        try
-        {
-            // Construct the URL
-            var url = $"whatsapp://send?phone={phoneNumber}&text={Uri.EscapeDataString(message)}";
-
-            // Check if the device can handle the URL scheme
-            if (await CanOpenUrlAsync(url))
-            {
-                // Open the URL
-                await Launcher.OpenAsync(new Uri(url));
-                return true;
-            }
-
-            return false;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error opening WhatsApp: {ex.Message}");
-            return false;
-        }
-    }
-
-    private async Task<bool> CanOpenUrlAsync(string url)
-    {
-        try
-        {
-            var uri = new Uri(url);
-            return await Launcher.CanOpenAsync(uri);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error checking URL: {ex.Message}");
-            return false;
         }
     }
 }
