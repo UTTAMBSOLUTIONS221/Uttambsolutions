@@ -56,6 +56,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand OnOkButtonClickedCommand { get; }
         public ICommand SaveAgentPropertyHouseCommand { get; }
         public ICommand SearchCommand { get; }
+        public ICommand SearchStaffsCommand { get; }
 
         private bool _isLoading;
         public bool IsLoading
@@ -437,6 +438,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnCancelButtonClickedCommand = new Command(OnCancelButtonClicked);
             OnOkButtonClickedCommand = new Command(OnOkButtonClicked);
             SearchCommand = new Command(async () => await Search());
+            SearchStaffsCommand = new Command(async () => await SearchStaff());
             SaveAgentPropertyHouseCommand = new Command(async () => await SaveAgentPropertyHouseAsync());
 
             LoadDropdownData();
@@ -1546,7 +1548,61 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
+        private async Task SearchStaff()
+        {
+            if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
+                return;
 
+            IsProcessing = true;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
+
+                if (response != null)
+                {
+                    TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
+                    var modalPage = new StaffCareTakerDetailModalPage(this);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                }
+                else
+                {
+                    TenantStaffData = new Systemtenantdetails();
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+        private void OnOkCareTakerButtonClicked()
+        {
+            TenantStaffData.Userid = TenantStaffData.Userid;
+            SearchId = string.Empty;
+            TenantStaffData = new Systemtenantdetails
+            {
+                Fullname = TenantStaffData.Fullname,
+                Phonenumber = TenantStaffData.Phonenumber,
+                Idnumber = TenantStaffData.Idnumber,
+            };
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+        private void OnCancelCareTakerButtonClickedButtonClicked()
+        {
+            TenantStaffData = new Systemtenantdetails
+            {
+                Fullname = "No Tenant selected",
+                Phonenumber = "No Tenant selected",
+                Idnumber = 0,
+                Userid = 0
+            };
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
         private void OnOkButtonClicked()
         {
             SystempropertyData.Propertyhouseowner = TenantStaffData.Userid;

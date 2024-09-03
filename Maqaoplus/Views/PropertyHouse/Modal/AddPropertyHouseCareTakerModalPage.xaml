@@ -4,7 +4,7 @@
              x:Class="Maqaoplus.Views.PropertyHouse.Modal.AddPropertyHouseCareTakerModalPage"
              xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              BackgroundColor="White">
-    
+
     <Grid Padding="10">
         <!-- Define Row Heights for Header and Content -->
         <Grid.RowDefinitions>
@@ -54,7 +54,7 @@
                         </StackLayout>
 
                         <StackLayout Grid.Column="1" Margin="0,20,0,0" >
-                            <Button Text="Search" Command="{Binding SearchCommand}" FontSize="18" HeightRequest="48" />
+                            <Button Text="Search" Command="{Binding SearchStaffsCommand}" FontSize="18" HeightRequest="48" />
                         </StackLayout>
                     </Grid>
                     <!-- Navigation Button -->
