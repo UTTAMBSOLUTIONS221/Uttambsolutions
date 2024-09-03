@@ -269,6 +269,7 @@ namespace DBL
                 if (resp.RespStatus == 0)
                 {
                     string companyname = "Maqao Plus";
+                    string changepasswordurl = "https://uttambsolutions.com/Account/changepassword";
                     //send email for reseting password
                     StringBuilder StrBodyEmail = new StringBuilder();
                     StringBuilder tableHtml = new StringBuilder();
@@ -277,7 +278,7 @@ namespace DBL
                     tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">We have received a request to reset your password.</td></tr>");
                     tableHtml.Append($"<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">Please click the link below to change your password:</td></tr>");
                     tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">");
-                    tableHtml.Append($"<a href=\"{resp.ResetPasswordUrl}\"><b>Change Password</b></a>");
+                    tableHtml.Append($"<a href=\"{changepasswordurl}\"><b>Change Password</b></a>");
                     tableHtml.Append("</td></tr>");
                     tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">If you did not request a password change, please ignore this email.</td></tr>");
                     tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">Thank you,</td></tr>");
