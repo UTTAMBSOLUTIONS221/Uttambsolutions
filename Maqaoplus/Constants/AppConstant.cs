@@ -117,6 +117,12 @@ namespace Maqaoplus.Constants
                             Title = "Profile",
                             ContentTemplate = new DataTemplate(() => new UserProfilePage(serviceProvider)),
                         },
+                          new ShellContent
+                        {
+                            Icon = Icons.user,
+                            Title = "Caretaker",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesCaretakerPage(serviceProvider)),
+                        },
                         new ShellContent
                         {
                             Icon = Icons.house,

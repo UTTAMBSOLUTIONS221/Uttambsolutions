@@ -61,6 +61,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<PropertyHousesTenantPaymentsPage>();
             builder.Services.AddSingleton<PropertyHousesTenantAgreementsPage>();
             builder.Services.AddSingleton<VacantPropertyHousesPage>();
+            builder.Services.AddSingleton<PropertyHousesCaretakerPage>();
 
             // View Models
             builder.Services.AddSingleton<AppShellViewModel>();

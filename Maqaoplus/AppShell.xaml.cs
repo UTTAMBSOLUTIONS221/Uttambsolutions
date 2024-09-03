@@ -26,6 +26,7 @@ namespace Maqaoplus
             Routing.RegisterRoute(nameof(PropertyHousesTenantPaymentsPage), typeof(PropertyHousesTenantPaymentsPage));
             Routing.RegisterRoute(nameof(PropertyHousesTenantAgreementsPage), typeof(PropertyHousesTenantAgreementsPage));
             Routing.RegisterRoute(nameof(VacantPropertyHousesPage), typeof(VacantPropertyHousesPage));
+            Routing.RegisterRoute(nameof(PropertyHousesCaretakerPage), typeof(PropertyHousesCaretakerPage));
         }
     }
 }
