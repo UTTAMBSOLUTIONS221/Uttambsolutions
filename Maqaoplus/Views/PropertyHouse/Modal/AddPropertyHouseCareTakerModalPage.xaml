@@ -6,72 +6,90 @@
              BackgroundColor="White">
 
     <Grid Padding="10">
-        <!-- Define Row Heights for Header and Content -->
+        <!-- Define Row Heights for Content and Footer -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <!-- For Header (Button) -->
+            <!-- For Content (ScrollView and Buttons) -->
             <RowDefinition Height="Auto" />
-            <!-- For Content (ScrollView) -->
+            <!-- For Footer -->
         </Grid.RowDefinitions>
-        <ScrollView Grid.Row="0">
 
-            <VerticalStackLayout>
-                <!-- Step 1 -->
-                <StackLayout Margin="0,0,0,20">
-                    <Grid ColumnSpacing="8" RowSpacing="0">
-                        <!-- Define two equal-width columns -->
+        <!-- ScrollView with Form Content -->
+        <VerticalStackLayout Grid.Row="0">
+            <!-- House Status Section -->
+            <StackLayout Margin="0,0,0,20">
+                <Grid ColumnSpacing="8" RowSpacing="0">
+                    <!-- Define Row Heights for Content and Footer -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- House Picker -->
+                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Label Text="House" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False" HeightRequest="45">
+                            <Picker ItemsSource="{Binding Systemownerhouse}" SelectedItem="{Binding Selectedownerhouse}" ItemDisplayBinding="{Binding Text}" Title="Select House" TextColor="Black" FontSize="15" BackgroundColor="White" Margin="0" />
+                        </Frame>
+                        <Label Text="{Binding PropertyOwnerHouseError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                    </StackLayout>
+
+                    <!-- Inline Search ID Entry and Search Button -->
+                    <Grid Grid.Row="1" ColumnSpacing="8" RowSpacing="4">
+                        <!-- Define columns for the Entry and Button -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <!-- House Status Section -->
-                        <StackLayout Grid.Column="0">
-                            <!-- House Status Label -->
-                            <Label Text="House" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
-                            <!-- House Status Picker (Styled like an Input Box) -->
-                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
-                                <Picker ItemsSource="{Binding Systemownerhouse}" SelectedItem="{Binding Selectedownerhouse}" ItemDisplayBinding="{Binding Text}" Title="Select House" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
-                            </Frame>
-                            <!-- Error Message -->
-                            <Label Text="{Binding PropertyOwnerHouseError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
-                        </StackLayout>
-                    </Grid>
-                    <!-- Header -->
-                    <Grid ColumnSpacing="8" RowSpacing="0">
-                        <!-- Define two equal-width columns -->
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
+                            <!-- Entry takes remaining space -->
                             <ColumnDefinition Width="Auto" />
+                            <!-- Button takes as much space as needed -->
                         </Grid.ColumnDefinitions>
 
-                        <StackLayout Grid.Column="0">
-                            <!-- Search Input -->
-                            <Label Text="House Care Taker" FontAttributes="Bold" FontSize="14"  Margin="0,0,0,4" TextColor="#0a506c"/>
-                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
-                                <Entry x:Name="SearchIdEntry" Placeholder="Enter ID number to search" Keyboard="Numeric" PlaceholderColor="#0a506c" TextColor="#0a506c" FontSize="18" Text="{Binding SearchId, Mode=TwoWay}" ClearButtonVisibility="WhileEditing"/>
-                            </Frame>
-                            <Label Text="{Binding PropertyHouseCareTakerError}" TextColor="Red" />
-                        </StackLayout>
+                        <!-- Define two rows: one for the Entry and Button, another for the Error Label -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <!-- Row for Entry and Button -->
+                            <RowDefinition Height="Auto" />
+                            <!-- Row for Error Label -->
+                        </Grid.RowDefinitions>
 
-                        <StackLayout Grid.Column="1" Margin="0,20,0,0" >
-                            <Button Text="Search" Command="{Binding SearchStaffsCommand}" FontSize="18" HeightRequest="48" />
-                        </StackLayout>
+                        <!-- Search ID Entry -->
+                        <Frame Grid.Row="0" Grid.Column="0" BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False" HeightRequest="45">
+                            <Entry x:Name="SearchIdEntry" Placeholder="Enter ID number to search" Keyboard="Numeric" PlaceholderColor="#0a506c" TextColor="#0a506c" FontSize="18" Text="{Binding SearchId, Mode=TwoWay}" ClearButtonVisibility="WhileEditing"/>
+                        </Frame>
+
+                        <!-- Search Button -->
+                        <Button Grid.Row="0" Grid.Column="1" Text="Search" Command="{Binding SearchStaffsCommand}" FontSize="18" HeightRequest="45" BackgroundColor="#0a506c" TextColor="White" />
+
+                        <!-- Error Label -->
+                        <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding PropertyHouseCareTakerError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                     </Grid>
-                    <!-- Navigation Button -->
-                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,4">
-                        <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="150" />
-                        <Button Text="Submit" Command="{Binding SavePropertyHouseCareTakerCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50"  WidthRequest="150"/>
-                    </FlexLayout>
-                </StackLayout>
-            </VerticalStackLayout>
-        </ScrollView>
-        <!-- Overlay Grid to cover the entire screen -->
+
+                    <!-- Buttons placed at the bottom of the page -->
+                    <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,40,0,20">
+                        <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                            <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="150" />
+                            <Button Text="Submit" Command="{Binding SavePropertyHouseCareTakerCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" FontSize="18" HeightRequest="50" WidthRequest="150" />
+                        </FlexLayout>
+                    </StackLayout>
+
+                </Grid>
+            </StackLayout>
+        </VerticalStackLayout>
+
+
+        <!-- Overlay Grid for Activity Indicator -->
         <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="1" BackgroundColor="Transparent">
             <BoxView Color="#C0000000" Opacity="0.5" />
             <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
         </Grid>
+
         <!-- Footer -->
-        <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
+        <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" HorizontalOptions="FillAndExpand">
             <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
         </StackLayout>
     </Grid>

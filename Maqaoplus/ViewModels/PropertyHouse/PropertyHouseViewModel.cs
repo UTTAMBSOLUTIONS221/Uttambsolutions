@@ -1746,6 +1746,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
                 return;
             }
+            if (Systemstaffdata.Userid == 0)
+            {
+                PropertyHouseCareTakerError = "Required.";
+                IsProcessing = false;
+                return;
+            }
 
             if (Systemstaffdata == null)
             {
