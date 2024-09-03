@@ -269,62 +269,53 @@ namespace DBL
                 if (resp.RespStatus == 0)
                 {
                     //send email for reseting password
-
-                    var commtempdata = db.SettingsRepository.Getsystemcommunicationtemplatedatabyname(true, "Staffforgotpasswordtemplate");
-                    if (commtempdata != null)
+                    string logoUrl = "https://uttambsolutions.com/images/uttambsolutionlogo.png";
+                    string body = GenerateEmailBody(logoUrl, "Uttamb Solutions", "info@uttambsolutions.com", DateTime.Now.Year.ToString());
+                    StringBuilder StrBodyEmail = new StringBuilder(commtempdata.Templatebody);
+                    StrBodyEmail.Replace("@CompanyName", "Uttamb Solutions");
+                    StrBodyEmail.Replace("@CompanyEmail", "support@uttambsolutions.com");
+                    StrBodyEmail.Replace("@Fullname", resp.Usermodel.Fullname);
+                    StrBodyEmail.Replace("@Username", resp.Usermodel.Username);
+                    StrBodyEmail.Replace("@Password", sec.Decrypt(resp.Usermodel.Passwords, resp.Usermodel.Passharsh));
+                    StrBodyEmail.Replace("@CurrentYear", DateTime.Now.Year.ToString());
+                    string message = StrBodyEmail.ToString();
+                    //log Email Messages
+                    EmailLogs Logs = new EmailLogs
                     {
-                        StringBuilder StrBodyEmail = new StringBuilder(commtempdata.Templatebody);
-                        StrBodyEmail.Replace("@CompanyName", "Uttamb Solutions");
-                        StrBodyEmail.Replace("@CompanyEmail", "support@uttambsolutions.com");
-                        StrBodyEmail.Replace("@Fullname", resp.Usermodel.Fullname);
-                        StrBodyEmail.Replace("@Username", resp.Usermodel.Username);
-                        StrBodyEmail.Replace("@Password", sec.Decrypt(resp.Usermodel.Passwords, resp.Usermodel.Passharsh));
-                        StrBodyEmail.Replace("@CurrentYear", DateTime.Now.Year.ToString());
-                        string message = StrBodyEmail.ToString();
-                        //log Email Messages
-                        EmailLogs Logs = new EmailLogs
+                        EmailLogId = 0,
+                        ModuleId = 1,
+                        EmailAddress = userName,
+                        EmailSubject = "Forgot Password",
+                        EmailMessage = message,
+                        IsEmailSent = false,
+                        DateTimeSent = DateTime.Now,
+                        Datecreated = DateTime.Now,
+                    };
+                    var respdata = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs));
+                    bool data = emlsnd.UttambsolutionssendemailAsync(resp.Usermodel.Emailaddress, "Forgot Password", message, true, "", "", "");
+                    if (data)
+                    {
+                        model.RespStatus = 0;
+                        model.RespMessage = "Email Sent";
+                        //Update Email is sent 
+                        EmailLogs Logs1 = new EmailLogs
                         {
-                            EmailLogId = 0,
+                            EmailLogId = Convert.ToInt64(respdata.Data1),
                             ModuleId = 1,
                             EmailAddress = userName,
-                            EmailSubject = commtempdata.Templatesubject,
+                            EmailSubject = "Forgot Password",
                             EmailMessage = message,
-                            IsEmailSent = false,
+                            IsEmailSent = true,
                             DateTimeSent = DateTime.Now,
                             Datecreated = DateTime.Now,
                         };
-                        var respdata = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs));
-                        bool data = emlsnd.UttambsolutionssendemailAsync(resp.Usermodel.Emailaddress, commtempdata.Templatesubject, message, true, "", "", "");
-                        if (data)
-                        {
-                            model.RespStatus = 0;
-                            model.RespMessage = "Email Sent";
-                            //Update Email is sent 
-                            EmailLogs Logs1 = new EmailLogs
-                            {
-                                EmailLogId = Convert.ToInt64(respdata.Data1),
-                                ModuleId = 1,
-                                EmailAddress = userName,
-                                EmailSubject = commtempdata.Templatesubject,
-                                EmailMessage = message,
-                                IsEmailSent = true,
-                                DateTimeSent = DateTime.Now,
-                                Datecreated = DateTime.Now,
-                            };
-                            var resp1 = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs1));
-                        }
-                        else
-                        {
-                            model.RespStatus = 1;
-                            model.RespMessage = "Email not Sent";
-                        }
+                        var resp1 = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs1));
                     }
                     else
                     {
                         model.RespStatus = 1;
-                        model.RespMessage = "Template not found!";
+                        model.RespMessage = "Email not Sent";
                     }
-
                 }
                 else
                 {
@@ -1672,6 +1663,40 @@ namespace DBL
 
             //---- Update payment status
             db.PesaServiceRepository.UpdatePayment3PStatus(paymentRef, status, message);
+        }
+        #endregion
+
+        #region Email Template
+        private string GenerateEmailBody(string companyLogo, string companyName, string companyEmail, string currentYear)
+        {
+            return $@"
+            <table style='width: 100%; font-family: Arial, sans-serif;'>
+                <thead style='background-color: #0a506c;color: #fff;'>
+                    <tr>
+                        <th rowspan='2' style='border: none; padding: 8px; text-align: left; color: #fff;'>
+                            <img src='{companyLogo}' alt='{companyName} Logo' style='max-width: 100px; max-height: 100px;' />
+                        </th>
+                        <th colspan='3' style='border: none; padding: 8px; text-align: right; color: #fff;'>{companyName}</th>
+                    </tr>
+                    <tr>
+                       <th colspan='3' style='border: none; padding: 8px; text-align: right; color: #fff; text-decoration: none;'>Email: {companyEmail}</th>
+                    </tr>
+                </thead>
+                <tbody style='min-height: 200px;'>
+   
+                </tbody>
+                <tfoot style='background-color: #0a506c;'>
+                    <tr>
+                        <td colspan='4' style='border: none; padding: 8px; text-align: center; color: #fff;'>Uttamb Solutions &copy; 2022 - {currentYear}</td>
+                    </tr>
+                    <tr>
+                        <td colspan='4' style='border: none; padding: 8px; text-align: center; color: #fff;'>Vision: Utilizing Technology To Automate Modern Business</td>
+                    </tr>
+                    <tr>
+                        <td colspan='4' style='border: none; padding: 8px; text-align: center; color: #fff;'>Mission: For Quality and Value</td>
+                    </tr>
+                </tfoot>
+            </table>";
         }
         #endregion
     }
