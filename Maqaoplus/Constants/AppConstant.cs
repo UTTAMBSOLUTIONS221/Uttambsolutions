@@ -330,6 +330,12 @@ namespace Maqaoplus.Constants
                             Title = "Payments",
                             ContentTemplate = new DataTemplate(() => new PropertyHousesTenantPaymentsPage(serviceProvider)),
                         },
+                        new ShellContent
+                        {
+                            Icon = Icons.house,
+                            Title = "Vacant Houses",
+                            ContentTemplate = new DataTemplate(() => new VacantPropertyHousesPage(serviceProvider)),
+                        },
                     }
                 };
                 if (!AppShell.Current.Items.Contains(flyoutItem))
