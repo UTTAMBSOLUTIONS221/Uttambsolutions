@@ -28,6 +28,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
         private Systemtenantdetails _tenantStaffData;
+        private Systemdataffdata _tenantStaffData;
 
 
         private bool _isStep1Visible;
@@ -57,6 +58,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand SaveAgentPropertyHouseCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand SearchStaffsCommand { get; }
+        public ICommand SavePropertyHouseCareTakerCommand { get; }
 
         private bool _isLoading;
         public bool IsLoading
@@ -441,6 +443,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SearchCommand = new Command(async () => await Search());
             SearchStaffsCommand = new Command(async () => await SearchStaff());
             SaveAgentPropertyHouseCommand = new Command(async () => await SaveAgentPropertyHouseAsync());
+            SavePropertyHouseCareTakerCommand = new Command(async () => await SavePropertyHouseCareTakerAsync());
 
             LoadDropdownData();
             // Initialize steps
@@ -1710,6 +1713,48 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
+
+        public async Task SavePropertyHouseCareTakerAsync()
+        {
+            IsProcessing = true;
+
+            await Task.Delay(500);
+            if (TenantStaffData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
+            TenantStaffData.Isagency = true;
+            TenantStaffData.Createdby = App.UserDetails.Usermodel.Userid;
+            TenantStaffData.Modifiedby = App.UserDetails.Usermodel.Userid;
+            SystempropertyData.Propertyhouseposter = App.UserDetails.Usermodel.Userid;
+            TenantStaffData.Datemodified = DateTime.Now;
+            try
+            {
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhousedata", SystempropertyData);
+                if (response.RespStatus == 200 || response.RespStatus == 0)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else if (response.RespStatus == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
         private bool ValidateStep1()
         {
             bool isValid = true;
