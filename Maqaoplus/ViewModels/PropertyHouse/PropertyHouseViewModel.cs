@@ -413,6 +413,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<Systemproperty>();
+            VacantItems = new ObservableCollection<PropertyHouseDetails>();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
@@ -1109,7 +1110,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getallsystempropertyvacanthouses/" + 0 + "/" + 1000, HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
-                    Items.Clear();
+                    VacantItems.Clear();
                     foreach (var item in items)
                     {
                         var product = item.ToObject<PropertyHouseDetails>();
