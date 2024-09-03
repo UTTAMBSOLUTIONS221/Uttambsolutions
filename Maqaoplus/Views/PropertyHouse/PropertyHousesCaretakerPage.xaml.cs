@@ -17,9 +17,9 @@ public partial class PropertyHousesCaretakerPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (_viewModel.LoadItemsCommand.CanExecute(null))
+        if (_viewModel.LoadPropertyHouseCaretakerItemsCommand.CanExecute(null))
         {
-            _viewModel.LoadItemsCommand.Execute(null);
+            _viewModel.LoadPropertyHouseCaretakerItemsCommand.Execute(null);
         }
     }
 }

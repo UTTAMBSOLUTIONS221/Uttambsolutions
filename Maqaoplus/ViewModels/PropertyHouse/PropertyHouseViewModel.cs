@@ -23,6 +23,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public string AgreementText { get; set; }
         public ObservableCollection<Systemproperty> Items { get; }
+        public ObservableCollection<SystemStaff> PropertyHouseCareTakerItems { get; }
         public ObservableCollection<PropertyHouseDetails> VacantItems { get; }
         private Systemproperty _systempropertyData;
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
@@ -41,6 +42,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand AddAgentPropertyHouseCommand { get; }
         public ICommand AddPropertyHouseCareTakerCommand { get; }
         public ICommand LoadItemsCommand { get; }
+        public ICommand LoadPropertyHouseCaretakerItemsCommand { get; }
         public ICommand LoadVacantPropertyHousesCommand { get; }
         public ICommand RefreshCommand { get; }
         public ICommand LoadMoreCommand { get; }
@@ -450,11 +452,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<Systemproperty>();
+            PropertyHouseCareTakerItems = new ObservableCollection<SystemStaff>();
             VacantItems = new ObservableCollection<PropertyHouseDetails>();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
             AddPropertyHouseCareTakerCommand = new Command<SystemStaff>(async (param) => { var caretakerId = param?.Userid ?? 0; await AddPropertyHouseCareTakerAsync(caretakerId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
+            LoadPropertyHouseCaretakerItemsCommand = new Command(async () => await LoadPropertyHouseCaretakerItems());
             LoadVacantPropertyHousesCommand = new Command(async () => await LoadVacantPropertyHouses());
             RefreshCommand = new Command(async () => await RefreshItemsAsync());
             LoadMoreCommand = new Command(async () => await LoadMoreItemsAsync());
@@ -1224,6 +1228,35 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
+
+        private async Task LoadPropertyHouseCaretakerItems()
+        {
+            IsProcessing = true;
+            IsDataLoaded = false;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousecaretakerdatabyownerid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null && response.Data is List<dynamic> items)
+                {
+                    PropertyHouseCareTakerItems.Clear();
+                    foreach (var item in items)
+                    {
+                        var Caretaker = item.ToObject<SystemStaff>();
+                        PropertyHouseCareTakerItems.Add(Caretaker);
+                    }
+                }
+                IsDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
         private async Task LoadVacantPropertyHouses()
         {
             IsProcessing = true;
@@ -1252,6 +1285,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
+
         private async Task LoadAgentItems()
         {
             IsProcessing = true;
