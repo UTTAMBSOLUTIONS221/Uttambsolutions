@@ -453,7 +453,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             VacantItems = new ObservableCollection<PropertyHouseDetails>();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
-            AddPropertyHouseCommand = new Command<(long propertyId, long caretakerId)>(async (param) => { var propertyId = param.propertyId != 0 ? param.propertyId : 0; var caretakerId = param.caretakerId != 0 ? param.caretakerId : 0; await AddPropertyHouseCareTakerAsync(propertyId, caretakerId); });
+            AddPropertyHouseCommand = new Command<SystemStaff>(async (param) => { var propertyId = param.Propertyhouseid != 0 ? param.Propertyhouseid : 0; var caretakerId = param.Userid != 0 ? param.Userid : 0; await AddPropertyHouseCareTakerAsync(propertyId, caretakerId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadVacantPropertyHousesCommand = new Command(async () => await LoadVacantPropertyHouses());
             RefreshCommand = new Command(async () => await RefreshItemsAsync());
@@ -1166,8 +1166,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
-
-
         private async Task LoadSubcountyDataCountyCode()
         {
             try
@@ -1227,8 +1225,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
-
-
         private async Task LoadVacantPropertyHouses()
         {
             IsProcessing = true;
@@ -1257,8 +1253,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
-
-
         private async Task LoadAgentItems()
         {
             IsProcessing = true;
