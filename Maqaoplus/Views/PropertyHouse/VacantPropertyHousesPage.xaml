@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
 
         <!-- Pull to Refresh functionality -->
-        <RefreshView Grid.Row="1" IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+        <RefreshView Grid.Row="1" IsRefreshing="{Binding IsProcessing}" Command="{Binding RefreshCommand}">
             <CollectionView x:Name="PropertyHousesCollectionView" 
                             ItemsSource="{Binding VacantItems}"
                             RemainingItemsThreshold="5"

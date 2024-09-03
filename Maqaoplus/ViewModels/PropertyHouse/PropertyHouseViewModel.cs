@@ -56,17 +56,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand SaveAgentPropertyHouseCommand { get; }
         public ICommand SearchCommand { get; }
 
-        private bool _isRefreshing;
-        public bool IsRefreshing
-        {
-            get => _isRefreshing;
-            set
-            {
-                _isRefreshing = value;
-                OnPropertyChanged();
-            }
-        }
-
         private bool _isLoading;
         public bool IsLoading
         {
@@ -459,14 +448,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async Task RefreshItemsAsync()
         {
-            IsRefreshing = true;
+            IsProcessing = true;
             _pageNumber = 1;
             VacantItems.Clear();
 
             // Load the first page of items
             await LoadVacantPropertyHouses();
 
-            IsRefreshing = false;
+            IsProcessing = false;
         }
 
         private async Task LoadMoreItemsAsync()
