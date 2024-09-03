@@ -6,6 +6,7 @@ namespace DBL.Entities
     {
         public int Userid { get; set; }
         public int Propertyhouseid { get; set; }
+        public string? Propertyhousename { get; set; }
         public string? Firstname { get; set; }
         public string? Lastname { get; set; }
         public string? Fullname { get; set; }
