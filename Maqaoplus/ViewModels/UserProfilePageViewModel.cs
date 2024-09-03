@@ -496,7 +496,7 @@ namespace Maqaoplus.ViewModels
             {
                 SystemStaffPhonenumberError = null;
             }
-            if (string.IsNullOrWhiteSpace(StaffData.Idnumber))
+            if (StaffData.Idnumber == 0)
             {
                 SystemStaffIdnumberError = "Required.";
                 isValid = false;

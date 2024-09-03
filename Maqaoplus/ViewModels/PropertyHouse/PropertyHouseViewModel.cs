@@ -1750,9 +1750,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             Systemstaffdata.Datemodified = DateTime.Now;
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhousedata", Systemstaffdata);
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/Account/Registerstaff", Systemstaffdata);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
+                    await Shell.Current.DisplayAlert("Success", response.RespMessage, "OK");
                     Application.Current.MainPage.Navigation.PopModalAsync();
                 }
                 else if (response.RespStatus == 1)
