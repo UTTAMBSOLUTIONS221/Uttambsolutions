@@ -386,7 +386,7 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-
+                    <Label Text="{Binding PropertyHouseRoomSizeError}" TextColor="Red" />
                     <!-- Navigation Buttons at Start and End -->
                     <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
                         <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />

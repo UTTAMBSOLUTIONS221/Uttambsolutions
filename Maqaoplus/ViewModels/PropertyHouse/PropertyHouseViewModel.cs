@@ -443,6 +443,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        private string _propertyHouseRoomSizeError;
+        public string PropertyHouseRoomSizeError
+        {
+            get => _propertyHouseRoomSizeError;
+            set
+            {
+                _propertyHouseRoomSizeError = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<Systempropertyhousesize> PropertyHouseSizes { get; set; } = new ObservableCollection<Systempropertyhousesize>();
         public ObservableCollection<Systempropertyhousedepositfees> PropertyHouseDepositFees { get; set; } = new ObservableCollection<Systempropertyhousedepositfees>();
         public ObservableCollection<Systempropertyhousebenefits> PropertyHouseBenefits { get; set; } = new ObservableCollection<Systempropertyhousebenefits>();
@@ -1538,7 +1549,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             else if (_isStep2Visible)
             {
-
+                if (!ValidateStep2())
+                {
+                    IsLoading = false;
+                    return;
+                }
                 _isStep2Visible = false;
                 _isStep3Visible = true;
             }
@@ -2027,6 +2042,26 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             return isValid;
         }
 
+
+        private bool ValidateStep2()
+        {
+            bool isValid = true;
+
+            // Validate Property Name
+            if (!SystempropertyData.Propertyhousesize.Any(x => x.Systempropertyhousesizeunits > 0))
+            {
+                PropertyHouseRoomSizeError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomSizeError = null;
+            }
+            // Update overall IsValid property
+            IsValid = isValid;
+
+            return isValid;
+        }
         public async Task<string> GenerateAndUploadAgreementPdfAsync()
         {
             if (OwnerTenantAgreementDetailData == null)
