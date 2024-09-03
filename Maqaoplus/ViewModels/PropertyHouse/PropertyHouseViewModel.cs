@@ -771,7 +771,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 _selectedownerhouse = value;
                 // Ensure SystempropertyData is not null
-                if (SystempropertyData != null)
+                if (Systemstaffdata != null)
                 {
                     // Safely convert the selected value to long and assign it to Countyid
                     if (value != null && int.TryParse(value.Value?.ToString(), out int propertyhouseid))
