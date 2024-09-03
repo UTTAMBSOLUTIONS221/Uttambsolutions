@@ -1759,14 +1759,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public async Task SavePropertyHouseCareTakerAsync()
         {
             IsProcessing = true;
-            if (Systemstaffdata.Propertyhouseid == 0)
+            if (Selectedownerhouse == null)
             {
                 PropertyOwnerHouseError = "Required.";
+                IsProcessing = false;
                 return;
             }
 
-
-            await Task.Delay(500);
             if (Systemstaffdata == null)
             {
                 IsProcessing = false;
@@ -1775,7 +1774,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             Systemstaffdata.Designation = "Caretaker";
             Systemstaffdata.Parentid = App.UserDetails.Usermodel.Userid;
             Systemstaffdata.Modifiedby = App.UserDetails.Usermodel.Userid;
-            Systemstaffdata.Propertyhouseid = Systemstaffdata.Propertyhouseid;
             Systemstaffdata.Datemodified = DateTime.Now;
             try
             {
