@@ -453,7 +453,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             VacantItems = new ObservableCollection<PropertyHouseDetails>();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
-            AddPropertyHouseCareTakerCommand = new Command(async () => await AddPropertyHouseCareTakerAsync());
+            AddPropertyHouseCommand = new Command<(long propertyId, long caretakerId)>(async (param) => { var propertyId = param.propertyId != 0 ? param.propertyId : 0; var caretakerId = param.caretakerId != 0 ? param.caretakerId : 0; await AddPropertyHouseCareTakerAsync(propertyId, caretakerId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadVacantPropertyHousesCommand = new Command(async () => await LoadVacantPropertyHouses());
             RefreshCommand = new Command(async () => await RefreshItemsAsync());
@@ -1106,10 +1106,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = false;
         }
 
-        private async Task AddPropertyHouseCareTakerAsync()
+        private async Task AddPropertyHouseCareTakerAsync(long propertyId, long caretakerId)
         {
             IsProcessing = true;
             LoadOwnerHousesByCode();
+            if (propertyId != 0 && caretakerId != 0)
+            {
+
+            }
             var modalPage = new AddPropertyHouseCareTakerModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
