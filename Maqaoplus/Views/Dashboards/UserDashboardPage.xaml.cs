@@ -38,7 +38,8 @@ public partial class UserDashboardPage : ContentPage
         }
 
         // Construct the message
-        var message = $"{greeting}, welcome to Maqao plus from tenant department. Your number one property management system. We are here to help";
+        string fullName = App.UserDetails.Usermodel.Fullname;
+        var message = $"{greeting} {fullName}, welcome to Maqao plus from tenant department. Your number one property management system. We are here to help";
         var uri = new Uri($"https://wa.me/{phoneNumber}?text={Uri.EscapeDataString(message)}");
         var success = await Launcher.TryOpenAsync(uri);
 
