@@ -33,7 +33,7 @@
                                 <Picker ItemsSource="{Binding Systemownerhouse}" SelectedItem="{Binding Selectedownerhouse}" ItemDisplayBinding="{Binding Text}" Title="Select House" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
                             </Frame>
                             <!-- Error Message -->
-                            <Label Text="{Binding PropertyHouseStatusError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                            <Label Text="{Binding PropertyOwnerHouseError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
                     </Grid>
                     <!-- Header -->
@@ -50,7 +50,7 @@
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
                                 <Entry x:Name="SearchIdEntry" Placeholder="Enter ID number to search" Keyboard="Numeric" PlaceholderColor="#0a506c" TextColor="#0a506c" FontSize="18" Text="{Binding SearchId, Mode=TwoWay}" ClearButtonVisibility="WhileEditing"/>
                             </Frame>
-                            <Label Text="{Binding PropertyHouseOwnerError}" TextColor="Red" />
+                            <Label Text="{Binding PropertyHouseCareTakerError}" TextColor="Red" />
                         </StackLayout>
 
                         <StackLayout Grid.Column="1" Margin="0,20,0,0" >

@@ -420,6 +420,26 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        private string _propertyOwnerHouseError;
+        public string PropertyOwnerHouseError
+        {
+            get => _propertyOwnerHouseError;
+            set
+            {
+                _propertyOwnerHouseError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _propertyHouseCareTakerError;
+        public string PropertyHouseCareTakerError
+        {
+            get => _propertyHouseCareTakerError;
+            set
+            {
+                _propertyHouseCareTakerError = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<Systempropertyhousesize> PropertyHouseSizes { get; set; } = new ObservableCollection<Systempropertyhousesize>();
         public ObservableCollection<Systempropertyhousedepositfees> PropertyHouseDepositFees { get; set; } = new ObservableCollection<Systempropertyhousedepositfees>();
@@ -1617,7 +1637,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task SearchStaff()
         {
             if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
+            {
+                PropertyHouseCareTakerError = "Required.";
                 return;
+            }
 
             IsProcessing = true;
 
@@ -1736,6 +1759,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public async Task SavePropertyHouseCareTakerAsync()
         {
             IsProcessing = true;
+            if (Systemstaffdata.Propertyhouseid == 0)
+            {
+                PropertyOwnerHouseError = "Required.";
+                return;
+            }
+
 
             await Task.Delay(500);
             if (Systemstaffdata == null)
