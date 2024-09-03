@@ -467,7 +467,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             PreviousCommand = new Command(PreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
-
             OnCancelCareTakerButtonClickedCommand = new Command(OnCancelCareTakerButtonClicked);
             OnOkCareTakerButtonClickedCommand = new Command(async () => await OnOkCareTakerButtonClicked());
             SearchCommand = new Command(async () => await Search());
