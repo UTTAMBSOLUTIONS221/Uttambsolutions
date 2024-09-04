@@ -119,10 +119,10 @@ namespace API.Controllers
             return await bl.Getsystempropertyhouseagreementdetaildatabyagentid(AgentId);
         }
         [AllowAnonymous]
-        [HttpGet("Getsystempropertyhouseroomagreementdetaildatabytenantid/{PropertyTenantId}")]
-        public async Task<TenantAgreementDetailDataModel> Getsystempropertyhouseroomagreementdetaildatabytenantid(long PropertyTenantId)
+        [HttpGet("Getsystempropertyhouseroomagreementdetaildatabytenantid/{TenantId}")]
+        public async Task<TenantAgreementDetailDataModel> Getsystempropertyhouseroomagreementdetaildatabytenantid(long TenantId)
         {
-            return await bl.Getsystempropertyhouseroomagreementdetaildatabytenantid(PropertyTenantId);
+            return await bl.Getsystempropertyhouseroomagreementdetaildatabytenantid(TenantId);
         }
 
         [AllowAnonymous]

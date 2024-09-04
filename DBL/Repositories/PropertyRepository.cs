@@ -458,7 +458,7 @@ namespace DBL.Repositories
             }
         }
 
-        public TenantAgreementDetailDataModel Getsystempropertyhouseroomagreementdetaildatabytenantid(long Propertytenantid)
+        public TenantAgreementDetailDataModel Getsystempropertyhouseroomagreementdetaildatabytenantid(long TenantId)
         {
             TenantAgreementDetailDataModel response = new TenantAgreementDetailDataModel();
             TenantAgreementDetailData responseData = new TenantAgreementDetailData();
@@ -466,7 +466,7 @@ namespace DBL.Repositories
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@Propertytenantid", Propertytenantid);
+                parameters.Add("@TenantId", TenantId);
                 parameters.Add("@TenantAgreementDetailData", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystempropertyhouseroomagreementdetaildatabytenantid", parameters, commandType: CommandType.StoredProcedure);
                 string systempropertydataJson = parameters.Get<string>("@TenantAgreementDetailData");
