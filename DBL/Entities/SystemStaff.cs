@@ -5,7 +5,7 @@ namespace DBL.Entities
     public class SystemStaff
     {
         public int Userid { get; set; }
-        public int Caretakerid { get; set; }
+        public int Caretakerhouseid { get; set; }
         public int Propertyhouseid { get; set; }
         public string? Propertyhousename { get; set; }
         public string? Firstname { get; set; }

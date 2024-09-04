@@ -460,7 +460,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             VacantItems = new ObservableCollection<PropertyHouseDetails>();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
-            AddPropertyHouseCareTakerCommand = new Command<SystemStaff>(async (param) => { var caretakerId = param?.Userid ?? 0; await AddPropertyHouseCareTakerAsync(caretakerId); });
+            AddPropertyHouseCareTakerCommand = new Command<SystemStaff>(async (param) => { var caretakerId = param?.Care ?? 0; await AddPropertyHouseCareTakerAsync(caretakerId); });
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadPropertyHouseCaretakerItemsCommand = new Command(async () => await LoadPropertyHouseCaretakerItems());
             LoadVacantPropertyHousesCommand = new Command(async () => await LoadVacantPropertyHouses());
