@@ -27,8 +27,8 @@
 		<ApplicationId>com.uttambsolutions.maqaoplus</ApplicationId>
 
 		<!-- Versions -->
-       <AndroidVersionCode>13</AndroidVersionCode> 
-       <AndroidVersionName>1.0.13</AndroidVersionName> 
+       <AndroidVersionCode>14</AndroidVersionCode> 
+       <AndroidVersionName>1.0.14</AndroidVersionName> 
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
