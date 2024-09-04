@@ -130,6 +130,9 @@
 	  <MauiXaml Update="Resources\Resources\Styles\Styles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Agreements\PropertyAgentAgreementsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\BillsandPayments\AgentPropertyHousesBillsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
