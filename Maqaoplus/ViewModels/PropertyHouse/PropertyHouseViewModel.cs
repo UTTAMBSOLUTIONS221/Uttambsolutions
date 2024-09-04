@@ -460,7 +460,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             VacantItems = new ObservableCollection<PropertyHouseDetails>();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
-            AddPropertyHouseCareTakerCommand = new Command<SystemStaff>(async (param) => { var caretakerId = param?.Care ?? 0; await AddPropertyHouseCareTakerAsync(caretakerId); });
+            AddPropertyHouseCareTakerCommand = new Command<SystemStaff>(async (param) => { var caretakerhouseid = param?.Caretakerhouseid ?? 0; await AddPropertyHouseCareTakerAsync(caretakerhouseid); });
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadPropertyHouseCaretakerItemsCommand = new Command(async () => await LoadPropertyHouseCaretakerItems());
             LoadVacantPropertyHousesCommand = new Command(async () => await LoadVacantPropertyHouses());
@@ -1111,13 +1111,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = false;
         }
 
-        private async Task AddPropertyHouseCareTakerAsync(long caretakerId)
+        private async Task AddPropertyHouseCareTakerAsync(long caretakerhouseid)
         {
             IsProcessing = true;
             LoadOwnerHousesByCode();
-            if (caretakerId > 0)
+            if (caretakerhouseid > 0)
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousecaretakerdatabyid/" + caretakerId, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousecaretakerdatabyid/" + caretakerhouseid, HttpMethod.Get, null);
                 if (response != null)
                 {
                     Systemstaffdata = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());

@@ -95,7 +95,7 @@ namespace DBL.Repositories
             }
         }
 
-        public SystemStaffData Getsystempropertyhousecaretakerdatabyid(long CareTakerid)
+        public SystemStaffData Getsystempropertyhousecaretakerdatabyid(long Caretakerhouseid)
         {
             SystemStaffData CareTakerResponseModel = new SystemStaffData();
             SystemStaff CareTakerResponse = new SystemStaff();
@@ -103,7 +103,7 @@ namespace DBL.Repositories
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@CareTakerid", CareTakerid);
+                parameters.Add("@Caretakerhouseid", Caretakerhouseid);
                 parameters.Add("@Systempropertyhousecaretakerdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystempropertyhousecaretakerdatabyid", parameters, commandType: CommandType.StoredProcedure);
                 string systempropertydataJson = parameters.Get<string>("@Systempropertyhousecaretakerdata");

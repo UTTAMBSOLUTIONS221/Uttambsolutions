@@ -944,11 +944,11 @@ namespace DBL
                 return db.PropertyRepository.Getsystempropertyhousecaretakerdatabyownerid(Ownerid); ;
             });
         }
-        public Task<SystemStaffData> Getsystempropertyhousecaretakerdatabyid(long CareTakerid)
+        public Task<SystemStaffData> Getsystempropertyhousecaretakerdatabyid(long Caretakerhouseid)
         {
             return Task.Run(() =>
             {
-                return db.PropertyRepository.Getsystempropertyhousecaretakerdatabyid(CareTakerid); ;
+                return db.PropertyRepository.Getsystempropertyhousecaretakerdatabyid(Caretakerhouseid); ;
             });
         }
         public Task<PropertyHouseSummaryDashboard> Getsystempropertyhousedashboardsummarydatabyowner(long OwnerId)

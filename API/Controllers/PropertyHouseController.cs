@@ -64,10 +64,10 @@ namespace API.Controllers
             return await bl.Getsystempropertyhousecaretakerdatabyownerid(Ownerid);
         }
         [AllowAnonymous]
-        [HttpGet("Getsystempropertyhousecaretakerdatabyid/{CareTakerid}")]
-        public async Task<SystemStaffData> Getsystempropertyhousecaretakerdatabyid(long CareTakerid)
+        [HttpGet("Getsystempropertyhousecaretakerdatabyid/{Caretakerhouseid}")]
+        public async Task<SystemStaffData> Getsystempropertyhousecaretakerdatabyid(long Caretakerhouseid)
         {
-            return await bl.Getsystempropertyhousecaretakerdatabyid(CareTakerid);
+            return await bl.Getsystempropertyhousecaretakerdatabyid(Caretakerhouseid);
         }
         [AllowAnonymous]
         [HttpGet("Getsystempropertyhousedetaildatabyhouseid/{Propertyid}")]
