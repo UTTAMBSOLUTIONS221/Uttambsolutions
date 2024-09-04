@@ -57,7 +57,6 @@
                                     <Label Text="{Binding TenantStaffData.Phonenumber}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
                                     <Label Text="Idnumber: " FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
                                     <Label Text="{Binding TenantStaffData.Idnumber}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                    <Label Text="My Wallet: " FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
                                 </Grid>
                             </StackLayout>
                         </StackLayout>
@@ -67,8 +66,8 @@
                     <!-- Buttons placed at the bottom of the page -->
                     <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,40,0,20">
                         <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                            <Button Command="{Binding OnCancelCareTakerButtonClickedCommand}" Text="Cancel" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5"  HeightRequest="50" WidthRequest="170" />
-                            <Button Command="{Binding OnOkCareTakerButtonClickedCommand}" Text="OK" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  HeightRequest="50" WidthRequest="170" />
+                            <Button Command="{Binding OnCancelCareTakerButtonClickedCommand}" Text="Cancel" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5"  HeightRequest="50" WidthRequest="140" />
+                            <Button Command="{Binding OnOkCareTakerButtonClickedCommand}" Text="OK" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  HeightRequest="50" WidthRequest="140" />
                         </FlexLayout>
                     </StackLayout>
 

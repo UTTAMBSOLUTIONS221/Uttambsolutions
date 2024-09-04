@@ -8,7 +8,7 @@
 
     <AbsoluteLayout>
         <!-- Main Grid Layout -->
-        <Grid Padding="10" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" AbsoluteLayout.LayoutFlags="All">
+        <Grid AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" AbsoluteLayout.LayoutFlags="All">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -22,7 +22,7 @@
             </VerticalStackLayout>
 
             <!-- Main Content Section -->
-            <VerticalStackLayout Grid.Row="1" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" WidthRequest="350">
+            <VerticalStackLayout Grid.Row="1" Spacing="10" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" WidthRequest="350">
                 <Label Text="Username" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                 <!-- Username Entry -->
                 <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="15" Padding="5" HasShadow="True">
@@ -38,7 +38,7 @@
                 <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="15" Padding="5" HasShadow="True">
                     <HorizontalStackLayout Spacing="10">
                         <Image Source="passwordicon.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
-                        <Entry x:Name="PasswordEntry" IsPassword="{Binding IsPasswordHidden}" Placeholder="Password" ReturnType="Done" Text="{Binding Password}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="260" />
+                        <Entry x:Name="PasswordEntry" IsPassword="{Binding IsPasswordHidden}" Placeholder="Password" ReturnType="Done" Text="{Binding Password}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="240" />
                         <Image Source="{Binding PasswordIconSource}" WidthRequest="24" HeightRequest="24" VerticalOptions="Center">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding TogglePasswordVisibilityCommand}" />
