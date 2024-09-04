@@ -1033,11 +1033,11 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<TenantAgreementDetailDataModel> Getsystempropertyhouseroomagreementdetaildatabytenantid(long TenantId)
+        public Task<TenantAgreementDetailDataModel> Getsystempropertyhouseroomagreementdetaildatabytenantid(long Tenantid)
         {
             return Task.Run(() =>
             {
-                var Resp = db.PropertyRepository.Getsystempropertyhouseroomagreementdetaildatabytenantid(TenantId);
+                var Resp = db.PropertyRepository.Getsystempropertyhouseroomagreementdetaildatabytenantid(Tenantid);
                 return Resp;
             });
         }
