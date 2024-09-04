@@ -249,14 +249,14 @@
                 <Label Text="Tenant:" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
                 <Grid>
                     <!-- Signature Drawing Section -->
-                    <VerticalStackLayout Spacing="25" Padding="3,0" VerticalOptions="Center" IsVisible="{Binding IsSignatureDrawingVisible}">
+                    <VerticalStackLayout Spacing="25" Padding="3,0" VerticalOptions="Center" IsVisible="{Binding IsTenantSignatureDrawingVisible}">
                         <mct:DrawingView x:Name="DrawBoard" LineColor="Black" LineWidth="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="140" IsMultiLineModeEnabled="True" DrawingLineCompleted="DrawBoard_DrawingLineCompleted" BackgroundColor="AliceBlue"/>
                         <Image x:Name="ImageView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="100"/>
                         <Button Text="Clear Board" Clicked="Button_Clicked"/>
                     </VerticalStackLayout>
 
                     <!-- Signature Image Section -->
-                    <Grid IsVisible="{Binding IsSignatureImageVisible}">
+                    <Grid IsVisible="{Binding IsTenantSignatureImageVisible}">
                         <Image Source="{Binding TenantAgreementDetailData.TenantSignatureimageurl}" WidthRequest="300" HeightRequest="80" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                         <Label Text="Signature: ____________________________" FontSize="14" Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
                     </Grid>
