@@ -112,6 +112,7 @@ namespace DBL.Repositories
                     JObject responseJson = JObject.Parse(systempropertydataJson);
                     JObject tenantreponseJson = JObject.Parse(responseJson["Data"].ToString());
                     CareTakerResponse.Userid = Convert.ToInt32(tenantreponseJson["Userid"]);
+                    CareTakerResponse.Caretakerhouseid = Convert.ToInt32(tenantreponseJson["Caretakerhouseid"]);
                     CareTakerResponse.Propertyhouseid = Convert.ToInt32(tenantreponseJson["Propertyhouseid"]);
                     CareTakerResponse.Propertyhousename = tenantreponseJson["Propertyhousename"].ToString();
                     CareTakerResponse.Fullname = tenantreponseJson["Fullname"].ToString();
