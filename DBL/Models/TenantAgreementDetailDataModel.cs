@@ -6,7 +6,8 @@
     }
     public class TenantAgreementDetailData
     {
-        public int Userid { get; set; }
+        public long Userid { get; set; }
+        public long Propertyhouseid { get; set; }
         public string? Tenantfullname { get; set; }
         public string? Tenantphonenumber { get; set; }
         public string? Tenantemailaddress { get; set; }
