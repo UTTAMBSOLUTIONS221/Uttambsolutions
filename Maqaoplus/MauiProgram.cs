@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Maui;
 using Maqaoplus.Helpers;
 using Maqaoplus.ViewModels;
+using Maqaoplus.ViewModels.Agreements;
 using Maqaoplus.ViewModels.Dashboards;
 using Maqaoplus.ViewModels.HouseTenant;
 using Maqaoplus.ViewModels.PropertyHouse;
-using Maqaoplus.ViewModels.PropertyHouseAgentAgreement;
 using Maqaoplus.ViewModels.PropertyHouseTenantAgreement;
 using Maqaoplus.ViewModels.Reports;
 using Maqaoplus.ViewModels.Startup;
@@ -83,7 +83,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<PropertyHousesTenantBillsViewModel>();
             builder.Services.AddSingleton<PropertyHousesTenantPaymentsViewModel>();
             builder.Services.AddSingleton<PropertyHouseTenantAgreementViewModel>();
-            builder.Services.AddSingleton<PropertyAgentAgreementViewModel>();
+            builder.Services.AddSingleton<SystemAgreementViewModel>();
 
 
             return builder.Build();

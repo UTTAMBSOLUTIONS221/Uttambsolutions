@@ -27,22 +27,13 @@
                 <Label Text="RENTAL MANAGEMENT SYSTEM AGREEMENT" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,10" />
 
                 <!-- Date -->
-                <Label Text="{Binding OwnerTenantAgreementDetailData.OwnerDatecreated,StringFormat='Date: {0:yyyy-MM-dd}'}" FontSize="14" Margin="0,0,0,20" />
+                <Label Text="{Binding AgentTenantAgreementDetailData.AgentDatecreated,StringFormat='Date: {0:yyyy-MM-dd}'}" FontSize="14" Margin="0,0,0,20" />
 
-                <!-- Property Owner -->
-                <Label Text="{Binding OwnerTenantAgreementDetailData.Propertyhousename,StringFormat='Property: {0}'}" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
-                <Label Text="{Binding OwnerTenantAgreementDetailData.Fullname,StringFormat='Name: {0}'}" FontSize="16" Margin="0,0,0,5" />
-                <Label FontSize="14" Margin="0,0,0,5">
-                    <Label.Text>
-                        <MultiBinding StringFormat="Address: {0}-{1}-{2}">
-                            <Binding Path="OwnerTenantAgreementDetailData.Countyname" />
-                            <Binding Path="OwnerTenantAgreementDetailData.Subcountyname" />
-                            <Binding Path="OwnerTenantAgreementDetailData.Subcountywardname" />
-                        </MultiBinding>
-                    </Label.Text>
-                </Label>
-                <Label Text="{Binding OwnerTenantAgreementDetailData.Phonenumber,StringFormat='Phone: {0}'}" FontSize="16" Margin="0,0,0,5" />
-                <Label Text="{Binding OwnerTenantAgreementDetailData.Emailaddress,StringFormat='Email: {0}'}" FontSize="16" Margin="0,0,0,20" />
+                <!-- Property Agent -->
+                <Label Text="{Binding AgentTenantAgreementDetailData.Propertyhousename,StringFormat='Agent: {0}'}" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="{Binding AgentTenantAgreementDetailData.Fullname,StringFormat='Name: {0}'}" FontSize="16" Margin="0,0,0,5" />
+                <Label Text="{Binding AgentTenantAgreementDetailData.Phonenumber,StringFormat='Phone: {0}'}" FontSize="16" Margin="0,0,0,5" />
+                <Label Text="{Binding AgentTenantAgreementDetailData.Emailaddress,StringFormat='Email: {0}'}" FontSize="16" Margin="0,0,0,20" />
 
                 <!-- Rental Management System Provider -->
                 <Label Text="Rental Management System Provider:" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
@@ -53,16 +44,7 @@
 
                 <!-- Agreement Sections -->
                 <Label Text="1. PURPOSE OF THE AGREEMENT" FontSize="16" FontAttributes="Bold"  Margin="0,0,0,5" />
-                <Label FontSize="14" Margin="0,0,0,5">
-                    <Label.Text>
-                        <MultiBinding  StringFormat="The purpose of this Agreement is to outline the terms and conditions under which UTTAMB SOLUTIONS LIMITED (hereinafter referred to as the Management System Provider) will provide rental management services to {0}(hereinafter referred to as the Property Owner) for the property located at {1}-{2}-{3} (hereinafter referred to as the Property).">
-                            <Binding Path="OwnerTenantAgreementDetailData.Fullname" />
-                            <Binding Path="OwnerTenantAgreementDetailData.Countyname" />
-                            <Binding Path="OwnerTenantAgreementDetailData.Subcountyname" />
-                            <Binding Path="OwnerTenantAgreementDetailData.Subcountywardname" />
-                        </MultiBinding>
-                    </Label.Text>
-                </Label>
+                <Label FontSize="14" Margin="0,0,0,5" Text="{Binding AgentTenantAgreementDetailData.Fullname,StringFormat='The purpose of this Agreement is to outline the terms and conditions under which UTTAMB SOLUTIONS LIMITED (hereinafter referred to as the Management System Provider) will provide rental management services to {0}(hereinafter referred to as the Property Agent).'}"/>
                 <Label Text="2. SERVICES PROVIDED" FontSize="16"  FontAttributes="Bold" Margin="0,0,0,5" />
                 <Label Text="- Advertising and Marketing: Listing the Property on various platforms to attract potential tenants." FontSize="14"  Margin="0,0,0,5" />
                 <Label Text="- Tenant Screening: Conducting background checks and verifying tenant credentials." FontSize="14" Margin="0,0,0,5" />
@@ -71,29 +53,29 @@
                 <Label Text="- Reporting: Providing regular reports on the status of the Property, rent collection, and any issues that arise." FontSize="14" Margin="0,0,0,20" />
 
                 <Label Text="3. FEES AND PAYMENTS" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
-                <Label Text="- Service Fee: The Property Owner agrees to pay the Management System Provider a service fee of 1% of the monthly rent collected." FontSize="14" Margin="0,0,0,5" />
-                <Label Text="- Subscription Payment: The Property Owner agrees to pay a subscription fee for the services rendered by the Management System Provider. The subscription fee shall be paid monthly to the following bank account:" FontSize="14" Margin="0,0,0,5" />
+                <Label Text="- Service Fee: The Property Agent agrees to pay the Management System Provider a service fee of 1% of the monthly rent collected." FontSize="14" Margin="0,0,0,5" />
+                <Label Text="- Subscription Payment: The Property Agent agrees to pay a subscription fee for the services rendered by the Management System Provider. The subscription fee shall be paid monthly to the following bank account:" FontSize="14" Margin="0,0,0,5" />
                 <Label Text="  Bank Name: FAMILY BANK" FontSize="14" FontAttributes="Bold" Margin="0,0,0,5" />
                 <Label Text="  Pay Bill: 222111" FontSize="14" FontAttributes="Bold" Margin="0,0,0,5" />
                 <Label Text="  Account Number: 2340982" FontSize="14" FontAttributes="Bold" Margin="0,0,0,5" />
                 <Label Text="- Payment Terms:The subscription fee is due on the 10 day of each month." FontSize="14" Margin="0,0,0,5" />
-                <Label Text="- Additional Costs: Any costs related to property maintenance, legal fees, or other services not covered under this Agreement will be billed separately with the Property Owner's prior approval." FontSize="14" Margin="0,0,0,20" />
+                <Label Text="- Additional Costs: Any costs related to property maintenance, legal fees, or other services not covered under this Agreement will be billed separately with the Property Agent's prior approval." FontSize="14" Margin="0,0,0,20" />
 
-                <Label Text="4. PROPERTY OWNER RESPONSIBILITIES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
-                <Label Text="- Property Upkeep: The Property Owner agrees to maintain the Property in a condition suitable for rental." FontSize="14" Margin="0,0,0,5" />
-                <Label Text="- Insurance: The Property Owner is responsible for obtaining and maintaining appropriate insurance coverage for the Property." FontSize="14" Margin="0,0,0,5" />
-                <Label Text="- Legal Compliance: The Property Owner agrees to comply with all local, county, and national laws relating to the rental and maintenance of the Property." FontSize="14" Margin="0,0,0,20" />
+                <Label Text="4. PROPERTY AGENT RESPONSIBILITIES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="- Property Upkeep: The Property Agent agrees to maintain the Property in a condition suitable for rental." FontSize="14" Margin="0,0,0,5" />
+                <Label Text="- Insurance: The Property Agent is responsible for obtaining and maintaining appropriate insurance coverage for the Property." FontSize="14" Margin="0,0,0,5" />
+                <Label Text="- Legal Compliance: The Property Agent agrees to comply with all local, county, and national laws relating to the rental and maintenance of the Property." FontSize="14" Margin="0,0,0,20" />
 
                 <Label Text="5. DATA PROTECTION AND PRIVACY" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
                 <Label Text="- Compliance with Data Protection Act, 2019: The Management System Provider shall ensure that all personal data collected, processed, and stored as part of the rental management services is handled in accordance with the Data Protection Act, 2019 of Kenya." FontSize="14" Margin="0,0,0,5" />
                 <Label Text="- Data Security: Both parties agree to implement appropriate technical and organizational measures to protect personal data against unauthorized or unlawful processing, accidental loss, destruction, or damage." FontSize="14" Margin="0,0,0,20" />
 
                 <Label Text="6. TERM AND TERMINATION" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
-                <Label Text="{Binding OwnerTenantAgreementDetailData.OwnerDatecreated,StringFormat='- Term: This Agreement will begin on {0:yyyy-MM-dd} and will continue until terminated by either party.'}" FontSize="14" Margin="0,0,0,5" />
-                <Label Text="- Termination: Either party may terminate this Agreement with 14 days' written notice. Upon termination, the Property Owner is responsible for any outstanding fees and obligations under this Agreement." FontSize="14" Margin="0,0,0,20" />
+                <Label Text="{Binding AgentTenantAgreementDetailData.AgentDatecreated,StringFormat='- Term: This Agreement will begin on {0:yyyy-MM-dd} and will continue until terminated by either party.'}" FontSize="14" Margin="0,0,0,5" />
+                <Label Text="- Termination: Either party may terminate this Agreement with 14 days' written notice. Upon termination, the Property Agent is responsible for any outstanding fees and obligations under this Agreement." FontSize="14" Margin="0,0,0,20" />
 
                 <Label Text="7. INDEMNIFICATION" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
-                <Label Text="The Property Owner agrees to indemnify and hold harmless the Management System Provider from any claims, liabilities, or damages arising out of the management of the Property, except in cases of gross negligence or willful misconduct by the Management System Provider." FontSize="14" Margin="0,0,0,20" />
+                <Label Text="The Property Agent agrees to indemnify and hold harmless the Management System Provider from any claims, liabilities, or damages arising out of the management of the Property, except in cases of gross negligence or willful misconduct by the Management System Provider." FontSize="14" Margin="0,0,0,20" />
 
                 <Label Text="8. CONFIDENTIALITY" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
                 <Label Text="Both parties agree to keep all information regarding the Property and this Agreement confidential, except as required by law." FontSize="14" Margin="0,0,0,20" />
@@ -103,8 +85,8 @@
 
                 <!-- Signatures Section -->
                 <Label Text="SIGNATURES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,20" />
-                <!-- Property Owner Signature -->
-                <Label Text="Property Owner Signature:" FontSize="17" FontAttributes="Bold" Margin="0,0,0,5" />
+                <!-- Property Agent Signature -->
+                <Label Text="Property Agent Signature:" FontSize="17" FontAttributes="Bold" Margin="0,0,0,5" />
                 <Grid>
                     <!-- Signature Drawing Section -->
                     <VerticalStackLayout Spacing="25" Padding="3,0" VerticalOptions="Center" IsVisible="{Binding IsSignatureDrawingVisible}">
@@ -115,11 +97,11 @@
 
                     <!-- Signature Image Section -->
                     <Grid IsVisible="{Binding IsSignatureImageVisible}">
-                        <Image Source="{Binding OwnerTenantAgreementDetailData.OwnerSignatureimageurl}" WidthRequest="300" HeightRequest="80" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <Image Source="{Binding AgentTenantAgreementDetailData.AgentSignatureimageurl}" WidthRequest="300" HeightRequest="80" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                         <Label Text="Signature: ____________________________" FontSize="14" Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
                     </Grid>
                 </Grid>
-                <Label Text="{Binding OwnerTenantAgreementDetailData.OwnerDatecreated,StringFormat='Date: {0:yyyy-MM-dd}'}" TextDecorations="Underline" FontSize="14" Margin="0,20,0,20" />
+                <Label Text="{Binding AgentTenantAgreementDetailData.AgentDatecreated,StringFormat='Date: {0:yyyy-MM-dd}'}" TextDecorations="Underline" FontSize="14" Margin="0,20,0,20" />
 
 
 
@@ -133,7 +115,7 @@
                 </Grid>
                 <Label Text="Francis Kingori" FontSize="14" Margin="0,0,0,5" />
                 <Label Text="Uttamb Solutions Co-Founder" FontSize="14" Margin="0,0,0,5" />
-                <Label Text="{Binding OwnerTenantAgreementDetailData.OwnerDatecreated,StringFormat='Date: {0:yyyy-MM-dd}'}" TextDecorations="Underline" FontSize="14" Margin="0,10,0,20" />
+                <Label Text="{Binding AgentTenantAgreementDetailData.AgentDatecreated,StringFormat='Date: {0:yyyy-MM-dd}'}" TextDecorations="Underline" FontSize="14" Margin="0,10,0,20" />
 
                 <!-- Closing -->
                 <Label Text="This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements, whether written or oral, relating to the subject matter herein." FontSize="14" Margin="0,0,0,20" />
