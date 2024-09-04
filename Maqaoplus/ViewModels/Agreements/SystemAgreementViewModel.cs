@@ -161,7 +161,7 @@ namespace Maqaoplus.ViewModels.Agreements
                     var responseAfter = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
                     if (responseAfter.RespStatus == 200 || responseAfter.RespStatus == 0)
                     {
-                        Application.Current.MainPage.Navigation.PopModalAsync();
+                        (Shell.Current.CurrentPage.BindingContext as SystemAgreementViewModel)?.ViewPropertyAgentAgreementCommand.Execute(null);
                     }
                     else if (responseAfter.RespStatus == 1)
                     {
@@ -170,7 +170,6 @@ namespace Maqaoplus.ViewModels.Agreements
                     else
                     {
                         await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
-
                     }
                 }
                 else if (response.RespStatus == 1)
@@ -402,7 +401,7 @@ namespace Maqaoplus.ViewModels.Agreements
                     var responseAfter = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
                     if (responseAfter.RespStatus == 200 || responseAfter.RespStatus == 0)
                     {
-                        Application.Current.MainPage.Navigation.PopModalAsync();
+                        (Shell.Current.CurrentPage.BindingContext as SystemAgreementViewModel)?.ViewPropertyOwnerAgreementCommand.Execute(null);
                     }
                     else if (responseAfter.RespStatus == 1)
                     {
@@ -411,7 +410,6 @@ namespace Maqaoplus.ViewModels.Agreements
                     else
                     {
                         await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
-
                     }
                 }
                 else if (response.RespStatus == 1)
@@ -654,7 +652,6 @@ namespace Maqaoplus.ViewModels.Agreements
                     else
                     {
                         await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
-
                     }
                 }
                 else if (response.RespStatus == 1)
