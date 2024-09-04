@@ -141,7 +141,7 @@ namespace Maqaoplus.ViewModels.Agreements
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabyagentid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabyownerid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null)
                 {
                     OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
