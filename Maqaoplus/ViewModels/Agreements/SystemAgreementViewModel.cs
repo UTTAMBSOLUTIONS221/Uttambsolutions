@@ -19,6 +19,7 @@ namespace Maqaoplus.ViewModels.Agreements
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private TenantAgreementDetailData _tenantAgreementDetailData;
         public ICommand ViewPropertyAgentAgreementCommand { get; }
+        public ICommand ViewPropertyOwnerAgreementCommand { get; }
         public ICommand ViewPropertyTenantAgreementCommand { get; }
 
         private bool _isProcessing;
@@ -61,9 +62,6 @@ namespace Maqaoplus.ViewModels.Agreements
         public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
         public bool IsSignatureImageVisible => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
         public bool IsSignatureAvailable => !string.IsNullOrEmpty(OwnerTenantAgreementDetailData?.OwnerSignatureimageurl);
-
-
-
 
         public TenantAgreementDetailData TenantAgreementDetailData
         {
@@ -108,10 +106,35 @@ namespace Maqaoplus.ViewModels.Agreements
         {
             _serviceProvider = serviceProvider;
             ViewPropertyAgentAgreementCommand = new Command(async () => await ViewPropertyAgentAgreementDetails());
-
+            ViewPropertyOwnerAgreementCommand = new Command(async () => await ViewPropertyOwnerAgreementDetails());
             ViewPropertyTenantAgreementCommand = new Command(async () => await ViewPropertyTenantAgreementDetails());
         }
+
         private async Task ViewPropertyAgentAgreementDetails()
+        {
+            IsProcessing = true;
+            IsDataLoaded = false;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabyagentid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                if (response != null)
+                {
+                    OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
+                }
+                IsDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
+        private async Task ViewPropertyOwnerAgreementDetails()
         {
             IsProcessing = true;
             IsDataLoaded = false;
