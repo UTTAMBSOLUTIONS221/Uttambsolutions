@@ -1,6 +1,6 @@
 ﻿using Maqaoplus.ViewModels;
 using Maqaoplus.Views;
-using Maqaoplus.Views.PropertyAgentAgreement;
+using Maqaoplus.Views.Agreements;
 using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.PropertyHouseTenantAgreement;
 using Maqaoplus.Views.PropertyHouseTenants;
