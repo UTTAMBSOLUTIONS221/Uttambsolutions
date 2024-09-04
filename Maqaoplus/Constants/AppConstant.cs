@@ -2,8 +2,8 @@
 using Maqaoplus.Views;
 using Maqaoplus.Views.BillsandPayments;
 using Maqaoplus.Views.Dashboards;
+using Maqaoplus.Views.PropertyAgentAgreement;
 using Maqaoplus.Views.PropertyHouse;
-using Maqaoplus.Views.PropertyHouseAgentAgreement;
 using Maqaoplus.Views.PropertyHouseTenantAgreement;
 using Maqaoplus.Views.PropertyHouseTenants;
 using Maqaoplus.Views.TenantBillsandPayments;
@@ -260,7 +260,7 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.agreement,
                             Title = "Agreement",
-                            ContentTemplate = new DataTemplate(() => new PropertyHousesAgentAgreementsPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new PropertyAgentAgreementsPage(serviceProvider)),
                         },
                         new ShellContent
                         {
