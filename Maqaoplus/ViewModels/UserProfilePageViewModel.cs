@@ -263,7 +263,7 @@ namespace Maqaoplus.ViewModels
         private async Task Updateuserdetailsasync()
         {
             IsProcessing = true;
-           
+
             if (!IsValidInput())
             {
                 IsProcessing = false;
@@ -310,7 +310,7 @@ namespace Maqaoplus.ViewModels
         private async Task Submituserdetailsasync()
         {
             IsProcessing = true;
-           
+
             if (!IsValidInput())
             {
                 IsProcessing = false;
@@ -501,10 +501,16 @@ namespace Maqaoplus.ViewModels
                 SystemStaffIdnumberError = "Required.";
                 isValid = false;
             }
+            else if (StaffData.Idnumber.ToString().Length <= 8)
+            {
+                SystemStaffIdnumberError = "Id number must be more than 8 characters.";
+                isValid = false;
+            }
             else
             {
                 SystemStaffIdnumberError = null;
             }
+
             if (Selectedstaffgender == null)
             {
                 SystemStaffGenderError = "Required.";
