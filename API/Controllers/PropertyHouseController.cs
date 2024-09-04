@@ -107,10 +107,16 @@ namespace API.Controllers
             return await bl.Getsystempropertyhousedetaildatabypropertyidandownerid(PropertyId, OwnerId);
         }
         [AllowAnonymous]
-        [HttpGet("Getsystempropertyhouseagreementdetaildatabypropertyidandownerid/{PropertyId}/{OwnerTenantId}")]
-        public async Task<OwnerTenantAgreementDetailDataModel> Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(long PropertyId, long OwnerTenantId)
+        [HttpGet("Getsystempropertyhouseagreementdetaildatabypropertyidandownerid/{PropertyId}/{OwnerId}")]
+        public async Task<OwnerTenantAgreementDetailDataModel> Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(long PropertyId, long OwnerId)
         {
-            return await bl.Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(PropertyId, OwnerTenantId);
+            return await bl.Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(PropertyId, OwnerId);
+        }
+        [AllowAnonymous]
+        [HttpGet("Getsystempropertyhouseagreementdetaildatabypropertyidandagentid/{PropertyId}/{AgentId}")]
+        public async Task<OwnerTenantAgreementDetailDataModel> Getsystempropertyhouseagreementdetaildatabypropertyidandagentid(long PropertyId, long AgentId)
+        {
+            return await bl.Getsystempropertyhouseagreementdetaildatabypropertyidandagentid(PropertyId, AgentId);
         }
         [AllowAnonymous]
         [HttpGet("Getsystempropertyhouseroomagreementdetaildatabytenantid/{PropertyTenantId}")]
