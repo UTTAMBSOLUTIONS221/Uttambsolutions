@@ -477,6 +477,7 @@ namespace DBL.Repositories
                     {
                         JObject tenantreponseJson = JObject.Parse(responseJson["Data"].ToString());
                         responseData.Userid = Convert.ToInt32(tenantreponseJson["Userid"]);
+                        responseData.Propertyhouseid = Convert.ToInt32(tenantreponseJson["Propertyhouseid"]);
                         responseData.Tenantfullname = tenantreponseJson["Tenantfullname"].ToString();
                         responseData.Tenantphonenumber = tenantreponseJson["Tenantphonenumber"].ToString();
                         responseData.Tenantemailaddress = tenantreponseJson["Tenantemailaddress"].ToString();
