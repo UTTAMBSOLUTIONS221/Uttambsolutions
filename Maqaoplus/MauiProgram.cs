@@ -11,6 +11,7 @@ using Maqaoplus.ViewModels.Startup;
 using Maqaoplus.ViewModels.TenantBillsandPayments;
 using Maqaoplus.Views;
 using Maqaoplus.Views.Dashboards;
+using Maqaoplus.Views.PropertyAgentAgreement;
 using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.PropertyHouseTenantAgreement;
 using Maqaoplus.Views.PropertyHouseTenants;
