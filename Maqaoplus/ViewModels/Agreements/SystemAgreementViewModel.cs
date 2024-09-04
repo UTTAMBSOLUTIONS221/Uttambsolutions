@@ -44,6 +44,7 @@ namespace Maqaoplus.ViewModels.Agreements
         }
 
 
+
         public OwnerTenantAgreementDetailData OwnerTenantAgreementDetailData
         {
             get => _ownerTenantAgreementDetailData;
