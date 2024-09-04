@@ -60,6 +60,7 @@ namespace Maqaoplus.Services
             Genericmodel resp = new Genericmodel();
             using (var httpClient = new HttpClient())
             {
+                string json = JsonConvert.SerializeObject(obj);
                 var content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
                 using (var response = await httpClient.PostAsync(_devHttpHelper.ApiUrl + endpoint, content))
                 {

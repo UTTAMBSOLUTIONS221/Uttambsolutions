@@ -447,6 +447,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        private string _careTakerFullname;
+        public string CareTakerFullname
+        {
+            get => _careTakerFullname;
+            set
+            {
+                _careTakerFullname = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<Systempropertyhousesize> PropertyHouseSizes { get; set; } = new ObservableCollection<Systempropertyhousesize>();
         public ObservableCollection<Systempropertyhousedepositfees> PropertyHouseDepositFees { get; set; } = new ObservableCollection<Systempropertyhousedepositfees>();
         public ObservableCollection<Systempropertyhousebenefits> PropertyHouseBenefits { get; set; } = new ObservableCollection<Systempropertyhousebenefits>();
@@ -1126,8 +1136,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         Selectedownerhouse = Systemownerhouse.FirstOrDefault(x => x.Value == _systemstaffdata.Propertyhouseid.ToString());
                     }
                 }
+                CareTakerFullname = Systemstaffdata.Fullname;
             }
-            Systemstaffdata.Firstname = "";
             var modalPage = new AddPropertyHouseCareTakerModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
@@ -1640,6 +1650,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             if (response != null)
             {
                 Systemstaffdata = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+                CareTakerFullname = Systemstaffdata.Fullname;
             }
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
