@@ -20,8 +20,8 @@
             </Grid.RowDefinitions>
             <!-- FlexLayout for Capture Image and Pick Image Buttons -->
             <FlexLayout Grid.Row="0" Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,4">
-                <Button Text="Capture Image" Clicked="OnCaptureImageClicked" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" HeightRequest="50" WidthRequest="170"  Grid.Column="0"/>
-                <Button Text="Pick Image" Clicked="OnPickImageClicked" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" HeightRequest="50" WidthRequest="170" Grid.Column="1" />
+                <Button Text="Capture Image" Clicked="OnCaptureImageClicked" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" HeightRequest="50" WidthRequest="140"  Grid.Column="0"/>
+                <Button Text="Pick Image" Clicked="OnPickImageClicked" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" HeightRequest="50" WidthRequest="140" Grid.Column="1" />
             </FlexLayout>
             <!-- Hidden Entry to Bind Property House ID -->
             <Entry IsVisible="False" Text="{Binding SystemPropertyHouseImageData.Propertyhouseid}" />

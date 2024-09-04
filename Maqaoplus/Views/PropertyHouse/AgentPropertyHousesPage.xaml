@@ -68,12 +68,12 @@
                                 </Grid>
 
                                 <!-- Buttons at the Bottom -->
-                                <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" ColumnSpacing="5" Padding="4">
+                                <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" ColumnSpacing="3" Padding="4">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="65" />
-                                        <ColumnDefinition Width="95" />
-                                        <ColumnDefinition Width="100" />
-                                        <ColumnDefinition Width="75" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Button Text="Edit" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddAgentPropertyHouseCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" Grid.Column="0" />
                                     <Button Text="Manage" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewDetailsCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" Grid.Column="1" />
