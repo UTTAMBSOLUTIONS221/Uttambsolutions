@@ -18,9 +18,9 @@ public partial class PropertyTenantAgreementsPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (_viewModel.ViewPropertyRoomAgreementCommand.CanExecute(null))
+        if (_viewModel.ViewPropertyTenantAgreementCommand.CanExecute(null))
         {
-            _viewModel.ViewPropertyRoomAgreementCommand.Execute(null);
+            _viewModel.ViewPropertyTenantAgreementCommand.Execute(null);
         }
     }
 
