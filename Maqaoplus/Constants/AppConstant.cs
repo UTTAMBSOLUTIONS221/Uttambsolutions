@@ -257,6 +257,12 @@ namespace Maqaoplus.Constants
                         },
                         new ShellContent
                         {
+                            Icon = Icons.agreement,
+                            Title = "Agreement",
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesAgentAgreementsPage(serviceProvider)),
+                        },
+                        new ShellContent
+                        {
                             Icon = Icons.house,
                             Title = "Houses",
                             ContentTemplate = new DataTemplate(() => new AgentPropertyHousesPage(serviceProvider)),
