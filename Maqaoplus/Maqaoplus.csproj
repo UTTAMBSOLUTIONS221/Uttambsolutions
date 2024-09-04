@@ -157,12 +157,6 @@
 	  <MauiXaml Update="Views\Dashboards\PropertyCaretakerDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\PropertyAgentAgreement\Modal\SystemPropertyAgentAgreementModalPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\PropertyAgentAgreement\PropertyAgentAgreementsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyHouseTenantAgreement\PropertyHousesTenantAgreementsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -278,15 +272,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DBL\DBL.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Views\PropertyAgentAgreement\Modal\SystemPropertyAgentAgreementModalPage.xaml.cs">
-	    <DependentUpon>SystemPropertyAgentAgreementModalPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\PropertyAgentAgreement\PropertyAgentAgreementsPage.xaml.cs">
-	    <DependentUpon>PropertyAgentAgreementsPage.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadGenericExceptionInfoBarMaqaoplusHideInfoBar="True" /></VisualStudio></ProjectExtensions>
