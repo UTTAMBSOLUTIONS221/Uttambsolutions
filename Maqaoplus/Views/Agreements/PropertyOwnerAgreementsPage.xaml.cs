@@ -13,6 +13,14 @@ public partial class PropertyOwnerAgreementsPage : ContentPage
         _viewModel = new SystemAgreementViewModel(serviceProvider);
         this.BindingContext = _viewModel;
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (_viewModel.ViewPropertyOwnerAgreementCommand.CanExecute(null))
+        {
+            _viewModel.ViewPropertyOwnerAgreementCommand.Execute(null);
+        }
+    }
 
     private async void DrawBoard_DrawingLineCompleted(System.Object sender, CommunityToolkit.Maui.Core.DrawingLineCompletedEventArgs e)
     {
