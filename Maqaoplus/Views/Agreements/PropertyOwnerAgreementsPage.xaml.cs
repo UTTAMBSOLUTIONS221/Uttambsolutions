@@ -5,10 +5,13 @@ using SkiaSharp;
 namespace Maqaoplus.Views.Agreements;
 public partial class PropertyOwnerAgreementsPage : ContentPage
 {
-    public PropertyOwnerAgreementsPage(SystemAgreementViewModel viewModel)
+    private SystemAgreementViewModel _viewModel;
+
+    public PropertyOwnerAgreementsPage(Services.ServiceProvider serviceProvider)
     {
         InitializeComponent();
-        BindingContext = viewModel;
+        _viewModel = new SystemAgreementViewModel(serviceProvider);
+        this.BindingContext = _viewModel;
     }
 
     private async void DrawBoard_DrawingLineCompleted(System.Object sender, CommunityToolkit.Maui.Core.DrawingLineCompletedEventArgs e)
