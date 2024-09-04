@@ -263,7 +263,7 @@ namespace Maqaoplus.ViewModels
         private async Task Updateuserdetailsasync()
         {
             IsProcessing = true;
-            await Task.Delay(500);
+           
             if (!IsValidInput())
             {
                 IsProcessing = false;
@@ -310,7 +310,7 @@ namespace Maqaoplus.ViewModels
         private async Task Submituserdetailsasync()
         {
             IsProcessing = true;
-            await Task.Delay(500);
+           
             if (!IsValidInput())
             {
                 IsProcessing = false;

@@ -60,7 +60,7 @@ namespace Maqaoplus.ViewModels.Startup
         private async Task ForgotPasswordAsync()
         {
             IsProcessing = true;
-            await Task.Delay(500);
+
             if (!IsValidInput())
             {
                 IsProcessing = false;

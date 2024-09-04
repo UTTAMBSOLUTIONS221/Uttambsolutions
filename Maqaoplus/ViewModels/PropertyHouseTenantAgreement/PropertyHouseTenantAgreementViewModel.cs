@@ -114,7 +114,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenantAgreement
         {
             IsProcessing = true;
 
-            await Task.Delay(500);
+           
             if (TenantAgreementDetailData == null)
             {
                 IsProcessing = false;

@@ -402,7 +402,7 @@ namespace Maqaoplus.ViewModels.BillsandPayments
                 return;
             }
 
-            await Task.Delay(500);
+           
             if (CustomerPaymentValidationData == null)
             {
                 IsProcessing = false;

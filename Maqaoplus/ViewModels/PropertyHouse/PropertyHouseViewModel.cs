@@ -1380,7 +1380,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
 
-            await Task.Delay(500);
+           
             if (OwnerTenantAgreementDetailData == null)
             {
                 IsProcessing = false;
@@ -1448,7 +1448,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
 
-            await Task.Delay(500);
+           
             if (SystemPropertyHouseImageData == null)
             {
                 IsProcessing = false;
@@ -1535,7 +1535,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsLoading = true;
 
-            await Task.Delay(500);
+           
             // Move to the next step
             if (_isStep1Visible)
             {
@@ -1580,7 +1580,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsLoading = true;
 
-            await Task.Delay(500);
+           
             // Move to the previous step
             if (_isStep5Visible)
             {
@@ -1618,7 +1618,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
 
-            await Task.Delay(500);
+           
             if (SystempropertyData == null)
             {
                 IsProcessing = false;
@@ -1756,7 +1756,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
 
-            await Task.Delay(500);
+           
             if (SystempropertyData == null)
             {
                 IsProcessing = false;
