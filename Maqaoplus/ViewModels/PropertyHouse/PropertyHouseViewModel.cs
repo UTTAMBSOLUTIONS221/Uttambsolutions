@@ -1127,6 +1127,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     }
                 }
             }
+            Systemstaffdata.Firstname = "";
             var modalPage = new AddPropertyHouseCareTakerModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
