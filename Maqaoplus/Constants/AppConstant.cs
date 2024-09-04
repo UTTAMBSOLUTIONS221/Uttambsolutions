@@ -1,5 +1,6 @@
 ﻿using Maqaoplus.Controls;
 using Maqaoplus.Views;
+using Maqaoplus.Views.Agreements;
 using Maqaoplus.Views.BillsandPayments;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
