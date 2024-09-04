@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.PropertyHouseAgentAgreement
 {
-    public class PropertyHouseAgentAgreementViewModel : INotifyPropertyChanged
+    public class PropertyAgentAgreementViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -57,7 +57,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgentAgreement
 
 
         // Parameterless constructor for XAML support
-        public PropertyHouseAgentAgreementViewModel(Services.ServiceProvider serviceProvider)
+        public PropertyAgentAgreementViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             ViewPropertyAgentAgreementCommand = new Command(async () => await ViewPropertyAgentAgreementDetails());

@@ -83,7 +83,7 @@ namespace Maqaoplus
             builder.Services.AddSingleton<PropertyHousesTenantBillsViewModel>();
             builder.Services.AddSingleton<PropertyHousesTenantPaymentsViewModel>();
             builder.Services.AddSingleton<PropertyHouseTenantAgreementViewModel>();
-            builder.Services.AddSingleton<PropertyHouseAgentAgreementViewModel>();
+            builder.Services.AddSingleton<PropertyAgentAgreementViewModel>();
 
 
             return builder.Build();

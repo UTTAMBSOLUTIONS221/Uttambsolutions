@@ -1,16 +1,27 @@
-
 using Firebase.Storage;
 using Maqaoplus.ViewModels.PropertyHouseAgentAgreement;
 using SkiaSharp;
 
-namespace Maqaoplus.Views.PropertyHouseAgentAgreement.Modal;
+namespace Maqaoplus.Views.PropertyAgentAgreement;
 
-public partial class SystemPropertyHouseAgentAgreementModalPage : ContentPage
+public partial class PropertyAgentAgreementsPage : ContentPage
 {
-    public SystemPropertyHouseAgentAgreementModalPage(PropertyHouseAgentAgreementViewModel viewModel)
+    private PropertyAgentAgreementViewModel _viewModel;
+
+    public PropertyAgentAgreementsPage(Services.ServiceProvider serviceProvider)
     {
         InitializeComponent();
-        BindingContext = viewModel;
+        _viewModel = new PropertyAgentAgreementViewModel(serviceProvider);
+        this.BindingContext = _viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (_viewModel.ViewPropertyAgentAgreementCommand.CanExecute(null))
+        {
+            _viewModel.ViewPropertyAgentAgreementCommand.Execute(null);
+        }
     }
 
     private async void DrawBoard_DrawingLineCompleted(System.Object sender, CommunityToolkit.Maui.Core.DrawingLineCompletedEventArgs e)
@@ -85,6 +96,7 @@ public partial class SystemPropertyHouseAgentAgreementModalPage : ContentPage
         }
     }
 
+
     private async void Button_Save_Signature_Clicked(object sender, EventArgs e)
     {
         if (await IsDrawBoardEmptyAsync())
@@ -92,7 +104,7 @@ public partial class SystemPropertyHouseAgentAgreementModalPage : ContentPage
             await DisplayAlert("Error", "The signature board is empty. Please sign before saving.", "OK");
             return;
         }
-        var filePath = Path.Combine(FileSystem.AppDataDirectory, "signature.png");
+        var filePath = Path.Combine(FileSystem.AppDataDirectory, App.UserDetails.Usermodel.Username + "signature.png");
 
         // Save the drawn signature to a file
         using (var stream = await DrawBoard.GetImageStream(300, 100))
@@ -102,10 +114,10 @@ public partial class SystemPropertyHouseAgentAgreementModalPage : ContentPage
         }
 
         // Upload the image to Firebase Storage and get the URL
-        var imageUrl = await UploadImageToFirebaseAsync(filePath, "signature.png");
+        var imageUrl = await UploadImageToFirebaseAsync(filePath, App.UserDetails.Usermodel.Username + "signature.png");
 
         // Use the image URL with the ViewModel or make an API call
-        //await ((PropertyHouseAgentAgreementViewModel)BindingContext).AgreeToPropertyHouseAgreementasync(imageUrl);
+        //await ((PropertyAgentAgreementViewModel)BindingContext).AgreeToPropertyHouseRoomAgreementasync(imageUrl);
     }
     void Button_Clicked(System.Object sender, System.EventArgs e)
     {
@@ -115,7 +127,7 @@ public partial class SystemPropertyHouseAgentAgreementModalPage : ContentPage
     {
         var stream = File.Open(filePath, FileMode.Open);
         var firebaseStorage = new FirebaseStorage("uttambsolutions-4ec2a.appspot.com");
-        var uploadTask = firebaseStorage.Child("maqaoplus").Child(fileName).PutAsync(stream);
+        var uploadTask = firebaseStorage.Child("images").Child(fileName).PutAsync(stream);
         var downloadUrl = await uploadTask;
         return downloadUrl;
     }
