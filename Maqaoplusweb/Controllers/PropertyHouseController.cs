@@ -233,7 +233,7 @@ namespace Maqaoplusweb.Controllers
             return View(data);
         }
         [HttpGet]
-        public async Task<IActionResult> Validatecustomerpayment(long Customerpaymentid, long Houseroomid, long Tenantid, long Financetransactionid)
+        public async Task<IActionResult> Validatecustomerpayment(int Customerpaymentid, long Houseroomid, long Tenantid, int Financetransactionid)
         {
             CustomerPaymentValidation Model = new CustomerPaymentValidation();
             Model.CustomerPaymentId = Customerpaymentid;
