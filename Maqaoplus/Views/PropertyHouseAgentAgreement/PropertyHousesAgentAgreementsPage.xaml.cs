@@ -1,4 +1,3 @@
-using Android.Widget;
 using Firebase.Storage;
 using Maqaoplus.ViewModels.PropertyHouseAgentAgreement;
 using SkiaSharp;
@@ -118,7 +117,7 @@ public partial class PropertyHousesAgentAgreementsPage : ContentPage
         var imageUrl = await UploadImageToFirebaseAsync(filePath, App.UserDetails.Usermodel.Username + "signature.png");
 
         // Use the image URL with the ViewModel or make an API call
-        await ((PropertyHouseTenantAgreementViewModel)BindingContext).AgreeToPropertyHouseRoomAgreementasync(imageUrl);
+        await ((PropertyHouseAgentAgreementViewModel)BindingContext).AgreeToPropertyHouseRoomAgreementasync(imageUrl);
     }
     void Button_Clicked(System.Object sender, System.EventArgs e)
     {
