@@ -3,6 +3,7 @@ using Maqaoplus.Views;
 using Maqaoplus.Views.BillsandPayments;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
+using Maqaoplus.Views.PropertyHouseAgentAgreement;
 using Maqaoplus.Views.PropertyHouseTenantAgreement;
 using Maqaoplus.Views.PropertyHouseTenants;
 using Maqaoplus.Views.TenantBillsandPayments;
