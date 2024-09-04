@@ -22,6 +22,8 @@ namespace Maqaoplus.ViewModels.Agreements
         public ICommand ViewPropertyOwnerAgreementCommand { get; }
         public ICommand ViewPropertyTenantAgreementCommand { get; }
 
+        public ICommand OnCancelClickedCommand { get; }
+
         private bool _isProcessing;
         public bool IsProcessing
         {
@@ -108,6 +110,7 @@ namespace Maqaoplus.ViewModels.Agreements
             ViewPropertyAgentAgreementCommand = new Command(async () => await ViewPropertyAgentAgreementDetails());
             ViewPropertyOwnerAgreementCommand = new Command(async () => await ViewPropertyOwnerAgreementDetails());
             ViewPropertyTenantAgreementCommand = new Command(async () => await ViewPropertyTenantAgreementDetails());
+            OnCancelClickedCommand = new Command(OnCancelClicked);
         }
 
         private async Task ViewPropertyAgentAgreementDetails()
@@ -464,6 +467,11 @@ namespace Maqaoplus.ViewModels.Agreements
             table.AddCell(cell);
         }
 
+
+        private void OnCancelClicked()
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
