@@ -1,12 +1,13 @@
+
 using Firebase.Storage;
-using Maqaoplus.ViewModels.PropertyHouse;
+using Maqaoplus.ViewModels.PropertyHouseAgentAgreement;
 using SkiaSharp;
 
-namespace Maqaoplus.Views.PropertyHouse.Modal;
+namespace Maqaoplus.Views.PropertyHouseAgentAgreement.Modal;
 
-public partial class SystemAgentPropertyHouseAgreementModalPage : ContentPage
+public partial class SystemPropertyHouseAgentAgreementModalPage : ContentPage
 {
-    public SystemAgentPropertyHouseAgreementModalPage(PropertyHouseViewModel viewModel)
+    public SystemPropertyHouseAgentAgreementModalPage(PropertyHouseAgentAgreementViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
@@ -104,7 +105,7 @@ public partial class SystemAgentPropertyHouseAgreementModalPage : ContentPage
         var imageUrl = await UploadImageToFirebaseAsync(filePath, "signature.png");
 
         // Use the image URL with the ViewModel or make an API call
-        await ((PropertyHouseViewModel)BindingContext).AgreeToPropertyHouseAgreementasync(imageUrl);
+        //await ((PropertyHouseAgentAgreementViewModel)BindingContext).AgreeToPropertyHouseAgreementasync(imageUrl);
     }
     void Button_Clicked(System.Object sender, System.EventArgs e)
     {

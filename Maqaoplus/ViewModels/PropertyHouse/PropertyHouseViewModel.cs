@@ -49,7 +49,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadAgentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand ViewPropertyAgreementCommand { get; }
-        public ICommand ViewAgentPropertyAgreementCommand { get; }
         public ICommand ViewPropertyHouseImageCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand PreviousCommand { get; }
@@ -476,7 +475,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
             ViewPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseowner));
-            ViewAgentPropertyAgreementCommand = new Command<Systemproperty>(async (property) => await ViewAgentPropertyAgreementDetails(property.Propertyhouseid, property.Propertyhouseposter));
             ViewPropertyHouseImageCommand = new Command<Systemproperty>(async (property) => await ViewPropertyHouseImagesDetails(property.Propertyhouseid));
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
@@ -1363,24 +1361,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = false;
         }
 
-        private async Task ViewAgentPropertyAgreementDetails(long propertyId, long Agentid)
-        {
-            IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabypropertyidandagentid/" + propertyId + "/" + Agentid, HttpMethod.Get, null);
-            if (response != null)
-            {
-                OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
-            }
-            var modalPage = new SystemAgentPropertyHouseAgreementModalPage(this);
-            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
-            IsProcessing = false;
-        }
-
         public async Task AgreeToPropertyHouseAgreementasync(string imageUrl)
         {
             IsProcessing = true;
 
-           
+
             if (OwnerTenantAgreementDetailData == null)
             {
                 IsProcessing = false;
@@ -1448,7 +1433,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
 
-           
+
             if (SystemPropertyHouseImageData == null)
             {
                 IsProcessing = false;
@@ -1535,7 +1520,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsLoading = true;
 
-           
+
             // Move to the next step
             if (_isStep1Visible)
             {
@@ -1580,7 +1565,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsLoading = true;
 
-           
+
             // Move to the previous step
             if (_isStep5Visible)
             {
@@ -1618,7 +1603,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
 
-           
+
             if (SystempropertyData == null)
             {
                 IsProcessing = false;
@@ -1756,7 +1741,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
 
-           
+
             if (SystempropertyData == null)
             {
                 IsProcessing = false;

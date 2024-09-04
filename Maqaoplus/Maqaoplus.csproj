@@ -154,6 +154,9 @@
 	  <MauiXaml Update="Views\Dashboards\PropertyCaretakerDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PropertyHouseAgentAgreement\Modal\SystemPropertyHouseAgentAgreementModalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyHouseAgentAgreement\PropertyHousesAgentAgreementsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -173,9 +176,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyHouse\Modal\AddSystemPropertyHouseModalPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\PropertyHouse\Modal\SystemAgentPropertyHouseAgreementModalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyHouse\Modal\SystemPropertyHouseAgreementModalPage.xaml">
