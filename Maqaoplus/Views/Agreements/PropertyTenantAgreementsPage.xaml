@@ -265,7 +265,7 @@
 
                 <!-- Closing -->
                 <Label Text="This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements, whether written or oral, relating to the subject matter herein." FontSize="14" Margin="0,0,0,20" />
-                <Button Text="I Agree" Clicked="Button_Save_Signature_Clicked" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" FontSize="18" HeightRequest="50" WidthRequest="380" IsVisible="{Binding IsSignatureAvailable, Converter={StaticResource InverseBooleanConverter}}" />
+                <Button Text="I Agree" Clicked="Button_Save_Signature_Clicked" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" FontSize="18" HeightRequest="50" WidthRequest="380" IsVisible="{Binding IsTenantSignatureAvailable, Converter={StaticResource InverseBooleanConverter}}" />
 
             </StackLayout>
         </ScrollView>
