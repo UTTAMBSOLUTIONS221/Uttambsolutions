@@ -111,9 +111,9 @@ BEGIN
                         0.00 AS Openingmeter,
                         0.00 AS Movedmeter,
                         0.00 AS Closingmeter,
-						0 AS Roomoccupant,
-						0 AS Roomoccupantdetail,
-						0 AS Tenantid,
+					   ISNULL(TENANT.Systempropertyhousetenantid,0) AS Tenantid,
+					   ISNULL(TENANT.Roomoccupant,0) AS Roomoccupant,
+					   ISNULL(TENANT.Roomoccupantdetail,'')  AS Roomoccupantdetail,
 						Systempropertyhouse.Hashousewatermeter,
 						Systempropertyhouse.Waterunitprice,
                         0 AS Createdby,
@@ -127,6 +127,9 @@ BEGIN
 				INNER JOIN Systempropertyhouses Systempropertyhouse ON Systempropertyhouseroom.Systempropertyhouseid =Systempropertyhouse.Propertyhouseid
 				INNER JOIN Systempropertyhousesizes Systempropertyhousesize ON Systempropertyhouseroom.Systempropertyhousesizeid=Systempropertyhousesize.Systempropertyhousesizeid
 				INNER JOIN Systemhousesizes Systemhousesize ON Systempropertyhousesize.Systemhousesizeid=Systemhousesize.Systemhousesizeid
+				LEFT JOIN Systempropertyhouseroomstenant TENANT ON Systempropertyhouseroom.Systempropertyhouseroomid=TENANT.Systempropertyhouseroomid
+				LEFT JOIN Systemstaffs Systemstaff ON TENANT.Systempropertyhousetenantid=Systemstaff.Userid
+				LEFT JOIN Systemstaffsaccount Systemstaffsaccount ON Systemstaff.Userid=Systemstaffsaccount.Userid
 				LEFT JOIN Systempropertyhouseroommeters Systempropertyhouseroommeter ON Systempropertyhouseroom.Systempropertyhouseroomid=Systempropertyhouseroommeter.Systempropertyhouseroomid
                 WHERE Systempropertyhouseroom.Systempropertyhouseroomid = @Houseroomid
 				FOR JSON PATH, INCLUDE_NULL_VALUES, WITHOUT_ARRAY_WRAPPER

@@ -9,5 +9,5 @@ Select r.Subcountyname as Text, r.Subcountyid as Value From Systemsubcounty r WH
 If(@Type = 911)
 Select r.Subcountywardname as Text, r.Subcountywardid as Value From Systemsubcountyward r WHERE  r.Subcountyid=@Code;
 If(@Type = 29)
-Select r.Propertyhousename as Text, r.Propertyhouseid as Value From SystemPropertyHouses r WHERE r.Propertyhouseowner=@Code;
+Select r.Propertyhousename as Text, r.Propertyhouseid as Value From SystemPropertyHouses r WHERE r.Propertyhouseowner=@Code AND  r.Propertyhouseposter=@Code ;
 END

@@ -12,10 +12,11 @@ BEGIN
 			BEGIN
 		BEGIN TRY	
 		--Validate
-		--IF NOT EXISTS(SELECT CloseDayId FROM CloseDays WHERE StartDate = (CONVERT(datetime, CONVERT(date, (SELECT dbo.getlocaldate((SELECT TOP 1 c.Utcname FROM SystemStaffs a  INNER JOIN Tenantaccounts b ON a.Tenantid=b.Tenantid INNER JOIN SystemCountry c ON b.Countryid=c.CountryId WHERE a.Tenantid=JSON_VALUE(@JsonObjectdata, '$.TenantId')))))) + '00:00:00'))
-		--BEGIN
-		-- INSERT INTO CloseDays VALUES((CONVERT(datetime, CONVERT(date, (SELECT dbo.getlocaldate((SELECT TOP 1 c.Utcname FROM SystemStaffs a  INNER JOIN Tenantaccounts b ON a.Tenantid=b.Tenantid INNER JOIN SystemCountry c ON b.Countryid=c.CountryId WHERE a.Tenantid=JSON_VALUE(@JsonObjectdata, '$.TenantId')))))) + '00:00:00'),(CONVERT(datetime, CONVERT(date, (SELECT dbo.getlocaldate((SELECT TOP 1 c.Utcname FROM SystemStaffs a  INNER JOIN Tenantaccounts b ON a.Tenantid=b.Tenantid INNER JOIN SystemCountry c ON b.Countryid=c.CountryId WHERE a.Tenantid=JSON_VALUE(@JsonObjectdata, '$.TenantId')))))) + '23:59:59'))
-		--END
+		IF EXISTS(SELECT CustomerPaymentId FROM CustomerPayments WHERE Transactionreference = JSON_VALUE(@JsonObjectdata, '$.Transactionreference'))
+		BEGIN
+		 	Select 1 as RespStatus, 'Similar transaction code exists' as RespMessage;
+		    return;
+		END
 		--IF NOT EXISTS(SELECT PeriodId FROM SystemPeriods WHERE Lastdateinperiod =(SELECT DATEADD(SECOND, -1, DATEADD(DAY, 1, CAST(EOMONTH((SELECT dbo.getlocaldate((SELECT TOP 1 c.Utcname FROM SystemStaffs a  INNER JOIN Tenantaccounts b ON a.Tenantid=b.Tenantid INNER JOIN SystemCountry c ON b.Countryid=c.CountryId WHERE a.Tenantid=JSON_VALUE(@JsonObjectdata, '$.TenantId')))), 0) AS datetime)))))
 		--BEGIN
 		-- INSERT INTO SystemPeriods 

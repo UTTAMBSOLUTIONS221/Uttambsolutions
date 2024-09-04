@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[Usp_Getsystempropertyhousedatabyownerid]
-@Ownerid BIGINT,
+﻿CREATE PROCEDURE [dbo].[Usp_Getsystempropertyhousedatabyagentid]
+@Agentid BIGINT,
 @Systempropertydata VARCHAR(MAX)  OUTPUT
 AS
 BEGIN
@@ -64,7 +64,7 @@ BEGIN
 					INNER JOIN Systemcounty Systemcounty ON Systempropertyhouse.Countyid=Systemcounty.Countyid
 					INNER JOIN Systemsubcounty Systemsubcounty ON Systempropertyhouse.Subcountyid=Systemsubcounty.Subcountyid
 					INNER JOIN Systemsubcountyward Systemsubcountyward ON Systempropertyhouse.Subcountywardid=Systemsubcountyward.Subcountywardid
-					WHERE Systempropertyhouse.Propertyhouseowner=@Ownerid AND Systempropertyhouse.Propertyhouseposter=@Ownerid
+					WHERE Systempropertyhouse.Propertyhouseposter=@Agentid
 					FOR JSON PATH
 				 ) AS Data
 				 FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER

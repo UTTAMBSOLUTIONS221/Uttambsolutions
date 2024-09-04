@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[Usp_Getsystempropertyhousedashboardsummarydatabyowner]
-@Ownerid INT,
+﻿CREATE PROCEDURE [dbo].[Usp_Getsystempropertyhousedashboardsummarydatabyagent]
+@Agentid INT,
 @Systempropertyhousedashboardsummarydata VARCHAR(MAX)  OUTPUT
 AS
 BEGIN
@@ -40,7 +40,7 @@ BEGIN
 FROM Systempropertyhouses Systempropertyhouse
 INNER JOIN Systempropertyhouserooms Systempropertyhouseroom ON Systempropertyhouse.Propertyhouseid = Systempropertyhouseroom.Systempropertyhouseid
 LEFT JOIN Systempropertyhouseroommeters Systempropertyhouseroommeter ON Systempropertyhouseroom.Systempropertyhouseroomid = Systempropertyhouseroommeter.Systempropertyhouseroomid
-WHERE Systempropertyhouse.Propertyhouseowner = @Ownerid AND Systempropertyhouse.Propertyhouseposter = @Ownerid
+WHERE Systempropertyhouse.Propertyhouseposter = @Agentid
 GROUP BY Systempropertyhouse.Propertyhouseid
 				FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER
 				) AS Data

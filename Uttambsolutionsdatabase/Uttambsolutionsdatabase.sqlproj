@@ -268,5 +268,13 @@
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyroompaymentbypaymentid.sql" />
     <Build Include="Security\uttambadmin.sql" />
     <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="dbo\Tables\Systemcaretakerhouse.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Gettenantmonthlyinvoicepaymentdatabyagentid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Gettenantmonthlyinvoicedatabyagentid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousedatabyagentid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousedashboardsummarydatabyagent.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousecaretakerdatabyownerid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousecaretakerdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemagentpropertyhouseroomtenantsdata.sql" />
   </ItemGroup>
 </Project>

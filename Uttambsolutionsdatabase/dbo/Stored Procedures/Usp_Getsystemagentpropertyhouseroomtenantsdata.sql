@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[Usp_Getsystempropertyhouseroomtenantsdata]
-@Ownerid INT,
+﻿CREATE PROCEDURE [dbo].[Usp_Getsystemagentpropertyhouseroomtenantsdata]
+@Agentid INT,
 @Systempropertyhouseroomtenantsdata VARCHAR(MAX)  OUTPUT
 AS
 BEGIN
@@ -23,7 +23,7 @@ BEGIN
 			  INNER JOIN Systempropertyhouses Systempropertyhouse ON Systempropertyhouseroom.Systempropertyhouseid=Systempropertyhouse.Propertyhouseid
 			  INNER JOIN Systemstaffdesignations  Systemstaffdesignation ON Systemtenant.Systempropertyhousetenantid=Systemstaffdesignation.Systemstaffid
 			  INNER JOIN Systemstaffs Systempropertyhousetenant ON Systemtenant.Systempropertyhousetenantid= Systempropertyhousetenant.Userid
-			  WHERE Systemstaffdesignation.Staffdesignation='Tenant' AND Systemtenant.Occupationalstatus IN(1,2) AND Systempropertyhouse.Propertyhouseowner=@Ownerid  AND Systempropertyhouse.Propertyhouseposter=@Ownerid
+			  WHERE Systemstaffdesignation.Staffdesignation='Tenant' AND Systemtenant.Occupationalstatus IN(1,2) AND Systempropertyhouse.Propertyhouseposter=@Agentid
 		      FOR JSON PATH
 			) AS Data
 		   FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER

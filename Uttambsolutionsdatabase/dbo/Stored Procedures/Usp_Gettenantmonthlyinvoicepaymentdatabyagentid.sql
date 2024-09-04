@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[Usp_Gettenantmonthlyinvoicepaymentdatabyownerid]
-@Ownerid BIGINT,
+﻿CREATE PROCEDURE [dbo].[Usp_Gettenantmonthlyinvoicepaymentdatabyagentid]
+@Agentid BIGINT,
 @Systemtenantmonthlyinvoicepaymentdata VARCHAR(MAX)  OUTPUT
 AS
 BEGIN
@@ -25,7 +25,7 @@ BEGIN
 					INNER JOIN Systempropertyhouses SPH ON SPHR.Systempropertyhouseid=SPH.Propertyhouseid
 					INNER JOIN Systemstaffs OWN ON SPH.Propertyhouseowner=OWN.Userid
 					INNER JOIN FinanceTransactions FTS ON CTPD.FinanceTransactionId=FTS.FinanceTransactionId
-					WHERE SPH.Propertyhouseowner=@Ownerid AND SPH.Propertyhouseposter=@Ownerid
+					WHERE SPH.Propertyhouseposter=@Agentid
 					FOR JSON PATH
 				 ) AS Data
 				 FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER

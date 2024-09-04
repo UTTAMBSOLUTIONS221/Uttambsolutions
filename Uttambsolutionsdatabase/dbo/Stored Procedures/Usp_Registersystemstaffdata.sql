@@ -52,7 +52,7 @@ BEGIN
 		BEGIN
 		SELECT @RoleId = RoleId FROM Systemroles WHERE Rolename = 'Maqaoplus Property House Agent';
 		END
-		ELSE IF(JSON_VALUE(@JsonObjectData, '$.Designation')= 'CareTaker')
+		ELSE IF(JSON_VALUE(@JsonObjectData, '$.Designation')= 'Caretaker')
 		BEGIN
 		SELECT @RoleId = RoleId FROM Systemroles WHERE Rolename = 'Maqaoplus Property House CareTaker';
 		END
@@ -162,6 +162,21 @@ BEGIN
 				INSERT INTO Systemstafftermandservices(Systemstaffid,Accepttermandservices,Datecreated)
 				SELECT UserId,JSON_VALUE(@JsonObjectData, '$.Accepttermsandcondition'),CAST(JSON_VALUE(@JsonObjectData, '$.Datecreated') AS DATETIME2) FROM @Systemstaffdata
 			END
+		END
+		IF(JSON_VALUE(@JsonObjectData, '$.Designation')= 'Caretaker')
+		BEGIN
+		    MERGE INTO Systemcaretakerhouse AS target
+			USING (
+			SELECT  Caretakerhouseid,Caretakerid,Propertyhouseid
+			FROM OPENJSON(@JsonObjectdata)
+			WITH (Caretakerhouseid BIGINT '$.Caretakerhouseid',Caretakerid BIGINT '$.Userid',Propertyhouseid BIGINT '$.Propertyhouseid'
+			)) AS source
+			ON Target.Caretakerid = Source.Caretakerid AND Target.Propertyhouseid = Source.Propertyhouseid
+			WHEN NOT MATCHED BY TARGET THEN
+			INSERT (Caretakerid,Propertyhouseid)
+			VALUES (source.Caretakerid,source.Propertyhouseid);
+
+			UPDATE Systemstaffdesignations SET Staffdesignation = 'Caretaker' WHERE Systemstaffid=JSON_VALUE(@JsonObjectData, '$.Userid');
 		END
 
         SET @RespMsg = 'Success';
