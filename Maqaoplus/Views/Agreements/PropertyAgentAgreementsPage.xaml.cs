@@ -116,7 +116,7 @@ public partial class PropertyAgentAgreementsPage : ContentPage
         var imageUrl = await UploadImageToFirebaseAsync(filePath, App.UserDetails.Usermodel.Username + "signature.png");
 
         // Use the image URL with the ViewModel or make an API call
-        //await ((PropertyAgentAgreementViewModel)BindingContext).AgreeToPropertyHouseRoomAgreementasync(imageUrl);
+        await ((SystemAgreementViewModel)BindingContext).AgreeToPropertyAgentAgreementasync(imageUrl);
     }
     void Button_Clicked(System.Object sender, System.EventArgs e)
     {
