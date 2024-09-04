@@ -4,7 +4,7 @@
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
              xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.PropertyHouseAgentAgreement.PropertyHousesAgentAgreementsPage"
-             Title="System Property House Agreement">
+             Title="AGREEMENT">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />

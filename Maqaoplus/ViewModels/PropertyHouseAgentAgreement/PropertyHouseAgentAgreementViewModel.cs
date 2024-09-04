@@ -16,8 +16,8 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgentAgreement
         private readonly Services.ServiceProvider _serviceProvider;
         public event PropertyChangedEventHandler PropertyChanged;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
-        private TenantAgreementDetailData _tenantAgreementDetailData;
-        public ICommand ViewPropertyRoomAgreementCommand { get; }
+        private AgentAgreementDetailData _agentAgreementDetailData;
+        public ICommand ViewPropertyAgentAgreementCommand { get; }
 
         private bool _isProcessing;
         public bool IsProcessing
@@ -42,35 +42,35 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgentAgreement
         }
 
 
-        public TenantAgreementDetailData TenantAgreementDetailData
+        public AgentAgreementDetailData AgentAgreementDetailData
         {
-            get => _tenantAgreementDetailData;
+            get => _agentAgreementDetailData;
             set
             {
-                _tenantAgreementDetailData = value;
-                OnPropertyChanged(nameof(TenantAgreementDetailData));
+                _agentAgreementDetailData = value;
+                OnPropertyChanged(nameof(AgentAgreementDetailData));
                 OnPropertyChanged(nameof(IsSignatureDrawingVisible));
                 OnPropertyChanged(nameof(IsSignatureImageVisible));
                 OnPropertyChanged(nameof(IsSignatureAvailable));
             }
         }
 
-        public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(TenantAgreementDetailData?.TenantSignatureimageurl);
-        public bool IsSignatureImageVisible => !string.IsNullOrEmpty(TenantAgreementDetailData?.TenantSignatureimageurl);
+        public bool IsSignatureDrawingVisible => string.IsNullOrEmpty(AgentAgreementDetailData?.TenantSignatureimageurl);
+        public bool IsSignatureImageVisible => !string.IsNullOrEmpty(AgentAgreementDetailData?.TenantSignatureimageurl);
         public bool IsSignatureAvailable
         {
             get
             {
                 // Check if TenantAgreementDetailData is not null
-                if (TenantAgreementDetailData == null)
+                if (AgentAgreementDetailData == null)
                 {
                     return false;
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(TenantAgreementDetailData.TenantSignatureimageurl))
+                    if (!string.IsNullOrEmpty(AgentAgreementDetailData.TenantSignatureimageurl))
                     {
-                        return !string.IsNullOrEmpty(TenantAgreementDetailData.TenantSignatureimageurl);
+                        return !string.IsNullOrEmpty(AgentAgreementDetailData.TenantSignatureimageurl);
                     }
                     else
                     {
@@ -83,10 +83,10 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgentAgreement
         public PropertyHouseAgentAgreementViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            ViewPropertyRoomAgreementCommand = new Command(async () => await ViewPropertyRoomAgreementDetails());
+            ViewPropertyAgentAgreementCommand = new Command(async () => await ViewPropertyAgentAgreementDetails());
         }
 
-        private async Task ViewPropertyRoomAgreementDetails()
+        private async Task ViewPropertyAgentAgreementDetails()
         {
             IsProcessing = true;
             IsDataLoaded = false;
@@ -169,7 +169,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseAgentAgreement
 
         public async Task<string> GenerateAndUploadAgreementPdfAsync()
         {
-            if (TenantAgreementDetailData == null)
+            if (AgentAgreementDetailData == null)
                 return null;
 
             using (var memoryStream = new MemoryStream())
