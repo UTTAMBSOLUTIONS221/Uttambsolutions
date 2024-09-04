@@ -119,25 +119,21 @@ namespace DBL.Repositories
                     CareTakerResponse.Lastname = tenantreponseJson["Lastname"].ToString();
                     CareTakerResponse.Fullname = tenantreponseJson["Fullname"].ToString();
                     CareTakerResponse.Phonenumber = tenantreponseJson["Phonenumber"].ToString();
-                    CareTakerResponse.Designation = tenantreponseJson["Designation"].ToString();
+                    CareTakerResponse.Designation = tenantreponseJson["Staffdesignation"].ToString();
                     CareTakerResponse.Username = tenantreponseJson["Username"].ToString();
                     CareTakerResponse.Emailaddress = tenantreponseJson["Emailaddress"].ToString();
                     CareTakerResponse.Genderid = Convert.ToInt32(tenantreponseJson["Genderid"]);
                     CareTakerResponse.Maritalstatusid = Convert.ToInt32(tenantreponseJson["Maritalstatusid"]);
                     CareTakerResponse.Roleid = Convert.ToInt32(tenantreponseJson["Roleid"]);
-                    CareTakerResponse.Rolename = tenantreponseJson["Rolename"].ToString();
-                    CareTakerResponse.Passharsh = tenantreponseJson["Passharsh"].ToString();
                     CareTakerResponse.Isactive = Convert.ToBoolean(tenantreponseJson["Isactive"]);
                     CareTakerResponse.Isdeleted = Convert.ToBoolean(tenantreponseJson["Isdeleted"]);
                     CareTakerResponse.Isdefault = Convert.ToBoolean(tenantreponseJson["Isdefault"]);
-                    CareTakerResponse.Accepttermsandcondition = Convert.ToBoolean(tenantreponseJson["Accepttermsandcondition"]);
                     CareTakerResponse.Loginstatus = Convert.ToInt32(tenantreponseJson["Loginstatus"]);
                     CareTakerResponse.Passwordresetdate = Convert.ToDateTime(tenantreponseJson["Passwordresetdate"]);
                     CareTakerResponse.Parentid = Convert.ToInt32(tenantreponseJson["Parentid"]);
                     CareTakerResponse.Userprofileimageurl = tenantreponseJson["Userprofileimageurl"].ToString();
                     CareTakerResponse.Usercurriculumvitae = tenantreponseJson["Usercurriculumvitae"].ToString();
                     CareTakerResponse.Idnumber = Convert.ToInt32(tenantreponseJson["Idnumber"]);
-                    CareTakerResponse.Token = tenantreponseJson["Token"].ToString();
                     CareTakerResponse.Expirydate = Convert.ToDateTime(tenantreponseJson["Expirydate"]);
                     CareTakerResponse.Updateprofile = Convert.ToBoolean(tenantreponseJson["Updateprofile"]);
                     CareTakerResponse.Extra = tenantreponseJson["Extra"].ToString();
@@ -158,7 +154,6 @@ namespace DBL.Repositories
                     CareTakerResponse.Lastlogin = Convert.ToDateTime(tenantreponseJson["Lastlogin"]);
                     CareTakerResponse.Datemodified = Convert.ToDateTime(tenantreponseJson["Datemodified"]);
                     CareTakerResponse.Datecreated = Convert.ToDateTime(tenantreponseJson["Datecreated"]);
-                    CareTakerResponse.Systemmodulename = tenantreponseJson["Systemmodulename"].ToString();
                     CareTakerResponseModel.Data = CareTakerResponse;
                     return CareTakerResponseModel;
                 }
