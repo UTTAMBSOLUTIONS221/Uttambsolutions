@@ -286,6 +286,10 @@
 	  </Compile>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="ViewModels\Agreements\" />
+	</ItemGroup>
+
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadGenericExceptionInfoBarMaqaoplusHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>
