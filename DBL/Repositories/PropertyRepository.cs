@@ -382,7 +382,7 @@ namespace DBL.Repositories
             }
         }
 
-        public OwnerTenantAgreementDetailDataModel Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(long Propertyid, long Ownerid)
+        public OwnerTenantAgreementDetailDataModel Getsystempropertyhouseagreementdetaildatabyownerid(long Ownerid)
         {
             OwnerTenantAgreementDetailDataModel response = new OwnerTenantAgreementDetailDataModel();
             OwnerTenantAgreementDetailData responseData = new OwnerTenantAgreementDetailData();
@@ -390,10 +390,9 @@ namespace DBL.Repositories
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@Propetyhouseid", Propertyid);
                 parameters.Add("@Ownerid", Ownerid);
                 parameters.Add("@OwnerTenantAgreementDetailData", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_Getsystempropertyhouseagreementdetaildatabypropertyidandownerid", parameters, commandType: CommandType.StoredProcedure);
+                var queryResult = connection.Query("Usp_Getsystempropertyhouseagreementdetaildatabyownerid", parameters, commandType: CommandType.StoredProcedure);
                 string systempropertydataJson = parameters.Get<string>("@OwnerTenantAgreementDetailData");
                 if (systempropertydataJson != null)
                 {

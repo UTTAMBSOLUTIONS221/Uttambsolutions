@@ -1017,11 +1017,11 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<OwnerTenantAgreementDetailDataModel> Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(long Propertyid, long Ownerid)
+        public Task<OwnerTenantAgreementDetailDataModel> Getsystempropertyhouseagreementdetaildatabyownerid(long Ownerid)
         {
             return Task.Run(() =>
             {
-                var Resp = db.PropertyRepository.Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(Propertyid, Ownerid);
+                var Resp = db.PropertyRepository.Getsystempropertyhouseagreementdetaildatabyownerid(Ownerid);
                 return Resp;
             });
         }

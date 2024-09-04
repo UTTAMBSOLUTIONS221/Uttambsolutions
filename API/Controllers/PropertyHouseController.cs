@@ -107,10 +107,10 @@ namespace API.Controllers
             return await bl.Getsystempropertyhousedetaildatabypropertyidandownerid(PropertyId, OwnerId);
         }
         [AllowAnonymous]
-        [HttpGet("Getsystempropertyhouseagreementdetaildatabypropertyidandownerid/{PropertyId}/{OwnerId}")]
-        public async Task<OwnerTenantAgreementDetailDataModel> Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(long PropertyId, long OwnerId)
+        [HttpGet("Getsystempropertyhouseagreementdetaildatabypropertyidandownerid/{OwnerId}")]
+        public async Task<OwnerTenantAgreementDetailDataModel> Getsystempropertyhouseagreementdetaildatabyownerid(long OwnerId)
         {
-            return await bl.Getsystempropertyhouseagreementdetaildatabypropertyidandownerid(PropertyId, OwnerId);
+            return await bl.Getsystempropertyhouseagreementdetaildatabyownerid(OwnerId);
         }
         [AllowAnonymous]
         [HttpGet("Getsystempropertyhouseagreementdetaildatabyagentid/{AgentId}")]
