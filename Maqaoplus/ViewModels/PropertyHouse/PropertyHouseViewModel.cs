@@ -2028,7 +2028,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             if (HouseroomData.Hashousewatermeter)
             {
                 IsStep2HouseRoomVisible = false;
-                Step2HouseRoomLabel = "Step 2: Tenant Details";
+                Step3HouseRoomLabel = "Step 2: Tenant Details";
             }
             else
             {
@@ -2280,7 +2280,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task ViewRoomDetails(long propertyRoomId)
         {
             IsProcessing = true;
-            UpdateHouseRoomSteps();
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/" + propertyRoomId, HttpMethod.Get, null);
@@ -2301,7 +2300,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         Systempropertyhousesize = new ObservableCollection<ListModel>(sizeResponse);
                         SelectedPropertyhousesize = Systempropertyhousesize.FirstOrDefault(x => x.Value == _houseroomData.Systempropertyhousesizeid.ToString());
                     }
-
+                    UpdateHouseRoomSteps();
                     var modalPage = new HousesRoomDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                     IsProcessing = false;
