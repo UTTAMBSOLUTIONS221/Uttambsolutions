@@ -18,9 +18,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public string AgreementText { get; set; }
         public ObservableCollection<Systemproperty> Items { get; }
+        public ObservableCollection<PropertyHouseDetails> Rooms { get; }
         public ObservableCollection<SystemStaff> PropertyHouseCareTakerItems { get; }
         public ObservableCollection<PropertyHouseDetails> VacantItems { get; }
         private Systemproperty _systempropertyData;
+        private Systempropertyhouserooms _houseroomData;
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
         private SystemPropertyHouseImage _systemPropertyHouseImageData;
         private Systemtenantdetails _tenantStaffData;
@@ -466,6 +468,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<Systemproperty>();
+            Rooms = new ObservableCollection<PropertyHouseDetails>();
             PropertyHouseCareTakerItems = new ObservableCollection<SystemStaff>();
             VacantItems = new ObservableCollection<PropertyHouseDetails>();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
@@ -477,7 +480,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             RefreshCommand = new Command(async () => await RefreshItemsAsync());
             LoadMoreCommand = new Command(async () => await LoadMoreItemsAsync());
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
-            ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewDetails(property.Propertyhouseid));
+            ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewHouseDetails(property.Propertyhouseid));
             ViewPropertyHouseImageCommand = new Command<Systemproperty>(async (property) => await ViewPropertyHouseImagesDetails(property.Propertyhouseid));
             NextCommand = new Command(NextStep);
             PreviousCommand = new Command(PreviousStep);
@@ -1335,13 +1338,25 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
-        private async Task ViewDetails(long propertyId)
+        private async Task ViewHouseDetails(long propertyId)
         {
             IsProcessing = true;
             try
             {
-                var encodedPropertyId = Uri.EscapeDataString(propertyId.ToString());
-                await Shell.Current.GoToAsync($"PropertyHousesDetailPage?PropertyId={encodedPropertyId}");
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyhouseid/" + propertyId, HttpMethod.Get, null);
+                if (response != null && response.Data is List<dynamic> items)
+                {
+                    Rooms.Clear();
+                    foreach (var item in items)
+                    {
+                        var room = item.ToObject<PropertyHouseDetails>();
+                        Rooms.Add(room);
+                    }
+                    IsDataLoaded = true; // Data is loaded after processing
+                }
+                var detailPage = new PropertyHousesDetailPage(this);
+                await Shell.Current.Navigation.PushAsync(detailPage);
+
             }
             catch (Exception ex)
             {
