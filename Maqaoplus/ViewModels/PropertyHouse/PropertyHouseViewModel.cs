@@ -656,6 +656,57 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+        private string _systemStaffFirstNameError;
+        public string SystemStaffFirstNameError
+        {
+            get => _systemStaffFirstNameError;
+            set
+            {
+                _systemStaffFirstNameError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffLastNameError;
+        public string SystemStaffLastNameError
+        {
+            get => _systemStaffLastNameError;
+            set
+            {
+                _systemStaffLastNameError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _systemStaffEmailAddressError;
+        public string SystemStaffEmailAddressError
+        {
+            get => _systemStaffEmailAddressError;
+            set
+            {
+                _systemStaffEmailAddressError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffPhonenumberError;
+        public string SystemStaffPhonenumberError
+        {
+            get => _systemStaffPhonenumberError;
+            set
+            {
+                _systemStaffPhonenumberError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffIdnumberError;
+        public string SystemStaffIdnumberError
+        {
+            get => _systemStaffIdnumberError;
+            set
+            {
+                _systemStaffIdnumberError = value;
+                OnPropertyChanged();
+            }
+        }
 
         public decimal OpeningMeter
         {
@@ -1310,14 +1361,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 new ListModel { Value = "Month-to-Month", Text = "Monthly" },
                 new ListModel { Value = "Fixedterm", Text = "Fixed Term" },
-
             };
 
             Systemhouseentrystatus = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "0", Text = "First Tenants" },
                 new ListModel { Value = "1", Text = "Second Tenants" },
-
             };
             Systemhouserentdueday = new ObservableCollection<ListModel>();
             for (int i = 1; i <= 28; i++)
@@ -3152,20 +3201,73 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             bool isValid = true;
 
-            // Validate Property Name
-            if (!SystempropertyData.Propertyhousesize.Any(x => x.Systempropertyhousesizeunits > 0))
+            if (string.IsNullOrWhiteSpace(SystempropertyData.Firstname))
             {
-                PropertyHouseRoomSizeError = "Required.";
+                SystemStaffFirstNameError = "Required.";
                 isValid = false;
             }
             else
             {
-                PropertyHouseRoomSizeError = null;
+                SystemStaffFirstNameError = null;
             }
-            // Update overall IsValid property
+            if (string.IsNullOrWhiteSpace(SystempropertyData.Lastname))
+            {
+                SystemStaffLastNameError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffLastNameError = null;
+            }
+
+            if (string.IsNullOrWhiteSpace(SystempropertyData.Emailaddress))
+            {
+                SystemStaffEmailAddressError = "Required.";
+                isValid = false;
+            }
+            else if (!IsValidEmail(SystempropertyData.Emailaddress))
+            {
+                SystemStaffEmailAddressError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffEmailAddressError = null;
+            }
+            if (string.IsNullOrWhiteSpace(SystempropertyData.Phonenumber))
+            {
+                SystemStaffPhonenumberError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffPhonenumberError = null;
+            }
+            if (SystempropertyData.Idnumber == 0)
+            {
+                SystemStaffIdnumberError = "Required.";
+                isValid = false;
+            }
+            else if (SystempropertyData.Idnumber.ToString().Length < 8)
+            {
+                SystemStaffIdnumberError = "Id number must be from 8 characters.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffIdnumberError = null;
+            }
             IsValid = isValid;
 
             return isValid;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            // Define a simple email regex pattern
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            return Regex.IsMatch(email, emailPattern);
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
