@@ -177,7 +177,7 @@
             <!-- Step 2 -->
             <StackLayout IsVisible="{Binding IsStep2Visible}" Padding="16" Spacing="8">
                 <!-- Header -->
-                <Label Text="Step 2: Sub Meter Reading" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="{Binding Step2Label}" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
 
                 <!-- Display a Grid for Adding New Meter Readings -->
                 <Grid>
@@ -266,7 +266,7 @@
             <!-- Step 3 -->
             <StackLayout IsVisible="{Binding IsStep3Visible}" Padding="8" Spacing="8">
                 <!-- Section Header for Tenant Details -->
-                <Label Text="Tenant Details" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
+                <Label Text="{Binding Step3Label}" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
 
                 <!-- Search Input -->
                 <Entry x:Name="SearchIdEntry" Placeholder="Enter tenant ID number to search" Keyboard="Numeric" PlaceholderColor="#0a506c" TextColor="#0a506c" FontSize="18" Text="{Binding SearchId, Mode=TwoWay}" ClearButtonVisibility="WhileEditing"/>

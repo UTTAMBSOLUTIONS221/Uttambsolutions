@@ -36,6 +36,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand OnOkButtonClickedCommand { get; }
         public ICommand SearchCommand { get; }
 
+        //maibupation of the House Room Details
+        private bool _isStep1Visible;
+        private bool _isStep2Visible;
+        private bool _isStep3Visible;
+        private bool _isStep4Visible;
+        private string _step2Label;
+        private string _step3Label;
+
         private decimal _openingMeter;
         private decimal _closingMeter;
         private decimal _movedMeter;
@@ -78,7 +86,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnOkButtonClickedCommand = new Command(OnOkButtonClicked);
             OnOkClickedCommand = new Command(async () => await SaveHouseRoomDetailsAsync());
             SavePropertyHouseRoomFixtureCommand = new Command(async () => await SavePropertyHouseRoomFixtureasync());
-
+            UpdateSteps();
             // Initialize steps
             _isStep1Visible = true;
             _isStep2Visible = false;
@@ -189,6 +197,25 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnPropertyChanged(nameof(IsStep2Visible));
             OnPropertyChanged(nameof(IsStep3Visible));
             OnPropertyChanged(nameof(IsStep4Visible));
+        }
+        public string Step2Label
+        {
+            get => _step2Label;
+            set
+            {
+                _step2Label = value;
+                OnPropertyChanged(nameof(Step2Label));
+            }
+        }
+
+        public string Step3Label
+        {
+            get => _step3Label;
+            set
+            {
+                _step3Label = value;
+                OnPropertyChanged(nameof(Step3Label));
+            }
         }
         public void SetPropertyId(long propertyId)
         {
@@ -442,13 +469,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
-
-        //maibupation of the House Room Details
-        private bool _isStep1Visible;
-        private bool _isStep2Visible;
-        private bool _isStep3Visible;
-        private bool _isStep4Visible;
-
 
         public string _searchId;
         public string SearchId
@@ -851,6 +871,20 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseRoomClosingMeterError = null;
             }
             return isValid;
+        }
+        private void UpdateSteps()
+        {
+            if (HouseroomData.Hashousewatermeter)
+            {
+                IsStep2Visible = false;
+                Step2Label = "Step 2: Tenant Details";
+            }
+            else
+            {
+                IsStep2Visible = true;
+                Step2Label = "Step 2: Sub Meter Reading";
+                Step3Label = "Step 3: Tenant Details";
+            }
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
