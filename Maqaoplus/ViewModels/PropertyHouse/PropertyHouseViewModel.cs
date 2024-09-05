@@ -53,7 +53,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand AddAgentPropertyHouseCommand { get; }
         public ICommand AddPropertyHouseCareTakerCommand { get; }
         public ICommand LoadItemsCommand { get; }
-
         public ICommand LoadPropertyHouseCaretakerItemsCommand { get; }
         public ICommand LoadVacantPropertyHousesCommand { get; }
         public ICommand RefreshCommand { get; }
@@ -77,9 +76,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         public ICommand OnHouseRoomCancelClickedCommand { get; }
         public ICommand OnHouseRoomOkClickedCommand { get; }
-
-
         public ICommand ViewRoomDetailsCommand { get; }
+        public ICommand SaveHouseRoomDetailsCommand { get; }
         public ICommand ViewPropertyRoomCheckListCommand { get; }
         public ICommand ViewPropertyRoomImageCommand { get; }
         public ICommand SavePropertyHouseRoomFixtureCommand { get; }
@@ -750,11 +748,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SearchTenantsCommand = new Command(async () => await SearchTenant());
             SaveAgentPropertyHouseCommand = new Command(async () => await SaveAgentPropertyHouseAsync());
             SavePropertyHouseCareTakerCommand = new Command(async () => await SavePropertyHouseCareTakerAsync());
-
             OnHouseRoomCancelClickedCommand = new Command(OnHouseRoomCancelClicked);
             OnHouseRoomOkClickedCommand = new Command(OnHouseRoomOkClicked);
-
-
+            SaveHouseRoomDetailsCommand = new Command(async () => await SaveHouseRoomDetailsAsync());
             ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewRoomDetails(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomCheckListCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomCheckListDetailAsync(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomImageCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomImagesDetails(propertyRoom.Systempropertyhouseroomid));
@@ -2490,6 +2486,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             HouseroomData.Tenantid = TenantStaffData.Userid;
             SearchId = string.Empty;
+            CareTakerFullname = TenantStaffData.Fullname;
             NewTenantStaffData = new Systemtenantdetails
             {
                 Fullname = TenantStaffData.Fullname,

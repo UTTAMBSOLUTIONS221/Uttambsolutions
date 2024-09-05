@@ -67,7 +67,7 @@
                                 <!-- Buttons at the Bottom -->
                                 <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" ColumnSpacing="5" Padding="4">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>

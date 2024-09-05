@@ -126,8 +126,8 @@
 
         <!-- Buttons at the bottom of the page -->
         <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center" VerticalOptions="End">
-            <Button Command="{Binding OnCancelButtonClickedCommand}" Text="Cancel" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
-            <Button Command="{Binding OnOkButtonClickedCommand}" Text="OK" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
+            <Button Command="{Binding OnHouseRoomCancelClickedCommand}" Text="Cancel" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
+            <Button Command="{Binding OnHouseRoomOkClickedCommand}" Text="OK" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" WidthRequest="150" />
         </StackLayout>
     </Grid>
 </ContentPage>
