@@ -69,6 +69,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand ViewPropertyHouseImageCommand { get; }
         public ICommand HouseNextCommand { get; }
         public ICommand HousePreviousCommand { get; }
+        public ICommand AgentHouseNextCommand { get; }
+        public ICommand AgentHousePreviousCommand { get; }
         public ICommand HouseRoomNextCommand { get; }
         public ICommand HouseRoomPreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
@@ -744,6 +746,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             ViewPropertyHouseImageCommand = new Command<Systemproperty>(async (property) => await ViewPropertyHouseImagesDetails(property.Propertyhouseid));
             HouseNextCommand = new Command(HouseNextStep);
             HousePreviousCommand = new Command(HousePreviousStep);
+            AgentHouseNextCommand = new Command(AgentHouseNextStep);
+            AgentHousePreviousCommand = new Command(AgentHousePreviousStep);
             HouseRoomNextCommand = new Command(HouseRoomNextStep);
             HouseRoomPreviousCommand = new Command(HouseRoomPreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
