@@ -40,7 +40,7 @@ namespace Maqaoplus.Views.PropertyHouse.Modal
             var firebaseStorage = new FirebaseStorage(FirebaseStorageBucket);
             var uploadTask = firebaseStorage.Child("maqaoplus").Child("houseroom").Child(fileName).PutAsync(stream);
             var imagePath = await uploadTask;
-            await ((PropertyHouseDetailViewModel)BindingContext).SavePropertyHouseRoomImageasync(imagePath);
+            await ((PropertyHouseViewModel)BindingContext).SavePropertyHouseRoomImageasync(imagePath);
         }
     }
 }

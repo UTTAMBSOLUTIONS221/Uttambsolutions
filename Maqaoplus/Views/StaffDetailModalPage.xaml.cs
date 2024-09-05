@@ -3,7 +3,7 @@ namespace Maqaoplus.Views;
 
 public partial class StaffDetailModalPage : ContentPage
 {
-    public StaffDetailModalPage(PropertyHouseDetailViewModel viewModel)
+    public StaffDetailModalPage(PropertyHouseViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
