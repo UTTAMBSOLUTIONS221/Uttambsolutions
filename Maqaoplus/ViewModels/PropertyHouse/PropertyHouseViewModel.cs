@@ -1867,13 +1867,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep1HouseRoomVisible = false;
                 if (HouseroomData.Hashousewatermeter)
                 {
-                    _isStep3HouseRoomVisible = true;
+                    _isStep2HouseRoomVisible = true;
                     Step2HouseRoomLabel = "Step 2: Sub Meter Reading";
                     Step3HouseRoomLabel = "Step 3: Tenant Details";
                 }
                 else
                 {
                     _isStep2HouseRoomVisible = false;
+                    _isStep3HouseRoomVisible = true;
                     Step3HouseRoomLabel = "Step 2: Tenant Details";
                 }
             }
@@ -1913,7 +1914,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             else if (_isStep3HouseRoomVisible)
             {
                 _isStep3HouseRoomVisible = false;
-                _isStep2HouseRoomVisible = true;
+                if (HouseroomData.Hashousewatermeter)
+                {
+                    _isStep2HouseRoomVisible = true;
+                    Step2HouseRoomLabel = "Step 2: Sub Meter Reading";
+                }
+                else
+                {
+                    _isStep2HouseRoomVisible = false;
+                    _isStep1HouseRoomVisible = true;
+                }
             }
             else if (_isStep2HouseRoomVisible)
             {
