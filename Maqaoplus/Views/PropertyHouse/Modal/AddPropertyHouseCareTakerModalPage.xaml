@@ -71,10 +71,10 @@
 
 
                     <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-                        <Label Text="{Binding CareTakerFullname,StringFormat='Care Taker: {0}'}" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                        <Label Text="{Binding CareTakerFullname,StringFormat='Care Taker: {0}'}" FontAttributes="Bold" FontSize="24" Margin="0,0,0,20" TextColor="#0a506c"/>
                     </StackLayout>
                     <!-- Buttons placed at the bottom of the page -->
-                    <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,40,0,20">
+                    <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,70,0,20">
                         <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
                             <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="140" />
                             <Button Text="Submit" Command="{Binding SavePropertyHouseCareTakerCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" FontSize="18" HeightRequest="50" WidthRequest="140" />
