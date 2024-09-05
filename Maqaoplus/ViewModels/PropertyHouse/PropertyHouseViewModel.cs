@@ -1803,7 +1803,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async void HouseNextStep()
         {
-            IsLoading = true;
+            IsProcessing = true;
 
 
             // Move to the next step
@@ -1811,7 +1811,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 if (!ValidateHouseStep1())
                 {
-                    IsLoading = false;
+                    IsProcessing = false;
                     return;
                 }
                 _isStep1HouseVisible = false;
@@ -1821,7 +1821,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 if (!ValidateHouseStep2())
                 {
-                    IsLoading = false;
+                    IsProcessing = false;
                     return;
                 }
                 _isStep2HouseVisible = false;
@@ -1838,7 +1838,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep5HouseVisible = true;
 
             }
-            IsLoading = false;
+            IsProcessing = false;
             OnPropertyChanged(nameof(IsStep1HouseVisible));
             OnPropertyChanged(nameof(IsStep2HouseVisible));
             OnPropertyChanged(nameof(IsStep3HouseVisible));
@@ -1848,7 +1848,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async void HousePreviousStep()
         {
-            IsLoading = true;
+            IsProcessing = true;
 
 
             // Move to the previous step
@@ -1872,7 +1872,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep2HouseVisible = false;
                 _isStep1HouseVisible = true;
             }
-            IsLoading = false;
+            IsProcessing = false;
 
             OnPropertyChanged(nameof(IsStep1HouseVisible));
             OnPropertyChanged(nameof(IsStep2HouseVisible));
@@ -1942,7 +1942,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async void AgentHouseNextStep()
         {
-            IsLoading = true;
+            IsProcessing = true;
 
 
             // Move to the next step
@@ -1950,7 +1950,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 if (!ValidateAgentHouseStep1())
                 {
-                    IsLoading = false;
+                    IsProcessing = false;
                     return;
                 }
                 _isStep1AgentHouseVisible = false;
@@ -1960,7 +1960,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 if (!ValidateAgentHouseStep2())
                 {
-                    IsLoading = false;
+                    IsProcessing = false;
                     return;
                 }
                 _isStep2AgentHouseVisible = false;
@@ -1983,7 +1983,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep6AgentHouseVisible = true;
 
             }
-            IsLoading = false;
+            IsProcessing = false;
             OnPropertyChanged(nameof(IsStep1AgentHouseVisible));
             OnPropertyChanged(nameof(IsStep2AgentHouseVisible));
             OnPropertyChanged(nameof(IsStep3AgentHouseVisible));
@@ -1994,7 +1994,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
         private async void AgentHousePreviousStep()
         {
-            IsLoading = true;
+            IsProcessing = true;
 
 
             // Move to the previous step
@@ -2024,7 +2024,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep2AgentHouseVisible = false;
                 _isStep1AgentHouseVisible = true;
             }
-            IsLoading = false;
+            IsProcessing = false;
 
             OnPropertyChanged(nameof(IsStep1AgentHouseVisible));
             OnPropertyChanged(nameof(IsStep2AgentHouseVisible));
