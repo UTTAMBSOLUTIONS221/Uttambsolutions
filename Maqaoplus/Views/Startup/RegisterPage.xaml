@@ -140,6 +140,7 @@
                         <Label Text="{Binding SystemStaffConfirmPasswordError}" TextColor="Red" Padding="0"/>
                     </StackLayout>
                 </Grid>
+                
                 <HorizontalStackLayout VerticalOptions="Center">
                     <CheckBox IsChecked="{Binding Accepttermsandcondition}" Color="#0a506c" VerticalOptions="Center" />
                     <Label FontSize="14" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black">
