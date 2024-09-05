@@ -1,6 +1,7 @@
 ﻿using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
+using Maqaoplus.Constants;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -259,7 +260,6 @@ namespace Maqaoplus.ViewModels
             }
         }
 
-
         private async Task Updateuserdetailsasync()
         {
             IsProcessing = true;
@@ -285,7 +285,9 @@ namespace Maqaoplus.ViewModels
                 var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Registerstaff", HttpMethod.Post, StaffData);
                 if (response.StatusCode == 200)
                 {
-                    await Shell.Current.GoToAsync("//LoginPage");
+                    string userDetailStr = JsonConvert.SerializeObject(App.UserDetails);
+                    Preferences.Set(nameof(App.UserDetails), userDetailStr);
+                    await AppConstant.AddFlyoutMenusDetails();
                 }
                 else if (response.StatusCode == 1)
                 {
