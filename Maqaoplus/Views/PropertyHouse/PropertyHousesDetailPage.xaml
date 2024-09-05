@@ -71,7 +71,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Button Text="Manage" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Column="0"/>
+                                    <Button Text="Assign Tenant" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Column="0"/>
                                     <Button Text="Checklist" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewPropertyRoomCheckListCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Column="1"/>
                                     <Button Text="Images" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewPropertyRoomImageCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Column="2" />
                                 </Grid>
