@@ -14,7 +14,7 @@
 
         <VerticalStackLayout Grid.Row="0">
             <!-- Step 1 -->
-            <StackLayout IsVisible="{Binding IsStep1Visible}" Padding="4,8" Spacing="8">
+            <StackLayout IsVisible="{Binding IsStep1HouseRoomVisible}" Padding="4,8" Spacing="8">
                 <!-- Header -->
                 <Label Text="Step 1: Basic Room Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" />
 
@@ -169,15 +169,15 @@
                 </Grid>
                 <!-- Navigation Button -->
                 <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
-                    <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="150" />
-                    <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50"  WidthRequest="150"/>
+                    <Button Text="Cancel" Command="{Binding OnHouseRoomCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="150" />
+                    <Button Text="Next" Command="{Binding HouseRoomNextCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50"  WidthRequest="150"/>
                 </FlexLayout>
             </StackLayout>
 
             <!-- Step 2 -->
-            <StackLayout IsVisible="{Binding IsStep2Visible}" Padding="16" Spacing="8">
+            <StackLayout IsVisible="{Binding IsStep2HouseRoomVisible}" Padding="16" Spacing="8">
                 <!-- Header -->
-                <Label Text="{Binding Step2Label}" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="{Binding Step2HouseRoomLabel}" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center" />
 
                 <!-- Display a Grid for Adding New Meter Readings -->
                 <Grid>
@@ -256,17 +256,17 @@
 
                 <!-- Navigation Buttons at Start and End -->
                 <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
-                    <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                    <Button Text="Previous" Command="{Binding HouseRoomPreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                     <!-- Adjusted WidthRequest -->
-                    <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                    <Button Text="Next" Command="{Binding HouseRoomNextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                     <!-- Adjusted WidthRequest -->
                 </FlexLayout>
             </StackLayout>
 
             <!-- Step 3 -->
-            <StackLayout IsVisible="{Binding IsStep3Visible}" Padding="8" Spacing="8">
+            <StackLayout IsVisible="{Binding IsStep3HouseRoomVisible}" Padding="8" Spacing="8">
                 <!-- Section Header for Tenant Details -->
-                <Label Text="{Binding Step3Label}" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
+                <Label Text="{Binding Step3HouseRoomLabel}" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
 
                 <!-- Search Input -->
                 <Entry x:Name="SearchIdEntry" Placeholder="Enter tenant ID number to search" Keyboard="Numeric" PlaceholderColor="#0a506c" TextColor="#0a506c" FontSize="18" Text="{Binding SearchId, Mode=TwoWay}" ClearButtonVisibility="WhileEditing"/>
@@ -391,8 +391,8 @@
                 <Label Text="{Binding PropertyHouseRoomTenantidError}" TextColor="Red" />
                 <!-- Navigation Buttons -->
                 <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,0">
-                    <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12"  CornerRadius="5"  FontSize="18" WidthRequest="150" />
-                    <Button Text="Finish" Command="{Binding OnOkClickedCommand}"  BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" WidthRequest="150" />
+                    <Button Text="Previous" Command="{Binding HouseRoomPreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12"  CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                    <Button Text="Finish" Command="{Binding OnHouseRoomOkClickedCommand}"  BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" WidthRequest="150" />
                 </FlexLayout>
             </StackLayout>
 

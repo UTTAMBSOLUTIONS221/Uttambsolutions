@@ -74,6 +74,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand SearchStaffsCommand { get; }
         public ICommand SavePropertyHouseCareTakerCommand { get; }
 
+        public ICommand OnHouseRoomCancelClickedCommand { get; }
+        public ICommand OnHouseRoomOkClickedCommand { get; }
+
 
         public ICommand ViewRoomDetailsCommand { get; }
         public ICommand ViewPropertyRoomCheckListCommand { get; }
@@ -129,16 +132,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-        public string _searchId;
-        public string SearchId
-        {
-            get => _searchId;
-            set
-            {
-                _searchId = value;
-                OnPropertyChanged();
-            }
-        }
         private ObservableCollection<ListModel> _systemcounty;
         private ObservableCollection<ListModel> _systemsubcounty;
         private ObservableCollection<ListModel> _systemsubcountyward;
@@ -279,6 +272,29 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 OnPropertyChanged();
             }
         }
+
+        public string _searchId;
+        public string SearchId
+        {
+            get => _searchId;
+            set
+            {
+                _searchId = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public long _tenantid;
+        public long Tenantid
+        {
+            get => _tenantid;
+            set
+            {
+                _tenantid = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ObservableCollection<ListModel> _systemkitchentype;
         public ObservableCollection<ListModel> Systemkitchentype
         {
@@ -733,11 +749,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SaveAgentPropertyHouseCommand = new Command(async () => await SaveAgentPropertyHouseAsync());
             SavePropertyHouseCareTakerCommand = new Command(async () => await SavePropertyHouseCareTakerAsync());
 
+            OnHouseRoomCancelClickedCommand = new Command(OnHouseRoomCancelClicked);
+            OnHouseRoomOkClickedCommand = new Command(OnHouseRoomOkClicked);
+
+
             ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewRoomDetails(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomCheckListCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomCheckListDetailAsync(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomImageCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomImagesDetails(propertyRoom.Systempropertyhouseroomid));
-
-            UpdateHouseRoomSteps();
 
             // Initialize steps
             _isStep1HouseVisible = true;
@@ -2262,6 +2280,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task ViewRoomDetails(long propertyRoomId)
         {
             IsProcessing = true;
+            UpdateHouseRoomSteps();
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/" + propertyRoomId, HttpMethod.Get, null);
@@ -2430,6 +2449,80 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
+        private void OnHouseRoomOkClicked()
+        {
+            HouseroomData.Tenantid = TenantStaffData.Userid;
+            SearchId = string.Empty;
+            NewTenantStaffData = new Systemtenantdetails
+            {
+                Fullname = TenantStaffData.Fullname,
+                Phonenumber = TenantStaffData.Phonenumber,
+                Idnumber = TenantStaffData.Idnumber,
+            };
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+        private void OnHouseRoomCancelClicked()
+        {
+            Tenantid = 0;
+            NewTenantStaffData = new Systemtenantdetails
+            {
+                Fullname = "No Tenant selected",
+                Phonenumber = "No Tenant selected",
+                Idnumber = 0,
+            };
+            SearchId = string.Empty;
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+
+        private async Task SaveHouseRoomDetailsAsync()
+        {
+            IsProcessing = true;
+            if (HouseroomData.Tenantid == 0)
+            {
+                PropertyHouseRoomTenantidError = "New Tenant is required.";
+                return;
+            }
+
+            if (!ValidateHouseRoomStep1())
+            {
+                IsProcessing = false;
+                return;
+            }
+            if (HouseroomData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
+            try
+            {
+                HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
+                HouseroomData.Datecreated = DateTime.UtcNow;
+
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, HouseroomData);
+                if (response.StatusCode == 200)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else if (response.StatusCode == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
+
 
         private bool ValidateHouseStep1()
         {
