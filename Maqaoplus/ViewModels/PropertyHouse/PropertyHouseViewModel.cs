@@ -1856,8 +1856,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async void HouseRoomNextStep()
         {
             IsProcessing = true;
-
-
             // Move to the next step
             if (_isStep1HouseRoomVisible)
             {
@@ -1867,7 +1865,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     return;
                 }
                 _isStep1HouseRoomVisible = false;
-                _isStep2HouseRoomVisible = true;
+                if (HouseroomData.Hashousewatermeter)
+                {
+                    _isStep3HouseRoomVisible = true;
+                    Step2HouseRoomLabel = "Step 2: Sub Meter Reading";
+                    Step3HouseRoomLabel = "Step 3: Tenant Details";
+                }
+                else
+                {
+                    _isStep2HouseRoomVisible = false;
+                    Step3HouseRoomLabel = "Step 2: Tenant Details";
+                }
             }
             else if (_isStep2HouseRoomVisible)
             {
@@ -2023,21 +2031,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             return isValid;
         }
-        private void UpdateHouseRoomSteps()
-        {
-            if (HouseroomData.Hashousewatermeter)
-            {
-                IsStep2HouseRoomVisible = true;
-                Step2HouseRoomLabel = "Step 2: Sub Meter Reading";
-                Step3HouseRoomLabel = "Step 3: Tenant Details";
-            }
-            else
-            {
-                IsStep2HouseRoomVisible = false;
-                Step3HouseRoomLabel = "Step 2: Tenant Details";
-            }
-        }
-
 
         private void OnCancelClicked()
         {
@@ -2300,7 +2293,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         Systempropertyhousesize = new ObservableCollection<ListModel>(sizeResponse);
                         SelectedPropertyhousesize = Systempropertyhousesize.FirstOrDefault(x => x.Value == _houseroomData.Systempropertyhousesizeid.ToString());
                     }
-                    UpdateHouseRoomSteps();
                     var modalPage = new HousesRoomDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                     IsProcessing = false;
