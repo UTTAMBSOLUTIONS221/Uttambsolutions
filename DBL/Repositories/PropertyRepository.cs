@@ -187,6 +187,8 @@ namespace DBL.Repositories
                         propertyHouseSummary.Propertyhouseunits = Convert.ToInt32(dashboardsummaryJson["Propertyhouseunits"]);
                         propertyHouseSummary.Systempropertyoccupiedroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyoccupiedroom"]);
                         propertyHouseSummary.Systempropertyvacantroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyvacantroom"]);
+                        propertyHouseSummary.Expectedcollections = Convert.ToDecimal(dashboardsummaryJson["Expectedcollections"]);
+                        propertyHouseSummary.Collectedcollections = Convert.ToDecimal(dashboardsummaryJson["Collectedcollections"]);
                         propertyHouseSummary.Rentarrears = Convert.ToDecimal(dashboardsummaryJson["Rentarrears"]);
                         propertyHouseSummary.Uncollectedpayments = Convert.ToDecimal(dashboardsummaryJson["Uncollectedpayments"]);
                         propertyHouseSummary.Consumedmeters = Convert.ToDecimal(dashboardsummaryJson["Consumedmeters"]);
@@ -229,6 +231,8 @@ namespace DBL.Repositories
                         propertyHouseSummary.Propertyhouseunits = Convert.ToInt32(dashboardsummaryJson["Propertyhouseunits"]);
                         propertyHouseSummary.Systempropertyoccupiedroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyoccupiedroom"]);
                         propertyHouseSummary.Systempropertyvacantroom = Convert.ToInt32(dashboardsummaryJson["Systempropertyvacantroom"]);
+                        propertyHouseSummary.Expectedcollections = Convert.ToDecimal(dashboardsummaryJson["Expectedcollections"]);
+                        propertyHouseSummary.Collectedcollections = Convert.ToDecimal(dashboardsummaryJson["Collectedcollections"]);
                         propertyHouseSummary.Rentarrears = Convert.ToDecimal(dashboardsummaryJson["Rentarrears"]);
                         propertyHouseSummary.Uncollectedpayments = Convert.ToDecimal(dashboardsummaryJson["Uncollectedpayments"]);
                         propertyHouseSummary.Consumedmeters = Convert.ToDecimal(dashboardsummaryJson["Consumedmeters"]);
