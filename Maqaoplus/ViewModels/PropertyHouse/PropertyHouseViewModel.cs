@@ -42,6 +42,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isStep4HouseVisible;
         private bool _isStep5HouseVisible;
 
+        private bool _isStep1AgentHouseVisible;
+        private bool _isStep2AgentHouseVisible;
+        private bool _isStep3AgentHouseVisible;
+        private bool _isStep4AgentHouseVisible;
+        private bool _isStep5AgentHouseVisible;
+        private bool _isStep6AgentHouseVisible;
+
         private bool _isStep1HouseRoomVisible;
         private bool _isStep2HouseRoomVisible;
         private bool _isStep3HouseRoomVisible;
@@ -761,6 +768,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep3HouseVisible = false;
             _isStep4HouseVisible = false;
             _isStep5HouseVisible = false;
+
+            _isStep1AgentHouseVisible = true;
+            _isStep2AgentHouseVisible = false;
+            _isStep3AgentHouseVisible = false;
+            _isStep4AgentHouseVisible = false;
+            _isStep5AgentHouseVisible = false;
+            _isStep6AgentHouseVisible = false;
 
 
             _isStep1HouseRoomVisible = true;
@@ -1812,6 +1826,161 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnPropertyChanged(nameof(IsStep4HouseVisible));
             OnPropertyChanged(nameof(IsStep5HouseVisible));
         }
+
+
+        public bool IsStep1AgentHouseVisible
+        {
+            get => _isStep1AgentHouseVisible;
+            set
+            {
+                _isStep1AgentHouseVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsStep2AgentHouseVisible
+        {
+            get => _isStep2AgentHouseVisible;
+            set
+            {
+                _isStep2AgentHouseVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsStep3AgentHouseVisible
+        {
+            get => _isStep3AgentHouseVisible;
+            set
+            {
+                _isStep3AgentHouseVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsStep4AgentHouseVisible
+        {
+            get => _isStep4AgentHouseVisible;
+            set
+            {
+                _isStep4AgentHouseVisible = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsStep5AgentHouseVisible
+        {
+            get => _isStep5AgentHouseVisible;
+            set
+            {
+                _isStep5AgentHouseVisible = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsStep6AgentHouseVisible
+        {
+            get => _isStep6AgentHouseVisible;
+            set
+            {
+                _isStep6AgentHouseVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private async void AgentHouseNextStep()
+        {
+            IsLoading = true;
+
+
+            // Move to the next step
+            if (_isStep1AgentHouseVisible)
+            {
+                if (!ValidateAgentHouseStep1())
+                {
+                    IsLoading = false;
+                    return;
+                }
+                _isStep1AgentHouseVisible = false;
+                _isStep2AgentHouseVisible = true;
+            }
+            else if (_isStep2AgentHouseVisible)
+            {
+                if (!ValidateAgentHouseStep2())
+                {
+                    IsLoading = false;
+                    return;
+                }
+                _isStep2AgentHouseVisible = false;
+                _isStep3AgentHouseVisible = true;
+            }
+            else if (_isStep3AgentHouseVisible)
+            {
+                _isStep3AgentHouseVisible = false;
+                _isStep4AgentHouseVisible = true;
+            }
+            else if (_isStep4AgentHouseVisible)
+            {
+                _isStep4AgentHouseVisible = false;
+                _isStep5AgentHouseVisible = true;
+
+            }
+            else if (_isStep5AgentHouseVisible)
+            {
+                _isStep5AgentHouseVisible = false;
+                _isStep6AgentHouseVisible = true;
+
+            }
+            IsLoading = false;
+            OnPropertyChanged(nameof(IsStep1AgentHouseVisible));
+            OnPropertyChanged(nameof(IsStep2AgentHouseVisible));
+            OnPropertyChanged(nameof(IsStep3AgentHouseVisible));
+            OnPropertyChanged(nameof(IsStep4AgentHouseVisible));
+            OnPropertyChanged(nameof(IsStep5AgentHouseVisible));
+            OnPropertyChanged(nameof(IsStep6AgentHouseVisible));
+        }
+
+        private async void AgentHousePreviousStep()
+        {
+            IsLoading = true;
+
+
+            // Move to the previous step
+            if (_isStep6AgentHouseVisible)
+            {
+                _isStep6AgentHouseVisible = false;
+                _isStep5AgentHouseVisible = true;
+
+            }
+            else if (_isStep5AgentHouseVisible)
+            {
+                _isStep5AgentHouseVisible = false;
+                _isStep4AgentHouseVisible = true;
+            }
+            else if (_isStep4AgentHouseVisible)
+            {
+                _isStep4AgentHouseVisible = false;
+                _isStep3AgentHouseVisible = true;
+            }
+            else if (_isStep3AgentHouseVisible)
+            {
+                _isStep3AgentHouseVisible = false;
+                _isStep2AgentHouseVisible = true;
+            }
+            else if (_isStep2AgentHouseVisible)
+            {
+                _isStep2AgentHouseVisible = false;
+                _isStep1AgentHouseVisible = true;
+            }
+            IsLoading = false;
+
+            OnPropertyChanged(nameof(IsStep1AgentHouseVisible));
+            OnPropertyChanged(nameof(IsStep2AgentHouseVisible));
+            OnPropertyChanged(nameof(IsStep3AgentHouseVisible));
+            OnPropertyChanged(nameof(IsStep4AgentHouseVisible));
+            OnPropertyChanged(nameof(IsStep5AgentHouseVisible));
+            OnPropertyChanged(nameof(IsStep6AgentHouseVisible));
+        }
+
+
         public bool IsStep1HouseRoomVisible
         {
             get => _isStep1HouseRoomVisible;
