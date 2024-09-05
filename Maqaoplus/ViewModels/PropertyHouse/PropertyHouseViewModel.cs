@@ -737,7 +737,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             ViewPropertyRoomCheckListCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomCheckListDetailAsync(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomImageCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomImagesDetails(propertyRoom.Systempropertyhouseroomid));
 
-            UpdateHousRoomSteps();
+            UpdateHouseRoomSteps();
 
             // Initialize steps
             _isStep1HouseVisible = true;
