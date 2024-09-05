@@ -2032,7 +2032,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 // Validate Property Name
                 if (ClosingMeter < HouseroomData.Openingmeter)
                 {
-                    PropertyHouseRoomClosingMeterError = "Closing Meter Cant be  is required.";
+                    PropertyHouseRoomClosingMeterError = "Closing Meter cant be less than Opening required.";
                     isValid = false;
                 }
                 else
