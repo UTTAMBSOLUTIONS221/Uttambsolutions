@@ -36,11 +36,18 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private decimal _movedMeter;
         private decimal _consumedAmount;
 
-        private bool _isStep1Visible;
-        private bool _isStep2Visible;
-        private bool _isStep3Visible;
-        private bool _isStep4Visible;
-        private bool _isStep5Visible;
+        private bool _isStep1HouseVisible;
+        private bool _isStep2HouseVisible;
+        private bool _isStep3HouseVisible;
+        private bool _isStep4HouseVisible;
+        private bool _isStep5HouseVisible;
+
+        private bool _isStep1HouseRoomVisible;
+        private bool _isStep2HouseRoomVisible;
+        private bool _isStep3HouseRoomVisible;
+        private bool _isStep4HouseRoomVisible;
+        private string _step2HouseRoomLabel;
+        private string _step3HouseRoomLabel;
 
         public ICommand AddPropertyHouseCommand { get; }
         public ICommand AddAgentPropertyHouseCommand { get; }
@@ -54,8 +61,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadAgentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand ViewPropertyHouseImageCommand { get; }
-        public ICommand NextCommand { get; }
-        public ICommand PreviousCommand { get; }
+        public ICommand HouseNextCommand { get; }
+        public ICommand HousePreviousCommand { get; }
+        public ICommand HouseRoomNextCommand { get; }
+        public ICommand HouseRoomPreviousCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public ICommand SavePropertyHouseCommand { get; }
         public ICommand OnCancelCareTakerButtonClickedCommand { get; }
@@ -711,8 +720,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewHouseDetails(property.Propertyhouseid));
             ViewPropertyHouseImageCommand = new Command<Systemproperty>(async (property) => await ViewPropertyHouseImagesDetails(property.Propertyhouseid));
-            NextCommand = new Command(NextStep);
-            PreviousCommand = new Command(PreviousStep);
+            HouseNextCommand = new Command(HouseNextStep);
+            HousePreviousCommand = new Command(HousePreviousStep);
+            HouseRoomNextCommand = new Command(HouseRoomNextStep);
+            HouseRoomPreviousCommand = new Command(HouseRoomPreviousStep);
             OnCancelClickedCommand = new Command(OnCancelClicked);
             SavePropertyHouseCommand = new Command(async () => await SavePropertyHouseAsync());
             OnCancelCareTakerButtonClickedCommand = new Command(OnCancelCareTakerButtonClicked);
@@ -731,11 +742,17 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
 
             // Initialize steps
-            _isStep1Visible = true;
-            _isStep2Visible = false;
-            _isStep3Visible = false;
-            _isStep4Visible = false;
-            _isStep5Visible = false;
+            _isStep1HouseVisible = true;
+            _isStep2HouseVisible = false;
+            _isStep3HouseVisible = false;
+            _isStep4HouseVisible = false;
+            _isStep5HouseVisible = false;
+
+
+            _isStep1HouseRoomVisible = true;
+            _isStep2HouseRoomVisible = false;
+            _isStep3HouseRoomVisible = false;
+            _isStep4HouseRoomVisible = false;
         }
 
         private async Task RefreshItemsAsync()
@@ -1653,133 +1670,260 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
-        public bool IsStep1Visible
+        public bool IsStep1HouseVisible
         {
-            get => _isStep1Visible;
+            get => _isStep1HouseVisible;
             set
             {
-                _isStep1Visible = value;
+                _isStep1HouseVisible = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool IsStep2Visible
+        public bool IsStep2HouseVisible
         {
-            get => _isStep2Visible;
+            get => _isStep2HouseVisible;
             set
             {
-                _isStep2Visible = value;
+                _isStep2HouseVisible = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool IsStep3Visible
+        public bool IsStep3HouseVisible
         {
-            get => _isStep3Visible;
+            get => _isStep3HouseVisible;
             set
             {
-                _isStep3Visible = value;
+                _isStep3HouseVisible = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool IsStep4Visible
+        public bool IsStep4HouseVisible
         {
-            get => _isStep4Visible;
+            get => _isStep4HouseVisible;
             set
             {
-                _isStep4Visible = value;
+                _isStep4HouseVisible = value;
                 OnPropertyChanged();
             }
         }
-        public bool IsStep5Visible
+        public bool IsStep5HouseVisible
         {
-            get => _isStep5Visible;
+            get => _isStep5HouseVisible;
             set
             {
-                _isStep5Visible = value;
+                _isStep5HouseVisible = value;
                 OnPropertyChanged();
             }
         }
-        private async void NextStep()
+
+        private async void HouseNextStep()
         {
             IsLoading = true;
 
 
             // Move to the next step
-            if (_isStep1Visible)
+            if (_isStep1HouseVisible)
             {
-                if (!ValidateStep1())
+                if (!ValidateHouseStep1())
                 {
                     IsLoading = false;
                     return;
                 }
-                _isStep1Visible = false;
-                _isStep2Visible = true;
+                _isStep1HouseVisible = false;
+                _isStep2HouseVisible = true;
             }
-            else if (_isStep2Visible)
+            else if (_isStep2HouseVisible)
             {
-                if (!ValidateStep2())
+                if (!ValidateHouseStep2())
                 {
                     IsLoading = false;
                     return;
                 }
-                _isStep2Visible = false;
-                _isStep3Visible = true;
+                _isStep2HouseVisible = false;
+                _isStep3HouseVisible = true;
             }
-            else if (_isStep3Visible)
+            else if (_isStep3HouseVisible)
             {
-                _isStep3Visible = false;
-                _isStep4Visible = true;
+                _isStep3HouseVisible = false;
+                _isStep4HouseVisible = true;
             }
-            else if (_isStep4Visible)
+            else if (_isStep4HouseVisible)
             {
-                _isStep4Visible = false;
-                _isStep5Visible = true;
+                _isStep4HouseVisible = false;
+                _isStep5HouseVisible = true;
 
             }
             IsLoading = false;
-            OnPropertyChanged(nameof(IsStep1Visible));
-            OnPropertyChanged(nameof(IsStep2Visible));
-            OnPropertyChanged(nameof(IsStep3Visible));
-            OnPropertyChanged(nameof(IsStep4Visible));
-            OnPropertyChanged(nameof(IsStep5Visible));
+            OnPropertyChanged(nameof(IsStep1HouseVisible));
+            OnPropertyChanged(nameof(IsStep2HouseVisible));
+            OnPropertyChanged(nameof(IsStep3HouseVisible));
+            OnPropertyChanged(nameof(IsStep4HouseVisible));
+            OnPropertyChanged(nameof(IsStep5HouseVisible));
         }
 
-        private async void PreviousStep()
+        private async void HousePreviousStep()
         {
             IsLoading = true;
 
 
             // Move to the previous step
-            if (_isStep5Visible)
+            if (_isStep5HouseVisible)
             {
-                _isStep5Visible = false;
-                _isStep4Visible = true;
+                _isStep5HouseVisible = false;
+                _isStep4HouseVisible = true;
             }
-            else if (_isStep4Visible)
+            else if (_isStep4HouseVisible)
             {
-                _isStep4Visible = false;
-                _isStep3Visible = true;
+                _isStep4HouseVisible = false;
+                _isStep3HouseVisible = true;
             }
-            else if (_isStep3Visible)
+            else if (_isStep3HouseVisible)
             {
-                _isStep3Visible = false;
-                _isStep2Visible = true;
+                _isStep3HouseVisible = false;
+                _isStep2HouseVisible = true;
             }
-            else if (_isStep2Visible)
+            else if (_isStep2HouseVisible)
             {
-                _isStep2Visible = false;
-                _isStep1Visible = true;
+                _isStep2HouseVisible = false;
+                _isStep1HouseVisible = true;
             }
             IsLoading = false;
 
-            OnPropertyChanged(nameof(IsStep1Visible));
-            OnPropertyChanged(nameof(IsStep2Visible));
-            OnPropertyChanged(nameof(IsStep3Visible));
-            OnPropertyChanged(nameof(IsStep4Visible));
-            OnPropertyChanged(nameof(IsStep5Visible));
+            OnPropertyChanged(nameof(IsStep1HouseVisible));
+            OnPropertyChanged(nameof(IsStep2HouseVisible));
+            OnPropertyChanged(nameof(IsStep3HouseVisible));
+            OnPropertyChanged(nameof(IsStep4HouseVisible));
+            OnPropertyChanged(nameof(IsStep5HouseVisible));
         }
+        public bool IsStep1HouseRoomVisible
+        {
+            get => _isStep1HouseRoomVisible;
+            set
+            {
+                _isStep1HouseRoomVisible = value;
+                OnPropertyChanged(nameof(IsStep1HouseRoomVisible));
+            }
+        }
+
+        public bool IsStep2HouseRoomVisible
+        {
+            get => _isStep2HouseRoomVisible;
+            set
+            {
+                _isStep2HouseRoomVisible = value;
+                OnPropertyChanged(nameof(IsStep2HouseRoomVisible));
+            }
+        }
+
+        public bool IsStep3HouseRoomVisible
+        {
+            get => _isStep3HouseRoomVisible;
+            set
+            {
+                _isStep3HouseRoomVisible = value;
+                OnPropertyChanged(nameof(IsStep3HouseRoomVisible));
+            }
+        }
+
+        public bool IsStep4HouseRoomVisible
+        {
+            get => _isStep4HouseRoomVisible;
+            set
+            {
+                _isStep4HouseRoomVisible = value;
+                OnPropertyChanged(nameof(IsStep4HouseRoomVisible));
+            }
+        }
+        private async void HouseRoomNextStep()
+        {
+            IsProcessing = true;
+
+
+            // Move to the next step
+            if (_isStep1HouseRoomVisible)
+            {
+                if (!ValidateHouseRoomStep1())
+                {
+                    IsProcessing = false;
+                    return;
+                }
+                _isStep1HouseRoomVisible = false;
+                _isStep2HouseRoomVisible = true;
+            }
+            else if (_isStep2HouseRoomVisible)
+            {
+                if (!ValidateHouseRoomStep2())
+                {
+                    IsProcessing = false;
+                    return;
+                }
+                _isStep2HouseRoomVisible = false;
+                _isStep3HouseRoomVisible = true;
+            }
+            else if (_isStep3HouseRoomVisible)
+            {
+                _isStep3HouseRoomVisible = false;
+                _isStep4HouseRoomVisible = true;
+            }
+            IsProcessing = false;
+            OnPropertyChanged(nameof(IsStep1HouseRoomVisible));
+            OnPropertyChanged(nameof(IsStep2HouseRoomVisible));
+            OnPropertyChanged(nameof(IsStep3HouseRoomVisible));
+            OnPropertyChanged(nameof(IsStep4HouseRoomVisible));
+        }
+
+        private async void HouseRoomPreviousStep()
+        {
+            IsProcessing = true;
+
+
+            // Move to the previous step
+            if (_isStep4HouseRoomVisible)
+            {
+                _isStep4HouseRoomVisible = false;
+                _isStep3HouseRoomVisible = true;
+            }
+            else if (_isStep3HouseRoomVisible)
+            {
+                _isStep3HouseRoomVisible = false;
+                _isStep2HouseRoomVisible = true;
+            }
+            else if (_isStep2HouseRoomVisible)
+            {
+                _isStep2HouseRoomVisible = false;
+                _isStep1HouseRoomVisible = true;
+            }
+            IsProcessing = false;
+
+            OnPropertyChanged(nameof(IsStep1HouseRoomVisible));
+            OnPropertyChanged(nameof(IsStep2HouseRoomVisible));
+            OnPropertyChanged(nameof(IsStep3HouseRoomVisible));
+            OnPropertyChanged(nameof(IsStep4HouseRoomVisible));
+        }
+        public string Step2HouseRoomLabel
+        {
+            get => _step2HouseRoomLabel;
+            set
+            {
+                _step2HouseRoomLabel = value;
+                OnPropertyChanged(nameof(Step2HouseRoomLabel));
+            }
+        }
+
+        public string Step3HouseRoomLabel
+        {
+            get => _step3HouseRoomLabel;
+            set
+            {
+                _step3HouseRoomLabel = value;
+                OnPropertyChanged(nameof(Step3HouseRoomLabel));
+            }
+        }
+
+
         private void OnCancelClicked()
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
@@ -2190,12 +2334,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
-
-
-
-
-
-        private bool ValidateStep1()
+        private bool ValidateHouseStep1()
         {
             bool isValid = true;
 
@@ -2391,8 +2530,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             return isValid;
         }
 
-
-        private bool ValidateStep2()
+        private bool ValidateHouseStep2()
         {
             bool isValid = true;
 
