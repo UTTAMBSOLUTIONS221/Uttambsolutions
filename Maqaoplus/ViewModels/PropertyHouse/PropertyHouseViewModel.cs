@@ -72,6 +72,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand SaveAgentPropertyHouseCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand SearchStaffsCommand { get; }
+        public ICommand SearchTenantsCommand { get; }
         public ICommand SavePropertyHouseCareTakerCommand { get; }
 
         public ICommand OnHouseRoomCancelClickedCommand { get; }
@@ -746,6 +747,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnOkCareTakerButtonClickedCommand = new Command(async () => await OnOkCareTakerButtonClicked());
             SearchCommand = new Command(async () => await Search());
             SearchStaffsCommand = new Command(async () => await SearchStaff());
+            SearchTenantsCommand = new Command(async () => await SearchTenant());
             SaveAgentPropertyHouseCommand = new Command(async () => await SaveAgentPropertyHouseAsync());
             SavePropertyHouseCareTakerCommand = new Command(async () => await SavePropertyHouseCareTakerAsync());
 
@@ -2138,6 +2140,40 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 {
                     TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
                     var modalPage = new StaffCareTakerDetailModalPage(this);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                }
+                else
+                {
+                    TenantStaffData = new Systemtenantdetails();
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+        private async Task SearchTenant()
+        {
+            if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
+            {
+                PropertyHouseCareTakerError = "Required.";
+                return;
+            }
+
+            IsProcessing = true;
+
+            try
+            {
+                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
+
+                if (response != null)
+                {
+                    TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
+                    var modalPage = new StaffDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                 }
                 else

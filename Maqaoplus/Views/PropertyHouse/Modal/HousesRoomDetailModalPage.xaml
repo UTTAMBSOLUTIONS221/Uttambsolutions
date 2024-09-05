@@ -271,7 +271,7 @@
                 <!-- Search Input -->
                 <Entry x:Name="SearchIdEntry" Placeholder="Enter tenant ID number to search" Keyboard="Numeric" PlaceholderColor="#0a506c" TextColor="#0a506c" FontSize="18" Text="{Binding SearchId, Mode=TwoWay}" ClearButtonVisibility="WhileEditing"/>
                 <!-- Search Button -->
-                <Button Text="Search" Command="{Binding SearchCommand}" FontSize="18" />
+                <Button Text="Search" Command="{Binding SearchTenantsCommand}" FontSize="18" />
 
 
                 <ScrollView Grid.Row="0">
