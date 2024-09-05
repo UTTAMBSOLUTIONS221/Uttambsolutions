@@ -23,7 +23,7 @@
             <VerticalStackLayout>
 
                 <!-- Step 1 -->
-                <StackLayout IsVisible="{Binding IsStep1Visible}" Margin="0,0,0,20">
+                <StackLayout IsVisible="{Binding IsStep1HouseVisible}" Margin="0,0,0,20">
                     <!-- Header -->
                     <Label Text="Step 1: Basic House Details" FontSize="20" FontAttributes="Bold" Padding="4" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#0a506c"/>
                     <Grid ColumnSpacing="8" RowSpacing="0">
@@ -341,13 +341,13 @@
                     <!-- Navigation Button -->
                     <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,4">
                         <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="150" />
-                        <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50"  WidthRequest="150"/>
+                        <Button Text="Next" Command="{Binding HouseNextCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50"  WidthRequest="150"/>
                     </FlexLayout>
                 </StackLayout>
 
 
                 <!-- Step 2 -->
-                <StackLayout IsVisible="{Binding IsStep2Visible}" Padding="16" Spacing="16">
+                <StackLayout IsVisible="{Binding IsStep2HouseVisible}" Padding="16" Spacing="16">
                     <!-- Header -->
                     <Label Text="Step 2: House Rooms and Amount" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center"  TextColor="#0a506c"/>
 
@@ -389,15 +389,15 @@
                     <Label Text="{Binding PropertyHouseRoomSizeError}" TextColor="Red" />
                     <!-- Navigation Buttons at Start and End -->
                     <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
-                        <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                        <Button Text="Previous" Command="{Binding HousePreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                         <!-- Adjusted WidthRequest -->
-                        <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                        <Button Text="Next" Command="{Binding HouseNextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                         <!-- Adjusted WidthRequest -->
                     </FlexLayout>
                 </StackLayout>
 
                 <!-- Step 3 -->
-                <StackLayout IsVisible="{Binding IsStep3Visible}" Padding="16" Spacing="16">
+                <StackLayout IsVisible="{Binding IsStep3HouseVisible}" Padding="16" Spacing="16">
                     <!-- Section Header for Tenant Details -->
                     <Label Text="Step 3: House Deposits and Fees" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
 
@@ -440,15 +440,15 @@
 
                     <!-- Navigation Buttons -->
                     <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
-                        <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                        <Button Text="Previous" Command="{Binding HousePreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                         <!-- Adjusted WidthRequest -->
-                        <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                        <Button Text="Next" Command="{Binding HouseNextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                         <!-- Adjusted WidthRequest -->
                     </FlexLayout>
                 </StackLayout>
 
                 <!-- Step 4 -->
-                <StackLayout IsVisible="{Binding IsStep4Visible}" Padding="16" Spacing="16">
+                <StackLayout IsVisible="{Binding IsStep4HouseVisible}" Padding="16" Spacing="16">
                     <!-- Section Header for Tenant Details -->
                     <Label Text="Step 4: House Bank and Account" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
 
@@ -493,15 +493,15 @@
 
                     <!-- Navigation Buttons -->
                     <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
-                        <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                        <Button Text="Previous" Command="{Binding HousePreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                         <!-- Adjusted WidthRequest -->
-                        <Button Text="Next" Command="{Binding NextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                        <Button Text="Next" Command="{Binding HouseNextCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                         <!-- Adjusted WidthRequest -->
                     </FlexLayout>
                 </StackLayout>
 
                 <!-- Step 5 -->
-                <StackLayout IsVisible="{Binding IsStep5Visible}" Padding="16" Spacing="16">
+                <StackLayout IsVisible="{Binding IsStep5HouseVisible}" Padding="16" Spacing="16">
                     <!-- Section Header for Tenant Details -->
                     <Label Text="Step 5: House Benefits and Services to Enjoy" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
 
@@ -539,7 +539,7 @@
 
                     <!-- Navigation Buttons -->
                     <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
-                        <Button Text="Previous" Command="{Binding PreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                        <Button Text="Previous" Command="{Binding HousePreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                         <!-- Adjusted WidthRequest -->
                         <Button Text="Complete" Command="{Binding SavePropertyHouseCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                         <!-- Adjusted WidthRequest -->

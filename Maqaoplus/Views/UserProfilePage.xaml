@@ -74,7 +74,7 @@
                     <StackLayout Grid.Column="1" Grid.Row="2"  Margin="0">
                         <Label Text="ID Number" FontAttributes="Bold" FontSize="14" TextColor="#0a506c"/>
                         <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="10" Padding="2" HasShadow="True" Margin="0,0,0,0">
-                            <Entry Text="{Binding StaffData.Idnumber}" Placeholder="Enter ID number" Keyboard="Numeric" IsReadOnly="{Binding StaffData.Columnreadonly}"  FontSize="16" TextColor="Black" PlaceholderColor="#0a506c" />
+                            <Entry Text="{Binding StaffData.Idnumber}" Placeholder="Enter ID number" Keyboard="n" IsReadOnly="{Binding StaffData.Columnreadonly}"  FontSize="16" TextColor="Black" PlaceholderColor="#0a506c" />
                         </Frame>
                         <Label Text="{Binding SystemStaffIdnumberError}" TextColor="Red" Padding="0"/>
                     </StackLayout>
