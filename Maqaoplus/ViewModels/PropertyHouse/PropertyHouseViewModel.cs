@@ -1923,6 +1923,105 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
         }
 
+        private bool ValidateHouseRoomStep1()
+        {
+            bool isValid = true;
+
+            // Validate Property Name
+            if (string.IsNullOrWhiteSpace(HouseroomData?.Systempropertyhousesizename))
+            {
+                PropertyHouseRoomNumberError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomNumberError = null;
+            }
+            // Validate Property House Water Type
+            if (HouseroomData?.Kitchentypeid == 0)
+            {
+                PropertyHouseKitchenTypeError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseKitchenTypeError = null;
+            }
+            if (HouseroomData?.Systempropertyhousesizerent == 0)
+            {
+                PropertyHouseRoomRentError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomRentError = null;
+            }
+            // Validate Property House County
+            if (HouseroomData?.Systempropertyhousesizeid == 0)
+            {
+                PropertyHouseSizeError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseSizeError = null;
+            }
+            if (HouseroomData?.Roomoccupant == 0)
+            {
+                PropertyHouseRoomoccupantError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomoccupantError = null;
+            }
+            if (string.IsNullOrWhiteSpace(HouseroomData?.Roomoccupantdetail))
+            {
+                PropertyHouseRoomoccupantdetailError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomoccupantdetailError = null;
+            }
+
+            // Update overall IsValid property
+            IsProcessing = isValid;
+
+            return isValid;
+        }
+
+        private bool ValidateHouseRoomStep2()
+        {
+            bool isValid = true;
+
+            // Validate Property Name
+            if (ClosingMeter < HouseroomData.Openingmeter)
+            {
+                PropertyHouseRoomClosingMeterError = "Closing Meter Cant be  is required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomClosingMeterError = null;
+            }
+            return isValid;
+        }
+        private void UpdateHouseRoomSteps()
+        {
+            if (HouseroomData.Hashousewatermeter)
+            {
+                IsStep2HouseRoomVisible = false;
+                Step2HouseRoomLabel = "Step 2: Tenant Details";
+            }
+            else
+            {
+                IsStep2HouseRoomVisible = true;
+                Step2HouseRoomLabel = "Step 2: Sub Meter Reading";
+                Step3HouseRoomLabel = "Step 3: Tenant Details";
+            }
+        }
+
 
         private void OnCancelClicked()
         {
