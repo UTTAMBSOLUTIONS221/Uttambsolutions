@@ -2945,6 +2945,224 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             return isValid;
         }
+
+
+        private bool ValidateAgentHouseStep1()
+        {
+            bool isValid = true;
+
+            // Validate Property Name
+            if (string.IsNullOrWhiteSpace(SystempropertyData.Propertyhousename))
+            {
+                PropertyHouseNameError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseNameError = null;
+            }
+
+            if (SystempropertyData.Monthlycollection == 0 || SystempropertyData.Monthlycollection < 20000)
+            {
+                PropertyHouseMonthlycollectionError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseMonthlycollectionError = null;
+            }
+
+            // Validate Street or Landmark
+            if (string.IsNullOrWhiteSpace(SystempropertyData?.Streetorlandmark))
+            {
+                StreetOrLandmarkError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                StreetOrLandmarkError = null;
+            }
+
+            // Validate Contact Details
+            if (string.IsNullOrWhiteSpace(SystempropertyData?.Contactdetails))
+            {
+                ContactDetailsError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                ContactDetailsError = null;
+            }
+
+            // Validate Property House Status
+            if (SelectedHouseentrystatus == null)
+            {
+                PropertyHouseStatusError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseStatusError = null;
+            }
+            // Validate Property House Water Type
+            if (SelectedHousewatertype == null)
+            {
+                PropertyHouseWaterTypeError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseWaterTypeError = null;
+            }
+            // Validate Property House County
+            if (SelectedCounty == null)
+            {
+                PropertyHouseCountyError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseCountyError = null;
+            }
+            // Validate Property House Sub County
+            if (SelectedSubcounty == null)
+            {
+                PropertyHouseSubcountyError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseSubcountyError = null;
+            }
+            // Validate Property House sub County Ward
+            if (SelectedSubcountyward == null)
+            {
+                PropertyHouseSubcountyWardError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseSubcountyWardError = null;
+            }
+            // Validate Property House Rent Deposit
+            if (SelectedHouserentdueday == null)
+            {
+                PropertyHouseRentDueDayError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentDueDayError = null;
+            }
+            // Validate Property House Rent Deposit Months
+            if (SelectedHousedepositmonths == null)
+            {
+                PropertyHouseRentDepositMonthsError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentDepositMonthsError = null;
+            }
+            // Validate Property House Vacation Period
+            if (SelectedHousevacantnoticeperiod == null)
+            {
+                PropertyHouseRentVacationPeriodMonthsError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentVacationPeriodMonthsError = null;
+            }
+            if (SelectedHouserentdepositreturndays == null)
+            {
+                PropertyHouseRentDepositReturnDaysError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRentDepositReturnDaysError = null;
+            }
+            if (SystempropertyData.Allowpets)
+            {
+                if (SystempropertyData.Numberofpets < 0)
+                {
+                    PropertyHouseNumberofpetsError = "Required.";
+                }
+                else
+                {
+                    PropertyHouseNumberofpetsError = null;
+                }
+                if (SystempropertyData.Petdeposit < 0)
+                {
+                    PropertyHousePetdepositError = "Required.";
+                }
+                else
+                {
+                    PropertyHousePetdepositError = null;
+                }
+                if (string.IsNullOrWhiteSpace(SystempropertyData.Petparticulars))
+                {
+                    PropertyHousePetparticularsError = "Required.";
+                }
+                else
+                {
+                    PropertyHousePetparticularsError = null;
+                }
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseNumberofpetsError = null;
+                PropertyHousePetdepositError = null;
+                PropertyHousePetparticularsError = null;
+            }
+            if (SelectedHouserentingterms == null)
+            {
+                PropertyHouseRentingTermsError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                if (SelectedHouserentingterms.Value == "Fixedterm")
+                {
+                    if (SystempropertyData.Enddate == null || SystempropertyData.Enddate >= DateTime.Now.Date)
+                    {
+                        PropertyHouseRentingTermsEnddateError = "Required.";
+                    }
+                    else
+                    {
+                        PropertyHouseRentingTermsEnddateError = null;
+                    }
+                }
+                PropertyHouseRentingTermsError = null;
+            }
+            // Update overall IsValid property
+            IsValid = isValid;
+
+            return isValid;
+        }
+
+
+        private bool ValidateAgentHouseStep2()
+        {
+            bool isValid = true;
+
+            // Validate Property Name
+            if (!SystempropertyData.Propertyhousesize.Any(x => x.Systempropertyhousesizeunits > 0))
+            {
+                PropertyHouseRoomSizeError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                PropertyHouseRoomSizeError = null;
+            }
+            // Update overall IsValid property
+            IsValid = isValid;
+
+            return isValid;
+        }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
