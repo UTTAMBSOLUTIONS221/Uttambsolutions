@@ -2536,6 +2536,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response.StatusCode == 200)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
+                    var detailPage = new PropertyHousesDetailPage(this);
+                    await Shell.Current.Navigation.PushAsync(detailPage);
                 }
                 else if (response.StatusCode == 1)
                 {
@@ -2555,9 +2557,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
             }
         }
-
-
-
         private bool ValidateHouseStep1()
         {
             bool isValid = true;
