@@ -2027,14 +2027,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             if (HouseroomData.Hashousewatermeter)
             {
-                IsStep2HouseRoomVisible = false;
-                Step3HouseRoomLabel = "Step 2: Tenant Details";
-            }
-            else
-            {
                 IsStep2HouseRoomVisible = true;
                 Step2HouseRoomLabel = "Step 2: Sub Meter Reading";
                 Step3HouseRoomLabel = "Step 3: Tenant Details";
+            }
+            else
+            {
+                IsStep2HouseRoomVisible = false;
+                Step3HouseRoomLabel = "Step 2: Tenant Details";
             }
         }
 
