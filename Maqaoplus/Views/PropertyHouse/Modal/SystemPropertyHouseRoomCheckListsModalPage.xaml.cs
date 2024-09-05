@@ -4,7 +4,7 @@ namespace Maqaoplus.Views.PropertyHouse.Modal;
 
 public partial class SystemPropertyHouseRoomCheckListsModalPage : ContentPage
 {
-    public SystemPropertyHouseRoomCheckListsModalPage(PropertyHouseDetailViewModel viewModel)
+    public SystemPropertyHouseRoomCheckListsModalPage(PropertyHouseViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;

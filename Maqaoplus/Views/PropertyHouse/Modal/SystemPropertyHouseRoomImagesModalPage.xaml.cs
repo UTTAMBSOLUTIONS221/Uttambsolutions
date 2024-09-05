@@ -7,7 +7,7 @@ namespace Maqaoplus.Views.PropertyHouse.Modal
     {
         private const string FirebaseStorageBucket = "uttambsolutions-4ec2a.appspot.com";
 
-        public SystemPropertyHouseRoomImagesModalPage(PropertyHouseDetailViewModel viewModel)
+        public SystemPropertyHouseRoomImagesModalPage(PropertyHouseViewModel viewModel)
         {
             InitializeComponent();
             BindingContext = viewModel;
