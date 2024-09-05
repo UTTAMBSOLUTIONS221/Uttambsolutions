@@ -2027,16 +2027,20 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             bool isValid = true;
 
-            // Validate Property Name
-            if (ClosingMeter < HouseroomData.Openingmeter)
+            if (HouseroomData.Hashousewatermeter)
             {
-                PropertyHouseRoomClosingMeterError = "Closing Meter Cant be  is required.";
-                isValid = false;
+                // Validate Property Name
+                if (ClosingMeter < HouseroomData.Openingmeter)
+                {
+                    PropertyHouseRoomClosingMeterError = "Closing Meter Cant be  is required.";
+                    isValid = false;
+                }
+                else
+                {
+                    PropertyHouseRoomClosingMeterError = null;
+                }
             }
-            else
-            {
-                PropertyHouseRoomClosingMeterError = null;
-            }
+
             return isValid;
         }
 
