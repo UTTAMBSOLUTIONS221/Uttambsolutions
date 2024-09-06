@@ -460,7 +460,7 @@
                 <!-- Step 3 -->
                 <StackLayout IsVisible="{Binding IsStep4AgentHouseVisible}" Padding="16" Spacing="16">
                     <!-- Section Header for Tenant Details -->
-                    <Label Text="Step 3: House Deposits and Fees" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
+                    <Label Text="Step 4: House Deposits and Fees" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
 
                     <CollectionView ItemsSource="{Binding SystempropertyData.Propertyhousedepositfee}" SelectionMode="None">
                         <CollectionView.Header>
@@ -510,7 +510,7 @@
                 <!-- Step 4 -->
                 <StackLayout IsVisible="{Binding IsStep5AgentHouseVisible}" Padding="16" Spacing="16">
                     <!-- Section Header for Tenant Details -->
-                    <Label Text="Step 4: House Bank and Account" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
+                    <Label Text="Step 5: House Bank and Account" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
 
 
                     <CollectionView ItemsSource="{Binding SystempropertyData.Propertyhousebankingdetail}" SelectionMode="None">
@@ -563,7 +563,7 @@
                 <!-- Step 5 -->
                 <StackLayout IsVisible="{Binding IsStep6AgentHouseVisible}" Padding="16" Spacing="16">
                     <!-- Section Header for Tenant Details -->
-                    <Label Text="Step 5: House Benefits and Services to Enjoy" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
+                    <Label Text="Step 6: House Benefits and Services to Enjoy" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
 
 
                     <CollectionView ItemsSource="{Binding SystempropertyData.Propertyhousebenefit}" SelectionMode="None">
@@ -601,7 +601,7 @@
                     <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
                         <Button Text="Previous" Command="{Binding AgentHousePreviousCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                         <!-- Adjusted WidthRequest -->
-                        <Button Text="Complete" Command="{Binding SavePropertyHouseCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
+                        <Button Text="Complete" Command="{Binding SaveAgentPropertyHouseCommand}" BackgroundColor="#0a506c" TextColor="White" Padding="12" CornerRadius="5"  FontSize="18" WidthRequest="150" />
                         <!-- Adjusted WidthRequest -->
                     </FlexLayout>
                 </StackLayout>

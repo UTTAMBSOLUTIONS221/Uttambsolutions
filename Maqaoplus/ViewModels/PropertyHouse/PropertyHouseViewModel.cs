@@ -2454,6 +2454,21 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
                 return;
             }
+
+            SystempropertyData.Designation = "Owner";
+            SystempropertyData.Passwords = "Wn+vmyniwUM0FaEZa4M4OVV50t6oy8FC8en194kJdAI=";
+            SystempropertyData.Passharsh = "XUIMWLJQOUXS";
+            SystempropertyData.Datecreated = DateTime.Now;
+            SystempropertyData.Datemodified = DateTime.Now;
+            SystempropertyData.Lastlogin = DateTime.Now;
+            SystempropertyData.Loginstatus = 0;
+            SystempropertyData.Accepttermsandcondition = true;
+            SystempropertyData.Isactive = true;
+            SystempropertyData.Isdeleted = false;
+            SystempropertyData.Isdefault = false;
+            SystempropertyData.Updateprofile = true;
+            SystempropertyData.Parentid = 0;
+            SystempropertyData.Passwordresetdate = DateTime.Now.AddDays(90);
             SystempropertyData.Isagency = true;
             SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
