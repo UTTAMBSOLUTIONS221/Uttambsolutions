@@ -2409,20 +2409,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response != null && response.Data != null)
                 {
                     TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
-                    HouseroomData.Fullname = TenantStaffData.Fullname;
-                    HouseroomData.Emailaddress = TenantStaffData.Emailaddress;
-                    HouseroomData.Phonenumber = TenantStaffData.Phonenumber;
-                    HouseroomData.Idnumber = TenantStaffData.Idnumber;
-                    HouseroomData.Walletbalance = TenantStaffData.Walletbalance;
                 }
                 else
                 {
                     TenantStaffData = new Systemtenantdetails();
-                    HouseroomData.Fullname = "";
-                    HouseroomData.Emailaddress = "";
-                    HouseroomData.Phonenumber = "";
-                    HouseroomData.Idnumber = 0;
-                    HouseroomData.Walletbalance = 0;
                 }
                 var modalPage = new StaffDetailModalPage(this);
                 await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
@@ -2769,6 +2759,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 Phonenumber = TenantStaffData.Phonenumber,
                 Idnumber = TenantStaffData.Idnumber,
             };
+            HouseroomData.Fullname = TenantStaffData.Fullname;
+            HouseroomData.Emailaddress = TenantStaffData.Emailaddress;
+            HouseroomData.Phonenumber = TenantStaffData.Phonenumber;
+            HouseroomData.Idnumber = TenantStaffData.Idnumber;
+            HouseroomData.Walletbalance = TenantStaffData.Walletbalance;
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
         private void OnHouseRoomCancelClicked()
@@ -2781,6 +2776,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 Idnumber = 0,
             };
             SearchId = string.Empty;
+            HouseroomData.Fullname = "";
+            HouseroomData.Emailaddress = "";
+            HouseroomData.Phonenumber = "";
+            HouseroomData.Idnumber = 0;
+            HouseroomData.Walletbalance = 0;
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
