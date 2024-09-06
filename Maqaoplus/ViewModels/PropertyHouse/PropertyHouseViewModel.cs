@@ -2409,13 +2409,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response != null && response.Data != null)
                 {
                     TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
+                    var modalPage = new StaffDetailModalPage(this);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                 }
                 else
                 {
                     TenantStaffData = new Systemtenantdetails();
                 }
-                var modalPage = new StaffDetailModalPage(this);
-                await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             }
             catch (Exception ex)
             {
