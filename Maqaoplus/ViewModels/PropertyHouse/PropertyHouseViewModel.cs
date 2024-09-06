@@ -2827,7 +2827,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, HouseroomData);
                 if (response.StatusCode == 200)
                 {
-                    await Application.Current.MainPage.Navigation.PopModalAsync();
+                    await Application.Current.MainPage.Navigation.PopAsync();
                     var detailPage = new PropertyHousesDetailPage(this);
                     await Shell.Current.Navigation.PushAsync(detailPage);
                 }
