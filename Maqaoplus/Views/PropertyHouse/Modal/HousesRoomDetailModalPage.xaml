@@ -230,7 +230,7 @@
                         </Grid>
 
                         <!-- Dynamic Table Content -->
-                        <CollectionView ItemsSource="{Binding HouseroomData.Meterhistorydata}" Margin="0">
+                        <CollectionView ItemsSource="{Binding .Meterhistorydata}" Margin="0">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -239,7 +239,7 @@
                                             <ColumnDefinition Width="70" />
                                             <ColumnDefinition Width="60" />
                                             <ColumnDefinition Width="50" />
-                                            <ColumnDefinition Width="70" />
+                                            <ColumnDefinition Width="70" /> HouseroomData
                                         </Grid.ColumnDefinitions>
 
                                         <Label Text="{Binding Systempropertyhouseroommeternumber}"  FontSize="14" Grid.Column="0" MaxLines="3" LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
@@ -400,7 +400,7 @@
 
                 <StackLayout IsVisible="{Binding IsStep4HouseRoomVisible}" Padding="8" Spacing="8">
                     <Label Text="{Binding Step4HouseRoomLabel}" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
-                    <CollectionView ItemsSource="{Binding SystempropertyhouseroomfixturesData.Roomfixtures}" SelectionMode="None" Margin="0,0,0,0">
+                    <CollectionView ItemsSource="{Binding HouseroomData.Roomfixtures}" SelectionMode="None" Margin="0,0,0,0">
                         <CollectionView.Header>
                             <Grid ColumnDefinitions="3*,2*,3*" BackgroundColor="#e0e0e0" Padding="5">
                                 <Label Text="Room Fixture" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center"/>

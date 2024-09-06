@@ -50,6 +50,7 @@ namespace DBL.Entities
         public DateTime Datemodified { get; set; }
         public List<Systempropertyhouseroommeterhistory>? Meterhistorydata { get; set; }
         public List<PropertyHousetenantroomhistory>? Roomtenanthistorydata { get; set; }
+        public List<RoomFixture>? Roomfixtures { get; set; }
     }
 
 }
