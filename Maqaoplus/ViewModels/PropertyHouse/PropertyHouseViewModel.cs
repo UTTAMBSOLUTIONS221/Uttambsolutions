@@ -2414,13 +2414,18 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     HouseroomData.Phonenumber = TenantStaffData.Phonenumber;
                     HouseroomData.Idnumber = TenantStaffData.Idnumber;
                     HouseroomData.Walletbalance = TenantStaffData.Walletbalance;
-                    var modalPage = new StaffDetailModalPage(this);
-                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                 }
                 else
                 {
                     TenantStaffData = new Systemtenantdetails();
+                    HouseroomData.Fullname = "";
+                    HouseroomData.Emailaddress = "";
+                    HouseroomData.Phonenumber = "";
+                    HouseroomData.Idnumber = 0;
+                    HouseroomData.Walletbalance = 0;
                 }
+                var modalPage = new StaffDetailModalPage(this);
+                await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             }
             catch (Exception ex)
             {
@@ -2600,7 +2605,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     if (systemPropertyFixturesResponse != null)
                     {
                         // Set SelectedFixture for each RoomFixture
-                        foreach (var item in SystempropertyhouseroomfixturesData.Roomfixtures)
+                        foreach (var item in HouseroomData.Roomfixtures)
                         {
                             item.Systempropertyfixturesdata = new ObservableCollection<ListModel>(systemPropertyFixturesResponse);
                             item.SelectedFixture = item.Systempropertyfixturesdata.FirstOrDefault(x => x.Value == item.Fixturestatusid.ToString());
