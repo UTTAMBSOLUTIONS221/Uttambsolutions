@@ -2580,6 +2580,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
                     var kitchentypeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemkitchentype, HttpMethod.Get);
                     var sizeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyhousesizes, HttpMethod.Get);
+                    var systemPropertyFixturesResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempropertyfixtures, HttpMethod.Get);
 
                     if (kitchentypeResponse != null)
                     {
@@ -2590,6 +2591,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     {
                         Systempropertyhousesize = new ObservableCollection<ListModel>(sizeResponse);
                         SelectedPropertyhousesize = Systempropertyhousesize.FirstOrDefault(x => x.Value == _houseroomData.Systempropertyhousesizeid.ToString());
+                    }
+                    if (systemPropertyFixturesResponse != null)
+                    {
+                        // Set SelectedFixture for each RoomFixture
+                        foreach (var item in SystempropertyhouseroomfixturesData.Roomfixtures)
+                        {
+                            item.Systempropertyfixturesdata = new ObservableCollection<ListModel>(systemPropertyFixturesResponse);
+                            item.SelectedFixture = item.Systempropertyfixturesdata.FirstOrDefault(x => x.Value == item.Fixturestatusid.ToString());
+                        }
                     }
                     var modalPage = new HousesRoomDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
