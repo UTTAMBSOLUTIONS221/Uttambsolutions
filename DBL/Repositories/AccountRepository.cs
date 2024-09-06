@@ -181,7 +181,9 @@ namespace DBL.Repositories
                     TenantDataResponse.Userid = Convert.ToInt32(tenantreponseJson["Userid"]);
                     TenantDataResponse.Fullname = tenantreponseJson["Fullname"].ToString();
                     TenantDataResponse.Phonenumber = tenantreponseJson["Phonenumber"].ToString();
+                    TenantDataResponse.Emailaddress = tenantreponseJson["Emailaddress"].ToString();
                     TenantDataResponse.Idnumber = Convert.ToInt32(tenantreponseJson["Idnumber"]);
+                    TenantDataResponse.Walletbalance = Convert.ToDecimal(tenantreponseJson["Walletbalance"]);
                     TenantDataResponse.Loginstatus = Convert.ToInt32(tenantreponseJson["Loginstatus"]);
                     if (tenantreponseJson["Tenantroomhistory"] != null)
                     {
