@@ -858,6 +858,7 @@ namespace DBL.Repositories
                         Tenantroomhistory = JsonConvert.DeserializeObject<List<PropertyHousetenantroomhistory>>(RoomtenanthistoryJson);
                     }
                     responseData.Meterhistorydata = responseMeterData;
+                    responseData.Roomfixtures = propertyhouseroomfixturesummary;
                     responseData.Roomtenanthistorydata = Tenantroomhistory;
                     response.Data = responseData;
                     return response;
