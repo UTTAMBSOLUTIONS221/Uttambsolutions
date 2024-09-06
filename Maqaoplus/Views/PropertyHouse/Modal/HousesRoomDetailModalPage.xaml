@@ -230,7 +230,7 @@
                         </Grid>
 
                         <!-- Dynamic Table Content -->
-                        <CollectionView ItemsSource="{Binding .Meterhistorydata}" Margin="0">
+                        <CollectionView ItemsSource="{Binding HouseroomData.Meterhistorydata}" Margin="0">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -239,7 +239,7 @@
                                             <ColumnDefinition Width="70" />
                                             <ColumnDefinition Width="60" />
                                             <ColumnDefinition Width="50" />
-                                            <ColumnDefinition Width="70" /> HouseroomData
+                                            <ColumnDefinition Width="70" />
                                         </Grid.ColumnDefinitions>
 
                                         <Label Text="{Binding Systempropertyhouseroommeternumber}"  FontSize="14" Grid.Column="0" MaxLines="3" LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
