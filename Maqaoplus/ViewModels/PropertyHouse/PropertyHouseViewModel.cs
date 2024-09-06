@@ -2409,6 +2409,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response != null && response.Data != null)
                 {
                     TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
+                    HouseroomData.Fullname = TenantStaffData.Fullname;
+                    HouseroomData.Emailaddress = TenantStaffData.Emailaddress;
+                    HouseroomData.Phonenumber = TenantStaffData.Phonenumber;
+                    HouseroomData.Idnumber = TenantStaffData.Idnumber;
+                    HouseroomData.Walletbalance = TenantStaffData.Walletbalance;
                     var modalPage = new StaffDetailModalPage(this);
                     await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                 }

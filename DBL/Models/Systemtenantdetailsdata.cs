@@ -9,9 +9,11 @@
         public int Userid { get; set; }
         public string? Fullname { get; set; }
         public string? Phonenumber { get; set; }
+        public string? Emailaddress { get; set; }
         public int Loginstatus { get; set; }
         public long Idnumber { get; set; }
         public int Propertyhouseid { get; set; }
+        public decimal Walletbalance { get; set; }
 
         public List<PropertyHouseTenant>? Tenantroomhistory { get; set; }
     }
