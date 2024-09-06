@@ -2406,7 +2406,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
 
-                if (response != null)
+                if (response != null && response.Data != null)
                 {
                     TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
                     var modalPage = new StaffDetailModalPage(this);
