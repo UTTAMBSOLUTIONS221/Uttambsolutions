@@ -56,6 +56,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private bool _isStep4HouseRoomVisible;
         private string _step2HouseRoomLabel;
         private string _step3HouseRoomLabel;
+        private string _step4HouseRoomLabel;
 
         public ICommand AddPropertyHouseCommand { get; }
         public ICommand AddAgentPropertyHouseCommand { get; }
@@ -2091,12 +2092,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     _isStep2HouseRoomVisible = true;
                     Step2HouseRoomLabel = "Step 2: Sub Meter Reading";
                     Step3HouseRoomLabel = "Step 3: Tenant Details";
+                    Step4HouseRoomLabel = "Step 4: Room Checklist";
                 }
                 else
                 {
                     _isStep2HouseRoomVisible = false;
                     _isStep3HouseRoomVisible = true;
                     Step3HouseRoomLabel = "Step 2: Tenant Details";
+                    Step4HouseRoomLabel = "Step 3: Room Checklist";
                 }
             }
             else if (_isStep2HouseRoomVisible)
@@ -2114,6 +2117,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 _isStep3HouseRoomVisible = false;
                 _isStep4HouseRoomVisible = true;
             }
+
             IsProcessing = false;
             OnPropertyChanged(nameof(IsStep1HouseRoomVisible));
             OnPropertyChanged(nameof(IsStep2HouseRoomVisible));
@@ -2175,6 +2179,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 _step3HouseRoomLabel = value;
                 OnPropertyChanged(nameof(Step3HouseRoomLabel));
+            }
+        }
+        public string Step4HouseRoomLabel
+        {
+            get => _step4HouseRoomLabel;
+            set
+            {
+                _step4HouseRoomLabel = value;
+                OnPropertyChanged(nameof(Step4HouseRoomLabel));
             }
         }
 
