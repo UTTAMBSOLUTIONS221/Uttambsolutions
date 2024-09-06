@@ -26,6 +26,16 @@ namespace DBL.Repositories
                 return connection.Query<SystemStaff>("Usp_Getsystemstaffdata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+        public Genericmodel Registersystemuserdevicedata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registersystemuserdevicedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         public Genericmodel Registersystemstaffdata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))

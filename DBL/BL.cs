@@ -70,6 +70,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Registersystemuserdevicedata(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Registersystemuserdevicedata(obj);
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Registersystemstaffdata(SystemStaff obj)
         {
             return Task.Run(() =>

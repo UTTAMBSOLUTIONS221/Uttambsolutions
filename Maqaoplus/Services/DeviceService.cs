@@ -15,18 +15,21 @@ namespace Maqaoplus.Services
 
             var deviceInfo = new DeviceInfoModel
             {
-                AndroidId = androidId,
+                Userid = 0,
+                Androidid = androidId,
                 Manufacturer = DeviceInfo.Manufacturer,
                 Model = DeviceInfo.Model,
-                OSVersion = DeviceInfo.VersionString,
+                Osversion = DeviceInfo.VersionString,
                 Platform = DeviceInfo.Platform.ToString(),
-                DeviceName = DeviceInfo.Name
+                Devicename = DeviceInfo.Name,
+                Datecreated = DateTime.UtcNow,
+                Datemodified = DateTime.UtcNow
             };
 
             return deviceInfo;
 #else
-            // Handle non-Android case or return default values
-            return new DeviceInfoModel();
+                    // Handle non-Android case or return default values
+                    return new DeviceInfoModel();
 #endif
         }
     }

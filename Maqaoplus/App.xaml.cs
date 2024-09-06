@@ -29,7 +29,7 @@ namespace Maqaoplus
 
             // Get device info and save it
             var deviceInfo = _deviceService.GetDeviceInfo();
-            await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseroomimagedata", deviceInfo);
+            await _serviceProvider.CallCustomUnAuthWebApi("/api/Account/Registersystemuserdevicedata", deviceInfo);
         }
     }
 }

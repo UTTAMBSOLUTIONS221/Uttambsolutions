@@ -2,11 +2,14 @@
 {
     public class DeviceInfoModel
     {
-        public string? AndroidId { get; set; }
+        public long Userid { get; set; }
+        public string? Androidid { get; set; }
         public string? Manufacturer { get; set; }
         public string? Model { get; set; }
-        public string? OSVersion { get; set; }
+        public string? Osversion { get; set; }
         public string? Platform { get; set; }
-        public string? DeviceName { get; set; }
+        public string? Devicename { get; set; }
+        public DateTime Datecreated { get; set; }
+        public DateTime Datemodified { get; set; }
     }
 }

@@ -90,6 +90,13 @@ namespace API.Controllers
             return token;
         }
         [AllowAnonymous]
+        [Route("Registersystemuserdevicedata"), HttpPost]
+        public async Task<Genericmodel> Registersystemuserdevicedata(DeviceInfoModel Model)
+        {
+            return await bl.Registersystemuserdevicedata(JsonConvert.SerializeObject(Model));
+        }
+
+        [AllowAnonymous]
         [Route("Registerstaff"), HttpPost]
         public async Task<Genericmodel> Registersystemstaffdata(SystemStaff Model)
         {
