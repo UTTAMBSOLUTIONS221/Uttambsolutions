@@ -2468,6 +2468,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SystempropertyData.Isdefault = false;
             SystempropertyData.Updateprofile = true;
             SystempropertyData.Parentid = 0;
+            SystempropertyData.Roleid = 2;
             SystempropertyData.Passwordresetdate = DateTime.Now.AddDays(90);
             SystempropertyData.Isagency = true;
             SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
