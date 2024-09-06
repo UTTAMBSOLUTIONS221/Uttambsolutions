@@ -9,6 +9,7 @@ namespace DBL.Repositories
         PropertyHouseDetailData Getallsystempropertyvacanthousesdata(int Page, int PageSize);
         IEnumerable<Systemproperty> Getsystempropertyhousedata();
         Genericmodel Registersystempropertyhousedata(string JsonData);
+        Genericmodel Registersystemagentpropertyhousedata(string JsonData);
         Systemproperty Getsystempropertyhousedatabyid(long Propertyid);
         SystemPropertyHouseCareTakerData Getsystempropertyhousecaretakerdatabyownerid(long Ownerid);
         SystemStaffData Getsystempropertyhousecaretakerdatabyid(long Caretakerhouseid);

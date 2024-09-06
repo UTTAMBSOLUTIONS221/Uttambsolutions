@@ -2478,7 +2478,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SystempropertyData.Datemodified = DateTime.Now;
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhousedata", SystempropertyData);
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystemagentpropertyhousedata", SystempropertyData);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();

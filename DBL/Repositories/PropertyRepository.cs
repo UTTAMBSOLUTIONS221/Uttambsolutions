@@ -54,6 +54,16 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registersystempropertyhousedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+        public Genericmodel Registersystemagentpropertyhousedata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registersystemagentpropertyhousedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         public Systemproperty Getsystempropertyhousedatabyid(long Propertyid)
         {
             using (var connection = new SqlConnection(_connString))
