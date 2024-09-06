@@ -2807,7 +2807,23 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
                 HouseroomData.Datecreated = DateTime.UtcNow;
-
+                foreach (var fixture in HouseroomData.Roomfixtures)
+                {
+                    if (fixture.SelectedFixture != null)
+                    {
+                        // Set the Fixtureid to the selected value
+                        fixture.Fixturestatusid = int.Parse(fixture.SelectedFixture.Value);
+                        fixture.Propertyhouseroomid = Convert.ToInt32(HouseroomData.Systempropertyhouseroomid);
+                        fixture.Createdby = App.UserDetails.Usermodel.Userid;
+                        fixture.Datecreated = DateTime.UtcNow;
+                    }
+                    if (fixture.Fixtureunits > 0 && fixture.Fixturestatusid <= 0)
+                    {
+                        await Shell.Current.DisplayAlert("Validation Error", "Fixture status is required when units are greater than 0.", "OK");
+                        IsProcessing = false;
+                        return;
+                    }
+                }
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, HouseroomData);
                 if (response.StatusCode == 200)
                 {
