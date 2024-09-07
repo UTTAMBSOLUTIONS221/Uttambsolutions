@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Usp_Getsystempropertyhouseroomagreementdetaildatabytenantid]
-@Propertytenantid BIGINT,
+@Tenantid BIGINT,
 @TenantAgreementDetailData VARCHAR(MAX)  OUTPUT
 AS
 BEGIN
@@ -13,9 +13,9 @@ BEGIN
 		BEGIN TRY
 		BEGIN TRANSACTION;
 		SET @TenantAgreementDetailData = (SELECT (SELECT STAFF.Userid,STAFF.Firstname+' '+STAFF.Lastname AS Tenantfullname,STAFF.Phonenumber AS Tenantphonenumber,STAFF.Emailaddress AS Tenantemailaddress,STAFF.Idnumber AS Tenantidnumber,
-				OWN.Firstname+' '+OWN.Lastname AS Ownerfullname,OWN.Phonenumber AS Ownerphonenumber,OWN.Emailaddress AS Owneremailaddress,ISNULL(OWN.Idnumber,0) AS Owneridnumber,HOUSE.Propertyhousename,HOUSE.Rentdueday,HOUSE.Vacantnoticeperiod,HOUSE.Hasagent,HOUSE.Hashousewatermeter,WATER.Systemhousewatertypename,
+				HOUSE.Propertyhouseid,OWN.Firstname+' '+OWN.Lastname AS Ownerfullname,OWN.Phonenumber AS Ownerphonenumber,OWN.Emailaddress AS Owneremailaddress,ISNULL(OWN.Idnumber,0) AS Owneridnumber,HOUSE.Propertyhousename,HOUSE.Rentdueday,HOUSE.Vacantnoticeperiod,HOUSE.Hasagent,HOUSE.Hashousewatermeter,WATER.Systemhousewatertypename,
 				SIZE.Systemhousesizename + ' '+ ROOM.Systempropertyhousesizename AS Systempropertyhousesizename,ROOM.Systempropertyhousesizerent,CASE WHEN HOUSE.Hashousedeposit =1 THEN  (ROOM.Systempropertyhousesizerent * HOUSE.Rentdepositmonth) ELSE 0 END AS Systempropertyhousesizerentdeposit,HOUSE.Rentdepositmonth,HOUSE.Rentdepositreturndays AS Rentdepositrefunddays,DATEADD(DAY, HOUSE.Rentdueday, DATEADD(MONTH, 1, GETDATE())) AS Nextrentduedate,CASE WHEN HOUSE.Rentingterms= 'Month-to-Month' THEN 1 ELSE 0 END AS Monthlyrentterms,CASE WHEN HOUSE.Rentingterms= 'Month-to-Month' THEN CONVERT(VARCHAR(20), HOUSE.Enddate, 103) ELSE 'Not Applicable' END AS Termenddate,HOUSE.Allowpets AS Allowpets,HOUSE.Waterunitprice,
-				Systemcounty.Countyname,Systemsubcounty.Subcountyname,Systemsubcountyward.Subcountywardname,HOUSE.Streetorlandmark,ISNULL(SPRA.Datecreated,GETDATE()) AS TenantDatecreated,ISNULL(SPRA.Signatureimageurl,'') AS TenantSignatureimageurl, (SELECT ISNULL(AGR.Signatureimageurl,'') FROM Systempropertyhouseagreements AGR WHERE AGR.Propertyhouseid = ROOM.Systempropertyhouseid) AS OwnerSignatureimageurl,'' AS Agreementdata,
+				Systemcounty.Countyname,Systemsubcounty.Subcountyname,Systemsubcountyward.Subcountywardname,HOUSE.Streetorlandmark,ISNULL(SPRA.Datecreated,GETDATE()) AS TenantDatecreated,ISNULL(SPRA.Signatureimageurl,'') AS TenantSignatureimageurl, (SELECT ISNULL(AGR.Signatureimageurl,'') FROM Systempropertyhouseagreements AGR WHERE AGR.Ownerortenantid = STAFF.Userid) AS OwnerSignatureimageurl,'' AS Agreementdata,
 				(SELECT STRING_AGG(FEE.Housedepositfeename + ' ' + CONVERT(VARCHAR(40), UTILITY.Systempropertyhousedepositfeeamount), ', ') AS CombinedFees FROM Systempropertyhousedepositfees UTILITY INNER JOIN Systemhousedepositfees FEE ON UTILITY.Housedepositfeeid = FEE.Housedepositfeeid WHERE UTILITY.Systempropertyhousesizedepositfeewehave = 1 AND FEE.Isrecurring = 1 AND UTILITY.Propertyhouseid=HOUSE.Propertyhouseid) AS Propertyhouseutility,
 				(SELECT STRING_AGG(BNK.Systembankname+ ' - ' + CONVERT(VARCHAR(10),BNK.Systembankpaybill)  + ' - ' + CONVERT(VARCHAR(40), ACC.Systempropertybankaccount), ', ') AS CombinedFees FROM Systempropertybankaccounts ACC INNER JOIN Systemsupportedbanks BNK ON ACC.Systembankid = BNK.Systembankid WHERE ACC.Systempropertyhousebankwehave = 1  AND ACC.Propertyhouseid=HOUSE.Propertyhouseid) AS Systempropertybankname,
 				TENANT.Roomoccupant AS Tenantsintheroom,HOUSE.Rentutilityinclusive AS Rentutilityinclusive
@@ -32,7 +32,7 @@ BEGIN
 				LEFT JOIN Systemsubcountyward Systemsubcountyward ON HOUSE.Subcountywardid=Systemsubcountyward.Subcountywardid
 				LEFT JOIN Systempropertyhouseagreements SPRA ON STAFF.Userid=SPRA.Ownerortenantid
 				LEFT JOIN Systemhousewatertype WATER ON HOUSE.Watertypeid=WATER.Systemhousewatertypeid
-				WHERE DESG.Staffdesignation='Tenant' AND TENANT.Isoccupant=1 AND STAFF.Userid=@Propertytenantid
+				WHERE DESG.Staffdesignation='Tenant' AND TENANT.Isoccupant=1 AND STAFF.Userid=@Tenantid
 			FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER
 			) AS Data
 			FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER

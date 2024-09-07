@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Usp_Getsystempropertyhousecaretakerdatabyid]
-    @CareTakerid BIGINT,
+    @Caretakerhouseid BIGINT,
 	@Systempropertyhousecaretakerdata VARCHAR(MAX)  OUTPUT
 AS
 BEGIN
@@ -16,14 +16,14 @@ BEGIN
 		BEGIN TRANSACTION;
 
 		SET @Systempropertyhousecaretakerdata= 
-		  (SELECT(SELECT Systemstaff.Userid,Caretaker.Propertyhouseid,Systemstaff.Firstname,Systemstaff.Lastname,Systemstaff.Firstname+' '+Systemstaff.Lastname AS Fullname,HSC.Propertyhousename,Systemstaff.Phonenumber,Systemstaffdesignation.Staffdesignation,Systemstaff.Username,Systemstaff.Emailaddress,Systemstaff.Genderid,Systemstaff.Maritalstatusid,Systemstaff.Roleid,Systemstaff.Passharsh,Systemstaff.Passwords,Systemstaff.Isactive,Systemstaff.Isdeleted,Systemstaff.Isdefault,Systemstaff.Loginstatus,Systemstaff.Passwordresetdate,Systemstaff.Parentid,Systemstaff.Userprofileimageurl,Systemstaff.Usercurriculumvitae,Systemstaff.Idnumber,CASE WHEN Systemstaff.Idnumber IS NULL THEN 0 ELSE 1 END AS Columnreadonly,Systemstaff.Updateprofile,Systemstaff.Extra,Systemstaff.Extra1,Systemstaff.Extra2,Systemstaff.Extra3,Systemstaff.Extra4,Systemstaff.Extra5,Systemstaff.Createdby,Systemstaff.Modifiedby,ISNULL(Systemstaffsaccount.Accountnumber,0) AS Accountnumber,1 AS Subscriptionamount,Systemstaff.Lastlogin,Systemstaffkin.Kinname,Systemstaffkin.Kinphonenumber,Systemstaffkin.Kinrelationshipid,Systemstaff.Datemodified,Systemstaff.Datecreated 
+		  (SELECT(SELECT Systemstaff.Userid,Caretaker.Caretakerhouseid,Caretaker.Propertyhouseid,Systemstaff.Firstname,Systemstaff.Lastname,Systemstaff.Firstname+' '+Systemstaff.Lastname AS Fullname,HSC.Propertyhousename,Systemstaff.Phonenumber,Systemstaffdesignation.Staffdesignation,Systemstaff.Username,Systemstaff.Emailaddress,Systemstaff.Genderid,Systemstaff.Maritalstatusid,Systemstaff.Roleid,Systemstaff.Passharsh,Systemstaff.Passwords,Systemstaff.Isactive,Systemstaff.Isdeleted,Systemstaff.Isdefault,Systemstaff.Loginstatus,Systemstaff.Passwordresetdate,Systemstaff.Parentid,Systemstaff.Userprofileimageurl,Systemstaff.Usercurriculumvitae,Systemstaff.Idnumber,CASE WHEN Systemstaff.Idnumber IS NULL THEN 0 ELSE 1 END AS Columnreadonly,Systemstaff.Updateprofile,Systemstaff.Extra,Systemstaff.Extra1,Systemstaff.Extra2,Systemstaff.Extra3,Systemstaff.Extra4,Systemstaff.Extra5,Systemstaff.Createdby,Systemstaff.Modifiedby,ISNULL(Systemstaffsaccount.Accountnumber,0) AS Accountnumber,1 AS Subscriptionamount,Systemstaff.Lastlogin,Systemstaffkin.Kinname,Systemstaffkin.Kinphonenumber,Systemstaffkin.Kinrelationshipid,Systemstaff.Datemodified,Systemstaff.Datecreated 
 			FROM Systemstaffs Systemstaff 
 			LEFT JOIN Systemstaffsaccount Systemstaffsaccount ON Systemstaff.Userid=Systemstaffsaccount.Userid
 			LEFT JOIN Systemstaffdesignations Systemstaffdesignation ON Systemstaff.Userid=Systemstaffdesignation.Systemstaffid
 			LEFT JOIN Systemstaffkins Systemstaffkin ON Systemstaff.Userid=Systemstaffkin.Userid
 			LEFT JOIN Systemcaretakerhouse Caretaker ON Systemstaff.Userid=Caretaker.Caretakerid
 			LEFT JOIN Systempropertyhouses HSC ON Caretaker.Propertyhouseid=HSC.Propertyhouseid
-			WHERE Systemstaff.Userid=@CareTakerid
+			WHERE Caretaker.Caretakerhouseid=@Caretakerhouseid
 		  FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER
 		 ) AS Data
 		 FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER

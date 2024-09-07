@@ -262,7 +262,6 @@
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomimagebyhouseroomid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomimagebyhouseid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomfixturesdatabyhouseroomid.sql" />
-    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseagreementdetaildatabypropertyidandownerid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseroomagreementdetaildatabytenantid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyroompaymentbypaymentid.sql" />
     <Build Include="dbo\Tables\Systemcaretakerhouse.sql" />
@@ -273,5 +272,10 @@
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousecaretakerdatabyownerid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhousecaretakerdatabyid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystemagentpropertyhouseroomtenantsdata.sql" />
+    <Build Include="dbo\Tables\Systemuserdevices.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemuserdevicedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersystemagentpropertyhousedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseagreementdetaildatabyownerid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseagreementdetaildatabyagentid.sql" />
   </ItemGroup>
 </Project>

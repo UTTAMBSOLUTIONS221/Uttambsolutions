@@ -61,8 +61,6 @@ BEGIN
 		 SELECT @RoleId = RoleId FROM Systemroles WHERE Rolename = 'Default User';
 		END
 
-		select * From Systemroles
-
         BEGIN TRANSACTION;
         DECLARE @Systemstaffdata TABLE (Action VARCHAR(100), UserId BIGINT, FullName VARCHAR(140), Passwords VARCHAR(100), PassHarsh VARCHAR(100), UserName VARCHAR(100), EmailAddress VARCHAR(100));
 
@@ -175,7 +173,7 @@ BEGIN
 			WHEN NOT MATCHED BY TARGET THEN
 			INSERT (Caretakerid,Propertyhouseid)
 			VALUES (source.Caretakerid,source.Propertyhouseid);
-
+			UPDATE Systemstaffs SET Roleid=(SELECT RoleId FROM Systemroles WHERE Rolename = 'Maqaoplus Property House CareTaker') WHERE Userid=JSON_VALUE(@JsonObjectData, '$.Userid');
 			UPDATE Systemstaffdesignations SET Staffdesignation = 'Caretaker' WHERE Systemstaffid=JSON_VALUE(@JsonObjectData, '$.Userid');
 		END
 

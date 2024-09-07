@@ -76,7 +76,11 @@ BEGIN
 				   Systempropertyhouse.Rentingterms,Systempropertyhouse.Enddate,Systempropertyhouse.Numberofpets,Systempropertyhouse.Petdeposit,Systempropertyhouse.Petparticulars,
 				   Systempropertyhouse.Extra,Systempropertyhouse.Extra1,Systempropertyhouse.Extra2,Systempropertyhouse.Extra3,Systempropertyhouse.Extra4,Systempropertyhouse.Extra5,Systempropertyhouse.Extra6,Systempropertyhouse.Extra7,
 				   Systempropertyhouse.Extra8,Systempropertyhouse.Extra9,Systempropertyhouse.Extra10,Systempropertyhouse.Createdby,Systempropertyhouse.Modifiedby,Systempropertyhouse.Datecreated,Systempropertyhouse.Datemodified,
-					(
+				   ISNULL(Systemstaff.Userid,0) AS Userid,ISNULL(Systemstaff.Firstname,'') AS Firstname,ISNULL(Systemstaff.Lastname,'') AS Lastname,ISNULL(Systemstaff.Phonenumber,'') AS Phonenumber,ISNULL(Systemstaff.Username,'') AS Username,
+				   ISNULL(Systemstaff.Emailaddress,'') Emailaddress,ISNULL(Systemstaff.Genderid,0) AS Genderid,ISNULL(Systemstaff.Maritalstatusid,0) AS Maritalstatusid,ISNULL(Systemstaff.Roleid,0) AS Roleid,ISNULL(Systemstaff.Passharsh,'') AS Passharsh,
+				   ISNULL(Systemstaff.Passwords,'') AS Passwords,ISNULL(Systemstaff.Isactive,1) AS Isactive,ISNULL(Systemstaff.Isdeleted,0) AS Isdeleted,ISNULL(Systemstaff.Isdefault,0) AS Isdefault,ISNULL(Systemstaff.Loginstatus,0) AS Loginstatus,
+				   ISNULL(Systemstaff.Passwordresetdate,GETDATE()) AS Passwordresetdate,ISNULL(Systemstaff.Parentid,0) AS Parentid,ISNULL(Systemstaff.Userprofileimageurl,'') AS Userprofileimageurl,ISNULL(Systemstaff.Usercurriculumvitae,'') AS Usercurriculumvitae,ISNULL(Systemstaff.Idnumber,0) AS Idnumber,ISNULL(Systemstaff.Updateprofile,0) AS Updateprofile,ISNULL(Systemstaff.Lastlogin,GETDATE()) AS Lastlogin,
+				   (
 						SELECT 
 							ISNULL(Systempropertyhousesize.Systempropertyhousesizeid, 0) AS Systempropertyhousesizeid,
 							ISNULL(Systempropertyhousesize.Propertyhouseid, 0) AS Propertyhouseid,
@@ -129,6 +133,7 @@ BEGIN
 						FOR JSON PATH
 					) AS Propertyhousebenefit
 					FROM Systempropertyhouses Systempropertyhouse
+					LEFT JOIN Systemstaffs Systemstaff ON Systempropertyhouse.Propertyhouseowner=Systemstaff.Userid
 					WHERE Systempropertyhouse.Propertyhouseid=@Propertyhouseid
 					FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER
 				 );

@@ -27,6 +27,7 @@ BEGIN
 		BEGIN TRANSACTION;
 		    DECLARE @Systempropertyhouseroomsdata TABLE (Systempropertyhouseroomid BIGINT);
 			DECLARE @Systempropertyhouseroomstenantdata TABLE (Systempropertyhousetenantentryid BIGINT);
+			DECLARE @InsertedIDs TABLE(Propertychecklistid BIGINT,Fixtureid INT);
 			MERGE INTO Systempropertyhouserooms AS target
 			USING (
 			SELECT Systempropertyhouseroomid,Systempropertyhouseid,Systempropertyhousesizeid,Systempropertyhousesizename,Systempropertyhousesizerent,Isvacant,Isunderrenovation,Isshop,Isgroundfloor,Hasbalcony,Forcaretaker,Kitchentypeid
@@ -69,7 +70,27 @@ BEGIN
 			OUTPUT inserted.Systempropertyhousetenantentryid INTO @Systempropertyhouseroomstenantdata;
 		    SET @Systempropertyhousetenantentryid = (SELECT TOP 1 Systempropertyhousetenantentryid FROM @Systempropertyhouseroomstenantdata);
 
-			
+			MERGE INTO Systempropertyhousechecklists AS target
+			USING (SELECT Propertychecklistid,Propertyhouseroomid,Fixtureid,Fixtureunits,Fixturestatusid,Createdby,Datecreated
+			FROM OPENJSON(@JsonObjectdata, '$.Roomfixtures') WITH (Propertychecklistid BIGINT '$.Propertychecklistid',Propertyhouseroomid BIGINT '$.Propertyhouseroomid',
+			Fixtureid INT '$.Fixtureid',Fixtureunits INT '$.Fixtureunits',Fixturestatusid INT '$.Fixturestatusid',Createdby BIGINT '$.Createdby',Datecreated DATETIME2 '$.Datecreated')) AS source
+			ON target.Propertychecklistid = source.Propertychecklistid AND target.Propertyhouseroomid = source.Propertyhouseroomid AND target.Fixtureid = source.Fixtureid
+			WHEN MATCHED THEN
+			UPDATE SET target.Fixtureunits = source.Fixtureunits,target.Fixturestatusid = source.Fixturestatusid,target.Createdby = source.Createdby,target.Datecreated = source.Datecreated
+			WHEN NOT MATCHED BY TARGET THEN
+			INSERT (Propertyhouseroomid,Fixtureid,Fixtureunits,Fixturestatusid,Createdby,Datecreated)
+			VALUES (source.Propertyhouseroomid,source.Fixtureid,source.Fixtureunits,source.Fixturestatusid,source.Createdby,source.Datecreated)
+			OUTPUT inserted.Propertychecklistid,inserted.Fixtureid INTO @InsertedIDs;
+
+
+			INSERT INTO Systemfixturestatushist (Propertychecklistid, Fixturestatusid, Fixtureunits)
+			SELECT i.Propertychecklistid, s.Fixturestatusid, s.Fixtureunits FROM @InsertedIDs i 
+			JOIN OPENJSON(@JsonObjectdata, '$.Roomfixtures') WITH (Propertychecklistid BIGINT '$.Propertychecklistid',Fixturestatusid INT '$.Fixturestatusid', Fixtureunits INT '$.Fixtureunits') AS s
+			ON i.Propertychecklistid = s.Propertychecklistid WHERE s.Fixtureunits > 0 AND (NOT EXISTS (
+			SELECT 1 FROM Systemfixturestatushist hist WHERE hist.Propertychecklistid = i.Propertychecklistid AND hist.Fixturestatusid = s.Fixturestatusid AND hist.Fixtureunits = s.Fixtureunits) 
+			OR s.Fixturestatusid <> (SELECT TOP 1 hist.Fixturestatusid FROM Systemfixturestatushist hist WHERE hist.Propertychecklistid = i.Propertychecklistid ORDER BY hist.Datecreated DESC)
+			OR s.Fixtureunits <> (SELECT TOP 1 hist.Fixtureunits  FROM Systemfixturestatushist hist  WHERE hist.Propertychecklistid = i.Propertychecklistid ORDER BY hist.Datecreated DESC));
+
 			--update any other entry for the tenant to have vacated
 			UPDATE Systempropertyhouseroomstenant SET Isoccupant=0,Occupationalstatus=0  WHERE Systempropertyhousetenantid = JSON_VALUE(@JsonObjectdata, '$.Tenantid');
 			--update the current entry for the tenant to have resided
