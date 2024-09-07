@@ -268,12 +268,12 @@ namespace DBL
         #endregion
 
         #region Verify System Staff Forgot Password
-        public Task<Genericmodel> ValidateSystemForgotpasswordStaff(Forgotpassword Obj)
+        public Task<ForgotPasswordUserResponce> ValidateSystemForgotpasswordStaff(Forgotpassword Obj)
         {
             return Task.Run(() =>
             {
-                Genericmodel model = new Genericmodel();
-                var resp = db.AccountRepository.VerifySystemStaff(JsonConvert.SerializeObject(Obj));
+                ForgotPasswordUserResponce model = new ForgotPasswordUserResponce();
+                var resp = db.AccountRepository.VerifyForgotPasswordSystemStaff(JsonConvert.SerializeObject(Obj));
                 if (resp.RespStatus == 0)
                 {
                     string companyname = "Maqao Plus";
@@ -313,8 +313,6 @@ namespace DBL
                     bool data = emlsnd.UttambsolutionssendemailAsync(resp.Usermodel.Emailaddress, "Forgot Password", message, true, "", "", "");
                     if (data)
                     {
-                        model.RespStatus = 0;
-                        model.RespMessage = "Email Sent";
                         //Update Email is sent 
                         EmailLogs Logs1 = new EmailLogs
                         {
@@ -331,14 +329,11 @@ namespace DBL
                     }
                     else
                     {
-                        model.RespStatus = 1;
-                        model.RespMessage = "Email not Sent";
+
                     }
                 }
                 else
                 {
-                    model.RespStatus = 1;
-                    model.RespMessage = resp.RespMessage;
                 }
                 return model;
             });

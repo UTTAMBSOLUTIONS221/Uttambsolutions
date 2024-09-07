@@ -105,7 +105,7 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [Route("Forgotstaffpassword"), HttpPost]
-        public async Task<Genericmodel> Forgotstaffpassword(Forgotpassword Model)
+        public async Task<ForgotPasswordUserResponce> Forgotstaffpassword(Forgotpassword Model)
         {
             return await bl.ValidateSystemForgotpasswordStaff(Model);
         }

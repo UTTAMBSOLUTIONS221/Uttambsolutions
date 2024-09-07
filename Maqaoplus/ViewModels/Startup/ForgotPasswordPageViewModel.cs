@@ -177,7 +177,6 @@ namespace Maqaoplus.ViewModels.Startup
             try
             {
                 IsProcessing = true;
-                ForgotPasswordData.Emailaddress = EmailAddress;
                 ForgotPasswordData.Androidid = androidId;
                 // Call your registration service here
                 var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, ForgotPasswordData);

@@ -247,6 +247,30 @@ namespace DBL.Repositories
         #endregion
 
 
+        #region Verify System Staff Forgot Password
+        public ForgotPasswordUserResponce VerifyForgotPasswordSystemStaff(string JsonData)
+        {
+
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                ForgotPasswordUserResponce resp = new ForgotPasswordUserResponce();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectData", JsonData);
+                parameters.Add("@StaffDetails", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Verifyforgotpasswordsystemstaff", parameters, commandType: CommandType.StoredProcedure);
+                string staffDetailsJson = parameters.Get<string>("@StaffDetails");
+                JObject responseJson = JObject.Parse(staffDetailsJson);
+
+                string userModelJson = responseJson["Data"].ToString();
+                Forgotpassword userResponse = JsonConvert.DeserializeObject<Forgotpassword>(userModelJson);
+                resp.Data = userResponse;
+                return resp;
+            }
+        }
+        #endregion
+
+
         #region System Permission by Roles
         public List<string> Getsystempermissiondatabyroleid(long Roleid)
         {
