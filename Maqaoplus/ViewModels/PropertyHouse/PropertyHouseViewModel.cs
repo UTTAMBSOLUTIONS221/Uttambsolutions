@@ -2078,90 +2078,110 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async void HouseRoomNextStep()
         {
             IsProcessing = true;
-            // Move to the next step
-            if (_isStep1HouseRoomVisible)
+            OnPropertyChanged(nameof(IsProcessing)); // Notify UI that IsProcessing has changed
+
+            await Task.Run(async () =>
             {
-                if (!ValidateHouseRoomStep1())
+                // Move to the next step
+                if (_isStep1HouseRoomVisible)
                 {
-                    IsProcessing = false;
-                    return;
+                    if (!ValidateHouseRoomStep1())
+                    {
+                        IsProcessing = false;
+                        OnPropertyChanged(nameof(IsProcessing));
+                        return;
+                    }
+
+                    _isStep1HouseRoomVisible = false;
+                    if (HouseroomData.Hashousewatermeter)
+                    {
+                        _isStep2HouseRoomVisible = true;
+                        Step2HouseRoomLabel = "Step 2: Sub Meter Reading";
+                        Step3HouseRoomLabel = "Step 3: Tenant Details";
+                        Step4HouseRoomLabel = "Step 4: Room Checklist";
+                    }
+                    else
+                    {
+                        _isStep2HouseRoomVisible = false;
+                        _isStep3HouseRoomVisible = true;
+                        Step3HouseRoomLabel = "Step 2: Tenant Details";
+                        Step4HouseRoomLabel = "Step 3: Room Checklist";
+                    }
                 }
-                _isStep1HouseRoomVisible = false;
-                if (HouseroomData.Hashousewatermeter)
+                else if (_isStep2HouseRoomVisible)
                 {
-                    _isStep2HouseRoomVisible = true;
-                    Step2HouseRoomLabel = "Step 2: Sub Meter Reading";
-                    Step3HouseRoomLabel = "Step 3: Tenant Details";
-                    Step4HouseRoomLabel = "Step 4: Room Checklist";
-                }
-                else
-                {
+                    if (!ValidateHouseRoomStep2())
+                    {
+                        IsProcessing = false;
+                        OnPropertyChanged(nameof(IsProcessing));
+                        return;
+                    }
+
                     _isStep2HouseRoomVisible = false;
                     _isStep3HouseRoomVisible = true;
-                    Step3HouseRoomLabel = "Step 2: Tenant Details";
-                    Step4HouseRoomLabel = "Step 3: Room Checklist";
                 }
-            }
-            else if (_isStep2HouseRoomVisible)
-            {
-                if (!ValidateHouseRoomStep2())
+                else if (_isStep3HouseRoomVisible)
                 {
-                    IsProcessing = false;
-                    return;
+                    _isStep3HouseRoomVisible = false;
+                    _isStep4HouseRoomVisible = true;
                 }
-                _isStep2HouseRoomVisible = false;
-                _isStep3HouseRoomVisible = true;
-            }
-            else if (_isStep3HouseRoomVisible)
-            {
-                _isStep3HouseRoomVisible = false;
-                _isStep4HouseRoomVisible = true;
-            }
+
+                // Notify UI about step visibility changes
+                OnPropertyChanged(nameof(IsStep1HouseRoomVisible));
+                OnPropertyChanged(nameof(IsStep2HouseRoomVisible));
+                OnPropertyChanged(nameof(IsStep3HouseRoomVisible));
+                OnPropertyChanged(nameof(IsStep4HouseRoomVisible));
+            });
 
             IsProcessing = false;
-            OnPropertyChanged(nameof(IsStep1HouseRoomVisible));
-            OnPropertyChanged(nameof(IsStep2HouseRoomVisible));
-            OnPropertyChanged(nameof(IsStep3HouseRoomVisible));
-            OnPropertyChanged(nameof(IsStep4HouseRoomVisible));
+            OnPropertyChanged(nameof(IsProcessing)); // Notify UI that processing has finished
         }
 
         private async void HouseRoomPreviousStep()
         {
             IsProcessing = true;
+            OnPropertyChanged(nameof(IsProcessing));
 
-
-            // Move to the previous step
-            if (_isStep4HouseRoomVisible)
+            await Task.Run(() =>
             {
-                _isStep4HouseRoomVisible = false;
-                _isStep3HouseRoomVisible = true;
-            }
-            else if (_isStep3HouseRoomVisible)
-            {
-                _isStep3HouseRoomVisible = false;
-                if (HouseroomData.Hashousewatermeter)
+                // Move to the previous step
+                if (_isStep4HouseRoomVisible)
                 {
-                    _isStep2HouseRoomVisible = true;
-                    Step2HouseRoomLabel = "Step 2: Sub Meter Reading";
+                    _isStep4HouseRoomVisible = false;
+                    _isStep3HouseRoomVisible = true;
                 }
-                else
+                else if (_isStep3HouseRoomVisible)
+                {
+                    _isStep3HouseRoomVisible = false;
+
+                    if (HouseroomData.Hashousewatermeter)
+                    {
+                        _isStep2HouseRoomVisible = true;
+                        Step2HouseRoomLabel = "Step 2: Sub Meter Reading";
+                    }
+                    else
+                    {
+                        _isStep2HouseRoomVisible = false;
+                        _isStep1HouseRoomVisible = true;
+                    }
+                }
+                else if (_isStep2HouseRoomVisible)
                 {
                     _isStep2HouseRoomVisible = false;
                     _isStep1HouseRoomVisible = true;
                 }
-            }
-            else if (_isStep2HouseRoomVisible)
-            {
-                _isStep2HouseRoomVisible = false;
-                _isStep1HouseRoomVisible = true;
-            }
-            IsProcessing = false;
 
-            OnPropertyChanged(nameof(IsStep1HouseRoomVisible));
-            OnPropertyChanged(nameof(IsStep2HouseRoomVisible));
-            OnPropertyChanged(nameof(IsStep3HouseRoomVisible));
-            OnPropertyChanged(nameof(IsStep4HouseRoomVisible));
+                // Notify UI about step visibility changes
+                OnPropertyChanged(nameof(IsStep1HouseRoomVisible));
+                OnPropertyChanged(nameof(IsStep2HouseRoomVisible));
+                OnPropertyChanged(nameof(IsStep3HouseRoomVisible));
+                OnPropertyChanged(nameof(IsStep4HouseRoomVisible));
+            });
+
+            IsProcessing = false;
+            OnPropertyChanged(nameof(IsProcessing));
         }
+
         public string Step2HouseRoomLabel
         {
             get => _step2HouseRoomLabel;
