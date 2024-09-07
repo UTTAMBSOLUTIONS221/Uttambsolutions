@@ -213,7 +213,7 @@ namespace DBL.Repositories
         #endregion
 
         #region Verify System Staff
-        public UsermodelResponce VerifySystemStaff(string JsonData)
+        public UsermodelResponce VerifySystemStaff(string Username)
         {
 
             using (var connection = new SqlConnection(_connString))
@@ -221,7 +221,7 @@ namespace DBL.Repositories
                 connection.Open();
                 UsermodelResponce resp = new UsermodelResponce();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@JsonObjectData", JsonData);
+                parameters.Add("@Username", Username);
                 parameters.Add("@StaffDetails", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Verifysystemstaffdata", parameters, commandType: CommandType.StoredProcedure);
                 string staffDetailsJson = parameters.Get<string>("@StaffDetails");
