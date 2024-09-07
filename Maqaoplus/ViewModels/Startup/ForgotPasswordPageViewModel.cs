@@ -186,10 +186,11 @@ namespace Maqaoplus.ViewModels.Startup
                 if (response.StatusCode == 200)
                 {
                     ForgotPasswordData = JsonConvert.DeserializeObject<Forgotpassword>(response.Data.ToString());
-
                     IsPasswordInputHidden = true;
-                    //ForgotPasswordData.Userid = response
-
+                    if (ForgotPasswordData.Passwordstatus == "Passwordupdated")
+                    {
+                        await Shell.Current.GoToAsync("//LoginPage");
+                    }
                 }
                 else if (response.StatusCode == 1)
                 {
