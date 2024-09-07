@@ -215,12 +215,12 @@ namespace Maqaoplus.ViewModels.Startup
         private bool IsValidInput()
         {
             bool isValid = true;
-            if (string.IsNullOrWhiteSpace(EmailAddress))
+            if (string.IsNullOrWhiteSpace(ForgotPasswordData.Emailaddress))
             {
                 SystemStaffEmailAddressError = "Email Address is required.";
                 isValid = false;
             }
-            else if (!IsValidEmail(EmailAddress))
+            else if (!IsValidEmail(ForgotPasswordData.Emailaddress))
             {
                 SystemStaffEmailAddressError = "Invalid email address format.";
                 isValid = false;
@@ -231,7 +231,7 @@ namespace Maqaoplus.ViewModels.Startup
             }
             if (ForgotPasswordData.Userid > 0)
             {
-                if (string.IsNullOrWhiteSpace(Passwords))
+                if (string.IsNullOrWhiteSpace(ForgotPasswordData.Passwords))
                 {
                     SystemStaffPasswordError = "Required.";
                     isValid = false;
@@ -240,7 +240,7 @@ namespace Maqaoplus.ViewModels.Startup
                 {
                     SystemStaffPasswordError = null;
                 }
-                if (string.IsNullOrWhiteSpace(Confirmpasswords))
+                if (string.IsNullOrWhiteSpace(ForgotPasswordData.Confirmpasswords))
                 {
                     SystemStaffConfirmPasswordError = "Required.";
                     isValid = false;
@@ -249,7 +249,7 @@ namespace Maqaoplus.ViewModels.Startup
                 {
                     SystemStaffConfirmPasswordError = null;
                 }
-                if (Passwords != Confirmpasswords)
+                if (ForgotPasswordData.Passwords != ForgotPasswordData.Confirmpasswords)
                 {
                     SystemStaffConfirmPasswordError = "Required.";
                     isValid = false;
