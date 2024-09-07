@@ -3,6 +3,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using Newtonsoft.Json;
+
+
 
 
 
@@ -182,6 +185,8 @@ namespace Maqaoplus.ViewModels.Startup
                 var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, ForgotPasswordData);
                 if (response.StatusCode == 200)
                 {
+                    ForgotPasswordData = JsonConvert.DeserializeObject<Forgotpassword>(response.Data.ToString());
+
                     IsPasswordInputHidden = true;
                     //ForgotPasswordData.Userid = response
 

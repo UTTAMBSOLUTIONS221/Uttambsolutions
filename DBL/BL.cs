@@ -272,6 +272,12 @@ namespace DBL
         {
             return Task.Run(() =>
             {
+                string Passwordhash = str.RandomString(12);
+                if (Obj.Userid > 0)
+                {
+                    Obj.Passwords = sec.Encrypt(Obj.Passwords, Passwordhash);
+                    Obj.Passharsh = Passwordhash;
+                }
                 var resp = db.AccountRepository.VerifyForgotPasswordSystemStaff(JsonConvert.SerializeObject(Obj));
 
                 return resp;
