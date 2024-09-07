@@ -221,7 +221,7 @@ namespace DBL.Repositories
                 connection.Open();
                 UsermodelResponce resp = new UsermodelResponce();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@JsonData", JsonData);
+                parameters.Add("@JsonObjectData", JsonData);
                 parameters.Add("@StaffDetails", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_verifysystemuser", parameters, commandType: CommandType.StoredProcedure);
                 string staffDetailsJson = parameters.Get<string>("@StaffDetails");

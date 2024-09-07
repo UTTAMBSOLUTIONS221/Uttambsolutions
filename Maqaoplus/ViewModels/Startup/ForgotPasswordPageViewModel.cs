@@ -14,14 +14,17 @@ namespace Maqaoplus.ViewModels.Startup
     {
         private string _emailAddress;
         private bool _isProcessing;
+        private bool _isPasswordHidden;
+        private string _passwordIconSource;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
-
+        public ICommand TogglePasswordVisibilityCommand { get; }
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
 
         public ForgotPasswordPageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -39,6 +42,26 @@ namespace Maqaoplus.ViewModels.Startup
             }
         }
 
+        public bool IsPasswordHidden
+        {
+            get => _isPasswordHidden;
+            set
+            {
+                _isPasswordHidden = value;
+                OnPropertyChanged(nameof(IsPasswordHidden));
+                PasswordIconSource = _isPasswordHidden ? "unvisible.png" : "visible.png";
+            }
+        }
+
+        public string PasswordIconSource
+        {
+            get => _passwordIconSource;
+            set
+            {
+                _passwordIconSource = value;
+                OnPropertyChanged(nameof(PasswordIconSource));
+            }
+        }
         public bool IsProcessing
         {
             get => _isProcessing;
@@ -49,6 +72,17 @@ namespace Maqaoplus.ViewModels.Startup
                 ((Command)ForgotPasswordCommand).ChangeCanExecute();
             }
         }
+        private bool _isVisible;
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set
+            {
+                _isVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public ICommand ForgotPasswordCommand => new Command(async () => await ForgotPasswordAsync(), () => !IsProcessing);
 
@@ -61,6 +95,11 @@ namespace Maqaoplus.ViewModels.Startup
                 _systemStaffEmailAddressError = value;
                 OnPropertyChanged();
             }
+        }
+
+        private void TogglePasswordVisibility()
+        {
+            IsPasswordHidden = !IsPasswordHidden;
         }
         private async Task ForgotPasswordAsync()
         {
