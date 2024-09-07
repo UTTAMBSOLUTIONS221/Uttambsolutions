@@ -24,6 +24,7 @@ namespace Maqaoplus.ViewModels.Startup
         private bool _isPasswordInputHidden;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ICommand TogglePasswordVisibilityCommand { get; }
+        public ICommand ToggleConfirmPasswordVisibilityCommand { get; }
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly Services.ServiceProvider _serviceProvider;
 
@@ -211,6 +212,7 @@ namespace Maqaoplus.ViewModels.Startup
                     IsPasswordInputHidden = true;
                     if (ForgotPasswordData.Passwordstatus == "Passwordupdated")
                     {
+                        ForgotPasswordData = new Forgotpassword();
                         await Shell.Current.GoToAsync("//LoginPage");
                     }
                 }
