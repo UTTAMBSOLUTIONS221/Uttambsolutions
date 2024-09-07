@@ -145,6 +145,7 @@ namespace Maqaoplus.ViewModels.Startup
                 if (response.StatusCode == 200)
                 {
                     IsPasswordInputHidden = true;
+                    //ForgotPasswordData.Userid = response
 
                 }
                 else if (response.StatusCode == 1)
