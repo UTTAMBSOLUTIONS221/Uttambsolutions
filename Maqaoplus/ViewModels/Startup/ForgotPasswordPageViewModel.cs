@@ -4,13 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Newtonsoft.Json;
-
-
-
-
-
-
-
 #if ANDROID
 using Android.Provider;
 using Android.Content;
@@ -25,8 +18,10 @@ namespace Maqaoplus.ViewModels.Startup
         private Forgotpassword _forgotPasswordData;
         private bool _isProcessing;
         private bool _isPasswordHidden;
-        private bool _isPasswordInputHidden;
         private string _passwordIconSource;
+        private bool _isConfirmPasswordHidden;
+        private string _confirmPasswordIconSource;
+        private bool _isPasswordInputHidden;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ICommand TogglePasswordVisibilityCommand { get; }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -37,6 +32,9 @@ namespace Maqaoplus.ViewModels.Startup
             _serviceProvider = serviceProvider;
             ForgotPasswordData = new Forgotpassword();
             IsPasswordHidden = true;
+            IsConfirmPasswordHidden = true;
+            TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
+            ToggleConfirmPasswordVisibilityCommand = new Command(ToggleConfirmPasswordVisibility);
             IsPasswordInputHidden = false;
             TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
         }
@@ -103,6 +101,26 @@ namespace Maqaoplus.ViewModels.Startup
                 OnPropertyChanged(nameof(PasswordIconSource));
             }
         }
+        public bool IsConfirmPasswordHidden
+        {
+            get => _isConfirmPasswordHidden;
+            set
+            {
+                _isConfirmPasswordHidden = value;
+                OnPropertyChanged(nameof(IsConfirmPasswordHidden));
+                ConfirmPasswordIconSource = _isConfirmPasswordHidden ? "unvisible.png" : "visible.png";
+            }
+        }
+
+        public string ConfirmPasswordIconSource
+        {
+            get => _confirmPasswordIconSource;
+            set
+            {
+                _confirmPasswordIconSource = value;
+                OnPropertyChanged(nameof(ConfirmPasswordIconSource));
+            }
+        }
         public bool IsProcessing
         {
             get => _isProcessing;
@@ -160,6 +178,10 @@ namespace Maqaoplus.ViewModels.Startup
         private void TogglePasswordVisibility()
         {
             IsPasswordHidden = !IsPasswordHidden;
+        }
+        private void ToggleConfirmPasswordVisibility()
+        {
+            IsConfirmPasswordHidden = !IsConfirmPasswordHidden;
         }
         private async Task ForgotPasswordAsync()
         {
