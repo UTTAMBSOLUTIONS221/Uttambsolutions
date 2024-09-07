@@ -95,6 +95,26 @@ namespace Maqaoplus.ViewModels.Startup
                 OnPropertyChanged();
             }
         }
+        private string _systemStaffPasswordError;
+        public string SystemStaffPasswordError
+        {
+            get => _systemStaffPasswordError;
+            set
+            {
+                _systemStaffPasswordError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _systemStaffConfirmPasswordError;
+        public string SystemStaffConfirmPasswordError
+        {
+            get => _systemStaffConfirmPasswordError;
+            set
+            {
+                _systemStaffConfirmPasswordError = value;
+                OnPropertyChanged();
+            }
+        }
 
         private void TogglePasswordVisibility()
         {
@@ -168,6 +188,33 @@ namespace Maqaoplus.ViewModels.Startup
             else
             {
                 SystemStaffEmailAddressError = null;
+            }
+            if (string.IsNullOrWhiteSpace(ForgotPasswordData.Passwords))
+            {
+                SystemStaffPasswordError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffPasswordError = null;
+            }
+            if (string.IsNullOrWhiteSpace(ForgotPasswordData.Confirmpasswords))
+            {
+                SystemStaffConfirmPasswordError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffConfirmPasswordError = null;
+            }
+            if (ForgotPasswordData.Passwords != ForgotPasswordData.Confirmpasswords)
+            {
+                SystemStaffConfirmPasswordError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffConfirmPasswordError = null;
             }
             return isValid;
         }
