@@ -277,5 +277,7 @@
     <Build Include="dbo\Stored Procedures\Usp_Registersystemagentpropertyhousedata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseagreementdetaildatabyownerid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyhouseagreementdetaildatabyagentid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Verifysystemstaffdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Verifyforgotpasswordsystemstaff.sql" />
   </ItemGroup>
 </Project>
