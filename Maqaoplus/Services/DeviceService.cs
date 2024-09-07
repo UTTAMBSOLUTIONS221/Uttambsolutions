@@ -20,7 +20,7 @@ namespace Maqaoplus.Services
                 Manufacturer = DeviceInfo.Manufacturer,
                 Model = DeviceInfo.Model,
                 Osversion = DeviceInfo.VersionString,
-                Platform = DeviceInfo.Platform.ToString(),
+                Platforms = DeviceInfo.Platform.ToString(),
                 Devicename = DeviceInfo.Name,
                 Datecreated = DateTime.UtcNow,
                 Datemodified = DateTime.UtcNow
