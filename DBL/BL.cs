@@ -268,12 +268,12 @@ namespace DBL
         #endregion
 
         #region Verify System Staff Forgot Password
-        public Task<Genericmodel> ValidateSystemForgotpasswordStaff(string userName)
+        public Task<Genericmodel> ValidateSystemForgotpasswordStaff(Forgotpassword Obj)
         {
             return Task.Run(() =>
             {
                 Genericmodel model = new Genericmodel();
-                var resp = db.AccountRepository.VerifySystemStaff(userName);
+                var resp = db.AccountRepository.VerifySystemStaff(JsonConvert.SerializeObject(Obj));
                 if (resp.RespStatus == 0)
                 {
                     string companyname = "Maqao Plus";
@@ -302,7 +302,7 @@ namespace DBL
                     {
                         EmailLogId = 0,
                         ModuleId = 1,
-                        EmailAddress = userName,
+                        EmailAddress = Obj.Emailaddress,
                         EmailSubject = "Forgot Password",
                         EmailMessage = message,
                         IsEmailSent = false,
@@ -320,7 +320,7 @@ namespace DBL
                         {
                             EmailLogId = Convert.ToInt64(respdata.Data1),
                             ModuleId = 1,
-                            EmailAddress = userName,
+                            EmailAddress = Obj.Emailaddress,
                             EmailSubject = "Forgot Password",
                             EmailMessage = message,
                             IsEmailSent = true,
