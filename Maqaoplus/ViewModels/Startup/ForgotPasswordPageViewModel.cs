@@ -12,7 +12,7 @@ namespace Maqaoplus.ViewModels.Startup
 {
     public class ForgotPasswordPageViewModel : INotifyPropertyChanged
     {
-        private string _emailAddress;
+        private Forgotpassword _forgotPasswordData;
         private bool _isProcessing;
         private bool _isPasswordHidden;
         private bool _isPasswordInputHidden;
@@ -33,18 +33,15 @@ namespace Maqaoplus.ViewModels.Startup
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public string EmailAddress
+        public Forgotpassword ForgotPasswordData
         {
-            get => _emailAddress;
+            get => _forgotPasswordData;
             set
             {
-                _emailAddress = value;
+                _forgotPasswordData = value;
                 OnPropertyChanged();
-                ((Command)ForgotPasswordCommand).ChangeCanExecute();
             }
         }
-
         public bool IsPasswordHidden
         {
             get => _isPasswordHidden;
@@ -123,14 +120,8 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 IsProcessing = true;
 
-                var request = new Forgotpassword
-                {
-                    Emailaddress = EmailAddress,
-                    Androidid = androidId
-                };
-
                 // Call your registration service here
-                var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, request);
+                var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, ForgotPasswordData);
                 if (response.StatusCode == 200)
                 {
                     IsPasswordInputHidden = true;
@@ -164,12 +155,12 @@ namespace Maqaoplus.ViewModels.Startup
         private bool IsValidInput()
         {
             bool isValid = true;
-            if (string.IsNullOrWhiteSpace(EmailAddress))
+            if (string.IsNullOrWhiteSpace(ForgotPasswordData.Emailaddress))
             {
                 SystemStaffEmailAddressError = "Email Address is required.";
                 isValid = false;
             }
-            else if (!IsValidEmail(EmailAddress))
+            else if (!IsValidEmail(ForgotPasswordData.Emailaddress))
             {
                 SystemStaffEmailAddressError = "Invalid email address format.";
                 isValid = false;
