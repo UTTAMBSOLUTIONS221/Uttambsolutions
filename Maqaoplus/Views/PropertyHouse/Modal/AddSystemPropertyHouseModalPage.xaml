@@ -353,22 +353,19 @@
 
                     <CollectionView ItemsSource="{Binding SystempropertyData.Propertyhousesize}" SelectionMode="None">
                         <CollectionView.Header>
-                            <Grid ColumnDefinitions="2*,1*,1*,1*" BackgroundColor="#e0e0e0">
+                            <Grid ColumnDefinitions="*,*" BackgroundColor="#e0e0e0">
 
                                 <!-- Room Size Column -->
                                 <Label Text="Room Size" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" Padding="2"/>
 
                                 <!-- Units Column -->
                                 <Label Text="Units" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start"/>
-
-                                <!-- We have? Column -->
-                                <Label Text="We have?" FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Center"/>
                             </Grid>
                         </CollectionView.Header>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid ColumnDefinitions="2*,1*,1*">
+                                <Grid ColumnDefinitions="*,*">
 
                                     <!-- Hidden fields (not visually represented) -->
                                     <Entry Text="{Binding Systempropertyhousesizeid}" IsVisible="False"/>
@@ -380,8 +377,6 @@
 
                                     <!-- Units -->
                                     <Entry Text="{Binding Systempropertyhousesizeunits}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill"/>
-                                    <!-- We have? -->
-                                    <CheckBox IsChecked="{Binding Systempropertyhousesizewehave}" Grid.Column="3"/>
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -404,21 +399,19 @@
 
                     <CollectionView ItemsSource="{Binding SystempropertyData.Propertyhousedepositfee}" SelectionMode="None">
                         <CollectionView.Header>
-                            <Grid ColumnDefinitions="2*,2*,1*" BackgroundColor="#e0e0e0">
+                            <Grid ColumnDefinitions="*,*" BackgroundColor="#e0e0e0">
 
                                 <!-- Room Size Column -->
                                 <Label Text="Deposit Name" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" Padding="2"/>
 
                                 <!-- Units Column -->
                                 <Label Text="Deposit Amount" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start"/>
-                                <!-- We have? Column -->
-                                <Label Text="We have?" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Center"/>
                             </Grid>
                         </CollectionView.Header>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid ColumnDefinitions="2*,2*,1*">
+                                <Grid ColumnDefinitions="*,*">
 
                                     <!-- Hidden fields (not visually represented) -->
                                     <Entry Text="{Binding Systempropertyhousedepositfeeid}" IsVisible="False"/>
@@ -430,8 +423,6 @@
 
                                     <!-- Amount -->
                                     <Entry Text="{Binding Systempropertyhousedepositfeeamount}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill" IsVisible="{Binding Isreadonly, Converter={StaticResource InverseBooleanConverter}}"/>
-                                    <!-- We have? -->
-                                    <CheckBox IsChecked="{Binding Systempropertyhousesizedepositfeewehave}" Grid.Column="2" IsVisible="{Binding Isreadonly, Converter={StaticResource InverseBooleanConverter}}"/>
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -455,21 +446,19 @@
 
                     <CollectionView ItemsSource="{Binding SystempropertyData.Propertyhousebankingdetail}" SelectionMode="None">
                         <CollectionView.Header>
-                            <Grid ColumnDefinitions="2*,2*,1*" BackgroundColor="#e0e0e0">
+                            <Grid ColumnDefinitions="*,*" BackgroundColor="#e0e0e0">
 
                                 <!-- Room Size Column -->
                                 <Label Text="Bank Name and Paybill" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" Padding="2"/>
 
                                 <!-- Units Column -->
                                 <Label Text="Account Nuber" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start"/>
-                                <!-- We have? Column -->
-                                <Label Text="We have?" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Center"/>
                             </Grid>
                         </CollectionView.Header>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid ColumnDefinitions="2*,2*,1*">
+                                <Grid ColumnDefinitions="*,*">
 
                                     <!-- Hidden fields (not visually represented) -->
                                     <Entry Text="{Binding Systembankid}" IsVisible="False"/>
@@ -478,13 +467,8 @@
 
                                     <!-- Room Size -->
                                     <Label Text="{Binding Systembanknameandpaybill}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2"/>
-
-
-
                                     <!-- Amount -->
                                     <Entry Text="{Binding Systempropertybankaccount}" Keyboard="Text" Grid.Column="1" HorizontalOptions="Fill"/>
-                                    <!-- We have? -->
-                                    <CheckBox IsChecked="{Binding Systempropertyhousebankwehave}" Grid.Column="2"/>
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
