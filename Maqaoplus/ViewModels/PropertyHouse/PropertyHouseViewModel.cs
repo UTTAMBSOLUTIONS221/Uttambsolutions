@@ -1805,83 +1805,95 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async void HouseNextStep()
         {
             IsProcessing = true;
+            OnPropertyChanged(nameof(IsProcessing));
 
-
-            // Move to the next step
-            if (_isStep1HouseVisible)
+            await Task.Run(async () =>
             {
-                if (!ValidateHouseStep1())
+                // Move to the next step
+                if (_isStep1HouseVisible)
                 {
-                    IsProcessing = false;
-                    return;
+                    if (!ValidateHouseStep1())
+                    {
+                        IsProcessing = false;
+                        OnPropertyChanged(nameof(IsProcessing));
+                        return;
+                    }
+                    _isStep1HouseVisible = false;
+                    _isStep2HouseVisible = true;
                 }
-                _isStep1HouseVisible = false;
-                _isStep2HouseVisible = true;
-            }
-            else if (_isStep2HouseVisible)
-            {
-                if (!ValidateHouseStep2())
+                else if (_isStep2HouseVisible)
                 {
-                    IsProcessing = false;
-                    return;
+                    if (!ValidateHouseStep2())
+                    {
+                        IsProcessing = false;
+                        OnPropertyChanged(nameof(IsProcessing));
+                        return;
+                    }
+                    _isStep2HouseVisible = false;
+                    _isStep3HouseVisible = true;
                 }
-                _isStep2HouseVisible = false;
-                _isStep3HouseVisible = true;
-            }
-            else if (_isStep3HouseVisible)
-            {
-                _isStep3HouseVisible = false;
-                _isStep4HouseVisible = true;
-            }
-            else if (_isStep4HouseVisible)
-            {
-                _isStep4HouseVisible = false;
-                _isStep5HouseVisible = true;
+                else if (_isStep3HouseVisible)
+                {
+                    _isStep3HouseVisible = false;
+                    _isStep4HouseVisible = true;
+                }
+                else if (_isStep4HouseVisible)
+                {
+                    _isStep4HouseVisible = false;
+                    _isStep5HouseVisible = true;
+                }
 
-            }
+                // Notify UI of visibility changes
+                OnPropertyChanged(nameof(IsStep1HouseVisible));
+                OnPropertyChanged(nameof(IsStep2HouseVisible));
+                OnPropertyChanged(nameof(IsStep3HouseVisible));
+                OnPropertyChanged(nameof(IsStep4HouseVisible));
+                OnPropertyChanged(nameof(IsStep5HouseVisible));
+            });
+
             IsProcessing = false;
-            OnPropertyChanged(nameof(IsStep1HouseVisible));
-            OnPropertyChanged(nameof(IsStep2HouseVisible));
-            OnPropertyChanged(nameof(IsStep3HouseVisible));
-            OnPropertyChanged(nameof(IsStep4HouseVisible));
-            OnPropertyChanged(nameof(IsStep5HouseVisible));
+            OnPropertyChanged(nameof(IsProcessing));
         }
-
         private async void HousePreviousStep()
         {
             IsProcessing = true;
+            OnPropertyChanged(nameof(IsProcessing));
 
+            await Task.Run(() =>
+            {
+                // Move to the previous step
+                if (_isStep5HouseVisible)
+                {
+                    _isStep5HouseVisible = false;
+                    _isStep4HouseVisible = true;
+                }
+                else if (_isStep4HouseVisible)
+                {
+                    _isStep4HouseVisible = false;
+                    _isStep3HouseVisible = true;
+                }
+                else if (_isStep3HouseVisible)
+                {
+                    _isStep3HouseVisible = false;
+                    _isStep2HouseVisible = true;
+                }
+                else if (_isStep2HouseVisible)
+                {
+                    _isStep2HouseVisible = false;
+                    _isStep1HouseVisible = true;
+                }
 
-            // Move to the previous step
-            if (_isStep5HouseVisible)
-            {
-                _isStep5HouseVisible = false;
-                _isStep4HouseVisible = true;
-            }
-            else if (_isStep4HouseVisible)
-            {
-                _isStep4HouseVisible = false;
-                _isStep3HouseVisible = true;
-            }
-            else if (_isStep3HouseVisible)
-            {
-                _isStep3HouseVisible = false;
-                _isStep2HouseVisible = true;
-            }
-            else if (_isStep2HouseVisible)
-            {
-                _isStep2HouseVisible = false;
-                _isStep1HouseVisible = true;
-            }
+                // Notify UI of visibility changes
+                OnPropertyChanged(nameof(IsStep1HouseVisible));
+                OnPropertyChanged(nameof(IsStep2HouseVisible));
+                OnPropertyChanged(nameof(IsStep3HouseVisible));
+                OnPropertyChanged(nameof(IsStep4HouseVisible));
+                OnPropertyChanged(nameof(IsStep5HouseVisible));
+            });
+
             IsProcessing = false;
-
-            OnPropertyChanged(nameof(IsStep1HouseVisible));
-            OnPropertyChanged(nameof(IsStep2HouseVisible));
-            OnPropertyChanged(nameof(IsStep3HouseVisible));
-            OnPropertyChanged(nameof(IsStep4HouseVisible));
-            OnPropertyChanged(nameof(IsStep5HouseVisible));
+            OnPropertyChanged(nameof(IsProcessing));
         }
-
 
         public bool IsStep1AgentHouseVisible
         {
