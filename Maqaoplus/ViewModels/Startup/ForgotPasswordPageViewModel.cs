@@ -15,6 +15,7 @@ namespace Maqaoplus.ViewModels.Startup
         private string _emailAddress;
         private bool _isProcessing;
         private bool _isPasswordHidden;
+        private bool _isPasswordInputHidden;
         private string _passwordIconSource;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ICommand TogglePasswordVisibilityCommand { get; }
@@ -24,6 +25,8 @@ namespace Maqaoplus.ViewModels.Startup
         public ForgotPasswordPageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            IsPasswordHidden = true;
+            IsPasswordInputHidden = true;
             TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -72,17 +75,16 @@ namespace Maqaoplus.ViewModels.Startup
                 ((Command)ForgotPasswordCommand).ChangeCanExecute();
             }
         }
-        private bool _isVisible;
-        public bool IsVisible
+
+        public bool IsPasswordInputHidden
         {
-            get => _isVisible;
+            get => _isPasswordInputHidden;
             set
             {
-                _isVisible = value;
-                OnPropertyChanged();
+                _isPasswordInputHidden = value;
+                OnPropertyChanged(nameof(IsPasswordInputHidden));
             }
         }
-
 
         public ICommand ForgotPasswordCommand => new Command(async () => await ForgotPasswordAsync(), () => !IsProcessing);
 
@@ -132,6 +134,7 @@ namespace Maqaoplus.ViewModels.Startup
                 if (response.StatusCode == 200)
                 {
                     await Shell.Current.DisplayAlert("Success", "User Found", "OK");
+                    IsPasswordInputHidden = true;
 
                 }
                 else if (response.StatusCode == 1)
