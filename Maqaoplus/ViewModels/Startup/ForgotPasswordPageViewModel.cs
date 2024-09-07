@@ -4,6 +4,10 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 
+
+
+
+
 #if ANDROID
 using Android.Provider;
 using Android.Content;
@@ -12,6 +16,9 @@ namespace Maqaoplus.ViewModels.Startup
 {
     public class ForgotPasswordPageViewModel : INotifyPropertyChanged
     {
+        private string _emailAddress;
+        private string _passwords;
+        private string _confirmpasswords;
         private Forgotpassword _forgotPasswordData;
         private bool _isProcessing;
         private bool _isPasswordHidden;
@@ -25,6 +32,7 @@ namespace Maqaoplus.ViewModels.Startup
         public ForgotPasswordPageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            ForgotPasswordData = new Forgotpassword();
             IsPasswordHidden = true;
             IsPasswordInputHidden = false;
             TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
@@ -40,6 +48,36 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 _forgotPasswordData = value;
                 OnPropertyChanged();
+            }
+        }
+        public string EmailAddress
+        {
+            get => _emailAddress;
+            set
+            {
+                _emailAddress = value;
+                OnPropertyChanged();
+                ((Command)ForgotPasswordCommand).ChangeCanExecute();
+            }
+        }
+        public string Passwords
+        {
+            get => _passwords;
+            set
+            {
+                _passwords = value;
+                OnPropertyChanged();
+                ((Command)ForgotPasswordCommand).ChangeCanExecute();
+            }
+        }
+        public string Confirmpasswords
+        {
+            get => _confirmpasswords;
+            set
+            {
+                _confirmpasswords = value;
+                OnPropertyChanged();
+                ((Command)ForgotPasswordCommand).ChangeCanExecute();
             }
         }
         public bool IsPasswordHidden
@@ -139,7 +177,8 @@ namespace Maqaoplus.ViewModels.Startup
             try
             {
                 IsProcessing = true;
-
+                ForgotPasswordData.Emailaddress = EmailAddress;
+                ForgotPasswordData.Androidid = androidId;
                 // Call your registration service here
                 var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, ForgotPasswordData);
                 if (response.StatusCode == 200)
@@ -176,12 +215,12 @@ namespace Maqaoplus.ViewModels.Startup
         private bool IsValidInput()
         {
             bool isValid = true;
-            if (string.IsNullOrWhiteSpace(ForgotPasswordData.Emailaddress))
+            if (string.IsNullOrWhiteSpace(EmailAddress))
             {
                 SystemStaffEmailAddressError = "Email Address is required.";
                 isValid = false;
             }
-            else if (!IsValidEmail(ForgotPasswordData.Emailaddress))
+            else if (!IsValidEmail(EmailAddress))
             {
                 SystemStaffEmailAddressError = "Invalid email address format.";
                 isValid = false;
@@ -190,33 +229,37 @@ namespace Maqaoplus.ViewModels.Startup
             {
                 SystemStaffEmailAddressError = null;
             }
-            if (string.IsNullOrWhiteSpace(ForgotPasswordData.Passwords))
+            if (ForgotPasswordData.Userid > 0)
             {
-                SystemStaffPasswordError = "Required.";
-                isValid = false;
+                if (string.IsNullOrWhiteSpace(Passwords))
+                {
+                    SystemStaffPasswordError = "Required.";
+                    isValid = false;
+                }
+                else
+                {
+                    SystemStaffPasswordError = null;
+                }
+                if (string.IsNullOrWhiteSpace(Confirmpasswords))
+                {
+                    SystemStaffConfirmPasswordError = "Required.";
+                    isValid = false;
+                }
+                else
+                {
+                    SystemStaffConfirmPasswordError = null;
+                }
+                if (Passwords != Confirmpasswords)
+                {
+                    SystemStaffConfirmPasswordError = "Required.";
+                    isValid = false;
+                }
+                else
+                {
+                    SystemStaffConfirmPasswordError = null;
+                }
             }
-            else
-            {
-                SystemStaffPasswordError = null;
-            }
-            if (string.IsNullOrWhiteSpace(ForgotPasswordData.Confirmpasswords))
-            {
-                SystemStaffConfirmPasswordError = "Required.";
-                isValid = false;
-            }
-            else
-            {
-                SystemStaffConfirmPasswordError = null;
-            }
-            if (ForgotPasswordData.Passwords != ForgotPasswordData.Confirmpasswords)
-            {
-                SystemStaffConfirmPasswordError = "Required.";
-                isValid = false;
-            }
-            else
-            {
-                SystemStaffConfirmPasswordError = null;
-            }
+
             return isValid;
         }
     }
