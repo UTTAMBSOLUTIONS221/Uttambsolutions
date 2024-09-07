@@ -1,4 +1,8 @@
 using Maqaoplus.ViewModels.Dashboards;
+#if ANDROID
+using Android.Provider;
+using Android.Content;
+#endif
 
 namespace Maqaoplus.Views.Dashboards;
 
@@ -10,14 +14,24 @@ public partial class AgentDashboardPage : ContentPage
         BindingContext = viewModel;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
+#if ANDROID
+        // Fetch Android ID on Android
+        string androidId = Settings.Secure.GetString(Android.App.Application.Context.ContentResolver, Settings.Secure.AndroidId);
+#else
+    // Provide a default or placeholder value for other platforms
+    string androidId = "NotApplicable"; 
+#endif
+
         if (BindingContext is SummaryDashBoardViewModel viewModel && viewModel.LoadAgentSummaryCommand.CanExecute(null))
         {
+            await ((SummaryDashBoardViewModel)BindingContext).Savesystemuserdevicedata(androidId);
             viewModel.LoadAgentSummaryCommand.Execute(null);
         }
     }
+
 
     private async void OnWhatsAppButtonClicked(object sender, EventArgs e)
     {

@@ -1,4 +1,5 @@
-﻿using DBL.Models.Dashboards;
+﻿using DBL.Entities;
+using DBL.Models.Dashboards;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -124,6 +125,29 @@ namespace Maqaoplus.ViewModels.Dashboards
                 IsProcessing = false;
             }
         }
+
+
+
+
+        public async Task Savesystemuserdevicedata(string Androidid)
+        {
+            var deviceInfo = new DeviceInfoModel
+            {
+                Userid = App.UserDetails.Usermodel.Userid,
+                Androidid = Androidid,
+                Manufacturer = DeviceInfo.Manufacturer,
+                Model = DeviceInfo.Model,
+                Osversion = DeviceInfo.VersionString,
+                Platforms = DeviceInfo.Platform.ToString(),
+                Devicename = DeviceInfo.Name,
+                Datecreated = DateTime.UtcNow,
+                Datemodified = DateTime.UtcNow
+            };
+            var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/Account/Registersystemuserdevicedata", deviceInfo);
+        }
+
+
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
