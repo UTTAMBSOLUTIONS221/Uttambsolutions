@@ -261,7 +261,6 @@ namespace DBL.Repositories
                 var queryResult = connection.Query("Usp_Verifyforgotpasswordsystemstaff", parameters, commandType: CommandType.StoredProcedure);
                 string staffDetailsJson = parameters.Get<string>("@StaffDetails");
                 JObject responseJson = JObject.Parse(staffDetailsJson);
-
                 string userModelJson = responseJson["Data"].ToString();
                 Forgotpassword userResponse = JsonConvert.DeserializeObject<Forgotpassword>(userModelJson);
                 resp.Data = userResponse;
