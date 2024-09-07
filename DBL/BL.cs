@@ -272,70 +272,9 @@ namespace DBL
         {
             return Task.Run(() =>
             {
-                ForgotPasswordUserResponce model = new ForgotPasswordUserResponce();
                 var resp = db.AccountRepository.VerifyForgotPasswordSystemStaff(JsonConvert.SerializeObject(Obj));
-                if (resp.RespStatus == 0)
-                {
-                    string companyname = "Maqao Plus";
-                    string changepasswordurl = "https://uttambsolutions.com/Account/changepassword";
-                    //send email for reseting password
-                    StringBuilder StrBodyEmail = new StringBuilder();
-                    StringBuilder tableHtml = new StringBuilder();
-                    tableHtml.Append("<tbody>");
-                    tableHtml.Append($"<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\"><b>Dear {resp.Usermodel.Fullname}</b>,</td></tr>");
-                    tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">We have received a request to reset your password.</td></tr>");
-                    tableHtml.Append($"<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">Your Password is:{sec.Decrypt(resp.Usermodel.Passwords, resp.Usermodel.Passharsh)}</td></tr>");
-                    tableHtml.Append($"<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">Please click the link below to change your password:</td></tr>");
-                    tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">");
-                    tableHtml.Append($"<a href=\"{changepasswordurl}\"><b>Change Password</b></a>");
-                    tableHtml.Append("</td></tr>");
-                    tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">If you did not request a password change, please ignore this email.</td></tr>");
-                    tableHtml.Append("<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\">Thank you,</td></tr>");
-                    tableHtml.Append($"<tr><td colspan=\"4\" style=\"border: none; padding: 8px; text-align: left;\"><b>{companyname}</b></td></tr>");
-                    tableHtml.Append("</tbody>");
 
-                    string logoUrl = "https://uttambsolutions.com/images/uttambsolutionlogo.png";
-                    string message = GenerateEmailBody(logoUrl, "Uttamb Solutions", "info@uttambsolutions.com", tableHtml.ToString(), DateTime.Now.Year.ToString());
-
-                    //log Email Messages
-                    EmailLogs Logs = new EmailLogs
-                    {
-                        EmailLogId = 0,
-                        ModuleId = 1,
-                        EmailAddress = Obj.Emailaddress,
-                        EmailSubject = "Forgot Password",
-                        EmailMessage = message,
-                        IsEmailSent = false,
-                        DateTimeSent = DateTime.Now,
-                        Datecreated = DateTime.Now,
-                    };
-                    var respdata = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs));
-                    bool data = emlsnd.UttambsolutionssendemailAsync(resp.Usermodel.Emailaddress, "Forgot Password", message, true, "", "", "");
-                    if (data)
-                    {
-                        //Update Email is sent 
-                        EmailLogs Logs1 = new EmailLogs
-                        {
-                            EmailLogId = Convert.ToInt64(respdata.Data1),
-                            ModuleId = 1,
-                            EmailAddress = Obj.Emailaddress,
-                            EmailSubject = "Forgot Password",
-                            EmailMessage = message,
-                            IsEmailSent = true,
-                            DateTimeSent = DateTime.Now,
-                            Datecreated = DateTime.Now,
-                        };
-                        var resp1 = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs1));
-                    }
-                    else
-                    {
-
-                    }
-                }
-                else
-                {
-                }
-                return model;
+                return resp;
             });
         }
         #endregion
