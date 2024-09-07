@@ -220,7 +220,6 @@
     <Build Include="dbo\Stored Procedures\Usp_Updatepublishedblogdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Updatestaffcurriculumdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Updatestaffprofilepicturedata.sql" />
-    <Build Include="dbo\Stored Procedures\Usp_verifysystemuser.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Approvepropertyhousevacatingrequest.sql" />
     <Build Include="dbo\Stored Procedures\Usp_GetListModel.sql" />
     <Build Include="dbo\Stored Procedures\Usp_GetListModelbycode.sql" />

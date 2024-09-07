@@ -87,13 +87,39 @@ BEGIN
                     WHERE spr.Systempropertyhouseroomid = sprm.Systempropertyhouseroomid
                     FOR JSON PATH
                 ) AS Meterhistorydata,
-				(SELECT ISNULL(CQL.Propertychecklistid, 0) AS Propertychecklistid,ISNULL(CQL.Propertyhouseroomid, 0) AS Propertyhouseroomid,ISNULL(CQL.Fixturestatusid, 0) AS Fixturestatusid,ISNULL(CQL.Fixtureunits, 0) AS Fixtureunits,ISNULL(STS.Fixturestatus, 'Not Set') AS Fixturestatus,ISNULL(CQL.Createdby, shp.Propertyhouseposter) AS Createdby,ISNULL(CQL.Datecreated, GETDATE()) AS Datecreated,FIX.Fixtureid,FIX.Fixturetype,FIX.Descriptions,FIX.Category
-					FROM Systemfixtures FIX
-					LEFT JOIN Systempropertyhousechecklists CQL ON CQL.Fixtureid = FIX.Fixtureid
-					LEFT JOIN Systemfixturestatus STS ON CQL.Fixturestatusid = STS.Fixturestatusid
-					WHERE (CQL.Propertyhouseroomid= @Houseroomid OR @Houseroomid NOT IN (SELECT Propertyhouseroomid FROM Systempropertyhousechecklists))
-					FOR JSON PATH
-				  ) AS Roomfixtures,
+				(CASE 
+                    WHEN EXISTS (SELECT 1 FROM Systempropertyhousechecklists WHERE Propertyhouseroomid = spr.Systempropertyhouseroomid)
+                    THEN 
+                    (SELECT ISNULL(CQL.Propertychecklistid, 0) AS Propertychecklistid,
+                            ISNULL(CQL.Propertyhouseroomid, 0) AS Propertyhouseroomid,
+                            ISNULL(CQL.Fixturestatusid, 0) AS Fixturestatusid,
+                            ISNULL(CQL.Fixtureunits, 0) AS Fixtureunits,
+                            ISNULL(STS.Fixturestatus, 'Not Set') AS Fixturestatus,
+                            ISNULL(CQL.Createdby, shp.Propertyhouseposter) AS Createdby,
+                            ISNULL(CQL.Datecreated, GETDATE()) AS Datecreated,
+                            FIX.Fixtureid,
+                            FIX.Fixturetype,
+                            FIX.Descriptions,
+                            FIX.Category
+                    FROM Systemfixtures FIX
+                    LEFT JOIN Systempropertyhousechecklists CQL ON CQL.Fixtureid = FIX.Fixtureid
+                    LEFT JOIN Systemfixturestatus STS ON CQL.Fixturestatusid = STS.Fixturestatusid
+                    WHERE CQL.Propertyhouseroomid = spr.Systempropertyhouseroomid
+                    FOR JSON PATH
+                    )
+                    ELSE 
+                    (SELECT 0 AS Propertychecklistid,
+                            0 AS Fixturestatusid,
+                            0 AS Fixtureunits,
+                            '' AS Fixturestatus,
+                            FIX.Fixtureid,
+                            FIX.Fixturetype,
+                            FIX.Descriptions,
+                            FIX.Category
+                    FROM Systemfixtures FIX
+                    FOR JSON PATH
+                    )
+                END) AS Roomfixtures,
                 (
                     SELECT 
                         sc.Countyname + ' >> ' + ss.Subcountyname AS Countyname,

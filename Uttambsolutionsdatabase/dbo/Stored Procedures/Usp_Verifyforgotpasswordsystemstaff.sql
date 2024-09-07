@@ -40,10 +40,18 @@ BEGIN
 					Return
 				End
 		BEGIN TRANSACTION;
-			IF(JSON_VALUE(@JsonObjectData, '$.Userid') >0)
+		
+			IF((SELECT JSON_VALUE(@JsonObjectData, '$.Userid'))>0)
 			BEGIN
-			UPDATE SystemStaffs SET Passwords = JSON_VALUE(@JsonObjectData, '$.Passharsh'),Passharsh = JSON_VALUE(@JsonObjectData, '$.Passharsh'), Passwordresetdate = GETDATE() WHERE Userid = JSON_VALUE(@JsonObjectData, '$.Userid');
-			SET @Passwordstatus = 'Passwordupdated';
+
+			 MERGE INTO SystemStaffs AS target
+             USING (SELECT JSON_VALUE(@JsonObjectData, '$.Userid') AS UserId,JSON_VALUE(@JsonObjectData, '$.Passharsh') AS PassHarsh,JSON_VALUE(@JsonObjectData, '$.Passwords') AS Passwords,GETDATE() AS Passwordresetdate) AS source
+			 ON target.UserId = source.UserId WHEN MATCHED THEN
+			 UPDATE SET Passwords = source.Passwords,Passharsh = source.Passharsh,Passwordresetdate = source.Passwordresetdate;
+
+
+				--UPDATE SystemStaffs SET Passharsh = JSON_VALUE(@JsonObjectData, '$.Passharsh'),Passwords = JSON_VALUE(@JsonObjectData, '$.Passwords'),Passwordresetdate = GETDATE() WHERE Userid = JSON_VALUE(@JsonObjectData, '$.Userid');
+				SET @Passwordstatus = 'Passwordupdated';
 			END
 			SET @StaffDetails = (
 				SELECT
