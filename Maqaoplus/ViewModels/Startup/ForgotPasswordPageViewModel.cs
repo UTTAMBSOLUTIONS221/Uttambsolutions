@@ -26,7 +26,7 @@ namespace Maqaoplus.ViewModels.Startup
         {
             _serviceProvider = serviceProvider;
             IsPasswordHidden = true;
-            IsPasswordInputHidden = true;
+            IsPasswordInputHidden = false;
             TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -133,7 +133,6 @@ namespace Maqaoplus.ViewModels.Startup
                 var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, request);
                 if (response.StatusCode == 200)
                 {
-                    await Shell.Current.DisplayAlert("Success", "User Found", "OK");
                     IsPasswordInputHidden = true;
 
                 }
