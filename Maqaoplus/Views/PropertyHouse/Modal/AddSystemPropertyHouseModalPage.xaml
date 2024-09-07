@@ -349,7 +349,7 @@
                 <!-- Step 2 -->
                 <StackLayout IsVisible="{Binding IsStep2HouseVisible}" Padding="16" Spacing="16">
                     <!-- Header -->
-                    <Label Text="Step 2: House Rooms and Amount" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center"  TextColor="#0a506c"/>
+                    <Label Text="Step 2: House Room Sizes" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" VerticalOptions="Center"  TextColor="#0a506c"/>
 
                     <CollectionView ItemsSource="{Binding SystempropertyData.Propertyhousesize}" SelectionMode="None">
                         <CollectionView.Header>
