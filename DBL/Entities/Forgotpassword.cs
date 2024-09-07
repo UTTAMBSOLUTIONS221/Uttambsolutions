@@ -7,5 +7,6 @@ namespace DBL.Entities
         [Required(ErrorMessage = "Email address can't be empty")]
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string? Emailaddress { get; set; }
+        public string? Androidid { get; set; }
     }
 }

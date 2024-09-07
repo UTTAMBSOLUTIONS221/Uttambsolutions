@@ -3,6 +3,11 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+
+#if ANDROID
+using Android.Provider;
+using Android.Content;
+#endif
 namespace Maqaoplus.ViewModels.Startup
 {
     public class ForgotPasswordPageViewModel : INotifyPropertyChanged
@@ -66,20 +71,29 @@ namespace Maqaoplus.ViewModels.Startup
                 IsProcessing = false;
                 return;
             }
+#if ANDROID
+            // Fetch Android ID on Android
+            string androidId = Settings.Secure.GetString(Android.App.Application.Context.ContentResolver, Settings.Secure.AndroidId);
+#else
+                // Provide a default or placeholder value for other platforms
+                string androidId = "NotApplicable"; 
+#endif
             try
             {
                 IsProcessing = true;
 
                 var request = new Forgotpassword
                 {
-                    Emailaddress = EmailAddress
+                    Emailaddress = EmailAddress,
+                    Androidid = androidId
                 };
 
                 // Call your registration service here
                 var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, request);
                 if (response.StatusCode == 200)
                 {
-                    await Shell.Current.GoToAsync("//LoginPage");
+                    await Shell.Current.DisplayAlert("Success", "User Found", "OK");
+
                 }
                 else if (response.StatusCode == 1)
                 {
