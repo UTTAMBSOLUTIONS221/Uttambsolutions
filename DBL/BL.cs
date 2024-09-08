@@ -278,7 +278,7 @@ namespace DBL
                     Obj.Passwords = sec.Encrypt(Obj.Passwords, Passwordhash);
                     Obj.Passharsh = Passwordhash;
                 }
-                var resp = db.AccountRepository.VerifyForgotPasswordSystemStaff(Obj);
+                var resp = db.AccountRepository.VerifyForgotPasswordSystemStaff(JsonConvert.SerializeObject(Obj));
 
                 return resp;
             });
