@@ -14,12 +14,38 @@ BEGIN
 		BEGIN TRANSACTION;
 		 SET @Systempropertyhouseroomfixturesdata= 
 			(SELECT(SELECT ROOM.Systempropertyhouseroomid,ROOM.Systempropertyhouseid,
-			  (SELECT ISNULL(CQL.Propertychecklistid,0) AS Propertychecklistid,ISNULL(CQL.Propertyhouseroomid,0) AS Propertyhouseroomid,ISNULL(CQL.Fixturestatusid,0) AS Fixturestatusid,ISNULL(CQL.Fixtureunits,0) AS  Fixtureunits,ISNULL(STS.Fixturestatus,'Not Set') AS Fixturestatus,ISNULL(CQL.Createdby,0) AS Createdby,ISNULL(CQL.Datecreated,GETDATE()) AS Datecreated,FIX.Fixtureid,FIX.Fixturetype,FIX.Descriptions,FIX.Category 
-			  FROM Systemfixtures FIX  
-			  LEFT JOIN Systempropertyhousechecklists CQL ON CQL.Fixtureid=FIX.Fixtureid
-			  LEFT JOIN Systemfixturestatus STS ON CQL.Fixturestatusid=STS.Fixturestatusid
-			  FOR JSON PATH
-			  ) AS Roomfixtures
+			  (CASE 
+                    WHEN EXISTS (SELECT 1 FROM Systempropertyhousechecklists WHERE Propertyhouseroomid = ROOM.Systempropertyhouseroomid)
+                    THEN 
+                    (SELECT ISNULL(CQL.Propertychecklistid, 0) AS Propertychecklistid,
+                            ISNULL(CQL.Propertyhouseroomid, 0) AS Propertyhouseroomid,
+                            ISNULL(CQL.Fixturestatusid, 0) AS Fixturestatusid,
+                            ISNULL(CQL.Fixtureunits, 0) AS Fixtureunits,
+                            ISNULL(STS.Fixturestatus, 'Not Set') AS Fixturestatus,
+                            ISNULL(CQL.Createdby, 0) AS Createdby,
+                            ISNULL(CQL.Datecreated, GETDATE()) AS Datecreated,
+                            FIX.Fixtureid,
+                            FIX.Fixturetype,
+                            FIX.Descriptions,
+                            FIX.Category
+                    FROM Systemfixtures FIX
+                    LEFT JOIN Systempropertyhousechecklists CQL ON CQL.Fixtureid = FIX.Fixtureid
+                    LEFT JOIN Systemfixturestatus STS ON CQL.Fixturestatusid = STS.Fixturestatusid
+                    WHERE CQL.Propertyhouseroomid = ROOM.Systempropertyhouseroomid
+                    FOR JSON PATH
+                    )ELSE 
+                    (SELECT 0 AS Propertychecklistid,
+                            0 AS Fixturestatusid,
+                            0 AS Fixtureunits,
+                            '' AS Fixturestatus,
+                            FIX.Fixtureid,
+                            FIX.Fixturetype,
+                            FIX.Descriptions,
+                            FIX.Category
+                    FROM Systemfixtures FIX
+                    FOR JSON PATH
+                    )
+                END) AS Roomfixtures
 			  FROM Systempropertyhouserooms ROOM
 			  WHERE ROOM.Systempropertyhouseroomid =@Houseroomid
 			  FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER

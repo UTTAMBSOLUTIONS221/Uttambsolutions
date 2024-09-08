@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Usp_Verifyforgotpasswordsystemstaff]
-	@JsonObjectData varchar(200),
+	@JsonObjectData varchar(MAX),
     @StaffDetails NVARCHAR(MAX) OUTPUT
 AS
 BEGIN
@@ -43,13 +43,8 @@ BEGIN
 		
 			IF((SELECT JSON_VALUE(@JsonObjectData, '$.Userid'))>0)
 			BEGIN
-
-			 MERGE INTO SystemStaffs AS target
-             USING (SELECT JSON_VALUE(@JsonObjectData, '$.Userid') AS UserId,JSON_VALUE(@JsonObjectData, '$.Passharsh') AS PassHarsh,JSON_VALUE(@JsonObjectData, '$.Passwords') AS Passwords,GETDATE() AS Passwordresetdate) AS source
-			 ON target.UserId = source.UserId WHEN MATCHED THEN
-			 UPDATE SET Passwords = source.Passwords,Passharsh = source.Passharsh,Passwordresetdate = source.Passwordresetdate;
-
-
+				-- Update statement
+				UPDATE SystemStaffs SET Passharsh = JSON_VALUE(@JsonObjectData, '$.Passharsh'),Passwords = JSON_VALUE(@JsonObjectData, '$.Passwords'),Passwordresetdate = GETDATE() WHERE Userid = JSON_VALUE(@JsonObjectData, '$.Userid');
 				--UPDATE SystemStaffs SET Passharsh = JSON_VALUE(@JsonObjectData, '$.Passharsh'),Passwords = JSON_VALUE(@JsonObjectData, '$.Passwords'),Passwordresetdate = GETDATE() WHERE Userid = JSON_VALUE(@JsonObjectData, '$.Userid');
 				SET @Passwordstatus = 'Passwordupdated';
 			END

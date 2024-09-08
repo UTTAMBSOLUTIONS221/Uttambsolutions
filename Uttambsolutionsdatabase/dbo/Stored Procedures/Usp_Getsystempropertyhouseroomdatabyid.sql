@@ -32,7 +32,7 @@ BEGIN
                 spr.Forcaretaker,
                 spr.Kitchentypeid,
                 ISNULL(sprm.Systempropertyhousemeterid,0) AS Systempropertyhousemeterid,
-                sprm.Systempropertyhouseroommeternumber,
+                ISNULL(sprm.Systempropertyhouseroommeternumber,'Meter' +spr.Systempropertyhousesizename) AS Systempropertyhouseroommeternumber,
                 ISNULL((SELECT TOP 1 Closingmeter 
                         FROM Systempropertyhouseroommeters 
                         WHERE Systempropertyhouseroomid = spr.Systempropertyhouseroomid 
