@@ -2792,7 +2792,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 foreach (var fixture in SystempropertyhouseroomfixturesData.Roomfixtures)
                 {
-                    fixture.Propertyhouseroomid = Convert.ToInt32(HouseroomData.Systempropertyhouseroomid);
                     fixture.Createdby = App.UserDetails.Usermodel.Userid;
                     if (fixture.SelectedFixture != null)
                     {
