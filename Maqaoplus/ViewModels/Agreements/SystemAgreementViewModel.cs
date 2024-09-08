@@ -106,6 +106,8 @@ namespace Maqaoplus.ViewModels.Agreements
         public SystemAgreementViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            OwnerTenantAgreementDetailData = new OwnerTenantAgreementDetailData();
+            TenantAgreementDetailData = new TenantAgreementDetailData();
             ViewPropertyAgentAgreementCommand = new Command(async () => await ViewPropertyAgentAgreementDetails());
             ViewPropertyOwnerAgreementCommand = new Command(async () => await ViewPropertyOwnerAgreementDetails());
             ViewPropertyTenantAgreementCommand = new Command(async () => await ViewPropertyTenantAgreementDetails());

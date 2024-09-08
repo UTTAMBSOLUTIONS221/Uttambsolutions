@@ -76,6 +76,8 @@ namespace Maqaoplus.ViewModels.BillsandPayments
         {
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<MonthlyRentInvoiceModel>();
+            TenantInvoiceDetailData = new MonthlyRentInvoiceModel();
+            CustomerPaymentValidationData = new CustomerPaymentValidation();
             LoadOwnerBillItemsCommand = new Command(async () => await LoadOwnerBillItems());
             LoadAgentBillItemsCommand = new Command(async () => await LoadAgentBillItems());
             LoadOwnerPaymentItemsCommand = new Command(async () => await LoadOwnerPaymentItems());
@@ -402,7 +404,7 @@ namespace Maqaoplus.ViewModels.BillsandPayments
                 return;
             }
 
-           
+
             if (CustomerPaymentValidationData == null)
             {
                 IsProcessing = false;
