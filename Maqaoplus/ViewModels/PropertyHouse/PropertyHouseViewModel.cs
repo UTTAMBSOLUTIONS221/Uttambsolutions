@@ -2342,6 +2342,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
                 return;
             }
+            SystempropertyData.Hasagent = false;
             SystempropertyData.Propertyhouseowner = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
@@ -2565,6 +2566,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SystempropertyData.Roleid = 2;
             SystempropertyData.Passwordresetdate = DateTime.Now.AddDays(90);
             SystempropertyData.Isagency = true;
+            SystempropertyData.Hasagent = true;
             SystempropertyData.Createdby = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Modifiedby = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Propertyhouseposter = App.UserDetails.Usermodel.Userid;

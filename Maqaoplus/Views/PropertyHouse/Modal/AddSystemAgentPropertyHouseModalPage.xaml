@@ -157,16 +157,9 @@
                     <Grid ColumnSpacing="14" RowSpacing="12">
                         <!-- Define three equal-width columns -->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="95" />
-                            <ColumnDefinition Width="107" />
-                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-
-                        <!-- First Row - Has Agent -->
-                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center">
-                            <CheckBox IsChecked="{Binding SystempropertyData.Hasagent}" Color="#0a506c" VerticalOptions="Center" />
-                            <Label Text="Has Agent?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" />
-                        </StackLayout>
 
                         <!-- First Row - Has Deposit -->
                         <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
@@ -483,7 +476,7 @@
 
                                     <!-- Amount -->
                                     <Entry Text="{Binding Systempropertyhousedepositfeeamount}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill" IsVisible="{Binding Isreadonly, Converter={StaticResource InverseBooleanConverter}}"/>
-                                     </Grid>
+                                </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
