@@ -786,6 +786,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             Rooms = new ObservableCollection<PropertyHouseDetails>();
             PropertyHouseCareTakerItems = new ObservableCollection<SystemStaff>();
             VacantItems = new ObservableCollection<PropertyHouseDetails>();
+            SystempropertyData = new Systemproperty();
+            HouseroomData = new Systempropertyhouserooms();
+            OwnerTenantAgreementDetailData = new OwnerTenantAgreementDetailData();
+            SystemPropertyHouseImageData = new SystemPropertyHouseImage();
+            TenantStaffData = new Systemtenantdetails();
+            Systemstaffdata = new SystemStaff();
+            NewTenantStaffData = new Systemtenantdetails();
+            SystempropertyhouseroomfixturesData = new Systempropertyhouseroomfixtures();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
             AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
             AddPropertyHouseCareTakerCommand = new Command<SystemStaff>(async (param) => { var caretakerhouseid = param?.Caretakerhouseid ?? 0; await AddPropertyHouseCareTakerAsync(caretakerhouseid); });

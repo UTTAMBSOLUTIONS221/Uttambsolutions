@@ -62,18 +62,8 @@ namespace Maqaoplus.ViewModels.Dashboards
 
         public SummaryDashBoardViewModel(Services.ServiceProvider serviceProvider)
         {
-            DashBoardSummaryData = new PropertyHouseSummary
-            {
-                Propertyhouseunits = 0,
-                Systempropertyoccupiedroom = 0,
-                Systempropertyvacantroom = 0,
-                Rentarrears = 0,
-                Uncollectedpayments = 0,
-                Consumedmeters = 0,
-                Propertybysummary = new List<PropertySummary>()
-            };
-
             _serviceProvider = serviceProvider;
+            DashBoardSummaryData = new PropertyHouseSummary();
             LoadOwnerSummaryCommand = new Command(async () => await LoadOwnerSummary());
             LoadAgentSummaryCommand = new Command(async () => await LoadAgentSummary());
         }

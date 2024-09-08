@@ -76,6 +76,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
         public Propertyhousetenantviewmodel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            TenantData = new PropertyHouseRoomTenantData();
             LoadItemsCommand = new Command(async () => await LoadItems());
             NeedtoVacateCommand = new Command(async () => await NeedtoVacatethisHouseAsync());
             OnCancelClickedCommand = new Command(OnCancelClicked);
