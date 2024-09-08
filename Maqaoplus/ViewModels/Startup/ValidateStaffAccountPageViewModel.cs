@@ -154,7 +154,7 @@ namespace Maqaoplus.ViewModels.Startup
         private async Task OnOkClickedAsync()
         {
             IsProcessing = true;
-           
+
             if (!IsValidInput())
             {
                 IsProcessing = false;
