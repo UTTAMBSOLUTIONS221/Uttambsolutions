@@ -815,6 +815,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             OnHouseRoomCancelClickedCommand = new Command(OnHouseRoomCancelClicked);
             OnHouseRoomOkClickedCommand = new Command(OnHouseRoomOkClicked);
             SaveHouseRoomDetailsCommand = new Command(async () => await SaveHouseRoomDetailsAsync());
+            SavePropertyHouseRoomFixtureCommand = new Command(async () => await SavePropertyHouseRoomFixtureasync());
             ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewRoomDetails(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomCheckListCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomCheckListDetailAsync(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomImageCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomImagesDetails(propertyRoom.Systempropertyhouseroomid));
@@ -2791,6 +2792,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 foreach (var fixture in SystempropertyhouseroomfixturesData.Roomfixtures)
                 {
+                    fixture.Propertyhouseroomid = Convert.ToInt32(HouseroomData.Systempropertyhouseroomid);
+                    fixture.Createdby = App.UserDetails.Usermodel.Userid;
                     if (fixture.SelectedFixture != null)
                     {
                         // Set the Fixtureid to the selected value
