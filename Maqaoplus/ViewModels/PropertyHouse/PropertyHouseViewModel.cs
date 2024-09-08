@@ -2834,7 +2834,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             HouseroomData.Tenantid = TenantStaffData.Userid;
             SearchId = string.Empty;
-            CareTakerFullname = TenantStaffData.Fullname;
             NewTenantStaffData = new Systemtenantdetails
             {
                 Fullname = TenantStaffData.Fullname,

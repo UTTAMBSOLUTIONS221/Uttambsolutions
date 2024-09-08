@@ -272,10 +272,6 @@
                     <!-- Search Button -->
                     <Button Text="Search" Command="{Binding SearchTenantsCommand}" FontSize="18" />
 
-                    <StackLayout>
-                        <Label Text="{Binding CareTakerFullname,StringFormat='Selected Tenant Name: {0}'}" FontAttributes="Bold" FontSize="24" Margin="0,0,0,20" TextColor="#0a506c"/>
-                    </StackLayout>
-
                     <ScrollView Grid.Row="0">
                         <Grid Padding="0">
                             <Grid.RowDefinitions>
