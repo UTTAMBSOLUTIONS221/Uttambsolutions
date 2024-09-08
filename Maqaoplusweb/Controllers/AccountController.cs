@@ -123,19 +123,15 @@ namespace Maqaoplusweb.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Forgotpassword(Forgotpassword model)
         {
-            var resp = await bl.ValidateSystemForgotpasswordStaff(model.Emailaddress);
-            if (resp.RespStatus == 0)
+            var resp = await bl.ValidateSystemForgotpasswordStaff(model);
+            if (resp.Data != null)
             {
-                Success(resp.RespMessage, true);
+
                 return RedirectToAction("Index", "Home");
-            }
-            else if (resp.RespStatus == 1)
-            {
-                Warning(resp.RespMessage, true);
             }
             else
             {
-                ModelState.AddModelError(string.Empty, resp.RespMessage);
+                ModelState.AddModelError(string.Empty, "Server error. Contact Admin");
             }
             return View();
         }
