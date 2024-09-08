@@ -17,7 +17,7 @@ namespace DBL.Repositories
         SystemStaff Getsystemstaffdatabyrefreshtoken(string Refreshtoken);
         Systemtenantdetailsdata Getsystemstaffdatabyidnumber(int Idnumber);
         Genericmodel Registersystemjobapplicationdata(string JsonData);
-        ForgotPasswordUserResponce VerifyForgotPasswordSystemStaff(string JsonData);
+        ForgotPasswordUserResponce VerifyForgotPasswordSystemStaff(Forgotpassword Obj);
         UsermodelResponce VerifySystemStaff(string Username);
         List<string> Getsystempermissiondatabyroleid(long Roleid);
     }

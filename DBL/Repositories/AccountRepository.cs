@@ -248,7 +248,7 @@ namespace DBL.Repositories
 
 
         #region Verify System Staff Forgot Password
-        public ForgotPasswordUserResponce VerifyForgotPasswordSystemStaff(string JsonData)
+        public ForgotPasswordUserResponce VerifyForgotPasswordSystemStaff(Forgotpassword Obj)
         {
 
             using (var connection = new SqlConnection(_connString))
@@ -256,7 +256,11 @@ namespace DBL.Repositories
                 connection.Open();
                 ForgotPasswordUserResponce resp = new ForgotPasswordUserResponce();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@JsonObjectData", JsonData);
+                parameters.Add("@Emailaddress", Obj.Emailaddress);
+                parameters.Add("@Androidid", Obj.Androidid);
+                parameters.Add("@Userid", Obj.Userid);
+                parameters.Add("@Passwords", Obj.Passwords);
+                parameters.Add("@Passharsh", Obj.Passharsh);
                 parameters.Add("@StaffDetails", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Verifyforgotpasswordsystemstaff", parameters, commandType: CommandType.StoredProcedure);
                 string staffDetailsJson = parameters.Get<string>("@StaffDetails");
