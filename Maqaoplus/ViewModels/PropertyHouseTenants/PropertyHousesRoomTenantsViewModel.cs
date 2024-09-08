@@ -68,6 +68,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
         {
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<PropertyHouseTenant>();
+            TenantData = new PropertyHouseRoomTenantData();
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<PropertyHouseTenant>(async (propertyhousetenant) => await ViewDetails(propertyhousetenant.Systempropertyhousetenantid));
