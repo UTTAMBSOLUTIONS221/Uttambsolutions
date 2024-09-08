@@ -161,13 +161,13 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- First Row - Has Deposit -->
-                        <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
+                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center">
                             <CheckBox IsChecked="{Binding SystempropertyData.Hashousedeposit}" Color="#0a506c" VerticalOptions="Center" />
                             <Label Text="Has Deposit?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start"  TextColor="Black" />
                         </StackLayout>
 
                         <!-- First Row - Water Metered -->
-                        <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center">
+                        <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
                             <CheckBox IsChecked="{Binding SystempropertyData.Hashousewatermeter}" Color="#0a506c" VerticalOptions="Center" />
                             <Label Text="Has Submeters?" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start"  TextColor="Black" />
                         </StackLayout>
