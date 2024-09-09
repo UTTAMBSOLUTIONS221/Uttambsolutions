@@ -85,7 +85,6 @@ namespace Maqaoplus.ViewModels
         public UserProfilePageViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            LoadDropdownData();
             StaffData = new SystemStaff();
             LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserDataAsync());
             UpdateCurrentUserDetailsCommand = new Command(async () => await Updateuserdetailsasync());
@@ -207,6 +206,21 @@ namespace Maqaoplus.ViewModels
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffprofiledatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
                 if (response != null)
                 {
+                    var SystemgenderResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemgender, HttpMethod.Get);
+                    if (SystemgenderResponse != null)
+                    {
+                        Systemgender = new ObservableCollection<ListModel>(SystemgenderResponse);
+                    }
+                    var SystemmaritalstatusResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemmaritalstatus, HttpMethod.Get);
+                    if (SystemmaritalstatusResponse != null)
+                    {
+                        Systemmaritalstatus = new ObservableCollection<ListModel>(SystemmaritalstatusResponse);
+                    }
+                    var SystemkinrelationshipResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemkinrelationship, HttpMethod.Get);
+                    if (SystemkinrelationshipResponse != null)
+                    {
+                        Systemkinrelationship = new ObservableCollection<ListModel>(SystemkinrelationshipResponse);
+                    }
                     StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
                     if (StaffData.Genderid > 0)
                     {
@@ -232,34 +246,6 @@ namespace Maqaoplus.ViewModels
                 IsProcessing = false;
             }
         }
-
-        private async Task LoadDropdownData()
-        {
-            try
-            {
-                var SystemgenderResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemgender, HttpMethod.Get);
-                var SystemmaritalstatusResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemmaritalstatus, HttpMethod.Get);
-                var SystemkinrelationshipResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemkinrelationship, HttpMethod.Get);
-                if (SystemgenderResponse != null)
-                {
-                    Systemgender = new ObservableCollection<ListModel>(SystemgenderResponse);
-                }
-
-                if (SystemmaritalstatusResponse != null)
-                {
-                    Systemmaritalstatus = new ObservableCollection<ListModel>(SystemmaritalstatusResponse);
-                }
-                if (SystemkinrelationshipResponse != null)
-                {
-                    Systemkinrelationship = new ObservableCollection<ListModel>(SystemkinrelationshipResponse);
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-        }
-
         private async Task Updateuserdetailsasync()
         {
             IsProcessing = true;
