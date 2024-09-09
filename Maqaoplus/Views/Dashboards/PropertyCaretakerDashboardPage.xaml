@@ -103,11 +103,11 @@
                             <!-- Table Headers -->
                             <Grid ColumnSpacing="15" RowSpacing="5" Padding="5, 0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Label Text="House" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" Grid.Row="0" Grid.Column="0" HorizontalOptions="Start"/>
@@ -124,9 +124,9 @@
                                         <Frame Padding="5" CornerRadius="5" BorderColor="#e0e0e0" BackgroundColor="White" HasShadow="False">
                                             <Grid ColumnSpacing="15" RowSpacing="5">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="auto"/>
                                                     <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
