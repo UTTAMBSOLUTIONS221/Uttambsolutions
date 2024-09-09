@@ -5,14 +5,20 @@ BEGIN
             @RespMsg VARCHAR(150) = '',
             @FinanceTransactionId BIGINT,
             @TicketId BIGINT,
-            @InvoiceId BIGINT;
+            @InvoiceId BIGINT,
+            @SystemPropertyHouseRoomId INT,
+            @SystemPropertyHouseTenantId INT,
+            @SystemPropertyHouseId INT,
+            @AccountId INT,
+            @AccountNumber VARCHAR(50),
+            @RentDueDay INT,
+            @TicketLines NVARCHAR(MAX),
+            @TotalAmount DECIMAL(18, 2);
 
     BEGIN TRY
         -- Start a transaction
         BEGIN TRANSACTION;
-
-        -- Declare temporary tables to hold the output from the inserted records
-        DECLARE @SystemFinanceTransactionData TABLE (FinanceTransactionId BIGINT);
+		DECLARE @SystemFinanceTransactionData TABLE (FinanceTransactionId BIGINT);
         DECLARE @SystemTicketData TABLE (TicketId BIGINT);
         DECLARE @SystemInvoiceIdData TABLE (InvoiceId BIGINT);
 
@@ -81,88 +87,93 @@ BEGIN
         INNER JOIN Systemstaffsaccount account ON i.SystemPropertyHouseTenantId = account.UserId
         WHERE PropertyHouse.HasHouseWaterMeter = 0;
 
-        -- Insert multiple records into FinanceTransactions
-        INSERT INTO FinanceTransactions(TenantId, TransactionCode, FinanceTransactionTypeId, FinanceTransactionSubTypeId, ParentId, SaleDescription, IsOnlineSale, CreatedBy, ActualDate, DateCreated)
-        OUTPUT inserted.FinanceTransactionId INTO @SystemFinanceTransactionData
-        SELECT SystemPropertyHouseTenantId, 'TXN' + CONVERT(VARCHAR(70), NEXT VALUE FOR TransactionCodeSequence),
-               (SELECT TOP 1 FinanceTransactionTypeId FROM FinanceTransactionTypes WHERE FinanceTransactionType='Monthly Rent'),(SELECT TOP 1 FinanceTransactionSubTypeId FROM FinanceTransactionSubTypes WHERE FinanceTransactionSubType='Bill Generattion'),
-               0, 'New Tenant House Rent, Deposits and Other Deposit', 1, 0, GETDATE(), GETDATE()
+        -- Cursor to loop over #MergedData
+        DECLARE DataCursor CURSOR FOR 
+        SELECT SystemPropertyHouseRoomId, SystemPropertyHouseTenantId, SystemPropertyHouseId, AccountId, AccountNumber, RentDueDay, TicketLines, TotalAmount
         FROM #MergedData;
 
-        -- Insert multiple records into GLTransactions
-        INSERT INTO GLTransactions(FinanceTransactionId, ChartOfAccountId, PeriodId, Amount, GlActualDate, DateCreated)
-        SELECT f.FinanceTransactionId, COALESCE(c.ChartOfAccountId, (SELECT ChartOfAccountId FROM ChartOfAccounts WHERE ChartOfAccountName = 'Accounts Payable')), 1, m.TotalAmount, GETDATE(), GETDATE()
-        FROM @SystemFinanceTransactionData f
-        CROSS JOIN #MergedData m
-        LEFT JOIN ChartOfAccounts c ON c.ChartOfAccountName = m.AccountNumber;
+        OPEN DataCursor;
 
-        -- Insert multiple records into SystemTickets
-        INSERT INTO SystemTickets(FinanceTransactionId, HouseRoomId, AccountId, CreatedBy, ActualDate, DateCreated)
-        OUTPUT inserted.TicketId INTO @SystemTicketData
-        SELECT f.FinanceTransactionId, m.SystemPropertyHouseRoomId, m.AccountId, 0, GETDATE(), GETDATE()
-        FROM @SystemFinanceTransactionData f
-        CROSS JOIN #MergedData m;
+        FETCH NEXT FROM DataCursor INTO @SystemPropertyHouseRoomId, @SystemPropertyHouseTenantId, @SystemPropertyHouseId, @AccountId, @AccountNumber, @RentDueDay, @TicketLines, @TotalAmount;
 
-        -- Insert multiple records into TicketLines
-        INSERT INTO TicketLines (TicketId, SystemPropertyHouseDepositFeeId, Units, Price, Discount, CreatedBy, DateCreated)
-        SELECT t.TicketId, j.SystemPropertyHouseDepositFeeId, j.Units, j.Amount, j.Discount, j.CreatedBy, j.DateCreated
-        FROM #MergedData m
-        CROSS APPLY OPENJSON(m.TicketLines)
-        WITH (
-            SystemPropertyHouseDepositFeeId BIGINT '$.SystemPropertyHouseDepositFeeId',
-            Units DECIMAL(18, 2) '$.Units',
-            Amount DECIMAL(18, 2) '$.Amount',
-            Discount DECIMAL(18, 2) '$.Discount',
-            CreatedBy BIGINT '$.CreatedBy',
-            DateCreated DATETIME2(6) '$.DateCreated'
-        ) j
-        CROSS JOIN @SystemTicketData t;
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+            -- Insert into FinanceTransactions with unique TransactionCode for each row
+            INSERT INTO FinanceTransactions(TenantId, TransactionCode, FinanceTransactionTypeId, FinanceTransactionSubTypeId, ParentId, SaleDescription, IsOnlineSale, CreatedBy, ActualDate, DateCreated)
+            VALUES (@SystemPropertyHouseTenantId, 'TXN' + CONVERT(VARCHAR(70), NEXT VALUE FOR TransactionCodeSequence),
+                    (SELECT TOP 1 FinanceTransactionTypeId FROM FinanceTransactionTypes WHERE FinanceTransactionType='Monthly Rent'),
+                    (SELECT TOP 1 FinanceTransactionSubTypeId FROM FinanceTransactionSubTypes WHERE FinanceTransactionSubType='Bill Generattion'),
+                    0, 'New Tenant House Rent, Deposits and Other Deposit', 1, 0, GETDATE(), GETDATE());
+					SET @FinanceTransactionId = SCOPE_IDENTITY();
 
-        -- Insert multiple records into MonthlyRentInvoices
-        INSERT INTO MonthlyRentInvoices (InvoiceNo, PropertyHouseRoomId, Propertyhouseroomtenantid, FinanceTransactionId, DateCreated, DueDate, Amount, Discount, IsPaid, PaidAmount, Balance, IsSent, PaidStatus)
-        OUTPUT inserted.InvoiceId INTO @SystemInvoiceIdData
-        SELECT 'INV' + CONVERT(VARCHAR(7), NEXT VALUE FOR InvoiceTransactionCodeSequence), m.SystemPropertyHouseRoomId, m.SystemPropertyHouseTenantId, f.FinanceTransactionId,
-               GETDATE(), GETDATE(), m.TotalAmount, 0, 0, 0, m.TotalAmount, 0, 'NOT PAID'
-        FROM #MergedData m
-        CROSS JOIN @SystemFinanceTransactionData f;
+            -- Insert into GLTransactions
+            INSERT INTO GLTransactions(FinanceTransactionId, ChartOfAccountId, PeriodId, Amount, GlActualDate, DateCreated)
+            SELECT @FinanceTransactionId, COALESCE(c.ChartOfAccountId, (SELECT ChartOfAccountId FROM ChartOfAccounts WHERE ChartOfAccountName = 'Accounts Payable')), 1, @TotalAmount, GETDATE(), GETDATE()
+            FROM ChartOfAccounts c
+            WHERE c.ChartOfAccountName = @AccountNumber;
 
-        -- Insert multiple records into MonthlyRentInvoiceItems
-        INSERT INTO MonthlyRentInvoiceItems (InvoiceId, SystemPropertyHouseDepositFeeId, Units, Price, Discount)
-        SELECT inv.InvoiceId, j.SystemPropertyHouseDepositFeeId, j.Units, j.Amount, j.Discount
-        FROM #MergedData m
-        CROSS APPLY OPENJSON(m.TicketLines)
-        WITH (
-            SystemPropertyHouseDepositFeeId BIGINT '$.SystemPropertyHouseDepositFeeId',
-            Units DECIMAL(18, 2) '$.Units',
-            Amount DECIMAL(18, 2) '$.Amount',
-            Discount DECIMAL(18, 2) '$.Discount',
-            CreatedBy BIGINT '$.CreatedBy',
-            DateCreated DATETIME2(6) '$.DateCreated'
-        ) j
-        CROSS JOIN @SystemInvoiceIdData inv;
+            -- Insert into SystemTickets
+            INSERT INTO SystemTickets(FinanceTransactionId, HouseRoomId, AccountId, CreatedBy, ActualDate, DateCreated)
+            VALUES (@FinanceTransactionId, @SystemPropertyHouseRoomId, @AccountId, 0, GETDATE(), GETDATE());
+			SET @TicketId = SCOPE_IDENTITY();
 
-        -- Update SystemPropertyHouseRoomTenant for the processed tenants
-        UPDATE Systempropertyhouseroomstenant
-        SET Lastinvoiceddate = GETDATE()
-        WHERE Systempropertyhousetenantid IN (SELECT SystemPropertyHouseTenantId FROM #MergedData);
+            -- Insert into TicketLines
+            INSERT INTO TicketLines (TicketId, SystemPropertyHouseDepositFeeId, Units, Price, Discount, CreatedBy, DateCreated)
+            SELECT @TicketId, j.SystemPropertyHouseDepositFeeId, j.Units, j.Amount, j.Discount, j.CreatedBy, j.DateCreated
+            FROM OPENJSON(@TicketLines)
+            WITH (
+                SystemPropertyHouseDepositFeeId BIGINT '$.SystemPropertyHouseDepositFeeId',
+                Units DECIMAL(18, 2) '$.Units',
+                Amount DECIMAL(18, 2) '$.Amount',
+                Discount DECIMAL(18, 2) '$.Discount',
+                CreatedBy BIGINT '$.CreatedBy',
+                DateCreated DATETIME2(6) '$.DateCreated'
+            ) j;
 
-        -- Commit the transaction if all steps succeeded
+            -- Insert into MonthlyRentInvoices
+            INSERT INTO MonthlyRentInvoices (InvoiceNo, PropertyHouseRoomId, Propertyhouseroomtenantid, FinanceTransactionId, DateCreated, DueDate, Amount, Discount, IsPaid, PaidAmount, Balance, IsSent, PaidStatus)
+            VALUES ('INV' + CONVERT(VARCHAR(7), NEXT VALUE FOR InvoiceTransactionCodeSequence), @SystemPropertyHouseRoomId, @SystemPropertyHouseTenantId, @FinanceTransactionId,
+                    GETDATE(), GETDATE(), @TotalAmount, 0, 0, 0, @TotalAmount, 0, 'NOT PAID');
+
+			SET @InvoiceId = SCOPE_IDENTITY();
+            -- Insert into MonthlyRentInvoiceItems
+            INSERT INTO MonthlyRentInvoiceItems (InvoiceId, SystemPropertyHouseDepositFeeId, Units, Price, Discount)
+            SELECT @InvoiceId, j.SystemPropertyHouseDepositFeeId, j.Units, j.Amount, j.Discount
+            FROM OPENJSON(@TicketLines)
+            WITH (
+                SystemPropertyHouseDepositFeeId BIGINT '$.SystemPropertyHouseDepositFeeId',
+                Units DECIMAL(18, 2) '$.Units',
+                Amount DECIMAL(18, 2) '$.Amount',
+                Discount DECIMAL(18, 2) '$.Discount'
+            ) j;
+			 
+            -- Fetch the next row from the cursor
+            FETCH NEXT FROM DataCursor INTO @SystemPropertyHouseRoomId, @SystemPropertyHouseTenantId, @SystemPropertyHouseId, @AccountId, @AccountNumber, @RentDueDay, @TicketLines, @TotalAmount;
+        END;
+
+        -- Clean up the cursor
+        CLOSE DataCursor;
+        DEALLOCATE DataCursor;
+
+        -- Clean up the temporary table
+        DROP TABLE #MergedData;
+
+        -- Commit the transaction
         COMMIT TRANSACTION;
 
-        -- Return success response
+        -- Set response status and message
         SET @RespStat = 1;
-        SET @RespMsg = 'Monthly rent invoice data generated successfully';
+        SET @RespMsg = 'Monthly rent invoice data generated successfully.';
+
     END TRY
     BEGIN CATCH
-        -- Rollback transaction on error
-        IF @@TRANCOUNT > 0
+        -- Rollback the transaction in case of an error
         ROLLBACK TRANSACTION;
-
-        -- Set error response
+        -- Handle the error
         SET @RespStat = 0;
         SET @RespMsg = ERROR_MESSAGE();
     END CATCH;
 
-    -- Return the response status and message
-    SELECT @RespStat AS ResponseStatus, @RespMsg AS ResponseMessage;
+    -- Return the response
+    SELECT @RespStat AS Status, @RespMsg AS Message;
 END;
