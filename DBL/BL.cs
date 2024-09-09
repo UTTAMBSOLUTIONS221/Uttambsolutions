@@ -1267,7 +1267,6 @@ namespace DBL
         }
         #endregion
 
-
         #region Mpesa Processes
 
         #region Stk Call Back
@@ -1709,7 +1708,6 @@ namespace DBL
             return body.ToString();
         }
         #endregion
-
 
         #region Cron Jobs
         public Task<Genericmodel> Generatemonthlyrentinvoicedata()

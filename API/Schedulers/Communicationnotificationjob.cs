@@ -20,20 +20,15 @@ namespace API.Schedulers
             DateTime now = DateTime.Now;
             DateTime yesterday = now.AddDays(-1);
             string formattedDate = yesterday.ToString("yyyy-MM-dd");
-            var unpublishedBlogs = await bl.Getsystemallunpublishedblogdata();
-            if (unpublishedBlogs != null && unpublishedBlogs.Any())
+            var unsentEmailAddress = await bl.Getsystemunsentemaildata();
+            if (unsentEmailAddress != null && unsentEmailAddress.Any())
             {
-                foreach (var blogData in unpublishedBlogs)
+                foreach (var unsentEmailData in unsentEmailAddress)
                 {
-                    //Get all Registered Social Pages
                     var Socialpages = await bl.Getsystemallsocialmediadata();
                     foreach (var page in Socialpages)
                     {
-                        var imageUrls = new List<string>
-                        {
-                            blogData.Blogprimaryimageurl
-                        };
-                        await bl.Updatepublishedblogdata(blogData.Blogid);
+                        await bl.Updatepublishedblogdata(unsentEmailData.Blogid);
                     }
                 }
                 await Task.CompletedTask;
