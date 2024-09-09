@@ -2,7 +2,7 @@
 {
     public class Monthlyrentinvoicedata
     {
-        public Monthlyrentinvoice? Data { get; set; }
+        public List<Monthlyrentinvoice>? Data { get; set; }
     }
     public class Monthlyrentinvoice
     {
