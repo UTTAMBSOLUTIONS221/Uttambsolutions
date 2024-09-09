@@ -190,6 +190,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Verifystaffaccountdatabyid(long Staffid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Verifystaffaccountdatabyid(Staffid);
+                return Resp;
+            });
+        }
         public Task<SystemStaff> Getsystemstaffdatabyrefreshtoken(string Refreshtoken)
         {
             return Task.Run(() =>

@@ -10,6 +10,7 @@ namespace DBL.Repositories
         Genericmodel Registersystemstaffdata(string JsonData);
         Genericmodel SaveStaffRefreshToken(string JsonData);
         SystemStaff Getsystemstaffdatabyid(long Staffid);
+        Genericmodel Verifystaffaccountdatabyid(long Staffid);
         SystemUserProfileData Getsystemuserprofiledata(long Userid);
         Genericmodel Updatestaffprofilepicturedata(string JsonData);
         Genericmodel Updatestaffcurriculumdata(string JsonData);

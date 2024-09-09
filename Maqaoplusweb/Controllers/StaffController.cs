@@ -43,5 +43,10 @@ namespace Maqaoplusweb.Controllers
             var resp = await bl.Getsystemstaffdatabyidnumber(Idnumber);
             return Json(resp);
         }
+        public async Task<JsonResult> Verifystaffaccountdatabyid(int Userid)
+        {
+            var resp = await bl.Verifystaffaccountdatabyid(Userid);
+            return Json(resp);
+        }
     }
 }

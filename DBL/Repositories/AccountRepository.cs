@@ -67,6 +67,16 @@ namespace DBL.Repositories
                 return connection.Query<SystemStaff>("Usp_Getsystemstaffdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+        public Genericmodel Verifystaffaccountdatabyid(long Staffid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Staffid", Staffid);
+                return connection.Query<Genericmodel>("Usp_Verifystaffaccountdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         public SystemStaff Getsystemstaffdatabyrefreshtoken(string Refreshtoken)
         {
             using (var connection = new SqlConnection(_connString))
