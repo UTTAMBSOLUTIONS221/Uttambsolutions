@@ -1,5 +1,9 @@
+using API.Schedulers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Quartz;
+using Quartz.Impl;
+using Quartz.Spi;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +12,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+// Add Quartz services
+builder.Services.AddHostedService<QuartzHostedService>();
+builder.Services.AddSingleton<IJobFactory, SingletonJobFactory>();
+builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+
+// Add our job
+builder.Services.AddSingleton<PublishBlogstoFacebookJob>();
+builder.Services.AddSingleton(new JobSchedule(
+jobType: typeof(PublishBlogstoFacebookJob),
+   cronExpression: "0 * * * * ?")); // Cron expression for running every minute
+
+
 
 // Add CORS
 builder.Services.AddCors(options =>
