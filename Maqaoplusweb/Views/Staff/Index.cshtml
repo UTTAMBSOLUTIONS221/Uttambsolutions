@@ -79,24 +79,27 @@
                                         }
                                     </td>
                                     <td class="text-right nowrap text-nowrap">
-                                        <a asp-action="Resendstaffpassword" asp-controller="Staff" asp-route-code="@Guid.NewGuid()" asp-route-Tenantstaffid="@item.Userid" asp-area="" id="CAN_RESEND_STAFF_PASSWORD"  style="display:none;" class="btn-info btn-xs btn-outline-info font-weight-bold text-white text-uppercase main">Resend Password</a>
-                                        <a asp-action="Addstaff" asp-controller="Staff" asp-route-code="@Guid.NewGuid()" asp-route-Userid="@item.Userid" asp-area="" id="CAN_EDIT_STAFF"  style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
-                                        <a asp-action="Verifystaffaccount" asp-controller="Staff" asp-route-code="@Guid.NewGuid()" asp-route-Userid="@item.Userid" asp-area="" id="CAN_EDIT_STAFF"  style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Verify</a>
+                                        <a asp-action="Resendstaffpassword" asp-controller="Staff" asp-route-code="@Guid.NewGuid()" asp-route-Tenantstaffid="@item.Userid" asp-area="" id="CAN_RESEND_STAFF_PASSWORD" style="display:none;" class="btn-info btn-xs btn-outline-info font-weight-bold text-white text-uppercase main">Resend Password</a>
+                                        <a asp-action="Addstaff" asp-controller="Staff" asp-route-code="@Guid.NewGuid()" asp-route-Userid="@item.Userid" asp-area="" id="CAN_EDIT_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                        @if (item.Loginstatus ==1)
+                                        {
+                                            <a onclick="verifythisstaffaccount(event)" data-Entryid="@item.Userid" id="CAN_EDIT_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Verify</a>
+                                        }
                                         @if (item.Isactive)
                                         {
-                                            <a onclick="deactivatethis(event)" data-tablename="Systemstaffs" data-Columname="IsActive" data-Status="0" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_DEACTIVATE_STAFF"  style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Deactivate</a>
+                                            <a onclick="deactivatethis(event)" data-tablename="Systemstaffs" data-Columname="IsActive" data-Status="0" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_DEACTIVATE_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Deactivate</a>
                                         }
                                         else
                                         {
-                                            <a onclick="activatethis(event)" data-Tablename="Systemstaffs" data-Columname="IsActive" data-Status="1" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_ACTIVATE_STAFF"  style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Activate</a>
+                                            <a onclick="activatethis(event)" data-Tablename="Systemstaffs" data-Columname="IsActive" data-Status="1" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_ACTIVATE_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Activate</a>
                                         }
                                         @if (item.Isdeleted)
                                         {
-                                            <a onclick="restorethis(event)" data-Tablename="Systemstaffs" data-Columname="IsDeleted" data-Status="0" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_RESTORE_STAFF"  style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Restore</a>
+                                            <a onclick="restorethis(event)" data-Tablename="Systemstaffs" data-Columname="IsDeleted" data-Status="0" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_RESTORE_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Restore</a>
                                         }
                                         else
                                         {
-                                            <a onclick="deletethis(event)" data-Tablename="Systemstaffs" data-Columname="IsDeleted" data-Status="1" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_DELETE_STAFF"  style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Delete</a>
+                                            <a onclick="deletethis(event)" data-Tablename="Systemstaffs" data-Columname="IsDeleted" data-Status="1" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_DELETE_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Delete</a>
                                         }
                                     </td>
                                 </tr>
@@ -108,78 +111,123 @@
         </div>
     </div>
 </div>
-
-                                            @section Scripts {
+@section Scripts {
     <script type="text/javascript">
-    ﻿function savesystemstaffdata() {
-    document.getElementById("savesystemstaffid").disabled = true;
-    document.getElementById("processingSpinner").style.display = "inline-block";
-    document.getElementById("buttonText").innerText = "Processing...";
+            ﻿function savesystemstaffdata() {
+            document.getElementById("savesystemstaffid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
 
-    if ($('#FirstnameId').val() == '') {
-        Swal.fire("Staff Detail Not Created", 'Firstname is Required', "warning");
-        document.getElementById("savesystemstaffid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-    if ($('#LastnameId').val() == '') {
-        Swal.fire("Staff Detail Not Created", 'Lastname is Required', "warning");
-        document.getElementById("savesystemstaffid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-    if ($('#EmailAddressId').val() == '') {
-        Swal.fire("Staff Detail Not Created", 'Emailaddress is Required', "warning");
-        document.getElementById("savesystemstaffid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-    if ($('#PhonenumberId').val() == '') {
-        Swal.fire("Staff Detail Not Created", 'Phonenumber is Required', "warning");
-        document.getElementById("savesystemstaffid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-    if ($('#StaffRoleId').val() == '' || $('#StaffRoleId').val() == 0) {
-        Swal.fire("Staff Detail Not Created", 'Role is Required', "warning");
-        document.getElementById("savesystemstaffid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
-    var uil = {
-        Userid: $('#UserId').val(),
-        Firstname: $('#FirstnameId').val(),
-        Lastname: $('#LastnameId').val(),
-        Emailaddress: $('#EmailAddressId').val(),
-        Phonenumber: $('#PhonenumberId').val(),
-        Idnumber: $('#IdnumberId').val(),
-        Genderid: $('#Genderid').val(),
-        Maritalstatusid: $('#Maritalstatusid').val(),
-        Roleid: $('#StaffRoleId').val(),
-        Parentid: 0,
-        Updateprofile: true,
-        Createdby: $('#UserId').val(),
-        Modifiedby: $('#UserId').val(),
-        Lastlogin: new Date().toISOString().slice(0, 19).replace('T', ' '),
-        Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
-        Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' ')
-    };
-    $.post("/Staff/Addsystemstaffdata", uil, function (response) {
-        if (response.RespStatus == 0) {
-            Swal.fire("Staff Detail", "Staff has been added and email sent.", "success");
-            setTimeout(function () { location.reload(); }, 500);
-        } else {
-            Swal.fire("Staff Detail Not Created", response.RespMessage, "error");
+            if ($('#FirstnameId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Firstname is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#LastnameId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Lastname is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#EmailAddressId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Emailaddress is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#PhonenumberId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Phonenumber is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            if ($('#StaffRoleId').val() == '' || $('#StaffRoleId').val() == 0) {
+                Swal.fire("Staff Detail Not Created", 'Role is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
+            var uil = {
+                Userid: $('#UserId').val(),
+                Firstname: $('#FirstnameId').val(),
+                Lastname: $('#LastnameId').val(),
+                Emailaddress: $('#EmailAddressId').val(),
+                Phonenumber: $('#PhonenumberId').val(),
+                Idnumber: $('#IdnumberId').val(),
+                Genderid: $('#Genderid').val(),
+                Maritalstatusid: $('#Maritalstatusid').val(),
+                Roleid: $('#StaffRoleId').val(),
+                Parentid: 0,
+                Updateprofile: true,
+                Createdby: $('#UserId').val(),
+                Modifiedby: $('#UserId').val(),
+                Lastlogin: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' ')
+            };
+            $.post("/Staff/Addsystemstaffdata", uil, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire("Staff Detail", "Staff has been added and email sent.", "success");
+                    setTimeout(function () { location.reload(); }, 500);
+                } else {
+                    Swal.fire("Staff Detail Not Created", response.RespMessage, "error");
+                }
+             document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+          }
+           function verifythisstaffaccount(event) {
+            Swal.fire({
+                title: "Are you sure you want to verify this?",
+                text: "Once Verified, it will transact!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, verify it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Log event and target for debugging purposes
+                    console.log("Event triggered, target element:", event.target);
+                    var activateBtn = event.target;
+
+                    // Get the Entryid from the button
+                    var Entryid = activateBtn.getAttribute('data-Entryid');
+                    if (!Entryid) {
+                        Swal.fire("Error", "Entry ID not found. Please try again.", "error");
+                        return;
+                    }
+
+                    // Log Entryid for debugging
+                    console.log("Entryid found:", Entryid);
+
+                    // Send the POST request to verify the staff account
+                    $.post("/Staff/Verifystaffaccountdatabyid/" + Entryid, function (response) {
+                        console.log("Response from server:", response); // Log response for debugging
+                        if (response.RespStatus === 0) {
+                            Swal.fire('Item Activated!', 'Good.', 'success');
+                            setTimeout(function () { location.reload(); }, 1000);
+                        } else if (response.RespStatus === 1) {
+                            Swal.fire("Oops!", response.RespMessage, "warning");
+                        } else {
+                            Swal.fire("Oops! Something Went Wrong", "Database error has occurred. Kindly contact our support team.", "error");
+                        }
+                    }).fail(function (xhr, status, error) {
+                        // Log the error for debugging
+                        console.log("AJAX error:", error);
+                        Swal.fire("Error", "An error occurred while verifying the staff account. Please try again.", "error");
+                    });
+                } else {
+                    Swal.fire("Thank you!", "Activate once you are sure.", "info");
+                }
+            });
         }
-        document.getElementById("savesystemstaffid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-    });
-}
-   </script>
+    </script>
 }
