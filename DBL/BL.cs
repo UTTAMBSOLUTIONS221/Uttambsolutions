@@ -1707,6 +1707,14 @@ namespace DBL
 
             return body.ToString();
         }
+        public Task<Genericmodel> LogEmailMessage(EmailLogs Logs)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs));
+                return Resp;
+            });
+        }
         #endregion
 
         #region Usent Email Address
@@ -1726,6 +1734,17 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.CronjobsRepository.Generatemonthlyrentinvoicedata();
+                return Resp;
+            });
+        }
+        #endregion
+
+        #region Send Email 
+        public Task<bool> Uttambsolutionssendemail(string Emailaddress, string Subject, string Message, bool Isbody, string idontknow, string idontknow1, string idontknow2)
+        {
+            return Task.Run(() =>
+            {
+                bool Resp = emlsnd.UttambsolutionssendemailAsync(Emailaddress, Subject, Message, Isbody, idontknow, idontknow1, idontknow2);
                 return Resp;
             });
         }

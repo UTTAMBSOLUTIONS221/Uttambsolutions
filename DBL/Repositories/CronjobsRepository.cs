@@ -39,8 +39,7 @@ namespace DBL.Repositories
                 string detailsJson = parameters.Get<string>("@RentinvoiceDetails");
                 JObject responseJson = JObject.Parse(detailsJson);
                 string userModelJson = responseJson["Data"].ToString();
-                Monthlyrentinvoice userResponse = JsonConvert.DeserializeObject<Monthlyrentinvoice>(userModelJson);
-                resp.Data = userResponse;
+                resp.Data = JsonConvert.DeserializeObject<List<Monthlyrentinvoice>>(userModelJson);
                 return resp;
             }
         }
