@@ -1709,5 +1709,17 @@ namespace DBL
             return body.ToString();
         }
         #endregion
+
+
+        #region Cron Jobs
+        public Task<Genericmodel> Generatemonthlyrentinvoicedata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.CronjobsRepository.Generatemonthlyrentinvoicedata();
+                return Resp;
+            });
+        }
+        #endregion
     }
 }

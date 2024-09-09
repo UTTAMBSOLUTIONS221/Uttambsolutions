@@ -14,6 +14,7 @@ namespace DBL.UOW
         private ISocialmediaRepository socialmediaRepository;
         private IOrganizationRepository organizationRepository;
         private IModulesRepository modulesRepository;
+        private ICronjobsRepository cronjobsRepository;
         private IBlogcategoryRepository blogcategoryRepository;
         private IBlogsRepository blogsRepository;
         private IOpportunityRepository opportunityRepository;
@@ -58,6 +59,10 @@ namespace DBL.UOW
         public IModulesRepository ModulesRepository
         {
             get { return modulesRepository ?? (modulesRepository = new ModulesRepository(connString)); }
+        }
+        public ICronjobsRepository CronjobsRepository
+        {
+            get { return cronjobsRepository ?? (cronjobsRepository = new CronjobsRepository(connString)); }
         }
         public IBlogcategoryRepository BlogcategoryRepository
         {

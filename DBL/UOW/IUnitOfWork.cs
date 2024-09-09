@@ -11,6 +11,7 @@ namespace DBL.UOW
         ISocialmediaRepository SocialmediaRepository { get; }
         IOrganizationRepository OrganizationRepository { get; }
         IModulesRepository ModulesRepository { get; }
+        ICronjobsRepository CronjobsRepository { get; }
 
         IBlogcategoryRepository BlogcategoryRepository { get; }
 
