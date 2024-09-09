@@ -20,9 +20,9 @@ builder.Services.AddSingleton<IJobFactory, SingletonJobFactory>();
 builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
 
 // Add our job
-builder.Services.AddSingleton<PublishBlogstoFacebookJob>();
+builder.Services.AddSingleton<Generatemonthlyrentinvoicejob>();
 builder.Services.AddSingleton(new JobSchedule(
-jobType: typeof(PublishBlogstoFacebookJob),
+jobType: typeof(Generatemonthlyrentinvoicejob),
    cronExpression: "0 * * * * ?")); // Cron expression for running every minute
 
 
