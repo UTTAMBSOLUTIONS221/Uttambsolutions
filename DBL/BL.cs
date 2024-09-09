@@ -1709,6 +1709,17 @@ namespace DBL
         }
         #endregion
 
+        #region Usent Email Address
+        public Task<Monthlyrentinvoicedata> Getsystemunsentemaildata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.CronjobsRepository.Getsystemunsentemaildata();
+                return Resp;
+            });
+        }
+        #endregion
+
         #region Cron Jobs
         public Task<Genericmodel> Generatemonthlyrentinvoicedata()
         {
