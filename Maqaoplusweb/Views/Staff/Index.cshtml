@@ -83,7 +83,7 @@
                                         <a asp-action="Addstaff" asp-controller="Staff" asp-route-code="@Guid.NewGuid()" asp-route-Userid="@item.Userid" asp-area="" id="CAN_EDIT_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
                                         @if (item.Loginstatus ==1)
                                         {
-                                            <a onclick="verifythisstaffaccount(event)" data-Entryid="@item.Userid" id="CAN_EDIT_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Verify</a>
+                                            <a onclick="verifythisstaffaccount(event)" data-Entryid="@item.Userid" id="CAN_EDIT_STAFF" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Verify</a>
                                         }
                                         @if (item.Isactive)
                                         {
