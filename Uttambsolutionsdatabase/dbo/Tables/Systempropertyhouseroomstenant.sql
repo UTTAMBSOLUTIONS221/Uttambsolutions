@@ -1,4 +1,4 @@
-CREATE TABLE [dbo].[Systempropertyhouseroomstenant] (
+﻿CREATE TABLE [dbo].[Systempropertyhouseroomstenant] (
     [Systempropertyhousetenantentryid] BIGINT          IDENTITY (1, 1) NOT NULL,
     [Systempropertyhousetenantid]      BIGINT          NOT NULL,
     [Systempropertyhouseroomid]        INT             NOT NULL,
@@ -14,8 +14,11 @@ CREATE TABLE [dbo].[Systempropertyhouseroomstenant] (
     [Vacateddate]                      DATETIME        NOT NULL,
     [Datecreated]                      DATETIME        NOT NULL,
     [Datemodified]                     DATETIME        NOT NULL,
+    [Lastinvoiceddate]                 DATETIME        DEFAULT (getdate()) NOT NULL,
     PRIMARY KEY CLUSTERED ([Systempropertyhousetenantentryid] ASC)
 );
+
+
 
 
 
