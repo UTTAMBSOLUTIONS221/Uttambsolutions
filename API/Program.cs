@@ -22,14 +22,16 @@ builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
 // Add our job
 builder.Services.AddSingleton<Generatemonthlyrentinvoicejob>();
 builder.Services.AddSingleton<Communicationnotificationjob>();
+//builder.Services.AddSingleton(new JobSchedule(
+//    jobType: typeof(Generatemonthlyrentinvoicejob),
+//    cronExpression: "0 0 28 * *"));
+
 builder.Services.AddSingleton(new JobSchedule(
 jobType: typeof(Generatemonthlyrentinvoicejob),
    cronExpression: "0 * * * * ?"));
 builder.Services.AddSingleton(new JobSchedule(
-jobType: typeof(Communicationnotificationjob),
-   cronExpression: "0 * * * * ?"));
-
-
+    jobType: typeof(Communicationnotificationjob),
+    cronExpression: "0 6 * * *"));
 
 // Add CORS
 builder.Services.AddCors(options =>
