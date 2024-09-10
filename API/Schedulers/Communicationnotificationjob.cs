@@ -25,118 +25,146 @@ namespace API.Schedulers
             var unsentEmailAddress = await bl.Getsystemunsentemaildata();
             if (unsentEmailAddress != null && unsentEmailAddress.Data.Any())
             {
-                foreach (var unsentEmailData in unsentEmailAddress.Data)
+                foreach (var invoice in unsentEmailAddress.Data)
                 {
                     string companyname = "Maqao Plus";
+                    string companyemail = "maqaoplus@uttambsolutions.com";
                     string changepasswordurl = "https://uttambsolutions.com/Account/changepassword";
                     //send email for reseting password
-                    StringBuilder StrBodyEmail = new StringBuilder();
+                    string logoUrl = "https://uttambsolutions.com/images/uttambsolutionlogo.png";
                     StringBuilder invoiceHtml = new StringBuilder();
 
-                    // Start invoice body
-                    invoiceHtml.Append("<table style=\"width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;\">");
+                    // Start of HTML structure
+                    invoiceHtml.Append("<div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>");
+                    invoiceHtml.Append("<table style='width: 100%; max-width: 600px; margin: 0 auto; border-collapse: collapse; position: relative;'>");
 
-                    // Add the unpaid ribbon
-                    invoiceHtml.Append(@"
-                                <div style='position:relative;'>
-                                    <div style='position:absolute; top:0; right:0; background-color:red; color:white; padding:5px 10px; font-weight:bold;'>
-                                        Unpaid
-                                    </div>
-                                </div>
-                            ");
+                    // Header with logo and email
+                    invoiceHtml.Append("<thead style='background-color: #0a506c; color: #fff; position: relative;'>");
+                    invoiceHtml.Append("<tr>");
+                    invoiceHtml.Append("<th rowspan='2' style='padding: 15px; text-align: left;'>");
+                    invoiceHtml.Append($"<img src=\"{logoUrl}\" alt=\"{companyname}\" style='max-width: 120px; max-height: 120px;' />");
+                    invoiceHtml.Append("</th>");
+                    invoiceHtml.Append($"<th colspan='2' style='padding: 15px; text-align: right; font-size: 18px;'>\"{companyname}\"</th>");
+                    invoiceHtml.Append("</tr>");
+                    invoiceHtml.Append("<tr>");
+                    invoiceHtml.Append("<th colspan='2' style='padding: 10px; text-align: right; font-size: 14px;'>");
+                    invoiceHtml.Append($"Email: <a href='mailto:\"{companyemail}\"' style='color: #fff; text-decoration: none;'>\"{companyemail}\"</a>");
+                    invoiceHtml.Append("</th>");
+                    invoiceHtml.Append("</tr>");
 
-                    // Invoice header
-                    invoiceHtml.Append($@"
-                            <thead>
-                                <tr><td colspan='2' style='border:none;'><img src='https://uttambsolutions.com/images/uttambsolutionlogo.png' alt='Company Logo' style='max-width: 150px;'></td></tr>
-                                <tr><td colspan='2' style='border:none; text-align:right;'><h2>Invoice</h2></td></tr>
-                                <tr>
-                                    <td style='border:none; text-align:left;'><strong>From:</strong><br>{companyname}<br>info@uttambsolutions.com</td>
-                                    <td style='border:none; text-align:right;'><strong>Invoice No:</strong> {unsentEmailData.InvoiceNo}<br><strong>Date:</strong> {DateTime.Now.ToShortDateString()}</td>
-                                </tr>
-                            </thead>
-                        ");
+                    // Ribbon at the far right for payment status
+                    string paidStatus = invoice.IsPaid ? "Paid" : "Unpaid";
+                    invoiceHtml.Append("<div style='position: absolute; top: 0; right: 0; width: 150px; height: 50px; overflow: hidden; z-index: 1;'>");
+                    invoiceHtml.Append($"<div style='background-color: {(invoice.IsPaid ? "green" : "red")}; color: white; padding: 8px 0; width: 220px; text-align: center; transform: rotate(45deg) translate(40px, -70px);'>");
+                    invoiceHtml.Append($"{paidStatus}");
+                    invoiceHtml.Append("</div>");
+                    invoiceHtml.Append("</div>");
 
-                    // Customer details
-                    invoiceHtml.Append($@"
-                        <tbody>
-                            <tr>
-                                <td colspan='2' style='border:none; padding-top: 10px;'>
-                                    <strong>Bill To:</strong><br>
-                                    {unsentEmailData.FullName}<br>
-                                    {unsentEmailData.EmailAddress}<br>
-                                    {unsentEmailData.PhoneNumber}
-                                </td>
-                            </tr>
-                    ");
+                    invoiceHtml.Append("</thead>");
 
-                    // Add the items table header
-                    invoiceHtml.Append(@"
-                                <tr>
-                                    <td style='border: 1px solid #ddd; padding: 8px;'><strong>Description</strong></td>
-                                    <td style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Units</strong></td>
-                                    <td style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Price</strong></td>
-                                </tr>
-                            ");
+                    // Invoice Section with Invoice Number and Date
+                    invoiceHtml.Append("<tbody>");
+                    invoiceHtml.Append("<tr><td style='border:none; text-align:right;'><h2>INVOICE</h2></td></tr>");
+                    invoiceHtml.Append("<tr>");
+                    invoiceHtml.Append("<td style='border:none; text-align:left;'>");
+                    invoiceHtml.Append($"<strong>From:</strong><br>Uttamb Solutions<br>info@uttambsolutions.com");
+                    invoiceHtml.Append("</td>");
+                    invoiceHtml.Append("<td style='border:none; text-align:right;'>");
+                    invoiceHtml.Append($"<strong>Invoice No:</strong> {invoice.InvoiceNo}<br>");
+                    invoiceHtml.Append($"<strong>Date:</strong> {invoice.DateCreated.ToString("dd/MM/yyyy")}");
+                    invoiceHtml.Append("</td>");
+                    invoiceHtml.Append("</tr>");
 
-                    // Add item rows
-                    foreach (var item in unsentEmailData.InvoiceDetails)
+                    // Customer Info
+                    invoiceHtml.Append("<tr>");
+                    invoiceHtml.Append("<td colspan='2' style='border:none; padding-top: 10px;'>");
+                    invoiceHtml.Append("<strong>Bill To:</strong><br>");
+                    invoiceHtml.Append($"{invoice.FullName}<br>");
+                    invoiceHtml.Append($"{invoice.EmailAddress}<br>");
+                    invoiceHtml.Append($"{invoice.PhoneNumber}");
+                    invoiceHtml.Append("</td>");
+                    invoiceHtml.Append("</tr>");
+
+                    // Invoice Details Header
+                    invoiceHtml.Append("<tr>");
+                    invoiceHtml.Append("<td style='border: 1px solid #ddd; padding: 8px;'><strong>Description</strong></td>");
+                    invoiceHtml.Append("<td style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Units</strong></td>");
+                    invoiceHtml.Append("<td style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Price</strong></td>");
+                    invoiceHtml.Append("</tr>");
+
+                    // Loop through the InvoiceDetails
+                    foreach (var detail in invoice.InvoiceDetails)
                     {
-                        invoiceHtml.Append($@"
-                            <tr>
-                                <td style='border: 1px solid #ddd; padding: 8px;'>{item.HouseDepositFeeName}</td>
-                                <td style='border: 1px solid #ddd; padding: 8px; text-align:right;'>{item.Units}</td>
-                                <td style='border: 1px solid #ddd; padding: 8px; text-align:right;'>{item.Price:C}</td>
-                            </tr>
-                        ");
+                        invoiceHtml.Append("<tr>");
+                        invoiceHtml.Append($"<td style='border: 1px solid #ddd; padding: 8px;'>{detail.HouseDepositFeeName}</td>");
+                        invoiceHtml.Append($"<td style='border: 1px solid #ddd; padding: 8px; text-align:right;'>{detail.Units}</td>");
+                        invoiceHtml.Append($"<td style='border: 1px solid #ddd; padding: 8px; text-align:right;'>Ksh{detail.Price:0.00}</td>");
+                        invoiceHtml.Append("</tr>");
                     }
 
-                    // Summary row for total
-                    invoiceHtml.Append($@"
-                            <tr>
-                                <td colspan='2' style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Total</strong></td>
-                                <td style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>{unsentEmailData.Amount:C}</strong></td>
-                            </tr>
-                        ");
+                    // Total Amount
+                    invoiceHtml.Append("<tr>");
+                    invoiceHtml.Append("<td colspan='2' style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Total</strong></td>");
+                    invoiceHtml.Append($"<td style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Ksh{invoice.Amount:0.00}</strong></td>");
+                    invoiceHtml.Append("</tr>");
 
-                    // Add footer note
-                    invoiceHtml.Append(@"
-                        <tr>
-                            <td colspan='3' style='border:none; padding: 20px 0 0 0; text-align:left;'>
-                                <strong>Note:</strong> This invoice is currently <span style='color: red;'>unpaid</span>. Please make payment by the due date to avoid late fees.
-                            </td>
-                        </tr>
-                    ");
+                    // Footer Note based on payment status
+                    invoiceHtml.Append("<tr>");
+                    invoiceHtml.Append("<td colspan='3' style='border:none; padding: 20px 0 0 0; text-align:left;'>");
+                    invoiceHtml.Append("<strong>Note:</strong> This invoice is currently ");
+                    invoiceHtml.Append(invoice.IsPaid ? "<span style='color: green;'>paid</span>" : "<span style='color: red;'>unpaid</span>");
+                    invoiceHtml.Append(". Please make payment by the due date to avoid late fees.");
+                    invoiceHtml.Append("</td>");
+                    invoiceHtml.Append("</tr>");
 
                     invoiceHtml.Append("</tbody>");
+
+                    // Footer Section
+                    invoiceHtml.Append("<tfoot style='background-color: #0a506c; color: #fff;'>");
+                    invoiceHtml.Append("<tr>");
+                    invoiceHtml.Append("<td colspan='3' style='padding: 15px; text-align: center; font-size: 14px;'>");
+                    invoiceHtml.Append("Uttamb Solutions &copy; 2022 - 2024");
+                    invoiceHtml.Append("</td>");
+                    invoiceHtml.Append("</tr>");
+                    invoiceHtml.Append("<tr>");
+                    invoiceHtml.Append("<td colspan='3' style='padding: 10px; text-align: center; font-size: 12px;'>");
+                    invoiceHtml.Append("Vision: Utilizing Technology To Automate Modern Business");
+                    invoiceHtml.Append("</td>");
+                    invoiceHtml.Append("</tr>");
+                    invoiceHtml.Append("<tr>");
+                    invoiceHtml.Append("<td colspan='3' style='padding: 10px; text-align: center; font-size: 12px;'>");
+                    invoiceHtml.Append("Mission: For Quality and Value");
+                    invoiceHtml.Append("</td>");
+                    invoiceHtml.Append("</tr>");
+                    invoiceHtml.Append("</tfoot>");
+
                     invoiceHtml.Append("</table>");
+                    invoiceHtml.Append("</div>");
 
-
-                    string logoUrl = "https://uttambsolutions.com/images/uttambsolutionlogo.png";
-                    string message = bl.GenerateEmailBody(logoUrl, "Uttamb Solutions", "info@uttambsolutions.com", invoiceHtml.ToString(), DateTime.Now.Year.ToString());
+                    // string message = bl.GenerateEmailBody(logoUrl, "Uttamb Solutions", "info@uttambsolutions.com", invoiceHtml.ToString(), DateTime.Now.Year.ToString());
 
                     //log Email Messages
                     EmailLogs Logs = new EmailLogs
                     {
                         EmailLogId = 0,
                         ModuleId = 1,
-                        EmailAddress = unsentEmailData.EmailAddress,
+                        EmailAddress = invoice.EmailAddress,
                         EmailSubject = "Forgot Password",
-                        EmailMessage = message,
+                        EmailMessage = invoiceHtml.ToString(),
                         IsEmailSent = false,
                         DateTimeSent = DateTime.Now,
                         Datecreated = DateTime.Now,
                     };
                     var respdata = await bl.LogEmailMessage(Logs);
-                    bool data = await bl.Uttambsolutionssendemail(unsentEmailData.EmailAddress, "Monthly Rent Invoice", message, true, "", "", "");
+                    bool data = await bl.Uttambsolutionssendemail(invoice.EmailAddress, "Monthly Rent Invoice", invoiceHtml.ToString(), true, "", "", "");
                     //Update Email is sent 
                     EmailLogs Logs1 = new EmailLogs
                     {
                         EmailLogId = Convert.ToInt64(respdata.Data1),
                         ModuleId = 1,
-                        EmailAddress = unsentEmailData.EmailAddress,
+                        EmailAddress = invoice.EmailAddress,
                         EmailSubject = "Forgot Password",
-                        EmailMessage = message,
+                        EmailMessage = invoiceHtml.ToString(),
                         IsEmailSent = true,
                         DateTimeSent = DateTime.Now,
                         Datecreated = DateTime.Now,
