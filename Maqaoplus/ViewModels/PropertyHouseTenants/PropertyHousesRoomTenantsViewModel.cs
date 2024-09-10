@@ -85,7 +85,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<PropertyHouseTenant>(async (propertyhousetenant) => await ViewDetails(propertyhousetenant.Systempropertyhousetenantid));
-            AddPropertyHouseAgentTenantCommand = new Command<SystemStaff>(async (propertytenant) => await AddPropertyHouseAgentTenant(propertytenant.Userid));
+            AddPropertyHouseAgentTenantCommand = new Command(async () => await AddPropertyHouseAgentTenant());
         }
         private async Task LoadItems()
         {
@@ -160,17 +160,9 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
                 IsProcessing = false;
             }
         }
-        private async Task AddPropertyHouseAgentTenant(long Tenantid)
+        private async Task AddPropertyHouseAgentTenant()
         {
             IsProcessing = true;
-            if (Tenantid > 0)
-            {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + Tenantid, HttpMethod.Get, null);
-                if (response != null)
-                {
-                    StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
-                }
-            }
             var detailPage = new AddAgentPropertyHouseTenantPage(this);
             await Application.Current.MainPage.Navigation.PushAsync(detailPage);
             IsProcessing = false;
