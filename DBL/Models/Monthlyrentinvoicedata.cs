@@ -8,6 +8,8 @@
     {
         public int InvoiceId { get; set; }
         public string? InvoiceNo { get; set; }
+        public string? Propertyownername { get; set; }
+        public string? Ownerphonenumber { get; set; }
         public string? FullName { get; set; }
         public string? EmailAddress { get; set; }
         public string? PhoneNumber { get; set; }
