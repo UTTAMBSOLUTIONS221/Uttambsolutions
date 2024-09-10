@@ -67,7 +67,7 @@ namespace API.Schedulers
                     invoiceHtml.Append("<tr><td style='border:none; text-align:right;'><h2>INVOICE</h2></td></tr>");
                     invoiceHtml.Append("<tr>");
                     invoiceHtml.Append("<td style='border:none; text-align:left;'>");
-                    invoiceHtml.Append($"<strong>From:</strong><br>Uttamb Solutions<br>info@uttambsolutions.com");
+                    invoiceHtml.Append($"<strong>From:</strong><br>{invoice.Propertyownername}<br>{invoice.Ownerphonenumber}<br>{invoice.Propertyowneremail}");
                     invoiceHtml.Append("</td>");
                     invoiceHtml.Append("<td style='border:none; text-align:right;'>");
                     invoiceHtml.Append($"<strong>Invoice No:</strong> {invoice.InvoiceNo}<br>");
