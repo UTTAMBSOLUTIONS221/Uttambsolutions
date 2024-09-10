@@ -1,7 +1,5 @@
-﻿using DBL.Entities;
-using DBL.Models;
+﻿using DBL.Models;
 using Maqaoplus.Views.PropertyHouseTenants;
-using Maqaoplus.Views.PropertyHouseTenants.Modal;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -17,11 +15,9 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ObservableCollection<PropertyHouseTenant> Items { get; }
         private PropertyHouseRoomTenantData _tenantData;
-        private SystemStaff _staffData;
         public ICommand LoadItemsCommand { get; }
         public ICommand LoadAgentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
-        public ICommand AddPropertyHouseAgentTenantCommand { get; }
 
         private bool _isProcessing;
         public bool IsProcessing
@@ -66,26 +62,15 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
                 OnPropertyChanged(nameof(TenantData));
             }
         }
-        public SystemStaff StaffData
-        {
-            get => _staffData;
-            set
-            {
-                _staffData = value;
-                OnPropertyChanged();
-            }
-        }
         // Constructor with ServiceProvider parameter
         public PropertyHousesRoomTenantsViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<PropertyHouseTenant>();
             TenantData = new PropertyHouseRoomTenantData();
-            StaffData = new SystemStaff();
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<PropertyHouseTenant>(async (propertyhousetenant) => await ViewDetails(propertyhousetenant.Systempropertyhousetenantid));
-            AddPropertyHouseAgentTenantCommand = new Command(async () => await AddPropertyHouseAgentTenant());
         }
         private async Task LoadItems()
         {
@@ -159,13 +144,6 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
                 IsDataLoaded = true;
                 IsProcessing = false;
             }
-        }
-        private async Task AddPropertyHouseAgentTenant()
-        {
-            IsProcessing = true;
-            var detailPage = new AddAgentPropertyHouseTenantPage(this);
-            await Application.Current.MainPage.Navigation.PushAsync(detailPage);
-            IsProcessing = false;
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
