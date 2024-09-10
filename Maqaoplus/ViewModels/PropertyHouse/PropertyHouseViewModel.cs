@@ -2396,6 +2396,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
+                    (Shell.Current.CurrentPage.BindingContext as PropertyHouseViewModel)?.LoadItemsCommand.Execute(null);
                 }
                 else if (response.RespStatus == 1)
                 {
@@ -2580,12 +2581,47 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SystempropertyData.Propertyhouseposter = App.UserDetails.Usermodel.Userid;
             SystempropertyData.Datecreated = DateTime.Now;
             SystempropertyData.Datemodified = DateTime.Now;
+            foreach (var housesize in SystempropertyData.Propertyhousesize)
+            {
+                if (housesize.Systempropertyhousesizeunits > 0)
+                {
+                    housesize.Systempropertyhousesizewehave = true;
+                }
+                else
+                {
+                    housesize.Systempropertyhousesizewehave = false;
+                }
+            }
+            foreach (var housedepositfee in SystempropertyData.Propertyhousedepositfee)
+            {
+                if (housedepositfee.Systempropertyhousedepositfeeamount > 0)
+                {
+                    housedepositfee.Systempropertyhousesizedepositfeewehave = true;
+                }
+                else
+                {
+                    housedepositfee.Systempropertyhousesizedepositfeewehave = false;
+                }
+            }
+            foreach (var housebankingdetail in SystempropertyData.Propertyhousebankingdetail)
+            {
+                if (housebankingdetail.Systempropertybankaccount != "0")
+                {
+                    housebankingdetail.Systempropertyhousebankwehave = true;
+                }
+                else
+                {
+                    housebankingdetail.Systempropertyhousebankwehave = false;
+                }
+            }
+
             try
             {
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystemagentpropertyhousedata", SystempropertyData);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
-                    Application.Current.MainPage.Navigation.PopAsync();
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                    (Shell.Current.CurrentPage.BindingContext as PropertyHouseViewModel)?.LoadAgentItemsCommand.Execute(null);
                 }
                 else if (response.RespStatus == 1)
                 {
