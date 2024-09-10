@@ -85,7 +85,7 @@ namespace API.Schedulers
                         invoiceHtml.Append($@"
                             <tr>
                                 <td style='border: 1px solid #ddd; padding: 8px;'>{item.HouseDepositFeeName}</td>
-                                <td style='border: 1px solid #ddd; padding: 8px; text-align:right;'>{item.Units:C}</td>
+                                <td style='border: 1px solid #ddd; padding: 8px; text-align:right;'>{item.Units}</td>
                                 <td style='border: 1px solid #ddd; padding: 8px; text-align:right;'>{item.Price:C}</td>
                             </tr>
                         ");
@@ -94,7 +94,7 @@ namespace API.Schedulers
                     // Summary row for total
                     invoiceHtml.Append($@"
                             <tr>
-                                <td style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Total</strong></td>
+                                <td colspan='2' style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Total</strong></td>
                                 <td style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>{unsentEmailData.Amount:C}</strong></td>
                             </tr>
                         ");
@@ -102,7 +102,7 @@ namespace API.Schedulers
                     // Add footer note
                     invoiceHtml.Append(@"
                         <tr>
-                            <td colspan='2' style='border:none; padding: 20px 0 0 0; text-align:left;'>
+                            <td colspan='3' style='border:none; padding: 20px 0 0 0; text-align:left;'>
                                 <strong>Note:</strong> This invoice is currently <span style='color: red;'>unpaid</span>. Please make payment by the due date to avoid late fees.
                             </td>
                         </tr>
@@ -141,7 +141,7 @@ namespace API.Schedulers
                         DateTimeSent = DateTime.Now,
                         Datecreated = DateTime.Now,
                     };
-                    var resp1 = bl.LogEmailMessage(Logs1);
+                    var resp1 = await bl.LogEmailMessage(Logs1);
                 }
                 await Task.CompletedTask;
             }
