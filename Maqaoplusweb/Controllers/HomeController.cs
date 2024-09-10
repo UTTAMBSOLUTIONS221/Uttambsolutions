@@ -1,4 +1,5 @@
 using DBL;
+using DBL.Models.Dashboards;
 using Maqaoplusweb.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +21,27 @@ namespace Maqaoplusweb.Controllers
             var data = await bl.Getallsystempropertyvacanthouses(0, 10000);
             return View(data);
         }
-
-        public IActionResult Dashboard()
+        [HttpGet]
+        public async Task<IActionResult> Dashboard()
         {
-            return View();
+            PropertyHouseSummaryDashboard model = new PropertyHouseSummaryDashboard();
+            if (SessionUserData.Usermodel.Designation == "Owner")
+            {
+                model = await bl.Getsystempropertyhousedashboardsummarydatabyowner(SessionUserData.Usermodel.Userid);
+            }
+            else if (SessionUserData.Usermodel.Designation == "Agent")
+            {
+                model = await bl.Getsystempropertyhousedashboardsummarydatabyagent(SessionUserData.Usermodel.Userid);
+            }
+            //else if (SessionUserData.Usermodel.Designation == "Tenant")
+            //{
+            //    model = await bl.Getsystempropertyhousetenantdatabytenantid(SessionUserData.Usermodel.Userid);
+            //}
+            else
+            {
+                model = await bl.Getsystempropertyhousedashboardsummarydatabyagent(SessionUserData.Usermodel.Userid);
+            }
+            return View(model);
         }
         public IActionResult OwnerDashboard()
         {

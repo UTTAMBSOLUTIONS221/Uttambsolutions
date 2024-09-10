@@ -61,7 +61,7 @@ namespace Maqaoplusweb.Controllers
                     return RedirectToAction("Updatemyprofile", "Account", new { Code = Guid.NewGuid(), Usercode = Guid.NewGuid(), Staffid = resp.Usermodel.Userid, });
                 }
                 SetUserLoggedIn(resp, false);
-                return RedirectToLocal(returnUrl, resp.Usermodel.Designation);
+                return RedirectToLocal(returnUrl);
             }
             else if (resp.RespStatus == 401)
             {
@@ -172,29 +172,16 @@ namespace Maqaoplusweb.Controllers
                 ExpiresUtc = new DateTimeOffset?(DateTime.UtcNow.AddMinutes(30))
             });
         }
-        private IActionResult RedirectToLocal(string returnUrl, string Designation)
+        private IActionResult RedirectToLocal(string returnUrl)
         {
-            if (Designation == "Owner")
-            {
-                return RedirectToAction(nameof(HomeController.OwnerDashboard), "Home", new { area = "" });
-            }
-            else if (Designation == "Agent")
-            {
-                return RedirectToAction(nameof(HomeController.AgentDashboard), "Home", new { area = "" });
-            }
-            else if (Designation == "Tenant")
-            {
-                return RedirectToAction(nameof(HomeController.TenantDashboard), "Home", new { area = "" });
-            }
-            else if (Designation == "System Admin")
-            {
-                return RedirectToAction(nameof(HomeController.Dashboard), "Home", new { area = "" });
-            }
-            else if (Url.IsLocalUrl(returnUrl))
+            if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
-            else { return RedirectToAction("Signin", "Account"); }
+            else
+            {
+                return RedirectToAction(nameof(HomeController.Dashboard), "Home", new { area = "" });
+            }
         }
         #endregion
 
