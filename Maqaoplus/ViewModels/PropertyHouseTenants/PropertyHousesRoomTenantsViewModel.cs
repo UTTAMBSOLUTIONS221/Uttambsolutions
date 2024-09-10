@@ -81,6 +81,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
             _serviceProvider = serviceProvider;
             Items = new ObservableCollection<PropertyHouseTenant>();
             TenantData = new PropertyHouseRoomTenantData();
+            StaffData = new SystemStaff();
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<PropertyHouseTenant>(async (propertyhousetenant) => await ViewDetails(propertyhousetenant.Systempropertyhousetenantid));
@@ -162,14 +163,17 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
         private async Task AddPropertyHouseAgentTenant(long Tenantid)
         {
             IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + Tenantid, HttpMethod.Get, null);
-            if (response != null)
+            if (Tenantid > 0)
             {
-                StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
-                var detailPage = new AddAgentPropertyHouseTenantPage(this);
-                await Application.Current.MainPage.Navigation.PushAsync(detailPage);
-                IsProcessing = false;
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + Tenantid, HttpMethod.Get, null);
+                if (response != null)
+                {
+                    StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+                }
             }
+            var detailPage = new AddAgentPropertyHouseTenantPage(this);
+            await Application.Current.MainPage.Navigation.PushAsync(detailPage);
+            IsProcessing = false;
         }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
