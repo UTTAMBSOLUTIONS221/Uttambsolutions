@@ -99,15 +99,15 @@ namespace API.Schedulers
                     {
                         invoiceHtml.Append("<tr>");
                         invoiceHtml.Append($"<td style='border: 1px solid #ddd; padding: 8px;'>{detail.HouseDepositFeeName}</td>");
-                        invoiceHtml.Append($"<td style='border: 1px solid #ddd; padding: 8px; text-align:right;'>{detail.Units}</td>");
-                        invoiceHtml.Append($"<td style='border: 1px solid #ddd; padding: 8px; text-align:right;'>Ksh{detail.Price:0.00}</td>");
+                        invoiceHtml.Append($"<td style='border: 1px solid #ddd; padding: 8px; text-align:right;'>{detail.Units.ToString("#,##0.00")}</td>");
+                        invoiceHtml.Append($"<td style='border: 1px solid #ddd; padding: 8px; text-align:right;'>Ksh {detail.Price.ToString("#,##0.00")}</td>");
                         invoiceHtml.Append("</tr>");
                     }
 
                     // Total Amount
                     invoiceHtml.Append("<tr>");
-                    invoiceHtml.Append("<td colspan='2' style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Total</strong></td>");
-                    invoiceHtml.Append($"<td style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Ksh{invoice.Amount:0.00}</strong></td>");
+                    invoiceHtml.Append("<td colspan='2' style='border: 1px solid #ddd; padding: 8px; text-align:left;'><strong>Total</strong></td>");
+                    invoiceHtml.Append($"<td style='border: 1px solid #ddd; padding: 8px; text-align:right;'><strong>Ksh {invoice.Amount.ToString("#,##0.00")}</strong></td>");
                     invoiceHtml.Append("</tr>");
 
                     // Footer Note based on payment status
