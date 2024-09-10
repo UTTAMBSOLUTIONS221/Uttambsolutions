@@ -166,6 +166,12 @@
 	  <MauiXaml Update="Views\PropertyHouseTenants\AgentPropertyHousesRoomTenantsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PropertyHouseTenants\Modal\AddAgentPropertyHouseTenant.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PropertyHouseTenants\Modal\AddOwnerPropertyHouseTenant.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyHouse\AgentPropertyHousesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
