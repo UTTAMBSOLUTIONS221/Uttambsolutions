@@ -12,6 +12,7 @@ namespace DBL.Models
     }
     public class MonthlyRentInvoiceModel
     {
+        public bool Haspendingpayment { get; set; }
         public int Invoiceid { get; set; }
         public int Financetransactionid { get; set; }
         public string? Transactioncode { get; set; }
