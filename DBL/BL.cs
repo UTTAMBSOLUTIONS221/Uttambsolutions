@@ -1737,6 +1737,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Updatemonthlyrentinvoicedata(long Invoiceid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Updatemonthlyrentinvoicedata(Invoiceid);
+                return Resp;
+            });
+        }
         #endregion
 
         #region Send Email 

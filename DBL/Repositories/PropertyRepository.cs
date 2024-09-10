@@ -1182,5 +1182,16 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registervalidatecustomerpaymentrequestdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+
+        public Genericmodel Updatemonthlyrentinvoicedata(long Invoiceid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Invoiceid", Invoiceid);
+                return connection.Query<Genericmodel>("Usp_Updatemonthlyrentinvoicedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
     }
 }

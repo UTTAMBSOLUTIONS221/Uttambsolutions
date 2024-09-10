@@ -170,6 +170,7 @@ namespace API.Schedulers
                         Datecreated = DateTime.Now,
                     };
                     var resp1 = await bl.LogEmailMessage(Logs1);
+                    await bl.Updatemonthlyrentinvoicedata(invoice.InvoiceId);
                 }
                 await Task.CompletedTask;
             }

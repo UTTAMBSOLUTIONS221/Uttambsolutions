@@ -50,5 +50,6 @@ namespace DBL.Repositories
         TenantMonthlyInvoicePaymentData Gettenantmonthlyinvoicepaymentdatabyagentid(long Agentid);
         CustomerPaymentValidationData Getsystempropertyroompaymentbypaymentid(long Paymentid);
         Genericmodel Registervalidatecustomerpaymentrequestdata(string JsonData);
+        Genericmodel Updatemonthlyrentinvoicedata(long Invoiceid);
     }
 }
