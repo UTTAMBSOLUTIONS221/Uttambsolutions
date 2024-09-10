@@ -125,20 +125,20 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-                var resp = await bl.ValidateSystemForgotpasswordStaff(model.Emailaddress);
-                if (resp.RespStatus == 0)
-                {
-                    Success(resp.RespMessage, true);
-                    return RedirectToAction("Index", "Home");
-                }
-                else if (resp.RespStatus == 1)
-                {
-                    Warning(resp.RespMessage, true);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, resp.RespMessage);
-                }
+                var resp = await bl.ValidateSystemForgotpasswordStaff(model);
+                //if (resp.RespStatus == 0)
+                //{
+                //    Success(resp.RespMessage, true);
+                //    return RedirectToAction("Index", "Home");
+                //}
+                //else if (resp.RespStatus == 1)
+                //{
+                //    Warning(resp.RespMessage, true);
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError(string.Empty, resp.RespMessage);
+                //}
             }
             return View();
         }
