@@ -29,9 +29,11 @@ namespace API.Schedulers
                 {
                     string companyname = "Maqao Plus";
                     string companyemail = "maqaoplus@uttambsolutions.com";
+                    string companysubject = "Monthly Rent Invoice";
                     string changepasswordurl = "https://uttambsolutions.com/Account/changepassword";
                     //send email for reseting password
-                    string logoUrl = "https://uttambsolutions.com/images/uttambsolutionlogo.png";
+                    //string logoUrl = "https://uttambsolutions.com/images/uttambsolutionlogo.png";
+                    string logoUrl = "https://maqaoplus.uttambsolutions.com/images/maqaopluslogo.png";
                     StringBuilder invoiceHtml = new StringBuilder();
 
                     // Start of HTML structure
@@ -149,7 +151,7 @@ namespace API.Schedulers
                         EmailLogId = 0,
                         ModuleId = 1,
                         EmailAddress = invoice.EmailAddress,
-                        EmailSubject = "Forgot Password",
+                        EmailSubject = companysubject,
                         EmailMessage = invoiceHtml.ToString(),
                         IsEmailSent = false,
                         DateTimeSent = DateTime.Now,
@@ -163,7 +165,7 @@ namespace API.Schedulers
                         EmailLogId = Convert.ToInt64(respdata.Data1),
                         ModuleId = 1,
                         EmailAddress = invoice.EmailAddress,
-                        EmailSubject = "Forgot Password",
+                        EmailSubject = companysubject,
                         EmailMessage = invoiceHtml.ToString(),
                         IsEmailSent = true,
                         DateTimeSent = DateTime.Now,
