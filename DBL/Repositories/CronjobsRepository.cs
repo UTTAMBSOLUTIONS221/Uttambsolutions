@@ -33,13 +33,15 @@ namespace DBL.Repositories
             {
                 connection.Open();
                 Monthlyrentinvoicedata resp = new Monthlyrentinvoicedata();
+                List<Monthlyrentinvoice> invoicesData = new List<Monthlyrentinvoice>();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@RentinvoiceDetails", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystemunsentemaildata", parameters, commandType: CommandType.StoredProcedure);
                 string detailsJson = parameters.Get<string>("@RentinvoiceDetails");
                 JObject responseJson = JObject.Parse(detailsJson);
                 string userModelJson = responseJson["Data"].ToString();
-                resp.Data = JsonConvert.DeserializeObject<List<Monthlyrentinvoice>>(userModelJson);
+                invoicesData = JsonConvert.DeserializeObject<List<Monthlyrentinvoice>>(userModelJson);
+                resp.Data = invoicesData;
                 return resp;
             }
         }
