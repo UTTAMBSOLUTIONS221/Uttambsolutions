@@ -1412,8 +1412,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 };
                 Systemhouserentdepositreturndays.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
             }
-
-
             Systemhousevacantnoticeperiod = new ObservableCollection<ListModel>();
             for (int i = 1; i <= 12; i++)
             {
@@ -1425,50 +1423,20 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
                 if (SystempropertyData != null)
                 {
-                    if (SystempropertyData.Propertyhousestatus > 0)
-                    {
-                        SelectedHouseentrystatus = Systemhouseentrystatus.FirstOrDefault(x => x.Value == _systempropertyData.Propertyhousestatus.ToString());
-                    }
-                    if (SystempropertyData.Watertypeid > 0)
-                    {
-                        SelectedHousewatertype = Systemhousewatertype.FirstOrDefault(x => x.Value == _systempropertyData.Watertypeid.ToString());
-                    }
-                    if (SystempropertyData.Countyid > 0)
-                    {
-                        SelectedCounty = Systemcounty.FirstOrDefault(x => x.Value == _systempropertyData.Countyid.ToString());
-                    }
-                    if (SystempropertyData.Subcountyid > 0)
-                    {
-                        SelectedSubcounty = Systemsubcounty.FirstOrDefault(x => x.Value == _systempropertyData.Subcountyid.ToString());
-                    }
-                    if (SystempropertyData.Subcountywardid > 0)
-                    {
-                        SelectedSubcountyward = Systemsubcountyward.FirstOrDefault(x => x.Value == _systempropertyData.Subcountywardid.ToString());
-                    }
-                    if (SystempropertyData.Rentdueday > 0)
-                    {
-                        SelectedHouserentdueday = Systemhouserentdueday.FirstOrDefault(x => x.Value == _systempropertyData.Rentdueday.ToString());
-                    }
-                    if (SystempropertyData.Rentdepositmonth > 0)
-                    {
-                        SelectedHousedepositmonths = Systemhousedepositmonths.FirstOrDefault(x => x.Value == _systempropertyData.Rentdepositmonth.ToString());
-                    }
-                    if (SystempropertyData.Vacantnoticeperiod > 0)
-                    {
-                        SelectedHousevacantnoticeperiod = Systemhousevacantnoticeperiod.FirstOrDefault(x => x.Value == _systempropertyData.Vacantnoticeperiod.ToString());
-                    }
-                    if (SystempropertyData.Rentdepositreturndays > 0)
-                    {
-                        SelectedHouserentdepositreturndays = Systemhouserentdepositreturndays.FirstOrDefault(x => x.Value == _systempropertyData.Rentdepositreturndays.ToString());
-                    }
-                    if (!string.IsNullOrWhiteSpace(SystempropertyData.Rentingterms))
-                    {
-                        SelectedHouserentingterms = Systemhouserentingterms.FirstOrDefault(x => x.Value == _systempropertyData.Rentingterms.ToString());
-                    }
+                    SelectedHouseentrystatus = Systemhouseentrystatus.FirstOrDefault(x => x.Value == SystempropertyData.Propertyhousestatus.ToString());
+                    SelectedHousewatertype = Systemhousewatertype.FirstOrDefault(x => x.Value == SystempropertyData.Watertypeid.ToString());
+                    SelectedCounty = Systemcounty.FirstOrDefault(x => x.Value == SystempropertyData.Countyid.ToString());
+                    SelectedSubcounty = Systemsubcounty.FirstOrDefault(x => x.Value == SystempropertyData.Subcountyid.ToString());
+                    SelectedSubcountyward = Systemsubcountyward.FirstOrDefault(x => x.Value == SystempropertyData.Subcountywardid.ToString());
+                    SelectedHouserentdueday = Systemhouserentdueday.FirstOrDefault(x => x.Value == SystempropertyData.Rentdueday.ToString());
+                    SelectedHousedepositmonths = Systemhousedepositmonths.FirstOrDefault(x => x.Value == SystempropertyData.Rentdepositmonth.ToString());
+                    SelectedHousevacantnoticeperiod = Systemhousevacantnoticeperiod.FirstOrDefault(x => x.Value == SystempropertyData.Vacantnoticeperiod.ToString());
+                    SelectedHouserentdepositreturndays = Systemhouserentdepositreturndays.FirstOrDefault(x => x.Value == SystempropertyData.Rentdepositreturndays.ToString());
+                    SelectedHouserentingterms = Systemhouserentingterms.FirstOrDefault(x => x.Value == SystempropertyData.Rentingterms);
                 }
             }
             var modalPage = new AddSystemAgentPropertyHouseModalPage(this);
-            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
 
