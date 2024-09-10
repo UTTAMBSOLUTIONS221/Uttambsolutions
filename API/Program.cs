@@ -25,11 +25,11 @@ builder.Services.AddSingleton<Communicationnotificationjob>();
 builder.Services.AddSingleton(new JobSchedule(
 jobType: typeof(Generatemonthlyrentinvoicejob),
    cronExpression: "0 * * * * ?"));
+
+//0 0 0 L * ?
 builder.Services.AddSingleton(new JobSchedule(
-jobType: typeof(Communicationnotificationjob),
-   cronExpression: "0 * * * * ?"));
-
-
+    jobType: typeof(Communicationnotificationjob),
+    cronExpression: "0 0 0 * * ?"));
 
 // Add CORS
 builder.Services.AddCors(options =>
