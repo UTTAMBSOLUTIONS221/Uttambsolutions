@@ -2737,7 +2737,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseroomimagedata", SystemPropertyHouseImageData);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
-                    Application.Current.MainPage.Navigation.PopModalAsync();
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                    var detailPage = new PropertyHousesDetailPage(this);
+                    await Shell.Current.Navigation.PushAsync(detailPage);
                 }
                 else if (response.RespStatus == 1)
                 {
@@ -2820,7 +2822,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseroomfixturedata", SystempropertyhouseroomfixturesData);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
-                    Application.Current.MainPage.Navigation.PopModalAsync();
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                    var detailPage = new PropertyHousesDetailPage(this);
+                    await Shell.Current.Navigation.PushAsync(detailPage);
                 }
                 else if (response.RespStatus == 1)
                 {
@@ -2915,14 +2919,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         return;
                     }
                 }
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomdata", HttpMethod.Post, HouseroomData);
-                if (response.StatusCode == 200)
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registerpropertyhouseroomdata", HouseroomData);
+                if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     await Application.Current.MainPage.Navigation.PopAsync();
                     var detailPage = new PropertyHousesDetailPage(this);
                     await Shell.Current.Navigation.PushAsync(detailPage);
                 }
-                else if (response.StatusCode == 1)
+                else if (response.RespStatus == 1)
                 {
                     await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
                 }
