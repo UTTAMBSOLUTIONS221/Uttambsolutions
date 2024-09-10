@@ -27,7 +27,7 @@ namespace API.Schedulers
             {
                 foreach (var invoice in unsentEmailAddress.Data)
                 {
-                    string companyname = "Maqao Plus";
+                    string companyname = "MAQAO PLUS";
                     string companyemail = "maqaoplus@uttambsolutions.com";
                     string companysubject = "Monthly Rent Invoice";
                     string changepasswordurl = "https://uttambsolutions.com/Account/changepassword";
@@ -46,11 +46,11 @@ namespace API.Schedulers
                     invoiceHtml.Append("<th rowspan='2' style='padding: 15px; text-align: left;'>");
                     invoiceHtml.Append($"<img src=\"{logoUrl}\" alt=\"{companyname}\" style='max-width: 120px; max-height: 120px;' />");
                     invoiceHtml.Append("</th>");
-                    invoiceHtml.Append($"<th colspan='2' style='padding: 15px; text-align: right; font-size: 18px;'>\"{companyname}\"</th>");
+                    invoiceHtml.Append($"<th colspan='2' style='padding: 15px; text-align: right; font-size: 18px;'>{companyname}</th>");
                     invoiceHtml.Append("</tr>");
                     invoiceHtml.Append("<tr>");
                     invoiceHtml.Append("<th colspan='2' style='padding: 10px; text-align: right; font-size: 14px;'>");
-                    invoiceHtml.Append($"Email: <a href='mailto:\"{companyemail}\"' style='color: #fff; text-decoration: none;'>\"{companyemail}\"</a>");
+                    invoiceHtml.Append($"Email: <a href='mailto:{companyemail}' style='color: #fff; text-decoration: none;'>{companyemail}</a>");
                     invoiceHtml.Append("</th>");
                     invoiceHtml.Append("</tr>");
 
