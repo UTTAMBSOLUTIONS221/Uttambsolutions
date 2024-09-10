@@ -127,7 +127,7 @@
                 </Frame>
 
 
-                <Frame Grid.Row="3" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
+                <Frame Grid.Row="3" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand" IsVisible="{Binding TenantInvoiceDetailData.Haspendingpayment}">
                     <StackLayout Padding="10">
                         <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
                             <Label Text="Payment Confirmation" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="17" Margin="0,0,0,10"/>
@@ -141,8 +141,6 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
