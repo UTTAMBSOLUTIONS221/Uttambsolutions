@@ -50,12 +50,47 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
+                                    <!-- Name -->
                                     <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Spacing="5" HorizontalOptions="FillAndExpand">
-                                        <Label Text="{Binding TenantData.Fullname,StringFormat='Name: {0}'}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                        <Label FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Name: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                    <Span Text="{Binding TenantData.Fullname}" TextColor="Black"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
                                     </StackLayout>
-                                    <Label Text="{Binding TenantData.Emailaddress,StringFormat='Email: {0}'}" FontSize="16" Grid.Row="1" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                    <Label Text="{Binding TenantData.Phonenumber,StringFormat='Phone: {0}'}" FontSize="16" Grid.Row="2" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                    <Label Text="{Binding TenantData.Walletbalance,StringFormat='My Wallet:{0:#,##0.00}'}" TextColor="Red" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+
+                                    <!-- Email -->
+                                    <Label FontSize="16" Grid.Row="1" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Email: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                <Span Text="{Binding TenantData.Emailaddress}" TextColor="Black"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <!-- Phone -->
+                                    <Label FontSize="16" Grid.Row="2" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Phone: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                <Span Text="{Binding TenantData.Phonenumber}" TextColor="Black"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <!-- Wallet Balance -->
+                                    <Label FontSize="16" Grid.Row="3" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="My Wallet: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                <Span Text="{Binding TenantData.Walletbalance, StringFormat='{0:#,##0.00}'}" TextColor="Red"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
                                 </Grid>
                             </StackLayout>
                         </StackLayout>
