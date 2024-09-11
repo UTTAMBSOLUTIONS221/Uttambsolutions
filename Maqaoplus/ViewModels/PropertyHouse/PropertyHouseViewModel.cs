@@ -2463,9 +2463,29 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
-                TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
-                var modalPage = new StaffDetailModalPage(this);
-                await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                if (response != null && response.Data != null)
+                {
+                    TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
+                    var modalPage = new StaffDetailModalPage(this);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                }
+                else
+                {
+                    TenantStaffData = new Systemtenantdetails
+                    {
+                        Userid = 0,
+                        Fullname = null,
+                        Phonenumber = null,
+                        Emailaddress = null,
+                        Loginstatus = 0,
+                        Idnumber = Convert.ToInt32(SearchId),
+                        Propertyhouseid = 0,
+                        Walletbalance = 0,
+                        Tenantroomhistory = null
+                    };
+                    var modalPage = new StaffDetailModalPage(this);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+                }
             }
             catch (Exception ex)
             {
