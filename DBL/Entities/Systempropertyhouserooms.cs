@@ -1,4 +1,5 @@
 ﻿using DBL.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DBL.Entities
 {
@@ -33,8 +34,6 @@ namespace DBL.Entities
         public int Createdby { get; set; }
         public DateTime Datecreated { get; set; }
         public string? Fullname { get; set; }
-        public string? Phonenumber { get; set; }
-        public string? Emailaddress { get; set; }
         public string? Gender { get; set; }
         public string? Maritalstatus { get; set; }
         public int Loginstatus { get; set; }
@@ -46,6 +45,42 @@ namespace DBL.Entities
         public bool Updateprofile { get; set; }
         public int Accountnumber { get; set; }
         public int Accountid { get; set; }
+
+        public int Userid { get; set; }
+        public int Caretakerhouseid { get; set; }
+        public string? Firstname { get; set; }
+        public string? Lastname { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        public string? Phonenumber { get; set; }
+        public string? Designation { get; set; }
+        public string? Username { get; set; }
+        [DataType(DataType.EmailAddress)]
+        public string? Emailaddress { get; set; }
+        public int Genderid { get; set; }
+        public int Maritalstatusid { get; set; }
+        public int Roleid { get; set; }
+        public string? Rolename { get; set; }
+        public string? Passharsh { get; set; }
+        [DataType(DataType.Password)]
+        public string? Passwords { get; set; }
+        [DataType(DataType.Password)]
+        public string? Confirmpasswords { get; set; }
+        public bool Isactive { get; set; }
+        public bool Isdeleted { get; set; }
+        public bool Isdefault { get; set; }
+        public bool Accepttermsandcondition { get; set; }
+        public DateTime? Passwordresetdate { get; set; }
+        public string? Token { get; set; }
+        public DateTime? Expirydate { get; set; }
+        public int Mpesapaybill { get; set; }
+        public decimal Subscriptionamount { get; set; }
+        public string? Kinname { get; set; }
+        public string? Kinphonenumber { get; set; }
+        public int Kinrelationshipid { get; set; }
+        public bool Columnreadonly { get; set; }
+        public DateTime? Lastlogin { get; set; }
+        public string? Systemmodulename { get; set; }
+
         public decimal Walletbalance { get; set; }
         public DateTime Datemodified { get; set; }
         public List<Systempropertyhouseroommeterhistory>? Meterhistorydata { get; set; }

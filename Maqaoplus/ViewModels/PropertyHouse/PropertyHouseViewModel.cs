@@ -2951,6 +2951,21 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             try
             {
+                HouseroomData.Designation = "Tenant";
+                HouseroomData.Passwords = "Wn+vmyniwUM0FaEZa4M4OVV50t6oy8FC8en194kJdAI=";
+                HouseroomData.Passharsh = "XUIMWLJQOUXS";
+                HouseroomData.Lastlogin = DateTime.Now;
+                HouseroomData.Loginstatus = 0;
+                HouseroomData.Accepttermsandcondition = true;
+                HouseroomData.Isactive = true;
+                HouseroomData.Isdeleted = false;
+                HouseroomData.Isdefault = false;
+                HouseroomData.Updateprofile = true;
+                HouseroomData.Parentid = 0;
+                HouseroomData.Roleid = 2;
+                HouseroomData.Passwordresetdate = DateTime.Now.AddDays(90);
+                HouseroomData.Isagency = true;
+                HouseroomData.Hasagent = true;
                 HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
                 HouseroomData.Datecreated = DateTime.UtcNow;
                 foreach (var fixture in HouseroomData.Roomfixtures)
