@@ -806,7 +806,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewHouseDetails(property.Propertyhouseid));
             ViewPropertyHouseImageCommand = new Command<Systemproperty>(async (property) => await ViewPropertyHouseImagesDetails(property.Propertyhouseid));
-            UpdatePropertyRoomMeterReadingCommand = new Command<Systempropertyhouserooms>(async (propertyRoom) => await UpdatePropertyRoomMeterReading(propertyRoom.Systempropertyhouseroomid));
             HouseNextCommand = new Command(HouseNextStep);
             HousePreviousCommand = new Command(HousePreviousStep);
             AgentHouseNextCommand = new Command(AgentHouseNextStep);
@@ -827,6 +826,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SaveHouseRoomDetailsCommand = new Command(async () => await SaveHouseRoomDetailsAsync());
             SavePropertyHouseRoomFixtureCommand = new Command(async () => await SavePropertyHouseRoomFixtureasync());
             ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewRoomDetails(propertyRoom.Systempropertyhouseroomid));
+            UpdatePropertyRoomMeterReadingCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await UpdatePropertyRoomMeterReading(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomCheckListCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomCheckListDetailAsync(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomImageCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomImagesDetails(propertyRoom.Systempropertyhouseroomid));
 
@@ -2311,10 +2311,18 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
-        private async Task UpdatePropertyRoomMeterReading(long PropertyHouseRoomId, decimal OpeningMeters, decimal UnitPrice)
+        private async Task UpdatePropertyRoomMeterReading(long PropertyHouseRoomId)
         {
             IsProcessing = true;
-
+            var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Getsystempropertyhouseroomdatabyid/" + PropertyHouseRoomId, HttpMethod.Get, null);
+            if (response != null && response.Data != null)
+            {
+                HouseroomData = JsonConvert.DeserializeObject<Systempropertyhouserooms>(response.Data.ToString());
+            }
+            else
+            {
+                HouseroomData = new Systempropertyhouserooms();
+            }
             var modalPage = new SystemPropertyHouseRoomMeterModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
