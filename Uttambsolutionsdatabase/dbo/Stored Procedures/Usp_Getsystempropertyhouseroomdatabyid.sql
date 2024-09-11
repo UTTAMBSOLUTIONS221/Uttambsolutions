@@ -122,7 +122,7 @@ BEGIN
                 END) AS Roomfixtures,
                 (
                     SELECT 
-                        sc.Countyname + ' >> ' + ss.Subcountyname AS Countyname,
+                        sc.Countyname AS Countyname,
                         ss.Subcountyname,
                         ssw.Subcountywardname,
                         shp.Streetorlandmark,

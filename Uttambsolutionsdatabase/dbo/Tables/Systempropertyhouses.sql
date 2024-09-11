@@ -10,18 +10,18 @@
     [Subcountywardid]         INT             NOT NULL,
     [Streetorlandmark]        VARCHAR (200)   NOT NULL,
     [Contactdetails]          VARCHAR (200)   NOT NULL,
-    [Rentingterms]          VARCHAR (20)   NOT NULL DEFAULT 'Month to Month',
-    [Enddate]         DATETIME   NOT NULL DEFAULT GETDATE(),
+    [Rentingterms]            VARCHAR (20)    DEFAULT ('Month to Month') NOT NULL,
+    [Enddate]                 DATETIME        DEFAULT (getdate()) NOT NULL,
     [Hashousedeposit]         BIT             DEFAULT ((0)) NOT NULL,
     [Rentdepositmonth]        INT             NOT NULL,
-    [Rentdepositreturndays]   INT        NOT NULL DEFAULT 0,
-    [Rentutilityinclusive]   BIT        NOT NULL DEFAULT 0,
+    [Rentdepositreturndays]   INT             DEFAULT ((0)) NOT NULL,
+    [Rentutilityinclusive]    BIT             DEFAULT ((0)) NOT NULL,
     [Propertyhousestatus]     INT             DEFAULT ((0)) NOT NULL,
     [Hasagent]                BIT             DEFAULT ((0)) NOT NULL,
     [Allowpets]               BIT             DEFAULT ((0)) NOT NULL,
-    [Numberofpets]           INT             DEFAULT ((0)) NOT NULL,
-    [Petdeposit]              DECIMAL(10,2)     DEFAULT ((0)) NOT NULL,
-    [Petparticulars]          VARCHAR(200)     DEFAULT 'Not Applicable' NOT NULL,
+    [Numberofpets]            INT             DEFAULT ((0)) NOT NULL,
+    [Petdeposit]              DECIMAL (10, 2) DEFAULT ((0)) NOT NULL,
+    [Petparticulars]          VARCHAR (200)   DEFAULT ('Not Applicable') NOT NULL,
     [Watertypeid]             INT             NOT NULL,
     [Hashousewatermeter]      BIT             NOT NULL,
     [Waterunitprice]          DECIMAL (10, 2) NOT NULL,
@@ -48,10 +48,12 @@
 );
 
 
+
+
 GO
 
-CREATE TRIGGER trg_PropertyHouseMonthlySubscriptions
-ON Systempropertyhouses
+CREATE TRIGGER [dbo].[trg_PropertyHouseMonthlySubscriptions]
+ON [dbo].[Systempropertyhouses]
 AFTER INSERT, UPDATE
 AS
 BEGIN
@@ -61,12 +63,13 @@ BEGIN
     SELECT @Multiplier = Subscriptionmultipliervalue FROM Subscriptionmultiplier
 
     -- Insert operation
-    MERGE INTO Propertyhousesubscriptions AS target
-        USING inserted AS source
-        ON target.Propertyownerid = source.Propertyhouseowner AND target.Propertyhouseid = source.Propertyhouseid
-        WHEN NOT MATCHED BY TARGET THEN
-            INSERT (Propertyownerid,Propertyhouseid, Propertyhousesubscriptionamount)
-            VALUES (source.Propertyhouseowner,source.Propertyhouseid, source.Monthlycollection * @Multiplier)
-        WHEN MATCHED THEN
-            UPDATE SET target.Propertyhousesubscriptionamount = source.Monthlycollection * @Multiplier;
+	MERGE INTO Propertyhousesubscriptions AS target
+	USING inserted AS source
+	ON target.Propertyownerid = source.Propertyhouseowner AND target.Propertyhouseid = source.Propertyhouseid
+	WHEN NOT MATCHED BY TARGET THEN
+	INSERT (Propertyownerid, Propertyhouseid, Propertyhousesubscriptionamount)
+	VALUES (source.Propertyhouseowner,source.Propertyhouseid,source.Monthlycollection * CASE WHEN source.Monthlycollection < 100000 THEN 0.02 ELSE @Multiplier END)
+	WHEN MATCHED THEN
+	UPDATE SET target.Propertyhousesubscriptionamount = source.Monthlycollection * CASE WHEN source.Monthlycollection < 100000 THEN 0.02 ELSE @Multiplier END;
+
 END;

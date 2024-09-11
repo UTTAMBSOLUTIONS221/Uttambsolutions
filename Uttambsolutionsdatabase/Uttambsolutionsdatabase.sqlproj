@@ -280,5 +280,7 @@
     <Build Include="dbo\Stored Procedures\Usp_Verifyforgotpasswordsystemstaff.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Verifystaffaccountdatabyid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Generatemonthlyrentinvoicedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Updatemonthlyrentinvoicedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemunsentemaildata.sql" />
   </ItemGroup>
 </Project>

@@ -15,7 +15,7 @@ BEGIN
 
 		BEGIN TRANSACTION;
 		 SET @Systempropertyhouseroomtenantdata= 
-		  (SELECT(SELECT a.Userid,a.Firstname+' '+a.Lastname AS Fullname,a.Phonenumber,a.Emailaddress,a.Loginstatus,a.Idnumber,0 AS Walletbalance,
+		  (SELECT(SELECT ISNULL(a.Userid,0) AS Userid,a.Firstname,a.Lastname,ISNULL(a.Firstname+' '+a.Lastname,'') AS Fullname,ISNULL(a.Phonenumber,'') AS Phonenumber,ISNULL(a.Emailaddress,'') AS Emailaddress,ISNULL(a.Loginstatus,0) AS Loginstatus,ISNULL(a.Idnumber,@Idnumber) AS Idnumber,0 AS Walletbalance,
 		   (SELECT Systempropertyhousetenantsroom.Systempropertyhousetenantid,Systempropertyhousetenant.Idnumber,Systempropertyhousetenant.Firstname+' '+Systempropertyhousetenant.Lastname AS Tenantname,Systempropertyhouse.Propertyhousename,'' AS Propertyprimaryimage,Systemhousesize.Systemhousesizename +''+Systempropertyhouseroom.Systempropertyhousesizename AS Systempropertyhousesizename,
 			Systempropertyhousetenantsroom.Isoccupant,CASE WHEN Systempropertyhousetenantsroom.Occupationalstatus=0 THEN 'Vacated' WHEN Systempropertyhousetenantsroom.Occupationalstatus= 1 THEN 'Vacating' ELSE 'Occupant' END AS Occupationalstatus,Systempropertyhousetenantsroom.Datecreated,Systempropertyhousetenantsroom.Datemodified
 			FROM Systempropertyhouseroomstenant Systempropertyhousetenantsroom

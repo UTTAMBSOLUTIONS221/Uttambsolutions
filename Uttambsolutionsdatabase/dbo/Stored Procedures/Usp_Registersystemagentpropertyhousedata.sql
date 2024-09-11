@@ -82,7 +82,18 @@ BEGIN
             OUTPUT $action AS Action, inserted.UserId, inserted.FirstName + ' ' + inserted.LastName AS FullName, inserted.Passwords, inserted.PassHarsh, inserted.UserName, inserted.EmailAddress INTO @Systemstaffdata;
 			
 			 SET @UserId = (SELECT TOP 1 UserId FROM @Systemstaffdata);
+			 IF EXISTS(SELECT 1 FROM @Systemstaffdata WHERE Action = 'INSERT')
+			BEGIN
+				INSERT INTO Systemstaffsaccount (Userid, AccountNumber, Datecreated, Datemodified)
+				SELECT UserId, NEXT VALUE FOR AccountNumberSequence, CAST(JSON_VALUE(@JsonObjectData, '$.Datecreated') AS DATETIME2), CAST(JSON_VALUE(@JsonObjectData, '$.Datemodified') AS DATETIME2)
+				FROM @Systemstaffdata
+				WHERE Action = 'INSERT';
 
+				SET @AccountId = SCOPE_IDENTITY();
+				SET @AccountNumber = (SELECT AccountNumber FROM Systemstaffsaccount WHERE AccountId = @AccountId);
+				INSERT INTO ChartofAccounts 
+				VALUES (@AccountNumber, 12);
+			END
 
        INSERT INTO @TempData
        SELECT Propertyhouseid, Isagency, @UserId AS Propertyhouseowner, Propertyhouseposter, Propertyhousename, Countyid, Subcountyid,Subcountywardid, Streetorlandmark, Contactdetails, Hashousedeposit, Rentdepositmonth, Hasagent, Propertyhousestatus,Watertypeid, Hashousewatermeter, Waterunitprice, Rentdueday, Vacantnoticeperiod, Monthlycollection,Rentutilityinclusive,Rentdepositreturndays,Allowpets,Rentingterms,Enddate,Numberofpets,Petdeposit,Petparticulars, Createdby,Modifiedby, Datecreated, Datemodified

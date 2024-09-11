@@ -13,7 +13,7 @@ BEGIN
 		BEGIN TRY
 		BEGIN TRANSACTION;
 		  SET @Systemtenantmonthlyinvoicedetaildata= 
-				  (SELECT(SELECT MRI.Invoiceid,MRI.Financetransactionid,FT.TransactionCode,MRI.Invoiceno,MRI.Propertyhouseroomid,sizes.Systemhousesizename,room.Systempropertyhousesizename,MRI.Propertyhouseroomtenantid,
+				  (SELECT(SELECT CASE WHEN (SELECT COUNT(PYM.CustomerPaymentId) FROM Customerpayments PYM WHERE PYM.HouseRoomTenantId=MRI.Propertyhouseroomtenantid AND IsPaymentValidated=0)<1 THEN 0 ELSE 1 END AS Haspendingpayment,MRI.Invoiceid,MRI.Financetransactionid,FT.TransactionCode,MRI.Invoiceno,MRI.Propertyhouseroomid,sizes.Systemhousesizename,room.Systempropertyhousesizename,MRI.Propertyhouseroomtenantid,
 					  tenant.Firstname +' ' +tenant.Lastname AS Tenantname,MRI.Datecreated,MRI.Duedate,MRI.Amount,MRI.Discount,MRI.Ispaid,MRI.Paidamount,MRI.Balance,MRI.Issent,MRI.Paidstatus,
 					  (SELECT  MRID.Invoiceitemid,MRID.Invoiceid,MRID.Systempropertyhousedepositfeeid,SDF.Housedepositfeename,MRID.Units,MRID.Price,MRID.Discount
 					   FROM Monthlyrentinvoiceitems MRID

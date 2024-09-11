@@ -5,6 +5,10 @@ BEGIN
    BEGIN
 	DECLARE @RespStat int = 0,
 			@RespMsg varchar(150) = '',
+			@UserId BIGINT,
+			@RoleId INT,
+            @AccountId INT,
+            @AccountNumber INT,
 			@Systempropertyhouseroomid  bigint,
 			@Systempropertyhousetenantentryid bigint,
 			@Isnewtenant BIT =1;
@@ -12,12 +16,6 @@ BEGIN
 	BEGIN
 		BEGIN TRY	
 		--Validate
-		IF(JSON_VALUE(@JsonObjectdata, '$.Tenantid')<1)
-		BEGIN
-			SELECT 1 AS RespStatus,'Tenant has not been provided' AS RespMessage;
-			return;
-		END
-
 		IF EXISTS(SELECT Systempropertyhousetenantid FROM Systempropertyhouseroomstenant WHERE Systempropertyhousetenantid = JSON_VALUE(@JsonObjectdata, '$.Tenantid') AND Systempropertyhouseroomid != JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid') AND Occupationalstatus=2)
 		BEGIN
 			SELECT 1 AS RespStatus,'Tenant has not given vacating notice to current residence' AS RespMessage;
@@ -28,6 +26,82 @@ BEGIN
 		    DECLARE @Systempropertyhouseroomsdata TABLE (Systempropertyhouseroomid BIGINT);
 			DECLARE @Systempropertyhouseroomstenantdata TABLE (Systempropertyhousetenantentryid BIGINT);
 			DECLARE @InsertedIDs TABLE(Propertychecklistid BIGINT,Fixtureid INT);
+			DECLARE @Systemstaffdata TABLE (Action VARCHAR(100), UserId BIGINT, FullName VARCHAR(140), Passwords VARCHAR(100), PassHarsh VARCHAR(100), UserName VARCHAR(100), EmailAddress VARCHAR(100));
+			SET @RoleId = (SELECT RoleId FROM Systemroles WHERE Rolename = 'Maqaoplus Property House Tenant');
+       
+		MERGE INTO SystemStaffs AS target
+        USING (SELECT 
+                    JSON_VALUE(@JsonObjectData, '$.Userid') AS UserId,
+                    JSON_VALUE(@JsonObjectData, '$.Firstname') AS FirstName,
+                    JSON_VALUE(@JsonObjectData, '$.Lastname') AS LastName,
+                    JSON_VALUE(@JsonObjectData, '$.Phonenumber') AS PhoneNumber,
+                    JSON_VALUE(@JsonObjectData, '$.Emailaddress') AS UserName,
+                    JSON_VALUE(@JsonObjectData, '$.Emailaddress') AS EmailAddress,
+					@RoleId AS RoleId,
+					JSON_VALUE(@JsonObjectData, '$.Genderid') AS Genderid,
+					JSON_VALUE(@JsonObjectData, '$.Maritalstatusid') AS Maritalstatusid,
+                    JSON_VALUE(@JsonObjectData, '$.Passharsh') AS PassHarsh,
+                    JSON_VALUE(@JsonObjectData, '$.Passwords') AS Passwords,
+                    CAST(JSON_VALUE(@JsonObjectData, '$.Datecreated') AS DATETIME2) AS DateCreated,
+                    JSON_VALUE(@JsonObjectData, '$.Createdby') AS CreatedBy,
+                    JSON_VALUE(@JsonObjectData, '$.Modifiedby') AS ModifiedBy,
+                    CAST(JSON_VALUE(@JsonObjectData, '$.Datemodified') AS DATETIME2) AS DateModified,
+                    JSON_VALUE(@JsonObjectData, '$.Isactive') AS IsActive,
+                    JSON_VALUE(@JsonObjectData, '$.Isdeleted') AS IsDeleted,
+                    JSON_VALUE(@JsonObjectData, '$.Isdefault') AS IsDefault,
+                    JSON_VALUE(@JsonObjectData, '$.Loginstatus') AS LoginStatus,
+                    CAST(JSON_VALUE(@JsonObjectData, '$.Passwordresetdate') AS DATETIME2) AS PasswordResetDate,
+                    JSON_VALUE(@JsonObjectData, '$.Parentid') AS ParentId,
+                    JSON_VALUE(@JsonObjectData, '$.Userprofileimageurl') AS UserProfileImageUrl,
+                    JSON_VALUE(@JsonObjectData, '$.Usercurriculumvitae') AS UserCurriculumVitae,
+                    JSON_VALUE(@JsonObjectData, '$.Idnumber') AS IdNumber,
+                    JSON_VALUE(@JsonObjectData, '$.Updateprofile') AS UpdateProfile,
+                    JSON_VALUE(@JsonObjectData, '$.Extra') AS Extra,
+                    JSON_VALUE(@JsonObjectData, '$.Extra1') AS Extra1,
+                    JSON_VALUE(@JsonObjectData, '$.Extra2') AS Extra2,
+                    JSON_VALUE(@JsonObjectData, '$.Extra3') AS Extra3,
+                    JSON_VALUE(@JsonObjectData, '$.Extra4') AS Extra4,
+                    JSON_VALUE(@JsonObjectData, '$.Extra5') AS Extra5,
+                    CAST(JSON_VALUE(@JsonObjectData, '$.Lastlogin') AS DATETIME2) AS LastLogin
+               ) AS source
+        ON target.IdNumber = source.IdNumber
+        WHEN MATCHED THEN
+            UPDATE SET 
+                FirstName = source.FirstName,
+                LastName = source.LastName,
+                PhoneNumber = source.PhoneNumber,
+                UserName = source.EmailAddress,
+                EmailAddress = source.EmailAddress,
+				Genderid = source.Genderid,
+				Maritalstatusid = source.Maritalstatusid,
+                LoginStatus = source.LoginStatus,
+                ParentId = source.ParentId,
+                UserProfileImageUrl = source.UserProfileImageUrl,
+                UserCurriculumVitae = source.UserCurriculumVitae,
+                IdNumber = source.IdNumber,
+                UpdateProfile = source.UpdateProfile,
+                ModifiedBy = source.ModifiedBy,
+                DateModified = source.DateModified
+        WHEN NOT MATCHED THEN
+            INSERT (FirstName, LastName, PhoneNumber, UserName, EmailAddress, RoleId, PassHarsh, Passwords, IsActive, IsDeleted, IsDefault, LoginStatus, PasswordResetDate, ParentId, UserProfileImageUrl, UserCurriculumVitae, IdNumber, UpdateProfile, Extra, Extra1, Extra2, Extra3, Extra4, Extra5, CreatedBy, ModifiedBy, DateModified, DateCreated, LastLogin)
+            VALUES (source.FirstName, source.LastName, source.PhoneNumber, source.UserName, source.EmailAddress, source.RoleId, source.PassHarsh, source.Passwords, source.IsActive, source.IsDeleted, source.IsDefault, source.LoginStatus, source.PasswordResetDate, source.ParentId, source.UserProfileImageUrl, source.UserCurriculumVitae, source.IdNumber, source.UpdateProfile, source.Extra, source.Extra1, source.Extra2, source.Extra3, source.Extra4, source.Extra5, source.CreatedBy, source.ModifiedBy, source.DateModified, source.DateCreated, source.LastLogin)
+            OUTPUT $action AS Action, inserted.UserId, inserted.FirstName + ' ' + inserted.LastName AS FullName, inserted.Passwords, inserted.PassHarsh, inserted.UserName, inserted.EmailAddress INTO @Systemstaffdata;
+			
+			 SET @UserId = (SELECT TOP 1 UserId FROM @Systemstaffdata);
+			 IF EXISTS(SELECT 1 FROM @Systemstaffdata WHERE Action = 'INSERT')
+			BEGIN
+				INSERT INTO Systemstaffsaccount (Userid, AccountNumber, Datecreated, Datemodified)
+				SELECT UserId, NEXT VALUE FOR AccountNumberSequence, CAST(JSON_VALUE(@JsonObjectData, '$.Datecreated') AS DATETIME2), CAST(JSON_VALUE(@JsonObjectData, '$.Datemodified') AS DATETIME2)
+				FROM @Systemstaffdata
+				WHERE Action = 'INSERT';
+
+				SET @AccountId = SCOPE_IDENTITY();
+				SET @AccountNumber = (SELECT AccountNumber FROM Systemstaffsaccount WHERE AccountId = @AccountId);
+				INSERT INTO ChartofAccounts 
+				VALUES (@AccountNumber, 12);
+			END
+
+
 			MERGE INTO Systempropertyhouserooms AS target
 			USING (
 			SELECT Systempropertyhouseroomid,Systempropertyhouseid,Systempropertyhousesizeid,Systempropertyhousesizename,Systempropertyhousesizerent,Isvacant,Isunderrenovation,Isshop,Isgroundfloor,Hasbalcony,Forcaretaker,Kitchentypeid
@@ -58,9 +132,9 @@ BEGIN
 			--insert tenant to tenants table
 			MERGE INTO Systempropertyhouseroomstenant AS target
 			USING(
-			SELECT Systempropertyhousetenantid,Systempropertyhouseroomid,Roomoccupant,Roomoccupantdetail,Createdby,Modifiedby,Datecreated,Datemodified
+			SELECT @UserId AS Systempropertyhousetenantid,Systempropertyhouseroomid,Roomoccupant,Roomoccupantdetail,Createdby,Modifiedby,Datecreated,Datemodified
 			FROM OPENJSON(@JsonObjectdata)
-			WITH (Systempropertyhousetenantid BIGINT '$.Tenantid',Systempropertyhouseroomid BIGINT '$.Systempropertyhouseroomid',Roomoccupant INT '$.Roomoccupant',Roomoccupantdetail VARCHAR(200) '$.Roomoccupantdetail',Createdby BIGINT '$.Createdby',Modifiedby BIGINT '$.Createdby',  Datecreated DATETIME2 '$.Datecreated',Datemodified DATETIME2 '$.Datecreated')) AS source
+			WITH (Systempropertyhouseroomid BIGINT '$.Systempropertyhouseroomid',Roomoccupant INT '$.Roomoccupant',Roomoccupantdetail VARCHAR(200) '$.Roomoccupantdetail',Createdby BIGINT '$.Createdby',Modifiedby BIGINT '$.Createdby',  Datecreated DATETIME2 '$.Datecreated',Datemodified DATETIME2 '$.Datecreated')) AS source
 			ON target.Systempropertyhousetenantid = source.Systempropertyhousetenantid AND target.Systempropertyhouseroomid = source.Systempropertyhouseroomid AND target.Isoccupant = 1 AND Occupationalstatus= 2
 			WHEN MATCHED THEN
 			UPDATE SET target.Roomoccupant =source.Roomoccupant,target.Roomoccupantdetail = source.Roomoccupantdetail	
