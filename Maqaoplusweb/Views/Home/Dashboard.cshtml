@@ -3,7 +3,6 @@
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 <div class="container mt-4">
     <!-- Summary Section -->
     <div class="row mb-4">
@@ -89,15 +88,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var property in Model.Data.Propertybysummary)
+                    @if (Model.Data.Propertybysummary != null)
                     {
-                        <tr>
-                            <td>@property.Propertyhousename</td>
-                            <td>@property.Propertyhouseunits</td>
-                            <td>@property.Systempropertyoccupiedroom</td>
-                            <td>@property.Systempropertyvacantroom</td>
-                            <td>@property.Consumedmeters</td>
-                        </tr>
+                        foreach (var property in Model.Data.Propertybysummary)
+                        {
+                            <tr>
+                                <td>@property.Propertyhousename</td>
+                                <td>@property.Propertyhouseunits</td>
+                                <td>@property.Systempropertyoccupiedroom</td>
+                                <td>@property.Systempropertyvacantroom</td>
+                                <td>@property.Consumedmeters</td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>
