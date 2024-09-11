@@ -48,5 +48,24 @@ namespace Maqaoplusweb.Controllers
             var resp = await bl.Verifystaffaccountdatabyid(id);
             return Json(resp);
         }
+
+        [HttpGet, HttpPost]
+        public async Task<IActionResult> Resendstaffpassword(long Tenantstaffid)
+        {
+            var Resp = await bl.Resendstaffpassword(Tenantstaffid);
+            if (Resp.RespStatus == 0)
+            {
+                Success(Resp.RespMessage, true);
+            }
+            else if (Resp.RespStatus == 1)
+            {
+                Warning(Resp.RespMessage, true);
+            }
+            else
+            {
+                Danger(Resp.RespMessage, true);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

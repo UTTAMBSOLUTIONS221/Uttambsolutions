@@ -298,15 +298,12 @@ namespace DBL
             {
                 Genericmodel model = new Genericmodel();
                 var Resp = db.AccountRepository.Getsystemstaffdatabyid(StaffId);
-                var commtempdata = db.SettingsRepository.Getsystemcommunicationtemplatedatabyname(true, "Forgotpasswords");
                 string passWord = sec.Decrypt(Resp.Passwords, Resp.Passharsh);
                 string companyname = "MAQAO PLUS";
                 string companyemail = "maqaoplus@uttambsolutions.com";
                 string companysubject = "Your Account Details - MAQAO PLUS";
                 string changepasswordurl = "https://uttambsolutions.com/Account/changepassword"; // URL for the user to change their password
                 string logoUrl = "https://maqaoplus.uttambsolutions.com/images/maqaopluslogo.png";
-                string username = "user123"; // Example username
-                string tempPassword = "TempPass123!"; // Example temporary password
 
                 StringBuilder accountDetailsHtml = new StringBuilder();
 
@@ -378,14 +375,14 @@ namespace DBL
                     EmailLogId = 0,
                     ModuleId = StaffId,
                     EmailAddress = Resp.Emailaddress,
-                    EmailSubject = commtempdata.Templatesubject,
+                    EmailSubject = "Password recovery",
                     EmailMessage = message,
                     IsEmailSent = false,
                     DateTimeSent = DateTime.Now,
                     Datecreated = DateTime.Now,
                 };
                 var resp = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs));
-                bool data = emlsnd.UttambsolutionssendemailAsync(Resp.Emailaddress, commtempdata.Templatesubject, message, true, "", "", "");
+                bool data = emlsnd.UttambsolutionssendemailAsync(Resp.Emailaddress, "Password Recovery", message, true, "", "", "");
                 if (data)
                 {
                     model.RespStatus = 0;
@@ -396,7 +393,7 @@ namespace DBL
                         EmailLogId = Convert.ToInt64(resp.Data1),
                         ModuleId = StaffId,
                         EmailAddress = Resp.Emailaddress,
-                        EmailSubject = commtempdata.Templatesubject,
+                        EmailSubject = "Password recovery",
                         EmailMessage = message,
                         IsEmailSent = true,
                         DateTimeSent = DateTime.Now,
