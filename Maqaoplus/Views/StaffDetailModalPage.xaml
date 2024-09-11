@@ -70,7 +70,15 @@
                                     <Label Text="{Binding SystemStaffLastNameError}" TextColor="Red" Padding="0"/>
                                 </StackLayout>
 
-                                <StackLayout Grid.Row="1" Grid.Column="0">
+                                <StackLayout Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="2">
+                                    <Label Text="Emailaddress" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
+                                        <Entry Placeholder="Email Address" Text="{Binding TenantStaffData.Emailaddress}" Keyboard="Email" FontSize="16" TextColor="#0a506c" PlaceholderColor="#0a506c" WidthRequest="320"/>
+                                    </Frame>
+                                    <Label Text="{Binding SystemStaffEmailAddressError}" TextColor="Red" Padding="0"/>
+                                </StackLayout>
+                                
+                                <StackLayout Grid.Row="2" Grid.Column="0">
                                     <Label Text="Phone Number " FontSize="16" FontAttributes="Bold" VerticalOptions="Center" Padding="10,0" TextColor="Black"/>
                                     <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False" HeightRequest="45">
                                         <Entry Placeholder="Phone Number" ReturnType="Next" Text="{Binding TenantStaffData.Phonenumber}" Keyboard="Telephone" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" HorizontalOptions="FillAndExpand"/>
@@ -78,7 +86,7 @@
                                     <Label Text="{Binding SystemStaffPhonenumberError}" TextColor="Red" Padding="0"/>
                                 </StackLayout>
 
-                                <StackLayout Grid.Row="1" Grid.Column="1">
+                                <StackLayout Grid.Row="2" Grid.Column="1">
                                     <Label Text="ID Number" FontAttributes="Bold" FontSize="14" TextColor="Black"/>
                                     <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
                                         <Entry Text="{Binding TenantStaffData.Idnumber}" Placeholder="Enter ID number" Keyboard="Numeric" FontSize="16" TextColor="Black" PlaceholderColor="#0a506c" />

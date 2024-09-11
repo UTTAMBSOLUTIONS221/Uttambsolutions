@@ -2883,6 +2883,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 SystemStaffLastNameError = null;
             }
+            if (string.IsNullOrWhiteSpace(TenantStaffData.Emailaddress))
+            {
+                SystemStaffEmailAddressError = "Required.";
+                isValid = false;
+                return;
+            }
+            else
+            {
+                SystemStaffEmailAddressError = null;
+            }
             if (string.IsNullOrWhiteSpace(TenantStaffData.Phonenumber))
             {
                 SystemStaffPhonenumberError = "Required.";
