@@ -1670,9 +1670,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     }
                     IsDataLoaded = true;
                 }
+                IsProcessing = false;
                 var detailPage = new PropertyHousesDetailPage(this);
                 await Shell.Current.Navigation.PushAsync(detailPage);
-
             }
             catch (Exception ex)
             {
