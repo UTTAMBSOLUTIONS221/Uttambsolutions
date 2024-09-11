@@ -2927,8 +2927,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     await Application.Current.MainPage.Navigation.PopAsync();
-                    var detailPage = new PropertyHousesDetailPage(this);
-                    await Shell.Current.Navigation.PushAsync(detailPage);
+                    await (Shell.Current.CurrentPage.BindingContext as PropertyHouseViewModel)?.ViewHouseDetails(HouseroomData.Systempropertyhouseid);
                 }
                 else if (response.RespStatus == 1)
                 {
