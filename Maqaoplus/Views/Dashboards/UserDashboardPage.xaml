@@ -180,7 +180,7 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Last Water Units: " FontAttributes="Bold" TextColor="#0a506c"/>
-                                                <Span Text="{Binding TenantData.Tenantroomdata.me, StringFormat='{0:#,##0.00}'}" TextColor="Black"/>
+                                                <Span Text="{Binding TenantData.Tenantroomdata.Previousmeters, StringFormat='{0:#,##0.00}'}" TextColor="Black"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>

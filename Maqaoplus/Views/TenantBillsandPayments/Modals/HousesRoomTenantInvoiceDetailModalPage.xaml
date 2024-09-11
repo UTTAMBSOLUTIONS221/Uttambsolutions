@@ -42,9 +42,35 @@
                                     </Grid.RowDefinitions>
                                     <Entry IsVisible="False" Text="{Binding HouseroomData.Systempropertyhouseroomid}" Grid.Row="0" Grid.Column="0" Margin="0,0,0,0" />
                                     <Label Text="{Binding HouseRoomIdError}" TextColor="Red" Margin="0,0,0,0" Grid.Row="0" Grid.Column="1" />
-                                    <Label Text="{Binding TenantInvoiceDetailData.Tenantname, StringFormat='Tenant Name: {0}'}" Grid.Row="1" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
-                                    <Label Text="{Binding TenantInvoiceDetailData.Systemhousesizename, StringFormat='House #: {0}'}" Grid.Row="2" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
-                                    <Label Text="{Binding TenantInvoiceDetailData.Balance, StringFormat='Amount: {0:#,##0.00}'}" Grid.Row="3" Grid.Column="0" FontSize="16" FontAttributes="Bold" TextColor="#0a506c"/>
+                                    <!-- Tenant Name -->
+                                    <Label Grid.Row="1" Grid.Column="0" FontSize="16" FontAttributes="Bold">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Tenant Name: " TextColor="#0a506c" />
+                                                <Span Text="{Binding TenantInvoiceDetailData.Tenantname}" TextColor="Black" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <!-- House # -->
+                                    <Label Grid.Row="2" Grid.Column="0" FontSize="16" FontAttributes="Bold">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="House #: " TextColor="#0a506c" />
+                                                <Span Text="{Binding TenantInvoiceDetailData.Systemhousesizename}" TextColor="Black" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <!-- Amount -->
+                                    <Label Grid.Row="3" Grid.Column="0" FontSize="16" FontAttributes="Bold">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Amount: " TextColor="#0a506c" />
+                                                <Span Text="{Binding TenantInvoiceDetailData.Balance, StringFormat='{0:#,##0.00}'}" TextColor="Black" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
                                 </Grid>
                             </StackLayout>
                         </StackLayout>
