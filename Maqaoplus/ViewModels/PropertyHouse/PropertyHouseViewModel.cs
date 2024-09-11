@@ -2964,8 +2964,8 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 HouseroomData.Parentid = 0;
                 HouseroomData.Roleid = 2;
                 HouseroomData.Passwordresetdate = DateTime.Now.AddDays(90);
-                HouseroomData.Isagency = true;
-                HouseroomData.Hasagent = true;
+                HouseroomData.Isagency = false;
+                HouseroomData.Hasagent = false;
                 HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
                 HouseroomData.Datecreated = DateTime.UtcNow;
                 foreach (var fixture in HouseroomData.Roomfixtures)

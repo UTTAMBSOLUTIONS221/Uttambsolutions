@@ -67,6 +67,8 @@ namespace DBL.Entities
         public string? Confirmpasswords { get; set; }
         public bool Isactive { get; set; }
         public bool Isdeleted { get; set; }
+        public bool Isagency { get; set; }
+        public bool Hasagent { get; set; }
         public bool Isdefault { get; set; }
         public bool Accepttermsandcondition { get; set; }
         public DateTime? Passwordresetdate { get; set; }
