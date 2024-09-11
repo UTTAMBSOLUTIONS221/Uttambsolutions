@@ -2546,6 +2546,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
+        private void OnCancelMeterButtonClicked()
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
         public async Task SaveAgentPropertyHouseAsync()
         {
             IsProcessing = true;
