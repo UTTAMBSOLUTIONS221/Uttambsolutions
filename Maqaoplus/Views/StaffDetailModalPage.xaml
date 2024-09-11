@@ -75,7 +75,7 @@
                                     <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False" HeightRequest="45">
                                         <Entry Placeholder="Phone Number" ReturnType="Next" Text="{Binding TenantStaffData.Phonenumber}" Keyboard="Telephone" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" HorizontalOptions="FillAndExpand"/>
                                     </Frame>
-                                    <Label Text="{Binding SystemStaffLastNameError}" TextColor="Red" Padding="0"/>
+                                    <Label Text="{Binding SystemStaffPhonenumberError}" TextColor="Red" Padding="0"/>
                                 </StackLayout>
 
                                 <StackLayout Grid.Row="1" Grid.Column="1">

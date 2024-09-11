@@ -2861,7 +2861,49 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         }
         private void OnHouseRoomOkClicked()
         {
+            bool isValid = true;
             HouseroomData.Tenantid = TenantStaffData.Userid;
+            if (string.IsNullOrWhiteSpace(TenantStaffData.Firstname))
+            {
+                SystemStaffFirstNameError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffFirstNameError = null;
+            }
+            if (string.IsNullOrWhiteSpace(TenantStaffData.Lastname))
+            {
+                SystemStaffLastNameError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffLastNameError = null;
+            }
+            if (string.IsNullOrWhiteSpace(TenantStaffData.Phonenumber))
+            {
+                SystemStaffPhonenumberError = "Required.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffPhonenumberError = null;
+            }
+            if (SystempropertyData.Idnumber == 0)
+            {
+                SystemStaffIdnumberError = "Required.";
+                isValid = false;
+            }
+            else if (SystempropertyData.Idnumber.ToString().Length < 8)
+            {
+                SystemStaffIdnumberError = "Id number must be from 8 characters.";
+                isValid = false;
+            }
+            else
+            {
+                SystemStaffIdnumberError = null;
+            }
             SearchId = string.Empty;
             NewTenantStaffData = new Systemtenantdetails
             {
@@ -2897,12 +2939,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task SaveHouseRoomDetailsAsync()
         {
             IsProcessing = true;
-            if (HouseroomData.Tenantid == 0)
-            {
-                PropertyHouseRoomTenantidError = "New Tenant is required.";
-                return;
-            }
-
             if (!ValidateHouseRoomStep1())
             {
                 IsProcessing = false;
