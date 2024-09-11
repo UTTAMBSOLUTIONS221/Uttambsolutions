@@ -299,20 +299,58 @@
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <Label Text="Name:" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Spacing="5" HorizontalOptions="FillAndExpand">
-                                                <Label Text="{Binding HouseroomData.Fullname}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Spacing="5" HorizontalOptions="FillAndExpand">
+                                                <Label FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Name: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                            <Span Text="{Binding HouseroomData.Fullname}" TextColor="Black"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
                                             </StackLayout>
-                                            <Label Text="Email:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                                            <Label Text="{Binding HouseroomData.Emailaddress}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                            <Label Text="Phone:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                                            <Label Text="{Binding HouseroomData.Phonenumber}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                            <Label Text="ID:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                                            <Label Text="{Binding HouseroomData.Idnumber}" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                            <Label Text="My Wallet:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
-                                            <Label Text="{Binding HouseroomData.Walletbalance,StringFormat='{0:#,##0.00}'}" TextColor="Red" FontSize="16" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                                        </Grid>
+
+                                            <!-- Email -->
+                                            <Label FontSize="16" Grid.Row="1" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Email: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                        <Span Text="{Binding HouseroomData.Emailaddress}" TextColor="Black"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                            <!-- Phone -->
+                                            <Label FontSize="16" Grid.Row="2" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Phone: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                        <Span Text="{Binding HouseroomData.Phonenumber}" TextColor="Black"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                            <Label FontSize="16" Grid.Row="3" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="ID: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                        <Span Text="{Binding HouseroomData.Idnumber}" TextColor="Black"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                            <Label FontSize="16" Grid.Row="4" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="My Wallet: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                        <Span Text="{Binding HouseroomData.Walletbalance, StringFormat='{0:#,##0.00}'}" TextColor="Red"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                                         </Grid>
                                     </StackLayout>
                                 </StackLayout>
                             </Frame>
@@ -346,34 +384,88 @@
                                                                     <RowDefinition Height="Auto"/>
                                                                     <RowDefinition Height="Auto"/>
                                                                     <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
                                                                 </Grid.RowDefinitions>
 
                                                                 <!-- County Name -->
-                                                                <Label Text="{Binding Countyname}" FontSize="16" Grid.Row="0" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                                <Label FontSize="16" Grid.Row="0" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                                    <Label.FormattedText>
+                                                                        <FormattedString>
+                                                                            <Span Text="County: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                                            <Span Text="{Binding Countyname}" TextColor="Black"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
+
+                                                                <!-- Sub County Name -->
+                                                                <Label FontSize="16" Grid.Row="1" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                                    <Label.FormattedText>
+                                                                        <FormattedString>
+                                                                            <Span Text="Sub County: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                                            <Span Text="{Binding Subcountyname}" TextColor="Black"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
 
                                                                 <!-- Subcounty Ward Name -->
-                                                                <Label Text="Ward:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                                                                <Label Text="{Binding Subcountywardname}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                                <Label FontSize="16" Grid.Row="2" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                                    <Label.FormattedText>
+                                                                        <FormattedString>
+                                                                            <Span Text="Ward: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                                            <Span Text="{Binding Subcountywardname}" TextColor="Black"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
 
                                                                 <!-- Street or Landmark -->
-                                                                <Label Text="Street/Landmark:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                                                                <Label Text="{Binding Streetorlandmark}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                                <Label FontSize="16" Grid.Row="3" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                                    <Label.FormattedText>
+                                                                        <FormattedString>
+                                                                            <Span Text="Street/Landmark: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                                            <Span Text="{Binding Streetorlandmark}" TextColor="Black"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
 
                                                                 <!-- Property House Name -->
-                                                                <Label Text="House:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
-                                                                <Label Text="{Binding Propertyhousename}" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                                <Label FontSize="16" Grid.Row="4" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                                    <Label.FormattedText>
+                                                                        <FormattedString>
+                                                                            <Span Text="House: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                                            <Span Text="{Binding Propertyhousename}" TextColor="Black"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
 
                                                                 <!-- Property Owner Name -->
-                                                                <Label Text="Owner:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
-                                                                <Label Text="{Binding Propertyownername}" FontSize="16" Grid.Row="4" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                                <Label FontSize="16" Grid.Row="5" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                                    <Label.FormattedText>
+                                                                        <FormattedString>
+                                                                            <Span Text="Owner: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                                            <Span Text="{Binding Propertyownername}" TextColor="Black"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
 
                                                                 <!-- Property Size Name -->
-                                                                <Label Text="Size:" FontSize="16" FontAttributes="Bold" Grid.Row="5" Grid.Column="0"/>
-                                                                <Label Text="{Binding Systempropertyhousesizename}" FontSize="16" Grid.Row="5" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                                <Label FontSize="16" Grid.Row="6" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                                    <Label.FormattedText>
+                                                                        <FormattedString>
+                                                                            <Span Text="House Size: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                                            <Span Text="{Binding Systempropertyhousesizename}" TextColor="Black"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
 
                                                                 <!-- Outstanding Balance -->
-                                                                <Label Text="Outstanding Balance:" FontSize="16" FontAttributes="Bold" Grid.Row="6" Grid.Column="0"/>
-                                                                <Label Text="{Binding Outstandingbalance, StringFormat='{0:#,##0.00}'}" FontSize="16" Grid.Row="6" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                                                <Label FontSize="16" Grid.Row="7" Grid.Column="0" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand">
+                                                                    <Label.FormattedText>
+                                                                        <FormattedString>
+                                                                            <Span Text="Outstanding Balance: " FontAttributes="Bold" TextColor="#0a506c"/>
+                                                                            <Span Text="{Binding Outstandingbalance, StringFormat='{0:#,##0.00}'}" TextColor="Black"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
                                                             </Grid>
                                                         </StackLayout>
                                                     </Frame>
