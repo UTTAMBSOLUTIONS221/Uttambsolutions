@@ -3120,6 +3120,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 HouseroomData.Modifiedby = App.UserDetails.Usermodel.Userid;
                 HouseroomData.Datecreated = DateTime.UtcNow;
                 HouseroomData.Datemodified = DateTime.UtcNow;
+                HouseroomData.Closingmeter = ClosingMeter;
+                HouseroomData.Movedmeter = MovedMeter;
+                HouseroomData.Consumedamount = ConsumedAmount;
                 foreach (var fixture in HouseroomData.Roomfixtures)
                 {
                     fixture.Propertyhouseroomid = Convert.ToInt32(HouseroomData.Systempropertyhouseroomid);
