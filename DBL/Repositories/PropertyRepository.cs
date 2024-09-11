@@ -638,6 +638,17 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registerpropertyhouseroomdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+
+        public Genericmodel Registersystempropertyhouseroommeterdata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registersystempropertyhouseroommeterdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         public Systempropertyhouseroomfixturesdata Getsystempropertyhouseroomfixturesdatabyhouseroomid(long Houseroomid)
         {
             Systempropertyhouseroomfixturesdata response = new Systempropertyhouseroomfixturesdata();

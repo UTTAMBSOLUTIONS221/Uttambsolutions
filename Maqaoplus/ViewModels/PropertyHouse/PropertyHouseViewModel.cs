@@ -70,6 +70,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand ViewDetailsCommand { get; }
         public ICommand ViewPropertyHouseImageCommand { get; }
         public ICommand UpdatePropertyRoomMeterReadingCommand { get; }
+        public ICommand UpdatePropertyRoomMeterReadingDataCommand { get; }
         public ICommand HouseNextCommand { get; }
         public ICommand HousePreviousCommand { get; }
         public ICommand AgentHouseNextCommand { get; }
@@ -85,7 +86,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand SearchStaffsCommand { get; }
         public ICommand SearchTenantsCommand { get; }
         public ICommand SavePropertyHouseCareTakerCommand { get; }
-
         public ICommand OnHouseRoomCancelClickedCommand { get; }
         public ICommand OnHouseRoomOkClickedCommand { get; }
         public ICommand ViewRoomDetailsCommand { get; }
@@ -827,6 +827,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SavePropertyHouseRoomFixtureCommand = new Command(async () => await SavePropertyHouseRoomFixtureasync());
             ViewRoomDetailsCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewRoomDetails(propertyRoom.Systempropertyhouseroomid));
             UpdatePropertyRoomMeterReadingCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await UpdatePropertyRoomMeterReading(propertyRoom.Systempropertyhouseroomid));
+            UpdatePropertyRoomMeterReadingDataCommand = new Command(async () => await UpdatePropertyRoomMeterReadingDataAsync());
             ViewPropertyRoomCheckListCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomCheckListDetailAsync(propertyRoom.Systempropertyhouseroomid));
             ViewPropertyRoomImageCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomImagesDetails(propertyRoom.Systempropertyhouseroomid));
 
@@ -2326,6 +2327,57 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             var modalPage = new SystemPropertyHouseRoomMeterModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
+        }
+        public async Task UpdatePropertyRoomMeterReadingDataAsync()
+        {
+            bool isValid = true;
+            IsProcessing = true;
+
+            if (HouseroomData == null)
+            {
+                IsProcessing = false;
+                return;
+            }
+            if (ClosingMeter < HouseroomData.Openingmeter)
+            {
+                PropertyHouseRoomClosingMeterError = "Closing Meter cant be less than Opening required.";
+                isValid = false;
+                return;
+            }
+            else
+            {
+                PropertyHouseRoomClosingMeterError = null;
+            }
+            try
+            {
+                HouseroomData.Closingmeter = ClosingMeter;
+                HouseroomData.Movedmeter = MovedMeter;
+                HouseroomData.Consumedamount = ConsumedAmount;
+                HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
+                HouseroomData.Datecreated = DateTime.UtcNow;
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseroommeterdata", HouseroomData);
+                if (response.RespStatus == 200 || response.RespStatus == 0)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                    await (Shell.Current.CurrentPage.BindingContext as PropertyHouseViewModel)?.ViewHouseDetails(HouseroomData.Systempropertyhouseid);
+                }
+                else if (response.RespStatus == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
         }
         public async Task SavePropertyHouseAsync()
         {
