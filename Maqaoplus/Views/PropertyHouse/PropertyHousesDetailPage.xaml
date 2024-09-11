@@ -7,6 +7,7 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
             <converters:NullToImageConverter x:Key="NullToImageConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -77,10 +78,10 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Button Text="Assign Tenant" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Column="0"/>
+                                    <Button Text="Assign Tenant" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewRoomDetailsCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Column="0" IsVisible="{Binding IsVacant}"/>
                                     <Button Text="Checklist" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewPropertyRoomCheckListCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Column="1"/>
                                     <Button Text="Images" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewPropertyRoomImageCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Column="2" />
-                                    <Button Text="Meter Readings" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.UpdatePropertyRoomMeterReadingCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Column="3" />
+                                    <Button Text="Meter Readings" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.UpdatePropertyRoomMeterReadingCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Grid.Column="3"  IsVisible="{Binding IsVacant, Converter={StaticResource InverseBooleanConverter}}" />
                                 </Grid>
                             </Grid>
                         </Frame>
