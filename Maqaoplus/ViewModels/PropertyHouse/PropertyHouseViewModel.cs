@@ -2478,7 +2478,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         Phonenumber = null,
                         Emailaddress = null,
                         Loginstatus = 0,
-                        Idnumber = Convert.ToInt32(SearchId),
+                        Idnumber = Convert.ToInt64(SearchId),
                         Propertyhouseid = 0,
                         Walletbalance = 0,
                         Tenantroomhistory = null
