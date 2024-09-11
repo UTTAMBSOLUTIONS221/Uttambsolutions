@@ -69,6 +69,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ICommand LoadAgentItemsCommand { get; }
         public ICommand ViewDetailsCommand { get; }
         public ICommand ViewPropertyHouseImageCommand { get; }
+        public ICommand UpdatePropertyRoomMeterReadingCommand { get; }
         public ICommand HouseNextCommand { get; }
         public ICommand HousePreviousCommand { get; }
         public ICommand AgentHouseNextCommand { get; }
@@ -805,6 +806,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewHouseDetails(property.Propertyhouseid));
             ViewPropertyHouseImageCommand = new Command<Systemproperty>(async (property) => await ViewPropertyHouseImagesDetails(property.Propertyhouseid));
+            UpdatePropertyRoomMeterReadingCommand = new Command<Systempropertyhouserooms>(async (propertyRoom) => await UpdatePropertyRoomMeterReading(propertyRoom.Systempropertyhouseroomid));
             HouseNextCommand = new Command(HouseNextStep);
             HousePreviousCommand = new Command(HousePreviousStep);
             AgentHouseNextCommand = new Command(AgentHouseNextStep);
@@ -2307,6 +2309,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private void OnCancelClicked()
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+
+        private async Task UpdatePropertyRoomMeterReading(long PropertyHouseRoomId, decimal OpeningMeters, decimal UnitPrice)
+        {
+            IsProcessing = true;
+
+            var modalPage = new SystemPropertyHouseRoomMeterModalPage(this);
+            await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
+            IsProcessing = false;
         }
         public async Task SavePropertyHouseAsync()
         {

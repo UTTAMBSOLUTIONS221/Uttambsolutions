@@ -187,6 +187,9 @@
 	  <MauiXaml Update="Views\PropertyHouse\Modal\SystemPropertyHouseRoomImagesModalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PropertyHouse\Modal\SystemPropertyHouseRoomMeterModalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyHouse\PropertyHousesCaretakerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
