@@ -2985,7 +2985,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 HouseroomData.Isagency = false;
                 HouseroomData.Hasagent = false;
                 HouseroomData.Createdby = App.UserDetails.Usermodel.Userid;
+                HouseroomData.Modifiedby = App.UserDetails.Usermodel.Userid;
                 HouseroomData.Datecreated = DateTime.UtcNow;
+                HouseroomData.Datemodified = DateTime.UtcNow;
                 foreach (var fixture in HouseroomData.Roomfixtures)
                 {
                     fixture.Propertyhouseroomid = Convert.ToInt32(HouseroomData.Systempropertyhouseroomid);

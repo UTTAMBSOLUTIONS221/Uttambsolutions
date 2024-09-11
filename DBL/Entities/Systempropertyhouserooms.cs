@@ -32,6 +32,7 @@ namespace DBL.Entities
         public decimal Waterunitprice { get; set; }
         public long Tenantid { get; set; }
         public int Createdby { get; set; }
+        public int Modifiedby { get; set; }
         public DateTime Datecreated { get; set; }
         public string? Fullname { get; set; }
         public string? Gender { get; set; }
