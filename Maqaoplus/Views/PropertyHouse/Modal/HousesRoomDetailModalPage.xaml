@@ -355,7 +355,7 @@
                                                 </Label.FormattedText>
                                             </Label>
 
-                                                         </Grid>
+                                        </Grid>
                                     </StackLayout>
                                 </StackLayout>
                             </Frame>

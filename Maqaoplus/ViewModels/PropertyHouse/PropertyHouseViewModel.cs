@@ -2867,6 +2867,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 SystemStaffFirstNameError = "Required.";
                 isValid = false;
+                return;
             }
             else
             {
@@ -2876,6 +2877,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 SystemStaffLastNameError = "Required.";
                 isValid = false;
+                return;
             }
             else
             {
@@ -2885,33 +2887,39 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 SystemStaffPhonenumberError = "Required.";
                 isValid = false;
+                return;
             }
             else
             {
                 SystemStaffPhonenumberError = null;
             }
-            if (SystempropertyData.Idnumber == 0)
+            if (TenantStaffData.Idnumber == 0)
             {
                 SystemStaffIdnumberError = "Required.";
                 isValid = false;
+                return;
             }
-            else if (SystempropertyData.Idnumber.ToString().Length < 8)
+            else if (TenantStaffData.Idnumber.ToString().Length < 8)
             {
                 SystemStaffIdnumberError = "Id number must be from 8 characters.";
                 isValid = false;
+                return;
             }
             else
             {
                 SystemStaffIdnumberError = null;
             }
             SearchId = string.Empty;
-            NewTenantStaffData = new Systemtenantdetails
+            if (!string.IsNullOrWhiteSpace(TenantStaffData.Fullname))
             {
-                Fullname = TenantStaffData.Fullname,
-                Phonenumber = TenantStaffData.Phonenumber,
-                Idnumber = TenantStaffData.Idnumber,
-            };
-            HouseroomData.Fullname = TenantStaffData.Fullname;
+                HouseroomData.Fullname = TenantStaffData.Fullname;
+            }
+            else
+            {
+                HouseroomData.Fullname = $"{TenantStaffData.Firstname} {TenantStaffData.Lastname}".Trim();
+            }
+            HouseroomData.Firstname = TenantStaffData.Firstname;
+            HouseroomData.Lastname = TenantStaffData.Lastname;
             HouseroomData.Emailaddress = TenantStaffData.Emailaddress;
             HouseroomData.Phonenumber = TenantStaffData.Phonenumber;
             HouseroomData.Idnumber = TenantStaffData.Idnumber;
