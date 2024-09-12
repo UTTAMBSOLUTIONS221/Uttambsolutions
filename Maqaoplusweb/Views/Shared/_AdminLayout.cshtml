@@ -221,24 +221,59 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-             var RoleId = $("#systemLoggedinedUserRoleid").val();
-             $.ajax({
-                 url: '/Account/GetPermissions',
-                 type: 'GET',
-                 data: { roleId: RoleId },
-                 success: function (permissionValues) {
-                     document.querySelectorAll('.main').forEach(function (node) {
-                         if (permissionValues.includes(node.id)) {
-                             console.log("Displaying element with ID:", node.id);
-                             node.style.display = "";
-                         }
-                     });
-                 },
-                 error: function () {
-                     window.location.href = '/Account/Signin';
-                 }
-             });
-         });
+            var RoleId = $("#systemLoggedinedUserRoleid").val();
+
+            // Fetch permissions on document ready
+            $.ajax({
+                url: '/Account/GetPermissions',
+                type: 'GET',
+                data: { roleId: RoleId },
+                success: function (permissionValues) {
+                    // Initialize DataTable
+                    var table = $("#AllsystemDataTables").DataTable();
+                    var table1 = $("#AllsystemDataTables1").DataTable();
+                    var table2 = $("#AllsystemDataTables2").DataTable();
+                    var table3 = $("#AllsystemDataTables3").DataTable();
+                    var table4 = $("#AllsystemDataTables4").DataTable();
+
+                    // Function to handle showing/hiding elements based on permissions
+                    function applyPermissions() {
+                        document.querySelectorAll('.main').forEach(function (node) {
+                            if (permissionValues.includes(node.id)) {
+                                console.log("Displaying element with ID:", node.id);
+                                node.style.display = "";
+                            } else {
+                                node.style.display = "none"; // Hide elements not permitted
+                            }
+                        });
+                    }
+
+                    // Apply permissions initially when the page loads
+                    applyPermissions();
+
+                    // Reapply permissions every time DataTable is redrawn (pagination, sorting, filtering)
+                    table.on('draw', function () {
+                        applyPermissions();
+                    });
+                    table1.on('draw', function () {
+                        applyPermissions();
+                    });
+                    table2.on('draw', function () {
+                        applyPermissions();
+                    });
+                    table3.on('draw', function () {
+                        applyPermissions();
+                    });
+                    table4.on('draw', function () {
+                        applyPermissions();
+                    });
+                },
+                error: function () {
+                    window.location.href = '/Account/Signin';
+                }
+            });
+        });
+
 
 
          let currentSection = 1;
