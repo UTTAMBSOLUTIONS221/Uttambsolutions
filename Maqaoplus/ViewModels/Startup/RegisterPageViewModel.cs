@@ -278,7 +278,8 @@ namespace Maqaoplus.ViewModels.Startup
                     Password = "";
                     ConfirmPassword = "";
                     Accepttermsandcondition = false;
-                    await Shell.Current.GoToAsync("//LoginPage");
+                    await Shell.Current.GoToAsync(nameof(LoginPage));
+                    //await Shell.Current.GoToAsync("//LoginPage");
                 }
                 else if (response.RespStatus == 1)
                 {
