@@ -942,7 +942,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
                     OnPropertyChanged(nameof(SelectedSubcounty));
                     OnPropertyChanged(nameof(SystempropertyData.Subcountyid));
-                    LoadSubcountyWardDataCountyCode();
+                    if (!string.IsNullOrEmpty(value?.Value))
+                    {
+                        LoadSubcountyWardDataCountyCode();
+                    }
                 }
             }
         }
@@ -1528,14 +1531,29 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             try
             {
-                var SystemsubcountywardResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCountyWard + "&code=" + Convert.ToInt64(SelectedSubcounty.Value), HttpMethod.Get);
-                if (SystemsubcountywardResponse != null)
+                // Ensure SelectedSubcounty and SelectedSubcounty.Value are not null
+                if (SelectedSubcounty != null && !string.IsNullOrEmpty(SelectedSubcounty.Value))
                 {
-                    Systemsubcountyward = new ObservableCollection<ListModel>(SystemsubcountywardResponse);
+                    var url = "/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCountyWard + "&code=" + Convert.ToInt64(SelectedSubcounty.Value);
+                    var SystemsubcountywardResponse = await _serviceProvider.GetSystemDropDownData(url, HttpMethod.Get);
+
+                    if (SystemsubcountywardResponse != null)
+                    {
+                        // Assign the result to Systemsubcountyward
+                        Systemsubcountyward = new ObservableCollection<ListModel>(SystemsubcountywardResponse);
+                    }
+                    else
+                    {
+                        Systemsubcountyward?.Clear(); // Clear the collection if no response data is found
+                    }
+                }
+                else
+                {
                 }
             }
             catch (Exception ex)
             {
+                // Handle any exceptions that occur during the API call
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
