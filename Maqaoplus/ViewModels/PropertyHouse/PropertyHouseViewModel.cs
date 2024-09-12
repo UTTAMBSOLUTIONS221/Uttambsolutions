@@ -931,9 +931,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (SystempropertyData != null)
                 {
                     // Safely convert the selected value to long and assign it to Countyid
-                    if (value != null && int.TryParse(value.Value?.ToString(), out int subCountyId))
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int Subcountyid))
                     {
-                        SystempropertyData.Subcountyid = subCountyId;
+                        SystempropertyData.Subcountyid = Subcountyid;
                     }
                     else
                     {
