@@ -72,7 +72,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Platforms\Android\Resources\drawable\splash_screen.xml" />
 	  <AndroidResource Remove="Platforms\Android\Resources\values\strings.xml" />
 	  <AndroidResource Remove="Platforms\Android\Resources\values\styles.xml" />
 	</ItemGroup>
@@ -94,12 +93,7 @@
 	  <None Remove="Resources\Images\tap.png" />
 	  <None Remove="Resources\Images\unvisible.png" />
 	  <None Remove="Resources\Images\visible.png" />
-	  <None Remove="Resources\Splash\splashscreen.png" />
 	  <None Remove="Resources\Splash\splash_screen.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Resources\Splash\splashscreen.png" />
 	</ItemGroup>
 
 	<ItemGroup>
