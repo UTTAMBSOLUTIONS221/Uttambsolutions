@@ -234,7 +234,7 @@ namespace Maqaoplus.ViewModels.Startup
         private async Task OnSignUp()
         {
             IsProcessing = true;
-           
+
             if (!IsValidInput())
             {
                 IsProcessing = false;
@@ -270,6 +270,14 @@ namespace Maqaoplus.ViewModels.Startup
                 var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/Account/Registerstaff", request);
                 if (response.RespStatus == 0 || response.RespStatus == 200)
                 {
+                    FirstName = "";
+                    LastName = "";
+                    EmailAddress = "";
+                    PhoneNumber = "";
+                    StaffDesignation = "";
+                    Password = "";
+                    ConfirmPassword = "";
+                    Accepttermsandcondition = false;
                     await Shell.Current.GoToAsync("//LoginPage");
                 }
                 else if (response.RespStatus == 1)

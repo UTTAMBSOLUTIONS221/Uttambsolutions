@@ -151,6 +151,8 @@ namespace Maqaoplus.ViewModels.Startup
                     App.UserDetails = response;
                     if (response.Usermodel.Updateprofile)
                     {
+                        UserName = "";
+                        Password = "";
                         await Shell.Current.GoToAsync(nameof(UpdateUserProfilePage));
                     }
                     else if (response.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
