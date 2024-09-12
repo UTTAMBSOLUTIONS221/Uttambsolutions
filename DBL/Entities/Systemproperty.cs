@@ -13,11 +13,11 @@ namespace DBL.Entities
         public string? Propertyhouseownername { get; set; }
         public long Propertyhouseposter { get; set; }
         public string? Propertyhousename { get; set; }
-        public int Countyid { get; set; }
+        public long Countyid { get; set; }
         public string? Countyname { get; set; }
-        public int Subcountyid { get; set; }
+        public long Subcountyid { get; set; }
         public string? Subcountyname { get; set; }
-        public int Subcountywardid { get; set; }
+        public long Subcountywardid { get; set; }
         public string? Subcountywardname { get; set; }
         public string? Streetorlandmark { get; set; }
         public string? Contactdetails { get; set; }
