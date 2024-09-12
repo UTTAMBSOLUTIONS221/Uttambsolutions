@@ -796,26 +796,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             NewTenantStaffData = new Systemtenantdetails();
             SystempropertyhouseroomfixturesData = new Systempropertyhouseroomfixtures();
             AddPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddPropertyHouseAsync(propertyId); });
-            AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) =>
-            {
-                if (property == null)
-                {
-                    // Handle the case where property is null
-                    Console.WriteLine("Property is null");
-                    return;
-                }
-
-                long propertyId = property.Propertyhouseid; // No need for ?? since long can't be null
-                if (propertyId == 0)
-                {
-                    // Handle the case where propertyId is not valid
-                    Console.WriteLine("Invalid Propertyhouseid");
-                    return;
-                }
-
-                await AddAgentPropertyHouseAsync(propertyId);
-            });
-            //AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
+            AddAgentPropertyHouseCommand = new Command<Systemproperty>(async (property) => { var propertyId = property?.Propertyhouseid ?? 0; await AddAgentPropertyHouseAsync(propertyId); });
             AddPropertyHouseCareTakerCommand = new Command<SystemStaff>(async (param) => { var caretakerhouseid = param?.Caretakerhouseid ?? 0; await AddPropertyHouseCareTakerAsync(caretakerhouseid); });
             LoadItemsCommand = new Command(async () => await LoadItems());
             LoadPropertyHouseCaretakerItemsCommand = new Command(async () => await LoadPropertyHouseCaretakerItems());
@@ -921,7 +902,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     }
                     else
                     {
-                        SystempropertyData.Countyid = 0;
+                        SystempropertyData.Countyid = SystempropertyData.Countyid;
                     }
 
                     OnPropertyChanged(nameof(SelectedCounty));
@@ -956,7 +937,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     }
                     else
                     {
-                        SystempropertyData.Countyid = 0;
+                        SystempropertyData.Subcountyid = SystempropertyData.Subcountyid; ;
                     }
 
                     OnPropertyChanged(nameof(SelectedSubcounty));
@@ -993,7 +974,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                     }
                     else
                     {
-                        SystempropertyData.Subcountywardid = 0;
+                        SystempropertyData.Subcountywardid = SystempropertyData.Subcountywardid;
                     }
 
                     OnPropertyChanged(nameof(SelectedSubcountyward));
