@@ -159,6 +159,44 @@ namespace DBL
 
                 accountDetailsHtml.Append("</table>");
                 accountDetailsHtml.Append("</div>");
+                string message = accountDetailsHtml.ToString();
+                //log Email Messages
+                EmailLogs Logs = new EmailLogs
+                {
+                    EmailLogId = 0,
+                    ModuleId = Convert.ToInt64(Resp.Data2),
+                    EmailAddress = Resp.Data7,
+                    EmailSubject = companySubject,
+                    EmailMessage = message,
+                    IsEmailSent = false,
+                    DateTimeSent = DateTime.Now,
+                    Datecreated = DateTime.Now,
+                };
+                var resp = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs));
+                bool data = emlsnd.UttambsolutionssendemailAsync(Resp.Data7, companySubject, message, true, "", "", "");
+                if (data)
+                {
+                    Resp.RespStatus = 0;
+                    Resp.RespMessage = "Email Sent";
+                    //Update Email is sent 
+                    EmailLogs Logs1 = new EmailLogs
+                    {
+                        EmailLogId = Convert.ToInt64(resp.Data1),
+                        ModuleId = Convert.ToInt64(Resp.Data2),
+                        EmailAddress = Resp.Data7,
+                        EmailSubject = companySubject,
+                        EmailMessage = message,
+                        IsEmailSent = true,
+                        DateTimeSent = DateTime.Now,
+                        Datecreated = DateTime.Now,
+                    };
+                    var resp1 = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs1));
+                }
+                else
+                {
+                    Resp.RespStatus = 0;
+                    Resp.RespMessage = "Email not Sent";
+                }
 
                 return Resp;
             });
