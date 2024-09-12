@@ -1267,13 +1267,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task AddPropertyHouseAsync(long Propertyhouseid)
         {
             IsProcessing = true;
+            SystempropertyData = new Systemproperty();
             Systemhouserentingterms = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "Month-to-Month", Text = "Monthly" },
                 new ListModel { Value = "Fixedterm", Text = "Fixed Term" },
 
             };
-
             Systemhouseentrystatus = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "0", Text = "First Tenants" },
@@ -1309,8 +1309,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 };
                 Systemhouserentdepositreturndays.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
             }
-
-
             Systemhousevacantnoticeperiod = new ObservableCollection<ListModel>();
             for (int i = 1; i <= 12; i++)
             {
@@ -1366,7 +1364,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         }
                     }
                 }
-
             }
             var modalPage = new AddSystemPropertyHouseModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
@@ -1375,12 +1372,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task AddAgentPropertyHouseAsync(long Propertyhouseid)
         {
             IsProcessing = true;
+            SystempropertyData = new Systemproperty();
             Systemhouserentingterms = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "Month-to-Month", Text = "Monthly" },
                 new ListModel { Value = "Fixedterm", Text = "Fixed Term" },
             };
-
             Systemhouseentrystatus = new ObservableCollection<ListModel>
             {
                 new ListModel { Value = "0", Text = "First Tenants" },
