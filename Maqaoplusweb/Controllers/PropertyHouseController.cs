@@ -229,7 +229,7 @@ namespace Maqaoplusweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Tenantmonthlyinvoicepaymentdata()
         {
-            var data = await bl.Gettenantmonthlyinvoicepaymentdatabyownerid(SessionUserData.Usermodel.Userid);
+            var data = await bl.Gettenantmonthlyinvoicepaymentdatabyownerid(SessionUserData.Usermodel.Userid, SessionUserData.Usermodel.Designation);
             return View(data);
         }
         [HttpGet]

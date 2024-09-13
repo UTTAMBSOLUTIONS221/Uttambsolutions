@@ -1130,6 +1130,25 @@ namespace DBL.Repositories
             }
         }
 
+        public TenantMonthlyInvoicePaymentData Gettenantmonthlyinvoicepaymentdatabyownerid()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Systemtenantmonthlyinvoicepaymentdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getalltenantmonthlyinvoicepaymentdata", parameters, commandType: CommandType.StoredProcedure);
+                string systemtenantmonthlyinvoicedataJson = parameters.Get<string>("@Systemtenantmonthlyinvoicepaymentdata");
+                if (systemtenantmonthlyinvoicedataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<TenantMonthlyInvoicePaymentData>(systemtenantmonthlyinvoicedataJson);
+                }
+                else
+                {
+                    return new TenantMonthlyInvoicePaymentData();
+                }
+            }
+        }
         public TenantMonthlyInvoicePaymentData Gettenantmonthlyinvoicepaymentdatabyownerid(long Ownerid)
         {
             using (var connection = new SqlConnection(_connString))

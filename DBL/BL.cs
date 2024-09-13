@@ -1404,6 +1404,22 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<TenantMonthlyInvoicePaymentData> Gettenantmonthlyinvoicepaymentdatabyownerid(long Ownerid, string Designation)
+        {
+            return Task.Run(() =>
+            {
+                TenantMonthlyInvoicePaymentData Resp = new TenantMonthlyInvoicePaymentData();
+                if (Designation == "System Admin")
+                {
+                    Resp = db.PropertyRepository.Gettenantmonthlyinvoicepaymentdatabyownerid();
+                }
+                else
+                {
+                    Resp = db.PropertyRepository.Gettenantmonthlyinvoicepaymentdatabyownerid(Ownerid);
+                }
+                return Resp;
+            });
+        }
         public Task<TenantMonthlyInvoicePaymentData> Gettenantmonthlyinvoicepaymentdatabyagentid(long Agentid)
         {
             return Task.Run(() =>
