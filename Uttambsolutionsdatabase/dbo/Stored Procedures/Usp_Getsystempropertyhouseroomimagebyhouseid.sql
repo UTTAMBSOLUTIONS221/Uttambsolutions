@@ -17,12 +17,11 @@ BEGIN
 			(SELECT SPHID.Propertyimageid,SPHID.Propertyhouseid,SPHID.Houseorroom,SPHID.Houseorroomimageurl,SPHID.Createdby,SPHID.Datecreated FROM Systempropertyhouseimages SPHID WHERE SPHI.Propertyimageid=SPHID.Propertyimageid  FOR JSON PATH) AS PropertyHouseImage
 			FROM Systempropertyhouserooms ROOM 
 			LEFT JOIN Systempropertyhouseimages SPHI ON ROOM.Systempropertyhouseid=SPHI.Propertyhouseid
-			WHERE ROOM.Systempropertyhouseroomid =@Houseid
+			WHERE ROOM.Systempropertyhouseid =@Houseid AND SPHI.Houseorroom ='PropertyHouse'
 			FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER
 			)AS Data
 			FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER
 			);
-			
 
 	    Set @RespMsg ='Ok.'
 		Set @RespStat =0; 

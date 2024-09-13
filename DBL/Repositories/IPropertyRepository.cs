@@ -41,6 +41,7 @@ namespace DBL.Repositories
         Systempropertyhouseroomdata Getsystempropertyhouseroomdatabyid(long Houseroomid);
         Systempropertyhouseroommeters Getsystempropertyhouseroommeterdatabyid(long Houseroomid);
         Genericmodel Registerpropertyhouseroommeterdata(string JsonData);
+        SystemPropertyHouseVacatingRequestModel Gettenantvacatingrequestsdatabyownerid();
         SystemPropertyHouseVacatingRequestModel Gettenantvacatingrequestsdatabyownerid(long Ownerid);
         Genericmodel Approvepropertyhousevacatingrequest(string JsonData);
         TenantMonthlyInvoiceData Gettenantmonthlyinvoicedatabyownerid(long Ownerid);

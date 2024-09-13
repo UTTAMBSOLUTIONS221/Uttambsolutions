@@ -949,6 +949,25 @@ namespace DBL.Repositories
             }
         }
 
+        public SystemPropertyHouseVacatingRequestModel Gettenantvacatingrequestsdatabyownerid()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Systempropertyvacatingrequestdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getalltenantvacatingrequestsdata", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Systempropertyvacatingrequestdata");
+                if (systempropertydataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<SystemPropertyHouseVacatingRequestModel>(systempropertydataJson);
+                }
+                else
+                {
+                    return new SystemPropertyHouseVacatingRequestModel();
+                }
+            }
+        }
         public SystemPropertyHouseVacatingRequestModel Gettenantvacatingrequestsdatabyownerid(long Ownerid)
         {
             using (var connection = new SqlConnection(_connString))

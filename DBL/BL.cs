@@ -1323,6 +1323,22 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<SystemPropertyHouseVacatingRequestModel> Gettenantvacatingrequestsdatabyownerid(long Ownerid, string Designation)
+        {
+            return Task.Run(() =>
+            {
+                SystemPropertyHouseVacatingRequestModel Resp = new SystemPropertyHouseVacatingRequestModel();
+                if (Designation == "System Admin")
+                {
+                    Resp = db.PropertyRepository.Gettenantvacatingrequestsdatabyownerid();
+                }
+                else
+                {
+                    Resp = db.PropertyRepository.Gettenantvacatingrequestsdatabyownerid(Ownerid);
+                }
+                return Resp;
+            });
+        }
         public Task<SystemPropertyHouseVacatingRequestModel> Gettenantvacatingrequestsdatabyownerid(long Ownerid)
         {
             return Task.Run(() =>

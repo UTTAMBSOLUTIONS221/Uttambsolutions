@@ -202,7 +202,7 @@ namespace Maqaoplusweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Tenantvacatingrequests()
         {
-            var data = await bl.Gettenantvacatingrequestsdatabyownerid(SessionUserData.Usermodel.Userid);
+            var data = await bl.Gettenantvacatingrequestsdatabyownerid(SessionUserData.Usermodel.Userid, SessionUserData.Usermodel.Designation);
             return PartialView(data);
         }
         [HttpGet]
