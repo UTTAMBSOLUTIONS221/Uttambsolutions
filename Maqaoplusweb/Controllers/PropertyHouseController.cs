@@ -23,7 +23,7 @@ namespace Maqaoplusweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var data = await bl.Getsystempropertyhousedatabyowner(SessionUserData.Usermodel.Userid);
+            var data = await bl.Getsystempropertyhousedatabyowner(SessionUserData.Usermodel.Userid, SessionUserData.Usermodel.Designation);
             return View(data);
         }
         [HttpGet]
@@ -188,7 +188,7 @@ namespace Maqaoplusweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Propertyhouseroomtenants()
         {
-            var data = await bl.Getsystempropertyhouseroomtenantsdata(SessionUserData.Usermodel.Userid);
+            var data = await bl.Getsystempropertyhouseroomtenantsdata(SessionUserData.Usermodel.Userid, SessionUserData.Usermodel.Designation);
             return View(data);
         }
 

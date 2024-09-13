@@ -1100,6 +1100,22 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Systempropertyhousedata> Getsystempropertyhousedatabyowner(long Ownerid, string Designation)
+        {
+            return Task.Run(() =>
+            {
+                Systempropertyhousedata Resp = new Systempropertyhousedata();
+                if (Designation == "System Admin")
+                {
+                    Resp = db.PropertyRepository.Getallsystempropertyhousedata();
+                }
+                else
+                {
+                    Resp = db.PropertyRepository.Getsystempropertyhousedatabyowner(Ownerid);
+                }
+                return Resp;
+            });
+        }
         public Task<Systempropertyhousedata> Getsystempropertyhousedatabyagent(long Agentid)
         {
             return Task.Run(() =>
@@ -1123,6 +1139,22 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.PropertyRepository.Getsystempropertyhouseroomtenantsdata(OwnerId);
+                return Resp;
+            });
+        }
+        public Task<PropertyHouseTenantData> Getsystempropertyhouseroomtenantsdata(long OwnerId, string Designation)
+        {
+            return Task.Run(() =>
+            {
+                PropertyHouseTenantData Resp = new PropertyHouseTenantData();
+                if (Designation == "System Admin")
+                {
+                    Resp = db.PropertyRepository.Getsystempropertyhouseroomtenantsdata();
+                }
+                else
+                {
+                    Resp = db.PropertyRepository.Getsystempropertyhouseroomtenantsdata(OwnerId);
+                }
                 return Resp;
             });
         }

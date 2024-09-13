@@ -282,6 +282,25 @@ namespace DBL.Repositories
                 }
             }
         }
+        public Systempropertyhousedata Getallsystempropertyhousedata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Systempropertydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getallsystempropertyhousedata", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Systempropertydata");
+                if (systempropertydataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Systempropertyhousedata>(systempropertydataJson);
+                }
+                else
+                {
+                    return new Systempropertyhousedata();
+                }
+            }
+        }
 
         public Systempropertyhousedata Getsystempropertyhousedatabyagent(long Agentid)
         {
@@ -361,6 +380,25 @@ namespace DBL.Repositories
             }
         }
 
+        public PropertyHouseTenantData Getsystempropertyhouseroomtenantsdata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Systempropertyhouseroomtenantsdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getallsystempropertyhouseroomtenantsdata", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertyhouseroomtenantsdataJson = parameters.Get<string>("@Systempropertyhouseroomtenantsdata");
+                if (systempropertyhouseroomtenantsdataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<PropertyHouseTenantData>(systempropertyhouseroomtenantsdataJson);
+                }
+                else
+                {
+                    return new PropertyHouseTenantData();
+                }
+            }
+        }
         public PropertyHouseTenantData Getsystempropertyhouseroomtenantsdata(long Ownerid)
         {
             using (var connection = new SqlConnection(_connString))
