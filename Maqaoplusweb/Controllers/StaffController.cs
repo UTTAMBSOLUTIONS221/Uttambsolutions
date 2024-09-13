@@ -18,7 +18,15 @@ namespace Maqaoplusweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var data = await bl.Getsystemstaffdata(0, 1000);
+            IEnumerable<SystemStaff> data = new List<SystemStaff>();
+            if (SessionUserData.Usermodel.Rolename == "System Admin")
+            {
+                data = await bl.Getsystemstaffdata(0, 1000);
+            }
+            else
+            {
+                data = await bl.Getsystemstaffdatabyparentid(SessionUserData.Usermodel.Parentid);
+            }
             return View(data);
         }
         [HttpGet]

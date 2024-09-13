@@ -32,7 +32,7 @@ namespace DBL.Entities
         public bool Accepttermsandcondition { get; set; }
         public int Loginstatus { get; set; }
         public DateTime? Passwordresetdate { get; set; }
-        public int? Parentid { get; set; }
+        public long? Parentid { get; set; }
         public string? Userprofileimageurl { get; set; }
         public string? Usercurriculumvitae { get; set; }
         public int Idnumber { get; set; }

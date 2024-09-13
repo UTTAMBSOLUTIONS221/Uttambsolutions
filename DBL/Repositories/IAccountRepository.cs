@@ -6,6 +6,7 @@ namespace DBL.Repositories
     public interface IAccountRepository
     {
         IEnumerable<SystemStaff> Getsystemstaffdata(int Page, int PageSize);
+        IEnumerable<SystemStaff> Getsystemstaffdatabyparentid(long Parentid);
         Genericmodel Registersystemuserdevicedata(string JsonData);
         Genericmodel Registersystemstaffdata(string JsonData);
         Genericmodel SaveStaffRefreshToken(string JsonData);

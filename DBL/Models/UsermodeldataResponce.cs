@@ -20,7 +20,7 @@
         public int Loginstatus { get; set; }
         public string? Designation { get; set; }
         public DateTime? Passwordresetdate { get; set; }
-        public int? Parentid { get; set; }
+        public long Parentid { get; set; }
         public string? Userprofileimageurl { get; set; }
         public string? Usercurriculumvitae { get; set; }
         public string? Idnumber { get; set; }

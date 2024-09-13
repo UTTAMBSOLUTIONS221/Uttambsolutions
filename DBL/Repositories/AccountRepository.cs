@@ -26,6 +26,16 @@ namespace DBL.Repositories
                 return connection.Query<SystemStaff>("Usp_Getsystemstaffdata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+        public IEnumerable<SystemStaff> Getsystemstaffdatabyparentid(long Parentid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Parentid", Parentid);
+                return connection.Query<SystemStaff>("Usp_Getsystemstaffdatabyparentid", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
         public Genericmodel Registersystemuserdevicedata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))

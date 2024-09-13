@@ -70,6 +70,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<IEnumerable<SystemStaff>> Getsystemstaffdatabyparentid(long Parentid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Getsystemstaffdatabyparentid(Parentid);
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Registersystemuserdevicedata(string obj)
         {
             return Task.Run(() =>
