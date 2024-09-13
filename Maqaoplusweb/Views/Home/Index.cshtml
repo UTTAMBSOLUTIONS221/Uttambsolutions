@@ -2,34 +2,134 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-@if (Model != null && Model.Data != null && Model.Data.Any())
-{
-    <div class="row">
-        @foreach (var item in Model.Data)
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    .hero {
+        background-image: url('/Images/hero-bg.png');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 100px 0;
+        text-align: center;
+    }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #7D2B2B;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+        }
+
+    .btn-primary {
+        background-color: #0a506c;
+        border-color: #0a506c;
+    }
+
+    .text-custom {
+        color: #0a506c;
+    }
+
+    .card {
+        border-radius: 10px;
+        transition: 0.3s;
+    }
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+    .features-section {
+        padding: 50px 0;
+        background-color: #ffffff;
+    }
+
+    .property-listings {
+        padding: 50px 0;
+    }
+
+    .footer {
+        background-color: #0a506c;
+        color: white;
+        padding: 20px 0;
+    }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+</style>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <h1>Welcome to Maqao Plus Property Management</h1>
+        <p>Streamline your property management processes, automate rent collection, and manage tenant history efficiently.</p>
+        <a href="#vacant-houses" class="btn btn-custom btn-lg">Explore Vacant Houses</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-4 mb-4">
+                <h3 class="text-custom">Automated Rent Collection</h3>
+                <p>Simplify rent collection with automated payment updates and reminders.</p>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h3 class="text-custom">Track Tenant History</h3>
+                <p>Easily manage and track tenant records, ensuring smooth occupancy transitions.</p>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h3 class="text-custom">Real-Time Vacant House Listings</h3>
+                <p>List and manage your properties with real-time vacant house updates.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vacant Houses Listings Section -->
+<section id="vacant-houses" class="property-listings">
+    <div class="container">
+        <h2 class="text-center text-custom mb-5">Available Vacant Houses</h2>
+
+        @if (Model != null && Model.Data != null && Model.Data.Any())
         {
-            <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-                <div class="card border-0 shadow-sm h-80">
-                    <img src="~/images/house.png" class="card-img-top" alt="@item.Systemhousesizename" style="object-fit: cover; height: 200px; border-radius: 8px 8px 0 0;" />
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title mb-2 font-weight-bold text-custom">@item.Systemhousesizename</h5>
-                        <p class="card-text text-muted mb-2"><strong>Rent:</strong> @(item.Systempropertyhousesizerent.ToString("N0"))</p>
-                        <p class="card-text mb-1"><strong>County:</strong> @item.Countyname, @item.Subcountyname</p>
-                        <p class="card-text mb-1"><strong>Ward:</strong> @item.Subcountywardname</p>
-                        <p class="card-text mb-1"><strong>Landmark:</strong> @item.Streetorlandmark</p>
-                      @*   <a href="#" class="btn btn-outline-primary mt-auto text-uppercase">View Details</a> *@
+            <div class="row">
+                @foreach (var item in Model.Data)
+                {
+                    <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <div class="card border-0 shadow-sm h-80">
+                            <img src="~/images/house.png" class="card-img-top" alt="@item.Systemhousesizename" style="object-fit: cover; height: 200px; border-radius: 8px 8px 0 0;" />
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title mb-2 font-weight-bold text-custom">@item.Systemhousesizename</h5>
+                                <p class="card-text text-muted mb-2"><strong>Rent:</strong> @(item.Systempropertyhousesizerent.ToString("N0"))</p>
+                                <p class="card-text mb-1"><strong>County:</strong> @item.Countyname, @item.Subcountyname</p>
+                                <p class="card-text mb-1"><strong>Ward:</strong> @item.Subcountywardname</p>
+                                <p class="card-text mb-1"><strong>Landmark:</strong> @item.Streetorlandmark</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="alert alert-info text-center" role="alert">
+                        No vacant rental properties available at the moment. Please check back later.
                     </div>
                 </div>
             </div>
         }
     </div>
-}
-else
-{
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="alert alert-info text-center" role="alert">
-                No vacant rental properties available at the moment. Please check back later.
-            </div>
-        </div>
-    </div>
-}
+</section>
