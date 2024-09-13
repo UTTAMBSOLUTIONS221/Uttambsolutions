@@ -321,7 +321,7 @@ namespace Maqaoplus.Constants
                         new ShellContent
                         {
                             Icon = Icons.Dashboard,
-                            Title = " Dashboard",
+                            Title = "Dashboard",
                             ContentTemplate = new DataTemplate(typeof(UserDashboardPage)),
                         },
                         new ShellContent
