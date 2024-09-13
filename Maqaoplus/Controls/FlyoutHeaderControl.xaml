@@ -3,11 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maqaoplus.Controls.FlyoutHeaderControl">
     <VerticalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
-        <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" IsClippedToBounds="True" BorderColor="#0a506c" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center" Padding="5">
-            <Frame WidthRequest="90" HeightRequest="90" CornerRadius="45" IsClippedToBounds="True" BorderColor="Transparent" HasShadow="False">
+        <!-- Outer Frame for Border and Shadow -->
+        <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" IsClippedToBounds="True" 
+               BorderColor="#0a506c" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center" Padding="5">
+            <!-- Inner Frame for Image -->
+            <Frame WidthRequest="90" HeightRequest="90" CornerRadius="45" IsClippedToBounds="True" 
+                   BorderColor="Transparent" HasShadow="False">
                 <Image Source="user.png" Aspect="AspectFill"/>
             </Frame>
         </Frame>
-        <Label x:Name="lblUserName" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" TextTransform="Uppercase" />
+        <!-- User Name Label -->
+        <Label x:Name="lblUserName" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" 
+               TextTransform="Uppercase" TextColor="Black"/>
+        <!-- Ensure text color is visible -->
     </VerticalStackLayout>
 </StackLayout>
