@@ -65,7 +65,7 @@
                                     <td class="text-right">
                                         @if (item.Isoccupant)
                                         {
-                                            <a asp-action="Tenantdetails" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Propertytenantid="@item.Systempropertyhousetenantid" asp-area="" id="CAN_EDIT_PROPERTY" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Manage</a>
+                                            <a asp-action="Tenantdetails" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Propertytenantid="@item.Systempropertyhousetenantid" asp-area="" id="CAN_VIEW_PROPERTY_TENANT_DETAIL" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Manage</a>
                                         }
                                         else
                                         {
