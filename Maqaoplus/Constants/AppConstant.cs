@@ -79,10 +79,6 @@ namespace Maqaoplus.Constants
                         },
                     }
                 };
-                foreach (var item in flyoutItem.Items.OfType<ShellContent>())
-                {
-                    Shell.SetTitleColor(item, Color.FromArgb("#0a506c"));
-                }
                 if (!AppShell.Current.Items.Contains(flyoutItem))
                 {
                     AppShell.Current.Items.Add(flyoutItem);
@@ -299,10 +295,6 @@ namespace Maqaoplus.Constants
 
                 if (!AppShell.Current.Items.Contains(flyoutItem))
                 {
-                    foreach (var item in flyoutItem.Items.OfType<ShellContent>())
-                    {
-                        Shell.SetTitleColor(item, Color.FromArgb("#0a506c"));
-                    }
                     AppShell.Current.Items.Add(flyoutItem);
                     if (DeviceInfo.Platform == DevicePlatform.WinUI)
                     {
