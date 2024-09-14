@@ -219,7 +219,7 @@ namespace Maqaoplus.Constants
                             Title = "Bills",
                             ContentTemplate = new DataTemplate(() => new OwnerPropertyHousesBillsPage(serviceProvider)),
                         },
-                            new ShellContent
+                        new ShellContent
                         {
                             Icon = Icons.dollar,
                             Title = "Payments",
