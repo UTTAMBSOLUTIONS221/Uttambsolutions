@@ -14,7 +14,7 @@
         </Frame>
         <!-- User Name Label -->
         <Label x:Name="lblUserName" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" 
-               TextTransform="Uppercase" TextColor="Black"/>
+               TextTransform="Uppercase" TextColor="#0a506c"/>
         <!-- Ensure text color is visible -->
     </VerticalStackLayout>
 </StackLayout>
