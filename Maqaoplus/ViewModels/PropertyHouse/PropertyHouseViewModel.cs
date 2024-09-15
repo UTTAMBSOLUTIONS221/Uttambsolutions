@@ -805,7 +805,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadMoreCommand = new Command(async () => await LoadMoreItemsAsync());
             LoadAgentItemsCommand = new Command(async () => await LoadAgentItems());
             ViewDetailsCommand = new Command<Systemproperty>(async (property) => await ViewHouseDetails(property.Propertyhouseid));
-            ViewPropertyHouseImageCommand = new Command<SystemPropertyHouseImage>(async (property) => await ViewPropertyHouseImagesDetails(property.Propertyhouseid));
+            ViewPropertyHouseImageCommand = new Command<Systemproperty>(async (property) => await ViewPropertyHouseImagesDetails(property.Propertyhouseid));
             HouseNextCommand = new Command(HouseNextStep);
             HousePreviousCommand = new Command(HousePreviousStep);
             AgentHouseNextCommand = new Command(AgentHouseNextStep);
@@ -829,7 +829,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             UpdatePropertyRoomMeterReadingCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await UpdatePropertyRoomMeterReading(propertyRoom.Systempropertyhouseroomid));
             UpdatePropertyRoomMeterReadingDataCommand = new Command(async () => await UpdatePropertyRoomMeterReadingDataAsync());
             ViewPropertyRoomCheckListCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomCheckListDetailAsync(propertyRoom.Systempropertyhouseroomid));
-            ViewPropertyRoomImageCommand = new Command<SystemPropertyHouseImage>(async (propertyRoom) => await ViewPropertyRoomImagesDetails(propertyRoom.Propertyhouseid));
+            ViewPropertyRoomImageCommand = new Command<PropertyHouseDetails>(async (propertyRoom) => await ViewPropertyRoomImagesDetails(propertyRoom.Systempropertyhouseroomid));
 
             // Initialize steps
             _isStep1HouseVisible = true;
