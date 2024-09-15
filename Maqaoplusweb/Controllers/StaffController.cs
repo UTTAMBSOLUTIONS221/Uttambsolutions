@@ -25,7 +25,7 @@ namespace Maqaoplusweb.Controllers
             }
             else
             {
-                data = await bl.Getsystemstaffdatabyparentid(SessionUserData.Usermodel.Parentid);
+                data = await bl.Getsystemstaffdatabyparentid(SessionUserData.Usermodel.Userid);
             }
             return View(data);
         }
