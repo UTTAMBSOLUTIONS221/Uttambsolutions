@@ -98,112 +98,120 @@ namespace DBL
                     obj.Username = obj.Emailaddress;
                 }
                 var Resp = db.AccountRepository.Registersystemstaffdata(JsonConvert.SerializeObject(obj));
-                string passWord = sec.Decrypt(Resp.Data4, Resp.Data5);
-                string companyName = "MAQAO PLUS";
-                string companyEmail = "maqaoplus@uttambsolutions.com";
-                string companySubject = "Your Account Details - MAQAO PLUS";
-                string changePasswordUrl = "https://uttambsolutions.com/Account/changepassword"; // URL for the user to change their password
-                string logoUrl = "https://maqaoplus.uttambsolutions.com/images/maqaopluslogo.png";
-
-                StringBuilder accountDetailsHtml = new StringBuilder();
-
-                // Start of HTML structure
-                accountDetailsHtml.Append("<div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>");
-                accountDetailsHtml.Append("<table style='width: 100%; max-width: 600px; margin: 0 auto; border-collapse: collapse;'>");
-
-                // Header with logo and email
-                accountDetailsHtml.Append("<thead style='background-color: #0a506c; color: #fff;'>");
-                accountDetailsHtml.Append("<tr>");
-                accountDetailsHtml.Append("<th rowspan='2' style='padding: 15px; text-align: left;'>");
-                accountDetailsHtml.Append($"<img src=\"{logoUrl}\" alt=\"{companyName}\" style='max-width: 120px; max-height: 120px;' />");
-                accountDetailsHtml.Append("</th>");
-                accountDetailsHtml.Append($"<th colspan='2' style='padding: 15px; text-align: right; font-size: 18px;'>{companyName}</th>");
-                accountDetailsHtml.Append("</tr>");
-                accountDetailsHtml.Append("<tr>");
-                accountDetailsHtml.Append("<th colspan='2' style='padding: 10px; text-align: right; font-size: 14px;'>");
-                accountDetailsHtml.Append($"Email: <a href='mailto:{companyEmail}' style='color: #fff; text-decoration: none;'>{companyEmail}</a>");
-                accountDetailsHtml.Append("</th>");
-                accountDetailsHtml.Append("</tr>");
-                accountDetailsHtml.Append("</thead>");
-
-                // Body of email with account details
-                accountDetailsHtml.Append("<tbody>");
-                accountDetailsHtml.Append("<tr>");
-                accountDetailsHtml.Append("<td colspan='2' style='padding: 20px 10px;'>");
-                accountDetailsHtml.Append("<h2>Welcome to the Team!</h2>");
-                accountDetailsHtml.Append($"<p>Hello {Resp.Data3},</p>");
-                accountDetailsHtml.Append("<p>Your staff account has been created. Below are your account details:</p>");
-                accountDetailsHtml.Append($"<p><strong>Email:</strong> {Resp.Data7}</p>");
-                accountDetailsHtml.Append($"<p><strong>Temporary Password:</strong> {passWord}</p>");
-                accountDetailsHtml.Append("<p>For security reasons, please log in and change your password immediately using the link below:</p>");
-                accountDetailsHtml.Append($"<p style='text-align: center;'><a href='{changePasswordUrl}' style='background-color: #0a506c; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Change Password</a></p>");
-                accountDetailsHtml.Append("<p>If the button doesn't work, please copy and paste the following URL into your browser:</p>");
-                accountDetailsHtml.Append($"<p><a href='{changePasswordUrl}' style='color: #0a506c;'>{changePasswordUrl}</a></p>");
-                accountDetailsHtml.Append("<p>We look forward to working with you. If you have any questions, feel free to reach out to us.</p>");
-                accountDetailsHtml.Append($"<p>Best regards,</p>");
-                accountDetailsHtml.Append($"<p><strong>{companyName} Team</strong></p>");
-                accountDetailsHtml.Append("</td>");
-                accountDetailsHtml.Append("</tr>");
-                accountDetailsHtml.Append("</tbody>");
-
-                // Footer Section
-                accountDetailsHtml.Append("<tfoot style='background-color: #0a506c; color: #fff;'>");
-                accountDetailsHtml.Append("<tr>");
-                accountDetailsHtml.Append("<td colspan='2' style='padding: 15px; text-align: center; font-size: 14px;'>");
-                accountDetailsHtml.Append("Uttamb Solutions &copy; 2022 - 2024");
-                accountDetailsHtml.Append("</td>");
-                accountDetailsHtml.Append("</tr>");
-                accountDetailsHtml.Append("<tr>");
-                accountDetailsHtml.Append("<td colspan='2' style='padding: 10px; text-align: center; font-size: 12px;'>");
-                accountDetailsHtml.Append("Vision: Utilizing Technology To Automate Modern Business");
-                accountDetailsHtml.Append("</td>");
-                accountDetailsHtml.Append("</tr>");
-                accountDetailsHtml.Append("<tr>");
-                accountDetailsHtml.Append("<td colspan='2' style='padding: 10px; text-align: center; font-size: 12px;'>");
-                accountDetailsHtml.Append("Mission: For Quality and Value");
-                accountDetailsHtml.Append("</td>");
-                accountDetailsHtml.Append("</tr>");
-                accountDetailsHtml.Append("</tfoot>");
-
-                accountDetailsHtml.Append("</table>");
-                accountDetailsHtml.Append("</div>");
-                string message = accountDetailsHtml.ToString();
-                //log Email Messages
-                EmailLogs Logs = new EmailLogs
+                if (Resp.RespStatus == 0)
                 {
-                    EmailLogId = 0,
-                    ModuleId = Convert.ToInt64(Resp.Data2),
-                    EmailAddress = Resp.Data7,
-                    EmailSubject = companySubject,
-                    EmailMessage = message,
-                    IsEmailSent = false,
-                    DateTimeSent = DateTime.Now,
-                    Datecreated = DateTime.Now,
-                };
-                var resp = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs));
-                bool data = emlsnd.UttambsolutionssendemailAsync(Resp.Data7, companySubject, message, true, "", "", "");
-                if (data)
-                {
-                    Resp.RespStatus = 0;
-                    Resp.RespMessage = "Email Sent";
-                    //Update Email is sent 
-                    EmailLogs Logs1 = new EmailLogs
+                    string passWord = sec.Decrypt(Resp.Data4, Resp.Data5);
+                    string companyName = "MAQAO PLUS";
+                    string companyEmail = "maqaoplus@uttambsolutions.com";
+                    string companySubject = "Your Account Details - MAQAO PLUS";
+                    string changePasswordUrl = "https://uttambsolutions.com/Account/changepassword"; // URL for the user to change their password
+                    string logoUrl = "https://maqaoplus.uttambsolutions.com/images/maqaopluslogo.png";
+
+                    StringBuilder accountDetailsHtml = new StringBuilder();
+
+                    // Start of HTML structure
+                    accountDetailsHtml.Append("<div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>");
+                    accountDetailsHtml.Append("<table style='width: 100%; max-width: 600px; margin: 0 auto; border-collapse: collapse;'>");
+
+                    // Header with logo and email
+                    accountDetailsHtml.Append("<thead style='background-color: #0a506c; color: #fff;'>");
+                    accountDetailsHtml.Append("<tr>");
+                    accountDetailsHtml.Append("<th rowspan='2' style='padding: 15px; text-align: left;'>");
+                    accountDetailsHtml.Append($"<img src=\"{logoUrl}\" alt=\"{companyName}\" style='max-width: 120px; max-height: 120px;' />");
+                    accountDetailsHtml.Append("</th>");
+                    accountDetailsHtml.Append($"<th colspan='2' style='padding: 15px; text-align: right; font-size: 18px;'>{companyName}</th>");
+                    accountDetailsHtml.Append("</tr>");
+                    accountDetailsHtml.Append("<tr>");
+                    accountDetailsHtml.Append("<th colspan='2' style='padding: 10px; text-align: right; font-size: 14px;'>");
+                    accountDetailsHtml.Append($"Email: <a href='mailto:{companyEmail}' style='color: #fff; text-decoration: none;'>{companyEmail}</a>");
+                    accountDetailsHtml.Append("</th>");
+                    accountDetailsHtml.Append("</tr>");
+                    accountDetailsHtml.Append("</thead>");
+
+                    // Body of email with account details
+                    accountDetailsHtml.Append("<tbody>");
+                    accountDetailsHtml.Append("<tr>");
+                    accountDetailsHtml.Append("<td colspan='2' style='padding: 20px 10px;'>");
+                    accountDetailsHtml.Append("<h2>Welcome to the Team!</h2>");
+                    accountDetailsHtml.Append($"<p>Hello {Resp.Data3},</p>");
+                    accountDetailsHtml.Append("<p>Your staff account has been created. Below are your account details:</p>");
+                    accountDetailsHtml.Append($"<p><strong>Email:</strong> {Resp.Data7}</p>");
+                    accountDetailsHtml.Append($"<p><strong>Temporary Password:</strong> {passWord}</p>");
+                    accountDetailsHtml.Append("<p>For security reasons, please log in and change your password immediately using the link below:</p>");
+                    accountDetailsHtml.Append($"<p style='text-align: center;'><a href='{changePasswordUrl}' style='background-color: #0a506c; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Change Password</a></p>");
+                    accountDetailsHtml.Append("<p>If the button doesn't work, please copy and paste the following URL into your browser:</p>");
+                    accountDetailsHtml.Append($"<p><a href='{changePasswordUrl}' style='color: #0a506c;'>{changePasswordUrl}</a></p>");
+                    accountDetailsHtml.Append("<p>We look forward to working with you. If you have any questions, feel free to reach out to us.</p>");
+                    accountDetailsHtml.Append($"<p>Best regards,</p>");
+                    accountDetailsHtml.Append($"<p><strong>{companyName} Team</strong></p>");
+                    accountDetailsHtml.Append("</td>");
+                    accountDetailsHtml.Append("</tr>");
+                    accountDetailsHtml.Append("</tbody>");
+
+                    // Footer Section
+                    accountDetailsHtml.Append("<tfoot style='background-color: #0a506c; color: #fff;'>");
+                    accountDetailsHtml.Append("<tr>");
+                    accountDetailsHtml.Append("<td colspan='2' style='padding: 15px; text-align: center; font-size: 14px;'>");
+                    accountDetailsHtml.Append("Uttamb Solutions &copy; 2022 - 2024");
+                    accountDetailsHtml.Append("</td>");
+                    accountDetailsHtml.Append("</tr>");
+                    accountDetailsHtml.Append("<tr>");
+                    accountDetailsHtml.Append("<td colspan='2' style='padding: 10px; text-align: center; font-size: 12px;'>");
+                    accountDetailsHtml.Append("Vision: Utilizing Technology To Automate Modern Business");
+                    accountDetailsHtml.Append("</td>");
+                    accountDetailsHtml.Append("</tr>");
+                    accountDetailsHtml.Append("<tr>");
+                    accountDetailsHtml.Append("<td colspan='2' style='padding: 10px; text-align: center; font-size: 12px;'>");
+                    accountDetailsHtml.Append("Mission: For Quality and Value");
+                    accountDetailsHtml.Append("</td>");
+                    accountDetailsHtml.Append("</tr>");
+                    accountDetailsHtml.Append("</tfoot>");
+
+                    accountDetailsHtml.Append("</table>");
+                    accountDetailsHtml.Append("</div>");
+                    string message = accountDetailsHtml.ToString();
+                    //log Email Messages
+                    EmailLogs Logs = new EmailLogs
                     {
-                        EmailLogId = Convert.ToInt64(resp.Data1),
+                        EmailLogId = 0,
                         ModuleId = Convert.ToInt64(Resp.Data2),
                         EmailAddress = Resp.Data7,
                         EmailSubject = companySubject,
                         EmailMessage = message,
-                        IsEmailSent = true,
+                        IsEmailSent = false,
                         DateTimeSent = DateTime.Now,
                         Datecreated = DateTime.Now,
                     };
-                    var resp1 = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs1));
+                    var resp = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs));
+                    bool data = emlsnd.UttambsolutionssendemailAsync(Resp.Data7, companySubject, message, true, "", "", "");
+                    if (data)
+                    {
+                        Resp.RespStatus = 0;
+                        Resp.RespMessage = "Email Sent";
+                        //Update Email is sent 
+                        EmailLogs Logs1 = new EmailLogs
+                        {
+                            EmailLogId = Convert.ToInt64(resp.Data1),
+                            ModuleId = Convert.ToInt64(Resp.Data2),
+                            EmailAddress = Resp.Data7,
+                            EmailSubject = companySubject,
+                            EmailMessage = message,
+                            IsEmailSent = true,
+                            DateTimeSent = DateTime.Now,
+                            Datecreated = DateTime.Now,
+                        };
+                        var resp1 = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs1));
+                    }
+                    else
+                    {
+                        Resp.RespStatus = 1;
+                        Resp.RespMessage = "Email not Sent";
+                    }
                 }
                 else
                 {
-                    Resp.RespStatus = 0;
-                    Resp.RespMessage = "Email not Sent";
+                    Resp.RespStatus = 1;
+                    Resp.RespMessage = Resp.RespMessage;
                 }
 
                 return Resp;
