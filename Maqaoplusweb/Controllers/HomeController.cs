@@ -33,17 +33,17 @@ namespace Maqaoplusweb.Controllers
             {
                 model = await bl.Getsystempropertyhousedashboardsummarydatabyagent(SessionUserData.Usermodel.Userid);
             }
-            //else if (SessionUserData.Usermodel.Designation == "Tenant")
-            //{
-            //    model = await bl.Getsystempropertyhousetenantdatabytenantid(SessionUserData.Usermodel.Userid);
-            //}
+            else if (SessionUserData.Usermodel.Designation == "Tenant")
+            {
+                return RedirectToAction("Tenantprofile", "Home");
+            }
             else
             {
                 model = await bl.Getsystempropertyhousedashboardsummarydatabyagent(SessionUserData.Usermodel.Userid);
             }
             return View(model);
         }
-        public IActionResult OwnerDashboard()
+        public IActionResult Tenantprofile()
         {
             return View();
         }
