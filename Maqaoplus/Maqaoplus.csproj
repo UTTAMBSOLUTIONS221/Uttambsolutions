@@ -61,7 +61,7 @@
 
 		<!-- Splash Screen -->
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Images/maqaopluslogo.png" BaseSize="256,256" Color="#FFFFFF" />
+		<MauiSplashScreen Include="Resources\Images/maqaopluslogo.png" BaseSize="512,512" Color="#FFFFFF" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
