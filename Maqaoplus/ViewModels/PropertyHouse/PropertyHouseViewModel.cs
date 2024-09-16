@@ -23,6 +23,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ObservableCollection<PropertyHouseDetails> Rooms { get; }
         public ObservableCollection<SystemStaff> PropertyHouseCareTakerItems { get; }
         public ObservableCollection<PropertyHouseDetails> VacantItems { get; }
+        public ObservableCollection<SystemPropertyHouseImage> HouseImagesItems { get; }
+
+
         private Systemproperty _systempropertyData;
         private Systempropertyhouserooms _houseroomData;
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
@@ -787,6 +790,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             Rooms = new ObservableCollection<PropertyHouseDetails>();
             PropertyHouseCareTakerItems = new ObservableCollection<SystemStaff>();
             VacantItems = new ObservableCollection<PropertyHouseDetails>();
+            HouseImagesItems = new ObservableCollection<SystemPropertyHouseImage>();
             SystempropertyData = new Systemproperty();
             HouseroomData = new Systempropertyhouserooms();
             OwnerTenantAgreementDetailData = new OwnerTenantAgreementDetailData();
@@ -1704,9 +1708,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
             var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomimagebyhouseid/" + propertyHouseId, HttpMethod.Get, null);
-            if (response != null)
+            if (response != null && response.Data is List<dynamic> items)
             {
-                SystemPropertyHouseImageData = JsonConvert.DeserializeObject<SystemPropertyHouseImage>(response.Data.ToString());
+                HouseImagesItems.Clear();
+                foreach (var item in items)
+                {
+                    var images = item.ToObject<SystemPropertyHouseImage>();
+                    HouseImagesItems.Add(images);
+                }
             }
             var modalPage = new SystemPropertyHouseImagesModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
@@ -2815,9 +2824,14 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             IsProcessing = true;
             var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomimagebyhouseroomid/" + propertyHouseRoomId, HttpMethod.Get, null);
-            if (response != null)
+            if (response != null && response.Data is List<dynamic> items)
             {
-                SystemPropertyHouseImageData = JsonConvert.DeserializeObject<SystemPropertyHouseImage>(response.Data.ToString());
+                HouseImagesItems.Clear();
+                foreach (var item in items)
+                {
+                    var images = item.ToObject<SystemPropertyHouseImage>();
+                    HouseImagesItems.Add(images);
+                }
             }
             var modalPage = new SystemPropertyHouseRoomImagesModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
