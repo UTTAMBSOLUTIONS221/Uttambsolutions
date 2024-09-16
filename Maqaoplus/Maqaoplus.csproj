@@ -74,10 +74,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<AndroidResource Remove="Platforms\Android\Resources\drawable\splash_image.png" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Remove="Resources\Images\agreement.png" />
 		<None Remove="Resources\Images\dollar.png" />
 		<None Remove="Resources\Images\email.png" />
