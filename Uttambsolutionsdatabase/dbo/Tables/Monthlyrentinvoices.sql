@@ -4,6 +4,7 @@
     [Propertyhouseroomid]       BIGINT          NOT NULL,
     [Propertyhouseroomtenantid] BIGINT          NOT NULL,
     [Financetransactionid]      BIGINT          NOT NULL,
+    [Periodid]                  BIGINT          DEFAULT ((0)) NOT NULL,
     [Datecreated]               DATETIME        NOT NULL,
     [Duedate]                   DATETIME        NOT NULL,
     [Amount]                    DECIMAL (18, 2) NOT NULL,
