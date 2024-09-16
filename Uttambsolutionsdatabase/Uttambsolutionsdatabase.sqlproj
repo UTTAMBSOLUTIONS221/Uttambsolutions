@@ -288,5 +288,6 @@
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyimagebyhouseroomid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyimagebyhouseid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getalltenantmonthlyinvoicepaymentdata.sql" />
+    <Build Include="dbo\Tables\SystemPeriods.sql" />
   </ItemGroup>
 </Project>
