@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Usp_Getsystempropertyhouseroomimagebyhouseroomid]
+﻿CREATE PROCEDURE [dbo].[Usp_Getsystempropertyimagebyhouseroomid]
 @Houseroomid INT,
 @Systempropertyhouseroomimagedata VARCHAR(MAX)  OUTPUT
 AS
@@ -13,11 +13,8 @@ BEGIN
 		BEGIN TRY
 		BEGIN TRANSACTION;
 		 SET @Systempropertyhouseroomimagedata= 
-			(SELECT(SELECT ISNULL(SPHI.Propertyimageid,0) AS Propertyimageid,ROOM.Systempropertyhouseroomid AS Propertyhouseid,ISNULL(SPHI.Houseorroom,'HouseRoom') AS Houseorroom,SPHI.Houseorroomimageurl,SPHI.Createdby,ISNULL(SPHI.Datecreated,GETDATE()) AS Datecreated,
-			 (SELECT SPHID.Propertyimageid,SPHID.Propertyhouseid,SPHID.Houseorroom,SPHID.Houseorroomimageurl,SPHID.Createdby,SPHID.Datecreated FROM Systempropertyhouseimages SPHID  FOR JSON PATH) AS PropertyHouseImage
-			FROM Systempropertyhouserooms ROOM 
-			LEFT JOIN Systempropertyhouseimages SPHI ON ROOM.Systempropertyhouseroomid=SPHI.Propertyhouseid
-			WHERE ROOM.Systempropertyhouseroomid =@Houseroomid  AND SPHI.Houseorroom ='HouseRoom'
+			(SELECT(SELECT @Houseroomid AS Propertyhouseid,
+			(SELECT SPHID.Propertyimageid,SPHID.Propertyhouseid,SPHID.Houseorroom,SPHID.Houseorroomimageurl,SPHID.Createdby,SPHID.Datecreated FROM Systempropertyhouseimages SPHID WHERE SPHID.Propertyhouseid =@Houseroomid AND SPHID.Houseorroom ='HouseRoom' FOR JSON PATH) AS PropertyHouseImage
 			FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER
 			)AS Data
 			FOR JSON PATH, INCLUDE_NULL_VALUES,WITHOUT_ARRAY_WRAPPER
