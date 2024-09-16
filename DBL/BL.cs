@@ -1298,19 +1298,19 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<SystemPropertyHouseImageData> Getsystempropertyhouseroomimagebyhouseroomid(long Houseroomid)
+        public Task<SystemPropertyHouseImageData> Getsystempropertyimagebyhouseroomid(long Houseroomid)
         {
             return Task.Run(() =>
             {
-                var Resp = db.PropertyRepository.Getsystempropertyhouseroomimagebyhouseroomid(Houseroomid);
+                var Resp = db.PropertyRepository.Getsystempropertyimagebyhouseroomid(Houseroomid);
                 return Resp;
             });
         }
-        public Task<SystemPropertyHouseImageData> Getsystempropertyhouseroomimagebyhouseid(long Houseid)
+        public Task<SystemPropertyHouseImageData> Getsystempropertyimagebyhouseid(long Houseid)
         {
             return Task.Run(() =>
             {
-                var Resp = db.PropertyRepository.Getsystempropertyhouseroomimagebyhouseid(Houseid);
+                var Resp = db.PropertyRepository.Getsystempropertyimagebyhouseid(Houseid);
                 return Resp;
             });
         }

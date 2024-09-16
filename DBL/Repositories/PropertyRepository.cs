@@ -744,7 +744,7 @@ namespace DBL.Repositories
             }
         }
 
-        public SystemPropertyHouseImageData Getsystempropertyhouseroomimagebyhouseroomid(long Houseroomid)
+        public SystemPropertyHouseImageData Getsystempropertyimagebyhouseroomid(long Houseroomid)
         {
             SystemPropertyHouseImageData response = new SystemPropertyHouseImageData();
             SystemPropertyHouseImage propertyhouseroomimage = new SystemPropertyHouseImage();
@@ -755,7 +755,7 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Houseroomid", Houseroomid);
                 parameters.Add("@Systempropertyhouseroomimagedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_Getsystempropertyhouseroomimagebyhouseroomid", parameters, commandType: CommandType.StoredProcedure);
+                var queryResult = connection.Query("Usp_Getsystempropertyimagebyhouseroomid", parameters, commandType: CommandType.StoredProcedure);
                 string systempropertyhouseroomimagedataJson = parameters.Get<string>("@Systempropertyhouseroomimagedata");
                 if (systempropertyhouseroomimagedataJson != null)
                 {
@@ -780,7 +780,7 @@ namespace DBL.Repositories
                 }
             }
         }
-        public SystemPropertyHouseImageData Getsystempropertyhouseroomimagebyhouseid(long Houseid)
+        public SystemPropertyHouseImageData Getsystempropertyimagebyhouseid(long Houseid)
         {
             SystemPropertyHouseImageData response = new SystemPropertyHouseImageData();
             SystemPropertyHouseImage propertyhouseroomimage = new SystemPropertyHouseImage();
@@ -791,7 +791,7 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Houseid", Houseid);
                 parameters.Add("@Systempropertyhousedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
-                var queryResult = connection.Query("Usp_Getsystempropertyhouseroomimagebyhouseid", parameters, commandType: CommandType.StoredProcedure);
+                var queryResult = connection.Query("Usp_Getsystempropertyimagebyhouseid", parameters, commandType: CommandType.StoredProcedure);
                 string systempropertyhouseroomimagedataJson = parameters.Get<string>("@Systempropertyhousedata");
                 if (systempropertyhouseroomimagedataJson != null)
                 {

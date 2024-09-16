@@ -174,16 +174,16 @@ namespace API.Controllers
             return await bl.Registersystempropertyhouseroomimagedata(JsonConvert.SerializeObject(model));
         }
         [AllowAnonymous]
-        [HttpGet("Getsystempropertyhouseroomimagebyhouseroomid/{HouseRoomId}")]
-        public async Task<SystemPropertyHouseImageData> Getsystempropertyhouseroomimagebyhouseroomid(long HouseRoomId)
+        [HttpGet("Getsystempropertyimagebyhouseroomid/{HouseRoomId}")]
+        public async Task<SystemPropertyHouseImageData> Getsystempropertyimagebyhouseroomid(long HouseRoomId)
         {
-            return await bl.Getsystempropertyhouseroomimagebyhouseroomid(HouseRoomId);
+            return await bl.Getsystempropertyimagebyhouseroomid(HouseRoomId);
         }
         [AllowAnonymous]
-        [HttpGet("Getsystempropertyhouseroomimagebyhouseid/{HouseId}")]
-        public async Task<SystemPropertyHouseImageData> Getsystempropertyhouseroomimagebyhouseid(long HouseId)
+        [HttpGet("Getsystempropertyimagebyhouseid/{HouseId}")]
+        public async Task<SystemPropertyHouseImageData> Getsystempropertyimagebyhouseid(long HouseId)
         {
-            return await bl.Getsystempropertyhouseroomimagebyhouseid(HouseId);
+            return await bl.Getsystempropertyimagebyhouseid(HouseId);
         }
         [AllowAnonymous]
         [HttpPost("Registerpropertyhousevacaterequestdata")]
