@@ -747,7 +747,8 @@ namespace DBL.Repositories
         public SystemPropertyHouseImageData Getsystempropertyhouseroomimagebyhouseroomid(long Houseroomid)
         {
             SystemPropertyHouseImageData response = new SystemPropertyHouseImageData();
-            List<SystemPropertyHouseImage> propertyhouseroomimage = new List<SystemPropertyHouseImage>();
+            SystemPropertyHouseImage propertyhouseroomimage = new SystemPropertyHouseImage();
+            List<SystemPropertyHouseImageModel>? propertyhouseroomimagesummary = new List<SystemPropertyHouseImageModel>();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -759,14 +760,16 @@ namespace DBL.Repositories
                 if (systempropertyhouseroomimagedataJson != null)
                 {
                     JObject responseJson = JObject.Parse(systempropertyhouseroomimagedataJson);
-
                     if (responseJson["Data"] != null && responseJson["Data"].Type != JTokenType.Null)
                     {
-                        if (responseJson["Data"] != null)
+                        JObject propertyhouseroomimageresponseJson = JObject.Parse(responseJson["Data"].ToString());
+                        propertyhouseroomimage.Propertyhouseid = Convert.ToInt32(propertyhouseroomimageresponseJson["Propertyhouseid"]);
+                        if (propertyhouseroomimageresponseJson["PropertyHouseImage"] != null)
                         {
-                            string propertyhouseroomimagesummaryJson = responseJson["PropertyHouseImage"].ToString();
-                            propertyhouseroomimage = JsonConvert.DeserializeObject<List<SystemPropertyHouseImage>>(propertyhouseroomimagesummaryJson);
+                            string propertyhouseroomimagesummaryJson = propertyhouseroomimageresponseJson["PropertyHouseImage"].ToString();
+                            propertyhouseroomimagesummary = JsonConvert.DeserializeObject<List<SystemPropertyHouseImageModel>>(propertyhouseroomimagesummaryJson);
                         }
+                        propertyhouseroomimage.PropertyHouseImage = propertyhouseroomimagesummary;
                         response.Data = propertyhouseroomimage;
                     }
                     return response;
@@ -780,7 +783,7 @@ namespace DBL.Repositories
         public SystemPropertyHouseImageData Getsystempropertyhouseroomimagebyhouseid(long Houseid)
         {
             SystemPropertyHouseImageData response = new SystemPropertyHouseImageData();
-            List<SystemPropertyHouseImage> propertyhouseroomimage = new List<SystemPropertyHouseImage>();
+            SystemPropertyHouseImage propertyhouseroomimage = new SystemPropertyHouseImage();
             List<SystemPropertyHouseImageModel>? propertyhouseroomimagesummary = new List<SystemPropertyHouseImageModel>();
             using (var connection = new SqlConnection(_connString))
             {
@@ -793,14 +796,16 @@ namespace DBL.Repositories
                 if (systempropertyhouseroomimagedataJson != null)
                 {
                     JObject responseJson = JObject.Parse(systempropertyhouseroomimagedataJson);
-
                     if (responseJson["Data"] != null && responseJson["Data"].Type != JTokenType.Null)
                     {
-                        if (responseJson["Data"] != null)
+                        JObject propertyhouseroomimageresponseJson = JObject.Parse(responseJson["Data"].ToString());
+                        propertyhouseroomimage.Propertyhouseid = Convert.ToInt32(propertyhouseroomimageresponseJson["Propertyhouseid"]);
+                        if (propertyhouseroomimageresponseJson["PropertyHouseImage"] != null)
                         {
-                            string propertyhouseroomimagesummaryJson = responseJson["PropertyHouseImage"].ToString();
-                            propertyhouseroomimage = JsonConvert.DeserializeObject<List<SystemPropertyHouseImage>>(propertyhouseroomimagesummaryJson);
+                            string propertyhouseroomimagesummaryJson = propertyhouseroomimageresponseJson["PropertyHouseImage"].ToString();
+                            propertyhouseroomimagesummary = JsonConvert.DeserializeObject<List<SystemPropertyHouseImageModel>>(propertyhouseroomimagesummaryJson);
                         }
+                        propertyhouseroomimage.PropertyHouseImage = propertyhouseroomimagesummary;
                         response.Data = propertyhouseroomimage;
                     }
                     return response;
