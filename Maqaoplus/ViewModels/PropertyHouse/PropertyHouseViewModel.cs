@@ -1704,7 +1704,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task ViewPropertyHouseImagesDetails(long propertyHouseId)
         {
             IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomimagebyhouseid/" + propertyHouseId, HttpMethod.Get, null);
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyimagebyhouseid/" + propertyHouseId, HttpMethod.Get, null);
             if (response != null)
             {
                 SystemPropertyHouseImageData = JsonConvert.DeserializeObject<SystemPropertyHouseImage>(response.Data.ToString());
@@ -2815,7 +2815,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task ViewPropertyRoomImagesDetails(long propertyHouseRoomId)
         {
             IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomimagebyhouseroomid/" + propertyHouseRoomId, HttpMethod.Get, null);
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyimagebyhouseroomid/" + propertyHouseRoomId, HttpMethod.Get, null);
             if (response != null)
             {
                 SystemPropertyHouseImageData = JsonConvert.DeserializeObject<SystemPropertyHouseImage>(response.Data.ToString());
