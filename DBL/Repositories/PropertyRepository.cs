@@ -792,7 +792,7 @@ namespace DBL.Repositories
                 parameters.Add("@Houseid", Houseid);
                 parameters.Add("@Systempropertyhouseimagedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystempropertyimagebyhouseid", parameters, commandType: CommandType.StoredProcedure);
-                string systempropertyhouseroomimagedataJson = parameters.Get<string>("@Systempropertyhousedata");
+                string systempropertyhouseroomimagedataJson = parameters.Get<string>("@Systempropertyhouseimagedata");
                 if (systempropertyhouseroomimagedataJson != null)
                 {
                     JObject responseJson = JObject.Parse(systempropertyhouseroomimagedataJson);
