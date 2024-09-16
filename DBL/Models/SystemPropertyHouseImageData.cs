@@ -4,6 +4,6 @@ namespace DBL.Models
 {
     public class SystemPropertyHouseImageData
     {
-        public SystemPropertyHouseImage? Data { get; set; }
+        public List<SystemPropertyHouseImage>? Data { get; set; }
     }
 }

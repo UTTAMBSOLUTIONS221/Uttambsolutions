@@ -270,3 +270,23 @@
 
 10/09/2024 10:33:00 [Reminders Service called]
 
+16/09/2024 06:08:00 [Reminders Service called]
+
+16/09/2024 06:09:00 [Reminders Service called]
+
+16/09/2024 06:10:23 [Reminders Service called]
+
+16/09/2024 06:15:00 [Reminders Service called]
+
+16/09/2024 06:16:00 [Reminders Service called]
+
+16/09/2024 06:17:00 [Reminders Service called]
+
+16/09/2024 06:18:00 [Reminders Service called]
+
+16/09/2024 06:19:00 [Reminders Service called]
+
+16/09/2024 06:20:00 [Reminders Service called]
+
+16/09/2024 06:27:00 [Reminders Service called]
+
