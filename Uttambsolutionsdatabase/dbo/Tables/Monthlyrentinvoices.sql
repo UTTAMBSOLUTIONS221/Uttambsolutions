@@ -10,6 +10,7 @@
     [Amount]                    DECIMAL (18, 2) NOT NULL,
     [Discount]                  DECIMAL (18, 2) DEFAULT ((0)) NOT NULL,
     [Ispaid]                    BIT             DEFAULT ((0)) NOT NULL,
+    [Invoicestatus]             VARCHAR (20)    NOT NULL,
     [Paidamount]                DECIMAL (18, 2) DEFAULT ((0)) NOT NULL,
     [Balance]                   DECIMAL (18, 2) NOT NULL,
     [Issent]                    BIT             DEFAULT ((0)) NOT NULL,

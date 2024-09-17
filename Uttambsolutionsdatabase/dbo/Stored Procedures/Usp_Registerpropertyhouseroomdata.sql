@@ -21,7 +21,6 @@ BEGIN
 			SELECT 1 AS RespStatus,'Tenant has not given vacating notice to current residence' AS RespMessage;
 			return;
 		END
-
 		BEGIN TRANSACTION;
 		    DECLARE @Systempropertyhouseroomsdata TABLE (Systempropertyhouseroomid BIGINT);
 			DECLARE @Systempropertyhouseroomstenantdata TABLE (Systempropertyhousetenantentryid BIGINT);
@@ -86,9 +85,9 @@ BEGIN
             INSERT (FirstName, LastName, PhoneNumber, UserName, EmailAddress, RoleId, PassHarsh, Passwords, IsActive, IsDeleted, IsDefault, LoginStatus, PasswordResetDate, ParentId, UserProfileImageUrl, UserCurriculumVitae, IdNumber, UpdateProfile, Extra, Extra1, Extra2, Extra3, Extra4, Extra5, CreatedBy, ModifiedBy, DateModified, DateCreated, LastLogin)
             VALUES (source.FirstName, source.LastName, source.PhoneNumber, source.UserName, source.EmailAddress, source.RoleId, source.PassHarsh, source.Passwords, source.IsActive, source.IsDeleted, source.IsDefault, source.LoginStatus, source.PasswordResetDate, source.ParentId, source.UserProfileImageUrl, source.UserCurriculumVitae, source.IdNumber, source.UpdateProfile, source.Extra, source.Extra1, source.Extra2, source.Extra3, source.Extra4, source.Extra5, source.CreatedBy, source.ModifiedBy, source.DateModified, source.DateCreated, source.LastLogin)
             OUTPUT $action AS Action, inserted.UserId, inserted.FirstName + ' ' + inserted.LastName AS FullName, inserted.Passwords, inserted.PassHarsh, inserted.UserName, inserted.EmailAddress INTO @Systemstaffdata;
-			
+				
 			 SET @UserId = (SELECT TOP 1 UserId FROM @Systemstaffdata);
-			 IF EXISTS(SELECT 1 FROM @Systemstaffdata WHERE Action = 'INSERT')
+		    IF EXISTS(SELECT 1 FROM @Systemstaffdata WHERE Action = 'INSERT')
 			BEGIN
 				INSERT INTO Systemstaffsaccount (Userid, AccountNumber, Datecreated, Datemodified)
 				SELECT UserId, NEXT VALUE FOR AccountNumberSequence, CAST(JSON_VALUE(@JsonObjectData, '$.Datecreated') AS DATETIME2), CAST(JSON_VALUE(@JsonObjectData, '$.Datemodified') AS DATETIME2)
@@ -100,7 +99,7 @@ BEGIN
 				INSERT INTO ChartofAccounts 
 				VALUES (@AccountNumber, 12);
 			END
-
+			
 
 			MERGE INTO Systempropertyhouserooms AS target
 			USING (
@@ -118,7 +117,7 @@ BEGIN
 			VALUES (source.Systempropertyhouseid,(select Systempropertyhousesize.Systempropertyhousesizeid from Systempropertyhousesizes Systempropertyhousesize WHERE Systempropertyhousesize.Systemhousesizeid=source.Systempropertyhousesizeid AND Systempropertyhousesize.Propertyhouseid=source.Systempropertyhouseid),source.Systempropertyhousesizename,source.Systempropertyhousesizerent,0,0,source.Isunderrenovation,source.Isshop,source.Isgroundfloor,source.Hasbalcony,source.Forcaretaker,source.Kitchentypeid)
 		    OUTPUT inserted.Systempropertyhouseroomid INTO @Systempropertyhouseroomsdata;
 			SET @Systempropertyhouseroomid = (SELECT TOP 1 Systempropertyhouseroomid FROM @Systempropertyhouseroomsdata);
-
+			
 			--set room vacant if exists
 			IF EXISTS (SELECT Systempropertyhouseroomid FROM Systempropertyhouseroomstenant WHERE Systempropertyhousetenantid = JSON_VALUE(@JsonObjectdata, '$.Tenantid') AND Isoccupant=1 AND Occupationalstatus=1)
             BEGIN 
@@ -128,11 +127,10 @@ BEGIN
 			BEGIN
 			 UPDATE Systemstaffs SET Loginstatus=1 WHERE Userid=JSON_VALUE(@JsonObjectdata, '$.Tenantid');
 			END
-
 			--insert tenant to tenants table
 			MERGE INTO Systempropertyhouseroomstenant AS target
 			USING(
-			SELECT @UserId AS Systempropertyhousetenantid,Systempropertyhouseroomid,Roomoccupant,Roomoccupantdetail,Createdby,Modifiedby,Datecreated,Datemodified
+			SELECT  @UserId AS Systempropertyhousetenantid,Systempropertyhouseroomid,Roomoccupant,Roomoccupantdetail,Createdby,Modifiedby,Datecreated,Datemodified
 			FROM OPENJSON(@JsonObjectdata)
 			WITH (Systempropertyhouseroomid BIGINT '$.Systempropertyhouseroomid',Roomoccupant INT '$.Roomoccupant',Roomoccupantdetail VARCHAR(200) '$.Roomoccupantdetail',Createdby BIGINT '$.Createdby',Modifiedby BIGINT '$.Createdby',  Datecreated DATETIME2 '$.Datecreated',Datemodified DATETIME2 '$.Datecreated')) AS source
 			ON target.Systempropertyhousetenantid = source.Systempropertyhousetenantid AND target.Systempropertyhouseroomid = source.Systempropertyhouseroomid AND target.Isoccupant = 1 AND Occupationalstatus= 2
@@ -156,7 +154,6 @@ BEGIN
 			VALUES (source.Propertyhouseroomid,source.Fixtureid,source.Fixtureunits,source.Fixturestatusid,source.Createdby,source.Datecreated)
 			OUTPUT inserted.Propertychecklistid,inserted.Fixtureid INTO @InsertedIDs;
 
-
 			INSERT INTO Systemfixturestatushist (Propertychecklistid, Fixturestatusid, Fixtureunits)
 			SELECT i.Propertychecklistid, s.Fixturestatusid, s.Fixtureunits FROM @InsertedIDs i 
 			JOIN OPENJSON(@JsonObjectdata, '$.Roomfixtures') WITH (Propertychecklistid BIGINT '$.Propertychecklistid',Fixturestatusid INT '$.Fixturestatusid', Fixtureunits INT '$.Fixtureunits') AS s
@@ -165,25 +162,32 @@ BEGIN
 			OR s.Fixturestatusid <> (SELECT TOP 1 hist.Fixturestatusid FROM Systemfixturestatushist hist WHERE hist.Propertychecklistid = i.Propertychecklistid ORDER BY hist.Datecreated DESC)
 			OR s.Fixtureunits <> (SELECT TOP 1 hist.Fixtureunits  FROM Systemfixturestatushist hist  WHERE hist.Propertychecklistid = i.Propertychecklistid ORDER BY hist.Datecreated DESC));
 
-			--update any other entry for the tenant to have vacated
-			UPDATE Systempropertyhouseroomstenant SET Isoccupant=0,Occupationalstatus=0  WHERE Systempropertyhousetenantid = JSON_VALUE(@JsonObjectdata, '$.Tenantid');
-			--update the current entry for the tenant to have resided
-			UPDATE Systempropertyhouseroomstenant SET Isoccupant=1,Occupationalstatus=2 WHERE Systempropertyhousetenantentryid = @Systempropertyhousetenantentryid AND Systempropertyhousetenantid = JSON_VALUE(@JsonObjectdata, '$.Tenantid');
-			--update house room to not vacant anymore 
-		    UPDATE Systempropertyhouserooms SET Isvacant=0 WHERE Systempropertyhouseroomid = JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid');
-           
+			IF EXISTS (SELECT Systempropertyhouseroomid FROM Systempropertyhouseroomstenant WHERE Systempropertyhouseroomid = JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid'))
+            BEGIN 
+				 --update any other entry for the tenant to have vacated
+				UPDATE Systempropertyhouseroomstenant SET Isoccupant=0,Occupationalstatus=0  WHERE Systempropertyhousetenantid = JSON_VALUE(@JsonObjectdata, '$.Tenantid');
+				--update the current entry for the tenant to have resided
+				UPDATE Systempropertyhouseroomstenant SET Isoccupant=1,Occupationalstatus=2 WHERE Systempropertyhousetenantentryid = @Systempropertyhousetenantentryid AND Systempropertyhousetenantid = JSON_VALUE(@JsonObjectdata, '$.Tenantid');
+				--update house room to not vacant anymore 
+				UPDATE Systempropertyhouserooms SET Isvacant=0 WHERE Systempropertyhouseroomid = JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid');
+			END
 
-		   IF ((SELECT Systempropertyhouse.Hashousewatermeter FROM Systempropertyhouses Systempropertyhouse INNER JOIN Systempropertyhouserooms Systempropertyhouseroom ON Systempropertyhouse.Propertyhouseid=Systempropertyhouseroom.Systempropertyhouseid WHERE Systempropertyhouseroom.Systempropertyhouseroomid=JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid'))=1)
-		   BEGIN
-			   IF NOT EXISTS (SELECT 1 FROM Systempropertyhouseroommeters WHERE Systempropertyhouseroomid = JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid') AND YEAR(Datecreated) = YEAR(TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Datecreated') AS DATETIME2)) AND MONTH(Datecreated) = MONTH(TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Datecreated') AS DATETIME2)))
-				BEGIN
-				   -- Insert into Systempropertyhouseroommeters table with conditions
-				   INSERT INTO Systempropertyhouseroommeters (Systempropertyhouseroomid, Systempropertyhouseroommeternumber, Openingmeter, Movedmeter, Closingmeter, Consumedamount, Createdby, Datecreated)
-				   SELECT JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid') AS Systempropertyhouseroomid,JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroommeternumber') AS Systempropertyhouseroommeternumber,TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Openingmeter') AS FLOAT) AS Openingmeter,TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Movedmeter') AS FLOAT) AS Movedmeter,TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Closingmeter') AS FLOAT) AS Closingmeter,TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Consumedamount') AS FLOAT) AS Consumedamount,JSON_VALUE(@JsonObjectdata, '$.Createdby') AS Createdby,TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Datecreated') AS DATETIME2) AS Datecreated
-				   WHERE TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Closingmeter') AS FLOAT) > 0 OR TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Movedmeter') AS FLOAT) > 0 OR TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Consumedamount') AS FLOAT) > 0;
-				END
-		   END
+        	IF((SELECT HSC.Hashousewatermeter FROM Systempropertyhouserooms ROOM INNER JOIN Systempropertyhouses HSC ON ROOM.Systempropertyhouseid= HSC.Propertyhouseid  WHERE ROOM.Systempropertyhouseroomid=JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid'))=1)
+			BEGIN
+			MERGE INTO Systempropertyhouseroommeters AS Target
+			USING (
+			SELECT JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid') AS Systempropertyhouseroomid,JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroommeternumber') AS Systempropertyhouseroommeternumber,(SELECT x.PeriodId FROM Systemperiods x WHERE x.Lastdateinperiod=(SELECT EOMONTH(GETDATE(), 0))) AS Periodid,
+			TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Openingmeter') AS FLOAT) AS Openingmeter,TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Movedmeter') AS FLOAT) AS Movedmeter,TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Closingmeter') AS FLOAT) AS Closingmeter,
+			TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Consumedamount') AS FLOAT) AS Consumedamount,JSON_VALUE(@JsonObjectdata, '$.Createdby') AS Createdby,TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Datecreated') AS DATETIME2) AS Datecreated
+			) AS Source
+			ON Target.Systempropertyhouseroomid = Source.Systempropertyhouseroomid AND Target.Periodid = Source.Periodid
+			WHEN MATCHED THEN
+			UPDATE SET Target.Openingmeter = Source.Openingmeter,Target.Movedmeter = Source.Movedmeter,Target.Closingmeter = Source.Closingmeter,Target.Consumedamount = Source.Consumedamount,Target.Createdby = Source.Createdby,Target.Datecreated = Source.Datecreated
+			WHEN NOT MATCHED BY TARGET THEN
+			INSERT (Systempropertyhouseroomid, Systempropertyhouseroommeternumber,Periodid, Openingmeter, Movedmeter, Closingmeter, Consumedamount, Createdby, Datecreated)
+			VALUES (Source.Systempropertyhouseroomid, Source.Systempropertyhouseroommeternumber,(SELECT x.PeriodId FROM Systemperiods x WHERE x.Lastdateinperiod=(SELECT EOMONTH(GETDATE(), 0))), Source.Openingmeter, Source.Movedmeter, Source.Closingmeter, Source.Consumedamount, Source.Createdby, Source.Datecreated);
 
+			END
 		Set @RespMsg ='Success'
 		Set @RespStat =0; 
 		COMMIT TRANSACTION;

@@ -10,6 +10,8 @@ BEGIN
             @SystemPropertyHouseTenantId INT,
             @SystemPropertyHouseId INT,
             @AccountId INT,
+			@Periodid INT,
+			@Invoicestatus VARCHAR(20),
             @AccountNumber VARCHAR(50),
             @RentDueDay INT,
             @TicketLines NVARCHAR(MAX),
@@ -23,20 +25,21 @@ BEGIN
         DECLARE @SystemInvoiceIdData TABLE (InvoiceId BIGINT);
 
         -- Create the temporary table to store merged data
-        CREATE TABLE #MergedData (
-            SystemPropertyHouseRoomId INT,
-            SystemPropertyHouseTenantId INT,
-            SystemPropertyHouseId INT,
-            AccountId INT,
-            AccountNumber VARCHAR(50),
-            RentDueDay INT,
-            TicketLines NVARCHAR(MAX),
-            TotalAmount DECIMAL(18, 2)
+       CREATE TABLE #MergedData (
+            Systempropertyhouseroomid INT,
+            Systempropertyhousetenantid INT,
+            Systempropertyhouseid INT,
+            Accountid INT,
+            Accountnumber VARCHAR(50),
+            Rentdueday INT,
+			Periodid INT,
+			Invoicestatus VARCHAR(20),
+            Ticketlines NVARCHAR(MAX),
+            TotalAmount DECIMAL(18, 2),
         );
-
         -- Insert into #MergedData
-        INSERT INTO #MergedData (SystemPropertyHouseRoomId, SystemPropertyHouseTenantId, SystemPropertyHouseId, AccountId, AccountNumber, RentDueDay, TicketLines, TotalAmount)
-        SELECT i.SystemPropertyHouseRoomId, i.SystemPropertyHouseTenantId, room.SystemPropertyHouseId, account.AccountId, account.AccountNumber, PropertyHouse.RentDueDay,
+        INSERT INTO #MergedData (SystemPropertyHouseRoomId, SystemPropertyHouseTenantId, SystemPropertyHouseId, AccountId, AccountNumber, RentDueDay,Periodid,Invoicestatus, TicketLines, TotalAmount)
+        SELECT i.SystemPropertyHouseRoomId, i.SystemPropertyHouseTenantId, room.SystemPropertyHouseId, account.AccountId, account.AccountNumber, PropertyHouse.RentDueDay,(SELECT x.PeriodId FROM Systemperiods x WHERE x.Lastdateinperiod=(SELECT EOMONTH(GETDATE(), 0))) AS Periodid,'Newinvoice' AS Invoicestatus,
                (
                    -- Fetch non-recurring ticket lines as JSON, including house rent
                    SELECT deposit.SystemPropertyHouseDepositFeeId, housedeposit.HouseDepositFeeName AS Name,
@@ -89,12 +92,12 @@ BEGIN
 
         -- Cursor to loop over #MergedData
         DECLARE DataCursor CURSOR FOR 
-        SELECT SystemPropertyHouseRoomId, SystemPropertyHouseTenantId, SystemPropertyHouseId, AccountId, AccountNumber, RentDueDay, TicketLines, TotalAmount
+        SELECT SystemPropertyHouseRoomId, SystemPropertyHouseTenantId, SystemPropertyHouseId, AccountId, AccountNumber, RentDueDay,Periodid,Invoicestatus, TicketLines, TotalAmount
         FROM #MergedData;
 
         OPEN DataCursor;
 
-        FETCH NEXT FROM DataCursor INTO @SystemPropertyHouseRoomId, @SystemPropertyHouseTenantId, @SystemPropertyHouseId, @AccountId, @AccountNumber, @RentDueDay, @TicketLines, @TotalAmount;
+        FETCH NEXT FROM DataCursor INTO @SystemPropertyHouseRoomId, @SystemPropertyHouseTenantId, @SystemPropertyHouseId, @AccountId, @AccountNumber, @RentDueDay,@Periodid,@Invoicestatus, @TicketLines, @TotalAmount;
 
         WHILE @@FETCH_STATUS = 0
         BEGIN
@@ -131,21 +134,15 @@ BEGIN
             ) j;
 
             -- Insert into MonthlyRentInvoices
-            INSERT INTO MonthlyRentInvoices (InvoiceNo, PropertyHouseRoomId, Propertyhouseroomtenantid, FinanceTransactionId, DateCreated, DueDate, Amount, Discount, IsPaid, PaidAmount, Balance, IsSent, PaidStatus)
-            VALUES ('INV' + CONVERT(VARCHAR(7), NEXT VALUE FOR InvoiceTransactionCodeSequence), @SystemPropertyHouseRoomId, @SystemPropertyHouseTenantId, @FinanceTransactionId,
-                    GETDATE(), GETDATE(), @TotalAmount, 0, 0, 0, @TotalAmount, 0, 'NOT PAID');
+           INSERT INTO Monthlyrentinvoices(Invoiceno,Propertyhouseroomid,Propertyhouseroomtenantid,Financetransactionid,Periodid,Invoicestatus,Datecreated,Duedate,Amount,Discount,Ispaid,Paidamount,Balance,Issent,Paidstatus)
+		   VALUES ('INV' + CONVERT(VARCHAR(7), NEXT VALUE FOR InvoiceTransactionCodeSequence), @SystemPropertyHouseRoomId, @SystemPropertyHouseTenantId, @FinanceTransactionId,(SELECT x.PeriodId FROM Systemperiods x WHERE x.Lastdateinperiod=(SELECT EOMONTH(GETDATE(), 0))),@Invoicestatus,GETDATE(), GETDATE(), @TotalAmount, 0, 0, 0, @TotalAmount, 0, 'NOT PAID');
 
 			SET @InvoiceId = SCOPE_IDENTITY();
             -- Insert into MonthlyRentInvoiceItems
             INSERT INTO MonthlyRentInvoiceItems (InvoiceId, SystemPropertyHouseDepositFeeId, Units, Price, Discount)
             SELECT @InvoiceId, j.SystemPropertyHouseDepositFeeId, j.Units, j.Amount, j.Discount
             FROM OPENJSON(@TicketLines)
-            WITH (
-                SystemPropertyHouseDepositFeeId BIGINT '$.SystemPropertyHouseDepositFeeId',
-                Units DECIMAL(18, 2) '$.Units',
-                Amount DECIMAL(18, 2) '$.Amount',
-                Discount DECIMAL(18, 2) '$.Discount'
-            ) j;
+            WITH (SystemPropertyHouseDepositFeeId BIGINT '$.SystemPropertyHouseDepositFeeId', Units DECIMAL(18, 2) '$.Units',Amount DECIMAL(18, 2) '$.Amount',Discount DECIMAL(18, 2) '$.Discount') j;
 			 
             -- Fetch the next row from the cursor
             FETCH NEXT FROM DataCursor INTO @SystemPropertyHouseRoomId, @SystemPropertyHouseTenantId, @SystemPropertyHouseId, @AccountId, @AccountNumber, @RentDueDay, @TicketLines, @TotalAmount;
