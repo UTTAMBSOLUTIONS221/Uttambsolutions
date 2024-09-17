@@ -31,6 +31,8 @@
 
 
 
+
+
 GO
 CREATE TRIGGER [dbo].[trg_AfterInsert_Generatesystemtenantinvoicebillfornewtenant]
 ON [dbo].[Systempropertyhouseroomstenant]
@@ -127,8 +129,11 @@ BEGIN
             BEGIN
                 -- Update the existing invoice
 				-- Merge into Monthlyrentinvoices
-				SELECT @Invoiceid=Invoiceid FROM Monthlyrentinvoices WHERE Propertyhouseroomid = @RoomId AND Propertyhouseroomtenantid = @TenantId AND Periodid =(SELECT x.PeriodId FROM Systemperiods x WHERE x.Lastdateinperiod=(SELECT EOMONTH(GETDATE(), 0)))
+				SELECT @Invoiceid=Invoiceid,@FinanceTransactionId=Financetransactionid FROM Monthlyrentinvoices WHERE Propertyhouseroomid = @RoomId AND Propertyhouseroomtenantid = @TenantId AND Periodid =(SELECT x.PeriodId FROM Systemperiods x WHERE x.Lastdateinperiod=(SELECT EOMONTH(GETDATE(), 0)))
+				
 				UPDATE Monthlyrentinvoices SET Amount = @TotalAmount,Balance = @TotalAmount WHERE Propertyhouseroomtenantid=@TenantId AND Propertyhouseroomid=@RoomId AND Periodid= @Periodid
+
+				UPDATE GLTransactions SET Amount =@TotalAmount WHERE FinanceTransactionId=@FinanceTransactionId
 
                 -- Merge into Monthlyrentinvoiceitems
 				MERGE INTO Monthlyrentinvoiceitems AS target
