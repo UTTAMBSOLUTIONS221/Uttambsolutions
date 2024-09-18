@@ -2331,7 +2331,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             bool isValid = true;
 
-            if (TenantStaffData.Idnumber > 0) ;
+            if (TenantStaffData.Idnumber > 0)
             {
                 if (string.IsNullOrWhiteSpace(TenantStaffData.Firstname))
                 {
