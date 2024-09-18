@@ -1331,14 +1331,6 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<Genericmodel> Registerpropertyhouseroommeterdata(string Obj)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.PropertyRepository.Registerpropertyhouseroommeterdata(Obj);
-                return Resp;
-            });
-        }
         public Task<SystemPropertyHouseVacatingRequestModel> Gettenantvacatingrequestsdatabyownerid(long Ownerid, string Designation)
         {
             return Task.Run(() =>

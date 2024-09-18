@@ -2358,6 +2358,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 PropertyHouseRoomClosingMeterError = "Closing Meter cant be less than Opening required.";
                 isValid = false;
+                IsProcessing = false;
                 return;
             }
             else
