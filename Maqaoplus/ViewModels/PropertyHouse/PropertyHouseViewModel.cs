@@ -3055,62 +3055,62 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
                 return;
             }
-            if (string.IsNullOrWhiteSpace(TenantStaffData.Firstname))
-            {
-                SystemStaffFirstNameError = "Required.";
-                isValid = false;
-                return;
-            }
-            else
-            {
-                SystemStaffFirstNameError = null;
-            }
-            if (string.IsNullOrWhiteSpace(TenantStaffData.Lastname))
-            {
-                SystemStaffLastNameError = "Required.";
-                isValid = false;
-                return;
-            }
-            else
-            {
-                SystemStaffLastNameError = null;
-            }
-            if (string.IsNullOrWhiteSpace(TenantStaffData.Emailaddress))
-            {
-                SystemStaffEmailAddressError = "Required.";
-                isValid = false;
-                return;
-            }
-            else
-            {
-                SystemStaffEmailAddressError = null;
-            }
-            if (string.IsNullOrWhiteSpace(TenantStaffData.Phonenumber))
-            {
-                SystemStaffPhonenumberError = "Required.";
-                isValid = false;
-                return;
-            }
-            else
-            {
-                SystemStaffPhonenumberError = null;
-            }
-            if (TenantStaffData.Idnumber == 0)
-            {
-                SystemStaffIdnumberError = "Required.";
-                isValid = false;
-                return;
-            }
-            else if (TenantStaffData.Idnumber.ToString().Length < 8)
-            {
-                SystemStaffIdnumberError = "Id number must be from 8 characters.";
-                isValid = false;
-                return;
-            }
-            else
-            {
-                SystemStaffIdnumberError = null;
-            }
+            //if (string.IsNullOrWhiteSpace(TenantStaffData.Firstname))
+            //{
+            //    SystemStaffFirstNameError = "Required.";
+            //    isValid = false;
+            //    return;
+            //}
+            //else
+            //{
+            //    SystemStaffFirstNameError = null;
+            //}
+            //if (string.IsNullOrWhiteSpace(TenantStaffData.Lastname))
+            //{
+            //    SystemStaffLastNameError = "Required.";
+            //    isValid = false;
+            //    return;
+            //}
+            //else
+            //{
+            //    SystemStaffLastNameError = null;
+            //}
+            //if (string.IsNullOrWhiteSpace(TenantStaffData.Emailaddress))
+            //{
+            //    SystemStaffEmailAddressError = "Required.";
+            //    isValid = false;
+            //    return;
+            //}
+            //else
+            //{
+            //    SystemStaffEmailAddressError = null;
+            //}
+            //if (string.IsNullOrWhiteSpace(TenantStaffData.Phonenumber))
+            //{
+            //    SystemStaffPhonenumberError = "Required.";
+            //    isValid = false;
+            //    return;
+            //}
+            //else
+            //{
+            //    SystemStaffPhonenumberError = null;
+            //}
+            //if (TenantStaffData.Idnumber == 0)
+            //{
+            //    SystemStaffIdnumberError = "Required.";
+            //    isValid = false;
+            //    return;
+            //}
+            //else if (TenantStaffData.Idnumber.ToString().Length < 8)
+            //{
+            //    SystemStaffIdnumberError = "Id number must be from 8 characters.";
+            //    isValid = false;
+            //    return;
+            //}
+            //else
+            //{
+            //    SystemStaffIdnumberError = null;
+            //}
             if (HouseroomData == null)
             {
                 IsProcessing = false;
