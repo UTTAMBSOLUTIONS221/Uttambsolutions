@@ -266,15 +266,17 @@
                 <StackLayout IsVisible="{Binding IsStep3HouseRoomVisible}" Padding="8" Spacing="8">
                     <!-- Section Header for Tenant Details -->
                     <Label Text="{Binding Step3HouseRoomLabel}" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center" />
-
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">
-                        <!-- Search Input -->
-                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
-                            <Entry x:Name="SearchIdEntry" Placeholder="Enter ID number to search" Keyboard="Numeric" PlaceholderColor="#0a506c" TextColor="#0a506c" FontSize="18" Text="{Binding SearchId, Mode=TwoWay}" ClearButtonVisibility="WhileEditing" WidthRequest="230" HorizontalOptions="Fill" />
+                    <Grid Padding="0" ColumnSpacing="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45" Grid.Row="1" Grid.Column="0">
+                            <Entry x:Name="SearchIdEntry" Placeholder="Enter ID number to search" Keyboard="Numeric" PlaceholderColor="#0a506c" TextColor="#0a506c" FontSize="18" Text="{Binding SearchId, Mode=TwoWay}" ClearButtonVisibility="WhileEditing" HorizontalOptions="Fill" />
                         </Frame>
                         <!-- Search Button -->
-                        <Button Text="Search" Command="{Binding SearchTenantsCommand}" FontSize="18" WidthRequest="100" HorizontalOptions="End" />
-                    </StackLayout>
+                        <Button Text="Search" Command="{Binding SearchTenantsCommand}" FontSize="18" HorizontalOptions="End"  HeightRequest="45" Grid.Row="1" Grid.Column="1" />
+                    </Grid>
 
 
                     <ScrollView Grid.Row="0">
