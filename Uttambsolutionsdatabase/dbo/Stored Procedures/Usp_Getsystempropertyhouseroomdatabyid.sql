@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[Usp_Getsystempropertyhouseroomdatabyid]
+﻿CREATE PROCEDURE [dbo].[Usp_Getsystempropertyhouseroomdatabyid]
     @Houseroomid BIGINT,
     @Systempropertyhouseroomdata VARCHAR(MAX) OUTPUT
 AS
@@ -13,55 +12,14 @@ BEGIN
 
         SET @Systempropertyhouseroomdata = (
             SELECT(SELECT 
-                CASE 
-                    WHEN EXISTS (SELECT 1 FROM Systempropertyhouseroommeters WHERE Systempropertyhouseroomid = @Houseroomid) 
-                    THEN 1 
-                    ELSE 0 
-                END AS Hasprevious,
-                spr.Systempropertyhouseroomid,
-                spr.Systempropertyhouseid,
-                sph.Systemhousesizeid AS Systempropertyhousesizeid,
-                spr.Systempropertyhousesizename,
-                spr.Systempropertyhousesizerent,
-                spr.Systempropertyhousesizedeposit,
-                spr.Isvacant,
-                spr.Isunderrenovation,
-                spr.Isshop,
-                spr.Isgroundfloor,
-                spr.Hasbalcony,
-                spr.Forcaretaker,
-                spr.Kitchentypeid,
-                ISNULL(sprm.Systempropertyhousemeterid,0) AS Systempropertyhousemeterid,
-                ISNULL(sprm.Systempropertyhouseroommeternumber,'Meter' +spr.Systempropertyhousesizename) AS Systempropertyhouseroommeternumber,
-                ISNULL((SELECT TOP 1 Closingmeter 
-                        FROM Systempropertyhouseroommeters 
-                        WHERE Systempropertyhouseroomid = spr.Systempropertyhouseroomid 
-                        ORDER BY Datecreated DESC), 0.00) AS Openingmeter,
-                0 AS Movedmeter,
-                0 AS Closingmeter,
-                ISNULL(t.Systempropertyhousetenantid, 0) AS Tenantid,
-                ISNULL(t.Roomoccupant, 0) AS Roomoccupant,
-                ISNULL(t.Roomoccupantdetail, '') AS Roomoccupantdetail,
-                shp.Waterunitprice,
-                shp.Hashousewatermeter,
-                ISNULL(sprm.Createdby,0) AS Createdby,
-                ISNULL(sprm.Datecreated,GETDATE()) AS Datecreated,
-                st.Firstname + ' ' + st.Lastname AS Fullname,
-                st.Phonenumber,
-                st.Emailaddress,
-                CASE 
-                    WHEN st.Genderid = 0 THEN 'Not Set' 
-                    WHEN st.Genderid = 1 THEN 'Male' 
-                    WHEN st.Genderid = 2 THEN 'Female' 
-                    ELSE 'Prefer not to Say' 
-                END AS Gender,
-                CASE 
-                    WHEN st.Maritalstatusid = 0 THEN 'Not Set' 
-                    WHEN st.Maritalstatusid = 1 THEN 'Single' 
-                    WHEN st.Maritalstatusid = 2 THEN 'Married' 
-                    WHEN st.Maritalstatusid = 3 THEN 'Divorced' 
-                    ELSE 'Prefer not to Say' 
-                END AS Maritalstatus,
+                CASE WHEN EXISTS (SELECT 1 FROM Systempropertyhouseroommeters WHERE Systempropertyhouseroomid = spr.Systempropertyhouseroomid) THEN 1 ELSE 0 END AS Hasprevious,
+                spr.Systempropertyhouseroomid,spr.Systempropertyhouseid,sph.Systemhousesizeid AS Systempropertyhousesizeid,spr.Systempropertyhousesizename,spr.Systempropertyhousesizerent,
+                spr.Systempropertyhousesizedeposit,spr.Isvacant,spr.Isunderrenovation,spr.Isshop,spr.Isgroundfloor,spr.Hasbalcony,spr.Forcaretaker,spr.Kitchentypeid,ISNULL((SELECT TOP 1 Systempropertyhousemeterid FROM Systempropertyhouseroommeters WHERE Systempropertyhouseroomid = spr.Systempropertyhouseroomid), 0) AS Systempropertyhousemeterid,
+                ISNULL((SELECT TOP 1 Systempropertyhouseroommeternumber FROM Systempropertyhouseroommeters WHERE Systempropertyhouseroomid = spr.Systempropertyhouseroomid), 'Meter' +spr.Systempropertyhousesizename) AS Systempropertyhouseroommeternumber,ISNULL((SELECT TOP 1 Closingmeter FROM Systempropertyhouseroommeters WHERE Systempropertyhouseroomid = spr.Systempropertyhouseroomid ORDER BY Datecreated DESC), 0.00) AS Openingmeter,
+				0 AS Movedmeter,0 AS Closingmeter,ISNULL(t.Systempropertyhousetenantid, 0) AS Tenantid,ISNULL(t.Roomoccupant, 0) AS Roomoccupant,ISNULL(t.Roomoccupantdetail, '') AS Roomoccupantdetail,shp.Waterunitprice,shp.Hashousewatermeter,ISNULL((SELECT TOP 1 Createdby FROM Systempropertyhouseroommeters WHERE Systempropertyhouseroomid = spr.Systempropertyhouseroomid), 0) AS Createdby,ISNULL((SELECT TOP 1 Datecreated FROM Systempropertyhouseroommeters WHERE Systempropertyhouseroomid = spr.Systempropertyhouseroomid), GETDATE()) AS Datecreated,
+				st.Firstname + ' ' + st.Lastname AS Fullname,st.Phonenumber,st.Emailaddress,
+                CASE WHEN st.Genderid = 0 THEN 'Not Set' WHEN st.Genderid = 1 THEN 'Male' WHEN st.Genderid = 2 THEN 'Female' ELSE 'Prefer not to Say' END AS Gender,
+                CASE WHEN st.Maritalstatusid = 0 THEN 'Not Set' WHEN st.Maritalstatusid = 1 THEN 'Single' WHEN st.Maritalstatusid = 2 THEN 'Married' WHEN st.Maritalstatusid = 3 THEN 'Divorced' ELSE 'Prefer not to Say' END AS Maritalstatus,
                 ISNULL(st.Loginstatus,0) AS Loginstatus,
                 ISNULL(st.Parentid,0) AS Parentid,
                 st.Userprofileimageurl,
@@ -73,66 +31,26 @@ BEGIN
                 0 AS Walletbalance,
                 ISNULL(st.Datemodified,GETDATE()) AS Datemodified,
                 (
-                    SELECT 
-                        sprm.Systempropertyhousemeterid,
-                        sprm.Systempropertyhouseroomid,
-                        sprm.Systempropertyhouseroommeternumber,
-                        sprm.Openingmeter,
-                        sprm.Movedmeter,
-                        sprm.Closingmeter,
-                        sprm.Consumedamount,
-                        sprm.Createdby,
-                        sprm.Datecreated
-                    FROM Systempropertyhouseroommeters sprm
-                    WHERE spr.Systempropertyhouseroomid = sprm.Systempropertyhouseroomid
+                    SELECT sprm.Systempropertyhousemeterid,sprm.Systempropertyhouseroomid,sprm.Systempropertyhouseroommeternumber,sprm.Openingmeter,sprm.Movedmeter,sprm.Closingmeter,sprm.Consumedamount,sprm.Createdby,sprm.Datecreated FROM Systempropertyhouseroommeters sprm WHERE sprm.Systempropertyhouseroomid= spr.Systempropertyhouseroomid
                     FOR JSON PATH
                 ) AS Meterhistorydata,
-				(CASE 
-                    WHEN EXISTS (SELECT 1 FROM Systempropertyhousechecklists WHERE Propertyhouseroomid = spr.Systempropertyhouseroomid)
+				(CASE WHEN EXISTS(SELECT 1 FROM Systempropertyhousechecklists ckl WHERE ckl.Propertyhouseroomid = spr.Systempropertyhouseroomid)
                     THEN 
-                    (SELECT ISNULL(CQL.Propertychecklistid, 0) AS Propertychecklistid,
-                            ISNULL(CQL.Propertyhouseroomid, 0) AS Propertyhouseroomid,
-                            ISNULL(CQL.Fixturestatusid, 0) AS Fixturestatusid,
-                            ISNULL(CQL.Fixtureunits, 0) AS Fixtureunits,
-                            ISNULL(STS.Fixturestatus, 'Not Set') AS Fixturestatus,
-                            ISNULL(CQL.Createdby, shp.Propertyhouseposter) AS Createdby,
-                            ISNULL(CQL.Datecreated, GETDATE()) AS Datecreated,
-                            FIX.Fixtureid,
-                            FIX.Fixturetype,
-                            FIX.Descriptions,
-                            FIX.Category
-                    FROM Systemfixtures FIX
-                    LEFT JOIN Systempropertyhousechecklists CQL ON CQL.Fixtureid = FIX.Fixtureid
-                    LEFT JOIN Systemfixturestatus STS ON CQL.Fixturestatusid = STS.Fixturestatusid
+                    (SELECT ISNULL(CQL.Propertychecklistid, 0) AS Propertychecklistid,ISNULL(CQL.Propertyhouseroomid, 0) AS Propertyhouseroomid,ISNULL(CQL.Fixturestatusid, 0) AS Fixturestatusid,ISNULL(CQL.Fixtureunits, 0) AS Fixtureunits,ISNULL(STS.Fixturestatus, 'Not Set') AS Fixturestatus,ISNULL(CQL.Createdby, shp.Propertyhouseposter) AS Createdby,ISNULL(CQL.Datecreated, GETDATE()) AS Datecreated,FIX.Fixtureid,FIX.Fixturetype,FIX.Descriptions,FIX.Category
+                    FROM Systempropertyhousechecklists CQL
+					INNER JOIN Systemfixtures FIX ON FIX.Fixtureid = CQL.Fixtureid
+                    LEFT JOIN Systemfixturestatus STS ON STS.Fixturestatusid = CQL.Fixturestatusid
                     WHERE CQL.Propertyhouseroomid = spr.Systempropertyhouseroomid
                     FOR JSON PATH
                     )
                     ELSE 
-                    (SELECT 0 AS Propertychecklistid,
-                            0 AS Fixturestatusid,
-                            0 AS Fixtureunits,
-                            '' AS Fixturestatus,
-                            FIX.Fixtureid,
-                            FIX.Fixturetype,
-                            FIX.Descriptions,
-                            FIX.Category
-                    FROM Systemfixtures FIX
-                    FOR JSON PATH
+                    (SELECT 0 AS Propertychecklistid,0 AS Fixturestatusid,0 AS Fixtureunits,'' AS Fixturestatus,FIX.Fixtureid,FIX.Fixturetype, FIX.Descriptions,FIX.Category FROM Systemfixtures FIX 
+					FOR JSON PATH
                     )
                 END) AS Roomfixtures,
                 (
-                    SELECT 
-                        sc.Countyname AS Countyname,
-                        ss.Subcountyname,
-                        ssw.Subcountywardname,
-                        shp.Streetorlandmark,
-                        shp.Propertyhousename,
-                        spo.Firstname + ' ' + spo.Lastname AS Propertyownername,
-                        sh.Systemhousesizename + '-' + spr.Systempropertyhousesizename AS Systempropertyhousesizename,
-                        0 AS Outstandingbalance,
-                        cb.Firstname + ' ' + cb.Lastname AS Createdby,
-                        mb.Firstname + ' ' + mb.Lastname AS Modifiedby,
-                        sprt.Datemodified
+                    SELECT TOP 4 sc.Countyname AS Countyname,ss.Subcountyname,ssw.Subcountywardname,shp.Streetorlandmark,shp.Propertyhousename,spo.Firstname + ' ' + spo.Lastname AS Propertyownername,
+					sh.Systemhousesizename + '-' + spr.Systempropertyhousesizename AS Systempropertyhousesizename,0 AS Outstandingbalance,cb.Firstname + ' ' + cb.Lastname AS Createdby, mb.Firstname + ' ' + mb.Lastname AS Modifiedby, sprt.Datemodified
                     FROM Systempropertyhouseroomstenant sprt
                     INNER JOIN Systempropertyhouserooms spr ON spr.Systempropertyhouseroomid = sprt.Systempropertyhouseroomid
                     INNER JOIN Systempropertyhousesizes sph ON spr.Systempropertyhousesizeid = sph.Systempropertyhousesizeid
@@ -155,7 +73,6 @@ BEGIN
             LEFT JOIN Systempropertyhouseroomstenant t ON spr.Systempropertyhouseroomid = t.Systempropertyhouseroomid
             LEFT JOIN Systemstaffs st ON t.Systempropertyhousetenantid = st.Userid
             LEFT JOIN Systemstaffsaccount sa ON st.Userid = sa.Userid
-            LEFT JOIN Systempropertyhouseroommeters sprm ON spr.Systempropertyhouseroomid = sprm.Systempropertyhouseroomid
             WHERE spr.Systempropertyhouseroomid = @Houseroomid
             FOR JSON PATH, INCLUDE_NULL_VALUES, WITHOUT_ARRAY_WRAPPER
 			) AS Data

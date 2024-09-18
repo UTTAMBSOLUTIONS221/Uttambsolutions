@@ -33,10 +33,12 @@
 
 
 
+
+
 GO
 CREATE TRIGGER [dbo].[trg_AfterInsert_Generatesystemtenantinvoicebillfornewtenant]
 ON [dbo].[Systempropertyhouseroomstenant]
-AFTER INSERT, UPDATE
+AFTER INSERT
 AS
 BEGIN
     DECLARE @RespStat INT = 0,
@@ -123,34 +125,7 @@ BEGIN
 		INNER JOIN Systemstaffsaccount account ON i.Systempropertyhousetenantid = account.Userid;
         -- Loop through the data and insert or update records in Monthlyrentinvoices and Monthlyrentinvoiceitems
         DECLARE @RoomId INT, @TenantId INT, @TotalAmount DECIMAL(18,2), @RentDueDay INT,@Periodid INT, @Ticketlines NVARCHAR(MAX), @AccountId INT,@Invoicestatus VARCHAR(20);
-        SELECT @RoomId=Systempropertyhouseroomid, @TenantId=Systempropertyhousetenantid, @TotalAmount=TotalAmount, @RentDueDay=Rentdueday,@Periodid=Periodid, @Ticketlines=Ticketlines, @AccountId=Accountid,@Invoicestatus=Invoicestatus
-        FROM #MergedData;
-		IF EXISTS (SELECT 1 FROM Monthlyrentinvoices WHERE Propertyhouseroomid = @RoomId AND Propertyhouseroomtenantid = @TenantId AND Ispaid=0 AND Invoicestatus='Newinvoice' AND Periodid =(SELECT x.PeriodId FROM Systemperiods x WHERE x.Lastdateinperiod=(SELECT EOMONTH(GETDATE(), 0))))
-            BEGIN
-                -- Update the existing invoice
-				-- Merge into Monthlyrentinvoices
-				SELECT @Invoiceid=Invoiceid,@FinanceTransactionId=Financetransactionid FROM Monthlyrentinvoices WHERE Propertyhouseroomid = @RoomId AND Propertyhouseroomtenantid = @TenantId AND Periodid =(SELECT x.PeriodId FROM Systemperiods x WHERE x.Lastdateinperiod=(SELECT EOMONTH(GETDATE(), 0)))
-				
-				UPDATE Monthlyrentinvoices SET Amount = @TotalAmount,Balance = @TotalAmount WHERE Propertyhouseroomtenantid=@TenantId AND Propertyhouseroomid=@RoomId AND Periodid= @Periodid
-
-				UPDATE GLTransactions SET Amount =@TotalAmount WHERE FinanceTransactionId=@FinanceTransactionId
-
-                -- Merge into Monthlyrentinvoiceitems
-				MERGE INTO Monthlyrentinvoiceitems AS target
-				USING (
-				SELECT @Invoiceid AS Invoiceid,JSONData.Systempropertyhousedepositfeeid,JSONData.Units,JSONData.Amount,JSONData.Discount FROM #MergedData source CROSS APPLY OPENJSON(source.Ticketlines)
-				WITH (Systempropertyhousedepositfeeid BIGINT '$.Systempropertyhousedepositfeeid',Units DECIMAL(18, 2) '$.Units',Amount DECIMAL(18, 2) '$.Amount', Discount DECIMAL(18, 2) '$.Discount'
-				) AS JSONData
-				) AS source
-				ON target.Invoiceid = source.Invoiceid
-				AND target.Systempropertyhousedepositfeeid = source.Systempropertyhousedepositfeeid
-				WHEN MATCHED THEN
-				UPDATE SET target.Units = source.Units,target.Price = source.Amount,target.Discount = source.Discount
-				WHEN NOT MATCHED THEN
-				INSERT (Invoiceid, Systempropertyhousedepositfeeid, Units, Price, Discount)
-				VALUES (source.Invoiceid, source.Systempropertyhousedepositfeeid, source.Units, source.Amount, source.Discount);
-		    END
-            ELSE
+        SELECT @RoomId=Systempropertyhouseroomid, @TenantId=Systempropertyhousetenantid, @TotalAmount=TotalAmount, @RentDueDay=Rentdueday,@Periodid=Periodid, @Ticketlines=Ticketlines, @AccountId=Accountid,@Invoicestatus=Invoicestatus FROM #MergedData;
             BEGIN
 			
                 INSERT INTO FinanceTransactions(Tenantid,TransactionCode,FinanceTransactionTypeId,FinanceTransactionSubTypeId,ParentId,Saledescription,IsOnlineSale,Createdby,ActualDate,DateCreated)

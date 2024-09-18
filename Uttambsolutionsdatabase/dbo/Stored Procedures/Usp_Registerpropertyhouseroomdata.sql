@@ -176,16 +176,16 @@ BEGIN
 			BEGIN
 			MERGE INTO Systempropertyhouseroommeters AS Target
 			USING (
-			SELECT JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid') AS Systempropertyhouseroomid,JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroommeternumber') AS Systempropertyhouseroommeternumber,(SELECT x.PeriodId FROM Systemperiods x WHERE x.Lastdateinperiod=(SELECT EOMONTH(GETDATE(), 0))) AS Periodid,
+			SELECT JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroomid') AS Systempropertyhouseroomid,JSON_VALUE(@JsonObjectdata, '$.Systempropertyhouseroommeternumber') AS Systempropertyhouseroommeternumber,(SELECT x.PeriodId FROM Systemperiods x WHERE x.Lastdateinperiod=(SELECT EOMONTH(GETDATE(), 0))) AS Periodid,'Openmeterreading' AS Meterreadingstatus,
 			TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Openingmeter') AS FLOAT) AS Openingmeter,TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Movedmeter') AS FLOAT) AS Movedmeter,TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Closingmeter') AS FLOAT) AS Closingmeter,
 			TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Consumedamount') AS FLOAT) AS Consumedamount,JSON_VALUE(@JsonObjectdata, '$.Createdby') AS Createdby,TRY_CAST(JSON_VALUE(@JsonObjectdata, '$.Datecreated') AS DATETIME2) AS Datecreated
 			) AS Source
-			ON Target.Systempropertyhouseroomid = Source.Systempropertyhouseroomid AND Target.Periodid = Source.Periodid
+			ON Target.Systempropertyhouseroomid = Source.Systempropertyhouseroomid AND Target.Periodid = Source.Periodid AND Source.Meterreadingstatus='Openmeterreading'
 			WHEN MATCHED THEN
 			UPDATE SET Target.Openingmeter = Source.Openingmeter,Target.Movedmeter = Source.Movedmeter,Target.Closingmeter = Source.Closingmeter,Target.Consumedamount = Source.Consumedamount,Target.Createdby = Source.Createdby,Target.Datecreated = Source.Datecreated
 			WHEN NOT MATCHED BY TARGET THEN
-			INSERT (Systempropertyhouseroomid, Systempropertyhouseroommeternumber,Periodid, Openingmeter, Movedmeter, Closingmeter, Consumedamount, Createdby, Datecreated)
-			VALUES (Source.Systempropertyhouseroomid, Source.Systempropertyhouseroommeternumber,(SELECT x.PeriodId FROM Systemperiods x WHERE x.Lastdateinperiod=(SELECT EOMONTH(GETDATE(), 0))), Source.Openingmeter, Source.Movedmeter, Source.Closingmeter, Source.Consumedamount, Source.Createdby, Source.Datecreated);
+			INSERT (Systempropertyhouseroomid, Systempropertyhouseroommeternumber,Periodid,Meterreadingstatus, Openingmeter, Movedmeter, Closingmeter, Consumedamount, Createdby, Datecreated)
+			VALUES (Source.Systempropertyhouseroomid, Source.Systempropertyhouseroommeternumber,Source.Periodid,Source.Meterreadingstatus, Source.Openingmeter, Source.Movedmeter, Source.Closingmeter, Source.Consumedamount, Source.Createdby, Source.Datecreated);
 
 			END
 		Set @RespMsg ='Success'

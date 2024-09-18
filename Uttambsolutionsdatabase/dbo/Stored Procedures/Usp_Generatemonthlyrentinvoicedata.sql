@@ -72,7 +72,7 @@ BEGIN
                    FROM (
                        SELECT 
                            CASE 
-                               WHEN housedeposit.HouseDepositFeeName IN ('Water Deposit', 'Electricity Deposit', 'Bin Fee', 'Security Fee') THEN deposit.SystemPropertyHouseDepositFeeAmount 
+                               WHEN housedeposit.HouseDepositFeeName IN ('Bin Fee', 'Security Fee') THEN deposit.SystemPropertyHouseDepositFeeAmount 
                                WHEN housedeposit.HouseDepositFeeName = 'House Rent' THEN room.SystemPropertyHouseSizeRent 
                                ELSE 0 
                            END AS Amount
@@ -106,7 +106,7 @@ BEGIN
             VALUES (@SystemPropertyHouseTenantId, 'TXN' + CONVERT(VARCHAR(70), NEXT VALUE FOR TransactionCodeSequence),
                     (SELECT TOP 1 FinanceTransactionTypeId FROM FinanceTransactionTypes WHERE FinanceTransactionType='Monthly Rent'),
                     (SELECT TOP 1 FinanceTransactionSubTypeId FROM FinanceTransactionSubTypes WHERE FinanceTransactionSubType='Bill Generattion'),
-                    0, 'New Tenant House Rent, Deposits and Other Deposit', 1, 0, GETDATE(), GETDATE());
+                    0, 'Subsequent Tenant House Rent,', 1, 0, GETDATE(), GETDATE());
 					SET @FinanceTransactionId = SCOPE_IDENTITY();
 
             -- Insert into GLTransactions

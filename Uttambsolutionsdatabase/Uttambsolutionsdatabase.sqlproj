@@ -193,7 +193,6 @@
     <Build Include="dbo\Stored Procedures\Usp_Registerarticlesandsourcesdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Registerorganizationshopproductdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Registerpropertyhouseroomdata.sql" />
-    <Build Include="dbo\Stored Procedures\Usp_Registerpropertyhouseroommeterdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Registerpropertyhouseroomrentpaymentrequestdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Registerpropertyhousevacaterequestdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Registersystemblogcategorydata.sql" />
@@ -289,5 +288,6 @@
     <Build Include="dbo\Stored Procedures\Usp_Getsystempropertyimagebyhouseid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getalltenantmonthlyinvoicepaymentdata.sql" />
     <Build Include="dbo\Tables\SystemPeriods.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Generatemonthlysusequentinvoiceaftermeter.sql" />
   </ItemGroup>
 </Project>
