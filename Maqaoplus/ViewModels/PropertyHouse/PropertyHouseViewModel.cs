@@ -2331,9 +2331,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             bool isValid = true;
 
-            if (HouseroomData.Idnumber > 0) ;
+            if (TenantStaffData.Idnumber > 0) ;
             {
-                if (string.IsNullOrWhiteSpace(HouseroomData.Firstname))
+                if (string.IsNullOrWhiteSpace(TenantStaffData.Firstname))
                 {
                     SystemStaffFirstNameError = "Required.";
                     isValid = false;
@@ -2343,7 +2343,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 {
                     SystemStaffFirstNameError = null;
                 }
-                if (string.IsNullOrWhiteSpace(HouseroomData.Lastname))
+                if (string.IsNullOrWhiteSpace(TenantStaffData.Lastname))
                 {
                     SystemStaffLastNameError = "Required.";
                     isValid = false;
@@ -2353,7 +2353,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 {
                     SystemStaffLastNameError = null;
                 }
-                if (string.IsNullOrWhiteSpace(HouseroomData.Emailaddress))
+                if (string.IsNullOrWhiteSpace(TenantStaffData.Emailaddress))
                 {
                     SystemStaffEmailAddressError = "Required.";
                     isValid = false;
@@ -2363,7 +2363,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 {
                     SystemStaffEmailAddressError = null;
                 }
-                if (string.IsNullOrWhiteSpace(HouseroomData.Phonenumber))
+                if (string.IsNullOrWhiteSpace(TenantStaffData.Phonenumber))
                 {
                     SystemStaffPhonenumberError = "Required.";
                     isValid = false;
@@ -2373,13 +2373,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 {
                     SystemStaffPhonenumberError = null;
                 }
-                if (HouseroomData.Idnumber == 0)
+                if (TenantStaffData.Idnumber == 0)
                 {
                     SystemStaffIdnumberError = "Required.";
                     isValid = false;
                     return isValid;
                 }
-                else if (HouseroomData.Idnumber.ToString().Length < 8)
+                else if (TenantStaffData.Idnumber.ToString().Length < 8)
                 {
                     SystemStaffIdnumberError = "Id number must be from 8 characters.";
                     isValid = false;
@@ -2625,13 +2625,6 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response != null && response.Data != null)
                 {
                     TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
-                    HouseroomData.Tenantid = TenantStaffData.Userid;
-                    HouseroomData.Firstname = TenantStaffData.Firstname;
-                    HouseroomData.Lastname = TenantStaffData.Lastname;
-                    HouseroomData.Emailaddress = TenantStaffData.Emailaddress;
-                    HouseroomData.Phonenumber = TenantStaffData.Phonenumber;
-                    HouseroomData.Idnumber = TenantStaffData.Idnumber;
-                    HouseroomData.Walletbalance = TenantStaffData.Walletbalance;
                 }
                 else
                 {
@@ -3132,6 +3125,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             }
             try
             {
+                HouseroomData.Tenantid = TenantStaffData.Userid;
+                HouseroomData.Firstname = TenantStaffData.Firstname;
+                HouseroomData.Lastname = TenantStaffData.Lastname;
+                HouseroomData.Emailaddress = TenantStaffData.Emailaddress;
+                HouseroomData.Phonenumber = TenantStaffData.Phonenumber;
+                HouseroomData.Idnumber = TenantStaffData.Idnumber;
+                HouseroomData.Walletbalance = TenantStaffData.Walletbalance;
                 HouseroomData.Designation = "Tenant";
                 HouseroomData.Passwords = "Wn+vmyniwUM0FaEZa4M4OVV50t6oy8FC8en194kJdAI=";
                 HouseroomData.Passharsh = "XUIMWLJQOUXS";
