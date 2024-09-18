@@ -2145,6 +2145,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 }
                 else if (_isStep3HouseRoomVisible)
                 {
+                    if (!ValidateHouseRoomStep3())
+                    {
+                        IsProcessing = false;
+                        return;
+                    }
                     _isStep3HouseRoomVisible = false;
                     _isStep4HouseRoomVisible = true;
                 }
@@ -2317,6 +2322,72 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 else
                 {
                     PropertyHouseRoomClosingMeterError = null;
+                }
+            }
+
+            return isValid;
+        }
+        private bool ValidateHouseRoomStep3()
+        {
+            bool isValid = true;
+
+            if (HouseroomData.Idnumber > 0) ;
+            {
+                if (string.IsNullOrWhiteSpace(HouseroomData.Firstname))
+                {
+                    SystemStaffFirstNameError = "Required.";
+                    isValid = false;
+                    return isValid;
+                }
+                else
+                {
+                    SystemStaffFirstNameError = null;
+                }
+                if (string.IsNullOrWhiteSpace(HouseroomData.Lastname))
+                {
+                    SystemStaffLastNameError = "Required.";
+                    isValid = false;
+                    return isValid;
+                }
+                else
+                {
+                    SystemStaffLastNameError = null;
+                }
+                if (string.IsNullOrWhiteSpace(HouseroomData.Emailaddress))
+                {
+                    SystemStaffEmailAddressError = "Required.";
+                    isValid = false;
+                    return isValid;
+                }
+                else
+                {
+                    SystemStaffEmailAddressError = null;
+                }
+                if (string.IsNullOrWhiteSpace(HouseroomData.Phonenumber))
+                {
+                    SystemStaffPhonenumberError = "Required.";
+                    isValid = false;
+                    return isValid;
+                }
+                else
+                {
+                    SystemStaffPhonenumberError = null;
+                }
+                if (HouseroomData.Idnumber == 0)
+                {
+                    SystemStaffIdnumberError = "Required.";
+                    isValid = false;
+                    return isValid;
+                }
+                else if (HouseroomData.Idnumber.ToString().Length < 8)
+                {
+                    SystemStaffIdnumberError = "Id number must be from 8 characters.";
+                    isValid = false;
+                    return isValid;
+                }
+                else
+                {
+                    SystemStaffIdnumberError = null;
                 }
             }
 
@@ -2554,6 +2625,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 if (response != null && response.Data != null)
                 {
                     TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
+                    HouseroomData.Tenantid = TenantStaffData.Userid;
+                    HouseroomData.Firstname = TenantStaffData.Firstname;
+                    HouseroomData.Lastname = TenantStaffData.Lastname;
+                    HouseroomData.Emailaddress = TenantStaffData.Emailaddress;
+                    HouseroomData.Phonenumber = TenantStaffData.Phonenumber;
+                    HouseroomData.Idnumber = TenantStaffData.Idnumber;
+                    HouseroomData.Walletbalance = TenantStaffData.Walletbalance;
                 }
                 else
                 {
@@ -2570,6 +2648,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         Tenantroomhistory = null
                     };
                 }
+                SearchId = string.Empty;
             }
             catch (Exception ex)
             {
@@ -3041,72 +3120,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             HouseroomData.Walletbalance = 0;
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
-
         private async Task SaveHouseRoomDetailsAsync()
         {
             bool isValid = true;
             IsProcessing = true;
-            if (!ValidateHouseRoomStep1())
-            {
-                IsProcessing = false;
-                return;
-            }
-            //if (string.IsNullOrWhiteSpace(TenantStaffData.Firstname))
-            //{
-            //    SystemStaffFirstNameError = "Required.";
-            //    isValid = false;
-            //    return;
-            //}
-            //else
-            //{
-            //    SystemStaffFirstNameError = null;
-            //}
-            //if (string.IsNullOrWhiteSpace(TenantStaffData.Lastname))
-            //{
-            //    SystemStaffLastNameError = "Required.";
-            //    isValid = false;
-            //    return;
-            //}
-            //else
-            //{
-            //    SystemStaffLastNameError = null;
-            //}
-            //if (string.IsNullOrWhiteSpace(TenantStaffData.Emailaddress))
-            //{
-            //    SystemStaffEmailAddressError = "Required.";
-            //    isValid = false;
-            //    return;
-            //}
-            //else
-            //{
-            //    SystemStaffEmailAddressError = null;
-            //}
-            //if (string.IsNullOrWhiteSpace(TenantStaffData.Phonenumber))
-            //{
-            //    SystemStaffPhonenumberError = "Required.";
-            //    isValid = false;
-            //    return;
-            //}
-            //else
-            //{
-            //    SystemStaffPhonenumberError = null;
-            //}
-            //if (TenantStaffData.Idnumber == 0)
-            //{
-            //    SystemStaffIdnumberError = "Required.";
-            //    isValid = false;
-            //    return;
-            //}
-            //else if (TenantStaffData.Idnumber.ToString().Length < 8)
-            //{
-            //    SystemStaffIdnumberError = "Id number must be from 8 characters.";
-            //    isValid = false;
-            //    return;
-            //}
-            //else
-            //{
-            //    SystemStaffIdnumberError = null;
-            //}
+
             if (HouseroomData == null)
             {
                 IsProcessing = false;
