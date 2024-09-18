@@ -2277,24 +2277,24 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 PropertyHouseSizeError = null;
             }
-            if (HouseroomData?.Roomoccupant == 0)
-            {
-                PropertyHouseRoomoccupantError = "Required.";
-                isValid = false;
-            }
-            else
-            {
-                PropertyHouseRoomoccupantError = null;
-            }
-            if (string.IsNullOrWhiteSpace(HouseroomData?.Roomoccupantdetail))
-            {
-                PropertyHouseRoomoccupantdetailError = "Required.";
-                isValid = false;
-            }
-            else
-            {
-                PropertyHouseRoomoccupantdetailError = null;
-            }
+            //if (HouseroomData?.Roomoccupant == 0)
+            //{
+            //    PropertyHouseRoomoccupantError = "Required.";
+            //    isValid = false;
+            //}
+            //else
+            //{
+            //    PropertyHouseRoomoccupantError = null;
+            //}
+            //if (string.IsNullOrWhiteSpace(HouseroomData?.Roomoccupantdetail))
+            //{
+            //    PropertyHouseRoomoccupantdetailError = "Required.";
+            //    isValid = false;
+            //}
+            //else
+            //{
+            //    PropertyHouseRoomoccupantdetailError = null;
+            //}
 
             // Update overall IsValid property
             IsProcessing = isValid;
