@@ -132,7 +132,7 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <!-- Dynamic Data -->
-                                                <Label Text="{Binding Propertyhousename}" FontSize="14" TextColor="#333" Grid.Column="0" MaxLines="2" LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                                                <Label Text="{Binding Propertyhousename}" FontSize="14" TextColor="#333" Grid.Column="0" MaxLines="4" LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
                                                 <Label Text="{Binding Propertyhouseunits}" FontSize="14" TextColor="#333" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
                                                 <Label Text="{Binding Systempropertyoccupiedroom}" FontSize="14" TextColor="#333" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" />
                                                 <Label Text="{Binding Systempropertyvacantroom}" FontSize="14" TextColor="#333" Grid.Column="3" HorizontalOptions="End" VerticalOptions="Center" />
