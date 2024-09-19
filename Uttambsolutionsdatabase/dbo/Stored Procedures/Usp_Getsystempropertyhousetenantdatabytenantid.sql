@@ -51,7 +51,39 @@ BEGIN
 			INNER JOIN Systemstaffs Modifiedby ON Systempropertyhouseroomstenant.Modifiedby=Modifiedby.Userid WHERE Systempropertyhouseroomstenant.Systempropertyhousetenantid=Systemstaff.Userid
 			ORDER BY Systempropertyhouseroomstenant.Datecreated ASC 
 			FOR JSON PATH
-			) AS Tenantroomhistory
+			) AS Tenantroomhistory,
+			(SELECT Systempropertyhouseroom.Systempropertyhouseroomid,
+			Systemstaff.Firstname+''+Systemstaff.Lastname AS Propertyhouseownername,
+			Systemcounty.Countyname,Systemsubcounty.Subcountyname,Systemsubcountyward.Subcountywardname,
+			Systempropertyhouse.Streetorlandmark,
+			CASE WHEN Systempropertyhouse.Propertyhousestatus=0 THEN 'First Tenants' ELSE 'Subsequent Tenants' END  AS Propertyhousestatusdata
+			,Systempropertyhouseroom.Systempropertyhousesizename,
+				Systemhousesize.Systemhousesizename,
+			Systempropertyhouseroom.Systempropertyhousesizerent,
+			Systempropertyhouseroom.Systempropertyhousesizedeposit,
+			Systempropertyhouse.Propertyhousename,
+			Systempropertyhouseroom.Isvacant,
+			Systempropertyhouse.Hashousewatermeter,
+			(SELECT TOP 1  IMG.Houseorroomimageurl FROM Systempropertyhouseimages IMG WHERE IMG.Houseorroom= 'HouseRoom' AND IMG.Propertyhouseid=Systempropertyhouseroom.Systempropertyhouseroomid ORDER BY IMG.Datecreated )AS Primaryimageurl,
+			Systempropertyhouseroom.Forcaretaker,
+			CASE WHEN Systempropertyhouseroom.Isvacant=0 THEN 'No' ELSE 'Yes' END  AS Propertyhousevacant,
+			CASE WHEN Systempropertyhouseroom.Isunderrenovation=0 THEN 'No' ELSE 'Yes' END AS Propertyhouseunderrenovation,
+			CASE WHEN Systempropertyhouseroom.Isshop=0 THEN 'No' ELSE 'Yes' END AS Propertyhouseshop,
+			CASE WHEN Systempropertyhouseroom.Isgroundfloor=0 THEN 'No' ELSE 'Yes' END AS Propertyhousegroundfloor,
+			CASE WHEN Systempropertyhouseroom.Hasbalcony=0 THEN 'No' ELSE 'Yes' END AS Propertyhousebalcony,
+			Systemhousekitchentype.Kitchentypename AS Propertyhousekitchentype
+			FROM Systempropertyhouserooms Systempropertyhouseroom
+			INNER JOIN Systemhousekitchentype Systemhousekitchentype ON Systempropertyhouseroom.Kitchentypeid=Systemhousekitchentype.Kitchentypeid
+			INNER  JOIN Systempropertyhousesizes Systempropertyhousesize ON Systempropertyhouseroom.Systempropertyhousesizeid=Systempropertyhousesize.Systempropertyhousesizeid
+			INNER JOIN Systemhousesizes Systemhousesize ON Systempropertyhousesize.Systemhousesizeid=Systemhousesize.Systemhousesizeid
+			INNER JOIN  Systempropertyhouses Systempropertyhouse ON Systempropertyhousesize.Propertyhouseid=Systempropertyhouse.Propertyhouseid
+			INNER JOIN Systemstaffs Systemstaff ON Systempropertyhouse.Propertyhouseowner=Systemstaff.Userid
+			INNER JOIN Systemcounty Systemcounty ON Systempropertyhouse.Countyid=Systemcounty.Countyid
+			INNER JOIN Systemsubcounty Systemsubcounty ON Systempropertyhouse.Subcountyid=Systemsubcounty.Subcountyid
+			INNER JOIN Systemsubcountyward Systemsubcountyward ON Systempropertyhouse.Subcountywardid=Systemsubcountyward.Subcountywardid
+			WHERE  Systempropertyhouseroom.Isvacant=1
+			FOR JSON PATH
+			) AS Vacanthousesdata
 			FROM Systemstaffs Systemstaff
 			INNER JOIN Systemstaffsaccount Systemstaffsaccount ON  Systemstaff.Userid=Systemstaffsaccount.Userid
 			WHERE Systemstaff.Userid=@Tenantid

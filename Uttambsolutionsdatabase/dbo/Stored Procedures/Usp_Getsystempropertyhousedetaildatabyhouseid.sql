@@ -25,6 +25,7 @@ BEGIN
 					Systempropertyhouse.Propertyhousename,
 					Systempropertyhouseroom.Isvacant,
 					Systempropertyhouse.Hashousewatermeter,
+					(SELECT TOP 1  IMG.Houseorroomimageurl FROM Systempropertyhouseimages IMG WHERE IMG.Houseorroom= 'HouseRoom' AND IMG.Propertyhouseid=Systempropertyhouseroom.Systempropertyhouseroomid ORDER BY IMG.Datecreated )AS Primaryimageurl,
 					Systempropertyhouseroom.Forcaretaker,
 					CASE WHEN Systempropertyhouseroom.Isvacant=0 THEN 'No' ELSE 'Yes' END  AS Propertyhousevacant,
 					CASE WHEN Systempropertyhouseroom.Isunderrenovation=0 THEN 'No' ELSE 'Yes' END AS Propertyhouseunderrenovation,
