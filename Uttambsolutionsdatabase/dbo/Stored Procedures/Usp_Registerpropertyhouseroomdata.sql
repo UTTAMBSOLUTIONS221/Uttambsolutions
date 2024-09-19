@@ -28,7 +28,10 @@ BEGIN
 			DECLARE @Systemstaffdata TABLE (Action VARCHAR(100), UserId BIGINT, FullName VARCHAR(140), Passwords VARCHAR(100), PassHarsh VARCHAR(100), UserName VARCHAR(100), EmailAddress VARCHAR(100));
 			SET @RoleId = (SELECT RoleId FROM Systemroles WHERE Rolename = 'Maqaoplus Property House Tenant');
        
-		MERGE INTO SystemStaffs AS target
+	   IF(JSON_VALUE(@JsonObjectData, '$.Firstname') IS NOT NULL AND JSON_VALUE(@JsonObjectData, '$.Lastname') IS NOT NULL AND JSON_VALUE(@JsonObjectData, '$.Phonenumber') IS NOT NULL AND 
+	   JSON_VALUE(@JsonObjectData, '$.Emailaddress')  IS NOT NULL)
+	   BEGIN
+	   MERGE INTO SystemStaffs AS target
         USING (SELECT 
                     JSON_VALUE(@JsonObjectData, '$.Userid') AS UserId,
                     JSON_VALUE(@JsonObjectData, '$.Firstname') AS FirstName,
@@ -99,6 +102,8 @@ BEGIN
 				INSERT INTO ChartofAccounts 
 				VALUES (@AccountNumber, 12);
 			END
+	   END
+		
 			
 
 			MERGE INTO Systempropertyhouserooms AS target
@@ -127,20 +132,23 @@ BEGIN
 			BEGIN
 			 UPDATE Systemstaffs SET Loginstatus=1 WHERE Userid=JSON_VALUE(@JsonObjectdata, '$.Tenantid');
 			END
+			IF(@UserId>0)
+			BEGIN
 			--insert tenant to tenants table
-			MERGE INTO Systempropertyhouseroomstenant AS target
-			USING(
-			SELECT  @UserId AS Systempropertyhousetenantid,Systempropertyhouseroomid,Roomoccupant,Roomoccupantdetail,Createdby,Modifiedby,Datecreated,Datemodified
-			FROM OPENJSON(@JsonObjectdata)
-			WITH (Systempropertyhouseroomid BIGINT '$.Systempropertyhouseroomid',Roomoccupant INT '$.Roomoccupant',Roomoccupantdetail VARCHAR(200) '$.Roomoccupantdetail',Createdby BIGINT '$.Createdby',Modifiedby BIGINT '$.Createdby',  Datecreated DATETIME2 '$.Datecreated',Datemodified DATETIME2 '$.Datecreated')) AS source
-			ON target.Systempropertyhousetenantid = source.Systempropertyhousetenantid AND target.Systempropertyhouseroomid = source.Systempropertyhouseroomid AND target.Isoccupant = 1 AND Occupationalstatus= 2
-			WHEN MATCHED THEN
-			UPDATE SET target.Roomoccupant =source.Roomoccupant,target.Roomoccupantdetail = source.Roomoccupantdetail	
-			WHEN NOT MATCHED THEN
-			INSERT (Systempropertyhousetenantid, Systempropertyhouseroomid,Isoccupant,Occupationalstatus,Isnewtenant,Roomoccupant,Roomoccupantdetail, Createdby, Modifiedby,Vacateddate, Datecreated, Datemodified)
-			VALUES (source.Systempropertyhousetenantid, source.Systempropertyhouseroomid,1,2,@Isnewtenant,source.Roomoccupant, source.Roomoccupantdetail, source.Createdby, source.Modifiedby,source.Datecreated, source.Datecreated, source.Datemodified)
-			OUTPUT inserted.Systempropertyhousetenantentryid INTO @Systempropertyhouseroomstenantdata;
-		    SET @Systempropertyhousetenantentryid = (SELECT TOP 1 Systempropertyhousetenantentryid FROM @Systempropertyhouseroomstenantdata);
+				MERGE INTO Systempropertyhouseroomstenant AS target
+				USING(
+				SELECT  @UserId AS Systempropertyhousetenantid,Systempropertyhouseroomid,Roomoccupant,Roomoccupantdetail,Createdby,Modifiedby,Datecreated,Datemodified
+				FROM OPENJSON(@JsonObjectdata)
+				WITH (Systempropertyhouseroomid BIGINT '$.Systempropertyhouseroomid',Roomoccupant INT '$.Roomoccupant',Roomoccupantdetail VARCHAR(200) '$.Roomoccupantdetail',Createdby BIGINT '$.Createdby',Modifiedby BIGINT '$.Createdby',  Datecreated DATETIME2 '$.Datecreated',Datemodified DATETIME2 '$.Datecreated')) AS source
+				ON target.Systempropertyhousetenantid = source.Systempropertyhousetenantid AND target.Systempropertyhouseroomid = source.Systempropertyhouseroomid AND target.Isoccupant = 1 AND Occupationalstatus= 2
+				WHEN MATCHED THEN
+				UPDATE SET target.Roomoccupant =source.Roomoccupant,target.Roomoccupantdetail = source.Roomoccupantdetail	
+				WHEN NOT MATCHED THEN
+				INSERT (Systempropertyhousetenantid, Systempropertyhouseroomid,Isoccupant,Occupationalstatus,Isnewtenant,Roomoccupant,Roomoccupantdetail, Createdby, Modifiedby,Vacateddate, Datecreated, Datemodified)
+				VALUES (source.Systempropertyhousetenantid, source.Systempropertyhouseroomid,1,2,@Isnewtenant,source.Roomoccupant, source.Roomoccupantdetail, source.Createdby, source.Modifiedby,source.Datecreated, source.Datecreated, source.Datemodified)
+				OUTPUT inserted.Systempropertyhousetenantentryid INTO @Systempropertyhouseroomstenantdata;
+				SET @Systempropertyhousetenantentryid = (SELECT TOP 1 Systempropertyhousetenantentryid FROM @Systempropertyhouseroomstenantdata);
+			END
 
 			MERGE INTO Systempropertyhousechecklists AS target
 			USING (SELECT Propertychecklistid,Propertyhouseroomid,Fixtureid,Fixtureunits,Fixturestatusid,Createdby,Datecreated
