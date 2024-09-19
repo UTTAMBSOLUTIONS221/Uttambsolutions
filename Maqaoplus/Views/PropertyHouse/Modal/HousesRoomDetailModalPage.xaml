@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              x:Class="Maqaoplus.Views.PropertyHouse.Modal.HousesRoomDetailModalPage"
              BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IsIdNumberGreaterThanZeroConverter x:Key="IdNumberConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
 
     <Grid Padding="10" RowSpacing="10">
         <Grid.RowDefinitions>
@@ -277,11 +285,16 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45" Grid.Row="1" Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45" Grid.Row="0" Grid.Column="0">
                                 <Entry x:Name="SearchIdEntry" Placeholder="Enter ID number to search" Keyboard="Numeric" PlaceholderColor="#0a506c" TextColor="#0a506c" FontSize="18" Text="{Binding SearchId, Mode=TwoWay}" ClearButtonVisibility="WhileEditing" HorizontalOptions="Fill" />
                             </Frame>
                             <!-- Search Button -->
-                            <Button Text="Search" Command="{Binding SearchTenantsCommand}" FontSize="18" HorizontalOptions="End"  HeightRequest="45" Grid.Row="1" Grid.Column="1" />
+                            <Button Text="Search" Command="{Binding SearchTenantsCommand}" FontSize="18" HorizontalOptions="End"  HeightRequest="45" Grid.Row="0" Grid.Column="1" />
+                            <Label Text="{Binding PropertyHouseCareTakerError}" TextColor="Red" Padding="0" Grid.Row="1" Grid.ColumnSpan="2"/>
                         </Grid>
                         <ScrollView Grid.Row="1">
                             <Grid Padding="0">
@@ -351,7 +364,7 @@
                                                 <StackLayout Grid.Row="2" Grid.Column="1">
                                                     <Label Text="ID Number" FontAttributes="Bold" FontSize="14" TextColor="Black"/>
                                                     <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5, 2" HasShadow="False" HeightRequest="45">
-                                                        <Entry Text="{Binding TenantStaffData.Idnumber}" Placeholder="Enter ID number" Keyboard="Numeric" FontSize="16" TextColor="Black" PlaceholderColor="#0a506c" />
+                                                        <Entry Text="{Binding TenantStaffData.Idnumber}" Placeholder="Enter ID number" Keyboard="Numeric" FontSize="16" TextColor="Black" PlaceholderColor="#0a506c" IsReadOnly="{Binding TenantStaffData.Idnumber, Converter={StaticResource IdNumberConverter}}" />
                                                     </Frame>
                                                     <Label Text="{Binding SystemStaffIdnumberError}" TextColor="Red" Padding="0"/>
                                                 </StackLayout>

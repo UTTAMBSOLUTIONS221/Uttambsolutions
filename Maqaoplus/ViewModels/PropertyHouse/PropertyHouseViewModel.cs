@@ -2616,6 +2616,15 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 PropertyHouseCareTakerError = "Required.";
                 return;
             }
+            else if (SearchId.Length < 8)
+            {
+                PropertyHouseCareTakerError = "Id number must be from 8 characters.";
+                return;
+            }
+            else
+            {
+                PropertyHouseCareTakerError = null;
+            }
 
             IsProcessing = true;
 
@@ -2635,7 +2644,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                         Phonenumber = null,
                         Emailaddress = null,
                         Loginstatus = 0,
-                        Idnumber = Convert.ToInt64(SearchId),
+                        Idnumber = Convert.ToInt32(SearchId),
                         Propertyhouseid = 0,
                         Walletbalance = 0,
                         Tenantroomhistory = null
