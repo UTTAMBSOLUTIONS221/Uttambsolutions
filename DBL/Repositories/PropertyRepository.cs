@@ -329,6 +329,7 @@ namespace DBL.Repositories
             PropertyHouseRoomTenantData TenantDataResponse = new PropertyHouseRoomTenantData();
             Systempropertyhousetenantsroom TenantRoomDataResponse = new Systempropertyhousetenantsroom();
             List<PropertyHousetenantroomhistory> Tenantroomhistory = new List<PropertyHousetenantroomhistory>();
+            List<PropertyHouseDetails> Vacanthousesdataresponse = new List<PropertyHouseDetails>();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -371,6 +372,13 @@ namespace DBL.Repositories
                         TenantRoomDataResponse = JsonConvert.DeserializeObject<Systempropertyhousetenantsroom>(TenantroomJson);
                     }
                     TenantDataResponse.Tenantroomdata = TenantRoomDataResponse;
+                    if (tenantreponseJson["Vacanthousesdata"] != null)
+                    {
+                        string VacanthousesdataJson = tenantreponseJson["Vacanthousesdata"].ToString();
+                        Vacanthousesdataresponse = JsonConvert.DeserializeObject<List<PropertyHouseDetails>>(VacanthousesdataJson);
+                    }
+                    TenantDataResponse.Vacanthousesdata = Vacanthousesdataresponse;
+
                     return TenantResponseModel;
                 }
                 else

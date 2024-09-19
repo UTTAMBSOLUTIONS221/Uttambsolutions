@@ -31,6 +31,7 @@
         }
         public Systempropertyhousetenantsroom? Tenantroomdata { get; set; }
         public List<PropertyHousetenantroomhistory>? Tenantroomhistory { get; set; }
+        public List<PropertyHouseDetails>? Vacanthousesdata { get; set; }
     }
     public class Systempropertyhousetenantsroom
     {
