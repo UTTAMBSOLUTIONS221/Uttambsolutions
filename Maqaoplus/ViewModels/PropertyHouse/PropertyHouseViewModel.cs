@@ -1517,10 +1517,21 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             try
             {
-                var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCounty + "&code=" + Convert.ToInt64(SelectedCounty.Value), HttpMethod.Get);
-                if (SystemsubcountyResponse != null)
+                if (SelectedCounty != null && !string.IsNullOrEmpty(SelectedCounty.Value))
                 {
-                    Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
+                    var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCounty + "&code=" + Convert.ToInt64(SelectedCounty.Value), HttpMethod.Get);
+                    if (SystemsubcountyResponse != null)
+                    {
+                        Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
+                    }
+                }
+                else
+                {
+                    var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemSubCounty, HttpMethod.Get);
+                    if (SystemsubcountyResponse != null)
+                    {
+                        Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
+                    }
                 }
             }
             catch (Exception ex)
@@ -1550,6 +1561,16 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 }
                 else
                 {
+                    var SystemsubcountywardResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemSubCountyWard, HttpMethod.Get);
+                    if (SystemsubcountywardResponse != null)
+                    {
+                        // Assign the result to Systemsubcountyward
+                        Systemsubcountyward = new ObservableCollection<ListModel>(SystemsubcountywardResponse);
+                    }
+                    else
+                    {
+                        Systemsubcountyward?.Clear(); // Clear the collection if no response data is found
+                    }
                 }
             }
             catch (Exception ex)
