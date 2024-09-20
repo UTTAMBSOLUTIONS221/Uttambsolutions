@@ -177,7 +177,7 @@
             $('#AllsystemDataTables3').DataTable().$('tr', { "filter": "applied" }).each(function () {
                 Systempropertyhouseroomfixturesdata.push({
                     Propertychecklistid: $(this).find('td').eq(0).text(),
-                    Propertyhouseroomid: $(this).find('td').eq(1).text(),
+                    Propertyhouseroomid: $('#Systempropertyhouseroomid').val(),
                     Fixtureid: $(this).find('td').eq(2).text(),
                     Fixtureunits: $(this).find('.house-fixture-units').val(),
                     Fixturestatusid: $(this).find('.house-fixture-selected-status').val(),
