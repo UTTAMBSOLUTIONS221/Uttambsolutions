@@ -187,13 +187,13 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light fw-light">Firstname</label>
-                    <input class="form-control form-control-sm" id="Systemstafffirstnameid" />
+                    <input class="form-control form-control-sm" asp-for="@Model.Firstname" id="Systemstafffirstnameid" />
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light fw-light">Lastname</label>
-                    <input class="form-control form-control-sm" id="Systemstafflastnameid" />
+                    <input class="form-control form-control-sm" asp-for="@Model.Lastname" id="Systemstafflastnameid" />
                 </div>
             </div>
         </div>
@@ -201,7 +201,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="font-weight-light fw-light">Email Address</label>
-                    <input class="form-control form-control-sm" id="Systemstaffemailaddressid" />
+                    <input class="form-control form-control-sm" asp-for="@Model.Emailaddress" id="Systemstaffemailaddressid" />
                 </div>
             </div>
         </div>
@@ -209,13 +209,13 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light fw-light">Phone Number</label>
-                    <input class="form-control form-control-sm" id="Systemstaffphonenumberid" />
+                    <input class="form-control form-control-sm" asp-for="@Model.Phonenumber" id="Systemstaffphonenumberid" />
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="font-weight-light fw-light">Idnumber</label>
-                    <input class="form-control form-control-sm" id="Systemstaffidnumberdataid"  readonly/>
+                    <input class="form-control form-control-sm" asp-for="@Model.Idnumber" id="Systemstaffidnumberdataid" readonly />
                 </div>
             </div>
         </div>
