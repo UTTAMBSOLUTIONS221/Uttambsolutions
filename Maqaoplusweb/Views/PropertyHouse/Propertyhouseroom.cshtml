@@ -92,14 +92,13 @@
                 type: 'GET',
                 data: { Idnumber: idNumber },
                 success: function (data) {
-                    alert(JSON.stringify(data));
-                    $('#Systempropertyhousetenantid').val('');
-                    $('#Systemstafffirstnameid').val('');
-                    $('#Systemstafflastnameid').val('');
-                    $('#Systemstaffemailaddressid').val('');
-                    $('#Systemstaffphonenumberid').val('');
-                    $('#Systemstaffidnumberdataid').val('');
-
+                    $('#Systemstaffidnumberid').val('');
+                    $('#Systempropertyhousetenantid').val(data.Data.Userid);
+                    $('#Systemstafffirstnameid').val(data.Data.Firstname);
+                    $('#Systemstafflastnameid').val(data.Data.Lastname);
+                    $('#Systemstaffemailaddressid').val(data.Data.Emailaddress);
+                    $('#Systemstaffphonenumberid').val(data.Data.Phonenumber);
+                    $('#Systemstaffidnumberdataid').val(data.Data.Idnumber);
                 },
                 error: function () {
                     // Handle errors (e.g., show a message or log the error)
