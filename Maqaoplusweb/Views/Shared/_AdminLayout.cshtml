@@ -317,9 +317,7 @@
             } else {
                 $('#Systempropertyhousesizerentid').removeClass('is-invalid'); // Correct usage of jQuery to remove class
             }
-            var idNumber = $('#Systemstaffidnumberdataid').val();
-
-            if (idNumber <= 0 || idNumber.length < 8) {
+            if ($('#Systemstaffidnumberdataid').val() <= 0 || $('#Systemstaffidnumberdataid').val().length < 8) {
                 if ($('#Systemstafffirstnameid').val() === '') {
                     $('#Systemstafffirstnameid').addClass('is-invalid'); 
                     isValid = false;
