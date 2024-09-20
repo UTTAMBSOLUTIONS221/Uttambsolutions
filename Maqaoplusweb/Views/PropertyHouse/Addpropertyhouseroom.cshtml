@@ -250,10 +250,10 @@
                                         <td hidden>@data.Propertychecklistid</td>
                                         <td hidden>@data.Propertyhouseroomid</td>
                                         <td hidden>@data.Fixtureid</td>
-                                        <td><input type="text" class="form-control form-control-sm font-weight-light house-deposit-fee-name" value="@data.Fixturetype" readonly /></td>
-                                        <td><input type="text" class="form-control form-control-sm font-weight-light house-deposit-fee-name" value="@data.Fixtureunits" /></td>
+                                        <td><input type="text" class="form-control form-control-sm font-weight-light house-fixture-type-name" value="@data.Fixturetype" readonly /></td>
+                                        <td><input type="text" class="form-control form-control-sm font-weight-light house-fixture-units" value="@data.Fixtureunits" /></td>
                                         <td>
-                                            <select class="form-control form-control-sm font-weight-light house-deposit-fee-name">
+                                            <select class="form-control form-control-sm font-weight-light house-fixture-selected-status">
                                                 <option value="">Select an option</option>
                                                 @foreach (var item in data.Systempropertyfixturesdata)
                                                 {
@@ -264,7 +264,6 @@
                                     </tr>
                                 }
                             }
-
                         </tbody>
                     </table>
                 </div>

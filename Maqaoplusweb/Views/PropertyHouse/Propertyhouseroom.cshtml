@@ -180,8 +180,8 @@
                 Hasbalcony: $('#Hasbalconyid').prop('checked'), Isunderrenovation: $('#Isunderrenovationid').prop('checked'),Systempropertyhousemeterid: $('.system-property-house-meterid').val(),
                 Systempropertyhouseroommeternumber: $('.system-property-house-room-meter-number').val(),Openingmeter: parseFloat($('.system-property-house-room-opening-meter').val()),Closingmeter: parseFloat($('.system-property-house-room-closing-meter').val()),
                 Movedmeter: parseFloat($('.system-property-house-room-moved-meter').val()), Consumedamount: parseFloat($('.system-property-house-room-meter-cost').val()), Tenantid: $('#Systempropertyhousetenantid').val(), Firstname: $('#Systemstafffirstnameid').val(), Lastname: $('#Systemstafflastnameid').val(),
-                Emailaddress: $('#Systemstaffemailaddressid').val(), Phonenumber: $('#Systemstaffphonenumberid').val(), Idnumber: $('#Systemstaffidnumberdataid').val(),
-                Roomoccupant: $('#Systempropertyhouseroomoccupantid').val(), Roomoccupantdetail: $('#Systempropertyhouseroomoccupantdetailid').val(),
+                Emailaddress: $('#Systemstaffemailaddressid').val(), Phonenumber: $('#Systemstaffphonenumberid').val(), Idnumber: $('#Systemstaffidnumberdataid').val(),Roomoccupant: $('#Systempropertyhouseroomoccupantid').val(), Roomoccupantdetail: $('#Systempropertyhouseroomoccupantdetailid').val(),
+                Roomfixtures:,
                 Createdby: $('#systemLoggedinedUserid').val(),Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
             };
             alert(JSON.stringify(uil));
@@ -193,7 +193,7 @@
             if (!uil.Systempropertyhouseroomid) errors.push("Room ID is required.");
             if (!uil.Systempropertyhousesizeid) errors.push("House size ID is required.");
             if($('#Systempropertyhousesizerentid').val()==='' ||$('#Systempropertyhousesizerentid').val()===0 )errors.push("Room rent is required.");
-
+            if ($('#Systempropertyhousesizerentid').val() <= 0) errors.push("House Room Rent is Required.");
             if($('#Systempropertyhousehashousewatermeterid').prop('checked')){
                  if (!uil.Systempropertyhouseroommeternumber) errors.push("Meter number is required.");
                 // Validate numeric fields

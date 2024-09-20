@@ -311,6 +311,40 @@
                     input.classList.remove('is-invalid');
                 }
             });
+            if ($('#Systempropertyhousesizerentid').val() <= 0) {
+                $('#Systempropertyhousesizerentid').addClass('is-invalid'); // Correct usage of jQuery to add class
+                isValid = false;
+            } else {
+                $('#Systempropertyhousesizerentid').removeClass('is-invalid'); // Correct usage of jQuery to remove class
+            }
+            var idNumber = $('#Systemstaffidnumberdataid').val();
+
+            if (idNumber <= 0 || idNumber.length < 8) {
+                if ($('#Systemstafffirstnameid').val() === '') {
+                    $('#Systemstafffirstnameid').addClass('is-invalid'); 
+                    isValid = false;
+                } else {
+                    $('#Systemstafffirstnameid').removeClass('is-invalid');
+                }
+                if ($('#Systemstafflastnameid').val() === '') {
+                    $('#Systemstafflastnameid').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#Systemstafflastnameid').removeClass('is-invalid');
+                }
+                if ($('#Systemstaffemailaddressid').val() === '') {
+                    $('#Systemstaffemailaddressid').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#Systemstaffemailaddressid').removeClass('is-invalid');
+                }
+                if ($('#Systemstaffphonenumberid').val() === '') {
+                    $('#Systemstaffphonenumberid').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#Systemstaffphonenumberid').removeClass('is-invalid');
+                }
+            } 
 
             // Additional validation for the rows
             const rowHouseSizes = section.querySelectorAll("tr");
