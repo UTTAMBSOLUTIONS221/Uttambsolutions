@@ -107,13 +107,7 @@
                     <input class="form-control form-control-sm" type="number" asp-for="@Model.Waterunitprice" placeholder="water unit price" id="Waterunitpriceid" required />
                 </div>
             </div>
-            <div class="col-sm-1">
-                <div class="form-group">
-                    <label class="font-weight-light">Agent?</label>
-                    <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.Hasagent" id="Hashousehasagentid" required />
-                </div>
-            </div>
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="form-group">
                     <label class="font-weight-light">Vacating Notice</label>
                     <select class="form-control form-control-sm" asp-for="@Model.Vacantnoticeperiod" asp-items="@Systemhousevacantnoticeperiod" id="Vacantnoticeperiodid" required>
