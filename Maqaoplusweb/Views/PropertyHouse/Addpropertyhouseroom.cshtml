@@ -101,77 +101,85 @@
         </div>
         <button type="button" class="btn btn-sm btn-secondary float-right" onclick="nextSection()">Next</button>
     </div>
-
-    <div id="section2" class="section" style="display: none;">
-        <h6 class="mb-4">Step 2: House Meters</h6>
-        <div class="row">
-            <div class="col-sm-12 table-responsive">
-                <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="roommeterreadingtable">
-                    <thead>
-                        <tr>
-                            <th hidden>Meterid</th>
-                            <th hidden>Roomsizeid</th>
-                            <th class="font-weight-light fw-light text-sm">Meter</th>
-                            <th class="font-weight-light fw-light text-sm">Opening</th>
-                            <th class="font-weight-light fw-light text-sm">Closing</th>
-                            <th class="font-weight-light fw-light text-sm">Units</th>
-                            <th class="font-weight-light fw-light text-sm">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td hidden><input type="text" class="form-control form-control-sm font-weight-light system-property-house-meterid" value="@Model.Systempropertyhousemeterid" /></td>
-                            <td hidden><input type="text" class="form-control form-control-sm font-weight-light system-property-house-roomid" value="@Model.Systempropertyhouseroomid" /></td>
-                            <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-room-meter-number" value="@Model.Systempropertyhouseroommeternumber" /></td>
-                            <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-room-opening-meter" readonly="@Model.Hasprevious" value="@Model.Openingmeter"/></td>
-                            <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-closing-meter" value="@Model.Closingmeter" required /></td>
-                            <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-moved-meter" value="@Model.Movedmeter" readonly /></td>
-                            <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-meter-cost" value="@Model.Consumedamount" readonly /></td>
-                        </tr>
-                    </tbody>
-                </table>
+    @if (Model.Hashousewatermeter)
+    {
+        <div id="section2" class="section" style="display: none;">
+            <h6 class="mb-4">Step 2: House Meters</h6>
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="roommeterreadingtable">
+                        <thead>
+                            <tr>
+                                <th hidden>Meterid</th>
+                                <th hidden>Roomsizeid</th>
+                                <th class="font-weight-light fw-light text-sm">Meter</th>
+                                <th class="font-weight-light fw-light text-sm">Opening</th>
+                                <th class="font-weight-light fw-light text-sm">Closing</th>
+                                <th class="font-weight-light fw-light text-sm">Units</th>
+                                <th class="font-weight-light fw-light text-sm">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td hidden><input type="text" class="form-control form-control-sm font-weight-light system-property-house-meterid" value="@Model.Systempropertyhousemeterid" /></td>
+                                <td hidden><input type="text" class="form-control form-control-sm font-weight-light system-property-house-roomid" value="@Model.Systempropertyhouseroomid" /></td>
+                                <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-room-meter-number" value="@Model.Systempropertyhouseroommeternumber" /></td>
+                                <td><input type="text" class="form-control form-control-sm font-weight-light system-property-house-room-opening-meter" readonly="@Model.Hasprevious" value="@Model.Openingmeter" /></td>
+                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-closing-meter" value="@Model.Closingmeter" required /></td>
+                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-moved-meter" value="@Model.Movedmeter" readonly /></td>
+                                <td><input type="number" class="form-control form-control-sm font-weight-light system-property-house-room-meter-cost" value="@Model.Consumedamount" readonly /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 table-responsive">
-                <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="AllsystemDataTables1">
-                    <thead>
-                        <tr>
-                            <th class="font-weight-light fw-light text-sm">Meter</th>
-                            <th class="font-weight-light fw-light text-sm">Opening</th>
-                            <th class="font-weight-light fw-light text-sm">Closing</th>
-                            <th class="font-weight-light fw-light text-sm">Units</th>
-                            <th class="font-weight-light fw-light text-sm">Bill</th>
-                            <th class="font-weight-light fw-light text-sm">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model != null && Model.Meterhistorydata != null)
-                        {
-                            foreach (var item in Model.Meterhistorydata)
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap w-100" id="AllsystemDataTables1">
+                        <thead>
+                            <tr>
+                                <th class="font-weight-light fw-light text-sm">Meter</th>
+                                <th class="font-weight-light fw-light text-sm">Opening</th>
+                                <th class="font-weight-light fw-light text-sm">Closing</th>
+                                <th class="font-weight-light fw-light text-sm">Units</th>
+                                <th class="font-weight-light fw-light text-sm">Bill</th>
+                                <th class="font-weight-light fw-light text-sm">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Meterhistorydata != null)
                             {
-                                <tr>
-                                    <td class="font-weight-light fw-light text-sm">@item.Systempropertyhouseroommeternumber</td>
-                                    <td class="font-weight-light fw-light text-sm">@item.Openingmeter</td>
-                                    <td class="font-weight-light fw-light text-sm">@item.Closingmeter</td>
-                                    <td class="font-weight-light fw-light text-sm">@item.Movedmeter</td>
-                                    <td class="font-weight-light fw-light text-sm">@item.Consumedamount</td>
-                                    <td class="font-weight-light fw-light text-sm">@item.Datecreated</td>
-                                </tr>
+                                foreach (var item in Model.Meterhistorydata)
+                                {
+                                    <tr>
+                                        <td class="font-weight-light fw-light text-sm">@item.Systempropertyhouseroommeternumber</td>
+                                        <td class="font-weight-light fw-light text-sm">@item.Openingmeter</td>
+                                        <td class="font-weight-light fw-light text-sm">@item.Closingmeter</td>
+                                        <td class="font-weight-light fw-light text-sm">@item.Movedmeter</td>
+                                        <td class="font-weight-light fw-light text-sm">@item.Consumedamount</td>
+                                        <td class="font-weight-light fw-light text-sm">@item.Datecreated</td>
+                                    </tr>
+                                }
                             }
-                        }
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-4">
+                <button type="button" class="btn btn-sm btn-secondary" onclick="prevSection()">Previous</button>
+                <button type="button" class="btn btn-sm btn-secondary" onclick="nextSection()">Next</button>
             </div>
         </div>
-        <div class="d-flex justify-content-between mt-4">
-            <button type="button" class="btn btn-sm btn-secondary" onclick="prevSection()">Previous</button>
-            <button type="button" class="btn btn-sm btn-secondary" onclick="nextSection()">Next</button>
-        </div>
-    </div>
-
+    }
     <div id="section3" class="section" style="display: none;">
-        <h6 class="mb-4">Step 3: Tenant Details</h6>
+        @if (Model.Hashousewatermeter)
+        {
+            <h6 class="mb-4">Step 2: Tenant Details</h6>
+        }
+        else
+        {
+            <h6 class="mb-4">Step 3: Tenant Details</h6>
+        }
         <div class="row">
             <div class="col-sm-12">
                 <div class="input-group" style="width:100%">
@@ -226,7 +234,14 @@
     </div>
 
     <div id="section4" class="section" style="display: none;">
-        <h6 class="mb-4">Step 4: Room Checklists</h6>
+        @if (Model.Hashousewatermeter)
+        {
+            <h6 class="mb-4">Step 3: Room Checklists</h6>
+        }
+        else
+        {
+            <h6 class="mb-4">Step 4: Room Checklists</h6>
+        }
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 table-responsive">
