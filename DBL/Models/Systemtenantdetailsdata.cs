@@ -13,7 +13,7 @@
         public string? Phonenumber { get; set; }
         public string? Emailaddress { get; set; }
         public int Loginstatus { get; set; }
-        public long Idnumber { get; set; }
+        public int Idnumber { get; set; }
         public int Propertyhouseid { get; set; }
         public decimal Walletbalance { get; set; }
 

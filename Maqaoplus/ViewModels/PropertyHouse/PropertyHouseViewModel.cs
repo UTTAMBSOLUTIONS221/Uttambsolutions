@@ -2547,24 +2547,45 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task Search()
         {
             if (IsProcessing || string.IsNullOrWhiteSpace(SearchId))
+            {
+                PropertyHouseCareTakerError = "Required.";
                 return;
+            }
+            else if (SearchId.Length < 8)
+            {
+                PropertyHouseCareTakerError = "Id number must be from 8 characters.";
+                return;
+            }
+            else
+            {
+                PropertyHouseCareTakerError = null;
+            }
 
             IsProcessing = true;
 
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>($"/api/Account/Getsystemstaffdetaildatabyidnumber/" + SearchId, HttpMethod.Get, null);
-
-                if (response != null)
+                if (response != null && response.Data != null)
                 {
                     TenantStaffData = JsonConvert.DeserializeObject<Systemtenantdetails>(response.Data.ToString());
-                    var modalPage = new StaffAgentOwnerDetailModalPage(this);
-                    await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
                 }
                 else
                 {
-                    TenantStaffData = new Systemtenantdetails();
+                    TenantStaffData = new Systemtenantdetails
+                    {
+                        Userid = 0,
+                        Fullname = null,
+                        Phonenumber = null,
+                        Emailaddress = null,
+                        Loginstatus = 0,
+                        Idnumber = Convert.ToInt32(SearchId),
+                        Propertyhouseid = 0,
+                        Walletbalance = 0,
+                        Tenantroomhistory = null
+                    };
                 }
+                SearchId = string.Empty;
             }
             catch (Exception ex)
             {
@@ -2706,7 +2727,11 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 IsProcessing = false;
                 return;
             }
-
+            SystempropertyData.Firstname = TenantStaffData.Firstname;
+            SystempropertyData.Lastname = TenantStaffData.Lastname;
+            SystempropertyData.Emailaddress = TenantStaffData.Emailaddress;
+            SystempropertyData.Phonenumber = TenantStaffData.Phonenumber;
+            SystempropertyData.Idnumber = TenantStaffData.Idnumber;
             SystempropertyData.Designation = "Owner";
             SystempropertyData.Passwords = "Wn+vmyniwUM0FaEZa4M4OVV50t6oy8FC8en194kJdAI=";
             SystempropertyData.Passharsh = "XUIMWLJQOUXS";
@@ -3622,7 +3647,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             bool isValid = true;
 
-            if (string.IsNullOrWhiteSpace(SystempropertyData.Firstname))
+            if (string.IsNullOrWhiteSpace(TenantStaffData.Firstname))
             {
                 SystemStaffFirstNameError = "Required.";
                 isValid = false;
@@ -3631,7 +3656,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 SystemStaffFirstNameError = null;
             }
-            if (string.IsNullOrWhiteSpace(SystempropertyData.Lastname))
+            if (string.IsNullOrWhiteSpace(TenantStaffData.Lastname))
             {
                 SystemStaffLastNameError = "Required.";
                 isValid = false;
@@ -3641,12 +3666,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
                 SystemStaffLastNameError = null;
             }
 
-            if (string.IsNullOrWhiteSpace(SystempropertyData.Emailaddress))
+            if (string.IsNullOrWhiteSpace(TenantStaffData.Emailaddress))
             {
                 SystemStaffEmailAddressError = "Required.";
                 isValid = false;
             }
-            else if (!IsValidEmail(SystempropertyData.Emailaddress))
+            else if (!IsValidEmail(TenantStaffData.Emailaddress))
             {
                 SystemStaffEmailAddressError = "Required.";
                 isValid = false;
@@ -3655,7 +3680,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 SystemStaffEmailAddressError = null;
             }
-            if (string.IsNullOrWhiteSpace(SystempropertyData.Phonenumber))
+            if (string.IsNullOrWhiteSpace(TenantStaffData.Phonenumber))
             {
                 SystemStaffPhonenumberError = "Required.";
                 isValid = false;
@@ -3664,12 +3689,12 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 SystemStaffPhonenumberError = null;
             }
-            if (SystempropertyData.Idnumber == 0)
+            if (TenantStaffData.Idnumber == 0)
             {
                 SystemStaffIdnumberError = "Required.";
                 isValid = false;
             }
-            else if (SystempropertyData.Idnumber.ToString().Length < 8)
+            else if (TenantStaffData.Idnumber.ToString().Length < 8)
             {
                 SystemStaffIdnumberError = "Id number must be from 8 characters.";
                 isValid = false;
