@@ -93,7 +93,7 @@
             }
         }
 
-        function savepropertyhousedata() {
+        function saveagentpropertyhousedata() {
             document.getElementById("savepropertyhouseid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
@@ -172,6 +172,12 @@
                 Petparticulars: $('#Propertyhousepetparticularsid').val(),
                 Createdby: $('#systemLoggedinedUserid').val(),
                 Modifiedby: $('#systemLoggedinedUserid').val(),
+                Propertyhouseowner: $('#Systempropertyhouseownerid').val(), 
+                Firstname: $('#Systemstaffownerfirstnameid').val(), 
+                Lastname: $('#Systemstaffownerlastnameid').val(),
+                Emailaddress: $('#Systemstaffowneremailaddressid').val(), 
+                Phonenumber: $('#Systemstaffownerphonenumberid').val(), 
+                Idnumber: $('#Systemstaffowneridnumberdataid').val(),
                 Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
                 Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
                 Propertyhousesize: Systsempropertyhousesizedata,
