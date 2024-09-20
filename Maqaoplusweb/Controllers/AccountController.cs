@@ -142,10 +142,10 @@ namespace Maqaoplusweb.Controllers
             var permissions = await bl.Getsystempermissiondatabyroleid(RoleId);
             return Json(permissions);
         }
-        public async Task<IActionResult> Getsystemstaffdatabyidnumber(int Idnumber)
+        public async Task<JsonResult> Getsystemstaffdatabyidnumber(int Idnumber)
         {
             var resp = await bl.Getsystemstaffdatabyidnumber(Idnumber);
-            return PartialView(resp);
+            return Json(resp);
         }
         #region Other Methods
 
