@@ -164,6 +164,7 @@ namespace Maqaoplusweb.Controllers
         {
             // var data = await bl.Getsystempropertyhousedetaildatabyownerid(SessionUserData.Usermodel.Userid);
             var data = await bl.Getsystempropertyhousedetaildatabyhouseid(Propertyhouseid);
+
             return View(data);
         }
         [HttpGet]
