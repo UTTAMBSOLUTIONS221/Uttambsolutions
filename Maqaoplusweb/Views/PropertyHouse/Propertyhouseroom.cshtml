@@ -173,6 +173,16 @@
             document.getElementById("savesystempropertyroomid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
+            var Systempropertyhouseroomfixturesdata = [];
+            $('#AllsystemDataTables3').DataTable().$('tr', { "filter": "applied" }).each(function () {
+                Systempropertyhouseroomfixturesdata.push({
+                    Propertychecklistid: $(this).find('td').eq(0).text(),
+                    Propertyhouseroomid: $(this).find('td').eq(1).text(),
+                    Fixtureid: $(this).find('td').eq(2).text(),
+                    Fixtureunits: $(this).find('.house-fixture-units').val(),
+                    Fixturestatusid: $(this).find('.house-fixture-selected-status').val()
+                });
+            });
 
             var uil = {
                 Systempropertyhouseroomid: $('#Systempropertyhouseroomid').val(),Systempropertyhouseid: $('#Systempropertyhouseid').val(), Kitchentypeid: $('#Kitchentypeid').val(), Systempropertyhousesizeid: $('#Systempropertyhousesizeid').val(),Systempropertyhousesizerent: $('#Systempropertyhousesizerentid').val(),
@@ -181,8 +191,7 @@
                 Systempropertyhouseroommeternumber: $('.system-property-house-room-meter-number').val(),Openingmeter: parseFloat($('.system-property-house-room-opening-meter').val()),Closingmeter: parseFloat($('.system-property-house-room-closing-meter').val()),
                 Movedmeter: parseFloat($('.system-property-house-room-moved-meter').val()), Consumedamount: parseFloat($('.system-property-house-room-meter-cost').val()), Tenantid: $('#Systempropertyhousetenantid').val(), Firstname: $('#Systemstafffirstnameid').val(), Lastname: $('#Systemstafflastnameid').val(),
                 Emailaddress: $('#Systemstaffemailaddressid').val(), Phonenumber: $('#Systemstaffphonenumberid').val(), Idnumber: $('#Systemstaffidnumberdataid').val(),Roomoccupant: $('#Systempropertyhouseroomoccupantid').val(), Roomoccupantdetail: $('#Systempropertyhouseroomoccupantdetailid').val(),
-                Roomfixtures:,
-                Createdby: $('#systemLoggedinedUserid').val(),Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+                Roomfixtures: Systempropertyhouseroomfixturesdata,Createdby: $('#systemLoggedinedUserid').val(),Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
             };
             alert(JSON.stringify(uil));
 
