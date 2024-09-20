@@ -30,7 +30,7 @@ namespace Maqaoplusweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Agentindex()
         {
-            var data = await bl.Getsystempropertyhousedatabyowner(SessionUserData.Usermodel.Userid, SessionUserData.Usermodel.Designation);
+            var data = await bl.Getsystempropertyhousedatabyagent(SessionUserData.Usermodel.Userid);
             return View(data);
         }
         [HttpGet]

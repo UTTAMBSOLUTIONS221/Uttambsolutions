@@ -1141,6 +1141,7 @@ namespace DBL
             });
         }
 
+
         public Task<PropertyHouseRoomTenantModel> Getsystempropertyhousetenantdatabytenantid(long TenantId)
         {
             return Task.Run(() =>
