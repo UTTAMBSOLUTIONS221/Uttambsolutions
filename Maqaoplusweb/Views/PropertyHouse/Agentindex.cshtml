@@ -61,6 +61,34 @@
 </div>
 @section Scripts {
     <script type="text/javascript">
+        function Searchagentbyidnumber() {
+            var idNumber = $('#Systemstaffidnumberid').val().trim();
+            // Validate if ID number is entered
+            if (idNumber === "") {
+                $("#Systemstaffidnumberid").addClass('is-invalid');
+                return false; // Prevent modal from being shown
+            } else {
+                $("#Systemstaffidnumberid").removeClass('is-invalid').addClass('is-valid');
+            }
+            $.ajax({
+                url: '/Account/Getsystemstaffdatabyidnumber',
+                type: 'GET',
+                data: { Idnumber: idNumber },
+                success: function (data) {
+                    $('#Systemstaffidnumberid').val('');
+                    $('#Systempropertyhouseownerid').val(data.Data.Userid);
+                    $('#Systemstaffownerfirstnameid').val(data.Data.Firstname);
+                    $('#Systemstaffownerlastnameid').val(data.Data.Lastname);
+                    $('#Systemstaffowneremailaddressid').val(data.Data.Emailaddress);
+                    $('#Systemstaffownerphonenumberid').val(data.Data.Phonenumber);
+                    $('#Systemstaffowneridnumberdataid').val(data.Data.Idnumber);
+                },
+                error: function () {
+                    // Handle errors (e.g., show a message or log the error)
+                    alert('Failed to load staff data. Please try again.');
+                }
+            });
+        }
         function handleRentingTermsChange(selectElement) {
             var selectedValue = selectElement.value;
             var fixedTermRow = document.getElementById("fixedTermRow");
@@ -185,7 +213,7 @@
                 Propertyhousebenefit: Systempropertyhousebenefitata,Propertyhousebankingdetail: Systempropertyhousebankingdetaildata
             };
 
-            $.post("/PropertyHouse/Addsystempropertyhousedata", uil1, function (response) {
+            $.post("/PropertyHouse/Addsystemagentpropertyhousedata", uil1, function (response) {
                 if (response.RespStatus == 0) {
                     Swal.fire('Saved!', response.RespMessage, 'success');
                     $('#Uttambsolutionsmodallarge').hide();

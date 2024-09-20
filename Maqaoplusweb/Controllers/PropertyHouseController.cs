@@ -153,6 +153,67 @@ namespace Maqaoplusweb.Controllers
             return Json(resp);
         }
 
+        public async Task<JsonResult> Addsystemagentpropertyhousedata(Systemproperty model)
+        {
+            model.Designation = "Owner";
+            model.Passwords = "Wn+vmyniwUM0FaEZa4M4OVV50t6oy8FC8en194kJdAI=";
+            model.Passharsh = "XUIMWLJQOUXS";
+            model.Datecreated = DateTime.Now;
+            model.Datemodified = DateTime.Now;
+            model.Lastlogin = DateTime.Now;
+            model.Loginstatus = 0;
+            model.Accepttermsandcondition = true;
+            model.Isactive = true;
+            model.Isdeleted = false;
+            model.Isdefault = false;
+            model.Updateprofile = true;
+            model.Parentid = 0;
+            model.Roleid = 2;
+            model.Passwordresetdate = DateTime.Now.AddDays(90);
+            model.Isagency = true;
+            model.Hasagent = true;
+            model.Createdby = SessionUserData.Usermodel.Userid;
+            model.Modifiedby = SessionUserData.Usermodel.Userid;
+            model.Propertyhouseposter = SessionUserData.Usermodel.Userid;
+            model.Datecreated = DateTime.Now;
+            model.Datemodified = DateTime.Now;
+            foreach (var housesize in model.Propertyhousesize)
+            {
+                if (housesize.Systempropertyhousesizeunits > 0)
+                {
+                    housesize.Systempropertyhousesizewehave = true;
+                }
+                else
+                {
+                    housesize.Systempropertyhousesizewehave = false;
+                }
+            }
+            foreach (var housedepositfee in model.Propertyhousedepositfee)
+            {
+                if (housedepositfee.Systempropertyhousedepositfeeamount > 0)
+                {
+                    housedepositfee.Systempropertyhousesizedepositfeewehave = true;
+                }
+                else
+                {
+                    housedepositfee.Systempropertyhousesizedepositfeewehave = false;
+                }
+            }
+            foreach (var housebankingdetail in model.Propertyhousebankingdetail)
+            {
+                if (housebankingdetail.Systempropertybankaccount != "0")
+                {
+                    housebankingdetail.Systempropertyhousebankwehave = true;
+                }
+                else
+                {
+                    housebankingdetail.Systempropertyhousebankwehave = false;
+                }
+            }
+            var resp = await bl.Registersystempropertyhousedata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Addagentproperty(long Propertyid)
         {
