@@ -202,13 +202,16 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="input-group">
-                    <input type="number" class="form-control form-control-sm" id="Systemstaffidnumberid" placeholder="Enter ID number to search" aria-label="Idnumbersearch" />
-                    <div class="input-group-append align-content-center text-center">
-                        <button onclick="Searchagentbyidnumber()" class="btn-info btn-xs text-white font-weight-bold text-uppercase">Search</button>
+                    <input type="number" class="form-control form-control-sm" id="Systemstaffidnumberid" placeholder="Enter ID number to search" aria-label="Idnumbersearch">
+                    <div class="input-group-append">
+                        <button onclick="Searchagentbyidnumber()" class="btn btn-info btn-xs text-white font-weight-bold text-uppercase" style="display: inline-block !important;">
+                            Search
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <input id="Systempropertyhouseownerid" asp-for="@Model.Propertyhouseowner" hidden />
             <div class="col-sm-6">
