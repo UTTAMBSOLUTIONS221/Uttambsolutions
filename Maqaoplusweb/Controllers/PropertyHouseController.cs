@@ -109,6 +109,39 @@ namespace Maqaoplusweb.Controllers
         }
         public async Task<JsonResult> Addsystempropertyhousedata(Systemproperty model)
         {
+            foreach (var housesize in model.Propertyhousesize)
+            {
+                if (housesize.Systempropertyhousesizeunits > 0)
+                {
+                    housesize.Systempropertyhousesizewehave = true;
+                }
+                else
+                {
+                    housesize.Systempropertyhousesizewehave = false;
+                }
+            }
+            foreach (var housedepositfee in model.Propertyhousedepositfee)
+            {
+                if (housedepositfee.Systempropertyhousedepositfeeamount > 0)
+                {
+                    housedepositfee.Systempropertyhousesizedepositfeewehave = true;
+                }
+                else
+                {
+                    housedepositfee.Systempropertyhousesizedepositfeewehave = false;
+                }
+            }
+            foreach (var housebankingdetail in model.Propertyhousebankingdetail)
+            {
+                if (housebankingdetail.Systempropertybankaccount != "0")
+                {
+                    housebankingdetail.Systempropertyhousebankwehave = true;
+                }
+                else
+                {
+                    housebankingdetail.Systempropertyhousebankwehave = false;
+                }
+            }
             var resp = await bl.Registersystempropertyhousedata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
