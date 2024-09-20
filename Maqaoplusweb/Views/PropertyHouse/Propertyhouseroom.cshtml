@@ -180,7 +180,9 @@
                     Propertyhouseroomid: $(this).find('td').eq(1).text(),
                     Fixtureid: $(this).find('td').eq(2).text(),
                     Fixtureunits: $(this).find('.house-fixture-units').val(),
-                    Fixturestatusid: $(this).find('.house-fixture-selected-status').val()
+                    Fixturestatusid: $(this).find('.house-fixture-selected-status').val(),
+                    Createdby: $('#systemLoggedinedUserid').val(), 
+                    Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
                 });
             });
 

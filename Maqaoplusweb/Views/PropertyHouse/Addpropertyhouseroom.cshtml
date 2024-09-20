@@ -253,13 +253,17 @@
                                         <td><input type="text" class="form-control form-control-sm font-weight-light house-fixture-type-name" value="@data.Fixturetype" readonly /></td>
                                         <td><input type="text" class="form-control form-control-sm font-weight-light house-fixture-units" value="@data.Fixtureunits" /></td>
                                         <td>
-                                            <select class="form-control form-control-sm font-weight-light house-fixture-selected-status">
+                                            <select class="form-control form-control-sm font-weight-light house-fixture-selected-status" asp-for="@data.Fixturestatusid" asp-items="@(new SelectList(data.Systempropertyfixturesdata, "Value", "Text"))">
+                                                <option value="">Select an option</option>
+                                            </select>
+
+                                           @*  <select class="form-control form-control-sm font-weight-light house-fixture-selected-status" asp-for="@data.Fixturestatusid">
                                                 <option value="">Select an option</option>
                                                 @foreach (var item in data.Systempropertyfixturesdata)
                                                 {
                                                     <option value="@item.Value">@item.Text</option>
                                                 }
-                                            </select>
+                                            </select> *@
                                         </td>
                                     </tr>
                                 }
