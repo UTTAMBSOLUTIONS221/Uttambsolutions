@@ -256,14 +256,6 @@
                                             <select class="form-control form-control-sm font-weight-light house-fixture-selected-status" asp-for="@data.Fixturestatusid" asp-items="@(new SelectList(data.Systempropertyfixturesdata, "Value", "Text"))">
                                                 <option value="">Select an option</option>
                                             </select>
-
-                                           @*  <select class="form-control form-control-sm font-weight-light house-fixture-selected-status" asp-for="@data.Fixturestatusid">
-                                                <option value="">Select an option</option>
-                                                @foreach (var item in data.Systempropertyfixturesdata)
-                                                {
-                                                    <option value="@item.Value">@item.Text</option>
-                                                }
-                                            </select> *@
                                         </td>
                                     </tr>
                                 }
