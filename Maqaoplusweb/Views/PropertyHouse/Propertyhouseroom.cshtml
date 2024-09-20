@@ -195,7 +195,6 @@
                 Emailaddress: $('#Systemstaffemailaddressid').val(), Phonenumber: $('#Systemstaffphonenumberid').val(), Idnumber: $('#Systemstaffidnumberdataid').val(),Roomoccupant: $('#Systempropertyhouseroomoccupantid').val(), Roomoccupantdetail: $('#Systempropertyhouseroomoccupantdetailid').val(),
                 Roomfixtures: Systempropertyhouseroomfixturesdata, Createdby: $('#systemLoggedinedUserid').val(), Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
             };
-            alert(JSON.stringify(uil));
 
             // Validate form data
             var errors = [];
