@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -187,6 +188,26 @@ namespace Maqaoplusweb.Controllers
                 model = await bl.Getsystempropertyhouseroomdatabyid(Houseroomid);
                 if (model.Data != null)
                 {
+                    var systemPropertyFixturesResponse = bl.GetListModel(ListModelType.Systempropertyfixtures).Result.Select(x => new SelectListItem
+                    {
+                        Text = x.Text,
+                        Value = x.Value
+                    }).ToList();
+
+                    if (systemPropertyFixturesResponse != null)
+                    {
+                        ObservableCollection<ListModel> convertedData = new ObservableCollection<ListModel>(
+                            systemPropertyFixturesResponse.Select(item => new ListModel
+                            {
+                                Value = item.Value,
+                                Text = item.Text
+                            }).ToList());
+                        // Set SelectedFixture for each RoomFixture
+                        foreach (var item in model.Data.Roomfixtures)
+                        {
+                            item.Systempropertyfixturesdata = convertedData;
+                        }
+                    }
                     modeldata = model.Data;
                 }
             }
