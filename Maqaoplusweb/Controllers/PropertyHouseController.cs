@@ -28,6 +28,12 @@ namespace Maqaoplusweb.Controllers
             return View(data);
         }
         [HttpGet]
+        public async Task<IActionResult> Agentindex()
+        {
+            var data = await bl.Getsystempropertyhousedatabyowner(SessionUserData.Usermodel.Userid, SessionUserData.Usermodel.Designation);
+            return View(data);
+        }
+        [HttpGet]
         public async Task<IActionResult> Addproperty(long Propertyid)
         {
             ViewData["Systemcountylists"] = bl.GetListModel(ListModelType.SystemCounty).Result.Select(x => new SelectListItem
@@ -146,6 +152,89 @@ namespace Maqaoplusweb.Controllers
             var resp = await bl.Registersystempropertyhousedata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Addagentproperty(long Propertyid)
+        {
+            ViewData["Systemcountylists"] = bl.GetListModel(ListModelType.SystemCounty).Result.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
+            ViewData["Systemsubcountylists"] = bl.GetListModel(ListModelType.SystemSubCounty).Result.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
+            ViewData["Systemsubcountywardlists"] = bl.GetListModel(ListModelType.SystemSubCountyWard).Result.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
+            ViewData["Systemhousewatertypelists"] = bl.GetListModel(ListModelType.Systemhousewatertype).Result.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
+            List<ListModel> Systemhouserentdueday = new List<ListModel>();
+            for (int i = 1; i <= 28; i++)
+            {
+                string suffix = i switch
+                {
+                    1 or 21 => "st",
+                    2 or 22 => "nd",
+                    3 or 23 => "rd",
+                    _ => "th"
+                };
+                Systemhouserentdueday.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
+            }
+            List<ListModel> Systemhousedepostmonths = new List<ListModel>();
+            for (int i = 1; i <= 6; i++)
+            {
+                Systemhousedepostmonths.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
+            }
+            List<ListModel> Systemhousedepositreturnday = new List<ListModel>();
+            for (int i = 1; i <= 28; i++)
+            {
+                string suffix = i switch
+                {
+                    1 or 21 => "st",
+                    2 or 22 => "nd",
+                    3 or 23 => "rd",
+                    _ => "th"
+                };
+                Systemhousedepositreturnday.Add(new ListModel { Value = i.ToString(), Text = $"{i} {suffix} Day" });
+            }
+            List<ListModel> Systemhousevacantnoticeperiod = new List<ListModel>();
+            for (int i = 1; i <= 12; i++)
+            {
+                Systemhousevacantnoticeperiod.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
+            }
+            ViewData["Systemhouserentduedaylists"] = Systemhouserentdueday.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
+            ViewData["Systemhousedepostmonthslists"] = Systemhousedepostmonths.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
+            ViewData["Systemhousedepositreturndaylists"] = Systemhousedepositreturnday.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
+            ViewData["Systemhousevacantnoticeperiodlists"] = Systemhousevacantnoticeperiod.Select(x => new SelectListItem
+            {
+                Text = x.Text,
+                Value = x.Value
+            }).ToList();
+
+            var data = await bl.Getsystempropertyhousedatabyid(Propertyid);
+            return PartialView(data);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Details(long Propertyid, long Ownerid)
