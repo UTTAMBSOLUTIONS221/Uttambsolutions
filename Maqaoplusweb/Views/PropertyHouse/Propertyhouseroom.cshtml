@@ -12,7 +12,7 @@
                         <h6 class="font-weight-bold text-sm card-title">Property House Rooms</h6>
                     </div>
                     <div class="col-sm-2">
-                        <a asp-action="Addpropertyhouseroom" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Houseroomid="0" asp-area="" id="CAN_ADD_PROPERTY_HOUSE_ROOM" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add House Room</a>
+                        <a asp-action="Addpropertyhouseroom" asp-controller="PropertyHouse" asp-route-code="@Guid.NewGuid()" asp-route-Houseroomid="0" asp-area="" id="CAN_ADD_PROPERTY_HOUSE_ROOM" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add House Room</a>
                     </div>
                 </div>
             </div>
@@ -78,72 +78,6 @@
 
 @section Scripts {
     <script type="text/javascript">
-        $('#Uttambsolutionsmodal').on('show.bs.modal', function (event) {
-            $(".blockoverlay").show(); // Show the loading overlay
-
-            var idNumber = $('#Systemstaffidnumberid').val().trim();
-
-            // Validate if ID number is entered
-            if (idNumber === "") {
-                $("#Systemstaffidnumberid").addClass('is-invalid');
-                $(".blockoverlay").hide(); // Hide the overlay if validation fails
-                return false; // Prevent modal from being shown
-            } else {
-                $("#Systemstaffidnumberid").removeClass('is-invalid').addClass('is-valid');
-            }
-
-            var button = $(event.relatedTarget); // Button that triggered the modal
-            var modal = $(this);
-
-            // Load content into the modal using AJAX
-            $.ajax({
-                url: '/Account/Getsystemstaffdatabyidnumber',
-                type: 'GET',
-                data: { Idnumber: idNumber },
-                success: function (data) {
-                    // Insert the retrieved content into the modal's body
-                    modal.find('.modal-content').html(data);
-
-                    // Handle nested modals
-                    modal.find('.modal-content .modal').each(function () {
-                        $(this).on('show.bs.modal', function () {
-                            $(this).appendTo('body'); // Detach nested modals from parent to work independently
-                        });
-                    });
-
-                    // Hide the loading overlay once content is loaded
-                    $(".blockoverlay").hide();
-                },
-                error: function () {
-                    // Handle errors (e.g., show a message or log the error)
-                    alert('Failed to load staff data. Please try again.');
-
-                    // Hide the loading overlay in case of an error
-                    $(".blockoverlay").hide();
-                }
-            });
-        });
-
-        function accepttoofferhimherroom() {
-            var tenantid = $('#Systemuserid').val();
-            $('#Systempropertyhousetenantid').val(tenantid);
-            $('#Systemstaffidnumberid').val('');
-            // Properly hide the modal
-            $('#Uttambsolutionsmodal').modal('hide');
-        }
-
-        function rejecttoofferhimherroom() {
-            $('#Systemstaffidnumberid').val('');
-
-            // Properly hide the modal
-            $('#Uttambsolutionsmodal').modal('hide');
-
-            // Optionally, reload the page after the modal is hidden
-            $('#Uttambsolutionsmodal').on('hidden.bs.modal', function () {
-                location.reload();
-            });
-        }
-
         function savesystempropertyhouseroomtenantdata() {
             document.getElementById("savesystempropertyhouseroomtenantdataid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
