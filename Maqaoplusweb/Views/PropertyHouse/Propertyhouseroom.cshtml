@@ -191,7 +191,7 @@
                 Systempropertyhouseroommeternumber: $('.system-property-house-room-meter-number').val(),Openingmeter: parseFloat($('.system-property-house-room-opening-meter').val()),Closingmeter: parseFloat($('.system-property-house-room-closing-meter').val()),
                 Movedmeter: parseFloat($('.system-property-house-room-moved-meter').val()), Consumedamount: parseFloat($('.system-property-house-room-meter-cost').val()), Tenantid: $('#Systempropertyhousetenantid').val(), Firstname: $('#Systemstafffirstnameid').val(), Lastname: $('#Systemstafflastnameid').val(),
                 Emailaddress: $('#Systemstaffemailaddressid').val(), Phonenumber: $('#Systemstaffphonenumberid').val(), Idnumber: $('#Systemstaffidnumberdataid').val(),Roomoccupant: $('#Systempropertyhouseroomoccupantid').val(), Roomoccupantdetail: $('#Systempropertyhouseroomoccupantdetailid').val(),
-                Roomfixtures: Systempropertyhouseroomfixturesdata,Createdby: $('#systemLoggedinedUserid').val(),Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+                Roomfixtures: Systempropertyhouseroomfixturesdata, Createdby: $('#systemLoggedinedUserid').val(), Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '), Datemodified: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
             };
             alert(JSON.stringify(uil));
 
