@@ -1,3 +1,4 @@
+using API.Paymentservices;
 using API.Schedulers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -13,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddHttpClient<EquityJengaApiService>();
 // Add Quartz services
 builder.Services.AddHostedService<QuartzHostedService>();
 builder.Services.AddSingleton<IJobFactory, SingletonJobFactory>();

@@ -8,6 +8,10 @@ namespace DBL
         private string url;
         private RequestType requestType;
 
+        public HttpClient()
+        {
+        }
+
         public HttpClient(string url, RequestType requestType)
         {
             this.url = url;
