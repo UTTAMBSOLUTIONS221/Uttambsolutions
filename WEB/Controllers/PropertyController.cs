@@ -124,7 +124,7 @@ namespace WEB.Controllers
         }
         public async Task<JsonResult> Addpropertyhouseroommeterdata(Systempropertyhouseroommeters model)
         {
-            var resp = await bl.Registerpropertyhouseroommeterdata(JsonConvert.SerializeObject(model));
+            var resp = await bl.Registersystempropertyhouseroommeterdata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
 
@@ -182,7 +182,7 @@ namespace WEB.Controllers
                     Console.WriteLine("Error Response: " + errorResponse);
                 }
             }
-            var resp = await bl.Registerpropertyhouseroommeterdata(JsonConvert.SerializeObject(model));
+            var resp = await bl.Registersystempropertyhouseroommeterdata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
         public async Task<string> GetAccessTokenAsync()
