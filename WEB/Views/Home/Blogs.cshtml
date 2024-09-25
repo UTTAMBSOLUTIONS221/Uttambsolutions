@@ -5,7 +5,7 @@
 }
 
 <div class="row">
-    @if (Model.Systemblogs.Any())
+    @if (Model.Systemblogs != null && Model.Systemblogs != null && Model.Systemblogs.Any())
     {
         foreach (var item in Model.Systemblogs)
         {
