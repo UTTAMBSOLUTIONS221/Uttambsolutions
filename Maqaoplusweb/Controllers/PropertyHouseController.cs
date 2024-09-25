@@ -17,9 +17,12 @@ namespace Maqaoplusweb.Controllers
     public class PropertyHouseController : BaseController
     {
         private readonly BL bl;
-        public PropertyHouseController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public PropertyHouseController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
         [HttpGet]
         public async Task<IActionResult> Index()

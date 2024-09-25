@@ -15,11 +15,13 @@ namespace Maqaoplusweb.Controllers
     public class AccountController : BaseController
     {
         private readonly BL bl;
-        public AccountController(IConfiguration config)
-        {
-            bl = new BL(Util.ShareConnectionString(config));
-        }
+        private readonly IWebHostEnvironment _env;
 
+        public AccountController(IConfiguration config, IWebHostEnvironment env)
+        {
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
+        }
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Register()
