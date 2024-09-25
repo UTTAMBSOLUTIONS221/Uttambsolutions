@@ -21,7 +21,7 @@
     [Allowpets]               BIT             DEFAULT ((0)) NOT NULL,
     [Numberofpets]            INT             DEFAULT ((0)) NOT NULL,
     [Petdeposit]              DECIMAL (10, 2) DEFAULT ((0)) NOT NULL,
-    [Petparticulars]          VARCHAR (200)   DEFAULT ('Not Applicable') NOT NULL,
+    [Petparticulars]          VARCHAR (200)   DEFAULT ('Not Applicable') NULL,
     [Watertypeid]             INT             NOT NULL,
     [Hashousewatermeter]      BIT             NOT NULL,
     [Waterunitprice]          DECIMAL (10, 2) NOT NULL,
@@ -46,6 +46,8 @@
     [Datemodified]            DATETIME        NOT NULL,
     PRIMARY KEY CLUSTERED ([Propertyhouseid] ASC)
 );
+
+
 
 
 
