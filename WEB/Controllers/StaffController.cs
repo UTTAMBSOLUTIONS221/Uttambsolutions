@@ -11,9 +11,12 @@ namespace WEB.Controllers
     public class StaffController : BaseController
     {
         private readonly BL bl;
-        public StaffController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public StaffController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
         [HttpGet]
         public async Task<IActionResult> Index()

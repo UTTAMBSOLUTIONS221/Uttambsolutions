@@ -12,9 +12,12 @@ namespace WEB.Controllers
     public class SystemblogController : Controller
     {
         private readonly BL bl;
-        public SystemblogController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public SystemblogController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
         [HttpGet]
         public async Task<IActionResult> Index()

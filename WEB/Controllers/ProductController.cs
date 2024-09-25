@@ -16,7 +16,7 @@ namespace WEB.Controllers
 
         public ProductController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
             _env = env;
         }
         [HttpGet]

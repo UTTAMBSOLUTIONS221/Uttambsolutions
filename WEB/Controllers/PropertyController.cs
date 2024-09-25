@@ -18,9 +18,11 @@ namespace WEB.Controllers
     {
         private readonly BL bl;
         private readonly Mpesaservices mpesaservices;
-        public PropertyController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+        public PropertyController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
             mpesaservices = new Mpesaservices();
         }
 

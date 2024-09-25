@@ -10,11 +10,11 @@ namespace WEB.Schedulers
     {
         private readonly IServiceProvider _provider;
         private readonly BL bl;
-
-        public RetrieveBlogsJob(IServiceProvider provider, IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+        public RetrieveBlogsJob(IServiceProvider provider, IConfiguration config, IWebHostEnvironment env)
         {
             _provider = provider;
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
         }
 
         public async Task Execute(IJobExecutionContext context)

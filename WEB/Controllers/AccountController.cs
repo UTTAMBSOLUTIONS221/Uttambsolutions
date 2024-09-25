@@ -15,9 +15,12 @@ namespace WEB.Controllers
     public class AccountController : BaseController
     {
         private readonly BL bl;
-        public AccountController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public AccountController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
 
         [HttpGet]

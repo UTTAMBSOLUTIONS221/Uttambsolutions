@@ -10,10 +10,14 @@ namespace WEB.Controllers
     public class ModuleController : BaseController
     {
         private readonly BL bl;
-        public ModuleController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public ModuleController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -22,10 +26,10 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddModule(string code,long Moduleid)
+        public async Task<IActionResult> AddModule(string code, long Moduleid)
         {
             Systemmodule module = new Systemmodule();
-            if (Moduleid>0)
+            if (Moduleid > 0)
             {
                 module = await bl.Getsystemmoduledatabyid(Moduleid);
             }

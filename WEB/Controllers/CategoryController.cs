@@ -16,9 +16,10 @@ namespace WEB.Controllers
 
         public CategoryController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
             _env = env;
         }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {

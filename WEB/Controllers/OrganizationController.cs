@@ -19,9 +19,11 @@ namespace WEB.Controllers
         SpreadsheetsResource.ValuesResource _googleSheetValues;
         private readonly BL bl;
         IConfiguration _config;
-        public OrganizationController(IConfiguration config, GoogleSheetsHelper googleSheetsHelper)
+        private readonly IWebHostEnvironment _env;
+        public OrganizationController(IConfiguration config, IWebHostEnvironment env, GoogleSheetsHelper googleSheetsHelper)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
             _config = config;
             _googleSheetValues = googleSheetsHelper.Service.Spreadsheets.Values;
         }
