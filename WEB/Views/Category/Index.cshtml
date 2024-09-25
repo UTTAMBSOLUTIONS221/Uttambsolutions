@@ -49,7 +49,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
     <script type="text/javascript">
-       const firebaseConfig = {
+        const firebaseProdConfig = {
             apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
             authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
             projectId: "uttambsolutions-4ec2a",
@@ -58,6 +58,28 @@
             appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
             measurementId: "G-Z24LLL0113"
         };
+        const firebaseDevConfig = {
+              apiKey: "AIzaSyC7PeGxi7RWy6wVOnrGFU9y6Rmz6ejFLiI",
+              authDomain: "uttambsolutionsdev.firebaseapp.com",
+              projectId: "uttambsolutionsdev",
+              storageBucket: "uttambsolutionsdev.appspot.com",
+              messagingSenderId: "629286721346",
+              appId: "1:629286721346:web:25a76122562d4630639adb",
+              measurementId: "G-W3W3KJ6SGH"
+        };
+        const firebaseConfig = process.env.NODE_ENV === 'production'  ? firebaseProdConfig : firebaseDevConfig;
+       
+
+
+       // const firebaseConfig = {
+       //      apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
+       //      authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
+       //      projectId: "uttambsolutions-4ec2a",
+       //      storageBucket: "uttambsolutions-4ec2a.appspot.com",
+       //      messagingSenderId: "336739823411",
+       //      appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
+       //      measurementId: "G-Z24LLL0113"
+       //  };
         firebase.initializeApp(firebaseConfig);
         var storage = firebase.storage();
 

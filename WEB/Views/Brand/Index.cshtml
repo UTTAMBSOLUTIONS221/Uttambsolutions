@@ -45,7 +45,7 @@
       <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
     <script type="text/javascript">
-          const firebaseConfig = {
+       const firebaseProdConfig = {
             apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
             authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
             projectId: "uttambsolutions-4ec2a",
@@ -54,6 +54,21 @@
             appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
             measurementId: "G-Z24LLL0113"
         };
+        
+        const firebaseDevConfig = {
+            apiKey: "AIzaSyC7PeGxi7RWy6wVOnrGFU9y6Rmz6ejFLiI",
+            authDomain: "uttambsolutionsdev.firebaseapp.com",
+            projectId: "uttambsolutionsdev",
+            storageBucket: "uttambsolutionsdev.appspot.com",
+            messagingSenderId: "629286721346",
+            appId: "1:629286721346:web:25a76122562d4630639adb",
+            measurementId: "G-W3W3KJ6SGH"
+        };
+
+        // Check the environment passed from the server
+        const environment = "@ViewBag.Environment";
+        const firebaseConfig = environment === 'Production' ? firebaseProdConfig : firebaseDevConfig;
+
         firebase.initializeApp(firebaseConfig);
         var storage = firebase.storage();
 
@@ -174,36 +189,36 @@
     
         
         ﻿function savesystemproductbranddata() {
-    document.getElementById("savesystemproductbrandid").disabled = true;
-    document.getElementById("processingSpinner").style.display = "inline-block";
-    document.getElementById("buttonText").innerText = "Processing...";
-    if ($('#Brandnameid').val() === '') {
-        Swal.fire("Brand Not Created", 'Brand Name is Required', "warning");
-        document.getElementById("savesystemproductbrandid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        return;
-    }
+            document.getElementById("savesystemproductbrandid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            if ($('#Brandnameid').val() === '') {
+                Swal.fire("Brand Not Created", 'Brand Name is Required', "warning");
+                document.getElementById("savesystemproductbrandid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            }
     
-    var uil1 = {
-        Brandid: $('#Brandid').val(), Brandname: $('#Brandnameid').val(),Brandpathurl: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
-    };
+            var uil1 = {
+                Brandid: $('#Brandid').val(), Brandname: $('#Brandnameid').val(),Brandpathurl: $('#UttambsolutionsimagesurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')
+            };
  
-    $.post("/Brand/Addsystemproductbranddata", uil1, function (response) {
-        if (response.RespStatus == 0) {
-            Swal.fire('Saved!', response.RespMessage, 'success')
-            $('#Uttambsolutionsmodal').hide();
-            setTimeout(function () { location.reload(); }, 1000);
-        } else if (response.RespStatus == 1) {
-            Swal.fire("Brand details not saved", response.RespMessage, "warning");
-        }
-        else {
-            Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-        }
-        document.getElementById("savesystemproductbrandid").disabled = false;
-        document.getElementById("processingSpinner").style.display = "none";
-        document.getElementById("buttonText").innerText = "SAVE";
-        });
-    }
+            $.post("/Brand/Addsystemproductbranddata", uil1, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    $('#Uttambsolutionsmodal').hide();
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Brand details not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystemproductbrandid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                });
+            }
    </script>
 }

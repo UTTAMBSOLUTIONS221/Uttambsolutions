@@ -10,13 +10,18 @@ namespace WEB.Controllers
     public class BrandController : BaseController
     {
         private readonly BL bl;
-        public BrandController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public BrandController(IConfiguration config, IWebHostEnvironment env)
         {
             bl = new BL(Util.ShareConnectionString(config));
+            _env = env;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var environment = _env.IsDevelopment() ? "Development" : "Production";
+            ViewBag.Environment = environment;
             var data = await bl.Getsystemproductbranddata(0, 1000);
             return View(data);
         }
