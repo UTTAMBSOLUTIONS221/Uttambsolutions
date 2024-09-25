@@ -12,13 +12,18 @@ namespace WEB.Controllers
     public class CategoryController : BaseController
     {
         private readonly BL bl;
-        public CategoryController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public CategoryController(IConfiguration config, IWebHostEnvironment env)
         {
             bl = new BL(Util.ShareConnectionString(config));
+            _env = env;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var environment = _env.IsDevelopment() ? "Development" : "Production";
+            ViewBag.Environment = environment;
             var data = await bl.Getsystemcategorydata(0, 1000);
             return View(data);
         }
