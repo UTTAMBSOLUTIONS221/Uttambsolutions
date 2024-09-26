@@ -149,25 +149,40 @@ namespace Maqaoplus.ViewModels.Startup
                 if (response.RespStatus == 200)
                 {
                     App.UserDetails = response;
-                    if (response.Usermodel.Updateprofile)
-                    {
-                        UserName = "";
-                        Password = "";
-                        await Shell.Current.GoToAsync(nameof(UpdateUserProfilePage));
-                    }
-                    else if (response.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
+                    if (response.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
                     {
                         var encodedStaffId = Uri.EscapeDataString(response.Usermodel.Userid.ToString());
                         await Shell.Current.GoToAsync($"ValidateStaffAccountPage?UserId={encodedStaffId}");
                     }
+                    else if (response.Usermodel.Loginstatus != 0)
+                    {
+                        if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                        {
+                            AppShell.Current.Dispatcher.Dispatch(async () =>
+                            {
+                                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+                            });
+                        }
+                        else
+                        {
+                            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+                        }
+                    }
                     else
                     {
-                        // Store user details locally (e.g., using Preferences)
-                        string userDetailStr = JsonConvert.SerializeObject(response);
-                        Preferences.Set(nameof(App.UserDetails), userDetailStr);
-
-                        // Example additional logic after successful login
-                        await AppConstant.AddFlyoutMenusDetails();
+                        if (response.Usermodel.Updateprofile)
+                        {
+                            UserName = "";
+                            Password = "";
+                            await Shell.Current.GoToAsync(nameof(UpdateUserProfilePage));
+                        }
+                        else
+                        {
+                            string userDetailStr = JsonConvert.SerializeObject(response);
+                            Preferences.Set(nameof(App.UserDetails), userDetailStr);
+                            // Example additional logic after successful login
+                            await AppConstant.AddFlyoutMenusDetails();
+                        }
                     }
                 }
                 else
