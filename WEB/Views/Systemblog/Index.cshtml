@@ -284,15 +284,17 @@
                 Swal.fire("Blog Paragraphs Not Created", 'Paragraph is Required', "warning");
                 return;
             }
-            if ($('#Blogparagraphimagenameid').val() == "") {
+            if($('#UttambsolutionsparagraphimageurlId').val() != ""){
+                if ($('#Blogparagraphimagenameid').val() == "") {
                 Swal.fire("Blog Paragraphs Not Created", 'Image name is Required', "warning");
                 return;
+                }
+                if ($('#Blogparagraphimagesourceid').val() == "") {
+                    Swal.fire("Blog Paragraphs Not Created", 'Image source is Required', "warning");
+                    return;
+                }
             }
-            if ($('#Blogparagraphimagesourceid').val() == "") {
-                Swal.fire("Blog Paragraphs Not Created", 'Image source is Required', "warning");
-                return;
-            }
-    
+            
             var Blogparagraphid = 0;
             var Blogid = $('#Blogid').val();
             var Blogparagraphcontent = $('#SystemblogparagraphId').val();
@@ -341,14 +343,16 @@
                 Swal.fire("Blog Paragraphs Not Created", 'Paragraph is Required', "warning");
                 return;
             }
-            if ($('#Blogparagraphimagenameid').val() == "") {
+           if($('#UttambsolutionsparagraphimageurlId').val() != ""){
+                if ($('#Blogparagraphimagenameid').val() == "") {
                 Swal.fire("Blog Paragraphs Not Created", 'Image name is Required', "warning");
                 return;
-            }
-            if ($('#Blogparagraphimagesourceid').val() == "") {
-                Swal.fire("Blog Paragraphs Not Created", 'Image source is Required', "warning");
-                return;
-            }
+                }
+                if ($('#Blogparagraphimagesourceid').val() == "") {
+                    Swal.fire("Blog Paragraphs Not Created", 'Image source is Required', "warning");
+                    return;
+                }
+           }
             var cells = $(row).children(); // Get the cells of the selected row
 
             // Update the cells with edited values from input fields
