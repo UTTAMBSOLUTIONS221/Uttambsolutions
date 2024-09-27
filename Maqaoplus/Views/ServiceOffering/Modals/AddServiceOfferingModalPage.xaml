@@ -12,30 +12,157 @@
             <RowDefinition Height="Auto" />
             <!-- For Footer -->
         </Grid.RowDefinitions>
+        <Grid RowSpacing="0">
+            <!-- Define Row Heights for Content and Footer -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- ScrollView with Form Content -->
+            <VerticalStackLayout Padding="10" Grid.Row="0">
+                <!-- House Status Section -->
+                <StackLayout Margin="0,0,0,20">
+                    <Grid ColumnSpacing="8" RowSpacing="0">
+                        <!-- Define Row Heights for Content and Footer -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Entry Text="{Binding Staffserviceid}" IsVisible="False"/>
 
-        <!-- ScrollView with Form Content -->
-        <VerticalStackLayout Padding="10" Grid.Row="0">
-            <Grid RowSpacing="0">
-                <!-- Define Row Heights for Content and Footer -->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <!-- Buttons placed at the bottom of the page -->
-                <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,70,0,20">
-                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                        <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="140" />
-                        <Button Text="Submit" Command="{Binding SavePropertyHouseCareTakerCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" FontSize="18" HeightRequest="50" WidthRequest="140" />
-                    </FlexLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="0">
+                            <Label Text="Service Type" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False" HeightRequest="45">
+                                <Picker ItemsSource="{Binding Servicetype}" SelectedItem="{Binding SelectedServicetype}" ItemDisplayBinding="{Binding Text}" Title="Select Service Type" TextColor="Black" FontSize="15" BackgroundColor="White" Margin="0" />
+                            </Frame>
+                            <Label Text="{Binding ServicetypeError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="1">
+                            <!-- House Status Label -->
+                            <Label Text="County" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <!-- House Status Picker (Styled like an Input Box) -->
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
+                                <Picker ItemsSource="{Binding Systemcounty}" SelectedItem="{Binding SelectedCounty}" ItemDisplayBinding="{Binding Text}" Title="Select County" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                            </Frame>
+                            <!-- Error Message -->
+                            <Label Text="{Binding PropertyHouseCountyError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="1" Grid.Column="0">
+                            <!-- Water Type Label -->
+                            <Label Text="Sub County" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <!-- Water Type Picker (Styled like an Input Box) -->
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
+                                <Picker ItemsSource="{Binding Systemsubcounty}" SelectedItem="{Binding SelectedSubcounty}" ItemDisplayBinding="{Binding Text}" Title="Select Sub County" TextColor="Black" FontSize="15" BackgroundColor="White" Margin="0" />
+                            </Frame>
+                            <!-- Error Message -->
+                            <Label Text="{Binding PropertyHouseSubcountyError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Grid.Column="1" Spacing="4">
+                            <!-- House Status Label -->
+                            <Label Text="Subcounty Ward" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <!-- House Status Picker (Styled like an Input Box) -->
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
+                                <Picker ItemsSource="{Binding Systemsubcountyward}" SelectedItem="{Binding SelectedSubcountyward}" ItemDisplayBinding="{Binding Text}" Title="Select Ward" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                            </Frame>
+                            <!-- Error Message -->
+                            <Label Text="{Binding PropertyHouseSubcountyWardError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="2" Grid.ColumnSpan="2">
+                            <!-- House Status Label -->
+                            <Label Text="Street/Landmark" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <!-- House Status Picker (Styled like an Input Box) -->
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
+                                <Entry Text="{Binding ServiceofferingsData.Streedorlandmark}"  Placeholder="Street or landmark" MaxLength="4" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                            </Frame>
+                            <!-- Error Message -->
+                            <Label Text="{Binding PropertyHouseCountyError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="3" Grid.ColumnSpan="2">
+                            <!-- House Status Label -->
+                            <Label Text="Contact" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <!-- House Status Picker (Styled like an Input Box) -->
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
+                                <Entry Text="{Binding ServiceofferingsData.Contacts}"  Placeholder="Contact1,Contact2, etc" MaxLength="4" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                            </Frame>
+                            <!-- Error Message -->
+                            <Label Text="{Binding PropertyHouseCountyError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="4" Grid.ColumnSpan="2">
+                            <!-- House Status Label -->
+                            <Label Text="Description" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                            <!-- House Status Picker (Styled like an Input Box) -->
+                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False"  HeightRequest="45">
+                                <Entry Text="{Binding ServiceofferingsData.Servicedescription}"  Placeholder="Service Description"  MaxLength="500" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                            </Frame>
+                            <!-- Error Message -->
+                            <Label Text="{Binding PropertyHouseCountyError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="5" Grid.ColumnSpan="2">
+                            <!-- Section Header for Tenant Details -->
+                            <Label Text="Specific Service Item" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
+                            <CollectionView ItemsSource="{Binding ServiceofferingsData.Serviceitem}" SelectionMode="None">
+                                <CollectionView.Header>
+                                    <Grid ColumnDefinitions="*,Auto,Auto" BackgroundColor="#e0e0e0">
+                                        <Label Text="Service/Item" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" Padding="2"/>
+                                        <Label Text="Amount" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" Padding="2"/>
+                                        <Label Text="Fixed?" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" Padding="2"/>
+                                    </Grid>
+                                </CollectionView.Header>
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="*,*,*">
+
+                                            <!-- Hidden fields (not visually represented) -->
+                                            <Entry Text="{Binding Systembankid}" IsVisible="False"/>
+
+                                            <Entry Text="{Binding Propertyhouseid}" IsVisible="False"/>
+
+                                            <!-- Room Size -->
+                                            <Label Text="{Binding Servicefee}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2"/>
+
+                                            <!-- Amount -->
+                                            <Entry Text="{Binding Servicefee}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+
+                    </Grid>
                 </StackLayout>
-            </Grid>
-        </VerticalStackLayout>
+            </VerticalStackLayout>
+
+
+            <!-- Buttons placed at the bottom of the page -->
+            <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,70,0,20">
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                    <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="140" />
+                    <Button Text="Submit" Command="{Binding SavePropertyHouseCareTakerCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" FontSize="18" HeightRequest="50" WidthRequest="140" />
+                </FlexLayout>
+            </StackLayout>
+        </Grid>
+
+
 
         <!-- Overlay Grid for Activity Indicator -->
-        <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="2" BackgroundColor="Transparent">
+        <!--<Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="2" BackgroundColor="Transparent">
             <BoxView Color="#C0000000" Opacity="0.5" />
             <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
-        </Grid>
+        </Grid>-->
 
         <!-- Footer -->
         <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" HorizontalOptions="FillAndExpand">
