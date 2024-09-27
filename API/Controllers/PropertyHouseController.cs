@@ -15,10 +15,12 @@ namespace API.Controllers
     {
         private readonly BL bl;
         IConfiguration _config;
-        public PropertyHouseController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public PropertyHouseController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
-            _config = config;
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
         [AllowAnonymous]
         [HttpGet("Getsystempropertyhousedashboardsummarydatabyowner/{OwnerId}")]

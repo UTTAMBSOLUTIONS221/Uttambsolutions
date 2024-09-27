@@ -7,12 +7,14 @@ namespace API.Schedulers
     {
         private readonly IServiceProvider _provider;
         private readonly BL bl;
-        public Generatemonthlyrentinvoicejob(IServiceProvider provider, IConfiguration config)
-        {
-            _provider = provider;
-            bl = new BL(Util.ShareConnectionString(config));
-        }
+        private readonly IWebHostEnvironment _env;
 
+        public Generatemonthlyrentinvoicejob(IServiceProvider provider, IConfiguration config, IWebHostEnvironment env)
+        {
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _provider = provider;
+            _env = env;
+        }
         public async Task Execute(IJobExecutionContext context)
         {
             Logs($"{DateTime.Now} [Reminders Service called]" + Environment.NewLine);

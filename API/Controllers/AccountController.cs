@@ -18,10 +18,12 @@ namespace API.Controllers
     {
         private readonly BL bl;
         IConfiguration _config;
-        public AccountController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public AccountController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
-            _config = config;
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
         [AllowAnonymous]
         [Route("Authenticate"), HttpPost]

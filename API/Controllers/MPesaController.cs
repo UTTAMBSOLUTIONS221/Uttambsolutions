@@ -9,9 +9,12 @@ namespace API.Controllers
     public class MPesaController : Controller
     {
         private readonly BL bl;
-        public MPesaController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public MPesaController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
 
         #region MPESA C2B

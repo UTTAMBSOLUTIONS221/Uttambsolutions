@@ -9,10 +9,13 @@ namespace API.Schedulers
     {
         private readonly IServiceProvider _provider;
         private readonly BL bl;
-        public Communicationnotificationjob(IServiceProvider provider, IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public Communicationnotificationjob(IServiceProvider provider, IConfiguration config, IWebHostEnvironment env)
         {
+            bl = new BL(Util.ShareConnectionString(config, env));
             _provider = provider;
-            bl = new BL(Util.ShareConnectionString(config));
+            _env = env;
         }
 
         public async Task Execute(IJobExecutionContext context)

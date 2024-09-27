@@ -13,10 +13,13 @@ namespace API.Controllers
     {
         private readonly BL bl;
         IConfiguration _config;
-        public GeneralController(IConfiguration config)
+
+        private readonly IWebHostEnvironment _env;
+
+        public GeneralController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
-            _config = config;
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
         [HttpGet]
         [AllowAnonymous]
