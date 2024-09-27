@@ -67,24 +67,27 @@ namespace Maqaoplus.ViewModels.ServiceOffering
         public ServiceOfferingViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            AddServiceOfferingCommand = new Command<ServiceOfferings>(async (service) => { var serviceId = service?.Serviceid ?? 0; await AddServiceOfferingAsync(serviceId); });
+            AddServiceOfferingCommand = new Command<ServiceOfferings>(async (service) => { var staffserviceId = service?.Staffserviceid ?? 0; await AddServiceOfferingAsync(staffserviceId); });
             OnCancelClickedCommand = new Command(OnCancelClicked);
         }
 
-        private async Task AddServiceOfferingAsync(long Serviceid)
+        private async Task AddServiceOfferingAsync(long Staffserviceid)
         {
             IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/Services/Getsystemserviceofferingdatabyid/" + Serviceid, HttpMethod.Get, null);
-            if (response != null)
+            if (Staffserviceid > 0)
             {
-                ServiceofferingsData = JsonConvert.DeserializeObject<ServiceOfferings>(response.Data.ToString());
-                if (Serviceid > 0)
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/Services/Getsystemserviceofferingdatabyid/" + Staffserviceid, HttpMethod.Get, null);
+                if (response != null)
                 {
-                    if (ServiceofferingsData != null)
+                    ServiceofferingsData = JsonConvert.DeserializeObject<ServiceOfferings>(response.Data.ToString());
+                    if (Staffserviceid > 0)
                     {
-                        if (ServiceofferingsData.Servicetypeid > 0)
+                        if (ServiceofferingsData != null)
                         {
-                            SelectedServicetype = Servicetype.FirstOrDefault(x => x.Value == _serviceofferingsData.Servicetypeid.ToString());
+                            if (ServiceofferingsData.Servicetypeid > 0)
+                            {
+                                SelectedServicetype = Servicetype.FirstOrDefault(x => x.Value == _serviceofferingsData.Servicetypeid.ToString());
+                            }
                         }
                     }
                 }
