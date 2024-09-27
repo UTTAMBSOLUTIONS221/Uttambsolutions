@@ -24,12 +24,11 @@ namespace DBL.UOW
         private IPropertyRepository propertyRepository;
 
 
+        private IServiceofferingRepository serviceofferingRepository;
 
 
         private IPaymentRepository paymentRepository;
         private IPesaServiceRepository pesaServiceRepository;
-
-
 
         public UnitOfWork(string connectionString) => connString = connectionString;
         public IGeneralRepository GeneralRepository
@@ -92,6 +91,13 @@ namespace DBL.UOW
         {
             get { return propertyRepository ?? (propertyRepository = new PropertyRepository(connString)); }
         }
+
+
+        public IServiceofferingRepository ServiceofferingRepository
+        {
+            get { return serviceofferingRepository ?? (serviceofferingRepository = new ServiceofferingRepository(connString)); }
+        }
+
 
 
         public IPaymentRepository PaymentRepository

@@ -14,6 +14,7 @@ namespace Maqaoplus.ViewModels.ServiceOffering
         private readonly Services.ServiceProvider _serviceProvider;
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand AddServiceOfferingCommand { get; }
+        public ICommand OnCancelClickedCommand { get; }
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
 
@@ -67,12 +68,13 @@ namespace Maqaoplus.ViewModels.ServiceOffering
         {
             _serviceProvider = serviceProvider;
             AddServiceOfferingCommand = new Command<ServiceOfferings>(async (service) => { var serviceId = service?.Serviceid ?? 0; await AddServiceOfferingAsync(serviceId); });
+            OnCancelClickedCommand = new Command(OnCancelClicked);
         }
 
         private async Task AddServiceOfferingAsync(long Serviceid)
         {
             IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + Serviceid, HttpMethod.Get, null);
+            var response = await _serviceProvider.CallAuthWebApi<object>("/api/Services/Getsystemserviceofferingdatabyid/" + Serviceid, HttpMethod.Get, null);
             if (response != null)
             {
                 ServiceofferingsData = JsonConvert.DeserializeObject<ServiceOfferings>(response.Data.ToString());
@@ -91,6 +93,11 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
+        private void OnCancelClicked()
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

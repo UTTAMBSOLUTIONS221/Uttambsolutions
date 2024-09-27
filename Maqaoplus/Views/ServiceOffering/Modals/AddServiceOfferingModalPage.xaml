@@ -15,43 +15,30 @@
 
         <!-- ScrollView with Form Content -->
         <VerticalStackLayout Padding="10" Grid.Row="0">
-            <!-- House Status Section -->
-            <StackLayout Margin="0,0,0,20">
-                <Grid ColumnSpacing="8" RowSpacing="0">
-                    <!-- Define Row Heights for Content and Footer -->
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                 
-
-                    <!-- Buttons placed at the bottom of the page -->
-                    <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,70,0,20">
-                        <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                            <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="140" />
-                            <Button Text="Submit" Command="{Binding SavePropertyHouseCareTakerCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" FontSize="18" HeightRequest="50" WidthRequest="140" />
-                        </FlexLayout>
-                    </StackLayout>
-
-                </Grid>
-            </StackLayout>
+            <Grid RowSpacing="0">
+                <!-- Define Row Heights for Content and Footer -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- Buttons placed at the bottom of the page -->
+                <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,70,0,20">
+                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                        <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="140" />
+                        <Button Text="Submit" Command="{Binding SavePropertyHouseCareTakerCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" FontSize="18" HeightRequest="50" WidthRequest="140" />
+                    </FlexLayout>
+                </StackLayout>
+            </Grid>
         </VerticalStackLayout>
 
-
         <!-- Overlay Grid for Activity Indicator -->
-        <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="3" BackgroundColor="Transparent">
+        <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="2" BackgroundColor="Transparent">
             <BoxView Color="#C0000000" Opacity="0.5" />
             <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
         </Grid>
 
         <!-- Footer -->
-        <StackLayout Grid.Row="4" BackgroundColor="#f8f8f8" Padding="10" HorizontalOptions="FillAndExpand">
+        <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="10" HorizontalOptions="FillAndExpand">
             <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
         </StackLayout>
     </Grid>

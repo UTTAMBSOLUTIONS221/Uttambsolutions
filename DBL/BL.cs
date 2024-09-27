@@ -1481,6 +1481,17 @@ namespace DBL
         //}
         #endregion
 
+        #region System Serices Offerings
+        public Task<ServiceOfferings> Getsystemserviceofferingdatabyid(long Serviceid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ServiceofferingRepository.Getsystemserviceofferingdatabyid(Serviceid);
+                return Resp;
+            });
+        }
+        #endregion
+
         #region System Dropdowns
         public Task<IEnumerable<ListModel>> GetListModel(ListModelType listType)
         {
