@@ -56,4 +56,6 @@ If(@Type = 28)
 Select r.Kinrelationshipname as Text, r.Kinrelationshipid as Value From Systemkinrelationship r;
 If(@Type = 30)
 Select r.Fixturestatus as Text, r.Fixturestatusid as Value From Systemfixturestatus r;
+If(@Type = 31)
+Select r.Servicename as Text, r.Serviceid as Value From Systemservices r;
 END

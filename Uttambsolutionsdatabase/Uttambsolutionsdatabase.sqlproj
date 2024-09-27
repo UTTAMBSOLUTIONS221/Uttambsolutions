@@ -289,5 +289,6 @@
     <Build Include="dbo\Stored Procedures\Usp_Getalltenantmonthlyinvoicepaymentdata.sql" />
     <Build Include="dbo\Tables\SystemPeriods.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Generatemonthlysusequentinvoiceaftermeter.sql" />
+    <Build Include="dbo\Tables\Systemservices.sql" />
   </ItemGroup>
 </Project>
