@@ -187,6 +187,9 @@
 		<MauiXaml Update="Views\PropertyHouse\VacantPropertyHousesPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Views\ServiceOffering\Modals\AddServiceOfferingModalPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\ServiceOffering\ServiceOfferingPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
