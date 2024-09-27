@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Content.PM;
-using Android.Gms.Ads;
 using Android.OS;
 namespace Maqaoplus
 {
@@ -10,7 +9,6 @@ namespace Maqaoplus
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            MobileAds.Initialize(this);
             // Set the status bar color
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
             {
