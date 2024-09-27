@@ -41,12 +41,12 @@ namespace API.Controllers
             if (_userData.RespStatus == 2)
                 return StatusCode(StatusCodes.Status500InternalServerError, _userData.RespMessage);
             var claims = new[] {
-                     new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
+                     new Claim(JwtRegisteredClaimNames.Sub, "JWTServiceAccessToken"),
                      new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                      new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                      new Claim("UserId", _userData.Usermodel.Userid.ToString()),
                  };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Yh2k7QSu4l8CZg5p6X3Pna9L0Miy4D3Bvt0JVr87UcOj69Kwq5R2Nmf4FWs03Hdx"));
             //var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             //var token = new JwtSecurityToken(
             //    _config["Jwt:Issuer"],
@@ -55,7 +55,7 @@ namespace API.Controllers
             //    expires: DateTime.UtcNow.AddMinutes(30),
             //    signingCredentials: signIn);
             //var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-            var accessToken = GenerateJwtToken(_userData.Usermodel.Username, _config["Jwt:Key"], _config["Jwt:Issuer"], _config["Jwt:Audience"]);
+            var accessToken = GenerateJwtToken(_userData.Usermodel.Username, "Yh2k7QSu4l8CZg5p6X3Pna9L0Miy4D3Bvt0JVr87UcOj69Kwq5R2Nmf4FWs03Hdx", "JWTAuthenticationServer", "JWTServicePostmanClient");
             var refreshToken = GenerateRefreshTokenAsync(_userData.Usermodel.Userid);
 
             return Ok(new UsermodelResponce
@@ -74,7 +74,7 @@ namespace API.Controllers
             {
                 return Unauthorized();
             }
-            var newAccessToken = GenerateJwtToken(Data.Username, _config["Jwt:Key"], _config["Jwt:Issuer"], _config["Jwt:Audience"]);
+            var newAccessToken = GenerateJwtToken(Data.Username, "Yh2k7QSu4l8CZg5p6X3Pna9L0Miy4D3Bvt0JVr87UcOj69Kwq5R2Nmf4FWs03Hdx", "JWTAuthenticationServer", "JWTServicePostmanClient");
 
             return Ok(new { accessToken = newAccessToken });
         }
