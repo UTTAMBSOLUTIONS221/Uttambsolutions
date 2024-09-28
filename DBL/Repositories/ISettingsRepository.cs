@@ -14,7 +14,7 @@ namespace DBL.Repositories
         #region System Services
         IEnumerable<Systemservices> Getsystemservicesdata();
         Genericmodel Registersystemservicedata(string jsonObjectdata);
-        //Systempermissions Getsystempermissiondatabyid(long Permissionid);
+        Systemservices Getsystemservicesdatabyid(long Serviceid);
         #endregion
 
 

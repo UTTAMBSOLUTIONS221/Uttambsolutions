@@ -66,7 +66,7 @@ namespace WEB.Controllers
             Systemservices serviceoffering = new Systemservices();
             if (Serviceid > 0)
             {
-                //serviceoffering = await bl.Getsystemorganizationdatabyid(Serviceid);
+                serviceoffering = await bl.Getsystemservicesdatabyid(Serviceid);
             }
             return PartialView(serviceoffering);
         }

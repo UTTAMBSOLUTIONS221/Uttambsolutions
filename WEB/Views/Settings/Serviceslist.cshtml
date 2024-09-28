@@ -58,7 +58,7 @@
 </div>
 @section Scripts {
     <script type="text/javascript">
-        function Addeditserviceitemdata() {
+        function addserviceitemdata() {
             if ($('#Systemserviceitemnameid').val() == "") {
             Swal.fire("Blog Paragraphs Not Created", 'Paragraph is Required', "warning");
             return;
@@ -81,12 +81,12 @@
             var newRow = '<tr>' +
                 '<td hidden>' + Serviceitemid + '</td>' +
                 '<td hidden>' + Serviceid + '</td>' +
+                 '<td>' + Serviceitemname + '</td>' +
+                 '<td hidden>' + Serviceitemimageurl + '</td>' +
                 '<td hidden><img src="' + Serviceitemimageurl + '" alt="Blog Paragraph Image" style="max-width: 70px; max-height: 70px;"></td>' +
-                '<td>' + Serviceitemname + '</td>' +
-                '<td hidden>' + Serviceitemimageurl + '</td>' +
                 '<td class="text-right">' +
-                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editblogparagraphdata(this.parentNode.parentNode)">Edit</button>' +
-                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateblogparagraphdata(this.parentNode.parentNode)">Update</button>' +
+                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editserviceitemdata(this.parentNode.parentNode)">Edit</button>' +
+                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateserviceitemdata(this.parentNode.parentNode)">Update</button>' +
                 '</td>' +
                 '</tr>';
 
@@ -95,15 +95,14 @@
             clearServiceitemForm();
         }
     // Function to populate input fields with values from the selected row for editing
-    function editblogparagraphdata(row) {
+    function editserviceitemdata(row) {
         var cells = $(row).children();
-        $('#Blogparagraphid').val($(cells[0]).text());
-        $('#SystemblogparagraphId').val($(cells[3]).text());
-        $('#Blogparagraphimagenameid').val($(cells[5]).text());
-        $('#Blogparagraphimagesourceid').val($(cells[6]).text());
+        $('#Serviceitemid').val($(cells[0]).text());
+        $('#Systemserviceitemnameid').val($(cells[2]).text());
+        $('#UttambsolutionsparagraphimageurlId').val($(cells[3]).text());
     }
         // Function to update the selected row with edited values
-        function updateblogparagraphdata(row) {
+        function updateserviceitemdata(row) {
             if ($('#SystemblogparagraphId').val() == "") {
                 Swal.fire("Blog Paragraphs Not Created", 'Paragraph is Required', "warning");
                 return;
@@ -121,11 +120,10 @@
             var cells = $(row).children(); // Get the cells of the selected row
 
             // Update the cells with edited values from input fields
-            $(cells[0]).text($('#Blogparagraphid').val());
-            $(cells[1]).text($('#Blogid').val());
-            $(cells[3]).text($('#SystemblogparagraphId').val());
-            $(cells[5]).text($('#Blogparagraphimagenameid').val());
-            $(cells[6]).text($('#Blogparagraphimagesourceid').val());
+            $(cells[0]).text($('#Serviceitemid').val());
+            $(cells[1]).text($('#Serviceid').val());
+            $(cells[2]).text($('#Systemserviceitemnameid').val());
+            $(cells[3]).text($('#UttambsolutionsparagraphimageurlId').val());
             clearServiceitemForm();
         }
         // Function to clear the form after adding a new row or updating
@@ -141,13 +139,13 @@
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
             var Serviceitems = [];
-            $("#SystemBlogParagraphListTable tbody tr").each(function () {
+            $("#AllsystemDataTables1 tbody tr").each(function () {
                 var row = $(this);
                 var Serviceitem = {
-                        Serviceitemid:row.find('td:eq(0)').text(),
-                        Serviceid:$('#Serviceid').val(),
-                        Serviceitemname:row.find('td:eq(2)').text(),
-                        Serviceitemimageurl:row.find('td:eq(3)').text()
+                    Serviceitemid:row.find('td:eq(0)').text(),
+                    Serviceid:$('#Serviceid').val(),
+                    Serviceitemname:row.find('td:eq(2)').text(),
+                    Serviceitemimageurl:row.find('td:eq(3)').text()
                 };
                 Serviceitems.push(Serviceitem);
             });

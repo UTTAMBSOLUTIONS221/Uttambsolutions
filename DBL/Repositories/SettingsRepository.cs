@@ -2,6 +2,7 @@
 using DBL.Entities;
 using DBL.Models;
 using DBL.Repositories.DBL.Repositories;
+using Newtonsoft.Json;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -64,16 +65,26 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registersystemservicedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
-        //public Systempermissions Getsystempermissiondatabyid(long Permissionid)
-        //{
-        //    using (var connection = new SqlConnection(_connString))
-        //    {
-        //        connection.Open();
-        //        DynamicParameters parameters = new DynamicParameters();
-        //        parameters.Add("@Permissionid", Permissionid);
-        //        return connection.Query<Systempermissions>("Usp_Getsystempermissiondatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
-        //    }
-        //}
+        public Systemservices Getsystemservicesdatabyid(long Serviceid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Serviceid", Serviceid);
+                parameters.Add("@Systemservicedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystemservicesdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string SystemservicedataJson = parameters.Get<string>("@Systemservicedata");
+                if (SystemservicedataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Systemservices>(SystemservicedataJson);
+                }
+                else
+                {
+                    return new Systemservices();
+                }
+            }
+        }
         #endregion
 
         #region Communication Templates

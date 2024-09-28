@@ -597,14 +597,14 @@ namespace DBL
                 return Resp;
             });
         }
-        //public Task<Systempermissions> Getsystempermissiondatabyid(long Permissionid)
-        //{
-        //    return Task.Run(() =>
-        //    {
-        //        var Resp = db.SettingsRepository.Getsystempermissiondatabyid(Permissionid);
-        //        return Resp;
-        //    });
-        //}
+        public Task<Systemservices> Getsystemservicesdatabyid(long Serviceid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystemservicesdatabyid(Serviceid);
+                return Resp;
+            });
+        }
 
         #endregion
 
