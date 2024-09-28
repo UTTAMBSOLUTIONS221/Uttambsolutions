@@ -11,6 +11,13 @@ namespace DBL.Repositories
         Systempermissions Getsystempermissiondatabyid(long Permissionid);
         #endregion
 
+        #region System Services
+        IEnumerable<Systemservices> Getsystemservicesdata();
+        Genericmodel Registersystemservicedata(string jsonObjectdata);
+        //Systempermissions Getsystempermissiondatabyid(long Permissionid);
+        #endregion
+
+
         #region Communication Templates
         IEnumerable<Communicationtemplate> Getsystemcommunicationtemplatedata();
         Communicationtemplate Getsystemcommunicationtemplatedatabyname(bool Isemail, string Templatename);

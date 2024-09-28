@@ -52,6 +52,31 @@ namespace WEB.Controllers
         }
         #endregion
 
+
+        #region Staff Services
+        [HttpGet]
+        public async Task<IActionResult> Serviceslist()
+        {
+            var data = await bl.Getsystemservicesdata();
+            return View(data);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Addservice(long Serviceid)
+        {
+            Systemservices serviceoffering = new Systemservices();
+            if (Serviceid > 0)
+            {
+                //serviceoffering = await bl.Getsystemorganizationdatabyid(Serviceid);
+            }
+            return PartialView(serviceoffering);
+        }
+        public async Task<JsonResult> Addsystemservicedata(Systemservices model)
+        {
+            var resp = await bl.Registersystemservicedata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
+        #endregion
+
         #region System Company
         [HttpGet]
         public async Task<IActionResult> Companylist()

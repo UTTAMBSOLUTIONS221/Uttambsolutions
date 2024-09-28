@@ -44,6 +44,38 @@ namespace DBL.Repositories
         }
         #endregion
 
+        #region System Services
+        public IEnumerable<Systemservices> Getsystemservicesdata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                return connection.Query<Systemservices>("Usp_Getsystemservicesdata", null, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+        public Genericmodel Registersystemservicedata(string jsonObjectdata)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", jsonObjectdata);
+                return connection.Query<Genericmodel>("Usp_Registersystemservicedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        //public Systempermissions Getsystempermissiondatabyid(long Permissionid)
+        //{
+        //    using (var connection = new SqlConnection(_connString))
+        //    {
+        //        connection.Open();
+        //        DynamicParameters parameters = new DynamicParameters();
+        //        parameters.Add("@Permissionid", Permissionid);
+        //        return connection.Query<Systempermissions>("Usp_Getsystempermissiondatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+        //    }
+        //}
+        #endregion
+
         #region Communication Templates
         public IEnumerable<Communicationtemplate> Getsystemcommunicationtemplatedata()
         {

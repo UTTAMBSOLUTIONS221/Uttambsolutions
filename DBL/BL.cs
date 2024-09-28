@@ -580,6 +580,34 @@ namespace DBL
 
         #endregion
 
+        #region System Services
+        public Task<IEnumerable<Systemservices>> Getsystemservicesdata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystemservicesdata();
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registersystemservicedata(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Registersystemservicedata(obj);
+                return Resp;
+            });
+        }
+        //public Task<Systempermissions> Getsystempermissiondatabyid(long Permissionid)
+        //{
+        //    return Task.Run(() =>
+        //    {
+        //        var Resp = db.SettingsRepository.Getsystempermissiondatabyid(Permissionid);
+        //        return Resp;
+        //    });
+        //}
+
+        #endregion
+
         #region System Modules
         public Task<IEnumerable<Systemmodule>> Getsystemmoduledata()
         {

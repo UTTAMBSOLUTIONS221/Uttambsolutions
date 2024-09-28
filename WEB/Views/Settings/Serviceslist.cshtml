@@ -1,0 +1,174 @@
+﻿@model IEnumerable<DBL.Entities.Systemservices>
+@{
+    ViewData["Title"] = "Serviceslist";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h6 class="font-weight-bold text-sm card-title">System Templates</h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <a asp-action="Addservice" asp-controller="Settings" asp-route-Serviceid="0" asp-area="" id="CAN_EDIT_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive table-responsive-sm">
+                <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <thead class="text-uppercase">
+                        <tr>
+                            <th>Service</th>
+                            <th>Subscription Fee</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Servicename</td>
+                                    <td>@item.Subscriptionfee</td>
+                                    <td>
+                                        @if (item.Isvisible)
+                                        {
+                                            <span class="badge badge-warning badge-info-xs text-uppercase font-weight-bold text-white">Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-warning badge-info-xs text-uppercase font-weight-bold text-white">No</span>
+                                        }
+                                    </td>
+                                    <td class="nowrap text-nowrap no-wrap-buttons">
+                                        <a asp-action="Addservice" asp-controller="Settings" asp-route-Serviceid="@item.Serviceid" asp-area="" id="CAN_EDIT_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        function Addeditserviceitemdata() {
+            if ($('#Systemserviceitemnameid').val() == "") {
+            Swal.fire("Blog Paragraphs Not Created", 'Paragraph is Required', "warning");
+            return;
+        }
+
+            var Serviceitemid = 0;
+            var Serviceid = $('#Serviceid').val();
+            var Serviceitemname = $('#Systemserviceitemnameid').val();
+            var Serviceitemimageurl = $('#UttambsolutionsparagraphimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, '');
+
+           // Check if the table body contains any rows
+            var tableBody = $('#AllsystemDataTables1 tbody');
+            var noDataRows = tableBody.find('tr');
+            if (noDataRows.length === 1 && noDataRows.hasClass('odd')) {
+                // Remove the "No data available in table" row
+                tableBody.empty();
+            }
+
+            // Append row to table with image
+            var newRow = '<tr>' +
+                '<td hidden>' + Serviceitemid + '</td>' +
+                '<td hidden>' + Serviceid + '</td>' +
+                '<td hidden><img src="' + Serviceitemimageurl + '" alt="Blog Paragraph Image" style="max-width: 70px; max-height: 70px;"></td>' +
+                '<td>' + Serviceitemname + '</td>' +
+                '<td hidden>' + Serviceitemimageurl + '</td>' +
+                '<td class="text-right">' +
+                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="editblogparagraphdata(this.parentNode.parentNode)">Edit</button>' +
+                '<button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main m-1" onclick="updateblogparagraphdata(this.parentNode.parentNode)">Update</button>' +
+                '</td>' +
+                '</tr>';
+
+            $('#AllsystemDataTables1 tbody').append(newRow);
+            // Clear the form after adding a new row
+            clearServiceitemForm();
+        }
+    // Function to populate input fields with values from the selected row for editing
+    function editblogparagraphdata(row) {
+        var cells = $(row).children();
+        $('#Blogparagraphid').val($(cells[0]).text());
+        $('#SystemblogparagraphId').val($(cells[3]).text());
+        $('#Blogparagraphimagenameid').val($(cells[5]).text());
+        $('#Blogparagraphimagesourceid').val($(cells[6]).text());
+    }
+        // Function to update the selected row with edited values
+        function updateblogparagraphdata(row) {
+            if ($('#SystemblogparagraphId').val() == "") {
+                Swal.fire("Blog Paragraphs Not Created", 'Paragraph is Required', "warning");
+                return;
+            }
+            if ($('#UttambsolutionsparagraphimageurlId').val() != "") {
+                if ($('#Blogparagraphimagenameid').val() == "") {
+                    Swal.fire("Blog Paragraphs Not Created", 'Image name is Required', "warning");
+                    return;
+                }
+                if ($('#Blogparagraphimagesourceid').val() == "") {
+                    Swal.fire("Blog Paragraphs Not Created", 'Image source is Required', "warning");
+                    return;
+                }
+            }
+            var cells = $(row).children(); // Get the cells of the selected row
+
+            // Update the cells with edited values from input fields
+            $(cells[0]).text($('#Blogparagraphid').val());
+            $(cells[1]).text($('#Blogid').val());
+            $(cells[3]).text($('#SystemblogparagraphId').val());
+            $(cells[5]).text($('#Blogparagraphimagenameid').val());
+            $(cells[6]).text($('#Blogparagraphimagesourceid').val());
+            clearServiceitemForm();
+        }
+        // Function to clear the form after adding a new row or updating
+        function clearServiceitemForm() {
+            $('#Systemserviceitemnameid').val('');
+            $('#UttambsolutionsparagraphimageurlId').val('');
+            $('#Uttambsolutionsparagraphimagespreviewcontainer').empty();
+        }
+
+
+        ﻿function savesystemtservicedata() {
+            document.getElementById("savesystemtserviceid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            var Serviceitems = [];
+            $("#SystemBlogParagraphListTable tbody tr").each(function () {
+                var row = $(this);
+                var Serviceitem = {
+                        Serviceitemid:row.find('td:eq(0)').text(),
+                        Serviceid:$('#Serviceid').val(),
+                        Serviceitemname:row.find('td:eq(2)').text(),
+                        Serviceitemimageurl:row.find('td:eq(3)').text()
+                };
+                Serviceitems.push(Serviceitem);
+            });
+
+            var uil1 = {
+                Serviceid: $('#Serviceid').val(), Servicename: $('#Servicenameid').val(),Subscriptionfee: $('#Subscriptionfeeid').val(),Serviceitems:Serviceitems
+            };
+            $.post("/Settings/Addsystemservicedata", uil1, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire('Saved!', response.RespMessage, 'success')
+                    setTimeout(function () { location.reload(); }, 1000);
+                } else if (response.RespStatus == 1) {
+                    Swal.fire("Service details not saved", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                }
+                document.getElementById("savesystemtserviceid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+         }
+    </script>
+}
