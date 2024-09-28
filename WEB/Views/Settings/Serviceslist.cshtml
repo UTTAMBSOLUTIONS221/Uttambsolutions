@@ -58,11 +58,14 @@
 </div>
 @section Scripts {
     <script type="text/javascript">
+        let isValid = true;
         function addserviceitemdata() {
             if ($('#Systemserviceitemnameid').val() == "") {
-            Swal.fire("Blog Paragraphs Not Created", 'Paragraph is Required', "warning");
-            return;
-        }
+                $('#Systemserviceitemnameid').classList.add('is-invalid');
+                isValid = false;
+            } else {
+                $('#Systemserviceitemnameid').classList.remove('is-invalid');
+            }
 
             var Serviceitemid = 0;
             var Serviceid = $('#Serviceid').val();
