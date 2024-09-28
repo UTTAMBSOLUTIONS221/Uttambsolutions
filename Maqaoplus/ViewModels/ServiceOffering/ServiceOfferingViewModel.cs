@@ -61,7 +61,22 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             set
             {
                 _selectedServicetype = value;
-                OnPropertyChanged();
+                if (ServiceofferingsData != null)
+                {
+                    // Safely convert the selected value to long and assign it to Countyid
+                    if (value != null && int.TryParse(value.Value?.ToString(), out int servicetypeId))
+                    {
+                        ServiceofferingsData.Servicetypeid = servicetypeId;
+                    }
+                    else
+                    {
+                        ServiceofferingsData.Servicetypeid = ServiceofferingsData.Servicetypeid;
+                    }
+
+                    OnPropertyChanged(nameof(SelectedServicetype));
+                    OnPropertyChanged(nameof(ServiceofferingsData.Servicetypeid));
+                    LoadServiceTypeItemsDataByCode();
+                }
             }
         }
         private ObservableCollection<ListModel> _systemcounty;
@@ -254,6 +269,32 @@ namespace Maqaoplus.ViewModels.ServiceOffering
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
+        private async Task LoadServiceTypeItemsDataByCode()
+        {
+            try
+            {
+                if (SelectedCounty != null && !string.IsNullOrEmpty(SelectedCounty.Value))
+                {
+                    var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCounty + "&code=" + Convert.ToInt64(SelectedCounty.Value), HttpMethod.Get);
+                    if (SystemsubcountyResponse != null)
+                    {
+                        Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
+                    }
+                }
+                else
+                {
+                    var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemSubCounty, HttpMethod.Get);
+                    if (SystemsubcountyResponse != null)
+                    {
+                        Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
         private async Task LoadSubcountyDataCountyCode()
         {
             try
@@ -320,6 +361,8 @@ namespace Maqaoplus.ViewModels.ServiceOffering
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
+
+
         private void OnCancelClicked()
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
