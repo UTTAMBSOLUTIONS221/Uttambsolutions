@@ -344,8 +344,22 @@ namespace Maqaoplus.ViewModels.ServiceOffering
                     {
                         var serviceItem = item.ToObject<Systemservicesitems>();
 
-                        ServiceItemsData.Add(serviceItem);
+                        // Create a new instance of the Servicetypeitem model
+                        var servicetypeitem = new Servicetypeitem
+                        {
+                            Staffserviceid = serviceItem.Staffserviceid,
+                            Servicetypeitemid = serviceItem.Servicetypeitemid,
+                            Servicefee = serviceItem.Servicefee,
+                            Isfixed = serviceItem.Isfixed,
+                            Serviceitemid = serviceItem.Serviceitemid,
+                            Serviceid = serviceItem.Serviceid,
+                            Serviceitemname = serviceItem.Serviceitemname,
+                            Serviceitemimageurl = serviceItem.Serviceitemimageurl
+                        };
+
+                        ServiceofferingsData.Serviceitem.Add(servicetypeitem);
                     }
+
                 }
             }
             catch (Exception ex)
@@ -426,11 +440,29 @@ namespace Maqaoplus.ViewModels.ServiceOffering
         {
             bool isValid = true;
             IsProcessing = true;
-
-
             try
             {
-
+                if (ServiceofferingsData == null)
+                {
+                    IsProcessing = false;
+                    return;
+                }
+                ServiceofferingsData.Datecreated = DateTime.Now;
+                ServiceofferingsData.Datemodified = DateTime.Now;
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/Services/Registersystempropertyhousedata", ServiceofferingsData);
+                if (response.RespStatus == 200 || response.RespStatus == 0)
+                {
+                    Application.Current.MainPage.Navigation.PopModalAsync();
+                    //(Shell.Current.CurrentPage.BindingContext as ServiceOfferingViewModel)?.LoadItemsCommand.Execute(null);
+                }
+                else if (response.RespStatus == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+                }
 
             }
             catch (Exception ex)
