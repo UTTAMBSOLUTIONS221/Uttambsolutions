@@ -208,10 +208,72 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             }
         }
 
+        private string _propertyHouseCountyError;
+        public string PropertyHouseCountyError
+        {
+            get => _propertyHouseCountyError;
+            set
+            {
+                _propertyHouseCountyError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _propertyHouseSubcountyError;
+        public string PropertyHouseSubcountyError
+        {
+            get => _propertyHouseSubcountyError;
+            set
+            {
+                _propertyHouseSubcountyError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _propertyHouseSubcountyWardError;
+        public string PropertyHouseSubcountyWardError
+        {
+            get => _propertyHouseSubcountyWardError;
+            set
+            {
+                _propertyHouseSubcountyWardError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _houseStreetLandMarkError;
+        public string HouseStreetLandMarkError
+        {
+            get => _houseStreetLandMarkError;
+            set
+            {
+                _houseStreetLandMarkError = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _serviceOffererContactsError;
+        public string ServiceOffererContactsError
+        {
+            get => _serviceOffererContactsError;
+            set
+            {
+                _serviceOffererContactsError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _servicedescriptionError;
+        public string ServicedescriptionError
+        {
+            get => _servicedescriptionError;
+            set
+            {
+                _servicedescriptionError = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ServiceOfferingViewModel(Services.ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            LoadDropdownData();
             AddServiceOfferingCommand = new Command<ServiceOfferings>(async (service) => { var staffserviceId = service?.Staffserviceid ?? 0; await AddServiceOfferingAsync(staffserviceId); });
             ServiceItemsData = new ObservableCollection<Systemservicesitems>();
             OnCancelClickedCommand = new Command(OnCancelClicked);
@@ -220,6 +282,26 @@ namespace Maqaoplus.ViewModels.ServiceOffering
         private async Task AddServiceOfferingAsync(long Staffserviceid)
         {
             IsProcessing = true;
+            var SystemcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemCounty, HttpMethod.Get);
+            var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemSubCounty, HttpMethod.Get);
+            var SystemsubcountywardResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemSubCountyWard, HttpMethod.Get);
+            var SystemservicesResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemservices, HttpMethod.Get);
+            if (SystemservicesResponse != null)
+            {
+                Servicetype = new ObservableCollection<ListModel>(SystemservicesResponse);
+            }
+            if (SystemcountyResponse != null)
+            {
+                Systemcounty = new ObservableCollection<ListModel>(SystemcountyResponse);
+            }
+            if (SystemsubcountyResponse != null)
+            {
+                Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
+            }
+            if (SystemsubcountywardResponse != null)
+            {
+                Systemsubcountyward = new ObservableCollection<ListModel>(SystemsubcountywardResponse);
+            }
             if (Staffserviceid > 0)
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/Services/Getsystemserviceofferingdatabyid/" + Staffserviceid, HttpMethod.Get, null);
@@ -241,36 +323,6 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             var modalPage = new AddServiceOfferingModalPage(this);
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
-        }
-        private async Task LoadDropdownData()
-        {
-            try
-            {
-                var SystemcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemCounty, HttpMethod.Get);
-                var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemSubCounty, HttpMethod.Get);
-                var SystemsubcountywardResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemSubCountyWard, HttpMethod.Get);
-                var SystemservicesResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systemservices, HttpMethod.Get);
-                if (SystemservicesResponse != null)
-                {
-                    Servicetype = new ObservableCollection<ListModel>(SystemservicesResponse);
-                }
-                if (SystemcountyResponse != null)
-                {
-                    Systemcounty = new ObservableCollection<ListModel>(SystemcountyResponse);
-                }
-                if (SystemsubcountyResponse != null)
-                {
-                    Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
-                }
-                if (SystemsubcountywardResponse != null)
-                {
-                    Systemsubcountyward = new ObservableCollection<ListModel>(SystemsubcountywardResponse);
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
         }
         private async Task LoadServiceTypeItemsDataByCode()
         {

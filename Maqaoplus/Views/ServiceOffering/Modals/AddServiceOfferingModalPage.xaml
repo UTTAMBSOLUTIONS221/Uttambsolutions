@@ -86,7 +86,7 @@
                                 <Entry Text="{Binding ServiceofferingsData.Streedorlandmark}"  Placeholder="Street or landmark" MaxLength="4" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
                             </Frame>
                             <!-- Error Message -->
-                            <Label Text="{Binding PropertyHouseCountyError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                            <Label Text="{Binding HouseStreetLandMarkError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
 
                         <StackLayout Grid.Row="3" Grid.ColumnSpan="2">
@@ -97,7 +97,7 @@
                                 <Entry Text="{Binding ServiceofferingsData.Contacts}"  Placeholder="Contact1,Contact2, etc" MaxLength="4" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
                             </Frame>
                             <!-- Error Message -->
-                            <Label Text="{Binding PropertyHouseCountyError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                            <Label Text="{Binding ServiceOffererContactsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
 
                         <StackLayout Grid.Row="4" Grid.ColumnSpan="2">
@@ -108,7 +108,7 @@
                                 <Entry Text="{Binding ServiceofferingsData.Servicedescription}"  Placeholder="Service Description"  MaxLength="500" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
                             </Frame>
                             <!-- Error Message -->
-                            <Label Text="{Binding PropertyHouseCountyError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
+                            <Label Text="{Binding ServicedescriptionError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
                         <StackLayout Grid.Row="5" Grid.ColumnSpan="2">
                             <!-- Section Header for Tenant Details -->
