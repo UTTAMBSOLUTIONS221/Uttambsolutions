@@ -24,5 +24,10 @@
         public int Servicetypeitemid { get; set; }
         public decimal Servicefee { get; set; }
         public bool Isfixed { get; set; }
+
+        public int Serviceitemid { get; set; }
+        public int Serviceid { get; set; }
+        public string? Serviceitemname { get; set; }
+        public string? Serviceitemimageurl { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace Maqaoplus.ViewModels.ServiceOffering
         private readonly Services.ServiceProvider _serviceProvider;
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand AddServiceOfferingCommand { get; }
+        public ICommand SaveServiceOfferingCommand { get; }
         public ICommand OnCancelClickedCommand { get; }
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
@@ -154,6 +155,10 @@ namespace Maqaoplus.ViewModels.ServiceOffering
                         LoadSubcountyWardDataCountyCode();
                     }
                 }
+                if (!string.IsNullOrEmpty(value?.Value))
+                {
+                    LoadSubcountyWardDataCountyCode();
+                }
             }
         }
 
@@ -276,6 +281,7 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             _serviceProvider = serviceProvider;
             AddServiceOfferingCommand = new Command<ServiceOfferings>(async (service) => { var staffserviceId = service?.Staffserviceid ?? 0; await AddServiceOfferingAsync(staffserviceId); });
             ServiceItemsData = new ObservableCollection<Systemservicesitems>();
+            SaveServiceOfferingCommand = new Command(async () => await SaveServiceOfferingAsync());
             OnCancelClickedCommand = new Command(OnCancelClicked);
         }
 
@@ -337,6 +343,7 @@ namespace Maqaoplus.ViewModels.ServiceOffering
                     foreach (var item in items)
                     {
                         var serviceItem = item.ToObject<Systemservicesitems>();
+
                         ServiceItemsData.Add(serviceItem);
                     }
                 }
@@ -412,6 +419,27 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             {
                 // Handle any exceptions that occur during the API call
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
+        private async Task SaveServiceOfferingAsync()
+        {
+            bool isValid = true;
+            IsProcessing = true;
+
+
+            try
+            {
+
+
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsProcessing = false;
             }
         }
 
