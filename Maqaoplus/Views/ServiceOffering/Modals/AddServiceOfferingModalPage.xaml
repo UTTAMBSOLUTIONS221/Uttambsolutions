@@ -113,7 +113,7 @@
                         <StackLayout Grid.Row="5" Grid.ColumnSpan="2">
                             <!-- Section Header for Tenant Details -->
                             <Label Text="Specific Service Item" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
-                            <CollectionView ItemsSource="{Binding ServiceofferingsData.Serviceitem}" SelectionMode="None">
+                            <CollectionView ItemsSource="{Binding ServiceItemsData}" SelectionMode="None">
                                 <CollectionView.Header>
                                     <Grid ColumnDefinitions="*,Auto,Auto" BackgroundColor="#e0e0e0">
                                         <Label Text="Service/Item" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" Padding="2"/>
@@ -127,12 +127,12 @@
                                         <Grid ColumnDefinitions="*,*,*">
 
                                             <!-- Hidden fields (not visually represented) -->
-                                            <Entry Text="{Binding Systembankid}" IsVisible="False"/>
+                                            <Entry Text="{Binding Serviceitemid}" IsVisible="False"/>
 
-                                            <Entry Text="{Binding Propertyhouseid}" IsVisible="False"/>
+                                            <Entry Text="{Binding Serviceid}" IsVisible="False"/>
 
                                             <!-- Room Size -->
-                                            <Label Text="{Binding Servicefee}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2"/>
+                                            <Label Text="{Binding Serviceitemname}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2"/>
 
                                             <!-- Amount -->
                                             <Entry Text="{Binding Servicefee}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill"/>

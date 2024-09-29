@@ -60,11 +60,16 @@
     <script type="text/javascript">
         let isValid = true;
         function addserviceitemdata() {
-            if ($('#Systemserviceitemnameid').val() == "") {
-                $('#Systemserviceitemnameid').classList.add('is-invalid');
+            if ($('#Systemserviceitemnameid').val() === "") {
+                $('#Systemserviceitemnameid').addClass('is-invalid');  // Add the 'is-invalid' class using jQuery
                 isValid = false;
             } else {
-                $('#Systemserviceitemnameid').classList.remove('is-invalid');
+                $('#Systemserviceitemnameid').removeClass('is-invalid');  // Remove the 'is-invalid' class using jQuery
+            }
+
+            // If the form is not valid, exit the function
+            if (!isValid) {
+                return;
             }
 
             var Serviceitemid = 0;
