@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace Maqaoplus.ViewModels.ServiceOffering
 {
-    public class ServiceOfferingViewModel
+    public class ServiceOfferingViewModel : INotifyPropertyChanged
     {
         private readonly Services.ServiceProvider _serviceProvider;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -324,6 +324,7 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             await Application.Current.MainPage.Navigation.PushModalAsync(modalPage);
             IsProcessing = false;
         }
+
         private async Task LoadServiceTypeItemsDataByCode()
         {
             try
@@ -342,9 +343,11 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                // Use the error property instead of alerting
+                ServicedescriptionError = "Failed to load service items: " + ex.Message;
             }
         }
+
         private async Task LoadSubcountyDataCountyCode()
         {
             try
