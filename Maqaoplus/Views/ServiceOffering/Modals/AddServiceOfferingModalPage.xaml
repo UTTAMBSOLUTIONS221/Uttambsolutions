@@ -113,7 +113,7 @@
                         <StackLayout Grid.Row="5" Grid.ColumnSpan="2">
                             <!-- Section Header for Tenant Details -->
                             <Label Text="Specific Service Item" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
-                            <CollectionView ItemsSource="{Binding ServiceofferingsData.Serviceitem}" SelectionMode="None">
+                            <CollectionView ItemsSource="{Binding ServiceItemsData}" SelectionMode="None">
                                 <CollectionView.Header>
                                     <Grid ColumnDefinitions="*,*,*" BackgroundColor="#e0e0e0">
                                         <Label Text="Service/Item" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" Padding="2"/>

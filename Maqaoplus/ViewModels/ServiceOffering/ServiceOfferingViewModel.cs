@@ -336,7 +336,6 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             try
             {
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/Services/Getsystemservicesitemsdatabyid/" + Convert.ToInt64(SelectedServicetype.Value), HttpMethod.Get, null);
-
                 if (response != null && response.Data is List<dynamic> items)
                 {
                     ServiceItemsData.Clear();
@@ -344,9 +343,7 @@ namespace Maqaoplus.ViewModels.ServiceOffering
                     {
                         var serviceItem = item.ToObject<Servicetypeitem>();
                         ServiceItemsData.Add(serviceItem);
-                        ServiceofferingsData.Serviceitem = ServiceItemsData.ToList();
                     }
-
                 }
             }
             catch (Exception ex)
