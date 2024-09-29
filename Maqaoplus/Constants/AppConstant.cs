@@ -5,7 +5,6 @@ using Maqaoplus.Views.BillsandPayments;
 using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.PropertyHouseTenants;
-using Maqaoplus.Views.ServiceOffering;
 using Maqaoplus.Views.TenantBillsandPayments;
 
 namespace Maqaoplus.Constants
@@ -343,12 +342,12 @@ namespace Maqaoplus.Constants
                             Title = "Payments",
                             ContentTemplate = new DataTemplate(() => new PropertyHousesTenantPaymentsPage(serviceProvider)),
                         },
-                        new ShellContent
-                        {
-                            Icon = Icons.dollar,
-                            Title = "Services",
-                            ContentTemplate = new DataTemplate(() => new ServiceOfferingPage(serviceProvider)),
-                        },
+                        //new ShellContent
+                        //{
+                        //    Icon = Icons.dollar,
+                        //    Title = "Services",
+                        //    ContentTemplate = new DataTemplate(() => new ServiceOfferingPage(serviceProvider)),
+                        //},
                     }
                 };
                 if (!AppShell.Current.Items.Contains(flyoutItem))
