@@ -40,11 +40,11 @@
                         <Entry Text="{Binding Staffserviceid}" IsVisible="False"/>
                         <StackLayout Grid.Row="0" Grid.Column="0">
                             <StackLayout Orientation="Horizontal" Spacing="10">
-                                <RadioButton GroupName="WorkType" Content="Looking for Work" IsChecked="{Binding IsLookingForWork}" TextColor="Black" />
-                                <RadioButton GroupName="WorkType" Content="Offering Work Opportunity" IsChecked="{Binding IsOfferingWork}" TextColor="Black" />
+                                <RadioButton GroupName="WorkType" Content="Looking for Work" IsChecked="{Binding Iswork}" TextColor="Black" />
+                                <RadioButton GroupName="WorkType" Content="Offering Work Opportunity" IsChecked="{Binding Iswork}" TextColor="Black" />
                             </StackLayout>
                         </StackLayout>
-                        
+
                         <StackLayout Grid.Row="1" Grid.Column="0">
                             <Label Text="Service Type" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False" HeightRequest="45">

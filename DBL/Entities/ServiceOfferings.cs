@@ -3,6 +3,7 @@
     public class ServiceOfferings
     {
         public int Staffserviceid { get; set; }
+        public bool Iswork { get; set; }
         public int Staffid { get; set; }
         public int Servicetypeid { get; set; }
         public int Countyid { get; set; }

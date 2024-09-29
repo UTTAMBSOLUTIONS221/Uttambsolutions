@@ -434,9 +434,10 @@ namespace Maqaoplus.ViewModels.ServiceOffering
                     IsProcessing = false;
                     return;
                 }
+                ServiceofferingsData.Staffid = App.UserDetails.Usermodel.Userid;
                 ServiceofferingsData.Datecreated = DateTime.Now;
                 ServiceofferingsData.Datemodified = DateTime.Now;
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/Services/Registersystempropertyhousedata", ServiceofferingsData);
+                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/Services/RegistersystemserviceofferingsData", ServiceofferingsData);
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
