@@ -44,6 +44,8 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             }
         }
 
+        public ObservableCollection<Systemservicesitems> ServiceItemsData { get; }
+
         private ObservableCollection<ListModel> _servicetype;
         public ObservableCollection<ListModel> Servicetype
         {
@@ -211,6 +213,7 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             _serviceProvider = serviceProvider;
             LoadDropdownData();
             AddServiceOfferingCommand = new Command<ServiceOfferings>(async (service) => { var staffserviceId = service?.Staffserviceid ?? 0; await AddServiceOfferingAsync(staffserviceId); });
+            ServiceItemsData = new ObservableCollection<Systemservicesitems>();
             OnCancelClickedCommand = new Command(OnCancelClicked);
         }
 
@@ -273,20 +276,15 @@ namespace Maqaoplus.ViewModels.ServiceOffering
         {
             try
             {
-                if (SelectedCounty != null && !string.IsNullOrEmpty(SelectedCounty.Value))
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/Services/Getsystemservicesitemsdatabyid/" + Convert.ToInt64(SelectedCounty.Value), HttpMethod.Get, null);
+
+                if (response != null && response.Data is List<dynamic> items)
                 {
-                    var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.SystemSubCounty + "&code=" + Convert.ToInt64(SelectedCounty.Value), HttpMethod.Get);
-                    if (SystemsubcountyResponse != null)
+                    ServiceItemsData.Clear();
+                    foreach (var item in items)
                     {
-                        Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
-                    }
-                }
-                else
-                {
-                    var SystemsubcountyResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.SystemSubCounty, HttpMethod.Get);
-                    if (SystemsubcountyResponse != null)
-                    {
-                        Systemsubcounty = new ObservableCollection<ListModel>(SystemsubcountyResponse);
+                        var serviceItem = item.ToObject<Systemservicesitems>();
+                        ServiceItemsData.Add(serviceItem);
                     }
                 }
             }

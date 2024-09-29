@@ -19,6 +19,14 @@ namespace API.Controllers
             bl = new BL(Util.ShareConnectionString(config, env));
             _env = env;
         }
+
+        [AllowAnonymous]
+        [HttpGet("Getsystemservicesitemsdatabyid/{Serviceid}")]
+        public async Task<Systemservices> Getsystemservicesitemsdatabyid(long Serviceid)
+        {
+            return await bl.Getsystemservicesitemsdatabyid(Serviceid);
+        }
+
         [AllowAnonymous]
         [HttpGet("Getsystemserviceofferingdatabyid/{Serviceid}")]
         public async Task<ServiceOfferings> Getsystemserviceofferingdatabyid(long Serviceid)

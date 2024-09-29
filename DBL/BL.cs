@@ -605,7 +605,14 @@ namespace DBL
                 return Resp;
             });
         }
-
+        public Task<Systemservices> Getsystemservicesitemsdatabyid(long Serviceid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystemservicesitemsdatabyid(Serviceid);
+                return Resp;
+            });
+        }
         #endregion
 
         #region System Modules
@@ -1508,6 +1515,7 @@ namespace DBL
         //    });
         //}
         #endregion
+
 
         #region System Serices Offerings
         public Task<ServiceOfferings> Getsystemserviceofferingdatabyid(long Serviceid)

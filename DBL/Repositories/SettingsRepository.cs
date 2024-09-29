@@ -45,6 +45,7 @@ namespace DBL.Repositories
         }
         #endregion
 
+
         #region System Services
         public IEnumerable<Systemservices> Getsystemservicesdata()
         {
@@ -75,6 +76,26 @@ namespace DBL.Repositories
                 parameters.Add("@Systemservicedata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsystemservicesdatabyid", parameters, commandType: CommandType.StoredProcedure);
                 string SystemservicedataJson = parameters.Get<string>("@Systemservicedata");
+                if (SystemservicedataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Systemservices>(SystemservicedataJson);
+                }
+                else
+                {
+                    return new Systemservices();
+                }
+            }
+        }
+        public Systemservices Getsystemservicesitemsdatabyid(long Serviceid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Serviceid", Serviceid);
+                parameters.Add("@Systemservicesitemsdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystemservicesitemsdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string SystemservicedataJson = parameters.Get<string>("@Systemservicesitemsdata");
                 if (SystemservicedataJson != null)
                 {
                     return JsonConvert.DeserializeObject<Systemservices>(SystemservicedataJson);
