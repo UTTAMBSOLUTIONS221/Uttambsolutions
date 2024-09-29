@@ -338,12 +338,15 @@ namespace Maqaoplus.ViewModels.ServiceOffering
                 var response = await _serviceProvider.CallAuthWebApi<object>("/api/Services/Getsystemservicesitemsdatabyid/" + Convert.ToInt64(SelectedServicetype.Value), HttpMethod.Get, null);
                 if (response != null && response.Data is List<dynamic> items)
                 {
-                    ServiceItemsData.Clear();
-                    foreach (var item in items)
+
+                    // Initialize or ensure ServiceofferingsData is not null
+                    if (ServiceofferingsData == null)
                     {
-                        var serviceItem = item.ToObject<Servicetypeitem>();
-                        ServiceItemsData.Add(serviceItem);
+                        ServiceofferingsData = new ServiceOfferings();
                     }
+
+                    // Update the service items within ServiceofferingsData
+                    ServiceofferingsData.UpdateServiceItems(items);
                 }
             }
             catch (Exception ex)
