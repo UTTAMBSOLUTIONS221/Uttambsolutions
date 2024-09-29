@@ -45,7 +45,7 @@ namespace Maqaoplus.ViewModels.ServiceOffering
             }
         }
 
-        public ObservableCollection<Systemservicesitems> ServiceItemsData { get; }
+        public ObservableCollection<Servicetypeitem> ServiceItemsData { get; }
 
         private ObservableCollection<ListModel> _servicetype;
         public ObservableCollection<ListModel> Servicetype
@@ -280,7 +280,7 @@ namespace Maqaoplus.ViewModels.ServiceOffering
         {
             _serviceProvider = serviceProvider;
             AddServiceOfferingCommand = new Command<ServiceOfferings>(async (service) => { var staffserviceId = service?.Staffserviceid ?? 0; await AddServiceOfferingAsync(staffserviceId); });
-            ServiceItemsData = new ObservableCollection<Systemservicesitems>();
+            ServiceItemsData = new ObservableCollection<Servicetypeitem>();
             SaveServiceOfferingCommand = new Command(async () => await SaveServiceOfferingAsync());
             OnCancelClickedCommand = new Command(OnCancelClicked);
         }
@@ -342,22 +342,9 @@ namespace Maqaoplus.ViewModels.ServiceOffering
                     ServiceItemsData.Clear();
                     foreach (var item in items)
                     {
-                        var serviceItem = item.ToObject<Systemservicesitems>();
-
-                        // Create a new instance of the Servicetypeitem model
-                        var servicetypeitem = new Servicetypeitem
-                        {
-                            Staffserviceid = serviceItem.Staffserviceid,
-                            Servicetypeitemid = serviceItem.Servicetypeitemid,
-                            Servicefee = serviceItem.Servicefee,
-                            Isfixed = serviceItem.Isfixed,
-                            Serviceitemid = serviceItem.Serviceitemid,
-                            Serviceid = serviceItem.Serviceid,
-                            Serviceitemname = serviceItem.Serviceitemname,
-                            Serviceitemimageurl = serviceItem.Serviceitemimageurl
-                        };
-
-                        ServiceofferingsData.Serviceitem.Add(servicetypeitem);
+                        var serviceItem = item.ToObject<Servicetypeitem>();
+                        ServiceItemsData.Add(serviceItem);
+                        ServiceofferingsData.Serviceitem = ServiceItemsData.ToList();
                     }
 
                 }
