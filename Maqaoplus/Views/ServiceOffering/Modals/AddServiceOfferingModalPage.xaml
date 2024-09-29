@@ -115,27 +115,23 @@
                             <Label Text="Specific Service Item" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
                             <CollectionView ItemsSource="{Binding ServiceItemsData}" SelectionMode="None">
                                 <CollectionView.Header>
-                                    <Grid ColumnDefinitions="*,Auto,Auto" BackgroundColor="#e0e0e0">
+                                    <Grid ColumnDefinitions="*,*,*" BackgroundColor="#e0e0e0">
                                         <Label Text="Service/Item" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" Padding="2"/>
-                                        <Label Text="Amount" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" Padding="2"/>
-                                        <Label Text="Fixed?" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" Padding="2"/>
+                                        <Label Text="Amount" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Center" Padding="2"/>
+                                        <Label Text="Fixed?" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="End" Padding="2"/>
                                     </Grid>
                                 </CollectionView.Header>
 
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid ColumnDefinitions="*,*,*">
-
-                                            <!-- Hidden fields (not visually represented) -->
+                                        <Grid ColumnDefinitions="*,*,*" RowSpacing="3" Padding="0,4,0,0">
                                             <Entry Text="{Binding Serviceitemid}" IsVisible="False"/>
-
                                             <Entry Text="{Binding Serviceid}" IsVisible="False"/>
-
-                                            <!-- Room Size -->
                                             <Label Text="{Binding Serviceitemname}" LineBreakMode="WordWrap" MaxLines="2" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="2"/>
-
-                                            <!-- Amount -->
-                                            <Entry Text="{Binding Servicefee}" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="Fill"/>
+                                            <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,0" HasShadow="False" Grid.Column="1" HeightRequest="40">
+                                                <Entry Text="{Binding Servicefee}" Keyboard="Numeric"  Placeholder="Service Fee" TextColor="Black"  FontSize="15" BackgroundColor="White" Margin="0" />
+                                            </Frame>
+                                            <CheckBox IsChecked="{Binding Isfixed}" HorizontalOptions="End" Grid.Column="2"/>
                                         </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>

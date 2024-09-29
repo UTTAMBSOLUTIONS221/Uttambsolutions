@@ -77,8 +77,8 @@ namespace Maqaoplus.ViewModels.ServiceOffering
 
                     OnPropertyChanged(nameof(SelectedServicetype));
                     OnPropertyChanged(nameof(ServiceofferingsData.Servicetypeid));
-                    LoadServiceTypeItemsDataByCode();
                 }
+                LoadServiceTypeItemsDataByCode();
             }
         }
         private ObservableCollection<ListModel> _systemcounty;
@@ -113,8 +113,8 @@ namespace Maqaoplus.ViewModels.ServiceOffering
 
                     OnPropertyChanged(nameof(SelectedCounty));
                     OnPropertyChanged(nameof(ServiceofferingsData.Countyid));
-                    LoadSubcountyDataCountyCode();
                 }
+                LoadSubcountyDataCountyCode();
             }
         }
         private ObservableCollection<ListModel> _systemsubcounty;
@@ -329,7 +329,7 @@ namespace Maqaoplus.ViewModels.ServiceOffering
         {
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/Services/Getsystemservicesitemsdatabyid/" + Convert.ToInt64(SelectedCounty.Value), HttpMethod.Get, null);
+                var response = await _serviceProvider.CallAuthWebApi<object>("/api/Services/Getsystemservicesitemsdatabyid/" + Convert.ToInt64(SelectedServicetype.Value), HttpMethod.Get, null);
 
                 if (response != null && response.Data is List<dynamic> items)
                 {

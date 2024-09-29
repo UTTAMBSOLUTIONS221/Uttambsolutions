@@ -295,5 +295,6 @@
     <Build Include="dbo\Stored Procedures\Usp_Registersystemservicedata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystemservicesdatabyid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystemservicesdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemservicesitemsdatabyid.sql" />
   </ItemGroup>
 </Project>
