@@ -38,15 +38,21 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Entry Text="{Binding Staffserviceid}" IsVisible="False"/>
-
                         <StackLayout Grid.Row="0" Grid.Column="0">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <RadioButton GroupName="WorkType" Content="Looking for Work" IsChecked="{Binding IsLookingForWork}" TextColor="Black" />
+                                <RadioButton GroupName="WorkType" Content="Offering Work Opportunity" IsChecked="{Binding IsOfferingWork}" TextColor="Black" />
+                            </StackLayout>
+                        </StackLayout>
+                        
+                        <StackLayout Grid.Row="1" Grid.Column="0">
                             <Label Text="Service Type" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="8" Padding="5,2" HasShadow="False" HeightRequest="45">
                                 <Picker ItemsSource="{Binding Servicetype}" SelectedItem="{Binding SelectedServicetype}" ItemDisplayBinding="{Binding Text}" Title="Select Service Type" TextColor="Black" FontSize="15" BackgroundColor="White" Margin="0" />
                             </Frame>
                             <Label Text="{Binding ServicetypeError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
-                        <StackLayout Grid.Row="0" Grid.Column="1">
+                        <StackLayout Grid.Row="1" Grid.Column="1">
                             <!-- House Status Label -->
                             <Label Text="County" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
@@ -57,7 +63,7 @@
                             <Label Text="{Binding PropertyHouseCountyError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
 
-                        <StackLayout Grid.Row="1" Grid.Column="0">
+                        <StackLayout Grid.Row="2" Grid.Column="0">
                             <!-- Water Type Label -->
                             <Label Text="Sub County" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- Water Type Picker (Styled like an Input Box) -->
@@ -67,7 +73,7 @@
                             <!-- Error Message -->
                             <Label Text="{Binding PropertyHouseSubcountyError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
-                        <StackLayout Grid.Row="1" Grid.Column="1" Spacing="4">
+                        <StackLayout Grid.Row="2" Grid.Column="1" Spacing="4">
                             <!-- House Status Label -->
                             <Label Text="Subcounty Ward" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
@@ -78,7 +84,7 @@
                             <Label Text="{Binding PropertyHouseSubcountyWardError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
 
-                        <StackLayout Grid.Row="2" Grid.ColumnSpan="2">
+                        <StackLayout Grid.Row="3" Grid.ColumnSpan="2">
                             <!-- House Status Label -->
                             <Label Text="Street/Landmark" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
@@ -89,7 +95,7 @@
                             <Label Text="{Binding HouseStreetLandMarkError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
 
-                        <StackLayout Grid.Row="3" Grid.ColumnSpan="2">
+                        <StackLayout Grid.Row="4" Grid.ColumnSpan="2">
                             <!-- House Status Label -->
                             <Label Text="Contact" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
@@ -100,7 +106,7 @@
                             <Label Text="{Binding ServiceOffererContactsError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
 
-                        <StackLayout Grid.Row="4" Grid.ColumnSpan="2">
+                        <StackLayout Grid.Row="5" Grid.ColumnSpan="2">
                             <!-- House Status Label -->
                             <Label Text="Description" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
                             <!-- House Status Picker (Styled like an Input Box) -->
@@ -110,7 +116,7 @@
                             <!-- Error Message -->
                             <Label Text="{Binding ServicedescriptionError}" TextColor="Red" FontSize="12" Margin="0,2,0,0"/>
                         </StackLayout>
-                        <StackLayout Grid.Row="5" Grid.ColumnSpan="2">
+                        <StackLayout Grid.Row="6" Grid.ColumnSpan="2">
                             <!-- Section Header for Tenant Details -->
                             <Label Text="Specific Service Item" FontSize="20" FontAttributes="Bold" Padding="8" HorizontalOptions="Center"  TextColor="#0a506c"/>
                             <CollectionView ItemsSource="{Binding ServiceofferingsData.Serviceitem}" SelectionMode="None">
@@ -137,11 +143,9 @@
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
                         </StackLayout>
-
                     </Grid>
                 </StackLayout>
             </VerticalStackLayout>
-
 
             <!-- Buttons placed at the bottom of the page -->
             <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,70,0,20">
