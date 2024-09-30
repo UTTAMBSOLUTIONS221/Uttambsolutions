@@ -1528,6 +1528,33 @@ namespace DBL
         }
         #endregion
 
+        #region Tokenizations
+        //public async Task PurchaseTokens(int Userid, int Tokenid, decimal Amount)
+        //{
+        //    var token = await _dbContext.SoftwareTokens.FindAsync(tokenId);
+        //    if (token == null) throw new Exception("Token not found.");
+
+        //    decimal totalCost = token.TokenPrice * Amount;
+
+        //    // Assume you have a method to check user balance and deduct
+        //    var user = await _dbContext.Users.FindAsync(userId);
+        //    if (user.Balance < totalCost) throw new Exception("Insufficient balance.");
+
+        //    user.Balance -= totalCost;
+        //    await _dbContext.TokenPurchases.AddAsync(new TokenPurchase
+        //    {
+        //        UserId = Userid,
+        //        SoftwareTokenId = Tokenid,
+        //        TokenAmount = Amount,
+        //        TotalCost = totalCost,
+        //        PurchaseDate = DateTime.UtcNow
+        //    });
+        //    await _dbContext.SaveChangesAsync();
+        //}
+        #endregion
+
+
+
         #region System Dropdowns
         public Task<IEnumerable<ListModel>> GetListModel(ListModelType listType)
         {
