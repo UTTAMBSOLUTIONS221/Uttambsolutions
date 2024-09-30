@@ -1,0 +1,103 @@
+﻿@model IEnumerable<DBL.Entities.Tokenization.Softwaretoken>
+@{
+    ViewData["Title"] = "Softwaretokenslist";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h6 class="font-weight-bold text-sm card-title">System Tokenization</h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <a asp-action="Addsoftwaretoken" asp-controller="Settings" asp-route-Tokenid="0" asp-area="" id="CAN_EDIT_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Software Token</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive table-responsive-sm">
+                <table class="table table-bordered table-striped compact table-sm nowrap text-nowrap" id="AllsystemDataTables">
+                    <thead class="text-uppercase">
+                        <tr>
+                            <th>Token</th>
+                            <th>Price</th>
+                            <th>Supply</th>
+                            <th>Value</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Tokenname</td>
+                                    <td>@item.Tokenprice</td>
+                                    <td>@item.Totalsupply</td>
+                                    <td>@item.Totalvalue</td>
+                                    <td class="nowrap text-nowrap no-wrap-buttons">
+                                        <a asp-action="Addsoftwaretoken" asp-controller="Settings" asp-route-Tokenid="@item.Tokenid" asp-area="" id="CAN_EDIT_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+            let isValid = true;
+            ﻿function savesoftwaretokendata() {
+                if ($('#Tokennameid').val() === "") {
+                    $('#Tokennameid').addClass('is-invalid');  // Add the 'is-invalid' class using jQuery
+                    isValid = false;
+                } else {
+                    $('#Tokennameid').removeClass('is-invalid');  // Remove the 'is-invalid' class using jQuery
+                }
+                if ($('#Tokenpriceid').val() === "" || $('#Tokenpriceid').val() === 0) {
+                    $('#Tokenpriceid').addClass('is-invalid');  // Add the 'is-invalid' class using jQuery
+                    isValid = false;
+                } else {
+                    $('#Tokenpriceid').removeClass('is-invalid');  // Remove the 'is-invalid' class using jQuery
+                }
+                if ($('#Totalsupplyid').val() === "" || $('#Totalsupplyid').val() === 0) {
+                    $('#Totalsupplyid').addClass('is-invalid');  // Add the 'is-invalid' class using jQuery
+                    isValid = false;
+                } else {
+                    $('#Totalsupplyid').removeClass('is-invalid');  // Remove the 'is-invalid' class using jQuery
+                }
+
+                // If the form is not valid, exit the function
+                if (!isValid) {
+                    return;
+                }
+                document.getElementById("savesoftwaretokenid").disabled = true;
+                document.getElementById("processingSpinner").style.display = "inline-block";
+                document.getElementById("buttonText").innerText = "Processing...";
+               
+
+                var uil1 = {
+                    Tokenid: $('#Tokenid').val(), Tokenname: $('#Tokennameid').val(),Tokenprice: $('#Tokenpriceid').val(),Totalsupply: $('#Totalsupplyid').val(),  Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                };
+                $.post("/Settings/Addsoftwaretokendata", uil1, function (response) {
+                    if (response.RespStatus == 0) {
+                        Swal.fire('Saved!', response.RespMessage, 'success')
+                        setTimeout(function () { location.reload(); }, 1000);
+                    } else if (response.RespStatus == 1) {
+                        Swal.fire("Token details not saved", response.RespMessage, "warning");
+                    }
+                    else {
+                        Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
+                    }
+                    document.getElementById("savesoftwaretokenid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                });
+             }
+    </script>
+}

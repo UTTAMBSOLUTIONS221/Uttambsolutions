@@ -2,7 +2,7 @@
 {
     public class Softwaretoken
     {
-        public int Id { get; set; }
+        public int Tokenid { get; set; }
         public string Tokenname { get; set; } // E.g., "SYS-TOKEN"
         public decimal Tokenprice { get; set; } // Price per token, e.g., $10
         public int Totalsupply { get; set; } // Total tokens for this software, e.g., 100,000
