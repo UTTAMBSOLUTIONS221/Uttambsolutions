@@ -82,7 +82,7 @@
                
 
                 var uil1 = {
-                    Tokenid: $('#Tokenid').val(), Tokenname: $('#Tokennameid').val(),Tokenprice: $('#Tokenpriceid').val(),Totalsupply: $('#Totalsupplyid').val(),  Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' '),
+                    Tokenid: $('#Tokenid').val(), Tokenname: $('#Tokennameid').val(),Tokenprice: $('#Tokenpriceid').val(),Totalsupply: $('#Totalsupplyid').val(),  Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
                 };
                 $.post("/Settings/Addsoftwaretokendata", uil1, function (response) {
                     if (response.RespStatus == 0) {
