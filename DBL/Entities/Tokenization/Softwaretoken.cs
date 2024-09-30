@@ -7,6 +7,7 @@
         public decimal Tokenprice { get; set; } // Price per token, e.g., $10
         public int Totalsupply { get; set; } // Total tokens for this software, e.g., 100,000
         public decimal Totalvalue => Tokenprice * Totalsupply; // Total value of the system
+        public DateTime Datecreated { get; set; }
     }
 
 }

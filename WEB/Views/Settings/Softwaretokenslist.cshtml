@@ -53,19 +53,24 @@
     <script type="text/javascript">
             let isValid = true;
             ﻿function savesoftwaretokendata() {
+                isValid = true;
+                document.getElementById("savesoftwaretokenid").disabled = true;
+                document.getElementById("processingSpinner").style.display = "inline-block";
+                document.getElementById("buttonText").innerText = "Processing...";
+
                 if ($('#Tokennameid').val() === "") {
                     $('#Tokennameid').addClass('is-invalid');  // Add the 'is-invalid' class using jQuery
                     isValid = false;
                 } else {
                     $('#Tokennameid').removeClass('is-invalid');  // Remove the 'is-invalid' class using jQuery
                 }
-                if ($('#Tokenpriceid').val() === "" || $('#Tokenpriceid').val() === 0) {
+                if ($('#Tokenpriceid').val() === "" || $('#Tokenpriceid').val() === "0") {
                     $('#Tokenpriceid').addClass('is-invalid');  // Add the 'is-invalid' class using jQuery
                     isValid = false;
                 } else {
                     $('#Tokenpriceid').removeClass('is-invalid');  // Remove the 'is-invalid' class using jQuery
                 }
-                if ($('#Totalsupplyid').val() === "" || $('#Totalsupplyid').val() === 0) {
+                if ($('#Totalsupplyid').val() === "" || $('#Totalsupplyid').val() === "0") {
                     $('#Totalsupplyid').addClass('is-invalid');  // Add the 'is-invalid' class using jQuery
                     isValid = false;
                 } else {
@@ -74,12 +79,11 @@
 
                 // If the form is not valid, exit the function
                 if (!isValid) {
+                    document.getElementById("savesoftwaretokenid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
                     return;
                 }
-                document.getElementById("savesoftwaretokenid").disabled = true;
-                document.getElementById("processingSpinner").style.display = "inline-block";
-                document.getElementById("buttonText").innerText = "Processing...";
-               
 
                 var uil1 = {
                     Tokenid: $('#Tokenid').val(), Tokenname: $('#Tokennameid').val(),Tokenprice: $('#Tokenpriceid').val(),Totalsupply: $('#Totalsupplyid').val(),  Datecreated: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
@@ -98,6 +102,6 @@
                     document.getElementById("processingSpinner").style.display = "none";
                     document.getElementById("buttonText").innerText = "SAVE";
                 });
-             }
+            }
     </script>
 }
