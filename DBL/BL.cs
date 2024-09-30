@@ -1,5 +1,6 @@
 ﻿using DBL.Entities;
 using DBL.Entities.Mpesa;
+using DBL.Entities.Tokenization;
 using DBL.Enum;
 using DBL.Helpers;
 using DBL.Models;
@@ -610,6 +611,33 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.SettingsRepository.Getsystemservicesitemsdatabyid(Serviceid);
+                return Resp;
+            });
+        }
+        #endregion
+
+        #region Software Tokenization
+        public Task<IEnumerable<Softwaretoken>> Getsystemsoftwaretokensdata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystemsoftwaretokensdata();
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registersoftwaretokendata(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Registersoftwaretokendata(obj);
+                return Resp;
+            });
+        }
+        public Task<Softwaretoken> Getsystemsoftwaretokensdatabyid(long Tokenid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystemsoftwaretokensdatabyid(Tokenid);
                 return Resp;
             });
         }

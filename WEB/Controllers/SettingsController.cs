@@ -1,5 +1,6 @@
 ﻿using DBL;
 using DBL.Entities;
+using DBL.Entities.Tokenization;
 using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -73,6 +74,30 @@ namespace WEB.Controllers
         public async Task<JsonResult> Addsystemservicedata(Systemservices model)
         {
             var resp = await bl.Registersystemservicedata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
+        #endregion
+
+        #region Staff Tokenizations
+        [HttpGet]
+        public async Task<IActionResult> Softwaretokenslist()
+        {
+            var data = await bl.Getsystemsoftwaretokensdata();
+            return View(data);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Addsoftwaretoken(long Tokenid)
+        {
+            Softwaretoken softwaretoken = new Softwaretoken();
+            if (Tokenid > 0)
+            {
+                softwaretoken = await bl.Getsystemsoftwaretokensdatabyid(Tokenid);
+            }
+            return PartialView(softwaretoken);
+        }
+        public async Task<JsonResult> Addsoftwaretokendata(Softwaretoken model)
+        {
+            var resp = await bl.Registersoftwaretokendata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
         #endregion

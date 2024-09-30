@@ -1,4 +1,5 @@
 ﻿using DBL.Entities;
+using DBL.Entities.Tokenization;
 using DBL.Models;
 
 namespace DBL.Repositories
@@ -16,6 +17,12 @@ namespace DBL.Repositories
         Genericmodel Registersystemservicedata(string jsonObjectdata);
         Systemservices Getsystemservicesdatabyid(long Serviceid);
         Systemservices Getsystemservicesitemsdatabyid(long Serviceid);
+        #endregion
+
+        #region Software Tokenizations
+        IEnumerable<Softwaretoken> Getsystemsoftwaretokensdata();
+        Genericmodel Registersoftwaretokendata(string jsonObjectdata);
+        Softwaretoken Getsystemsoftwaretokensdatabyid(long Tokenid);
         #endregion
 
 

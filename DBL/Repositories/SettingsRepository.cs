@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DBL.Entities;
+using DBL.Entities.Tokenization;
 using DBL.Models;
 using DBL.Repositories.DBL.Repositories;
 using Newtonsoft.Json;
@@ -106,6 +107,39 @@ namespace DBL.Repositories
                 }
             }
         }
+        #endregion
+
+        #region Software Tokenizations
+        public IEnumerable<Softwaretoken> Getsystemsoftwaretokensdata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                return connection.Query<Softwaretoken>("Usp_Getsystemsoftwaretokensdata", null, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+        public Genericmodel Registersoftwaretokendata(string jsonObjectdata)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", jsonObjectdata);
+                return connection.Query<Genericmodel>("Usp_Registersoftwaretokendata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        public Softwaretoken Getsystemsoftwaretokensdatabyid(long Tokenid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Tokenid", Tokenid);
+                return connection.Query<Softwaretoken>("Usp_Getsystemsoftwaretokensdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
         #endregion
 
         #region Communication Templates
