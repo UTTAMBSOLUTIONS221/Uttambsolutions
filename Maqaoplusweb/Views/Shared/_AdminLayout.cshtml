@@ -112,6 +112,11 @@
                                 <i class="nav-icon fas fa-tachometer-alt"></i><p>Dashboard</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a asp-controller="Staff" asp-action="Shareslist" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i><p>Shares</p>
+                            </a>
+                        </li>
                         @if (currentUserData.Usermodel.Rolename == "Maqaoplus Property House Owner")
                         {
                             <li class="nav-item main" id="CAN_VIEW_PROPERTY" style="display:none;">

@@ -78,5 +78,11 @@ namespace Maqaoplusweb.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Shareslist()
+        {
+            return View();
+        }
     }
 }
