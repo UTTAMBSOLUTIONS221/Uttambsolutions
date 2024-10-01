@@ -99,5 +99,10 @@ namespace Maqaoplusweb.Controllers
             var resp = await bl.Registersoftwaretokenpurchasedata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
+        public async Task<JsonResult> Verifythistokenpurchasedatabyid(int id)
+        {
+            var resp = await bl.Verifythistokenpurchasedatabyid(id);
+            return Json(resp);
+        }
     }
 }

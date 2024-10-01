@@ -657,6 +657,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Verifythistokenpurchasedatabyid(long Tokenpurchaseid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Verifythistokenpurchasedatabyid(Tokenpurchaseid);
+                return Resp;
+            });
+        }
         #endregion
 
         #region System Modules

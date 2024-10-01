@@ -25,6 +25,7 @@ namespace DBL.Repositories
         Softwaretoken Getsystemsoftwaretokensdatabyid(long Tokenid);
         Genericmodel Registersoftwaretokenpurchasedata(string jsonObjectdata);
         IEnumerable<Tokenpurchase> Getsystemsoftwaretokenspurchasedata();
+        Genericmodel Verifythistokenpurchasedatabyid(long Tokenpurchaseid);
         #endregion
 
 

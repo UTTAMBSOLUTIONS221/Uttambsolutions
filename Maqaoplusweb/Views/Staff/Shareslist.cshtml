@@ -117,5 +117,52 @@
                     document.getElementById("buttonText").innerText = "SAVE";
                 });
             }
+
+            function verifythistokenpurchase(event) {
+            Swal.fire({
+                title: "Are you sure you want to validate this?",
+                text: "Once validated, will be okay!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, validate it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Log event and target for debugging purposes
+                    console.log("Event triggered, target element:", event.target);
+                    var activateBtn = event.target;
+
+                    // Get the Entryid from the button
+                    var Entryid = activateBtn.getAttribute('data-Entryid');
+                    if (!Entryid) {
+                        Swal.fire("Error", "Entry ID not found. Please try again.", "error");
+                        return;
+                    }
+
+                    // Log Entryid for debugging
+                    console.log("Entryid found:", Entryid);
+
+                    // Send the POST request to verify the staff account
+                    $.post("/Staff/Verifythistokenpurchasedatabyid/" + Entryid, function (response) {
+                        console.log("Response from server:", response); // Log response for debugging
+                        if (response.RespStatus === 0) {
+                            Swal.fire('Item Activated!', 'Good.', 'success');
+                            setTimeout(function () { location.reload(); }, 1000);
+                        } else if (response.RespStatus === 1) {
+                            Swal.fire("Oops!", response.RespMessage, "warning");
+                        } else {
+                            Swal.fire("Oops! Something Went Wrong", "Database error has occurred. Kindly contact our support team.", "error");
+                        }
+                    }).fail(function (xhr, status, error) {
+                        // Log the error for debugging
+                        console.log("AJAX error:", error);
+                        Swal.fire("Error", "An error occurred while verifying the staff account. Please try again.", "error");
+                    });
+                } else {
+                    Swal.fire("Thank you!", "Activate once you are sure.", "info");
+                }
+            });
+        }
     </script>
 }
