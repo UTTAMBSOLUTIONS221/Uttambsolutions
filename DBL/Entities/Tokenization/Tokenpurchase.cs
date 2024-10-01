@@ -9,6 +9,7 @@
         public decimal Totalcost { get; set; } // Total cost (TokenPrice * TokenAmount)
         public decimal Tokenprice { get; set; }
         public string Tokenname { get; set; }
+        public int Tokenstatus { get; set; }
         public DateTime Purchasedate { get; set; } // Purchase timestamp
     }
 }

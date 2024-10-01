@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DBL.Entities.Tokenization.Softwaretoken>
+﻿@model IEnumerable<DBL.Entities.Tokenization.Tokenpurchase>
 @{
     ViewData["Title"] = "Shareslist";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -21,9 +21,9 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Role</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                            <th>Cost</th>
                             <th>Status</th>
                             <th class="text-right">Action</th>
                         </tr>
@@ -35,54 +35,24 @@
                             {
                                 <tr>
                                     <td>@item.Tokenname</td>
-                                    <td>@item.Tokenprice</td>
-                                    <td>@Html.Raw(item.Templatebody)</td>
+                                    <td>@item.Tokenprice.ToString("#,##0.00")</td>
+                                    <td>@item.Tokenamount.ToString("#,##0.00")</td>
+                                    <td>@item.Totalcost.ToString("#,##0.00")</td>
                                     <td>
-                                        @if (item.Isemailsms)
+                                        @if (item.Tokenstatus==3)
                                         {
-                                            <span class="badge badge-warning badge-info-xs text-uppercase font-weight-bold text-white">Yes</span>
+                                            <span class="badge badge-warning badge-info-xs text-uppercase font-weight-bold text-white">Not Paid</span>
+                                        }else if (item.Tokenstatus==3)
+                                        {
+                                            <span class="badge badge-secondary badge-info-xs text-uppercase font-weight-bold text-white">Partially Paid</span>
                                         }
                                         else
                                         {
-                                            <span class="badge badge-warning badge-info-xs text-uppercase font-weight-bold text-white">No</span>
-                                        }
-                                    </td>
-                                    <td>
-                                        @if (item.Isactive)
-                                        {
-                                            <span class="badge badge-info badge-info-xs text-uppercase font-weight-bold">Active</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge badge-danger badge-info-xs text-uppercase font-weight-bold">Inactive</span>
-                                        }
-                                        @if (item.Isdeleted)
-                                        {
-                                            <span class="badge badge-danger badge-info-xs text-uppercase font-weight-bold">Deleted</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge badge-info badge-info-xs text-uppercase font-weight-bold">Notdeleted</span>
+                                            <span class="badge badge-success badge-info-xs text-uppercase font-weight-bold text-white">Paid</span>
                                         }
                                     </td>
                                     <td class="nowrap text-nowrap no-wrap-buttons">
-                                        <a asp-action="Addcommunicationtemplate" asp-controller="CommunicationTemplate" asp-route-Templateid="@item.Templateid" asp-area="" id="CAN_EDIT_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
-                                        @if (item.Isactive)
-                                        {
-                                            <a onclick="deactivatethis(event)" data-Tablename="Communicationtemplates" data-Columname="Isactive" data-Status="0" data-Columnidname="Templateid" data-Entryid="@item.Templateid" id="CAN_DEACTIVATE_TEMPLATES" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Deactivate</a>
-                                        }
-                                        else
-                                        {
-                                            <a onclick="activatethis(event)" data-Tablename="Communicationtemplates" data-Columname="Isactive" data-Status="1" data-Columnidname="Templateid" data-Entryid="@item.Templateid" id="CAN_ACTIVATE_TEMPLATES" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Activate</a>
-                                        }
-                                        @if (item.Isdeleted)
-                                        {
-                                            <a onclick="restorethis(event)" data-Tablename="Communicationtemplates" data-Columname="Isdeleted" data-Status="0" data-Columnidname="Templateid" data-Entryid="@item.Templateid" id="CAN_RESTORE_TEMPLATES" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Restore</a>
-                                        }
-                                        else
-                                        {
-                                            <a onclick="deletethis(event)" data-Tablename="Communicationtemplates" data-Columname="Isdeleted" data-Status="1" data-Columnidname="Templateid" data-Entryid="@item.Templateid" id="CAN_DELETE_TEMPLATES" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Delete</a>
-                                        }
+                                        <a asp-action="Addcommunicationtemplate" asp-controller="CommunicationTemplate" asp-route-Templateid="@item.Tokenpurchaseid" asp-area="" id="CAN_EDIT_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
                                     </td>
                                 </tr>
                             }
