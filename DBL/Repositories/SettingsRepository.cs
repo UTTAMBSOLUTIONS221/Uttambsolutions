@@ -149,6 +149,15 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registersoftwaretokenpurchasedata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+        public IEnumerable<Tokenpurchase> Getsystemsoftwaretokenspurchasedata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                return connection.Query<Tokenpurchase>("Usp_Getsystemsoftwaretokenspurchasedata", null, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
         #endregion
 
         #region Communication Templates

@@ -649,7 +649,14 @@ namespace DBL
                 return Resp;
             });
         }
-
+        public Task<IEnumerable<Tokenpurchase>> Getsystemsoftwaretokenspurchasedata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystemsoftwaretokenspurchasedata();
+                return Resp;
+            });
+        }
         #endregion
 
         #region System Modules

@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<DBL.Entities.Tokenization.Softwaretoken>
 @{
     ViewData["Title"] = "Shareslist";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -29,7 +29,64 @@
                         </tr>
                     </thead>
                     <tbody>
-                       
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Tokenname</td>
+                                    <td>@item.Tokenprice</td>
+                                    <td>@Html.Raw(item.Templatebody)</td>
+                                    <td>
+                                        @if (item.Isemailsms)
+                                        {
+                                            <span class="badge badge-warning badge-info-xs text-uppercase font-weight-bold text-white">Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-warning badge-info-xs text-uppercase font-weight-bold text-white">No</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.Isactive)
+                                        {
+                                            <span class="badge badge-info badge-info-xs text-uppercase font-weight-bold">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger badge-info-xs text-uppercase font-weight-bold">Inactive</span>
+                                        }
+                                        @if (item.Isdeleted)
+                                        {
+                                            <span class="badge badge-danger badge-info-xs text-uppercase font-weight-bold">Deleted</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-info badge-info-xs text-uppercase font-weight-bold">Notdeleted</span>
+                                        }
+                                    </td>
+                                    <td class="nowrap text-nowrap no-wrap-buttons">
+                                        <a asp-action="Addcommunicationtemplate" asp-controller="CommunicationTemplate" asp-route-Templateid="@item.Templateid" asp-area="" id="CAN_EDIT_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white float-right font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                        @if (item.Isactive)
+                                        {
+                                            <a onclick="deactivatethis(event)" data-Tablename="Communicationtemplates" data-Columname="Isactive" data-Status="0" data-Columnidname="Templateid" data-Entryid="@item.Templateid" id="CAN_DEACTIVATE_TEMPLATES" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Deactivate</a>
+                                        }
+                                        else
+                                        {
+                                            <a onclick="activatethis(event)" data-Tablename="Communicationtemplates" data-Columname="Isactive" data-Status="1" data-Columnidname="Templateid" data-Entryid="@item.Templateid" id="CAN_ACTIVATE_TEMPLATES" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Activate</a>
+                                        }
+                                        @if (item.Isdeleted)
+                                        {
+                                            <a onclick="restorethis(event)" data-Tablename="Communicationtemplates" data-Columname="Isdeleted" data-Status="0" data-Columnidname="Templateid" data-Entryid="@item.Templateid" id="CAN_RESTORE_TEMPLATES" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Restore</a>
+                                        }
+                                        else
+                                        {
+                                            <a onclick="deletethis(event)" data-Tablename="Communicationtemplates" data-Columname="Isdeleted" data-Status="1" data-Columnidname="Templateid" data-Entryid="@item.Templateid" id="CAN_DELETE_TEMPLATES" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Delete</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table>
             </div>

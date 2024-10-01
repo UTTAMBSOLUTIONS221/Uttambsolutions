@@ -84,7 +84,7 @@ namespace Maqaoplusweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Shareslist()
         {
-            var data = await bl.Getsystemsoftwaresharesdata();
+            var data = await bl.Getsystemsoftwaretokenspurchasedata();
             return View(data);
         }
 
