@@ -54,11 +54,11 @@
                                     <td class="nowrap text-nowrap no-wrap-buttons">
                                          @if (item.Tokenstatus ==3 || item.Tokenstatus ==2)
                                         {
-                                            <a onclick="verifythistokenpurchase(event)" data-Entryid="@item.Tokenpurchaseid" id="CAN_EDIT_STAFF" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false">Validate</a>
+                                            <a onclick="verifythistokenpurchase(event)" data-Entryid="@item.Tokenpurchaseid" id="CAN_EDIT_STAFF" class="btn-info btn-xs text-white font-weight-bold text-uppercase main float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false">Validate</a>
                                         }
                                         else
                                         {
-                                            <button class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right">Paid</button>
+                                            <button class="btn-success btn-xs text-white font-weight-bold text-uppercase main float-right">Paid</button>
                                         }
                                     </td>
                                 </tr>
