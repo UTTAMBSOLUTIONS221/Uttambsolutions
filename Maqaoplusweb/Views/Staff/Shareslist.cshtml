@@ -66,7 +66,7 @@
                 }
 
                 var uil1 = {
-                    Tokenpurchaseid: $('#Tokenpurchaseid').val(), Tokenid: $('#Tokenid').val(),Tokenamount: $('#Tokenamountid').val(),Userid: $('#systemLoggedinedUserid').val()
+                    Tokenpurchaseid: $('#Tokenpurchaseid').val(), Tokenid: $('#Tokenid').val(),Tokenamount: $('#Tokenamountid').val(),Userid: $('#systemLoggedinedUserid').val(),Purchasedate: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
                 };
                 $.post("/Staff/Registersoftwaretokenpurchase", uil1, function (response) {
                     if (response.RespStatus == 0) {
