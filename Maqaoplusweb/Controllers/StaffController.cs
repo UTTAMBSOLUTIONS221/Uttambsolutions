@@ -1,9 +1,11 @@
 ﻿using DBL;
 using DBL.Entities;
+using DBL.Entities.Tokenization;
 using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace Maqaoplusweb.Controllers
 {
@@ -85,12 +87,16 @@ namespace Maqaoplusweb.Controllers
             return View();
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Buyshare()
         {
-
+            ViewData["Systemtokenslists"] = bl.GetListModel(ListModelType.Systemtokens).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             return PartialView();
+        }
+        public async Task<JsonResult> Registersoftwaretokenpurchase(Tokenpurchase model)
+        {
+            var resp = await bl.Registersoftwaretokenpurchasedata(JsonConvert.SerializeObject(model));
+            return Json(resp);
         }
     }
 }
