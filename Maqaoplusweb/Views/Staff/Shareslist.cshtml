@@ -52,7 +52,14 @@
                                         }
                                     </td>
                                     <td class="nowrap text-nowrap no-wrap-buttons">
-                                        <a asp-action="Addcommunicationtemplate" asp-controller="CommunicationTemplate" asp-route-Templateid="@item.Tokenpurchaseid" asp-area="" id="CAN_EDIT_PERMISSION" style="display:none;" class="main btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                         @if (item.Tokenstatus ==3 || item.Tokenstatus ==2)
+                                        {
+                                            <a onclick="verifythistokenpurchase(event)" data-Entryid="@item.Tokenpurchaseid" id="CAN_EDIT_STAFF" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false">Validate</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Paid</a>
+                                        }
                                     </td>
                                 </tr>
                             }
