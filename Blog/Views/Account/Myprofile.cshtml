@@ -281,9 +281,9 @@
                                                 {
                                                     <tr>
                                                         <td><img src="@Url.Content(item.Blogprimaryimageurl)" height="40" width="40" alt="@item.Blogcategoryname" /></td>
-                                                        <td>@item.Blogname</td>
-                                                        <td>@item.Summary</td>
-                                                        <td>@item.Blogcontent</td>
+                                                        <td class="wrap text-wrap">@item.Blogname</td>
+                                                        <td class="wrap text-wrap">@item.Summary</td>
+                                                        <td class="wrap text-wrap">@item.Blogcontent</td>
                                                         <td>@item.Blogcategoryname</td>
                                                         <td>@item.Blogtags</td>
                                                         <td class="text-right"><a asp-action="Addsystemblog" asp-controller="Systemblog" asp-route-code="@Guid.NewGuid()" asp-route-Blogid="@item.Blogid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
