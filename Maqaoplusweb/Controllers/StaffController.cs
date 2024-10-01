@@ -84,5 +84,13 @@ namespace Maqaoplusweb.Controllers
         {
             return View();
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Buyshare()
+        {
+
+            return PartialView();
+        }
     }
 }
