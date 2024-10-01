@@ -147,7 +147,7 @@
                     $.post("/Staff/Verifythistokenpurchasedatabyid/" + Entryid, function (response) {
                         console.log("Response from server:", response); // Log response for debugging
                         if (response.RespStatus === 0) {
-                            Swal.fire('Item Activated!', 'Good.', 'success');
+                            Swal.fire('Item Validated!', 'Good.', 'success');
                             setTimeout(function () { location.reload(); }, 1000);
                         } else if (response.RespStatus === 1) {
                             Swal.fire("Oops!", response.RespMessage, "warning");
@@ -160,7 +160,7 @@
                         Swal.fire("Error", "An error occurred while verifying the staff account. Please try again.", "error");
                     });
                 } else {
-                    Swal.fire("Thank you!", "Activate once you are sure.", "info");
+                    Swal.fire("Thank you!", "Validate once you are sure.", "info");
                 }
             });
         }
