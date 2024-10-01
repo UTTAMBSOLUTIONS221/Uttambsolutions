@@ -296,5 +296,15 @@
     <Build Include="dbo\Stored Procedures\Usp_Getsystemservicesdatabyid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystemservicesdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystemservicesitemsdatabyid.sql" />
+    <Build Include="dbo\Tables\Tokenownership.sql" />
+    <Build Include="dbo\Tables\Systemserviceitems.sql" />
+    <Build Include="dbo\Tables\Softwaretokenpurchase.sql" />
+    <Build Include="dbo\Tables\Softwaretoken.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Verifythistokenpurchasedatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersoftwaretokenpurchasedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registersoftwaretokendata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemsoftwaretokenspurchasedata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemsoftwaretokensdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemsoftwaretokensdata.sql" />
   </ItemGroup>
 </Project>

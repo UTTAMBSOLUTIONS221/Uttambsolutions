@@ -58,4 +58,6 @@ If(@Type = 30)
 Select r.Fixturestatus as Text, r.Fixturestatusid as Value From Systemfixturestatus r;
 If(@Type = 31)
 Select r.Servicename as Text, r.Serviceid as Value From Systemservices r;
+If(@Type = 32)
+Select r.Tokenname+'- KES '+ CONVERT(VARCHAR(10),r.Tokenprice)+' Per Share' as Text, r.Tokenid as Value From Softwaretoken r;
 END
