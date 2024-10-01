@@ -42,7 +42,7 @@
                                         @if (item.Tokenstatus==3)
                                         {
                                             <span class="badge badge-warning badge-info-xs text-uppercase font-weight-bold text-white">Not Paid</span>
-                                        }else if (item.Tokenstatus==3)
+                                        }else if (item.Tokenstatus==2)
                                         {
                                             <span class="badge badge-secondary badge-info-xs text-uppercase font-weight-bold text-white">Partially Paid</span>
                                         }
@@ -51,14 +51,14 @@
                                             <span class="badge badge-success badge-info-xs text-uppercase font-weight-bold text-white">Paid</span>
                                         }
                                     </td>
-                                    <td class="nowrap text-nowrap no-wrap-buttons">
+                                    <td>
                                          @if (item.Tokenstatus ==3 || item.Tokenstatus ==2)
                                         {
                                             <a onclick="verifythistokenpurchase(event)" data-Entryid="@item.Tokenpurchaseid" id="CAN_EDIT_STAFF" class="btn-info btn-xs text-white font-weight-bold text-uppercase main float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false">Validate</a>
                                         }
                                         else
                                         {
-                                            <button class="btn-success btn-xs text-white font-weight-bold text-uppercase main float-right">Paid</button>
+                                           <button class="btn btn-info btn-xs text-white font-weight-bold text-uppercase main float-right">Paid</button>
                                         }
                                     </td>
                                 </tr>
