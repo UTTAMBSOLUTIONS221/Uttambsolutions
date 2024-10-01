@@ -5,6 +5,9 @@ namespace DBL.Models
     public class SystemUserProfileData
     {
         public string Systemmodulename { get; set; }
+        public string Fullname { get; set; }
+        public string Emailaddress { get; set; }
+        public DateTime Datecreated { get; set; }
         public Systemjobdata Systemjobsdata { get; set; }
         public Systemblogdata Systemblogdata { get; set; }
         public Systemorganizationshopproducts Shopproductsdata { get; set; }
