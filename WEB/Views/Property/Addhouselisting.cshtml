@@ -20,7 +20,7 @@
         </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label class="font-weight-light">Property Type</label>
+                <label class="font-weight-light">Is rental?</label>
                 <input asp-for="@Model.Isforrent" class="form-control form-control-sm" id="Housepropertyisforrentid" />
             </div>
         </div>
@@ -37,19 +37,19 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="form-group">
-                <label class="font-weight-light text-center ml-4">Price</label>
+                <label class="font-weight-light">Price</label>
                 <input asp-for="@Model.Price" class="form-control form-control-sm" id="Housepropertypriceid" />
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
-                <label class="font-weight-light text-center ml-4">Bedrooms</label>
+                <label class="font-weight-light">Bedrooms</label>
                 <input asp-for="@Model.Bedrooms" class="form-control form-control-sm" id="Housepropertybedroomsid" />
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
-                <label class="font-weight-light text-center ml-4">Bathrooms</label>
+                <label class="font-weight-light">Bathrooms</label>
                 <input asp-for="@Model.Bathrooms" class="form-control form-control-sm" id="Housepropertybathroomsid" />
             </div>
         </div>
@@ -63,7 +63,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="font-weight-light">Contacts</label>
+                <input asp-for="@Model.Bathrooms" class="form-control form-control-sm" id="Housepropertycontactsid" />
+            </div>
+        </div>
+        <div class="col-sm-6">
             <div class="form-group">
                 <label class="font-weight-light"> Image(s)</label>
                 <input class="form-control form-control-sm font-weight-light" id="Houselistingimageurlid" type="file" multiple onchange="systemHousePropertyFileChanged(event)" />
