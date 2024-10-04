@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-9">
             <div class="form-group">
                 <label class="font-weight-light">Property Title</label>
                 <input asp-for="@Model.Title" class="form-control form-control-sm" required id="Houselistingtitleid" />
@@ -21,21 +21,7 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label class="font-weight-light">Property Type</label>
-                <select asp-for="@Model.Propertytype" class="form-control form-control-sm" required id="Housepropertytypeid">
-                    <option value="">---Select---</option>
-                    <option value="House for Sale">House for Sale</option>
-                    <option value="House for Rent">House for Rent</option>
-                    <option value="Apartment">Apartment</option>
-                    <option value="Bungalow">Bungalow</option>
-                    <option value="Townhouse">Townhouse</option>
-                    <option value="Commercial Space">Commercial Space</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label class="font-weight-light text-center ml-4">Price</label>
-                <input asp-for="@Model.Price" class="form-control form-control-sm" id="Housepropertypriceid" />
+                <input asp-for="@Model.Isforrent" class="form-control form-control-sm" id="Housepropertyisforrentid" />
             </div>
         </div>
     </div>
@@ -47,6 +33,27 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light text-center ml-4">Price</label>
+                <input asp-for="@Model.Price" class="form-control form-control-sm" id="Housepropertypriceid" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light text-center ml-4">Bedrooms</label>
+                <input asp-for="@Model.Bedrooms" class="form-control form-control-sm" id="Housepropertybedroomsid" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light text-center ml-4">Bathrooms</label>
+                <input asp-for="@Model.Bathrooms" class="form-control form-control-sm" id="Housepropertybathroomsid" />
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
@@ -55,8 +62,23 @@
             </div>
         </div>
     </div>
-
-   
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="font-weight-light"> Image(s)</label>
+                <input class="form-control form-control-sm font-weight-light" type="file" onchange="systemBlogFileChanged(event)" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12" hidden>
+            <div class="form-group">
+                <label class="font-weight-light">Images Url</label>
+                <input class="form-control form-control-sm" id="UttambsolutionsimageurlId" readonly />
+            </div>
+        </div>
+        <div id="Uttambsolutionsimagespreviewcontainer"></div>
+    </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
