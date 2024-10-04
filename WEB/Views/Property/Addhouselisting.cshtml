@@ -1,0 +1,47 @@
+﻿@model DBL.Entities.Propertyhouselisting
+<div class="modal-header">
+    <h5 class="text-sm modal-title" id="SocialPesaModalLabel">House List</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <input asp-for="@Model.Houselistingid" id="Houselistingid" hidden />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="font-weight-light">Property Title</label>
+                <input asp-for="@Model.Title" class="form-control form-control-sm" required id="Houselistingtitleid" />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="font-weight-light">Property Type</label>
+                <select asp-for="@Model.Propertytype" class="form-control form-control-sm" required id="Housepropertytypeid">
+                    <option value="">---Select---</option>
+                    <option value="House for Sale">House for Sale</option>
+                    <option value="House for Rent">House for Rent</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Bungalow">Bungalow</option>
+                    <option value="Townhouse">Townhouse</option>
+                    <option value="Commercial Space">Commercial Space</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="font-weight-light text-center ml-4">Price</label>
+                <input asp-for="@Model.Price" class="form-control form-control-sm" id="Housepropertypriceid" />
+            </div>
+        </div>
+    </div>
+   
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" onclick="Savesystemcommunicationtemplatedata();">Submit</button>
+</div>

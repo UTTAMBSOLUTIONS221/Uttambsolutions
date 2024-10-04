@@ -32,6 +32,23 @@ namespace WEB.Controllers
         {
             return View();
         }
+        #region Property Listing
+        [HttpGet]
+        public async Task<IActionResult> Propertyhouselisting()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Addhouselisting(long Houselistingid)
+        {
+
+            //var data = await bl.Getsystempropertyhousedatabyid(Houselistingid);
+            return PartialView();
+        }
+        #endregion
+
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
