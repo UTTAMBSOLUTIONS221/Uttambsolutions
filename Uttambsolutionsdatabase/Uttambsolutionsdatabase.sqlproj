@@ -307,8 +307,8 @@
     <Build Include="dbo\Stored Procedures\Usp_Getsystemsoftwaretokensdatabyid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystemsoftwaretokensdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystemstaffowneragentdata.sql" />
-    <Build Include="dbo\Tables\Propertyhouselistingimages_1.sql" />
-    <Build Include="dbo\Tables\Propertyhouselisting_1.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Registerhousepropertydata_1.sql" />
+    <Build Include="dbo\Tables\Propertyhouselisting.sql" />
+    <Build Include="dbo\Tables\Propertyhouselistingimages.sql" />
   </ItemGroup>
 </Project>
