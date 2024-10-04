@@ -42,6 +42,8 @@ namespace WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Addhouselisting(long Houselistingid)
         {
+            var environment = _env.IsDevelopment() ? "Development" : "Production";
+            ViewBag.Environment = environment;
 
             //var data = await bl.Getsystempropertyhousedatabyid(Houselistingid);
             return PartialView();
