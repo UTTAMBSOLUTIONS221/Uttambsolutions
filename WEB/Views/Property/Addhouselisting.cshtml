@@ -66,7 +66,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label class="font-weight-light"> Image(s)</label>
-                <input class="form-control form-control-sm font-weight-light" type="file" onchange="systemHousePropertyFileChanged(event)" />
+                <input class="form-control form-control-sm font-weight-light" id="Houselistingimageurlid" type="file" onchange="systemHousePropertyFileChanged(event)" />
             </div>
         </div>
     </div>
@@ -82,7 +82,7 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemhousepropertyid" onclick="Savesystemhousepropertydata();">
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savesystemhousepropertyid" onclick="savesystemhousepropertydata();">
         <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
     </button>
 </div>

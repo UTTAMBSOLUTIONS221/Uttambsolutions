@@ -16,6 +16,19 @@ namespace DBL.Repositories
         {
         }
 
+        #region System Property House Listing
+        public Genericmodel Registerhousepropertydata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registerhousepropertydata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        #endregion
+
         public PropertyHouseDetailData Getallsystempropertyvacanthousesdata(int Page, int PageSize)
         {
             using (var connection = new SqlConnection(_connString))

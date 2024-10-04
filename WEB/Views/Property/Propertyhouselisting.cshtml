@@ -163,26 +163,105 @@
             inputField.value = JSON.stringify(downloadURLs);
         }
 
-        function Savesystemhousepropertydata() {
-            if ($('#SystemcommtemplatemoduleId').val() == '' || $('#SystemcommtemplatemoduleId').val() == 0) {
-                Swal.fire("Communication Template Not Created", 'Module is Required', "warning");
-                return;
+        function savesystemhousepropertydata() {
+            document.getElementById("savesystemhousepropertyid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+
+            let isValid = true;
+
+            if ($('#Houselistingtitleid').val() == '') {
+                $('#Houselistingtitleid').addClass('is-invalid');
+                isValid = false;
             }
-            var uil1 = {
-                Templateid: $('#SystemcommTemplateId').val(), Templatename: $('#SystemcommtemplatenameId').val(), Templatesubject: $('#SystemcommtemplatesubjectId').val(),
-                Isemailsms: $('#SystemcommtemplateisemailsmsId').is(':checked'), Templatebody: $('#SystemcommtemplatebodyId').val()
+            if ($('#Houselistinglocationid').val() == '') {
+                $('#Houselistinglocationid').addClass('is-invalid');
+                isValid = false;
+            }
+            if ($('#Housepropertypriceid').val() == '') {
+                $('#Housepropertypriceid').addClass('is-invalid');
+                isValid = false;
+            }
+            if ($('#Housepropertybedroomsid').val() == '') {
+                $('#Housepropertybedroomsid').addClass('is-invalid');
+                isValid = false;
+            }
+            if ($('#Housepropertybathroomsid').val() == '') {
+                $('#Housepropertybathroomsid').addClass('is-invalid');
+                isValid = false;
+            }
+            if ($('#Houselistingdescriptionid').val() == '') {
+                $('#Houselistingdescriptionid').addClass('is-invalid');
+                isValid = false;
+            }
+
+            // Handle invalid form inputs
+            if (!isValid) {
+                document.getElementById("savechurhblogid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+
+                $('#Houselistingtitleid').addClass('is-valid');
+                $('#Houselistinglocationid').addClass('is-valid');
+                $('#Housepropertypriceid').addClass('is-valid');
+                $('#Housepropertybedroomsid').addClass('is-valid');
+                $('#Housepropertybathroomsid').addClass('is-valid');
+                $('#Houselistingdescriptionid').addClass('is-valid');
+                return isValid;
+            }
+
+            // Process Images
+            var Propertyhouseimages = [];
+            var imageUrlsJson = document.getElementById('UttambsolutionsimageurlId').value;
+            if (imageUrlsJson && imageUrlsJson.trim() !== "") {
+                var imageUrls = JSON.parse(imageUrlsJson);
+                Propertyhouseimages = imageUrls.map(function (url) { return { Propertyhouseimageurl: url } });
+            } else {
+                $('#Houselistingimageurlid').addClass('is-invalid');
+                isValid = false;
+                document.getElementById("savesystemhousepropertyid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return isValid;
+            }
+
+
+            // If any validation failed, stop and restore button
+            if (!isValid) {
+                document.getElementById("savesystemhousepropertyid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+                return isValid;
+            }
+
+            // Prepare data to be sent
+            var uil = {
+                Houselistingid: $('#Houselistingid').val(),
+                Title: $('#Houselistingtitleid').val(),
+                Price: $('#Housepropertypriceid').val(),
+                Location: $('#Houselistinglocationid').val(),
+                Isforrent: $('#Housepropertyisforrentid').prop('checked'),
+                Bedrooms: $('#Housepropertybedroomsid').val(),
+                Bathrooms: $('#Housepropertybathroomsid').val(),
+                Description: $('#Houselistingdescriptionid').val(),
+                Contacts: $('#Blogthemeid').val(),
+                Createdby: $('#systemLoggedinedUserid').val(),
+                Modifiedby: $('#systemLoggedinedUserid').val(),
+                Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Propertyhouseimages: Propertyhouseimages,
             };
-            $.post("/Settings/Addcommunicationtemplatedata", uil1, function (response) {
+            // Post data using AJAX
+            $.post("/Property/Registerhouseproperty", uil, function (response) {
                 if (response.RespStatus == 0) {
-                    Swal.fire('Saved!', response.RespMessage, 'success')
-                    $('#Uttambsolutionsmodalpdate').hide();
-                    setTimeout(function () { location.reload(); }, 1000);
-                } else if (response.RespStatus == 1) {
-                    Swal.fire("Communication templates details not saved", response.RespMessage, "warning");
+                    Swal.fire("House Listing Detail", response.RespMessage, "success");
+                    setTimeout(function () { location.reload(); }, 500);
+                } else {
+                    Swal.fire("House Listing Detail Not Created", response.RespMessage, "error");
                 }
-                else {
-                    Swal.fire("Oops! Something Went Wrong", "Database Error has occured. Kindly Contact our support team.", "error");
-                }
+                document.getElementById("savesystemhousepropertyid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
             });
         }
     </script>

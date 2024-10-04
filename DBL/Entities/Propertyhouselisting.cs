@@ -12,6 +12,10 @@
         public string? Description { get; set; }
         public string? Imageurl { get; set; }
         public string? Contacts { get; set; }
+        public List<Propertyhouseimagesdata>? Propertyhouseimages { get; set; }
     }
-
+    public class Propertyhouseimagesdata
+    {
+        public string? Propertyhouseimageurl { get; set; }
+    }
 }

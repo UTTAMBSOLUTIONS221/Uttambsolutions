@@ -6,6 +6,10 @@ namespace DBL.Repositories
 {
     public interface IPropertyRepository
     {
+
+        #region System Property House Listing
+        Genericmodel Registerhousepropertydata(string JsonData);
+        #endregion
         PropertyHouseDetailData Getallsystempropertyvacanthousesdata(int Page, int PageSize);
         IEnumerable<Systemproperty> Getsystempropertyhousedata();
         Genericmodel Registersystempropertyhousedata(string JsonData);

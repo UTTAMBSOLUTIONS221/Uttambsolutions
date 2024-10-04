@@ -1169,7 +1169,19 @@ namespace DBL
         }
         #endregion
 
+        #region System Property House Listing
+        public Task<Genericmodel> Registerhousepropertydata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Registerhousepropertydata(Obj);
+                return Resp;
+            });
+        }
+        #endregion
+
         #region System Properties Houses
+
         public Task<PropertyHouseDetailData> Getallsystempropertyvacanthouses(int Page, int PageSize)
         {
             return Task.Run(() =>
@@ -1219,7 +1231,6 @@ namespace DBL
                 return Resp;
             });
         }
-
         public Task<SystemPropertyHouseCareTakerData> Getsystempropertyhousecaretakerdatabyownerid(long Ownerid)
         {
             return Task.Run(() =>
@@ -1622,7 +1633,6 @@ namespace DBL
         //    });
         //}
         #endregion
-
 
         #region System Serices Offerings
         public Task<ServiceOfferings> Getsystemserviceofferingdatabyid(long Serviceid)

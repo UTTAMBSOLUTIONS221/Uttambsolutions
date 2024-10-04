@@ -48,6 +48,11 @@ namespace WEB.Controllers
             //var data = await bl.Getsystempropertyhousedatabyid(Houselistingid);
             return PartialView();
         }
+        public async Task<JsonResult> Registerhouseproperty(Propertyhouselisting model)
+        {
+            var resp = await bl.Registerhousepropertydata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
         #endregion
 
 
