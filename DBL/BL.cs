@@ -581,6 +581,88 @@ namespace DBL
 
         #endregion
 
+        #region Communication Templates
+        public Task<IEnumerable<Communicationtemplate>> Getsystemcommunicationtemplatedata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystemcommunicationtemplatedata();
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registersystemcommunicationtemplatedata(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Registersystemcommunicationtemplatedata(obj);
+                return Resp;
+            });
+        }
+        public Task<Communicationtemplate> Getsystemcommunicationtemplatedatabyid(long TemplateId)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.SettingsRepository.Getsystemcommunicationtemplatedatabyid(TemplateId);
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Sendmarketingemaildata(long TemplateId)
+        {
+            Genericmodel Resp = new Genericmodel();
+            return Task.Run(() =>
+            {
+                var commtempdata = db.SettingsRepository.Getsystemcommunicationtemplatedatabyid(TemplateId);
+                StringBuilder marketingEmailHtml = new StringBuilder(commtempdata.Templatebody);
+                //get agents and owners
+                var Owneragentdata = db.AccountRepository.Getsystemstaffowneragentdata();
+                foreach (var item in Owneragentdata)
+                {
+                    marketingEmailHtml.Replace("@Recipientname", item.Fullname);
+                    //log email before send 
+                    EmailLogs Logs = new EmailLogs
+                    {
+                        EmailLogId = 0,
+                        ModuleId = Convert.ToInt64(commtempdata.Templateid),
+                        EmailAddress = item.Emailaddress,
+                        EmailSubject = commtempdata.Templatesubject,
+                        EmailMessage = marketingEmailHtml.ToString(),
+                        IsEmailSent = false,
+                        DateTimeSent = DateTime.Now,
+                        Datecreated = DateTime.Now,
+                    };
+
+                    string message = marketingEmailHtml.ToString();
+                    var resp = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs));
+                    bool data1 = emlsnd.UttambsolutionssendemailAsync(item.Emailaddress, commtempdata.Templatesubject, message, true, "", "", "");
+                    if (data1)
+                    {
+                        Resp.RespStatus = 0;
+                        Resp.RespMessage = "Email Sent";
+                        // Update Email is sent 
+                        EmailLogs Logs1 = new EmailLogs
+                        {
+                            EmailLogId = Convert.ToInt64(resp.Data1),
+                            ModuleId = Convert.ToInt64(commtempdata.Templateid),
+                            EmailAddress = item.Emailaddress,
+                            EmailSubject = commtempdata.Templatesubject,
+                            EmailMessage = message,
+                            IsEmailSent = true,
+                            DateTimeSent = DateTime.Now,
+                            Datecreated = DateTime.Now,
+                        };
+                        var resp1 = db.SettingsRepository.LogEmailMessage(JsonConvert.SerializeObject(Logs1));
+                    }
+                    else
+                    {
+                        Resp.RespStatus = 1;
+                        Resp.RespMessage = "Email not Sent";
+                    }
+                }
+                return Resp;
+            });
+        }
+        #endregion
+
         #region System Services
         public Task<IEnumerable<Systemservices>> Getsystemservicesdata()
         {
@@ -689,33 +771,6 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.ModulesRepository.Getsystemmoduledatabyid(Moduleid);
-                return Resp;
-            });
-        }
-        #endregion
-
-        #region Communication Templates
-        public Task<IEnumerable<Communicationtemplate>> Getsystemcommunicationtemplatedata()
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.SettingsRepository.Getsystemcommunicationtemplatedata();
-                return Resp;
-            });
-        }
-        public Task<Genericmodel> Registersystemcommunicationtemplatedata(string obj)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.SettingsRepository.Registersystemcommunicationtemplatedata(obj);
-                return Resp;
-            });
-        }
-        public Task<Communicationtemplate> Getsystemcommunicationtemplatedatabyid(long TemplateId)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.SettingsRepository.Getsystemcommunicationtemplatedatabyid(TemplateId);
                 return Resp;
             });
         }
@@ -1579,8 +1634,6 @@ namespace DBL
             });
         }
         #endregion
-
-
 
         #region System Dropdowns
         public Task<IEnumerable<ListModel>> GetListModel(ListModelType listType)

@@ -53,6 +53,16 @@ namespace WEB.Controllers
         }
         #endregion
 
+        #region Communication Templates
+
+        [HttpGet]
+        [HttpPost]
+        public async Task<JsonResult> Sendmarketingemaildata(long Templateid)
+        {
+            var Resp = await bl.Sendmarketingemaildata(Templateid);
+            return Json(Resp);
+        }
+        #endregion
 
         #region Staff Services
         [HttpGet]
@@ -125,5 +135,8 @@ namespace WEB.Controllers
             return Json(resp);
         }
         #endregion
+
+
+
     }
 }
