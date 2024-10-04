@@ -24,12 +24,6 @@ namespace WEB.Controllers
             var data = await bl.Getsystemcommunicationtemplatedata();
             return View(data);
         }
-
-        [HttpGet]
-        public async Task<IActionResult> Addmarketingemail()
-        {
-            return PartialView();
-        }
         [HttpGet]
         public async Task<IActionResult> Addcommunicationtemplate(long Templateid)
         {
