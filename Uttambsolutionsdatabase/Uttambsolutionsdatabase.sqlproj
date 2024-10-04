@@ -306,5 +306,6 @@
     <Build Include="dbo\Stored Procedures\Usp_Getsystemsoftwaretokenspurchasedata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystemsoftwaretokensdatabyid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystemsoftwaretokensdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemstaffowneragentdata.sql" />
   </ItemGroup>
 </Project>
