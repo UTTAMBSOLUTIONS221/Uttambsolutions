@@ -1,5 +1,4 @@
-﻿using Maqaoplus.ViewModels;
-using Maqaoplus.Views;
+﻿using Maqaoplus.Views;
 using Maqaoplus.Views.Agreements;
 using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.PropertyHouseTenants;
@@ -9,10 +8,9 @@ namespace Maqaoplus
 {
     public partial class AppShell : Shell
     {
-        public AppShell(AppShellViewModel viewModel)
+        public AppShell()
         {
             InitializeComponent();
-            this.BindingContext = viewModel;
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             Routing.RegisterRoute(nameof(ForgotPasswordPage), typeof(ForgotPasswordPage));
             Routing.RegisterRoute(nameof(ValidateStaffAccountPage), typeof(ValidateStaffAccountPage));

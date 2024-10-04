@@ -7,14 +7,20 @@ namespace Maqaoplus
         private readonly DeviceService _deviceService;
         private readonly Services.ServiceProvider _serviceProvider;
         public static UsermodelResponce UserDetails;
-        public App(AppShell appShell, Services.ServiceProvider serviceProvider)
+        public App()
         {
             InitializeComponent();
-            _deviceService = new DeviceService();
-            _serviceProvider = serviceProvider;
-            MainPage = appShell;
-            CheckConnectivity();
+
+            MainPage = new AppShell();
         }
+        //public App(AppShell appShell, Services.ServiceProvider serviceProvider)
+        //{
+        //    InitializeComponent();
+        //    _deviceService = new DeviceService();
+        //    _serviceProvider = serviceProvider;
+        //    MainPage = appShell;
+        //    CheckConnectivity();
+        //}
         private void CheckConnectivity()
         {
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)

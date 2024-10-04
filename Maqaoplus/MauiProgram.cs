@@ -39,6 +39,8 @@ namespace Maqaoplus
             builder.Services.AddSingleton<AppShell>();
 
             // Views
+
+            builder.Services.AddTransient<MainPage>();
             builder.Services.AddSingleton<LoadingPage>();
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();

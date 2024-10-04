@@ -8,13 +8,17 @@
     Shell.TabBarIsVisible="False"
     xmlns:startupPages="clr-namespace:Maqaoplus.Views.Startup">
 
-    <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TitleColor="#0a506c"
+
+    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+
+
+    <!--<ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TitleColor="#0a506c"
         ContentTemplate="{DataTemplate startupPages:LoadingPage}" Route="LoadingPage" />
 
     <ShellContent
         Title="Login Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TitleColor="#0a506c"
         ContentTemplate="{DataTemplate startupPages:LoginPage}"
-        Route="LoginPage" />
+        Route="LoginPage" />-->
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">
