@@ -44,7 +44,7 @@
 		<AndroidSigningStorePass>K@ribun1</AndroidSigningStorePass>
 		<AndroidSigningKeyAlias>my-key-alias</AndroidSigningKeyAlias>
 		<AndroidSigningKeyPass>K@ribun1</AndroidSigningKeyPass>
-		<AndroidSigningKeyStore>C:\Users\francis\my-release-key.keystore</AndroidSigningKeyStore>
+		<AndroidSigningKeyStore>my-release-key.keystore</AndroidSigningKeyStore>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
@@ -52,7 +52,7 @@
 		<AndroidSigningStorePass>K@ribun1</AndroidSigningStorePass>
 		<AndroidSigningKeyAlias>my-key-alias</AndroidSigningKeyAlias>
 		<AndroidSigningKeyPass>K@ribun1</AndroidSigningKeyPass>
-		<AndroidSigningKeyStore>C:\Users\francis\my-release-key.keystore</AndroidSigningKeyStore>
+		<AndroidSigningKeyStore>my-release-key.keystore</AndroidSigningKeyStore>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -188,13 +188,13 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\ServiceOffering\Modals\AddServiceOfferingModalPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\ServiceOffering\ServiceOfferingPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\Services\ServiceOfferingPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\StaffAgentDetailModalPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
@@ -281,7 +281,7 @@
 	</ProjectExtensions>
 
 	<ItemGroup>
-	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.91" />
+		<PackageReference Update="Microsoft.Maui.Controls" Version="8.0.91" />
 	</ItemGroup>
 
 </Project>
