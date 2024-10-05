@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using DBL;
 using Maqaoplus.Helpers;
 using Maqaoplus.ViewModels;
 using Maqaoplus.ViewModels.Agreements;
@@ -22,6 +23,23 @@ namespace Maqaoplus
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
+            // Determine environment based on conditional compilation
+            string environment = "Production";
+#if DEBUG
+            environment = "Development";
+#endif
+
+            // Use the environment to set up logging or other services
+            if (environment == "Development")
+            {
+                builder.Logging.AddDebug();
+            }
+
+            // Set up connection string or other services based on environment
+            string connectionString = environment == "Development" ? "Data Source=SQL6032.site4now.net;Initial Catalog=db_aaa347_uttambsolutionsdev;user id=db_aaa347_uttambsolutionsdev_admin;password=Password123!;" : "Data Source=SQL6030.site4now.net;Initial Catalog=db_aaa347_uttambsolutions;user id=db_aaa347_uttambsolutions_admin;password=Password123!;";
+            builder.Services.AddSingleton<BL>(sp => new BL(connectionString));
+
             builder
                 .UseMauiApp<App>().UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
@@ -29,6 +47,8 @@ namespace Maqaoplus
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+
 
             string apiUrl = "https://mainapi.uttambsolutions.com";
             builder.Services.AddSingleton(new DevHttpConnectionHelper(apiUrl));
