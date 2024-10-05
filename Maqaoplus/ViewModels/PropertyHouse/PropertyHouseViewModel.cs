@@ -853,6 +853,10 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             _isStep4HouseRoomVisible = false;
         }
 
+        public PropertyHouseViewModel()
+        {
+        }
+
         private async Task RefreshItemsAsync()
         {
             IsProcessing = true;

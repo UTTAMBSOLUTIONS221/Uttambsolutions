@@ -57,7 +57,7 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.house,
                             Title = "Houses",
-                            ContentTemplate = new DataTemplate(() => new AgentPropertyHousesPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new AgentPropertyHousesPage()),
                         },
                         new ShellContent
                         {
@@ -126,13 +126,13 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.house,
                             Title = "Houses",
-                            ContentTemplate = new DataTemplate(() => new PropertyHousesPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesPage()),
                         },
                         new ShellContent
                         {
                             Icon = Icons.user,
                             Title = "Caretaker",
-                            ContentTemplate = new DataTemplate(() => new PropertyHousesCaretakerPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesCaretakerPage()),
                         },
                         new ShellContent
                         {
@@ -195,7 +195,7 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.house,
                             Title = "Houses",
-                            ContentTemplate = new DataTemplate(() => new PropertyHousesPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new PropertyHousesPage()),
                         },
                         new ShellContent
                         {
@@ -264,7 +264,7 @@ namespace Maqaoplus.Constants
                         {
                             Icon = Icons.house,
                             Title = "Houses",
-                            ContentTemplate = new DataTemplate(() => new AgentPropertyHousesPage(serviceProvider)),
+                            ContentTemplate = new DataTemplate(() => new AgentPropertyHousesPage()),
                         },
                         new ShellContent
                         {

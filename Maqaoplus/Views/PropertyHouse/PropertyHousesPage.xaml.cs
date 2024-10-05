@@ -1,16 +1,22 @@
 using Maqaoplus.ViewModels.PropertyHouse;
 namespace Maqaoplus.Views.PropertyHouse;
-
 public partial class PropertyHousesPage : ContentPage
 {
     private PropertyHouseViewModel _viewModel;
 
-    public PropertyHousesPage(Services.ServiceProvider serviceProvider)
+    public PropertyHousesPage()
     {
         InitializeComponent();
-        _viewModel = new PropertyHouseViewModel(serviceProvider);
-        this.BindingContext = _viewModel;
 
+        _viewModel = new PropertyHouseViewModel();
+
+        BindingContext = _viewModel;
+    }
+
+    public PropertyHousesPage(PropertyHouseViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = _viewModel = viewModel;
     }
 
     protected override async void OnAppearing()

@@ -5,13 +5,10 @@ namespace Maqaoplus.Views.PropertyHouse;
 public partial class VacantPropertyHousesPage : ContentPage
 {
     private PropertyHouseViewModel _viewModel;
-
-    public VacantPropertyHousesPage(Services.ServiceProvider serviceProvider)
+    public VacantPropertyHousesPage(PropertyHouseViewModel viewModel)
     {
         InitializeComponent();
-        _viewModel = new PropertyHouseViewModel(serviceProvider);
-        this.BindingContext = _viewModel;
-
+        BindingContext = _viewModel = viewModel;
     }
 
     protected override async void OnAppearing()

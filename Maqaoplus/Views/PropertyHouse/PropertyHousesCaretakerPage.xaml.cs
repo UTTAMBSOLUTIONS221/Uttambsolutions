@@ -6,12 +6,19 @@ public partial class PropertyHousesCaretakerPage : ContentPage
 {
     private PropertyHouseViewModel _viewModel;
 
-    public PropertyHousesCaretakerPage(Services.ServiceProvider serviceProvider)
+    public PropertyHousesCaretakerPage()
     {
         InitializeComponent();
-        _viewModel = new PropertyHouseViewModel(serviceProvider);
-        this.BindingContext = _viewModel;
 
+        _viewModel = new PropertyHouseViewModel();
+
+        BindingContext = _viewModel;
+    }
+
+    public PropertyHousesCaretakerPage(PropertyHouseViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = _viewModel = viewModel;
     }
 
     protected override async void OnAppearing()
@@ -23,3 +30,4 @@ public partial class PropertyHousesCaretakerPage : ContentPage
         }
     }
 }
+
