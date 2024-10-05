@@ -15,6 +15,7 @@ using Maqaoplus.Views.PropertyHouse;
 using Maqaoplus.Views.PropertyHouseTenants;
 using Maqaoplus.Views.Startup;
 using Maqaoplus.Views.TenantBillsandPayments;
+using Microsoft.Extensions.Logging;
 
 namespace Maqaoplus
 {
