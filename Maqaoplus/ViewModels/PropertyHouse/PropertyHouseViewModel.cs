@@ -1,4 +1,5 @@
-﻿using DBL.Entities;
+﻿using DBL;
+using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
 using Maqaoplus.Views;
@@ -15,8 +16,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 {
     public class PropertyHouseViewModel : INotifyPropertyChanged
     {
-        private readonly Services.ServiceProvider _serviceProvider;
-        public event PropertyChangedEventHandler PropertyChanged;
+        private readonly BL _bl;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public string AgreementText { get; set; }
         public ObservableCollection<Systemproperty> Items { get; }
@@ -780,9 +780,9 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         public ObservableCollection<Systempropertyhousebenefits> PropertyHouseBenefits { get; set; } = new ObservableCollection<Systempropertyhousebenefits>();
 
         // Parameterless constructor for XAML support
-        public PropertyHouseViewModel(Services.ServiceProvider serviceProvider)
+        public PropertyHouseViewModel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             LoadDropdownData();
             Items = new ObservableCollection<Systemproperty>();
             Rooms = new ObservableCollection<PropertyHouseDetails>();
@@ -1318,7 +1318,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 Systemhousevacantnoticeperiod.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
             }
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + Propertyhouseid, HttpMethod.Get, null);
+            var response = await _bl.Getsystempropertyhousedetaildatabyid(Propertyhouseid);
             if (response != null)
             {
                 SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
@@ -1421,7 +1421,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             {
                 Systemhousevacantnoticeperiod.Add(new ListModel { Value = i.ToString(), Text = $"{i} Month{(i > 1 ? "s" : "")}" });
             }
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyid/" + Propertyhouseid, HttpMethod.Get, null);
+            var response = await _bl.Getsystempropertyhousedetaildatabyid(Propertyhouseid);
             if (response != null)
             {
                 SystempropertyData = JsonConvert.DeserializeObject<Systemproperty>(response.Data.ToString());
@@ -1450,7 +1450,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             LoadOwnerHousesByCode();
             if (caretakerhouseid > 0)
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousecaretakerdatabyid/" + caretakerhouseid, HttpMethod.Get, null);
+                var response = await _bl.Getsystempropertyhousecaretakerdatabyid(caretakerhouseid);
                 if (response != null)
                 {
                     Systemstaffdata = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
@@ -1471,7 +1471,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         {
             try
             {
-                var SystemownerhousesResponse = await _serviceProvider.GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.Systempropertyhouses + "&code=" + App.UserDetails.Usermodel.Userid, HttpMethod.Get);
+                var SystemownerhousesResponse = await _bl.Getdropdownitembycode(); GetSystemDropDownData("/api/General/Getdropdownitembycode?listType=" + ListModelType.Systempropertyhouses + "&code=" + App.UserDetails.Usermodel.Userid, HttpMethod.Get);
                 if (SystemownerhousesResponse != null)
                 {
                     Systemownerhouse = new ObservableCollection<ListModel>(SystemownerhousesResponse);
@@ -1587,14 +1587,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedatabyowner/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Getsystempropertyhousedatabyowner(App.UserDetails.Usermodel.Userid);
+                if (response != null && response.Data != null)
                 {
                     Items.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var product = item.ToObject<Systemproperty>();
-                        Items.Add(product);
+                        Items.Add(item);
                     }
                 }
                 IsDataLoaded = true;
@@ -1616,14 +1615,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousecaretakerdatabyownerid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Getsystempropertyhousecaretakerdatabyownerid(App.UserDetails.Usermodel.Userid);
+                if (response != null && response.Data != null)
                 {
                     PropertyHouseCareTakerItems.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var Caretaker = item.ToObject<SystemStaff>();
-                        PropertyHouseCareTakerItems.Add(Caretaker);
+                        PropertyHouseCareTakerItems.Add(item);
                     }
                 }
                 IsDataLoaded = true;
@@ -1644,14 +1642,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getallsystempropertyvacanthouses/" + _pageNumber + "/" + 10, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Getallsystempropertyvacanthouses(_pageNumber, 10);
+                if (response != null && response.Data != null)
                 {
                     VacantItems.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var product = item.ToObject<PropertyHouseDetails>();
-                        VacantItems.Add(product);
+                        VacantItems.Add(item);
                     }
                 }
                 IsDataLoaded = true;
@@ -1673,14 +1670,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedatabyagent/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Getsystempropertyhousedatabyagent(App.UserDetails.Usermodel.Userid);
+                if (response != null && response.Data != null)
                 {
                     Items.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var product = item.ToObject<Systemproperty>();
-                        Items.Add(product);
+                        Items.Add(item);
                     }
                 }
                 IsDataLoaded = true;
@@ -1699,14 +1695,13 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             IsProcessing = true;
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedetaildatabyhouseid/" + propertyId, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Getsystempropertyhousedetaildatabyhouseid(propertyId);
+                if (response != null && response.Data != null)
                 {
                     Rooms.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var room = item.ToObject<PropertyHouseDetails>();
-                        Rooms.Add(room);
+                        Rooms.Add(item);
                     }
                     IsDataLoaded = true;
                 }
@@ -1725,7 +1720,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
         private async Task ViewPropertyHouseImagesDetails(long propertyHouseId)
         {
             IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyimagebyhouseid/" + propertyHouseId, HttpMethod.Get, null);
+            var response = await _bl.Getsystempropertyimagebyhouseid(propertyHouseId);
             if (response != null)
             {
                 SystemPropertyHouseImageData = JsonConvert.DeserializeObject<SystemPropertyHouseImage>(response.Data.ToString());
@@ -1750,7 +1745,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
             SystemPropertyHouseImageData.Datecreated = DateTime.UtcNow;
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseroomimagedata", SystemPropertyHouseImageData);
+                var response = await _bl.Registersystempropertyhouseroomimagedata(JsonConvert.SerializeObject(SystemPropertyHouseImageData));
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
@@ -3736,6 +3731,7 @@ namespace Maqaoplus.ViewModels.PropertyHouse
 
             return Regex.IsMatch(email, emailPattern);
         }
+        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
