@@ -3,6 +3,7 @@
              x:Class="Maqaoplus.MainPage"
              xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              xmlns:local="clr-namespace:Maqaoplus.Helpers"
+             BackgroundColor="#ffffff"
              Title="MAQAO PLUS">
 
     <ContentPage.Resources>
