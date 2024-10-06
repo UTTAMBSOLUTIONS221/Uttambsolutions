@@ -4,6 +4,9 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Newtonsoft.Json;
+using DBL;
+
+
 #if ANDROID
 using Android.Provider;
 using Android.Content;
@@ -12,6 +15,7 @@ namespace Maqaoplus.ViewModels.Startup
 {
     public class ForgotPasswordPageViewModel : INotifyPropertyChanged
     {
+        private readonly BL _bl;
         private string _emailAddress;
         private string _passwords;
         private string _confirmpasswords;
@@ -26,11 +30,10 @@ namespace Maqaoplus.ViewModels.Startup
         public ICommand TogglePasswordVisibilityCommand { get; }
         public ICommand ToggleConfirmPasswordVisibilityCommand { get; }
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly Services.ServiceProvider _serviceProvider;
 
-        public ForgotPasswordPageViewModel(Services.ServiceProvider serviceProvider)
+        public ForgotPasswordPageViewModel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             ForgotPasswordData = new Forgotpassword();
             IsPasswordHidden = true;
             IsConfirmPasswordHidden = true;
@@ -205,8 +208,8 @@ namespace Maqaoplus.ViewModels.Startup
                 IsProcessing = true;
                 ForgotPasswordData.Androidid = androidId;
                 // Call your registration service here
-                var response = await _serviceProvider.CallUnAuthWebApi("/api/Account/Forgotstaffpassword", HttpMethod.Post, ForgotPasswordData);
-                if (response.StatusCode == 200)
+                var response = await _bl.ValidateSystemForgotpasswordStaff(ForgotPasswordData);
+                if (response != null && response.Data != null)
                 {
                     ForgotPasswordData = JsonConvert.DeserializeObject<Forgotpassword>(response.Data.ToString());
                     IsPasswordInputHidden = true;
@@ -216,10 +219,10 @@ namespace Maqaoplus.ViewModels.Startup
                         await Shell.Current.GoToAsync("//LoginPage");
                     }
                 }
-                else if (response.StatusCode == 1)
-                {
-                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
-                }
+                //else if (response.StatusCode == 1)
+                //{
+                //    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
+                //}
                 else
                 {
                     await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
