@@ -69,7 +69,7 @@
         </StackLayout>
 
         <!-- Main Content - Property Listings -->
-        <Grid>
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -82,10 +82,10 @@
 
             <!-- CollectionView directly under the Search Bar -->
             <CollectionView Grid.Row="1" 
-                 ItemsSource="{Binding Maqaoplussummarydata.Vacanthouses}" 
-                 ItemsLayout="HorizontalGrid, 2" 
-                 VerticalOptions="FillAndExpand" 
-                 Margin="4,0" >
+                  ItemsSource="{Binding Maqaoplussummarydata.Vacanthouses}" 
+                  ItemsLayout="HorizontalGrid, 2" 
+                  VerticalOptions="FillAndExpand" 
+                  Margin="4,0" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="4" Margin="4" BorderColor="LightGray" CornerRadius="10" HeightRequest="180">
@@ -104,7 +104,7 @@
 
                                     <!-- Image on the Left -->
                                     <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" 
-                                Aspect="AspectFill" HeightRequest="100" Grid.Column="0" />
+                                 Aspect="AspectFill" HeightRequest="100" Grid.Column="0" />
 
                                     <!-- Data on the Right -->
                                     <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
@@ -119,7 +119,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-
         <!-- Overlay Layer for ActivityIndicator -->
         <Grid IsVisible="{Binding IsProcessing}" BackgroundColor="#00000066" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3">
             <BoxView Color="#C0000000" Opacity="0.5" />
