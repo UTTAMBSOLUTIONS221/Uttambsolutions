@@ -1,4 +1,5 @@
-﻿using DBL.Entities;
+﻿using DBL;
+using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
 using Maqaoplus.Views.TenantBillsandPayments.Modals;
@@ -12,7 +13,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
     public class PropertyHousesTenantBillsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly Services.ServiceProvider _serviceProvider;
+        private readonly BL _bl;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ObservableCollection<MonthlyRentInvoiceModel> Items { get; }
         private MonthlyRentInvoiceModel _tenantInvoiceDetailData;
@@ -54,9 +55,9 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
         }
 
         // Parameterless constructor for XAML support
-        public PropertyHousesTenantBillsViewModel(Services.ServiceProvider serviceProvider)
+        public PropertyHousesTenantBillsViewModel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             Items = new ObservableCollection<MonthlyRentInvoiceModel>();
             LoadItemsCommand = new Command(async () => await LoadItems());
             ViewDetailsCommand = new Command<MonthlyRentInvoiceModel>(async (propertyhouseinvoice) => await ViewDetails(propertyhouseinvoice.Invoiceid));
@@ -135,14 +136,13 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicedatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Gettenantmonthlyinvoicedatabytenantid(App.UserDetails.Usermodel.Userid);
+                if (response != null && response.Data != null)
                 {
                     Items.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var product = item.ToObject<MonthlyRentInvoiceModel>();
-                        Items.Add(product);
+                        Items.Add(item);
                     }
                 }
                 IsDataLoaded = true;
@@ -162,11 +162,11 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
             IsDataLoaded = false;
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Gettenantmonthlyinvoicedetaildatabyinvoiceid/" + Invoiceid, HttpMethod.Get, null);
+                var response = await _bl.Gettenantmonthlyinvoicedetaildatabyinvoiceid(Invoiceid);
                 if (response != null && response.Data != null)
                 {
                     TenantInvoiceDetailData = JsonConvert.DeserializeObject<MonthlyRentInvoiceModel>(response.Data.ToString());
-                    var SystemPaymentModeResponse = await _serviceProvider.GetSystemDropDownData("/api/General?listType=" + ListModelType.Systempaymentmodetype, HttpMethod.Get);
+                    var SystemPaymentModeResponse = await _bl.GetListModel(ListModelType.Systempaymentmodetype);
                     if (SystemPaymentModeResponse != null)
                     {
                         SystemPaymentModes = new ObservableCollection<ListModel>(SystemPaymentModeResponse);
@@ -223,14 +223,14 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
                 InvoicePaymentData.Datecreated = DateTime.UtcNow;
 
 
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Registerpropertyhouseroomrentpaymentrequestdata", HttpMethod.Post, InvoicePaymentData);
-                if (response.StatusCode == 200)
+                var response = await _bl.Registerpropertyhouseroomrentpaymentrequestdata(JsonConvert.SerializeObject(InvoicePaymentData));
+                if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
                 }
-                else if (response.StatusCode == 1)
+                else if (response.RespStatus == 1)
                 {
-                    await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
                 }
                 else
                 {
