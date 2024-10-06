@@ -1,11 +1,11 @@
-﻿using Maqaoplus.ViewModels.PropertyHouse;
+﻿using Maqaoplus.ViewModels;
 
 namespace Maqaoplus
 {
     public partial class MainPage : ContentPage
     {
-        private PropertyHouseViewModel _viewModel;
-        public MainPage(PropertyHouseViewModel viewModel)
+        private MainPageViewModel _viewModel;
+        public MainPage(MainPageViewModel viewModel)
         {
             InitializeComponent();
             BindingContext = _viewModel = viewModel;
@@ -13,9 +13,9 @@ namespace Maqaoplus
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            if (_viewModel.LoadVacantPropertyHousesCommand.CanExecute(null))
+            if (_viewModel.LoadMaqaoplussummaryCommand.CanExecute(null))
             {
-                _viewModel.LoadVacantPropertyHousesCommand.Execute(null);
+                _viewModel.LoadMaqaoplussummaryCommand.Execute(null);
             }
         }
     }
