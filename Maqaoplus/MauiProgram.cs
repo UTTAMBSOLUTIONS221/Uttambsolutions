@@ -1,4 +1,6 @@
 ﻿using DBL;
+using Maqaoplus.ViewModels.PropertyHouse;
+using Maqaoplus.Views.PropertyHouse;
 using Microsoft.Extensions.Logging;
 
 namespace Maqaoplus
@@ -22,7 +24,7 @@ namespace Maqaoplus
             }
 
             // Set up connection string or other services based on environment
-            string connectionString = environment == "Development" ? "Data Source=SQL6032.site4now.net;Initial Catalog=db_aaa347_jcmchurchdev;user id=db_aaa347_jcmchurchdev_admin;password=Password123!;" : "Data Source=SQL6032.site4now.net;Initial Catalog=db_aaa347_jcmchurch;user id=db_aaa347_jcmchurch_admin;password=Password123!;";
+            string connectionString = environment == "Development" ? "Data Source=SQL6030.site4now.net;Initial Catalog=db_aaa347_uttambsolutions;user id=db_aaa347_uttambsolutions_admin;password=Password123!;" : "Data Source=SQL6030.site4now.net;Initial Catalog=db_aaa347_uttambsolutions;user id=db_aaa347_uttambsolutions_admin;password=Password123!;";
             builder.Services.AddSingleton<BL>(sp => new BL(connectionString));
 
             builder
@@ -34,8 +36,9 @@ namespace Maqaoplus
                 });
 
             builder.Services.AddTransient<MainPage>();
+            builder.Services.AddSingleton<PropertyHousesPage>();
 
-
+            builder.Services.AddSingleton<PropertyHouseViewModel>();
 
             return builder.Build();
         }
