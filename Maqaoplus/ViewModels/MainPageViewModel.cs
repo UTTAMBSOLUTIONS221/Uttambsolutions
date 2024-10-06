@@ -1,5 +1,6 @@
 ﻿using DBL;
 using DBL.Models;
+using Maqaoplus.Views.Startup;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -11,9 +12,7 @@ namespace Maqaoplus.ViewModels
         private readonly BL _bl;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ICommand LoadMaqaoplussummaryCommand { get; }
-        public ICommand LoginCommand { get; }
-        public ICommand OpenLiveStreamCommand { get; }
-        public ICommand RegisterCommand { get; }
+        public ICommand JoinMaqaoPlusCommand { get; }
         public ICommand SubscribeCommand { get; }
         public ICommand FacebookCommand { get; }
         public ICommand InstagramCommand { get; }
@@ -73,9 +72,7 @@ namespace Maqaoplus.ViewModels
             // Initialize commands
             Maqaoplussummarydata = new Maqaoplussummary();
             LoadMaqaoplussummaryCommand = new Command(async () => await OnLoadChurchSummary());
-            LoginCommand = new Command(OnLogin);
-            OpenLiveStreamCommand = new Command(OnOpenLiveStream);
-            RegisterCommand = new Command(OnRegister);
+            JoinMaqaoPlusCommand = new Command(OnJoinMaqaoPlus);
             SubscribeCommand = new Command(OnSubscribe);
             FacebookCommand = new Command(OnFacebook);
             InstagramCommand = new Command(OnInstagram);
@@ -105,20 +102,9 @@ namespace Maqaoplus.ViewModels
             }
         }
 
-        private void OnLogin()
+        private async void OnJoinMaqaoPlus()
         {
-            // Handle login logic
-        }
-
-
-        private async void OnRegister()
-        {
-            //await Shell.Current.GoToAsync(nameof(RegisterPage));
-        }
-
-        private void OnOpenLiveStream()
-        {
-            IsLiveStreamVisible = true;
+            await Shell.Current.GoToAsync(nameof(LoginPage));
         }
 
         private async void OnSubscribe()
