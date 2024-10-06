@@ -14,6 +14,7 @@
     </ContentPage.Resources>
 
     <Grid>
+        
         <!-- Define Row Heights for Header, Content, and Footer -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -47,32 +48,36 @@
                                     <Label Text="{Binding Maqaoplussummarydata.Listedproperties}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                             </Frame>
-
                             <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                                <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <Label Text="Collections" TextColor="White" FontSize="14" HorizontalOptions="Start" />
+                                    <Label Text="{Binding Maqaoplussummarydata.Collectedrent}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" HorizontalOptions="FillAndExpand" HeightRequest="40">
                                 <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                                     <Label Text="Tenants" TextColor="White" FontSize="14" HorizontalOptions="Start" />
                                     <Label Text="{Binding Maqaoplussummarydata.Registeredtenants}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                             </Frame>
 
-                            <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" HorizontalOptions="FillAndExpand" HeightRequest="40">
                                 <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                    <Label Text="Jobs" TextColor="White" FontSize="14" HorizontalOptions="Start" />
-                                    <Label Text="{Binding Maqaoplussummarydata.Listedjobs}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
+                                    <Label Text="Tenants" TextColor="White" FontSize="14" HorizontalOptions="Start" />
+                                    <Label Text="{Binding Maqaoplussummarydata.Registeredowners}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                             </Frame>
-
-                            <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Frame Grid.Row="2" Grid.Column="0" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" HorizontalOptions="FillAndExpand" HeightRequest="40">
                                 <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                                     <Label Text="Occupied" TextColor="White" FontSize="14" HorizontalOptions="Start" />
                                     <Label Text="{Binding Maqaoplussummarydata.Occupiedhouses}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                             </Frame>
-
-                            <Frame Grid.Row="2" Grid.Column="0" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Frame Grid.Row="2" Grid.Column="1" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" HorizontalOptions="FillAndExpand" HeightRequest="40">
                                 <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                    <Label Text="Collections" TextColor="White" FontSize="14" HorizontalOptions="Start" />
-                                    <Label Text="{Binding Maqaoplussummarydata.Collectedrent}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
+                                    <Label Text="Jobs" TextColor="White" FontSize="14" HorizontalOptions="Start" />
+                                    <Label Text="{Binding Maqaoplussummarydata.Listedjobs}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                             </Frame>
                         </Grid>

@@ -5,6 +5,7 @@
         public int Listedproperties { get; set; } = 0;
         public int Listedjobs { get; set; } = 0;
         public int Registeredtenants { get; set; } = 0;
+        public int Registeredowners { get; set; } = 0;
         public int Occupiedhouses { get; set; } = 0;
         public decimal Collectedrent { get; set; } = 0;
         public List<Vacanthousesdata>? Vacanthouses { get; set; }
