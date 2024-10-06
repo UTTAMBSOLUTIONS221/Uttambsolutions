@@ -5,7 +5,7 @@ using Android.OS;
 using AndroidX.Core.App;
 using AndroidX.Core.Content;
 using CommunityToolkit.Mvvm.Messaging;
-using DBL.Models;
+using Maqaoplus.Models;
 
 namespace Maqaoplus
 {
