@@ -36,7 +36,6 @@ namespace DBL.Repositories
                     Maqaoplussummarydata.Registeredtenants = Convert.ToInt32(responseJson["Registeredtenants"]);
                     Maqaoplussummarydata.Occupiedhouses = Convert.ToInt32(responseJson["Occupiedhouses"]);
                     Maqaoplussummarydata.Collectedrent = Convert.ToDecimal(responseJson["Collectedrent"]);
-
                     if (responseJson["Vacanthouses"] != null)
                     {
                         string VacanthousesJson = responseJson["Vacanthouses"].ToString();
