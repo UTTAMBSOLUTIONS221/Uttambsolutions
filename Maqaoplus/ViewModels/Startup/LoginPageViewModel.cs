@@ -1,4 +1,5 @@
-﻿using DBL.Entities;
+﻿using DBL;
+using DBL.Entities;
 using DBL.Enum;
 using Maqaoplus.Constants;
 using Maqaoplus.Views;
@@ -14,7 +15,7 @@ namespace Maqaoplus.ViewModels.Startup
     public class LoginPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly Services.ServiceProvider _serviceProvider;
+        private readonly BL _bl;
         private bool _isPasswordHidden;
         private string _passwordIconSource;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
@@ -42,9 +43,9 @@ namespace Maqaoplus.ViewModels.Startup
 
 
 
-        public LoginPageViewModel(Services.ServiceProvider serviceProvider)
+        public LoginPageViewModel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             IsPasswordHidden = true; // Default to hidden password
             TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
             LoginCommand = new Command(async () => await LoginAsync(), () => !IsProcessing);
@@ -144,7 +145,7 @@ namespace Maqaoplus.ViewModels.Startup
                     password = Password
                 };
 
-                var response = await _serviceProvider.Authenticate(request);
+                var response = await _bl.ValidateSystemStaff(request.username, request.password);
 
                 if (response.RespStatus == 200)
                 {
