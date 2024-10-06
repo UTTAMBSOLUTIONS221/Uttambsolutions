@@ -89,7 +89,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="300" HasShadow="True">
+                                <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="240" HasShadow="True">
                                     <Grid Padding="5">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*" />
