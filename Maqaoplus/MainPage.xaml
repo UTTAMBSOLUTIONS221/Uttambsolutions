@@ -28,20 +28,10 @@
             <!-- Main Content -->
             <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout Spacing="20">
-
-                    <!-- Search Bar -->
-                    <SearchBar Placeholder="Search properties..."
-                               BackgroundColor="White"
-                               Margin="0,10"
-                               HeightRequest="40" />
-
-                    <!-- Property Listings Section -->
-                    <Label Text="Property Listings" 
-                           FontSize="24" 
-                           TextColor="#0A506C" 
-                           FontAttributes="Bold" 
-                           HorizontalOptions="Center" 
-                           Margin="0,10"/>
+                    <!-- Search Bar with Frame -->
+                    <Frame CornerRadius="10" Padding="0" BackgroundColor="White" BorderColor="#0a506c" HasShadow="True" Margin="4,10">
+                        <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40"/>
+                    </Frame>
 
                     <!-- Carousel View for Property Listings -->
                     <CarouselView ItemsSource="{Binding TenantData.Vacanthousesdata}">
