@@ -3,17 +3,15 @@ using Maqaoplus.ViewModels.Agreements;
 using SkiaSharp;
 
 namespace Maqaoplus.Views.Agreements;
+
 public partial class PropertyAgentAgreementsPage : ContentPage
 {
     private SystemAgreementViewModel _viewModel;
-
-    public PropertyAgentAgreementsPage(Services.ServiceProvider serviceProvider)
+    public PropertyAgentAgreementsPage(SystemAgreementViewModel viewModel)
     {
         InitializeComponent();
-        _viewModel = new SystemAgreementViewModel(serviceProvider);
-        this.BindingContext = _viewModel;
+        BindingContext = _viewModel = viewModel;
     }
-
     protected override async void OnAppearing()
     {
         base.OnAppearing();

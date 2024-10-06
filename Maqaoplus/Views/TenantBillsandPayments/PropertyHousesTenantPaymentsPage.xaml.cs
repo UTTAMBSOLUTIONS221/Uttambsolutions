@@ -1,18 +1,13 @@
 using Maqaoplus.ViewModels.TenantBillsandPayments;
 namespace Maqaoplus.Views.TenantBillsandPayments;
-
 public partial class PropertyHousesTenantPaymentsPage : ContentPage
 {
     private PropertyHousesTenantPaymentsViewModel _viewModel;
-
-    public PropertyHousesTenantPaymentsPage(Services.ServiceProvider serviceProvider)
+    public PropertyHousesTenantPaymentsPage(PropertyHousesTenantPaymentsViewModel viewModel)
     {
         InitializeComponent();
-        _viewModel = new PropertyHousesTenantPaymentsViewModel(serviceProvider);
-        this.BindingContext = _viewModel;
-
+        BindingContext = _viewModel = viewModel;
     }
-
     protected override async void OnAppearing()
     {
         base.OnAppearing();

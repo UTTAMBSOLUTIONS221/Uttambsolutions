@@ -1,4 +1,5 @@
-﻿using DBL;
+﻿using CommunityToolkit.Maui;
+using DBL;
 using Maqaoplus.ViewModels;
 using Maqaoplus.ViewModels.PropertyHouse;
 using Maqaoplus.ViewModels.Startup;
@@ -29,14 +30,13 @@ namespace Maqaoplus
             // Set up connection string or other services based on environment
             string connectionString = environment == "Development" ? "Data Source=SQL6030.site4now.net;Initial Catalog=db_aaa347_uttambsolutions;user id=db_aaa347_uttambsolutions_admin;password=Password123!;" : "Data Source=SQL6030.site4now.net;Initial Catalog=db_aaa347_uttambsolutions;user id=db_aaa347_uttambsolutions_admin;password=Password123!;";
             builder.Services.AddSingleton<BL>(sp => new BL(connectionString));
-
             builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+              .UseMauiApp<App>().UseMauiCommunityToolkit()
+              .ConfigureFonts(fonts =>
+              {
+                  fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                  fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+              });
 
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddSingleton<LoginPage>();

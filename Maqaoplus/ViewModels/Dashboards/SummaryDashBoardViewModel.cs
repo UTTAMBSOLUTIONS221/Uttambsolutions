@@ -1,4 +1,5 @@
-﻿using DBL.Entities;
+﻿using DBL;
+using DBL.Entities;
 using DBL.Models.Dashboards;
 using Newtonsoft.Json;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ namespace Maqaoplus.ViewModels.Dashboards
 {
     public class SummaryDashBoardViewModel : INotifyPropertyChanged
     {
-        private readonly Services.ServiceProvider _serviceProvider;
+        private readonly BL _bl;
         private PropertyHouseSummary _dashBoardSummaryData;
 
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
@@ -60,9 +61,9 @@ namespace Maqaoplus.ViewModels.Dashboards
             }
         }
 
-        public SummaryDashBoardViewModel(Services.ServiceProvider serviceProvider)
+        public SummaryDashBoardViewModel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             DashBoardSummaryData = new PropertyHouseSummary();
             LoadOwnerSummaryCommand = new Command(async () => await LoadOwnerSummary());
             LoadAgentSummaryCommand = new Command(async () => await LoadAgentSummary());
@@ -75,7 +76,7 @@ namespace Maqaoplus.ViewModels.Dashboards
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedashboardsummarydatabyowner/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _bl.Getsystempropertyhousedashboardsummarydatabyowner(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
                     DashBoardSummaryData = JsonConvert.DeserializeObject<PropertyHouseSummary>(response.Data.ToString());
@@ -99,7 +100,7 @@ namespace Maqaoplus.ViewModels.Dashboards
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousedashboardsummarydatabyagent/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _bl.Getsystempropertyhousedashboardsummarydatabyagent(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
                     DashBoardSummaryData = JsonConvert.DeserializeObject<PropertyHouseSummary>(response.Data.ToString());
@@ -133,7 +134,7 @@ namespace Maqaoplus.ViewModels.Dashboards
                 Datecreated = DateTime.UtcNow,
                 Datemodified = DateTime.UtcNow
             };
-            var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/Account/Registersystemuserdevicedata", deviceInfo);
+            var response = await _bl.Registersystemuserdevicedata(JsonConvert.SerializeObject(deviceInfo));
         }
 
 
