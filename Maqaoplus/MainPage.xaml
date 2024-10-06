@@ -93,9 +93,9 @@
                                     <Grid Padding="5">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
-                                        <Image Grid.Row="0" Grid.Column="0" Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100" />
+                                        <Image Grid.Row="0" Grid.Column="0" Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill"/>
 
                                         <!-- Data on the Right -->
                                         <StackLayout  Grid.Row="1" Grid.Column="0"  VerticalOptions="Center" HorizontalOptions="FillAndExpand">
