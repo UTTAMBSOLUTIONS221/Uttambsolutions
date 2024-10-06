@@ -103,7 +103,7 @@ namespace Maqaoplus.ViewModels.Dashboards
                 var response = await _bl.Getsystempropertyhousedashboardsummarydatabyagent(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
-                    DashBoardSummaryData = JsonConvert.DeserializeObject<PropertyHouseSummary>(response.Data.ToString());
+                    DashBoardSummaryData = response.Data;
                 }
                 IsDataLoaded = true;
             }
