@@ -1,4 +1,5 @@
-﻿using DBL.Models;
+﻿using DBL;
+using DBL.Models;
 using Maqaoplus.Views.PropertyHouseTenants;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
     public class PropertyHousesRoomTenantsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly Services.ServiceProvider _serviceProvider;
+        private readonly BL _bl;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ObservableCollection<PropertyHouseTenant> Items { get; }
         private PropertyHouseRoomTenantData _tenantData;
@@ -63,9 +64,9 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
             }
         }
         // Constructor with ServiceProvider parameter
-        public PropertyHousesRoomTenantsViewModel(Services.ServiceProvider serviceProvider)
+        public PropertyHousesRoomTenantsViewModel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             Items = new ObservableCollection<PropertyHouseTenant>();
             TenantData = new PropertyHouseRoomTenantData();
             LoadItemsCommand = new Command(async () => await LoadItems());
@@ -79,14 +80,13 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomtenantsdata/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Getsystempropertyhouseroomtenantsdata(App.UserDetails.Usermodel.Userid);
+                if (response != null && response.Data != null)
                 {
                     Items.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var product = item.ToObject<PropertyHouseTenant>();
-                        Items.Add(product);
+                        Items.Add(item);
                     }
                 }
                 IsDataLoaded = true;
@@ -107,14 +107,13 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystemagentpropertyhouseroomtenantsdata/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Getsystemagentpropertyhouseroomtenantsdata(App.UserDetails.Usermodel.Userid);
+                if (response != null && response.Data != null)
                 {
                     Items.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var product = item.ToObject<PropertyHouseTenant>();
-                        Items.Add(product);
+                        Items.Add(item);
                     }
                 }
                 IsDataLoaded = true;
@@ -132,7 +131,7 @@ namespace Maqaoplus.ViewModels.PropertyHouseTenants
         {
             IsProcessing = true;
             IsDataLoaded = false;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + Tenantid, HttpMethod.Get, null);
+            var response = await _bl.Getsystempropertyhousetenantdatabytenantid(Tenantid);
             if (response != null)
             {
                 TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
