@@ -64,7 +64,7 @@
 
                             <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" HorizontalOptions="FillAndExpand" HeightRequest="40">
                                 <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                    <Label Text="Tenants" TextColor="White" FontSize="14" HorizontalOptions="Start" />
+                                    <Label Text="Owners/Agents" TextColor="White" FontSize="14" HorizontalOptions="Start" />
                                     <Label Text="{Binding Maqaoplussummarydata.Registeredowners}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                             </Frame>
