@@ -34,7 +34,7 @@
                     </Frame>
 
                     <!-- Carousel View for Property Listings -->
-                    <CarouselView ItemsSource="{Binding TenantData.Vacanthousesdata}">
+                    <CarouselView ItemsSource="{Binding Maqaoplussummarydata.Vacanthouses}">
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
                                 <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="180">
