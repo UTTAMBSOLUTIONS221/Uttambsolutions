@@ -5,16 +5,6 @@ namespace Maqaoplus.Views.PropertyHouse;
 public partial class AgentPropertyHousesPage : ContentPage
 {
     private PropertyHouseViewModel _viewModel;
-
-    public AgentPropertyHousesPage()
-    {
-        InitializeComponent();
-
-        _viewModel = new PropertyHouseViewModel();
-
-        BindingContext = _viewModel;
-    }
-
     public AgentPropertyHousesPage(PropertyHouseViewModel viewModel)
     {
         InitializeComponent();

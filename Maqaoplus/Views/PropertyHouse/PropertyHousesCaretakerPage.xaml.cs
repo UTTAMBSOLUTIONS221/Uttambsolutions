@@ -5,16 +5,6 @@ namespace Maqaoplus.Views.PropertyHouse;
 public partial class PropertyHousesCaretakerPage : ContentPage
 {
     private PropertyHouseViewModel _viewModel;
-
-    public PropertyHousesCaretakerPage()
-    {
-        InitializeComponent();
-
-        _viewModel = new PropertyHouseViewModel();
-
-        BindingContext = _viewModel;
-    }
-
     public PropertyHousesCaretakerPage(PropertyHouseViewModel viewModel)
     {
         InitializeComponent();
