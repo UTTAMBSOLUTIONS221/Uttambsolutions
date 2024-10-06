@@ -57,10 +57,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Platforms\Android\Resources\values\ic_launcher_background.xml" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Remove="Resources\Images\maqaopluslogo.png" />
 	</ItemGroup>
 
