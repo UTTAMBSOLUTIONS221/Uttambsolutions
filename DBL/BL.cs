@@ -1169,6 +1169,18 @@ namespace DBL
         }
         #endregion
 
+        #region System Property Summary
+
+        public Task<Maqaoplussummary> Getmaqaoplussummarydata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Getmaqaoplussummarydata();
+                return Resp;
+            });
+        }
+        #endregion
+
         #region System Property House Listing
         public Task<Genericmodel> Registerhousepropertydata(string Obj)
         {

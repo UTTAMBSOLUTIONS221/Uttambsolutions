@@ -1,4 +1,5 @@
 ﻿using DBL;
+using DBL.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -9,7 +10,7 @@ namespace Maqaoplus.ViewModels
     {
         private readonly BL _bl;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
-        public ICommand LoadChurchSummaryCommand { get; }
+        public ICommand LoadMaqaoplussummaryCommand { get; }
         public ICommand LoginCommand { get; }
         public ICommand OpenLiveStreamCommand { get; }
         public ICommand RegisterCommand { get; }
@@ -52,16 +53,16 @@ namespace Maqaoplus.ViewModels
         }
 
 
-        private Jcmhomepagesummary _JcmhomepagesummaryData;
-        public Jcmhomepagesummary JcmhomepagesummaryData
+        private Maqaoplussummary _Maqaoplussummarydata;
+        public Maqaoplussummary Maqaoplussummarydata
         {
-            get => _JcmhomepagesummaryData;
+            get => _Maqaoplussummarydata;
             set
             {
-                if (_JcmhomepagesummaryData != value)
+                if (_Maqaoplussummarydata != value)
                 {
-                    _JcmhomepagesummaryData = value;
-                    OnPropertyChanged(nameof(JcmhomepagesummaryData));
+                    _Maqaoplussummarydata = value;
+                    OnPropertyChanged(nameof(Maqaoplussummarydata));
                 }
             }
         }
@@ -70,8 +71,8 @@ namespace Maqaoplus.ViewModels
         {
             _bl = bl;
             // Initialize commands
-            JcmhomepagesummaryData = new Jcmhomepagesummary();
-            LoadChurchSummaryCommand = new Command(async () => await OnLoadChurchSummary());
+            Maqaoplussummarydata = new Maqaoplussummary();
+            LoadMaqaoplussummaryCommand = new Command(async () => await OnLoadChurchSummary());
             LoginCommand = new Command(OnLogin);
             OpenLiveStreamCommand = new Command(OnOpenLiveStream);
             RegisterCommand = new Command(OnRegister);
@@ -91,7 +92,7 @@ namespace Maqaoplus.ViewModels
 
             try
             {
-                JcmhomepagesummaryData = await _bl.Getchurchhomesummarydata();
+                Maqaoplussummarydata = await _bl.Getmaqaoplussummarydata();
                 IsDataLoaded = true;
             }
             catch (Exception ex)
@@ -112,7 +113,7 @@ namespace Maqaoplus.ViewModels
 
         private async void OnRegister()
         {
-            await Shell.Current.GoToAsync(nameof(RegisterPage));
+            //await Shell.Current.GoToAsync(nameof(RegisterPage));
         }
 
         private void OnOpenLiveStream()
