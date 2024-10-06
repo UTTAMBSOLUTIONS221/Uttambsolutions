@@ -39,7 +39,7 @@ namespace DBL.Repositories
 
                     if (responseJson["Vacanthouses"] != null)
                     {
-                        string VacanthousesJson = responseJson["responseJson"].ToString();
+                        string VacanthousesJson = responseJson["Vacanthouses"].ToString();
                         Vacanthouses = JsonConvert.DeserializeObject<List<Vacanthousesdata>>(VacanthousesJson);
                         Maqaoplussummarydata.Vacanthouses = Vacanthouses;
                     }
