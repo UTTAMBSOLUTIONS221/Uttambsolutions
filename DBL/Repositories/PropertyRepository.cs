@@ -16,6 +16,19 @@ namespace DBL.Repositories
         {
         }
 
+        #region System Property Summary
+        public Maqaoplussummary Getmaqaoplussummarydata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+
+                return connection.Query<Maqaoplussummary>("Usp_Getmaqaoplussummarydata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        #endregion
+
         #region System Property House Listing
         public Genericmodel Registerhousepropertydata(string JsonData)
         {
