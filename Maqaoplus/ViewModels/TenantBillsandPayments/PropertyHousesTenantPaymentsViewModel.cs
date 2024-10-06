@@ -1,4 +1,5 @@
-﻿using DBL.Models;
+﻿using DBL;
+using DBL.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,7 +10,7 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
     public class PropertyHousesTenantPaymentsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly Services.ServiceProvider _serviceProvider;
+        private readonly BL _bl;
         public ObservableCollection<CustomerPaymentData> PaymentItems { get; }
         private MonthlyRentInvoiceModel _tenantInvoiceDetailData;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
@@ -49,9 +50,9 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
         }
 
         // Parameterless constructor for XAML support
-        public PropertyHousesTenantPaymentsViewModel(Services.ServiceProvider serviceProvider)
+        public PropertyHousesTenantPaymentsViewModel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             PaymentItems = new ObservableCollection<CustomerPaymentData>();
             LoadPaymentItemsCommand = new Command(async () => await LoadPaymentItems());
         }
@@ -127,14 +128,13 @@ namespace Maqaoplus.ViewModels.TenantBillsandPayments
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicepaymentdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Gettenantmonthlyinvoicepaymentdatabytenantid(App.UserDetails.Usermodel.Userid);
+                if (response != null && response.Data != null)
                 {
                     PaymentItems.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var payments = item.ToObject<CustomerPaymentData>();
-                        PaymentItems.Add(payments);
+                        PaymentItems.Add(item);
                     }
                 }
                 IsDataLoaded = true;
