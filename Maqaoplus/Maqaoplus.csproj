@@ -72,6 +72,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<MauiXaml Update="ConfirmPaymentDetailModalPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="UpdateUserProfilePage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

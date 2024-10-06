@@ -1,4 +1,5 @@
-﻿using DBL.Entities;
+﻿using DBL;
+using DBL.Entities;
 using DBL.Enum;
 using DBL.Models;
 using Maqaoplus.Views;
@@ -10,7 +11,7 @@ namespace Maqaoplus.ViewModels.Startup
 {
     public class ValidateStaffAccountPageViewModel : INotifyPropertyChanged
     {
-        private readonly Services.ServiceProvider _serviceProvider;
+        private readonly BL _bl;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
         private StaffDetailData _systemStaffTenantData;
@@ -87,9 +88,9 @@ namespace Maqaoplus.ViewModels.Startup
                 OnPropertyChanged();
             }
         }
-        public ValidateStaffAccountPageViewModel(Services.ServiceProvider serviceProvider)
+        public ValidateStaffAccountPageViewModel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             LoadCurrentUserCommand = new Command(async () => await LoadCurrentyStaffTenantData());
             CheckUserLoginStatusCommand = new Command(async () => await CheckUserLoginStatusAsync());
             OnCancelClickedCommand = new Command(OnCancelClicked);
@@ -103,7 +104,7 @@ namespace Maqaoplus.ViewModels.Startup
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffdetaildatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _bl.Getsystemstaffdetaildatabyid(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
                     SystemStaffTenantData = JsonConvert.DeserializeObject<StaffDetailData>(response.Data.ToString());
@@ -126,7 +127,7 @@ namespace Maqaoplus.ViewModels.Startup
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffdetaildatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _bl.Getsystemstaffdetaildatabyid(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
                     StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
@@ -166,7 +167,7 @@ namespace Maqaoplus.ViewModels.Startup
                 PaymentReferenceCode = PaymentReferenceCode
             };
             //Validate Family Bank 
-            var response1 = await _serviceProvider.CallAuthWebApi<object>("/api/Account/Getsystemstaffdetaildatabyid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+            var response1 = await _bl.Getsystemstaffdetaildatabyid(App.UserDetails.Usermodel.Userid);
             if (response1 != null)
             {
 

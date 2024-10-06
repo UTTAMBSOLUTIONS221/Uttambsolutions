@@ -1,4 +1,5 @@
-﻿using DBL.Entities;
+﻿using DBL;
+using DBL.Entities;
 using DBL.Models;
 using Maqaoplus.Views.Startup;
 using System.Collections.ObjectModel;
@@ -12,6 +13,7 @@ namespace Maqaoplus.ViewModels.Startup
 {
     public class RegisterPageViewModel : INotifyPropertyChanged
     {
+        private readonly BL _bl;
         private string _firstName;
         private string _lastName;
         private string _emailAddress;
@@ -28,7 +30,6 @@ namespace Maqaoplus.ViewModels.Startup
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly Services.ServiceProvider _serviceProvider;
         private ObservableCollection<ListModel> _systemstaffdesignation;
         public ICommand OpenPrivacyPolicyCommand => new Command<string>(async (url) =>
         {
@@ -38,9 +39,9 @@ namespace Maqaoplus.ViewModels.Startup
             }
         });
 
-        public RegisterPageViewModel(Services.ServiceProvider serviceProvider)
+        public RegisterPageViewModel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             IsPasswordHidden = true; // Default to hidden password
             IsConfirmPasswordHidden = true; // Default to hidden password
             TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
@@ -267,7 +268,7 @@ namespace Maqaoplus.ViewModels.Startup
                 };
 
                 // Call your registration service here
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/Account/Registerstaff", request);
+                var response = await _bl.Registersystemstaffdata(request);
                 if (response.RespStatus == 0 || response.RespStatus == 200)
                 {
                     FirstName = "";
