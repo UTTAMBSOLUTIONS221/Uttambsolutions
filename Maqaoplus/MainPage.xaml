@@ -70,15 +70,16 @@
 
         <!-- Main Content - Property Listings -->
         <AbsoluteLayout Grid.Row="2" IsVisible="{Binding IsDataLoaded}">
-            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                <StackLayout Spacing="20">
-
-                    <!-- Search Bar -->
-                    <Frame CornerRadius="10" Padding="0" BackgroundColor="White" BorderColor="#0a506c" HasShadow="True" Margin="4,10">
-                        <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40" />
-                    </Frame>
-
-                    <!-- Grid for Property Listings -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!-- Search Bar -->
+                <Frame Grid.Row="0" CornerRadius="10" Padding="0" BackgroundColor="White" BorderColor="#0a506c" HasShadow="True" Margin="4,10">
+                    <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40" />
+                </Frame>
+                <ScrollView Grid.Row="1" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                     <CollectionView ItemsSource="{Binding Maqaoplussummarydata.Vacanthouses}" ItemsLayout="HorizontalGrid, 2">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -98,7 +99,7 @@
 
                                             <!-- Image on the Left -->
                                             <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" 
-                                                   Aspect="AspectFill" HeightRequest="100" Grid.Column="0" />
+                                 Aspect="AspectFill" HeightRequest="100" Grid.Column="0" />
 
                                             <!-- Data on the Right -->
                                             <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
@@ -112,8 +113,8 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                </StackLayout>
-            </ScrollView>
+                </ScrollView>
+            </Grid>
         </AbsoluteLayout>
 
         <!-- Footer -->
