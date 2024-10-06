@@ -48,21 +48,21 @@
                     </StackLayout>
                 </Frame>
 
-                <Frame Grid.Row="0" Grid.Column="2" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="40">
+                <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="40">
                     <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
                         <Label Text="Jobs" TextColor="White" FontSize="14" HorizontalOptions="Start" />
                         <Label Text="{Binding Maqaoplussummarydata.Listedjobs}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
                     </StackLayout>
                 </Frame>
 
-                <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="40">
+                <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="40">
                     <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
                         <Label Text="Occupied" TextColor="White" FontSize="14" HorizontalOptions="Start" />
                         <Label Text="{Binding Maqaoplussummarydata.Occupiedhouses}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
                     </StackLayout>
                 </Frame>
 
-                <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="40">
+                <Frame Grid.Row="2" Grid.Column="0" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="40">
                     <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
                         <Label Text="Collections" TextColor="White" FontSize="14" HorizontalOptions="Start" />
                         <Label Text="{Binding Maqaoplussummarydata.Collectedrent}" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" />
