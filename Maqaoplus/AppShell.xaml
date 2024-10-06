@@ -5,8 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Maqaoplus"
     Shell.FlyoutBehavior="Disabled"
+    xmlns:startupPages="clr-namespace:Maqaoplus.Views.Startup"
     Title="Maqaoplus">
 
-    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    <ShellContent
+     Title="MAQAO PLUS Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TitleColor="#0a506c"
+     ContentTemplate="{DataTemplate local:MainPage}"
+     Route="MainPage" />
 
+    <ShellContent
+        Title="Login Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TitleColor="#0a506c"
+        ContentTemplate="{DataTemplate startupPages:LoginPage}"
+        Route="LoginPage" />
 </Shell>
