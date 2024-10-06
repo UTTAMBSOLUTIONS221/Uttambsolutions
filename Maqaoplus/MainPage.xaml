@@ -7,7 +7,6 @@
              BackgroundColor="#ffffff"
              Title="JCM CHURCH INT’L.">
 
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:NullToImageConverter x:Key="NullToImageConverter" />
@@ -24,17 +23,47 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!-- Summary Data Section -->
+        <StackLayout Grid.Row="0" Padding="10" Spacing="10">
+            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True">
+                <Grid ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Summary Metrics Display -->
+                    <StackLayout Grid.Column="0" Spacing="5">
+                        <Label Text="Listed Properties" TextColor="White" FontSize="14" />
+                        <Label Text="{Binding Maqaoplussummary.ListedProperties}" TextColor="White" FontSize="18" FontAttributes="Bold" />
+
+                        <Label Text="Registered Tenants" TextColor="White" FontSize="14" />
+                        <Label Text="{Binding Maqaoplussummary.Registeredtenants}" TextColor="White" FontSize="18" FontAttributes="Bold" />
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="Listed Jobs" TextColor="White" FontSize="14" />
+                        <Label Text="{Binding Maqaoplussummary.ListedJobs}" TextColor="White" FontSize="18" FontAttributes="Bold" />
+
+                        <Label Text="Occupied Houses" TextColor="White" FontSize="14" />
+                        <Label Text="{Binding Maqaoplussummary.Occupiedhouses}" TextColor="White" FontSize="18" FontAttributes="Bold" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+        </StackLayout>
+
+        <!-- Main Content -->
         <AbsoluteLayout Grid.Row="1" IsVisible="{Binding IsDataLoaded}">
-            <!-- Main Content -->
             <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout Spacing="20">
+
                     <!-- Search Bar with Frame -->
                     <Frame CornerRadius="10" Padding="0" BackgroundColor="White" BorderColor="#0a506c" HasShadow="True" Margin="4,10">
-                        <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40"/>
+                        <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40" />
                     </Frame>
 
                     <!-- Carousel View for Property Listings -->
-                    <CarouselView ItemsSource="{Binding Maqaoplussummarydata.Vacanthouses}">
+                    <CarouselView ItemsSource="{Binding Maqaoplussummary.Vacanthouses}">
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
                                 <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="180">
@@ -52,9 +81,7 @@
                                         <Grid Grid.Row="0" ColumnSpacing="10">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
-                                                <!-- For Image -->
                                                 <ColumnDefinition Width="*" />
-                                                <!-- For Data -->
                                             </Grid.ColumnDefinitions>
 
                                             <!-- Image on the Left -->

@@ -1,4 +1,5 @@
 ﻿using DBL;
+using Maqaoplus.ViewModels;
 using Maqaoplus.ViewModels.PropertyHouse;
 using Maqaoplus.Views.PropertyHouse;
 using Microsoft.Extensions.Logging;
@@ -38,6 +39,7 @@ namespace Maqaoplus
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddSingleton<PropertyHousesPage>();
 
+            builder.Services.AddSingleton<MainPageViewModel>();
             builder.Services.AddSingleton<PropertyHouseViewModel>();
 
             return builder.Build();
