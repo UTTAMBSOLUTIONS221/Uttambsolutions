@@ -23,8 +23,17 @@ namespace DBL.Repositories
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
-
-                return connection.Query<Maqaoplussummary>("Usp_Getmaqaoplussummarydata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                parameters.Add("@Maqaoplussummarydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getmaqaoplussummarydata", parameters, commandType: CommandType.StoredProcedure);
+                string systempropertydataJson = parameters.Get<string>("@Maqaoplussummarydata");
+                if (systempropertydataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Maqaoplussummary>(systempropertydataJson);
+                }
+                else
+                {
+                    return new Maqaoplussummary();
+                }
             }
         }
         #endregion
