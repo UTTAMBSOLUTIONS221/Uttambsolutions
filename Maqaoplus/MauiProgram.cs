@@ -1,10 +1,19 @@
 ﻿using CommunityToolkit.Maui;
 using DBL;
 using Maqaoplus.ViewModels;
+using Maqaoplus.ViewModels.Agreements;
+using Maqaoplus.ViewModels.Dashboards;
+using Maqaoplus.ViewModels.HouseTenant;
 using Maqaoplus.ViewModels.PropertyHouse;
 using Maqaoplus.ViewModels.Startup;
+using Maqaoplus.ViewModels.TenantBillsandPayments;
+using Maqaoplus.Views;
+using Maqaoplus.Views.Agreements;
+using Maqaoplus.Views.Dashboards;
 using Maqaoplus.Views.PropertyHouse;
+using Maqaoplus.Views.PropertyHouseTenants;
 using Maqaoplus.Views.Startup;
+using Maqaoplus.Views.TenantBillsandPayments;
 using Microsoft.Extensions.Logging;
 
 namespace Maqaoplus
@@ -39,18 +48,47 @@ namespace Maqaoplus
               });
 
             builder.Services.AddTransient<MainPage>();
-            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddSingleton<LoadingPage>();
+            builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<ForgotPasswordPage>();
             builder.Services.AddTransient<ValidateStaffAccountPage>();
-            builder.Services.AddTransient<PropertyHousesPage>();
+            builder.Services.AddSingleton<DashboardPage>();
+            builder.Services.AddSingleton<AdminDashboardPage>();
+            builder.Services.AddSingleton<UserDashboardPage>();
+            builder.Services.AddSingleton<PropertyOwnerDashboardPage>();
+            builder.Services.AddSingleton<PropertyCaretakerDashboardPage>();
+            builder.Services.AddSingleton<AgentDashboardPage>();
+            builder.Services.AddSingleton<UserProfilePage>();
+            builder.Services.AddSingleton<UpdateUserProfilePage>();
+            builder.Services.AddSingleton<PropertyHousesPage>();
+            builder.Services.AddSingleton<PropertyHousesDetailPage>();
+            builder.Services.AddSingleton<AgentPropertyHousesPage>();
+            builder.Services.AddSingleton<PropertyHousesTenantDetailPage>();
+            builder.Services.AddSingleton<PropertyHousesTenantBillsPage>();
+            builder.Services.AddSingleton<PropertyHousesTenantPaymentsPage>();
+            builder.Services.AddSingleton<PropertyTenantAgreementsPage>();
+            builder.Services.AddSingleton<VacantPropertyHousesPage>();
+            builder.Services.AddSingleton<PropertyHousesCaretakerPage>();
+            builder.Services.AddSingleton<PropertyAgentAgreementsPage>();
+            builder.Services.AddSingleton<PropertyOwnerAgreementsPage>();
 
+            // View Models
             builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddSingleton<LoadingPageViewModel>();
             builder.Services.AddSingleton<LoginPageViewModel>();
             builder.Services.AddSingleton<RegisterPageViewModel>();
             builder.Services.AddSingleton<ForgotPasswordPageViewModel>();
             builder.Services.AddSingleton<ValidateStaffAccountPageViewModel>();
+            builder.Services.AddSingleton<DashboardPageViewModel>();
+            builder.Services.AddSingleton<UserProfilePageViewModel>();
+            builder.Services.AddSingleton<SummaryDashBoardViewModel>();
             builder.Services.AddSingleton<PropertyHouseViewModel>();
+            builder.Services.AddSingleton<Propertyhousetenantviewmodel>();
+            builder.Services.AddSingleton<PropertyHousesTenantBillsViewModel>();
+            builder.Services.AddSingleton<PropertyHousesTenantPaymentsViewModel>();
+            builder.Services.AddSingleton<SystemAgreementViewModel>();
 
             return builder.Build();
         }
