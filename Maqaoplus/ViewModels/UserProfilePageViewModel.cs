@@ -222,7 +222,7 @@ namespace Maqaoplus.ViewModels
                     {
                         Systemkinrelationship = new ObservableCollection<ListModel>(SystemkinrelationshipResponse);
                     }
-                    StaffData = JsonConvert.DeserializeObject<SystemStaff>(response.Data.ToString());
+                    StaffData = response.Data;
                     if (StaffData.Genderid > 0)
                     {
                         Selectedstaffgender = Systemgender.FirstOrDefault(x => x.Value == _staffData.Genderid.ToString());

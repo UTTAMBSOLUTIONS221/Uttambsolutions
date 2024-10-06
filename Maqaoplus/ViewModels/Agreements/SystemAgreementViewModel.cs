@@ -124,7 +124,7 @@ namespace Maqaoplus.ViewModels.Agreements
                 var response = await _bl.Getsystempropertyhouseagreementdetaildatabyagentid(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
-                    OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
+                    OwnerTenantAgreementDetailData = response.Data;
                 }
                 IsDataLoaded = true;
             }
@@ -364,7 +364,7 @@ namespace Maqaoplus.ViewModels.Agreements
                 var response = await _bl.Getsystempropertyhouseagreementdetaildatabyownerid(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
-                    OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
+                    OwnerTenantAgreementDetailData = response.Data;
                 }
                 IsDataLoaded = true;
             }
@@ -606,7 +606,7 @@ namespace Maqaoplus.ViewModels.Agreements
                 var response = await _bl.Getsystempropertyhouseroomagreementdetaildatabytenantid(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
-                    TenantAgreementDetailData = JsonConvert.DeserializeObject<TenantAgreementDetailData>(response.Data.ToString());
+                    TenantAgreementDetailData = response.Data;
                 }
                 IsDataLoaded = true;
             }
