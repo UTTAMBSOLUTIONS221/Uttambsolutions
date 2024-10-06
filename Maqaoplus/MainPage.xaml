@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
 
         <!-- Summary Data Section with Smaller Cards -->
-        <StackLayout Grid.Row="0" Padding="10" Spacing="10" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+        <StackLayout Grid.Row="0" Spacing="10" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
             <!-- Listed Properties Card -->
             <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="7" HasShadow="True" WidthRequest="120" HeightRequest="60">
                 <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
@@ -49,22 +49,21 @@
                     <Label Text="{Binding Maqaoplussummarydata.Listedjobs}" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
-
-            <!-- Occupied Houses Card -->
-            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="100">
-                <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
-                    <Label Text="Occupied" TextColor="White" FontSize="12" HorizontalOptions="Center" />
-                    <Label Text="{Binding Maqaoplussummarydata.Occupiedhouses}" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
-                </StackLayout>
-            </Frame>
         </StackLayout>
 
-        <StackLayout Grid.Row="1" Padding="10" Spacing="10" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+        <StackLayout Grid.Row="1" Spacing="10" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
             <!-- Occupied Houses Card -->
             <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="7" HasShadow="True" WidthRequest="120" HeightRequest="60">
                 <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
                     <Label Text="Occupied" TextColor="White" FontSize="12" HorizontalOptions="Center" />
                     <Label Text="{Binding Maqaoplussummarydata.Occupiedhouses}" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
+                </StackLayout>
+            </Frame>
+            <!-- Collected Houses Rent -->
+            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="7" HasShadow="True" WidthRequest="120" HeightRequest="60">
+                <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
+                    <Label Text="Collections" TextColor="White" FontSize="12" HorizontalOptions="Center" />
+                    <Label Text="{Binding Maqaoplussummarydata.Collectedrent}" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
         </StackLayout>
