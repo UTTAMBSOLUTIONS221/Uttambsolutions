@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.uttambsolutions.maqaoplus" android:versionCode="33" android:versionName="1.0.33">
-	<application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:supportsRtl="true" android:label="MAQAO Plus">
+	<application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:supportsRtl="true" android:label="MAQAO">
 		<meta-data android:name="com.google.android.gms:play-services-ads:23.3.0" android:value="ca-app-pub-2850934153859537~9819539564" />
 	</application>
 	<queries>
