@@ -89,16 +89,16 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="200" HasShadow="True">
+                                <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="300" HasShadow="True">
                                     <Grid Padding="5">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
-                                        <Image Grid.Row="0" Grid.Column="0" Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill"/>
+                                        <Image Grid.Row="0" Grid.Column="0" Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" />
 
                                         <!-- Data on the Right -->
-                                        <StackLayout  Grid.Row="1" Grid.Column="0"  VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                        <StackLayout  Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                                             <Label Text="{Binding Propertyhousename}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" />
                                             <Label Text="{Binding Systempropertyhousesizename,StringFormat='Rooms: {0}'}" FontSize="14" TextColor="#0a506c" />
                                             <Label Text="{Binding Streetorlandmark}" FontSize="14" TextColor="Black" MaxLines="2" />
