@@ -75,45 +75,50 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+
                 <!-- Search Bar -->
                 <Frame Grid.Row="0" CornerRadius="10" Padding="0" BackgroundColor="White" BorderColor="#0a506c" HasShadow="True" Margin="4,10">
-                    <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40" />
+                    <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40"/>
                 </Frame>
-                <ScrollView Grid.Row="1" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                    <CollectionView ItemsSource="{Binding Maqaoplussummarydata.Vacanthouses}" ItemsLayout="HorizontalGrid, 2">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="180">
-                                    <Grid Padding="5">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
 
-                                        <!-- Image and Data -->
-                                        <Grid Grid.Row="0" ColumnSpacing="10">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
+                <!-- CollectionView directly under the Search Bar -->
+                <CollectionView Grid.Row="1" 
+                        ItemsSource="{Binding Maqaoplussummarydata.Vacanthouses}" 
+                        ItemsLayout="HorizontalGrid, 2" 
+                        VerticalOptions="FillAndExpand" 
+                        Margin="4,0" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="4" Margin="4" BorderColor="LightGray" CornerRadius="10" HeightRequest="180">
+                                <Grid Padding="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
 
-                                            <!-- Image on the Left -->
-                                            <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" 
-                                 Aspect="AspectFill" HeightRequest="100" Grid.Column="0" />
+                                    <!-- Image and Data -->
+                                    <Grid Grid.Row="0" ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
 
-                                            <!-- Data on the Right -->
-                                            <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-                                                <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" />
-                                                <Label Text="{Binding Systempropertyhousesizename,StringFormat='Rooms: {0}'}" FontSize="12" TextColor="#0a506c" />
-                                                <Label Text="{Binding Streetorlandmark}" FontSize="12" TextColor="Black" MaxLines="2" />
-                                            </StackLayout>
-                                        </Grid>
+                                        <!-- Image on the Left -->
+                                        <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" 
+                                       Aspect="AspectFill" HeightRequest="100" Grid.Column="0" />
+
+                                        <!-- Data on the Right -->
+                                        <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                            <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" />
+                                            <Label Text="{Binding Systempropertyhousesizename,StringFormat='Rooms: {0}'}" FontSize="12" TextColor="#0a506c" />
+                                            <Label Text="{Binding Streetorlandmark}" FontSize="12" TextColor="Black" MaxLines="2" />
+                                        </StackLayout>
                                     </Grid>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </ScrollView>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Grid>
         </AbsoluteLayout>
 
