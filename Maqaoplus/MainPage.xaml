@@ -24,87 +24,44 @@
         </Grid.RowDefinitions>
 
         <!-- Summary Data Section -->
-        <StackLayout Grid.Row="0" Padding="10" Spacing="10">
-            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True">
-                <Grid ColumnSpacing="20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+        <StackLayout Grid.Row="0" Padding="10" Spacing="20" Orientation="Horizontal">
+            <!-- Listed Properties Card -->
+            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="15" HasShadow="True" WidthRequest="160">
+                <StackLayout Spacing="5" HorizontalOptions="CenterAndExpand">
+                    <Label Text="Listed Properties" TextColor="White" FontSize="14" HorizontalOptions="Center" />
+                    <Label Text="{Binding Maqaoplussummarydata.Listedproperties}" TextColor="White" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+                </StackLayout>
+            </Frame>
 
-                    <!-- Summary Metrics Display -->
-                    <StackLayout Grid.Column="0" Spacing="5">
-                        <Label Text="Listed Properties" TextColor="White" FontSize="14" />
-                        <Label Text="{Binding Maqaoplussummary.ListedProperties}" TextColor="White" FontSize="18" FontAttributes="Bold" />
+            <!-- Registered Tenants Card -->
+            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="15" HasShadow="True" WidthRequest="160">
+                <StackLayout Spacing="5" HorizontalOptions="CenterAndExpand">
+                    <Label Text="Registered Tenants" TextColor="White" FontSize="14" HorizontalOptions="Center" />
+                    <Label Text="{Binding Maqaoplussummarydata.Registeredtenants}" TextColor="White" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
 
-                        <Label Text="Registered Tenants" TextColor="White" FontSize="14" />
-                        <Label Text="{Binding Maqaoplussummary.Registeredtenants}" TextColor="White" FontSize="18" FontAttributes="Bold" />
-                    </StackLayout>
+        <StackLayout Grid.Row="0" Padding="10" Spacing="20" Orientation="Horizontal">
+            <!-- Listed Jobs Card -->
+            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="15" HasShadow="True" WidthRequest="160">
+                <StackLayout Spacing="5" HorizontalOptions="CenterAndExpand">
+                    <Label Text="Listed Jobs" TextColor="White" FontSize="14" HorizontalOptions="Center" />
+                    <Label Text="{Binding Maqaoplussummarydata.Listedjobs}" TextColor="White" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+                </StackLayout>
+            </Frame>
 
-                    <StackLayout Grid.Column="1" Spacing="5">
-                        <Label Text="Listed Jobs" TextColor="White" FontSize="14" />
-                        <Label Text="{Binding Maqaoplussummary.ListedJobs}" TextColor="White" FontSize="18" FontAttributes="Bold" />
-
-                        <Label Text="Occupied Houses" TextColor="White" FontSize="14" />
-                        <Label Text="{Binding Maqaoplussummary.Occupiedhouses}" TextColor="White" FontSize="18" FontAttributes="Bold" />
-                    </StackLayout>
-                </Grid>
+            <!-- Occupied Houses Card -->
+            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="15" HasShadow="True" WidthRequest="160">
+                <StackLayout Spacing="5" HorizontalOptions="CenterAndExpand">
+                    <Label Text="Occupied Houses" TextColor="White" FontSize="14" HorizontalOptions="Center" />
+                    <Label Text="{Binding Maqaoplussummarydata.Occupiedhouses}" TextColor="White" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+                </StackLayout>
             </Frame>
         </StackLayout>
 
         <!-- Main Content -->
-        <AbsoluteLayout Grid.Row="1" IsVisible="{Binding IsDataLoaded}">
-            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                <StackLayout Spacing="20">
-
-                    <!-- Search Bar with Frame -->
-                    <Frame CornerRadius="10" Padding="0" BackgroundColor="White" BorderColor="#0a506c" HasShadow="True" Margin="4,10">
-                        <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40" />
-                    </Frame>
-
-                    <!-- Carousel View for Property Listings -->
-                    <CarouselView ItemsSource="{Binding Maqaoplussummary.Vacanthouses}">
-                        <CarouselView.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Padding="4" Margin="4" HasShadow="True" BorderColor="LightGray" CornerRadius="10" HeightRequest="180">
-                                    <Grid Padding="5">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-
-                                        <!-- Horizontal Grid for Image and Data -->
-                                        <Grid Grid.Row="0" ColumnSpacing="10">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <!-- Image on the Left -->
-                                            <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" HeightRequest="100" Grid.Column="0" />
-
-                                            <!-- Data on the Right -->
-                                            <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-                                                <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" TextTransform="Uppercase" MaxLines="1" LineBreakMode="TailTruncation" />
-                                                <Label Text="{Binding Systempropertyhousesizename,StringFormat='Rooms: {0}'}" FontSize="17" TextColor="#0a506c" />
-                                                <Label Text="{Binding Streetorlandmark}" FontSize="14" LineBreakMode="WordWrap" MaxLines="2" TextColor="Black" />
-                                                <Label Text="{Binding Countyname, StringFormat='County: {0}'}" FontSize="14" LineBreakMode="WordWrap" MaxLines="2" TextColor="Black" />
-                                                <Label Text="{Binding Subcountyname, StringFormat='Subcounty: {0}'}" FontSize="14" LineBreakMode="WordWrap" MaxLines="2" TextColor="Black" />
-                                                <Label Text="{Binding Subcountywardname, StringFormat='Ward: {0}'}" FontSize="14" LineBreakMode="WordWrap" MaxLines="2" TextColor="Black" />
-                                            </StackLayout>
-                                        </Grid>
-                                    </Grid>
-                                </Frame>
-                            </DataTemplate>
-                        </CarouselView.ItemTemplate>
-                    </CarouselView>
-                </StackLayout>
-            </ScrollView>
-        </AbsoluteLayout>
+    
 
         <!-- Overlay Layer for ActivityIndicator -->
         <Grid IsVisible="{Binding IsProcessing}" BackgroundColor="#f0f0f0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3">

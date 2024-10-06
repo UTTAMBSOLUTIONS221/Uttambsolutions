@@ -19,6 +19,8 @@ namespace DBL.Repositories
         #region System Property Summary
         public Maqaoplussummary Getmaqaoplussummarydata()
         {
+            Maqaoplussummary Maqaoplussummarydata = new Maqaoplussummary();
+            List<Vacanthousesdata> Vacanthouses = new List<Vacanthousesdata>();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -28,11 +30,24 @@ namespace DBL.Repositories
                 string systempropertydataJson = parameters.Get<string>("@Maqaoplussummarydata");
                 if (systempropertydataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<Maqaoplussummary>(systempropertydataJson);
+                    JObject responseJson = JObject.Parse(systempropertydataJson);
+                    Maqaoplussummarydata.Listedproperties = Convert.ToInt32(responseJson["Listedproperties"]);
+                    Maqaoplussummarydata.Listedjobs = Convert.ToInt32(responseJson["Listedjobs"]);
+                    Maqaoplussummarydata.Registeredtenants = Convert.ToInt32(responseJson["Registeredtenants"]);
+                    Maqaoplussummarydata.Occupiedhouses = Convert.ToInt32(responseJson["Occupiedhouses"]);
+                    Maqaoplussummarydata.Collectedrent = Convert.ToDecimal(responseJson["Collectedrent"]);
+
+                    if (responseJson["Vacanthouses"] != null)
+                    {
+                        string VacanthousesJson = responseJson["responseJson"].ToString();
+                        Vacanthouses = JsonConvert.DeserializeObject<List<Vacanthousesdata>>(VacanthousesJson);
+                        Maqaoplussummarydata.Vacanthouses = Vacanthouses;
+                    }
+                    return Maqaoplussummarydata;
                 }
                 else
                 {
-                    return new Maqaoplussummary();
+                    return Maqaoplussummarydata;
                 }
             }
         }
