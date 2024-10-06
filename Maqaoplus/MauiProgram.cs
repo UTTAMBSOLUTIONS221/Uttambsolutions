@@ -39,11 +39,11 @@ namespace Maqaoplus
               });
 
             builder.Services.AddTransient<MainPage>();
-            builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<ForgotPasswordPage>();
             builder.Services.AddTransient<ValidateStaffAccountPage>();
-            builder.Services.AddSingleton<PropertyHousesPage>();
+            builder.Services.AddTransient<PropertyHousesPage>();
 
             builder.Services.AddSingleton<MainPageViewModel>();
             builder.Services.AddSingleton<LoginPageViewModel>();
