@@ -1,23 +1,23 @@
 using Maqaoplus.ViewModels;
+
 namespace Maqaoplus.Views;
 public partial class UserProfilePage : ContentPage
 {
-    private UserProfilePageViewModel _viewModel;
-
-    public UserProfilePage(Services.ServiceProvider serviceProvider)
+    public partial class MainPage : ContentPage
     {
-        InitializeComponent();
-        _viewModel = new UserProfilePageViewModel(serviceProvider);
-        this.BindingContext = _viewModel;
-
-    }
-
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        if (_viewModel.LoadCurrentUserCommand.CanExecute(null))
+        private UserProfilePageViewModel _viewModel;
+        public MainPage(UserProfilePageViewModel viewModel)
         {
-            _viewModel.LoadCurrentUserCommand.Execute(null);
+            InitializeComponent();
+            BindingContext = _viewModel = viewModel;
+        }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            if (_viewModel.LoadCurrentUserCommand.CanExecute(null))
+            {
+                _viewModel.LoadCurrentUserCommand.Execute(null);
+            }
         }
     }
 }
