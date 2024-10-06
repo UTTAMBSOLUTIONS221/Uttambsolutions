@@ -3,9 +3,7 @@
              x:Class="Maqaoplus.MainPage"
              xmlns:converters="clr-namespace:Maqaoplus.Helpers"
              xmlns:local="clr-namespace:Maqaoplus.Helpers"
-             Shell.NavBarIsVisible="False"
-             BackgroundColor="#ffffff"
-             Title="JCM CHURCH INT’L.">
+             Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -25,70 +23,72 @@
         </Grid.RowDefinitions>
 
         <!-- Summary Data Section with Smaller Cards -->
-        <StackLayout Grid.Row="0" Spacing="10" Padding="4" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-            <!-- Listed Properties Card -->
-            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="7" HasShadow="True" WidthRequest="120" HeightRequest="60">
-                <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
-                    <Label Text="Properties" TextColor="White" FontSize="12" HorizontalOptions="Center" />
-                    <Label Text="{Binding Maqaoplussummarydata.Listedproperties}" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
-                </StackLayout>
-            </Frame>
+        <StackLayout Grid.Row="0" Spacing="10" Padding="10" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="70">
+                    <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Properties" TextColor="White" FontSize="14" HorizontalOptions="Center" />
+                        <Label Text="{Binding Maqaoplussummarydata.Listedproperties}" TextColor="White" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+                <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="70">
+                    <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Tenants" TextColor="White" FontSize="14" HorizontalOptions="Center" />
+                        <Label Text="{Binding Maqaoplussummarydata.Registeredtenants}" TextColor="White" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Grid.Row="0" Grid.Column="2" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="70">
+                    <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Jobs" TextColor="White" FontSize="14" HorizontalOptions="Center" />
+                        <Label Text="{Binding Maqaoplussummarydata.Listedjobs}" TextColor="White" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
 
-            <!-- Registered Tenants Card -->
-            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="7" HasShadow="True" WidthRequest="120" HeightRequest="60">
-                <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
-                    <Label Text="Tenants" TextColor="White" FontSize="12" HorizontalOptions="Center" />
-                    <Label Text="{Binding Maqaoplussummarydata.Registeredtenants}" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
-                </StackLayout>
-            </Frame>
-
-            <!-- Listed Jobs Card -->
-            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="7" HasShadow="True" WidthRequest="120" HeightRequest="60">
-                <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
-                    <Label Text="Jobs" TextColor="White" FontSize="12" HorizontalOptions="Center" />
-                    <Label Text="{Binding Maqaoplussummarydata.Listedjobs}" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
-                </StackLayout>
-            </Frame>
-        </StackLayout>
-
-        <StackLayout Grid.Row="1" Spacing="10" Padding="4" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-            <!-- Occupied Houses Card -->
-            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="7" HasShadow="True" WidthRequest="120" HeightRequest="60">
-                <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
-                    <Label Text="Occupied" TextColor="White" FontSize="12" HorizontalOptions="Center" />
-                    <Label Text="{Binding Maqaoplussummarydata.Occupiedhouses}" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
-                </StackLayout>
-            </Frame>
-            <!-- Collected Houses Rent -->
-            <Frame BackgroundColor="#0a506c" CornerRadius="10" Padding="7" HasShadow="True" WidthRequest="120" HeightRequest="60">
-                <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
-                    <Label Text="Collections" TextColor="White" FontSize="12" HorizontalOptions="Center" />
-                    <Label Text="{Binding Maqaoplussummarydata.Collectedrent}" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
-                </StackLayout>
-            </Frame>
+                <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="70">
+                    <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Occupied" TextColor="White" FontSize="14" HorizontalOptions="Center" />
+                        <Label Text="{Binding Maqaoplussummarydata.Occupiedhouses}" TextColor="White" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+                <Frame Grid.Row="1" Grid.Column="1"  BackgroundColor="#0a506c" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120" HeightRequest="70">
+                    <StackLayout Spacing="2" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Collections" TextColor="White" FontSize="14" HorizontalOptions="Center" />
+                        <Label Text="{Binding Maqaoplussummarydata.Collectedrent}" TextColor="White" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+            </Grid>
         </StackLayout>
 
         <!-- Main Content - Property Listings -->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <!-- Search Bar -->
-            <Frame Grid.Row="0" CornerRadius="10" Padding="0" BackgroundColor="White" BorderColor="#0a506c" HasShadow="True" Margin="4,10">
-                <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40"/>
+            <Frame Grid.Row="0" CornerRadius="10" Padding="0" BackgroundColor="White" BorderColor="#0a506c" HasShadow="True" Margin="10">
+                <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40" />
             </Frame>
-            <ScrollView Grid.Row="1" IsVisible="{Binding IsDataLoaded}">
-                <!-- CollectionView directly under the Search Bar -->
-            <CollectionView 
-                  ItemsSource="{Binding Maqaoplussummarydata.Vacanthouses}" 
-                  ItemsLayout="HorizontalGrid, 2" 
-                  VerticalOptions="FillAndExpand" 
-                  Margin="4,0" >
+
+            <!-- CollectionView directly under the Search Bar -->
+            <CollectionView Grid.Row="1" 
+                            ItemsSource="{Binding Maqaoplussummarydata.Vacanthouses}" 
+                            ItemsLayout="HorizontalGrid, 2" 
+                            VerticalOptions="FillAndExpand" 
+                            Margin="10">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="4" Margin="4" BorderColor="LightGray" CornerRadius="10" HeightRequest="180">
+                        <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="200" HasShadow="True">
                             <Grid Padding="5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -104,13 +104,13 @@
 
                                     <!-- Image on the Left -->
                                     <Image Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" 
-                                 Aspect="AspectFill" HeightRequest="100" Grid.Column="0" />
+                                           Aspect="AspectFill" HeightRequest="100" WidthRequest="100" Grid.Column="0" />
 
                                     <!-- Data on the Right -->
                                     <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-                                        <Label Text="{Binding Propertyhousename}" FontSize="14" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" />
-                                        <Label Text="{Binding Systempropertyhousesizename,StringFormat='Rooms: {0}'}" FontSize="12" TextColor="#0a506c" />
-                                        <Label Text="{Binding Streetorlandmark}" FontSize="12" TextColor="Black" MaxLines="2" />
+                                        <Label Text="{Binding Propertyhousename}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" />
+                                        <Label Text="{Binding Systempropertyhousesizename,StringFormat='Rooms: {0}'}" FontSize="14" TextColor="#0a506c" />
+                                        <Label Text="{Binding Streetorlandmark}" FontSize="14" TextColor="Black" MaxLines="2" />
                                     </StackLayout>
                                 </Grid>
                             </Grid>
@@ -118,16 +118,17 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </ScrollView>
-            </Grid>
+        </Grid>
+
         <!-- Overlay Layer for ActivityIndicator -->
         <Grid IsVisible="{Binding IsProcessing}" BackgroundColor="#00000066" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3">
             <BoxView Color="#C0000000" Opacity="0.5" />
             <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
         </Grid>
+
         <!-- Footer -->
         <StackLayout Grid.Row="3" BackgroundColor="#ffffff" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="End">
-            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold" FontSize="12"/>
         </StackLayout>
     </Grid>
 </ContentPage>
