@@ -1,4 +1,5 @@
-﻿using DBL.Entities;
+﻿using DBL;
+using DBL.Entities;
 using DBL.Models;
 using Maqaoplus.Views.BillsandPayments.Modals;
 using Newtonsoft.Json;
@@ -12,7 +13,7 @@ namespace Maqaoplus.ViewModels.BillsandPayments
     public class PropertyHousesBillsandPaymentsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly Services.ServiceProvider _serviceProvider;
+        private readonly BL _bl;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         public ObservableCollection<MonthlyRentInvoiceModel> Items { get; }
         public ObservableCollection<CustomerPaymentData> PaymentItems { get; }
@@ -72,9 +73,9 @@ namespace Maqaoplus.ViewModels.BillsandPayments
         }
 
         // Parameterless constructor for XAML support
-        public PropertyHousesBillsandPaymentsViewModel(Services.ServiceProvider serviceProvider)
+        public PropertyHousesBillsandPaymentsViewModel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             Items = new ObservableCollection<MonthlyRentInvoiceModel>();
             TenantInvoiceDetailData = new MonthlyRentInvoiceModel();
             CustomerPaymentValidationData = new CustomerPaymentValidation();
@@ -172,14 +173,13 @@ namespace Maqaoplus.ViewModels.BillsandPayments
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicedatabyownerid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Gettenantmonthlyinvoicedatabyownerid(App.UserDetails.Usermodel.Userid);
+                if (response != null && response.Data != null)
                 {
                     Items.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var product = item.ToObject<MonthlyRentInvoiceModel>();
-                        Items.Add(product);
+                        Items.Add(item);
                     }
                 }
                 IsDataLoaded = true;
@@ -200,14 +200,13 @@ namespace Maqaoplus.ViewModels.BillsandPayments
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicedatabyagentid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Gettenantmonthlyinvoicedatabyagentid(App.UserDetails.Usermodel.Userid);
+                if (response != null && response.Data != null)
                 {
                     Items.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var product = item.ToObject<MonthlyRentInvoiceModel>();
-                        Items.Add(product);
+                        Items.Add(item);
                     }
                 }
                 IsDataLoaded = true;
@@ -228,7 +227,7 @@ namespace Maqaoplus.ViewModels.BillsandPayments
             IsDataLoaded = false;
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>($"/api/PropertyHouse/Gettenantmonthlyinvoicedetaildatabyinvoiceid/" + Invoiceid, HttpMethod.Get, null);
+                var response = await _bl.Gettenantmonthlyinvoicedetaildatabyinvoiceid(Invoiceid);
                 if (response != null && response.Data != null)
                 {
                     TenantInvoiceDetailData = JsonConvert.DeserializeObject<MonthlyRentInvoiceModel>(response.Data.ToString());
@@ -272,12 +271,12 @@ namespace Maqaoplus.ViewModels.BillsandPayments
                 InvoicePaymentValidationData.Datemodified = DateTime.UtcNow;
 
 
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Validatepropertyhouseroomrentpaymentrequestdata", HttpMethod.Post, InvoicePaymentValidationData);
-                if (response.StatusCode == 200)
+                var response = await _bl.Registervalidatecustomerpaymentrequestdata(JsonConvert.SerializeObject(InvoicePaymentValidationData));
+                if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
                 }
-                else if (response.StatusCode == 1)
+                else if (response.RespStatus == 1)
                 {
                     await Shell.Current.DisplayAlert("Warning", "Something went wrong. Contact Admin!", "OK");
                 }
@@ -332,14 +331,13 @@ namespace Maqaoplus.ViewModels.BillsandPayments
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicepaymentdatabyownerid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Gettenantmonthlyinvoicepaymentdatabyownerid(App.UserDetails.Usermodel.Userid);
+                if (response != null && response.Data != null)
                 {
                     PaymentItems.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var payments = item.ToObject<CustomerPaymentData>();
-                        PaymentItems.Add(payments);
+                        PaymentItems.Add(item);
                     }
                 }
                 IsDataLoaded = true;
@@ -362,14 +360,13 @@ namespace Maqaoplus.ViewModels.BillsandPayments
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Gettenantmonthlyinvoicepaymentdatabyagentid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
-                if (response != null && response.Data is List<dynamic> items)
+                var response = await _bl.Gettenantmonthlyinvoicepaymentdatabyagentid(App.UserDetails.Usermodel.Userid);
+                if (response != null && response.Data != null)
                 {
                     PaymentItems.Clear();
-                    foreach (var item in items)
+                    foreach (var item in response.Data)
                     {
-                        var payments = item.ToObject<CustomerPaymentData>();
-                        PaymentItems.Add(payments);
+                        PaymentItems.Add(item);
                     }
                 }
                 IsDataLoaded = true;
@@ -386,7 +383,7 @@ namespace Maqaoplus.ViewModels.BillsandPayments
         private async Task ValidateThisPaymentDetail(long CustomerPaymentId)
         {
             IsProcessing = true;
-            var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyroompaymentbypaymentid/" + CustomerPaymentId, HttpMethod.Get, null);
+            var response = await _bl.Getsystempropertyroompaymentbypaymentid(CustomerPaymentId);
             if (response != null)
             {
                 CustomerPaymentValidationData = JsonConvert.DeserializeObject<CustomerPaymentValidation>(response.Data.ToString());
@@ -415,7 +412,7 @@ namespace Maqaoplus.ViewModels.BillsandPayments
             CustomerPaymentValidationData.Datemodified = DateTime.UtcNow;
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Validatepropertyhouseroomrentpaymentrequestdata", CustomerPaymentValidationData);
+                var response = await _bl.Registervalidatecustomerpaymentrequestdata(JsonConvert.SerializeObject(CustomerPaymentValidationData));
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
