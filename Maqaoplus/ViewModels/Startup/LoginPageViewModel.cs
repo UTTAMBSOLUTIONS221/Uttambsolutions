@@ -147,7 +147,7 @@ namespace Maqaoplus.ViewModels.Startup
 
                 var response = await _bl.ValidateSystemStaff(request.username, request.password);
 
-                if (response.RespStatus == 200)
+                if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     App.UserDetails = response;
                     if (response.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
@@ -186,14 +186,18 @@ namespace Maqaoplus.ViewModels.Startup
                         }
                     }
                 }
+                else if (response.RespStatus == 1)
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+                }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Uttamb Solutions", response.RespMessage, "OK");
+                    await Shell.Current.DisplayAlert("Error", response.RespMessage, "OK");
                 }
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Uttamb Solutions", ex.Message, "OK");
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {
