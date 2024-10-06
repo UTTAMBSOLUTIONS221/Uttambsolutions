@@ -1,4 +1,6 @@
-﻿namespace DBL.Models
+﻿using CommunityToolkit.Mvvm.Messaging.Messages;
+
+namespace Maqaoplus.Models
 {
     public class PushNotificationReceived : ValueChangedMessage<string>
     {
