@@ -1,7 +1,9 @@
 ﻿using DBL;
 using Maqaoplus.ViewModels;
 using Maqaoplus.ViewModels.PropertyHouse;
+using Maqaoplus.ViewModels.Startup;
 using Maqaoplus.Views.PropertyHouse;
+using Maqaoplus.Views.Startup;
 using Microsoft.Extensions.Logging;
 
 namespace Maqaoplus
@@ -37,9 +39,17 @@ namespace Maqaoplus
                 });
 
             builder.Services.AddTransient<MainPage>();
+            builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddTransient<ForgotPasswordPage>();
+            builder.Services.AddTransient<ValidateStaffAccountPage>();
             builder.Services.AddSingleton<PropertyHousesPage>();
 
             builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddSingleton<LoginPageViewModel>();
+            builder.Services.AddSingleton<RegisterPageViewModel>();
+            builder.Services.AddSingleton<ForgotPasswordPageViewModel>();
+            builder.Services.AddSingleton<ValidateStaffAccountPageViewModel>();
             builder.Services.AddSingleton<PropertyHouseViewModel>();
 
             return builder.Build();

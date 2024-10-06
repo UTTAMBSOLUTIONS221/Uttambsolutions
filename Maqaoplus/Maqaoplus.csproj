@@ -72,6 +72,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<MauiXaml Update="UpdateUserProfilePage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="UserProfilePage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\PropertyHouse\AgentPropertyHousesPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
