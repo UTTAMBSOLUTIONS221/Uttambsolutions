@@ -1,4 +1,5 @@
-﻿using DBL.Entities;
+﻿using DBL;
+using DBL.Entities;
 using DBL.Models;
 using Maqaoplus.Views.PropertyHouseTenants.Modal;
 using Newtonsoft.Json;
@@ -10,7 +11,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
 {
     public class Propertyhousetenantviewmodel : INotifyPropertyChanged
     {
-        private readonly Services.ServiceProvider _serviceProvider;
+        private readonly BL _bl;
         private PropertyHouseRoomTenantData _tenantData;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
 
@@ -73,9 +74,9 @@ namespace Maqaoplus.ViewModels.HouseTenant
             }
         }
 
-        public Propertyhousetenantviewmodel(Services.ServiceProvider serviceProvider)
+        public Propertyhousetenantviewmodel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             TenantData = new PropertyHouseRoomTenantData();
             LoadItemsCommand = new Command(async () => await LoadItems());
             NeedtoVacateCommand = new Command(async () => await NeedtoVacatethisHouseAsync());
@@ -88,7 +89,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
             IsDataLoaded = false;
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhousetenantdatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _bl.Getsystempropertyhousetenantdatabytenantid(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
                     TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
@@ -163,7 +164,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
             };
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registerpropertyhousevacaterequestdata", tenantVacatingRequest);
+                var response = await _bl.Registerpropertyhousevacaterequestdata(JsonConvert.SerializeObject(tenantVacatingRequest));
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     Application.Current.MainPage.Navigation.PopModalAsync();
