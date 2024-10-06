@@ -92,7 +92,7 @@ namespace Maqaoplus.ViewModels.HouseTenant
                 var response = await _bl.Getsystempropertyhousetenantdatabytenantid(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
-                    TenantData = JsonConvert.DeserializeObject<PropertyHouseRoomTenantData>(response.Data.ToString());
+                    TenantData = response.Data;
                     if (TenantData.Tenantroomdata != null)
                     {
                         TenantData.Tenantroomdata.Expectedvacatingdate = DateTime.Now.AddMonths(TenantData.Tenantroomdata.Vacatingperioddays);
