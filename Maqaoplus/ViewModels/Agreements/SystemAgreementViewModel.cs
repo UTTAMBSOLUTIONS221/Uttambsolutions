@@ -1,4 +1,5 @@
-﻿using DBL.Models;
+﻿using DBL;
+using DBL.Models;
 using Firebase.Storage;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -13,7 +14,7 @@ namespace Maqaoplus.ViewModels.Agreements
 {
     public class SystemAgreementViewModel : INotifyPropertyChanged
     {
-        private readonly Services.ServiceProvider _serviceProvider;
+        private readonly BL _bl;
         public event PropertyChangedEventHandler PropertyChanged;
         public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         private OwnerTenantAgreementDetailData _ownerTenantAgreementDetailData;
@@ -103,9 +104,9 @@ namespace Maqaoplus.ViewModels.Agreements
         }
 
         // Parameterless constructor for XAML support
-        public SystemAgreementViewModel(Services.ServiceProvider serviceProvider)
+        public SystemAgreementViewModel(BL bl)
         {
-            _serviceProvider = serviceProvider;
+            _bl = bl;
             OwnerTenantAgreementDetailData = new OwnerTenantAgreementDetailData();
             TenantAgreementDetailData = new TenantAgreementDetailData();
             ViewPropertyAgentAgreementCommand = new Command(async () => await ViewPropertyAgentAgreementDetails());
@@ -120,7 +121,7 @@ namespace Maqaoplus.ViewModels.Agreements
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabyagentid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _bl.Getsystempropertyhouseagreementdetaildatabyagentid(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
                     OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
@@ -154,13 +155,13 @@ namespace Maqaoplus.ViewModels.Agreements
             OwnerTenantAgreementDetailData.Datecreated = DateTime.UtcNow;
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
+                var response = await _bl.Registersystempropertyhouseagreementdata(JsonConvert.SerializeObject(OwnerTenantAgreementDetailData));
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     OwnerTenantAgreementDetailData.OwnerSignatureimageurl = response.Data2;
                     OwnerTenantAgreementDetailData.Agreementdetailpdfurl = await GenerateAndUploadAgentAgreementPdfAsync();
                     OwnerTenantAgreementDetailData.Agreementid = Convert.ToInt64(response.Data1);
-                    var responseAfter = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
+                    var responseAfter = await _bl.Registersystempropertyhouseagreementdata(JsonConvert.SerializeObject(OwnerTenantAgreementDetailData));
                     if (responseAfter.RespStatus == 200 || responseAfter.RespStatus == 0)
                     {
                         (Shell.Current.CurrentPage.BindingContext as SystemAgreementViewModel)?.ViewPropertyAgentAgreementCommand.Execute(null);
@@ -360,7 +361,7 @@ namespace Maqaoplus.ViewModels.Agreements
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseagreementdetaildatabyownerid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _bl.Getsystempropertyhouseagreementdetaildatabyownerid(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
                     OwnerTenantAgreementDetailData = JsonConvert.DeserializeObject<OwnerTenantAgreementDetailData>(response.Data.ToString());
@@ -394,13 +395,13 @@ namespace Maqaoplus.ViewModels.Agreements
             OwnerTenantAgreementDetailData.Datecreated = DateTime.UtcNow;
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
+                var response = await _bl.Registersystempropertyhouseagreementdata(JsonConvert.SerializeObject(OwnerTenantAgreementDetailData));
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     OwnerTenantAgreementDetailData.OwnerSignatureimageurl = response.Data2;
                     OwnerTenantAgreementDetailData.Agreementdetailpdfurl = await GenerateAndUploadOwnerAgreementPdfAsync();
                     OwnerTenantAgreementDetailData.Agreementid = Convert.ToInt64(response.Data1);
-                    var responseAfter = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", OwnerTenantAgreementDetailData);
+                    var responseAfter = await _bl.Registersystempropertyhouseagreementdata(JsonConvert.SerializeObject(OwnerTenantAgreementDetailData));
                     if (responseAfter.RespStatus == 200 || responseAfter.RespStatus == 0)
                     {
                         (Shell.Current.CurrentPage.BindingContext as SystemAgreementViewModel)?.ViewPropertyOwnerAgreementCommand.Execute(null);
@@ -602,7 +603,7 @@ namespace Maqaoplus.ViewModels.Agreements
 
             try
             {
-                var response = await _serviceProvider.CallAuthWebApi<object>("/api/PropertyHouse/Getsystempropertyhouseroomagreementdetaildatabytenantid/" + App.UserDetails.Usermodel.Userid, HttpMethod.Get, null);
+                var response = await _bl.Getsystempropertyhouseroomagreementdetaildatabytenantid(App.UserDetails.Usermodel.Userid);
                 if (response != null)
                 {
                     TenantAgreementDetailData = JsonConvert.DeserializeObject<TenantAgreementDetailData>(response.Data.ToString());
@@ -636,13 +637,13 @@ namespace Maqaoplus.ViewModels.Agreements
             TenantAgreementDetailData.Datecreated = DateTime.UtcNow;
             try
             {
-                var response = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", TenantAgreementDetailData);
+                var response = await _bl.Registersystempropertyhouseagreementdata(JsonConvert.SerializeObject(TenantAgreementDetailData));
                 if (response.RespStatus == 200 || response.RespStatus == 0)
                 {
                     TenantAgreementDetailData.TenantSignatureimageurl = response.Data2;
                     TenantAgreementDetailData.Agreementdetailpdfurl = await GenerateAndUploadTenantAgreementPdfAsync();
                     TenantAgreementDetailData.Agreementid = Convert.ToInt64(response.Data1);
-                    var responseAfter = await _serviceProvider.CallCustomUnAuthWebApi("/api/PropertyHouse/Registersystempropertyhouseagreementdata", TenantAgreementDetailData);
+                    var responseAfter = await _bl.Registersystempropertyhouseagreementdata(JsonConvert.SerializeObject(TenantAgreementDetailData));
                     if (responseAfter.RespStatus == 200 || responseAfter.RespStatus == 0)
                     {
                         (Shell.Current.CurrentPage.BindingContext as SystemAgreementViewModel)?.ViewPropertyTenantAgreementCommand.Execute(null);
