@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maqaoplusweb", "Maqaopluswe
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Uttambsolutionsdatabase", "Uttambsolutionsdatabase\Uttambsolutionsdatabase.sqlproj", "{96EB7C88-75A9-4AB5-A743-ACA74253A9EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maqaoplus", "Maqaoplus\Maqaoplus.csproj", "{CE695986-0B97-4BC1-926F-7C69472017C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,12 @@ Global
 		{96EB7C88-75A9-4AB5-A743-ACA74253A9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96EB7C88-75A9-4AB5-A743-ACA74253A9EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{96EB7C88-75A9-4AB5-A743-ACA74253A9EA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CE695986-0B97-4BC1-926F-7C69472017C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE695986-0B97-4BC1-926F-7C69472017C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE695986-0B97-4BC1-926F-7C69472017C7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CE695986-0B97-4BC1-926F-7C69472017C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE695986-0B97-4BC1-926F-7C69472017C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE695986-0B97-4BC1-926F-7C69472017C7}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
