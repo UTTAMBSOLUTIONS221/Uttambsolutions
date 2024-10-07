@@ -14,7 +14,7 @@
     </ContentPage.Resources>
 
     <Grid>
-        
+
         <!-- Define Row Heights for Header, Content, and Footer -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
