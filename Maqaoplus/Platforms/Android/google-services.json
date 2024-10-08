@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "150264615813",
+    "project_id": "maqao-plus",
+    "storage_bucket": "maqao-plus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150264615813:android:1b65bf6c584fe69cd52aec",
+        "android_client_info": {
+          "package_name": "com.uttambsolutions.maqaoplus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1kic6Q3K38pDI3MA08iQXPBUnF-ab8IA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

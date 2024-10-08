@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maqaoplus.Views.PropertyHouseTenants.Modal.TenantVacationNoticeModalPage"
+              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+               BackgroundColor="White" 
+             Padding="16">
+    <AbsoluteLayout>
+        <!-- Main Layout -->
+        <Grid AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Scrollable Content -->
+            <ScrollView Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Tenant Information Frame -->
+                    <Frame Grid.Row="0" Padding="0" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
+                        <StackLayout Padding="10">
+                            <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                <Label Text="Basic Information" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="20" Margin="0,0,0,10"/>
+                                <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                            <StackLayout Padding="0" Spacing="8">
+                                <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Text="Name:" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                    <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Spacing="5" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding TenantData.Fullname}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="StartAndExpand" />
+                                    </StackLayout>
+                                    <Label Text="Email:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                    <Label Text="{Binding TenantData.Emailaddress}" FontSize="16" Grid.Row="1" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                    <Label Text="Phone:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                    <Label Text="{Binding TenantData.Phonenumber}" FontSize="16" Grid.Row="2" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                    <Label Text="My Wallet:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                                    <Label Text="{Binding TenantData.Walletbalance,StringFormat='{0:#,##0.00}'}" TextColor="Red" FontSize="16" Grid.Row="3" Grid.Column="1" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                    <!-- Tenant House Room Frame -->
+                    <Frame Grid.Row="1" Padding="3" IsVisible="{Binding Path=TenantData.Tenantroomdata}" HasShadow="True" CornerRadius="8" BorderColor="#dcdcdc" HorizontalOptions="FillAndExpand">
+                        <StackLayout Padding="0" Spacing="10">
+                            <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                <Label Text="Current Rental Information" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#0a506c" TextTransform="Uppercase" FontSize="20" Margin="0,0,0,10"/>
+                                <BoxView Color="#0a506c" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+
+                            <!-- Updated Layout: Using StackLayout with horizontal Label pairs -->
+                            <StackLayout Padding="0" Spacing="5">
+                                <Label Text="{Binding TenantData.Tenantroomdata.Propertyhousename}" FontSize="16" LineBreakMode="TailTruncation" TextTransform="Uppercase" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding TenantData.Tenantroomdata.Systempropertyhousesizename}" FontSize="14" LineBreakMode="TailTruncation" TextTransform="Uppercase" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Label Text="From:" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Text="{Binding TenantData.Tenantroomdata.Datecreated, StringFormat='{0:MM/dd/yyyy}'}" FontSize="16" LineBreakMode="TailTruncation"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Label Text="Rent Amount:" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Text="{Binding TenantData.Tenantroomdata.Systempropertyhousesizerent, StringFormat='{0:#,##0.00}'}" FontSize="16" LineBreakMode="TailTruncation"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Label Text="Deposit Balance:" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Text="{Binding TenantData.Tenantroomdata.Depositbalance, StringFormat='{0:#,##0.00}'}" FontSize="16" TextColor="Red" LineBreakMode="TailTruncation"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Label Text="Expected Vacating Date:" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Text="{Binding TenantData.Tenantroomdata.Expectedvacatingdate, StringFormat='{0:yyyy-MM-dd}'}" FontSize="16" TextColor="Red" LineBreakMode="TailTruncation"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Label Text="Planned Vacating Date:" FontSize="16" FontAttributes="Bold"/>
+                                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="0" HasShadow="False" Margin="0,0,0,0" HeightRequest="40" WidthRequest="160">
+                                        <DatePicker Date="{Binding TenantData.Tenantroomdata.Plannedvacatingdate}" Format="MM/dd/yyyy" FontSize="16" TextColor="Black" HorizontalOptions="FillAndExpand"/>
+                                    </Frame>
+                                    <Label Text="{Binding PropertyHousePlannedVacatingDateError}" TextColor="Red" />
+                                </StackLayout>
+
+                                <StackLayout Spacing="6">
+                                    <!-- Vacating Reason Label -->
+                                    <Label Text="Vacating Reason (Optional)" FontAttributes="Bold" FontSize="17" Margin="0,0,0,4" TextColor="Black"/>
+
+                                    <!-- Styled Entry inside a Frame -->
+                                    <Frame BorderColor="#0a506c" BackgroundColor="White" CornerRadius="5" Padding="5,0" HasShadow="False" HeightRequest="40">
+                                        <Entry Text="{Binding TenantData.Tenantroomdata.Systempropertyhousevacatingreason}" Placeholder="Enter vacating reason"  PlaceholderColor="#0a506c" Keyboard="Text" TextColor="Black" FontSize="14" BackgroundColor="White" VerticalOptions="Center" />
+                                    </Frame>
+                                </StackLayout>
+
+
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Entry IsVisible="False" Text="{Binding TenantData.Userid}" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Entry IsVisible="False" Text="{Binding TenantData.Tenantroomdata.Systempropertyhouseroomid}" Grid.Row="4" />
+                                </StackLayout>
+                                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" Margin="0,16">
+                                    <Button Text="Cancel" Command="{Binding OnCancelClickedCommand}" BackgroundColor="Gray" TextColor="White" Padding="12" CornerRadius="5" FontSize="18" FontAttributes="Bold" HeightRequest="50" WidthRequest="150" />
+                                    <Button Text="Submit" Command="{Binding OnOkClickedCommand}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12"  FontSize="18" HeightRequest="50"  WidthRequest="150"/>
+                                </FlexLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+            </ScrollView>
+            <!-- Overlay Layer for ActivityIndicator -->
+            <Grid IsVisible="{Binding IsVacatingProcessing}" BackgroundColor="#00000066" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3">
+                <BoxView Color="#C0000000" Opacity="0.5" />
+                <ActivityIndicator IsRunning="{Binding IsVacatingProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
+            </Grid>
+
+            <!-- Footer -->
+            <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+            </StackLayout>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

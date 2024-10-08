@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
+
+    <Shell
     x:Class="Maqaoplus.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dashboardPages="clr-namespace:Maqaoplus.Views.Dashboards"
     xmlns:local="clr-namespace:Maqaoplus"
-    Shell.FlyoutBehavior="Disabled"
-    Title="Maqaoplus">
+    Shell.TabBarIsVisible="False"
+    xmlns:startupPages="clr-namespace:Maqaoplus.Views.Startup">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+        <ShellContent
+     Title="MAQAO PLUS Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TitleColor="#0a506c"
+     ContentTemplate="{DataTemplate local:MainPage}"
+     Route="MainPage" />
+    
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Text="Sign Out" FontAttributes="Bold" Command="{Binding SignOutCommand}" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
 </Shell>

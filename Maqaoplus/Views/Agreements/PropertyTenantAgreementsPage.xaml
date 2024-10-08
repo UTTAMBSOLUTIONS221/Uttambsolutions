@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:converters="clr-namespace:Maqaoplus.Helpers"
+             x:Class="Maqaoplus.Views.Agreements.PropertyTenantAgreementsPage"
+             Title="RENTING AGREEMENT">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+
+        <!-- Define Row Heights for Header and Content -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- For Header (Button) -->
+            <RowDefinition Height="*" />
+            <!-- For Content (ScrollView) -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="1" Padding="20" IsVisible="{Binding IsDataLoaded}">
+            <StackLayout>
+                <!-- Title -->
+                <Label Text="AGREEMENT" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,4" />
+
+                <!-- Agreement Details -->
+                <Label Text="{Binding TenantAgreementDetailData.TenantDatecreated, StringFormat='This Rental Agreement (Agreement) is made and entered into on this {0:dd} day of {0:MMM}, 20{0:yy}, by and between:'}"  FontSize="14" Margin="0,0,0,10" />
+
+                <!-- Landlord -->
+                <Label Text="Landlord: " FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="{Binding TenantAgreementDetailData.Ownerfullname, StringFormat='Full Name: {0}'}" FontSize="14" Margin="0,0,0,5" />
+                <Label Text="{Binding TenantAgreementDetailData.Propertyhousename, StringFormat='Property Name: {0}'}" FontSize="14" Margin="0,0,0,5" />
+                <Label FontSize="14" Margin="0,0,0,5">
+                    <Label.Text>
+                        <MultiBinding StringFormat="Address: {0}-{1}-{2}">
+                            <Binding Path="TenantAgreementDetailData.Countyname" />
+                            <Binding Path="TenantAgreementDetailData.Subcountyname" />
+                            <Binding Path="TenantAgreementDetailData.Subcountywardname" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+                <Label Text="{Binding TenantAgreementDetailData.Ownerphonenumber, StringFormat='Phone Number: {0}'}" FontSize="14" Margin="0,0,0,5" />
+                <Label Text="{Binding TenantAgreementDetailData.Owneremailaddress, StringFormat='Email Address: {0}'}" FontSize="14" Margin="0,0,0,20" />
+
+                <!-- Tenant -->
+                <Label Text="AND" FontSize="16" FontAttributes="Bold" Margin="0,0,0,20" />
+                <Label Text="Tenant:" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="{Binding TenantAgreementDetailData.Tenantfullname, StringFormat='Full Name: {0}'}" FontSize="14" Margin="0,0,0,5" />
+                <Label Text="{Binding TenantAgreementDetailData.Tenantidnumber, StringFormat='ID/Passport Number: {0}'}" FontSize="14" Margin="0,0,0,5" />
+                <Label Text="{Binding TenantAgreementDetailData.Tenantphonenumber, StringFormat='Phone Number: {0}'}" FontSize="14" Margin="0,0,0,5" />
+                <Label Text="{Binding TenantAgreementDetailData.Tenantemailaddress, StringFormat='Email Address: {0}'}" FontSize="14" Margin="0,0,0,20" />
+
+                <!-- Agreement Sections -->
+                <Label Text="1. PREMISES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="{Binding TenantAgreementDetailData.Propertyhousename, StringFormat='The Landlord hereby agrees to rent to the Tenant, and the Tenant hereby agrees to rent from the Landlord {0}, '}" FontSize="14" Margin="0,0,0,5" />
+                <Label FontSize="14" Margin="0,0,0,5">
+                    <Label.Text>
+                        <MultiBinding StringFormat="the residential premises located at: {0}-{1}-{2}">
+                            <Binding Path="TenantAgreementDetailData.Countyname" />
+                            <Binding Path="TenantAgreementDetailData.Subcountyname" />
+                            <Binding Path="TenantAgreementDetailData.Subcountywardname" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+                <Label Text="{Binding TenantAgreementDetailData.Streetorlandmark, StringFormat='Land Mark: {0}'}" FontSize="14" Margin="0,0,0,5" />
+                <StackLayout>
+                    <Label Text="2. TERM" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                    <Label Text="{Binding TenantAgreementDetailData.TenantDatecreated, StringFormat='The term of this rental agreement shall commence on ___{0:yyyy-MM-dd}___ (Start Date) and shall continue as follows:'}" FontSize="14" Margin="0,0,0,5" />
+                    <!-- Grid for Rent Inclusive -->
+                    <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
+                        <CheckBox x:Name="MonthlyrenttermsCheckBox" IsChecked="{Binding TenantAgreementDetailData.Monthlyrentterms}" />
+                        <Label Text="{Binding TenantAgreementDetailData.TenantDatecreated, StringFormat='Month-to-month tenancy beginning on ___{0:yyyy-MM-dd}___.'}" FontSize="14" Grid.Column="1">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Monthlyrentterms}" Value="True">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Monthlyrentterms}" Value="False">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+
+                    <!-- Grid for Rent Not Inclusive -->
+                    <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
+                        <CheckBox x:Name="MonthlyrenttermsNotCheckBox" IsChecked="{Binding TenantAgreementDetailData.Monthlyrentterms, Mode=OneWay, Converter={StaticResource InverseBooleanConverter}}" />
+                        <Label Text="{Binding TenantAgreementDetailData.Termenddate, StringFormat='Fixed-term lease ending on ___{0}___(End Date).'}" FontSize="14" Grid.Column="1">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Monthlyrentterms}" Value="True">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Monthlyrentterms}" Value="False">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+                </StackLayout>
+
+                <Label Text="3. RENT" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label FontSize="14" Margin="0,0,0,5">
+                    <Label.Text>
+                        <MultiBinding StringFormat="The Tenant agrees to pay the Landlord a monthly rent of Ksh.___{0: #,##0.00}___, payable in advance on or before the ___{1}___ day of each month. The first rent payment is due on ___{2:yyyy-MM-dd}___.">
+                            <Binding Path="TenantAgreementDetailData.Systempropertyhousesizerent" />
+                            <Binding Path="TenantAgreementDetailData.Rentdueday" />
+                            <Binding Path="TenantAgreementDetailData.Nextrentduedate" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+                <Label Text="4. SECURITY DEPOSIT" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label FontSize="14" Margin="0,0,0,5">
+                    <Label.Text>
+                        <MultiBinding StringFormat="The Tenant agrees to pay a security deposit of Ksh.___{0: #,##0.00}___, equivalent to ___{1}___ month's rent, to be held by the Landlord as security for the performance of the Tenant's obligations under this Agreement. The security deposit will be refunded to the Tenant within ___{2}___ days after vacating the premises, less any deductions for damages beyond normal wear and tear.">
+                            <Binding Path="TenantAgreementDetailData.Systempropertyhousesizerentdeposit" />
+                            <Binding Path="TenantAgreementDetailData.Rentdepositmonth" />
+                            <Binding Path="TenantAgreementDetailData.Rentdepositrefunddays" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+                <StackLayout>
+                    <Label Text="5. UTILITIES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                    <!-- Grid for Rent Inclusive -->
+                    <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
+                        <CheckBox x:Name="RentInclusiveCheckBox" IsChecked="{Binding TenantAgreementDetailData.Rentutilityinclusive}" />
+                        <Label Text="All utilities (e.g., electricity, water) are included in the rent." FontSize="14" Grid.Column="1">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="True">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="False">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+
+                    <!-- Grid for Rent Not Inclusive -->
+                    <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
+                        <CheckBox x:Name="RentNotInclusiveCheckBox" IsChecked="{Binding TenantAgreementDetailData.Rentutilityinclusive, Mode=OneWay, Converter={StaticResource InverseBooleanConverter}}" />
+                        <Label Text="{Binding TenantAgreementDetailData.Propertyhouseutility, StringFormat='The Tenant shall be responsible for the payment of the following utilities: {0}'}" FontSize="14" Grid.Column="1">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="True">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Rentutilityinclusive}" Value="False">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+                </StackLayout>
+
+
+                <Label Text="6. MAINTENANCE AND REPAIRS" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="The Tenant agrees to keep the premises in a clean and habitable condition and to promptly notify the Landlord of any necessary repairs. The Tenant shall not make any alterations to the premises without the prior written consent of the Landlord." FontSize="14" Margin="0,0,0,20" />
+
+                <Label Text="7. OCCUPANTS" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="{Binding TenantAgreementDetailData.Tenantsintheroom, StringFormat='The premises shall be occupied by the Tenant and the following individuals:\n{0}'}" FontSize="14" Margin="0,0,0,20" />
+
+                <StackLayout>
+                    <Label Text="8. PETS" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                    <!-- Pets Not Allowed -->
+                    <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
+                        <CheckBox x:Name="RentNotAllowPetsCheckBox" IsChecked="{Binding TenantAgreementDetailData.Allowpets, Mode=OneWay, Converter={StaticResource InverseBooleanConverter}}" />
+                        <Label Text="No pets are allowed on the premises" FontSize="14" Grid.Column="1">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Allowpets}" Value="True">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Allowpets}" Value="False">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+                    <!-- Pets Allowed -->
+                    <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,5">
+                        <CheckBox x:Name="RentAllowPetsCheckBox" IsChecked="{Binding TenantAgreementDetailData.Allowpets}" />
+                        <Label Text="Pets are allowed, subject to the following conditions:" FontSize="14" Grid.Column="1">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Allowpets}" Value="True">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding TenantAgreementDetailData.Allowpets}" Value="False">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+
+                    <!-- Pet Conditions -->
+                    <StackLayout Margin="20,0,0,5" IsVisible="{Binding TenantAgreementDetailData.Allowpets}">
+                        <Label Text="1. Type and Number of Pets: [Specify type and number of pets allowed]" FontSize="14" Margin="0,0,0,5" />
+                        <Label Text="2. Pet Deposit: Ksh. ___[Amount]___ refundable upon inspection." FontSize="14" Margin="0,0,0,5" />
+                        <Label Text="3. Vaccination and Licensing: Pets must be vaccinated and licensed per Kenyan law." FontSize="14" Margin="0,0,0,5" />
+                        <Label Text="4. Pet Restrictions: No dangerous breeds. Pets must be kept within designated areas." FontSize="14" Margin="0,0,0,5" />
+                        <Label Text="5. Maintenance and Care: Tenant is responsible for cleanliness and any damages." FontSize="14" Margin="0,0,0,5" />
+                        <Label Text="6. Liability: Tenant is liable for any injuries or damages caused by pets." FontSize="14" Margin="0,0,0,5" />
+                        <Label Text="7. Noise and Disturbance: Pets must not cause excessive noise or disturbance." FontSize="14" Margin="0,0,0,5" />
+                        <Label Text="8. Right to Inspect: Landlord may inspect the premises periodically with notice." FontSize="14" Margin="0,0,0,5" />
+                    </StackLayout>
+                </StackLayout>
+
+                <Label Text="9. PAYMENT DETAILS" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="The Tenant shall make all payments to the following bank account details:" FontSize="14" Margin="0,0,0,10" />
+
+                <!-- Bank Account Details -->
+                <Label Text="{Binding TenantAgreementDetailData.Systempropertybankname, StringFormat='Banking Details: {0}'}" FontSize="14" Margin="0,0,0,5" />
+
+                <Label Text="10. INSURANCE" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="The Tenant is encouraged to obtain renter's insurance to cover personal property against loss or damage. The Landlord shall not be responsible for any loss or damage to the Tenant's personal property." FontSize="14" Margin="0,0,0,20" />
+
+                <Label Text="11. DISPUTE RESOLUTION" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="Any disputes arising out of or relating to this Agreement shall be resolved through mediation or arbitration, as per the laws of Kenya. The parties agree to seek resolution through these methods before pursuing any legal action." FontSize="14" Margin="0,0,0,20" />
+
+                <Label Text="12. GOVERNING LAW" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="This Agreement shall be governed by and construed in accordance with the laws of Kenya." FontSize="14" Margin="0,0,0,20" />
+
+                <Label Text="13. ENTIRE AGREEMENT" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="This Agreement constitutes the entire agreement between the parties and supersedes all prior agreements or understandings, whether written or oral, relating to the subject matter hereof." FontSize="14" Margin="0,0,0,20" />
+
+                <!-- Wear and Tear Clause -->
+                <Label Text="14. WEAR AND TEAR" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="Normal wear and tear refers to the deterioration of the premises and its fixtures caused by ordinary use over time, without negligence or abuse. Examples include minor scuffs on walls, worn carpet, or faded paint. Damage beyond normal wear and tear includes, but is not limited to, large holes in walls, broken windows, and significant damage to appliances or fixtures. The Tenant is responsible for repairs or costs associated with damage beyond normal wear and tear. The Landlord shall provide a written estimate for such repairs, and the Tenant shall have the right to contest the charges if they disagree." FontSize="14" Margin="0,0,0,20" />
+
+                <Label Text="15. DATA PROTECTION" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label Text="The Landlord and Tenant agree to comply with all applicable data protection laws and regulations. The Tenant's personal data collected under this Agreement will be used solely for the purpose of managing the rental relationship and will not be shared with third parties without the Tenant's consent, except as required by law. The Tenant has the right to access, correct, or delete their personal data upon request." FontSize="14" Margin="0,0,0,20" />
+
+                <!-- Signatures Section -->
+                <Label Text="SIGNATURES" FontSize="16" FontAttributes="Bold" Margin="0,0,0,20" />
+                <!-- Landlord Signature -->
+                <Label Text="Landlord:" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Grid>
+                    <!-- Image in the grid -->
+                    <Image Source="{Binding TenantAgreementDetailData.OwnerSignatureimageurl}" WidthRequest="300" HeightRequest="80" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <!-- Label for signature line -->
+                    <Label Text="Signature: ____________________________" FontSize="14" Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                </Grid>
+                <Label Text="{Binding TenantAgreementDetailData.Ownerfullname}" FontSize="14" Margin="0,0,0,5" />
+                <Label Text="{Binding TenantAgreementDetailData.Propertyhousename,StringFormat='{0} Property Owner'}" FontSize="14" Margin="0,0,0,5" />
+                <Label Text="{Binding TenantAgreementDetailData.TenantDatecreated,StringFormat='Date: {0:yyyy-MM-dd}'}" TextDecorations="Underline" FontSize="14" Margin="0,10,0,20" />
+
+                <!-- Tenant Signature -->
+                <Label Text="Tenant:" FontSize="16" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Grid>
+                    <!-- Signature Drawing Section -->
+                    <VerticalStackLayout Spacing="25" Padding="3,0" VerticalOptions="Center" IsVisible="{Binding IsTenantSignatureDrawingVisible}">
+                        <mct:DrawingView x:Name="DrawBoard" LineColor="Black" LineWidth="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="140" IsMultiLineModeEnabled="True" DrawingLineCompleted="DrawBoard_DrawingLineCompleted" BackgroundColor="AliceBlue"/>
+                        <Image x:Name="ImageView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="100"/>
+                        <Button Text="Clear Board" Clicked="Button_Clicked"/>
+                    </VerticalStackLayout>
+
+                    <!-- Signature Image Section -->
+                    <Grid IsVisible="{Binding IsTenantSignatureImageVisible}">
+                        <Image Source="{Binding TenantAgreementDetailData.TenantSignatureimageurl}" WidthRequest="300" HeightRequest="80" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="Signature: ____________________________" FontSize="14" Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                    </Grid>
+                </Grid>
+                <Label Text="{Binding TenantAgreementDetailData.TenantDatecreated,StringFormat='Date: {0:yyyy-MM-dd}'}" TextDecorations="Underline" FontSize="14" Margin="0,20,0,20" />
+
+                <!-- Closing -->
+                <Label Text="This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements, whether written or oral, relating to the subject matter herein." FontSize="14" Margin="0,0,0,20" />
+                <Button Text="I Agree" Clicked="Button_Save_Signature_Clicked" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" Padding="12" FontSize="18" HeightRequest="50" WidthRequest="380" IsVisible="{Binding IsTenantSignatureAvailable, Converter={StaticResource InverseBooleanConverter}}" />
+
+            </StackLayout>
+        </ScrollView>
+        <Grid IsVisible="{Binding IsProcessing}" Grid.RowSpan="2" BackgroundColor="Transparent">
+            <BoxView Color="#C0000000" Opacity="0.5" />
+            <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#0a506c" HeightRequest="100" WidthRequest="100" />
+        </Grid>
+        <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>
