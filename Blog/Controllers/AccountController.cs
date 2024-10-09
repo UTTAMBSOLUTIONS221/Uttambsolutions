@@ -110,6 +110,8 @@ namespace Blog.Controllers
         [HttpGet]
         public async Task<IActionResult> Myprofile()
         {
+            var environment = _env.IsDevelopment() ? "Development" : "Production";
+            ViewBag.Environment = environment;
             var data = await bl.Getsystemuserprofiledata(SessionUserData.Usermodel.Userid);
             return View(data);
         }
