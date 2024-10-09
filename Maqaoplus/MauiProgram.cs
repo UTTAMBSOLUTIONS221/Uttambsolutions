@@ -37,7 +37,7 @@ namespace Maqaoplus
             }
 
             // Set up connection string or other services based on environment
-            string connectionString = environment == "Development" ? "Data Source=SQL6030.site4now.net;Initial Catalog=db_aaa347_uttambsolutions;user id=db_aaa347_uttambsolutions_admin;password=Password123!;" : "Data Source=SQL6030.site4now.net;Initial Catalog=db_aaa347_uttambsolutions;user id=db_aaa347_uttambsolutions_admin;password=Password123!;";
+            string connectionString = environment == "Development" ? "Data Source=sql6032.site4now.net;Initial Catalog=db_aaa347_uttambsolutionsdev;user id=db_aaa347_uttambsolutionsdev_admin;password=Password123!;" : "Data Source=SQL6030.site4now.net;Initial Catalog=db_aaa347_uttambsolutions;user id=db_aaa347_uttambsolutions_admin;password=Password123!;";
             builder.Services.AddSingleton<BL>(sp => new BL(connectionString));
             builder
               .UseMauiApp<App>().UseMauiCommunityToolkit()
