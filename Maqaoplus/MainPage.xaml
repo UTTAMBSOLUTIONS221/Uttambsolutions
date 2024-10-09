@@ -138,7 +138,7 @@
                                                     <Image Grid.Row="0" Grid.Column="0" Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" />
 
                                                     <!-- Data on the Right -->
-                                                    <StackLayout Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                                    <StackLayout Grid.Row="1" Grid.Column="0" Margin="0,0,0,4" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                                                         <Label Text="{Binding Propertyhousename}" FontSize="16" FontAttributes="Bold" TextColor="Black" MaxLines="1" />
                                                         <Label Text="{Binding Systemhousesizename}" FontSize="15" Margin="0,0,0,0" TextColor="Black" />
                                                         <Label FontSize="14" TextColor="Black">
