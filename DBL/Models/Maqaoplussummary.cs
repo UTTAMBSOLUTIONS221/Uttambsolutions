@@ -33,7 +33,7 @@
         public int Rentdepositreturndays { get; set; }
         public string? Rentingterms { get; set; }
         public bool Rentutilityinclusive { get; set; }
-        public string? SystemHousesizename { get; set; }
+        public string? Systemhousesizename { get; set; }
         public int Systempropertyhousesizeid { get; set; }
         public string? Systempropertyhousesizename { get; set; }
         public decimal Systempropertyhousesizerent { get; set; }

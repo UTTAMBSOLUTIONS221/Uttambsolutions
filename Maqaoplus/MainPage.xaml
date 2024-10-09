@@ -141,7 +141,6 @@
                                                     <StackLayout Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                                                         <Label Text="{Binding Propertyhousename}" FontSize="16" FontAttributes="Bold" TextColor="Black" MaxLines="1" />
                                                         <Label Text="{Binding Systemhousesizename}" FontSize="15" Margin="0,0,0,0" TextColor="Black" />
-                                                        <Label Text="{Binding Systempropertyhousesizename, StringFormat='Rooms: {0}'}" FontSize="14" TextColor="Black" />
                                                         <Label FontSize="14" TextColor="Black">
                                                             <Label.Text>
                                                                 <MultiBinding StringFormat="{}{0}, {1}, {2}">
@@ -156,7 +155,6 @@
                                                         <Label Text="{Binding Systempropertyhousesizerent, StringFormat='Rent Deposit: {0:#,##0.00}'}" IsVisible="{Binding IsMoreDetailVisible}" FontSize="14" TextColor="Black" />
                                                         <Label Text="{Binding Contactdetails, StringFormat='Contact: {0}'}" IsVisible="{Binding IsMoreDetailVisible}" FontSize="14" TextColor="Black" MaxLines="2" />
                                                     </StackLayout>
-
                                                     <Button Grid.Row="2" Text="View More Details" BackgroundColor="#0a506c" TextColor="White" CornerRadius="15" Padding="10" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewMoreDetailsCommand}" CommandParameter="{Binding .}" />
                                                 </Grid>
                                             </Frame>
