@@ -132,7 +132,8 @@
                                                 <Grid Padding="5">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="*" />
-                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
                                                     </Grid.RowDefinitions>
                                                     <Image Grid.Row="0" Grid.Column="0" Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" />
 
@@ -142,6 +143,7 @@
                                                         <Label Text="{Binding Systempropertyhousesizename,StringFormat='Rooms: {0}'}" FontSize="14" TextColor="#0a506c" />
                                                         <Label Text="{Binding Streetorlandmark}" FontSize="14" TextColor="Black" MaxLines="2" />
                                                     </StackLayout>
+                                                    <Button Grid.Row="2" Text="View More Details" BackgroundColor="#0a506c" TextColor="White" CornerRadius="15" Padding="10" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
                                                 </Grid>
                                             </Frame>
                                         </DataTemplate>
