@@ -9,10 +9,13 @@ namespace Blog.Schedulers
         private readonly IServiceProvider _provider;
         private readonly BL bl;
         FacebookHelper facebook = new FacebookHelper();
-        public PublishBlogstoFacebookJob(IServiceProvider provider, IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public PublishBlogstoFacebookJob(IServiceProvider provider, IConfiguration config, IWebHostEnvironment env)
         {
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
             _provider = provider;
-            bl = new BL(Util.ShareConnectionString(config));
         }
 
         public async Task Execute(IJobExecutionContext context)

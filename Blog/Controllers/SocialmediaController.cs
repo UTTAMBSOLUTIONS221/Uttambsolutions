@@ -1,5 +1,6 @@
 ﻿using DBL;
 using DBL.Entities;
+using DBL.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +10,12 @@ namespace Blog.Controllers
     public class SocialmediaController : BaseController
     {
         private readonly BL bl;
-        public SocialmediaController(IConfiguration config)
+        private readonly IWebHostEnvironment _env;
+
+        public SocialmediaController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
         [HttpGet]
         public async Task<IActionResult> Index()

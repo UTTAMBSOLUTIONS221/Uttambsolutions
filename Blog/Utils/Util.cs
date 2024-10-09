@@ -5,9 +5,16 @@ namespace Blog
 {
     public class Util
     {
-        public static string ShareConnectionString(IConfiguration config)
+        public static string ShareConnectionString(IConfiguration config, IWebHostEnvironment env)
         {
-            return config["ConnectionStrings:DatabaseConnection"];
+            if (env.IsDevelopment())
+            {
+                return config["ConnectionStrings:DevelopmentDatabaseConnection"];
+            }
+            else
+            {
+                return config["ConnectionStrings:ProductionDatabaseConnection"];
+            }
         }
         public static void LogError(string userName, Exception ex, bool isError = true)
         {

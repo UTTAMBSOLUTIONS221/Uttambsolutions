@@ -18,12 +18,14 @@ namespace Blog.Controllers
     {
         private readonly FacebookHelper _facebookHelper;
         private readonly BL bl;
-        public AccountController(FacebookHelper facebookHelper, IConfiguration config)
-        {
-            _facebookHelper = facebookHelper;
-            bl = new BL(Util.ShareConnectionString(config));
-        }
+        private readonly IWebHostEnvironment _env;
 
+        public AccountController(FacebookHelper facebookHelper, IConfiguration config, IWebHostEnvironment env)
+        {
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
+            _facebookHelper = facebookHelper;
+        }
 
         [HttpGet]
         [AllowAnonymous]
