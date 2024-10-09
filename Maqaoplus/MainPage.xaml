@@ -92,7 +92,7 @@
 
                         <Label Text="Become a member to access exclusive properties listing,management and tenant services. Enjoy personalized support and stay updated with the latest listings." FontSize="14" TextColor="#333333"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="0,5" HorizontalTextAlignment="Center" />
 
-                        <Label FontSize="14" TextColor="#333333" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="0,5" HorizontalTextAlignment="Center">
+                        <Label FontSize="14" TextColor="#333333" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="0,0" HorizontalTextAlignment="Center">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="You can buy Token(s) for " />
@@ -104,7 +104,7 @@
                         <Button Text="JOIN NOW" BackgroundColor="#0a506c" TextColor="White" Padding="15" CornerRadius="25" FontSize="16" FontAttributes="Bold" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BorderWidth="2"  BorderColor="#ffffff"  Command="{Binding JoinMaqaoPlusCommand}" />
                         <!-- Assuming you have a Clicked event handler -->
 
-                        <Label Text="We value your membership and are committed to providing you with the best service possible."  FontSize="14" TextColor="#777777"  HorizontalOptions="Center" VerticalOptions="End" Padding="0,10" HorizontalTextAlignment="Center" />
+                        <Label Text="We value your membership and are committed to providing you with the best service possible."  FontSize="14" TextColor="#777777"  HorizontalOptions="Center" VerticalOptions="End" HorizontalTextAlignment="Center" />
                     </StackLayout>
 
                     <!-- Main Content - Property Listings -->
