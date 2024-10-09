@@ -1,4 +1,5 @@
 ﻿using DBL;
+using DBL.Entities;
 using DBL.Models;
 using Maqaoplus.Views.Startup;
 using System.ComponentModel;
@@ -100,7 +101,7 @@ namespace Maqaoplus.ViewModels
             InstagramCommand = new Command(OnInstagram);
             TwitterCommand = new Command(OnTwitter);
             CloseLiveStreamCommand = new Command(OnCloseLiveStream);
-            ViewMoreDetailsCommand = new Command<Vacanthousesdata>(OnViewMoreDetails);
+            ViewMoreDetailsCommand = new Command<Vacanthousesdata>(async (param) => { var houseroomid = param?.SystempropertyhouseroomId ?? 0; await OnViewMoreDetails(houseroomid); });
 
             IsLiveStreamVisible = false;
             IsMoreDetailVisible = false;
@@ -159,7 +160,7 @@ namespace Maqaoplus.ViewModels
         {
             IsLiveStreamVisible = false;
         }
-         private void OnViewMoreDetails(Vacanthousesdata selectedHouse)
+        private async Task OnViewMoreDetails(int houseroomid)
         {
             IsMoreDetailVisible = true;
         }
