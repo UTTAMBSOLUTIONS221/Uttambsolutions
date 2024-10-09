@@ -19,7 +19,7 @@ BEGIN
 			USING (
 			SELECT Houselistingid,Title,Price,Locations,Isforrent,Bedrooms,Bathrooms,Descriptions,Contacts,Extra,Extra1,Extra2,Extra3,Extra4,Extra5,Extra6,Extra7,Extra8,Extra9,Extra10,Isactive,Isdeleted,Createdby,Modifiedby,Datecreated,Datemodified
 			FROM OPENJSON(@JsonObjectdata)
-			WITH (Houselistingid INT '$.Houselistingid',Title VARCHAR(200) '$.Title',Price DECIMAL(10,2) '$.Price',Locations VARCHAR(400) '$.Locations',Isforrent BIT '$.Isforrent',Bedrooms INT '$.Bedrooms',Bathrooms INT '$.Bathrooms',Descriptions VARCHAR(2000) '$.Descriptions',Contacts VARCHAR(200) '$.Contacts',Extra VARCHAR(200) '$.Extra',Extra1 VARCHAR(200) '$.Extra1',Extra2 VARCHAR(200) '$.Extra2',Extra3 VARCHAR(200) '$.Extra3',
+			WITH (Houselistingid INT '$.Houselistingid',Title VARCHAR(200) '$.Title',Price DECIMAL(10,2) '$.Price',Locations VARCHAR(400) '$.Locations',Isforrent BIT '$.Isforrent',Bedrooms INT '$.Bedrooms',Bathrooms INT '$.Bathrooms',Descriptions VARCHAR(2000) '$.Descriptions',Contacts VARCHAR(300) '$.Contacts',Extra VARCHAR(200) '$.Extra',Extra1 VARCHAR(200) '$.Extra1',Extra2 VARCHAR(200) '$.Extra2',Extra3 VARCHAR(200) '$.Extra3',
 			Extra4 VARCHAR(200) '$.Extra4',Extra5 VARCHAR(200) '$.Extra5',Extra6 VARCHAR(200) '$.Extra6',Extra7 VARCHAR(200) '$.Extra7',Extra8 VARCHAR(200) '$.Extra8',Extra9 VARCHAR(200) '$.Extra9',Extra10 VARCHAR(200) '$.Extra10',Isactive BIT '$.Isactive',Isdeleted BIT '$.Isactive',Blogstatus INT '$.Blogstatus',Createdby INT '$.Createdby',Modifiedby INT '$.Modifiedby',Datecreated DATETIME2 '$.Datecreated',Datemodified DATETIME2 '$.Datemodified')) AS source 
 			ON target.Houselistingid = source.Houselistingid
 			WHEN MATCHED THEN
