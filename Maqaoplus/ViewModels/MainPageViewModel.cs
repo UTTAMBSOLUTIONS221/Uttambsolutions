@@ -75,7 +75,19 @@ namespace Maqaoplus.ViewModels
                 }
             }
         }
-
+        private Vacanthousesdata _Vacanthousesdata;
+        public Vacanthousesdata Vacanthousesdata
+        {
+            get => _Vacanthousesdata;
+            set
+            {
+                if (_Vacanthousesdata != value)
+                {
+                    _Vacanthousesdata = value;
+                    OnPropertyChanged(nameof(Vacanthousesdata));
+                }
+            }
+        }
         public MainPageViewModel(BL bl)
         {
             _bl = bl;
@@ -88,7 +100,7 @@ namespace Maqaoplus.ViewModels
             InstagramCommand = new Command(OnInstagram);
             TwitterCommand = new Command(OnTwitter);
             CloseLiveStreamCommand = new Command(OnCloseLiveStream);
-            ViewMoreDetailsCommand = new Command(OnViewMoreDetails);
+            ViewMoreDetailsCommand = new Command<Vacanthousesdata>(OnViewMoreDetails);
 
             IsLiveStreamVisible = false;
             IsMoreDetailVisible = false;
@@ -147,9 +159,9 @@ namespace Maqaoplus.ViewModels
         {
             IsLiveStreamVisible = false;
         }
-         private void OnViewMoreDetails()
+         private void OnViewMoreDetails(Vacanthousesdata selectedHouse)
         {
-            IsMoreDetailVisible = !IsMoreDetailVisible;
+            IsMoreDetailVisible = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
