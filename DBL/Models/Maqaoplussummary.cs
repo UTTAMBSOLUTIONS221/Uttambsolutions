@@ -2,6 +2,8 @@
 {
     public class Maqaoplussummary
     {
+        public decimal Tokenprice { get; set; } = 0;
+        public decimal Totalsupply { get; set; } = 0;
         public int Listedproperties { get; set; } = 0;
         public int Listedjobs { get; set; } = 0;
         public int Registeredtenants { get; set; } = 0;
