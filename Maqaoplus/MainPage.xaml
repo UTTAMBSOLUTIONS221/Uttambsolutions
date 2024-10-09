@@ -151,9 +151,6 @@
                                                             </Label.Text>
                                                         </Label>
                                                         <Label Text="{Binding Streetorlandmark}" FontSize="14" TextColor="Black" MaxLines="2" />
-                                                        <Label Text="{Binding Systempropertyhousesizerent, StringFormat='Rent: {0:#,##0.00}'}" IsVisible="{Binding IsMoreDetailVisible}" FontSize="14" TextColor="Black" />
-                                                        <Label Text="{Binding Systempropertyhousesizerent, StringFormat='Rent Deposit: {0:#,##0.00}'}" IsVisible="{Binding IsMoreDetailVisible}" FontSize="14" TextColor="Black" />
-                                                        <Label Text="{Binding Contactdetails, StringFormat='Contact: {0}'}" IsVisible="{Binding IsMoreDetailVisible}" FontSize="14" TextColor="Black" MaxLines="2" />
                                                     </StackLayout>
                                                     <Button Grid.Row="2" Text="View More Details" BackgroundColor="#0a506c" TextColor="White" CornerRadius="15" Padding="10" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewMoreDetailsCommand}" CommandParameter="{Binding .}" />
                                                 </Grid>
