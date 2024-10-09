@@ -1,4 +1,9 @@
-﻿using Maqaoplus.Views.Startup;
+﻿using Maqaoplus.Views;
+using Maqaoplus.Views.Agreements;
+using Maqaoplus.Views.PropertyHouse;
+using Maqaoplus.Views.PropertyHouseTenants;
+using Maqaoplus.Views.Startup;
+using Maqaoplus.Views.TenantBillsandPayments;
 
 namespace Maqaoplus
 {
@@ -7,7 +12,22 @@ namespace Maqaoplus
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(ForgotPasswordPage), typeof(ForgotPasswordPage));
+            Routing.RegisterRoute(nameof(ValidateStaffAccountPage), typeof(ValidateStaffAccountPage));
+            Routing.RegisterRoute(nameof(UserProfilePage), typeof(UserProfilePage));
+            Routing.RegisterRoute(nameof(UpdateUserProfilePage), typeof(UpdateUserProfilePage));
+            Routing.RegisterRoute(nameof(PropertyHousesPage), typeof(PropertyHousesPage));
+            Routing.RegisterRoute(nameof(PropertyHousesDetailPage), typeof(PropertyHousesDetailPage));
+            Routing.RegisterRoute(nameof(AgentPropertyHousesPage), typeof(AgentPropertyHousesPage));
+            Routing.RegisterRoute(nameof(PropertyHousesTenantDetailPage), typeof(PropertyHousesTenantDetailPage));
+            Routing.RegisterRoute(nameof(PropertyHousesTenantBillsPage), typeof(PropertyHousesTenantBillsPage));
+            Routing.RegisterRoute(nameof(PropertyHousesTenantPaymentsPage), typeof(PropertyHousesTenantPaymentsPage));
+            Routing.RegisterRoute(nameof(PropertyTenantAgreementsPage), typeof(PropertyTenantAgreementsPage));
+            Routing.RegisterRoute(nameof(VacantPropertyHousesPage), typeof(VacantPropertyHousesPage));
+            Routing.RegisterRoute(nameof(PropertyHousesCaretakerPage), typeof(PropertyHousesCaretakerPage));
+            Routing.RegisterRoute(nameof(PropertyAgentAgreementsPage), typeof(PropertyAgentAgreementsPage));
+            Routing.RegisterRoute(nameof(PropertyOwnerAgreementsPage), typeof(PropertyOwnerAgreementsPage));
         }
     }
 }
