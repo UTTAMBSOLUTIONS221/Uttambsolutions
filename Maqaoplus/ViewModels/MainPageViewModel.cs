@@ -98,7 +98,6 @@ namespace Maqaoplus.ViewModels
         {
             IsProcessing = true;
             IsDataLoaded = false;
-
             try
             {
                 Maqaoplussummarydata = await _bl.Getmaqaoplussummarydata();
@@ -150,7 +149,7 @@ namespace Maqaoplus.ViewModels
         }
          private void OnViewMoreDetails()
         {
-            IsMoreDetailVisible = true;
+            IsMoreDetailVisible = !IsMoreDetailVisible;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
