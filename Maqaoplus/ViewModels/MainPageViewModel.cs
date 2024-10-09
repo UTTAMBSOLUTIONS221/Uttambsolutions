@@ -162,6 +162,8 @@ namespace Maqaoplus.ViewModels
         }
         private async Task OnViewMoreDetails(int houseroomid)
         {
+            IsProcessing = true;
+            IsDataLoaded = false;
             IsMoreDetailVisible = true;
         }
 
