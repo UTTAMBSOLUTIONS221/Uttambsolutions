@@ -128,7 +128,7 @@
                                     </CollectionView.ItemsLayout>
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
-                                            <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="240" HasShadow="True">
+                                            <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="340" HasShadow="True">
                                                 <Grid Padding="5">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="*" />
@@ -138,12 +138,17 @@
                                                     <Image Grid.Row="0" Grid.Column="0" Source="{Binding Primaryimageurl, Converter={StaticResource NullToImageConverter}}" Aspect="AspectFill" />
 
                                                     <!-- Data on the Right -->
-                                                    <StackLayout  Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                                    <StackLayout  Grid.Row="1" Grid.Column="0" Margin="0,0,0,4" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                                                         <Label Text="{Binding Propertyhousename}" FontSize="16" FontAttributes="Bold" TextColor="#0a506c" MaxLines="1" />
                                                         <Label Text="{Binding Systempropertyhousesizename,StringFormat='Rooms: {0}'}" FontSize="14" TextColor="#0a506c" />
-                                                        <Label Text="{Binding Streetorlandmark}" FontSize="14" TextColor="Black" MaxLines="2" />
+                                                        <Label Text="{Binding Countyname}" FontSize="14" TextColor="Black" />
+                                                        <Label Text="{Binding Subcountyname}" FontSize="14" TextColor="Black" />
+                                                        <Label Text="{Binding Subcountywardname}" FontSize="14" TextColor="Black"  />
+                                                        <Label Text="{Binding Streetorlandmark}" FontSize="14" TextColor="Black" />
+                                                        <Label Text="{Binding Systempropertyhousesizerent,StringFormat='Rent: {0:#,##0.00}'}" IsVisible="{Binding IsMoreDetailVisible}"  FontSize="14" TextColor="Black" />
+                                                        <Label Text="{Binding Systempropertyhousesizerent,StringFormat='Rent Deposit: {0:#,##0.00}'}" IsVisible="{Binding IsMoreDetailVisible}" FontSize="14" TextColor="Black" />
                                                     </StackLayout>
-                                                    <Button Grid.Row="2" Text="View More Details" BackgroundColor="#0a506c" TextColor="White" CornerRadius="15" Padding="10" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
+                                                    <Button Grid.Row="2" Text="View More Details" BackgroundColor="#0a506c" TextColor="White" CornerRadius="15" Padding="10" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding ViewMoreDetailsCommand}" />
                                                 </Grid>
                                             </Frame>
                                         </DataTemplate>

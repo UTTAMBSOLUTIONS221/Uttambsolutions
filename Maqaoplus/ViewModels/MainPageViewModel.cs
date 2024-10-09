@@ -18,6 +18,7 @@ namespace Maqaoplus.ViewModels
         public ICommand InstagramCommand { get; }
         public ICommand TwitterCommand { get; }
         public ICommand CloseLiveStreamCommand { get; }
+        public ICommand ViewMoreDetailsCommand { get; }
 
         private bool _isLiveStreamVisible;
         public bool IsLiveStreamVisible
@@ -51,7 +52,16 @@ namespace Maqaoplus.ViewModels
             }
         }
 
-
+        private bool _isMoreDetailVisible;
+        public bool IsMoreDetailVisible
+        {
+            get => _isMoreDetailVisible;
+            set
+            {
+                _isMoreDetailVisible = value;
+                OnPropertyChanged();
+            }
+        }
         private Maqaoplussummary _Maqaoplussummarydata;
         public Maqaoplussummary Maqaoplussummarydata
         {
@@ -78,8 +88,10 @@ namespace Maqaoplus.ViewModels
             InstagramCommand = new Command(OnInstagram);
             TwitterCommand = new Command(OnTwitter);
             CloseLiveStreamCommand = new Command(OnCloseLiveStream);
+            ViewMoreDetailsCommand = new Command(OnViewMoreDetails);
 
             IsLiveStreamVisible = false;
+            IsMoreDetailVisible = false;
         }
 
         private async Task OnLoadChurchSummary()
@@ -135,6 +147,10 @@ namespace Maqaoplus.ViewModels
         private void OnCloseLiveStream()
         {
             IsLiveStreamVisible = false;
+        }
+         private void OnViewMoreDetails()
+        {
+            IsMoreDetailVisible = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
