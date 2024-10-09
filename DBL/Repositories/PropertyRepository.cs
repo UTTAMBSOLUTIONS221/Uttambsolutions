@@ -31,6 +31,8 @@ namespace DBL.Repositories
                 if (systempropertydataJson != null)
                 {
                     JObject responseJson = JObject.Parse(systempropertydataJson);
+                    Maqaoplussummarydata.Tokenprice = Convert.ToDecimal(responseJson["Tokenprice"]);
+                    Maqaoplussummarydata.Totalsupply = Convert.ToDecimal(responseJson["Totalsupply"]);
                     Maqaoplussummarydata.Listedproperties = Convert.ToInt32(responseJson["Listedproperties"]);
                     Maqaoplussummarydata.Listedjobs = Convert.ToInt32(responseJson["Listedjobs"]);
                     Maqaoplussummarydata.Registeredtenants = Convert.ToInt32(responseJson["Registeredtenants"]);

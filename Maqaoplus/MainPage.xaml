@@ -91,7 +91,8 @@
                         <Label Text="BECOME MAQAO PLUS SHAREHOLDER" FontSize="17" FontAttributes="Bold" TextColor="#0a506c" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
 
                         <Label Text="Become a member to access exclusive properties listing,management and tenant services. Enjoy personalized support and stay updated with the latest listings." FontSize="14" TextColor="#333333"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="0,5" HorizontalTextAlignment="Center" />
-                        <Label Text="{Binding Tokenprice,StringFormat='You can buy Token(s) for Kes. {0} per token'}" FontSize="14" TextColor="#333333"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="0,5" HorizontalTextAlignment="Center" />
+
+                        <Label Text="{Binding Maqaoplussummarydata.Tokenprice,StringFormat='You can buy Token(s) for Kes. {0} per token'}" FontSize="14" TextColor="#333333"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="0,5" HorizontalTextAlignment="Center" />
 
                         <Button Text="JOIN NOW" BackgroundColor="#0a506c" TextColor="White" Padding="15" CornerRadius="25" FontSize="16" FontAttributes="Bold" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BorderWidth="2"  BorderColor="#ffffff"  Command="{Binding JoinMaqaoPlusCommand}" />
                         <!-- Assuming you have a Clicked event handler -->
