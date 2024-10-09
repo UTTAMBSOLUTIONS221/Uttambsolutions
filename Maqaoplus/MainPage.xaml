@@ -128,10 +128,10 @@
                                     </CollectionView.ItemsLayout>
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
-                                            <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="340" HasShadow="True">
+                                            <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="420" HasShadow="True">
                                                 <Grid Padding="5">
                                                     <Grid.RowDefinitions>
-                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="Auto" />
                                                         <RowDefinition Height="Auto" />
                                                         <RowDefinition Height="Auto" />
                                                     </Grid.RowDefinitions>
@@ -147,6 +147,7 @@
                                                         <Label Text="{Binding Streetorlandmark}" FontSize="14" TextColor="Black" />
                                                         <Label Text="{Binding Systempropertyhousesizerent,StringFormat='Rent: {0:#,##0.00}'}" IsVisible="{Binding IsMoreDetailVisible}"  FontSize="14" TextColor="Black" />
                                                         <Label Text="{Binding Systempropertyhousesizerent,StringFormat='Rent Deposit: {0:#,##0.00}'}" IsVisible="{Binding IsMoreDetailVisible}" FontSize="14" TextColor="Black" />
+                                                        <Label Text="{Binding Contactdetails,StringFormat='Contact: {0}'}" IsVisible="{Binding IsMoreDetailVisible}" FontSize="14" TextColor="Black" />
                                                     </StackLayout>
                                                     <Button Grid.Row="2" Text="View More Details" BackgroundColor="#0a506c" TextColor="White" CornerRadius="15" Padding="10" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding ViewMoreDetailsCommand}" />
                                                 </Grid>

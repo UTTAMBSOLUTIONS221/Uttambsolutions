@@ -29,6 +29,7 @@
         public int Rentdepositmonth { get; set; }
         public bool Hasagent { get; set; }
         public int Rentdueday { get; set; }
+        public string? Contactdetails { get; set; }
         public int Rentdepositreturndays { get; set; }
         public string? Rentingterms { get; set; }
         public bool Rentutilityinclusive { get; set; }
