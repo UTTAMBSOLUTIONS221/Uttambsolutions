@@ -128,7 +128,10 @@
                                     </CollectionView.ItemsLayout>
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
-                                            <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="420" HasShadow="True">
+                                            <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="320" HasShadow="True">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewMoreDetailsCommand}" CommandParameter="{Binding .}" />
+                                                </Frame.GestureRecognizers>
                                                 <Grid Padding="5">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="Auto" />
@@ -152,7 +155,6 @@
                                                         </Label>
                                                         <Label Text="{Binding Streetorlandmark}" FontSize="14" TextColor="Black" MaxLines="2" />
                                                     </StackLayout>
-                                                    <Button Grid.Row="2" Text="View More Details" BackgroundColor="#0a506c" TextColor="White" CornerRadius="15" Padding="10" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewMoreDetailsCommand}" CommandParameter="{Binding .}" />
                                                 </Grid>
                                             </Frame>
                                         </DataTemplate>
