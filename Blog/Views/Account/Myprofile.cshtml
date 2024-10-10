@@ -133,14 +133,14 @@
             <section class="content">
                 <div class="container-fluid">
                 <div class="row mb-4">
-                        <div class="col-lg-7 col-md-12">
+                        <div class="col-lg-4 col-md-12">
                             <div class="card card-outline card-info">
                                 <div class="card-header">
                                     <h5 class="font-weight-bold">User Profile</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-12 col-sm-5">
+                                        <div class="col-12 col-sm-12">
                                             <div class="row mb-3">
                                                 <div class="col-sm-3 position-relative">
                                                     <img src="@imageUrl" class="img-fluid rounded-circle" alt="@Model.Fullname" />
@@ -168,43 +168,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                         <div class="col-12 col-sm-7">
-                                             <div class="card card-outline card-info">
-                                                <div class="card-header py-1">
-                                                    <div class="row">
-                                                        <div class="col-sm-8">
-                                                            <h6 class="font-weight-bold text-sm card-title">Social Pages</h6>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <a asp-action="Addsocialmediapage" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body table-responsive table-responsive-sm">
-                                                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables3">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>DateCreated</th>
-                                                                <th class="text-right">Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @if(Model.Systemusersocials!= null ){
-                                                                foreach (var item in Model.Systemusersocials)
-                                                                {
-                                                                    <tr>
-                                                                        <td>@item.Socialpagename</td>
-                                                                        <td>@item.DateCreated</td>
-                                                                        <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
-                                                                    </tr>
-                                                                }
-                                                            }
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                    
                                     @* <div class="row mb-3">
@@ -255,8 +219,44 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-5 col-md-12">
+                          <div class="col-12 col-sm-4">
+                                             <div class="card card-outline card-info">
+                                                <div class="card-header">
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <h6 class="font-weight-bold text-sm card-title">Social Pages</h6>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <a asp-action="Addsocialmediapage" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body table-responsive table-responsive-sm">
+                                                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables3">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>DateCreated</th>
+                                                                <th class="text-right">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if(Model.Systemusersocials!= null ){
+                                                                foreach (var item in Model.Systemusersocials)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@item.Socialpagename</td>
+                                                                        <td>@item.DateCreated</td>
+                                                                        <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                        <div class="col-lg-4 col-md-12">
                             <div class="card card-outline card-info">
                                 <div class="card-header">
                                     <h5 class="font-weight-bold">Summary</h5>
