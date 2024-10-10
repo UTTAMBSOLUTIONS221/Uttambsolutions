@@ -3,4 +3,267 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
 }
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h6 class="font-weight-bold text-sm card-title text-uppercase">Warehouse</h6>
+                    </div>
+                    <div class="col-sm-2">
+                        <a asp-action="Addstoreitem" asp-controller="Store" asp-route-code="@Guid.NewGuid()" asp-route-Eventid="0" asp-area="" id="CAN_ADD_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Event</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm text-nowrap nowrap" id="AllsystemDataTables">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Event Name</th>
+                            <th>Day</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th>Dates</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
+    <script type="text/javascript">
+        const firebaseProdConfig = {
+               apiKey: "AIzaSyCmRT7WLWSDUAqUmUCNRVlTcZ1ZOPsmgwc",
+               authDomain: "uttambsolutions-4ec2a.firebaseapp.com",
+               projectId: "uttambsolutions-4ec2a",
+               storageBucket: "uttambsolutions-4ec2a.appspot.com",
+               messagingSenderId: "336739823411",
+               appId: "1:336739823411:web:f2ad2d4dba0f7881f5d846",
+               measurementId: "G-Z24LLL0113"
+           };
+
+           const firebaseDevConfig = {
+               apiKey: "AIzaSyC7PeGxi7RWy6wVOnrGFU9y6Rmz6ejFLiI",
+               authDomain: "uttambsolutionsdev.firebaseapp.com",
+               projectId: "uttambsolutionsdev",
+               storageBucket: "uttambsolutionsdev.appspot.com",
+               messagingSenderId: "629286721346",
+               appId: "1:629286721346:web:25a76122562d4630639adb",
+               measurementId: "G-W3W3KJ6SGH"
+           };
+
+           // Check the environment passed from the server
+           const environment = "@ViewBag.Environment";
+           const firebaseConfig = environment === 'Production' ? firebaseProdConfig : firebaseDevConfig;
+
+           firebase.initializeApp(firebaseConfig);
+           var storage = firebase.storage();
+
+           function storeProductImageFileChanged(event) {
+               var files = event.target.files;
+               uploadStoreProductImage(files);
+           }
+
+
+           async function uploadStoreProductImage(files) {
+               var downloadURLs = [];
+
+               function generateStoreProductFileName(file) {
+                   var uniqueId = Date.now();
+                   var fileExtension = file.name.split('.').pop();
+                   var newFileName = 'Sokojiji/Store/' + uniqueId + '.' + fileExtension;
+                   return newFileName;
+               }
+
+               async function uploadStoreProductFile(file) {
+                   return new Promise((resolve, reject) => {
+                       var newFileName = generateStoreProductFileName(file);
+
+                       var storageRef = storage.ref().child(newFileName);
+                       var uploadTask = storageRef.put(file);
+
+                       uploadTask.on('state_changed',
+                           function (snapshot) {
+                               var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                               console.log('Upload is ' + progress + '% done');
+                           },
+                           function (error) {
+                               reject('Error uploading file: ' + error);
+                           },
+                           function () {
+                               uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                                   console.log('File available at', downloadURL);
+                                   downloadURLs.push(downloadURL);
+                                   resolve(downloadURL);
+                               });
+                           }
+                       );
+                   });
+               }
+
+               function displayStoreProductPreview(file) {
+                   return new Promise((resolve, reject) => {
+                       var reader = new FileReader();
+                       reader.onload = function (e) {
+                           var previewContainer = document.createElement('div');
+                           previewContainer.classList.add('image-preview');
+
+                           var spinner = document.createElement('div');
+                           spinner.classList.add('spinner');
+                           previewContainer.appendChild(spinner);
+
+                           var previewContainerElement = document.getElementById('Uttambsolutionsimagespreviewcontainer');
+                           previewContainerElement.appendChild(previewContainer);
+
+                           var img = document.createElement('img');
+                           img.src = e.target.result;
+                           img.width = 140;
+                           img.height = 140;
+                           img.style.display = 'none';
+                           img.onload = function () {
+                               spinner.remove();
+                               img.style.display = 'block';
+                               previewContainer.appendChild(img);
+                           };
+
+                           resolve();
+                       };
+                       reader.readAsDataURL(file);
+                   });
+               }
+
+               document.getElementById('loadingOverlay').style.zIndex = 1100;
+               document.getElementById('loadingOverlay').style.display = 'flex';
+
+               for (var i = 0; i < files.length; i++) {
+                   var file = files[i];
+
+                   try {
+                       await displayStoreProductPreview(file);
+                       var downloadURL = await uploadStoreProductFile(file);
+                   } catch (error) {
+                       console.error(error);
+                   }
+               }
+
+               document.getElementById('loadingOverlay').style.display = 'none';
+
+               var inputField = document.getElementById('UttambsolutionsimageurlId');
+               inputField.value = JSON.stringify(downloadURLs);
+           }
+
+
+
+
+
+            function checkAllOtherEventSponsors() {
+               var checkBox = document.getElementById("eventSponsorsCheckAll");
+               if (checkBox.checked == true) {
+                   $('.eveneSponsors-checkbox').prop('checked', true);
+               } else {
+                   $('.eveneSponsors-checkbox').prop('checked', false);
+               }
+             }
+           ﻿function savechurcheventdata() {
+               document.getElementById("savechurcheventid").disabled = true;
+               document.getElementById("processingSpinner").style.display = "inline-block";
+               document.getElementById("buttonText").innerText = "Processing...";
+                var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked:not(#eventSponsorsCheckAll)');
+               var Sponsors = new Array();
+               checkboxes.forEach((checkbox) => {
+                   var Eventsponsor = {};
+                   Eventsponsor.Sponsorid = checkbox.value;
+                   Sponsors.push(Eventsponsor);
+               });
+           let isValid = true;
+           if ($('#Eventnameid').val() == '') {
+               $('#Eventnameid').addClass('is-invalid');
+               isValid = false;
+               document.getElementById("savechurcheventid").disabled = false;
+               document.getElementById("processingSpinner").style.display = "none";
+               document.getElementById("buttonText").innerText = "SAVE";
+               return isValid;
+           }
+           if ($('#Daysofweekid').val() == '') {
+               $('#Daysofweekid').addClass('is-invalid');
+               isValid = false;
+               document.getElementById("savechurcheventid").disabled = false;
+               document.getElementById("processingSpinner").style.display = "none";
+               document.getElementById("buttonText").innerText = "SAVE";
+               return isValid;
+           }
+           if ($('#Branchid').val() == '') {
+               $('#Branchid').addClass('is-invalid');
+               isValid = false;
+               document.getElementById("savechurcheventid").disabled = false;
+               document.getElementById("processingSpinner").style.display = "none";
+               document.getElementById("buttonText").innerText = "SAVE";
+               return isValid;
+           }
+            if ($('#Organizerid').val() == '') {
+               $('#Organizerid').addClass('is-invalid');
+               isValid = false;
+               document.getElementById("savechurcheventid").disabled = false;
+               document.getElementById("processingSpinner").style.display = "none";
+               document.getElementById("buttonText").innerText = "SAVE";
+               return isValid;
+           }
+            if ($('#Locationsid').val() == '') {
+               $('#Locationsid').addClass('is-invalid');
+               isValid = false;
+               document.getElementById("savechurcheventid").disabled = false;
+               document.getElementById("processingSpinner").style.display = "none";
+               document.getElementById("buttonText").innerText = "SAVE";
+               return isValid;
+           }
+            if ($('#Descriptionsid').val() == '') {
+               $('#Descriptionsid').addClass('is-invalid');
+               isValid = false;
+               document.getElementById("savechurcheventid").disabled = false;
+               document.getElementById("processingSpinner").style.display = "none";
+               document.getElementById("buttonText").innerText = "SAVE";
+               return isValid;
+           }
+           var uil = {
+               Eventid: $('#Eventid').val(),
+               Eventname: $('#Eventnameid').val(),
+               Eventimageurl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, ''),
+               Isrecurring: $('#Isrecurringid').prop('checked'),
+               Startdatetime: $('#Startdatetimeid').val(),
+               Enddatetime: $('#Enddatetimeid').val(),
+               Locations: $('#Locationsid').val(),
+               Descriptions: $('#Descriptionsid').val(),
+               Branch: $('#Branchid').val(),
+               Organizer: $('#Organizerid').val(),
+               Createdby: $('#systemLoggedinedUserid').val(),
+               Modifiedby: $('#systemLoggedinedUserid').val(),
+               Datecreated:new Date().toISOString().slice(0, 19).replace('T', ' '),
+               Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' '),
+               Eventsponsors: Sponsors,
+           };
+               $.post("/Church/Registerchurchevent", uil, function (response) {
+                   if (response.RespStatus == 0) {
+                       Swal.fire("Event Detail", response.RespMessage, "success");
+                       setTimeout(function () { location.reload(); }, 500);
+                   } else {
+                       Swal.fire("Event Detail Not Created", response.RespMessage, "error");
+                   }
+                   document.getElementById("savechurcheventid").disabled = false;
+                   document.getElementById("processingSpinner").style.display = "none";
+                   document.getElementById("buttonText").innerText = "SAVE";
+               });
+           }
+    </script>
+}
 

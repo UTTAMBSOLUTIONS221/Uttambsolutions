@@ -23,5 +23,16 @@ namespace WEB.Controllers
             //var data = await bl.Getsystemproductbranddata(0, 1000);
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Addstoreitem(int Itemid)
+        {
+            //Dailychurchevent model = new Dailychurchevent();
+            //if (Eventid > 0)
+            //{
+            //    model = await bl.Getchurcheventdatabyid(Eventid);
+            //}
+            return PartialView();
+        }
     }
 }
