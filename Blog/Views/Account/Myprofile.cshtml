@@ -696,8 +696,8 @@
                 }
 
                 async function saveprofileimageurltodatabase(url) {
-                    var uil1 = {Profileimagelogo: url };
-                    $.post("/Account/Updatestaffprofilepicturedata", uil1, function (response) {
+                    var uil1 = {Userprofileimageurl: url };
+                    $.post("/Account/Updatesystemstaffprofiledata", uil1, function (response) {
                         setTimeout(function () { location.reload(); }, 1000);
                     });
                  }
