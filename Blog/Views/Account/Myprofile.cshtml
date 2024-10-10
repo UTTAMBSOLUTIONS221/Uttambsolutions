@@ -139,32 +139,74 @@
                                     <h5 class="font-weight-bold">User Profile</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row mb-3">
-                                        <div class="col-sm-2 position-relative">
-                                            <img src="@imageUrl" class="img-fluid rounded-circle" alt="@Model.Fullname" />
-                                            <input type="file" id="imageUpload" style="display: none;" accept="image/*" onchange="systemuserprofileeditimagechanged(event)" />
-                                            <button class="position-absolute top-0 end-0 p-1" style="margin: 10px; border: none; background: transparent; cursor: pointer; transform: translate(50%, -50%);" onclick="triggerFileInput()">
-                                                <i class="fas fa-camera"></i>
-                                            </button>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-7">
+                                            <div class="row mb-3">
+                                                <div class="col-sm-2 position-relative">
+                                                    <img src="@imageUrl" class="img-fluid rounded-circle" alt="@Model.Fullname" />
+                                                    <input type="file" id="imageUpload" style="display: none;" accept="image/*" onchange="systemuserprofileeditimagechanged(event)" />
+                                                    <button class="position-absolute top-0 end-0 p-1" style="margin: 10px; border: none; background: transparent; cursor: pointer; transform: translate(50%, -50%);" onclick="triggerFileInput()">
+                                                        <i class="fas fa-camera"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <!-- User Details Table -->
+                                                    <h6 class="font-weight-bold">User Details</h6>
+                                                    <table class="table table-borderless table-sm">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><span class="font-weight-bold">Name: </span>@Model.Fullname</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="font-weight-bold">Email: </span>@Model.Emailaddress</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="font-weight-bold">Joined: </span>@Model.Datecreated.ToString("MMMM dd, yyyy")</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-10">
-                                            <!-- User Details Table -->
-                                            <h6 class="font-weight-bold">User Details</h6>
-                                            <table class="table table-borderless table-sm">
-                                                <tbody>
-                                                    <tr>
-                                                        <td><span class="font-weight-bold">Name: </span>@Model.Fullname</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span class="font-weight-bold">Email: </span>@Model.Emailaddress</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span class="font-weight-bold">Joined: </span>@Model.Datecreated.ToString("MMMM dd, yyyy")</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                         <div class="col-12 col-sm-5">
+                                             <div class="card card-outline card-info">
+                                                <div class="card-header py-1">
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <h6 class="font-weight-bold text-sm card-title">Social Pages</h6>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <a asp-action="Addsocialmediapage" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body table-responsive table-responsive-sm">
+                                                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables3">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>DateCreated</th>
+                                                                <th class="text-right">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if(Model.Systemusersocials!= null ){
+                                                                foreach (var item in Model.Systemusersocials)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@item.Socialpagename</td>
+                                                                        <td>@item.DateCreated</td>
+                                                                        <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                   
                                     @* <div class="row mb-3">
                                         <div class="col-sm-12">
                                             <!-- Organization or Company Details Table -->
