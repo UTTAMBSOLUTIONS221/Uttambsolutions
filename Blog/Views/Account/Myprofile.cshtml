@@ -648,9 +648,74 @@
 
         firebase.initializeApp(firebaseConfig);
         var storage = firebase.storage();
+
+        function systemuserprofileeditimagechanged(event) {
+                var files = event.target.files;
+                uploaduserprofileeditimage(files);
+            }
+
+             async function uploaduserprofileeditimage(files) {
+                var downloadURLs = [];
+
+                function generateuserprofileeditfilename(file) {
+                    var uniqueId = Date.now();
+                    var fileExtension = file.name.split('.').pop();
+                    var newFileName = 'Userprofiles/Userprofileimage/' + uniqueId + '.' + fileExtension;
+                    return newFileName;
+                }
+
+                async function uploaduserprofileeditfile(file) {
+                    return new Promise((resolve, reject) => {
+                        var newFileName = generateuserprofileeditfilename(file);
+
+                        var storageRef = storage.ref().child(newFileName);
+                        var uploadTask = storageRef.put(file);
+
+                        uploadTask.on('state_changed',
+                            function (snapshot) {
+                                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                console.log('Upload is ' + progress + '% done');
+                            },
+                            function (error) {
+                                reject('Error uploading file: ' + error);
+                            },
+                            function () {
+                                uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                                    console.log('File available at', downloadURL);
+                                    downloadURLs.push(downloadURL);
+                                    resolve(downloadURL);
+                                });
+                            }
+                        );
+                    });
+                }
+
+                async function saveprofileimageurltodatabase(url) {
+                    var uil1 = {Profileimagelogo: url };
+                    $.post("/Account/Updatestaffprofilepicturedata", uil1, function (response) {
+                        setTimeout(function () { location.reload(); }, 1000);
+                    });
+                 }
+
+                document.getElementById('loadingOverlay').style.zIndex = 1100; 
+                document.getElementById('loadingOverlay').style.display = 'flex';
+
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+
+                    try {
+                        var downloadURL = await uploaduserprofileeditfile(file);
+                        await saveprofileimageurltodatabase(downloadURL);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }   
             
 
-              function systemBlogFileChanged(event) {
+           function systemBlogFileChanged(event) {
                 var files = event.target.files;
                 uploadBlogImage(files);
             }

@@ -115,7 +115,13 @@ namespace Blog.Controllers
             var data = await bl.Getsystemuserprofiledata(SessionUserData.Usermodel.Userid);
             return View(data);
         }
-
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<JsonResult> Updatesystemstaffprofiledata(SystemStaff model)
+        {
+            var resp = await bl.Registersystemstaffdata(model);
+            return Json(resp);
+        }
 
         [HttpGet]
         [AllowAnonymous]
