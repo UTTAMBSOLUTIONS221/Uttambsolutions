@@ -696,7 +696,7 @@
                 }
 
                 async function saveprofileimageurltodatabase(url) {
-                    var uil1 = {Userprofileimageurl: url };
+                    var uil1 = {Userid:$('#systemLoggedinedUserid').val(),Userprofileimageurl: url };
                     $.post("/Account/Updatesystemstaffprofiledata", uil1, function (response) {
                         setTimeout(function () { location.reload(); }, 1000);
                     });
