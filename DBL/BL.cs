@@ -975,6 +975,17 @@ namespace DBL
 
         #endregion
 
+        #region Store Products
+        public Task<Genericmodel> Registerstoreproductdata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ProductRepository.Registerstoreproductdata(Obj);
+                return Resp;
+            });
+        }
+        #endregion
+
         #region System Product Brands
         public Task<Genericmodel> Registersystemproductbranddata(string Obj)
         {

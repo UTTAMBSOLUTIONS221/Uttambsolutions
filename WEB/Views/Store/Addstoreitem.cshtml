@@ -12,23 +12,29 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-8">
             <div class="form-group">
                 <label class="font-weight-light">Item Name</label>
                 <input class="form-control form-control-sm" asp-for="@Model.Storeitemname" id="Storeitemnameid" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Brand Name</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Itembrandname" id="Itembrandnameid" />
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
-                <label class="font-weight-light">Start Date</label>
+                <label class="font-weight-light">Buying Price</label>
                 <input class="form-control form-control-sm" type="number" asp-for="@Model.Itembuyingprice" id="Itembuyingpriceid" />
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label class="font-weight-light">End Date</label>
+                <label class="font-weight-light">Selling Price</label>
                 <input class="form-control form-control-sm" type="number" asp-for="@Model.Itemsellingprice" id="Itemsellingpriceid" />
             </div>
         </div>
@@ -53,7 +59,7 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savechurcheventid" onclick="savechurcheventdata();">
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savestoreproductid" onclick="savestoreproductdata();">
         <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
     </button>
 </div>

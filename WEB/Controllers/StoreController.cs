@@ -1,6 +1,8 @@
 ﻿using DBL;
+using DBL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace WEB.Controllers
 {
@@ -33,6 +35,11 @@ namespace WEB.Controllers
             //    model = await bl.Getchurcheventdatabyid(Eventid);
             //}
             return PartialView();
+        }
+        public async Task<JsonResult> Registerstoreproduct(Systemstoreitems model)
+        {
+            var resp = await bl.Registerstoreproductdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
         }
     }
 }

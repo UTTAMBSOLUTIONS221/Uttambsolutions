@@ -163,84 +163,72 @@
                inputField.value = JSON.stringify(downloadURLs);
            }
 
-           ﻿function savechurcheventdata() {
-               document.getElementById("savechurcheventid").disabled = true;
+           ﻿function savestoreproductdata() {
+               document.getElementById("savestoreproductid").disabled = true;
                document.getElementById("processingSpinner").style.display = "inline-block";
                document.getElementById("buttonText").innerText = "Processing...";
-                var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked:not(#eventSponsorsCheckAll)');
-               var Sponsors = new Array();
-               checkboxes.forEach((checkbox) => {
-                   var Eventsponsor = {};
-                   Eventsponsor.Sponsorid = checkbox.value;
-                   Sponsors.push(Eventsponsor);
-               });
+              
            let isValid = true;
-           if ($('#Eventnameid').val() == '') {
-               $('#Eventnameid').addClass('is-invalid');
+           if ($('#Storeitemnameid').val() == '') {
+               $('#Storeitemnameid').addClass('is-invalid');
                isValid = false;
-               document.getElementById("savechurcheventid").disabled = false;
+               document.getElementById("savestoreproductid").disabled = false;
                document.getElementById("processingSpinner").style.display = "none";
                document.getElementById("buttonText").innerText = "SAVE";
                return isValid;
            }
-           if ($('#Daysofweekid').val() == '') {
-               $('#Daysofweekid').addClass('is-invalid');
+           if ($('#Itembrandname').val() == '') {
+               $('#Itembrandname').addClass('is-invalid');
                isValid = false;
-               document.getElementById("savechurcheventid").disabled = false;
+               document.getElementById("savestoreproductid").disabled = false;
                document.getElementById("processingSpinner").style.display = "none";
                document.getElementById("buttonText").innerText = "SAVE";
                return isValid;
            }
-           if ($('#Branchid').val() == '') {
-               $('#Branchid').addClass('is-invalid');
+           if ($('#Itembuyingpriceid').val() == ''|| $('#Itembuyingpriceid').val() == 0) {
+               $('#Itembuyingpriceid').addClass('is-invalid');
                isValid = false;
-               document.getElementById("savechurcheventid").disabled = false;
+               document.getElementById("savestoreproductid").disabled = false;
                document.getElementById("processingSpinner").style.display = "none";
                document.getElementById("buttonText").innerText = "SAVE";
                return isValid;
            }
-            if ($('#Organizerid').val() == '') {
-               $('#Organizerid').addClass('is-invalid');
+            if ($('#Itemsellingpriceid').val() == ''||$('#Itemsellingpriceid').val() == 0) {
+               $('#Itemsellingpriceid').addClass('is-invalid');
                isValid = false;
-               document.getElementById("savechurcheventid").disabled = false;
+               document.getElementById("savestoreproductid").disabled = false;
                document.getElementById("processingSpinner").style.display = "none";
                document.getElementById("buttonText").innerText = "SAVE";
                return isValid;
            }
-            if ($('#Locationsid').val() == '') {
-               $('#Locationsid').addClass('is-invalid');
-               isValid = false;
-               document.getElementById("savechurcheventid").disabled = false;
-               document.getElementById("processingSpinner").style.display = "none";
-               document.getElementById("buttonText").innerText = "SAVE";
-               return isValid;
-           }
-            if ($('#Descriptionsid').val() == '') {
-               $('#Descriptionsid').addClass('is-invalid');
-               isValid = false;
-               document.getElementById("savechurcheventid").disabled = false;
-               document.getElementById("processingSpinner").style.display = "none";
-               document.getElementById("buttonText").innerText = "SAVE";
-               return isValid;
-           }
-           var uil = {
-               Eventid: $('#Eventid').val(),
-               Eventname: $('#Eventnameid').val(),
-               Eventimageurl: $('#UttambsolutionsimageurlId').val().replace(/^\[|\]$/g, '').replace(/^"|"$/g, ''),
-               Isrecurring: $('#Isrecurringid').prop('checked'),
-               Startdatetime: $('#Startdatetimeid').val(),
-               Enddatetime: $('#Enddatetimeid').val(),
-               Locations: $('#Locationsid').val(),
-               Descriptions: $('#Descriptionsid').val(),
-               Branch: $('#Branchid').val(),
-               Organizer: $('#Organizerid').val(),
-               Createdby: $('#systemLoggedinedUserid').val(),
-               Modifiedby: $('#systemLoggedinedUserid').val(),
-               Datecreated:new Date().toISOString().slice(0, 19).replace('T', ' '),
-               Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' '),
-               Eventsponsors: Sponsors,
-           };
-               $.post("/Church/Registerchurchevent", uil, function (response) {
+                var Storeproductimages = new Array();
+                var imageUrlsJson = document.getElementById('UttambsolutionsimageurlId').value;
+                if (imageUrlsJson && imageUrlsJson.trim() !== "") 
+                {   
+                    var imageUrls = JSON.parse(imageUrlsJson);
+                    Storeproductimages = imageUrls.map(function (url) {return {Storeproductimgurl: url,Datecreated:new Date().toISOString().slice(0, 19).replace('T', ' ')}});
+                } else {
+                    $('#Storeproductimageurlid').addClass('is-invalid');
+                    isValid = false;
+                    document.getElementById("savestoreproductid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                    return isValid;
+                }
+           
+               var uil = {
+                   Storeitemid: $('#Storeitemid').val(),
+                   Storeitemname: $('#Storeitemnameid').val(),
+                   Itembrandname: $('#Itembrandnameid').val(),
+                   Itembuyingprice: $('#Itembuyingpriceid').val(),
+                   Itemsellingprice: $('#Itemsellingpriceid').val(),
+                   Createdby: $('#systemLoggedinedUserid').val(),
+                   Modifiedby: $('#systemLoggedinedUserid').val(),
+                   Datecreated:new Date().toISOString().slice(0, 19).replace('T', ' '),
+                   Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                   Storeproductimages: Storeproductimages,
+               };
+               $.post("/Store/Registerstoreproduct", uil, function (response) {
                    if (response.RespStatus == 0) {
                        Swal.fire("Event Detail", response.RespMessage, "success");
                        setTimeout(function () { location.reload(); }, 500);

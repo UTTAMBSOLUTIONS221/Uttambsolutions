@@ -12,6 +12,16 @@ namespace DBL.Repositories
         public ProductRepository(string connectionString) : base(connectionString)
         {
         }
+        public Genericmodel Registerstoreproductdata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registerstoreproductdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         public Genericmodel Registersystemproductdata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))
