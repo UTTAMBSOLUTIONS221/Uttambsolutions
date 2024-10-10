@@ -219,76 +219,76 @@
                                 </div>
                             </div>
                         </div>
-                          <div class="col-12 col-sm-4">
-                                             <div class="card card-outline card-info">
-                                                <div class="card-header">
-                                                    <div class="row">
-                                                        <div class="col-sm-8">
-                                                            <h6 class="font-weight-bold text-sm card-title">Social Pages</h6>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <a asp-action="Addsocialmediapage" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body table-responsive table-responsive-sm">
-                                                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables3">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>DateCreated</th>
-                                                                <th class="text-right">Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @if(Model.Systemusersocials!= null ){
-                                                                foreach (var item in Model.Systemusersocials)
-                                                                {
-                                                                    <tr>
-                                                                        <td>@item.Socialpagename</td>
-                                                                        <td>@item.DateCreated</td>
-                                                                        <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
-                                                                    </tr>
-                                                                }
-                                                            }
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="card card-outline card-info">
-                                <div class="card-header">
-                                    <h5 class="font-weight-bold">Summary</h5>
+                    <div class="col-12 col-sm-4">
+                        <div class="card card-outline card-info">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <h5 class="font-weight-bold text-sm card-title">Social Pages</h5>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <a asp-action="Addsocialmediapage" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="0" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Page</a>
+                                    </div>
                                 </div>
-                                <div class="card-body table-responsive table-responsive-sm">
-                                    <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables1">
-                                        <thead>
-                                            <tr>
-                                                <th>Action</th>
-                                                <th>Time</th>
-                                                <th>Reward</th>
-                                                <th>Datecreated</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if(Model!= null && Model.Systemuserlogs!=null){
-                                                foreach (var item in Model.Systemuserlogs)
-                                                {
-                                                  <tr>
-                                                    <td>@item.Logaction</td>
-                                                    <td>@item.Logactionexittime</td>
-                                                    <td>@item.Loyaltyreward</td>
-                                                    <td>@item.Datecreated.ToString("dd/MM/yyyy HH:MM:ss")</td>
+                            </div>
+                            <div class="card-body table-responsive table-responsive-sm">
+                                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables3">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>DateCreated</th>
+                                            <th class="text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if(Model.Systemusersocials!= null ){
+                                            foreach (var item in Model.Systemusersocials)
+                                            {
+                                                <tr>
+                                                    <td>@item.Socialpagename</td>
+                                                    <td>@item.DateCreated</td>
+                                                    <td class="text-right"><a asp-action="Addsocialmediapage" asp-controller="Socialmedia" asp-route-code="@Guid.NewGuid()" asp-route-Socialsettingid="@item.SocialSettingId" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
                                                 </tr>
-                                                }
                                             }
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card card-outline card-info">
+                            <div class="card-header">
+                                <h5 class="font-weight-bold">Summary</h5>
+                            </div>
+                            <div class="card-body table-responsive table-responsive-sm">
+                                <table class="table table-bordered table-striped compact table-sm table-responsive-sm nowrap text-nowrap" id="AllsystemDataTables1">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>Time</th>
+                                            <th>Reward</th>
+                                            <th>Datecreated</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if(Model!= null && Model.Systemuserlogs!=null){
+                                            foreach (var item in Model.Systemuserlogs)
+                                            {
+                                                <tr>
+                                                <td>@item.Logaction</td>
+                                                <td>@item.Logactionexittime</td>
+                                                <td>@item.Loyaltyreward</td>
+                                                <td>@item.Datecreated.ToString("dd/MM/yyyy HH:MM:ss")</td>
+                                            </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                     <div class="row">
                         <div class="col-sm-7">
