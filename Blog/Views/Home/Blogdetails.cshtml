@@ -15,11 +15,12 @@
     <meta property="og:type" content="@ViewData["type"]" />
     <meta property="og:title" content="@ViewData["Title"]" />
     <meta property="og:description" content="@ViewData["description"]" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta property="og:image" content="@ViewData["image"]" />
-    <meta property="og:url" content="@ViewData["url"]" />
     <meta property="og:image:alt" content="@ViewData["imagealt"]" />
+    <meta property="og:url" content="@ViewData["url"]" />
+    <meta property="og:site_name" content="FortySevenNews" />
+    <meta property="article:author" content="@ViewData["Blogownername"]" />
+    <meta property="article:tag" content="@ViewData["Blogtags"]" />
 
     <meta property="ia:markup_url" content="URL for instant articles markup" />
     <meta property="ia:markup_url_dev" content="URL for instant articles markup (development)" />
@@ -32,10 +33,13 @@
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="@ViewData["Title"] - Uttamb Solutions" />
-    <meta name="twitter:description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card system, forecought management system, fcs, fms, fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
-    <meta name="twitter:image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
-
+    <meta name="twitter:site" content="@ViewData["Blogownername"]" />
+    <meta name="twitter:title" content="@ViewData["Title"]" />
+    <meta name="twitter:description" content="@ViewData["description"]" />
+    <meta name="twitter:image" content="@ViewData["image"]" />
+    <meta name="twitter:image:alt" content="@ViewData["imagealt"]" />
+    <meta name="twitter:url" content="@ViewData["url"]" />
+   
     <!-- Schema.org Markup for Google+ -->
     <meta itemprop="name" content="@ViewData["Title"] - Uttamb Solutions" />
     <meta itemprop="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card system, forecought management system, fcs, fms, fuel management system, and digital marketing services. Explore our blogs and contact us for more information." />
