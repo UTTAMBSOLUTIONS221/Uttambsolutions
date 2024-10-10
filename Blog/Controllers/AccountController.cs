@@ -228,9 +228,9 @@ namespace Blog.Controllers
         public async Task<JsonResult> Addsocialmediapagedata(SocialMediaSettings model)
         {
             Genericmodel Resp = new Genericmodel();
-            var tokenResponse = await GetFacebookAccessTokenAsync(model.Appid, model.Appsecret);
+            ///var tokenResponse = await GetFacebookAccessTokenAsync(model.Appid, model.Appsecret);
 
-            var longLivedToken = await _facebookHelper.ExchangeAccessTokenAsync(model.Appid, model.Appsecret, tokenResponse.AccessToken);
+            var longLivedToken = await _facebookHelper.ExchangeAccessTokenAsync(model.Appid, model.Appsecret, model.PageAccessToken);
             var pageAccessTokenResponse = await _facebookHelper.GenerateNeverExpiresAccessTokenAsync(longLivedToken.AccessToken);
 
             var matchingPage = pageAccessTokenResponse.Data.FirstOrDefault(x => x.Name.Contains(model.Socialpagename, StringComparison.OrdinalIgnoreCase));
@@ -253,19 +253,20 @@ namespace Blog.Controllers
             return Json(Resp);
         }
 
-
         public async Task<FacebookAccountData> GetFacebookAccessTokenAsync(string appId, string appSecret)
         {
-            var requestUri = $"https://graph.facebook.com/oauth/access_token?client_id={appId}&client_secret={appSecret}&grant_type=client_credentials";
+            var requestUri = $"https://graph.facebook.com/v17.0/oauth/access_token?client_id={Uri.EscapeDataString(appId)}&client_secret={Uri.EscapeDataString(appSecret)}&grant_type=client_credentials";
 
             using (var httpClient = new HttpClient())
             {
-                // Make the HTTP request
                 var response = await httpClient.GetAsync(requestUri);
-                response.EnsureSuccessStatusCode(); // Throws if not a success status code
-
-                // Read and deserialize the response content
                 var responseBody = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException($"Error fetching token: {responseBody}");
+                }
+
                 return JsonConvert.DeserializeObject<FacebookAccountData>(responseBody);
             }
         }
