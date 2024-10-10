@@ -39,8 +39,6 @@ namespace Blog.Controllers
             @ViewData["imagealt"] = blogPost.Blogcategoryname;
             @ViewData["Blogtags"] = blogPost.Blogtags;
             @ViewData["url"] = $"https://fortysevennews.uttambsolutions.com/Home/Blogdetails?code={Guid.NewGuid()}&Blogid={Blogid}";
-
-
             return View(blogPost);
         }
 
