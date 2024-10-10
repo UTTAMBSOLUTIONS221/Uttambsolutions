@@ -3,7 +3,6 @@ using DBL.Enum;
 using DBL.Models.Mpesa;
 using DBL.Utils;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -27,18 +26,18 @@ namespace DBL
             string tkn = Convert.ToBase64String(isoBytes);
             headers.Add("Authorization", "Basic " + tkn);
 
-            HttpClient1 httpClient = new HttpClient1(url, HttpClient1.RequestType.Get, headers);
+            //HttpClient1 httpClient = new HttpClient1(url, HttpClient1.RequestType.Get, headers);
 
-            Exception error;
-            var results = httpClient.SendRequest("", out error);
-            if (!string.IsNullOrEmpty(results))
-            {
-                if (results != "Error!")
-                {
-                    dynamic data = JObject.Parse(results);
-                    authToken = data.access_token;
-                }
-            }
+            //Exception error;
+            //var results = httpClient.SendRequest("", out error);
+            //if (!string.IsNullOrEmpty(results))
+            //{
+            //    if (results != "Error!")
+            //    {
+            //        dynamic data = JObject.Parse(results);
+            //        authToken = data.access_token;
+            //    }
+            //}
 
             return authToken;
         }
@@ -222,13 +221,14 @@ namespace DBL
             //---- Create token
             headers.Add("Authorization", "Bearer " + authHeader);
 
-            HttpClient1 httpClient = new HttpClient1(url, HttpClient1.RequestType.Post, headers);
+            //HttpClient1 httpClient = new HttpClient1(url, HttpClient1.RequestType.Post, headers);
 
-            Exception ex;
-            var results = httpClient.SendRequest(jsonData, out ex);
+            //Exception ex;
+            var results = "";
+            //httpClient.SendRequest(jsonData, out ex);
 
-            if (string.IsNullOrEmpty(results))
-                throw ex;
+            //if (string.IsNullOrEmpty(results))
+            //    throw ex;
 
             return results;
         }
