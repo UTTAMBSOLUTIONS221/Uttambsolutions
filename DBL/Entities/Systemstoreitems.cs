@@ -7,6 +7,9 @@
         public string? Itembrandname { get; set; }
         public decimal Itembuyingprice { get; set; }
         public decimal Itemsellingprice { get; set; }
+        public int Itemstatus { get; set; }
+        public bool Isactive { get; set; }
+        public bool Isdeleted { get; set; }
         public int Createdby { get; set; }
         public int Modifiedby { get; set; }
         public DateTime Datecreated { get; set; }
