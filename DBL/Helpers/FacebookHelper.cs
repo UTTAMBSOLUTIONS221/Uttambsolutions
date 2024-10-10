@@ -21,14 +21,13 @@ namespace DBL.Helpers
 
         public async Task<FacebookNeverExpiresResponse> GenerateNeverExpiresAccessTokenAsync(string extendedAccessToken)
         {
-            string requestUri = $"https://graph.facebook.com/me/accounts?access_token={extendedAccessToken}";
+            string requestUri = $"https://graph.facebook.com/v21.0/me/accounts?access_token={extendedAccessToken}";
 
             using (var httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(requestUri);
                 response.EnsureSuccessStatusCode();
                 var responseBody = await response.Content.ReadAsStringAsync();
-
                 return JsonConvert.DeserializeObject<FacebookNeverExpiresResponse>(responseBody);
             }
         }
