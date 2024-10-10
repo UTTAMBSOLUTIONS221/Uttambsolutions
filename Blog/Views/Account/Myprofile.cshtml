@@ -165,7 +165,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
+                                    @* <div class="row mb-3">
                                         <div class="col-sm-12">
                                             <!-- Organization or Company Details Table -->
                                               <div class="card card-outline card-info">
@@ -209,7 +209,7 @@
                                                     </div>
                                                 </div>
                                         </div>
-                                    </div>
+                                    </div> *@
                                 </div>
                             </div>
                         </div>
@@ -713,7 +713,10 @@
 
                 document.getElementById('loadingOverlay').style.display = 'none';
             }   
-            
+            function triggerFileInput() {
+                // Trigger the file input click event
+                document.getElementById('imageUpload').click();
+            }
 
            function systemBlogFileChanged(event) {
                 var files = event.target.files;
