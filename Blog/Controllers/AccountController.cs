@@ -119,7 +119,7 @@ namespace Blog.Controllers
         [AllowAnonymous]
         public async Task<JsonResult> Updatesystemstaffprofiledata(SystemStaff model)
         {
-            var resp = await bl.Registersystemstaffdata(model);
+            var resp = await bl.Updatestaffprofilepicturedata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
 
