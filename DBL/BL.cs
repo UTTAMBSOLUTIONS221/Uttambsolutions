@@ -2048,7 +2048,7 @@ namespace DBL
         private void SendPaymentNotifTo3P(string url, PaymentNotificationData notifData, string paymentRef)
         {
             //---- Update 3rd party application
-            HttpClient httpClient = new HttpClient(url, HttpClient.RequestType.Post);
+            HttpClient1 httpClient = new HttpClient1(url, HttpClient1.RequestType.Post);
             string jsonData = JsonConvert.SerializeObject(notifData);
 
             Exception ex;

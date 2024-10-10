@@ -2,17 +2,17 @@
 
 namespace DBL
 {
-    public class HttpClient
+    public class HttpClient1
     {
         private HttpWebRequest webRequest;
         private string url;
         private RequestType requestType;
 
-        public HttpClient()
+        public HttpClient1()
         {
         }
 
-        public HttpClient(string url, RequestType requestType)
+        public HttpClient1(string url, RequestType requestType)
         {
             this.url = url;
             this.requestType = requestType;
@@ -21,7 +21,7 @@ namespace DBL
             webRequest.ContentType = "application/json";
         }
 
-        public HttpClient(string url, RequestType requestType, Dictionary<string, string> headers)
+        public HttpClient1(string url, RequestType requestType, Dictionary<string, string> headers)
         {
             this.url = url;
             this.requestType = requestType;

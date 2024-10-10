@@ -27,7 +27,7 @@ namespace DBL
             string tkn = Convert.ToBase64String(isoBytes);
             headers.Add("Authorization", "Basic " + tkn);
 
-            HttpClient httpClient = new HttpClient(url, HttpClient.RequestType.Get, headers);
+            HttpClient1 httpClient = new HttpClient1(url, HttpClient1.RequestType.Get, headers);
 
             Exception error;
             var results = httpClient.SendRequest("", out error);
@@ -222,7 +222,7 @@ namespace DBL
             //---- Create token
             headers.Add("Authorization", "Bearer " + authHeader);
 
-            HttpClient httpClient = new HttpClient(url, HttpClient.RequestType.Post, headers);
+            HttpClient1 httpClient = new HttpClient1(url, HttpClient1.RequestType.Post, headers);
 
             Exception ex;
             var results = httpClient.SendRequest(jsonData, out ex);

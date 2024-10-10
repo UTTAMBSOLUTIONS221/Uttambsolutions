@@ -225,31 +225,31 @@ namespace Blog.Controllers
             return PartialView(socialMediaSettings);
         }
 
-        //public async Task<JsonResult> Addsocialmediapagedata(SocialMediaSettings model)
-        //{
-        //    Genericmodel Resp = new Genericmodel();
-        //    var longLivedToken = await _facebookHelper.ExchangeAccessTokenAsync(model.Appid, model.Appsecret, model.UserAccessToken);
-        //    var pageAccessTokenResponse = await _facebookHelper.GenerateNeverExpiresAccessTokenAsync(longLivedToken.AccessToken);
+        public async Task<JsonResult> Addsocialmediapagedata(SocialMediaSettings model)
+        {
+            Genericmodel Resp = new Genericmodel();
+            var longLivedToken = await _facebookHelper.ExchangeAccessTokenAsync(model.Appid, model.Appsecret, model.UserAccessToken);
+            var pageAccessTokenResponse = await _facebookHelper.GenerateNeverExpiresAccessTokenAsync(longLivedToken.AccessToken);
 
-        //    var matchingPage = pageAccessTokenResponse.Data.FirstOrDefault(x => x.Name.Contains(model.Socialpagename, StringComparison.OrdinalIgnoreCase));
-        //    if (matchingPage != null)
-        //    {
-        //        // Set the page access token and page ID
-        //        model.PageAccessToken = matchingPage.AccessToken;
-        //        model.PageId = matchingPage.Id;
+            var matchingPage = pageAccessTokenResponse.Data.FirstOrDefault(x => x.Name.Contains(model.Socialpagename, StringComparison.OrdinalIgnoreCase));
+            if (matchingPage != null)
+            {
+                // Set the page access token and page ID
+                model.PageAccessToken = matchingPage.AccessToken;
+                model.PageId = matchingPage.Id;
 
-        //        // Save the data
-        //        Resp = await bl.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(model));
-        //    }
-        //    else
-        //    {
-        //        // If the page name doesn't exist, return with an error message
-        //        Resp.RespStatus = 1;
-        //        Resp.RespMessage = "Failed to find the page with the specified name. Use correct facebook Page name";
-        //    }
+                // Save the data
+                Resp = await bl.Registersystemsocialmediapagedata(JsonConvert.SerializeObject(model));
+            }
+            else
+            {
+                // If the page name doesn't exist, return with an error message
+                Resp.RespStatus = 1;
+                Resp.RespMessage = "Failed to find the page with the specified name. Use correct facebook Page name";
+            }
 
-        //    return Json(Resp);
-        //}
+            return Json(Resp);
+        }
         #endregion
 
         #endregion
