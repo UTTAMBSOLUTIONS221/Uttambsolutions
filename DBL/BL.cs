@@ -1938,7 +1938,7 @@ namespace DBL
                             };
 
                             //---- Update 3rd party application
-                            SendPaymentNotifTo3P(resp.Data1, notificationData, resp.Data2);
+                            //SendPaymentNotifTo3P(resp.Data1, notificationData, resp.Data2);
                         }
                     }
                     else
@@ -2038,45 +2038,12 @@ namespace DBL
                                 };
 
                                 //---- Update 3rd party application
-                                SendPaymentNotifTo3P(url, notificationData, resp.Data2);
+                                //SendPaymentNotifTo3P(url, notificationData, resp.Data2);
                             }
                         }
                     }
                 }
             });
-        }
-        private void SendPaymentNotifTo3P(string url, PaymentNotificationData notifData, string paymentRef)
-        {
-            //---- Update 3rd party application
-            HttpClient1 httpClient = new HttpClient1(url, HttpClient1.RequestType.Post);
-            string jsonData = JsonConvert.SerializeObject(notifData);
-
-            Exception ex;
-            int status = 0;
-            string message = "";
-            var notifResp = httpClient.SendRequest(jsonData, out ex);
-            if (ex != null)
-            {
-                status = 2;
-                message = ex.Message;
-            }
-            else
-            {
-                var respData = JsonConvert.DeserializeObject<ThirdPartyPaymentResponse>(notifResp);
-                if (respData == null)
-                {
-                    status = 2;
-                    message = "Failed to understand the received response!";
-                }
-                else
-                {
-                    status = respData.Status == 0 ? 1 : 2;
-                    message = respData.Message;
-                }
-            }
-
-            //---- Update payment status
-            db.PesaServiceRepository.UpdatePayment3PStatus(paymentRef, status, message);
         }
         #endregion
 
