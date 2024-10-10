@@ -1,6 +1,6 @@
 ﻿@model DBL.Entities.Systemstoreitems
 <div class="modal-header bg-custom">
-    <h5 class="modal-title text-uppercase" id="Uttambsolutionsmodallabel">Event Details</h5>
+    <h5 class="modal-title text-uppercase text-white" id="Uttambsolutionsmodallabel">Store Item</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -37,7 +37,7 @@
          <div class="col-sm-12">
             <div class="form-group">
                 <label class="font-weight-light">Event Image</label>
-                <input class="form-control form-control-sm" type="file" id="Storeproductimageurlid" onchange="storeProductImageFileChanged(event)" />
+                <input class="form-control form-control-sm" type="file" id="Storeproductimageurlid" multiple onchange="storeProductImageFileChanged(event)" />
             </div>
         </div>
     </div>  
