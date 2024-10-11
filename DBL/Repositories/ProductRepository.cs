@@ -3,6 +3,7 @@ using DBL.Entities;
 using DBL.Models;
 using DBL.Repositories.DBL.Repositories;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -34,6 +35,8 @@ namespace DBL.Repositories
 
         public Systemstoreitems Getsystemstoreitemdatabyid(int Storeitemid)
         {
+            Systemstoreitems Storeitemdata = new Systemstoreitems();
+            List<Storeproductimages> Storeproductimages = new List<Storeproductimages>();
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
@@ -44,11 +47,31 @@ namespace DBL.Repositories
                 string storeitemdataJson = parameters.Get<string>("@Storeitemdata");
                 if (storeitemdataJson != null)
                 {
-                    return JsonConvert.DeserializeObject<Systemstoreitems>(storeitemdataJson);
+                    JObject responseJson = JObject.Parse(storeitemdataJson);
+                    Storeitemdata.Storeitemid = Convert.ToInt32(responseJson["Storeitemid"]);
+                    Storeitemdata.Storeitemname = responseJson["Storeitemname"].ToString();
+                    Storeitemdata.Itembrandname = responseJson["Itembrandname"].ToString();
+                    Storeitemdata.Itemsize = responseJson["Itemsize"].ToString();
+                    Storeitemdata.Itembuyingprice = Convert.ToDecimal(responseJson["Itembuyingprice"]);
+                    Storeitemdata.Itemsellingprice = Convert.ToDecimal(responseJson["Itemsellingprice"]);
+                    Storeitemdata.Itemstatus = Convert.ToInt32(responseJson["Itemstatus"]);
+                    Storeitemdata.Isactive = Convert.ToBoolean(responseJson["Isactive"]);
+                    Storeitemdata.Isdeleted = Convert.ToBoolean(responseJson["Isdeleted"]);
+                    Storeitemdata.Createdby = Convert.ToInt32(responseJson["Createdby"]);
+                    Storeitemdata.Modifiedby = Convert.ToInt32(responseJson["Modifiedby"]);
+                    Storeitemdata.Datecreated = Convert.ToDateTime(responseJson["Datecreated"]);
+                    Storeitemdata.Datemodified = Convert.ToDateTime(responseJson["Datemodified"]);
+                    if (responseJson["Storeproductimages"] != null)
+                    {
+                        string StoreproductimagesJson = responseJson["Storeproductimages"].ToString();
+                        Storeproductimages = JsonConvert.DeserializeObject<List<Storeproductimages>>(StoreproductimagesJson);
+                        Storeitemdata.Storeproductimages = Storeproductimages;
+                    }
+                    return Storeitemdata;
                 }
                 else
                 {
-                    return new Systemstoreitems();
+                    return Storeitemdata;
                 }
             }
         }
