@@ -976,6 +976,14 @@ namespace DBL
         #endregion
 
         #region Store Products
+        public Task<IEnumerable<Systemstoreitems>> Getsystemstoreitemdata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ProductRepository.Getsystemstoreitemdata();
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Registerstoreproductdata(string Obj)
         {
             return Task.Run(() =>

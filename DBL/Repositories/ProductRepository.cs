@@ -12,6 +12,14 @@ namespace DBL.Repositories
         public ProductRepository(string connectionString) : base(connectionString)
         {
         }
+        public IEnumerable<Systemstoreitems> Getsystemstoreitemdata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                return connection.Query<Systemstoreitems>("Usp_Getsystemstoreitemdata", null, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
         public Genericmodel Registerstoreproductdata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))

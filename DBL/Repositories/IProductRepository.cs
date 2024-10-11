@@ -5,6 +5,7 @@ namespace DBL.Repositories
 {
     public interface IProductRepository
     {
+        IEnumerable<Systemstoreitems> Getsystemstoreitemdata();
         Genericmodel Registerstoreproductdata(string JsonData);
         Genericmodel Registersystemproductdata(string JsonData);
         IEnumerable<Systemproducts> Getsystemproductdata(int Page, int PageSize);
