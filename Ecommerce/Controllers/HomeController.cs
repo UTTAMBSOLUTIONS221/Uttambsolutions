@@ -11,11 +11,14 @@ namespace Ecommerce.Controllers
     public class HomeController : BaseController
     {
         private readonly BL bl;
+        private readonly IWebHostEnvironment _env;
 
-        public HomeController(IConfiguration config)
+        public HomeController(IConfiguration config, IWebHostEnvironment env)
         {
-            bl = new BL(Util.ShareConnectionString(config));
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Index()

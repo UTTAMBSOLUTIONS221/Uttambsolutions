@@ -315,5 +315,7 @@
     <Build Include="dbo\Tables\Systemstoreitems.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Registerstoreproductdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystemstoreitemdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemstoreitemdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getallsystemstoreitemdata.sql" />
   </ItemGroup>
 </Project>
