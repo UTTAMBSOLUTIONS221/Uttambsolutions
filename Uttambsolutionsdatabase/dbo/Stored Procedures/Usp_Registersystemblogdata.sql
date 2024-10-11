@@ -60,6 +60,7 @@ BEGIN
                 target.Blogcontent = source.Blogcontent,
                 target.Summary = source.Summary,
 				target.Blogimagename = source.Blogimagename,
+				target.Blogprimaryimageurl = source.Blogprimaryimageurl,
 				target.Blogimagesource = source.Blogimagesource,
                 target.Blogtags = source.Blogtags,
                 target.Modifiedby = source.Modifiedby,

@@ -16,7 +16,7 @@ BEGIN
 					(SELECT VCH.Systempropertyhouseroomid,VCH.Systempropertyhouseid,
 					CASE WHEN HSC.Propertyhousestatus=0 THEN 'First Tenants' ELSE 'Subsequent Tenants' END  AS Propertyhousestatusdata,
 					(SELECT TOP 1 IMG.Houseorroomimageurl FROM Systempropertyhouseimages IMG WHERE IMG.Houseorroom='PropertyHouse' AND IMG.Propertyhouseid =HSC.Propertyhouseid)  AS Primaryimageurl,
-					HSC.Propertyhousename, CNTY.Countyname, SCNTY.Subcountyname,SCNTYW.Subcountywardname,HSC.Streetorlandmark,HSC.Hashousedeposit,HSC.Hashousewatermeter,HSC.Allowpets,HSC.Rentdepositmonth,HSC.Hasagent,
+					HSC.Propertyhousename, CNTY.Countyname, SCNTY.Subcountyname,SCNTYW.Subcountywardname,HSC.Streetorlandmark,HSC.Hashousedeposit,HSC.Hashousewatermeter,HSC.Allowpets,HSC.Rentdepositmonth,HSC.Hasagent,HSC.Contactdetails,
 					HSC.Rentdueday,HSC.Rentdepositreturndays, HSC.Rentingterms, HSC.Rentutilityinclusive,SZS.Systemhousesizename,VCH.Systempropertyhousesizeid,VCH.Systempropertyhousesizename,ISNULL(VCH.Systempropertyhousesizerent,0) AS Systempropertyhousesizerent,
 					(CASE WHEN HSC.Hashousedeposit=1 THEN ISNULL(VCH.Systempropertyhousesizerent,0) ELSE 0 END) AS Systempropertyhousesizedeposit,VCH.Isvacant,VCH.Isunderrenovation,VCH.Isshop,VCH.Isgroundfloor,VCH.Hasbalcony,VCH.Forcaretaker,VCH.Kitchentypeid,KTCH.Kitchentypename
 					FROM Systempropertyhouserooms VCH 

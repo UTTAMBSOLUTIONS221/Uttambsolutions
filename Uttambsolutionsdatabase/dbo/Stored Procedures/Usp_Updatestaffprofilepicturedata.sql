@@ -7,7 +7,7 @@ BEGIN
 
     BEGIN TRY
         BEGIN TRANSACTION;
-		UPDATE Systemstaffs SET Userprofileimageurl = JSON_VALUE(@JsonObjectdata, '$.Profileimagelogo') WHERE Userid =JSON_VALUE(@JsonObjectdata, '$.Userid')
+		UPDATE Systemstaffs SET Userprofileimageurl = JSON_VALUE(@JsonObjectdata, '$.Userprofileimageurl') WHERE Userid =JSON_VALUE(@JsonObjectdata, '$.Userid')
         SET @RespMsg = 'Success.'
         SET @RespStat = 0; 
        

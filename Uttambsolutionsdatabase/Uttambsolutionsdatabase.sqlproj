@@ -311,5 +311,9 @@
     <Build Include="dbo\Tables\Propertyhouselisting.sql" />
     <Build Include="dbo\Tables\Propertyhouselistingimages.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getmaqaoplussummarydata .sql" />
+    <Build Include="dbo\Tables\Systemstoreitemsimages.sql" />
+    <Build Include="dbo\Tables\Systemstoreitems.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registerstoreproductdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getsystemstoreitemdata.sql" />
   </ItemGroup>
 </Project>
