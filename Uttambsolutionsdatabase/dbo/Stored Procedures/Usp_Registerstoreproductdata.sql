@@ -38,8 +38,7 @@ BEGIN
 			UPDATE SET target.Storeproductimgurl = source.Storeproductimgurl
 			WHEN NOT MATCHED BY TARGET THEN
 			INSERT (Storeitemid,Storeproductimgurl,Datecreated)
-			VALUES (source.Storeitemid,source.Storeproductimgurl,source.Datecreated)
-			WHEN NOT MATCHED BY SOURCE THEN DELETE;
+			VALUES (source.Storeitemid,source.Storeproductimgurl,source.Datecreated);
 		
 		
 		Set @RespMsg ='Success'
