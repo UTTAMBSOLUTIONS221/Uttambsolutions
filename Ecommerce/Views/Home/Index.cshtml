@@ -1,32 +1,21 @@
-﻿@model DBL.Models.Systemorganizationshopproducts
+﻿@model DBL.Models.Systemstoreitemsdata
 @{
     ViewData["Title"] = "Ecommerce";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row">
-    @if (Model != null && Model.Data != null)
+    @if (Model != null && Model.Systemstoreitems != null)
     {
-        foreach (var product in Model.Data)
+        foreach (var product in Model.Systemstoreitems)
         {
             <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
-                <a asp-action="Shopproductdetail" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Shopproductid="@product.Shopproductid" asp-area="" class="text-decoration-none">
+                <a asp-action="Shopproductdetail" asp-controller="Home" asp-route-code="@Guid.NewGuid()" asp-route-Shopproductid="@product.Storeitemid" asp-area="" class="text-decoration-none">
                     <div class="card h-100 shadow-sm card-info card-outline">
-                        <img src="@Url.Content(product.Primaryimageurl)" alt="@product.Productname" class="card-img-top" style="height: 140px; object-fit: cover;" />
+                        <img src="@Url.Content(product.Storeproductimgurl)" alt="@product.Storeitemname" class="card-img-top" style="height: 140px; object-fit: cover;" />
                         <div class="card-body pt-2 pr-2 pl-2 d-flex flex-column">
-                            <p class="card-text text-center text-muted text-truncate mb-1" title="@product.Productname">@product.Productname</p>
-                            <p class="card-text text-center text-muted text-truncate mb-1" title="Kes. @product.Marketprice">Kes. @product.Marketprice.ToString("#,##0.00")</p>
-                            <p class="card-text text-center text-muted text-truncate" title="Shop: @product.Organizationname">Shop: @product.Organizationname</p>
-                            <p class="card-text text-center text-muted text-truncate" title="Status: @product.ProductStatus">
-                                Status: @if (product.ProductStatus == "New")
-                                {
-                                    <span class="badge badge-info badge-info-xs font-weight-bold text-uppercase">New</span>
-                                }
-                                else
-                                {
-                                    <span class="badge badge-warning badge-warning-xs font-weight-bold text-uppercase">Used</span>
-                                }
-                            </p>
+                            <p class="card-text text-center text-muted text-truncate mb-1" title="@product.Storeitemname">@product.Storeitemname</p>
+                            <p class="card-text text-center text-muted text-truncate mb-1" title="Kes. @product.Itemsellingprice">Kes. @product.Itemsellingprice.ToString("#,##0.00")</p>
                         </div>
                     </div>
                 </a>

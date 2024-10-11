@@ -20,7 +20,7 @@ namespace Ecommerce.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var ecommerce = await bl.Getsystemorganizationshopproductsdata();
+            var ecommerce = await bl.Getallsystemstoreitemdata();
             return View(ecommerce);
         }
         [HttpGet]

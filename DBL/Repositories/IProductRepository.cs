@@ -8,6 +8,7 @@ namespace DBL.Repositories
         IEnumerable<Systemstoreitems> Getsystemstoreitemdata();
         Genericmodel Registerstoreproductdata(string JsonData);
         Systemstoreitems Getsystemstoreitemdatabyid(int Storeitemid);
+        Systemstoreitemsdata Getallsystemstoreitemdata();
         Genericmodel Registersystemproductdata(string JsonData);
         IEnumerable<Systemproducts> Getsystemproductdata(int Page, int PageSize);
         Systemproducts Getsystemproductdatabyid(long Productid);

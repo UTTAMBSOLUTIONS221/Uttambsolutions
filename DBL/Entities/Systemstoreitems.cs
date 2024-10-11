@@ -15,6 +15,7 @@
         public int Modifiedby { get; set; }
         public DateTime Datecreated { get; set; }
         public DateTime Datemodified { get; set; }
+        public string? Storeproductimgurl { get; set; }
         public List<Storeproductimages>? Storeproductimages { get; set; }
     }
     public class Storeproductimages

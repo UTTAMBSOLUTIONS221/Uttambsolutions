@@ -75,6 +75,26 @@ namespace DBL.Repositories
                 }
             }
         }
+        public Systemstoreitemsdata Getallsystemstoreitemdata()
+        {
+            Systemstoreitemsdata Storeitemdata = new Systemstoreitemsdata();
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Storeitemdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getallsystemstoreitemdata", parameters, commandType: CommandType.StoredProcedure);
+                string storeitemdataJson = parameters.Get<string>("@Storeitemdata");
+                if (storeitemdataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Systemstoreitemsdata>(storeitemdataJson);
+                }
+                else
+                {
+                    return new Systemstoreitemsdata();
+                }
+            }
+        }
         public Genericmodel Registersystemproductdata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))

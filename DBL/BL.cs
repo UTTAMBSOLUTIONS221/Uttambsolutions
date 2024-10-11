@@ -1000,6 +1000,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Systemstoreitemsdata> Getallsystemstoreitemdata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ProductRepository.Getallsystemstoreitemdata();
+                return Resp;
+            });
+        }
         #endregion
 
         #region System Product Brands
