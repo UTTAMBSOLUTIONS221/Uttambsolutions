@@ -27,14 +27,14 @@ namespace WEB.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Addstoreitem(int Itemid)
+        public async Task<IActionResult> Addstoreitem(int Storeitemid)
         {
-            //Dailychurchevent model = new Dailychurchevent();
-            //if (Eventid > 0)
-            //{
-            //    model = await bl.Getchurcheventdatabyid(Eventid);
-            //}
-            return PartialView();
+            Systemstoreitems model = new Systemstoreitems();
+            if (Storeitemid > 0)
+            {
+                model = await bl.Getsystemstoreitemdatabyid(Storeitemid);
+            }
+            return PartialView(model);
         }
         public async Task<JsonResult> Registerstoreproduct(Systemstoreitems model)
         {

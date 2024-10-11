@@ -2,6 +2,7 @@
 using DBL.Entities;
 using DBL.Models;
 using DBL.Repositories.DBL.Repositories;
+using Newtonsoft.Json;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -28,6 +29,27 @@ namespace DBL.Repositories
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@JsonObjectdata", JsonData);
                 return connection.Query<Genericmodel>("Usp_Registerstoreproductdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
+        public Systemstoreitems Getsystemstoreitemdatabyid(int Storeitemid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Storeitemid", Storeitemid);
+                parameters.Add("@Storeitemdata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
+                var queryResult = connection.Query("Usp_Getsystemstoreitemdatabyid", parameters, commandType: CommandType.StoredProcedure);
+                string storeitemdataJson = parameters.Get<string>("@Storeitemdata");
+                if (storeitemdataJson != null)
+                {
+                    return JsonConvert.DeserializeObject<Systemstoreitems>(storeitemdataJson);
+                }
+                else
+                {
+                    return new Systemstoreitems();
+                }
             }
         }
         public Genericmodel Registersystemproductdata(string JsonData)

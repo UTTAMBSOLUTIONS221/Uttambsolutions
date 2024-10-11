@@ -992,6 +992,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Systemstoreitems> Getsystemstoreitemdatabyid(int Storeitemid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ProductRepository.Getsystemstoreitemdatabyid(Storeitemid);
+                return Resp;
+            });
+        }
         #endregion
 
         #region System Product Brands
