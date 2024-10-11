@@ -5,6 +5,7 @@
         public int Storeitemid { get; set; }
         public string? Storeitemname { get; set; }
         public string? Itembrandname { get; set; }
+        public string? Itemsize { get; set; }
         public decimal Itembuyingprice { get; set; }
         public decimal Itemsellingprice { get; set; }
         public int Itemstatus { get; set; }
