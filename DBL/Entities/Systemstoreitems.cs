@@ -16,6 +16,15 @@
         public DateTime Datecreated { get; set; }
         public DateTime Datemodified { get; set; }
         public string? Storeproductimgurl { get; set; }
+        public string? Productdescription { get; set; }
+        public string? Productavailability { get; set; }
+        public string? Productstatus { get; set; }
+        public string? Parentcategoryname { get; set; }
+        public decimal Productstock { get; set; }
+        public string? Productgender { get; set; }
+        public string? Productcolor { get; set; }
+        public string? Productagegroup { get; set; }
+        public string? Productmaterial { get; set; }
         public List<Storeproductimages>? Storeproductimages { get; set; }
     }
     public class Storeproductimages
