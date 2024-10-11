@@ -22,7 +22,7 @@ namespace WEB.Controllers
         {
             var environment = _env.IsDevelopment() ? "Development" : "Production";
             ViewBag.Environment = environment;
-            var data = await bl.Getsystemstoreitemdata(0, 1000);
+            var data = await bl.Getsystemstoreitemdata();
             return View();
         }
 

@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<DBL.Entities.Systemstoreitems>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
@@ -12,7 +12,7 @@
                         <h6 class="font-weight-bold text-sm card-title text-uppercase">Warehouse</h6>
                     </div>
                     <div class="col-sm-2">
-                        <a asp-action="Addstoreitem" asp-controller="Store" asp-route-code="@Guid.NewGuid()" asp-route-Eventid="0" asp-area="" id="CAN_ADD_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Item</a>
+                        <a asp-action="Addstoreitem" asp-controller="Store" asp-route-code="@Guid.NewGuid()" asp-route-Storeitemid="0" asp-area="" id="CAN_ADD_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Item</a>
                     </div>
                 </div>
             </div>
@@ -20,17 +20,29 @@
                 <table class="table table-bordered table-striped compact table-sm table-responsive-sm text-nowrap nowrap" id="AllsystemDataTables">
                     <thead>
                         <tr>
-                            <th>Image</th>
-                            <th>Event Name</th>
-                            <th>Day</th>
-                            <th>Location</th>
-                            <th>Description</th>
+                            <th>Name</th>
+                            <th>Brand</th>
+                            <th>Size</th>
+                            <th>B. Price</th>
+                            <th>S. Price</th>
                             <th>Dates</th>
                             <th class="text-right">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Storeitemname</td>
+                                <td>@item.Itembrandname</td>
+                                <td>@item.Itembuyingprice.ToString("#,##0.00")</td>
+                                <td>@item.Itemsellingprice.ToString("#,##0.00")</td>
+                                <td class="text-right"><a asp-action="Addstoreitem" asp-controller="Store" asp-route-code="@Guid.NewGuid()" asp-route-Storeitemid="@item.Storeitemid" asp-area=""  id="CAN_EDIT_BRAND" style="display:none;"  class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                            </tr>
+                        }
+                    }
                     </tbody>
                 </table>
             </div>
