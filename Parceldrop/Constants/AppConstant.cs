@@ -1,5 +1,6 @@
 ﻿using DBL;
 using Parceldrop.Controls;
+using Parceldrop.Views.Dashboards;
 
 namespace Parceldrop.Constants
 {
@@ -23,36 +24,6 @@ namespace Parceldrop.Constants
                             Icon = Icons.Dashboard,
                             Title = "Dashboard",
                             ContentTemplate = new DataTemplate(typeof(AdminDashboardPage)),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.user,
-                            Title = "Profile",
-                            ContentTemplate = new DataTemplate(() => new UserProfilePage(new UserProfilePageViewModel(bl))),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.house,
-                            Title = "Houses",
-                            ContentTemplate = new DataTemplate(() => new AgentPropertyHousesPage(new PropertyHouseViewModel(bl))),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.groupusers,
-                            Title = "Tenants",
-                            ContentTemplate = new DataTemplate(() => new PropertyHousesRoomTenantsPage(new PropertyHousesRoomTenantsViewModel(bl))),
-                        },
-                         new ShellContent
-                        {
-                            Icon = Icons.invoice,
-                            Title = "Bills",
-                            ContentTemplate = new DataTemplate(() => new OwnerPropertyHousesBillsPage(new PropertyHousesBillsandPaymentsViewModel(bl))),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.dollar,
-                            Title = "Payments",
-                            ContentTemplate = new DataTemplate(() => new OwnerPropertyHousesPaymentsPage(new PropertyHousesBillsandPaymentsViewModel(bl))),
                         },
                     }
             };
