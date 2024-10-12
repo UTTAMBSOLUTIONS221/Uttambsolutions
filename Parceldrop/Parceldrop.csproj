@@ -90,6 +90,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\FlyoutHeaderControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UpdateUserProfilePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -109,6 +112,12 @@
 	    <Resize>True</Resize>
 	    <BaseSize>300,185</BaseSize>
 	  </MauiImage>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Controls\FlyoutHeaderControl.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>
