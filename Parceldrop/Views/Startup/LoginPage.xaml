@@ -49,19 +49,19 @@
                     <Label Text="{Binding SystemStaffPasswordError}" TextColor="Red" Padding="0" FontSize="14"/>
                 </StackLayout>
                 <!-- Forgot Password Link -->
-                <Label HorizontalOptions="End" Margin="0,5,0,0" Text="Forgot password?" TextColor="#0a506c" FontSize="16" FontAttributes="Bold">
+                <Label HorizontalOptions="End" Margin="0,5,0,0" Text="Forgot password?" TextColor="#200b3a" FontSize="16" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
 
                 <!-- Login Button -->
-                <Button BackgroundColor="#0a506c" Command="{Binding LoginCommand}" CornerRadius="10" Text="Login" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" />
+                <Button BackgroundColor="#ed7a17" Command="{Binding LoginCommand}" CornerRadius="10" Text="Login" TextColor="White" FontSize="18" HeightRequest="50" FontAttributes="Bold" />
 
                 <!-- Register Now -->
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,20,0,0">
-                    <Label Text="Not a member?" TextColor="#000000" FontSize="16" />
-                    <Label Text="Register now" TextColor="#0a506c" FontSize="16" FontAttributes="Bold">
+                    <Label Text="Not a member?" TextColor="#200b3a" FontSize="16" />
+                    <Label Text="Register now" TextColor="#ed7a17" FontSize="16" FontAttributes="Bold">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding RegisterCommand}" />
                         </Label.GestureRecognizers>
@@ -76,7 +76,7 @@
 
             <!-- Footer -->
             <StackLayout Grid.Row="2" BackgroundColor="#f8f8f8" Padding="10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#0a506c" TextTransform="Uppercase" FontAttributes="Bold"/>
+                <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#ed7a17" TextTransform="Uppercase" FontAttributes="Bold"/>
             </StackLayout>
         </Grid>
 
