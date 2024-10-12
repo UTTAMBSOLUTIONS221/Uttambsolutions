@@ -46,8 +46,8 @@ public class LoginPageViewModel : INotifyPropertyChanged
         IsPasswordHidden = true; // Default to hidden password
         TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
         LoginCommand = new Command(async () => await LoginAsync(), () => !IsProcessing);
-        //RegisterCommand = new Command(OnRegister);
-        //ForgotPasswordCommand = new Command(OnForgotPassword);
+        RegisterCommand = new Command(OnRegister);
+        ForgotPasswordCommand = new Command(OnForgotPassword);
     }
 
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -240,15 +240,13 @@ public class LoginPageViewModel : INotifyPropertyChanged
 
         return isValid;
     }
-
-
-    //private async void OnRegister()
-    //{
-    //    SystemStaff systemStaff = null;
-    //    await Shell.Current.GoToAsync(nameof(RegisterPage));
-    //}
-    //private async void OnForgotPassword()
-    //{
-    //    await Shell.Current.GoToAsync(nameof(ForgotPasswordPage));
-    //}
+    private async void OnRegister()
+    {
+        SystemStaff systemStaff = null;
+        await Shell.Current.GoToAsync(nameof(RegisterPage));
+    }
+    private async void OnForgotPassword()
+    {
+        await Shell.Current.GoToAsync(nameof(ForgotPasswordPage));
+    }
 }

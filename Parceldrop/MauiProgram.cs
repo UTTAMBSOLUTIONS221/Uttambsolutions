@@ -2,6 +2,7 @@
 using DBL;
 using Microsoft.Extensions.Logging;
 using Parceldrop.ViewModels;
+using Parceldrop.ViewModels.Startup;
 using Parceldrop.Views.Startup;
 
 namespace Parceldrop
@@ -41,6 +42,7 @@ namespace Parceldrop
 
             // View Models
             builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddSingleton<LoginPageViewModel>();
 
             return builder.Build();
         }
