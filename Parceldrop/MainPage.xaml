@@ -26,18 +26,6 @@
 
                     <Button Text="Register Now" TextColor="White" FontAttributes="Bold" WidthRequest="200" CornerRadius="20" BackgroundColor="#ed7a17" Command="{Binding JoinMaqaoPlusCommand}" HorizontalOptions="Center" VerticalOptions="EndAndExpand" Padding="10,5"/>
 
-                    <!-- Church Lord Store Section -->
-                    <Label Text="Lord Stores" FontSize="24" TextColor="#200b3a" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,20,0,10" />
-
-                    <!-- Indicator for the Stores carousel -->
-                    <IndicatorView x:Name="churchlordstoresIndicator" HorizontalOptions="Center" IndicatorColor="Gray" SelectedIndicatorColor="#ed7a17" Margin="0,10,0,0"/>
-
-                    <!-- blogs Section -->
-                    <Label Text="BLogs" FontSize="24" TextColor="#200b3a" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,20,0,10" />
-
-                    <!-- Indicator for the blogs carousel -->
-                    <IndicatorView x:Name="churchblogsIndicator" HorizontalOptions="Center" IndicatorColor="Gray" SelectedIndicatorColor="#ed7a17" Margin="0,20,0,0"/>
-
                     <!-- Social Media Section -->
                     <Label Text="Follow us on Social Media" FontSize="24" TextColor="#200b3a" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,20,0,10" />
 
