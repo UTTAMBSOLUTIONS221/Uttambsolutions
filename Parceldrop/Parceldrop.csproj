@@ -57,6 +57,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\agreement.png" />
+	  <None Remove="Resources\Images\dashboard.png" />
+	  <None Remove="Resources\Images\dollar.png" />
+	  <None Remove="Resources\Images\dotnet_bot.png" />
+	  <None Remove="Resources\Images\email.png" />
+	  <None Remove="Resources\Images\familybank.png" />
+	  <None Remove="Resources\Images\groupusers.png" />
+	  <None Remove="Resources\Images\house.png" />
+	  <None Remove="Resources\Images\invoice.png" />
+	  <None Remove="Resources\Images\maqaopluslogo.png" />
+	  <None Remove="Resources\Images\mpesalogo.png" />
+	  <None Remove="Resources\Images\mysignature.jpg" />
+	  <None Remove="Resources\Images\passwordicon.png" />
+	  <None Remove="Resources\Images\phone.png" />
+	  <None Remove="Resources\Images\reports.png" />
+	  <None Remove="Resources\Images\tap.png" />
+	  <None Remove="Resources\Images\unvisible.png" />
+	  <None Remove="Resources\Images\user.png" />
+	  <None Remove="Resources\Images\visible.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
@@ -80,6 +102,13 @@
 	  <MauiXaml Update="Views\Startup\RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Update="Resources\Images\dotnet_bot.png">
+	    <Resize>True</Resize>
+	    <BaseSize>300,185</BaseSize>
+	  </MauiImage>
 	</ItemGroup>
 
 </Project>
