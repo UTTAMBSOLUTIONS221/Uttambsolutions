@@ -4,18 +4,15 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Parceldrop"
-    Shell.TabBarIsVisible="False"
-    xmlns:startupPages="clr-namespace:Parceldrop.Views.Startup">
+    Shell.FlyoutBehavior="Disabled"
+    Title="Parceldrop">
 
     <ShellContent
-     Title="MAQAO PLUS Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TitleColor="#0a506c"
-     ContentTemplate="{DataTemplate local:MainPage}"
-     Route="MainPage" />
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
 
-    <Shell.FlyoutFooter>
-        <StackLayout Padding="20">
-            <Button Text="Sign Out" FontAttributes="Bold" Command="{Binding SignOutCommand}" />
-        </StackLayout>
-    </Shell.FlyoutFooter>
 </Shell>
+    
+    
 
