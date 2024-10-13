@@ -58,7 +58,8 @@
         Systempropertyfixtures = 30,
         Systemservices = 31,
         Systemtokens = 32,
-        SystemParcelStaffs = 33,
+        SystemParcelStaffss = 33,
+        ParcelSenderReciever = 34,
         Parceltypes = 35,
         Parcelstatus = 36,
     }

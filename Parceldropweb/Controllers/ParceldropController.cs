@@ -54,6 +54,7 @@ namespace Parceldropweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Addcollectionparcel(int Parcelid)
         {
+            ViewData["ParcelSenderRecieverlists"] = bl.GetListModel(ListModelType.ParcelSenderReciever).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             ViewData["Parceltypeslists"] = bl.GetListModel(ListModelType.Parceltypes).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             ViewData["Parcelstatuslists"] = bl.GetListModel(ListModelType.Parcelstatus).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Collectioncenterparcels model = new Collectioncenterparcels();
