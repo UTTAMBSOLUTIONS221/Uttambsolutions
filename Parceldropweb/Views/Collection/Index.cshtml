@@ -45,6 +45,9 @@
             document.getElementById("buttonText").innerText = "Processing...";
             if ($("#Collectionnameid").val() === "") {
                 $("#Collectionnameid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
                 return;
             } else {
                 $("#Collectionnameid").removeClass('is-invalid').addClass('is-valid');
@@ -78,31 +81,22 @@
             }
           
             var uil = {
-                Userid: $('#UserId').val(),
-                Firstname: $('#FirstnameId').val(),
-                Lastname: $('#LastnameId').val(),
-                Emailaddress: $('#EmailAddressId').val(),
-                Phonenumber: $('#PhonenumberId').val(),
-                Idnumber: $('#IdnumberId').val(),
-                Genderid: $('#Genderid').val(),
-                Maritalstatusid: $('#Maritalstatusid').val(),
-                Roleid: $('#StaffRoleId').val(),
-                Parentid: 0,
-                Updateprofile: true,
-                Createdby: $('#UserId').val(),
-                Modifiedby: $('#UserId').val(),
-                Lastlogin: new Date().toISOString().slice(0, 19).replace('T', ' '),
-                Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
-                Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' ')
+                Collectioncenterid : $('#Collectioncenterid').val(),
+                Collectionname: $('#Collectionnameid').val(),
+                Collectionaddress: $('#Collectionaddressid').val(),
+                Phonenumber: $('#Phonenumberid').val(),
+                Operatinghours: $('#Operatinghoursid').val(),
+                Collectionstatus: 1,
+                Managerid: $('#systemLoggedinedUserid').val(),
             };
-            $.post("/Staff/Addsystemstaffdata", uil, function (response) {
+            $.post("/Collection/Addparcelcollectioncenterdata", uil, function (response) {
                 if (response.RespStatus == 0) {
-                    Swal.fire("Staff Detail", "Staff has been added and email sent.", "success");
+                    Swal.fire("Collection Detail", "Staff has been added and email sent.", "success");
                     setTimeout(function () { location.reload(); }, 500);
                 } else {
-                    Swal.fire("Staff Detail Not Created", response.RespMessage, "error");
+                    Swal.fire("Collection Detail Not Created", response.RespMessage, "error");
                 }
-                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("saveparcelcollectioncenterid").disabled = false;
                 document.getElementById("processingSpinner").style.display = "none";
                 document.getElementById("buttonText").innerText = "SAVE";
             });

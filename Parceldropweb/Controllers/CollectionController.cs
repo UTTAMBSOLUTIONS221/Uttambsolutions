@@ -1,9 +1,8 @@
 ﻿using DBL;
 using DBL.Entities;
-using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace Parceldropweb.Controllers
 {
@@ -27,13 +26,17 @@ namespace Parceldropweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Addcollectioncenter(int Collectioncenterid)
         {
-            ViewData["Systemparcelstaffslists"] = bl.GetListModel(ListModelType.SystemParcelStaffs).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Parcelcollectioncenters model = new Parcelcollectioncenters();
             if (Collectioncenterid > 0)
             {
                 model = await bl.Getparcelcollectioncentersdatabyid(Collectioncenterid);
             }
             return PartialView(model);
+        }
+        public async Task<JsonResult> Addparcelcollectioncenterdata(Parcelcollectioncenters model)
+        {
+            var resp = await bl.Registerparcelcollectioncenterdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
         }
     }
 }

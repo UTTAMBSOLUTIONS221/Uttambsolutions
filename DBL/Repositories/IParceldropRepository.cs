@@ -1,4 +1,5 @@
 ﻿using DBL.Entities;
+using DBL.Models;
 
 namespace DBL.Repositories
 {
@@ -6,6 +7,7 @@ namespace DBL.Repositories
     {
         #region Collection Centers
         IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersdata();
+        Genericmodel Registerparcelcollectioncenterdata(string JsonData);
         Parcelcollectioncenters Getparcelcollectioncentersdatabyid(int Collectioncenterid);
         #endregion
     }
