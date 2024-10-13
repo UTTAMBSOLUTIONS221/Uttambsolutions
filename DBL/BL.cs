@@ -1091,6 +1091,21 @@ namespace DBL
         }
         #endregion
 
+        #region Parcel Drops
+
+        #region Collection centers
+        public Task<IEnumerable<Parcelcollectioncenters>> Getparcelcollectioncentersdata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ParceldropRepository.Getparcelcollectioncentersdata();
+                return Resp;
+            });
+        }
+        #endregion
+        #endregion
+
+
         #region System Blog Category
         public Task<IEnumerable<Systemblogcategories>> Getsystemblogcategorydata(int Page, int PageSize)
         {

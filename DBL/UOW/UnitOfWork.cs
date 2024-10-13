@@ -29,6 +29,7 @@ namespace DBL.UOW
 
         private IPaymentRepository paymentRepository;
         private IPesaServiceRepository pesaServiceRepository;
+        private IParceldropRepository parceldropRepository;
 
         public UnitOfWork(string connectionString) => connString = connectionString;
         public IGeneralRepository GeneralRepository
@@ -108,6 +109,10 @@ namespace DBL.UOW
         {
             get { return pesaServiceRepository ?? (pesaServiceRepository = new PesaServiceRepository(connString)); }
         }
+        public IParceldropRepository ParceldropRepository
+        {
+            get { return parceldropRepository ?? (parceldropRepository = new ParceldropRepository(connString)); }
+        }
 
         public void Reset()
         {
@@ -128,6 +133,7 @@ namespace DBL.UOW
 
             paymentRepository = null;
             pesaServiceRepository = null;
+            parceldropRepository = null;
         }
 
         public void Dispose()

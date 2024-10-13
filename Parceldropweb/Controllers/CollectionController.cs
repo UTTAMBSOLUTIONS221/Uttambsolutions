@@ -17,9 +17,10 @@ namespace Parceldropweb.Controllers
             _env = env;
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var data = await bl.Getparcelcollectioncentersdata();
+            return View(data);
         }
         [HttpGet]
         public IActionResult Addcollectioncenter()
