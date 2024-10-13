@@ -1,0 +1,279 @@
+﻿@model DBL.Entities.SystemStaff
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PARCEL DROP | SIGNUP</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-toggle/css/bootstrap2-toggle.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link href="~/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <style type="text/css">
+        textarea {
+            resize: none;
+        }
+        /* Hide spinner arrows for number inputs */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield; /* Firefox */
+        }
+
+        .no-wrap-buttons {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 5px; /* Adjust the gap as needed */
+        }
+
+            .no-wrap-buttons a {
+                white-space: nowrap;
+            }
+
+    </style>
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-info card-outline">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg font-weight-light text-dark text-uppercase font-weight-bold">Sign up to start interaction</p>
+                <div class="row" hidden>
+                    <input class="form-control form-control-sm" asp-for="@Model.Userid" id="UserId" />
+                    <input class="form-control form-control-sm" asp-for="@Model.Parentid" id="Parentid" />
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="text-sm fontweight-light">First Name</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Firstname" type="text" class="form-control form-control-sm" placeholder="First Name" id="FirstnameId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Last Name</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Lastname" type="text" class="form-control form-control-sm" placeholder="Last Name" id="LastnameId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Email Address</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Emailaddress" type="email" class="form-control form-control-sm" placeholder="Email Address" id="EmailAddressId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Phone Number</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number" id="PhonenumberId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-phone"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Password</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Passwords" type="password" class="form-control form-control-sm" placeholder="Password" id="StaffPasswordid">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Confirm Password</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Confirmpasswords" type="password" class="form-control form-control-sm" placeholder="Confirm Password" id="StaffConfirmPasswordid">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="text-sm font-weight-normal"><input type="checkbox" id="Accepttermsandconditionsid" /> Accept our <a asp-action="Privacy" asp-controller="Home" asp-area="">terms</a> of services and use of the system.</label>
+
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder btn-block text-uppercase">cancel</a>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-sm btn-info btn-block font-weight-bold" type="button" id="savesystemstaffid" onclick="savesystemstaffdata();">
+                            <span id="buttonText">SIGN UP</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="row mt-2 text-center">
+                    <div class="col-12">
+                        <p class="text-xs">Already have account? <a asp-action="Signin" asp-controller="Account" class="text-uppercase text-info text-xs">Sign In</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/plugins/jquery/jquery.min.js"></script>
+    <script src="~/lib/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/bootstrap-toggle/js/bootstrap2-toggle.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script type="text/javascript">
+        function savesystemstaffdata() {
+            document.getElementById("savesystemstaffid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+
+            if ($('#FirstnameId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Firstname is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            }
+            if ($('#LastnameId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Lastname is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            }
+            if ($('#EmailAddressId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Emailaddress is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            }
+            if ($('#PhonenumberId').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Phonenumber is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            }
+            // if ($('#StaffDesignationid').val() == '') {
+            //     Swal.fire("Staff Detail Not Created", 'Designation is Required', "warning");
+            //     document.getElementById("savesystemstaffid").disabled = false;
+            //     document.getElementById("processingSpinner").style.display = "none";
+            //     document.getElementById("buttonText").innerText = "SIGN UP";
+            //     return;
+            // }
+            if ($('#StaffPasswordid').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Password is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            }
+            if ($('#StaffConfirmPasswordid').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Confirm Password is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            }
+            if ($('#StaffConfirmPasswordid').val() == '') {
+                Swal.fire("Staff Detail Not Created", 'Confirm Password is Required', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            } if ($('#StaffConfirmPasswordid').val() != $('#StaffConfirmPasswordid').val()) {
+                Swal.fire("Staff Detail Not Created", 'Password Mismatch', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            }
+            if (!document.getElementById('Accepttermsandconditionsid').checked) {
+                Swal.fire("Staff Detail Not Created", 'Terms and services Not Accepted', "warning");
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SIGN UP";
+                return;
+            }
+            var Updateprofile = true;
+            var Loginstatus = 1;
+            if ($('#StaffDesignationid').val() == 'Owner' || $('#StaffDesignationid').val() == 'Agent') {
+                Updateprofile = false;
+                Loginstatus = 0;
+            }
+            var uil = {
+                Userid: $('#UserId').val(),
+                Firstname: $('#FirstnameId').val(),
+                Lastname: $('#LastnameId').val(),
+                Emailaddress: $('#EmailAddressId').val(),
+                Phonenumber: $('#PhonenumberId').val(),
+                Designation: $('#StaffDesignationid').val(),
+                Passwords: $('#StaffPasswordid').val(),
+                Confirmpasswords: $('#StaffConfirmPasswordid').val(),
+                Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Lastlogin: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Loginstatus: Loginstatus,
+                Isactive: true,
+                Isdeleted: false,
+                Isdefault: false,
+                Updateprofile: Updateprofile,
+                Parentid: 0,
+                Systemmodulename: 'Parceldrop',
+                Passwordresetdate: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Accepttermsandcondition: $('#Accepttermsandconditionsid').prop('checked'),
+            };
+            $.post("/Account/Addsystemstaffdata", uil, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire("User Detail", "Staff has been added and email sent.", "success");
+                    window.location.href = "/account/Signin";
+                } else {
+                    Swal.fire("User Detail Not Created", response.RespMessage, "error");
+                }
+                document.getElementById("savesystemstaffid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+    </script>
+</body>
+</html>

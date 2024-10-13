@@ -1,0 +1,260 @@
+﻿@model DBL.Entities.SystemStaff
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta name="keywords" content="Uttamb Solutions, web development, e-commerce, fuel card systems, digital marketing, blogs" />
+    <meta name="author" content="Uttamb Solutions" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@ViewData["Title"] - Uttamb Solutions" />
+    <meta property="og:description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta property="og:image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
+    <meta property="og:url" content="https://uttambsolutions.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@ViewData["Title"] - Uttamb Solutions" />
+    <meta name="twitter:description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta name="twitter:image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
+
+    <!-- Schema.org Markup for Google+ -->
+    <meta itemprop="name" content="@ViewData["Title"] - Uttamb Solutions" />
+    <meta itemprop="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta itemprop="image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
+            crossorigin="anonymous"></script>
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-info card-outline">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg font-weight-light text-dark text-uppercase font-weight-bold">Update Profile</p>
+                <div class="row">
+                    <input asp-for="Userid" type="number" class="form-control form-control-sm" id="UserId" hidden>
+                    <input asp-for="Roleid" type="number" class="form-control form-control-sm" id="StaffRoleId" hidden>
+                    <input asp-for="Parentid" type="number" class="form-control form-control-sm" id="Parentid" hidden>
+                    <div class="col-sm-6">
+                        <label class="text-sm fontweight-light">First Name</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Firstname" type="text" class="form-control form-control-sm" id="FirstnameId" required placeholder="First Name">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Firstname" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Last Name</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Lastname" type="text" class="form-control form-control-sm" placeholder="Last Name" required id="LastnameId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Lastname" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Email Address</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Emailaddress" type="email" class="form-control form-control-sm" placeholder="Email Address" required id="EmailAddressId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Emailaddress" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Phone Number</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Phonenumber" type="tel" class="form-control form-control-sm" placeholder="Phone Number" required id="PhonenumberId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-phone"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Phonenumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>ID Number</label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Idnumber" type="tel" class="form-control form-control-sm" placeholder="Id Number" required id="IdnumberId">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-card"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Idnumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Gender</label>
+                        <div class="input-group mb-3">
+                            <select asp-for="Genderid" class="form-control form-control-sm" id="Genderid" required>
+                                <option value="">---select---</option>
+                                <option value="0">Not Set</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                            </select>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-card"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Marital Status</label>
+                        <div class="input-group mb-3">
+                            <select asp-for="Maritalstatusid" class="form-control form-control-sm" id="Maritalstatusid" required>
+                                <option value="">---select---</option>
+                                <option value="0">Not Set</option>
+                                <option value="1">Single</option>
+                                <option value="2">Married</option>
+                                <option value="3">Divorced</option>
+                            </select>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-card"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder text-uppercase">Cancel</a>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-sm btn-info font-weight-bold float-right" type="button" id="savesystemstaffprofileid" onclick="savesystemstaffprofiledata();">
+                            <span id="buttonText">Update Profile</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/lib/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <script type="text/javascript">
+        function savesystemstaffprofiledata() {
+            document.getElementById("savesystemstaffprofileid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+
+            // Validation checks
+            let isValid = true;
+            let validationMessage = '';
+
+            if ($('#FirstnameId').val() === '') {
+                validationMessage += 'Firstname is required.\n';
+                isValid = false;
+            }
+            if ($('#LastnameId').val() === '') {
+                validationMessage += 'Lastname is required.\n';
+                isValid = false;
+            }
+            if ($('#EmailAddressId').val() === '') {
+                validationMessage += 'Email address is required.\n';
+                isValid = false;
+            }
+            if ($('#PhonenumberId').val() === '') {
+                validationMessage += 'Phone number is required.\n';
+                isValid = false;
+            }
+            if ($('#IdnumberId').val() === '') {
+                validationMessage += 'ID number is required.\n';
+                isValid = false;
+            }
+            if ($('#Genderid').val() === '' || $('#Genderid').val() == 0) {
+                validationMessage += 'Gender is required.\n';
+                isValid = false;
+            }
+            if ($('#Maritalstatusid').val() === '' || $('#Maritalstatusid').val() == 0) {
+                validationMessage += 'Marital status is required.\n';
+                isValid = false;
+            }
+            if ($('#StaffRoleId').val() === '' || $('#StaffRoleId').val() == 0) {
+                validationMessage += 'Role is required.\n';
+                isValid = false;
+            }
+            if (!isValid) {
+                Swal.fire('Validation Error', validationMessage, 'warning');
+                document.getElementById("savesystemstaffprofileid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "Update Profile";
+                return;
+            }
+            var uil = {
+                Userid: $('#UserId').val(),
+                Firstname: $('#FirstnameId').val(),
+                Lastname: $('#LastnameId').val(),
+                Emailaddress: $('#EmailAddressId').val(),
+                Phonenumber: $('#PhonenumberId').val(),
+                Idnumber: $('#IdnumberId').val(),
+                Genderid: $('#Genderid').val(),
+                Maritalstatusid: $('#Maritalstatusid').val(),
+                Roleid: $('#StaffRoleId').val(),
+                Parentid: $('#Parentid').val(),
+                Updateprofile: false,
+                Createdby: $('#UserId').val(),
+                Modifiedby: $('#UserId').val(),
+                Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' ')
+            };
+
+            $.post("/Account/Updatesystemstaffprofiledata", uil, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire("Staff Detail", "Staff has been added and email sent.", "success");
+                    window.location.href = '/Account/Signin';
+                } else {
+                    Swal.fire("Staff Detail Not Created", response.RespMessage, "error");
+                }
+                document.getElementById("savesystemstaffprofileid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "Update Profile";
+            });
+        }
+    </script>
+</body>
+</html>
