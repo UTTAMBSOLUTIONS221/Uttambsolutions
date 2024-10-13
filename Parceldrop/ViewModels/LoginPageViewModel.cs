@@ -179,6 +179,7 @@ public class LoginPageViewModel : INotifyPropertyChanged
                     {
                         string userDetailStr = JsonConvert.SerializeObject(response);
                         Preferences.Set(nameof(App.UserDetails), userDetailStr);
+
                         // Example additional logic after successful login
                         await AppConstant.AddFlyoutMenusDetails();
                     }
