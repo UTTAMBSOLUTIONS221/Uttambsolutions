@@ -154,6 +154,26 @@
                         </div>
                     </div>
                 </div>
+               
+                <div class="row">
+                     <div class="col-sm-12">
+                        <label>Designation</label>
+                        <div class="input-group mb-3">
+                            <select asp-for="Designation" type="tel" class="form-control form-control-sm" id="StaffDesignationid">
+                                <option value="">--Select--</option>
+                                <option value="Collectioncenter">Collection Center</option>
+                                <option value="Courier">Courier</option>
+                                <option value="Customer">Customer</option>
+                            </select>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="row">
                     <div class="col-6">
                         <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder text-uppercase">Cancel</a>
