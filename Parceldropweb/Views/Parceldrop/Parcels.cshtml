@@ -64,3 +64,70 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+            ﻿function saveparcelcollectioncenterdata() {
+            document.getElementById("saveparcelcollectioncenterid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            if ($("#Collectionnameid").val() === "") {
+                $("#Collectionnameid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Collectionnameid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Collectionaddressid").val() === "") {
+                $("#Collectionaddressid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Collectionaddressid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Phonenumberid").val() === "") {
+                $("#Phonenumberid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Phonenumberid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Operatinghoursid").val() === "") {
+                $("#Operatinghoursid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Operatinghoursid").removeClass('is-invalid').addClass('is-valid');
+            }
+
+            var uil = {
+                Collectioncenterid : $('#Collectioncenterid').val(),
+                Collectionname: $('#Collectionnameid').val(),
+                Collectionaddress: $('#Collectionaddressid').val(),
+                Phonenumber: $('#Phonenumberid').val(),
+                Operatinghours: $('#Operatinghoursid').val(),
+                Collectionstatus: 1,
+                Managerid: $('#systemLoggedinedUserid').val(),
+            };
+            $.post("/Parceldrop/Addcollectioncenterparceldata", uil, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire("Parcels Detail", "Staff has been added and email sent.", "success");
+                    setTimeout(function () { location.reload(); }, 500);
+                } else {
+                    Swal.fire("Parcels Detail Not Created", response.RespMessage, "error");
+                }
+                document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
+    </script>
+}

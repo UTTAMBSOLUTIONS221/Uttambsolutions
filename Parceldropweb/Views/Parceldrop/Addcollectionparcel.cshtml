@@ -1,5 +1,6 @@
 ﻿@model DBL.Entities.Collectioncenterparcels
 @{
+    var Collectioncenter = ViewData["Collectioncenterlists"] as List<SelectListItem>;
     var ParcelSenderReciever = ViewData["ParcelSenderRecieverlists"] as List<SelectListItem>;
     var Parceltypes = ViewData["Parceltypeslists"] as List<SelectListItem>;
     var Parcelstatus = ViewData["Parcelstatuslists"] as List<SelectListItem>;
@@ -17,10 +18,21 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="font-weight-light">Collection Center</label>
+                <select class="form-control form-control-sm" asp-for="@Model.Collectioncenterid" asp-items="@Collectioncenter" id="Collectioncenterid">
+                    <option value="">---Select---</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Sender</label>
-                <select class="form-control form-control-sm" asp-for="@Model.Senderid" asp-items="ParcelSenderReciever" id="Senderid">
+                <select class="form-control form-control-sm" asp-for="@Model.Senderid" asp-items="@ParcelSenderReciever" id="Senderid">
                     <option value="">---Select---</option>
                 </select>
             </div>
@@ -28,7 +40,7 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Reciever</label>
-                <select class="form-control form-control-sm" asp-for="@Model.Receiverid" asp-items="ParcelSenderReciever" id="Receiverid">
+                <select class="form-control form-control-sm" asp-for="@Model.Receiverid" asp-items="@ParcelSenderReciever" id="Receiverid">
                     <option value="">---Select---</option>
                 </select>
             </div>

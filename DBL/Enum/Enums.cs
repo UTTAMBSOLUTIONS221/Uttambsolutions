@@ -62,5 +62,6 @@
         ParcelSenderReciever = 34,
         Parceltypes = 35,
         Parcelstatus = 36,
+        Collectioncenter = 37,
     }
 }
