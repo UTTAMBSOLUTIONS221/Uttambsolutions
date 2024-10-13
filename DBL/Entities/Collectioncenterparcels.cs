@@ -10,6 +10,7 @@
         public decimal Parcelweight { get; set; }
         public string? Dimensions { get; set; }
         public int Parcelstatusid { get; set; }
+        public int Transitdays { get; set; }
         public decimal DeliveryFee { get; set; }
         public string? Trackingnumber { get; set; }
         public DateTime Pickupdate { get; set; }
