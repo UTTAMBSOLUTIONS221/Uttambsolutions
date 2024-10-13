@@ -222,7 +222,7 @@
                 validationMessage += 'Phone number is required.\n';
                 isValid = false;
             }
-            if ($('#IdnumberId').val() === '') {
+            if ($('#IdnumberId').val() === '' || $('#IdnumberId').val() == 0) {
                 validationMessage += 'ID number is required.\n';
                 isValid = false;
             }
