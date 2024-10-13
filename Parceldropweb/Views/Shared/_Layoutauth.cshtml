@@ -101,8 +101,8 @@
 
         <aside class="main-sidebar sidebar-white bg-white position-fixed">
             <a asp-controller="Home" asp-action="Dashboard" class="brand-link">
-                <img src="~/images/maqaopluslogo.png" alt="MAQAO PLUS" class="brand-image">
-                <span class="brand-text font-weight-bold">MAQAO PLUS</span>
+                <img src="~/images/maqaopluslogo.png" alt="PARCEL DROP" class="brand-image">
+                <span class="brand-text font-weight-bold">PARCEL DROP</span>
             </a>
             <div class="sidebar  bg-white" style="height: calc(100vh - 56px); overflow-y: auto;">
                 <nav class="mt-2">
@@ -113,54 +113,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a asp-controller="Staff" asp-action="Shareslist" class="nav-link">
-                                <i class="nav-icon fas fa-briefcase"></i><p>Shares</p>
+                            <a asp-controller="Staff" asp-action="Collectioncenterlist" class="nav-link">
+                                <i class="nav-icon fas fa-briefcase"></i><p>Collection Centers</p>
                             </a>
                         </li>
-                        @if (currentUserData.Usermodel.Rolename == "Maqaoplus Property House Owner")
-                        {
-                            <li class="nav-item main" id="CAN_VIEW_PROPERTY" style="display:none;">
-                                <a asp-controller="PropertyHouse" asp-action="Index" class="nav-link">
-                                    <i class="nav-icon fas fa-building"></i><p>Rental Houses</p>
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item main" id="CAN_VIEW_PROPERTY" style="display:none;">
-                                <a asp-controller="PropertyHouse" asp-action="Agentindex" class="nav-link">
-                                    <i class="nav-icon fas fa-building"></i><p>Rental Houses</p>
-                                </a>
-                            </li>
-                        }
-
-                        <li class="nav-item main" id="CAN_VIEW_PROPERTY_TENANTS" style="display:none;">
-                            <a asp-controller="PropertyHouse" asp-action="Propertyhouseroomtenants" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i><p>Room Tenants</p>
-                            </a>
-                        </li>
-                        <li class="nav-item main" id="CAN_VIEW_PROPERTY_VACATING_REQUEST" style="display:none;">
-                            <a asp-controller="PropertyHouse" asp-action="Tenantvacatingrequests" class="nav-link">
-                                <i class="nav-icon 	fas fa-phone-slash"></i><p>Vacating Requests</p>
-                            </a>
-                        </li>
-                        <li class="nav-item main" id="CAN_VIEW_PROPERTY_RENT_INVOICE" style="display:none;">
-                            <a asp-controller="PropertyHouse" asp-action="Tenantmonthlyinvoicedata" class="nav-link">
-                                <i class="nav-icon fas fa-solid fa-file-invoice"></i><p>Invoices</p>
-                            </a>
-                        </li>
-                        <li class="nav-item main" id="CAN_VIEW_PROPERTY_RENT_PAYMENTS" style="display:none;">
-                            <a asp-controller="PropertyHouse" asp-action="Tenantmonthlyinvoicepaymentdata" class="nav-link">
-                                <i class="nav-icon fas fa-solid fa-money-bill"></i><p>Payments</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item main" id="CAN_MANAGE_STAFFS" style="display:none;">
-                            <a asp-controller="Staff" asp-action="Index" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i><p>Tenants</p>
-                            </a>
-                        </li>
-
                     </ul>
                 </nav>
             </div>

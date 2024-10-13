@@ -68,7 +68,7 @@ app.UseSession();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Signin}/{id?}");
 
 app.MapControllerRoute(
     name: "csr",
