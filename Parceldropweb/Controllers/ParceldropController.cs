@@ -7,18 +7,19 @@ using Newtonsoft.Json;
 namespace Parceldropweb.Controllers
 {
     [Authorize]
-    public class CollectionController : BaseController
+    public class ParceldropController : BaseController
     {
         private readonly BL bl;
         private readonly IWebHostEnvironment _env;
 
-        public CollectionController(IConfiguration config, IWebHostEnvironment env)
+        public ParceldropController(IConfiguration config, IWebHostEnvironment env)
         {
             bl = new BL(Util.ShareConnectionString(config, env));
             _env = env;
         }
+        #region Parcel Collection Centers
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Collections()
         {
             var data = await bl.Getparcelcollectioncentersdata();
             return View(data);
@@ -37,6 +38,11 @@ namespace Parceldropweb.Controllers
         {
             var resp = await bl.Registerparcelcollectioncenterdata(JsonConvert.SerializeObject(model));
             return Json(resp);
+        }
+        #endregion
+        public IActionResult Index()
+        {
+            return View();
         }
     }
 }
