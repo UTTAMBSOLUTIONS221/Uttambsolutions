@@ -58,5 +58,6 @@
         Systempropertyfixtures = 30,
         Systemservices = 31,
         Systemtokens = 32,
+        SystemParcelStaffs = 33,
     }
 }

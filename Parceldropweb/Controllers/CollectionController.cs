@@ -1,7 +1,9 @@
 ﻿using DBL;
 using DBL.Entities;
+using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Parceldropweb.Controllers
 {
@@ -25,6 +27,7 @@ namespace Parceldropweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Addcollectioncenter(int Collectioncenterid)
         {
+            ViewData["Systemparcelstaffslists"] = bl.GetListModel(ListModelType.SystemParcelStaffs).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Parcelcollectioncenters model = new Parcelcollectioncenters();
             if (Collectioncenterid > 0)
             {
