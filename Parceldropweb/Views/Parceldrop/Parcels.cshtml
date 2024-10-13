@@ -67,23 +67,36 @@
 
 @section Scripts {
     <script type="text/javascript">
-            function calculatePickUpDate() {
-                // Get the values from the input fields
-                const dropOffDateValue = $('#Dropoffdateid').val();
-                const transitDaysValue = parseInt($('#Transitdaysid').val());
+        function calculatePickupDate() {
+            // Get the drop-off date and transit days
+            var dropOffDateValue = $('#Dropoffdateid').val();
+            var transitDaysValue = $('#Transitdaysid').val();
 
-                // Convert the drop-off date value to a Date object
-                const dropOffDate = new Date(dropOffDateValue);
+            // If drop-off date is empty, set it to today's date as a default
+            var dropOffDate = dropOffDateValue ? new Date(dropOffDateValue) : new Date();
 
-                // Subtract the transit days from the drop-off date to get the pick-up date
-                dropOffDate.setDate(dropOffDate.getDate() - transitDaysValue);
+            // If transit days is empty, set it to 0 as a default
+            var transitDays = transitDaysValue ? parseInt(transitDaysValue) : 0;
 
-                // Format the pick-up date as needed (e.g., YYYY-MM-DD)
-                const pickUpDateFormatted = dropOffDate.toISOString().split('T')[0];
+            // Check if both values are valid before proceeding
+            if (!isNaN(dropOffDate.getTime()) && !isNaN(transitDays)) {
+                // Add the transit days (converted to milliseconds) to the drop-off date
+                var pickupDate = new Date(dropOffDate.getTime() + transitDays * 24 * 60 * 60 * 1000);
 
-                // Set the calculated pick-up date to the input field
-                $('#Pickupdateid').val(pickUpDateFormatted);
+                // Format the date as dd/MM/yyyy
+                var day = String(pickupDate.getDate()).padStart(2, '0');
+                var month = String(pickupDate.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+                var year = pickupDate.getFullYear();
+                var formattedDate = `${day}/${month}/${year}`;
+
+                // Set the value of the pickup date field
+                $('#Pickupdateid').val(formattedDate);
+            } else {
+                console.error("Invalid date or transit days");
             }
+        }
+
+
             ﻿function savesavecollectioncenterparceldata() {
                 document.getElementById("savecollectioncenterparcelid").disabled = true;
                 document.getElementById("processingSpinner").style.display = "inline-block";
