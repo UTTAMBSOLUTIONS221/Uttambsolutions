@@ -11,7 +11,7 @@
         public string? Dimensions { get; set; }
         public int Parcelstatusid { get; set; }
         public int Transitdays { get; set; }
-        public decimal DeliveryFee { get; set; }
+        public decimal Deliveryfee { get; set; }
         public string? Trackingnumber { get; set; }
         public DateTime Pickupdate { get; set; }
         public DateTime Dropoffdate { get; set; }
