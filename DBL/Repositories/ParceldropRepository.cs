@@ -63,7 +63,7 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@JsonObjectdata", JsonData);
-                return connection.Query<Genericmodel>("Usp_Registerparcelcollectioncenterdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                return connection.Query<Genericmodel>("Usp_Registercollectioncenterparceldata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
         public Collectioncenterparcels Getcollectioncenterparcelsdatabyid(int Parcelid)

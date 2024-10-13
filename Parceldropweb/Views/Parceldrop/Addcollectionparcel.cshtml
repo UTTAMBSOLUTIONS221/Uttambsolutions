@@ -8,34 +8,51 @@
 <div class="modal-body">
     <div class="row">
         <div class="col-sm-12">
-            <input asp-for="@Model.Parce" id="Collectioncenterid" hidden />
+            <input asp-for="@Model.Parcelid" id="Parcelid" hidden />
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-4">
             <div class="form-group">
-                <label class="font-weight-light">Name</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Collectionname" id="Collectionnameid" />
+                <label class="font-weight-light">Sender</label>
+                <select class="form-control form-control-sm" asp-for="@Model.Senderid" id="Senderid">
+
+                </select>
             </div>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-4">
             <div class="form-group">
-                <label class="font-weight-light">Address</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Collectionaddress" id="Collectionaddressid" />
+                <label class="font-weight-light">Reciever</label>
+                <select class="form-control form-control-sm" asp-for="@Model.Receiverid" id="Receiverid">
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Parcel Type</label>
+                <select class="form-control form-control-sm" asp-for="@Model.Parceltypeid" id="Parceltypeid">
+                </select>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-4">
             <div class="form-group">
-                <label class="font-weight-light">Phone Number</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Phonenumber" id="Phonenumberid" />
+                <label class="font-weight-light">Parcel Weight</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Parcelweight" id="Parcelweightid" />
             </div>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-4">
             <div class="form-group">
-                <label class="font-weight-light">Operating Hours</label>
-                <input class="form-control form-control-sm" asp-for="@Model.Operatinghours" id="Operatinghoursid" />
+                <label class="font-weight-light">Parcel Dimension</label>
+                <input class="form-control form-control-sm" asp-for="@Model.Dimensions" id="Dimensionsid" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Parcel Status</label>
+                <select class="form-control form-control-sm" asp-for="@Model.Parcelstatusid" id="Parcelstatusid">
+                </select>
             </div>
         </div>
     </div>
