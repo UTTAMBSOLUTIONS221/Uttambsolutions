@@ -5,10 +5,16 @@ namespace DBL.Repositories
 {
     public interface IParceldropRepository
     {
-        #region Collection Centers
+        #region Parcel Collection Centers
         IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersdata();
         Genericmodel Registerparcelcollectioncenterdata(string JsonData);
         Parcelcollectioncenters Getparcelcollectioncentersdatabyid(int Collectioncenterid);
+        #endregion
+
+        #region  Collection Center Parcels
+        IEnumerable<Collectioncenterparcels> Getcollectioncenterparcelsdata();
+        Genericmodel Registercollectioncenterparceldata(string JsonData);
+        Collectioncenterparcels Getcollectioncenterparcelsdatabyid(int Parcelid);
         #endregion
     }
 }

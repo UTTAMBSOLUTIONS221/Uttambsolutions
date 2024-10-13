@@ -13,7 +13,7 @@ namespace DBL.Repositories
         {
         }
 
-        #region Collection centers
+        #region Parcel Collection centers
         public IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersdata()
         {
             using (var connection = new SqlConnection(_connString))
@@ -44,5 +44,39 @@ namespace DBL.Repositories
             }
         }
         #endregion
+
+
+        #region  Collection center Parcels
+        public IEnumerable<Collectioncenterparcels> Getcollectioncenterparcelsdata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                return connection.Query<Collectioncenterparcels>("Usp_Getparcelcollectioncentersdata", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+        public Genericmodel Registercollectioncenterparceldata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registerparcelcollectioncenterdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        public Collectioncenterparcels Getcollectioncenterparcelsdatabyid(int Parcelid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Parcelid", Parcelid);
+                return connection.Query<Collectioncenterparcels>("Usp_Getparcelcollectioncentersdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        #endregion
+
     }
 }
