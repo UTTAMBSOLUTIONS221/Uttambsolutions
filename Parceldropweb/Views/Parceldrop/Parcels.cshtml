@@ -88,118 +88,115 @@
                 var month = String(pickupDate.getMonth() + 1).padStart(2, '0'); // Months are 0-based
                 var year = pickupDate.getFullYear();
                 var formattedDate = `${day}/${month}/${year}`;
-
                 // Set the value of the pickup date field
                 $('#Pickupdateid').val(formattedDate);
             } else {
                 console.error("Invalid date or transit days");
             }
         }
-
-
-            ﻿function savesavecollectioncenterparceldata() {
-                document.getElementById("savecollectioncenterparcelid").disabled = true;
-                document.getElementById("processingSpinner").style.display = "inline-block";
-                document.getElementById("buttonText").innerText = "Processing...";
-                if ($("#Collectioncenterid").val() === "" || $("#Collectioncenterid").val() === 0) {
-                    $("#Collectioncenterid").addClass('is-invalid');
-                     document.getElementById("savecollectioncenterparcelid").disabled = false;
-                     document.getElementById("processingSpinner").style.display = "none";
-                     document.getElementById("buttonText").innerText = "SAVE";
-                    return;
-                } else {
-                    $("#Collectioncenterid").removeClass('is-invalid').addClass('is-valid');
-                }
-                if ($("#Pickupdateid").val() === "") {
-                    $("#Pickupdateid").addClass('is-invalid');
-                     document.getElementById("savecollectioncenterparcelid").disabled = false;
-                     document.getElementById("processingSpinner").style.display = "none";
-                     document.getElementById("buttonText").innerText = "SAVE";
-                    return;
-                } else {
-                    $("#Pickupdateid").removeClass('is-invalid').addClass('is-valid');
-                }
-                if ($("#Senderid").val() === ""||$("#Senderid").val() === 0) {
-                    $("#Senderid").addClass('is-invalid');
-                     document.getElementById("savecollectioncenterparcelid").disabled = false;
-                     document.getElementById("processingSpinner").style.display = "none";
-                     document.getElementById("buttonText").innerText = "SAVE";
-                    return;
-                } else {
-                    $("#Senderid").removeClass('is-invalid').addClass('is-valid');
-                }
-                if ($("#Receiverid").val() === ""||$("#Receiverid").val() === 0) {
-                    $("#Receiverid").addClass('is-invalid');
-                     document.getElementById("savecollectioncenterparcelid").disabled = false;
-                     document.getElementById("processingSpinner").style.display = "none";
-                     document.getElementById("buttonText").innerText = "SAVE";
-                    return;
-                } else {
-                    $("#Receiverid").removeClass('is-invalid').addClass('is-valid');
-                }
-                if ($("#Parceltypeid").val() === ""||$("#Parceltypeid").val() === 0) {
-                    $("#Parceltypeid").addClass('is-invalid');
-                     document.getElementById("savecollectioncenterparcelid").disabled = false;
-                     document.getElementById("processingSpinner").style.display = "none";
-                     document.getElementById("buttonText").innerText = "SAVE";
-                    return;
-                } else {
-                    $("#Parceltypeid").removeClass('is-invalid').addClass('is-valid');
-                }
-                if ($("#Parcelstatusid").val() === ""||$("#Parcelstatusid").val() === 0) {
-                    $("#Parcelstatusid").addClass('is-invalid');
-                     document.getElementById("savecollectioncenterparcelid").disabled = false;
-                     document.getElementById("processingSpinner").style.display = "none";
-                     document.getElementById("buttonText").innerText = "SAVE";
-                    return;
-                } else {
-                    $("#Parcelstatusid").removeClass('is-invalid').addClass('is-valid');
-                }
-                if ($("#Parcelweightid").val() === "") {
-                    $("#Parcelweightid").addClass('is-invalid');
-                     document.getElementById("savecollectioncenterparcelid").disabled = false;
-                     document.getElementById("processingSpinner").style.display = "none";
-                     document.getElementById("buttonText").innerText = "SAVE";
-                    return;
-                } else {
-                    $("#Parcelweightid").removeClass('is-invalid').addClass('is-valid');
-                }
-                if ($("#Dimensionsid").val() === "") {
-                    $("#Dimensionsid").addClass('is-invalid');
-                     document.getElementById("savecollectioncenterparcelid").disabled = false;
-                     document.getElementById("processingSpinner").style.display = "none";
-                     document.getElementById("buttonText").innerText = "SAVE";
-                    return;
-                } else {
-                    $("#Dimensionsid").removeClass('is-invalid').addClass('is-valid');
-                }
-                if ($("#Dropoffdateid").val() === "") {
-                    $("#Dropoffdateid").addClass('is-invalid');
-                     document.getElementById("savecollectioncenterparcelid").disabled = false;
-                     document.getElementById("processingSpinner").style.display = "none";
-                     document.getElementById("buttonText").innerText = "SAVE";
-                    return;
-                } else {
-                    $("#Dropoffdateid").removeClass('is-invalid').addClass('is-valid');
-                }
-                if ($("#Transitdaysid").val() === "") {
-                    $("#Transitdaysid").addClass('is-invalid');
-                     document.getElementById("savecollectioncenterparcelid").disabled = false;
-                     document.getElementById("processingSpinner").style.display = "none";
-                     document.getElementById("buttonText").innerText = "SAVE";
-                    return;
-                } else {
-                    $("#Transitdaysid").removeClass('is-invalid').addClass('is-valid');
-                }
-                 if ($("#Deliveryfeeid").val() === ""|| $("#Deliveryfeeid").val() === 0) {
-                    $("#Deliveryfeeid").addClass('is-invalid');
-                     document.getElementById("savecollectioncenterparcelid").disabled = false;
-                     document.getElementById("processingSpinner").style.display = "none";
-                     document.getElementById("buttonText").innerText = "SAVE";
-                    return;
-                } else {
-                    $("#Deliveryfeeid").removeClass('is-invalid').addClass('is-valid');
-                }
+        ﻿function savesavecollectioncenterparceldata() {
+            document.getElementById("savecollectioncenterparcelid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            if ($("#Collectioncenterid").val() === "" || $("#Collectioncenterid").val() === 0) {
+                $("#Collectioncenterid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Collectioncenterid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Pickupdateid").val() === "") {
+                $("#Pickupdateid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Pickupdateid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Senderid").val() === ""||$("#Senderid").val() === 0) {
+                $("#Senderid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Senderid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Receiverid").val() === ""||$("#Receiverid").val() === 0) {
+                $("#Receiverid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Receiverid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Parceltypeid").val() === ""||$("#Parceltypeid").val() === 0) {
+                $("#Parceltypeid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Parceltypeid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Parcelstatusid").val() === ""||$("#Parcelstatusid").val() === 0) {
+                $("#Parcelstatusid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Parcelstatusid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Parcelweightid").val() === "") {
+                $("#Parcelweightid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Parcelweightid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Dimensionsid").val() === "") {
+                $("#Dimensionsid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Dimensionsid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Dropoffdateid").val() === "") {
+                $("#Dropoffdateid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Dropoffdateid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Transitdaysid").val() === "") {
+                $("#Transitdaysid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Transitdaysid").removeClass('is-invalid').addClass('is-valid');
+            }
+                if ($("#Deliveryfeeid").val() === ""|| $("#Deliveryfeeid").val() === 0) {
+                $("#Deliveryfeeid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Deliveryfeeid").removeClass('is-invalid').addClass('is-valid');
+            }
 
             var uil = {
                 Parcelid: $('#Parcelid').val(),
