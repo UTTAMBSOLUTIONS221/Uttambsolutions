@@ -39,46 +39,44 @@
 
 @section Scripts {
     <script type="text/javascript">
-            ﻿function savesystemstaffdata() {
-            document.getElementById("savesystemstaffid").disabled = true;
+            ﻿function saveparcelcollectioncenterdata() {
+            document.getElementById("saveparcelcollectioncenterid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
-
-            if ($('#FirstnameId').val() == '') {
-                Swal.fire("Staff Detail Not Created", 'Firstname is Required', "warning");
-                document.getElementById("savesystemstaffid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
+            if ($("#Collectionnameid").val() === "") {
+                $("#Collectionnameid").addClass('is-invalid');
                 return;
+            } else {
+                $("#Collectionnameid").removeClass('is-invalid').addClass('is-valid');
             }
-            if ($('#LastnameId').val() == '') {
-                Swal.fire("Staff Detail Not Created", 'Lastname is Required', "warning");
-                document.getElementById("savesystemstaffid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
+            if ($("#Collectionaddressid").val() === "") {
+                $("#Collectionaddressid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
                 return;
+            } else {
+                $("#Collectionaddressid").removeClass('is-invalid').addClass('is-valid');
             }
-            if ($('#EmailAddressId').val() == '') {
-                Swal.fire("Staff Detail Not Created", 'Emailaddress is Required', "warning");
-                document.getElementById("savesystemstaffid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
+            if ($("#Phonenumberid").val() === "") {
+                $("#Phonenumberid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
                 return;
+            } else {
+                $("#Phonenumberid").removeClass('is-invalid').addClass('is-valid');
             }
-            if ($('#PhonenumberId').val() == '') {
-                Swal.fire("Staff Detail Not Created", 'Phonenumber is Required', "warning");
-                document.getElementById("savesystemstaffid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
+            if ($("#Operatinghoursid").val() === "") {
+                $("#Operatinghoursid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
                 return;
+            } else {
+                $("#Operatinghoursid").removeClass('is-invalid').addClass('is-valid');
             }
-            if ($('#StaffRoleId').val() == '' || $('#StaffRoleId').val() == 0) {
-                Swal.fire("Staff Detail Not Created", 'Role is Required', "warning");
-                document.getElementById("savesystemstaffid").disabled = false;
-                document.getElementById("processingSpinner").style.display = "none";
-                document.getElementById("buttonText").innerText = "SAVE";
-                return;
-            }
+          
             var uil = {
                 Userid: $('#UserId').val(),
                 Firstname: $('#FirstnameId').val(),
