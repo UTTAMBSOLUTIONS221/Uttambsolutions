@@ -22,7 +22,7 @@ namespace Parceldropweb.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Addcenter()
+        public IActionResult Addcollectioncenter()
         {
             Parcelcollectioncenters model = new Parcelcollectioncenters();
             return PartialView(model);
