@@ -9,5 +9,6 @@
         public string? Operatinghours { get; set; }
         public int Collectionstatus { get; set; }
         public int Managerid { get; set; }
+        public string? Managername { get; set; }
     }
 }
