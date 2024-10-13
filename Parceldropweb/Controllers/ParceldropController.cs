@@ -49,6 +49,16 @@ namespace Parceldropweb.Controllers
             //var data = await bl.Getparcelcollectioncentersdata();
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> Addcollectionparcel(int Parcelid)
+        {
+            //Parcelcollectioncenters model = new Parcelcollectioncenters();
+            //if (Collectioncenterid > 0)
+            //{
+            //    model = await bl.Getparcelcollectioncentersdatabyid(Collectioncenterid);
+            //}
+            return PartialView();
+        }
         #endregion
     }
 }
