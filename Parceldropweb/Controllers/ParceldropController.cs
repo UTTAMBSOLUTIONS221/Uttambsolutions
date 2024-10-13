@@ -40,9 +40,15 @@ namespace Parceldropweb.Controllers
             return Json(resp);
         }
         #endregion
-        public IActionResult Index()
+
+
+        #region Collection Parcels
+        [HttpGet]
+        public async Task<IActionResult> Parcels()
         {
+            //var data = await bl.Getparcelcollectioncentersdata();
             return View();
         }
+        #endregion
     }
 }
