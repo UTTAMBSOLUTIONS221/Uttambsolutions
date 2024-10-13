@@ -59,5 +59,6 @@
         Systemservices = 31,
         Systemtokens = 32,
         SystemParcelStaffs = 33,
+        Parceltypes = 35,
     }
 }

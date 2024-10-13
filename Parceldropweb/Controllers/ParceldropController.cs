@@ -1,7 +1,9 @@
 ﻿using DBL;
 using DBL.Entities;
+using DBL.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace Parceldropweb.Controllers
@@ -52,6 +54,7 @@ namespace Parceldropweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Addcollectionparcel(int Parcelid)
         {
+            ViewData["Parceltypeslists"] = bl.GetListModel(ListModelType.Parceltypes).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Collectioncenterparcels model = new Collectioncenterparcels();
             if (Parcelid > 0)
             {
