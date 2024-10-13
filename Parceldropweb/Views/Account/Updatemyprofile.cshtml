@@ -238,6 +238,10 @@
                 validationMessage += 'Role is required.\n';
                 isValid = false;
             }
+            if ($('#StaffDesignationid').val() === '') {
+                validationMessage += 'Designation is required.\n';
+                isValid = false;
+            }
             if (!isValid) {
                 Swal.fire('Validation Error', validationMessage, 'warning');
                 document.getElementById("savesystemstaffprofileid").disabled = false;
@@ -256,6 +260,7 @@
                 Maritalstatusid: $('#Maritalstatusid').val(),
                 Roleid: $('#StaffRoleId').val(),
                 Parentid: $('#Parentid').val(),
+                Designation: $('#StaffDesignationid').val(),
                 Updateprofile: false,
                 Createdby: $('#UserId').val(),
                 Modifiedby: $('#UserId').val(),
