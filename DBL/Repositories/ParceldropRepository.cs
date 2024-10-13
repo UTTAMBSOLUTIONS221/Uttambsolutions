@@ -53,7 +53,7 @@ namespace DBL.Repositories
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
-                return connection.Query<Collectioncenterparcels>("Usp_Getparcelcollectioncentersdata", parameters, commandType: CommandType.StoredProcedure).ToList();
+                return connection.Query<Collectioncenterparcels>("Usp_Getcollectioncenterparcelsdata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
         public Genericmodel Registercollectioncenterparceldata(string JsonData)
@@ -73,7 +73,7 @@ namespace DBL.Repositories
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Parcelid", Parcelid);
-                return connection.Query<Collectioncenterparcels>("Usp_Getparcelcollectioncentersdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                return connection.Query<Collectioncenterparcels>("Usp_Getcollectioncenterparcelsdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
         #endregion
