@@ -1,4 +1,5 @@
 ﻿using DBL;
+using DBL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +24,8 @@ namespace Parceldropweb.Controllers
         [HttpGet]
         public IActionResult Addcenter()
         {
-            return PartialView();
+            Parcelcollectioncenters model = new Parcelcollectioncenters();
+            return PartialView(model);
         }
     }
 }
