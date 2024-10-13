@@ -6,6 +6,7 @@ namespace DBL.Repositories
     {
         #region Collection Centers
         IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersdata();
+        Parcelcollectioncenters Getparcelcollectioncentersdatabyid(int Collectioncenterid);
         #endregion
     }
 }

@@ -23,9 +23,13 @@ namespace Parceldropweb.Controllers
             return View(data);
         }
         [HttpGet]
-        public IActionResult Addcollectioncenter()
+        public async Task<IActionResult> Addcollectioncenter(int Collectioncenterid)
         {
             Parcelcollectioncenters model = new Parcelcollectioncenters();
+            if (Collectioncenterid > 0)
+            {
+                model = await bl.Getparcelcollectioncentersdatabyid(Collectioncenterid);
+            }
             return PartialView(model);
         }
     }

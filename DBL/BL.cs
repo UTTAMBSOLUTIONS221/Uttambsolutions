@@ -1102,6 +1102,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Parcelcollectioncenters> Getparcelcollectioncentersdatabyid(int Collectioncenterid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ParceldropRepository.Getparcelcollectioncentersdatabyid(Collectioncenterid);
+                return Resp;
+            });
+        }
         #endregion
         #endregion
 

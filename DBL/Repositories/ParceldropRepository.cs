@@ -22,6 +22,16 @@ namespace DBL.Repositories
                 return connection.Query<Parcelcollectioncenters>("Usp_Getparcelcollectioncentersdata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+        public Parcelcollectioncenters Getparcelcollectioncentersdatabyid(int Collectioncenterid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Collectioncenterid", Collectioncenterid);
+                return connection.Query<Parcelcollectioncenters>("Usp_Getparcelcollectioncentersdatabyid", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         #endregion
     }
 }
