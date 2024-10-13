@@ -55,6 +55,7 @@ namespace Parceldropweb.Controllers
         public async Task<IActionResult> Addcollectionparcel(int Parcelid)
         {
             ViewData["Parceltypeslists"] = bl.GetListModel(ListModelType.Parceltypes).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["Parcelstatuslists"] = bl.GetListModel(ListModelType.Parcelstatus).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Collectioncenterparcels model = new Collectioncenterparcels();
             if (Parcelid > 0)
             {

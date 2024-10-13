@@ -60,5 +60,6 @@
         Systemtokens = 32,
         SystemParcelStaffs = 33,
         Parceltypes = 35,
+        Parcelstatus = 36,
     }
 }

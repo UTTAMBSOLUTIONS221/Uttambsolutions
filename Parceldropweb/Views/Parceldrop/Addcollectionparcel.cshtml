@@ -1,4 +1,8 @@
 ﻿@model DBL.Entities.Collectioncenterparcels
+@{
+    var Parceltypes = ViewData["Parceltypeslists"] as List<SelectListItem>;
+    var Parcelstatus = ViewData["Parcelstatuslists"] as List<SelectListItem>;
+}
 <div class="modal-header">
     <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Collection Detail</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -24,13 +28,15 @@
             <div class="form-group">
                 <label class="font-weight-light">Reciever</label>
                 <select class="form-control form-control-sm" asp-for="@Model.Receiverid" id="Receiverid">
+                    <option value="">---Select---</option>
                 </select>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Parcel Type</label>
-                <select class="form-control form-control-sm" asp-for="@Model.Parceltypeid" id="Parceltypeid">
+                <select class="form-control form-control-sm" asp-for="@Model.Parceltypeid" asp-items="@Parceltypes" id="Parceltypeid">
+                    <option value="">---Select---</option>
                 </select>
             </div>
         </div>
@@ -51,7 +57,8 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Parcel Status</label>
-                <select class="form-control form-control-sm" asp-for="@Model.Parcelstatusid" id="Parcelstatusid">
+                <select class="form-control form-control-sm" asp-for="@Model.Parcelstatusid" asp-items="Parcelstatus" id="Parcelstatusid">
+                    <option value="">---Select---</option>
                 </select>
             </div>
         </div>
