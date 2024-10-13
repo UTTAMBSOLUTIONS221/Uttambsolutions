@@ -1,3 +1,4 @@
+using DBL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Parceldropweb.Models;
@@ -6,19 +7,23 @@ using System.Diagnostics;
 namespace Parceldropweb.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly BL bl;
+        private readonly IWebHostEnvironment _env;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IConfiguration config, IWebHostEnvironment env)
         {
-            _logger = logger;
+            bl = new BL(Util.ShareConnectionString(config, env));
+            _env = env;
         }
-
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
+        [HttpGet]
         public IActionResult Dashboard()
         {
             return View();
