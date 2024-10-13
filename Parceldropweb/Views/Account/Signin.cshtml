@@ -1,0 +1,100 @@
+﻿@model DBL.Entities.Userloginmodel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UTTAMB SOLUTIONS | SIGNIN</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537"
+            crossorigin="anonymous"></script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-2850934153859537?ers=1" nonce="dDYKvq_VdPZaU6r2X5lJmw"></script>
+    <script nonce="dDYKvq_VdPZaU6r2X5lJmw">(function () { function signalGooglefcPresent() { if (!window.frames['googlefcPresent']) { if (document.body) { const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe); } else { setTimeout(signalGooglefcPresent, 0); } } } signalGooglefcPresent(); })();</script>
+
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-info card-outline">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg font-weight-light text-dark text-uppercase font-weight-bold">Sign in to start your session</p>
+                <div class="row mt-1">
+                    <div class="col-sm-12" id="AlertsContainer">
+                        @{
+                            await Html.RenderPartialAsync("_Alerts");
+                        }
+                    </div>
+                </div>
+                <form asp-action="Signin" asp-controller="Account" method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="input-group mb-3">
+                                        <input asp-for="username" type="email" class="form-control form-control-sm" placeholder="Email Address">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fa fa-envelope"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pt-0">
+                                <div class="col-sm-12">
+                                    <span asp-validation-for="username" class="text-danger font-weight-light"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="input-group mb-3">
+                                        <input asp-for="password" type="password" class="form-control form-control-sm" placeholder="Password">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fa fa-lock"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span asp-validation-for="password" class="text-danger font-weight-light"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-sm btn-danger font-weight-bolder btn-block text-uppercase">cancel</a>
+                        </div>
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-sm btn-info font-weight-bolder btn-block text-uppercase">Sign in</button>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-5">
+                            <a asp-action="Forgotpassword" asp-controller="Account" class="text-uppercase text-info text-xs"> Forgot Password?</a>
+                        </div>
+                        <div class="col-7">
+                            <p class="text-xs">Don't have account yet? <a asp-action="Register" asp-controller="Account" class="text-uppercase text-info text-xs">Register</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/dist/adminlte.js"></script>
+</body>
+</html>
