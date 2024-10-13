@@ -1093,7 +1093,7 @@ namespace DBL
 
         #region Parcel Drops
 
-        #region Collection centers
+        #region Parcel Collection centers
         public Task<IEnumerable<Parcelcollectioncenters>> Getparcelcollectioncentersdata()
         {
             return Task.Run(() =>
@@ -1119,6 +1119,34 @@ namespace DBL
             });
         }
         #endregion
+
+        #region Collection centers Parcels
+        public Task<IEnumerable<Collectioncenterparcels>> Getcollectioncenterparcelsdata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ParceldropRepository.Getcollectioncenterparcelsdata();
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Registercollectioncenterparceldata(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ParceldropRepository.Registercollectioncenterparceldata(obj);
+                return Resp;
+            });
+        }
+        public Task<Collectioncenterparcels> Getcollectioncenterparcelsdatabyid(int Parcelid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ParceldropRepository.Getcollectioncenterparcelsdatabyid(Parcelid);
+                return Resp;
+            });
+        }
+        #endregion
+
         #endregion
 
 
