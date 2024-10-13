@@ -21,15 +21,41 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
+                            <th>Address</th>
                             <th>Phone</th>
-                            <th>Role</th>
+                            <th>Hours</th>
                             <th>Status</th>
+                            <th>Manager</th>
                             <th class="text-right">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                      
+                       @if (Model != null)
+                        {
+
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Collectionname </td>
+                                    <td>@item.Collectionaddress</td>
+                                    <td>@item.Phonenumber</td>
+                                    <td>@item.Operatinghours</td>
+                                    <td class="text-nowrap">
+                                        @if (item.Collectionstatus==0)
+                                        {
+                                            <span class="badge badge-info badge-info-xs text-uppercase">Validated</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger badge-info-xs  text-uppercase">Not Validated</span>
+                                        }
+                                    </td>
+                                    <td class="text-right nowrap text-nowrap">
+                                          <a asp-action="Addcollectioncenter" asp-controller="Collection" asp-route-code="@Guid.NewGuid()" asp-route-Collectioncenterid="@item.Collectioncenterid" asp-area="" id="CAN_EDIT_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table>
             </div>
