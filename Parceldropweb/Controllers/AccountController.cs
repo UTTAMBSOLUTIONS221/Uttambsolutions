@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -21,6 +22,25 @@ namespace Parceldropweb.Controllers
         {
             bl = new BL(Util.ShareConnectionString(config, env));
             _env = env;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Systemstaffs()
+        {
+            var data = await bl.Getsystemstaffdata(0, 1000);
+            return View(data);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Addstaff(int Userid)
+        {
+            ViewData["Systemstaffrolelists"] = bl.GetListModel(ListModelType.SystemRoles).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            SystemStaff staffs = new SystemStaff();
+            if (Userid > 0)
+            {
+                staffs = await bl.Getsystemstaffdatabyid(Userid);
+            }
+            return PartialView(staffs);
         }
 
         [HttpGet]
@@ -200,7 +220,6 @@ namespace Parceldropweb.Controllers
             }
         }
         #endregion
-
 
         #region Profile Data via Ajax
         public async Task<JsonResult> GetJobs(int page, int pageSize)
