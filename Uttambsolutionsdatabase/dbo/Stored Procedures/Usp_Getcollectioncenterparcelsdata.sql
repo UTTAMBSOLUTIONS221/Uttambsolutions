@@ -10,13 +10,12 @@ BEGIN
 	
 		BEGIN TRY
 		BEGIN TRANSACTION;
-		SELECT CCP.Parcelid,CCP.Senderid,SENDER.Firstname+' '+ SENDER.Lastname AS Sendername,CCP.Receiverid,RECIEVER.Firstname+' '+ RECIEVER.Lastname AS Recievername,CCP.Pickupcenterid,PICKUP.Collectionname AS Pickupcentername,CCP.Deliverycenterid,DELIVERLY.Collectionname AS Deliverycentername,
+		SELECT CCP.Parcelid,CCP.Senderid,SENDER.Firstname+' '+ SENDER.Lastname AS Sendername,CCP.Receiverid,RECIEVER.Firstname+' '+ RECIEVER.Lastname AS Recievername,CCP.Collectioncenterid,PICKUP.Collectionname AS Collectionname,
 		CCP.Parceltypeid,TYP.Parceltypename,CCP.Parcelweight,CCP.Dimensions,CCP.Parcelstatusid,STAT.Parcelstatusname,CCP.Transitdays,CCP.DeliveryFee,CCP.Trackingnumber,CCP.Pickupdate,CCP.Dropoffdate,CCP.Createddate 
 		FROM Parcels CCP
 		INNER JOIN Systemstaffs SENDER ON CCP.Senderid=SENDER.Userid
 		INNER JOIN Systemstaffs RECIEVER ON CCP.Receiverid=RECIEVER.Userid
-		INNER JOIN Parcelcollectioncenters PICKUP ON CCP.Pickupcenterid=PICKUP.Collectioncenterid
-		INNER JOIN Parcelcollectioncenters DELIVERLY ON CCP.Deliverycenterid=DELIVERLY.Collectioncenterid
+		INNER JOIN Parcelcollectioncenters PICKUP ON CCP.Collectioncenterid=PICKUP.Collectioncenterid
 		INNER JOIN Parceltypes TYP ON CCP.Parceltypeid=TYP.Parceltypeid
 		INNER JOIN Parcelstatus STAT ON CCP.Parcelstatusid=STAT.Parcelstatusid
 	    Set @RespMsg ='Ok.'

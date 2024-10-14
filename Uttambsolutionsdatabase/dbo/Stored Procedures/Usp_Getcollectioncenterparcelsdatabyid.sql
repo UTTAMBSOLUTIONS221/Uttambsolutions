@@ -11,7 +11,7 @@ BEGIN
 	
 		BEGIN TRY
 		BEGIN TRANSACTION;
-		SELECT CCP.Parcelid,CCP.Senderid,CCP.Receiverid,CCP.Pickupcenterid,CCP.Deliverycenterid,CCP.Parceltypeid,CCP.Parcelweight,CCP.Dimensions,CCP.Parcelstatusid,CCP.Transitdays,CCP.DeliveryFee,CCP.Trackingnumber,CCP.Pickupdate,CCP.Dropoffdate,CCP.Createddate FROM Parcels CCP WHERE CCP.Parcelid= @Parcelid
+		SELECT CCP.Parcelid,CCP.Senderid,CCP.Receiverid,CCP.Collectioncenterid,CCP.Parceltypeid,CCP.Parcelweight,CCP.Dimensions,CCP.Parcelstatusid,CCP.Transitdays,CCP.DeliveryFee,CCP.Trackingnumber,CCP.Pickupdate,CCP.Dropoffdate,CCP.Createddate FROM Parcels CCP WHERE CCP.Parcelid= @Parcelid
 	    Set @RespMsg ='Ok.'
 		Set @RespStat =0; 
 		COMMIT TRANSACTION;

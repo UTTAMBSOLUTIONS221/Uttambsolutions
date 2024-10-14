@@ -17,7 +17,7 @@ BEGIN
 			USING (
 			SELECT Parcelid,Senderid,Receiverid,Collectioncenterid,Parceltypeid,Parcelweight,Dimensions,Parcelstatusid,Transitdays,Deliveryfee,Trackingnumber,Pickupdate,Dropoffdate,Createddate
 			FROM OPENJSON(@JsonObjectdata)
-			WITH (Parcelid INT '$.Parcelid',Senderid INT '$.Senderid',Receiverid INT '$.Receiverid',Collectioncenterid INT '$.Collectioncenterid',Parceltypeid INT '$.Parceltypeid',Parcelweight DECIMAL(10,2) '$.Parcelweight',Dimensions VARCHAR(50) '$.Dimensions',Parcelstatusid INT '$.Parcelstatusid',Transitdays INT '$.Transitdays',Deliveryfee DECIMAL(10,2) '$.Deliveryfee',Trackingnumber VARCHAR(50) '$.Trackingnumber',Pickupdate DATETIME2 '$.Pickupdate',Dropoffdate DATETIME2 '$.Dropoffdate',Createddate DATETIME2 '$.Createddate'
+			WITH (Parcelid INT '$.Parcelid',Senderid INT '$.Senderid',Receiverid BIGINT '$.Receiverid',Collectioncenterid INT '$.Collectioncenterid',Parceltypeid INT '$.Parceltypeid',Parcelweight DECIMAL(10,2) '$.Parcelweight',Dimensions VARCHAR(50) '$.Dimensions',Parcelstatusid INT '$.Parcelstatusid',Transitdays INT '$.Transitdays',Deliveryfee DECIMAL(10,2) '$.Deliveryfee',Trackingnumber VARCHAR(50) '$.Trackingnumber',Pickupdate DATETIME2 '$.Pickupdate',Dropoffdate DATETIME2 '$.Dropoffdate',Createddate DATETIME2 '$.Createddate'
 			)) AS source
 			ON target.Parcelid = source.Parcelid
 			WHEN MATCHED THEN
