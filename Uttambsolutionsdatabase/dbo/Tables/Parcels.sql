@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Parcels] (
     [Parcelid]         INT             IDENTITY (1, 1) NOT NULL,
-    [Senderid]         BIGINT          NULL,
-    [Receiverid]       BIGINT          NULL,
+    [Senderid]         INT          NULL,
+    [Receiverid]       INT          NULL,
     [Collectioncenterid ]  INT             NULL,
     [Parceltypeid]     INT             NULL,
     [Parcelweight]     DECIMAL (10, 2) NULL,
