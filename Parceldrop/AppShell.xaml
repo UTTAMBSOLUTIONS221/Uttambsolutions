@@ -9,7 +9,7 @@
     xmlns:startupPages="clr-namespace:Parceldrop.Views.Startup">
 
     <ShellContent
-     Title="PARCEL DROP" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TitleColor="#200b3a"
+     Title="PARCEL DROP DELIVERIES" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TitleColor="#200b3a"
      ContentTemplate="{DataTemplate local:MainPage}"
      Route="MainPage" />
 
