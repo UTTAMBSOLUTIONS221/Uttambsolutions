@@ -10,7 +10,7 @@ BEGIN
 	
 		BEGIN TRY
 		BEGIN TRANSACTION;
-		SELECT  PCC.Collectioncenterid,PCC.Collectionname,PCC.Collectionaddress,PCC.Phonenumber,PCC.Operatinghours,PCC.Collectionstatus,PCC.Managerid FROM Parcelcollectioncenters PCC
+		SELECT  PCC.Collectioncenterid,PCC.Collectionname,PCC.Phonenumber,PCC.Operatinghours,PCC.Collectionstatus,PCC.Managerid FROM Parcelcollectioncenters PCC
 
 	    Set @RespMsg ='Ok.'
 		Set @RespStat =0; 

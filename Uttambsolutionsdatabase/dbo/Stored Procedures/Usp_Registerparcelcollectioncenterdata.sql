@@ -13,16 +13,16 @@ BEGIN
 		BEGIN TRANSACTION;
 			MERGE INTO Parcelcollectioncenters AS target
 			USING (
-			SELECT Collectioncenterid,Collectionname,Collectionaddress,Phonenumber,Operatinghours,Collectionstatus,Managerid
+			SELECT Collectioncenterid,Collectionname,Phonenumber,Operatinghours,Collectionstatus,Managerid
 			FROM OPENJSON(@JsonObjectdata)
-			WITH (Collectioncenterid BIGINT '$.Collectioncenterid',Collectionname VARCHAR(100) '$.Collectionname',Collectionaddress VARCHAR(255) '$.Collectionaddress',Phonenumber VARCHAR(15) '$.Phonenumber',Operatinghours VARCHAR(50) '$.Operatinghours',Collectionstatus INT '$.Collectionstatus',Managerid INT '$.Managerid'
+			WITH (Collectioncenterid BIGINT '$.Collectioncenterid',Collectionname VARCHAR(100) '$.Collectionname',Phonenumber VARCHAR(15) '$.Phonenumber',Operatinghours VARCHAR(50) '$.Operatinghours',Collectionstatus INT '$.Collectionstatus',Managerid INT '$.Managerid'
 			)) AS source
 			ON target.Collectioncenterid = source.Collectioncenterid
 			WHEN MATCHED THEN
-			UPDATE SET target.Collectionname = source.Collectionname,target.Collectionaddress =source.Collectionaddress,target.Phonenumber =source.Phonenumber,target.Operatinghours =source.Operatinghours,target.Collectionstatus =source.Collectionstatus
+			UPDATE SET target.Collectionname = source.Collectionname,target.Phonenumber =source.Phonenumber,target.Operatinghours =source.Operatinghours,target.Collectionstatus =source.Collectionstatus
 			WHEN NOT MATCHED BY TARGET THEN
-			INSERT (Collectionname,Collectionaddress,Phonenumber,Operatinghours,Collectionstatus,Managerid)
-			VALUES (source.Collectionname,source.Collectionaddress,source.Phonenumber,source.Operatinghours,source.Collectionstatus,source.Managerid);
+			INSERT (Collectionname,Phonenumber,Operatinghours,Collectionstatus,Managerid)
+			VALUES (source.Collectionname,source.Phonenumber,source.Operatinghours,source.Collectionstatus,source.Managerid);
 		Set @RespMsg ='Success'
 		Set @RespStat =0; 
 		COMMIT TRANSACTION;
