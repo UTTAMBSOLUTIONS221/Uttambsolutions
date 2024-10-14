@@ -38,6 +38,7 @@ namespace Parceldrop
 
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<RegisterPage>();
 
 
             // View Models
