@@ -24,6 +24,10 @@
                             <th>Name</th>
                             <th>Phone</th>
                             <th>Hours</th>
+                            <th>County</th>
+                            <th>Subcounty</th>
+                            <th>Ward</th>
+                            <th>Street</th>
                             <th>Status</th>
                             <th>Manager</th>
                             <th class="text-right">Action</th>
@@ -39,6 +43,10 @@
                                     <td>@item.Collectionname </td>
                                     <td>@item.Phonenumber</td>
                                     <td>@item.Operatinghours</td>
+                                    <td>@item.Countyname</td>
+                                    <td>@item.Subcountyname</td>
+                                    <td>@item.Subcountywardname</td>
+                                    <td>@item.Streetorlandmark</td>
                                     <td class="text-nowrap">
                                         @if (item.Collectionstatus == 0)
                                         {
