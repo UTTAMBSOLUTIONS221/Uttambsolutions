@@ -20,31 +20,6 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="form-group">
-                <label class="font-weight-light">Pickup Center</label>
-                <select class="form-control form-control-sm" asp-for="@Model.Pickupcenterid" asp-items="@Collectioncenter" id="Pickupcenterid">
-                    <option value="">---Select---</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="font-weight-light">Delivery Center</label>
-                <select class="form-control form-control-sm" asp-for="@Model.Deliverycenterid" asp-items="@Collectioncenter" id="Deliverycenterid">
-                    <option value="">---Select---</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="font-weight-light">Pickup Date</label>
-                <input class="form-control form-control-sm" readonly id="Pickupdateid" />
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
                 <label class="font-weight-light">Sender</label>
                 <select class="form-control form-control-sm" asp-for="@Model.Senderid" asp-items="@ParcelSenderReciever" id="Senderid">
                     <option value="">---Select---</option>
@@ -94,13 +69,13 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Drop off Date</label>
-                <input class="form-control form-control-sm" type="date" onchange="calculatePickupDate()" asp-for="@Model.Dropoffdate" id="Dropoffdateid" />
+                <input class="form-control form-control-sm" type="date" asp-for="@Model.Dropoffdate" id="Dropoffdateid" />
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label class="font-weight-light">Transit Days</label>
-                <input class="form-control form-control-sm" type="number" onchange="calculatePickupDate()" asp-for="@Model.Transitdays" id="Transitdaysid" />
+                <input class="form-control form-control-sm" type="number" asp-for="@Model.Transitdays" id="Transitdaysid" />
             </div>
         </div>
         <div class="col-sm-4">
