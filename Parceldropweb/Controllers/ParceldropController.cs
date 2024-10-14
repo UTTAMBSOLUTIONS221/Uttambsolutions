@@ -63,7 +63,7 @@ namespace Parceldropweb.Controllers
             {
                 model = await bl.Getcollectioncenterparcelsdatabyid(Parcelid);
             }
-            return PartialView();
+            return PartialView(model);
         }
         public async Task<JsonResult> Addcollectioncenterparceldata(Collectioncenterparcels model)
         {
