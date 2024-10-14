@@ -26,7 +26,7 @@ namespace Parceldropweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Systemstaffs()
         {
-            var data = await bl.Getsystemstaffdata(0, 1000);
+            var data = await bl.Getparceldropsystemstaffdata();
             return View(data);
         }
 

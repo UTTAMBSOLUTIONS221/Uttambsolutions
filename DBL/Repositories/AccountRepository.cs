@@ -26,6 +26,15 @@ namespace DBL.Repositories
                 return connection.Query<SystemStaff>("Usp_Getsystemstaffdata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+        public IEnumerable<SystemStaff> Getparceldropsystemstaffdata()
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                return connection.Query<SystemStaff>("Usp_Getparceldropsystemstaffdata", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
         public IEnumerable<SystemStaff> Getsystemstaffowneragentdata()
         {
             using (var connection = new SqlConnection(_connString))

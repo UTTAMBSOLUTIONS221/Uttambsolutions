@@ -71,6 +71,15 @@ namespace DBL
                 return Resp;
             });
         }
+
+        public Task<IEnumerable<SystemStaff>> Getparceldropsystemstaffdata()
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.AccountRepository.Getparceldropsystemstaffdata();
+                return Resp;
+            });
+        }
         public Task<IEnumerable<SystemStaff>> Getsystemstaffdatabyparentid(long Parentid)
         {
             return Task.Run(() =>
