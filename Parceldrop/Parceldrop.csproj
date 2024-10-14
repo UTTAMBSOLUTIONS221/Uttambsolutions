@@ -133,10 +133,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ViewModels\Startup\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.91" />
 	</ItemGroup>
 

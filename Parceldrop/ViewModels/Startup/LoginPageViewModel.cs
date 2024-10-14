@@ -46,7 +46,6 @@ public class LoginPageViewModel : INotifyPropertyChanged
         {
             _firstName = value;
             OnPropertyChanged();
-            ((Command)SignUpCommand).ChangeCanExecute();
         }
     }
 
@@ -57,7 +56,6 @@ public class LoginPageViewModel : INotifyPropertyChanged
         {
             _lastName = value;
             OnPropertyChanged();
-            ((Command)SignUpCommand).ChangeCanExecute();
         }
     }
 
@@ -68,7 +66,6 @@ public class LoginPageViewModel : INotifyPropertyChanged
         {
             _emailAddress = value;
             OnPropertyChanged();
-            ((Command)SignUpCommand).ChangeCanExecute();
         }
     }
 
@@ -79,7 +76,6 @@ public class LoginPageViewModel : INotifyPropertyChanged
         {
             _phoneNumber = value;
             OnPropertyChanged();
-            ((Command)SignUpCommand).ChangeCanExecute();
         }
     }
     public string StaffDesignation
@@ -89,7 +85,6 @@ public class LoginPageViewModel : INotifyPropertyChanged
         {
             _staffDesignation = value;
             OnPropertyChanged();
-            ((Command)SignUpCommand).ChangeCanExecute();
         }
     }
     public bool Accepttermsandcondition
@@ -99,7 +94,6 @@ public class LoginPageViewModel : INotifyPropertyChanged
         {
             _accepttermsandcondition = value;
             OnPropertyChanged();
-            ((Command)SignUpCommand).ChangeCanExecute();
         }
     }
 
@@ -120,7 +114,6 @@ public class LoginPageViewModel : INotifyPropertyChanged
         {
             _confirmPassword = value;
             OnPropertyChanged();
-            ((Command)SignUpCommand).ChangeCanExecute();
         }
     }
     private string _userName;
@@ -131,7 +124,6 @@ public class LoginPageViewModel : INotifyPropertyChanged
         {
             _userName = value;
             OnPropertyChanged();
-            ((Command)LoginCommand).ChangeCanExecute();
         }
     }
     public bool IsPasswordHidden
