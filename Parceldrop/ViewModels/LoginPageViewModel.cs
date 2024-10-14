@@ -252,9 +252,9 @@ public class LoginPageViewModel : INotifyPropertyChanged
         ToggleConfirmPasswordVisibilityCommand = new Command(ToggleConfirmPasswordVisibility);
         Systemstaffdesignation = new ObservableCollection<ListModel>
         {
-            new ListModel { Value = "Owner", Text = "Owner" },
-            new ListModel { Value = "Agent", Text = "Agent" },
-            new ListModel { Value = "Tenant", Text = "Tenant" },
+            new ListModel { Value = "Collectioncenter", Text = "Collection Center" },
+            new ListModel { Value = "Courier", Text = "Courier" },
+            new ListModel { Value = "Customer", Text = "Customer" },
         };
         LoginCommand = new Command(async () => await LoginAsync(), () => !IsProcessing);
         RegisterCommand = new Command(OnRegister);
