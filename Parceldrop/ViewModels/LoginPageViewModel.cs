@@ -282,8 +282,10 @@ public class LoginPageViewModel : INotifyPropertyChanged
     }
     private async void OnRegister()
     {
+        IsProcessing = true;
         SystemStaff systemStaff = null;
         await Shell.Current.GoToAsync(nameof(RegisterPage));
+        IsProcessing = false;
     }
     private async void OnForgotPassword()
     {
