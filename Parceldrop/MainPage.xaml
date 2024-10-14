@@ -24,7 +24,7 @@
 
                     <Label Text="Become a member of our growing community and take part in our mission!" FontSize="16" TextColor="Gray" HorizontalOptions="Center" Margin="0,0,0,0" />
 
-                    <Button Text="Joinus Now" TextColor="White" FontSize="24" FontAttributes="Bold" WidthRequest="200" CornerRadius="20" BackgroundColor="#ed7a17" Command="{Binding JoinMaqaoPlusCommand}" HorizontalOptions="Center" VerticalOptions="EndAndExpand" />
+                    <Button Text="JOIN US NOW" TextColor="White" FontSize="24" FontAttributes="Bold" WidthRequest="200" CornerRadius="20" BackgroundColor="#ed7a17" Command="{Binding JoinMaqaoPlusCommand}" HorizontalOptions="Center" VerticalOptions="EndAndExpand" />
 
                     <!-- Social Media Section -->
                     <Label Text="Follow us on Social Media" FontSize="20" TextColor="#200b3a" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,20,0,10" />
