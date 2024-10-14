@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Parceldrop.Helpers"
-           x:Class="Parceldrop.Views.Startup.ValidateStaffAccountPage"
+             x:Class="Parceldrop.Views.Startup.ValidateStaffAccountPage"
              Title="VALIDATE ACCOUNT">
 
     <ContentPage.Resources>
@@ -19,13 +19,13 @@
         </Grid.RowDefinitions>
 
         <ScrollView Grid.Row="0">
-            <StackLayout Padding="10">
+            <StackLayout Padding="10" HorizontalOptions="Center" VerticalOptions="Center">
                 <StackLayout Padding="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
                     <Label Text="Customer Information" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#ed7a17" TextTransform="Uppercase" FontSize="20" Margin="0,0,0,10"/>
                     <BoxView Color="#ed7a17" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
-                <StackLayout Padding="0" Spacing="8">
-                    <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                <StackLayout Padding="0" Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Grid ColumnSpacing="2" RowSpacing="5" HorizontalOptions="Center" VerticalOptions="Center">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -39,7 +39,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="0">
+                        <Label FontSize="20" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="0" HorizontalOptions="Center">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="Greetings " />
@@ -47,8 +47,8 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Label Text="You need to activate your account" FontSize="16" Grid.Row="1" MaxLines="2" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand"/>
-                        <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="2">
+                        <Label Text="You need to activate your account" FontSize="16" Grid.Row="1" MaxLines="2" LineBreakMode="TailTruncation" HorizontalOptions="Center"/>
+                        <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="2" HorizontalOptions="Center">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="Your activation amount is Ksh. " />
@@ -59,7 +59,7 @@
 
                         <Image Source="familybank.png" Grid.Row="3" HorizontalOptions="Center" VerticalOptions="Center" MaximumHeightRequest="50"/>
 
-                        <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4">
+                        <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="4" HorizontalOptions="Center">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="Go to Lipa na Mpesa paybill " />
@@ -67,7 +67,7 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="5">
+                        <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="5" HorizontalOptions="Center">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="and use " />
@@ -76,15 +76,15 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="6">
+                        <Label FontSize="16" MaxLines="3" LineBreakMode="TailTruncation" Grid.Row="6" HorizontalOptions="Center">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="and pay the above amount " />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Label HorizontalTextAlignment="Center" Text="Once you receive the Confirmation," FontSize="16" Grid.Row="9" FontAttributes="Bold" TextColor="#ed7a17" TextTransform="Uppercase"  LineBreakMode="WordWrap" HorizontalOptions="Fill"/>
-                        <Label HorizontalTextAlignment="Center" Text="Wait for about 10 minutes and login." FontSize="16" Grid.Row="10" FontAttributes="Bold" TextColor="#ed7a17" TextTransform="Uppercase" LineBreakMode="WordWrap" HorizontalOptions="Fill"/>
+                        <Label HorizontalTextAlignment="Center" Text="Once you receive the Confirmation," FontSize="16" Grid.Row="9" FontAttributes="Bold" TextColor="#ed7a17" TextTransform="Uppercase"  LineBreakMode="WordWrap" HorizontalOptions="Center"/>
+                        <Label HorizontalTextAlignment="Center" Text="Wait for about 10 minutes and login." FontSize="16" Grid.Row="10" FontAttributes="Bold" TextColor="#ed7a17" TextTransform="Uppercase" LineBreakMode="WordWrap" HorizontalOptions="Center"/>
                     </Grid>
                 </StackLayout>
             </StackLayout>
