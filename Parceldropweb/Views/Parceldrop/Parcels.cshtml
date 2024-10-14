@@ -26,19 +26,22 @@
                                 Received Parcels
                             </div>
                             <div class="card-body">
-                                @if (Model != null && Model.Any(p => p.Parcelstatusname == "Received"))
+                                 @if (Model != null && Model.Any(p => p.Parcelstatusname == "Received"))
                                 {
                                     foreach (var item in Model.Where(p => p.Parcelstatusname == "Received"))
                                     {
-                                      <div class="card mb-2 bg-light p-0">
+                                      <div class="card mb-2 p-0">
                                             <div class="card-body">
-                                                <h6 class="mb-0 font-weight-bold">@item.Trackingnumber <b>  Fee: </b>@item.Deliveryfee.ToString("#,##0.00")</h6>
+                                                <h6 class="mb-0 font-weight-bold">@item.Trackingnumber <b>  Fee: </b>KES. @item.Deliveryfee.ToString("#,##0.00")</h6>
                                                 <div class="text-muted" style="font-size: 0.9rem; line-height: 1.4;">
                                                     <p class="mb-0">Sender: @item.Sendername</p>
                                                     <p class="mb-0">Receiver: @item.Recievername</p>
                                                     <p class="mb-0"><b>Type:</b> @item.Parceltypename<b> Weight:</b>@item.Parcelweight.ToString("#,##0.00")</p>
                                                     <p class="mb-0">Dropoff Date: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
                                                     <p class="mb-0">Pickup Date: @item.Pickupdate?.ToString("yyyy-MM-dd")</p>
+                                                    <a asp-action="Addcollectionparcel" asp-controller="Parceldrop" asp-route-code="@Guid.NewGuid()" asp-route-Parcelid="@item.Parcelid" asp-area="" class="btn-info btn-xs btn-outline-info btn-block text-white font-weight-bold text-uppercase col-sm-3" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                                    <a asp-action="Addcollectionparcel" asp-controller="Parceldrop" asp-route-code="@Guid.NewGuid()" asp-route-Parcelid="@item.Parcelid" asp-area="" class="btn-info btn-xs btn-outline-info btn-block text-white font-weight-bold text-uppercase col-sm-3" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Details</a>
+                                                    <a asp-action="Addcollectionparcel" asp-controller="Parceldrop" asp-route-code="@Guid.NewGuid()" asp-route-Parcelid="@item.Parcelid" asp-area="" class="btn-info btn-xs btn-outline-info btn-block text-white font-weight-bold text-uppercase col-sm-3" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Assign</a>
                                                 </div>
                                             </div>
                                         </div>
