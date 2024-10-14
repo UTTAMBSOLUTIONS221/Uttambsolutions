@@ -30,7 +30,6 @@ namespace Parceldropweb.Controllers
             return View(data);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Addstaff(int Userid)
         {
