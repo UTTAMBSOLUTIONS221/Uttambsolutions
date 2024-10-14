@@ -18,16 +18,16 @@
             <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout Padding="20">
                     <!-- Welcome Section -->
-                    <Label Text="Welcome to JCM Church! Join us in our mission of faith, community, and spiritual growth. Together, we are stronger!" FontSize="18" TextColor="Black" HorizontalOptions="Center" VerticalOptions="StartAndExpand" Margin="0,0,0,20" />
+                    <Label Text="Welcome to ParcelDrop! ParcelDrop is a convenient and reliable delivery app that streamlines your shipping. With numerous collection centers and real-time tracking, you can easily drop off, pick up, or send parcels directly to any location. Enjoy secure, fast deliveries with flexible options and simple payments. ParcelDrop—your trusted delivery partner!" FontSize="18" TextColor="Black" HorizontalOptions="Center" VerticalOptions="StartAndExpand" Margin="0,0,0,0" />
                     <!-- Membership Section -->
-                    <Label Text="Membership Registration" FontSize="24" TextColor="#200b3a" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,20,0,10" />
+                    <Label Text="Membership Registration" FontSize="24" TextColor="#200b3a" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,0" />
 
-                    <Label Text="Become a member of our growing community and take part in our mission!" FontSize="16" TextColor="Gray" HorizontalOptions="Center" Margin="0,10,0,20" />
+                    <Label Text="Become a member of our growing community and take part in our mission!" FontSize="16" TextColor="Gray" HorizontalOptions="Center" Margin="0,0,0,0" />
 
-                    <Button Text="Register Now" TextColor="White" FontAttributes="Bold" WidthRequest="200" CornerRadius="20" BackgroundColor="#ed7a17" Command="{Binding JoinMaqaoPlusCommand}" HorizontalOptions="Center" VerticalOptions="EndAndExpand" Padding="10,5"/>
+                    <Button Text="Joinus Now" TextColor="White" FontSize="24" FontAttributes="Bold" WidthRequest="200" CornerRadius="20" BackgroundColor="#ed7a17" Command="{Binding JoinMaqaoPlusCommand}" HorizontalOptions="Center" VerticalOptions="EndAndExpand" />
 
                     <!-- Social Media Section -->
-                    <Label Text="Follow us on Social Media" FontSize="24" TextColor="#200b3a" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,20,0,10" />
+                    <Label Text="Follow us on Social Media" FontSize="20" TextColor="#200b3a" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,20,0,10" />
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
                         <Button Text="Facebook" BackgroundColor="#3b5998" HeightRequest="40" TextColor="White" Command="{Binding FacebookCommand}" />
