@@ -82,6 +82,8 @@ namespace WEB.Controllers
             var commerceProducts = await bl.Getsystemorganizationshopproductsdatabyid(Shopproductid);
             return View(commerceProducts);
         }
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();

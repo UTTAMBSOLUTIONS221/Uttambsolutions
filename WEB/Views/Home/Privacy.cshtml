@@ -1,6 +1,226 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    Layout = null;
 }
-<h1>@ViewData["Title"]</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Maqao Plus | Rental Management System</title>
+    <meta name="description" content="Maqao Plus is a comprehensive rental management system that simplifies the collection of rental fees, tracks tenant history, and manages expenses efficiently. Experience seamless property management with Maqao Plus." />
+    <meta name="keywords" content="Maqao Plus, rental management, property management, tenant history, expense management, rental collection, property software" />
+    <meta name="author" content="Maqao Plus" />
+    <meta name="google-adsense-account" content="ca-pub-2850934153859537">
 
-<p>Use this page to detail your site's privacy policy.</p>
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@ViewData["Title"] - Maqao Plus | Rental Management System" />
+    <meta property="og:description" content="Maqao Plus streamlines rental management by simplifying the collection of fees, tracking tenant history, and managing expenses. Improve your property management process with Maqao Plus." />
+    <meta property="og:image" content="https://maqao.uttambsolutions.com/images/maqaopluslogo.png" />
+    <meta property="og:url" content="https://maqao.uttambsolutions.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@ViewData["Title"] - Maqao Plus | Rental Management System" />
+    <meta name="twitter:description" content="Manage your rental properties effortlessly with Maqao Plus. From rental fee collection to tenant history and expense tracking, we've got you covered." />
+    <meta name="twitter:image" content="https://maqao.uttambsolutions.com/images/maqaopluslogo.png" />
+
+    <!-- Schema.org Markup -->
+    <meta itemprop="name" content="@ViewData["Title"] - Maqao Plus | Rental Management System" />
+    <meta itemprop="description" content="Maqao Plus is designed for easy rental management, helping you collect fees, manage tenant history, and track expenses effectively." />
+    <meta itemprop="image" content="https://maqao.uttambsolutions.com/images/maqaopluslogo.png" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link href="~/lib/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: #0a506c;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+            ul li {
+                margin-bottom: 5px;
+            }
+
+        .header-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .header-logo img {
+                max-width: 150px;
+            }
+
+        .terms-date {
+            text-align: right;
+            font-size: 14px;
+            color: #555;
+        }
+
+        hr {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-logo">
+            <img src="~/images/uttambsolutionlogo.png" alt="UTTAMB SOLUTIONS LIMITED">
+            <h1>Terms and Conditions</h1>
+        </div>
+
+        <p class="terms-date"><strong>Effective Date:</strong> SEP-01-2024 </p>
+
+        <hr />
+
+        <p>Welcome to UTTAMB SOLUTIONS LIMITED ("we," "our," "us"). These Terms and Conditions ("Terms") govern your use of our services, including our website, software, products, and related services (collectively, the "Services"). By accessing or using our Services, you agree to be bound by these Terms. If you do not agree with these Terms, please do not use our Services.</p>
+
+        <h2>1. Definitions</h2>
+        <ul>
+            <li><strong>"Client"</strong> refers to any individual or entity that uses our Services.</li>
+            <li><strong>"Services"</strong> refers to any services provided by UTTAMB SOLUTIONS LIMITED, including but not limited to software development, IT support, consulting, system subscriptions, and related ICT services.</li>
+        </ul>
+
+        <h2>2. Services Provided</h2>
+        <p>We offer a range of ICT services, including software development, IT consulting, network management, data security, system subscriptions, and other related services. The specific services to be provided will be detailed in a separate agreement or statement of work ("SOW") between you and us.</p>
+
+        <h2>3. Acceptance of Terms</h2>
+        <p>By using our Services, you agree to comply with and be bound by these Terms. If you are entering into this agreement on behalf of an entity, you represent that you have the authority to bind that entity to these Terms.</p>
+
+        <h2>4. User Responsibilities</h2>
+        <p>You agree to use our Services only for lawful purposes and in accordance with these Terms. You are responsible for ensuring that your use of our Services complies with all applicable laws and regulations.</p>
+
+        <h2>5. System Subscription Terms</h2>
+        <ul>
+            <li><strong>Subscription Plans:</strong> We offer various subscription plans for our Services, each with different features, pricing, and payment terms. Details of the subscription plans will be provided at the time of subscription.</li>
+            <li><strong>Subscription Period:</strong> The subscription period will be specified in your subscription plan. Unless otherwise stated, subscriptions will automatically renew at the end of each subscription period unless you cancel the subscription in accordance with the cancellation policy below.</li>
+            <li><strong>Cancellation:</strong> You may cancel your subscription at any time by providing written notice to us at least 30 days before the end of the current subscription period. Cancellations will take effect at the end of the current subscription period, and you will not be entitled to any refunds for partial subscription periods.</li>
+        </ul>
+
+        <h2>6. Payment Terms</h2>
+        <ul>
+            <li><strong>Payment Methods:</strong> Payment for our Services, including subscription fees, is due within 7 days from the date of invoice unless otherwise agreed in a separate contract.</li>
+            <li><strong>Late Payments:</strong> Late payments may be subject to interest charges as permitted by law. We reserve the right to suspend or terminate your access to the Services if payment is not received within the specified timeframe.</li>
+            <li><strong>Automatic Payments:</strong> If you have provided us with payment details for automatic payments, you authorize us to charge the subscription fees to your designated payment method at the beginning of each subscription period.</li>
+            <li><strong>Refund Policy:</strong> All payments are non-refundable unless otherwise specified in a separate agreement. If we terminate your subscription for a breach of these Terms, you will not be entitled to any refunds.</li>
+        </ul>
+
+        <h2>7. Intellectual Property</h2>
+        <p>All intellectual property rights, including but not limited to software, designs, methodologies, and documentation, created or used by us in the provision of the Services, remain the property of UTTAMB SOLUTIONS LIMITED unless otherwise agreed in writing.</p>
+        <p>You are granted a limited, non-exclusive, non-transferable license to use any deliverables provided by us as part of the Services solely for your internal business purposes.</p>
+
+        <h2>8. Confidentiality</h2>
+        <p>Both parties agree to keep confidential any non-public information disclosed during the provision of Services. Confidential information shall not be disclosed to any third party without the prior written consent of the disclosing party, except as required by law.</p>
+
+        <h2>9. Data Protection</h2>
+        <p>We will process any personal data provided by you in accordance with our Privacy Policy and the Kenya Data Protection Act, 2019. You agree to comply with all applicable data protection laws when using our Services.</p>
+
+        <h2>10. Warranties and Disclaimers</h2>
+        <p>We warrant that the Services will be performed with reasonable skill and care. However, we do not guarantee that the Services will be uninterrupted or error-free.</p>
+        <p>Except as expressly provided in these Terms, the Services are provided "as is," and we disclaim all other warranties, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+
+        <h2>11. Limitation of Liability</h2>
+        <p>To the fullest extent permitted by law, UTTAMB SOLUTIONS LIMITED shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or use, arising out of or relating to the Services.</p>
+        <p>Our total liability to you for any claims arising out of or relating to the Services shall not exceed the amount you have paid us in the 12 months preceding the event giving rise to the claim.</p>
+
+        <h2>12. Indemnification</h2>
+        <p>You agree to indemnify and hold UTTAMB SOLUTIONS LIMITED, its officers, directors, employees, and agents harmless from and against any and all claims, liabilities, damages, losses, and expenses, including reasonable legal fees, arising out of or in any way connected with your use of the Services or violation of these Terms.</p>
+
+        <h2>13. Termination</h2>
+        <p>Either party may terminate these Terms or any specific Service at any time by providing [insert notice period,30 days written notice to the other party.</p>
+        <p>We may terminate these Terms immediately if you breach any provision of these Terms or engage in conduct that, in our sole discretion, may harm our reputation or business.</p>
+
+        <h2>14. Force Majeure</h2>
+        <p>We shall not be liable for any delay or failure to perform our obligations under these Terms if such delay or failure is due to circumstances beyond our reasonable control, including but not limited to acts of God, natural disasters, war, terrorism, strikes, or government restrictions.</p>
+
+        <h2>15. Governing Law and Dispute Resolution</h2>
+        <p>These Terms shall be governed by and construed in accordance with the laws of Kenya.</p>
+        <p>Any disputes arising out of or in connection with these Terms shall be resolved through amicable negotiation. If the dispute cannot be resolved through negotiation, it shall be referred to mediation or arbitration in accordance with the laws of Kenya.</p>
+
+        <h2>16. Amendments</h2>
+        <p>We reserve the right to modify these Terms at any time. We will notify you of any material changes by posting the revised Terms on our website or by other appropriate means. Your continued use of the Services after such changes constitutes your acceptance of the new Terms.</p>
+
+        <h2>17. Severability</h2>
+        <p>If any provision of these Terms is found to be invalid or unenforceable by a court of competent jurisdiction, the remaining provisions shall remain in full force and effect.</p>
+
+        <h2>18. Entire Agreement</h2>
+        <p>These Terms, together with any agreements or statements of work entered into between you and us, constitute the entire agreement between the parties and supersede any prior agreements, understandings, or representations, whether oral or written.</p>
+
+        <h2>19. Contact Information</h2>
+        <p>If you have any questions or concerns regarding these Terms, please contact us at:</p>
+        <p>
+            UTTAMB SOLUTIONS LIMITED<br>
+            Email: support@uttambsolutions.com<br>
+            Phone: 0792714257
+        </p>
+
+        <footer>
+            <p>&copy; @DateTime.Now.Year UTTAMB SOLUTIONS LIMITED. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="~/lib/plugins/jquery/jquery.min.js"></script>
+    <script src="~/lib/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/datatables-buttons/js/datatables.buttons.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/lib/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/lib/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
+</body>
+</html>
