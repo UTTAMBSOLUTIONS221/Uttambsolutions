@@ -332,21 +332,7 @@ public class LoginPageViewModel : INotifyPropertyChanged
                     var accountVerificationPage = new ValidateStaffAccountPage(this);
                     await Shell.Current.Navigation.PushAsync(accountVerificationPage);
                 }
-                else if (response.Usermodel.Loginstatus != 0)
-                {
-                    if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                    {
-                        AppShell.Current.Dispatcher.Dispatch(async () =>
-                        {
-                            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-                        });
-                    }
-                    else
-                    {
-                        await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-                    }
-                }
-                else
+                else if (response.Usermodel.Loginstatus == (int)UserLoginStatus.Ok)
                 {
                     if (response.Usermodel.Updateprofile)
                     {
@@ -358,9 +344,21 @@ public class LoginPageViewModel : INotifyPropertyChanged
                     {
                         string userDetailStr = JsonConvert.SerializeObject(response);
                         Preferences.Set(nameof(App.UserDetails), userDetailStr);
-
-                        // Example additional logic after successful login
                         await AppConstant.AddFlyoutMenusDetails();
+                    }
+                }
+                else
+                {
+                    if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                    {
+                        AppShell.Current.Dispatcher.Dispatch(async () =>
+                        {
+                            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+                        });
+                    }
+                    else
+                    {
+                        await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
                     }
                 }
             }
