@@ -29,6 +29,9 @@ namespace Parceldropweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Addcollectioncenter(int Collectioncenterid)
         {
+            ViewData["Systemcountylists"] = bl.GetListModel(ListModelType.SystemCounty).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["Systemsubcountylists"] = bl.GetListModel(ListModelType.SystemSubCounty).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["Systemsubcountywardlists"] = bl.GetListModel(ListModelType.SystemSubCountyWard).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Parcelcollectioncenters model = new Parcelcollectioncenters();
             if (Collectioncenterid > 0)
             {

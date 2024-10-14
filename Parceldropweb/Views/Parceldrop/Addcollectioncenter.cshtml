@@ -1,4 +1,9 @@
 ﻿@model DBL.Entities.Parcelcollectioncenters
+@{
+    var Systemcounty = ViewData["Systemcountylists"] as List<SelectListItem>;
+    var Systemsubcounty = ViewData["Systemsubcountylists"] as List<SelectListItem>;
+    var Systemsubcountyward = ViewData["Systemsubcountywardlists"] as List<SelectListItem>;
+}
 <div class="modal-header">
     <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Collection Detail</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
