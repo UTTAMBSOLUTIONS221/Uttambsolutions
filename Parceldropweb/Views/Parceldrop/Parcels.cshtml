@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<DBL.Entities.Collectioncenterparcels>
 @{
     ViewData["Title"] = "Parcels";
     Layout = "~/Views/Shared/_Layoutauth.cshtml";
@@ -21,43 +21,46 @@
                 <table class="table table-bordered table-striped compact table-sm table-responsive-sm text-nowrap nowrap" id="AllsystemDataTables">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Hours</th>
+                            <th>#</th>
+                            <th>Sender</th>
+                            <th>Reciever</th>
+                            <th>Pickup Center</th>
+                            <th>Delivery Center</th>
+                            <th>Parcel Type</th>
+                            <th>Weight</th>
+                            <th>Dimension</th>
                             <th>Status</th>
-                            <th>Manager</th>
+                            <th>Fee</th>
+                            <th>Dropoff Date</th>
+                            <th>Collection Date</th>
                             <th class="text-right">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                       @*  @if (Model != null)
+                        @if (Model != null)
                         {
 
                             foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@item.Collectionname </td>
-                                    <td>@item.Collectionaddress</td>
-                                    <td>@item.Phonenumber</td>
-                                    <td>@item.Operatinghours</td>
-                                    <td class="text-nowrap">
-                                        @if (item.Collectionstatus == 0)
-                                        {
-                                            <span class="badge badge-info badge-info-xs text-uppercase">Validated</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge badge-danger badge-info-xs  text-uppercase">Not Validated</span>
-                                        }
-                                    </td>
-                                    <td>@item.Managername</td>
+                                    <td>@item.Trackingnumber</td>
+                                    <td>@item.Sendername</td>
+                                    <td>@item.Recievername</td>
+                                    <td>@item.Pickupcentername</td>
+                                    <td>@item.Deliverycentername</td>
+                                    <td>@item.Parceltypename</td>
+                                    <td>@item.Parcelweight</td>
+                                    <td>@item.Dimensions</td>
+                                    <td>@item.Parcelstatusname</td>
+                                    <td>@item.Deliveryfee.ToString("#,##0.00")</td>
+                                    <td>@item.Dropoffdate.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.Pickupdate.ToString("yyyy-MM-dd")</td>
                                     <td class="text-right nowrap text-nowrap">
-                                        <a asp-action="Addcollectioncenter" asp-controller="Parceldrop" asp-route-code="@Guid.NewGuid()" asp-route-Collectioncenterid="@item.Collectioncenterid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                        <a asp-action="Addcollectionparcel" asp-controller="Parceldrop" asp-route-code="@Guid.NewGuid()" asp-route-Parcelid="@item.Parcelid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
                                     </td>
                                 </tr>
                             }
-                        } *@
+                        }
                     </tbody>
                 </table>
             </div>
