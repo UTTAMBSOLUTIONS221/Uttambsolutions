@@ -30,15 +30,15 @@
                                 {
                                     foreach (var item in Model.Where(p => p.Parcelstatusname == "Received"))
                                     {
-                                       <div class="card mb-2 bg-light">
-                                            <div class="card-body d-flex justify-content-between align-items-center" style="padding: 10px;">
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0 font-weight-bold">@item.Trackingnumber</h6>
-                                                </div>
-                                                <div class="ml-3">
-                                                    <span>Sender: @item.Sendername</span> |
-                                                    <span>Receiver: @item.Recievername</span> |
-                                                    <span>Date: @item.Dropoffdate?.ToString("yyyy-MM-dd")</span>
+                                      <div class="card mb-2 bg-light p-0">
+                                            <div class="card-body">
+                                                <h6 class="mb-0 font-weight-bold">@item.Trackingnumber <b>  Fee: </b>@item.Deliveryfee.ToString("#,##0.00")</h6>
+                                                <div class="text-muted" style="font-size: 0.9rem; line-height: 1.4;">
+                                                    <p class="mb-0">Sender: @item.Sendername</p>
+                                                    <p class="mb-0">Receiver: @item.Recievername</p>
+                                                    <p class="mb-0"><b>Type:</b> @item.Parceltypename<b> Weight:</b>@item.Parcelweight.ToString("#,##0.00")</p>
+                                                    <p class="mb-0">Dropoff Date: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
+                                                    <p class="mb-0">Pickup Date: @item.Pickupdate?.ToString("yyyy-MM-dd")</p>
                                                 </div>
                                             </div>
                                         </div>
