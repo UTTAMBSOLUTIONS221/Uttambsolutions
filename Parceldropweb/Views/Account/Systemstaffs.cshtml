@@ -1,0 +1,184 @@
+﻿﻿
+@model IEnumerable<DBL.Entities.SystemStaff>
+@{
+    ViewData["Title"] = "Systemstaffs";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-outline card-info">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h6 class="font-weight-bold text-sm card-title">Staffs</h6>
+                    </div>
+                    <div class="col-sm-2">
+                        <a asp-action="Addstaff" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Userid="0" asp-area="" id="CAN_ADD_STAFF" style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Staff</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-bordered table-striped compact table-sm table-responsive-sm text-nowrap nowrap" id="AllsystemDataTables">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@(item.Firstname + " " + item.Lastname)</td>
+                                    <td>@item.Emailaddress</td>
+                                    <td>@item.Phonenumber</td>
+                                    <td>@item.Rolename</td>
+                                    <td class="text-nowrap">
+                                        @if (item.Isactive)
+                                        {
+                                            <span class="badge badge-info badge-info-xs text-uppercase">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger badge-info-xs  text-uppercase">Inactive</span>
+                                        }
+                                        @if (item.Isdeleted)
+                                        {
+                                            <span class="badge badge-danger badge-info-xs  text-uppercase">Deleted</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-info  text-uppercase   badge-info-xs">Notdeleted</span>
+                                        }
+                                        @if (item.Loginstatus == 0)
+                                        {
+                                            <span class="badge badge-info badge-info-xs text-uppercase  text-white">Account okay</span>
+                                        }
+                                        else if (item.Loginstatus == 1)
+                                        {
+                                            <span class="badge badge-warning warning-info-xs  text-uppercase  text-white">Verify account</span>
+                                        }
+                                        else if (item.Loginstatus == 2)
+                                        {
+                                            <span class="badge badge-warning warning-info-xs  text-uppercase text-white">Change Password</span>
+                                        }
+                                        else if (item.Loginstatus == 3)
+                                        {
+                                            <span class="badge badge-warning warning-info-xs text-white">Service Unavailable</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger danger-info-xs text-white  text-uppercase ">Account Blocked</span>
+                                        }
+                                    </td>
+                                    <td class="text-right nowrap text-nowrap">
+                                        <a asp-action="Resendstaffpassword" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Tenantstaffid="@item.Userid" asp-area="" id="CAN_RESEND_STAFF_PASSWORD"  style="display:none;" class="btn-info btn-xs btn-outline-info font-weight-bold text-white text-uppercase main">Resend Password</a>
+                                        <a asp-action="Addstaff" asp-controller="Account" asp-route-code="@Guid.NewGuid()" asp-route-Userid="@item.Userid" asp-area="" id="CAN_EDIT_STAFF"  style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                        @if (item.Isactive)
+                                        {
+                                            <a onclick="deactivatethis(event)" data-tablename="Systemstaffs" data-Columname="IsActive" data-Status="0" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_DEACTIVATE_STAFF"  style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Deactivate</a>
+                                        }
+                                        else
+                                        {
+                                            <a onclick="activatethis(event)" data-Tablename="Systemstaffs" data-Columname="IsActive" data-Status="1" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_ACTIVATE_STAFF"  style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Activate</a>
+                                        }
+                                        @if (item.Isdeleted)
+                                        {
+                                            <a onclick="restorethis(event)" data-Tablename="Systemstaffs" data-Columname="IsDeleted" data-Status="0" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_RESTORE_STAFF"  style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Restore</a>
+                                        }
+                                        else
+                                        {
+                                            <a onclick="deletethis(event)" data-Tablename="Systemstaffs" data-Columname="IsDeleted" data-Status="1" data-Columnidname="Userid" data-Entryid="@item.Userid" id="CAN_DELETE_STAFF"  style="display:none;" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main">Delete</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+ <script type="text/javascript">
+        ﻿function savesystemstaffdata() {
+        document.getElementById("savesystemstaffid").disabled = true;
+        document.getElementById("processingSpinner").style.display = "inline-block";
+        document.getElementById("buttonText").innerText = "Processing...";
+
+        if ($('#FirstnameId').val() == '') {
+            Swal.fire("Staff Detail Not Created", 'Firstname is Required', "warning");
+            document.getElementById("savesystemstaffid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+            return;
+        }
+        if ($('#LastnameId').val() == '') {
+            Swal.fire("Staff Detail Not Created", 'Lastname is Required', "warning");
+            document.getElementById("savesystemstaffid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+            return;
+        }
+        if ($('#EmailAddressId').val() == '') {
+            Swal.fire("Staff Detail Not Created", 'Emailaddress is Required', "warning");
+            document.getElementById("savesystemstaffid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+            return;
+        }
+        if ($('#PhonenumberId').val() == '') {
+            Swal.fire("Staff Detail Not Created", 'Phonenumber is Required', "warning");
+            document.getElementById("savesystemstaffid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+            return;
+        }
+        if ($('#StaffRoleId').val() == '' || $('#StaffRoleId').val() == 0) {
+            Swal.fire("Staff Detail Not Created", 'Role is Required', "warning");
+            document.getElementById("savesystemstaffid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+            return;
+        }
+        var uil = {
+            Userid: $('#UserId').val(),
+            Firstname: $('#FirstnameId').val(),
+            Lastname: $('#LastnameId').val(),
+            Emailaddress: $('#EmailAddressId').val(),
+            Phonenumber: $('#PhonenumberId').val(),
+            Idnumber: $('#IdnumberId').val(),
+            Genderid: $('#Genderid').val(),
+            Maritalstatusid: $('#Maritalstatusid').val(),
+            Roleid: $('#StaffRoleId').val(),
+            Parentid: 0,
+            Updateprofile: true,
+            Createdby: $('#UserId').val(),
+            Modifiedby: $('#UserId').val(),
+            Lastlogin: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            Datecreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            Datemodified: new Date().toISOString().slice(0, 19).replace('T', ' ')
+        };
+        $.post("/Account/Addsystemstaffdata", uil, function (response) {
+            if (response.RespStatus == 0) {
+                Swal.fire("Staff Detail", "Staff has been added and email sent.", "success");
+                setTimeout(function () { location.reload(); }, 500);
+            } else {
+                Swal.fire("Staff Detail Not Created", response.RespMessage, "error");
+            }
+            document.getElementById("savesystemstaffid").disabled = false;
+            document.getElementById("processingSpinner").style.display = "none";
+            document.getElementById("buttonText").innerText = "SAVE";
+        });
+    }
+ </script>
+}
