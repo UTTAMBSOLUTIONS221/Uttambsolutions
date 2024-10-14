@@ -11,8 +11,7 @@ BEGIN
 	
 		BEGIN TRY
 		BEGIN TRANSACTION;
-		SELECT  PCC.Collectioncenterid,PCC.Collectionname,PCC.Phonenumber,PCC.Operatinghours,PCC.Collectionstatus,PCC.Managerid FROM Parcelcollectioncenters PCC WHERE PCC.Collectioncenterid= @Collectioncenterid
-
+		SELECT PCC.Collectioncenterid,PCC.Collectionname,PCC.Phonenumber,PCC.Countyid,PCC.Subcountyid,PCC.Subcountywardid,PCC.Streetorlandmark,PCC.Maplatitude,PCC.Maplongitude,PCC.Operatinghours,PCC.Collectionstatus,PCC.Managerid FROM Parcelcollectioncenters PCC WHERE PCC.Collectioncenterid= @Collectioncenterid
 	    Set @RespMsg ='Ok.'
 		Set @RespStat =0; 
 		COMMIT TRANSACTION;

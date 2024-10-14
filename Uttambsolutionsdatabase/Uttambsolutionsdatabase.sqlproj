@@ -332,5 +332,6 @@
     <Build Include="dbo\Stored Procedures\Usp_Getparcelcollectioncentersdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getcollectioncenterparcelsdatabyid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getcollectioncenterparcelsdata.sql" />
+    <Build Include="dbo\Tables\Parcelcollectioncentercourier.sql" />
   </ItemGroup>
 </Project>

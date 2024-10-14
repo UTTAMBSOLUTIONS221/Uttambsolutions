@@ -10,8 +10,13 @@ BEGIN
 	
 		BEGIN TRY
 		BEGIN TRANSACTION;
-		SELECT  PCC.Collectioncenterid,PCC.Collectionname,PCC.Phonenumber,PCC.Operatinghours,PCC.Collectionstatus,PCC.Managerid FROM Parcelcollectioncenters PCC
-
+		  SELECT PCC.Collectioncenterid,PCC.Collectionname,PCC.Phonenumber,PCC.Countyid,SC.Countyname,PCC.Subcountyid,SCC.Subcountyname,PCC.Subcountywardid,SCW.Subcountywardname,
+		  PCC.Streetorlandmark,PCC.Maplatitude,PCC.Maplongitude,PCC.Operatinghours,PCC.Collectionstatus,PCC.Managerid,SST.Firstname+' '+SST.Lastname AS Managername
+		  FROM Parcelcollectioncenters PCC
+		  INNER JOIN Systemcounty SC ON PCC.Countyid=SC.Countyid
+		  INNER JOIN Systemsubcounty SCC ON PCC.Subcountyid=SCC.Subcountyid
+		  INNER JOIN Systemsubcountyward SCW ON PCC.Subcountywardid=SCW.Subcountywardid
+		  INNER JOIN Systemstaffs SST ON PCC.Managerid=SST.Userid
 	    Set @RespMsg ='Ok.'
 		Set @RespStat =0; 
 		COMMIT TRANSACTION;
