@@ -2,8 +2,7 @@
     [Parcelid]         INT             IDENTITY (1, 1) NOT NULL,
     [Senderid]         BIGINT          NULL,
     [Receiverid]       BIGINT          NULL,
-    [Pickupcenterid ]  INT             NULL,
-    [Deliverycenterid] INT             NULL,
+    [Collectioncenterid ]  INT             NULL,
     [Parceltypeid]     INT             NULL,
     [Parcelweight]     DECIMAL (10, 2) NULL,
     [Dimensions]       VARCHAR (50)    NULL,
@@ -15,13 +14,12 @@
     [Dropoffdate]      DATETIME        NULL,
     [Createddate]      DATETIME        DEFAULT (getdate()) NULL,
     PRIMARY KEY CLUSTERED ([Parcelid] ASC),
-    FOREIGN KEY ([Deliverycenterid]) REFERENCES [dbo].[Parcelcollectioncenters] ([Collectioncenterid]),
+    FOREIGN KEY ([Collectioncenterid]) REFERENCES [dbo].[Parcelcollectioncenters] ([Collectioncenterid]),
     FOREIGN KEY ([Parcelstatusid]) REFERENCES [dbo].[Parcelstatus] ([Parcelstatusid]),
     FOREIGN KEY ([Parcelstatusid]) REFERENCES [dbo].[Parcelstatus] ([Parcelstatusid]),
     FOREIGN KEY ([Parceltypeid]) REFERENCES [dbo].[Parceltypes] ([Parceltypeid]),
     FOREIGN KEY ([Parceltypeid]) REFERENCES [dbo].[Parceltypes] ([Parceltypeid]),
     FOREIGN KEY ([Parceltypeid]) REFERENCES [dbo].[Parceltypes] ([Parceltypeid]),
-    FOREIGN KEY ([Pickupcenterid ]) REFERENCES [dbo].[Parcelcollectioncenters] ([Collectioncenterid]),
     FOREIGN KEY ([Receiverid]) REFERENCES [dbo].[Systemstaffs] ([Userid]),
     FOREIGN KEY ([Receiverid]) REFERENCES [dbo].[Systemstaffs] ([Userid]),
     FOREIGN KEY ([Receiverid]) REFERENCES [dbo].[Systemstaffs] ([Userid]),
@@ -30,4 +28,3 @@
     FOREIGN KEY ([Senderid]) REFERENCES [dbo].[Systemstaffs] ([Userid]),
     UNIQUE NONCLUSTERED ([Trackingnumber] ASC)
 );
-
