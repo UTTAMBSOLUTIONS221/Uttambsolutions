@@ -244,8 +244,8 @@ public class LoginPageViewModel : INotifyPropertyChanged
         Systemstaffdesignation = new ObservableCollection<ListModel>
         {
             new ListModel { Value = "Collectioncenter", Text = "Collection Center" },
-            new ListModel { Value = "Courier", Text = "Courier" },
-            new ListModel { Value = "Customer", Text = "Customer" },
+            new ListModel { Value = "Parcelcourier", Text = "Courier" },
+            new ListModel { Value = "Parcelcustomer", Text = "Customer" },
         };
         LoginCommand = new Command(async () => await LoginAsync(), () => !IsProcessing);
         RegisterCommand = new Command(OnRegister);
