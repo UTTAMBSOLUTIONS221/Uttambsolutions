@@ -103,33 +103,6 @@
             document.getElementById("savecollectioncenterparcelid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
-            if ($("#Pickupcenterid").val() === "" || $("#Pickupcenterid").val() === 0) {
-                $("#Pickupcenterid").addClass('is-invalid');
-                    document.getElementById("savecollectioncenterparcelid").disabled = false;
-                    document.getElementById("processingSpinner").style.display = "none";
-                    document.getElementById("buttonText").innerText = "SAVE";
-                return;
-            } else {
-                $("#Pickupcenterid").removeClass('is-invalid').addClass('is-valid');
-            }
-            if ($("#Deliverycenterid").val() === "" || $("#Deliverycenterid").val() === 0) {
-                $("#Deliverycenterid").addClass('is-invalid');
-                    document.getElementById("savecollectioncenterparcelid").disabled = false;
-                    document.getElementById("processingSpinner").style.display = "none";
-                    document.getElementById("buttonText").innerText = "SAVE";
-                return;
-            } else {
-                $("#Deliverycenterid").removeClass('is-invalid').addClass('is-valid');
-            }
-            if ($("#Pickupdateid").val() === "") {
-                $("#Pickupdateid").addClass('is-invalid');
-                    document.getElementById("savecollectioncenterparcelid").disabled = false;
-                    document.getElementById("processingSpinner").style.display = "none";
-                    document.getElementById("buttonText").innerText = "SAVE";
-                return;
-            } else {
-                $("#Pickupdateid").removeClass('is-invalid').addClass('is-valid');
-            }
             if ($("#Senderid").val() === ""||$("#Senderid").val() === 0) {
                 $("#Senderid").addClass('is-invalid');
                     document.getElementById("savecollectioncenterparcelid").disabled = false;
@@ -216,8 +189,6 @@
                 Parcelid: $('#Parcelid').val(),
                 Senderid: $('#Senderid').val(),
                 Receiverid: $('#Receiverid').val(),
-                Pickupcenterid: $('#Pickupcenterid').val(),
-                Deliverycenterid: $('#Deliverycenterid').val(),
                 Parceltypeid: $('#Parceltypeid').val(),
                 Parcelweight: $('#Parcelweightid').val(),
                 Dimensions: $('#Dimensionsid').val(),
