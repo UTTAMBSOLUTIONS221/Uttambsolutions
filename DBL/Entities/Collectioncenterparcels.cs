@@ -20,8 +20,8 @@
         public int Transitdays { get; set; }
         public decimal Deliveryfee { get; set; }
         public string? Trackingnumber { get; set; }
-        public DateTime Pickupdate { get; set; }
-        public DateTime Dropoffdate { get; set; }
+        public DateTime? Pickupdate { get; set; }
+        public DateTime? Dropoffdate { get; set; }
         public DateTime Createddate { get; set; }
         public int Createdby { get; set; }
     }

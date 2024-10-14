@@ -33,6 +33,7 @@
                             <th>Fee</th>
                             <th>Dropoff Date</th>
                             <th>Collection Date</th>
+                            <th>Created Date</th>
                             <th class="text-right">Action</th>
                         </tr>
                     </thead>
@@ -53,8 +54,9 @@
                                     <td>@item.Dimensions</td>
                                     <td>@item.Parcelstatusname</td>
                                     <td>@item.Deliveryfee.ToString("#,##0.00")</td>
-                                    <td>@item.Dropoffdate.ToString("yyyy-MM-dd")</td>
-                                    <td>@item.Pickupdate.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.Dropoffdate?.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.Pickupdate?.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.Createddate.ToString("yyyy-MM-dd")</td>
                                     <td class="text-right nowrap text-nowrap">
                                         <a asp-action="Addcollectionparcel" asp-controller="Parceldrop" asp-route-code="@Guid.NewGuid()" asp-route-Parcelid="@item.Parcelid" asp-area="" class="btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
                                     </td>
@@ -229,7 +231,7 @@
             };
             $.post("/Parceldrop/Addcollectioncenterparceldata", uil, function (response) {
                 if (response.RespStatus == 0) {
-                    Swal.fire("Parcels Detail", "Staff has been added and email sent.", "success");
+                    Swal.fire("Parcels Detail", response.RespMessage, "success");
                     setTimeout(function () { location.reload(); }, 500);
                 } else {
                     Swal.fire("Parcels Detail Not Created", response.RespMessage, "error");
