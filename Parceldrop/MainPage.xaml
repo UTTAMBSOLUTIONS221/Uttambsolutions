@@ -21,111 +21,41 @@
             <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout Padding="20" Spacing="15">
                     <!-- Welcome Section -->
-                    <Label Text="Welcome to ParcelDrop!"
-                           FontSize="26"
-                           TextColor="#200b3a"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Start" />
+                    <Label Text="Welcome to ParcelDrop!" FontSize="26" TextColor="#200b3a" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Start" />
 
-                    <Label Text="ParcelDrop is a convenient and reliable delivery app that streamlines your shipping. With numerous collection centers and real-time tracking, you can easily drop off, pick up, or send parcels directly to any location. Enjoy secure, fast deliveries with flexible options and simple payments. ParcelDrop—your trusted delivery partner!"
-                           FontSize="16"
-                           TextColor="Black"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Start"
-                           LineBreakMode="WordWrap" />
+                    <Label Text="ParcelDrop is a convenient and reliable delivery app that streamlines your shipping. With numerous collection centers and real-time tracking, you can easily drop off, pick up, or send parcels directly to any location. Enjoy secure, fast deliveries with flexible options and simple payments. ParcelDrop—your trusted delivery partner!" FontSize="16" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Start" LineBreakMode="WordWrap" />
 
                     <!-- Membership Section -->
-                    <Label Text="Membership Registration"
-                           FontSize="24"
-                           TextColor="#200b3a"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center" />
+                    <Label Text="Membership Registration" FontSize="24" TextColor="#200b3a" FontAttributes="Bold" HorizontalOptions="Center" />
 
-                    <Label Text="Become a member of our growing community and take part in our mission!"
-                           FontSize="16"
-                           TextColor="Black"
-                           HorizontalOptions="Center" />
+                    <Label Text="Become a member of our growing community and take part in our mission!" FontSize="16" TextColor="Black" HorizontalOptions="Center" />
 
-                    <Button Text="JOIN US NOW"
-                            TextColor="White"
-                            FontSize="24"
-                            FontAttributes="Bold"
-                            WidthRequest="220"
-                            HeightRequest="50"
-                            CornerRadius="25"
-                            BackgroundColor="#ed7a17"
-                            Command="{Binding JoinMaqaoPlusCommand}"
-                            HorizontalOptions="Center" />
+                    <Button Text="JOIN US NOW" TextColor="White" FontSize="24" FontAttributes="Bold" WidthRequest="220" HeightRequest="50" CornerRadius="25" BackgroundColor="#ed7a17" Command="{Binding JoinMaqaoPlusCommand}" HorizontalOptions="Center" />
 
                     <!-- Account Validation Fee Section -->
-                    <Label Text="To become a rider, courier, or collection center, an account validation fee of 200 Kenyan Shillings is required."
-                           FontSize="18"
-                           TextColor="#d9534f"
-                           HorizontalOptions="Center"
-                           Margin="0,10,0,0" 
-                           LineBreakMode="WordWrap" />
+                    <Label Text="To become a rider, courier, or collection center, an account validation fee of 200 Kenyan Shillings is required." FontSize="18" TextColor="#d9534f" HorizontalOptions="Center" Margin="0,10,0,0" LineBreakMode="WordWrap" />
 
                     <!-- Social Media Section -->
-                    <Label Text="Follow us on Social Media"
-                           FontSize="20"
-                           TextColor="#200b3a"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"
-                           Margin="0,20,0,10" />
+                    <Label Text="Follow us on Social Media" FontSize="20" TextColor="#200b3a" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,20,0,10" />
 
-                    <StackLayout Orientation="Horizontal" 
-                                 HorizontalOptions="Center" 
-                                 Spacing="15">
-                        <Button Text="Facebook" 
-                                BackgroundColor="#3b5998" 
-                                HeightRequest="40" 
-                                TextColor="White" 
-                                Command="{Binding FacebookCommand}" 
-                                CornerRadius="20" />
-                        <Button Text="Instagram" 
-                                BackgroundColor="#e4405f" 
-                                HeightRequest="40" 
-                                TextColor="White" 
-                                Command="{Binding InstagramCommand}" 
-                                CornerRadius="20" />
-                        <Button Text="Twitter" 
-                                BackgroundColor="#1DA1F2" 
-                                HeightRequest="40" 
-                                TextColor="White" 
-                                Command="{Binding TwitterCommand}" 
-                                CornerRadius="20" />
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15">
+                        <Button Text="Facebook" BackgroundColor="#3b5998" HeightRequest="40" TextColor="White" Command="{Binding FacebookCommand}" CornerRadius="20" />
+                        <Button Text="Instagram" BackgroundColor="#e4405f" HeightRequest="40" TextColor="White" Command="{Binding InstagramCommand}" CornerRadius="20" />
+                        <Button Text="Twitter" BackgroundColor="#1DA1F2" HeightRequest="40" TextColor="White" Command="{Binding TwitterCommand}" CornerRadius="20" />
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
         </AbsoluteLayout>
 
         <!-- Overlay Layer for ActivityIndicator -->
-        <Grid IsVisible="{Binding IsProcessing}" 
-              BackgroundColor="#f0f0f0" 
-              VerticalOptions="FillAndExpand" 
-              HorizontalOptions="FillAndExpand" 
-              Grid.RowSpan="3">
+        <Grid IsVisible="{Binding IsProcessing}" BackgroundColor="#f0f0f0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3">
             <BoxView Color="#ffffff" Opacity="0.5" />
-            <ActivityIndicator IsRunning="{Binding IsProcessing}" 
-                               VerticalOptions="Center" 
-                               HorizontalOptions="Center" 
-                               Color="#ed7a17" 
-                               HeightRequest="100" 
-                               WidthRequest="100" />
+            <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center"  HorizontalOptions="Center" Color="#ed7a17" HeightRequest="100" WidthRequest="100" />
         </Grid>
 
         <!-- Footer -->
-        <StackLayout Grid.Row="2" 
-                     BackgroundColor="#ffffff" 
-                     Padding="10" 
-                     HorizontalOptions="FillAndExpand" 
-                     VerticalOptions="End">
-            <Label Text="{Binding CopyrightText}" 
-                   HorizontalOptions="Center" 
-                   TextColor="#ed7a17" 
-                   TextTransform="Uppercase" 
-                   FontAttributes="Bold" />
+        <StackLayout Grid.Row="2" BackgroundColor="#ffffff" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="End">
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="Center" TextColor="#ed7a17" TextTransform="Uppercase" FontAttributes="Bold" />
         </StackLayout>
     </Grid>
 </ContentPage>
