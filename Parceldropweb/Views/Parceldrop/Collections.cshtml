@@ -78,15 +78,6 @@
             } else {
                 $("#Collectionnameid").removeClass('is-invalid').addClass('is-valid');
             }
-            if ($("#Collectionaddressid").val() === "") {
-                $("#Collectionaddressid").addClass('is-invalid');
-                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
-                 document.getElementById("processingSpinner").style.display = "none";
-                 document.getElementById("buttonText").innerText = "SAVE";
-                return;
-            } else {
-                $("#Collectionaddressid").removeClass('is-invalid').addClass('is-valid');
-            }
             if ($("#Phonenumberid").val() === "") {
                 $("#Phonenumberid").addClass('is-invalid');
                  document.getElementById("saveparcelcollectioncenterid").disabled = false;
@@ -105,13 +96,52 @@
             } else {
                 $("#Operatinghoursid").removeClass('is-invalid').addClass('is-valid');
             }
+            if ($("#Systemcountyid").val() === ""|| $("#Systemcountyid").val() === 0) {
+                $("#Systemcountyid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Systemcountyid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Systemsubcountyid").val() === ""|| $("#Systemsubcountyid").val() === 0) {
+                $("#Systemsubcountyid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Systemsubcountyid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Systemsubcountywardid").val() === ""|| $("#Systemsubcountywardid").val() === 0) {
+                $("#Systemsubcountywardid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Systemsubcountywardid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Streetorlandmarkid").val() === "") {
+                $("#Streetorlandmarkid").addClass('is-invalid');
+                 document.getElementById("saveparcelcollectioncenterid").disabled = false;
+                 document.getElementById("processingSpinner").style.display = "none";
+                 document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Streetorlandmarkid").removeClass('is-invalid').addClass('is-valid');
+            }
 
             var uil = {
                 Collectioncenterid : $('#Collectioncenterid').val(),
                 Collectionname: $('#Collectionnameid').val(),
-                Collectionaddress: $('#Collectionaddressid').val(),
                 Phonenumber: $('#Phonenumberid').val(),
                 Operatinghours: $('#Operatinghoursid').val(),
+                Countyid: $('#Systemcountyid').val(),
+                Subcountyid: $('#Systemsubcountyid').val(),
+                Subcountywardid: $('#Systemsubcountywardid').val(),
+                Streetorlandmark: $('#Streetorlandmarkid').val(),
                 Collectionstatus: 1,
                 Managerid: $('#systemLoggedinedUserid').val(),
             };
