@@ -60,4 +60,12 @@ If(@Type = 31)
 Select r.Servicename as Text, r.Serviceid as Value From Systemservices r;
 If(@Type = 32)
 Select r.Tokenname+'- KES '+ CONVERT(VARCHAR(10),r.Tokenprice)+' Per Share' as Text, r.Tokenid as Value From Softwaretoken r;
+If(@Type = 34)
+Select r.Firstname +' '+ r.Lastname as Text, r.Userid as Value From Systemstaffs r;
+If(@Type = 35)
+Select r.Parceltypename as Text, r.Parceltypeid as Value From Parceltypes r;
+If(@Type = 36)
+Select r.Parcelstatusname as Text, r.Parcelstatusid as Value From Parcelstatus r;
+If(@Type = 37)
+Select r.Collectionname as Text, r.Collectioncenterid as Value From Parcelcollectioncenters r;
 END

@@ -12,7 +12,7 @@ BEGIN
 	
 		BEGIN TRY
 		BEGIN TRANSACTION;
-		    SET @Storeitemdata = (SELECT  SSTI.Storeitemid,SSTI.Storeitemname,SSTI.Itembrandname,ISNULL(SSTI.Itemsize,'N/A') AS Itemsize,SSTI.Itembuyingprice,SSTI.Itemsellingprice,SSTI.Itemstatus,SSTI.Isactive,SSTI.Isdeleted,SSTI.Createdby,SSTI.Modifiedby,SSTI.Datecreated,SSTI.Datemodified,
+		    SET @Storeitemdata = (SELECT  SSTI.Storeitemid,SSTI.Storeitemname,(SELECT TOP 1 SII.Storeproductimgurl FROM Systemstoreitemsimages SII WHERE SSTI.Storeitemid=SII.Storeitemid ORDER BY SII.Datecreated) AS Storeproductimgurl,SSTI.Itembrandname,'Sokojiji is the selling point' AS Productdescription,'instock' AS Productavailability, '' AS Productstatus,ISNULL(SSTI.Itemsize,'N/A') AS Itemsize,SSTI.Itembuyingprice,SSTI.Itemsellingprice,SSTI.Itemstatus,SSTI.Isactive,SSTI.Isdeleted,SSTI.Createdby,SSTI.Modifiedby,SSTI.Datecreated,SSTI.Datemodified,
 		     (
 				SELECT SII.Storeitemid,SII.Storeproductimgurl,SII.Datecreated FROM Systemstoreitemsimages SII
 				WHERE SSTI.Storeitemid= SII.Storeitemid

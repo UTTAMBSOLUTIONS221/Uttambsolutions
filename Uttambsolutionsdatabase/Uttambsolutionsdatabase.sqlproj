@@ -317,5 +317,20 @@
     <Build Include="dbo\Stored Procedures\Usp_Getsystemstoreitemdata.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getsystemstoreitemdatabyid.sql" />
     <Build Include="dbo\Stored Procedures\Usp_Getallsystemstoreitemdata.sql" />
+    <Build Include="dbo\Tables\Paymentmethods.sql" />
+    <Build Include="dbo\Tables\Parceltypes.sql" />
+    <Build Include="dbo\Tables\Parceltransactions.sql" />
+    <Build Include="dbo\Tables\Parcelstatuses.sql" />
+    <Build Include="dbo\Tables\Parcelstatus.sql" />
+    <Build Include="dbo\Tables\Parcels.sql" />
+    <Build Include="dbo\Tables\Parcelcollectioncenters.sql" />
+    <Build Include="dbo\Tables\Notifications.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registerparcelcollectioncenterdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Registercollectioncenterparceldata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getparceldropsystemstaffdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getparcelcollectioncentersdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getparcelcollectioncentersdata.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getcollectioncenterparcelsdatabyid.sql" />
+    <Build Include="dbo\Stored Procedures\Usp_Getcollectioncenterparcelsdata.sql" />
   </ItemGroup>
 </Project>

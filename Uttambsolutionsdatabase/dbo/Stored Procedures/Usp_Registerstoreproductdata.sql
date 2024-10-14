@@ -44,7 +44,7 @@ BEGIN
 		Set @RespMsg ='Success'
 		Set @RespStat =0; 
 		COMMIT TRANSACTION;
-		Select @RespStat as RespStatus, @RespMsg as RespMessage;
+		Select @RespStat as RespStatus, @RespMsg as RespMessage, @Storeitemid AS Data1;
 
 		END TRY
 		BEGIN CATCH

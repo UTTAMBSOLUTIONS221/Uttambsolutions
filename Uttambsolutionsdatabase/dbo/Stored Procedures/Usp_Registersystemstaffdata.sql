@@ -120,10 +120,24 @@ BEGIN
                 DateModified = source.DateModified
         WHEN NOT MATCHED THEN
             INSERT (FirstName, LastName, PhoneNumber, UserName, EmailAddress, RoleId, PassHarsh, Passwords, IsActive, IsDeleted, IsDefault, LoginStatus, PasswordResetDate, ParentId, UserProfileImageUrl, UserCurriculumVitae, IdNumber, UpdateProfile, Extra, Extra1, Extra2, Extra3, Extra4, Extra5, CreatedBy, ModifiedBy, DateModified, DateCreated, LastLogin)
-            VALUES (source.FirstName, source.LastName, source.PhoneNumber, source.UserName, source.EmailAddress, source.RoleId, source.PassHarsh, source.Passwords, source.IsActive, source.IsDeleted, source.IsDefault, 0, source.PasswordResetDate, source.ParentId, source.UserProfileImageUrl, source.UserCurriculumVitae, source.IdNumber, source.UpdateProfile, source.Extra, source.Extra1, source.Extra2, source.Extra3, source.Extra4, source.Extra5, source.CreatedBy, source.ModifiedBy, source.DateModified, source.DateCreated, source.LastLogin)
+            VALUES (source.FirstName, source.LastName, source.PhoneNumber, source.UserName, source.EmailAddress, source.RoleId, source.PassHarsh, source.Passwords, source.IsActive, source.IsDeleted, source.IsDefault,source.LoginStatus, source.PasswordResetDate, source.ParentId, source.UserProfileImageUrl, source.UserCurriculumVitae, source.IdNumber, source.UpdateProfile, source.Extra, source.Extra1, source.Extra2, source.Extra3, source.Extra4, source.Extra5, source.CreatedBy, source.ModifiedBy, source.DateModified, source.DateCreated, source.LastLogin)
             OUTPUT $action AS Action, inserted.UserId, inserted.FirstName + ' ' + inserted.LastName AS FullName, inserted.Passwords, inserted.PassHarsh, inserted.UserName, inserted.EmailAddress INTO @Systemstaffdata;
 			
 			 SET @UserId = (SELECT TOP 1 UserId FROM @Systemstaffdata);
+			IF EXISTS(SELECT 1 FROM @Systemstaffdata WHERE Action = 'INSERT')
+			BEGIN
+				MERGE INTO Systemstafftermandservices AS target
+				USING (
+				SELECT  Stafftermandserviceid,ISNULL(Systemstaffid,@UserId) AS Systemstaffid,Accepttermandservices,Datecreated
+				FROM OPENJSON(@JsonObjectdata)
+				WITH (Stafftermandserviceid BIGINT '$.Stafftermandserviceid',Systemstaffid BIGINT '$.Systemstaffid',Accepttermandservices BIT '$.Accepttermandservices',Datecreated DATETIME2 '$.Datecreated'
+				)) AS source
+				ON Target.Systemstaffid = Source.Systemstaffid 
+				WHEN NOT MATCHED BY TARGET THEN
+				INSERT (Systemstaffid,Accepttermandservices,Datecreated)
+				VALUES (source.Systemstaffid,source.Accepttermandservices,source.Datecreated);
+			END
+			
         -- Insert into Systemstaffsaccount if it was an insert action
         IF EXISTS(SELECT 1 FROM @Systemstaffdata WHERE Action = 'INSERT')
         BEGIN
@@ -141,8 +155,11 @@ BEGIN
 		BEGIN
 		  IF NOT EXISTS(SELECT Userid FROM Systemstaffkins WHERE Userid =JSON_VALUE(@JsonObjectData, '$.Userid'))
 		  BEGIN
-		   INSERT INTO Systemstaffkins(Userid,Kinname,Kinphonenumber,Kinrelationshipid,Datecreated)
-		   SELECT JSON_VALUE(@JsonObjectData, '$.Userid'),JSON_VALUE(@JsonObjectData, '$.Kinname'),JSON_VALUE(@JsonObjectData, '$.Kinphonenumber'),JSON_VALUE(@JsonObjectData, '$.Kinrelationshipid'),CAST(JSON_VALUE(@JsonObjectData, '$.Datemodified') AS DATETIME2);
+			  IF(JSON_VALUE(@JsonObjectData, '$.Kinname') IS NOT NULL)
+			  BEGIN
+			   INSERT INTO Systemstaffkins(Userid,Kinname,Kinphonenumber,Kinrelationshipid,Datecreated)
+			   SELECT JSON_VALUE(@JsonObjectData, '$.Userid'),JSON_VALUE(@JsonObjectData, '$.Kinname'),JSON_VALUE(@JsonObjectData, '$.Kinphonenumber'),JSON_VALUE(@JsonObjectData, '$.Kinrelationshipid'),CAST(JSON_VALUE(@JsonObjectData, '$.Datemodified') AS DATETIME2);		
+			  END
 		  END
 		END
 		IF EXISTS(SELECT 1 FROM @Systemstaffdata WHERE Action = 'INSERT')
@@ -150,8 +167,12 @@ BEGIN
 			IF NOT EXISTS(SELECT Systemstaffid FROM Systemstaffdesignations WHERE Systemstaffid=@UserId AND JSON_VALUE(@JsonObjectData, '$.Designation') IS NOT NULL)
 			BEGIN
 				INSERT INTO Systemstaffdesignations(Systemstaffid,Staffdesignation,Datecreated)
-				SELECT UserId,JSON_VALUE(@JsonObjectData, '$.Designation'),CAST(JSON_VALUE(@JsonObjectData, '$.Datecreated') AS DATETIME2) FROM @Systemstaffdata
+				SELECT UserId,ISNULL(JSON_VALUE(@JsonObjectData, '$.Designation'),'Default User'),CAST(JSON_VALUE(@JsonObjectData, '$.Datecreated') AS DATETIME2) FROM @Systemstaffdata
 			END
+		END
+		IF EXISTS(SELECT 1 FROM Systemstaffdesignations  WHERE Systemstaffid =JSON_VALUE(@JsonObjectData, '$.Userid'))
+        BEGIN
+			UPDATE Systemstaffdesignations SET Staffdesignation=JSON_VALUE(@JsonObjectData, '$.Designation') WHERE Systemstaffid =JSON_VALUE(@JsonObjectData, '$.Userid');
 		END
 		IF EXISTS(SELECT 1 FROM @Systemstaffdata WHERE Action = 'INSERT')
         BEGIN
