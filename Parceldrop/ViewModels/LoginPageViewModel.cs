@@ -1,6 +1,7 @@
 ﻿using DBL;
 using DBL.Entities;
 using DBL.Enum;
+using DBL.Models;
 using Newtonsoft.Json;
 using Parceldrop.Constants;
 using Parceldrop.Views.Startup;
@@ -38,7 +39,39 @@ public class LoginPageViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(PasswordIconSource));
         }
     }
+    private StaffDetailData _systemStaffTenantData;
+    public StaffDetailData SystemStaffTenantData
+    {
+        get => _systemStaffTenantData;
+        set
+        {
+            _systemStaffTenantData = value;
+            OnPropertyChanged();
+        }
+    }
 
+
+    private SystemStaff _staffData;
+    public SystemStaff StaffData
+    {
+        get => _staffData;
+        set
+        {
+            _staffData = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private UsermodeldataResponce _usermodeldataResponcedata;
+    public UsermodeldataResponce UsermodeldataResponcedata
+    {
+        get => _usermodeldataResponcedata;
+        set
+        {
+            _usermodeldataResponcedata = value;
+            OnPropertyChanged();
+        }
+    }
 
 
     public LoginPageViewModel(BL bl)
@@ -150,8 +183,13 @@ public class LoginPageViewModel : INotifyPropertyChanged
                 App.UserDetails = response;
                 if (response.Usermodel.Loginstatus == (int)UserLoginStatus.VerifyAccount)
                 {
-                    var encodedStaffId = Uri.EscapeDataString(response.Usermodel.Userid.ToString());
-                    await Shell.Current.GoToAsync($"ValidateStaffAccountPage?UserId={encodedStaffId}");
+                    var response1 = await _bl.Getsystemstaffdetaildatabyid(response.Usermodel.Userid);
+                    if (response1 != null)
+                    {
+                        SystemStaffTenantData = response1.Data;
+                    }
+                    var accountVerificationPage = new ValidateStaffAccountPage(this);
+                    await Shell.Current.Navigation.PushAsync(accountVerificationPage);
                 }
                 else if (response.Usermodel.Loginstatus != 0)
                 {
