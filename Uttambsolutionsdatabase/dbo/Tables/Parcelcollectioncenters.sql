@@ -1,7 +1,6 @@
 ﻿CREATE TABLE [dbo].[Parcelcollectioncenters] (
     [Collectioncenterid] INT           IDENTITY (1, 1) NOT NULL,
     [Collectionname]     VARCHAR (100) NOT NULL,
-    [Collectionaddress]  VARCHAR (255) NOT NULL,
     [Phonenumber]        VARCHAR (15)  NULL,
 	[Countyid]                INT             NOT NULL,
     [Subcountyid]             INT             NOT NULL,
