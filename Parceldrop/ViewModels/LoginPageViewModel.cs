@@ -110,7 +110,6 @@ public class LoginPageViewModel : INotifyPropertyChanged
         {
             _password = value;
             OnPropertyChanged();
-            ((Command)SignUpCommand).ChangeCanExecute();
         }
     }
 
