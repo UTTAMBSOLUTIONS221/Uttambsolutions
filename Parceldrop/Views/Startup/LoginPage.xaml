@@ -17,22 +17,22 @@
 
             <!-- Header Section with Logo -->
             <VerticalStackLayout Grid.Row="0" Padding="10" Spacing="10" HorizontalOptions="Center" VerticalOptions="Start">
-                <Label Text="Welcome Back" TextColor="#0a506c" FontSize="24" FontAttributes="Bold" />
+                <Label Text="Welcome Back" TextColor="#200b3a" FontSize="24" FontAttributes="Bold" />
             </VerticalStackLayout>
             <VerticalStackLayout Grid.Row="1" Spacing="4" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" WidthRequest="350">
                 <StackLayout>
-                    <Label Text="Username" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                    <Label Text="Username" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#200b3a"/>
                     <!-- Username Entry -->
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="15" Padding="5" HasShadow="True">
                         <HorizontalStackLayout Spacing="10">
                             <Image Source="email.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
-                            <Entry Placeholder="Email Address" ReturnType="Next" Text="{Binding UserName}" TextColor="#0a506c" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="300" />
+                            <Entry Placeholder="Email Address" ReturnType="Next" Text="{Binding UserName}" TextColor="#200b3a" FontSize="16" PlaceholderColor="#0a506c" WidthRequest="300" />
                         </HorizontalStackLayout>
                     </Frame>
                     <Label Text="{Binding SystemStaffUserNameError}" TextColor="Red" Padding="0" FontSize="14"/>
                 </StackLayout>
                 <StackLayout IsVisible="{Binding IsPasswordInputHidden}">
-                    <Label Text="Password" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#0a506c"/>
+                    <Label Text="Password" FontAttributes="Bold" FontSize="14" Margin="0,0,0,4" TextColor="#200b3a"/>
                     <!-- Password Entry with Show/Hide Password Icon -->
                     <Frame BackgroundColor="White" BorderColor="#e0e0e0" CornerRadius="15" Padding="5" HasShadow="True">
                         <HorizontalStackLayout Spacing="10">
