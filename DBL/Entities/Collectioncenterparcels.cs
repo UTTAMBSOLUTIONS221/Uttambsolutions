@@ -17,5 +17,6 @@
         public DateTime Pickupdate { get; set; }
         public DateTime Dropoffdate { get; set; }
         public DateTime Createddate { get; set; }
+        public int Createdby { get; set; }
     }
 }

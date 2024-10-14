@@ -221,6 +221,7 @@
                 Deliveryfee: $('#Deliveryfeeid').val(),
                 Pickupdate: $('#Pickupdateid').val(),
                 Dropoffdate: $('#Dropoffdateid').val(),
+                Createdby:$('#systemLoggedinedUserid').val(),
                 Createddate: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
             };
             $.post("/Parceldrop/Addcollectioncenterparceldata", uil, function (response) {
