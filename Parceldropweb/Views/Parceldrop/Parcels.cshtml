@@ -98,14 +98,23 @@
             document.getElementById("savecollectioncenterparcelid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
-            if ($("#Collectioncenterid").val() === "" || $("#Collectioncenterid").val() === 0) {
-                $("#Collectioncenterid").addClass('is-invalid');
+            if ($("#Pickupcenterid").val() === "" || $("#Pickupcenterid").val() === 0) {
+                $("#Pickupcenterid").addClass('is-invalid');
                     document.getElementById("savecollectioncenterparcelid").disabled = false;
                     document.getElementById("processingSpinner").style.display = "none";
                     document.getElementById("buttonText").innerText = "SAVE";
                 return;
             } else {
-                $("#Collectioncenterid").removeClass('is-invalid').addClass('is-valid');
+                $("#Pickupcenterid").removeClass('is-invalid').addClass('is-valid');
+            }
+            if ($("#Deliverycenterid").val() === "" || $("#Deliverycenterid").val() === 0) {
+                $("#Deliverycenterid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Deliverycenterid").removeClass('is-invalid').addClass('is-valid');
             }
             if ($("#Pickupdateid").val() === "") {
                 $("#Pickupdateid").addClass('is-invalid');
@@ -202,7 +211,8 @@
                 Parcelid: $('#Parcelid').val(),
                 Senderid: $('#Senderid').val(),
                 Receiverid: $('#Receiverid').val(),
-                Collectioncenterid: $('#Collectioncenterid').val(),
+                Pickupcenterid: $('#Pickupcenterid').val(),
+                Deliverycenterid: $('#Deliverycenterid').val(),
                 Parceltypeid: $('#Parceltypeid').val(),
                 Parcelweight: $('#Parcelweightid').val(),
                 Dimensions: $('#Dimensionsid').val(),

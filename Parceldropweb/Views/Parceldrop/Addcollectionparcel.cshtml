@@ -18,10 +18,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-4">
             <div class="form-group">
-                <label class="font-weight-light">Collection Center</label>
-                <select class="form-control form-control-sm" asp-for="@Model.Collectioncenterid" asp-items="@Collectioncenter" id="Collectioncenterid">
+                <label class="font-weight-light">Pickup Center</label>
+                <select class="form-control form-control-sm" asp-for="@Model.Pickupcenterid" asp-items="@Collectioncenter" id="Pickupcenterid">
+                    <option value="">---Select---</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Delivery Center</label>
+                <select class="form-control form-control-sm" asp-for="@Model.Deliverycenterid" asp-items="@Collectioncenter" id="Deliverycenterid">
                     <option value="">---Select---</option>
                 </select>
             </div>

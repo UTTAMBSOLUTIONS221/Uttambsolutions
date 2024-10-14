@@ -5,7 +5,8 @@
         public int Parcelid { get; set; }
         public int Senderid { get; set; }
         public int Receiverid { get; set; }
-        public int Collectioncenterid { get; set; }
+        public int Pickupcenterid { get; set; }
+        public int Deliverycenterid { get; set; }
         public int Parceltypeid { get; set; }
         public decimal Parcelweight { get; set; }
         public string? Dimensions { get; set; }
