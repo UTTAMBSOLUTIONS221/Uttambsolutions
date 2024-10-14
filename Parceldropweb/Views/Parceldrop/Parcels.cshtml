@@ -19,37 +19,153 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <!-- In-Transit Parcels Column -->
-                    <div class="col-md-4">
+                    <!-- Received Parcels Column -->
+                    <div class="col-md-4 mb-3">
                         <div class="card">
-                            <div class="card-header bg-info text-white">
-                                In-Transit Parcels
+                            <div class="card-header bg-secondary text-white">
+                                Received Parcels
                             </div>
                             <div class="card-body">
-                                @if (Model != null && Model.Any(p => p.Parcelstatusname == "In-Transit"))
+                                @if (Model != null && Model.Any(p => p.Parcelstatusname == "Received"))
                                 {
-                                    foreach (var item in Model.Where(p => p.Parcelstatusname == "In-Transit"))
+                                    foreach (var item in Model.Where(p => p.Parcelstatusname == "Received"))
                                     {
                                         <div class="card mb-2">
                                             <div class="card-body">
                                                 <h6 class="card-title">@item.Trackingnumber</h6>
                                                 <p>Sender: @item.Sendername</p>
                                                 <p>Receiver: @item.Recievername</p>
-                                                <p>Dropoff: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
+                                                <p>Date: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
                                             </div>
                                         </div>
                                     }
                                 }
                                 else
                                 {
-                                    <p>No parcels currently in transit.</p>
+                                    <p>No received parcels.</p>
                                 }
                             </div>
                         </div>
                     </div>
-                    
+
+                    <!-- Pending Parcels Column -->
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-header bg-warning text-white">
+                                Pending Parcels
+                            </div>
+                            <div class="card-body">
+                                @if (Model != null && Model.Any(p => p.Parcelstatusname == "Pending"))
+                                {
+                                    foreach (var item in Model.Where(p => p.Parcelstatusname == "Pending"))
+                                    {
+                                        <div class="card mb-2">
+                                            <div class="card-body">
+                                                <h6 class="card-title">@item.Trackingnumber</h6>
+                                                <p>Sender: @item.Sendername</p>
+                                                <p>Receiver: @item.Recievername</p>
+                                                <p>Date: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>No pending parcels.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Assigned Parcels Column -->
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                Assigned Parcels
+                            </div>
+                            <div class="card-body">
+                                @if (Model != null && Model.Any(p => p.Parcelstatusname == "Assigned"))
+                                {
+                                    foreach (var item in Model.Where(p => p.Parcelstatusname == "Assigned"))
+                                    {
+                                        <div class="card mb-2">
+                                            <div class="card-body">
+                                                <h6 class="card-title">@item.Trackingnumber</h6>
+                                                <p>Sender: @item.Sendername</p>
+                                                <p>Receiver: @item.Recievername</p>
+                                                <p>Date: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>No assigned parcels.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- In Transit Parcels Column -->
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                In Transit Parcels
+                            </div>
+                            <div class="card-body">
+                                @if (Model != null && Model.Any(p => p.Parcelstatusname == "In Transit"))
+                                {
+                                    foreach (var item in Model.Where(p => p.Parcelstatusname == "In Transit"))
+                                    {
+                                        <div class="card mb-2">
+                                            <div class="card-body">
+                                                <h6 class="card-title">@item.Trackingnumber</h6>
+                                                <p>Sender: @item.Sendername</p>
+                                                <p>Receiver: @item.Recievername</p>
+                                                <p>Date: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>No parcels in transit.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Picked Up Parcels Column -->
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-header bg-dark text-white">
+                                Picked Up Parcels
+                            </div>
+                            <div class="card-body">
+                                @if (Model != null && Model.Any(p => p.Parcelstatusname == "Picked Up"))
+                                {
+                                    foreach (var item in Model.Where(p => p.Parcelstatusname == "Picked Up"))
+                                    {
+                                        <div class="card mb-2">
+                                            <div class="card-body">
+                                                <h6 class="card-title">@item.Trackingnumber</h6>
+                                                <p>Sender: @item.Sendername</p>
+                                                <p>Receiver: @item.Recievername</p>
+                                                <p>Date: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>No picked up parcels.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Delivered Parcels Column -->
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-header bg-success text-white">
                                 Delivered Parcels
@@ -71,36 +187,7 @@
                                 }
                                 else
                                 {
-                                    <p>No delivered parcels yet.</p>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Pending Parcels Column -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header bg-warning text-white">
-                                Pending Parcels
-                            </div>
-                            <div class="card-body">
-                                @if (Model != null && Model.Any(p => p.Parcelstatusname == "Pending"))
-                                {
-                                    foreach (var item in Model.Where(p => p.Parcelstatusname == "Pending"))
-                                    {
-                                        <div class="card mb-2">
-                                            <div class="card-body">
-                                                <h6 class="card-title">@item.Trackingnumber</h6>
-                                                <p>Sender: @item.Sendername</p>
-                                                <p>Receiver: @item.Recievername</p>
-                                                <p>Expected: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <p>No pending parcels.</p>
+                                    <p>No delivered parcels.</p>
                                 }
                             </div>
                         </div>
@@ -110,6 +197,7 @@
         </div>
     </div>
 </div>
+
 
 
 @section Scripts {
