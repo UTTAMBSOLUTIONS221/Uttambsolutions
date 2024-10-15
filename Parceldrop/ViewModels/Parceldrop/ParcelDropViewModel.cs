@@ -10,6 +10,7 @@ namespace Parceldrop.ViewModels.Parceldrop
     public class ParcelDropViewModel : INotifyPropertyChanged
     {
         private readonly BL _bl;
+        public string CopyrightText => $"© 2020 - {DateTime.Now.Year}  UTTAMB SOLUTIONS LIMITED";
         private bool _isProcessing;
         public bool IsProcessing
         {
