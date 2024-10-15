@@ -92,7 +92,7 @@
 	  <MauiXaml Update="Controls\FlyoutHeaderControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UpdateUserProfilePage.xaml">
+	  <MauiXaml Update="UserProfilePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Dashboards\DashboardPage.xaml">
@@ -130,6 +130,14 @@
 
 	<ItemGroup>
 	  <Compile Update="Controls\FlyoutHeaderControl.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UpdateUserProfilePage.xaml.cs">
+	    <SubType>Code</SubType>
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UserProfilePage.xaml.cs">
+	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Dashboards\AdminDashboardPage.xaml.cs">

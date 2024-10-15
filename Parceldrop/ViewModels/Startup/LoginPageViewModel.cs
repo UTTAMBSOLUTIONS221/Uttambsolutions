@@ -200,7 +200,25 @@ public class LoginPageViewModel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-
+    private bool _isDataLoaded;
+    public bool IsDataLoaded
+    {
+        get => _isDataLoaded;
+        set
+        {
+            _isDataLoaded = value;
+            OnPropertyChanged();
+        }
+    }
+    public bool IsProcessing
+    {
+        get => _isProcessing;
+        set
+        {
+            _isProcessing = value;
+            OnPropertyChanged();
+        }
+    }
 
     private ObservableCollection<ListModel> _systemstaffdesignation;
     public ObservableCollection<ListModel> Systemstaffdesignation
@@ -226,16 +244,131 @@ public class LoginPageViewModel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    private ObservableCollection<ListModel> _systemgender;
+    public ObservableCollection<ListModel> Systemgender
+    {
+        get => _systemgender;
+        set
+        {
+            _systemgender = value;
+            OnPropertyChanged();
+        }
+    }
+
+
+    private ListModel _selectedstaffgender;
+    public ListModel Selectedstaffgender
+    {
+        get => _selectedstaffgender;
+        set
+        {
+            _selectedstaffgender = value;
+            // Ensure SystempropertyData is not null
+            if (Systemgender != null)
+            {
+                // Safely convert the selected value to long and assign it to Countyid
+                if (value != null && int.TryParse(value.Value?.ToString(), out int genderid))
+                {
+                    StaffData.Genderid = genderid;
+                }
+                else
+                {
+                    StaffData.Genderid = 0;
+                }
+
+                OnPropertyChanged(nameof(Selectedstaffgender));
+                OnPropertyChanged(nameof(StaffData.Genderid));
+            }
+        }
+    }
+    private ObservableCollection<ListModel> _systemmaritalstatus;
+    public ObservableCollection<ListModel> Systemmaritalstatus
+    {
+        get => _systemmaritalstatus;
+        set
+        {
+            _systemmaritalstatus = value;
+            OnPropertyChanged();
+        }
+    }
+    private ListModel _selectedstaffmaritalstatus;
+    public ListModel Selectedstaffmaritalstatus
+    {
+        get => _selectedstaffmaritalstatus;
+        set
+        {
+            _selectedstaffmaritalstatus = value;
+            // Ensure SystempropertyData is not null
+            if (Systemmaritalstatus != null)
+            {
+                // Safely convert the selected value to long and assign it to Countyid
+                if (value != null && int.TryParse(value.Value?.ToString(), out int maritalstatusid))
+                {
+                    StaffData.Maritalstatusid = maritalstatusid;
+                }
+                else
+                {
+                    StaffData.Maritalstatusid = 0;
+                }
+
+                OnPropertyChanged(nameof(Selectedstaffmaritalstatus));
+                OnPropertyChanged(nameof(StaffData.Maritalstatusid));
+            }
+        }
+    }
+    private ObservableCollection<ListModel> _systemkinrelationship;
+    public ObservableCollection<ListModel> Systemkinrelationship
+    {
+        get => _systemkinrelationship;
+        set
+        {
+            _systemkinrelationship = value;
+            OnPropertyChanged();
+        }
+    }
+    private ListModel _selectedstaffkinrelationship;
+    public ListModel Selectedstaffkinrelationship
+    {
+        get => _selectedstaffkinrelationship;
+        set
+        {
+            _selectedstaffkinrelationship = value;
+            // Ensure SystempropertyData is not null
+            if (Systemkinrelationship != null)
+            {
+                // Safely convert the selected value to long and assign it to Countyid
+                if (value != null && int.TryParse(value.Value?.ToString(), out int kinrelationshipid))
+                {
+                    StaffData.Kinrelationshipid = kinrelationshipid;
+                }
+                else
+                {
+                    StaffData.Kinrelationshipid = 0;
+                }
+
+                OnPropertyChanged(nameof(Selectedstaffkinrelationship));
+                OnPropertyChanged(nameof(StaffData.Kinrelationshipid));
+            }
+        }
+    }
+
+
     public ICommand TogglePasswordVisibilityCommand { get; }
     public ICommand LoginCommand { get; }
     public ICommand RegisterCommand { get; }
     public ICommand ForgotPasswordCommand { get; }
 
-    public ICommand SignUpCommand => new Command(async () => await OnSignUp(), () => !IsProcessing);
+    public ICommand SignUpCommand => new Command(async () => await OnSignUp());
     public ICommand ToggleConfirmPasswordVisibilityCommand { get; }
+
+
+    public ICommand LoadCurrentUserCommand { get; }
+    public ICommand UpdateCurrentUserDetailsCommand { get; }
+    public ICommand SubmitCurrentUserDetailsCommand { get; }
     public LoginPageViewModel(BL bl)
     {
         _bl = bl;
+        StaffData = new SystemStaff();
         IsPasswordHidden = true; // Default to hidden password
         TogglePasswordVisibilityCommand = new Command(TogglePasswordVisibility);
         IsPasswordHidden = true; // Default to hidden password
@@ -247,9 +380,12 @@ public class LoginPageViewModel : INotifyPropertyChanged
             new ListModel { Value = "Parcelcourier", Text = "Courier" },
             new ListModel { Value = "Parcelcustomer", Text = "Customer" },
         };
-        LoginCommand = new Command(async () => await LoginAsync(), () => !IsProcessing);
+        LoginCommand = new Command(async () => await LoginAsync());
         RegisterCommand = new Command(OnRegister);
         ForgotPasswordCommand = new Command(OnForgotPassword);
+        LoadCurrentUserCommand = new Command(async () => await LoadCurrentUserDataAsync());
+        UpdateCurrentUserDetailsCommand = new Command(async () => await Updateuserdetailsasync());
+        SubmitCurrentUserDetailsCommand = new Command(async () => await Submituserdetailsasync());
     }
     private void ToggleConfirmPasswordVisibility()
     {
@@ -258,17 +394,6 @@ public class LoginPageViewModel : INotifyPropertyChanged
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    public bool IsProcessing
-    {
-        get => _isProcessing;
-        set
-        {
-            _isProcessing = value;
-            OnPropertyChanged();
-            ((Command)LoginCommand).ChangeCanExecute();
-        }
     }
 
 
@@ -448,6 +573,151 @@ public class LoginPageViewModel : INotifyPropertyChanged
             IsProcessing = false;
         }
     }
+
+    private async Task LoadCurrentUserDataAsync()
+    {
+        IsProcessing = true;
+        IsDataLoaded = false;
+        try
+        {
+            var response = await _bl.Getsystemstaffprofiledatabyid(App.UserDetails.Usermodel.Userid);
+            if (response != null)
+            {
+                var SystemgenderResponse = await _bl.GetListModel(ListModelType.Systemgender);
+                if (SystemgenderResponse != null)
+                {
+                    Systemgender = new ObservableCollection<ListModel>(SystemgenderResponse);
+                }
+                var SystemmaritalstatusResponse = await _bl.GetListModel(ListModelType.Systemmaritalstatus);
+                if (SystemmaritalstatusResponse != null)
+                {
+                    Systemmaritalstatus = new ObservableCollection<ListModel>(SystemmaritalstatusResponse);
+                }
+                var SystemkinrelationshipResponse = await _bl.GetListModel(ListModelType.Systemkinrelationship);
+                if (SystemkinrelationshipResponse != null)
+                {
+                    Systemkinrelationship = new ObservableCollection<ListModel>(SystemkinrelationshipResponse);
+                }
+                StaffData = response.Data;
+                if (StaffData.Genderid > 0)
+                {
+                    Selectedstaffgender = Systemgender.FirstOrDefault(x => x.Value == _staffData.Genderid.ToString());
+                }
+                if (StaffData.Maritalstatusid > 0)
+                {
+                    Selectedstaffmaritalstatus = Systemmaritalstatus.FirstOrDefault(x => x.Value == _staffData.Maritalstatusid.ToString());
+                }
+                if (StaffData.Kinrelationshipid > 0)
+                {
+                    Selectedstaffkinrelationship = Systemkinrelationship.FirstOrDefault(x => x.Value == _staffData.Kinrelationshipid.ToString());
+                }
+            }
+            IsDataLoaded = true;
+        }
+        catch (Exception ex)
+        {
+            await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+        }
+        finally
+        {
+            IsProcessing = false;
+        }
+    }
+    private async Task Updateuserdetailsasync()
+    {
+        IsProcessing = true;
+
+        if (!IsValidInput())
+        {
+            IsProcessing = false;
+            return;
+        }
+        if (StaffData == null)
+        {
+            IsProcessing = false;
+            return;
+        }
+
+        try
+        {
+            IsProcessing = true;
+            StaffData.Updateprofile = false;
+            StaffData.Modifiedby = App.UserDetails.Usermodel.Userid;
+            StaffData.Datemodified = DateTime.Now;
+            // Call your registration service here
+            var response = await _bl.Registersystemstaffdata(StaffData);
+            if (response.RespStatus == 200 || response.RespStatus == 0)
+            {
+                string userDetailStr = JsonConvert.SerializeObject(App.UserDetails);
+                Preferences.Set(nameof(App.UserDetails), userDetailStr);
+                await AppConstant.AddFlyoutMenusDetails();
+            }
+            else if (response.RespStatus == 1)
+            {
+                await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+        }
+        finally
+        {
+            IsProcessing = false;
+        }
+    }
+
+
+    private async Task Submituserdetailsasync()
+    {
+        IsProcessing = true;
+
+        if (!IsValidInput())
+        {
+            IsProcessing = false;
+            return;
+        }
+        if (StaffData == null)
+        {
+            IsProcessing = false;
+            return;
+        }
+
+        try
+        {
+            IsProcessing = true;
+            StaffData.Updateprofile = false;
+            StaffData.Modifiedby = App.UserDetails.Usermodel.Userid;
+            StaffData.Datemodified = DateTime.Now;
+            // Call your registration service here
+            var response = await _bl.Registersystemstaffdata(StaffData);
+            if (response.RespStatus == 200 || response.RespStatus == 0)
+            {
+                await Shell.Current.DisplayAlert("Success", response.RespMessage, "OK");
+            }
+            else if (response.RespStatus == 1)
+            {
+                await Shell.Current.DisplayAlert("Warning", response.RespMessage, "OK");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", "Sever error occured. Kindly Contact Admin!", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+        }
+        finally
+        {
+            IsProcessing = false;
+        }
+    }
+
 
     private string _systemStaffFirstNameError;
     public string SystemStaffFirstNameError
