@@ -74,11 +74,12 @@ namespace Parceldropweb.Controllers
             return Json(resp);
         }
         [HttpGet]
-        public async Task<IActionResult> Paycollectionparcelfee(int Parcelid)
+        public async Task<IActionResult> Paycollectionparcelfee(int Parcelid, decimal Deliveryfee)
         {
             ViewData["Systempaymentmodetypelists"] = bl.GetListModel(ListModelType.Systempaymentmodetype).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Parceltransactions model = new Parceltransactions();
             model.Parcelid = Parcelid;
+            model.Amount = Deliveryfee;
             return PartialView(model);
         }
         public async Task<JsonResult> Saveparcelpaymentdata(Parceltransactions model)

@@ -41,7 +41,7 @@
                                                 </div>
                                                 <div class="d-flex justify-content-between">
                                                     <a asp-action="Addcollectionparcel" asp-controller="Parceldrop" asp-route-code="@Guid.NewGuid()" asp-route-Parcelid="@item.Parcelid" asp-area="" class="btn btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
-                                                    <a asp-action="Paycollectionparcelfee" asp-controller="Parceldrop" asp-route-code="@Guid.NewGuid()" asp-route-Parcelid="@item.Parcelid" asp-area="" class="btn btn-info btn-xs  btn-outline-info text-white font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Pay Delivery Fee</a>
+                                                    <a asp-action="Paycollectionparcelfee" asp-controller="Parceldrop" asp-route-code="@Guid.NewGuid()" asp-route-Parcelid="@item.Parcelid" asp-route-Deliveryfee="@item.Deliveryfee" asp-area="" class="btn btn-info btn-xs  btn-outline-info text-white font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Pay Delivery Fee</a>
                                                 </div>
                                             </div>
                                         </div>
