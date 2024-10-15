@@ -419,19 +419,19 @@
                 Paymentmethodid: $('#Paymentmethodid').val(),
                 Amount: $('#Deliveryamountid').val(),
                 Createdby:$('#systemLoggedinedUserid').val(),
-                Createddate: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+                Transactiondate: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
             };
             $.post("/Parceldrop/Saveparcelpaymentdata", uil, function (response) {
                 if (response.RespStatus == 0) {
-                    Swal.fire("Assign Parcels Detail", response.RespMessage, "success");
+                    Swal.fire("Pay Parcels Detail", response.RespMessage, "success");
                     setTimeout(function () { location.reload(); }, 500);
                 }else if(response.RespStatus == 1){
-                     Swal.fire("Assign Parcels Detail Not Created", response.RespMessage, "warning");
+                     Swal.fire("Pay Parcels Detail Not Created", response.RespMessage, "warning");
                 }
                 else {
-                    Swal.fire("Assign Parcels Detail Not Created", response.RespMessage, "error");
+                    Swal.fire("Pay Parcels Detail Not Created", response.RespMessage, "error");
                 }
-                document.getElementById("savecollectioncenterparcelid").disabled = false;
+                document.getElementById("savecollectioncenterparcelpaymentid").disabled = false;
                 document.getElementById("processingSpinner").style.display = "none";
                 document.getElementById("buttonText").innerText = "SAVE";
             });
