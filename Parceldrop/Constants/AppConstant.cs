@@ -1,5 +1,7 @@
 ﻿using DBL;
 using Parceldrop.Controls;
+using Parceldrop.ViewModels.Startup;
+using Parceldrop.Views;
 using Parceldrop.Views.Dashboards;
 
 namespace Parceldrop.Constants
@@ -110,12 +112,12 @@ namespace Parceldrop.Constants
                             Title = "Dashboard",
                             ContentTemplate = new DataTemplate(typeof(ParcelCollectionCourierDashboardPage)),
                         },
-                        //new ShellContent
-                        //{
-                        //    Icon = Icons.user,
-                        //    Title = "Profile",
-                        //    ContentTemplate = new DataTemplate(() => new UserProfilePage(new UserProfilePageViewModel(bl))),
-                        //},
+                        new ShellContent
+                        {
+                            Icon = Icons.user,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(() => new UserProfilePage(new LoginPageViewModel(bl))),
+                        },
                     }
                 };
                 if (!AppShell.Current.Items.Contains(flyoutItem))
