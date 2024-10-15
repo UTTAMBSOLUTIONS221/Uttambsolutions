@@ -1154,6 +1154,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Registerparcelpaymentdata(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ParceldropRepository.Registerparcelpaymentdata(obj);
+                return Resp;
+            });
+        }
         #endregion
 
         #region Collection Center Couriers

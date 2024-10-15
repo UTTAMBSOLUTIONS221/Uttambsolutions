@@ -15,6 +15,7 @@ namespace DBL.Repositories
         IEnumerable<Collectioncenterparcels> Getcollectioncenterparcelsdata();
         Genericmodel Registercollectioncenterparceldata(string JsonData);
         Collectioncenterparcels Getcollectioncenterparcelsdatabyid(int Parcelid);
+        Genericmodel Registerparcelpaymentdata(string JsonData);
         #endregion
 
 

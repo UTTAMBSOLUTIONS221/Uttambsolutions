@@ -81,6 +81,11 @@ namespace Parceldropweb.Controllers
             model.Parcelid = Parcelid;
             return PartialView(model);
         }
+        public async Task<JsonResult> Saveparcelpaymentdata(Parceltransactions model)
+        {
+            var resp = await bl.Registerparcelpaymentdata(JsonConvert.SerializeObject(model));
+            return Json(resp);
+        }
         #endregion
 
         #region Collection Drop Couriers
