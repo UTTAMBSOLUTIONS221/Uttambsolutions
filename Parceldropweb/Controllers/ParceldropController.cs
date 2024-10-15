@@ -73,6 +73,14 @@ namespace Parceldropweb.Controllers
             var resp = await bl.Registercollectioncenterparceldata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
+        [HttpGet]
+        public async Task<IActionResult> Paycollectionparcelfee(int Parcelid)
+        {
+            ViewData["Collectioncentercourierlists"] = bl.GetListModel(ListModelType.Collectioncenter).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            Couriercollectiondropparcel model = new Couriercollectiondropparcel();
+            model.Parcelid = Parcelid;
+            return PartialView(model);
+        }
         #endregion
 
         #region Collection Drop Couriers
@@ -86,7 +94,7 @@ namespace Parceldropweb.Controllers
         }
         public async Task<JsonResult> Assigncollectionparceltocourierdata(Couriercollectiondropparcel model)
         {
-            var resp = await bl.Registercollectioncenterparceldata(JsonConvert.SerializeObject(model));
+            var resp = await bl.Registerparcelassignedtocourierdata(JsonConvert.SerializeObject(model));
             return Json(resp);
         }
         #endregion

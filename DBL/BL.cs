@@ -1181,6 +1181,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<Genericmodel> Registerparcelassignedtocourierdata(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ParceldropRepository.Registerparcelassignedtocourierdata(obj);
+                return Resp;
+            });
+        }
         #endregion
 
         #endregion

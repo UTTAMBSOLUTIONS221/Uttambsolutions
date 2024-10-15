@@ -110,6 +110,16 @@ namespace DBL.Repositories
                 return connection.Query<Genericmodel>("Usp_Registercollectioncentercourierdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+        public Genericmodel Registerparcelassignedtocourierdata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registerparcelassignedtocourierdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
         #endregion
     }
 }
