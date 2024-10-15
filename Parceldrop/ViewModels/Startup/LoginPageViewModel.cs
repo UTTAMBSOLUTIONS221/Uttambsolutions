@@ -427,7 +427,7 @@ public class LoginPageViewModel : INotifyPropertyChanged
     private async Task LoginAsync()
     {
         IsProcessing = true;
-        if (!IsValidInput())
+        if (!IsSigninValidInput())
         {
             IsProcessing = false;
             return;
@@ -511,7 +511,7 @@ public class LoginPageViewModel : INotifyPropertyChanged
     {
         IsProcessing = true;
 
-        if (!IsValidInput())
+        if (!IsSignupValidInput())
         {
             IsProcessing = false;
             return;
@@ -628,7 +628,7 @@ public class LoginPageViewModel : INotifyPropertyChanged
     {
         IsProcessing = true;
 
-        if (!IsValidInput())
+        if (!IsProfileValidInput())
         {
             IsProcessing = false;
             return;
@@ -677,7 +677,7 @@ public class LoginPageViewModel : INotifyPropertyChanged
     {
         IsProcessing = true;
 
-        if (!IsValidInput())
+        if (!IsProfileValidInput())
         {
             IsProcessing = false;
             return;
@@ -719,7 +719,6 @@ public class LoginPageViewModel : INotifyPropertyChanged
         }
     }
 
-
     private string _systemStaffFirstNameError;
     public string SystemStaffFirstNameError
     {
@@ -740,6 +739,7 @@ public class LoginPageViewModel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+
     private string _systemStaffEmailAddressError;
     public string SystemStaffEmailAddressError
     {
@@ -760,6 +760,70 @@ public class LoginPageViewModel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    private string _systemStaffIdnumberError;
+    public string SystemStaffIdnumberError
+    {
+        get => _systemStaffIdnumberError;
+        set
+        {
+            _systemStaffIdnumberError = value;
+            OnPropertyChanged();
+        }
+    }
+    private string _systemStaffGenderError;
+    public string SystemStaffGenderError
+    {
+        get => _systemStaffGenderError;
+        set
+        {
+            _systemStaffGenderError = value;
+            OnPropertyChanged();
+        }
+    }
+    private string _systemStaffMaritalstatusError;
+    public string SystemStaffMaritalstatusError
+    {
+        get => _systemStaffMaritalstatusError;
+        set
+        {
+            _systemStaffMaritalstatusError = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string _systemStaffKinnameError;
+    public string SystemStaffKinnameError
+    {
+        get => _systemStaffKinnameError;
+        set
+        {
+            _systemStaffKinnameError = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string _systemStaffKinrelationshipError;
+    public string SystemStaffKinrelationshipError
+    {
+        get => _systemStaffKinrelationshipError;
+        set
+        {
+            _systemStaffKinrelationshipError = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string _systemStaffKinphonenumberError;
+    public string SystemStaffKinphonenumberError
+    {
+        get => _systemStaffKinphonenumberError;
+        set
+        {
+            _systemStaffKinphonenumberError = value;
+            OnPropertyChanged();
+        }
+    }
+
     private string _systemStaffConfirmPasswordError;
     public string SystemStaffConfirmPasswordError
     {
@@ -797,7 +861,7 @@ public class LoginPageViewModel : INotifyPropertyChanged
 
         return Regex.IsMatch(email, emailPattern);
     }
-    private bool IsValidInput()
+    private bool IsSigninValidInput()
     {
         bool isValid = true;
 
@@ -829,6 +893,205 @@ public class LoginPageViewModel : INotifyPropertyChanged
 
         return isValid;
     }
+    private bool IsProfileValidInput()
+    {
+        bool isValid = true;
+        if (string.IsNullOrWhiteSpace(StaffData.Firstname))
+        {
+            SystemStaffFirstNameError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffFirstNameError = null;
+        }
+        if (string.IsNullOrWhiteSpace(StaffData.Lastname))
+        {
+            SystemStaffLastNameError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffLastNameError = null;
+        }
+
+        if (string.IsNullOrWhiteSpace(StaffData.Emailaddress))
+        {
+            SystemStaffEmailAddressError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffEmailAddressError = null;
+        }
+        if (string.IsNullOrWhiteSpace(StaffData.Phonenumber))
+        {
+            SystemStaffPhonenumberError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffPhonenumberError = null;
+        }
+        if (StaffData.Idnumber == 0)
+        {
+            SystemStaffIdnumberError = "Required.";
+            isValid = false;
+        }
+        else if (StaffData.Idnumber.ToString().Length < 8)
+        {
+            SystemStaffIdnumberError = "Id number must be from 8 characters.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffIdnumberError = null;
+        }
+
+        if (Selectedstaffgender == null)
+        {
+            SystemStaffGenderError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffGenderError = null;
+        }
+        if (Selectedstaffmaritalstatus == null)
+        {
+            SystemStaffMaritalstatusError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffMaritalstatusError = null;
+        }
+        if (string.IsNullOrWhiteSpace(StaffData.Kinname))
+        {
+            SystemStaffKinnameError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffKinnameError = null;
+        }
+        if (string.IsNullOrWhiteSpace(StaffData.Kinphonenumber))
+        {
+            SystemStaffKinphonenumberError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffKinphonenumberError = null;
+        }
+        if (Selectedstaffkinrelationship == null)
+        {
+            SystemStaffKinrelationshipError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffKinrelationshipError = null;
+        }
+
+        return isValid;
+    }
+
+    private bool IsSignupValidInput()
+    {
+        bool isValid = true;
+        if (string.IsNullOrWhiteSpace(FirstName))
+        {
+            SystemStaffFirstNameError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffFirstNameError = null;
+        }
+        if (string.IsNullOrWhiteSpace(LastName))
+        {
+            SystemStaffLastNameError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffLastNameError = null;
+        }
+
+        if (string.IsNullOrWhiteSpace(EmailAddress))
+        {
+            SystemStaffEmailAddressError = "Required.";
+            isValid = false;
+        }
+        else if (!IsValidEmail(EmailAddress))
+        {
+            SystemStaffEmailAddressError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffEmailAddressError = null;
+        }
+        if (string.IsNullOrWhiteSpace(PhoneNumber))
+        {
+            SystemStaffPhonenumberError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffPhonenumberError = null;
+        }
+        if (string.IsNullOrWhiteSpace(Password))
+        {
+            SystemStaffPasswordError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffPasswordError = null;
+        }
+        if (string.IsNullOrWhiteSpace(ConfirmPassword))
+        {
+            SystemStaffConfirmPasswordError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffConfirmPasswordError = null;
+        }
+        if (Password != ConfirmPassword)
+        {
+            SystemStaffConfirmPasswordError = "Required.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffConfirmPasswordError = null;
+        }
+        if (string.IsNullOrWhiteSpace(StaffDesignation))
+        {
+            SystemStaffDesignationError = "Required!.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffDesignationError = null;
+        }
+        if (!Accepttermsandcondition)
+        {
+            SystemStaffAccepttermsandconditionError = "Required!.";
+            isValid = false;
+        }
+        else
+        {
+            SystemStaffAccepttermsandconditionError = null;
+        }
+
+        return isValid;
+    }
+
+
     private async void OnRegister()
     {
         IsProcessing = true;
