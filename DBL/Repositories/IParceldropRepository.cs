@@ -7,7 +7,7 @@ namespace DBL.Repositories
     {
         #region Parcel Collection Centers
         IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersdata();
-        IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersdata(int Managerid);
+        IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersdatabymanagerid(int Managerid);
         Genericmodel Registerparcelcollectioncenterdata(string JsonData);
         Parcelcollectioncenters Getparcelcollectioncentersdatabyid(int Collectioncenterid);
         #endregion

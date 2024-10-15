@@ -23,7 +23,7 @@ namespace DBL.Repositories
                 return connection.Query<Parcelcollectioncenters>("Usp_Getparcelcollectioncentersdata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
-        public IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersdata(int Managerid)
+        public IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersdatabymanagerid(int Managerid)
         {
             using (var connection = new SqlConnection(_connString))
             {

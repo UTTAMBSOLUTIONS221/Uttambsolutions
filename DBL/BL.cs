@@ -1111,6 +1111,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<IEnumerable<Parcelcollectioncenters>> Getparcelcollectioncentersdatabymanagerid(int Managerid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ParceldropRepository.Getparcelcollectioncentersdatabymanagerid(Managerid);
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Registerparcelcollectioncenterdata(string obj)
         {
             return Task.Run(() =>
@@ -1138,14 +1146,7 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<IEnumerable<Collectioncenterparcels>> Getcollectioncenterparcelsdata(int Managerid)
-        {
-            return Task.Run(() =>
-            {
-                var Resp = db.ParceldropRepository.Getcollectioncenterparcelsdata(Managerid);
-                return Resp;
-            });
-        }
+
         public Task<Genericmodel> Registercollectioncenterparceldata(string obj)
         {
             return Task.Run(() =>

@@ -58,7 +58,7 @@ namespace Parceldropweb.Controllers
             }
             else
             {
-                data = await bl.Getcollectioncenterparcelsdata(SessionUserData.Usermodel.Userid);
+                data = await bl.Getparcelcollectioncentersdatabymanagerid(SessionUserData.Usermodel.Userid);
             }
             return View(data);
         }
