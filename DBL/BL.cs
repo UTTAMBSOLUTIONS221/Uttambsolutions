@@ -1165,6 +1165,14 @@ namespace DBL
                 return Resp;
             });
         }
+        public Task<IEnumerable<Collectioncentercouriers>> Getparcelcollectioncentersnotindata(int Courierid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ParceldropRepository.Getparcelcollectioncentersnotindata(Courierid);
+                return Resp;
+            });
+        }
         #endregion
 
         #endregion
