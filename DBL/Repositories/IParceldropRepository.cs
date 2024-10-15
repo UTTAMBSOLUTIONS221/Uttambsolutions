@@ -21,6 +21,7 @@ namespace DBL.Repositories
         #region Collection Center Courier
         Collectioncentercouriers Checkifcourierexistincollectioncenter(int Courierid);
         IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersnotindata(int Courierid);
+        Genericmodel Registercollectioncentercourierdata(string JsonData);
         #endregion
     }
 }
