@@ -1,8 +1,10 @@
+using Parceldrop.ViewModels.Startup;
+
 namespace Parceldrop.Views;
 public partial class UserProfilePage : ContentPage
 {
-    private UserProfilePageViewModel _viewModel;
-    public UserProfilePage(UserProfilePageViewModel viewModel)
+    private LoginPageViewModel _viewModel;
+    public UserProfilePage(LoginPageViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = _viewModel = viewModel;
