@@ -1,6 +1,7 @@
 ﻿using DBL;
 using DBL.Entities;
 using Newtonsoft.Json;
+using Parceldrop.Views.Parceldrop;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -113,7 +114,8 @@ namespace Parceldrop.ViewModels.Parceldrop
             var response = await _bl.Registercollectioncentercourierdata(JsonConvert.SerializeObject(Collectioncentercourierdata));
             if (response != null)
             {
-                await OnLoadCurrentParcelDrop();
+                await Shell.Current.GoToAsync(nameof(CollectionDropCentersPage), true);
+                //await OnLoadCurrentParcelDrop();
             }
             IsProcessing = false;
         }
