@@ -76,8 +76,8 @@ namespace Parceldropweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Paycollectionparcelfee(int Parcelid)
         {
-            ViewData["Collectioncentercourierlists"] = bl.GetListModel(ListModelType.Collectioncenter).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
-            Couriercollectiondropparcel model = new Couriercollectiondropparcel();
+            ViewData["Systempaymentmodetypelists"] = bl.GetListModel(ListModelType.Systempaymentmodetype).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            Parceltransactions model = new Parceltransactions();
             model.Parcelid = Parcelid;
             return PartialView(model);
         }

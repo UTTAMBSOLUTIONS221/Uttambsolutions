@@ -1,6 +1,6 @@
-﻿@model DBL.Entities.Couriercollectiondropparcel
+﻿@model DBL.Entities.Parceltransactions
 @{
-    var Collectioncentercourier = ViewData["Collectioncentercourierlists"] as List<SelectListItem>;
+    var Systempaymentmodetype = ViewData["Systempaymentmodetypelists"] as List<SelectListItem>;
 }
 <div class="modal-header">
     <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Assign Cuorier Detail</h5>
@@ -15,19 +15,25 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-8">
             <div class="form-group">
-                <label class="font-weight-light">Sender</label>
-                <select class="form-control form-control-sm" asp-for="@Model.Courierid" asp-items="@Collectioncentercourier" id="Courierid">
+                <label class="font-weight-light">Payment Mode</label>
+                <select class="form-control form-control-sm" asp-for="@Model.Paymentmethodid" asp-items="@Systempaymentmodetype" id="Paymentmethodid">
                     <option value="">---Select---</option>
                 </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="font-weight-light">Deliverly Fee</label>
+                <input class="form-control form-control-sm" type="number" asp-for="@Model.Amount" id="Deliveryamountid" />
             </div>
         </div>
     </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savecollectioncenterparcelcourierid" onclick="savecollectioncenterparcelcourierdata();">
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="savecollectioncenterparcelpaymentid" onclick="savecollectioncenterparcelpaymentdata();">
         <span id="buttonText">SAVE</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
     </button>
 </div>
