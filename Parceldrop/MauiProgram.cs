@@ -2,7 +2,9 @@
 using DBL;
 using Microsoft.Extensions.Logging;
 using Parceldrop.ViewModels;
+using Parceldrop.ViewModels.Parceldrop;
 using Parceldrop.ViewModels.Startup;
+using Parceldrop.Views;
 using Parceldrop.Views.Startup;
 
 namespace Parceldrop
@@ -39,11 +41,15 @@ namespace Parceldrop
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<RegisterPage>();
+            builder.Services.AddTransient<ValidateStaffAccountPage>();
+            builder.Services.AddSingleton<UserProfilePage>();
+            builder.Services.AddSingleton<UpdateUserProfilePage>();
 
 
             // View Models
             builder.Services.AddSingleton<MainPageViewModel>();
             builder.Services.AddSingleton<LoginPageViewModel>();
+            builder.Services.AddSingleton<ParcelDropViewModel>();
 
             return builder.Build();
         }
