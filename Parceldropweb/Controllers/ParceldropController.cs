@@ -75,6 +75,20 @@ namespace Parceldropweb.Controllers
         }
         #endregion
 
+        #region Collection Drop Couriers
+        [HttpGet]
+        public async Task<IActionResult> Assigncollectionparceltocourier(int Parcelid)
+        {
+            ViewData["Collectioncenterlists"] = bl.GetListModel(ListModelType.Collectioncenter).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["ParcelSenderRecieverlists"] = bl.GetListModel(ListModelType.ParcelSenderReciever).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["Parceltypeslists"] = bl.GetListModel(ListModelType.Parceltypes).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["Parcelstatuslists"] = bl.GetListModel(ListModelType.Parcelstatus).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            Couriercollectiondropparcel model = new Couriercollectiondropparcel();
+            model.Parcelid = Parcelid;
+            return PartialView(model);
+        }
+        #endregion
+
 
 
         [HttpGet]
