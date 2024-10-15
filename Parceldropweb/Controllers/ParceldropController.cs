@@ -51,7 +51,15 @@ namespace Parceldropweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Parcels()
         {
-            var data = await bl.Getcollectioncenterparcelsdata();
+            IEnumerable<Collectioncenterparcels> data = new List<Collectioncenterparcels>();
+            if (SessionUserData.Usermodel.Rolename == "System Admin")
+            {
+                data = await bl.Getcollectioncenterparcelsdata();
+            }
+            else
+            {
+                data = await bl.Getcollectioncenterparcelsdata(SessionUserData.Usermodel.Userid);
+            }
             return View(data);
         }
         [HttpGet]
