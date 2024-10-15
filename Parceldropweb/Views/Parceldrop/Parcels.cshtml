@@ -349,5 +349,40 @@
                 document.getElementById("buttonText").innerText = "SAVE";
             });
         }
+
+        ﻿function savesavecollectioncenterparceldata() {
+            document.getElementById("savecollectioncenterparcelid").disabled = true;
+            document.getElementById("processingSpinner").style.display = "inline-block";
+            document.getElementById("buttonText").innerText = "Processing...";
+            if ($("#Courierid").val() === ""||$("#Courierid").val() === 0) {
+                $("#Courierid").addClass('is-invalid');
+                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("processingSpinner").style.display = "none";
+                    document.getElementById("buttonText").innerText = "SAVE";
+                return;
+            } else {
+                $("#Courierid").removeClass('is-invalid').addClass('is-valid');
+            }
+            var uil = {
+                Parcelid: $('#Parcelid').val(),
+                Courierid: $('#Courierid').val(),
+                Createdby:$('#systemLoggedinedUserid').val(),
+                Createddate: new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0].replace('T', ' ')
+            };
+            $.post("/Parceldrop/Assigncollectionparceltocourierdata", uil, function (response) {
+                if (response.RespStatus == 0) {
+                    Swal.fire("Assign Parcels Detail", response.RespMessage, "success");
+                    setTimeout(function () { location.reload(); }, 500);
+                }else if(response.RespStatus == 1){
+                     Swal.fire("Assign Parcels Detail Not Created", response.RespMessage, "warning");
+                }
+                else {
+                    Swal.fire("Assign Parcels Detail Not Created", response.RespMessage, "error");
+                }
+                document.getElementById("savecollectioncenterparcelid").disabled = false;
+                document.getElementById("processingSpinner").style.display = "none";
+                document.getElementById("buttonText").innerText = "SAVE";
+            });
+        }
     </script>
 }
