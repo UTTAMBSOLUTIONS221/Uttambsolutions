@@ -20,7 +20,7 @@ namespace DBL.Repositories
 
         #region Collection Center Courier
         Collectioncentercouriers Checkifcourierexistincollectioncenter(int Courierid);
-        IEnumerable<Collectioncentercouriers> Getparcelcollectioncentersnotindata(int Courierid);
+        IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersnotindata(int Courierid);
         #endregion
     }
 }

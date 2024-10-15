@@ -1165,7 +1165,7 @@ namespace DBL
                 return Resp;
             });
         }
-        public Task<IEnumerable<Collectioncentercouriers>> Getparcelcollectioncentersnotindata(int Courierid)
+        public Task<IEnumerable<Parcelcollectioncenters>> Getparcelcollectioncentersnotindata(int Courierid)
         {
             return Task.Run(() =>
             {

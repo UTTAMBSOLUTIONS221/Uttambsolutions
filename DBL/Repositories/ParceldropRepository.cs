@@ -89,14 +89,14 @@ namespace DBL.Repositories
                 return connection.Query<Collectioncentercouriers>("Usp_Checkifcourierexistincollectioncenter", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
-        public IEnumerable<Collectioncentercouriers> Getparcelcollectioncentersnotindata(int Courierid)
+        public IEnumerable<Parcelcollectioncenters> Getparcelcollectioncentersnotindata(int Courierid)
         {
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Courierid", Courierid);
-                return connection.Query<Collectioncentercouriers>("Usp_Getparcelcollectioncentersnotindata", parameters, commandType: CommandType.StoredProcedure).ToList();
+                return connection.Query<Parcelcollectioncenters>("Usp_Getparcelcollectioncentersnotindata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
         #endregion
