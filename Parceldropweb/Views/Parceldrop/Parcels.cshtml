@@ -101,12 +101,15 @@
                                 {
                                     foreach (var item in Model.Where(p => p.Parcelstatusname == "Assigned"))
                                     {
-                                        <div class="card mb-2">
-                                            <div class="card-body">
-                                                <h6 class="card-title">@item.Trackingnumber</h6>
-                                                <p>Sender: @item.Sendername</p>
-                                                <p>Receiver: @item.Recievername</p>
-                                                <p>Date: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
+                                        <div class="card p-0">
+                                            <div class="card-body p-2">
+                                                <h6 class="mb-0"><span class="font-weight-bold">@item.Trackingnumber</span> - <b> Fee: </b>KES. @item.Deliveryfee.ToString("#,##0.00")</h6>
+                                                <div class="text-muted" style="font-size: 0.9rem; line-height: 1.4;">
+                                                    <p class="mb-0">Sender: @item.Sendername</p>
+                                                    <p class="mb-0">Receiver: @item.Recievername</p>
+                                                    <p class="mb-0"><b>Type:</b> @item.Parceltypename <b>Weight:</b> @item.Parcelweight.ToString("#,##0.00")</p>
+                                                    <p class="mb-0"><b>Dropoff: </b> @item.Dropoffdate?.ToString("yyyy-MM-dd") <b>  Pickup: </b> @item.Pickupdate?.ToString("yyyy-MM-dd")</p>
+                                                </div>
                                             </div>
                                         </div>
                                     }
@@ -130,12 +133,15 @@
                                 {
                                     foreach (var item in Model.Where(p => p.Parcelstatusname == "In Transit"))
                                     {
-                                        <div class="card mb-2">
-                                            <div class="card-body">
-                                                <h6 class="card-title">@item.Trackingnumber</h6>
-                                                <p>Sender: @item.Sendername</p>
-                                                <p>Receiver: @item.Recievername</p>
-                                                <p>Date: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
+                                        <div class="card p-0">
+                                            <div class="card-body p-2">
+                                                <h6 class="mb-0"><span class="font-weight-bold">@item.Trackingnumber</span> - <b> Fee: </b>KES. @item.Deliveryfee.ToString("#,##0.00")</h6>
+                                                <div class="text-muted" style="font-size: 0.9rem; line-height: 1.4;">
+                                                    <p class="mb-0">Sender: @item.Sendername</p>
+                                                    <p class="mb-0">Receiver: @item.Recievername</p>
+                                                    <p class="mb-0"><b>Type:</b> @item.Parceltypename <b>Weight:</b> @item.Parcelweight.ToString("#,##0.00")</p>
+                                                    <p class="mb-0"><b>Dropoff: </b> @item.Dropoffdate?.ToString("yyyy-MM-dd") <b>  Pickup: </b> @item.Pickupdate?.ToString("yyyy-MM-dd")</p>
+                                                </div>
                                             </div>
                                         </div>
                                     }
@@ -159,12 +165,15 @@
                                 {
                                     foreach (var item in Model.Where(p => p.Parcelstatusname == "Picked Up"))
                                     {
-                                        <div class="card mb-2">
-                                            <div class="card-body">
-                                                <h6 class="card-title">@item.Trackingnumber</h6>
-                                                <p>Sender: @item.Sendername</p>
-                                                <p>Receiver: @item.Recievername</p>
-                                                <p>Date: @item.Dropoffdate?.ToString("yyyy-MM-dd")</p>
+                                       <div class="card p-0">
+                                            <div class="card-body p-2">
+                                                <h6 class="mb-0"><span class="font-weight-bold">@item.Trackingnumber</span> - <b> Fee: </b>KES. @item.Deliveryfee.ToString("#,##0.00")</h6>
+                                                <div class="text-muted" style="font-size: 0.9rem; line-height: 1.4;">
+                                                    <p class="mb-0">Sender: @item.Sendername</p>
+                                                    <p class="mb-0">Receiver: @item.Recievername</p>
+                                                    <p class="mb-0"><b>Type:</b> @item.Parceltypename <b>Weight:</b> @item.Parcelweight.ToString("#,##0.00")</p>
+                                                    <p class="mb-0"><b>Dropoff: </b> @item.Dropoffdate?.ToString("yyyy-MM-dd") <b>  Pickup: </b> @item.Pickupdate?.ToString("yyyy-MM-dd")</p>
+                                                </div>
                                             </div>
                                         </div>
                                     }
@@ -188,12 +197,15 @@
                                 {
                                     foreach (var item in Model.Where(p => p.Parcelstatusname == "Delivered"))
                                     {
-                                        <div class="card mb-2">
-                                            <div class="card-body">
-                                                <h6 class="card-title">@item.Trackingnumber</h6>
-                                                <p>Sender: @item.Sendername</p>
-                                                <p>Receiver: @item.Recievername</p>
-                                                <p>Delivered: @item.Pickupdate?.ToString("yyyy-MM-dd")</p>
+                                         <div class="card p-0">
+                                            <div class="card-body p-2">
+                                                <h6 class="mb-0"><span class="font-weight-bold">@item.Trackingnumber</span> - <b> Fee: </b>KES. @item.Deliveryfee.ToString("#,##0.00")</h6>
+                                                <div class="text-muted" style="font-size: 0.9rem; line-height: 1.4;">
+                                                    <p class="mb-0">Sender: @item.Sendername</p>
+                                                    <p class="mb-0">Receiver: @item.Recievername</p>
+                                                    <p class="mb-0"><b>Type:</b> @item.Parceltypename <b>Weight:</b> @item.Parcelweight.ToString("#,##0.00")</p>
+                                                    <p class="mb-0"><b>Dropoff: </b> @item.Dropoffdate?.ToString("yyyy-MM-dd") <b>  Pickup: </b> @item.Pickupdate?.ToString("yyyy-MM-dd")</p>
+                                                </div>
                                             </div>
                                         </div>
                                     }
@@ -356,7 +368,7 @@
             });
         }
 
-        ﻿function savesavecollectioncenterparceldata() {
+        ﻿function savecollectioncenterparcelcourierdata() {
             document.getElementById("savecollectioncenterparcelcourierid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
