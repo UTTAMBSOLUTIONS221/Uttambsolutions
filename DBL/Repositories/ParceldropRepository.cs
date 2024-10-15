@@ -78,5 +78,17 @@ namespace DBL.Repositories
         }
         #endregion
 
+        #region Collection center Couriers
+        public Collectioncentercouriers Checkifcourierexistincollectioncenter(int Courierid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Courierid", Courierid);
+                return connection.Query<Collectioncentercouriers>("Usp_Checkifcourierexistincollectioncenter", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        #endregion
     }
 }

@@ -1156,6 +1156,17 @@ namespace DBL
         }
         #endregion
 
+        #region Collection Center Couriers
+        public Task<Collectioncentercouriers> Checkifcourierexistincollectioncenter(int Courierid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ParceldropRepository.Checkifcourierexistincollectioncenter(Courierid);
+                return Resp;
+            });
+        }
+        #endregion
+
         #endregion
 
 

@@ -16,5 +16,10 @@ namespace DBL.Repositories
         Genericmodel Registercollectioncenterparceldata(string JsonData);
         Collectioncenterparcels Getcollectioncenterparcelsdatabyid(int Parcelid);
         #endregion
+
+
+        #region Collection Center Courier
+        Collectioncentercouriers Checkifcourierexistincollectioncenter(int Courierid);
+        #endregion
     }
 }
