@@ -76,7 +76,7 @@
                                                     <p class="mb-0"><b>Dropoff: </b> @item.Dropoffdate?.ToString("yyyy-MM-dd") <b>  Pickup: </b> @item.Pickupdate?.ToString("yyyy-MM-dd")</p>
                                                 </div>
                                                 <div class="d-flex justify-content-between">
-                                                    <a asp-action="Assigncollectionparceltocourier" asp-controller="Parceldrop" asp-route-code="@Guid.NewGuid()" asp-route-Parcelid="@item.Parcelid" asp-area="" class="btn btn-info btn-xs  btn-outline-info text-white font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Assign</a>
+                                                    <a asp-action="Assigncollectionparceltocourier" asp-controller="Parceldrop" asp-route-code="@Guid.NewGuid()" asp-route-Parcelid="@item.Parcelid" asp-area="" class="btn btn-info btn-xs  btn-outline-info text-white font-weight-bold text-uppercase" data-target="#Uttambsolutionsmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Assign to a Rider</a>
                                                 </div>
                                             </div>
                                         </div>
