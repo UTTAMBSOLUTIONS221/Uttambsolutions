@@ -31,7 +31,7 @@ namespace Parceldrop.ViewModels.Parceldrop
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<Parcelcollectioncenters> Collectioncenters { get; }
+        public ObservableCollection<Parcelcollectioncenters> Collectioncentersdata { get; }
 
         public ICommand LoadCurrentParcelDropCommand { get; }
 
@@ -39,7 +39,7 @@ namespace Parceldrop.ViewModels.Parceldrop
         public ParcelDropViewModel(BL bl)
         {
             _bl = bl;
-            Collectioncenters = new ObservableCollection<Parcelcollectioncenters>();
+            Collectioncentersdata = new ObservableCollection<Parcelcollectioncenters>();
             LoadCurrentParcelDropCommand = new Command(async () => await OnLoadCurrentParcelDrop());
 
         }
@@ -56,10 +56,10 @@ namespace Parceldrop.ViewModels.Parceldrop
                 var response = await _bl.Getparcelcollectioncentersnotindata(App.UserDetails.Usermodel.Userid);
                 if (response != null && response != null)
                 {
-                    Collectioncenters.Clear();
+                    Collectioncentersdata.Clear();
                     foreach (var item in response)
                     {
-                        Collectioncenters.Add(item);
+                        Collectioncentersdata.Add(item);
                     }
                 }
                 IsDataLoaded = true;
