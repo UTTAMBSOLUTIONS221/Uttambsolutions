@@ -357,12 +357,12 @@
         }
 
         ﻿function savesavecollectioncenterparceldata() {
-            document.getElementById("savecollectioncenterparcelid").disabled = true;
+            document.getElementById("savecollectioncenterparcelcourierid").disabled = true;
             document.getElementById("processingSpinner").style.display = "inline-block";
             document.getElementById("buttonText").innerText = "Processing...";
             if ($("#Courierid").val() === ""||$("#Courierid").val() === 0) {
                 $("#Courierid").addClass('is-invalid');
-                    document.getElementById("savecollectioncenterparcelid").disabled = false;
+                    document.getElementById("savecollectioncenterparcelcourierid").disabled = false;
                     document.getElementById("processingSpinner").style.display = "none";
                     document.getElementById("buttonText").innerText = "SAVE";
                 return;
@@ -385,7 +385,7 @@
                 else {
                     Swal.fire("Assign Parcels Detail Not Created", response.RespMessage, "error");
                 }
-                document.getElementById("savecollectioncenterparcelid").disabled = false;
+                document.getElementById("savecollectioncenterparcelcourierid").disabled = false;
                 document.getElementById("processingSpinner").style.display = "none";
                 document.getElementById("buttonText").innerText = "SAVE";
             });
