@@ -93,7 +93,7 @@ namespace Parceldropweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Assigncollectionparceltocourier(int Parcelid)
         {
-            ViewData["Collectioncentercourierlists"] = bl.GetListModel(ListModelType.Collectioncenter).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
+            ViewData["Collectioncentercourierslists"] = bl.GetListModelById(ListModelType.Collectioncentercouriers, SessionUserData.Usermodel.Userid).Result.Select(x => new SelectListItem { Text = x.Text, Value = x.Value }).ToList();
             Couriercollectiondropparcel model = new Couriercollectiondropparcel();
             model.Parcelid = Parcelid;
             return PartialView(model);

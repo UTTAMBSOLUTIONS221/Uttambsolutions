@@ -63,5 +63,6 @@
         Parceltypes = 35,
         Parcelstatus = 36,
         Collectioncenter = 37,
+        Collectioncentercouriers = 38,
     }
 }
