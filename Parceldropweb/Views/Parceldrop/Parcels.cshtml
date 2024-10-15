@@ -61,7 +61,7 @@
                             <div class="card-header bg-warning text-white">
                                 Pending Parcels
                             </div>
-                            <div class="card-body">
+                            <div class="card-body p-1">
                                 @if (Model != null && Model.Any(p => p.Parcelstatusname == "Pending"))
                                 {
                                     foreach (var item in Model.Where(p => p.Parcelstatusname == "Pending"))
@@ -96,7 +96,7 @@
                             <div class="card-header bg-info text-white">
                                 Assigned Parcels
                             </div>
-                            <div class="card-body">
+                          <div class="card-body p-1">
                                 @if (Model != null && Model.Any(p => p.Parcelstatusname == "Assigned"))
                                 {
                                     foreach (var item in Model.Where(p => p.Parcelstatusname == "Assigned"))
@@ -128,7 +128,7 @@
                             <div class="card-header bg-primary text-white">
                                 In Transit Parcels
                             </div>
-                            <div class="card-body">
+                            <div class="card-body p-1">
                                 @if (Model != null && Model.Any(p => p.Parcelstatusname == "In Transit"))
                                 {
                                     foreach (var item in Model.Where(p => p.Parcelstatusname == "In Transit"))
@@ -160,7 +160,7 @@
                             <div class="card-header bg-dark text-white">
                                 Picked Up Parcels
                             </div>
-                            <div class="card-body">
+                          <div class="card-body p-1">
                                 @if (Model != null && Model.Any(p => p.Parcelstatusname == "Picked Up"))
                                 {
                                     foreach (var item in Model.Where(p => p.Parcelstatusname == "Picked Up"))
@@ -192,7 +192,7 @@
                             <div class="card-header bg-success text-white">
                                 Delivered Parcels
                             </div>
-                            <div class="card-body">
+                            <div class="card-body p-1">
                                 @if (Model != null && Model.Any(p => p.Parcelstatusname == "Delivered"))
                                 {
                                     foreach (var item in Model.Where(p => p.Parcelstatusname == "Delivered"))
