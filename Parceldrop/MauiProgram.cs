@@ -5,6 +5,7 @@ using Parceldrop.ViewModels;
 using Parceldrop.ViewModels.Parceldrop;
 using Parceldrop.ViewModels.Startup;
 using Parceldrop.Views;
+using Parceldrop.Views.Parceldrop;
 using Parceldrop.Views.Startup;
 
 namespace Parceldrop
@@ -44,6 +45,7 @@ namespace Parceldrop
             builder.Services.AddTransient<ValidateStaffAccountPage>();
             builder.Services.AddSingleton<UserProfilePage>();
             builder.Services.AddSingleton<UpdateUserProfilePage>();
+            builder.Services.AddSingleton<CollectionDropCentersPage>();
 
 
             // View Models

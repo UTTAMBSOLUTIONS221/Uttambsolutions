@@ -1,4 +1,5 @@
 ﻿using Parceldrop.Views;
+using Parceldrop.Views.Parceldrop;
 using Parceldrop.Views.Startup;
 
 namespace Parceldrop
@@ -13,6 +14,7 @@ namespace Parceldrop
             Routing.RegisterRoute(nameof(ValidateStaffAccountPage), typeof(ValidateStaffAccountPage));
             Routing.RegisterRoute(nameof(UserProfilePage), typeof(UserProfilePage));
             Routing.RegisterRoute(nameof(UpdateUserProfilePage), typeof(UpdateUserProfilePage));
+            Routing.RegisterRoute(nameof(CollectionDropCentersPage), typeof(CollectionDropCentersPage));
         }
     }
 }

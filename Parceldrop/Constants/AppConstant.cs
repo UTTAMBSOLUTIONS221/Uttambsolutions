@@ -1,8 +1,10 @@
 ﻿using DBL;
 using Parceldrop.Controls;
+using Parceldrop.ViewModels.Parceldrop;
 using Parceldrop.ViewModels.Startup;
 using Parceldrop.Views;
 using Parceldrop.Views.Dashboards;
+using Parceldrop.Views.Parceldrop;
 
 namespace Parceldrop.Constants
 {
@@ -117,6 +119,12 @@ namespace Parceldrop.Constants
                             Icon = Icons.user,
                             Title = "Profile",
                             ContentTemplate = new DataTemplate(() => new UserProfilePage(new LoginPageViewModel(bl))),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.user,
+                            Title = "Drop Centers",
+                            ContentTemplate = new DataTemplate(() => new CollectionDropCentersPage(new ParcelDropViewModel(bl))),
                         },
                     }
                 };
