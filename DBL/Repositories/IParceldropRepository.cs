@@ -14,6 +14,7 @@ namespace DBL.Repositories
 
         #region  Collection Center Parcels
         IEnumerable<Collectioncenterparcels> Getcollectioncenterparcelsdata();
+        IEnumerable<Collectioncenterparcels> Getcollectioncenterparcelsdatabymanagerid(int Managerid);
         Genericmodel Registercollectioncenterparceldata(string JsonData);
         Collectioncenterparcels Getcollectioncenterparcelsdatabyid(int Parcelid);
         Genericmodel Registerparcelpaymentdata(string JsonData);

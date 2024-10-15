@@ -1147,6 +1147,15 @@ namespace DBL
             });
         }
 
+        public Task<IEnumerable<Collectioncenterparcels>> Getcollectioncenterparcelsdatabymanagerid(int Managerid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.ParceldropRepository.Getcollectioncenterparcelsdatabymanagerid(Managerid);
+                return Resp;
+            });
+        }
+
         public Task<Genericmodel> Registercollectioncenterparceldata(string obj)
         {
             return Task.Run(() =>

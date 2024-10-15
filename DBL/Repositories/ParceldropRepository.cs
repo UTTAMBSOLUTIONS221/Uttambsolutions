@@ -66,6 +66,16 @@ namespace DBL.Repositories
                 return connection.Query<Collectioncenterparcels>("Usp_Getcollectioncenterparcelsdata", parameters, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+        public IEnumerable<Collectioncenterparcels> Getcollectioncenterparcelsdatabymanagerid(int Managerid)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Managerid", Managerid);
+                return connection.Query<Collectioncenterparcels>("Usp_Getcollectioncenterparcelsdatabymanagerid", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
         public Genericmodel Registercollectioncenterparceldata(string JsonData)
         {
             using (var connection = new SqlConnection(_connString))

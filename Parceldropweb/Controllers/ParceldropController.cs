@@ -23,7 +23,15 @@ namespace Parceldropweb.Controllers
         [HttpGet]
         public async Task<IActionResult> Collections()
         {
-            var data = await bl.Getparcelcollectioncentersdata();
+            IEnumerable<Parcelcollectioncenters> data = new List<Parcelcollectioncenters>();
+            if (SessionUserData.Usermodel.Rolename == "System Admin")
+            {
+                data = await bl.Getparcelcollectioncentersdata();
+            }
+            else
+            {
+                data = await bl.Getparcelcollectioncentersdatabymanagerid(SessionUserData.Usermodel.Userid);
+            }
             return View(data);
         }
         [HttpGet]
@@ -58,7 +66,7 @@ namespace Parceldropweb.Controllers
             }
             else
             {
-                data = await bl.Getparcelcollectioncentersdatabymanagerid(SessionUserData.Usermodel.Userid);
+                data = await bl.Getcollectioncenterparcelsdatabymanagerid(SessionUserData.Usermodel.Userid);
             }
             return View(data);
         }
