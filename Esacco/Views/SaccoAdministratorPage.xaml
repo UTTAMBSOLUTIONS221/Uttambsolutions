@@ -67,17 +67,10 @@
                                                         <RowDefinition Height="Auto" />
                                                     </Grid.RowDefinitions>
                                                     <StackLayout Grid.Row="0" Margin="0,0,0,4" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-                                                        <Label Text="{Binding Sacconame}" FontSize="16" FontAttributes="Bold" TextColor="Black" MaxLines="1" />
+                                                        <Label Text="{Binding Sacconame}" FontSize="16" FontAttributes="Bold" TextColor="Black" />
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="End">
-                                                        <!--<Button Text="Join" 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.JoinCommand}" 
-                                        CommandParameter="{Binding .}" 
-                                        BackgroundColor="#0a506c" 
-                                        TextColor="White" 
-                                        CornerRadius="5" 
-                                        WidthRequest="100" 
-                                        HeightRequest="40" />-->
+                                                        <!--<Button Text="Join" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.JoinEsaccoSaccoCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" WidthRequest="100" HeightRequest="40" />-->
                                                     </StackLayout>
                                                 </Grid>
                                             </Frame>
