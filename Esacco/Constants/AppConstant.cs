@@ -1,4 +1,7 @@
 ﻿using DBL;
+using Esacco.Controls;
+using Esacco.Views;
+using Esacco.Views.Dashboards;
 
 namespace Esacco.Constants
 {
@@ -10,14 +13,8 @@ namespace Esacco.Constants
             var adminDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(AdminDashboardPage)).FirstOrDefault();
             if (adminDashboardInfo != null) AppShell.Current.Items.Remove(adminDashboardInfo);
 
-            var parcelCollectionCenterDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(ParcelCollectionCenterDashboardPage)).FirstOrDefault();
+            var parcelCollectionCenterDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(SaccoAdministratorPage)).FirstOrDefault();
             if (parcelCollectionCenterDashboardInfo != null) AppShell.Current.Items.Remove(parcelCollectionCenterDashboardInfo);
-
-            var parcelCollectionCourierDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(ParcelCollectionCourierDashboardPage)).FirstOrDefault();
-            if (parcelCollectionCourierDashboardInfo != null) AppShell.Current.Items.Remove(parcelCollectionCourierDashboardInfo);
-
-            var parcelCollectionCustomerDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(ParcelCollectionCustomerDashboardPage)).FirstOrDefault();
-            if (parcelCollectionCustomerDashboardInfo != null) AppShell.Current.Items.Remove(parcelCollectionCustomerDashboardInfo);
 
             var bl = App.Current.Handler.MauiContext.Services.GetService<BL>();
 
@@ -54,12 +51,12 @@ namespace Esacco.Constants
                     }
                 }
             }
-            else if (App.UserDetails.Usermodel.Rolename == "Parcel Collection Center")
+            else if (App.UserDetails.Usermodel.Rolename == "Sacco Administrator")
             {
                 var flyoutItem = new FlyoutItem()
                 {
                     Title = "Dashboard",
-                    Route = nameof(ParcelCollectionCenterDashboardPage),
+                    Route = nameof(SaccoAdministratorPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
                     {
@@ -67,7 +64,7 @@ namespace Esacco.Constants
                         {
                             Icon = Icons.Dashboard,
                             Title = "Dashboard",
-                            ContentTemplate = new DataTemplate(typeof(ParcelCollectionCenterDashboardPage)),
+                            ContentTemplate = new DataTemplate(typeof(SaccoAdministratorPage)),
                         },
                         //new ShellContent
                         //{
@@ -84,57 +81,12 @@ namespace Esacco.Constants
                     {
                         AppShell.Current.Dispatcher.Dispatch(async () =>
                         {
-                            await Shell.Current.GoToAsync($"//{nameof(ParcelCollectionCenterDashboardPage)}");
+                            await Shell.Current.GoToAsync($"//{nameof(SaccoAdministratorPage)}");
                         });
                     }
                     else
                     {
-                        await Shell.Current.GoToAsync($"//{nameof(ParcelCollectionCenterDashboardPage)}");
-                    }
-                }
-            }
-            else if (App.UserDetails.Usermodel.Rolename == "Parcel Drop Courier")
-            {
-                var flyoutItem = new FlyoutItem()
-                {
-                    Title = "Dashboard",
-                    Route = nameof(ParcelCollectionCourierDashboardPage),
-                    FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
-                    Items =
-                    {
-                        new ShellContent
-                        {
-                            Icon = Icons.Dashboard,
-                            Title = "Dashboard",
-                            ContentTemplate = new DataTemplate(typeof(ParcelCollectionCourierDashboardPage)),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.user,
-                            Title = "Profile",
-                            ContentTemplate = new DataTemplate(() => new UserProfilePage(new LoginPageViewModel(bl))),
-                        },
-                        new ShellContent
-                        {
-                            Icon = Icons.user,
-                            Title = "Drop Centers",
-                            ContentTemplate = new DataTemplate(() => new CollectionDropCentersPage(new ParcelDropViewModel(bl))),
-                        },
-                    }
-                };
-                if (!AppShell.Current.Items.Contains(flyoutItem))
-                {
-                    AppShell.Current.Items.Add(flyoutItem);
-                    if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                    {
-                        AppShell.Current.Dispatcher.Dispatch(async () =>
-                        {
-                            await Shell.Current.GoToAsync($"//{nameof(ParcelCollectionCourierDashboardPage)}");
-                        });
-                    }
-                    else
-                    {
-                        await Shell.Current.GoToAsync($"//{nameof(ParcelCollectionCourierDashboardPage)}");
+                        await Shell.Current.GoToAsync($"//{nameof(SaccoAdministratorPage)}");
                     }
                 }
             }
@@ -143,7 +95,7 @@ namespace Esacco.Constants
                 var flyoutItem = new FlyoutItem()
                 {
                     Title = "Dashboard",
-                    Route = nameof(ParcelCollectionCustomerDashboardPage),
+                    Route = nameof(SaccoAdministratorPage),
                     FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
                     Items =
                     {
@@ -151,7 +103,7 @@ namespace Esacco.Constants
                         {
                             Icon = Icons.Dashboard,
                             Title = "Dashboard",
-                            ContentTemplate = new DataTemplate(typeof(ParcelCollectionCustomerDashboardPage)),
+                            ContentTemplate = new DataTemplate(typeof(SaccoAdministratorPage)),
                         },
                     }
                 };
@@ -162,12 +114,12 @@ namespace Esacco.Constants
                     {
                         AppShell.Current.Dispatcher.Dispatch(async () =>
                         {
-                            await Shell.Current.GoToAsync($"//{nameof(ParcelCollectionCustomerDashboardPage)}");
+                            await Shell.Current.GoToAsync($"//{nameof(SaccoAdministratorPage)}");
                         });
                     }
                     else
                     {
-                        await Shell.Current.GoToAsync($"//{nameof(ParcelCollectionCustomerDashboardPage)}");
+                        await Shell.Current.GoToAsync($"//{nameof(SaccoAdministratorPage)}");
                     }
                 }
             }
