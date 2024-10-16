@@ -47,8 +47,6 @@ namespace Esacco.ViewModels
             }
         }
 
-
-
         public EsaccoManagementViewModel(BL bl)
         {
             _bl = bl;
