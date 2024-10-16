@@ -1827,7 +1827,7 @@ namespace DBL
         {
             return Task.Run(() =>
             {
-                var Resp = db.PropertyRepository.Getsaccosummarymodeldata(Staffid);
+                var Resp = db.EsaccoRepository.Getsaccosummarymodeldata(Staffid);
                 return Resp;
             });
         }

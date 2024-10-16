@@ -31,6 +31,9 @@ namespace DBL.UOW
         private IPesaServiceRepository pesaServiceRepository;
         private IParceldropRepository parceldropRepository;
 
+        #region Esacco Sacco Administrator Summary
+        private IEsaccoRepository esaccoRepository;
+        #endregion
         public UnitOfWork(string connectionString) => connString = connectionString;
         public IGeneralRepository GeneralRepository
         {
@@ -113,7 +116,12 @@ namespace DBL.UOW
         {
             get { return parceldropRepository ?? (parceldropRepository = new ParceldropRepository(connString)); }
         }
-
+        #region Esacco Sacco Administrator Summary
+        public IEsaccoRepository EsaccoRepository
+        {
+            get { return esaccoRepository ?? (esaccoRepository = new EsaccoRepository(connString)); }
+        }
+        #endregion
         public void Reset()
         {
             generalRepository = null;
@@ -134,6 +142,9 @@ namespace DBL.UOW
             paymentRepository = null;
             pesaServiceRepository = null;
             parceldropRepository = null;
+
+            esaccoRepository = null;
+
         }
 
         public void Dispose()

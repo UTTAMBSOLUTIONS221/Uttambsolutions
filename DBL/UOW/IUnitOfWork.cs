@@ -28,5 +28,9 @@ namespace DBL.UOW
         IPesaServiceRepository PesaServiceRepository { get; }
         IParceldropRepository ParceldropRepository { get; }
 
+        #region Esacco Sacco Administrator Summary
+        IEsaccoRepository EsaccoRepository { get; }
+        #endregion
+
     }
 }
