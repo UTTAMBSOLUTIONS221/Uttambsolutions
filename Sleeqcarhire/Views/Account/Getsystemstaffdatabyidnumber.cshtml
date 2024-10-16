@@ -1,0 +1,31 @@
+﻿@model DBL.Models.Systemtenantdetailsdata
+<div class="modal-header">
+    <h5 class="text-sm modal-title" id="Uttambsolutionsmodallabel">Tenant Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-4">
+            <input asp-for="@Model.Data.Userid" id="Systemuserid" hidden/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <p class="text-sm fw-light fontweight-light">Fullname:  @Model.Data.Fullname</p>
+        </div>
+        <div class="col-sm-4">
+            <p class="text-sm fw-light fontweight-light">Idnumber: @Model.Data.Idnumber</p>
+        </div>
+        <div class="col-sm-4">
+            <p class="text-sm fw-light fontweight-light">Phone: @Model.Data.Phonenumber</p>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" onclick="rejecttoofferhimherroom();">Close</button>
+    <button class="btn btn-sm btn-info font-weight-bold" type="button" id="accepttoofferhimherroomid" onclick="accepttoofferhimherroom();">
+        <span id="buttonText">Continue</span><span id="processingSpinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display: none;"></span>
+    </button>
+</div>
