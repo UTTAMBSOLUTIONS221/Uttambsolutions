@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using DBL;
 using Esacco.ViewModels;
+using Esacco.Views;
 using Microsoft.Extensions.Logging;
 
 namespace Esacco
@@ -38,9 +39,11 @@ namespace Esacco
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<RegisterPage>();
             builder.Services.AddSingleton<ForgotPasswordPage>();
+            builder.Services.AddSingleton<SaccoAdministratorPage>();
 
 
             builder.Services.AddSingleton<UserManagementViewModel>();
+            builder.Services.AddSingleton<EsaccoManagementViewModel>();
 
             return builder.Build();
         }
