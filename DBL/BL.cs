@@ -1219,7 +1219,6 @@ namespace DBL
 
         #endregion
 
-
         #region System Blog Category
         public Task<IEnumerable<Systemblogcategories>> Getsystemblogcategorydata(int Page, int PageSize)
         {
@@ -1819,6 +1818,21 @@ namespace DBL
                 return Resp;
             });
         }
+        #endregion
+
+        #region Esacco Module 
+        #region Esacco Sacco Administrator Summary
+
+        public Task<Saccosummarydatamodel> Getsaccosummarymodeldata(int Staffid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.PropertyRepository.Getsaccosummarymodeldata(Staffid);
+                return Resp;
+            });
+        }
+        #endregion
+
         #endregion
 
         #region System Dropdowns

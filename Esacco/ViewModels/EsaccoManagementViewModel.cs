@@ -33,15 +33,15 @@ namespace Esacco.ViewModels
         }
         public ICommand LoadSaccoSummaryDataCommand { get; }
 
-        private Saccosummarydatamodel _Saccosummarydatamodeldata;
-        public Saccosummarydatamodel Saccosummarydatamodeldata
+        private Saccosummarydatamodel _Saccosummarymodeldata;
+        public Saccosummarydatamodel Saccosummarymodeldata
         {
-            get => _Saccosummarydatamodeldata;
+            get => _Saccosummarymodeldata;
             set
             {
-                if (_Saccosummarydatamodeldata != value)
+                if (_Saccosummarymodeldata != value)
                 {
-                    _Saccosummarydatamodeldata = value;
+                    _Saccosummarymodeldata = value;
                     OnPropertyChanged(nameof(Saccosummarydatamodel));
                 }
             }
@@ -52,7 +52,7 @@ namespace Esacco.ViewModels
         public EsaccoManagementViewModel(BL bl)
         {
             _bl = bl;
-            Saccosummarydatamodeldata = new Saccosummarydatamodel();
+            Saccosummarymodeldata = new Saccosummarydatamodel();
             LoadSaccoSummaryDataCommand = new Command(async () => await OnLoadSaccoSummaryData());
         }
         private async Task OnLoadSaccoSummaryData()
@@ -61,7 +61,7 @@ namespace Esacco.ViewModels
             IsDataLoaded = false;
             try
             {
-                Maqaoplussummarydata = await _bl.Getmaqaoplussummarydata();
+                Saccosummarymodeldata = await _bl.Getsaccosummarymodeldata(App.UserDetails.Usermodel.Userid);
                 IsDataLoaded = true;
             }
             catch (Exception ex)
