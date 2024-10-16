@@ -82,7 +82,7 @@ namespace Esacco.ViewModels
             Saccosummarymodeldata = new Saccosummarydatamodel();
             Esaccosaccosdata = new Esaccosaccos();
             LoadSaccoSummaryDataCommand = new Command(async () => await OnLoadSaccoSummaryData());
-            JoinEsaccoSaccoCommand = new Command<Esaccosaccos>(async (sacco) => { var saccoId = sacco?.Saccoid ?? 0; await OnJoinEsaccoSacco(saccoId); });
+            JoinEsaccoSaccoCommand = new Command<Esaccosaccos>(async (sacco) => { if (sacco != null) { await OnJoinEsaccoSacco(sacco); } });
         }
         private async Task OnLoadSaccoSummaryData()
         {
@@ -103,20 +103,30 @@ namespace Esacco.ViewModels
             }
         }
 
-        private async Task OnJoinEsaccoSacco(int SaccoId)
+        private async Task OnJoinEsaccoSacco(Esaccosaccos Sacco)
         {
             IsProcessing = true;
             Saccodriversdata = new Saccodrivers
             {
-                Saccoid = SaccoId,
+                Saccoid = Sacco.Saccoid,
                 Userid = App.UserDetails.Usermodel.Userid
             };
 
-            var response = await _bl.Registercollectioncentercourierdata(JsonConvert.SerializeObject(Saccodriversdata));
-            if (response != null)
+            bool isConfirmed = await Application.Current.MainPage.DisplayAlert("Join Sacco", $"Are you sure you are a member to {Sacco.Sacconame}?", "OK", "Cancel");
+            if (isConfirmed)
             {
-                await OnLoadSaccoSummaryData();
+                var response = await _bl.Registercollectioncentercourierdata(JsonConvert.SerializeObject(Saccodriversdata));
+                if (response != null)
+                {
+                    await OnLoadSaccoSummaryData();
+                }
             }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Warning", "Cool Join the sacco you are a member!", "OK");
+            }
+
+
             IsProcessing = false;
         }
 
