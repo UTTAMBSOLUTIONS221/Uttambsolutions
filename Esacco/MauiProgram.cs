@@ -36,6 +36,8 @@ namespace Esacco
 
 
             builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<RegisterPage>();
+            builder.Services.AddSingleton<ForgotPasswordPage>();
 
 
             builder.Services.AddSingleton<UserManagementViewModel>();
