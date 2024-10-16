@@ -40,6 +40,7 @@ namespace Esacco
             builder.Services.AddSingleton<RegisterPage>();
             builder.Services.AddSingleton<ForgotPasswordPage>();
             builder.Services.AddSingleton<SaccoAdministratorPage>();
+            builder.Services.AddSingleton<SaccoDriverPage>();
 
 
             builder.Services.AddSingleton<UserManagementViewModel>();

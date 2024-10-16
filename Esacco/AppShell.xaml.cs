@@ -11,6 +11,7 @@ namespace Esacco
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             Routing.RegisterRoute(nameof(ForgotPasswordPage), typeof(ForgotPasswordPage));
             Routing.RegisterRoute(nameof(SaccoAdministratorPage), typeof(SaccoAdministratorPage));
+            Routing.RegisterRoute(nameof(SaccoDriverPage), typeof(SaccoDriverPage));
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using DBL;
+using DBL.Entities;
 using DBL.Models;
+using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -32,6 +34,7 @@ namespace Esacco.ViewModels
             }
         }
         public ICommand LoadSaccoSummaryDataCommand { get; }
+        public ICommand JoinEsaccoSaccoCommand { get; }
 
         private Saccosummarydatamodel _Saccosummarymodeldata;
         public Saccosummarydatamodel Saccosummarymodeldata
@@ -46,12 +49,40 @@ namespace Esacco.ViewModels
                 }
             }
         }
+        private Esaccosaccos _Esaccosaccosdata;
+        public Esaccosaccos Esaccosaccosdata
+        {
+            get => _Esaccosaccosdata;
+            set
+            {
+                if (_Esaccosaccosdata != value)
+                {
+                    _Esaccosaccosdata = value;
+                    OnPropertyChanged(nameof(Esaccosaccosdata));
+                }
+            }
+        }
+        private Saccodrivers _Saccodriversdata;
+        public Saccodrivers Saccodriversdata
+        {
+            get => _Saccodriversdata;
+            set
+            {
+                if (_Saccodriversdata != value)
+                {
+                    _Saccodriversdata = value;
+                    OnPropertyChanged(nameof(Saccodriversdata));
+                }
+            }
+        }
 
         public EsaccoManagementViewModel(BL bl)
         {
             _bl = bl;
             Saccosummarymodeldata = new Saccosummarydatamodel();
+            Esaccosaccosdata = new Esaccosaccos();
             LoadSaccoSummaryDataCommand = new Command(async () => await OnLoadSaccoSummaryData());
+            JoinEsaccoSaccoCommand = new Command<Esaccosaccos>(async (sacco) => { var saccoId = sacco?.Saccoid ?? 0; await OnJoinEsaccoSacco(saccoId); });
         }
         private async Task OnLoadSaccoSummaryData()
         {
@@ -70,6 +101,23 @@ namespace Esacco.ViewModels
             {
                 IsProcessing = false;
             }
+        }
+
+        private async Task OnJoinEsaccoSacco(int SaccoId)
+        {
+            IsProcessing = true;
+            Saccodriversdata = new Saccodrivers
+            {
+                Saccoid = SaccoId,
+                Userid = App.UserDetails.Usermodel.Userid
+            };
+
+            var response = await _bl.Registercollectioncentercourierdata(JsonConvert.SerializeObject(Saccodriversdata));
+            if (response != null)
+            {
+                await OnLoadSaccoSummaryData();
+            }
+            IsProcessing = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
