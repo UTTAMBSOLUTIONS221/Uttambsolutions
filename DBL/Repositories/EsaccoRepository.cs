@@ -24,7 +24,7 @@ namespace DBL.Repositories
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("Staffid", Staffid);
+                parameters.Add("@Staffid", Staffid);
                 parameters.Add("@Saccosummarydata", dbType: DbType.String, direction: ParameterDirection.Output, size: int.MaxValue);
                 var queryResult = connection.Query("Usp_Getsaccosummarymodeldata", parameters, commandType: CommandType.StoredProcedure);
                 string saccosummarydataJson = parameters.Get<string>("@Saccosummarydata");
