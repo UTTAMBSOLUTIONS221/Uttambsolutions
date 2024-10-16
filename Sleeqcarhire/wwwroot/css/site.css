@@ -1,22 +1,141 @@
-html {
-  font-size: 14px;
+.bg-custom {
+    background-color: #0a506c !important;
 }
 
+.btn-custom {
+    background-color: #0a506c !important;
+    color: #ffffff;
+}
+
+.full-width-hr {
+    margin: 0 -15px; /* Adjust based on card padding */
+}
+
+.card-border-custom {
+    border: 1px solid #0a506c;
+}
+
+.text-custom {
+    color: #0a506c !important;
+}
+
+.btn-apply-site {
+    color: white !important;
+}
+
+textarea {
+    resize: none;
+}
+
+.custom-badge {
+    margin: 2px 0;
+}
+
+    .custom-badge.unique-color-1 {
+        background-color: #FF5733 !important;
+        color: white;
+    }
+
+    .custom-badge.unique-color-2 {
+        background-color: #33FF57 !important;
+        color: white;
+    }
+
+    .custom-badge.unique-color-3 {
+        background-color: #3357FF !important;
+        color: white;
+    }
+/* Hide spinner arrows for number inputs */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.no-wrap-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px; /* Adjust the gap as needed */
+}
+
+    .no-wrap-buttons a {
+        white-space: nowrap;
+    }
+
+html {
+    font-size: 14px;
+}
+
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: -30px;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #22a6b3;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.image-preview {
+    display: inline-block; /* Display images inline */
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border: 2px solid #0a506c !important;
+    margin: 5px;
+    overflow: hidden;
+}
+
+#Uttambsolutionsimagespreviewcontainer {
+    display: flex; /* Display images in a row */
+    flex-wrap: wrap; /* Wrap to the next line if needed */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
 }
