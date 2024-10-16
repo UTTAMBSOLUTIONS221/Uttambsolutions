@@ -8,8 +8,14 @@
     Title="Esacco">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+     Title="Esacco" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled" Shell.TitleColor="#ed7a17"
+     ContentTemplate="{DataTemplate local:LoginPage}"
+     Route="LoginPage" />    
+
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Text="Sign Out" FontAttributes="Bold" Command="{Binding SignOutCommand}" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
 
 </Shell>
