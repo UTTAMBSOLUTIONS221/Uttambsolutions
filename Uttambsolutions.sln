@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maqaoplus", "Maqaoplus\Maqa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parceldrop", "Parceldrop\Parceldrop.csproj", "{F2CCF71A-7149-471F-B9E4-4FFDEA5202B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parceldropweb", "Parceldropweb\Parceldropweb.csproj", "{8EC5E128-6AF0-4874-AFEB-E368164A0315}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parceldropweb", "Parceldropweb\Parceldropweb.csproj", "{8EC5E128-6AF0-4874-AFEB-E368164A0315}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sleeqcarhire", "Sleeqcarhire\Sleeqcarhire.csproj", "{FADAA40C-3FF8-4050-93D4-4022A7387108}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{8EC5E128-6AF0-4874-AFEB-E368164A0315}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EC5E128-6AF0-4874-AFEB-E368164A0315}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EC5E128-6AF0-4874-AFEB-E368164A0315}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FADAA40C-3FF8-4050-93D4-4022A7387108}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADAA40C-3FF8-4050-93D4-4022A7387108}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FADAA40C-3FF8-4050-93D4-4022A7387108}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FADAA40C-3FF8-4050-93D4-4022A7387108}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
