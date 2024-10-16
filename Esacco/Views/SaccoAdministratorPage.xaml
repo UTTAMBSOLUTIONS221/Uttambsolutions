@@ -61,9 +61,9 @@
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
                                             <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="320" HasShadow="True">
-                                                <Frame.GestureRecognizers>
+                                                <!--<Frame.GestureRecognizers>
                                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ViewMoreDetailsCommand}" CommandParameter="{Binding .}" />
-                                                </Frame.GestureRecognizers>
+                                                </Frame.GestureRecognizers>-->
                                                 <Grid Padding="5">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="Auto" />
