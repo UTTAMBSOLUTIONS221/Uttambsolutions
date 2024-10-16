@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Esacco.Views.SaccoDriverPage"
+             xmlns:converters="clr-namespace:Esacco.Helpers"
+             xmlns:local="clr-namespace:Esacco.Helpers"
+             Title="ESACCO">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:NullToImageConverter x:Key="NullToImageConverter" />
+            <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+            <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+
+        <!-- Define Row Heights for Header, Content, and Footer -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ScrollView Grid.Row="0"  IsVisible="{Binding IsDataLoaded}">
+            <StackLayout>
+                <Grid>
+                    <!-- Define Row Heights for Header, Content, and Footer -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <!-- Summary Data Section with Smaller Cards -->
+                    <StackLayout Grid.Row="0" Spacing="10" Padding="10" BackgroundColor="#f9f9f9" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1" BackgroundColor="#f9f9f9" Padding="20" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Spacing="10">
+
+                    </StackLayout>
+
+                    <!-- Main Content - Property Listings -->
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <!--<RowDefinition Height="Auto" />-->
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Search Bar -->
+                        <!--<Frame Grid.Row="0" CornerRadius="10" Padding="0" BackgroundColor="White" BorderColor="#0a506c" HasShadow="True" Margin="10,0,10,0">
+                            <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40" />
+                        </Frame>-->
+
+                        <!-- CollectionView directly under the Search Bar -->
+                        <ScrollView Grid.Row="0">
+                            <StackLayout>
+                                <CollectionView ItemsSource="{Binding Saccosummarymodeldata.Esaccosaccosdata}" HeightRequest="600">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Span="2" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Padding="10" Margin="4" BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="10" HeightRequest="100" HasShadow="True">
+                                                <Grid Padding="5">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <StackLayout Grid.Row="0" Margin="0,0,0,4" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                                        <Label Text="{Binding Sacconame}" FontSize="16" FontAttributes="Bold" TextColor="Black" />
+                                                    </StackLayout>
+                                                    <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="End">
+                                                        <!--<Button Text="Join" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.JoinEsaccoSaccoCommand}" CommandParameter="{Binding .}" BackgroundColor="#0a506c" TextColor="White" CornerRadius="5" WidthRequest="100" HeightRequest="40" />-->
+                                                    </StackLayout>
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </ScrollView>
+                    </Grid>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Overlay Layer for ActivityIndicator -->
+        <Grid IsVisible="{Binding IsProcessing}" BackgroundColor="#00000066" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3">
+            <BoxView Color="#C0000000" Opacity="0.5" />
+            <ActivityIndicator IsRunning="{Binding IsProcessing}" VerticalOptions="Center" HorizontalOptions="Center" Color="#ed7a17" HeightRequest="100" WidthRequest="100" />
+        </Grid>
+
+        <!-- Footer -->
+        <StackLayout Grid.Row="2" BackgroundColor="#ffffff" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="End">
+            <Label Text="{Binding CopyrightText}" HorizontalOptions="CenterAndExpand" TextColor="#ed7a17" TextTransform="Uppercase" FontAttributes="Bold" FontSize="12"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>
