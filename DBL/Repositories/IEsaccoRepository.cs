@@ -7,5 +7,9 @@ namespace DBL.Repositories
         #region Esacco Sacco Administrator Summary
         Saccosummarydatamodel Getsaccosummarymodeldata(int Staffid);
         #endregion
+        #region Esacco Sacco Driver Summary
+        Genericmodel Registersaccodriverdata(string JsonData);
+        #endregion
+
     }
 }

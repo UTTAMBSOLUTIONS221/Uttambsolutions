@@ -115,7 +115,7 @@ namespace Esacco.ViewModels
             bool isConfirmed = await Application.Current.MainPage.DisplayAlert("Join Sacco", $"Are you sure you are a member to {Sacco.Sacconame}?", "OK", "Cancel");
             if (isConfirmed)
             {
-                var response = await _bl.Registercollectioncentercourierdata(JsonConvert.SerializeObject(Saccodriversdata));
+                var response = await _bl.Registersaccodriverdata(JsonConvert.SerializeObject(Saccodriversdata));
                 if (response != null)
                 {
                     await OnLoadSaccoSummaryData();

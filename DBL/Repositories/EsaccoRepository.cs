@@ -47,5 +47,19 @@ namespace DBL.Repositories
             }
         }
         #endregion
+
+
+        #region Esacco Sacco Driver Summary
+        public Genericmodel Registersaccodriverdata(string JsonData)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@JsonObjectdata", JsonData);
+                return connection.Query<Genericmodel>("Usp_Registersaccodriverdata", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+        #endregion
     }
 }

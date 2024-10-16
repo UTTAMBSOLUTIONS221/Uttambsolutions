@@ -1822,12 +1822,22 @@ namespace DBL
 
         #region Esacco Module 
         #region Esacco Sacco Administrator Summary
-
         public Task<Saccosummarydatamodel> Getsaccosummarymodeldata(int Staffid)
         {
             return Task.Run(() =>
             {
                 var Resp = db.EsaccoRepository.Getsaccosummarymodeldata(Staffid);
+                return Resp;
+            });
+        }
+        #endregion
+
+        #region Esacco Sacco Driver Summary
+        public Task<Genericmodel> Registersaccodriverdata(string Obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.EsaccoRepository.Registersaccodriverdata(Obj);
                 return Resp;
             });
         }
