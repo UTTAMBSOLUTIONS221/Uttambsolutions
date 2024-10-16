@@ -1,0 +1,81 @@
+﻿@model DBL.Models.Systemstaffdetaildata
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta name="keywords" content="Uttamb Solutions, web development, e-commerce, fuel card systems, digital marketing, blogs" />
+    <meta name="author" content="Uttamb Solutions" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@ViewData["Title"] - Uttamb Solutions" />
+    <meta property="og:description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta property="og:image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
+    <meta property="og:url" content="https://uttambsolutions.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@ViewData["Title"] - Uttamb Solutions" />
+    <meta name="twitter:description" content="Uttamb Solutions offers top-notch web development, e-commerce, fuel card systems, forecasting management systems, and digital marketing services." />
+    <meta name="twitter:image" content="https://uttambsolutions.com/images/uttambsolutionlogo.png" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/bs-stepper/css/bs-stepper.min.css" rel="stylesheet" />
+    <link href="~/lib/plugins/datatables-bs4/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850934153859537" crossorigin="anonymous"></script>
+</head>
+<body class="hold-transition login-page">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-info card-outline">
+                    <div class="card-body">
+                        <h5 class="text-center text-dark font-weight-bold">Greetings @Model.Data.Fullname</h5>
+                        <p class="text-center">You need to activate your account.</p>
+                        <p class="text-center">Your activation amount is <strong>Ksh. @Model.Data.Subscriptionamount.ToString("N2")</strong></p>
+                        <div class="text-center mb-3">
+                            <img src="~/images/familybank.png" alt="Family Bank" class="img-fluid" style="max-height: 50px;">
+                        </div>
+                        <p class="text-center">
+                            Go to Lipa na Mpesa paybill <strong>@Model.Data.AccountVerificationBanks[0].Verificationshortcode</strong>
+                            and use <strong>@Model.Data.AccountVerificationBanks[0].Accountnumber</strong> as the account number.
+                        </p>
+                        <p class="text-center">and pay the above amount.</p>
+                        <p class="text-center text-uppercase font-weight-bold text-warning">
+                            Once you receive the confirmation, wait for about 10 minutes and login.
+                        </p>
+                        <div class="text-center mt-4">
+                            <a asp-action="Signin" asp-controller="Account" class="btn btn-sm btn-danger font-weight-bolder text-center text-info text-xs">Sign In</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/lib/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>

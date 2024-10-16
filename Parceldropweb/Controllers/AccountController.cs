@@ -111,13 +111,10 @@ namespace Parceldropweb.Controllers
         }
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Verifyaccount(long Staffid, long Accountnumber, string Phonenumber)
+        public async Task<IActionResult> Verifyaccount(long Staffid)
         {
-            Verifyaccountmodel data = new Verifyaccountmodel();
-            data.Userid = Staffid;
-            data.Accountnumber = Accountnumber;
-            data.Phonenumber = Phonenumber;
-            return View(data);
+            var response = await bl.Getsystemstaffdetaildatabyid(Staffid);
+            return View(response);
         }
 
         [HttpGet]
