@@ -42,7 +42,7 @@ namespace Esacco.ViewModels
                 if (_Saccosummarymodeldata != value)
                 {
                     _Saccosummarymodeldata = value;
-                    OnPropertyChanged(nameof(Saccosummarydatamodel));
+                    OnPropertyChanged(nameof(Saccosummarymodeldata));
                 }
             }
         }
