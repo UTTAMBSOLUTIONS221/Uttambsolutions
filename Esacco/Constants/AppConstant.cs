@@ -1,5 +1,6 @@
 ﻿using DBL;
 using Esacco.Controls;
+using Esacco.ViewModels;
 using Esacco.Views;
 using Esacco.Views.Dashboards;
 
@@ -32,6 +33,12 @@ namespace Esacco.Constants
                             Icon = Icons.Dashboard,
                             Title = "Dashboard",
                             ContentTemplate = new DataTemplate(typeof(AdminDashboardPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.user,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(() => new UserProfilePage(new UserManagementViewModel(bl))),
                         },
                     }
                 };
@@ -66,12 +73,12 @@ namespace Esacco.Constants
                             Title = "Dashboard",
                             ContentTemplate = new DataTemplate(typeof(SaccoAdministratorPage)),
                         },
-                        //new ShellContent
-                        //{
-                        //    Icon = Icons.user,
-                        //    Title = "Profile",
-                        //    ContentTemplate = new DataTemplate(() => new UserProfilePage(new UserProfilePageViewModel(bl))),
-                        //},
+                        new ShellContent
+                        {
+                            Icon = Icons.user,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(() => new UserProfilePage(new UserManagementViewModel(bl))),
+                        },
                     }
                 };
                 if (!AppShell.Current.Items.Contains(flyoutItem))
@@ -104,6 +111,12 @@ namespace Esacco.Constants
                             Icon = Icons.Dashboard,
                             Title = "Dashboard",
                             ContentTemplate = new DataTemplate(typeof(SaccoAdministratorPage)),
+                        },
+                        new ShellContent
+                        {
+                            Icon = Icons.user,
+                            Title = "Profile",
+                            ContentTemplate = new DataTemplate(() => new UserProfilePage(new UserManagementViewModel(bl))),
                         },
                     }
                 };
