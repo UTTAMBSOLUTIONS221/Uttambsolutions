@@ -13,8 +13,8 @@ namespace Esacco.Constants
             var adminDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(AdminDashboardPage)).FirstOrDefault();
             if (adminDashboardInfo != null) AppShell.Current.Items.Remove(adminDashboardInfo);
 
-            var parcelCollectionCenterDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(SaccoAdministratorPage)).FirstOrDefault();
-            if (parcelCollectionCenterDashboardInfo != null) AppShell.Current.Items.Remove(parcelCollectionCenterDashboardInfo);
+            var saccoadministratorpageinfo = AppShell.Current.Items.Where(f => f.Route == nameof(SaccoAdministratorPage)).FirstOrDefault();
+            if (saccoadministratorpageinfo != null) AppShell.Current.Items.Remove(saccoadministratorpageinfo);
 
             var bl = App.Current.Handler.MauiContext.Services.GetService<BL>();
 
