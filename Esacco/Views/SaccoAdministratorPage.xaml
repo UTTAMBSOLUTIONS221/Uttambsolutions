@@ -4,7 +4,7 @@
              x:Class="Esacco.Views.SaccoAdministratorPage"
              xmlns:converters="clr-namespace:Esacco.Helpers"
              xmlns:local="clr-namespace:Esacco.Helpers"
-             Shell.NavBarIsVisible="False">
+             Title="ESACCO">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -18,14 +18,10 @@
 
         <!-- Define Row Heights for Header, Content, and Footer -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackLayout Grid.Row="0" BackgroundColor="#0a506c" Padding="10" Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-            <Label Text="MAQAO PLUS" FontSize="24" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
-        </StackLayout>
-        <ScrollView Grid.Row="1"  IsVisible="{Binding IsDataLoaded}">
+        <ScrollView Grid.Row="0"  IsVisible="{Binding IsDataLoaded}">
             <StackLayout>
                 <Grid>
                     <!-- Define Row Heights for Header, Content, and Footer -->
@@ -46,17 +42,17 @@
                     <!-- Main Content - Property Listings -->
                     <Grid Grid.Row="2">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
+                            <!--<RowDefinition Height="Auto" />-->
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
                         <!-- Search Bar -->
-                        <Frame Grid.Row="0" CornerRadius="10" Padding="0" BackgroundColor="White" BorderColor="#0a506c" HasShadow="True" Margin="10,0,10,0">
+                        <!--<Frame Grid.Row="0" CornerRadius="10" Padding="0" BackgroundColor="White" BorderColor="#0a506c" HasShadow="True" Margin="10,0,10,0">
                             <SearchBar Placeholder="Search properties..." BackgroundColor="Transparent" Margin="5,0" HeightRequest="40" />
-                        </Frame>
+                        </Frame>-->
 
                         <!-- CollectionView directly under the Search Bar -->
-                        <ScrollView Grid.Row="1">
+                        <ScrollView Grid.Row="0">
                             <StackLayout>
                                 <CollectionView ItemsSource="{Binding Saccosummarymodeldata.Esaccosaccosdata}" HeightRequest="600">
                                     <CollectionView.ItemsLayout>
