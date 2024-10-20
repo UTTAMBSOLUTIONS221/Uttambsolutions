@@ -119,7 +119,7 @@ namespace Esacco.ViewModels
                 var response = await _bl.Registersaccodriverdata(JsonConvert.SerializeObject(Saccodriversdata));
                 if (response != null)
                 {
-                    await Shell.Current.GoToAsync(nameof(SaccoDriverPage), true);
+                    await Shell.Current.GoToAsync(nameof(SaccoEquipmentPage), true);
                 }
             }
             else
