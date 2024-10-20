@@ -113,7 +113,7 @@ namespace Esacco.ViewModels
                 Userid = App.UserDetails.Usermodel.Userid
             };
 
-            bool isConfirmed = await Application.Current.MainPage.DisplayAlert("Join Sacco", $"Are you sure you are a member to {Sacco.Sacconame}?", "OK", "Cancel");
+            bool isConfirmed = await Application.Current.MainPage.DisplayAlert("Join Sacco", $"Are you sure you are a member to {Sacco.Sacconame}?", "Yes", "No");
             if (isConfirmed)
             {
                 var response = await _bl.Registersaccodriverdata(JsonConvert.SerializeObject(Saccodriversdata));
