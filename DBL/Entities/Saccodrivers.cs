@@ -3,6 +3,6 @@
     public class Saccodrivers
     {
         public int Saccoid { get; set; }
-        public int Userid { get; set; }
+        public int Memberid { get; set; }
     }
 }

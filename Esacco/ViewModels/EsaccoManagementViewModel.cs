@@ -110,7 +110,7 @@ namespace Esacco.ViewModels
             Saccodriversdata = new Saccodrivers
             {
                 Saccoid = Sacco.Saccoid,
-                Userid = App.UserDetails.Usermodel.Userid
+                Memberid = App.UserDetails.Usermodel.Userid
             };
 
             bool isConfirmed = await Application.Current.MainPage.DisplayAlert("Join Sacco", $"Are you sure you are a member to {Sacco.Sacconame}?", "Yes", "No");
