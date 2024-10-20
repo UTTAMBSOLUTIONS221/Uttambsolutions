@@ -1,6 +1,7 @@
 ﻿using DBL;
 using DBL.Entities;
 using DBL.Models;
+using Esacco.Views;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -118,7 +119,7 @@ namespace Esacco.ViewModels
                 var response = await _bl.Registersaccodriverdata(JsonConvert.SerializeObject(Saccodriversdata));
                 if (response != null)
                 {
-                    await OnLoadSaccoSummaryData();
+                    await Shell.Current.GoToAsync(nameof(SaccoDriverPage), true);
                 }
             }
             else
