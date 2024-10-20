@@ -149,6 +149,25 @@ namespace Sleeqcarhire.Controllers
             var resp = await bl.Getsystemstaffdatabyidnumber(Idnumber);
             return Json(resp);
         }
+
+        #region Vehicle Owners
+
+        [HttpGet]
+        public async Task<IActionResult> Vehicleowners()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Addvehicleowner(long Vehicleownerid)
+        {
+            return PartialView();
+        }
+        #endregion
+
+
+
+
         #region Other Methods
 
         private async void SetUserLoggedIn(UsermodelResponce user, bool rememberMe)
