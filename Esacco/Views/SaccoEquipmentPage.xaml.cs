@@ -7,6 +7,11 @@ public partial class SaccoEquipmentPage : ContentPage
     public SaccoEquipmentPage(EsaccoManagementViewModel viewModel)
     {
         InitializeComponent();
+        Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+        {
+            IsEnabled = false,
+            IsVisible = false
+        });
         BindingContext = _viewModel = viewModel;
     }
     protected override async void OnAppearing()
