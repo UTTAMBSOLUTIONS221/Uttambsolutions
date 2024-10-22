@@ -113,7 +113,7 @@ namespace WEB.Controllers
                     Title = productData.Storeitemname,
                     Description = productData.Productdescription,
                     Availability = productData.Productavailability,
-                    Condition = productData.Productstatus,
+                    Condition = productData.Productcondition,
                     Price = productData.Itemsellingprice.ToString("#,##0.00"),
                     Link = "https://uttambsolutions.com/Home/Shopproductdetail?code=" + Guid.NewGuid().ToString() + "&Shopproductid=" + productData.Storeitemid,
                     Image_link = productData.Storeproductimgurl,

@@ -19,6 +19,7 @@
         public string? Productdescription { get; set; }
         public string? Productavailability { get; set; }
         public string? Productstatus { get; set; }
+        public string? Productcondition { get; set; }
         public string? Parentcategoryname { get; set; }
         public decimal Productstock { get; set; }
         public string? Productgender { get; set; }
