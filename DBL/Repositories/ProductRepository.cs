@@ -56,6 +56,7 @@ namespace DBL.Repositories
                     Storeitemdata.Itemsellingprice = Convert.ToDecimal(responseJson["Itemsellingprice"]);
                     Storeitemdata.Itemstatus = Convert.ToInt32(responseJson["Itemstatus"]);
                     Storeitemdata.Storeproductimgurl = responseJson["Storeproductimgurl"].ToString();
+                    Storeitemdata.Productdescription = responseJson["Productdescription"].ToString();
                     Storeitemdata.Productavailability = responseJson["Productavailability"].ToString();
                     Storeitemdata.Productcondition = responseJson["Productcondition"].ToString();
                     Storeitemdata.Productstatus = responseJson["Productstatus"].ToString();
