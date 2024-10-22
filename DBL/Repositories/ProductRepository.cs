@@ -55,6 +55,7 @@ namespace DBL.Repositories
                     Storeitemdata.Itembuyingprice = Convert.ToDecimal(responseJson["Itembuyingprice"]);
                     Storeitemdata.Itemsellingprice = Convert.ToDecimal(responseJson["Itemsellingprice"]);
                     Storeitemdata.Itemstatus = Convert.ToInt32(responseJson["Itemstatus"]);
+                    Storeitemdata.Storeproductimgurl = responseJson["Storeproductimgurl"].ToString();
                     Storeitemdata.Isactive = Convert.ToBoolean(responseJson["Isactive"]);
                     Storeitemdata.Isdeleted = Convert.ToBoolean(responseJson["Isdeleted"]);
                     Storeitemdata.Createdby = Convert.ToInt32(responseJson["Createdby"]);
