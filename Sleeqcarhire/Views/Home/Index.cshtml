@@ -1,8 +1,149 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "Car Hire in Kenya - Explore Comfort and Style";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Main container for the page -->
+<div class="container-fluid p-0">
+    <!-- Hero Section -->
+    <div class="hero-section bg-cover text-white d-flex align-items-center" style="background-image: url('/images/hero-kenya.jpg'); height: 80vh;">
+        <div class="container text-center">
+            <h1 class="display-4">Explore Kenya with Comfort and Style</h1>
+            <p class="lead">Affordable and reliable car hire services across Kenya.</p>
+            <a href="/Booking" class="btn btn-primary btn-lg">Book Your Ride</a>
+        </div>
+    </div>
+
+    <!-- Vehicle Categories Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Choose Your Ride</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <img src="/images/economy-car.jpg" class="card-img-top" alt="Economy Car">
+                    <div class="card-body">
+                        <h5 class="card-title">Economy Cars</h5>
+                        <p class="card-text">Budget-friendly options for city travel.</p>
+                        <a href="/Vehicles/Economy" class="btn btn-outline-primary btn-block">View More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <img src="/images/suv.jpg" class="card-img-top" alt="SUV">
+                    <div class="card-body">
+                        <h5 class="card-title">SUVs</h5>
+                        <p class="card-text">Perfect for off-road and adventure trips.</p>
+                        <a href="/Vehicles/SUVs" class="btn btn-outline-primary btn-block">View More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <img src="/images/luxury-car.jpg" class="card-img-top" alt="Luxury Car">
+                    <div class="card-body">
+                        <h5 class="card-title">Luxury Cars</h5>
+                        <p class="card-text">For business or special occasions.</p>
+                        <a href="/Vehicles/Luxury" class="btn btn-outline-primary btn-block">View More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <img src="/images/van.jpg" class="card-img-top" alt="Van">
+                    <div class="card-body">
+                        <h5 class="card-title">Vans & Buses</h5>
+                        <p class="card-text">For group travel and family trips.</p>
+                        <a href="/Vehicles/Vans" class="btn btn-outline-primary btn-block">View More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us Section -->
+    <div class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Why Choose Our Service?</h2>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <i class="fas fa-car fa-3x mb-3"></i>
+                    <h5>Wide Selection of Vehicles</h5>
+                    <p>From economy to luxury cars.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fas fa-headset fa-3x mb-3"></i>
+                    <h5>24/7 Customer Support</h5>
+                    <p>Reliable assistance anytime.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fas fa-map-marker-alt fa-3x mb-3"></i>
+                    <h5>Flexible Pick-Up Locations</h5>
+                    <p>Available across Kenya.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fas fa-money-bill-wave fa-3x mb-3"></i>
+                    <h5>Affordable Rates</h5>
+                    <p>Transparent pricing for all.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">What Our Clients Say</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <blockquote class="blockquote">
+                    <p>"Great service! The car was clean and perfect for our road trip."</p>
+                    <footer class="blockquote-footer">John, Nairobi</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-4">
+                <blockquote class="blockquote">
+                    <p>"Affordable prices and excellent support. Highly recommend!"</p>
+                    <footer class="blockquote-footer">Mary, Mombasa</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-4">
+                <blockquote class="blockquote">
+                    <p>"Easy booking process and fantastic selection of vehicles."</p>
+                    <footer class="blockquote-footer">David, Nakuru</footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Get In Touch</h2>
+        <form>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" placeholder="Name" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="email" class="form-control" placeholder="Email" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" rows="4" placeholder="Message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </div>
 </div>
+
+<!-- Footer Section -->
+<footer class="bg-dark text-white text-center py-3">
+    <p>© 2024 Car Hire in Kenya. All Rights Reserved.</p>
+    <div class="social-icons">
+        <a href="#" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+    </div>
+</footer>
+
+<!-- Include FontAwesome for icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
