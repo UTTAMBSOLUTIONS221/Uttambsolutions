@@ -57,7 +57,7 @@ namespace DBL.Repositories
                     Storeitemdata.Itemstatus = Convert.ToInt32(responseJson["Itemstatus"]);
                     Storeitemdata.Storeproductimgurl = responseJson["Storeproductimgurl"].ToString();
                     Storeitemdata.Productavailability = responseJson["Productavailability"].ToString();
-                    Storeitemdata.Productstatus = responseJson["Productstatus"].ToString();
+                    Storeitemdata.Productcondition = responseJson["Productcondition"].ToString();
                     Storeitemdata.Productstatus = responseJson["Productstatus"].ToString();
                     Storeitemdata.Isactive = Convert.ToBoolean(responseJson["Isactive"]);
                     Storeitemdata.Isdeleted = Convert.ToBoolean(responseJson["Isdeleted"]);
