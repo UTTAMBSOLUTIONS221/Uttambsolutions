@@ -44,7 +44,10 @@
                                     <td>@item.JobStatus</td>
                                     <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
                                     <td>@item.DatePosted.ToString("dd/MM/yyyy")</td>
-                                    <td class="text-right"><a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" id="CAN_EDIT_JOB" class="btn btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a></td>
+                                    <td class="text-right">
+                                        <a asp-action="Addopportunity" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" id="CAN_EDIT_JOB" class="btn btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right" data-target="#Uttambsolutionsmodallarge" data-toggle="modal" data-backdrop="static" data-keyboard="false">Edit</a>
+                                        <a asp-action="PostJobToLinkedIn" asp-controller="Opportunity" asp-route-code="@Guid.NewGuid()" asp-route-Opportunityid="@item.JobId" asp-area="" id="CAN_EDIT_JOB" class="btn btn-info btn-xs btn-outline-info text-white font-weight-bold text-uppercase main float-right">Post</a>
+                                    </td>
                                 </tr>
                             }
                         }

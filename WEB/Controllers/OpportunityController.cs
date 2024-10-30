@@ -76,18 +76,22 @@ namespace WEB.Controllers
             return PartialView(systemJob);
         }
         [HttpPost]
-        public async Task<IActionResult> PostJobToLinkedIn(string jobCompanyImage, string jobTitle, string jobUrl, string jobDescription)
+        public async Task<IActionResult> PostJobToLinkedIn(int Opportunityid)
         {
             string organizationId = "78n4swsafira7a";     // LinkedIn organization ID
             string accessToken = HttpContext.Session.GetString("LinkedInAccessToken");
-
+            var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
             if (string.IsNullOrEmpty(accessToken))
             {
                 return RedirectToAction("Authorize", "LinkedIn"); // Redirect to LinkedIn authorization
             }
             try
             {
-                string result = await _linkedInService.PostJobToLinkedInAsync(accessToken, organizationId, jobTitle, jobUrl, jobDescription, jobCompanyImage);
+                string jobUrl = string.Format("https://jobcenter.uttambsolutions.com/Home/Jobdetails?code={0}&jobcode={1}&JobId={2}",
+                              Guid.NewGuid(),
+                              Guid.NewGuid(),
+                              systemJob.JobId);
+                string result = await _linkedInService.PostJobToLinkedInAsync(accessToken, organizationId, systemJob.Title, jobUrl, systemJob.JobDescription, systemJob.Organizationlogo);
                 ViewBag.Message = "Job posted successfully to LinkedIn!";
                 return View("Success"); // Redirect to a success view or return a success message
             }
