@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using WEB.Services;
 
 namespace WEB.Controllers
 {
@@ -13,11 +14,12 @@ namespace WEB.Controllers
     {
         private readonly BL bl;
         private readonly IWebHostEnvironment _env;
-
-        public OpportunityController(IConfiguration config, IWebHostEnvironment env)
+        private readonly LinkedInService _linkedInService;
+        public OpportunityController(IConfiguration config, IWebHostEnvironment env, LinkedInService linkedInService)
         {
             bl = new BL(Util.ShareConnectionString(config, env));
             _env = env;
+            _linkedInService = linkedInService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -73,6 +75,27 @@ namespace WEB.Controllers
             var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
             return PartialView(systemJob);
         }
+        [HttpPost]
+        public async Task<IActionResult> PostJobToLinkedIn(string jobCompanyImage, string jobTitle, string jobUrl, string jobDescription)
+        {
+            string organizationId = "78n4swsafira7a";     // LinkedIn organization ID
+            string accessToken = HttpContext.Session.GetString("LinkedInAccessToken");
 
+            if (string.IsNullOrEmpty(accessToken))
+            {
+                return RedirectToAction("Authorize", "LinkedIn"); // Redirect to LinkedIn authorization
+            }
+            try
+            {
+                string result = await _linkedInService.PostJobToLinkedInAsync(accessToken, organizationId, jobTitle, jobUrl, jobDescription, jobCompanyImage);
+                ViewBag.Message = "Job posted successfully to LinkedIn!";
+                return View("Success"); // Redirect to a success view or return a success message
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("Error"); // Redirect to an error view or return an error message
+            }
+        }
     }
 }
