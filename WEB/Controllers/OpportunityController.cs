@@ -75,6 +75,7 @@ namespace WEB.Controllers
             var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
             return PartialView(systemJob);
         }
+        [HttpGet]
         [HttpPost]
         public async Task<IActionResult> PostJobToLinkedIn(int Opportunityid)
         {
