@@ -80,14 +80,16 @@ namespace WEB.Controllers
         public async Task<IActionResult> PostJobToLinkedIn(int Opportunityid)
         {
             string organizationId = "78n4swsafira7a";     // LinkedIn organization ID
-            string accessToken = HttpContext.Session.GetString("LinkedInAccessToken");
-            var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
-            if (string.IsNullOrEmpty(accessToken))
-            {
-                return RedirectToAction("Authorize", "LinkedIn"); // Redirect to LinkedIn authorization
-            }
+            //string accessToken = HttpContext.Session.GetString("LinkedInAccessToken");
+            string accessToken = "AQVt-rx_Ib7t0NFZshv_ACacz5IdXi7GxJ1OMguwCBnvtnOpUsdMN0Xqdw1RQ211WpYmZuW_USRGUlo7igDA2x4rDh7ru3ETlFc6D1mhsZI-Ha3D0f4JsNZT0bogdLbeImnEdaqY5dx_vY8xZ0hDaXEImwY8-nZvXc8G0gL837VunRlLNPwWV9UZACFL_R1lI6FPQLbNqns71lFay8VI8NgwG3NAcFN6rMyoV9dWx3QLZ-OhFJ7LWMK3dpjHHD2x4MpcBiaJMP0jqiLw4gSroUjtl29yfYdbqUGtnB50vZ4ZsRRgw_kZR3MIeZMYZEJQdHuUiw7hAVE5i3-NfcxE1XW5a-qNaQ";
+
+            //if (string.IsNullOrEmpty(accessToken))
+            //{
+            //    return RedirectToAction("Authorize", "LinkedIn"); // Redirect to LinkedIn authorization
+            //}
             try
             {
+                var systemJob = await bl.Getsystemopportunitydatabyid(Opportunityid);
                 string jobUrl = string.Format("https://jobcenter.uttambsolutions.com/Home/Jobdetails?code={0}&jobcode={1}&JobId={2}",
                               Guid.NewGuid(),
                               Guid.NewGuid(),
